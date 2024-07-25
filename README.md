@@ -1,10 +1,12 @@
-JavaScript Notes for Professionals 
-JavaScript ® Notes for Professionals
-GoalKicker.com
+---
+JavaScript Notes for Professionals
+JavaScript ® JS-Notes4-Pros.bauska.org
+cellardoor.bauska.org
+---
 
-Free Programming Books
+Free Programming Website
 Disclaimer
-This is an unofficial free book created for educational purposes and is
+This is an unofficial free website created for educational purposes and is
 not affiliated with ocial JavaScript® group(s) or company(s).
 
 All trademarks and registered trademarks are
@@ -40,38 +42,27 @@ Section 3.8: Math library functions that return NaN 16
 Chapter 4: Comments 17
 Section 4.1: Using Comments 17
 Section 4.2: Using HTML comments in JavaScript (Bad practice) 17
-Chapter 5: Console
-19
+Chapter 5: Console																			19
 .....................................................................................................................................................
-Section 5.1: Measuring time - console.time()
-22
+Section 5.1: Measuring time - console.time()												22
 ............................................................................................................
-Section 5.2: Formatting console output
-23
+Section 5.2: Formatting console output														23
 ....................................................................................................................
-Section 5.3: Printing to a browser's debugging console
-24
+Section 5.3: Printing to a browser's debugging console										24
 .........................................................................................
-Section 5.4: Including a stack trace when logging - console.trace()
-26
+Section 5.4: Including a stack trace when logging - console.trace()							26
 .....................................................................
-Section 5.5: Tabulating values - console.table()
-26
+Section 5.5: Tabulating values - console.table()											26
 ......................................................................................................
-Section 5.6: Counting - console.count()
-28
+Section 5.6: Counting - console.count()														28
 ....................................................................................................................
-Section 5.7: Clearing the console - console.clear()
-30
+Section 5.7: Clearing the console - console.clear()											30
 ..................................................................................................
-Section 5.8: Displaying objects and XML interactively - console.dir(), console.dirxml()
-30
+Section 5.8: Displaying objects and XML interactively - console.dir(), console.dirxml()		30
 ......................................
-Section 5.9: Debugging with assertions - console.assert()
-32
+Section 5.9: Debugging with assertions - console.assert()									32
 .....................................................................................
-Chapter 6: Datatypes in JavaScript
-33
+Chapter 6: Datatypes in JavaScript															33
 .................................................................................................................
 Section 6.1: typeof
 33
@@ -484,20 +475,15 @@ Section 29.4: Callbacks and `this`
 Section 29.5: Callback using Arrow function
 217
 ..........................................................................................................
-Section 29.6: Error handling and control-flow branching
-218
+Section 29.6: Error handling and control-flow branching											218
 .....................................................................................
-Chapter 30: Intervals and Timeouts
-219
+Chapter 30: Intervals and Timeouts																219
 ...............................................................................................................
-Section 30.1: Recursive setTimeout
-219
+Section 30.1: Recursive setTimeout																219
 .........................................................................................................................
-Section 30.2: Intervals
-219
+Section 30.2: Intervals																			219
 ...............................................................................................................................................
-Section 30.3: Intervals
-219
+Section 30.3: Intervals																			219
 ...............................................................................................................................................
 Section 30.4: Removing intervals
 220
