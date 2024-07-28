@@ -1,6 +1,6 @@
 ---
 JavaScript Notes for Professionals
-JavaScript ® JS-Notes4-Pros.bauska.org
+JavaScript ® JS-Notes4Pros.bauska.org
 cellardoor.bauska.org
 ---
 
