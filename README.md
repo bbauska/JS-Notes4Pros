@@ -1,7 +1,10 @@
 ---
-JavaScript Notes for Professionals
-JavaScript ® JS-Notes4Pros.bauska.org
-cellardoor.bauska.org
+title: |
+  JavaScript Notes for Professionals
+  JavaScript ® JS-Notes4Pros.bauska.org
+  by web@petercv.com, PDF https://goalkicker.com/CSSBook
+author: "bbauska"
+date last editted: "7/28/2024 Sun 3+pm"
 ---
 
 Free Programming Website
