@@ -1,8 +1,7 @@
 ---
 title: |
-  JavaScript Notes for Professionals<br>
-  JavaScript ® JS-Notes4Pros.bauska.org<br>
-  by web@petercv.com, PDF https://goalkicker.com/CSSBook
+  JavaScript Notes for Professionals
+  JavaScript ® JS-Notes4Pros.bauska.org
 author: "bbauska"
 date last editted: "7/28/2024 Sun 3+pm"
 ---
