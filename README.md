@@ -1595,8 +1595,8 @@ the global scope.
 function sec() {
 first();
 
-GoalKicker.com – JavaScript® Notes for Professionals
-26
+GoalKicker.com – JavaScript® Notes for Professionals 26
+
 }
 function first() {
 } console.trace();
@@ -1629,8 +1629,8 @@ Section 5.5: Tabulating values - console.table()
 In most environments, console.table() can be used to display objects and arrays in a tabular format.
 For example:
 
-GoalKicker.com – JavaScript® Notes for Professionals
-27
+GoalKicker.com – JavaScript® Notes for Professionals 27
+
 console.table(['Hello', 'world']);
 displays like:
 0(index) value
@@ -1668,8 +1668,8 @@ displays like:
 console.table(personArr, ['name', 'personId']);
 displays like:
 
-GoalKicker.com – JavaScript® Notes for Professionals
-28
+GoalKicker.com – JavaScript® Notes for Professionals 28
+
 Section 5.6: Counting - console.count()
 console.count([obj]) places a counter on the object's value provided as argument. Each time this method is
 invoked, the counter is increased (with the exception of the empty string ''). A label together with a number is
@@ -1694,8 +1694,8 @@ Displays:
 Strings with numbers are converted to Number objects:
 console.count(42.3);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-29
+GoalKicker.com – JavaScript® Notes for Professionals 29
+
 console.count(Number('42.3'));
 console.count('42.3');
 Displays:
@@ -1746,8 +1746,8 @@ Infinity: 2
 [object HTMLDocument]: 1
 [object Object]: 1
 
-GoalKicker.com – JavaScript® Notes for Professionals
-30
+GoalKicker.com – JavaScript® Notes for Professionals 30
+
 [object Object]: 2
 [object Object]: 3
 [object Object]: 4
@@ -1780,8 +1780,8 @@ console.dirxml(object) prints an XML representation of the descendant elements o
 JavaScript representation if not. Calling console.dirxml() on HTML and XML elements is equivalent to calling
 console.log().
 
-GoalKicker.com – JavaScript® Notes for Professionals
-31
+GoalKicker.com – JavaScript® Notes for Professionals 31
+
 Example 1:
 console.dirxml(document)
 displays:
@@ -1797,8 +1797,8 @@ var myObject = {
 console.dirxml(myObject);
 displays:
 
-GoalKicker.com – JavaScript® Notes for Professionals
-32
+GoalKicker.com – JavaScript® Notes for Professionals 32
+
 Section 5.9: Debugging with assertions - console.assert()
 Writes an error message to the console if the assertion is false. Otherwise, if the assertion is true, this does
 nothing.
@@ -1808,8 +1808,8 @@ printed if the assertion is false:
 console.assert does not throw an AssertionError (except in Node.js), meaning that this method is incompatible
 with most testing frameworks and that code execution will not break on a failed assertion.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-33
+GoalKicker.com – JavaScript® Notes for Professionals 33
+
 Chapter 6: Datatypes in JavaScript
 Section 6.1: typeof
 typeof is the 'official' function that one uses to get the type in JavaScript, however in certain cases it might yield
@@ -1838,8 +1838,8 @@ typeof function(){}
 var var1; typeof var1
 "undefined"
 
-GoalKicker.com – JavaScript® Notes for Professionals
-34
+GoalKicker.com – JavaScript® Notes for Professionals 34
+
 Section 6.2: Finding an object's class
 To find whether an object was constructed by a certain constructor or one inheriting from it, you can use the
 instanceof command:
@@ -1883,8 +1883,8 @@ object constructor name to get what flavour of object it actually is: Object.pro
 Object.prototype.toString.call("String")
 "[object String]"
 
-GoalKicker.com – JavaScript® Notes for Professionals
-35
+GoalKicker.com – JavaScript® Notes for Professionals 35
+
 2. Number
 Object.prototype.toString.call(42)
 "[object Number]"
@@ -1921,8 +1921,8 @@ Object.prototype.toString.call(undefined);
 Object.prototype.toString.call(Error());
 "[object Error]"
 
-GoalKicker.com – JavaScript® Notes for Professionals
-37
+GoalKicker.com – JavaScript® Notes for Professionals 37
+
 Chapter 7: Strings
 Section 7.1: Basic Info and String Concatenation
 Strings in JavaScript can be enclosed in Single quotes 'hello', Double quotes "Hello" and (from ES2015, ES6) in
@@ -1961,8 +1961,8 @@ var boolean = true;
 console.log(string + number + boolean); // "string32true"
 String Templates
 
-GoalKicker.com – JavaScript® Notes for Professionals
-38
+GoalKicker.com – JavaScript® Notes for Professionals 38
+
 Version ≥ 6
 Strings can be created using template literals (backticks) `hello`.
 var greeting = `Hello`;
@@ -2014,8 +2014,8 @@ are put right next to each other).
 Using spread operator
 Version ≥ 6
 
-GoalKicker.com – JavaScript® Notes for Professionals
-39
+GoalKicker.com – JavaScript® Notes for Professionals 39
+
 function reverseString(str) {
 return [.String(str)].reverse().join('');
 }
@@ -2096,8 +2096,8 @@ Version ≥ 6
 If a string has ' and " you may want to consider using template literals (also known as template strings in previous ES6
 editions), which do not require you to escape ' and ". These use backticks (`) instead of single or double quotes.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-41
+GoalKicker.com – JavaScript® Notes for Professionals 41
+
 var x = `"Escaping " and ' can become very annoying`;
 Section 7.6: Word Counter
 Say you have a <textarea> and you want to retrieve info about the number of:
@@ -2136,8 +2136,8 @@ s.split(", "); // ["one", "two", "three", "four", "five"]
 Use the array method .join to go back to a string:
 s.split(", ").join("--"); // "one--two--three--four--five"
 
-GoalKicker.com – JavaScript® Notes for Professionals
-42
+GoalKicker.com – JavaScript® Notes for Professionals 42
+
 Section 7.9: Strings are unicode
 All JavaScript strings are unicode!
 var s = "some ∆≈ƒ unicode ¡™£¢¢¢";
@@ -2179,8 +2179,8 @@ if(aString.substring) {
 }
 // Explicit check for the String substring prototype method
 
-GoalKicker.com – JavaScript® Notes for Professionals
-43
+GoalKicker.com – JavaScript® Notes for Professionals 43
+
 if(aString.substring === String.prototype.substring) {
 aString.substring(0, );
 }
@@ -2216,8 +2216,8 @@ var b16 = b10.toString(16); // "c"
 If the number represented is an integer, the inverse operation for this can be done with parseInt and the radix 16
 again
 
-GoalKicker.com – JavaScript® Notes for Professionals
-44
+GoalKicker.com – JavaScript® Notes for Professionals 44
+
 // base 16 String representation
 var b16 = 'c';
 // base 10 Number
@@ -2257,8 +2257,8 @@ var string = "Hello, World!";
 console.log( string.includes("Hello") ); // true
 console.log( string.includes("foo") ); // false
 
-GoalKicker.com – JavaScript® Notes for Professionals
-45
+GoalKicker.com – JavaScript® Notes for Professionals 45
+
 replace( regexp|substring, replacement|replaceFunction )
 replace() will return a string that has all occurrences of substrings matching the RegExp regexp or string
 substring with a string replacement or the returned value of replaceFunction.
@@ -2297,8 +2297,8 @@ Section 7.16: String to Upper Case
 String.prototype.toUpperCase():
 console.log('qwerty'.toUpperCase()); // 'QWERTY'
 
-GoalKicker.com – JavaScript® Notes for Professionals
-46
+GoalKicker.com – JavaScript® Notes for Professionals 46
+
 Section 7.17: String to Lower Case
 String.prototype.toLowerCase()
 console.log('QWERTY'.toLowerCase()); // 'qwerty'
@@ -2315,8 +2315,8 @@ var myString = "abc";
 var n = 3;
 new Array(n + 1).join(myString); // Returns "abcabcabc"
 
-GoalKicker.com – JavaScript® Notes for Professionals
-47
+GoalKicker.com – JavaScript® Notes for Professionals 47
+
 Chapter 8: Date
 Parameter
 Details
@@ -2359,8 +2359,8 @@ Exploring dates
 Note that these examples were generated on a browser in the Central Time Zone of the US, during Daylight Time,
 as evidenced by the code. Where comparison with UTC was instructive, Date.prototype.toISOString() was used
 
-GoalKicker.com – JavaScript® Notes for Professionals
-48
+GoalKicker.com – JavaScript® Notes for Professionals 48
+
 to show the date and time in UTC (the Z in the formatted string denotes UTC).
 // Creates a Date object with the current date and time from the
 // user's browser
@@ -2414,8 +2414,8 @@ rollover.toString() === 'Sat Feb 02 2013 02:03:03 GMT-0600 (Central Standard Tim
 // Jan based on the month 12 (11 being December), then again because of the day 32
 // (January having 31 days).
 
-GoalKicker.com – JavaScript® Notes for Professionals
-49
+GoalKicker.com – JavaScript® Notes for Professionals 49
+
 // Special dates for years in the range 0-99
 var special1 = new Date(12, 0);
 special1.toString() === 'Mon Jan 01 1912 00:00:00 GMT-0600 (Central Standard Time)`
@@ -2447,8 +2447,8 @@ var date1 = new Date();
 date1.toISOString();
 Returns: "2016-04-14T23:49:08.596Z"
 
-GoalKicker.com – JavaScript® Notes for Professionals
-50
+GoalKicker.com – JavaScript® Notes for Professionals 50
+
 Convert to GMT String
 var date1 = new Date();
 date1.toGMTString();
@@ -2480,8 +2480,8 @@ The first implementation naively uses local times, which results in wrong result
 UTC dates to avoid timezones where they are not needed.
 Naive approach with WRONG results
 
-GoalKicker.com – JavaScript® Notes for Professionals
-51
+GoalKicker.com – JavaScript® Notes for Professionals 51
+
 function formatDate(dayOfWeek, day, month, year) {
 var daysOfWeek = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -2519,8 +2519,8 @@ Foo was born on: Sat Jan 1 2000
 //Bar lives in a country with timezone GMT - 1
 var birthday = new Date(receiveFromFoo());
 
-GoalKicker.com – JavaScript® Notes for Professionals
-52
+GoalKicker.com – JavaScript® Notes for Professionals 52
+
 console.log("Foo was born on: " + formatDate(birthday.getUTCDay(), birthday.getUTCDate(),
 birthday.getUTCMonth(), birthday.getUTCFullYear()));
 Sample output:
@@ -2551,8 +2551,8 @@ date.setUTCHours(12,0,0,0);
 console.log(date);
 Sample output:
 
-GoalKicker.com – JavaScript® Notes for Professionals
-53
+GoalKicker.com – JavaScript® Notes for Professionals 53
+
 Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
 The other UTC-specific modifiers are .setUTCMonth(), .setUTCDate() (for the day of the month),
 .setUTCMinutes(), .setUTCSeconds() and .setUTCMilliseconds().
@@ -2587,8 +2587,8 @@ The options parameter should be an object with some or all of the following prop
 localeMatcher : possible values are "lookup" and "best fit"; the default is "best fit"
 timeZone : the only value implementations must recognize is "UTC"; the default is the runtime's default time
 
-GoalKicker.com – JavaScript® Notes for Professionals
-54
+GoalKicker.com – JavaScript® Notes for Professionals 54
+
 zone
 hour12 :possible values are true and false; the default is locale dependent
 formatMatcher : possible values are "basic" and "best fit"; the default is "best fit"
@@ -2640,8 +2640,7 @@ ret.push(this[properties[i]]);
 }
 return ret.join(separator);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-55
+GoalKicker.com – JavaScript® Notes for Professionals 55
 }
 };
 return date;
@@ -2680,8 +2679,7 @@ var year = (new Date()).getFullYear();
 console.log(year);
 // Sample output: 2016
 
-GoalKicker.com – JavaScript® Notes for Professionals
-56
+GoalKicker.com – JavaScript® Notes for Professionals 56
 Get the current month
 var month = (new Date()).getMonth();
 console.log(month);
@@ -2726,8 +2724,8 @@ To increment date objects in JavaScript, we can usually do this:
 var checkoutDate = new Date(); // Thu Jul 21 2016 10:05:13 GMT-0400 (EDT)
 checkoutDate.setDate( checkoutDate.getDate() + 1 );
 
-GoalKicker.com – JavaScript® Notes for Professionals
-57
+GoalKicker.com – JavaScript® Notes for Professionals 57
+
 console.log(checkoutDate); // Fri Jul 22 2016 10:05:13 GMT-0400 (EDT)
 It is possible to use setDate to change the date to a day in the following month by using a value larger than the
 number of days in the current month -
@@ -2769,8 +2767,8 @@ var date1 = new Date();
 date1.toJSON();
 Returns: "2016-04-14T23:49:08.596Z"
 
-GoalKicker.com – JavaScript® Notes for Professionals
-58
+GoalKicker.com – JavaScript® Notes for Professionals 58
+
 Chapter 9: Date Comparison
 Section 9.1: Comparing Date values
 To check the equality of Date values:
