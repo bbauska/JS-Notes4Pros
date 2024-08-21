@@ -3,7 +3,7 @@ title: |
   JavaScript Notes for Professionals
   JavaScript ® JS-Notes4Pros.bauska.org
 author: "bbauska"
-date last editted: "8/18/2024 Sun 3+pm"
+date last editted: "8/20/2024 Tue 7+pm"
 ---
 
 Free Programming Website
@@ -70,7 +70,7 @@ Section 7.2: Reverse String 38
 Section 7.3: Comparing Strings Lexicographically 39
 Section 7.4: Access character at index in string 40
 Section 7.5: Escaping quotes 40
-Section 7.6: Word Counter
+Section 7.6: Word Counter 41
 Section 7.7: Trim whitespace 41
 Section 7.8: Splitting a string into an array 41
 Section 7.9: Strings are unicode 42
@@ -164,7 +164,7 @@ Section 13.2: Object.freeze 112
 Section 13.3: Object cloning 113
 Section 13.4: Object properties iteration 114
 Section 13.5: Object.assign 115
-Section 13.6: Object rest/spread (.) 116
+Section 13.6: Object rest/spread (...) 116
 Section 13.7: Object.defineProperty 116
 Section 13.8: Accesor properties (get and set) 117
 Section 13.9: Dynamic / variable property names 117
@@ -228,12 +228,12 @@ Section 17.7: Assignment 155
 
 Chapter 18: Loops 156
 Section 18.1: Standard "for" loops 156
-Section 18.2: "for . of" loop 157
-Section 18.3: "for . in" loop 159
+Section 18.2: "for ... of" loop 157
+Section 18.3: "for ... in" loop 159
 Section 18.4: "while" Loops 159
 Section 18.5: "continue" a loop 160
 Section 18.6: Break specific nested loops 161
-Section 18.7: "do . while" loop 161
+Section 18.7: "do ... while" loop 161
 Section 18.8: Break and continue labels 161
 
 Chapter 19: Functions 163
@@ -262,7 +262,7 @@ Section 20.3: Pure Functions 187
 Section 20.4: Accepting Functions as Arguments 188
 
 Chapter 21: Prototypes, objects 190
-Section 21.1: Creation and initialising Prototype 190
+Section 21.1: Creation and initializing Prototype 190
 
 Chapter 22: Classes 192
 Section 22.1: Class Constructor 192
@@ -288,7 +288,7 @@ Section 24.4: this in constructor functions 202
 Chapter 25: Setters and Getters 203
 Section 25.1: Defining a Setter/Getter Using Object.defineProperty 203
 Section 25.2: Defining an Setter/Getter in a Newly Created Object 203
-Section 25.3: Defining getters and setters in ES6 class . 203
+Section 25.3: Defining getters and setters in ES6 class 203
 
 Chapter 26: Events 205
 Section 26.1: Page, DOM and Browser loading 205
@@ -346,7 +346,7 @@ Section 33.6: Error conditions 232
 Section 33.7: Clearing storage 232
 Section 33.8: Remove Storage Item 232
 
-Chapter 34: Data attributes . 233
+Chapter 34: Data attributes 233
 Section 34.1: Accessing data attributes 233
 
 Chapter 35: JSON 234
@@ -356,6 +356,7 @@ Section 35.3: Serializing a value 236
 Section 35.4: Serializing and restoring class instances 237
 Section 35.5: Serializing with a replacer function 238
 Section 35.6: Parsing a simple JSON string 239
+
 Section 35.7: Cyclic object values 239
 
 Chapter 36: AJAX 240
@@ -402,7 +403,7 @@ Section 40.8: The logical NOT operator (!) 256
 Chapter 41: Generators 258
 Section 41.1: Generator Functions 258
 Section 41.2: Sending Values to Generator 259
-Section 41.3: Delegating to other Generator  259
+Section 41.3: Delegating to other Generator 259
 Section 41.4: Iteration 259
 Section 41.5: Async flow with generators 260
 Section 41.6: Iterator-Observer interface 261
@@ -412,7 +413,7 @@ Section 42.1: Introduction 263
 Section 42.2: Promise chaining 264
 Section 42.3: Waiting for multiple concurrent promises 265
 Section 42.4: Reduce an array to chained promises 266
-Section 42.5: Waiting for the first of multiple concurrent promises 267
+Section 42.5: Waiting for the first of multiple concu rrent promises267
 Section 42.6: "Promisifying" functions with callbacks 268
 Section 42.7: Error Handling 268
 Section 42.8: Reconciling synchronous and asynchronous operations 272
@@ -429,7 +430,6 @@ Section 43.2: Adding a value to a Set 277
 Section 43.3: Removing value from a set 277
 Section 43.4: Checking if a value exist in a set 278
 Section 43.5: Clearing a Set 278
-
 Section 43.6: Getting set length 278
 Section 43.7: Converting Sets to arrays 278
 Section 43.8: Intersection and dierence in Sets 279
@@ -481,230 +481,582 @@ Section 51.2: Registering New Elements 299
 
 Chapter 52: Data Manipulation 300
 Section 52.1: Format numbers as money 300
-Section 52.2: Extract extension from file name 300
-Section 52.3: Set object property given its string name 301
+...
+Section 52.2: Extract extension from file name
+300
+.
+Section 52.3: Set object property given its string name
+301
+...
+Chapter 53: Binary Data
+302
+...
+Section 53.1: Getting binary representation of an image file
+302
+...
+Section 53.2: Converting between Blobs and ArrayBuers
+302
+.
+Section 53.3: Manipulating ArrayBuers with DataViews
+303
+.
+Section 53.4: Creating a TypedArray from a Base64 string
+303
+.
+Section 53.5: Using TypedArrays
+304
+.
+Section 53.6: Iterating through an arrayBuer
+304
+..
+Chapter 54: Template Literals
+306
+..
+Section 54.1: Basic interpolation and multiline strings
+306
+...
+Section 54.2: Tagged strings
+306
+...
+Section 54.3: Raw strings
+307
+..
+Section 54.4: Templating HTML With Template Strings
+307
+...
+Section 54.5: Introduction
+308
+.
+Chapter 55: Fetch
+309
+.
+Section 55.1: Getting JSON data
+309
+..
+Section 55.2: Set Request Headers
+309
+.
+Section 55.3: POST Data
+309
+...
+Section 55.4: Send cookies
+310
+...
+Section 55.5: GlobalFetch
+310
+.
+Section 55.6: Using Fetch to Display Questions from the Stack Overflow API
+310
+...
+Chapter 56: Scope
+311
 
-Chapter 53: Binary Data 302
-Section 53.1: Getting binary representation of an image file 302
-Section 53.2: Converting between Blobs and ArrayBuers 302
-Section 53.3: Manipulating ArrayBuers with DataViews 303
-Section 53.4: Creating a TypedArray from a Base64 string 303
-Section 53.5: Using TypedArrays 304
-Section 53.6: Iterating through an arrayBuer 304
+Section 56.1: Closures
+311
 
-Chapter 54: Template Literals 306
-Section 54.1: Basic interpolation and multiline strings 306
-Section 54.2: Tagged strings 306
-Section 54.3: Raw strings 307
-Section 54.4: Templating HTML With Template Strings 307
-Section 54.5: Introduction 308
-Chapter 55: Fetch 309
-Section 55.1: Getting JSON data 309
-Section 55.2: Set Request Headers 309
-Section 55.3: POST Data 309
-Section 55.4: Send cookies 310
-Section 55.5: GlobalFetch 310
-Section 55.6: Using Fetch to Display Questions from the Stack Overflow API 310
+Section 56.2: Hoisting
+312
 
-Chapter 56: Scope 311
-Section 56.1: Closures 311
-Section 56.2: Hoisting 312
-Section 56.3: Dierence between var and let 315
-Section 56.4: Apply and Call syntax and invocation 317
-Section 56.5: Arrow function invocation 318
-Section 56.6: Bound invocation 319
-Section 56.7: Method invocation 319
-Section 56.8: Anonymous invocation 320
-Section 56.9: Constructor invocation 320
-Section 56.10: Using let in loops instead of var (click handlers example) 320
+Section 56.3: Dierence between var and let
+315
 
-Chapter 57: Modules 322
-Section 57.1: Defining a module322
-Section 57.2: Default exports 322
-Section 57.3: Importing named members from another module 323
-Section 57.4: Importing an entire module 323
-Section 57.5: Importing named members with aliases 324
-Section 57.6: Importing with side eects 324
-Section 57.7: Exporting multiple named members 324
+Section 56.4: Apply and Call syntax and invocation
+317
+.
+Section 56.5: Arrow function invocation
+318
+.
+Section 56.6: Bound invocation
+319
 
-Chapter 58: Screen 325
-Section 58.1: Getting the screen resolution 325
-Section 58.2: Getting the “available” area of the screen 325
-Section 58.3: Page width and height 325
-Section 58.4: Window innerWidth and innerHeight Properties 325
-Section 58.5: Getting color information about the screen 325
+Section 56.7: Method invocation
+319
+..
+Section 56.8: Anonymous invocation
+320
+..
+Section 56.9: Constructor invocation
+.. 320
 
-Chapter 59: Variable coercion/conversion 326
-Section 59.1: Double Negation (!!x) 326
-Section 59.2: Implicit conversion 326
-Section 59.3: Converting to boolean 326
-Section 59.4: Converting a string to a number 327
-Section 59.5: Converting a number to a string 328
-Section 59.6: Primitive to Primitive conversion table 328
-Section 59.7: Convert an array to a string 328
-Section 59.8: Array to String using array methods 329
-Section 59.9: Converting a number to a boolean 329
-Section 59.10: Converting a string to a boolean 329
-Section 59.11: Integer to Float 329
-Section 59.12: Float to Integer 330
-Section 59.13: Convert string to float 330
+Section 56.10: Using let in loops instead of var (click handlers example)
+320
+...
+Chapter 57: Modules
+322
+...
+Section 57.1: Defining a module
+322
+...
+Section 57.2: Default exports
+322
+...
+Section 57.3: Importing named members from another module
+323
 
-Chapter 60: Destructuring assignment 331
-Section 60.1: Destructuring Objects 331
-Section 60.2: Destructuring function arguments 332
-Section 60.3: Nested Destructuring 332
-Section 60.4: Destructuring Arrays 333
-Section 60.5: Destructuring inside variables 333
-Section 60.6: Default Value While Destructuring 334
-Section 60.7: Renaming Variables While Destructuring 334
+Section 57.4: Importing an entire module
+323
+..
+Section 57.5: Importing named members with aliases
+324
+.
+Section 57.6: Importing with side eects
+324
 
-Chapter 61: WebSockets 335
-Section 61.1: Working with string messages 335
-Section 61.2: Establish a web socket connection 335
-Section 61.3: Working with binary messages 335
-Section 61.4: Making a secure web socket connection 336
+Section 57.7: Exporting multiple named members
+324
 
-Chapter 62: Arrow Functions 337
-Section 62.1: Introduction 337
-Section 62.2: Lexical Scoping & Binding (Value of "this") 337
-Section 62.3: Arguments Object 338
-Section 62.4: Implicit Return 338
-Section 62.5: Arrow functions as a constructor 339
-Section 62.6: Explicit Return 339
+Chapter 58: Screen
+325
+..
+Section 58.1: Getting the screen resolution
+325
+.
+Section 58.2: Getting the “available” area of the screen
+325
+..
+Section 58.3: Page width and height
+325
+...
+Section 58.4: Window innerWidth and innerHeight Properties
+325
 
-Chapter 63: Workers 340
-Section 63.1: Web Worker 340
-Section 63.2: A simple service worker 340
-Section 63.3: Register a service worker 341
-Section 63.4: Communicating with a Web Worker 341
-Section 63.5: Terminate a worker 342
-Section 63.6: Populating your cache 343
-Section 63.7: Dedicated Workers and Shared Workers 343
+Section 58.5: Getting color information about the screen
+325
 
-Chapter 64: requestAnimationFrame 345
-Section 64.1: Use requestAnimationFrame to fade in element 345
-Section 64.2: Keeping Compatibility 346
-Section 64.3: Cancelling an Animation 346
+Chapter 59: Variable coercion/conversion
+326
+.
+Section 59.1: Double Negation (!!x)
+326
+..
+Section 59.2: Implicit conversion
+326
+.
+Section 59.3: Converting to boolean
+326
+...
+Section 59.4: Converting a string to a number
+327
+..
+Section 59.5: Converting a number to a string
+328
+..
+Section 59.6: Primitive to Primitive conversion table
+328
+.
+Section 59.7: Convert an array to a string
+328
+.
+Section 59.8: Array to String using array methods
+329
+...
+Section 59.9: Converting a number to a boolean
+329
+..
+Section 59.10: Converting a string to a boolean
+329
 
-Chapter 65: Creational Design Patterns 348
-Section 65.1: Factory Functions 348
-Section 65.2: Factory with Composition 349
-Section 65.3: Module and Revealing Module Patterns 350
-Section 65.4: Prototype Pattern 352
-Section 65.5: Singleton Pattern 353
-Section 65.6: Abstract Factory Pattern 354
+Section 59.11: Integer to Float
+329
+...
+Section 59.12: Float to Integer
+330
+..
+Section 59.13: Convert string to float
+330
+...
+Chapter 60: Destructuring assignment
+331
+.
+Section 60.1: Destructuring Objects
+331
+.
+Section 60.2: Destructuring function arguments
+332
+...
+Section 60.3: Nested Destructuring
+332
+.
+Section 60.4: Destructuring Arrays
+333
+..
+Section 60.5: Destructuring inside variables
+333
+..
+Section 60.6: Default Value While Destructuring
+334
+...
+Section 60.7: Renaming Variables While Destructuring
+334
 
-Chapter 66: Detecting browser 355
-Section 66.1: Feature Detection Method 355
-Section 66.2: User Agent Detection 355
-Section 66.3: Library Method 356
+Chapter 61: WebSockets
+335
+...
+Section 61.1: Working with string messages
+335
+...
+Section 61.2: Establish a web socket connection
+335
+...
+Section 61.3: Working with binary messages
+335
+.
+Section 61.4: Making a secure web socket connection
+336
+.
+Chapter 62: Arrow Functions
+337
+..
+Section 62.1: Introduction
+337
+..
+Section 62.2: Lexical Scoping & Binding (Value of "this")
+337
+.
+Section 62.3: Arguments Object
+338
+..
+Section 62.4: Implicit Return
+338
+.
+Section 62.5: Arrow functions as a constructor
+339
+.
+Section 62.6: Explicit Return
+. 339
 
-Chapter 67: Symbols 357
-Section 67.1: Basics of symbol primitive type 357
-Section 67.2: Using Symbol.for() to create global, shared symbols 357
-Section 67.3: Converting a symbol into a string 357
+Chapter 63: Workers
+340
+...
+Section 63.1: Web Worker
+340
+.
+Section 63.2: A simple service worker
+340
+.
+Section 63.3: Register a service worker
+341
+..
+Section 63.4: Communicating with a Web Worker
+341
 
-Chapter 68: Transpiling 359
-Section 68.1: Introduction to Transpiling 359
-Section 68.2: Start using ES6/7 with Babel 360
+Section 63.5: Terminate a worker
+342
 
-Chapter 69: Automatic Semicolon Insertion - ASI 361
-Section 69.1: Avoid semicolon insertion on return statements 361
-Section 69.2: Rules of Automatic Semicolon Insertion 361
-Section 69.3: Statements aected by automatic semicolon insertion 362
+Section 63.6: Populating your cache
+343
+...
+Section 63.7: Dedicated Workers and Shared Workers
+343
 
-Chapter 70: Localization 364
-Section 70.1: Number formatting 364
-Section 70.2: Currency formatting 364
-Section 70.3: Date and time formatting 364
+Chapter 64: requestAnimationFrame
+345
 
-Chapter 71: Geolocation 365
-Section 71.1: Get updates when a user's location changes 365
-Section 71.2: Get a user's latitude and longitude 365
-Section 71.3: More descriptive error codes 365
+Section 64.1: Use requestAnimationFrame to fade in element
+345
 
-Chapter 72: IndexedDB 367
-Section 72.1: Opening a database 367
-Section 72.2: Adding objects 367
-Section 72.3: Retrieving data 368
-Section 72.4: Testing for IndexedDB availability 369
+Section 64.2: Keeping Compatibility
+346
+...
+Section 64.3: Cancelling an Animation
+346
 
-Chapter 73: Modularization Techniques 370
-Section 73.1: ES6 Modules . 370
-Section 73.2: Universal Module Definition (UMD) 370
-Section 73.3: Immediately invoked function expressions (IIFE) 371
-Section 73.4: Asynchronous Module Definition (AMD) 371
-Section 73.5: CommonJS - Node.js 372
+Chapter 65: Creational Design Patterns
+348
+...
+Section 65.1: Factory Functions
+348
 
-Chapter 74: Proxy 374
-Section 74.1: Proxying property lookup 374
-Section 74.2: Very simple proxy (using the set trap) 374
+Section 65.2: Factory with Composition
+349
+..
+Section 65.3: Module and Revealing Module Patterns
+350
+..
+Section 65.4: Prototype Pattern
+352
+...
+Section 65.5: Singleton Pattern
+353
 
-Chapter 75: .postMessage() and MessageEvent 376
-Section 75.1: Getting Started 376
+Section 65.6: Abstract Factory Pattern
+354
+...
+Chapter 66: Detecting browser
+355
+.
+Section 66.1: Feature Detection Method
+355
+.
+Section 66.2: User Agent Detection
+355
+.
+Section 66.3: Library Method
+356
+...
+Chapter 67: Symbols
+357
+...
+Section 67.1: Basics of symbol primitive type
+357
+.
+Section 67.2: Using Symbol.for() to create global, shared symbols
+357
 
-Chapter 76: WeakMap 379
-Section 76.1: Creating a WeakMap object 379
-Section 76.2: Getting a value associated to the key 379
-Section 76.3: Assigning a value to the key 379
-Section 76.4: Checking if an element with the key exists 379
-Section 76.5: Removing an element with the key 380
-Section 76.6: Weak reference demo 380
+Section 67.3: Converting a symbol into a string
+357
 
-Chapter 77: WeakSet 382
-Section 77.1: Creating a WeakSet object 382
-Section 77.2: Adding a value 382
-Section 77.3: Checking if a value exists 382
-Section 77.4: Removing a value 382
+Chapter 68: Transpiling
+359
+.
+Section 68.1: Introduction to Transpiling
+359
+.
+Section 68.2: Start using ES6/7 with Babel
+360
+.
+Chapter 69: Automatic Semicolon Insertion - ASI
+361
 
-Chapter 78: Escape Sequences 383
-Section 78.1: Entering special characters in strings and regular expressions 383
-Section 78.2: Escape sequence types 383
+Section 69.1: Avoid semicolon insertion on return statements
+361
+.
+Section 69.2: Rules of Automatic Semicolon Insertion
+361
+..
+Section 69.3: Statements aected by automatic semicolon insertion
+362
 
-Chapter 79: Behavioral Design Patterns 386
-Section 79.1: Observer pattern 386
-Section 79.2: Mediator Pattern 387
-Section 79.3: Command 388
-Section 79.4: Iterator 389
+Chapter 70: Localization
+364
+...
+Section 70.1: Number formatting
+364
+.
+Section 70.2: Currency formatting
+364
+..
+Section 70.3: Date and time formatting
+364
+..
+Chapter 71: Geolocation
+365
 
-Chapter 80: Server-sent events 391
-Section 80.1: Setting up a basic event stream to the server 391
-Section 80.2: Closing an event stream 391
-Section 80.3: Binding event listeners to EventSource 391
+Section 71.1: Get updates when a user's location changes
+365
+...
+Section 71.2: Get a user's latitude and longitude
+365
+...
+Section 71.3: More descriptive error codes
+365
+.
+Chapter 72: IndexedDB
+367
+..
+Section 72.1: Opening a database
+367
+...
+Section 72.2: Adding objects
+367
 
-Chapter 81: Async functions (async/await) 393
-Section 81.1: Introduction 393
-Section 81.2: Await and operator precedence 393
-Section 81.3: Async functions compared to Promises 394
-Section 81.4: Looping with async await 395
-Section 81.5: Less indentation 396
-Section 81.6: Simultaneous async (parallel) operations 397
+Section 72.3: Retrieving data
+368
+...
+Section 72.4: Testing for IndexedDB availability
+369
 
-Chapter 82: Async Iterators 398
-Section 82.1: Basics 398
-Chapter 83: How to make iterator usable inside async callback function 399
-Section 83.1: Erroneous code, can you spot why this usage of key will lead to bugs? 399
-Section 83.2: Correct Writing 399
-Chapter 84: Tail Call Optimization 400
-Section 84.1: What is Tail Call Optimization (TCO) 400
-Section 84.2: Recursive loops 400
-Chapter 85: Bitwise Operators - Real World Examples (snippets) 401
-Section 85.1: Swapping Two Integers with Bitwise XOR (without additional memory allocation) 401
-Section 85.2: Faster multiplication or division by powers of 2 401
-Section 85.3: Number's Parity Detection with Bitwise AND 401
+Chapter 73: Modularization Techniques
+370
+...
+Section 73.1: ES6 Modules
+. 370
 
-Chapter 86: Tilde ~ 403
-Section 86.1: ~ Integer 403
-Section 86.2: ~~ Operator 403
-Section 86.3: Converting Non-numeric values to Numbers 404
-Section 86.4: Shorthands 404
-Section 86.5: ~ Decimal 404
-Chapter 87: Using JavaScript to get/set CSS custom variables 406
-Section 87.1: How to get and set CSS variable property values 406
+Section 73.2: Universal Module Definition (UMD)
+370
+..
+Section 73.3: Immediately invoked function expressions (IIFE)
+371
+
+Section 73.4: Asynchronous Module Definition (AMD)
+371
+..
+Section 73.5: CommonJS - Node.js
+372
+..
+Chapter 74: Proxy
+374
+
+Section 74.1: Proxying property lookup
+374
+..
+Section 74.2: Very simple proxy (using the set trap)
+374
+
+Chapter 75: .postMessage() and MessageEvent
+376
+..
+Section 75.1: Getting Started
+376
+
+Chapter 76: WeakMap
+379
+
+Section 76.1: Creating a WeakMap object
+379
+..
+Section 76.2: Getting a value associated to the key
+379
+..
+Section 76.3: Assigning a value to the key
+379
+.
+Section 76.4: Checking if an element with the key exists
+379
+..
+Section 76.5: Removing an element with the key
+380
+..
+Section 76.6: Weak reference demo
+380
+...
+Chapter 77: WeakSet
+382
+..
+Section 77.1: Creating a WeakSet object
+382
+
+Section 77.2: Adding a value
+382
+
+Section 77.3: Checking if a value exists
+382
+...
+Section 77.4: Removing a value
+382
+...
+Chapter 78: Escape Sequences
+383
+.
+Section 78.1: Entering special characters in strings and regular expressions
+383
+
+Section 78.2: Escape sequence types
+383
+.
+Chapter 79: Behavioral Design Patterns
+386
+..
+Section 79.1: Observer pattern
+386
+.
+Section 79.2: Mediator Pattern
+387
+
+Section 79.3: Command
+388
+
+Section 79.4: Iterator
+389
+.
+Chapter 80: Server-sent events
+391
+
+Section 80.1: Setting up a basic event stream to the server
+391
+.
+Section 80.2: Closing an event stream
+391
+...
+Section 80.3: Binding event listeners to EventSource
+391
+...
+Chapter 81: Async functions (async/await)
+393
+
+Section 81.1: Introduction
+393
+..
+Section 81.2: Await and operator precedence
+393
+...
+Section 81.3: Async functions compared to Promises
+394
+...
+Section 81.4: Looping with async await
+395
+...
+Section 81.5: Less indentation
+396
+..
+Section 81.6: Simultaneous async (parallel) operations
+397
+
+Chapter 82: Async Iterators
+398
+
+Section 82.1: Basics
+398
+...
+Chapter 83: How to make iterator usable inside async callback function
+399
+.
+Section 83.1: Erroneous code, can you spot why this usage of key will lead to bugs?
+399
+..
+Section 83.2: Correct Writing
+399
+...
+Chapter 84: Tail Call Optimization
+400
+..
+Section 84.1: What is Tail Call Optimization (TCO)
+400
+
+Section 84.2: Recursive loops
+.. 400
+
+Chapter 85: Bitwise Operators - Real World Examples (snippets)
+401
+.
+Section 85.1: Swapping Two Integers with Bitwise XOR (without additional memory allocation)
+401
+
+Section 85.2: Faster multiplication or division by powers of 2
+401
+.
+Section 85.3: Number's Parity Detection with Bitwise AND
+401
+..
+Chapter 86: Tilde ~
+403
+...
+Section 86.1: ~ Integer
+403
+...
+Section 86.2: ~~ Operator
+403
+.
+Section 86.3: Converting Non-numeric values to Numbers
+404
+..
+Section 86.4: Shorthands
+404
+..
+Section 86.5: ~ Decimal
+404
+.
+Chapter 87: Using JavaScript to get/set CSS custom variables
+406
+.
+Section 87.1: How to get and set CSS variable property values
+406
+...
 Chapter 88: Selection API 407
 Section 88.1: Get the text of the selection 407
 Section 88.2: Deselect everything that is selected 407
 Section 88.3: Select the contents of an element 407
+
 Chapter 89: File API, Blobs and FileReaders 408
 Section 89.1: Read file as string 408
 Section 89.2: Read file as dataURL 408
@@ -712,21 +1064,25 @@ Section 89.3: Slice a file 409
 Section 89.4: Get the properties of the file 409
 Section 89.5: Selecting multiple files and restricting file types 410
 Section 89.6: Client side csv download using Blob 410
+
 Chapter 90: Notifications API 411
 Section 90.1: Requesting Permission to send notifications 411
 Section 90.2: Sending Notifications 411
 Section 90.3: Closing a notification 411
 Section 90.4: Notification events 412
+
 Chapter 91: Vibration API 413
 Section 91.1: Single vibration 413
 Section 91.2: Check for support 413
 Section 91.3: Vibration patterns 413
+
 Chapter 92: Battery Status API 414
 Section 92.1: Battery Events 414
 Section 92.2: Getting current battery level 414
 Section 92.3: Is battery charging? 414
 Section 92.4: Get time left until battery is empty 414
 Section 92.5: Get time left until battery is fully charged 414
+
 Chapter 93: Fluent API 415
 Section 93.1: Fluent API capturing construction of HTML articles with JS 415
 
@@ -793,17 +1149,19 @@ Section 104.6: Reuse objects rather than recreate 454
 Section 104.7: Prefer local variables to globals, attributes, and indexed values 455
 Section 104.8: Be consistent in use of Numbers 456
 
-Chapter 105: Memory eciency 458
+Chapter 105: Memory efficiency 458
 Section 105.1: Drawback of creating true private method 458
-
 
 Appendix A: Reserved Keywords 459
 Section A.1: Reserved Keywords 459
 Section A.2: Identifiers & Identifier Names 
-Credits 463
-You may also like 474
 
-GoalKicker.com – JavaScript® Notes for Professionals 1
+Credits 463
+
+You may also like
+
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 1 -->
+
 About
 Please feel free to share this PDF with anyone for free,
 latest version of this book can be downloaded from:
@@ -821,30 +1179,40 @@ The information presented in this book is not guaranteed to be correct nor
 accurate, use at your own risk
 Please send feedback and corrections to web@petercv.com
 
-GoalKicker.com – JavaScript® Notes for Professionals 2
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 2 -->
 
 Chapter 1: Getting started with JavaScript
 
-Section 1.1: Using console.log()
+<h3 id="ch1-1">Section 1.1: Using console.log()</h3>
+<h4>Introduction</h4>
 
-Introduction
-All modern web browsers, Node.js as well as almost every other JavaScript environments support writing messages
-to a console using a suite of logging methods. The most common of these methods is console.log().
-In a browser environment, the console.log() function is predominantly used for debugging purposes.
-Getting Started
-Open up the JavaScript Console in your browser, type the following, and press Enter :
-console.log("Hello, World!");
-This will log the following to the console:
-In the example above, the console.log() function prints Hello, World! to the console and returns undefined
-(shown above in the console output window). This is because console.log() has no explicit return value.
-Logging variables
+<p>All modern web browsers, Node.js as well as almost every other JavaScript environments support writing messages
+to a console using a suite of logging methods. The most common of these methods is console.log().</p>
+
+<p>In a browser environment, the console.log() function is predominantly used for debugging purposes.</p>
+
+<h4>Getting Started</h4>
+<p>Open up the JavaScript Console in your browser, type the following, and press Enter :
+console.log("Hello, World!");</p>
+
+<p>This will log the following to the console:</p>
+<!-- image here -->
+
+<p>In the example above, the console.log() function prints Hello, World! to the console and returns undefined
+(shown above in the console output window). This is because console.log() has no explicit return value.</p>
+
+<h4>Logging variables</h4>
 console.log() can be used to log variables of any kind; not only strings. Just pass in the variable that you want to
-be displayed in the console, for example:
+be displayed in the console, for example:</p>
+<pre><code>
 var foo = "bar";
 console.log(foo);
-This will log the following to the console:
+</code></pre>
 
-GoalKicker.com – JavaScript® Notes for Professionals 3
+<p>This will log the following to the console:</p>
+
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 3 -->
+
 If you want to log two or more values, simply separate them with commas. Spaces will be automatically added
 between each argument during concatenation:
 var thisVar = 'first value';
@@ -867,7 +1235,7 @@ console.log({
 'LoginName': 'i:0#.w|virtualdomain\\user2',
 'PrincipalType': 1,
 
-GoalKicker.com – JavaScript® Notes for Professionals 4
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 4 -->
 'Title': 'user2'
 });
 This will log the following to the console:
@@ -885,14 +1253,13 @@ For example, consider the following HTML tag:
 <p id="paragraph"></p>
 To change its textContent property, we can run the following JavaScript:
 
-GoalKicker.com – JavaScript® Notes for Professionals 5
+<!--  GoalKicker.com – JavaScript® Notes for Professionals 5 -->
 document.getElementById("paragraph").textContent = "Hello, World";
 This will select the element that with the id paragraph and set its text content to "Hello, World":
 <p id="paragraph">Hello, World</p>
 (See also this demo)
 You can also use JavaScript to create a new HTML element programmatically. For example, consider an HTML
 document with the following body:
-
 <body>
 <h1>Adding an element</h1>
 </body>
@@ -914,8 +1281,7 @@ A third way to make sure all your DOM has been loaded, is to wrap the DOM manipu
 function of 0 ms. This way, this JavaScript code is re-queued at the end of the execution queue, which gives the
 browser a chance to finish doing some non-JavaScript things that have been waiting to finish before attending to
 this new piece of JavaScript.
-
-  Section 1.3: Using window.alert()
+Section 1.3: Using window.alert()
 The alert method displays a visual alert box on screen. The alert method parameter is displayed to the user in
 plain text:
 window.alert(message);
@@ -924,7 +1290,8 @@ alert(message);
 So what does window.alert() do? Well, let's take the following example:
 alert('hello, world');
 
-GoalKicker.com – JavaScript® Notes for Professionals 6
+<!--  GoalKicker.com – JavaScript® Notes for Professionals 6 -->
+
 In Chrome, that would produce a pop-up like this:
 Notes
 The alert method is technically a property of window object, but since all window properties are
@@ -942,7 +1309,6 @@ The use of alerts is usually discouraged in favour of other methods that do not 
 page - in order to create a better user experience. Nevertheless, it can be useful for debugging.
 Starting with Chrome 46.0, window.alert() is blocked inside an <iframe> unless its sandbox attribute has the value
 allow-modal.
-
 Section 1.4: Using window.prompt()
 An easy way to get an input from a user is by using the prompt() method.
 Syntax
@@ -952,12 +1318,13 @@ default: A default value for the input field (optional).
 Examples
 var age = prompt("How old are you?");
 console.log(age); // Prints the value inserted by the user
-GoalKicker.com – JavaScript® Notes for Professionals 7
+
+<!--  GoalKicker.com – JavaScript® Notes for Professionals 7 -->
+
 If the user clicks the OK button, the input value is returned. Otherwise, the method returns null.
 The return value of prompt is always a string, unless the user clicks Cancel , in which that case it returns null.
 Safari is an exception in that when the user clicks Cancel, the function returns an empty string. From there, you can
 convert the return value to another type, such as an integer.
-
 Notes
 While the prompt box is displayed, the user is prevented from accessing other parts of the page, since dialog
 boxes are modal windows.
@@ -977,7 +1344,7 @@ deleteItem(itemId);
 The output of that code would look like this in the browser:
 If you need it for later use, you can simply store the result of the user's interaction in a variable:
 
-GoalKicker.com – JavaScript® Notes for Professionals 8
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 8 -->
 var deleteConfirm = window.confirm("Are you sure you want to delete this?");
 Notes
 The argument is optional and not required by the specification.
@@ -1015,7 +1382,7 @@ Then build a text element with the desired positioning and font characteristics:
 var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
 text.setAttribute('x', '0');
 
-GoalKicker.com – JavaScript® Notes for Professionals 9
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 9 -->
 text.setAttribute('y', '50');
 text.style.fontFamily = 'Times New Roman';
 text.style.fontSize = '50';
@@ -1031,8 +1398,7 @@ var img = new Image();
 img.src = 'https://i.ytimg.com/vi/zecueq-mo4M/maxresdefault.jpg';
 document.body.appendChild(img);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-10
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 10 -->
 Chapter 2: JavaScript Variables
 variable_name
 {Required} The name of the variable: used when calling it.
@@ -1060,7 +1426,6 @@ var number2 = number1 * 10; // 2 (times) 10 = 20
 var number3 = number2 / number1; // 20 (divided by) 2 = 10;
 We can also add strings which will concatenate them, or put them together. For example:
 var myString = "I am a " + "string!"; // "I am a string!"
-
 Section 2.3: Types of Variables
 var myInteger = 12; // 32-bit number (from -2,147,483,648 to 2,147,483,647)
 var myLong = 9310141419482; // 64-bit number (from -9,223,372,036,854,775,808 to
@@ -1074,10 +1439,9 @@ var NaN_Example = 0/0; // NaN: Division by Zero is not possible
 var notDefined; // undefined: we didn't define it to anything yet
 window.alert(aRandomVariable); // undefined
 
-GoalKicker.com – JavaScript® Notes for Professionals 11
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 11 -->
 var myNull = null; // null
-// etc.
-
+// etc...
 Section 2.4: Arrays and Objects
 var myArray = []; // empty array
 An array is a set of variables. For example:
@@ -1105,9 +1469,9 @@ window.alert(billy.firstname); // Billy
 Rather than making an array ["John Doe", "Billy"] and calling myArray[0], we can just call john.fullname and
 billy.fullname.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-12
-Chapter 3: Built-in Constants
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 12 -->
+<h2 id="ch3">Chapter 3: Built-in Constants</h2>
+
 Section 3.1: null
 null is used for representing the intentional absence of an object value and is a primitive value. Unlike undefined,
 it is not a property of the global object.
@@ -1146,10 +1510,10 @@ isNaN(); // true : converted to NaN (implicitly undefined)
 isNaN(function(){}); // true : conversion fails
 isNaN({}); // true : conversion fails
 isNaN([1, 2]); // true : converted to "1, 2", which can't be converted to a number
-This last one is a bit tricky: checking if an Array is NaN. To do this, the Number() constructor first converts the array
+This last one is a bit tricky: checking if an Array is NaN. To do this, the Number() 
+constructor first converts the array
 
-GoalKicker.com – JavaScript® Notes for Professionals
-13
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 13 -->
 to a string, then to a number; this is the reason why isNaN([]) and isNaN([34]) both return false, but isNaN([1,
 2]) and isNaN([true]) both return true: because they get converted to "", "34", "1,2" and "true" respectively. In
 general, an array is considered NaN by isNaN() unless it only holds one element whose string representation
@@ -1199,8 +1563,8 @@ Section 3.3: NaN
 NaN stands for "Not a Number." When a mathematical function or operation in JavaScript cannot return a specific
 number, it returns the value NaN instead.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-14
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 14 -->
+
 It is a property of the global object, and a reference to Number.NaN
 window.hasOwnProperty('NaN'); // true
 NaN; // NaN
@@ -1242,7 +1606,7 @@ foo();
 // is undefined? false
 // is undefined? true
 
-GoalKicker.com – JavaScript® Notes for Professionals 15
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 15 -->
 undefined is also a property of the global window object.
 // Only in browsers
 console.log(window.undefined); // undefined
@@ -1259,10 +1623,10 @@ It is greater than any other value, and you can get it by dividing by 0 or by ev
 that's so big that overflows. This actually means there is no division by 0 errors in JavaScript, there is Infinity!
 There is also -Infinity which is mathematical negative infinity, and it's lower than any other value.
 To get -Infinity you negate Infinity, or get a reference to it in Number.NEGATIVE_INFINITY.
-  - (Infinity); // -Infinity
+- (Infinity); // -Infinity
 Now let's have some fun with examples:
 Infinity > 123192310293; // true
-  -Infinity < -123192310293; // true
+-Infinity < -123192310293; // true
 1 / 0; // Infinity
 Math.pow(123123123, 9123192391023); // Infinity
 Number.MAX_VALUE * 2; // Infinity
@@ -1283,8 +1647,7 @@ The Number constructor has some built in constants that can be useful
 Number.MAX_VALUE; // 1.7976931348623157e+308
 Number.MAX_SAFE_INTEGER; // 9007199254740991
 
-GoalKicker.com – JavaScript® Notes for Professionals
-16
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 16 -->
 Number.MIN_VALUE; // 5e-324
 Number.MIN_SAFE_INTEGER; // -9007199254740991
 Number.EPSILON; // 0.0000000000000002220446049250313
@@ -1298,24 +1661,24 @@ thus the smallest possible difference between two different Number values. One r
 nature of how numbers are stored by JavaScript see Check the equality of two numbers
 Section 3.7: Operations that return NaN
 Mathematical operations on values other than numbers return NaN.
-  "b" * 3
-  "cde" - "e"
-  [1, 2, 3] * 2
+"b" * 3
+"cde" - "e"
+[1, 2, 3] * 2
 An exception: Single-number arrays.
-  [2] * [3] // Returns 6
+[2] * [3] // Returns 6
 Also, remember that the + operator concatenates strings.
-  "a" + "b" // Returns "ab"
+"a" + "b" // Returns "ab"
 Dividing zero by zero returns NaN.
-  0 / 0 // NaN
+0 / 0 // NaN
 Note: In mathematics generally (unlike in JavaScript programming), dividing by zero is not possible.
 Section 3.8: Math library functions that return NaN
 Generally, Math functions that are given non-numeric arguments will return NaN.
 Math.floor("a")
-The square root of a negative number returns NaN, because Math.sqrt does not support imaginary or complex numbers.
+The square root of a negative number returns NaN, because Math.sqrt does not support imaginary or complex
+numbers.
 Math.sqrt(-1)
 
-GoalKicker.com – JavaScript® Notes for Professionals 17
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 17 -->
 Chapter 4: Comments
 Section 4.1: Using Comments
 To add annotations, hints, or exclude some code from being executed JavaScript provides two ways of commenting
@@ -1354,8 +1717,7 @@ Old browsers would treat
 it as HTML code. */
 // -->
 
-GoalKicker.com – JavaScript® Notes for Professionals
-18
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 18 -->
 </script>
 An HTML closing comment can also be used in JavaScript (independent of an opening comment) at the beginning of
 a line (optionally preceded by whitespace) in which case it too causes the rest of the line to be ignored:
@@ -1379,12 +1741,11 @@ console.log(e.data); // 'reached JS "file"
 When run a HTML, all the multiline text between the <!-- and --> comments are ignored, so the JavaScript
 contained therein is ignored when run as HTML.
 As JavaScript, however, while the lines beginning with <!-- and --> are ignored, their effect is not to escape over
-multiple lines, so the lines following them (e.g., self.postMessage(.) will not be ignored when run as JavaScript,
+multiple lines, so the lines following them (e.g., self.postMessage(...) will not be ignored when run as JavaScript,
 at least until they reach a JavaScript comment, marked by /* and */. Such JavaScript comments are used in the
 above example to ignore the remaining HTML text (until the --> which is also ignored as JavaScript).
 
-GoalKicker.com – JavaScript® Notes for Professionals
-19
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 19 -->
 Chapter 5: Console
 The information displayed by a debugging/web console is made available through the multiple methods of the
 console Javascript object that can be consulted through console.dir(console). Besides the console.memory
@@ -1425,8 +1786,7 @@ F12 , then click on the “Console” tab or press ESC to toggle the console on 
 Mac OS: Cmd + Opt + J
 Firefox
 
-GoalKicker.com – JavaScript® Notes for Professionals
-20
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 20 -->
 Opening the “Console” panel in Firefox’s Developer Tools:
 Windows / Linux: any of the following options.
 Ctrl + Shift + K
@@ -1441,8 +1801,7 @@ Safari
 Opening the “Console” panel in Safari’s Web Inspector you must first enable the develop menu in Safari's
 Preferences
 
-GoalKicker.com – JavaScript® Notes for Professionals
-21
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 21 -->
 Then you can either pick "Develop->Show Error Console" from the menus or press ⌘ + Option + C
 Opera
 Opening the “Console” in opera:
@@ -1457,8 +1816,7 @@ console.log("Hello World");
 }
 Or at the start of your script you can identify if the console is available and if not, define a null function to catch all
 
-GoalKicker.com – JavaScript® Notes for Professionals
-22
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 22 -->
 of your references and prevent exceptions.
 {if (!window.console)
 console = {log: function() {}};
@@ -1488,15 +1846,14 @@ var elms = document.getElementsByTagName('*'); //select all elements on the page
 console.time('Loop time');
 for (var i = 0; i < 5000; i++) {
 for (var j = 0, length = elms.length; j < length; j++) {
-// nothing to do .
+// nothing to do ...
 }
 }
 console.timeEnd('Loop time');
 will output:
 Loop time: 40.716ms
 
-GoalKicker.com – JavaScript® Notes for Professionals
-23
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 23 -->
 Section 5.2: Formatting console output
 Many of the console's print methods can also handle C-like string formatting, using % tokens:
 console.log('%s has %d points', 'Sam', 100);
@@ -1527,7 +1884,7 @@ this parameter may be an empty string, if there is no need to apply CSS rules to
 if two %c format specifiers are found, the 1st (encased in %c) and 2nd substring will have their rules defined in
 the 2nd and 3rd parameter of the print method respectively.
 if three %c format specifiers are found, then the 1st, 2nd and 3rd substrings will have their rules defined in
-the 2nd , 3rd and 4th parameter respectively, and so on.
+the 2nd , 3rd and 4th parameter respectively, and so on...
 console.log("%cHello %cWorld%c!!", // string to be printed
 "color: blue;", // applies color formatting to the 1st substring
 "font-size: xx-large;", // applies font formatting to the 2nd substring
@@ -1535,8 +1892,7 @@ console.log("%cHello %cWorld%c!!", // string to be printed
 );
 Displays:
 
-GoalKicker.com – JavaScript® Notes for Professionals
-24
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 24 -->
 Using groups to indent output
 Output can be indented and enclosed in a collapsible group in the debugging console with the following methods:
 console.groupCollapsed(): creates a collapsed group of entries that can be expanded through the
@@ -1560,8 +1916,7 @@ var obj = { test: 1 };
 console.log(['string'], 1, obj, window);
 The log method will display the following in the debugging console:
 
-GoalKicker.com – JavaScript® Notes for Professionals
-25
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 25 -->
 ['string'] 1 Object { test: 1 } Window { /* truncated */ }
 Beside plain strings, console.log() can handle other types, like arrays, objects, dates, functions, etc.:
 console.log([0, 3, 32, 'a string']);
@@ -1595,8 +1950,7 @@ the global scope.
 function sec() {
 first();
 
-GoalKicker.com – JavaScript® Notes for Professionals 26
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 26 -->
 }
 function first() {
 } console.trace();
@@ -1629,8 +1983,7 @@ Section 5.5: Tabulating values - console.table()
 In most environments, console.table() can be used to display objects and arrays in a tabular format.
 For example:
 
-GoalKicker.com – JavaScript® Notes for Professionals 27
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 27 -->
 console.table(['Hello', 'world']);
 displays like:
 0(index) value
@@ -1668,8 +2021,7 @@ displays like:
 console.table(personArr, ['name', 'personId']);
 displays like:
 
-GoalKicker.com – JavaScript® Notes for Professionals 28
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 28 -->
 Section 5.6: Counting - console.count()
 console.count([obj]) places a counter on the object's value provided as argument. Each time this method is
 invoked, the counter is increased (with the exception of the empty string ''). A label together with a number is
@@ -1694,8 +2046,7 @@ Displays:
 Strings with numbers are converted to Number objects:
 console.count(42.3);
 
-GoalKicker.com – JavaScript® Notes for Professionals 29
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 29 -->
 console.count(Number('42.3'));
 console.count('42.3');
 Displays:
@@ -1746,8 +2097,7 @@ Infinity: 2
 [object HTMLDocument]: 1
 [object Object]: 1
 
-GoalKicker.com – JavaScript® Notes for Professionals 30
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 30 -->
 [object Object]: 2
 [object Object]: 3
 [object Object]: 4
@@ -1780,8 +2130,7 @@ console.dirxml(object) prints an XML representation of the descendant elements o
 JavaScript representation if not. Calling console.dirxml() on HTML and XML elements is equivalent to calling
 console.log().
 
-GoalKicker.com – JavaScript® Notes for Professionals 31
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 31 -->
 Example 1:
 console.dirxml(document)
 displays:
@@ -1797,8 +2146,7 @@ var myObject = {
 console.dirxml(myObject);
 displays:
 
-GoalKicker.com – JavaScript® Notes for Professionals 32
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 32 -->
 Section 5.9: Debugging with assertions - console.assert()
 Writes an error message to the console if the assertion is false. Otherwise, if the assertion is true, this does
 nothing.
@@ -1808,12 +2156,11 @@ printed if the assertion is false:
 console.assert does not throw an AssertionError (except in Node.js), meaning that this method is incompatible
 with most testing frameworks and that code execution will not break on a failed assertion.
 
-GoalKicker.com – JavaScript® Notes for Professionals 33
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 33 -->
 Chapter 6: Datatypes in JavaScript
 Section 6.1: typeof
 typeof is the 'official' function that one uses to get the type in JavaScript, however in certain cases it might yield
-some unexpected results .
+some unexpected results ...
 1. Strings
 typeof "String" or
 typeof Date(2011,01,01)
@@ -1838,18 +2185,17 @@ typeof function(){}
 var var1; typeof var1
 "undefined"
 
-GoalKicker.com – JavaScript® Notes for Professionals 34
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 34 -->
 Section 6.2: Finding an object's class
 To find whether an object was constructed by a certain constructor or one inheriting from it, you can use the
 instanceof command:
 //We want this function to take the sum of the numbers passed to it
 //It can be called as sum(1, 2, 3) or sum([1, 2, 3]) and should give 6
-function sum(.arguments) {
+function sum(...arguments) {
 if (arguments.length === 1) {
 const [firstArg] = arguments
 if (firstArg instanceof Array) { //firstArg is something like [1, 2, 3]
-return sum(.firstArg) //calls sum(1, 2, 3)
+return sum(...firstArg) //calls sum(1, 2, 3)
 }
 }
 return arguments.reduce((a, b) => a + b)
@@ -1876,15 +2222,14 @@ console.log(isNumber(null), isNumber(undefined)) //false false
 console.log(isNumber('abc'), isNumber([]), isNumber(() => 1)) //false false false
 console.log(isNumber(0), isNumber(Number('10.1')), isNumber(NaN)) //true true true
 Section 6.3: Getting object type by constructor name
-When one with typeof operator one gets type object it falls into somewhat wast category.
+When one with typeof operator one gets type object it falls into somewhat wast category...
 In practice you might need to narrow it down to what sort of 'object' it actually is and one way to do it is to use
 object constructor name to get what flavour of object it actually is: Object.prototype.toString.call(yourObject)
 1. String
 Object.prototype.toString.call("String")
 "[object String]"
 
-GoalKicker.com – JavaScript® Notes for Professionals 35
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 35 -->
 2. Number
 Object.prototype.toString.call(42)
 "[object Number]"
@@ -1911,8 +2256,7 @@ Object.prototype.toString.call([]);
 9. Null
 Object.prototype.toString.call(null);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-36
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 36 -->
 "[object Null]"
 10. Undefined
 Object.prototype.toString.call(undefined);
@@ -1921,8 +2265,7 @@ Object.prototype.toString.call(undefined);
 Object.prototype.toString.call(Error());
 "[object Error]"
 
-GoalKicker.com – JavaScript® Notes for Professionals 37
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 37 -->
 Chapter 7: Strings
 Section 7.1: Basic Info and String Concatenation
 Strings in JavaScript can be enclosed in Single quotes 'hello', Double quotes "Hello" and (from ES2015, ES6) in
@@ -1961,8 +2304,7 @@ var boolean = true;
 console.log(string + number + boolean); // "string32true"
 String Templates
 
-GoalKicker.com – JavaScript® Notes for Professionals 38
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 38 -->
 Version ≥ 6
 Strings can be created using template literals (backticks) `hello`.
 var greeting = `Hello`;
@@ -2014,10 +2356,9 @@ are put right next to each other).
 Using spread operator
 Version ≥ 6
 
-GoalKicker.com – JavaScript® Notes for Professionals 39
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 39 -->
 function reverseString(str) {
-return [.String(str)].reverse().join('');
+return [...String(str)].reverse().join('');
 }
 console.log(reverseString('stackoverflow')); // "wolfrevokcats"
 console.log(reverseString(1337)); // "7331"
@@ -2059,8 +2400,7 @@ var arr = ["bananas", "cranberries", "apples"];
 arr.sort(function(a, b) {
 return a.localeCompare(b);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-40
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 40 -->
 });
 console.log(arr); // [ "apples", "bananas", "cranberries" ]
 Section 7.4: Access character at index in string
@@ -2096,8 +2436,7 @@ Version ≥ 6
 If a string has ' and " you may want to consider using template literals (also known as template strings in previous ES6
 editions), which do not require you to escape ' and ". These use backticks (`) instead of single or double quotes.
 
-GoalKicker.com – JavaScript® Notes for Professionals 41
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 41 -->
 var x = `"Escaping " and ' can become very annoying`;
 Section 7.6: Word Counter
 Say you have a <textarea> and you want to retrieve info about the number of:
@@ -2136,8 +2475,7 @@ s.split(", "); // ["one", "two", "three", "four", "five"]
 Use the array method .join to go back to a string:
 s.split(", ").join("--"); // "one--two--three--four--five"
 
-GoalKicker.com – JavaScript® Notes for Professionals 42
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 42 -->
 Section 7.9: Strings are unicode
 All JavaScript strings are unicode!
 var s = "some ∆≈ƒ unicode ¡™£¢¢¢";
@@ -2179,8 +2517,7 @@ if(aString.substring) {
 }
 // Explicit check for the String substring prototype method
 
-GoalKicker.com – JavaScript® Notes for Professionals 43
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 43 -->
 if(aString.substring === String.prototype.substring) {
 aString.substring(0, );
 }
@@ -2216,8 +2553,7 @@ var b16 = b10.toString(16); // "c"
 If the number represented is an integer, the inverse operation for this can be done with parseInt and the radix 16
 again
 
-GoalKicker.com – JavaScript® Notes for Professionals 44
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 44 -->
 // base 16 String representation
 var b16 = 'c';
 // base 10 Number
@@ -2257,8 +2593,7 @@ var string = "Hello, World!";
 console.log( string.includes("Hello") ); // true
 console.log( string.includes("foo") ); // false
 
-GoalKicker.com – JavaScript® Notes for Professionals 45
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 45 -->
 replace( regexp|substring, replacement|replaceFunction )
 replace() will return a string that has all occurrences of substrings matching the RegExp regexp or string
 substring with a string replacement or the returned value of replaceFunction.
@@ -2274,7 +2609,7 @@ Parameter
 Meaning
 match
 the substring that matches the entire regular expressiong
-g1, g2, g3, . the matching groups in the regular expression
+g1, g2, g3, ... the matching groups in the regular expression
 offset
 the offset of the match in the entire string
 string
@@ -2297,8 +2632,7 @@ Section 7.16: String to Upper Case
 String.prototype.toUpperCase():
 console.log('qwerty'.toUpperCase()); // 'QWERTY'
 
-GoalKicker.com – JavaScript® Notes for Professionals 46
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 46 -->
 Section 7.17: String to Lower Case
 String.prototype.toLowerCase()
 console.log('QWERTY'.toLowerCase()); // 'qwerty'
@@ -2315,8 +2649,7 @@ var myString = "abc";
 var n = 3;
 new Array(n + 1).join(myString); // Returns "abcabcabc"
 
-GoalKicker.com – JavaScript® Notes for Professionals 47
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 47 -->
 Chapter 8: Date
 Parameter
 Details
@@ -2359,8 +2692,7 @@ Exploring dates
 Note that these examples were generated on a browser in the Central Time Zone of the US, during Daylight Time,
 as evidenced by the code. Where comparison with UTC was instructive, Date.prototype.toISOString() was used
 
-GoalKicker.com – JavaScript® Notes for Professionals 48
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 48 -->
 to show the date and time in UTC (the Z in the formatted string denotes UTC).
 // Creates a Date object with the current date and time from the
 // user's browser
@@ -2414,8 +2746,7 @@ rollover.toString() === 'Sat Feb 02 2013 02:03:03 GMT-0600 (Central Standard Tim
 // Jan based on the month 12 (11 being December), then again because of the day 32
 // (January having 31 days).
 
-GoalKicker.com – JavaScript® Notes for Professionals 49
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 49 -->
 // Special dates for years in the range 0-99
 var special1 = new Date(12, 0);
 special1.toString() === 'Mon Jan 01 1912 00:00:00 GMT-0600 (Central Standard Time)`
@@ -2447,8 +2778,7 @@ var date1 = new Date();
 date1.toISOString();
 Returns: "2016-04-14T23:49:08.596Z"
 
-GoalKicker.com – JavaScript® Notes for Professionals 50
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 50 -->
 Convert to GMT String
 var date1 = new Date();
 date1.toGMTString();
@@ -2480,8 +2810,7 @@ The first implementation naively uses local times, which results in wrong result
 UTC dates to avoid timezones where they are not needed.
 Naive approach with WRONG results
 
-GoalKicker.com – JavaScript® Notes for Professionals 51
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 51 -->
 function formatDate(dayOfWeek, day, month, year) {
 var daysOfWeek = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -2494,7 +2823,7 @@ birthday.getMonth(), birthday.getFullYear()));
 sendToBar(birthday.getTime());
 Sample output:
 Foo was born on: Sat Jan 1 2000
-//Meanwhile somewhere else.
+//Meanwhile somewhere else...
 //Bar lives in a country with timezone GMT - 1
 var birthday = new Date(receiveFromFoo());
 console.log("Foo was born on: " + formatDate(birthday.getDay(), birthday.getDate(),
@@ -2515,18 +2844,17 @@ birthday.getUTCMonth(), birthday.getUTCFullYear()));
 sendToBar(birthday.getTime());
 Sample output:
 Foo was born on: Sat Jan 1 2000
-//Meanwhile somewhere else.
+//Meanwhile somewhere else...
 //Bar lives in a country with timezone GMT - 1
 var birthday = new Date(receiveFromFoo());
 
-GoalKicker.com – JavaScript® Notes for Professionals 52
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 52 -->
 console.log("Foo was born on: " + formatDate(birthday.getUTCDay(), birthday.getUTCDate(),
 birthday.getUTCMonth(), birthday.getUTCFullYear()));
 Sample output:
 Foo was born on: Sat Jan 1 2000
 Creating a Date from UTC
-If one wants to create a Date object based on UTC or GMT, the Date.UTC(.) method can be used. It uses the
+If one wants to create a Date object based on UTC or GMT, the Date.UTC(...) method can be used. It uses the
 same arguments as the longest Date constructor. This method will return a number representing the time that has
 passed since January 1, 1970, 00:00:00 UTC.
 console.log(Date.UTC(2000,0,31,12));
@@ -2543,7 +2871,7 @@ var localDate = new Date(2000,0,31,12);
 console.log(localDate - utcDate === utcDate.getTimezoneOffset() * 60 * 1000);
 Sample output: true
 Changing a Date object
-All Date object modifiers, such as setDate(.) and setFullYear(.) have an equivalent takes an argument in
+All Date object modifiers, such as setDate(...) and setFullYear(...) have an equivalent takes an argument in
 UTC time rather than in local time.
 var date = new Date();
 date.setUTCFullYear(2000,0,31);
@@ -2551,8 +2879,7 @@ date.setUTCHours(12,0,0,0);
 console.log(date);
 Sample output:
 
-GoalKicker.com – JavaScript® Notes for Professionals 53
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 53 -->
 Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
 The other UTC-specific modifiers are .setUTCMonth(), .setUTCDate() (for the day of the month),
 .setUTCMinutes(), .setUTCSeconds() and .setUTCMilliseconds().
@@ -2566,7 +2893,7 @@ var timestamp = date.getTime();
 var timestamp2 = Date.UTC(2000,0,31,12);
 console.log(timestamp === timestamp2);
 Sample output: true
-//And when constructing a date from it elsewhere.
+//And when constructing a date from it elsewhere...
 var otherDate = new Date(timestamp);
 //Represented as a universal date
 console.log(otherDate.toUTCString());
@@ -2587,8 +2914,7 @@ The options parameter should be an object with some or all of the following prop
 localeMatcher : possible values are "lookup" and "best fit"; the default is "best fit"
 timeZone : the only value implementations must recognize is "UTC"; the default is the runtime's default time
 
-GoalKicker.com – JavaScript® Notes for Professionals 54
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 54 -->
 zone
 hour12 :possible values are true and false; the default is locale dependent
 formatMatcher : possible values are "basic" and "best fit"; the default is "best fit"
@@ -2640,7 +2966,7 @@ ret.push(this[properties[i]]);
 }
 return ret.join(separator);
 
-GoalKicker.com – JavaScript® Notes for Professionals 55
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 55 -->
 }
 };
 return date;
@@ -2679,7 +3005,7 @@ var year = (new Date()).getFullYear();
 console.log(year);
 // Sample output: 2016
 
-GoalKicker.com – JavaScript® Notes for Professionals 56
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 56 -->
 Get the current month
 var month = (new Date()).getMonth();
 console.log(month);
@@ -2724,8 +3050,7 @@ To increment date objects in JavaScript, we can usually do this:
 var checkoutDate = new Date(); // Thu Jul 21 2016 10:05:13 GMT-0400 (EDT)
 checkoutDate.setDate( checkoutDate.getDate() + 1 );
 
-GoalKicker.com – JavaScript® Notes for Professionals 57
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 57 -->
 console.log(checkoutDate); // Fri Jul 22 2016 10:05:13 GMT-0400 (EDT)
 It is possible to use setDate to change the date to a day in the following month by using a value larger than the
 number of days in the current month -
@@ -2767,8 +3092,7 @@ var date1 = new Date();
 date1.toJSON();
 Returns: "2016-04-14T23:49:08.596Z"
 
-GoalKicker.com – JavaScript® Notes for Professionals 58
-
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 58 -->
 Chapter 9: Date Comparison
 Section 9.1: Comparing Date values
 To check the equality of Date values:
@@ -2799,8 +3123,7 @@ var date2 = new Date(date1.valueOf());
 console.log(date1 <= date2);
 Sample output: true
 
-GoalKicker.com – JavaScript® Notes for Professionals
-59
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 59 -->
 Section 9.2: Date Dierence Calculation
 To compare the difference of two dates, we can do the comparison based on the timestamp.
 var date1 = new Date();
@@ -2809,8 +3132,7 @@ var dateDiff = date1.valueOf() - date2.valueOf();
 var dateDiffInYears = dateDiff/1000/60/60/24/365; //convert milliseconds into years
 console.log("Date difference in years : " + dateDiffInYears);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-60
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 60 -->
 Chapter 10: Comparison Operations
 Section 10.1: Abstract equality / inequality and type
 conversion
@@ -2852,8 +3174,7 @@ the latter will create a new object. Objects are compared by reference and not b
 below.
 Number("0") == Number("0"); // true;
 
-GoalKicker.com – JavaScript® Notes for Professionals
-61
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 61 -->
 new Number("0") == new Number("0"); // false
 Finally, you have the option to use strict equality and inequality operators which will not perform any implicit type
 conversions.
@@ -2895,8 +3216,7 @@ Number.isNaN(Infinity); // false
 Number.isNaN('str'); // false
 Number.isNaN(undefined); // false
 
-GoalKicker.com – JavaScript® Notes for Professionals
-62
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 62 -->
 Number.isNaN({}); // false
 Version < 6
 You can check if a value is NaN by comparing it with itself:
@@ -2941,8 +3261,7 @@ Points to note
 NaN itself is a number, meaning that it does not equal to the string "NaN", and most importantly (though perhaps
 unintuitively):
 
-GoalKicker.com – JavaScript® Notes for Professionals
-63
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 63 -->
 typeof(NaN) === "number"; //true
 Section 10.3: Short-circuiting in boolean operators
 The and-operator (&&) and the or-operator (||) employ short-circuiting to prevent unnecessary work if the outcome
@@ -2974,8 +3293,7 @@ Output:
 'T'
 Example 4
 
-GoalKicker.com – JavaScript® Notes for Professionals
-64
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 64 -->
 F() || T(); // true
 Output:
 'F'
@@ -3010,8 +3328,7 @@ if (cb) {
 cb();
 }
 
-GoalKicker.com – JavaScript® Notes for Professionals
-65
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 65 -->
 // To this
 cb && cb();
 }
@@ -3051,8 +3368,7 @@ Existence testing identifier foo against undefined could throw a Reference Error
 Section 10.5: Abstract Equality (==)
 Operands of the abstract equality operator are compared after being converted to a common type. How this
 
-GoalKicker.com – JavaScript® Notes for Professionals
-66
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 66 -->
 conversion happens is based on the specification of the operator:
 Specification for the == operator:
 7.2.13 Abstract Equality Comparison
@@ -3104,8 +3420,7 @@ This will return false, because y is false.
 OR
 This operator will return true if one of the two expressions evaluate to true. This boolean operator will employ
 
-GoalKicker.com – JavaScript® Notes for Professionals
-67
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 67 -->
 short-circuiting and y will not be evaluated if x evaluates to true.
 x || y;
 This will return true, because x is true.
@@ -3143,8 +3458,7 @@ var g = '' || 'yay' || 'boo'; // g = 'yay'
 Logical AND (&&), reading left to right, will evaluate to the first falsy value. If no falsey value is found, the last value is
 returned.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-68
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 68 -->
 var a = 'hello' && ''; // a = ''
 var b = '' && []; // b = ''
 var c = undefined && 0; // c = undefined
@@ -3186,8 +3500,7 @@ Object.is(NaN, NaN); // true
 Object.is(true, "true"); // false
 Object.is(false, 0); // false
 
-GoalKicker.com – JavaScript® Notes for Professionals
-69
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 69 -->
 Object.is(null, undefined); // false
 Object.is(1, "1"); // false
 Object.is([], []); // false
@@ -3230,8 +3543,7 @@ null === undefined; // false
 [] === []; // false
 This algorithm has the following properties:
 
-GoalKicker.com – JavaScript® Notes for Professionals
-70
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 70 -->
 Symmetry: x === y is true if, and only if, y === xistrue, for any valuesxandy`.
 Transitivity: If x === y and y === z are true, then x === z is also true, for any values x, y and z.
 But is not an equivalence relation because
@@ -3270,8 +3582,7 @@ When both operands are strings, they are compared lexicographically (according t
 'a' < 'b' // true
 '1' < '2' // true
 
-GoalKicker.com – JavaScript® Notes for Professionals
-71
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 71 -->
 '100' > '12' // false ('100' is less than '12' lexicographically!)
 When one operand is a string and the other is a number, the string is converted to a number before comparison:
 '1' < 2 // true
@@ -3310,8 +3621,7 @@ Example:
 1 !== 2 // true
 1 !== 1 // false
 
-GoalKicker.com – JavaScript® Notes for Professionals
-72
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 72 -->
 Section 10.13: List of Comparison Operators
 Operator
 Comparison
@@ -3371,8 +3681,7 @@ const KEY_MASKS = [0b1011,0b1110,0b0111,0b1101]; // left up right down
 window.onkeydown = window.onkeyup = function (e) {
 if(e.keyCode >= 37 && e.keyCode <41){
 
-GoalKicker.com – JavaScript® Notes for Professionals
-73
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 73 -->
 if(e.type === "keydown"){
 bitField |= KEY_BITS[e.keyCode - 37];
 }else{
@@ -3419,8 +3728,7 @@ The keyboard input is just one example. Bitfields are useful when you have vario
 be acted on. JavaScript can use up to 32 bits for a bit field. Using them can offer significant performance increases.
 They are worth being familiar with.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-74
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 74 -->
 Chapter 11: Conditions
 Conditional expressions, involving keywords such as if and else, provide JavaScript programs with the ability to
 perform different actions depending on a Boolean condition: true or false. This section covers the use of JavaScript
@@ -3460,8 +3768,7 @@ cleaner.
 a === 1 ? alert('Hey, it is 1!') : alert('Weird, what could it be?');
 if (a === 1) alert('Hey, it is 1!') else alert('Weird, what could it be?');
 
-GoalKicker.com – JavaScript® Notes for Professionals
-75
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 75 -->
 Ternaries can be nested to encapsulate additional logic. For example
 foo ? bar ? 1 : 2 : 3
 // To be clear, this is evaluated left to right
@@ -3503,8 +3810,7 @@ case 2:
 console.log('I will never run');
 } break;
 
-GoalKicker.com – JavaScript® Notes for Professionals
-76
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 76 -->
 The break statement "breaks" out of the switch statement and ensures no more code within the switch statement
 is executed. This is how sections are defined and allows the user to make "fall through" cases.
 Warning: lack of a break or return statement for each case means the program will continue to evaluate
@@ -3554,8 +3860,7 @@ break;
 Multiple Inclusive Criteria for Cases
 Since cases "fall through" without a break or return statement, you can use this to create multiple inclusive criteria:
 
-GoalKicker.com – JavaScript® Notes for Professionals
-77
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 77 -->
 var x = "c"
 switch (x) {
 case "a":
@@ -3603,8 +3908,7 @@ console.log("i is smaller than 2");
 } else {
 console.log("none of the previous conditions was true");
 
-GoalKicker.com – JavaScript® Notes for Professionals
-78
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 78 -->
 }
 Some important footnotes about the above examples:
 If any one condition evaluated to true, no other condition in that chain of blocks will be evaluated, and all
@@ -3643,12 +3947,11 @@ cat () {
 return 'meow';
 },
 
-GoalKicker.com – JavaScript® Notes for Professionals
-79
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 79 -->
 lion () {
 return 'roar';
 },
-// . other animals
+// ... other animals
 default () {
 return 'moo';
 }
@@ -3672,8 +3975,7 @@ var x = 10
 x == 10 && alert("x is 10")
 x == 10 || alert("x is not 10")
 
-GoalKicker.com – JavaScript® Notes for Professionals
-80
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 80 -->
 Chapter 12: Arrays
 Section 12.1: Converting Array-like Objects to Arrays
 What are Array-like Objects?
@@ -3712,19 +4014,18 @@ length: 2
 arrayLike.forEach(value => {/* Do something */}); // Errors
 const realArray = Array.from(arrayLike);
 realArray.forEach(value => {/* Do something */}); // Works
-for.of:
+for...of:
 2.
 Version ≥ 6
 var realArray = [];
 for(const element of arrayLike) {
 } realArray.append(element);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-81
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 81 -->
 Spread operator:
 3.
 Version ≥ 6
-[.arrayLike]
+[...arrayLike]
 Object.values:
 4.
 Version ≥ 7
@@ -3768,8 +4069,7 @@ arrayLike.forEach(function() {
 [].forEach.bind(arrayLike)(function(val){
 // Do stuff with val
 
-GoalKicker.com – JavaScript® Notes for Professionals
-82
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 82 -->
 }); // Wow! this works
 Modifying Items During Conversion
 In ES6, while using Array.from, we can specify a map function that returns a mapped value for the new array being
@@ -3813,14 +4113,13 @@ obj[current.key] = current.value;
 return obj;
 }, {});
 
-GoalKicker.com – JavaScript® Notes for Professionals
-83
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 83 -->
 Version ≥ 6
 array.reduce((obj, current) => Object.assign(obj, {
 [current.key]: current.value
 }), {});
 Version ≥ 7
-array.reduce((obj, current) => ({.obj, [current.key]: current.value}), {});
+array.reduce((obj, current) => ({...obj, [current.key]: current.value}), {});
 Note that the Rest/Spread Properties is not in the list of finished proposals of ES2016. It isn't supported by ES2016.
 But we can use babel plugin babel-plugin-transform-object-rest-spread to support it.
 All of the above examples for Flatten Array result in:
@@ -3858,8 +4157,7 @@ Find Unique Values
 Here is an example that uses reduce to return the unique numbers to an array. An empty array is passed as the
 second argument and is referenced by prev.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-84
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 84 -->
 var arr = [1, 2, 1, 5, 9, 5];
 arr.reduce((prev, number) => {
 if(prev.indexOf(number) === -1) {
@@ -3882,7 +4180,7 @@ Version ≥ 6
 In this example, an anonymous function is provided to the map() function, and the map function will call it for every
 element in the array, providing the following parameters, in this order:
 The element itself
-The index of the element (0, 1.)
+The index of the element (0, 1...)
 The entire array
 Additionally, map() provides an optional second parameter in order to set the value of this in the mapping
 function. Depending on the execution environment, the default value of this might vary:
@@ -3902,8 +4200,7 @@ Section 12.4: Filtering Object Arrays
 The filter() method accepts a test function, and returns a new array containing only the elements of the original
 array that pass the test provided.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-85
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 85 -->
 // Suppose we want to get all odd number in an array:
 var numbers = [5, 32, 43, 4];
 Version ≥ 5.1
@@ -3955,8 +4252,7 @@ return;
 if(flag) return obj;
 });
 
-GoalKicker.com – JavaScript® Notes for Professionals
-86
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 86 -->
 This returns:
 [{
 id: 1,
@@ -3992,8 +4288,7 @@ may contain items that are not strings use the safe version below.
 return a.toString().localeCompare(b);
 });
 
-GoalKicker.com – JavaScript® Notes for Professionals
-87
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 87 -->
 String sorting by length (longest first)
 ["zebras", "dogs", "elephants", "penguins"].sort(function(a, b) {
 return b.length - a.length;
@@ -4029,8 +4324,7 @@ var dates = [
 new Date(2007, 11, 10),
 new Date(2014, 2, 21),
 
-GoalKicker.com – JavaScript® Notes for Professionals
-88
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 88 -->
 new Date(2009, 6, 11),
 new Date(2016, 7, 23)
 ];
@@ -4076,8 +4370,7 @@ Using a traditional for loop to loop through an array
 The traditional way to loop through an array, is this:
 for (var i = 0, length = myArray.length; i < length; i++) {
 
-GoalKicker.com – JavaScript® Notes for Professionals
-89
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 89 -->
 console.log(myArray[i]);
 }
 Or, if you prefer to loop backwards, you do this:
@@ -4089,13 +4382,13 @@ for (var key = 0, value = myArray[key], length = myArray.length; key < length; v
 myArray[++key]) {
 console.log(value);
 }
-. or this one .
+... or this one ...
 var i = 0, length = myArray.length;
 for (; i < length;) {
 console.log(myArray[i]);
 i++;
 }
-. or this one:
+... or this one:
 var key = 0, value;
 for (; value = myArray[key++];){
 console.log(value);
@@ -4114,18 +4407,17 @@ exact same way as this for-loop:
 for(var key = 0; value = myArray[key++];){
 console.log(value);
 }
-for.in
+for...in
 In JavaScript, you can also do this:
 
-GoalKicker.com – JavaScript® Notes for Professionals
-90
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 90 -->
 for (i in myArray) {
 console.log(myArray[i]);
 }
 This should be used with care, however, as it doesn't behave the same as a traditional for loop in all cases, and
-there are potential side-effects that need to be considered. See Why is using "for.in" with array iteration a bad
+there are potential side-effects that need to be considered. See Why is using "for...in" with array iteration a bad
 idea? for more details.
-for.of
+for...of
 In ES 6, the for-of loop is the recommended way of iterating over a the values of an array:
 Version ≥ 6
 let myArray = [1, 2, 3, 4];
@@ -4133,7 +4425,7 @@ for (let value of myArray) {
 let twoValue = value * 2;
 console.log("2 * value is: %d", twoValue);
 }
-The following example shows the difference between a for.of loop and a for.in loop:
+The following example shows the difference between a for...of loop and a for...in loop:
 Version ≥ 6
 let myArray = [3, 5, 7];
 myArray.foo = "hello";
@@ -4152,7 +4444,7 @@ let twoValue = myArray[i] * 2;
 console.log("2 * value is: %d", twoValue);
 }
 Array.prototype.forEach()
-The .forEach(.) method is an option in ES 5 and above. It is supported by all modern browsers, as well as
+The .forEach(...) method is an option in ES 5 and above. It is supported by all modern browsers, as well as
 Internet Explorer 9 and later.
 Version ≥ 5
 [1, 2, 3, 4].forEach(function(value, index, arr) {
@@ -4162,8 +4454,7 @@ console.log("2 * value is: %d", twoValue);
 Comparing with the traditional for loop, we can't jump out of the loop in .forEach(). In this case, use the for loop,
 or use partial iteration presented below.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-91
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 91 -->
 In all versions of JavaScript, it is possible to iterate through the indices of an array using a traditional C-style for
 loop.
 var myArray = [1, 2, 3, 4];
@@ -4207,8 +4498,7 @@ var arr = [2, 4, 7, 9];
 for (var i = 0; i < arr.length && arr[i] !== 7; i++) {
 } console.log(arr[i]);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-92
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 92 -->
 Libraries
 Finally, many utility libraries also have their own foreach variation. Three of the most popular ones are these:
 jQuery.each(), in jQuery:
@@ -4237,14 +4527,13 @@ Elements can be skipped
 const [,b,,c] = [1, 2, 3, 4];
 console.log(b, c); // → 2, 4
 Rest operator can be used too
-const [b,c, .xs] = [2, 3, 4, 5];
+const [b,c, ...xs] = [2, 3, 4, 5];
 console.log(b, c, xs); // → 2, 3, [4, 5]
 An array can also be destructured if it's an argument to a function.
 function area([length, height]) {
 } return (length * height) / 2;
 
-GoalKicker.com – JavaScript® Notes for Professionals
-93
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 93 -->
 const triangle = [3, 4, 5];
 area(triangle); // → 6
 Notice the third argument is not named in the function because it's not needed.
@@ -4261,7 +4550,7 @@ return self.indexOf(value) === index;
 If your environment supports ES6, you can also use the Set object. This object lets you store unique values of any
 type, whether primitive values or object references:
 Version ≥ 6
-var uniqueArray = [. new Set(['a', 1, 'a', 2, '1', 1])];
+var uniqueArray = [... new Set(['a', 1, 'a', 2, '1', 1])];
 Section 12.9: Array comparison
 For simple array comparison you can use JSON stringify and compare the output strings:
 JSON.stringify(array1) === JSON.stringify(array2)
@@ -4284,8 +4573,7 @@ return false;
 // iterate arrays and compare them
 for (i = 0; i < array1.length; i += 1) {
 
-GoalKicker.com – JavaScript® Notes for Professionals
-94
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 94 -->
 if (!compareArrays(array1[i], array2[i])) { // Do items compare recursively
 return false;
 }
@@ -4324,8 +4612,7 @@ return arr;
 Example for deepReverse:
 var arr = [1, 2, 3, [1, 2, 3, ['a', 'b', 'c']]];
 
-GoalKicker.com – JavaScript® Notes for Professionals
-95
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 95 -->
 deepReverse(arr);
 Results in:
 arr // -> [[['c','b','a'], 3, 2, 1], 3, 2, 1]
@@ -4343,8 +4630,8 @@ All method used to convert array like objects to array are applicable to clone a
 Version ≥ 6
 arrayToClone = [1, 2, 3, 4, 5];
 clone1 = Array.from(arrayToClone);
-clone2 = Array.of(.arrayToClone);
-clone3 = [.arrayToClone] // the shortest way
+clone2 = Array.of(...arrayToClone);
+clone3 = [...arrayToClone] // the shortest way
 Version ≤ 5.1
 arrayToClone = [1, 2, 3, 4, 5];
 clone1 = Array.prototype.slice.call(arrayToClone);
@@ -4356,7 +4643,7 @@ var array2 = [3, 4, 5];
 Version ≥ 3
 var array3 = array1.concat(array2); // returns a new array
 Version ≥ 6
-var array3 = [.array1, .array2]
+var array3 = [...array1, ...array2]
 Results in a new Array:
 [1, 2, 3, 4, 5]
 Multiple Arrays
@@ -4365,14 +4652,13 @@ array2 = ["c", "d"],
 array3 = ["e", "f"],
 array4 = ["g", "h"];
 
-GoalKicker.com – JavaScript® Notes for Professionals
-96
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 96 -->
 Version ≥ 3
 Provide more Array arguments to array.concat()
 var arrConc = array1.concat(array2, array3, array4);
 Version ≥ 6
 Provide more arguments to []
-var arrConc = [.array1, .array2, .array3, .array4]
+var arrConc = [...array1, ...array2, ...array3, ...array4]
 Results in a new Array:
 ["a", "b", "c", "d", "e", "f", "g", "h"]
 Without Copying the First Array
@@ -4383,7 +4669,7 @@ Provide the elements of shortArray as parameters to push using Function.prototyp
 longArray.push.apply(longArray, shortArray);
 Version ≥ 6
 Use the spread operator to pass the elements of shortArray as separate arguments to push
-longArray.push(.shortArray)
+longArray.push(...shortArray)
 The value of longArray is now:
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 Note that if the second array is too long (>100,000 entries), you may get a stack overflow error (because of how
@@ -4396,13 +4682,12 @@ var array = ["a", "b"];
 Version ≥ 3
 var arrConc = array.concat("c", "d");
 Version ≥ 6
-var arrConc = [.array, "c", "d"]
+var arrConc = [...array, "c", "d"]
 Results in a new Array:
 ["a", "b", "c", "d"]
 You can also mix arrays with non-arrays
 
-GoalKicker.com – JavaScript® Notes for Professionals
-97
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 97 -->
 var arr1 = ["a","b"];
 var arr2 = ["e", "f"];
 var arrConc = arr1.concat("c", "d", arr2);
@@ -4430,32 +4715,31 @@ Section 12.14: Array spread / rest
 Spread operator
 Version ≥ 6
 With ES6, you can use spreads to separate individual elements into a comma-separated syntax:
-let arr = [1, 2, 3, .[4, 5, 6]]; // [1, 2, 3, 4, 5, 6]
+let arr = [1, 2, 3, ...[4, 5, 6]]; // [1, 2, 3, 4, 5, 6]
 // in ES < 6, the operations above are equivalent to
 arr = [1, 2, 3];
 arr.push(4, 5, 6);
 The spread operator also acts upon strings, separating each individual character into a new string element.
 Therefore, using an array function for converting these into integers, the array created above is equivalent to the
 one below:
-let arr = [1, 2, 3, .[."456"].map(x=>parseInt(x))]; // [1, 2, 3, 4, 5, 6]
+let arr = [1, 2, 3, ...[..."456"].map(x=>parseInt(x))]; // [1, 2, 3, 4, 5, 6]
 Or, using a single string, this could be simplified to:
-let arr = [."123456"].map(x=>parseInt(x)); // [1, 2, 3, 4, 5, 6]
+let arr = [..."123456"].map(x=>parseInt(x)); // [1, 2, 3, 4, 5, 6]
 
-GoalKicker.com – JavaScript® Notes for Professionals
-98
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 98 -->
 If the mapping is not performed then:
-let arr = [."123456"]; // ["1", "2", "3", "4", "5", "6"]
+let arr = [..."123456"]; // ["1", "2", "3", "4", "5", "6"]
 The spread operator can also be used to spread arguments into a function:
 function myFunction(a, b, c) { }
 let args = [0, 1, 2];
-myFunction(.args);
+myFunction(...args);
 // in ES < 6, this would be equivalent to:
 myFunction.apply(null, args);
 Rest operator
 The rest operator does the opposite of the spread operator by coalescing several elements into a single one
-[a, b, .rest] = [1, 2, 3, 4, 5, 6]; // rest is assigned [3, 4, 5, 6]
+[a, b, ...rest] = [1, 2, 3, 4, 5, 6]; // rest is assigned [3, 4, 5, 6]
 Collect arguments of a function:
-function myFunction(a, b, .rest) { console.log(rest); }
+function myFunction(a, b, ...rest) { console.log(rest); }
 myFunction(0, 1, 2, 3, 4, 5, 6); // rest is [2, 3, 4, 5, 6]
 Section 12.15: Filtering values
 The filter() method creates an array filled with all array elements that pass a test provided as a function.
@@ -4486,8 +4770,7 @@ Boolean(true) returns true which means push it to the returned array
 6.
 7.Boolean(5) returns true which means push it to the returned array
 
-GoalKicker.com – JavaScript® Notes for Professionals
-99
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 99 -->
 so the overall process will result
 [ {}, true, 5 ]
 Another simple example
@@ -4532,8 +4815,7 @@ array = [
 { value: 4 },
 { value: 5 }
 
-GoalKicker.com – JavaScript® Notes for Professionals
-100
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 100 -->
 ];
 var index = array.findIndex(item => item.value === 3); // 2
 var index = array.findIndex(item => item.value === 12); // -1
@@ -4547,8 +4829,8 @@ languages that require 3 and 4 byte Unicode characters, slice("") will separate 
 var strArray = "StackOverflow".split("");
 // strArray = ["S", "t", "a", "c", "k", "O", "v", "e", "r", "f", "l", "o", "w"]
 Version ≥ 6
-Using the spread operator (.), to convert a string into an array.
-var strArray = [."sky is blue"];
+Using the spread operator (...), to convert a string into an array.
+var strArray = [..."sky is blue"];
 // strArray = ["s", "k", "y", " ", "i", "s", " ", "b", "l", "u", "e"]
 Section 12.18: Removing items from an array
 Shift
@@ -4568,8 +4850,7 @@ array results in:
 Both methods return the removed item;
 Splice
 
-GoalKicker.com – JavaScript® Notes for Professionals
-101
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 101 -->
 Use .splice() to remove a series of elements from an array. .splice() accepts two parameters, the starting
 index, and an optional number of elements to delete. If the second parameter is left out .splice() will remove all
 elements from the starting index through the end of the array.
@@ -4585,7 +4866,7 @@ Thus, omitting the second parameter effectively splits the array into two arrays
 index specified:
 var array = [1, 2, 3, 4];
 array.splice(2);
-.leaves array containing [1, 2] and returns [3, 4].
+...leaves array containing [1, 2] and returns [3, 4].
 Delete
 Use delete to remove item from array without changing the length of array:
 var array = [1, 2, 3, 4, 5];
@@ -4605,8 +4886,7 @@ Method 1
 Creates a new array and overwrites the existing array reference with a new one.
 arr = [];
 
-GoalKicker.com – JavaScript® Notes for Professionals
-102
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 102 -->
 Care must be taken as this does not remove any items from the original array. The array may have been closed
 over when passed to a function. The array will remain in memory for the life of the function though you may not be
 aware of this. This is a common source of memory leaks.
@@ -4649,14 +4929,13 @@ or Math.max.apply by passing null as the first argument, and your array as the s
 var myArray = [1, 2, 3, 4];
 Math.min.apply(null, myArray); // 1
 
-GoalKicker.com – JavaScript® Notes for Professionals
-103
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 103 -->
 Math.max.apply(null, myArray); // 4
 Version ≥ 6
-In ES6 you can use the . operator to spread an array and take the minimum or maximum element.
+In ES6 you can use the ... operator to spread an array and take the minimum or maximum element.
 var myArray = [1, 2, 3, 4, 99, 20];
-var maxValue = Math.max(.myArray); // 99
-var minValue = Math.min(.myArray); // 1
+var maxValue = Math.max(...myArray); // 99
+var minValue = Math.min(...myArray); // 1
 The following example uses a for loop:
 var maxValue = myArray[0];
 for(var i = 1; i < myArray.length; i++) {
@@ -4692,8 +4971,7 @@ For the details on how to properly use reduce see Reducing values.
 Section 12.21: Standard array initialization
 There are many ways to create arrays. The most common are to use array literals, or the Array constructor:
 
-GoalKicker.com – JavaScript® Notes for Professionals
-104
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 104 -->
 var arr = [1, 2, 3, 4];
 var arr2 = new Array(1, 2, 3, 4);
 If the Array constructor is used with no arguments, an empty array is created.
@@ -4724,8 +5002,7 @@ Section 12.22: Joining array elements in a string
 To join all of an array's elements into a string, you can use the join method:
 console.log(["Hello", " ", "world"].join("")); // "Hello world"
 
-GoalKicker.com – JavaScript® Notes for Professionals
-105
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 105 -->
 console.log([1, 800, 555, 1234].join("-")); // "1-800-555-1234"
 As you can see in the second line, items that are not strings will be converted first.
 Section 12.23: Removing/Adding elements using splice()
@@ -4763,8 +5040,7 @@ When you need to remove a specific value from an array, you can use the followin
 without the given value:
 array.filter(function(val) { return val !== to_remove; });
 
-GoalKicker.com – JavaScript® Notes for Professionals
-106
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 106 -->
 Or if you want to change the array itself without creating a copy (for example if you write a function that get an
 array as a function and manipulates it) you can use this snippet:
 while(index = array.indexOf(3) !== -1) { array.splice(index, 1); }
@@ -4774,9 +5050,9 @@ if(index !== -1) { array.splice(index , 1); }
 Section 12.26: Flattening Arrays
 2 Dimensional arrays
 Version ≥ 6
-In ES6, we can flatten the array by the spread operator .:
+In ES6, we can flatten the array by the spread operator ...:
 function flattenES6(arr) {
-return [].concat(.arr);
+return [].concat(...arr);
 }
 var arrL1 = [1, 2, [3, 4]];
 console.log(flattenES6(arrL1)); // [1, 2, 3, 4]
@@ -4800,8 +5076,7 @@ console.log(flatten);
 Both of the above methods only work when the array is made up exclusively of numbers. A multi-dimensional array
 of objects cannot be flattened by this method.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-107
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 107 -->
 Section 12.27: Append / Prepend items to Array
 Unshift
 Use .unshift to add one or more items in the beginning of an array.
@@ -4836,8 +5111,7 @@ Now array is
 ["key3", 40],
 ] ["key4", 20]
 
-GoalKicker.com – JavaScript® Notes for Professionals
-108
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 108 -->
 Section 12.29: Logical connective of values
 Version ≥ 5.1
 .some and .every allow a logical connective of Array values.
@@ -4880,8 +5154,7 @@ In most cases you can instanceof to check if an object is an Array.
 Array.isArray has the an advantage over using a instanceof check in that it will still return true even if the
 prototype of the array has been changed and will return false if a non-arrays prototype was changed to the Array
 
-GoalKicker.com – JavaScript® Notes for Professionals
-109
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 109 -->
 prototype.
 var arr = [];
 Object.setPrototypeOf(arr, null);
@@ -4892,7 +5165,7 @@ Simple item insertion can be done with Array.prototype.splice method:
 arr.splice(index, 0, item);
 More advanced variant with multiple arguments and chaining support:
 /* Syntax:
-array.insert(index, value1, value2, ., valueN) */
+array.insert(index, value1, value2, ..., valueN) */
 Array.prototype.insert = function(index) {
 this.splice.apply(this, [index, 0].concat(
 Array.prototype.slice.call(arguments, 1)));
@@ -4901,7 +5174,7 @@ return this;
 ["a", "b", "c", "d"].insert(2, "X", "Y", "Z").slice(1, 6); // ["b", "X", "Y", "Z", "c"]
 And with array-type arguments merging and chaining support:
 /* Syntax:
-array.insert(index, value1, value2, ., valueN) */
+array.insert(index, value1, value2, ..., valueN) */
 Array.prototype.insert = function(index) {
 index = Math.min(index, this.length);
 arguments.length > 1
@@ -4923,8 +5196,7 @@ array.sort(function(a, b) {
 return a[1] - b[1];
 })
 
-GoalKicker.com – JavaScript® Notes for Professionals
-110
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 110 -->
 Version ≥ 6
 array.sort((a,b) => a[1] - b[1]);
 This will output
@@ -4963,22 +5235,20 @@ Zero-based index which is the end of extraction, slicing up to this index but it
 If the end is a negative number,end = arr.length + end.
 Example 1
 
-GoalKicker.com – JavaScript® Notes for Professionals
-111
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 111 -->
 // Let's say we have this Array of Alphabets
-var arr = ["a", "b", "c", "d".];
+var arr = ["a", "b", "c", "d"...];
 // I want an Array of the first two Alphabets
 var newArr = arr.slice(0, 2); // newArr === ["a", "b"]
 Example 2
 // Let's say we have this Array of Numbers
 // and I don't know it's end
-var arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9.];
+var arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9...];
 // I want to slice this Array starting from
 // number 5 to its end
-var newArr = arr.slice(4); // newArr === [5, 6, 7, 8, 9.]
+var newArr = arr.slice(4); // newArr === [5, 6, 7, 8, 9...]
 
-GoalKicker.com – JavaScript® Notes for Professionals
-112
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 112 -->
 Chapter 13: Objects
 Property
 Description
@@ -5003,7 +5273,7 @@ This includes Symbol properties in addition to String ones.
 Object rest/spread destructuring which is currently a stage 3 proposal provides an even simpler way to create
 shallow clones of Object instances:
 const existing = { a: 1, b: 2, c: 3 };
-const { .clone } = existing;
+const { ...clone } = existing;
 If you need to support older versions of JavaScript, the most-compatible way to clone an Object is by manually
 iterating over its properties and filtering out inherited ones using .hasOwnProperty().
 var existing = { a: 1, b: 2, c: 3 };
@@ -5021,8 +5291,7 @@ prevents the value of existing properties from being changed. However, it does n
 that child objects are not automatically frozen and are subject to change.
 The operations following the freeze will fail silently unless the code is running in strict mode. If the code is in strict
 
-GoalKicker.com – JavaScript® Notes for Professionals
-113
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 113 -->
 mode, a TypeError will be thrown.
 var obj = {
 foo: 'foo',
@@ -5046,7 +5315,7 @@ obj.bar.push(4);
 obj.baz.foo = 'new foo';
 Section 13.3: Object cloning
 When you want a complete copy of an object (i.e. the object properties and the values inside those properties,
-etc.), that is called deep cloning.
+etc...), that is called deep cloning.
 Version ≥ 5.1
 If an object can be serialized to JSON, then you can create a deep clone of it with a combination of JSON.parse and
 JSON.stringify:
@@ -5065,8 +5334,7 @@ Assuming that you have a "nice" object whose properties only contain primitive v
 objects, then the following function can be used for making deep clones. It is a recursive function that can detect
 objects with a cyclic structure and will throw an error in such cases.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-114
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 114 -->
 function deepClone(obj) {
 function clone(obj, traversedObjects) {
 var copy;
@@ -5120,8 +5388,7 @@ You should include the additional check for hasOwnProperty because an object may
 inherited from the object's base class. Not performing this check can raise errors.
 Version ≥ 5
 
-GoalKicker.com – JavaScript® Notes for Professionals
-115
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 115 -->
 You can also use Object.keys function which return an Array containing all properties of an object and then you
 can loop through this array with Array.map or Array.forEach function.
 var obj = { 0: 'a', 1: 'b', 2: 'c' };
@@ -5163,19 +5430,18 @@ var obj = Object.assign({}, var_1, null, var_2, undefined, var_3, var_4);
 console.log(obj); // Logs: { "0": "a", "1": "b", "2": "c" }
 Note, only string wrappers can have own enumerable properties
 
-GoalKicker.com – JavaScript® Notes for Professionals
-116
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 116 -->
 Use it as reducer: (merges an array to an object)
 return users.reduce((result, user) => Object.assign({}, {[user.id]: user})
-Section 13.6: Object rest/spread (.)
+Section 13.6: Object rest/spread (...)
 Version > 7
-Object spreading is just syntactic sugar for Object.assign({}, obj1, ., objn);
-It is done with the . operator:
+Object spreading is just syntactic sugar for Object.assign({}, obj1, ..., objn);
+It is done with the ... operator:
 let obj = { a: 1 };
-let obj2 = { .obj, b: 2, c: 3 };
+let obj2 = { ...obj, b: 2, c: 3 };
 console.log(obj2); // { a: 1, b: 2, c: 3 };
 As Object.assign it does shallow merging, not deep merging.
-let obj3 = { .obj, b: { c: 2 } };
+let obj3 = { ...obj, b: { c: 2 } };
 console.log(obj3); // { a: 1, b: { c: 2 } };
 NOTE: This specification is currently in stage 3
 Section 13.7: Object.defineProperty
@@ -5191,13 +5457,12 @@ Object.defineProperty(obj, 'nameOfTheProperty', {
 value: valueOfTheProperty,
 writable: true, // if false, the property is read-only
 configurable : true, // true means the property can be changed later
-enumerable : true // true means property can be enumerated such as in a forin loop
+enumerable : true // true means property can be enumerated such as in a for..in loop
 });
 Object.defineProperties allows you to define multiple properties at a time.
 var obj = {};
 
-GoalKicker.com – JavaScript® Notes for Professionals
-117
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 117 -->
 Object.defineProperties(obj, {
 property1: {
 value: true,
@@ -5243,8 +5508,7 @@ Apple: 'Steve Jobs rocks!' // properties are case-sensitive
 var word = prompt('What word would you like to look up today?')
 var definition = dictionary[word]
 
-GoalKicker.com – JavaScript® Notes for Professionals
-118
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 118 -->
 alert(word + '\n\n' + definition)
 Note how we are using [] bracket notation to look at the variable named word; if we were to use the traditional .
 notation, then it would take the value literally, hence:
@@ -5284,8 +5548,7 @@ console.log(anArray[0], anObject[0]); // outputs: zero. zero!
 console.log(anArray[1], anObject[1]); // outputs: one. one!
 console.log(anArray.length, anObject.length); // outputs: 2 interesting
 
-GoalKicker.com – JavaScript® Notes for Professionals
-119
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 119 -->
 console.log(anArray.foo, anObject.foo); // outputs: undefined bar
 Since anArray is actually an object, just like anObject, we can even add custom wordy properties to anArray
 Disclaimer: Arrays with custom properties are not usually recommended as they can be confusing, but it
@@ -5323,8 +5586,7 @@ get: function () { return 'newFoo'; }
 // But you can make it read only
 Object.defineProperty(obj, 'foo', {
 
-GoalKicker.com – JavaScript® Notes for Professionals
-120
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 120 -->
 writable: false
 }); // TypeError
 obj.foo = 'newFoo';
@@ -5363,13 +5625,12 @@ enumerable characteristic. That means it be considered as true.
 Purpose of enumerability :
 The main purpose of setting enumerable characteristics to a property is to make the particular property's
 
-GoalKicker.com – JavaScript® Notes for Professionals
-121
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 121 -->
 availability when retrieving it from its object, by using different programmatical methods. Those different methods
 will be discussed deeply below.
 Methods of retrieving properties :
 Properties from an object could be retrieved by the following methods,
-forin loop
+for..in loop
 1.
 This loop is very useful in retrieving enumerable properties from an object. Additionally this loop will retrieve
 enumerable own properties as well as it will do the same retrieval by traversing through the prototype chain
@@ -5396,7 +5657,7 @@ console.log(props); //["a"]
 Object.keys() function
 2.
 This function was unveiled as a part of ECMAScript 5. It is used to retrieve enumerable own properties from
-an object. Prior to its release people used to retrieve own properties from an object by combining forin
+an object. Prior to its release people used to retrieve own properties from an object by combining for..in
 loop and Object.prototype.hasOwnProperty() function.
 //Ex 1 : Simple data
 var x = { a : 10 , b : 3} , props;
@@ -5406,8 +5667,7 @@ console.log(props); //["a","b"]
 var x = { a : 10 , __proto__ : { b : 10 }} , props;
 props = Object.keys(x);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-122
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 122 -->
 console.log(props); //["a"]
 //Ex 3 : Data with non enumerable properties
 var x = { a : 10 } , props;
@@ -5442,11 +5702,10 @@ props.concat(Object.getOwnPropertyNames(obj)));
 var x = {a:10, __proto__ : { b : 5, c : 15 }};
 //adding a non enumerable property to first level prototype
 Object.defineProperty(x.__proto__, "d", {value : 20, enumerable : false});
-console.log(getAllProperties(x)); ["a", "b", "c", "d", ".other default core props."]
+console.log(getAllProperties(x)); ["a", "b", "c", "d", "...other default core props..."]
 And this will be supported by the browsers which supports ECMAScript 5.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-123
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 123 -->
 Section 13.14: Read-Only property
 Version ≥ 5
 Using property descriptors we can make a property read only, and any attempt to change its value will fail silently,
@@ -5460,7 +5719,7 @@ Console output
 original
 Section 13.15: Non enumerable property
 Version ≥ 5
-We can avoid a property from showing up in for (. in .) loops
+We can avoid a property from showing up in for (... in ...) loops
 The enumerable property of the property descriptor tells whether that property will be enumerated while looping
 through the object's properties.
 var obj = { };
@@ -5477,8 +5736,7 @@ A property's descriptor can be locked so no changes can be made to it. It will s
 normally, assigning and retrieving the value from it, but any attempt to redefine it will throw an exception.
 The configurable property of the property descriptor is used to disallow any further changes on the descriptor.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-124
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 124 -->
 var obj = {};
 // Define 'foo' as read only and lock it
 Object.defineProperty(obj, "foo", {
@@ -5517,8 +5775,7 @@ obj.propertyName1 = 5; //translates behind the scenes into
 //either assigning 5 to the value field* if it is a data property
 //or calling the set function with the parameter 5 if accessor property
 
-GoalKicker.com – JavaScript® Notes for Professionals
-125
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 125 -->
 //*actually whether an assignment would take place in the case of a data property
 //also depends on the presence and value of the writable field - on that later on
 The property's type is determined by its descriptor's fields, and a property cannot be of both types.
@@ -5560,8 +5817,7 @@ This key defaults to undefined.
 The value associated with the property. Can be any valid JavaScript value (number, object, function, etc).
 Example:
 
-GoalKicker.com – JavaScript® Notes for Professionals
-126
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 126 -->
 var obj = {propertyName1: 1}; //the pair is actually ('propertyName1', {value:1,
 // writable:true,
 // enumerable:true,
@@ -5603,8 +5859,7 @@ All-digit properties:
 In addition to special characters, property names that are all-digits will require bracket notation. However, in this
 case the property need not be written as a string.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-127
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 127 -->
 myObject[123] = 'hi!' // number 123 is automatically converted to a string
 console.log(myObject['123']) // notice how using string 123 produced the same result
 console.log(myObject['12' + '3']) // string concatenation
@@ -5652,8 +5907,7 @@ Version ≥ 8
 The proposed Object.entries() method returns an array of key/value pairs for the given object. It does not return
 an iterator like Array.prototype.entries(), but the Array returned by Object.entries() can be iterated
 
-GoalKicker.com – JavaScript® Notes for Professionals
-128
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 128 -->
 regardless.
 const obj = {
 one: 1,
@@ -5675,15 +5929,14 @@ console.log(value); // 1, 2 and 3
 Section 13.23: Object.values()
 Version ≥ 8
 The Object.values() method returns an array of a given object's own enumerable property values, in the same
-order as that provided by a for.in loop (the difference being that a for-in loop enumerates properties in the
+order as that provided by a for...in loop (the difference being that a for-in loop enumerates properties in the
 prototype chain as well).
 var obj = { 0: 'a', 1: 'b', 2: 'c' };
 console.log(Object.values(obj)); // ['a', 'b', 'c']
 Note:
 For browser support, please refer to this link
 
-GoalKicker.com – JavaScript® Notes for Professionals
-129
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 129 -->
 Chapter 14: Arithmetic (Math)
 Section 14.1: Constants
 Constants
@@ -5757,15 +6010,14 @@ Test if an integer is (not) divisible by another number:
 x % 4 == 0 // true if x is divisible by 4
 x % 2 == 0 // true if x is even number
 
-GoalKicker.com – JavaScript® Notes for Professionals
-130
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 130 -->
 x % 2 != 0 // true if x is odd number
 Since 0 === -0, this also works for x <= -0.
-Implement cyclic increment/decrement of value within [0, n) interval.
+Implement cyclic increment/decrement of value within (0, n) interval.
 2.
 Suppose that we need to increment integer value from 0 to (but not including) n, so the next value after n-1 become
 0. This can be done by such pseudocode:
-var n = .; // given n
+var n = ...; // given n
 var i = 0;
 function inc() {
 } i = (i + 1) % n;
@@ -5775,7 +6027,7 @@ inc();
 }
 Now generalize the above problem and suppose that we need to allow to both increment and decrement that value
 from 0 to (not including) n, so the next value after n-1 become 0 and the previous value before 0 become n-1.
-var n = .; // given n
+var n = ...; // given n
 var i = 0;
 function delta(d) { // d - any signed integer
 i = (i + d + n) % n; // we add n to (i+d) to ensure the sum is positive
@@ -5798,8 +6050,7 @@ var c = Math.round(-2.5); // c is now -2
 Note how -2.5 is rounded to -2. This is because half-way values are always rounded up, that is they're rounded to
 the integer with the next higher value.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-131
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 131 -->
 Rounding up
 Math.ceil() will round the value up.
 var a = Math.ceil(2.3); // a is now 3
@@ -5837,8 +6088,7 @@ var myNum = 10000/3; // 3333.3333333333335
 var multiplier = 1/100;
 var a = Math.round(myNum * multiplier) / multiplier; // 3300
 
-GoalKicker.com – JavaScript® Notes for Professionals
-132
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 132 -->
 var b = Math.ceil (myNum * multiplier) / multiplier; // 3400
 var c = Math.floor(myNum * multiplier) / multiplier; // 3300
 As a more usable function:
@@ -5878,8 +6128,7 @@ Math.acos(r);
 This will return the arccosine (the reverse of the cosine) of r.
 Math.acosh(r);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-133
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 133 --> 
 This will return the hyperbolic arccosine of r.
 Tangent
 Math.tan(r);
@@ -5923,8 +6172,7 @@ a = 0b0001 << 1; // a === 0b0010
 a = 0b0001 << 2; // a === 0b0100
 a = 0b0001 << 3; // a === 0b1000
 
-GoalKicker.com – JavaScript® Notes for Professionals
-134
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 134 -->
 Shift left is equivalent to integer multiply by Math.pow(2, n). When doing integer math, shift can significantly
 improve the speed of some math operations.
 var n = 2;
@@ -5971,8 +6219,7 @@ a >>= b; // same as: a = a >> b;
 a >>>= b; // same as: a = a >>> b;
 a <<= b; // same as: a = a << b;
 
-GoalKicker.com – JavaScript® Notes for Professionals
-135
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 135 -->
 Warning: JavaScript uses Big Endian to store integers. This will not always match the Endian of the device/OS. When
 using typed arrays with bit lengths greater than 8 bits you should check if the environment is Little Endian or Big
 Endian before applying bitwise operations.
@@ -6009,8 +6256,7 @@ Stage 3 ES2016 (ECMAScript 7) Proposal:
 let a = 2,
 b = 3,
 
-GoalKicker.com – JavaScript® Notes for Professionals
-136
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 136 -->
 c = a ** b;
 c will now be 8
 Use Math.pow to find the nth root of a number.
@@ -6047,8 +6293,7 @@ return Math.floor(Math.random() * (max - min + 1)) + min;
 Functions taken from
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 
-GoalKicker.com – JavaScript® Notes for Professionals
-137
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 137 -->
 Section 14.9: Addition (+)
 The addition operator (+) adds numbers.
 var a = 9,
@@ -6087,8 +6332,7 @@ var isLittleEndian = true;
 var buf = new ArrayBuffer(4);
 var buf8 = new Uint8ClampedArray(buf);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-138
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 138 -->
 var data = new Uint32Array(buf);
 data[0] = 0x0F000000;
 if(buf8[0] === 0x0f){
@@ -6134,8 +6378,7 @@ Returns a random integer between min and max:
 function randomBetween(min, max) {
 } return Math.floor(Math.random() * (max - min + 1) + min);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-139
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 139 -->
 Examples:
 // randomBetween(0, 10);
 Math.floor(Math.random() * 11);
@@ -6181,8 +6424,7 @@ console.log("Rolled a "+(simulateEvent([1,1,1,1,1,2])+1)); // Rolled a 1
 // using probabilities
 console.log("Rolled a "+(simulateEvent([1/7,1/7,1/7,1/7,1/7,2/7])+1)); // Rolled a 6
 
-GoalKicker.com – JavaScript® Notes for Professionals
-140
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 140 -->
 As you probably noticed, these functions return an index, so you could have more descriptive outcomes stored in
 an array. Here's an example.
 var rewards = ["gold coin","silver coin","diamond","god sword"];
@@ -6219,8 +6461,7 @@ The Math.min() function returns the smallest of zero or more numbers.
 Math.min(4, 12); // 4
 Math.min(-1, -15); // -15
 
-GoalKicker.com – JavaScript® Notes for Professionals
-141
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 141 -->
 Getting maximum and minimum from an array:
 var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9],
 max = Math.max.apply(Math, arr),
@@ -6229,8 +6470,8 @@ console.log(max); // Logs: 9
 console.log(min); // Logs: 1
 ECMAScript 6 spread operator, getting the maximum and minimum of an array:
 var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9],
-max = Math.max(.arr),
-min = Math.min(.arr);
+max = Math.max(...arr),
+min = Math.min(...arr);
 console.log(max); // Logs: 9
 console.log(min); // Logs: 1
 Section 14.16: Restrict Number to Min/Max Range
@@ -6258,8 +6499,7 @@ floor()
 The floor() method rounds a number downwards to the nearest integer, and returns the result.
 Syntax:
 
-GoalKicker.com – JavaScript® Notes for Professionals
-142
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 142 -->
 Math.floor(n);
 Example:
 console.log(Math.ceil(0.60)); // 0
@@ -6297,8 +6537,7 @@ var r = 0;
 for(var i = v; i > 0; i --){
 r += Math.random();
 
-GoalKicker.com – JavaScript® Notes for Professionals
-143
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 143 -->
 }
 return r / v;
 }
@@ -6335,8 +6574,7 @@ var dist = 200; // distance
 var vec = {};
 vec.x = Math.cos(dir) * dist; // get the x component
 
-GoalKicker.com – JavaScript® Notes for Professionals
-144
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 144 -->
 vec.y = Math.sin(dir) * dist; // get the y component
 You can also ignore the distance to create a normalised (1 unit long) vector in the direction of dir
 var dir = 1.4536; // direction in radians
@@ -6378,8 +6616,7 @@ var v = [1,3,2,6,1,7,3,7,5,3,1];
 var i = 0;
 dist = Math.hypot(v[i++],v[i++],v[i++],v[i++],v[i++],v[i++],v[i++],v[i++],v[i++],v[i++],v[i++]);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-145
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 145 -->
 Section 14.23: Periodic functions using Math.sin
 Math.sin and Math.cos are cyclic with a period of 2*PI radians (360 deg) they output a wave with an amplitude of 2
 in the range -1 to 1.
@@ -6406,8 +6643,7 @@ To include all these in the function:
 function oscillator(time, frequency = 1, amplitude = 1, phase = 0, offset = 0){
 var t = time * frequency * Math.PI * 2; // get phase at time
 
-GoalKicker.com – JavaScript® Notes for Professionals
-146
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 146 -->
 t += phase * Math.PI * 2; // add the phase offset
 var v = Math.sin(t); // get the value at the calculated position in the cycle
 v *= amplitude; // set the amplitude
@@ -6445,8 +6681,7 @@ value prior to the operation).
 Note: Neither -- nor ++ are like normal mathematical operators, but rather they are very concise
 operators for assignment. Notwithstanding the return value, both
 
-GoalKicker.com – JavaScript® Notes for Professionals
-147
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 147 -->
 x--
 and
 --x
@@ -6457,8 +6692,7 @@ console.log(--x) // TypeError: Assignment to constant variable.
 console.log(--3) // ReferenceError: Invalid left-hand size expression in prefix operation.
 console.log(3--) // ReferenceError: Invalid left-hand side expression in postfix operation.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-148
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 148 -->
 Chapter 15: Bitwise operators
 Section 15.1: Bitwise operators
 Bitwise operators perform operations on bit values of data. These operators convert operands to signed 32-bit
@@ -6488,17 +6722,16 @@ Bitwise AND
 The bitwise AND operation a & b returns the binary value with a 1 where both binary operands have 1's in a
 specific position, and 0 in all other positions. For example:
 13 & 7 => 5
-// 13: 001101
-// 7: 000111
+// 13: 0..01101
+// 7: 0..00111
 //-----------------
-// 5: 000101 (0 + 0 + 4 + 0 + 1)
+// 5: 0..00101 (0 + 0 + 4 + 0 + 1)
 Real world example: Number's Parity Check
 Instead of this "masterpiece" (unfortunately too often seen in many real code parts):
 function isEven(n) {
 } return n % 2 == 0;
 
-GoalKicker.com – JavaScript® Notes for Professionals
-149
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 149 -->
 function isOdd(n) {
 if (isEven(n)) {
 return false;
@@ -6516,25 +6749,25 @@ Bitwise OR
 The bitwise OR operation a | b returns the binary value with a 1 where either operands or both operands have 1's
 in a specific position, and 0 when both values have 0 in a position. For example:
 13 | 7 => 15
-// 13: 001101
-// 7: 000111
+// 13: 0..01101
+// 7: 0..00111
 //-----------------
-// 15: 001111 (0 + 8 + 4 + 2 + 1)
+// 15: 0..01111 (0 + 8 + 4 + 2 + 1)
 Bitwise NOT
 The bitwise NOT operation ~a flips the bits of the given value a. This means all the 1's will become 0's and all the 0's
 will become 1's.
 ~13 => -14
-// 13: 001101
+// 13: 0..01101
 //-----------------
-//-14: 110010 (-16 + 0 + 0 + 2 + 0)
+//-14: 1..10010 (-16 + 0 + 0 + 2 + 0)
 Bitwise XOR
 The bitwise XOR (exclusive or) operation a ^ b places a 1 only if the two bits are different. Exclusive or means either
 one or the other, but not both.
 13 ^ 7 => 10
-// 13: 001101
-// 7: 000111
+// 13: 0..01101
+// 7: 0..00111
 //-----------------
-// 10: 001010 (0 + 8 + 0 + 2 + 0)
+// 10: 0..01010 (0 + 8 + 0 + 2 + 0)
 Real world example: swapping two integer values without additional memory allocation
 var a = 11, b = 22;
 a = a ^ b;
@@ -6542,8 +6775,7 @@ b = a ^ b;
 a = a ^ b;
 console.log("a = " + a + "; b = " + b);// a is now 22 and b is now 11
 
-GoalKicker.com – JavaScript® Notes for Professionals
-150
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 150 -->
 Section 15.2: Shift Operators
 Bitwise shifting can be thought as "moving" the bits either left or right, and hence changing the value of the data
 operated on.
@@ -6551,30 +6783,29 @@ Left Shift
 The left shift operator (value) << (shift amount) will shift the bits to the left by (shift amount) bits; the new
 bits coming in from the right will be 0's:
 5 << 2 => 20
-// 5: 0000101
-// 20: 0010100 <= adds two 0's to the right
+// 5: 0..000101
+// 20: 0..010100 <= adds two 0's to the right
 Right Shift (Sign-propagating)
 The right shift operator (value) >> (shift amount) is also known as the "Sign-propagating right shift" because it
 keeps the sign of the initial operand. The right shift operator shifts the value the specified shift amount of bits to
 the right. Excess bits shifted off the right are discarded. The new bits coming in from the left will be based on the
 sign of the initial operand. If the left-most bit was 1 then the new bits will all be 1 and vice-versa for 0's.
 20 >> 2 => 5
-// 20: 0010100
-// 5: 0000101 <= added two 0's from the left and chopped off 00 from the right
+// 20: 0..010100
+// 5: 0..000101 <= added two 0's from the left and chopped off 00 from the right
 -5 >> 3 => -1
-// -5: 1111011
-// -2: 1111111 <= added three 1's from the left and chopped off 011 from the right
+// -5: 1..111011
+// -2: 1..111111 <= added three 1's from the left and chopped off 011 from the right
 Right Shift (Zero fill)
 The zero-fill right shift operator (value) >>> (shift amount) will move the bits to the right, and the new bits will
 be 0's. The 0's are shifted in from the left, and excess bits to the right are shifted off and discarded. This means it
 can make negative numbers into positive ones.
 -30 >>> 2 => 1073741816
-// -30: 1111100010
-//1073741816: 0011111000
+// -30: 111..1100010
+//1073741816: 001..1111000
 Zero-fill right shift and sign-propagating right shift yield the same result for non negative numbers.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-151
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 151 -->
 Chapter 16: Constructor functions
 Section 16.1: Declaring a constructor function
 Constructor functions are functions designed to construct a new object. Within a constructor function, the keyword
@@ -6600,8 +6831,7 @@ Objects created by constructor functions are also considered to be "instances" o
 instanceof operator:
 cat instanceof Cat // Returns "true"
 
-GoalKicker.com – JavaScript® Notes for Professionals
-152
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 152 -->
 Chapter 17: Declarations and Assignments
 Section 17.1: Modifying constants
 Declaring a variable const only prevents its value from being replaced by a new value. const does not put any
@@ -6627,8 +6857,8 @@ You can initialize a constant by using the const keyword.
 const foo = 100;
 const bar = false;
 const person = { name: "John" };
-const fun = function () = { /* . */ };
-const arrowFun = () => /* . */ ;
+const fun = function () = { /* ... */ };
+const arrowFun = () => /* ... */ ;
 Important
 You must declare and initialize a constant in the same statement.
 Section 17.3: Declaration
@@ -6641,8 +6871,7 @@ The const keyword creates a block-scope variable that cannot be reassigned.
 A bare declaration creates a global variable.
 var a = 'foo'; // Function-scope
 
-GoalKicker.com – JavaScript® Notes for Professionals
-153
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 153 -->
 let b = 'foo'; // Block-scope
 const c = 'foo'; // Block-scope & immutable reference
 Keep in mind that you can't declare constants without initializing them at the same time.
@@ -6680,8 +6909,7 @@ Increment by
 var a = 9,
 b = 3;
 
-GoalKicker.com – JavaScript® Notes for Professionals
-154
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 154 -->
 b += a;
 b will now be 12
 This is functionally the same as
@@ -6716,8 +6944,7 @@ b will now be 3375
 This is functionally the same as
 b = b ** a;
 
-GoalKicker.com – JavaScript® Notes for Professionals
-155
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 155 -->
 Section 17.7: Assignment
 To assign a value to a previously declared variable, use the assignment operator, =:
 a = 6;
@@ -6749,8 +6976,7 @@ Notice in the preceding code snippet that the order in which declaration and ass
 b, c = 2, d;) does not matter. You may freely intermix the two.
 Function declaration effectively creates variables, as well.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-156
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 156 -->
 Chapter 18: Loops
 Section 18.1: Standard "for" loops
 Standard usage
@@ -6760,7 +6986,7 @@ console.log(i);
 Expected output:
 0
 1
-.
+...
 99
 Multiple declarations
 Commonly used to cache the length of an array.
@@ -6780,21 +7006,20 @@ Expected output:
 0
 2
 4
-.
+...
 98
 Decremented loop
 for (var i = 100; i >=0; i--) {
 } console.log(i);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-157
-Expected output:
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 157 -->
+ Expected output:
 100
 99
 98
-.
+...
 0
-Section 18.2: "for . of" loop
+Section 18.2: "for ... of" loop
 Version ≥ 6
 const iterable = [0, 1, 2];
 for (let i of iterable) {
@@ -6804,13 +7029,13 @@ Expected output:
 0
 1
 2
-The advantages from the for.of loop are:
+The advantages from the for...of loop are:
 This is the most concise, direct syntax yet for looping through array elements
-It avoids all the pitfalls of for.in
+It avoids all the pitfalls of for...in
 Unlike forEach(), it works with break, continue, and return
-Support of for.of in other collections
+Support of for...of in other collections
 Strings
-for.of will treat a string as a sequence of Unicode characters:
+for...of will treat a string as a sequence of Unicode characters:
 const string = "abc";
 for (let chr of string) {
 console.log(chr);
@@ -6818,13 +7043,12 @@ console.log(chr);
 Expected output:
 a b c
 Sets
-for.of works on Set objects.
+for...of works on Set objects.
 Note:
 A Set object will eliminate duplicates.
 Please check this reference for Set() browser support.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-158
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 158 -->
 const names = ['bob', 'alejandro', 'zandra', 'anna', 'bob'];
 const uniqueNames = new Set(names);
 for (let name of uniqueNames) {
@@ -6836,7 +7060,7 @@ alejandro
 zandra
 anna
 Maps
-You can also use for.of loops to iterate over Maps. This works similarly to arrays and sets, except the iteration
+You can also use for...of loops to iterate over Maps. This works similarly to arrays and sets, except the iteration
 variable stores both a key and a value.
 const map = new Map()
 .set('abc', 1)
@@ -6855,20 +7079,19 @@ abc is mapped to 1
 def is mapped to 2
 */
 Objects
-for.of loops do not work directly on plain Objects; but, it is possible to iterate over an object’s properties by
-switching to a for.in loop, or using Object.keys():
+for...of loops do not work directly on plain Objects; but, it is possible to iterate over an object’s properties by
+switching to a for...in loop, or using Object.keys():
 const someObject = { name: 'Mike' };
 for (let key of Object.keys(someObject)) {
 console.log(key + ": " + someObject[key]);
 }
 Expected output:
 
-GoalKicker.com – JavaScript® Notes for Professionals
-159
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 159 -->
 name: Mike
-Section 18.3: "for . in" loop
+Section 18.3: "for ... in" loop
 Warning
-for.in is intended for iterating over object keys, not array indexes. Using it to loop through an array is
+for...in is intended for iterating over object keys, not array indexes. Using it to loop through an array is
 generally discouraged. It also includes properties from the prototype, so it may be necessary to check if
 the key is within the object using hasOwnProperty. If any attributes in the object are defined by the
 defineProperty/defineProperties method and set the param enumerable: false, those attributes will
@@ -6897,14 +7120,13 @@ i++;
 Expected output:
 0
 1
-.
+...
 99
 Decremented loop
 var i = 100;
 while (i > 0) {
 
-GoalKicker.com – JavaScript® Notes for Professionals
-160
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 160 -->
 console.log(i);
 i--; /* equivalent to i=i-1 */
 }
@@ -6912,10 +7134,10 @@ Expected output:
 100
 99
 98
-.
+...
 1
-Do.while Loop
-A do.while loop will always execute at least once, regardless of whether the condition is true or false:
+Do...while Loop
+A do...while loop will always execute at least once, regardless of whether the condition is true or false:
 var i = 101;
 do {
 console.log(i);
@@ -6942,8 +7164,7 @@ if (i === 1) {
 i = 2;
 continue;
 
-GoalKicker.com – JavaScript® Notes for Professionals
-161
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 161 -->
 }
 console.log(i);
 i++;
@@ -6967,7 +7188,7 @@ break outerloop;
 Output:
 000
 1
-Section 18.7: "do . while" loop
+Section 18.7: "do ... while" loop
 var availableName;
 do {
 availableName = getRandomName();
@@ -6984,8 +7205,7 @@ if(i == j) break nextLoop2Iteration;
 console.log(i, j);
 }
 
-GoalKicker.com – JavaScript® Notes for Professionals
-162
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 162 -->
 }
 i=0 j=0 skips rest of j values
 1 0
@@ -7002,8 +7222,7 @@ i=3 j=3 skips rest of j values
 4 3
 i=4 j=4 does not log and loops are done
 
-GoalKicker.com – JavaScript® Notes for Professionals
-163
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 163 -->
 Chapter 19: Functions
 Functions in JavaScript provide organized, reusable code to perform a set of actions. Functions simplify the coding
 process, prevent redundant logic, and make code easier to follow. This topic describes the declaration and
@@ -7045,8 +7264,7 @@ console.log(c); // => '!!'
 console.log(d); // reference error
 }
 
-GoalKicker.com – JavaScript® Notes for Professionals
-164
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 164 -->
 }
 This climbing behavior can also mean that one reference may "shadow" over a similarly named reference in the
 outer scope since it gets seen first.
@@ -7087,8 +7305,7 @@ and height (h):
 var prism = function(l, w, h) {
 } return l * w * h;
 
-GoalKicker.com – JavaScript® Notes for Professionals
-165
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 165 -->
 A curried version of this function would look like:
 function prism(l) {
 return function(w) {
@@ -7132,8 +7349,7 @@ If required it is possible to name an IIFE. While less often seen, this pattern 
 providing a reference which can be used for a recursion and can make debugging simpler as the name is included
 in the callstack.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-166
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 166 -->
 (function namedIIFE() {
 throw error; // We can now see the error thrown in 'namedIIFE()'
 }());
@@ -7170,8 +7386,7 @@ Depending on ECMAScript version, named and anonymous functions may treat the fun
 differently
 Named functions are hoisted
 
-GoalKicker.com – JavaScript® Notes for Professionals
-167
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 167 -->
 When using an anonymous function, the function can only be called after the line of declaration, whereas a named
 function can be called before declaration. Consider
 foo();
@@ -7209,8 +7424,7 @@ var sayHelloTimes = say;
 say = "oops";
 sayHelloTimes(2);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-168
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 168 -->
 Hello!
 Uncaught TypeError: say is not a function
 This can be solved using a named function
@@ -7249,8 +7463,7 @@ The name property of functions
 Before ES6, named functions had their name properties set to their function names, and anonymous functions had
 their name properties set to the empty string.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-169
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 169 -->
 Version ≤ 5
 var foo = function () {}
 console.log(foo.name); // outputs ''
@@ -7294,8 +7507,7 @@ When not in strict mode, a function uses the global object (window in the browse
 called as a method, bound, or called with the method .call syntax.
 window.x = 12;
 
-GoalKicker.com – JavaScript® Notes for Professionals
-170
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 170 -->
 function example() {
 return this.x;
 }
@@ -7306,7 +7518,7 @@ function example() {
 "use strict";
 return this.x;
 }
-console.log(example()); // Uncaught TypeError: Cannot read property 'x' of undefined()
+console.log(example()); // Uncaught TypeError: Cannot read property 'x' of undefined(…)
 Version ≥ 7
 Bind Operator
 The double colon bind operator can be used as a shortened syntax for the concept explained above:
@@ -7317,7 +7529,7 @@ foo::bar(); // short version
 foo.bar.call(foo, arg1, arg2, arg3); // long version
 foo::bar(arg1, arg2, arg3); // short version
 foo.bar.apply(foo, args); // long version
-foo::bar(.args); // short version
+foo::bar(...args); // short version
 This syntax allows you to write normally, without worrying about binding this everywhere.
 Binding console functions to variables
 var log = console.log.bind(console);
@@ -7330,8 +7542,7 @@ One use case can be when you have custom logger and you want to decide on runtim
 var logger = require('appLogger');
 var log = logToServer ? logger.log : console.log.bind(console);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-171
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 171 -->
 Section 19.6: Functions with an Unknown Number of
 Arguments (variadic functions)
 To create a function which accepts an undetermined number of arguments, there are two methods depending on
@@ -7349,9 +7560,9 @@ logSomeThings('hello', 'world');
 // logs "world"
 Note that you can convert arguments to an actual Array if need-be; see: Converting Array-like Objects to Arrays
 Version ≥ 6
-From ES6, the function can be declared with its last parameter using the rest operator (.). This creates an Array
+From ES6, the function can be declared with its last parameter using the rest operator (...). This creates an Array
 which holds the arguments from that point onwards
-function personLogsSomeThings(person, .msg) {
+function personLogsSomeThings(person, ...msg) {
 msg.forEach(arg => {
 console.log(person, 'says', arg);
 });
@@ -7360,43 +7571,42 @@ personLogsSomeThings('John', 'hello', 'world');
 // logs "John says hello"
 // logs "John says world"
 Functions can also be called with similar way, the spread syntax
-const logArguments = (.args) => console.log(args)
+const logArguments = (...args) => console.log(args)
 const list = [1, 2, 3]
-logArguments('a', 'b', 'c', .list)
+logArguments('a', 'b', 'c', ...list)
 // output: Array [ "a", "b", "c", 1, 2, 3 ]
 This syntax can be used to insert arbitrary number of arguments to any position, and can be used with any
 iterable(apply accepts only array-like objects).
-const logArguments = (.args) => console.log(args)
+const logArguments = (...args) => console.log(args)
 function* generateNumbers() {
 yield 6
 yield 5
 yield 4
 }
-logArguments('a', .generateNumbers(), .'pqr', 'b')
+logArguments('a', ...generateNumbers(), ...'pqr', 'b')
 // output: Array [ "a", 6, 5, 4, "p", "q", "r", "b" ]
 
-GoalKicker.com – JavaScript® Notes for Professionals
-172
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 172 -->
 Section 19.7: Anonymous Function
 Defining an Anonymous Function
 When a function is defined, you often give it a name and then invoke it using that name, like so:
 foo();
 function foo(){
-// .
+// ...
 }
 When you define a function this way, the JavaScript runtime stores your function in memory and then creates a
 reference to that function, using the name you've assigned it. That name is then accessible within the current
 scope. This can be a very convenient way to create a function, but JavaScript does not require you to assign a name
 to a function. The following is also perfectly legal:
 function() {
-// .
+// ...
 }
 When a function is defined without a name, it's known as an anonymous function. The function is stored in
 memory, but the runtime doesn't automatically create a reference to it for you. At first glance, it may appear as if
 such a thing would have no use, but there are several scenarios where anonymous functions are very convenient.
 Assigning an Anonymous Function to a Variable
 A very common use of anonymous functions is to assign them to a variable:
-var foo = function(){ /*.*/ };
+var foo = function(){ /*...*/ };
 foo();
 This use of anonymous functions is covered in more detail in Functions as a variable
 Supplying an Anonymous Function as a Parameter to Another Function
@@ -7414,12 +7624,11 @@ Returning an Anonymous Function From Another Function
 Sometimes it's useful to return a function as the result of another function. For example:
 var hash = getHashFunction( 'sha1' );
 
-GoalKicker.com – JavaScript® Notes for Professionals
-173
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 173 -->
 var hashValue = hash( 'Secret Value' );
 function getHashFunction( algorithm ){
-if ( algorithm === 'sha1' ) return function( value ){ /*.*/ };
-else if ( algorithm === 'md5' ) return function( value ){ /*.*/ };
+if ( algorithm === 'sha1' ) return function( value ){ /*...*/ };
+else if ( algorithm === 'md5' ) return function( value ){ /*...*/ };
 }
 Immediately Invoking an Anonymous Function
 Unlike many other languages, scoping in JavaScript is function-level, not block-level. (See Function Scoping ). In
@@ -7432,10 +7641,10 @@ example:
 <!-- My Script -->
 <script>
 function initialize(){
-// foo is safely hidden within initialize, but.
+// foo is safely hidden within initialize, but...
 var foo = '';
 }
-// .my initialize function is now accessible from global scope.
+// ...my initialize function is now accessible from global scope.
 // There is a risk someone could call it again, probably by accident.
 initialize();
 </script>
@@ -7453,7 +7662,7 @@ recursively call itself or add properties to itself. If the function is anonymou
 requires knowledge of the variable that the function has been assigned to. This is the less than ideal solution:
 var foo = function(callAgain){
 console.log( 'Whassup?' );
-// Less than ideal. we're dependent on a variable reference.
+// Less than ideal... we're dependent on a variable reference...
 if (callAgain === true) foo(false);
 };
 foo(true);
@@ -7464,8 +7673,7 @@ foo(true);
 var bar = foo;
 foo = function(){
 
-GoalKicker.com – JavaScript® Notes for Professionals
-174
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 174 -->
 console.log('Bad.')
 };
 bar(true);
@@ -7477,7 +7685,7 @@ end up with a potentially difficult to trace bug.
 Instead, we can give the anonymous function a reference to itself by giving it a private name, like so:
 var foo = function myself(callAgain){
 console.log( 'Whassup?' );
-// Less than ideal. we're dependent on a variable reference.
+// Less than ideal... we're dependent on a variable reference...
 if (callAgain === true) myself(false);
 };
 foo(true);
@@ -7509,8 +7717,7 @@ Section 19.8: Default parameters
 Before ECMAScript 2015 (ES6), a parameter's default value could be assigned in the following way:
 function printMsg(msg) {
 
-GoalKicker.com – JavaScript® Notes for Professionals
-175
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 175 -->
 msg = typeof msg !== 'undefined' ? // if a value was provided
 msg : // then, use that value in the reassignment
 'Default value for msg.'; // else, assign a default value
@@ -7556,8 +7763,7 @@ function multiply(x) { return x * 2;}
 function add(a = 1 + zero, b = a, c = b + a, d = multiply(c)) {
 console.log((a + b + c), d);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-176
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 176 -->
 }
 add(1); // 4, 4
 add(3); // 12, 12
@@ -7589,7 +7795,7 @@ Functions have two built-in methods that allow the programmer to supply argument
 differently: call and apply.
 This is useful, because functions that operate on one object (the object that they are a property of) can be
 repurposed to operate on another, compatible object. Additionally, arguments can be given in one shot as arrays,
-similar to the spread (.) operator in ES6.
+similar to the spread (...) operator in ES6.
 let obj = {
 a: 1,
 b: 2,
@@ -7605,8 +7811,7 @@ console.log(obj); // prints { a: 3, b: 5 }
 let myObj = {};
 myObj.set(5, 4); // fails; myObj has no `set` property
 
-GoalKicker.com – JavaScript® Notes for Professionals
-177
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 177 -->
 obj.set.call(myObj, 5, 4); // success; `this` in set() is re-routed to myObj instead of obj
 obj.set.apply(myObj, [5, 4]); // same as above; note the array
 console.log(myObj); // prints { a: 3, b: 5 }
@@ -7636,11 +7841,11 @@ Section 19.10: Partial Application
 Similar to currying, partial application is used to reduce the number of arguments passed to a function. Unlike
 currying, the number need not go down by one.
 Example:
-This function .
+This function ...
 function multiplyThenAdd(a, b, c) {
 return a * b + c;
 }
-. can be used to create another function that will always multiply by 2 and then add 10 to the passed value;
+... can be used to create another function that will always multiply by 2 and then add 10 to the passed value;
 function reversedMultiplyThenAdd(c, b, a) {
 return a * b + c;
 }
@@ -7649,8 +7854,7 @@ return reversedMultiplyThenAdd.bind(null, c, b);
 }
 var multiplyTwoThenAddTen = factory(2, 10);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-178
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 178 -->
 multiplyTwoThenAddTen(10); // 30
 The "application" part of partial application simply means fixing parameters of a function.
 Section 19.11: Passing arguments by reference or value
@@ -7692,8 +7896,7 @@ function myfunc(arg){
 arg++;
 return arg;
 
-GoalKicker.com – JavaScript® Notes for Professionals
-179
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 179 -->
 }
 a = myfunc(a);
 console.log(obj.a); // 3
@@ -7711,28 +7914,27 @@ even if the parameters are not explicitly declared:
 (function() { console.log(arguments) })(0,'str', [2,{3}]) // -> [0, "str", Array[2]]
 Although when printing arguments the output resembles an Array, it is in fact an object:
 (function() { console.log(typeof arguments) })(); // -> object
-Rest parameters: function (.parm) {}
-In ES6, the . syntax when used in the declaration of a function's parameters transforms the variable to its right
+Rest parameters: function (...parm) {}
+In ES6, the ... syntax when used in the declaration of a function's parameters transforms the variable to its right
 into a single object containing all the remaining parameters provided after the declared ones. This allows the
 function to be invoked with an unlimited number of arguments, which will become part of this variable:
-(function(a, .b){console.log(typeof b+': '+b[0]+b[1]+b[2]) })(0,1,'2',[3],{i:4});
+(function(a, ...b){console.log(typeof b+': '+b[0]+b[1]+b[2]) })(0,1,'2',[3],{i:4});
 // -> object: 123
-Spread parameters: function_name(.varb);
-In ES6, the . syntax can also be used when invoking a function by placing an object/variable to its right. This
+Spread parameters: function_name(...varb);
+In ES6, the ... syntax can also be used when invoking a function by placing an object/variable to its right. This
 allows that object's elements to be passed into that function as a single object:
 let nums = [2,42,-1];
-console.log(.['a','b','c'], Math.max(.nums)); // -> a b c 42
+console.log(...['a','b','c'], Math.max(...nums)); // -> a b c 42
 Section 19.13: Function Composition
 Composing multiple functions into one is a functional programming common practice;
 composition makes a pipeline through which our data will transit and get modified simply working on the function-
-composition (just like snapping pieces of a track together).
+composition (just like snapping pieces of a track together)...
 you start out with some single responsibility functions:
 Version ≥ 6
 const capitalize = x => x.replace(/^\w/, m => m.toUpperCase());
 const sign = x => x + ',\nmade with love';
 
-GoalKicker.com – JavaScript® Notes for Professionals
-180
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 180 -->
 and easily create a transformation track:
 Version ≥ 6
 const formatText = compose(capitalize, sign);
@@ -7743,7 +7945,7 @@ N.B. Composition is achieved through a utility function usually called compose a
 Implementation of compose are present in many JavaScript utility libraries (lodash, rambda, etc.) but you can also
 start out with a simple implementation such as:
 Version ≥ 6
-const compose = (.funs) =>
+const compose = (...funs) =>
 x =>
 funs.reduce((ac, f) => f(ac), x);
 Section 19.14: Get the name of a function object
@@ -7772,8 +7974,7 @@ if (n <= 1) {
 return 1;
 }
 
-GoalKicker.com – JavaScript® Notes for Professionals
-181
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 181 -->
 return n * factorial(n - 1);
 }
 The above function shows a basic example of how to perform a recursive function to return a factorial.
@@ -7814,8 +8015,7 @@ console.log("The first action of the first char function");
 return stringIn.charAt(0);
 console.log("The last action of the first char function");
 
-GoalKicker.com – JavaScript® Notes for Professionals
-182
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 182 -->
 }
 Running this function like so will look like this:
 console.log(firstChar("JS"));
@@ -7852,18 +8052,17 @@ if ( name === 'Taylor' ) spouse = { name: 'Jordan' };
 else if ( name === 'Cameron' ) spouse = { name: 'Casey' };
 var spouseName = spouse.name;
 
-GoalKicker.com – JavaScript® Notes for Professionals
-183
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 183 -->
 In JavaScript, you can do the same thing with functions:
 // Example 1
 var hashAlgorithm = 'sha1';
 var hash;
-if ( hashAlgorithm === 'sha1' ) hash = function(value){ /*.*/ };
-else if ( hashAlgorithm === 'md5' ) hash = function(value){ /*.*/ };
+if ( hashAlgorithm === 'sha1' ) hash = function(value){ /*...*/ };
+else if ( hashAlgorithm === 'md5' ) hash = function(value){ /*...*/ };
 hash('Fred');
 In the example above, hash is a normal variable. It is assigned a reference to a function, after which the function it
 references can be invoked using parentheses, just like a normal function declaration.
-The example above references anonymous functions. functions that do not have their own name. You can also
+The example above references anonymous functions... functions that do not have their own name. You can also
 use variables to refer to named functions. The example above could be rewritten like so:
 // Example 2
 var hashAlgorithm = 'sha1';
@@ -7872,10 +8071,10 @@ if ( hashAlgorithm === 'sha1' ) hash = sha1Hash;
 else if ( hashAlgorithm === 'md5' ) hash = md5Hash;
 hash('Fred');
 function md5Hash(value){
-// .
+// ...
 }
 function sha1Hash(value){
-// .
+// ...
 }
 Or, you can assign function references from object properties:
 // Example 3
@@ -7896,8 +8095,7 @@ var a = getValue;
 var b = a; // b is now a reference to getValue.
 var c = b(); // b is invoked, so c now holds the value returned by getValue (41)
 
-GoalKicker.com – JavaScript® Notes for Professionals
-184
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 184 -->
 function getValue(){
 return 41;
 }
@@ -7909,7 +8107,7 @@ For example:
 // getHashingFunction returns a function, which is assigned
 // to hash for later use:
 var hash = getHashingFunction( 'sha1' );
-// .
+// ...
 hash('Fred');
 // return the function corresponding to the given algorithmName
 function getHashingFunction( algorithmName ){
@@ -7919,7 +8117,7 @@ if (algorithmName === 'sha1') return function(value){ /**/ };
 else if (algorithmName === 'md5') return md5;
 }
 function md5Hash(value){
-// .
+// ...
 }
 You don't need to assign a function reference to a variable in order to invoke it. This example, building off example
 5, will call getHashingFunction and then immediately invoke the returned function and pass its return value to
@@ -7937,8 +8135,7 @@ functionVariable(); // error: undefined is not a function.
 function hoistedFunction(){}
 functionVariable = function(){};
 
-GoalKicker.com – JavaScript® Notes for Professionals
-185
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 185 -->
 Chapter 20: Functional JavaScript
 Section 20.1: Higher-Order Functions
 In general, functions that operate on other functions, either by taking them as arguments or by returning them (or
@@ -7949,7 +8146,7 @@ function iAmCallbackFunction() {
 console.log("callback has been invoked");
 }
 function iAmJustFunction(callbackFn) {
-// do some stuff .
+// do some stuff ...
 // invoke the callback function.
 callbackFn();
 }
@@ -7957,7 +8154,7 @@ callbackFn();
 iAmJustFunction(iAmCallbackFunction);
 A higher-order function is also a function that returns another function as its result.
 function iAmJustFunction() {
-// do some stuff .
+// do some stuff ...
 // return a function.
 return function iAmReturnedFunction() {
 console.log("returned function has been invoked");
@@ -7978,25 +8175,24 @@ identityMonad(value)
 .bind(j, j1, j2)
 .bind(i, i2)
 
-GoalKicker.com – JavaScript® Notes for Professionals
-186
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 186 -->
 .bind(h, h1, h2)
 .bind(g, g1, g2)
 .bind(f, f1, f2);
 function identityMonad(value) {
 var monad = Object.create(null);
 // func should return a monad
-monad.bind = function (func, .args) {
-return func(value, .args);
+monad.bind = function (func, ...args) {
+return func(value, ...args);
 };
 // whatever func does, we get our monad back
-monad.call = function (func, .args) {
-func(value, .args);
+monad.call = function (func, ...args) {
+func(value, ...args);
 return identityMonad(value);
 };
 // func doesn't have to know anything about monads
-monad.apply = function (func, .args) {
-return identityMonad(func(value, .args));
+monad.apply = function (func, ...args) {
+return identityMonad(func(value, ...args));
 };
 // Get the value wrapped in this monad
 monad.value = function () {
@@ -8022,14 +8218,13 @@ identityMonad(value)
 .apply(g)
 .bind(h); // Logs 'foo: bar, bar: foo'
 Let's try everything:
-var add = (x, .args) => x + args.reduce((r, n) => r + n, 0),
-multiply = (x, .args) => x * args.reduce((r, n) => r * n, 1),
+var add = (x, ...args) => x + args.reduce((r, n) => r + n, 0),
+multiply = (x, ...args) => x * args.reduce((r, n) => r * n, 1),
 
-GoalKicker.com – JavaScript® Notes for Professionals
-187
-divideMonad = (x, .args) => identityMonad(x / multiply(.args)),
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 187 -->
+divideMonad = (x, ...args) => identityMonad(x / multiply(...args)),
 log = x => console.log(x),
-substract = (x, .args) => x - add(.args);
+substract = (x, ...args) => x - add(...args);
 identityMonad(100)
 .apply(add, 10, 29, 13)
 .apply(multiply, 2)
@@ -8066,8 +8261,7 @@ const pure = (input) => {
 let output = input.a + 1;
 } return output;
 
-GoalKicker.com – JavaScript® Notes for Professionals
-188
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 188 -->
 let b = pure(obj)
 console.log(obj) // Logs { "a": 0 }
 console.log(b) // Logs 1
@@ -8107,12 +8301,10 @@ As you can see, our transform function accepts two parameters, a function and a 
 collection, and push values onto the result, calling fn on each of them.
 Looks familiar? This is very similar to how Array.prototype.map() works!
 
-GoalKicker.com – JavaScript® Notes for Professionals
-189
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 189 -->
 console.log([1, 2, 3, 4].map(x => x * 2)); // [2, 4, 6, 8]
 
-GoalKicker.com – JavaScript® Notes for Professionals
-190
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 190 -->
 Chapter 21: Prototypes, objects
 In the conventional JS there are no class instead we have prototypes. Like the class, prototype inherits the
 properties including the methods and the variables declared in the class. We can create the new instance of the
@@ -8158,8 +8350,7 @@ console.log('Hi, I am ' + this.name + ', the ' + this.title);
 }
 };
 
-GoalKicker.com – JavaScript® Notes for Professionals
-191
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 191 -->
 var Customer = function(name) {
 Human.call(this); // inheriting from the base class
 this.name = name;
@@ -8178,8 +8369,7 @@ andy.greet();
 // Hi, I am Andy, the Bill
 virat.greet();
 
-GoalKicker.com – JavaScript® Notes for Professionals
-192
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 192 -->
 Chapter 22: Classes
 Section 22.1: Class Constructor
 The fundamental part of most classes is its constructor, which sets up each instance's initial state and handles any
@@ -8218,8 +8408,7 @@ this.name = 'subclass';
 const subClass = new SubClass();
 subClass.log(); // logs: "Hello subclass"
 
-GoalKicker.com – JavaScript® Notes for Professionals
-193
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 193 -->
 Section 22.3: Static Methods
 Static methods and properties are defined on the class/constructor itself, not on instance objects. These are specified
 in a class definition by using the static keyword.
@@ -8260,8 +8449,7 @@ get name() {
 return this.names_[this.names_.length - 1];
 } }
 
-GoalKicker.com – JavaScript® Notes for Professionals
-194
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 194 -->
 const myClassInstance = new MyClass();
 myClassInstance.name = 'Joe';
 myClassInstance.name = 'Bob';
@@ -8303,15 +8491,14 @@ return list.shift(); // "reading / writing" alike.
 };
 } }
 
-GoalKicker.com – JavaScript® Notes for Professionals
-195
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 195 -->
 var q = new Queue; //
 //
-q.enqueue(9); // . first in .
+q.enqueue(9); // ... first in ...
 q.enqueue(8); //
 q.enqueue(7); //
 //
-console.log(q.dequeue()); // 9 . first out.
+console.log(q.dequeue()); // 9 ... first out.
 console.log(q.dequeue()); // 8
 console.log(q.dequeue()); // 7
 console.log(q); // {}
@@ -8351,8 +8538,7 @@ this.model = model;
 }
 // example using symbols
 
-GoalKicker.com – JavaScript® Notes for Professionals
-196
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 196 -->
 [METADATA]() {
 return {
 make: this.make,
@@ -8396,8 +8582,7 @@ figureWhatToDo(topSecret[topSecret]); // we have access to topSecret
 Because symbols are unique, we must have reference to the original symbol to access the private property.
 import {SecretAgent} from 'SecretAgent.js'
 
-GoalKicker.com – JavaScript® Notes for Professionals
-197
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 197 -->
 const agent = new SecretAgent('steal all the ice cream');
 // ok let's try to get the secret out of him!
 Object.keys(agent); // ['coverStory'] only cover story is public, our secret is kept.
@@ -8437,8 +8622,7 @@ The idea here is simply to define all our methods and members inside the constru
 private members without assigning them to this.
 export class SecretAgent{
 
-GoalKicker.com – JavaScript® Notes for Professionals
-198
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 198 -->
 constructor(secret){
 const topSecret = secret;
 this.coverStory = 'just a simple gardner';
@@ -8482,8 +8666,7 @@ A.prototype.foo = function foo() {
 } A = null; // works
 A = null; // works
 
-GoalKicker.com – JavaScript® Notes for Professionals
-199
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 199 -->
 Chapter 23: Namespacing
 Section 23.1: Namespace by direct assignment
 //Before: antipattern 3 global variables
@@ -8508,8 +8691,7 @@ Navigational.pagination.jquery = function();
 Navigational.pagination.angular = function();
 Navigational.pagination.ember = function();
 
-GoalKicker.com – JavaScript® Notes for Professionals
-200
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 200 -->
 Chapter 24: Context (this)
 Section 24.1: this with simple objects
 var person = {
@@ -8555,7 +8737,7 @@ this.className = 'success';
 }
 } })
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 201
 Section 24.3: Binding function context
 Version ≥ 5.1
@@ -8601,8 +8783,7 @@ Person.call(person1);
 //outputs: I'm Stackoverflow
 Person.apply(person2);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-202
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 202 -->
 //outputs: I'm Stackoverflow
 Person.call(person3);
 //outputs: I'm Stackoverflow
@@ -8620,8 +8801,7 @@ var cat2 = Cat("Tom"); // is undefined -- function got executed in global contex
 window.name; // "Tom"
 cat2.name; // error! cannot access property of undefined
 
-GoalKicker.com – JavaScript® Notes for Professionals
-203
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 203 -->
 Chapter 25: Setters and Getters
 Setters and getters are object properties that call a function when they are set/gotten.
 Section 25.1: Defining a Setter/Getter Using
@@ -8669,8 +8849,7 @@ Section 25.3: Defining getters and setters in ES6 class
 class Person {
 constructor(firstname, lastname) {
 
-GoalKicker.com – JavaScript® Notes for Professionals
-204
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 204 -->
 this._firstname = firstname;
 this._lastname = lastname;
 }
@@ -8693,8 +8872,7 @@ person.firstname = 'Foo';
 person.lastname = 'Bar';
 console.log(person.firstname, person.lastname); // Foo Bar
 
-GoalKicker.com – JavaScript® Notes for Professionals
-205
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 205 -->
 Chapter 26: Events
 Section 26.1: Page, DOM and Browser loading
 This is an example to explain the variations of load events.
@@ -8724,8 +8902,7 @@ console.log("Hi I am an anonymous function! I am loaded");
 Here, the message gets logged as soon as the browser interprets the anonymous function. It means, this function
 can get executed even before the DOM is loaded.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-206
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 206 -->
 Chapter 27: Inheritance
 Section 27.1: Standard function prototype
 Start by defining a Foo function that we'll use as a constructor.
@@ -8759,8 +8936,7 @@ var obj = Object.create(prototype);
 Now all the properties and methods from prototype will be available to obj
 console.log(obj.foo);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-207
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 207 -->
 console.log(obj.bar());
 Console output
 "foo"
@@ -8796,8 +8972,7 @@ this.name = name;
 }
 var foo = new Foo(1, 'foo');
 
-GoalKicker.com – JavaScript® Notes for Professionals
-208
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 208 -->
 console.log(foo.id);
 Console output
 1
@@ -8812,7 +8987,7 @@ bar
 In fact what Foo is doing as a "constructor" is just creating objects with Foo.prototype as it's prototype.
 You can find a reference to its constructor on every object
 console.log(foo.constructor);
-function Foo(id, name) { .
+function Foo(id, name) { ...
 console.log({ }.constructor);
 function Object() { [native code] }
 And also check if an object is an instance of a given class with the instanceof operator
@@ -9186,7 +9361,7 @@ console.log(event.type, this.msg);
 Use arrow functions and the rest operator
 function SomeClass(msg, elem) {
 this.msg = msg;
-elem.addEventListener('click', (.a) => this.handleClick(.a));
+elem.addEventListener('click', (...a) => this.handleClick(...a));
 }
 SomeClass.prototype.handleClick = function(event) {
 console.log(event.type, this.msg);
@@ -9454,10 +9629,10 @@ The String object has the following methods that accept regular expressions as a
 
 GoalKicker.com – JavaScript® Notes for Professionals
 224
-"string".match(.
-"string".replace(.
-"string".split(.
-"string".search(.
+"string".match(...
+"string".replace(...
+"string".split(...
+"string".search(...
 Match with RegExp
 console.log("string".match(/[i-n]+/));
 console.log("string".match(/(r)[i-n]+/));
@@ -9488,7 +9663,7 @@ Sometimes the desired match relies on its context. This means a simple RegExp wi
 GoalKicker.com – JavaScript® Notes for Professionals
 225
 that is of interest, so the solution is to write a capture group (pattern). The captured data can then be referenced
-as.
+as...
 String replacement "$n" where n is the n th capture group (starting from 1)
 The n th argument in a callback function
 If the RegExp is not flagged g, the n+1 th item in a returned str.match Array
@@ -9680,7 +9855,7 @@ Space available
 10MB
 Section 33.2: Simpler way of handling Storage
 localStorage, sessionStorage are JavaScript Objects and you can treat them as such.
-Instead of using Storage Methods like .getItem(), .setItem(), etc here's a simpler alternative:
+Instead of using Storage Methods like .getItem(), .setItem(), etc… here's a simpler alternative:
 // Set
 localStorage.greet = "Hi!"; // Same as: window.localStorage.setItem("greet", "Hi!");
 // Get
@@ -9890,7 +10065,7 @@ Boolean (e.g. true)
 The value null
 undefined is not supported in the sense that an undefined property will be omitted from JSON upon serialization.
 Therefore, there is no way to deserialize JSON and end up with a property whose value is undefined.
-The string "42" is valid JSON. JSON doesn't always have to have an outer envelope of "{.}" or "[.]".
+The string "42" is valid JSON. JSON doesn't always have to have an outer envelope of "{...}" or "[...]".
 While some JSON is also valid JavaScript and some JavaScript is also valid JSON, there are some subtle differences
 between both languages and neither language is a subset of the other.
 Take the following JSON string as an example:
@@ -10624,7 +10799,7 @@ typeof function(){};
 typeof class C {};
 typeof Math.sin;
 // returns 'object'
-typeof { /*<.>*/ };
+typeof { /*<...>*/ };
 typeof null;
 typeof /regex/; // This is also considered an object
 typeof [1, 2, 4]; // use Array.isArray or Object.prototype.toString.call.
@@ -10958,7 +11133,7 @@ console.log(it.next()); // 4
 console.log(it.next()); // 5
 console.log(it.next()); // undefined
 Section 41.4: Iteration
-A generator is iterable. It can be looped over with a for.of statement, and used in other constructs which depend
+A generator is iterable. It can be looped over with a for...of statement, and used in other constructs which depend
 on the iteration protocol.
 
 GoalKicker.com – JavaScript® Notes for Professionals
@@ -10970,11 +11145,11 @@ yield i;
 }
 // looping
 for (let n of range(10)) {
-// n takes on the values 0, 1, . 9
+// n takes on the values 0, 1, ... 9
 }
 // spread operator
-let nums = [.range(3)]; // [0, 1, 2]
-let max = Math.max(.range(100)); // 99
+let nums = [...range(3)]; // [0, 1, 2]
+let max = Math.max(...range(100)); // 99
 Here is another example of use generator to custom iterable object in ES6. Here anonymous generator function
 function * used.
 let user = {
@@ -11021,7 +11196,7 @@ var result = yield asyncError()
 console.error(e) // Something went wrong
 }
 })
-Using co would work exactly the same but with co(function * (){.}) instead of q.spawn
+Using co would work exactly the same but with co(function * (){...}) instead of q.spawn
 Section 41.6: Iterator-Observer interface
 A generator is a combination of two things - an Iterator and an Observer.
 Iterator
@@ -11060,8 +11235,8 @@ the assignment position. When PUSHing, value appears in the argument position of
 When you use iterators, you PULL the value from the producer. When you use callbacks, the producer PUSHes the
 value to the argument position of the callback.
 var i = a.next() // PULL
-dosomething(., v => {.}) // PUSH
-Here, you pull the value from a.next() and in the second, v => {.} is the callback and a value is PUSHed into the
+dosomething(..., v => {...}) // PUSH
+Here, you pull the value from a.next() and in the second, v => {...} is the callback and a value is PUSHed into the
 argument position v of the callback function.
 Using this pull-push mechanism, we can write async programming like this,
 let delay = t => new Promise(r => setTimeout(r, t));
@@ -11082,7 +11257,7 @@ resolved, and PUSHes the resolved value back to the generator so it can consume 
 Use it now
 So, with generators and spawn function, you can clean up all your async code in NodeJS to look and feel like it's
 synchronous. This will make debugging easy. Also the code will look neat.
-This feature is coming to future versions of JavaScript - as async.await. But you can use them today in
+This feature is coming to future versions of JavaScript - as async...await. But you can use them today in
 ES2015/ES6 using the spawn function defined in the libraries - taskjs, co, or bluebird
 
 GoalKicker.com – JavaScript® Notes for Professionals
@@ -11106,7 +11281,7 @@ respectively.
 Example
 const promise = new Promise((resolve, reject) => {
 // Perform some work (possibly asynchronous)
-// .
+// ...
 if (/* Work has successfully finished and produced "value" */) {
 resolve(value);
 } else {
@@ -11130,7 +11305,7 @@ promise.then(value => {
 // Something went wrong,
 // promise has been rejected with "reason"
 });
-Note: Calling promise.then(.) and promise.catch(.) on the same promise might result in an Uncaught
+Note: Calling promise.then(...) and promise.catch(...) on the same promise might result in an Uncaught
 exception in Promise if an error occurs, either while executing the promise or inside one of the callbacks, so the
 preferred way would be to attach the next listener on the promise returned by the previous then / catch.
 Alternatively, both callbacks can be attached in a single call to then:
@@ -11259,7 +11434,7 @@ We call .reduce() on a source array, and provide Promise.resolve() as an initial
 1.
 Every element reduced will add a .then() to the initial value.
 2.
-reduce()'s product will be Promise.resolve().then(.).then(.).
+reduce()'s product will be Promise.resolve().then(...).then(...).
 3.
 We manually append a .then(successHandler, errorHandler) after the reduce, to execute successHandler
 4.
@@ -11291,7 +11466,7 @@ We call .reduce() on a source array, and provide Promise.reject() as an initial 
 1.
 Every element reduced will add a .catch() to the initial value.
 2.
-reduce()'s product will be Promise.reject().catch(.).catch(.).
+reduce()'s product will be Promise.reject().catch(...).catch(...).
 3.
 We manually append .then(successHandler, errorHandler) after the reduce, to execute successHandler
 4.
@@ -11327,7 +11502,7 @@ resolve(2, 2000)
 .catch(error => console.log(error.message)); // outputs "bad things!" after 1 second
 Section 42.6: "Promisifying" functions with callbacks
 Given a function that accepts a Node-style callback,
-fooFn(options, function callback(err, result) { . });
+fooFn(options, function callback(err, result) { ... });
 you can promisify it (convert it to a promise-based function) like this:
 function promiseFooFn(options) {
 return new Promise((resolve, reject) =>
@@ -11345,9 +11520,9 @@ promiseFooFn(options).then(result => {
 });
 In a more generic way, here's how to promisify any given callback-style function:
 function promisify(func) {
-return function(.args) {
+return function(...args) {
 return new Promise((resolve, reject) => {
-func(.args, (err, result) => err ? reject(err) : resolve(result));
+func(...args, (err, result) => err ? reject(err) : resolve(result));
 });
 }
 }
@@ -11558,7 +11733,7 @@ function wait(ms) {
 return new Promise(resolve => setTimeout(resolve, ms));
 }
 wait(5000).then(() => {
-console.log('5 seconds have passed.');
+console.log('5 seconds have passed...');
 });
 Section 42.10: "Promisifying" values
 The Promise.resolve static method can be used to wrap values into promises.
@@ -11777,7 +11952,7 @@ var mySet = new Set([1, 2, 3, 4]);
 //use Array.from
 const myArray = Array.from(mySet);
 //use destructuring-assignment
-const myArray = [.mySet];
+const myArray = [...mySet];
 Now you can filter the array to contain only even numbers and convert it back to Set using Set constructor:
 mySet = new Set(myArray.filter(x => x % 2 === 0));
 mySet now contains only even numbers:
@@ -11882,7 +12057,7 @@ The alert() method of the window object displays an alert box with a specified m
 button. The text of that button depends on the browser and can't be modified.
 Syntax
 alert("Hello world!");
-// Or, alternatively.
+// Or, alternatively...
 window.alert("Hello world!");
 Produces
 
@@ -11908,7 +12083,7 @@ var name = prompt("What's your name?");
 console.log("Hello, " + name);
 You can also pass prompt() a second parameter, which will be displayed as the default text in the prompt's text
 field.
-var name = prompt('What\'s your name?', ' Name.');
+var name = prompt('What\'s your name?', ' Name...');
 console.log('Hello, ' + name);
 Parameter
 Description
@@ -12474,7 +12649,7 @@ function a({ x }) {
 "use strict";
 }
 Rest params
-function a(.args) {
+function a(...args) {
 } "use strict";
 
 GoalKicker.com – JavaScript® Notes for Professionals
@@ -12532,7 +12707,7 @@ Fast and short way to format value of type Number as money, e.g. 1234567.89 => "
 var num = 1234567.89,
 formatted;
 formatted = num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'); // "1,234,567.89"
-More advanced variant with support of any number of decimals [0  n], variable size of number groups [0  x]
+More advanced variant with support of any number of decimals [0 .. n], variable size of number groups [0 .. x]
 and different delimiter types:
 /**
 * Number.prototype.format(n, x, s, c)
@@ -12550,7 +12725,7 @@ return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s ||
 12345678.9.format(2, 3, '.', ','); // "12.345.678,90"
 123456.789.format(4, 4, ' ', ':'); // "12 3456:7890"
 12345678.9.format(0, 3, '-'); // "12-345-679"
-123456789format(2); // "123,456,789.00"
+123456789..format(2); // "123,456,789.00"
 Section 52.2: Extract extension from file name
 Fast and short way to extract extension from file name in JavaScript will be:
 function get_extension(filename) {
@@ -12564,13 +12739,13 @@ get_extension('.htpasswd') // ""
 get_extension('name.with.many.dots.myext') // "myext"
 The following solution may extract file extensions from full path:
 function get_extension(path) {
-var basename = path.split(/[\\/]/).pop(), // extract file name from full path .
+var basename = path.split(/[\\/]/).pop(), // extract file name from full path ...
 // (supports `\\` and `/` separators)
 pos = basename.lastIndexOf('.'); // get last position of `.`
 
 GoalKicker.com – JavaScript® Notes for Professionals
 301
-if (basename === '' || pos < 1) // if file name is empty or .
+if (basename === '' || pos < 1) // if file name is empty or ...
 return ""; // `.` not found (-1) or comes first (0)
 return basename.slice(pos + 1); // extract extension ignoring `.`
 }
@@ -12618,7 +12793,7 @@ console.log(ArrayBufferToBinary(data));
 reader.readAsArrayBuffer(file); //gets an ArrayBuffer of the file
 Now we perform the actual conversion of the file data into 1's and 0's using a DataView:
 function ArrayBufferToBinary(buffer) {
-// Convert an array buffer to a string bit-representation: 0 1 1 0 0 0.
+// Convert an array buffer to a string bit-representation: 0 1 1 0 0 0...
 var dataView = new DataView(buffer);
 var response = "", offset = (8/8);
 for(var i = 0; i < dataView.byteLength; i += offset) {
@@ -12711,7 +12886,7 @@ byteView[1] = 0x02;
 byteView[2] = 0x04;
 byteView[3] = 0x08;
 console.log(floatView); // [6.64421383e-316]
-ArrayBuffers can be copied using the .slice(.) method, either directly or through a TypedArray view.
+ArrayBuffers can be copied using the .slice(...) method, either directly or through a TypedArray view.
 var byteView2 = byteView.slice();
 var floatView2 = new Float64Array(byteView2.buffer);
 byteView2[6] = 0xFF;
@@ -12786,8 +12961,8 @@ Chapter 54: Template Literals
 Template literals are a type of string literal that allows values to be interpolated, and optionally the interpolation
 and construction behaviour to be controlled using a "tag" function.
 Section 54.1: Basic interpolation and multiline strings
-Template literals are a special type of string literal that can be used instead of the standard '.' or ".". They
-are declared by quoting the string with backticks instead of the standard single or double quotes: `.`.
+Template literals are a special type of string literal that can be used instead of the standard '...' or "...". They
+are declared by quoting the string with backticks instead of the standard single or double quotes: `...`.
 Template literals can contain line breaks and arbitrary expressions can be embedded using the ${ expression }
 substitution syntax. By default, the values of these substitution expressions are concatenated directly into the
 string where they appear.
@@ -12801,8 +12976,8 @@ Section 54.2: Tagged strings
 A function identified immediately before a template literal is used to interpret it, in what is called a tagged
 template literal. The tag function can return a string, but it can also return any other type of value.
 The first argument to the tag function, strings, is an Array of each constant piece of the literal. The remaining
-arguments, .substitutions, contain the evaluated values of each ${} substitution expression.
-function settings(strings, .substitutions) {
+arguments, ...substitutions, contain the evaluated values of each ${} substitution expression.
+function settings(strings, ...substitutions) {
 const result = new Map();
 for (let i = 0; i < substitutions.length; i++) {
 result.set(strings[i].trim(), substitutions[i]);
@@ -12817,9 +12992,9 @@ hostname ${location.hostname}
 Map {"label" => "Content", "servers" => 17, "hostname" => "stackoverflow.com"}
 The strings Array has a special .raw property referencing a parallel Array of the same constant pieces of the
 template literal but exactly as they appear in the source code, without any backslash-escapes being replaced.
-function example(strings, .substitutions) {
+function example(strings, ...substitutions) {
 console.log('strings:', strings);
-} console.log('.substitutions:', substitutions);
+} console.log('...substitutions:', substitutions);
 
 GoalKicker.com – JavaScript® Notes for Professionals
 307
@@ -12837,7 +13012,7 @@ const message = "Welcome, John!";
 pattern.exec(message);
 ["Welcome, John!", "John"]
 Section 54.4: Templating HTML With Template Strings
-You can create an HTML`.` template string tag function to automatically encodes interpolated values. (This
+You can create an HTML`...` template string tag function to automatically encodes interpolated values. (This
 requires that interpolated values are only used as text, and may not be safe if interpolated values are used in
 code such as scripts or styles.)
 class HTMLString extends String {
@@ -12854,7 +13029,7 @@ String(text)
 .replace(/\\/g, '&#39;'));
 }
 }
-function HTML(strings, .substitutions) {
+function HTML(strings, ...substitutions) {
 const escapedFlattenedSubstitutions =
 substitutions.map(s => [].concat(s).map(HTMLString.escape).join(''));
 const pieces = [];
@@ -13136,7 +13311,7 @@ For example: The below scripts will give different outputs.
 var x = 2;
 var y = 4;
 alert(x + y);
-This will give you an output of 6. But this.
+This will give you an output of 6. But this...
 var x = 2;
 alert(x + y);
 var y = 4;
@@ -13387,7 +13562,7 @@ An example of loadedData to be tested with this code:
 var loadedData = [
 { label:"apple", content:"green and round" },
 { label:"blackberry", content:"small black or blue" },
-{ label:"pineapple", content:"weird stuff difficult to explain the shape" }
+{ label:"pineapple", content:"weird stuff.. difficult to explain the shape" }
 ];
 A fiddle to illustrate this
 
@@ -13491,14 +13666,14 @@ Section 57.6: Importing with side eects
 Sometimes you have a module that you only want to import so its top-level code gets run. This is useful for polyfills,
 other globals, or configuration that only runs once when your module is imported.
 Given a file named test.js:
-console.log('Initializing.')
+console.log('Initializing...')
 You can use it like this:
 import './test'
-This example will print Initializing. to the console.
+This example will print Initializing... to the console.
 Section 57.7: Exporting multiple named members
-const namedMember1 = .
-const namedMember2 = .
-const namedMember3 = .
+const namedMember1 = ...
+const namedMember2 = ...
+const namedMember3 = ...
 export { namedMember1, namedMember2, namedMember3 }
 
 GoalKicker.com – JavaScript® Notes for Professionals
@@ -13584,7 +13759,7 @@ Some of the trickier parts:
 !"0" === false // "0" got converted to true, then reversed.
 !"false" === false // "false" converted to true, then reversed.
 Section 59.3: Converting to boolean
-Boolean(.) will convert any data type into either true or false.
+Boolean(...) will convert any data type into either true or false.
 
 GoalKicker.com – JavaScript® Notes for Professionals
 327
@@ -13735,7 +13910,7 @@ can do it with join(); But if you need to make something to the strings while yo
 this can be useful.
 var arr = ['a', 'á', 'b', 'c']
 function upper_lower (a, b, i) {
-//.do something here
+//...do something here
 b = i & 1 ? b.toUpperCase() : b.toLowerCase();
 } return a + ',' + b
 arr = arr.reduce(upper_lower); // "a,Á,b,C"
@@ -14009,8 +14184,8 @@ const bar = (baz) => baz + 1;
 However, if the arrow function takes no parameters, or more than one parameter, a new set of parentheses must
 encase all the arguments:
 (() => "foo")() // -> "foo"
-((bow, arrow) => bow + arrow)('I took an arrow ', 'to the knee.')
-// -> "I took an arrow to the knee."
+((bow, arrow) => bow + arrow)('I took an arrow ', 'to the knee...')
+// -> "I took an arrow to the knee..."
 If the function body doesn't consist of a single expression, it must be surrounded by brackets and use an explicit
 return statement for providing a result:
 (bar => {
@@ -14055,7 +14230,7 @@ Due to this, arrow functions are also not aware of their caller/callee.
 While the lack of an arguments object can be a limitation in some edge cases, rest parameters are generally a
 suitable alternative.
 const arguments = [true];
-const foo = (.arguments) => console.log(arguments[0]);
+const foo = (...arguments) => console.log(arguments[0]);
 foo(false); // -> false
 Section 62.4: Implicit Return
 Arrow functions may implicitly return values by simply omitting the curly braces that traditionally wrap a function's
@@ -14078,7 +14253,7 @@ const a = new foo();
 const bar = () => {
 return 'bar';
 }
-const b = new bar(); // -> Uncaught TypeError: bar is not a constructor.
+const b = new bar(); // -> Uncaught TypeError: bar is not a constructor...
 Section 62.6: Explicit Return
 Arrow functions can behave very similar to classic functions in that you may explicitly return a value from them
 using the return keyword; simply wrap your function's body in curly braces, and return a value:
@@ -14426,8 +14601,7 @@ closure.
 Factories are also a great way of applying functional programming practices in JavaScript, because they are
 functions.
 
-GoalKicker.com – JavaScript® Notes for Professionals
-349
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 349 -->
 Section 65.2: Factory with Composition
 'Prefer composition over inheritance' is an important and popular programming principle, used to assign behaviors to
 objects, as opposed to inheriting many often unneeded behaviors.
@@ -14477,8 +14651,7 @@ mover(state)
 Usage
 var fred = person('Fred', 42);
 
-GoalKicker.com – JavaScript® Notes for Professionals
-350
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 350 -->
 fred.speak(); // outputs: Fred says Hello
 fred.moveSlowly(); // outputs: Fred is moving slowly
 var snowy = rabbit('Snowy', 'white');
@@ -14526,8 +14699,8 @@ return getPrivateData() * 2;
 return {
 getPrivateData: getPrivateData,
 
-GoalKicker.com – JavaScript® Notes for Professionals
-351
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 351 -->
+
 getDoublePrivateData: getDoublePrivateData
 };
 })(/* pass initialization data if necessary */);
@@ -14575,8 +14748,7 @@ This code above should be in a separated file .js to be referenced in any page t
 var menuActive = new NavigationNs.active('ul.sidebar-menu li', 5);
 menuActive.setCurrent();
 
-GoalKicker.com – JavaScript® Notes for Professionals
-352
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 352 -->
 Section 65.4: Prototype Pattern
 The prototype pattern focuses on creating an object that can be used as a blueprint for other objects through
 prototypal inheritance. This pattern is inherently easy to work with in JavaScript because of the native support for
@@ -14617,8 +14789,7 @@ RoomService.prototype.constructor = RoomService;
 RoomService.prototype.announceDelivery = function() {
 } return 'Your ' + this.order + ' has arrived!';
 
-GoalKicker.com – JavaScript® Notes for Professionals
-353
+<!-- GoalKicker.com – JavaScript® Notes for Professionals 353 -->
 RoomService.prototype.deliverOrder = function() {
 return this.sayHello() + ' ' + this.announceDelivery();
 }
@@ -14694,7 +14865,7 @@ const truck = vehicleFactory.createVehicle("Truck"); // Truck { name: "Truck", w
 const bike = vehicleFactory.createVehicle("Bike"); // Bike { name: "Bike", wheels: 2 }
 const unknown = vehicleFactory.createVehicle("Boat"); // null ( Vehicle not known )
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 355
 Chapter 66: Detecting browser
 Browsers, as they have evolved, offered more features to JavaScript. But often these features are not available in all
@@ -14735,7 +14906,7 @@ agents of different browsers. For example, in case of opera, since it uses Chrom
 additional step of ignoring that part.
 Note that this method can be easily spoofed by a user.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 356
 navigator.sayswho= (function(){
 var ua= navigator.userAgent, tem,
@@ -14770,7 +14941,7 @@ else if (bowser.safari) {
 else if (bowser.iphone || bowser.android) {
 } alert('iPhone or Android');
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 357
 Chapter 67: Symbols
 Section 67.1: Basics of symbol primitive type
@@ -14806,14 +14977,14 @@ concatenation.
 let apple = Symbol('Apple') + ''; // throws TypeError!
 Instead, they have to be explicitly converted into a string when necessary, (for example, to get a textual description
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 358
 of the symbol that can be used in a debug message) using the toString method or the String constructor.
 const APPLE = Symbol('Apple');
 let str1 = APPLE.toString(); // "Symbol(Apple)"
 let str2 = String(APPLE); // "Symbol(Apple)"
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 359
 Chapter 68: Transpiling
 Transpiling is the process of interpreting certain programming languages and translating it to a specific target
@@ -14849,7 +15020,7 @@ The ability to use newer syntax reliably
 Compatibility among most, if not all browsers
 Usage of missing/not yet native features to JavaScript via languages like CoffeeScript or TypeScript
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 360
 Section 68.2: Start using ES6/7 with Babel
 Browser support for ES6 is growing, but to be sure your code will work on environments that don't fully support it,
@@ -14878,12 +15049,12 @@ Edit your package.json file (created when you ran npm init) and add the build sc
 6.
 property:
 {
-.
+...
 "scripts": {
-. ,
+... ,
 "build": "babel scripts --out-dir dist/scripts"
 },
-.
+...
 }
 Enjoy programming in ES6/7
 7.
@@ -14892,21 +15063,21 @@ Run the following to transpile all your files to ES5
 ~ npm run build
 For more complex projects you might want to take a look at Gulp or Webpack
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 361
 Chapter 69: Automatic Semicolon Insertion
 - ASI
 Section 69.1: Avoid semicolon insertion on return statements
 The JavaScript coding convention is to place the starting bracket of blocks on the same line of their declaration:
-if (.) {
+if (...) {
 }
-function (a, b, .) {
+function (a, b, ...) {
 }
 Instead of in the next line:
-if (.)
+if (...)
 {
 }
-function (a, b, .)
+function (a, b, ...)
 {
 }
 This has been adopted to avoid semicolon insertion in return statements that return objects:
@@ -14929,7 +15100,7 @@ to silent errors.
 Section 69.2: Rules of Automatic Semicolon Insertion
 There are three basic rules of semicolon insertion:
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 362
 When, as the program is parsed from left to right, a token (called the offending token) is
 1.
@@ -14977,7 +15148,7 @@ x;
 ++y;
 Array indexing/literals
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 363
 console.log("Hello, World")
 [1,2,3].join()
@@ -14990,7 +15161,7 @@ return
 return;
 "something";
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 364
 Chapter 70: Localization
 Paramater
@@ -15031,7 +15202,7 @@ const esDateTimeFormatting = new Intl.DateTimeFormat('es-ES');
 const usDate = usDateTimeFormatting.format(new Date('2016-07-21')); // "7/21/2016"
 const esDate = esDateTimeFormatting.format(new Date('2016-07-21')); // "21/7/2016"
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 365
 Chapter 71: Geolocation
 Section 71.1: Get updates when a user's location changes
@@ -15077,7 +15248,7 @@ return "POSITION_UNAVAILABLE";
 case err.TIMEOUT:
 return "TIMEOUT";
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 366
 default:
 return "UNKNOWN_ERROR";
@@ -15088,7 +15259,7 @@ var geolocationFailure = function(err) {
 console.log("ERROR (" + getErrorCode(err) + "): " + err.message);
 };
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 367
 Chapter 72: IndexedDB
 Section 72.1: Opening a database
@@ -15133,7 +15304,7 @@ We'll use the database we set up in Opening a database.
 // Create a new readwrite (since we want to change things) transaction for the things store
 var transaction = db.transaction(["things"], "readwrite");
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 368
 // Transactions use events, just like database open requests. Let's listen for success
 transaction.oncomplete = function() {
@@ -15179,7 +15350,7 @@ var store = transaction.objectStore("things");
 // We'll load the coffee_cup object we added in Adding objects
 var request = store.get("coffee_cup");
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 369
 // Let's listen so we can see if everything went well
 request.onsuccess = function(event) {
@@ -15196,7 +15367,7 @@ window.indexedDB property:
 if (window.indexedDB) {
 } // IndexedDB is available
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 370
 Chapter 73: Modularization Techniques
 Section 73.1: ES6 Modules
@@ -15232,7 +15403,7 @@ The UMD (Universal Module Definition) pattern is used when our module needs to b
 different module loaders (e.g. AMD, CommonJS).
 The pattern itself consists of two parts:
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 371
 An IIFE (Immediately-Invoked Function Expression) that checks for the module loader that is being
 1.
@@ -15281,7 +15452,7 @@ Registering the factory function by calling define(), instead of immediately exe
 Passing dependencies as an array of module names, which are then loaded, instead of using globals
 Only executing the factory function once all the dependencies have been loaded and executed
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 372
 Passing the dependent modules as arguments to the factory function
 The key thing here is that a module can have a dependency and not hold everything up while waiting for it to load,
@@ -15322,7 +15493,7 @@ var myPrivateFn = function(param) {
 return "Here's what you said: " + param;
 };
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 373
 // Here we export a public `myMethod` that other modules can use
 exports.myMethod = function(param) {
@@ -15333,15 +15504,15 @@ module.exports = function() {
 return "Hello!";
 };
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 374
 Chapter 74: Proxy
 Parameter
 Details
 target
-The target object, actions on this object (getting, setting, etc.) will be routed through the handler
+The target object, actions on this object (getting, setting, etc...) will be routed through the handler
 handler
-An object that can define "traps" for intercepting actions on the target object (getting, setting, etc.)
+An object that can define "traps" for intercepting actions on the target object (getting, setting, etc...)
 A Proxy in JavaScript can be used to modify fundamental operations on objects. Proxies were introduced in ES6. A
 Proxy on an object is itself an object, that has traps. Traps may be triggered when operations are performed on the
 Proxy. This includes property lookup, function calling, modifying properties, adding properties, et cetera. When no
@@ -15382,11 +15553,11 @@ proxied.example = "ExampleValue";
 console.log(object);
 // logs: { example: "ExampleValue went through proxy" }
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 375
 // you could also access the object via proxied.target
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 376
 Chapter 75: .postMessage() and
 MessageEvent
@@ -15428,7 +15599,7 @@ childWindow.postMessage(JSON.stringify({
 message: message,
 time: new Date()
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 377
 }), 'http://receiver.com');
 }
@@ -15472,11 +15643,11 @@ var p = document.createElement("p");
 p.innerText = (new Date(data.time)).toLocaleTimeString() + " | " + data.message;
 } document.getElementById("console").appendChild(p);
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 378
 Click here for a JS Fiddle showcasing its usage.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 379
 Chapter 76: WeakMap
 Section 76.1: Creating a WeakMap object
@@ -15513,7 +15684,7 @@ const weakmap = new WeakMap([[obj1, 7]]);
 console.log(weakmap.has(obj1)); // true
 console.log(weakmap.has(obj2)); // false
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 380
 Section 76.5: Removing an element with the key
 To remove an element with a specified key, use the .delete() method. It returns true if the element existed and
@@ -15560,7 +15731,7 @@ WeakMap {}
 undefined
 // heapUsed is still 45M
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 381
 > process.memoryUsage();
 { rss: 62652416,
@@ -15582,7 +15753,7 @@ heapTotal: 8425472,
 heapUsed: 3979792,
 external: 8956 }
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 382
 Chapter 77: WeakSet
 Section 77.1: Creating a WeakSet object
@@ -15616,7 +15787,7 @@ const weakset = new WeakSet([obj1]);
 console.log(weakset.delete(obj1)); // true
 console.log(weakset.delete(obj2)); // false
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 383
 Chapter 78: Escape Sequences
 Section 78.1: Entering special characters in strings and
@@ -15668,7 +15839,7 @@ escape sequences, where the leading backslash is simply ignored (i.e. \? for ?),
 character escape sequences inside strings as per the specification.
 Hexadecimal escape sequences
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 384
 Characters with codes between 0 and 255 can be represented with an escape sequence where \x is followed by the
 2-digit hexadecimal character code. For example, the non-breaking space character has code 160 or A0 in base 16,
@@ -15705,7 +15876,7 @@ digits, with value between 0 and 3778 = 255.
 For example, the capital letter "E" has character code 69, or 105 in base 8. So it can be represented with the escape
 sequence \105:
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 385
 /\105scape/.test("Fun with Escape Sequences"); // true
 In strict mode, octal escape sequences are not allowed inside strings and will produce a syntax error. It is worth to
@@ -15720,7 +15891,7 @@ For example, in the regular expression
 The letter "G" (the 7th letter in the alphabet) refers to the character U+0007, and thus
 `/\cG`/.test(String.fromCharCode(7)); // true
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 386
 Chapter 79: Behavioral Design Patterns
 Section 79.1: Observer pattern
@@ -15770,7 +15941,7 @@ meetingAlerts.registerObserver(jane);
 meetingAlerts.notifyObservers('4pm');
 // Output:
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 387
 // Bob: There is a meeting at 4pm
 // Jane: There is a meeting at 4pm
@@ -15820,7 +15991,7 @@ add: function(msg) { log += msg + "\n"; },
 show: function() { alert(log); log = ""; }
 }
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 388
 })();
 function run() {
@@ -15871,7 +16042,7 @@ receiver.DoThis(this._stringArg, this._numArg, this._objectArg, this._arrayArg )
 }
 }
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 389
 Invoker
 aCommand.Execute();
@@ -15917,7 +16088,7 @@ return false;
 var withPepperoni = new BeverageForPizza(["Cola", "Water", "Beer", "Orange Juice"]);
 for( var bevToOrder of withPepperoni ){
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 390
 if( preferredBeverage( bevToOrder ) {
 bevToOrder.done; //false, because "Beer" isn't the final collection item
@@ -15960,7 +16131,7 @@ fib.next().value; //3
 fib.next().value; //5
 fib.next().done; //false
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 391
 Chapter 80: Server-sent events
 Section 80.1: Setting up a basic event stream to the server
@@ -15981,7 +16152,7 @@ send JSON data you may want to parse it.
 Section 80.2: Closing an event stream
 An event stream to the server can be closed using the EventSource.close() method
 var eventSource = new EventSource("api/my-events");
-// do things .
+// do things ...
 eventSource.close(); // you will not receive anymore events from this object
 The .close() method does nothing is the stream is already closed.
 Section 80.3: Binding event listeners to EventSource
@@ -15995,9 +16166,9 @@ options: Options that characterize the behavior of the event listener.
 The following example shows a heartbeat event stream from the server, the server sends events on the heartbeat
 channel and this routine will always run when an event in accepted.
 var eventSource = new EventSource("api/heartbeat");
-.
+...
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 392
 eventSource.addEventListener("heartbeat", function(event) {
 var status = event.data;
@@ -16006,7 +16177,7 @@ if (status=='OK') {
 }
 });
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 393
 Chapter 81: Async functions (async/await)
 async and await build on top of promises and generators to express asynchronous actions inline. This makes
@@ -16047,7 +16218,7 @@ await getUnicorn().getSize();
 At first sight, it seems valid, but it's not. Due to operator precedence, it's equivalent to the following:
 async function myAsyncFunction() {
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 394
 await (getUnicorn().getSize());
 }
@@ -16062,19 +16233,19 @@ synchronous, but the getSize() method was asynchronous.
 Section 81.3: Async functions compared to Promises
 async functions do not replace the Promise type; they add language keywords that make promises easier to call.
 They are interchangeable:
-async function doAsyncThing() { . }
-function doPromiseThing(input) { return new Promise((r, x) => .); }
+async function doAsyncThing() { ... }
+function doPromiseThing(input) { return new Promise((r, x) => ...); }
 // Call with promise syntax
 doAsyncThing()
 .then(a => doPromiseThing(a))
-.then(b => .)
-.catch(ex => .);
+.then(b => ...)
+.catch(ex => ...);
 // Call with await syntax
 try {
 const a = await doAsyncThing();
 const b = await doPromiseThing(a);
-} .
-catch(ex) { . }
+} ...
+catch(ex) { ... }
 Any function that uses chains of promises can be rewritten using await:
 function newUnicorn() {
 return fetch('unicorn.json') // fetch unicorn.json from server
@@ -16093,7 +16264,7 @@ The function can be rewritten using async / await as follows:
 async function newUnicorn() {
 try {
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 395
 const responseCurrent = await fetch('unicorn.json'); // fetch unicorn.json from server
 const unicorn = await responseCurrent.json(); // parse the response as JSON
@@ -16140,7 +16311,7 @@ Example:
 (async() => {
 data = [1, 2, 3, 4, 5];
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 396
 data.forEach(async(e) => {
 const i = await somePromiseFn(e);
@@ -16169,7 +16340,7 @@ run concurrently, you will need to await on Promise.all.
 (async() => {
 data = [1, 2, 3, 4, 5];
 const p = await Promise.all(data.map(async(e) => await somePromiseFn(e)));
-console.log(.p);
+console.log(...p);
 })();
 Promise.all receives an array of promises as its only parameter and returns a promise. When all of the promises
 in the array are resolved, the returned promise is also resolved. We await on that promise and when it's resolved
@@ -16186,7 +16357,7 @@ With promises:
 function doTheThing() {
 return doOneThing()
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 397
 .then(doAnother)
 .then(doSomeMore)
@@ -16229,7 +16400,7 @@ db.get("posts", {user: id})
 This will loop over the list of IDs to create an array of promises. await will wait for all promises to be complete.
 Promise.all combines them into a single promise, but they are done in parallel.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 398
 Chapter 82: Async Iterators
 An async function is one that returns a promise. await yields to the caller until the promise resolves and then
@@ -16266,7 +16437,7 @@ wait for the Promises on your behalf.
 The above example will wait 1 second, log 0, wait another second, log 1, and so on, until it logs 9. At which point the
 AsyncIterator will be done, and the for await of loop will exit.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 399
 Chapter 83: How to make iterator usable
 inside async callback function
@@ -16275,7 +16446,7 @@ not to do and a simple working example.
 Section 83.1: Erroneous code, can you spot why this usage of
 key will lead to bugs?
 var pipeline = {};
-// (.) adding things in pipeline
+// (...) adding things in pipeline
 for(var key in pipeline) {
 fs.stat(pipeline[key].path, function(err, stats) {
 if (err) {
@@ -16283,7 +16454,7 @@ if (err) {
 delete pipeline[key];
 return;
 }
-// (.)
+// (...)
 pipeline[key].count++;
 });
 }
@@ -16292,7 +16463,7 @@ the callback will fire, the key will most likely have been incremented and not p
 receiving the stats for.
 Section 83.2: Correct Writing
 var pipeline = {};
-// (.) adding things in pipeline
+// (...) adding things in pipeline
 var processOneFile = function(key) {
 fs.stat(pipeline[key].path, function(err, stats) {
 if (err) {
@@ -16300,7 +16471,7 @@ if (err) {
 delete pipeline[key];
 return;
 }
-// (.)
+// (...)
 pipeline[key].count++;
 });
 };
@@ -16310,7 +16481,7 @@ processOneFileInPipeline(key);
 }
 By creating a new function, we are scoping key inside a function so all callback have their own key instance.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 400
 Chapter 84: Tail Call Optimization
 Section 84.1: What is Tail Call Optimization (TCO)
@@ -16348,7 +16519,7 @@ return indexOf(array, predicate, i + 1); // the tail call
 } }
 indexOf([1,2,3,4,5,6,7], x => x === 5); // returns index of 5 which is 4
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 401
 Chapter 85: Bitwise Operators - Real
 World Examples (snippets)
@@ -16388,7 +16559,7 @@ return true;
 }
 You can do the parity check much more effective and simple:
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 402
 if(n & 1) {
 console.log("ODD!");
@@ -16397,7 +16568,7 @@ console.log("EVEN!");
 }
 (this is actually valid not only for JavaScript)
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 403
 Chapter 86: Tilde ~
 The ~ operator looks at the binary representation of the values of the expression and does a bitwise negation
@@ -16447,7 +16618,7 @@ f2(n) will leave the integer number as it is.
 let a = ~~-2; // a is now -2
 let b = ~~-1; // b is now -1
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 404
 let c = ~~0; // c is now 0
 let d = ~~1; // d is now 1
@@ -16488,7 +16659,7 @@ To keep the example simple, decimal number 3.5 will be used, cause of it's simpl
 let number = 3.5;
 let complement = ~number;
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 405
 Result of the complement number equals to -4;
 Expression
@@ -16506,7 +16677,7 @@ let c = ~0.5; // c is now -1
 let d = ~1.5; // c is now -2
 let e = ~2.5; // c is now -3
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 406
 Chapter 87: Using JavaScript to get/set
 CSS custom variables
@@ -16516,7 +16687,7 @@ element.style.getPropertyValue("--var")
 To set a value use the .setProperty() method.
 element.style.setProperty("--var", "NEW_VALUE")
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 407
 Chapter 88: Selection API
 Parameter
@@ -16548,7 +16719,7 @@ sel.addRange(range);
 It may be necessary to first remove all the ranges of the previous selection, as most browsers don't support
 multiple ranges.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 408
 Chapter 89: File API, Blobs and FileReaders
 Property/Method
@@ -16605,7 +16776,7 @@ could also be added as attribute on the input element. This listener gets trigge
 selected. Within this callback, we can read the file that was selected and perform further actions (like creating an
 image with the contents of the selected file):
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 409
 document.getElementById('upload').addEventListener('change', showImage);
 function showImage(evt) {
@@ -16651,7 +16822,7 @@ we have the following html piece of code:
 You can access the properties directly like this:
 document.getElementById('newFile').addEventListener('change', getFile);
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 410
 function getFile(event) {
 var files = event.target.files
@@ -16693,7 +16864,7 @@ var string = "a1,a2,a3";
 downloadCSV(string);
 Source reference ; https://github.com/mholt/PapaParse/issues/175
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 411
 Chapter 90: Notifications API
 Section 90.1: Requesting Permission to send notifications
@@ -16701,7 +16872,7 @@ We use Notification.requestPermission to ask the user if he/she wants to receive
 Notification.requestPermission(function() {
 if (Notification.permission === 'granted') {
 // user approved.
-// use of new Notification(.) syntax will now be successful
+// use of new Notification(...) syntax will now be successful
 } else if (Notification.permission === 'denied') {
 // user denied.
 } else { // Notification.permission === 'default'
@@ -16734,7 +16905,7 @@ let notification = new Notification(title, options);
 notification.close()
 You can utilize the setTimeout function to auto-close the notification sometime in the future.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 412
 let notification = new Notification(title, options);
 setTimeout(() => {
@@ -16757,7 +16928,7 @@ The notification will fire this event whenever something wrong will happen, like
 notification.onerror = function(event) {
 } console.debug("There was an error: ", event);
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 413
 Chapter 91: Vibration API
 Modern mobile devices include hardware for vibrations. The Vibration API offers Web apps the ability to access this
@@ -16777,7 +16948,7 @@ Section 91.3: Vibration patterns
 An array of values describes periods of time in which the device is vibrating and not vibrating.
 window.navigator.vibrate([200, 100, 200]);
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 414
 Chapter 92: Battery Status API
 Section 92.1: Battery Events
@@ -16822,7 +16993,7 @@ navigator.getBattery().then(function(battery) {
 console.log( "Battery will get fully charged in ", battery.chargingTime, " seconds" );
 });
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 415
 Chapter 93: Fluent API
 JavaScript is great for designing fluent API - a consumer-oriented API with focus on developer experience. Combine
@@ -16873,7 +17044,7 @@ this.lastSection = section;
 return this;
 }
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 416
 list(text) {
 const list = new List(text, []);
@@ -16923,7 +17094,7 @@ Article.withTopic('JavaScript')
 ];
 document.getElementById('content').innerHTML = articles.map(a => a.toHtml()).join('\n');
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 417
 Chapter 94: Web Cryptography API
 Section 94.1: Creating digests (e.g. SHA-256)
@@ -16971,7 +17142,7 @@ Uint16Array: 0 to 216-1
 Int32Array: -231 to 231-1
 Uint32Array: 0 to 231-1
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 418
 Section 94.3: Generating RSA key pair and converting to PEM
 format
@@ -17024,7 +17195,7 @@ keyPair.privateKey
 // converting exported private key to PEM format
 var pem = toPem(exportedPrivateKey);
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 419
 console.log(pem);
 }).catch(function(err) {
@@ -17072,11 +17243,11 @@ console.log(importedPrivateKey);
 console.log(err);
 });
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 420
 And now you're done! You can use your imported key in WebCrypto API.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 421
 Chapter 95: Security issues
 This is a collection of common JavaScript security issues, like XSS and eval injection. This collection also contains
@@ -17102,7 +17273,7 @@ Than Alice searches for <script src = "https://alice.evil/puppy_xss.js></script>
 copies the link in her address bar, and then emails Bob:
 Bob,
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 422
 When I search for cute puppies, nothing happens!
 Than Alice successfully gets Bob to run her script while Bob is logged on to his account.
@@ -17141,7 +17312,7 @@ Store profile descriptions in a plain text file that is then fetched with a scri
 .innerText
 3.Add a Content Security Policy that refuses to load active content from other domains
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 423
 Section 95.3: Persistent Cross-site scripting from JavaScript
 string literals
@@ -17182,7 +17353,7 @@ Section 95.4: Why scripts from other people can harm your
 website and its visitors
 If you don't think that malicious scripts can harm your site, you are wrong. Here is a list of what a malicious script
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 424
 could do:
 Remove itself from the DOM so that it can't be traced
@@ -17228,7 +17399,7 @@ If you don't think that's a problem, paste that in your console and see what hap
 Mitigation
 Use JSON.parse instead of eval to get JSON. In general, don't use eval, and definitely don't use eval with
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 425
 something a user could control. Eval creates a new execution context, creating a performance hit.
 Properly escape " and \ in user data before putting it in JSON. If you just escape the ", than this will happen:
@@ -17237,7 +17408,7 @@ Will be converted to:
 "Hello! \\"});alert(1);({"
 Oops. Remember to escape both the \ and ", or just use JSON.parse.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 426
 Chapter 96: Same Origin Policy & Cross-
 Origin Communication
@@ -17253,14 +17424,14 @@ able to intercept it with its onmessage event handler, elaborate it, and, if nec
 sender window using postMessage() again.
 Example of Window communicating with a children frame
 Content of http://main-site.com/index.html:
-<!-- . -->
+<!-- ... -->
 <iframe id="frame-id" src="http://other-site.com/index.html"></iframe>
 <script src="main_site_script.js"></script>
-<!-- . -->
+<!-- ... -->
 Content of http://other-site.com/index.html:
-<!-- . -->
+<!-- ... -->
 <script src="other_site_script.js"></src>
-<!-- . -->
+<!-- ... -->
 Content of main_site_script.js:
 // Get the <iframe>'s window
 var frameWindow = document.getElementById('frame-id').contentWindow;
@@ -17270,21 +17441,21 @@ window.addEventListener('message', function(evt) {
 if (event.origin.indexOf('http://other-site.com') == 0) {
 // Check the response
 console.log(evt.data);
-/* . */
+/* ... */
 }
 });
 // Send a message to the frame's window
 frameWindow.postMessage(/* any obj or var */, '*');
 Content of other_site_script.js:
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 427
 window.addEventListener('message', function(evt) {
 // IMPORTANT: Check the origin of the data!
 if (event.origin.indexOf('http://main-site.com') == 0) {
 // Read and elaborate the received data
 console.log(evt.data);
-/* . */
+/* ... */
 // Send a response back to the main window
 window.parent.postMessage(/* any obj or var */, '*');
 }
@@ -17319,12 +17490,12 @@ function myfunc(obj){
 <script src="http://example.com/api/endpoint.js?callback=myfunc"></script>
 The contents of http://example.com/api/endpoint.js?callback=myfunc might look like this:
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 428
 myfunc({"example_field":true})
 The function always has to be defined first, otherwise it won't be defined when the external script loads.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 429
 Chapter 97: Error Handling
 Section 97.1: Error objects
@@ -17365,7 +17536,7 @@ console.log("Caught error: " + error);
 } }
 main();
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 430
 Caught error: Invalid something
 Section 97.3: Error types
@@ -17404,7 +17575,7 @@ Will throw an error and not run the second line:
 // Uncaught ReferenceError: undefinedFunction is not defined
 You need a try catch block, similar to other languages, to ensure you catch that error so code can continue to
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 431
 execute:
 try {
@@ -17415,42 +17586,42 @@ console.log("An error occurred!", error);
 } console.log("The code-block has finished");
 console.log("I will run because we caught the error!");
 Now, we've caught the error and can be sure that our code is going to execute
-// An error occurred! ReferenceError: undefinedFunction is not defined()
+// An error occurred! ReferenceError: undefinedFunction is not defined(…)
 // The code-block has finished
 // I will run because we caught the error!
 What if an error occurs in our catch block!?
 try {
 undefinedFunction("This will not get executed");
 } catch(error) {
-otherUndefinedFunction("Uh oh. ");
+otherUndefinedFunction("Uh oh... ");
 console.log("An error occurred!", error);
 } finally {
 } console.log("The code-block has finished");
 console.log("I won't run because of the uncaught error in the catch block!");
 We won't process the rest of our catch block, and execution will halt except for the finally block.
 // The code-block has finished
-// Uncaught ReferenceError: otherUndefinedFunction is not defined()
-You could always nest your try catch blocks but you shouldn't because that will get extremely messy
+// Uncaught ReferenceError: otherUndefinedFunction is not defined(…)
+You could always nest your try catch blocks.. but you shouldn't because that will get extremely messy..
 try {
 undefinedFunction("This will not get executed");
 } catch(error) {
 try {
-otherUndefinedFunction("Uh oh. ");
+otherUndefinedFunction("Uh oh... ");
 } catch(error2) {
-console.log("Too much nesting is bad for my heart and soul.");
+console.log("Too much nesting is bad for my heart and soul...");
 }
 console.log("An error occurred!", error);
 } finally {
 } console.log("The code-block has finished");
 console.log("I will run because we caught the error!");
 Will catch all errors from the previous example and log the following:
-//Too much nesting is bad for my heart and soul.
-//An error occurred! ReferenceError: undefinedFunction is not defined()
+//Too much nesting is bad for my heart and soul...
+//An error occurred! ReferenceError: undefinedFunction is not defined(…)
 //The code-block has finished
 //I will run because we caught the error!
 So, how can we catch all errors!? For undefined variables and functions: you can't.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 432
 Also, you shouldn't wrap every variable and function in a try/catch block, because these are simple examples that
 will only ever occur once until you fix them. However, for objects, functions and other variables that you know exist,
@@ -17467,18 +17638,18 @@ foo(1, 2, 3);
 try {
 foo(4, 5, 6);
 } catch(e2) {
-console.log("We had to nest because there's currently no other way.");
+console.log("We had to nest because there's currently no other way...");
 }
 } console.log(e);
 // 1 2 3
 // 4 5 6
-// We had to nest because there's currently no other way.
-// Error: custom error!()
+// We had to nest because there's currently no other way...
+// Error: custom error!(…)
 And with protection:
 function foo(a, b, c) {
 console.log(a, b, c);
 } throw new Error("custom error!");
-function protectedFunction(fn, .args) {
+function protectedFunction(fn, ...args) {
 try {
 fn.apply(this, args);
 } catch (e) {
@@ -17495,7 +17666,7 @@ We catch errors and still process all the expected code, though with a somewhat 
 work, but as you build more advanced applications you will want to start thinking about ways to abstract your error
 handling.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 433
 Chapter 98: Global error handling in
 browsers
@@ -17555,7 +17726,7 @@ stack = stack.replace(/https?\:\/\/[^/]+/gi, '');
 // calling the server-side handler which should probably register the error in a database or a
 log file
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 434
 new Image().src = '/exampleErrorReporting?stack=' + encodeURIComponent(stack);
 // window.DEBUG_ENVIRONMENT a configurable property that may be set to true somewhere else for
@@ -17564,7 +17735,7 @@ if (window.DEBUG_ENVIRONMENT) {
 alert('Client-side script failed: ' + stack);
 } }
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 435
 Chapter 99: Debugging
 Section 99.1: Interactive interpreter variables
@@ -17638,7 +17809,7 @@ The second option is to add a breakpoint directly into the code from the browser
 Opening the Developer Tools
 Chrome or Firefox
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 436
 Press F12 to open Developer Tools
 1.
@@ -17689,7 +17860,7 @@ a property
 Let's say you have an object like this:
 var myObject = {
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 437
 name: 'Peter'
 }
@@ -17736,7 +17907,7 @@ console.log("%s %s", "Hello", "World!");
 var arr = [1, 2, 3];
 console.log(arr.length, this);
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 438
 You can use different console methods to highlight your output in different ways. Other methods are also useful for
 more advanced debugging.
@@ -17753,7 +17924,7 @@ Pause on Exception: While this button is toggled on, if your program hits an unh
 program will pause as if it had hit a breakpoint. The button can be found near Execution Controls and is useful for
 locating errors.
 You can also pause execution when an HTML tag (DOM node) is modified, or when its attributes are changed. To do
-that, right click the DOM node on the Elements tab and select "Break on.".
+that, right click the DOM node on the Elements tab and select "Break on...".
 Section 99.6: Elements inspector
 Clicking the
 Select an element in the page to inspect it button in the upper left corner of the Elements tab in
@@ -17776,7 +17947,7 @@ For named (non-anonymous) functions, you can break when the function is executed
 debug(functionName);
 The next time functionName function runs, the debugger will stop on its first line.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 439
 Section 99.8: Stepping through code
 Once you've paused execution on a breakpoint, you may want to follow execution line-by-line to observe what
@@ -17800,7 +17971,7 @@ IE
 Edge
 Safari
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 440
 Chapter 100: Unit Testing JavaScript
 Section 100.1: Unit Testing Promises with Mocha, Sinon, Chai
@@ -17808,7 +17979,7 @@ and Proxyquire
 Here we have a simple class to be tested that returns a Promise based on the results of an external
 ResponseProcessor that takes time to execute.
 For simplicity we'll assume that the processResponse method won't ever fail.
-import {processResponse} from '/utils/response_processor';
+import {processResponse} from '../utils/response_processor';
 const ping = () => {
 return new Promise((resolve, _reject) => {
 const response = processResponse(data);
@@ -17848,11 +18019,11 @@ import proxyquire from 'proxyquire';
 let formattingStub = {
 wrapResponse: () => {}
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 441
 }
-let ping = proxyquire('///src/api/ping', {
-'/utils/formatting': formattingStub
+let ping = proxyquire('../../../src/api/ping', {
+'../utils/formatting': formattingStub
 });
 describe('ping', () => {
 let wrapResponseSpy, pingResult;
@@ -17897,9 +18068,9 @@ let pingStub = {
 ping: () => {}
 };
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 442
-let pingWrapper = proxyquire('/src/pingWrapper', {
+let pingWrapper = proxyquire('../src/pingWrapper', {
 './ping': pingStub
 });
 describe('pingWrapper', () => {
@@ -17930,49 +18101,49 @@ A good unit test is designed to test a discreet unit of code; usually a function
 function add(num1, num2) {
 } return num1 + num2;
 var result = add(5, 20);
-assert( result == 24, 'add(5, 20) should return 25.');
+assert( result == 24, 'add(5, 20) should return 25...');
 In the example above, the return value from the function add(x, y) or 5 + 20 is clearly 25, so our assertion of 24
 should fail, and the assert method will log a "fail" line.
 If we simply modify our expected assertion outcome, the test will succeed and the resulting output would look
 something like this.
-assert( result == 25, 'add(5, 20) should return 25.');
+assert( result == 25, 'add(5, 20) should return 25...');
 console output:
-> pass: should return 25.
+> pass: should return 25...
 This simple assertion can assure that in many different cases, your "add" function will always return the expected
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 443
 result and requires no additional frameworks or libraries to work.
 A more rigorous set of assertions would look like this (using var result = add(x,y) for each assertion):
-assert( result == 0, 'add(0, 0) should return 0.');
-assert( result == -1, 'add(0, -1) should return -1.');
-assert( result == 1, 'add(0, 1) should return 1.');
+assert( result == 0, 'add(0, 0) should return 0...');
+assert( result == -1, 'add(0, -1) should return -1...');
+assert( result == 1, 'add(0, 1) should return 1...');
 And console output would be this:
-> pass: should return 0.
-> pass: should return -1.
-> pass: should return 1.
-We can now safely say that add(x,y) should return the sum of two integers. We can roll these up into
+> pass: should return 0...
+> pass: should return -1...
+> pass: should return 1...
+We can now safely say that add(x,y)… should return the sum of two integers. We can roll these up into
 something like this:
 function test__addsIntegers() {
 // expect a number of passed assertions
 var passed = 3;
 // number of assertions to be reduced and added as Booleans
 var assertions = [
-assert( add(0, 0) == 0, 'add(0, 0) should return 0.'),
-assert( add(0, -1) == -1, 'add(0, -1) should return -1.'),
-assert( add(0, 1) == 1, 'add(0, 1) should return 1.')
+assert( add(0, 0) == 0, 'add(0, 0) should return 0...'),
+assert( add(0, -1) == -1, 'add(0, -1) should return -1...'),
+assert( add(0, 1) == 1, 'add(0, 1) should return 1...')
 ].reduce(function(previousValue, currentValue){
 return previousValue + current;
 });
 if (assertions === passed) {
-console.log("add(x,y). did return the sum of two integers");
+console.log("add(x,y)... did return the sum of two integers");
 return true;
 } else {
-console.log("add(x,y). does not reliably return the sum of two integers");
+console.log("add(x,y)... does not reliably return the sum of two integers");
 return false;
 } }
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 444
 Chapter 101: Evaluating JavaScript
 Parameter
@@ -18008,7 +18179,7 @@ The result, stored in the variable res, will be:
 27
 The use of eval is strongly discouraged. See the Remarks section for details.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 445
 Chapter 102: Linters - Ensuring code
 quality
@@ -18059,7 +18230,7 @@ break;
 // JSHint flag to allow cases to not need a break
 /* falls through */
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 446
 case '*':
 case 'x':
@@ -18093,7 +18264,7 @@ you decide which linter is right for you. While there are differences (here are 
 and JSHint / ESLint), each option is extremely customizable.
 For a more information about configuring JSLint check out NPM or github.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 447
 Chapter 103: Anti-patterns
 Section 103.1: Chaining assignments in var declarations
@@ -18117,7 +18288,7 @@ Or:
 var a = 0, b = a;
 This will make sure that both a and b will be local variables.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 448
 Chapter 104: Performance Tips
 JavaScript, like any language, requires us to be judicious in the use of certain language features. Overuse of some
@@ -18162,7 +18333,7 @@ A common mistake seen in JavaScript when run in a browser environment is updatin
 necessary.
 The issue here is that every update in the DOM interface causes the browser to re-render the screen. If an update
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 449
 changes the layout of an element in the page, the entire page layout needs to be re-computed, and this is very
 performance-heavy even in the simplest of cases. The process of re-drawing a page is known as reflow and can
@@ -18206,7 +18377,7 @@ at a given time. The fundamental law of performance optimization is that you mus
 optimize, and measure again after a presumed optimization.
 To measure code execution time, you can use different time measurement tools like:
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 450
 Performance interface that represents timing-related performance information for the given page (only available in
 browsers).
@@ -18249,7 +18420,7 @@ let arr = []; //store empty array
 for (let i = 0; i < 1000000; i++) { //1 million iterations
 arr.push(i); //push current i value
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 451
 }
 console.log(Date.now() - t0); //print elapsed time between stored t0 and now
@@ -18291,7 +18462,7 @@ var fact = (function() {
 var cache = {}; // Initialise a memory cache object
 // Use and return this function to check if val is cached
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 452
 function checkCache(val) {
 if (val in cache) {
@@ -18327,16 +18498,16 @@ object-oriented approaches). This is done to generate a unique key with all the 
 included.
 We can also create a function that "memoizes" other functions, using the same scope concept as before (returning
 a new function that uses the original and has access to the cache object):
-WARNING: ES6 syntax, if you don't like it, replace . with nothing and use the var args =
+WARNING: ES6 syntax, if you don't like it, replace ... with nothing and use the var args =
 Array.prototype.slice.call(null, arguments); trick; replace const and let with var, and the other things you
 already know.
 function memoize(func) {
 let cache = {};
 // You can opt for not naming the function
-function memoized(.args) {
+function memoized(...args) {
 const argsKey = JSON.stringify(args);
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 453
 // The same alternatives apply for this example
 if (argsKey in cache) {
@@ -18351,7 +18522,7 @@ return memoized; // Return the memoized function
 }
 Now notice that this will work for multiple arguments but won't be of much use in object-oriented methods I think,
 you may need an extra object for dependencies. Also, func.apply(null, args) can be replaced with
-func(.args) since array destructuring will send them separately instead of as an array form. Also, just for
+func(...args) since array destructuring will send them separately instead of as an array form. Also, just for
 reference, passing an array as an argument to func won't work unless you use Function.prototype.apply as I did.
 To use the above method you just:
 const newFunction = memoize(oldFunction);
@@ -18381,7 +18552,7 @@ this.value = 1
 };
 var big_array = new Array(10000000).fill(1).map((x, index)=> {
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 454
 p = new P();
 if (index > 5000000) {
@@ -18428,7 +18599,7 @@ a = {x:0,y:0}
 function test(){ // return object created each call
 } return {x:0,y:0};
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 455
 function test1(a){ // return object supplied
 a.x=0;
@@ -18478,7 +18649,7 @@ for (var i=0; i<items.length; i++) {
 global_variable += items[i];
 }
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 456
 }
 For every iteration in for loop, the engine will lookup items, lookup the length attribute within items, lookup items
@@ -18521,7 +18692,7 @@ arr = [];
 for (var i=0; i<N; i++) arr[i] = Math.round(1000*Math.random());
 Result:
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 457
 Summing took 180520 nanoseconds
 Summing integers took half the time here.
@@ -18531,7 +18702,7 @@ engines, when they can predict you only use integers, can use a more compact and
 example, short integers.
 This kind of optimization is especially important for computation or data intensive applications.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 458
 Chapter 105: Memory eciency
 Section 105.1: Drawback of creating true private method
@@ -18556,7 +18727,7 @@ var don = new contact('Donald', 'Trump');
 var andy = new contact('Andy', 'Whitehall');
 Thus, would be great to avoid using private method only if it's necessary.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 459
 Appendix A: Reserved Keywords
 Certain words - so-called keywords - are treated specially in JavaScript. There's a plethora of different kinds of
@@ -18660,7 +18831,7 @@ extends
 private
 with
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 460
 false
 protected
@@ -18752,7 +18923,7 @@ yield
 Future reserved keywords
 The following are reserved as future keywords by the ECMAScript specification. They have no special functionality at
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 461
 present, but they might at some future time, so they cannot be used as identifiers.
 enum
@@ -18801,7 +18972,7 @@ Identifier Names are tokens that are interpreted according to the grammar given 
 section of chapter 5 of the Unicode standard, with some small modifications. An Identifier is an
 IdentifierName that is not a ReservedWord (see 7.6.1).
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 462
 Syntax
 Identifier ::
@@ -18837,7 +19008,7 @@ Note: the syntax highlighter in this example has spotted the reserved word and s
 example is valid JavaScript developers can get caught out by some compiler / transpiler, linter and minifier tools
 that argue otherwise.
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 463
 Credits
 Thank you greatly to all the people from Stack Overflow Documentation who helped provide this content,
@@ -18937,7 +19108,7 @@ Chapters 11 and 30
 arbybruce
 Chapter 33
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 464
 Armfoot
 Chapter 62
@@ -19031,7 +19202,7 @@ catalogue_number
 Chapter 1
 cchamberlain
 Chapter 5
-CD
+CD..
 Chapters 12 and 13
 cdm
 Chapter 58
@@ -19046,7 +19217,7 @@ Chapters 10, 14, 35 and 54
 Chong Lip Phang
 Chapter 50
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 465
 choz
 Chapter 19
@@ -19155,7 +19326,7 @@ Chapter 42
 Durgpal Singh
 Chapters 19 and 42
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 466
 DVJex
 Chapter 99
@@ -19264,7 +19435,7 @@ Chapter 36
 HopeNick
 Chapters 15 and 85
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 467
 Hunan Rostomyan
 Chapter 12
@@ -19372,7 +19543,7 @@ Chapters 1 and 25
 Junbang Huang
 Chapter 76
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 468
 Just a student
 Chapters 5 and 74
@@ -19481,7 +19652,7 @@ Chapter 1
 MegaTom
 Chapter 11
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 469
 Meow
 Chapters 7, 11, 14, 19, 59 and 62
@@ -19590,7 +19761,7 @@ Chapter 10
 Ovidiu Dolha
 Chapter 93
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 470
 Ozan
 Chapter 75
@@ -19698,7 +19869,7 @@ Chapters 12, 19, 32 and 43
 ronnyfm
 Chapter 1
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 471
 royhowie
 Chapter 35
@@ -19807,7 +19978,7 @@ Chapter 59
 tcooc
 Chapter 42
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 472
 teppic
 Chapter 42
@@ -19916,7 +20087,7 @@ Chapter 42
 zer00ne
 Chapter 12
 
-GoalKicker.com – JavaScript® Notes for Professionals
+<!-- GoalKicker.com – JavaScript® Notes for Professionals
 473
 ZeroBased_IX
 Chapter 12
@@ -19936,3 +20107,6 @@ Zze
 Chapter 1
 
 You may also like
+
+<!-- first editted mm/dd/yyyy dow hh:mm -->
+<!-- last editted 8/20/2024 Tue 7:22pm -->
