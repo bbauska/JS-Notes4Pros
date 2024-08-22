@@ -1,5 +1,8 @@
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 01/02. javascript notes 4 pros logo (01) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~ 01. javascript notes 4 pros logo (01) ~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ readme.md of js-notes4-pros.org ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="center">
   <img src="./images/image001.jpeg"
   title="JavaScript Notes 4 Professionals logo"
@@ -8,7 +11,7 @@
 
 <!-- {width="8.25in" height="11.663194444444445in"} -->
 
-**Contents**
+<h4>Contents</h4>
 
 [**About** [1](#about)](#about)
 
@@ -2096,7 +2099,7 @@ property of their respective company owners.</p>
 nor accurate, use at your own risk.</p>
 
 <p>Please send feedback and corrections to [web@petercv.com].</p>
-
+<!-- page 2 -->
 <h2 id="ch1">Chapter 1: Getting started with JavaScript</h2>
 
 <h4>Version Release Date</h4>
@@ -2104,37 +2107,17 @@ nor accurate, use at your own risk.</p>
 1.  1997-06-01
 2.  1998-06-01
 3.  1998-12-01
-
-[E4X](http://www-archive.mozilla.org/js/language/ECMA-357.pdf)
-2004-06-01
-[5](http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205th%20edition%20December%202009.pdf)
-2009-12-01
-[5.1](http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205.1%20edition%20June%202011.pdf)
-2011-06-01
-
+<a href="http://www-archive.mozilla.org/js/language/ECMA-357.pdf">E4X</a>  2004-06-01<br>
+<a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205th%20edition%20December%202009.pdf">5</a>  2009-12-01<br>
+<a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205.1%20edition%20June%202011.pdf">5.1</a>  2011-06-01<br>
 6.  2015-06-01
 7.  2016-06-14
 8.  2017-06-27
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~ readme.md of js-notes4-pros.org ~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 01/02. javascript notes 4 pros logo (01) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p align="center">
-  <img src="./images/image001.png"
-  title="JavaScript Notes 4 Professionals logo"
-  alt="JavaScript Notes 4 Professionals logo."
-  style="border: 2px solid #000000; width:400px;" />
-
-<img src="./images/image002.png" 
-  title="University of California @Davis logo"
-  alt="University of California @Davis logo."
-  style="border: 2px solid #000000; width:261px;" />
-</p>
-
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch1-1">Section 1.1: Using console.log()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 <h4>Introduction</h4>
 
 <p>All modern web browsers, Node.js as well as almost every other 
@@ -2154,6 +2137,7 @@ console.log("Hello, World!");
 </pre>
 
 <p>This will log the following to the console:</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image002.jpg"
   title=""
@@ -2211,7 +2195,7 @@ console.log("thisVar:", thisVar, "and thatVar:", thatVar);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image004.jpg"
-  title="thisVar and thatVar."
+  title="thisVar and thatVar"
   alt="thisVar and thatVar."
   style="border: 2px solid #000000; width:7.47in;" />
 </p>
@@ -2258,8 +2242,13 @@ console.log ( {
 <p>This will log the following to the console:</p>
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-![](./images/image006.jpg){width="6.738888888888889in"
-height="1.7208333333333334in"}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image006.jpg"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:6.73in;" />
+<!-- {width="6.738888888888889in" height="1.7208333333333334in"} -->
 
 <h4>Logging HTML elements</h4>
 
@@ -2275,8 +2264,12 @@ console.log ( document.body );
 <p>This will log the following to the console:</p>
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-![](./images/image007.jpg){width="6.522222222222222in"
-height="2.3784722222222223in"}
+<p align="left">
+  <img src="./images/image007.jpg"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:6.52in;" />
+<!-- {width="6.522222222222222in" height="2.3784722222222223in"} -->
 
 <h4>End Note</h4>
 
@@ -2363,7 +2356,7 @@ to listen to eg. [window\'s onload
 event](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload),
 adding your code to that event listener will delay running your code
 until after the whole content on your page has been loaded.
->
+
 A third way to make sure all your DOM has been loaded, is [to wrap the
 DOM manipulation code with a timeout function of 0
 ms](https://stackoverflow.com/questions/779379/why-is-settimeoutfn-0-sometimes-useful).
@@ -2396,8 +2389,12 @@ alert(\'hello, world\');
 <p>In Chrome, that would produce a pop-up like this:</p>
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-![](./images/image008.png){width="5.225in"
-height="2.3152777777777778in"}
+<p align="left">
+  <img src="./images/image008.png"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:5.225in;" />
+<!-- {width="5.225in" height="2.3152777777777778in"} -->
 
 <h4>Notes</h4>
 
@@ -2470,8 +2467,12 @@ console.log(age);
 
 *// Prints the value inserted by the user*
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-![](./images/image009.png){width="4.603472222222222in"
-height="1.9548611111111112in"}
+<p align="left">
+  <img src="./images/image009.png"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:4.603in;" />
+<!-- {width="4.603472222222222in" height="1.9548611111111112in"} -->
 
 If the user clicks the OK button, the input value is returned.
 Otherwise, the method returns **null**.
@@ -2524,9 +2525,13 @@ something in a Control Panel:
 }
 
 <p>The output of that code would look like this in the browser:</p>
-
-![](./images/image010.jpg){width="4.603472222222222in"
-height="1.4597222222222221in"}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image010.jpg"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:4.603in;" />
+<!-- {width="4.603472222222222in" height="1.4597222222222221in"} -->
 
 If you need it for later use, you can simply store the result of the
 user\'s interaction in a variable:
@@ -2547,7 +2552,6 @@ dialog box
 avoid using dialog boxes for confirmation.
 
   **\<iframe**
-
 
 Starting with Chrome 46.0 this method is blocked inside an **\>**
 unless its sandbox attribute has the value allow-modal.
@@ -2621,9 +2625,7 @@ createElementNS
 \'http://www.w3.org/2000/svg\',\'text\');
 
 text.setAttribute(\'x\',\'0\');
-
 text.setAttribute(\'y\',\'50\');
-
 text.style.fontFamily=\'Times New Roman\';
 text.style.fontSize=\'50\';
 
@@ -2648,7 +2650,7 @@ the image to the document as follows:
 img.src= \'https://i.ytimg.com/vi/zecueq-mo4M/maxresdefault.jpg\';
 document.body.appendChild(img);
 
-# Chapter 2: JavaScript Variables
+<h2 id="ch2">Chapter 2: JavaScript Variables</h2>
 
 **variable_name {Required} The name of the variable: used when calling
 it.**
@@ -2662,14 +2664,14 @@ Variables are what make up most of JavaScript. These variables make up
 things from numbers to objects, which are all over JavaScript to make
 one\'s life much easier.
 
-<h2 id="ch2-1">Section 2.1: Defining a Variable</h2>
+<h3 id="ch2-1">Section 2.1: Defining a Variable</h3>
 
 **var** myVariable = \"This is a variable!\";
 
 This is an example of defining variables. This variable is called a
 \"string\" because it has ASCII characters (A-Z, 0-9, !@#\$, etc.)
 
-<h2 id="ch2-2">Section 2.2: Using a Variable</h2>
+<h3 id="ch2-2">Section 2.2: Using a Variable</h3>
 
 **var** number1 = 5;
 number1=3;
@@ -2677,142 +2679,42 @@ number1=3;
   window.alert
 
 
-> Here, we defined a number called \"number1\" which was equal to 5.
-> However, on the second line, we changed the value to 3. To show the
-> value of a variable, we log it to the console or use ():
+<p>Here, we defined a number called \"number1\" which was equal to 5. 
+However, on the second line, we changed the value to 3. To show the 
+value of a variable, we log it to the console or use ():</p>
 
 console.
 
-log
-
-(
-
-number1
-
-)
-
-;
-
-*// 3*
-
-window.
-
-alert
-
-(
-
-number1
-
-)
-
-;
-
-*// 3*
-
+log(number1);
+*// 3* window.alert(number1);
+*// 3* 
 > To add, subtract, multiply, divide, etc., we do like so:
 
-number1
+number1 = number1 \+ 5;
+*// 3 + 5 = 8* number1 = number1 \- 6;
+*// 8 - 6 = 2* **var** number2 = number1 \* 10;
+*// 2 (times) 10 = 20* **var** number3 = number2 / number1;
+*// 20 (divided by) 2 = 10;* 
 
-=
-
-number1
-
-\+
-
-5
-
-;
-
-*// 3 + 5 = 8*
-
-number1
-
-=
-
-number1
-
-\-
-
-6
-
-;
-
-*// 8 - 6 = 2*
+<p>We can also add strings which will concatenate them, or put them
+together. For example:</p>
 
 **var**
 
-number2
-
-=
-
-number1
-
-\*
-
-10
-
-;
-
-*// 2 (times) 10 = 20*
-
-**var**
-
-number3
-
-=
-
-number2
-
-/
-
-number1
-
-;
-
-*// 20 (divided by) 2 = 10;*
-
-> We can also add strings which will concatenate them, or put them
-> together. For example:
-
-**var**
-
-myString
-
-=
-
-\"I am a \"
-
-\+
-
-\"string!\"
-
-;
-
+myString = \"I am a \" \+ \"string!\" ;
 *// \"I am a string!\"*
 
-## Section 2.3: Types of Variables
+<h3 id="ch2-3">Section 2.3: Types of Variables</h3>
 
 **var**
 
-myInteger
-
-=
-
-12
-
-;
+myInteger = 12;
 
 *// 32-bit number (from -2,147,483,648 to 2,147,483,647)*
 
 **var**
 
-myLong
-
-=
-
-9310141419482
-
-;
+myLong = 9310141419482 ;
 
 *// 64-bit number (from -9,223,372,036,854,775,808 to*
 
@@ -2820,37 +2722,19 @@ myLong
 
 **var**
 
-myFloat
-
-=
-
-5.5
-
-;
+myFloat = 5.5;
 
 *// 32-bit floating-point number (decimal)*
 
 **var**
 
-myDouble
-
-=
-
-9310141419482.22
-
-;
+myDouble = 9310141419482.22;
 
 *// 64-bit floating-point number*
 
 **var**
 
-myBoolean
-
-=
-
-**true**
-
-;
+myBoolean = **true**;
 
 *// 1-bit true/false (0 or 1)*
 
@@ -2860,9 +2744,7 @@ myBoolean2
 
 =
 
-**false**
-
-;
+**false**;
 
 **var**
 
@@ -2870,79 +2752,36 @@ myNotANumber
 
 =
 
-**NaN**
+**NaN**;
 
-;
+**var** NaN_Example = 0 / 0 ; 
 
-**var**
+*// NaN: Division by Zero is not possible* 
 
-NaN_Example
-
-=
-
-0
-
-/
-
-0
-
-;
-
-*// NaN: Division by Zero is not possible*
-
-**var**
-
-notDefined
-
-;
+**var** notDefined ;
 
 *// undefined: we didn\'t define it to anything yet*
 
-window.
-
-alert
-
-(
-
-aRandomVariable
-
-)
-
-;
-
+window.alert(aRandomVariable);
 *// undefined*
 
 **var**
 
-myNull
-
-=
-
-**null**
-
-;
+myNull=**null**;
 
 *// null*
 
 *// etc\...*
 
-## Section 2.4: Arrays and Objects
+<h3 id="ch2-4">Section 2.4: Arrays and Objects</h3>
 
 **var**
 
-myArray
-
-=
-
-\[
-
-\]
-
-;
+myArray=\[\];
 
 *// empty array*
 
-> An array is a set of variables. For example:
+<p>An array is a set of variables. For example:</p>
 
 **var**
 
@@ -3016,125 +2855,15 @@ primeNumbers
 
 =
 
-\[
-
-2
-
-,
-
-3
-
-,
-
-5
-
-,
-
-7
-
-,
-
-11
-
-,
-
-13
-
-,
-
-17
-
-,
-
-19
-
-,
-
-23
-
-,
-
-29
-
-,
-
-31
-
-\]
-
-;
+\[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31\];
 
 **var**
 
-randomVariables
+randomVariables = \[ 2, \"any type works\", **undefined**, **null**, **true**, 2.51 \];
 
-=
+myArray = \[ \"zero\" , \"one\" , \"two\" \];
 
-\[
-
-2
-
-,
-
-\"any type works\"
-
-,
-
-**undefined**
-
-,
-
-**null**
-
-,
-
-**true**
-
-,
-
-2.51
-
-\]
-
-;
-
-myArray
-
-=
-
-\[
-
-\"zero\"
-
-,
-
-\"one\"
-
-,
-
-\"two\"
-
-\]
-
-;
-
-window.
-
-alert
-
-(
-
-myArray
-
-\[
-
-0
-
-\]
-
-)
-
-;
+window.alert ( myArray \[0 \] );
 
 *// 0 is the first element of an array*
 
