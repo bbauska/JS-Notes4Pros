@@ -48,9 +48,9 @@ nor accurate, use at your own risk.</p>
 1.  1997-06-01
 2.  1998-06-01
 3.  1998-12-01
-4.  <a href="http://www-archive.mozilla.org/js/language/ECMA-357.pdf">E4X</a> 2004-06-01<br>
-5.  <a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205th%20edition%20December%202009.pdf">5</a> 2009-12-01<br>
-5.1 <a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205.1%20edition%20June%202011.pdf">5.1</a> 2011-06-01<br>
+<a href="http://www-archive.mozilla.org/js/language/ECMA-357.pdf">E4X</a> 2004-06-01<br>
+<a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205th%20edition%20December%202009.pdf">5</a> 2009-12-01<br>
+<a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205.1%20edition%20June%202011.pdf">5.1</a> 2011-06-01<br>
 6.  2015-06-01
 7.  2016-06-14
 8.  2017-06-27
@@ -97,12 +97,12 @@ explicit <i>return value</i>.</p>
 in the variable that you want to be displayed in the console, for example:</p>
 
 <pre>
-<b>var</bfoo = &quot;bar&quot;;
+<b>var</b>foo = &quot;bar&quot;;
 console.log (foo);
 </pre>
 
 <p>This will log the following to the console:</p>
-<!--page 3 -->
+<!-- page 3 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image003.jpg"
@@ -126,8 +126,8 @@ console.log("thisVar:", thisVar, "and thatVar:", thatVar);
 <p>This will log the following to the console:</p>
 
 <pre>
-&gt; <b>var</bthisVar = 'first value';
-  <b>var</bthatVar = 'second value';
+&gt; <b>var</b>thisVar = 'first value';
+  <b>var</b>thatVar = 'second value';
   console.log("thisVar:", thisVar, "and thatVar:", thatVar);
 </pre>
 
@@ -147,7 +147,7 @@ console.log("thisVar:", thisVar, "and thatVar:", thatVar);
 <p>You can use () in combination with placeholders:</p>
 
 <pre>
-<b>var</bgreet="Hello", who="World";
+<b>var</b>greet="Hello", who="World";
 console.log ("%s, %s!", greet, who);
 </pre>
 
@@ -226,7 +226,7 @@ text on a web page.</p>
 <p>For example, consider the following HTML tag:</p>
 
 <pre>
-<b>&lt;p</bid="paragraph"<b>&gt;&lt;/p&gt;</b>
+<b>&lt;p</b>id="paragraph"<b>&gt;&lt;/p&gt;</b>
 </pre>
 
 <p>To change its textContent property, we can run the following JavaScript:</p>
@@ -239,7 +239,7 @@ document.getElementById("paragraph").textContent = "Hello, World";
 text content to \"Hello, World\":</p>
 
 <pre>
-<b>&lt;</bid="paragraph"&gt;Hello, World<b>&lt;/p&gt;</b>
+<b>&lt;</b>id="paragraph"&gt;Hello, World<b>&lt;/p&gt;</b>
 </pre>
 
 <p><a href="http://jsbin.com/fuzijox/edit?html,js,console,output">(See also this demo)</a></p>
@@ -252,11 +252,11 @@ consider an HTML document with the following body:</p>
 <b>&lt;/body&gt;</b>
 </pre>
 
-<p>In our JavaScript, we create a new <b>&lt;p&gt;</btag with a textContent property of 
+<p>In our JavaScript, we create a new <b>&lt;p&gt;</b>tag with a textContent property of 
 and add it at the end of the html body:</p>
 
 <pre>
-<b>var</belement = document.createElement('p');
+<b>var</b>element = document.createElement('p');
 element.textContent = "Hello, World";
 document.body.appendChild(element); //add the newly created element to the DOM
 </pre>
@@ -112270,7 +112270,7 @@ I\'m actually too lazy to write something here.
 **\>**
 
   
-  **\<b**   **\>**   I like HTML**\</b**
+  **\<b**   **\>**   I like HTML**\</b>**
     
 
   
