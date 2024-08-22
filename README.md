@@ -2150,11 +2150,11 @@ debugging purposes.</p>
 and press Enter:</p>
 
 <pre>
-console.log(\"Hello, World!\");
+console.log("Hello, World!");
 </pre>
 
 <p>This will log the following to the console:</p>
-<p align="center">
+<p align="left">
   <img src="./images/image002.jpg"
   title=""
   alt="."
@@ -2162,9 +2162,9 @@ console.log(\"Hello, World!\");
 </p>
 <!-- {width="3.8916666666666666in" height="1.4236111111111112in"} -->
 
-<p>In the example above, the ! to the console and returns <b>undefined</b>
+<p>In the example above, the console.log() function prints Hello, World! to the console and returns <b>undefined</b>
 (shown above in the console output window). This is because () has no 
-explicit *return value*.</p>
+explicit <i>return value</i>.</p>
 
 <h4>Logging variables</h4>
 
@@ -2177,39 +2177,65 @@ console.log (foo);
 </pre>
 
 <p>This will log the following to the console:</p>
-
+<!-- page 3 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-![](./images/image003.jpg){width="5.954861111111111in"
-height="1.4777777777777779in"}
+<p align="left">
+  <img src="./images/image003.jpg"
+  title="foobar console example."
+  alt="Example foobar console."
+  style="border: 2px solid #000000; width:5.95in;" />
+</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- {width="5.954861111111111in" height="1.4777777777777779in"} -->
 
 <p>If you want to log two or more values, simply separate them with 
 commas. Spaces will be automatically added between each argument 
-during concatenation: console.log(\"thisVar:\", thisVar, \"and 
-thatVar:\", thatVar); This will log the following to the console:</p>
+during concatenation:</p>
 
 <pre>
-**var** thisVar = \'first value\';
-**var** thatVar = \'second value\';
+var thisVar = 'first value';
+var thatVar = 'second value';
+console.log("thisVar:", thisVar, "and thatVar:", thatVar);
 </pre>
 
+<p>This will log the following to the console:</p>
+
+<pre>
+&gt; <b>var</b> thisVar = 'first value';
+  <b>var</b> thatVar = 'second value';
+  console.log("thisVar:", thisVar, "and thatVar:", thatVar);
+</pre>
+
+<p>This will log the following to the console:</p>
+
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-![](./images/image004.jpg){width="7.477777777777778in"
-height="0.9729166666666667in"}
+<p align="left">
+  <img src="./images/image004.jpg"
+  title="thisVar and thatVar."
+  alt="thisVar and thatVar."
+  style="border: 2px solid #000000; width:7.47in;" />
+</p>
+<!-- {width="7.477777777777778in" height="0.9729166666666667in"} -->
 
 <h4>Placeholders</h4>
 
 <p>You can use () in combination with placeholders:</p>
 
 <pre>
-**var** greet=\"Hello\", who=\"World\";
-console.log (\"%s, %s!\", greet, who);
+<b>var</b> greet="Hello", who="World";
+console.log ("%s, %s!", greet, who);
 </pre>
 
 <p>This will log the following to the console:</p>
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-![](./images/image005.jpg){width="6.990972222222222in"
-height="1.4868055555555555in"}
+<p align="left">
+  <img src="./images/image005.jpg"
+  title="greet Hello, World"
+  alt="greet Hello, World."
+  style="border: 2px solid #000000; width:7in;" />
+</p>
+<!-- {width="6.990972222222222in" height="1.4868055555555555in"} -->
 
 <h4>Logging Objects</h4>
 
