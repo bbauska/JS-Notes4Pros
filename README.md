@@ -21,7 +21,7 @@ version of this book can be downloaded from:</p>
 
 <p><a href="https://goalkicker.com/JavaScriptBook">JS Notes 4 Pros</a></p>
 
-<p>This <i>JavaScript® Notes for Professionals</ibook is compiled from 
+<p>This <i>JavaScript® Notes for Professionals</i> book is compiled from 
 <a href="https://archive.org/details/documentation-dump.7z">Stack Overflow</a>.</p>
 
 <p><a href="https://archive.org/details/documentation-dump.7z">Documentation</a>, the
