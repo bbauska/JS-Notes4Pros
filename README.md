@@ -9,7 +9,7 @@
   alt="JavaScript Notes 4 Professionals logo."
   style="border: 2px solid #000000; width:8.25in;" />
 
-<! {width="8.25in" height="11.663194444444445in"} >
+<!--{width="8.25in" height="11.663194444444445in"}-->
 
 <h4>Contents</h4>
 <p>See end of document.</p>
@@ -40,7 +40,7 @@ property of their respective company owners.</p>
 nor accurate, use at your own risk.</p>
 
 <p>Please send feedback and corrections to [web@petercv.com].</p>
-<! page 2 >
+<!--page 2-->
 <h2 id="ch1">Chapter 1: Getting started with JavaScript</h2>
 
 <h4>Version Release Date</h4>
@@ -85,7 +85,7 @@ console.log("Hello, World!");
   alt="."
   style="border: 2px solid #000000; width:3.89in;" />
 </p>
-<! {width="3.8916666666666666in" height="1.4236111111111112in"} >
+<!--{width="3.8916666666666666in" height="1.4236111111111112in"}-->
 
 <p>In the example above, the console.log() function prints Hello, World! to the console and returns <b>undefined</b>
 (shown above in the console output window). This is because () has no 
@@ -102,7 +102,7 @@ console.log (foo);
 </pre>
 
 <p>This will log the following to the console:</p>
-<! page 3 >
+<!--page 3 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image003.jpg"
@@ -111,7 +111,7 @@ console.log (foo);
   style="border: 2px solid #000000; width:5.95in;" />
 </p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<! {width="5.954861111111111in" height="1.4777777777777779in"} >
+<!-- {width="5.954861111111111in" height="1.4777777777777779in"}-->
 
 <p>If you want to log two or more values, simply separate them with 
 commas. Spaces will be automatically added between each argument 
@@ -140,7 +140,7 @@ console.log("thisVar:", thisVar, "and thatVar:", thatVar);
   alt="thisVar and thatVar."
   style="border: 2px solid #000000; width:7.47in;" />
 </p>
-<! {width="7.477777777777778in" height="0.9729166666666667in"} >
+<!-- {width="7.477777777777778in" height="0.9729166666666667in"} -->
 
 <h4>Placeholders</h4>
 
@@ -160,7 +160,7 @@ console.log ("%s, %s!", greet, who);
   alt="greet Hello, World."
   style="border: 2px solid #000000; width:7in;" />
 </p>
-<! {width="6.990972222222222in" height="1.4868055555555555in"} >
+<!--{width="6.990972222222222in" height="1.4868055555555555in"}-->
 
 <h4>Logging Objects</h4>
 
@@ -189,7 +189,7 @@ console.log ( {
   title=" "
   alt="."
   style="border: 2px solid #000000; width:6.73in;" />
-<! {width="6.738888888888889in" height="1.7208333333333334in"} >
+<!--{width="6.738888888888889in" height="1.7208333333333334in"}-->
 
 <h4>Logging HTML elements</h4>
 
@@ -209,7 +209,7 @@ console.log ( document.body );
   title=" "
   alt="."
   style="border: 2px solid #000000; width:6.52in;" />
-<! {width="6.522222222222222in" height="2.3784722222222223in"} >
+<!--{width="6.522222222222222in" height="2.3784722222222223in"}-->
 
 <h4>End Note</h4>
 <p>For more information on the capabilities of the console, see the 
@@ -317,7 +317,7 @@ alert('hello, world');
   title=" "
   alt="."
   style="border: 2px solid #000000; width:5.225in;" />
-<! {width="5.225in" height="2.3152777777777778in"} >
+<!--{width="5.225in" height="2.3152777777777778in"}-->
 
 <h4>Notes</h4>
 
@@ -388,7 +388,7 @@ console.log(age);
   title=" "
   alt="."
   style="border: 2px solid #000000; width:4.603in;" />
-<! {width="4.603472222222222in" height="1.9548611111111112in"} >
+<!--{width="4.603472222222222in" height="1.9548611111111112in"}-->
 
 If the user clicks the OK button, the input value is returned.
 Otherwise, the method returns **null**.
@@ -447,7 +447,7 @@ something in a Control Panel:
   title=" "
   alt="."
   style="border: 2px solid #000000; width:4.603in;" />
-<! {width="4.603472222222222in" height="1.4597222222222221in"} >
+<!--{width="4.603472222222222in" height="1.4597222222222221in"}-->
 
 If you need it for later use, you can simply store the result of the
 user\'s interaction in a variable:
@@ -121809,8 +121809,8 @@ and 19
 
 # You may also like
 
-<! last updated 8/22/24 Thu 2:22pm >
-<! moved table of contents to here >
+<!--last updated 8/22/24 Thu 2:22pm-->
+<!--moved table of contents to here-->
 [**About** [1](#about)](#about)
 
 [**Chapter 1: Getting started with JavaScript** [2](#section)](#section)
