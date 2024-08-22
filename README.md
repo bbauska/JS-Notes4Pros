@@ -169,14 +169,14 @@ logging JSON responses from API calls.</p>
 
 <pre>
 console.log ( { 
-  \'Email\': \'\', 
-  \'Groups\': {}, 
-  \'Id\': 33, 
-  \'IsHiddenInUI\': **false**,
-  \'IsSiteAdmin\': **false**, 
-  \'LoginName\': \'i:0#.w\|virtualdomain **\\\\** user2\',
-  \'PrincipalType\': 1, 
-  \'Title\': \'user2\' 
+  'Email': '', 
+  'Groups': {}, 
+  'Id': 33, 
+  'IsHiddenInUI': <b>false</b>,
+  'IsSiteAdmin': <b>false</b>, 
+  'LoginName': 'i:0#.w\|virtualdomain\\user2',
+  'PrincipalType': 1, 
+  'Title': 'user2' 
 } );
 </pre>
 
@@ -203,7 +203,6 @@ console.log ( document.body );
 </pre>
 
 <p>This will log the following to the console:</p>
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image007.jpg"
@@ -213,81 +212,65 @@ console.log ( document.body );
 <!-- {width="6.522222222222222in" height="2.3784722222222223in"} -->
 
 <h4>End Note</h4>
-
 <p>For more information on the capabilities of the console, see the 
 Console topic.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch1-2">Section 1.2: Using the DOM API</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>DOM stands for **D**ocument **O**bject **M**odel. It is an
-object-oriented representation of structured documents like XML and
-HTML.</p>
+<p>DOM stands for <b>D</b>ocument <b>O</b>bject <b>M</b>odel. It is an
+object-oriented representation of structured documents like XML and HTML.</p>
 
 <p>Setting the textContent property of an Element is one way to output
 text on a web page.</p>
 
 <p>For example, consider the following HTML tag:</p>
 
-**\<** **p** id = \"paragraph\" **\>** **\<** **/p** **\>**
+<pre>
+<b>&lt;p</b> id="paragraph"<b>&gt;&lt;/p&gt;</b>
+</pre>
 
-<p>To change its textContent property, we can run the following
-JavaScript:</p>
+<p>To change its textContent property, we can run the following JavaScript:</p>
 
 <pre>
-document.getElementById(\"paragraph\").textContent = \"Hello, World\";
+document.getElementById("paragraph").textContent = "Hello, World";
 </pre>
 
 <p>This will select the element that with the id paragraph and set its
 text content to \"Hello, World\":</p>
 
-**\<** **p** id = \"paragraph\" **\>** Hello, World **\<** **/p** **\>**
+<pre>
+<b>&lt;</b> id="paragraph"&gt;Hello, World<b>&lt;/p&gt;</b>
+</pre>
 
-<p><a href="http://jsbin.com/fuzijox/edit?html,js,console,output">(See also this demo)</a>
-You can also use JavaScript to create a new HTML element programmatically. For example, 
+<p><a href="http://jsbin.com/fuzijox/edit?html,js,console,output">(See also this demo)</a></p>
+<p>You can also use JavaScript to create a new HTML element programmatically. For example, 
 consider an HTML document with the following body:</p>
 
-**\<** **body** **\>** **\<** **h** **1** **\>** Adding an element **\<** **/h** **1** **\>**
-**\<** **/body** **\>**   **\<p**
+<pre>
+<b>&lt;body&gt;</b>
+  <b>&lt;h1&gt;</b>Adding an element<b>&lt;/h1&gt;</b>
+<b>&lt;/body&gt;</b>
+</pre>
 
-In our JavaScript, we create a new **\>** tag with a textContent
-property of and add it at the end of the html body:
+<p>In our JavaScript, we create a new <b>&lt;p&gt;</b> tag with a textContent property of 
+and add it at the end of the html body:</p>
 
-**var** element = document.createElement(\'p\'); element.textContent =
-\"Hello, World\";
+<pre>
+<b>var</b> element = document.createElement('p');
+element.textContent = "Hello, World";
+document.body.appendChild(element); //add the newly created element to the DOM
+</pre>
 
-document.body.appendChild(element); *//add the newly created element
-to the DOM* That will change your HTML body to the following:
+<p>That will change your HTML body to the following:</p>
 
-**\<**
-**body**
-**\>**
-**\<**
-**h**
-**1**
-**\>**
+<pre>
+<b>&lt;body&gt;</b>
+  <b>&lt;h1&gt;</b>Adding an element<b>&lt;/h1&gt;</b>
+  <b>&lt;p&gt;</b>Hello, World<b>&lt;/p&gt;</b>
+<b>&lt;/body&gt;</b>
+</pre>
 
-Adding an element
-
-**\<**
-**/h**
-**1**
-**\>**
-**\<**
-**p**
-**\>**
-
-Hello, World
-
-**\<**
-**/p**
-**\>**
-**\<**
-**/body**
-**\>**
-  **\<script**
-  **\<body**
-
-Note that in order to manipulate elements in the DOM using JavaScript,
+<p>Note that in order to manipulate elements in the DOM using JavaScript,
 the JavaScript code must be run *after* the relevant element has been
 created in the document. This can be achieved by putting the
 JavaScript **\>** tags *after* all of your other **\>** content.
@@ -296,39 +279,38 @@ listener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventL
 to listen to eg. [window\'s onload
 event](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload),
 adding your code to that event listener will delay running your code
-until after the whole content on your page has been loaded.
+until after the whole content on your page has been loaded.</p>
 
-A third way to make sure all your DOM has been loaded, is [to wrap the
+<p>A third way to make sure all your DOM has been loaded, is [to wrap the
 DOM manipulation code with a timeout function of 0
 ms](https://stackoverflow.com/questions/779379/why-is-settimeoutfn-0-sometimes-useful).
 This way, this JavaScript code is re-queued at the end of the
 execution queue, which gives the browser a chance to finish doing some
 non-JavaScript things that have been waiting to finish before
-attending to this new piece of JavaScript.
+attending to this new piece of JavaScript.</p>
 
 <h3 id="ch1-3">Section 1.3: Using window.alert()</h3>
 
-The alert method displays a visual alert box on screen. The alert
-method parameter is displayed to the user in **plain** text:
-
-window.alert(message);
-
-Because window is the global object, you can call also use the
-following shorthand:
-
-alert(message);
-
-  window.alert
-
-
-So what does () do? Well, let\'s take the following example:
+<p>The alert method displays a visual alert box on screen. The alert
+method parameter is displayed to the user in **plain** text:</p>
 
 <pre>
-alert(\'hello, world\');
+window.alert(message);
+</pre>
+
+<p>Because window is the global object, you can call also use the following shorthand:</p>
+
+<pre>
+alert(message);
+</pre>
+
+<p>So what does <pre>window.alert()</pre> do? Well, let's take the following example:</p>
+
+<pre>
+alert('hello, world');
 </pre>
 
 <p>In Chrome, that would produce a pop-up like this:</p>
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image008.png"
@@ -339,42 +321,35 @@ alert(\'hello, world\');
 
 <h4>Notes</h4>
 
-  alert        () instead of                window.alert
+> The alert method is technically a property of window object, but since
+> all window properties are automatically global variables, we can use
+> alert as a global variable instead of as a property of window meaning
+> you can directly use ().
 
-
-The alert method is technically a property of window object, but since
-all window properties are automatically global variables, we can use
-alert as a global variable instead of as a property of window meaning
-you can directly use ().
-
-  console.log
-
-
-Unlike using , alert acts as a modal prompt meaning that the code
+<p>Unlike using , alert acts as a modal prompt meaning that the code
 calling alert will pause until the prompt is answered. Traditionally
 this means that *no other JavaScript code will execute* until the
-alert is dismissed:
+alert is dismissed:</p>
 
-alert(\'Pause!\');
-console.log(\'Alert was dismissed\');
+<pre>
+alert('Pause!');
+console.log('Alert was dismissed');
+</pre>
 
-However the specification actually allows other event-triggered code
+<p>However the specification actually allows other event-triggered code
 to continue to execute even though a modal dialog is still being
 shown. In such implementations, it is possible for other code to run
-while the modal dialog is being shown.
+while the modal dialog is being shown.</p>
 
-More information about usage of the alert method can be found in the
-modals prompts topic.
+<p>More information about usage of the alert method can be found in the
+modals prompts topic.</p>
 
-The use of alerts is usually discouraged in favour of other methods
+<p>The use of alerts is usually discouraged in favour of other methods
 that do not block users from interacting with the page - in order to
 create a better user experience. Nevertheless, it can be useful for
-debugging.
+debugging.</p>
 
-  window.alert          () is blocked inside an              **\<iframe**
-
-
-Starting with Chrome 46.0, **\>** [unless its sandbox attribute has the
+<p>Starting with Chrome 46.0, **\>** [unless its sandbox attribute has the
 value allow-modal](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert).
 
 <h3 id="ch1-4">Section 1.4: Using window.prompt()</h3>
