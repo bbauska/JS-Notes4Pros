@@ -1,13 +1,12 @@
----
-title: |
-  JavaScript Notes for Professionals
-  JavaScript ® JS-Notes4Pros.bauska.org
-author: "bbauska"
-date last editted: "8/20/2024 Tue 7+pm"
----
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 01/02. javascript notes 4 pros logo (01) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="center">
+  <img src="./images/image001.jpeg"
+  title="JavaScript Notes 4 Professionals logo"
+  alt="JavaScript Notes 4 Professionals logo."
+  style="border: 2px solid #000000; width:8.25in;" />
 
-![](./images/image001.jpeg){width="8.25in"
-height="11.663194444444445in"}
+<!-- {width="8.25in" height="11.663194444444445in"} -->
 
 **Contents**
 
@@ -2073,32 +2072,32 @@ indexed values
 
 <h4>About</h4>
 
-> Please feel free to share this PDF with anyone for free, latest
-> version of this book can be downloaded from:
->
-> <https://goalkicker.com/JavaScriptBook>
+<p>Please feel free to share this PDF with anyone for free, latest 
+version of this book can be downloaded from:</p>
 
-This *JavaScript® Notes for Professionals* book is compiled from [Stack
-Overflow](https://archive.org/details/documentation-dump.7z)
+&lt;https://goalkicker.com/JavaScriptBook&gt;
 
-[Documentation](https://archive.org/details/documentation-dump.7z), the
-content is written by the beautiful people at Stack Overflow.
+<p>This <i>JavaScript® Notes for Professionals</i> book is compiled from 
+<a href="https://archive.org/details/documentation-dump.7z">Stack Overflow</a>.</p>
 
-> Text content is released under Creative Commons BY-SA, see credits at
-> the end of this book whom contributed to the various chapters. Images
-> may be copyright of their respective owners unless otherwise specified
->
-> This is an unofficial free book created for educational purposes and
-> is not affiliated with official JavaScript® group(s) or company(s) nor
-> Stack Overflow. All trademarks and registered trademarks are the
-> property of their respective company owners
->
-> The information presented in this book is not guaranteed to be correct
-> nor accurate, use at your own risk
->
-> Please send feedback and corrections to [web@petercv.com]{.underline}
+<p><a href="https://archive.org/details/documentation-dump.7z">Documentation</a>, the
+content is written by the beautiful people at Stack Overflow.</p>
 
-<h1 id="ch1">Chapter 1: Getting started with JavaScript</h1>
+<p>Text content is released under Creative Commons BY-SA, see credits at 
+the end of this book whom contributed to the various chapters. Images 
+may be copyright of their respective owners unless otherwise specified.
+
+<p>This is an unofficial free book created for educational purposes and 
+is not affiliated with official JavaScript® group(s) or company(s) nor 
+Stack Overflow. All trademarks and registered trademarks are the 
+property of their respective company owners.</p>
+
+<p>The information presented in this book is not guaranteed to be correct 
+nor accurate, use at your own risk.</p>
+
+<p>Please send feedback and corrections to [web@petercv.com].</p>
+
+<h2 id="ch1">Chapter 1: Getting started with JavaScript</h2>
 
 <h4>Version Release Date</h4>
 
@@ -2106,90 +2105,118 @@ content is written by the beautiful people at Stack Overflow.
 2.  1998-06-01
 3.  1998-12-01
 
-> [E4X](http://www-archive.mozilla.org/js/language/ECMA-357.pdf)
-> 2004-06-01
-> [5](http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205th%20edition%20December%202009.pdf)
-> 2009-12-01
-
+[E4X](http://www-archive.mozilla.org/js/language/ECMA-357.pdf)
+2004-06-01
+[5](http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205th%20edition%20December%202009.pdf)
+2009-12-01
 [5.1](http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205.1%20edition%20June%202011.pdf)
 2011-06-01
 
 6.  2015-06-01
 7.  2016-06-14
 8.  2017-06-27
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~ readme.md of js-notes4-pros.org ~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 01/02. javascript notes 4 pros logo (01) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="center">
+  <img src="./images/image001.png"
+  title="JavaScript Notes 4 Professionals logo"
+  alt="JavaScript Notes 4 Professionals logo."
+  style="border: 2px solid #000000; width:400px;" />
 
-<h2 id="ch1-1">Section 1.1: Using console.log()</h2>
+<img src="./images/image002.png" 
+  title="University of California @Davis logo"
+  alt="University of California @Davis logo."
+  style="border: 2px solid #000000; width:261px;" />
+</p>
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch1-1">Section 1.1: Using console.log()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 <h4>Introduction</h4>
->
-> All modern web browsers, Node.js as well as almost every other
-> JavaScript environments support writing messages to a console using a
-> suite of logging methods. The most common of these methods is ().
->
-> In a browser environment, the () function is predominantly used for
-> debugging purposes.
->
+
+<p>All modern web browsers, Node.js as well as almost every other 
+JavaScript environments support writing messages to a console using a 
+suite of logging methods. The most common of these methods is ().</p>
+
+<p>In a browser environment, the () function is predominantly used for
+debugging purposes.</p>
+
 <h4>Getting Started</h4>
->
-> Open up the JavaScript Console in your browser, type the following,
-> and press Enter :
+
+<p>Open up the JavaScript Console in your browser, type the following,
+and press Enter:</p>
 
 <pre>
 console.log(\"Hello, World!\");
 </pre>
 
-> This will log the following to the console:
+<p>This will log the following to the console:</p>
+<p align="center">
+  <img src="./images/image002.jpg"
+  title=""
+  alt="."
+  style="border: 2px solid #000000; width:3.89in;" />
+</p>
+<!-- {width="3.8916666666666666in" height="1.4236111111111112in"} -->
 
-![](./images/image002.jpg){width="3.8916666666666666in"
-height="1.4236111111111112in"}
+<p>In the example above, the ! to the console and returns <b>undefined</b>
+(shown above in the console output window). This is because () has no 
+explicit *return value*.</p>
 
-> In the example above, the ! to the console and returns **undefined**
-> (shown above in the console output window). This is because () has no
-> explicit *return value*.
->
-> **Logging variables**
+<h4>Logging variables</h4>
 
-console.log() can be used to log variables of any kind; not only strings. Just pass
-in the variable that you want to be displayed in the console, for example:
+<p>console.log() can be used to log variables of any kind; not only strings. Just pass
+in the variable that you want to be displayed in the console, for example:</p>
 
 <pre>
 <b>var</b> foo = &quot;bar&quot;;
 console.log (foo);
 </pre>
 
-> This will log the following to the console:
+<p>This will log the following to the console:</p>
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 ![](./images/image003.jpg){width="5.954861111111111in"
 height="1.4777777777777779in"}
 
-> If you want to log two or more values, simply separate them with
-> commas. Spaces will be automatically added between each argument
-> during concatenation: console.log(\"thisVar:\", thisVar, \"and
-> thatVar:\", thatVar); This will log the following to the console:
+<p>If you want to log two or more values, simply separate them with 
+commas. Spaces will be automatically added between each argument 
+during concatenation: console.log(\"thisVar:\", thisVar, \"and 
+thatVar:\", thatVar); This will log the following to the console:</p>
 
+<pre>
 **var** thisVar = \'first value\';
 **var** thatVar = \'second value\';
+</pre>
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 ![](./images/image004.jpg){width="7.477777777777778in"
 height="0.9729166666666667in"}
 
 <h4>Placeholders</h4>
 
-> You can use () in combination with placeholders:
+<p>You can use () in combination with placeholders:</p>
 
+<pre>
 **var** greet=\"Hello\", who=\"World\";
 console.log (\"%s, %s!\", greet, who);
+</pre>
 
-> This will log the following to the console:
+<p>This will log the following to the console:</p>
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 ![](./images/image005.jpg){width="6.990972222222222in"
 height="1.4868055555555555in"}
 
 <h4>Logging Objects</h4>
->
-> Below we see the result of logging an object. This is often useful for
-> logging JSON responses from API calls.
 
+<p>Below we see the result of logging an object. This is often useful for 
+logging JSON responses from API calls.</p>
+
+<pre>
 console.log ( { 
   \'Email\': \'\', 
   \'Groups\': {}, 
@@ -2200,387 +2227,208 @@ console.log ( {
   \'PrincipalType\': 1, 
   \'Title\': \'user2\' 
 } );
+</pre>
 
-> This will log the following to the console:
+<p>This will log the following to the console:</p>
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 ![](./images/image006.jpg){width="6.738888888888889in"
 height="1.7208333333333334in"}
 
 <h4>Logging HTML elements</h4>
->
-> You have the ability to log any element which exists within the
-> [*DOM*](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction).
-> In this case we log the body element:
 
-console.
+<p>You have the ability to log any element which exists within the
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">
+<i>DOM</i></a>.</p>
+<p>In this case we log the body element:</p>
 
-log
+<pre>
+console.log ( document.body );
+</pre>
 
-(
+<p>This will log the following to the console:</p>
 
-document.
-
-body
-
-)
-
-;
-
-> This will log the following to the console:
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 ![](./images/image007.jpg){width="6.522222222222222in"
 height="2.3784722222222223in"}
 
-> **End Note**
->
-> For more information on the capabilities of the console, see the
-> Console topic.
+<h4>End Note</h4>
 
-## Section 1.2: Using the DOM API
+<p>For more information on the capabilities of the console, see the 
+Console topic.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch1-2">Section 1.2: Using the DOM API</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>DOM stands for **D**ocument **O**bject **M**odel. It is an
+object-oriented representation of structured documents like XML and
+HTML.</p>
 
-> DOM stands for **D**ocument **O**bject **M**odel. It is an
-> object-oriented representation of structured documents like XML and
-> HTML.
->
-> Setting the textContent property of an Element is one way to output
-> text on a web page.
->
-> For example, consider the following HTML tag:
+<p>Setting the textContent property of an Element is one way to output
+text on a web page.</p>
 
-**\<**
+<p>For example, consider the following HTML tag:</p>
 
-**p**
+**\<** **p** id = \"paragraph\" **\>** **\<** **/p** **\>**
 
-id
+<p>To change its textContent property, we can run the following
+JavaScript:</p>
 
-=
+<pre>
+document.getElementById(\"paragraph\").textContent = \"Hello, World\";
+</pre>
 
-\"paragraph\"
+<p>This will select the element that with the id paragraph and set its
+text content to \"Hello, World\":</p>
 
-**\>**
+**\<** **p** id = \"paragraph\" **\>** Hello, World **\<** **/p** **\>**
 
-**\<**
+<p><a href="http://jsbin.com/fuzijox/edit?html,js,console,output">(See also this demo)</a>
+You can also use JavaScript to create a new HTML element programmatically. For example, 
+consider an HTML document with the following body:</p>
 
-**/p**
+**\<** **body** **\>** **\<** **h** **1** **\>** Adding an element **\<** **/h** **1** **\>**
+**\<** **/body** **\>**   **\<p**
 
-**\>**
+In our JavaScript, we create a new **\>** tag with a textContent
+property of and add it at the end of the html body:
 
-> To change its textContent property, we can run the following
-> JavaScript:
->
-> document.getElementById(\"paragraph\").textContent = \"Hello, World\";
->
-> This will select the element that with the id paragraph and set its
-> text content to \"Hello, World\":
+**var** element = document.createElement(\'p\'); element.textContent =
+\"Hello, World\";
 
-**\<**
-
-**p**
-
-id
-
-=
-
-\"paragraph\"
-
-**\>**
-
-Hello, World
+document.body.appendChild(element); *//add the newly created element
+to the DOM* That will change your HTML body to the following:
 
 **\<**
-
-**/p**
-
-**\>**
-
-> [(See also this
-> demo)](http://jsbin.com/fuzijox/edit?html,js,console,output)
->
-> You can also use JavaScript to create a new HTML element
-> programmatically. For example, consider an HTML document with the
-> following body:
-
-**\<**
-
 **body**
-
 **\>**
-
 **\<**
-
 **h**
-
 **1**
-
 **\>**
 
 Adding an element
 
 **\<**
-
 **/h**
-
 **1**
-
 **\>**
-
 **\<**
-
-**/body**
-
-**\>**
-
-  -----------------------------------------------------------------------
-  **\<p**
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-> In our JavaScript, we create a new **\>** tag with a textContent
-> property of and add it at the end of the html body:
->
-> **var** element = document.createElement(\'p\'); element.textContent =
-> \"Hello, World\";
->
-> document.body.appendChild(element); *//add the newly created element
-> to the DOM* That will change your HTML body to the following:
-
-**\<**
-
-**body**
-
-**\>**
-
-**\<**
-
-**h**
-
-**1**
-
-**\>**
-
-Adding an element
-
-**\<**
-
-**/h**
-
-**1**
-
-**\>**
-
-**\<**
-
 **p**
-
 **\>**
 
 Hello, World
 
 **\<**
-
 **/p**
-
 **\>**
-
 **\<**
-
 **/body**
-
 **\>**
-
-  -----------------------------------------------------------------------
   **\<script**
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
   **\<body**
-  -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
-
-> Note that in order to manipulate elements in the DOM using JavaScript,
-> the JavaScript code must be run *after* the relevant element has been
-> created in the document. This can be achieved by putting the
-> JavaScript **\>** tags *after* all of your other **\>** content.
-> Alternatively, you can also use [an event
-> listener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
-> to listen to eg. [window\'s onload
-> event](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload),
-> adding your code to that event listener will delay running your code
-> until after the whole content on your page has been loaded.
+Note that in order to manipulate elements in the DOM using JavaScript,
+the JavaScript code must be run *after* the relevant element has been
+created in the document. This can be achieved by putting the
+JavaScript **\>** tags *after* all of your other **\>** content.
+Alternatively, you can also use [an event
+listener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
+to listen to eg. [window\'s onload
+event](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload),
+adding your code to that event listener will delay running your code
+until after the whole content on your page has been loaded.
 >
-> A third way to make sure all your DOM has been loaded, is [to wrap the
-> DOM manipulation code with a timeout function of 0
-> ms](https://stackoverflow.com/questions/779379/why-is-settimeoutfn-0-sometimes-useful).
-> This way, this JavaScript code is re-queued at the end of the
-> execution queue, which gives the browser a chance to finish doing some
-> non-JavaScript things that have been waiting to finish before
-> attending to this new piece of JavaScript.
+A third way to make sure all your DOM has been loaded, is [to wrap the
+DOM manipulation code with a timeout function of 0
+ms](https://stackoverflow.com/questions/779379/why-is-settimeoutfn-0-sometimes-useful).
+This way, this JavaScript code is re-queued at the end of the
+execution queue, which gives the browser a chance to finish doing some
+non-JavaScript things that have been waiting to finish before
+attending to this new piece of JavaScript.
 
-## Section 1.3: Using window.alert()
+<h3 id="ch1-3">Section 1.3: Using window.alert()</h3>
 
-> The alert method displays a visual alert box on screen. The alert
-> method parameter is displayed to the user in **plain** text:
+The alert method displays a visual alert box on screen. The alert
+method parameter is displayed to the user in **plain** text:
 
-window.
+window.alert(message);
 
-alert
+Because window is the global object, you can call also use the
+following shorthand:
 
-(
+alert(message);
 
-message
-
-)
-
-;
-
-> Because window is the global object, you can call also use the
-> following shorthand:
-
-alert
-
-(
-
-message
-
-)
-
-;
-
-  -----------------------------------------------------------------------
   window.alert
-  -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
 
-> So what does () do? Well, let\'s take the following example:
+So what does () do? Well, let\'s take the following example:
 
-alert
+<pre>
+alert(\'hello, world\');
+</pre>
 
-(
+<p>In Chrome, that would produce a pop-up like this:</p>
 
-\'hello, world\'
-
-)
-
-;
-
-> In Chrome, that would produce a pop-up like this:
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 ![](./images/image008.png){width="5.225in"
 height="2.3152777777777778in"}
 
-> **Notes**
+<h4>Notes</h4>
 
-  -----------------------------------------------------------------------
   alert        () instead of                window.alert
-  ------------ ---------------------------- -----------------------------
 
-  -----------------------------------------------------------------------
 
-> The alert method is technically a property of window object, but since
-> all window properties are automatically global variables, we can use
-> alert as a global variable instead of as a property of window meaning
-> you can directly use ().
+The alert method is technically a property of window object, but since
+all window properties are automatically global variables, we can use
+alert as a global variable instead of as a property of window meaning
+you can directly use ().
 
-  -----------------------------------------------------------------------
   console.log
-  -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
 
-> Unlike using , alert acts as a modal prompt meaning that the code
-> calling alert will pause until the prompt is answered. Traditionally
-> this means that *no other JavaScript code will execute* until the
-> alert is dismissed:
+Unlike using , alert acts as a modal prompt meaning that the code
+calling alert will pause until the prompt is answered. Traditionally
+this means that *no other JavaScript code will execute* until the
+alert is dismissed:
 
-alert
+alert(\'Pause!\');
+console.log(\'Alert was dismissed\');
 
-(
+However the specification actually allows other event-triggered code
+to continue to execute even though a modal dialog is still being
+shown. In such implementations, it is possible for other code to run
+while the modal dialog is being shown.
 
-\'Pause!\'
+More information about usage of the alert method can be found in the
+modals prompts topic.
 
-)
+The use of alerts is usually discouraged in favour of other methods
+that do not block users from interacting with the page - in order to
+create a better user experience. Nevertheless, it can be useful for
+debugging.
 
-;
-
-console.
-
-log
-
-(
-
-\'Alert was dismissed\'
-
-)
-
-;
-
-> However the specification actually allows other event-triggered code
-> to continue to execute even though a modal dialog is still being
-> shown. In such implementations, it is possible for other code to run
-> while the modal dialog is being shown.
->
-> More information about usage of the alert method can be found in the
-> modals prompts topic.
->
-> The use of alerts is usually discouraged in favour of other methods
-> that do not block users from interacting with the page - in order to
-> create a better user experience. Nevertheless, it can be useful for
-> debugging.
-
-  -------------------------------------------------------------------------
   window.alert          () is blocked inside an              **\<iframe**
-  --------------------- ------------------------------------ --------------
 
-  -------------------------------------------------------------------------
 
 Starting with Chrome 46.0, **\>** [unless its sandbox attribute has the
-value
-allow-modal](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert).
+value allow-modal](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert).
 
-## Section 1.4: Using window.prompt()
+<h3 id="ch1-4">Section 1.4: Using window.prompt()</h3>
 
-  -----------------------------------------------------------------------
   prompt
-  -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
 
-> An easy way to get an input from a user is by using the () method.
->
-> **Syntax**
+An easy way to get an input from a user is by using the () method.
 
-prompt
+**Syntax**
 
-(
+prompt(text, \[**default**\]);
 
-text
-
-,
-
-\[
-
-**default**
-
-\]
-
-)
-
-;
-
-**text**
-
-:
+**text**:
 
 The text displayed in the prompt box.
 
-**default**
-
-).
+**default**).
 
 :
 
@@ -2590,180 +2438,105 @@ A default value for the input field (optional
 
 **var**
 
-age
+age=prompt(\"How old are you?\");
 
-=
-
-prompt
-
-(
-
-\"How old are you?\"
-
-)
-
-;
-
-console.
-
-log
-
-(
-
-age
-
-)
-
-;
+console.log(age);
 
 *// Prints the value inserted by the user*
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 ![](./images/image009.png){width="4.603472222222222in"
 height="1.9548611111111112in"}
 
-> If the user clicks the OK button, the input value is returned.
-> Otherwise, the method returns **null**.
+If the user clicks the OK button, the input value is returned.
+Otherwise, the method returns **null**.
 >
-> The return value of prompt is always a string, unless the user clicks
-> Cancel , in which that case it returns **null**. Safari is an
-> exception in that when the user clicks Cancel, the function returns an
-> empty string. From there, you can convert the return value to another
-> type, such as an integer.
+The return value of prompt is always a string, unless the user clicks
+Cancel , in which that case it returns **null**. Safari is an
+exception in that when the user clicks Cancel, the function returns an
+empty string. From there, you can convert the return value to another
+type, such as an integer.
 >
-> **Notes**
+**Notes**
 
-  -----------------------------------------------------------------------
   **\<iframe**
-  -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
 
-> While the prompt box is displayed, the user is prevented from
-> accessing other parts of the page, since dialog boxes are modal
-> windows.
->
-> Starting with Chrome 46.0 this method is blocked inside an **\>**
-> unless its sandbox attribute has the value allow-modal.
+<p>While the prompt box is displayed, the user is prevented from
+accessing other parts of the page, since dialog boxes are modal
+windows.</p>
 
-## Section 1.5: Using window.confirm()
+<p>Starting with Chrome 46.0 this method is blocked inside an <b>&gt;</b>
+unless its sandbox attribute has the value allow-modal.</p>
 
-  -----------------------------------------------------------------------
+<h2 id="ch1-5">Section 1.5: Using window.confirm()</h2>
+
   window.confirm
-  -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
+<p>The () method displays a modal dialog with an optional message and two
+buttons, OK and Cancel.</p>
 
-> The () method displays a modal dialog with an optional message and two
-> buttons, OK and Cancel.
->
-> Now, let\'s take the following example:
+<p>Now, let\'s take the following example:</p>
 
-result
+<pre>
+result=window.confirm(message);
+</pre>
 
-=
+Here, **message** is the optional string to be displayed in the dialog
+and **result** is a boolean value indicating whether OK or Cancel was
+selected (true means OK).
 
-window.
-
-confirm
-
-(
-
-message
-
-)
-
-;
-
-> Here, **message** is the optional string to be displayed in the dialog
-> and **result** is a boolean value indicating whether OK or Cancel was
-> selected (true means OK).
-
-  -----------------------------------------------------------------------
   window.confirm
-  -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
 
 () is typically used to ask for user confirmation before doing a
 dangerous operation like deleting
 
-> something in a Control Panel:
+something in a Control Panel:
 
-**if**
-
-(
-
-window.
-
-confirm
-
-(
-
-\"Are you sure you want to delete this?\"
-
-)
-
-)
-
-{
-
-deleteItem
-
-(
-
-itemId
-
-)
-
-;
-
+**if** 
+( window.confirm(\"Are you sure you want to delete this?\") ) { deleteItem (itemId);
 }
 
-> The output of that code would look like this in the browser:
+<p>The output of that code would look like this in the browser:</p>
 
 ![](./images/image010.jpg){width="4.603472222222222in"
 height="1.4597222222222221in"}
 
-> If you need it for later use, you can simply store the result of the
-> user\'s interaction in a variable:
->
-> **var** deleteConfirm = window.confirm(\"Are you sure you want to
-> delete this?\");
->
-> **Notes**
->
-> The argument is optional and not required by the specification.
->
-> Dialog boxes are modal windows - they prevent the user from accessing
-> the rest of the program\'s interface until the dialog box is closed.
-> For this reason, you should not overuse any function that creates a
-> dialog box
->
-> (or modal window). And regardless, there are very good reasons to
-> avoid using dialog boxes for confirmation.
+If you need it for later use, you can simply store the result of the
+user\'s interaction in a variable:
 
-  -----------------------------------------------------------------------
+**var** deleteConfirm = window.confirm(\"Are you sure you want to
+delete this?\");
+
+**Notes**
+
+The argument is optional and not required by the specification.
+
+Dialog boxes are modal windows - they prevent the user from accessing
+the rest of the program\'s interface until the dialog box is closed.
+For this reason, you should not overuse any function that creates a
+dialog box
+
+(or modal window). And regardless, there are very good reasons to
+avoid using dialog boxes for confirmation.
+
   **\<iframe**
-  -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
 
-> Starting with Chrome 46.0 this method is blocked inside an **\>**
-> unless its sandbox attribute has the value allow-modal.
->
-> It is commonly accepted to call the confirm method with the window
-> notation removed as the window object is always implicit. However, it
-> is recommended to explicitly define the window object as expected
-> behavior may change due to implementation at a lower scope level with
-> similarly named methods.
+Starting with Chrome 46.0 this method is blocked inside an **\>**
+unless its sandbox attribute has the value allow-modal.
 
-## Section 1.6: Using the DOM API (with graphical text: Canvas, SVG, or image file)
+It is commonly accepted to call the confirm method with the window
+notation removed as the window object is always implicit. However, it
+is recommended to explicitly define the window object as expected
+behavior may change due to implementation at a lower scope level with
+similarly named methods.
 
-> **Using canvas elements**
->
-> HTML provides the canvas element for building raster-based images.
->
-> First build a canvas for holding image pixel information.
+<h2 id="ch1-6">Section 1.6: Using the DOM API (with graphical text: Canvas, SVG, or image file)</h2>
+
+<h4>Using canvas elements</h4>
+<p>HTML provides the canvas element for building raster-based images.</p>
+<p>First build a canvas for holding image pixel information.</p>
 
 **var** canvas = document.
 createElement ( \'canvas\' );
@@ -2772,78 +2545,40 @@ width=500;
 canvas.
 height=250;
 
-> Then select a context for the canvas, in this case two-dimensional:
+Then select a context for the canvas, in this case two-dimensional:
 
 **var**
 
-ctx=canvas.
-getContext ( \'2d\' );
+<pre>
+ctx=canvas.getContext ( \'2d\' );
+</pre>
 
-> Then set properties related to the text:
-ctx.
-font = \'30px Cursive\';
-ctx.
+<p>Then set properties related to the text:</p>
 
-fillText ( \"Hello world!\", 50, 50 );
+<pre>
+ctx.font = \'30px Cursive\';
+ctx.fillText ( \"Hello world!\", 50, 50 );
+</pre>
 
-> Then insert the canvas element into the page to take effect:
+Then insert the canvas element into the page to take effect:
 
-document.
-body.
+document.body.appendChild ( canvas );
 
-appendChild ( canvas );
+<h4>Using SVG</h4>
 
-> **Using SVG**
->
-> SVG is for building scalable vector-based graphics and can be used
-> within HTML.
->
-> First create an SVG element container with dimensions:
+SVG is for building scalable vector-based graphics and can be used
+within HTML.
 
-**var**
+First create an SVG element container with dimensions:
 
-svg
+<pre>
+**var** svg=document.createElementNS(\'http://www.w3.org/2000/svg\', \'svg\');
+svg.width=500;
+svg.height=50;
+</pre>
 
-=
-
-document.
-
-createElementNS
-
-(
-
-\'http://www.w3.org/2000/svg\'
-
-,
-
-\'svg\'
-
-)
-
-;
-
-svg.
-
-width
-
-=
-
-500
-
-;
-
-svg.
-
-height
-
-=
-
-50
-
-;
-
-> Then build a text element with the desired positioning and font
-> characteristics:
+Then build a text element with the desired positioning and font
+characteristics:
 
 **var**
 
@@ -2857,166 +2592,35 @@ createElementNS
 
 (
 
-\'http://www.w3.org/2000/svg\'
+\'http://www.w3.org/2000/svg\',\'text\');
 
-,
+text.setAttribute(\'x\',\'0\');
 
-\'text\'
+text.setAttribute(\'y\',\'50\');
 
-)
+text.style.fontFamily=\'Times New Roman\';
+text.style.fontSize=\'50\';
 
-;
+Then add the actual text to display to the textelement:
 
-text.
+text.textContent=\'Hello world!\';
 
-setAttribute
+Finally add the text element to our svg container and add the svg
+container element to the HTML document:
 
-(
+svg.appendChild(text);
+document.body.appendChild(svg);
 
-\'x\'
-
-,
-
-\'0\'
-
-)
-
-;
-
-text.
-
-setAttribute
-
-(
-
-\'y\'
-
-,
-
-\'50\'
-
-)
-
-;
-
-text.
-
-style
-
-.
-
-fontFamily
-
-=
-
-\'Times New Roman\'
-
-;
-
-text.
-
-style
-
-.
-
-fontSize
-
-=
-
-\'50\'
-
-;
-
-> Then add the actual text to display to the textelement:
-
-text.
-
-textContent
-
-=
-
-\'Hello world!\'
-
-;
-
-> Finally add the text element to our svg container and add the svg
-> container element to the HTML document:
-
-svg.
-
-appendChild
-
-(
-
-text
-
-)
-
-;
-
-document.
-
-body
-
-.
-
-appendChild
-
-(
-
-svg
-
-)
-
-;
-
-> **Image file**
+**Image file**
 >
-> If you already have an image file containing the desired text and have
-> it placed on a server, you can add the URL of the image and then add
-> the image to the document as follows:
+If you already have an image file containing the desired text and have
+it placed on a server, you can add the URL of the image and then add
+the image to the document as follows:
 
-**var**
+**var** img=**new** Image ( );
 
-img
-
-=
-
-**new**
-
-Image
-
-(
-
-)
-
-;
-
-img.
-
-src
-
-=
-
-\'https://i.ytimg.com/vi/zecueq-mo4M/maxresdefault.jpg\'
-
-;
-
-document.
-
-body
-
-.
-
-appendChild
-
-(
-
-img
-
-)
-
-;
+img.src= \'https://i.ytimg.com/vi/zecueq-mo4M/maxresdefault.jpg\';
+document.body.appendChild(img);
 
 # Chapter 2: JavaScript Variables
 
@@ -3028,58 +2632,24 @@ it.**
 value **{Required when using Assignment}** The value of a variable
 **\[default: undefined\]**
 
-> Variables are what make up most of JavaScript. These variables make up
-> things from numbers to objects, which are all over JavaScript to make
-> one\'s life much easier.
+Variables are what make up most of JavaScript. These variables make up
+things from numbers to objects, which are all over JavaScript to make
+one\'s life much easier.
 
-## Section 2.1: Defining a Variable
+<h2 id="ch2-1">Section 2.1: Defining a Variable</h2>
 
-**var**
+**var** myVariable = \"This is a variable!\";
 
-myVariable
+This is an example of defining variables. This variable is called a
+\"string\" because it has ASCII characters (A-Z, 0-9, !@#\$, etc.)
 
-=
+<h2 id="ch2-2">Section 2.2: Using a Variable</h2>
 
-\"This is a variable!\"
+**var** number1 = 5;
+number1=3;
 
-;
-
-> This is an example of defining variables. This variable is called a
-> \"string\" because it has ASCII characters (A-Z, 0-9,
-
-  -----------------------------------------------------------------------
-  !@#\$
-  -----------------------------------------------------------------------
-
-  -----------------------------------------------------------------------
-
-, etc.)
-
-## Section 2.2: Using a Variable
-
-**var**
-
-number1
-
-=
-
-5
-
-;
-
-number1
-
-=
-
-3
-
-;
-
-  -----------------------------------------------------------------------
   window.alert
-  -----------------------------------------------------------------------
 
-  -----------------------------------------------------------------------
 
 > Here, we defined a number called \"number1\" which was equal to 5.
 > However, on the second line, we changed the value to 3. To show the
@@ -124606,7 +124176,3 @@ and 19
   --------------------------------------------------------------------------------------------
 
 # You may also like
-
-
-<!-- first editted mm/dd/yyyy dow hh:mm -->
-<!-- last editted 8/20/2024 Tue 7:22pm -->
