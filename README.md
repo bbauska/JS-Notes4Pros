@@ -985,305 +985,132 @@ dividing by zero is not possible.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-8">Section 3.8: Math library functions that return NaN</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Generally, Math functions that are given non-numeric arguments will
+return NaN.</p>
 
-Generally, Math functions that are given non-numeric arguments will
-return NaN.
+<pre>
+Math.floor("a")
+</pre>
 
-Math
+<p>The square root of a negative number returns NaN, because does not
+support <a href="https://en.wikipedia.org/wiki/Imaginary_number">imaginary</a> or
+<a href="https://en.wikipedia.org/wiki/Complex_number">complex</a> numbers.</p>
 
-.
-
-floor
-
-(
-
-\"a\"
-
-)
-
-  
-  Math                            .       sqrt
-   - 
-
-  
-
-The square root of a negative number returns NaN, because does not
-support [imaginary](https://en.wikipedia.org/wiki/Imaginary_number) or
-[complex](https://en.wikipedia.org/wiki/Complex_number) numbers.
-
-Math
-
-.
-
-sqrt
-
-(
-
-\-
-
-1
-
-)
-
+<pre>
+Math.sqrt(-1)
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch4">Chapter 4: Comments</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch4-1">Section 4.1: Using Comments</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>To add annotations, hints, or exclude some code from being executed
+JavaScript provides two ways of commenting code lines.</p>
 
-To add annotations, hints, or exclude some code from being executed
-JavaScript provides two ways of commenting code lines
->
-<b>Single line Comment //</b>
->
-Everything after the // until the end of the line is excluded from
-execution.
+<h4>Single line Comment</h4>
 
+<p>Everything after the // until the end of the line is excluded from execution.</p>
+
+<pre>
+<b>function</b> elementAt( event ) {
+// Gets the element from Event coordinates
+  <b>return</b> document.elementFromPoint(event.clientX, event.clientY);
+}
 *// TODO: write more cool stuff!*
+</pre>
 
-<b>function</b>
+<h4>Multi-line Comment /&ast;&ast;/</h4>
 
-elementAt
-
-(
-
-event
-
-)
-
-{
-
-*// Gets the element from Event coordinates*
-
-<b>return</b>
-
-document.
-
-elementFromPoint
-
-(
-
-event.
-
-clientX
-
-,
-
-event.
-
-clientY
-
-)
-
-;
-
-}
-
-**Multi-line Comment */\*\*/***
-
-Everything between the opening /\* and the closing \*/ is excluded
+<p>Everything between the opening /* and the closing */ is excluded
 from execution, even if the opening and closing are on different
-lines.
+lines.</p>
 
-*/\**
-
-*Gets the element from Event coordinates.*
-
-*Use like:*
-
-*var clickedEl = someEl.addEventListener(\"click\", elementAt, false);*
-
-*\*/*
-
-<b>function</b>
-
-elementAt
-
-(
-
-event
-
-)
-
-{
-
-<b>return</b>
-
-document.
-
-elementFromPoint
-
-(
-
-event.
-
-clientX
-
-,
-
-event.
-
-clientY
-
-)
-
-;
-
+<pre>
+/*
+   Gets the element from Event coordinates.
+   Use like:
+     var clickedEl = someEl.addEventListener("click", elementAt, false);
+*/
+<b>function</b> elementAt( event ) {
+  <b>return</b> document.elementFromPoint(event.clientX, event.clientY);
 }
-
-*/\* TODO: write more useful comments! \*/*
-
+/* TODO: write more useful comments! */
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch4-2">Section 4.2: Using HTML comments in JavaScript (Bad practice)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-HTML comments (optionally preceded by whitespace) will cause code (on
+<p>HTML comments (optionally preceded by whitespace) will cause code (on
 the same line) to be ignored by the browser also, though this is
-considered <b>bad practice</b>.
->
-One-line comments with the HTML comment opening sequence (\<!\):
+considered <b>bad practice</b>.</p>
 
-<b>Note:</b>
+<p>One-line comments with the HTML comment opening sequence (&lt;!-&dash;):
 
-the JavaScript interpreter ignores the closing characters of HTML
-comments (
+<p><b>Note:</b> the JavaScript interpreter ignores the closing characters of HTML comments (&dash;-&gt;) here.</p>
 
-\\>
+<pre>
+&lt;!-- A single-line comment.
+&lt;!-- --&gt; Identical to using `//` since
+&lt;!-- --&gt; the closing '--&gt;' is ignored.
+</pre>
 
-)
+<p>This technique can be observed in legacy code to hide JavaScript from
+browsers that didn't support it:</p>
 
-here.
+<pre>
+<b>script</b> type="text/javascript" language="JavaScript"<b>&gt;</b>
+&lt;!-&dash;
+/* Arbitrary JavaScript code.
+   Old browsers would treat
+   it as HTML code. */
+// --&gt;
+&lt;/script&gt;
+</pre>
 
-*\<!\*
-
-*A single-line comment.*
-
-*\<!\ \\>*
-
-Identical to using \`//\` since
-
-*\<!\ \\>*
-
-the closing \`\\>\` is ignored.
-
-This technique can be observed in legacy code to hide JavaScript from
-browsers that didn\'t support it:
-
-<b>\<</b>
-
-<b>script</b>
-
-type
-
-=
-
-\"text/javascript\"
-
-language
-
-=
-
-\"JavaScript\"
-
-<b>\></b>
-
-\<!\
-
-/\* Arbitrary JavaScript code.
-
-Old browsers would treat
-
-it as HTML code. \*/
-
-// \
-
-<b>\></b>
-
-<b>\<</b>
-
-<b>/script</b>
-
-<b>\></b>
-
-An HTML closing comment can also be used in JavaScript (independent of
+<p>An HTML closing comment can also be used in JavaScript (independent of
 an opening comment) at the beginning of a line (optionally preceded by
 whitespace) in which case it too causes the rest of the line to be
-ignored:
+ignored:</p>
 
-\\>
+<pre>
+&dash;-&gt; Unreachable JS code
+</pre>
 
-Unreachable JS code
+<p>These facts have also been exploited to allow a page to call itself
+first as HTML and secondly as JavaScript. For example:</p>
 
-These facts have also been exploited to allow a page to call itself
-first as HTML and secondly as JavaScript. For example:
-
-*\<!\*
-
-*self.postMessage(\'reached JS \"file\"\');*
-
-*/\**
-
-*\\>*
-
-\<!
-
-DOCTYPE html
-
-\>
-
-<b>\<</b>
-
-<b>script</b>
-
-<b>\></b>
-
-var w1 = new Worker(\'#1\');
-
+<pre>
+&lt;!-&dash;
+ self.postMessage('reached JS "file"');
+/*
+&dash;-&gt;
+<b>&lt;!DOCTYPE html&gt;</b>
+<b>&lt;script&gt;</b>
+var w1 = new Worker('#1');
 w1.onmessage = function (e) {
+  console.log(e.data); // 'reached JS "file"
+};
+<b>&lt;/script&gt;</b>
+&lt;!-&dash;
+*/
+&dash;-&gt;
+</pre>
 
-console.log(e.data); // \'reached JS \"file\"
-
-}
-
-;
-
-<b>\<</b>
-
-<b>/script</b>
-
-<b>\></b>
-
-*\<!\*
-
-*\*/*
-
-*\\>*
-
-When run a HTML, all the multiline text between the \<!\ and \\>
+<p>When run a HTML, all the multiline text between the &lt;!-&dash; and &dash;-&gt;
 comments are ignored, so the JavaScript contained therein is ignored
-when run as HTML.
+when run as HTML.</p>
 
-  
-  self.postMessage                                         (   \...
-    -
+<p>As JavaScript, however, while the lines beginning with &lt;!-&dash; and &dash-&gt;
+are ignored, their effect is not to escape over <i>multiple</i>
+lines, so the lines following them (e.g., self.postMessage(...) will not be ignored when
+run as JavaScript, at least until they reach a <i>JavaScript</i> comment,
+marked by /* and */. Such JavaScript comments are used in the above
+example to ignore the remaining <i>HTML</i> text (until the &dash-> which is
+also ignored as JavaScript).</p>
 
-  
-
-As JavaScript, however, while the lines beginning with \<!\ and
-\\are ignored, their effect is not to escape over *multiple*
-lines, so the lines following them (e.g., ) will not be ignored when
-run as JavaScript, at least until they reach a *JavaScript* comment,
-marked by /\* and \*/. Such JavaScript comments are used in the above
-example to ignore the remaining *HTML* text (until the \\which is
-also ignored as JavaScript).
-
-# Chapter 5: Console
-
-  
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch5">Chapter 5: Console</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
   console.dir       (   console    ). Besides the      console.memory
-    -  
-
-  
 
 The information displayed by a [debugging/web
 console](https://developer.mozilla.org/en-US/docs/Tools/Web_Console)
@@ -1292,19 +1119,19 @@ Javascript
 object](https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/console)
 that can be consulted through property, the methods displayed are
 generally the following (taken from Chromium\'s output):
->
+
 [assert](https://developer.mozilla.org/en-US/docs/Web/API/console/assert)
 [clear](https://developer.mozilla.org/en-US/docs/Web/API/Console/clear)
 [count](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
 [debug](https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/console#console.debug(...))
->
+
 [dir](https://developer.mozilla.org/en-US/docs/Web/API/Console/dir)
 [dirxml](https://developer.mozilla.org/en-US/docs/Web/API/Console/dirxml)
 [error](https://developer.mozilla.org/en-US/docs/Web/API/Console/error)
 [group](https://developer.mozilla.org/en-US/docs/Web/API/Console/group)
 [groupCollapsed](https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed)
 [groupEnd](https://developer.mozilla.org/en-US/docs/Web/API/Console/groupEnd)
->
+
 [info](https://developer.mozilla.org/en-US/docs/Web/API/Console/info)
 [log](https://developer.mozilla.org/en-US/docs/Web/API/Console/log)
 markTimeline
@@ -1317,72 +1144,45 @@ markTimeline
 timeline timelineEnd
 [trace](https://developer.mozilla.org/en-US/docs/Web/API/Console/trace)
 [warn](https://developer.mozilla.org/en-US/docs/Web/API/Console/warn)
->
+
 <b>Opening the Console</b>
->
+
 In most current browsers, the JavaScript Console has been integrated
 as a tab within Developer Tools. The shortcut keys listed below will
 open Developer Tools, it might be necessary to switch to the right tab
 after that.
->
 **Chrome**
->
 Opening the "Console" panel of Chrome's **DevTools**:
->
 Windows / Linux: any of the following options.
->
 Ctrl + Shift + J
->
 Ctrl + Shift + I , then click on the "Web Console" tab **or** press
 ESC to toggle the console on and off
->
 F12 , then click on the "Console" tab **or** press ESC to toggle the
 console on and off
->
 Mac OS: Cmd + Opt + J
->
 **Firefox**
->
 Opening the "Console" panel in Firefox's **Developer Tools**:
->
 Windows / Linux: any of the following options.
->
 Ctrl + Shift + K
->
 Ctrl + Shift + I , then click on the "Web Console" tab **or** press
 ESC to toggle the console on and off
->
 F12 , then click on the "Web Console" tab **or** press ESC to toggle
 the console on and off
->
 Mac OS: Cmd + Opt + K
->
 **Edge and Internet Explorer**
->
 Opening the "Console" panel in the **F12 Developer Tools**:
->
 F12 , then click on the "Console" tab
->
 **Safari**
->
 Opening the "Console" panel in Safari's **Web Inspector** you must
 first enable the develop menu in Safari\'s
->
 Preferences
-
 Then you can either pick \"Develop-\>Show Error Console\" from the menus
 or press
-
 ⌘
-
 \+
-
 Option
-
 \+
-
 C
-
 **Opera**
 >
 Opening the "Console" in opera:
@@ -1465,33 +1265,20 @@ log
 :
 
 **function**
-
 (
-
 )
-
 {
-
 }
-
 }
-
 ;
-
 }
-
 Note this second example will stop **all** console logs even if the
 developer window has been opened.
-
-  -
-  console.dir                                          (    obj
-    
-
-  -
+  console.dir  ( obj
 
 Using this second example will preclude use of other functions such as
 ) unless that is specifically added.
->
+
 A browser\'s debugging console or [web
 console](https://developer.mozilla.org/en-US/docs/Tools/Web_Console)
 is generally used by developers to identify errors, understand flow of
@@ -1499,253 +1286,81 @@ execution, log data and for many other purpose at runtime. This
 information is accessed through the
 [console](https://developer.mozilla.org/en-US/docs/Web/API/Console)
 object.
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-1">Section 5.1: Measuring time - console.time()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+console.time() can be used to measure how long a task in your code takes to run.
 
-  
-  console.time
-  
-
-  
-
-() can be used to measure how long a task in your code takes to run.
-
-  
-  [console.time](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)   [(\[](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)   [label](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)   [\])](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)   [console.timeEnd](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd)   [(\[](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd)   [label](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd)
-                                                                                                                                                                                                                                  starts a new timer. When                                                                                                                                                                                                               
-    -    
-
-  
+[console.time](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)   [(\[](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)   [label](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)   [\])](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)   [console.timeEnd](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd)   [(\[](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd)   [label](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd)
 
 Calling
 [\])](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd)
-is called, the elapsed time, in
-
-  
-  time
-  
-
-  
-
-milliseconds, since the original .() call is calculated and logged.
+is called, the elapsed time, in time milliseconds, since the original .() call is calculated and logged.
 Because of this behavior, you can call
-
-  -
   timeEnd   () multiple times with the same label to log the elapsed time time
             since the original .                                          
-    
-
-  -
-
 .() call was made.
->
 **Example 1:**
-
 console.
-
 time
-
 (
-
 \'response in\'
-
 )
-
 ;
-
 alert
-
 (
-
 \'Click to continue\'
-
 )
-
 ;
-
 console.
-
 timeEnd
-
 (
-
 \'response in\'
-
 )
-
 ;
-
 alert
-
 (
-
 \'One more time\'
-
 )
-
 ;
-
 console.
-
 timeEnd
-
 (
-
 \'response in\'
-
-)
-
-;
-
+);
 will output:
-
 response
-
 **in**
-
 :
-
 774.967ms
-
 response
-
 **in**
-
 :
-
 1402.199ms
-
 **Example 2:**
-
 **var**
-
 elms
-
 =
-
 document.
-
 getElementsByTagName
-
 (
-
 \'\*\'
-
 )
-
 ;
-
 *//select all elements on the page*
-
-console.
-
-time
-
-(
-
-\'Loop time\'
-
-)
-
-;
-
-**for**
-
-(
-
-**var**
-
-i
-
-=
-
-0
-
-;
-
-i
-
-\<
-
-5000
-
-;
-
-i
-
-++
-
-)
-
-{
-
-**for**
-
-(
-
-**var**
-
-j
-
-=
-
-0
-
-,
-
-length
-
-=
-
-elms.
-
-length
-
-;
-
-j
-
-\<
-
-length
-
-;
-
-j
-
-++
-
-)
-
-{
-
-*// nothing to do \...*
-
+console.time(\'Loop time\');
+**for**(**var** i = 0;
+i \< 5000;
+i ++ ) {
+**for** (
+**var** j = 0, length = elms.length;
+j \< length;
+j ++ ) { // nothing to do ...
 }
-
-}
-
-console.
-
-timeEnd
-
-(
-
-\'Loop time\'
-
-)
-
-;
-
-will output:
-
-Loop time
-
-:
-
-40.716ms
+} 
+console.timeEnd(\'Loop time\');
+will output: 
+Loop time: 40.716ms
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-2">Section 5.2: Formatting console output</h3>
@@ -1754,34 +1369,10 @@ Loop time
 Many of the console\'s print methods can also handle C-like string
 formatting, using % tokens:
 
-console.
-
-log
-
-(
-
-\'%s has %d points\'
-
-,
-
-\'Sam\'
-
-,
-
-100
-
-)
-
-;
-
+console.log(\'%s has %d points\',\'Sam\',100);
   
-  Sam has 100 points
-  
+  Sam has 100 points Displays .
 
-  
-
-Displays .
->
 The full list of format specifiers in JavaScript is:
 
 **Specifier Output**
@@ -1800,7 +1391,7 @@ The full list of format specifiers in JavaScript is:
 second parameter
 
 **Advanced styling**
->
+
 When the CSS format specifier (%c) is placed at the left side of the
 string, the print method will accept a second parameter with CSS rules
 which allow fine-grained control over the formatting of that string:
@@ -1815,28 +1406,28 @@ Displays:
 <!-- ![](./images/image013.jpg){width="7.477777777777778in" height="0.6666666666666666in"} -->
 
 It is possible to use multiple %c format specifiers:
->
+
 any substring to the right of a %c has a corresponding parameter in
 the print method; this parameter may be an empty string, if there is
 no need to apply CSS rules to that same substring; if two %c format
 specifiers are found, the 1st (encased in %c) and 2nd substring will
 have their rules defined in the 2nd and 3rd parameter of the print
 method respectively.
->
+
 if three %c format specifiers are found, then the 1st, 2nd and 3rd
 substrings will have their rules defined in the 2nd , 3rd and 4th
 parameter respectively, and so on\...
->
+
 console.log(\"%cHello %cWorld%c!!\", *// string to be printed*
->
+
 \"color: blue;\", *// applies color formatting to the 1st substring*
->
+
 \"font-size: xx-large;\", *// applies font formatting to the 2nd
 substring*
->
+
 \"/\* no CSS rule\*/\" *// does not apply any rule to the remaining
 substring* );
->
+
 Displays:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
@@ -1847,41 +1438,33 @@ Displays:
 <!-- ![](./images/image014.jpg){width="7.477777777777778in" height="0.6395833333333333in"} -->
 
 **Using groups to indent output**
->
+
 Output can be indented and enclosed in a collapsible group in the
 debugging console with the following methods:
->
+
 [()](https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed):
 creates a collapsed group of entries that can be expanded through the
 
-  
   [console.groupCollapsed](https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed)
   
-
-  
-
-  -
   [console.group](https://developer.mozilla.org/en-US/docs/Web/API/Console/group)
-  -
-
-  -
 
 disclosure button in order to reveal all the entries performed after
 this method is invoked;
->
+
 [()](https://developer.mozilla.org/en-US/docs/Web/API/Console/group):
 creates an expanded group of entries that can be collapsed in order to
 hide the entries
->
+
 after this method is invoked.
->
+
 The indentation can be removed for posterior entries by using the
 following method:
->
+
 [console.groupEnd()](https://developer.mozilla.org/en-US/docs/Web/API/Console/groupEnd):
 exits the current group, allowing newer entries to be printed in the
 parent group after this method is invoked.
->
+
 Groups can be cascaded to allow multiple indented output or
 collapsible layers within each other:
 
@@ -1942,336 +1525,116 @@ arguments will be printed in one line with a small space between them.
 **var**
 
 obj
-
 =
-
 {
-
 test
-
 :
-
 1
-
 }
-
 ;
-
 console.
-
 log
-
 (
-
 \[
-
 \'string\'
-
 \]
-
 ,
-
 1
-
 ,
-
 obj
-
 ,
-
 window
-
 )
-
 ;
-
 The log method will display the following in the debugging console:
-
 \[
-
 \'string\'
-
 \]
-
 1
-
 Object
-
 {
-
 test
-
 :
-
 1
-
 }
-
 Window
-
 {
-
 */\* truncated \*/*
-
 }
-
   
   console.log
+ 
   
-
-  
-
 Beside plain strings, () can handle other types, like arrays, objects,
 dates, functions, etc.:
 
-console.
-
-log
-
-(
-
-\[
-
-0
-
-,
-
-3
-
-,
-
-32
-
-,
-
-\'a string\'
-
-\]
-
-)
-
-;
-
-console.
-
-log
-
-(
-
-{
-
-key1
-
-:
-
-\'value\'
-
-,
-
-key2
-
-:
-
-\'another value\'
-
-}
-
-)
-
-;
-
-Displays:
-
-Array
-
-\[
-
-0
-
-,
-
-3
-
-,
-
-32
-
-,
-
-\'a string\'
-
-\]
-
-Object
-
-{
-
-key1
-
-:
-
-\'value\'
-
-,
-
-key2
-
-:
-
-\'another value\'
-
-}
+console.log(&lbrack;0, 3, 32, 'a string' &rbrack;);
+console.log({key1: 'value', key2: 'another value'});
+Displays: Array &lbrack;0, 3, 32, 'a string'&rbrack; Object { key1: 'value', key2: 'another value'}
 
 Nested objects may be collapsed: console.log({ key1: \'val\', key2:
 \[\'one\', \'two\'\], key3: { a: 1, b: 2 } }); Displays:
 
-Object
-
-{
-
-key1
-
-:
-
-\'val\'
-
-,
-
-key2
-
-:
-
-Array
-
-\[
-
-2
-
-\]
-
-,
-
-key3
-
-:
-
-Object
-
-}
+Object { key1: 'val', key2: Array \[2\], key3: Object }
 
 Certain types such as Date objects and **function**s may be displayed
 differently:
 
-console.
-
-log
-
+console.log
 (
-
 **new**
-
 Date
-
 (
-
 0
-
 )
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 **function**
-
 test
-
 (
-
 a
-
 ,
-
 b
-
 )
-
 {
-
 **return**
-
 c
-
 ;
-
 }
-
 )
-
 ;
-
 Displays:
-
 Wed Dec
-
 31
-
 1969
-
 19
-
 :
-
 00
-
 :
-
 00
-
 GMT
-
 \-
-
 0500
-
 (
-
 Eastern Standard Time
-
 )
-
 **function**
-
 test
-
 (
-
 a
-
 ,
-
 b
-
 )
-
 {
-
 **return**
-
 c
-
 ;
-
 }
-
 **Other print methods**
->
+
 In addition to the log method, modern browsers also support similar
 methods:
 
@@ -2301,20 +1664,12 @@ methods:
     string(s) or object(s).
 
 -   small warning icon (!) appears on the left side. In some browsers,
-    the background of the log
+    the background of the log is yellow.
 
-is yellow.
+[console.error](https://developer.mozilla.org/en-US/docs/Web/API/Console/error)
 
-  -
-  [console.error](https://developer.mozilla.org/en-US/docs/Web/API/Console/error)
-  -
-
-  -
-
- small times icon (⊗) appears on the left side. In some browsers, the
-background of the log is
-
-red.
+small times icon (⊗) appears on the left side. In some browsers, the
+background of the log is red.
 
 [console]{.underline}
 
@@ -2325,115 +1680,61 @@ red.
 [p](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeStamp)
 
 
-
 outputs the current time and a specified string, but is non-standard:
 
-console.
-
-timeStamp
-
+console.timeStamp
 (
-
 \'msg\'
-
 )
-
 ;
-
 Displays:
-
 00
-
 :
-
 00
-
 :
-
 00.001
-
 msg
-
 [console]{.underline}
-
 [.](https://developer.mozilla.org/en-US/docs/Web/API/Console/trace)
-
 [trac]{.underline}
-
 [e](https://developer.mozilla.org/en-US/docs/Web/API/Console/trace)
 
-
-
 outputs the current stack trace or displays the same output as the
-
 log
-
 method if invoked in
-
 the global scope.
-
 **function**
-
 sec
-
 (
-
 )
-
 {
-
 first
-
 (
-
 )
-
 ;
-
 }
-
 **function**
-
 first
-
 (
-
 )
-
 {
-
 console.
-
 trace
-
 (
-
 )
-
 ;
-
 }
-
 sec
-
 (
-
 )
-
 ;
-
 Displays:
-
 first
-
 sec
-
 (
-
 anonymous
 
 **function**
-
 )
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
@@ -2445,16 +1746,13 @@ anonymous
 
 The above image shows all the functions, with the exception of
 timeStamp, in Chrome version 56.
->
+
 These methods behave similarly to the log method and in different
 debugging consoles may render in different colors or formats.
-
   
   console.dir
+ 
   
-
-  
-
 In certain debuggers, the individual objects information can be
 further expanded by clicking the printed text or a small triangle (►)
 which refers to the respective object properties. These collapsing
@@ -2466,362 +1764,193 @@ information on this
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **function**
-
 foo
-
 (
-
 )
-
 {
-
 console.
-
 trace
-
 (
-
 \'My log statement\'
-
 )
-
 ;
-
 }
-
 foo
-
 (
-
 )
-
 ;
-
 Will display this in the console:
-
 My log statement VM696
-
 :
-
 1
-
 foo
-
 @
-
 VM696
-
 :
-
 1
-
 (
-
 anonymous
-
 **function**
-
 )
-
 @
-
 (
-
 program
-
 )
-
 :
-
 1
-
 Note: Where available it\'s also useful to know that the same stack
 trace is accessible as a property of the Error object. This can be
 useful for post-processing and gathering automated feedback.
 
 **var**
-
 e
-
 =
-
 **new**
-
 Error
-
 (
-
 \'foo\'
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 e\.
-
 stack
-
 )
-
 ;
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-5">Section 5.5: Tabulating values - console.table()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
   
   console.table
+ 
   
-
-  
-
 In most environments, () can be used to display objects and arrays in
 a tabular format.
->
+
 **For example:**
-
 console.
-
 table
-
 (
-
 \[
-
 \'Hello\'
-
 ,
-
 \'world\'
-
 \]
-
 )
-
 ;
-
 displays like:
->
-**(index) value**
->
+
+*(index) value**
+
 0 \"Hello\" 1 \"world\"
-
 console.
-
 table
-
 (
-
 {
-
 foo
-
 :
-
 \'bar\'
-
 ,
-
 bar
-
 :
-
 \'baz\'
-
 }
-
 )
-
 ;
 
 displays like:
->
+
 **(index) value**
->
 \"foo\" \"bar\" \"bar\" \"baz\"
-
 **var**
-
 personArr
-
 =
-
 \[
-
 {
-
 \"personId\"
-
 :
-
 123
-
 ,
-
 \"name\"
-
 :
-
 \"Jhon\"
-
 ,
-
 \"city\"
-
 :
-
 \"Melbourne\"
-
 ,
-
 \"phoneNo\"
-
 :
-
 \"1234567890\"
-
 }
-
 ,
-
 {
-
 \"personId\"
-
 :
-
 124
-
 ,
-
 \"name\"
-
 :
-
 \"Amelia\"
-
 ,
-
 \"city\"
-
 :
-
 \"Sydney\"
-
 ,
-
 \"phoneNo\"
-
 :
-
 \"1234567890\"
-
 }
-
 ,
-
 {
-
 \"personId\"
-
 :
-
 125
-
 ,
-
 \"name\"
-
 :
-
 \"Emily\"
-
 ,
-
 \"city\"
-
 :
-
 \"Perth\"
-
 ,
-
 \"phoneNo\"
-
 :
-
 \"1234567890\"
-
 }
-
 ,
-
 {
-
 \"personId\"
-
 :
-
 126
-
 ,
-
 \"name\"
-
 :
-
 \"Abraham\"
-
 ,
-
 \"city\"
-
 :
-
 \"Perth\"
-
 ,
-
 \"phoneNo\"
-
 :
-
 \"1234567890\"
-
 }
-
 \]
-
 ;
-
 console.
-
 table
-
 (
-
 personArr
-
 ,
-
 \[
-
 \'name\'
-
 ,
-
 \'personId\'
-
 \]
-
 )
-
 ;
 
 displays like:
@@ -2836,12 +1965,8 @@ displays like:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-6">Section 5.6: Counting - console.count()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
   
   [console.count](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)   [(\[](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)   [obj](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
-  -  
-
-  
 
 [\])](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
 places a counter on the object\'s value provided as argument. Each time
@@ -2852,838 +1977,434 @@ string \'\'). A label together with a number is displayed in the
 debugging console according to the following format:
 
 \[
-
 label
-
 \]
-
 :
-
 X
 
 label represents the value of the object passed as argument and X
 represents the counter\'s value.
->
+
 An object\'s value is always considered, even if variables are
 provided as arguments:
 
 **var**
-
 o1
-
 =
-
 1
-
 ,
-
 o2
-
 =
-
 \'2\'
-
 ,
-
 o3
-
 =
-
 \"\"
-
 ;
-
 console.
-
 count
-
 (
-
 o1
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 o2
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 o3
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 1
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 \'2\'
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 \'\'
-
 )
-
 ;
-
 Displays:
-
 1
-
 :
-
 1
-
 2
-
 :
-
 1
-
 :
-
 1
-
 1
-
 :
-
 2
-
 2
-
 :
-
 2
-
 :
-
 1
-
 Strings with numbers are converted to
-
 Number
-
 objects:
-
 console.
-
 count
-
 (
-
 42.3
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 Number
-
 (
-
 \'42.3\'
-
 )
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 \'42.3\'
-
 )
-
 ;
-
 Displays:
-
 42.3
-
 :
-
 1
-
 42.3
-
 :
-
 2
-
 42.3
-
 :
-
 3
-
 Functions point always to the global
-
 Function
-
 object:
-
 console.
-
 count
-
 (
-
 console.
-
 constructor
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 **function**
-
 (
-
 )
-
 {
-
 }
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 Object
-
 )
-
 ;
-
 **var**
-
 fn1
-
 =
-
 **function**
-
 myfn
-
 (
-
 )
-
 {
-
 }
-
 ;
-
 console.
-
 count
-
 (
-
 fn1
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 Number
-
 )
-
 ;
-
 Displays:
-
 \[
-
 object
-
 Function
-
 \]
-
 :
-
 1
-
 \[
-
 object
-
 Function
-
 \]
-
 :
-
 2
-
 \[
-
 object
-
 Function
-
 \]
-
 :
-
 3
-
 \[
-
 object
-
 Function
-
 \]
-
 :
-
 4
-
 \[
-
 object
-
 Function
-
 \]
-
 :
-
 5
-
 Certain objects get specific counters associated to the type of object
 they refer to:
 
 console.
-
 count
-
 (
-
 **undefined**
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 document.
-
 Batman
-
 )
-
 ;
-
 **var**
-
 obj
-
 ;
-
 console.
-
 count
-
 (
-
 obj
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 Number
-
 (
 
 **undefined**
 
 )
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 **NaN**
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 **NaN**
-
 \+
-
 3
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 1
-
 /
-
 0
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 String
-
 (
-
 1
-
 /
-
 0
-
 )
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 window
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 document
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 console
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 console.
-
 \_\_proto\_\_
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 console.
-
 constructor
-
 .
-
 **prototype**
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 console.
-
 \_\_proto\_\_
-
 .
-
 constructor
-
 .
-
 **prototype**
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 Object
-
 .
-
 getPrototypeOf
-
 (
-
 console
-
 )
-
 )
-
 ;
-
 console.
-
 count
-
 (
-
 **null**
-
 )
-
 ;
-
 Displays:
-
 **undefined**
-
 :
-
 1
-
 **undefined**
-
 :
-
 2
-
 **undefined**
-
 :
-
 3
-
 **NaN**
-
 :
-
 1
-
 **NaN**
-
 :
-
 2
-
 **NaN**
-
 :
-
 3
-
 **Infinity**
-
 :
-
 1
-
 **Infinity**
-
 :
-
 2
-
 \[
-
 object Window
-
 \]
-
 :
-
 1
-
 \[
-
 object HTMLDocument
-
 \]
-
 :
-
 1
-
 \[
-
 object
-
 Object
-
 \]
-
 :
-
 1
-
 \[
-
 object
-
 Object
-
 \]
-
 :
-
 2
-
 \[
-
 object
-
 Object
-
 \]
-
 :
-
 3
-
 \[
-
 object
-
 Object
-
 \]
-
 :
-
 4
-
 \[
-
 object
-
 Object
-
 \]
-
 :
-
-5
 
 **null**
-
 :
-
 1
-
 **Empty string or absence of argument**
->
+
 If no argument is provided while **sequentially inputting the count
 method in the debugging console**, an empty string is assumed as
 parameter, i.e.:
 
-\>
-
 console.
-
 count
-
 (
-
 )
-
 ;
-
 :
-
 1
-
 \>
-
 console.
-
 count
-
 (
-
 \'\'
-
 )
-
 ;
-
 :
-
 2
-
 \>
-
 console.
-
 count
-
 (
-
 \"\"
-
 )
-
 ;
-
 :
-
 3
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-7">Section 5.7: Clearing the console - console.clear()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
   
   console.clear
-  
 
-  
-
+ 
 You can clear the console window using the () method. This removes all
 previously printed messages in the console and may print a message
 like \"Console was cleared\" in some environments.
