@@ -853,7 +853,7 @@ concept of an "empty" property.</p>
     from the function call
 	<ul>
       <li><b>function</b> foo(param) {<br>
-        console.log('is undefined?', param === <b>undefined</b>);<br>
+          console.log('is undefined?', param === <b>undefined</b>);<br>
 		}<br>
         foo('a');<br>
         foo();<br>
@@ -861,16 +861,16 @@ concept of an "empty" property.</p>
         // is undefined? true<br>
 	  </li>
 	</ul>
+  </li>
+</ul>
 
 <p><b>undefined</b> is also a property of the global window object.</p>
 
-<pre>
-// Only in browsers
+<pre>// Only in browsers
 console.log(window.<b>undefined</b>); // undefined
-window.hasOwnProperty('undefined'); // true
-</pre>
+window.hasOwnProperty('undefined'); // true</pre>
 
-<p>Version &lt; 5</p>
+<h5>Version &lt; 5</h5>
 
 <p>Before ECMAScript 5 you could actually change the value of the
 window.<b>undefined</b> property to any other value potentially breaking everything.</p>
@@ -890,53 +890,40 @@ variable) that represents mathematical infinity. It is a reference to Number.POS
 overflows. This actually means there is no division by 0 errors in
 JavaScript, there is Infinity!</p>
 
-<p>To get 
+<p>There is also <b>-Infinity</b> which is mathematical negative infinity, and it's lower 
+than any other value.</p>
+
+<p>To get <b>-Infinity</b> you negate <b>Infinity</b>, or get a reference to it in 
+<b>Number.NEGATIVE_INFINITY</b>.
 
 <pre>
 - <b>Infinity</b>; // -Infinity
 </pre>
 
-  
+<p>Now let's have some fun with examples:</p>
 
-There is also - which is mathematical negative infinity, and it\'s
-lower than any other value.
+<pre>
+<b>Infinity</b> &gt; 123192310293;  // true
+<b>-Infinity</b> &lt; -123192310293;  //true
+1 / 0;  // Infinity
+Math.pow(123123123, 9123192391023); // Infinity
+Number.MAX_VALUE * 2;  // Infinity
+23 / <b>Infinity;</b>  // 0
+<b>-Infinity;</b>  // -Infinity
+<b>-Infinity</b> === Number.NEGATIVE_INFINITY;  // true
+-0;  // -0 , yes there is a negative 0 in the Language
+0 === -0;  // true
+1 / -0;  // -Infinity
+1 / 0 === 1 / -0;  // false
+<b>Infinity + Infinity</b>  // Infinity
 
-  -
-  <b>Infinity</b>   you negate <b>Infinity</b>, or get a       Number   .   NEGATIVE_INFINITY
-                 reference to it in                                   
-				 To get -.
+<b>var</b> a = 0, b = -0;
 
--
-
-(<b>Infinity</b>);
-*// -Infinity*
-
-Now let\'s have some fun with examples:
-
-<b>Infinity</b>
-\>
-
-123192310293; // true
-- <b>Infinity</b>
-
-\<
-\-
-123192310293; // true
-1/0; // Infinity
-Math.pow(123123123,9123192391023); // Infinity
-Number.MAX_VALUE\*2; // Infinity
-23/<b>Infinity</b>; // 0
-\-<b>Infinity</b>;  // -Infinity
-\-<b>Infinity</b> === Number.NEGATIVE_INFINITY; // true
-\-0; // -0 , yes there is a negative 0 in the language
-0 === \- 0; // true
-1 / \-0; // -Infinity
-1 / 0 === 1 / \- 0;  // false
-<b>Infinity</b>\+<b>Infinity</b>;  // Infinity
-<b>var</b> a = 0 , b = \- 0;
-a === b ;  // true
+a === b;  // true
 1 / a === 1 / b;  // false
+
 // Try your own!
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-6">Section 3.6: Number constants</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -947,108 +934,54 @@ Number.MAX_VALUE;  // 1.7976931348623157e+308
 Number.MAX_SAFE_INTEGER;  // 9007199254740991
 Number.MIN_VALUE;  // 5e-324
 Number.MIN_SAFE_INTEGER;  // -9007199254740991
+
 Number.EPSILON; // 0.0000000000000002220446049250313
+
 Number.POSITIVE_INFINITY; // Infinity
 Number.NEGATIVE_INFINITY;  // -Infinity
+
 Number.<b>NaN</b>;  // NaN
 </pre>
 
 <p>In many cases the various operators in JavaScript will break with
-values outside the range of</p>
+values outside the range of (Number.MIN_SAFE_INTEGER,Number.MAX_SAFE_INTEGER)</p>
 
-  Number    .   MIN_SAFE_INTEGER         ,   Number    .   MAX_SAFE_INTEGER
-
-()
-
-  -
-  Number                         .     EPSILON
-  - - 
-
-  -
-
-Note that represents the different between one and the smallest Number
+<p>Note that represents the different between one and the smallest Number
 greater than one, and thus the smallest possible difference between
 two different Number values. One reason to use this is due to the
 nature of how numbers are stored by JavaScript see Check the equality
-of two numbers
-
+of two numbers.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-7">Section 3.7: Operations that return NaN</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Mathematical operations on values other than numbers return NaN.</p>
 
-Mathematical operations on values other than numbers return NaN.
+<pre>
+"b" * 3
+"cde" - "e"
+&lbrack;1, 2, 3&rbrack; * 2
+</pre>
 
-\"b\"
+<p>An exception: Single-number arrays.</p>
 
-\*
+<pre>
+&lbrack;2&rbrack; * &lbrack;3&rbrack;  // Returns 6
+</pre>
 
-3
+<p>Also, remember that the + operator concatenates strings.</p>
 
-\"cde\"
+<pre>
+"a" + "b"  // Returns "ab"
+</pre>
 
-\-
+<p>Dividing zero by zero returns <b>NaN</b>.</p>
 
-\"e\"
+<pre>
+0 / 0  // NaN
+</pre>
 
-\[
-
-1
-
-,
-
-2
-
-,
-
-3
-
-\]
-
-\*
-
-2
-
-An exception: Single-number arrays.
-
-\[
-
-2
-
-\]
-
-\*
-
-\[
-
-3
-
-\]
-
-*// Returns 6*
-
-Also, remember that the + operator concatenates strings.
-
-\"a\"
-
-\+
-
-\"b\"
-
-*// Returns \"ab\"*
-
-Dividing zero by zero returns <b>NaN</b>.
-
-0
-
-/
-
-0
-
-*// NaN*
-
-Note: In mathematics generally (unlike in JavaScript programming),
-dividing by zero is not possible.
-
+<p>Note: In mathematics generally (unlike in JavaScript programming),
+dividing by zero is not possible.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-8">Section 3.8: Math library functions that return NaN</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
