@@ -672,6 +672,7 @@ primitive value. Unlike <b>undefined</b>, it is not a property of the global obj
 <pre>
 <b>null</b> == <b>undefined</b>; // true
 <b>null</b> === <b>undefined</b>; // false
+</pre>
 
 <p><b>CAREFUL</b>: The <b>typeof null</b> is 'object'.</p>
 
@@ -813,16 +814,16 @@ window.hasOwnProperty(\'NaN\'); // true
 At first glance it may appear that <b>null</b> and <b>undefined</b> are
 basically the same, however there are subtle but important
 differences.
->
+
 <b>undefined</b> is the absence of a value in the compiler, because where
 it should be a value, there hasn\'t been put one, like the case of an
 unassigned variable.
->
+
 <b>undefined</b> is a global value that represents the absence of an
 assigned value.
 
   
-  <b>typeof</b> <b>undefined</b> === \'undefined\'
+<b>typeof</b> <b>undefined</b> === \'undefined\'
   
 
   
