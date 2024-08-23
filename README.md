@@ -303,7 +303,7 @@ window.alert(message);
 alert(message);
 </pre>
 
-<p>So what does <pre>window.alert()</pre> do? Well, let's take the following example:</p>
+<p>So what does window.alert() do? Well, let's take the following example:</p>
 
 <pre>
 alert('hello, world');
@@ -348,41 +348,31 @@ that do not block users from interacting with the page - in order to
 create a better user experience. Nevertheless, it can be useful for
 debugging.</p>
 
-<p>Starting with Chrome 46.0, <b>\></b> 
+<p>Starting with Chrome 46.0, window.alert() is blocked inside an <b>&lt;iframe&gt;</b> 
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/alert">
 unless its sandbox attribute has the value allow-modal</a>.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch1-4">Section 1.4: Using window.prompt()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>An easy way to get an input from a user is by using the () method.</p>
 
-  prompt
+<h4>Syntax</h4>
 
+<pre>
+prompt(text, \[<b>default</b>]);
+</pre>
 
-An easy way to get an input from a user is by using the () method.
+<ul>
+  <li><b>text</b>: The text displayed in the prompt box.</li>
+  <li><b>default</b>): A default value for the input field (optional).</li>
+</ul>
 
-<b>Syntax</b>
+<h4>Examples</h4>
 
-prompt(text, \[<b>default</b>\]);
-
-<b>text</b>:
-
-The text displayed in the prompt box.
-
-<b>default</b>).
-
-:
-
-A default value for the input field (optional
-
-<b>Examples</b>
-
-<b>var</b>
-
-age=prompt(\"How old are you?\");
-
-console.log(age);
-
-*// Prints the value inserted by the user*
+<pre>
+<b>var</b> age=prompt("How old are you?");
+console.log(age); // Prints the value inserted by the user
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image009.png"
@@ -391,52 +381,47 @@ console.log(age);
   style="border: 2px solid #000000; width:4.603in;" />
 <!--{width="4.603472222222222in" height="1.9548611111111112in"}-->
 
-If the user clicks the OK button, the input value is returned.
-Otherwise, the method returns <b>null</b>.
+<p>If the user clicks the <b>OK</b> button, the input value is returned.
+Otherwise, the method returns <b>null</b>.</p>
 
-The return value of prompt is always a string, unless the user clicks
-Cancel , in which that case it returns <b>null</b>. Safari is an
+<p>The return value of prompt is always a string, unless the user clicks
+<b>Cancel</b>, in which that case it returns <b>null</b>. Safari is an
 exception in that when the user clicks Cancel, the function returns an
 empty string. From there, you can convert the return value to another
-type, such as an integer.
+type, such as an integer.</p>
 
-<b>Notes</b>
+<h4>Notes</h4>
 
-  <b>\<iframe</b>
-
-
-<p>While the prompt box is displayed, the user is prevented from
-accessing other parts of the page, since dialog boxes are modal
-windows.</p>
-
-<p>Starting with Chrome 46.0 this method is blocked inside an <b>&gt;</b>
-unless its sandbox attribute has the value allow-modal.</p>
-
-<h2 id="ch1-5">Section 1.5: Using window.confirm()</h2>
-
-  window.confirm
-
-<p>The () method displays a modal dialog with an optional message and two
+<ul>
+  <li>While the prompt box is displayed, the user is prevented from accessing 
+    other parts of the page, since dialog boxes are modal windows.</li>
+  <li>Starting with Chrome 46.0 this method is blocked inside an <b>&lt;iframe&gt;</b>
+    unless its sandbox attribute has the value allow-modal.</li>
+</ul>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch1-5">Section 1.5: Using window.confirm()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>The window.confirm() method displays a modal dialog with an optional message and two
 buttons, OK and Cancel.</p>
 
 <p>Now, let\'s take the following example:</p>
 
 <pre>
-result=window.confirm(message);
+result = window.confirm(message);
 </pre>
 
 <p>Here, <b>message</b> is the optional string to be displayed in the dialog
 and <b>result</b> is a boolean value indicating whether OK or Cancel was
 selected (true means OK).</p>
 
-window.confirm
-
-
-<p>() is typically used to ask for user confirmation before doing a
+<p>window.confirm() is typically used to ask for user confirmation before doing a
 dangerous operation like deleting something in a Control Panel:</p>
 
-<b>if</b> ( window.confirm(\"Are you sure you want to delete this?\") ) { deleteItem (itemId);
+<pre>
+<b>if</b> (window.confirm("Are you sure you want to delete this?")) { 
+  deleteItem (itemId);
 }
+</pre>
 
 <p>The output of that code would look like this in the browser:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -450,48 +435,47 @@ dangerous operation like deleting something in a Control Panel:</p>
 <p>If you need it for later use, you can simply store the result of the
 user\'s interaction in a variable:</p>
 
+<pre>
 <p><b>var</b> deleteConfirm = window.confirm(\"Are you sure you want to
 delete this?\");</p>
+</pre>
 
-**Notes**
+<h4>Notes</h4>
 
-The argument is optional and not required by the specification.
-
-Dialog boxes are modal windows - they prevent the user from accessing
-the rest of the program\'s interface until the dialog box is closed.
-For this reason, you should not overuse any function that creates a
-dialog box
-
-(or modal window). And regardless, there are very good reasons to
-avoid using dialog boxes for confirmation.
-
-  **\<iframe**
-
-Starting with Chrome 46.0 this method is blocked inside an **\>**
-unless its sandbox attribute has the value allow-modal.
-
-It is commonly accepted to call the confirm method with the window
-notation removed as the window object is always implicit. However, it
-is recommended to explicitly define the window object as expected
-behavior may change due to implementation at a lower scope level with
-similarly named methods.
+<ul>
+  <li>The argument is optional and not required by the specification.</li>
+  <li>Dialog boxes are modal windows - they prevent the user from accessing
+    the rest of the program\'s interface until the dialog box is closed.
+	For this reason, you should not overuse any function that creates a
+	dialog box (or modal window). And regardless, there are very good reasons 
+	to avoid using dialog boxes for confirmation.</li>
+  <li>Starting with Chrome 46.0 this method is blocked inside an <b>&lt;iframe&gt;</b>
+    unless its sandbox attribute has the value allow-modal.</li>
+  <li>It is commonly accepted to call the confirm method with the window
+    notation removed as the window object is always implicit. However, it
+	is recommended to explicitly define the window object as expected
+	behavior may change due to implementation at a lower scope level with
+	similarly named methods.</li>
+</ul>
 
 <h2 id="ch1-6">Section 1.6: Using the DOM API (with graphical text: Canvas, SVG, or image file)</h2>
 
 <h4>Using canvas elements</h4>
+
 <p>HTML provides the canvas element for building raster-based images.</p>
+
 <p>First build a canvas for holding image pixel information.</p>
 
 <pre>
-<b>var</b> canvas = document.createElement ( 'canvas' );
-canvas.width=500;
-canvas.height=250;
+<b>var</b> canvas = document.createElement('canvas');
+canvas.width = 500;
+canvas.height = 250;
 </pre>
 
 <p>Then select a context for the canvas, in this case two-dimensional:</p>
 
 <pre>
-<b>var</b> ctx=canvas.getContext ( '2d' );
+<b>var</b> ctx=canvas.getContext ('2d');
 </pre>
 
 <p>Then set properties related to the text:</p>
@@ -501,292 +485,159 @@ ctx.font = '30px Cursive';
 ctx.fillText ( "Hello world!", 50, 50 );
 </pre>
 
-Then insert the canvas element into the page to take effect:
+<p>Then insert the canvas element into the page to take effect:</p>
 
-document.body.appendChild ( canvas );
+<pre>
+document.body.appendChild(canvas);
+</pre>
 
 <h4>Using SVG</h4>
 
-SVG is for building scalable vector-based graphics and can be used
-within HTML.
+<p>SVG is for building scalable vector-based graphics and can be used
+within HTML.</p>
 
-First create an SVG element container with dimensions:
+<p>First create an SVG element container with dimensions:</p>
 
 <pre>
-**var** svg=document.createElementNS(\'http://www.w3.org/2000/svg\', \'svg\');
+<b>var</b> svg=document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 svg.width=500;
 svg.height=50;
 </pre>
 
-Then build a text element with the desired positioning and font
-characteristics:
+<p>Then build a text element with the desired positioning and font
+characteristics:</p>
 
-**var**
+<pre>
+<b>var</b> text = document.createElementNS('http://www.w3.org/2000/svg','text');
+text.setAttribute('x','0');
+text.setAttribute('y','50');
+text.style.fontFamily='Times New Roman';
+text.style.fontSize='50';
+</pre>
 
-text
+<p>Then add the actual text to display to the textelement:</p>
 
-=
+<pre>
+text.textContent='Hello world!';
+</pre>
 
-document.
+<p>Finally add the text element to our svg container and add the svg
+container element to the HTML document:</p>
 
-createElementNS
-
-(
-
-\'http://www.w3.org/2000/svg\',\'text\');
-
-text.setAttribute(\'x\',\'0\');
-text.setAttribute(\'y\',\'50\');
-text.style.fontFamily=\'Times New Roman\';
-text.style.fontSize=\'50\';
-
-Then add the actual text to display to the textelement:
-
-text.textContent=\'Hello world!\';
-
-Finally add the text element to our svg container and add the svg
-container element to the HTML document:
-
+<pre>
 svg.appendChild(text);
 document.body.appendChild(svg);
+</pre>
 
-**Image file**
->
-If you already have an image file containing the desired text and have
+<h4>Image file</h4>
+
+<p>If you already have an image file containing the desired text and have
 it placed on a server, you can add the URL of the image and then add
-the image to the document as follows:
+the image to the document as follows:</p>
 
-**var** img=**new** Image ( );
-
-img.src= \'https://i.ytimg.com/vi/zecueq-mo4M/maxresdefault.jpg\';
+<pre>
+<b>var</b> img=<b>new</b> Image ( );
+img.src= 'https://i.ytimg.com/vi/zecueq-mo4M/maxresdefault.jpg';
 document.body.appendChild(img);
+</pre>
 
 <h2 id="ch2">Chapter 2: JavaScript Variables</h2>
 
-**variable_name {Required} The name of the variable: used when calling
-it.**
+<b>variable_name {Required} The name of the variable: used when calling
+it.</b>
 
-= **\[Optional\]** Assignment (defining the variable)
+= <b>&lbrack;Optional&rbrack;</b> Assignment (defining the variable)
 
-value **{Required when using Assignment}** The value of a variable
-**\[default: undefined\]**
+value <b>{Required when using Assignment}</b> The value of a variable
+<b>&lbrack;default: undefined&rbrack;</b>
 
-Variables are what make up most of JavaScript. These variables make up
+<p>Variables are what make up most of JavaScript. These variables make up
 things from numbers to objects, which are all over JavaScript to make
-one\'s life much easier.
-
+one\'s life much easier.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-1">Section 2.1: Defining a Variable</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+<b>var</b> myVariable = "This is a variable!";
+</pre>
 
-**var** myVariable = \"This is a variable!\";
-
-This is an example of defining variables. This variable is called a
-\"string\" because it has ASCII characters (A-Z, 0-9, !@#\$, etc.)
-
+<p>This is an example of defining variables. This variable is called a
+\"string\" because it has ASCII characters (A-Z, 0-9, !@#\$, etc.)</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-2">Section 2.2: Using a Variable</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-**var** number1 = 5;
+<pre>
+<b>var</b> number1 = 5;
 number1=3;
-
-  window.alert
-
+</pre>
 
 <p>Here, we defined a number called \"number1\" which was equal to 5. 
 However, on the second line, we changed the value to 3. To show the 
 value of a variable, we log it to the console or use ():</p>
 
-console.
+<pre>
+console.log(number1); // 3
+window.alert(number1); // 3 
+</pre>
 
-log(number1);
-*// 3* window.alert(number1);
-*// 3* 
-To add, subtract, multiply, divide, etc., we do like so:
+<p>To add, subtract, multiply, divide, etc., we do like so:</p>
 
-number1 = number1 \+ 5;
-*// 3 + 5 = 8* number1 = number1 \- 6;
-*// 8 - 6 = 2* **var** number2 = number1 \* 10;
-*// 2 (times) 10 = 20* **var** number3 = number2 / number1;
-*// 20 (divided by) 2 = 10;* 
+<pre>
+number1 = number1 + 5; // 3 + 5 = 8
+number1 = number1 - 6; // 8 - 6 = 2
+<b>var</b> number2 = number1 * 10; // 2 (times) 10 = 20
+<b>var</b> number3 = number2 / number1; // 20 (divided by) 2 = 10;
+</pre>
 
 <p>We can also add strings which will concatenate them, or put them
 together. For example:</p>
 
-**var**
-
-myString = \"I am a \" \+ \"string!\" ;
-*// \"I am a string!\"*
-
+<pre>
+<b>var</b> myString = "I am a " + "string!" ; // "I am a string!"
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-3">Section 2.3: Types of Variables</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+**var** myInteger = 12; // 32-bit number (from -2,147,483,648 to 2,147,483,647)
+**var** myLong = 9310141419482 ; // 64-bit number (from -9,223,372,036,854,775,808 to
+*9,223,372,036,854,775,807)
+**var** myFloat = 5.5; // 32-bit floating-point number (decimal)
+**var** myDouble = 9310141419482.22; // 64-bit floating-point number
 
-**var**
+**var** myBoolean = **true**; // 1-bit true/false (0 or 1)
+**var** myBoolean2 = **false**;
 
-myInteger = 12;
+**var** myNotANumber = **NaN**;
+**var** NaN_Example = 0 / 0 ; // NaN: Division by Zero is not possible
 
-*// 32-bit number (from -2,147,483,648 to 2,147,483,647)*
+**var** notDefined ; // undefined: we didn\'t define it to anything yet
+window.alert(aRandomVariable); // undefined
 
-**var**
-
-myLong = 9310141419482 ;
-
-*// 64-bit number (from -9,223,372,036,854,775,808 to*
-
-*9,223,372,036,854,775,807)*
-
-**var**
-
-myFloat = 5.5;
-
-*// 32-bit floating-point number (decimal)*
-
-**var**
-
-myDouble = 9310141419482.22;
-
-*// 64-bit floating-point number*
-
-**var**
-
-myBoolean = **true**;
-
-*// 1-bit true/false (0 or 1)*
-
-**var**
-
-myBoolean2
-
-=
-
-**false**;
-
-**var**
-
-myNotANumber
-
-=
-
-**NaN**;
-
-**var** NaN_Example = 0 / 0 ; 
-
-*// NaN: Division by Zero is not possible* 
-
-**var** notDefined ;
-
-*// undefined: we didn\'t define it to anything yet*
-
-window.alert(aRandomVariable);
-*// undefined*
-
-**var**
-
-myNull=**null**;
-
-*// null*
-
-*// etc\...*
-
+**var** myNull=**null**; // null
+<i>// etc...</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-4">Section 2.4: Arrays and Objects</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-**var**
-
-myArray=\[\];
-
-*// empty array*
+<pre>
+<b>var</b> myArray=[]; // empty array
+</pre>
 
 <p>An array is a set of variables. For example:</p>
 
-**var**
-
-favoriteFruits
-
-=
-
-\[
-
-\"apple\"
-
-,
-
-\"orange\"
-
-,
-
-\"strawberry\"
-
-\]
-
-;
-
-**var**
-
-carsInParkingLot
-
-=
-
-\[
-
-\"Toyota\"
-
-,
-
-\"Ferrari\"
-
-,
-
-\"Lexus\"
-
-\]
-
-;
-
-**var**
-
-employees
-
-=
-
-\[
-
-\"Billy\"
-
-,
-
-\"Bob\"
-
-,
-
-\"Joe\"
-
-\]
-
-;
-
-**var**
-
-primeNumbers
-
-=
-
-\[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31\];
-
-**var**
-
-randomVariables = \[ 2, \"any type works\", **undefined**, **null**, **true**, 2.51 \];
+<pre>
+<b>var</b> favoriteFruits = &lbrack;"apple", "orange", "strawberry"&rbrack;;
+<b>var</b> carsInParkingLot = &lbrack;"Toyota", "Ferrari", "Lexus"&rbrack;;
+<b>var</b> employees = &lbrack;"Billy", "Bob", "Joe"&rbrack;;
+<b>var</b> primeNumbers = &lbrack;2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31&rbrack;;
+<b>var</b> randomVariables = &lbrack;2, "any type works", <b>undefined</b>, <b>null</b>, <b>true</b>, 2.51&rbrack;;
 
 myArray = \[ \"zero\" , \"one\" , \"two\" \];
-
 window.alert ( myArray \[0 \] );
+                          // 0 is the first element of an array*
 
-*// 0 is the first element of an array*
-
-*// in this case, the value would be \"zero\"*
+// in this case, the value would be \"zero\"*
 
 myArray
 
