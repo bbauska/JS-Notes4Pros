@@ -707,27 +707,27 @@ for a detailed explanation of the algorithm.</p>
 <p>These examples will help you better understand the isNaN() behavior:</p>
 
 <pre>
-isNaN(<b>NaN</b>);           // true
-isNaN(1);                    // false: 1 is a number
-isNaN(-2e-4);                // false: -2e-4 is a number (-0.0002) in scientific notation
-isNaN(<b>Infinity</b>);      // false: Infinity is a number
-isNaN(<b>true</b>);          // false: converted to 1, which is a number
-isNaN(<b>false</b>);         // false: converted to 0, which is a number
-isNaN(<b>null</b>);          // false: converted to 0, which is a number
-isNaN(\"\");                 // false: converted to 0, which is a number
-isNaN(\"\");                 // false: converted to 0, which is a number
-isNaN(\"45.3\");             // false: string representing a number, converted to 45.3
-isNaN(\"1.2e3\");            // false: string representing a number, converted to 1.2e3
-isNaN(\"Infinity\");         // false: string representing a number, converted to Infinity
-isNaN(<b>new</b> Date);      // false: Date object, converted to milliseconds since epoch
-isNaN(\"10\$\");             //true : conversion fails, the dollar sign is not a digit
-isNaN(\"hello\");            // true : conversion fails, no digits at all
-isNaN(<b>undefined</b>);     // true : converted to NaN 
-isNaN();                     // true : converted to NaN (implicitly undefined)
-isNaN(<b>function</b>(){});  //true : conversion fails
-isNaN({});                   // true : conversion fails
-isNaN(\[1, 2\]);             // true : converted to \"1, 2\", which can\'t be converted to a number
-isNaN(\[\]) and  isNaN   (\[34\]) both return <b>false</b>, but isNaN
+isNaN(<b>NaN</b>);          // true
+isNaN(1);               // false: 1 is a number
+isNaN(-2e-4);           // false: -2e-4 is a number (-0.0002) in scientific notation
+isNaN(<b>Infinity</b>);    // false: Infinity is a number
+isNaN(<b>true</b>);        // false: converted to 1, which is a number
+isNaN(<b>false</b>);       // false: converted to 0, which is a number
+isNaN(<b>null</b>);        // false: converted to 0, which is a number
+isNaN("");                 // false: converted to 0, which is a number
+isNaN("");                 // false: converted to 0, which is a number
+isNaN("45.3");             // false: string representing a number, converted to 45.3
+isNaN("1.2e3");            // false: string representing a number, converted to 1.2e3
+isNaN("Infinity");         // false: string representing a number, converted to Infinity
+isNaN(<b>new</b> Date); // false: Date object, converted to milliseconds since epoch
+isNaN("10$");              //true : conversion fails, the dollar sign is not a digit
+isNaN("hello");            // true : conversion fails, no digits at all
+isNaN(<b>undefined</b>);   // true : converted to NaN 
+isNaN();                   // true : converted to NaN (implicitly undefined)
+isNaN(<b>function</b>(){}); //true : conversion fails
+isNaN({});                  // true : conversion fails
+isNaN([1, 2]);              // true : converted to "1, 2", which can't be converted to a number
+isNaN([]) and isNaN ([34]) both return <b>false</b>, but isNaN
 </pre>
 
 <p>This last one is a bit tricky: checking if an Array is <b>NaN</b>. To do
