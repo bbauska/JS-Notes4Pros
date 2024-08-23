@@ -273,7 +273,7 @@ document.body.appendChild(element); //add the newly created element to the DOM
 <p>Note that in order to manipulate elements in the DOM using JavaScript,
 the JavaScript code must be run *after* the relevant element has been
 created in the document. This can be achieved by putting the
-JavaScript **\>** tags *after* all of your other **\>** content.
+JavaScript <b>\></b> tags *after* all of your other <b>\></b> content.
 Alternatively, you can also use [an event
 listener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
 to listen to eg. [window\'s onload
@@ -289,10 +289,12 @@ execution queue, which gives the browser a chance to finish doing some
 non-JavaScript things that have been waiting to finish before
 attending to this new piece of JavaScript.</p>
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch1-3">Section 1.3: Using window.alert()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 <p>The alert method displays a visual alert box on screen. The alert
-method parameter is displayed to the user in **plain** text:</p>
+method parameter is displayed to the user in <b>plain</b> text:</p>
 
 <pre>
 window.alert(message);
@@ -349,33 +351,35 @@ that do not block users from interacting with the page - in order to
 create a better user experience. Nevertheless, it can be useful for
 debugging.</p>
 
-<p>Starting with Chrome 46.0, **\>** [unless its sandbox attribute has the
+<p>Starting with Chrome 46.0, <b>\></b> [unless its sandbox attribute has the
 value allow-modal](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert).
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch1-4">Section 1.4: Using window.prompt()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   prompt
 
 
 An easy way to get an input from a user is by using the () method.
 
-**Syntax**
+<b>Syntax</b>
 
-prompt(text, \[**default**\]);
+prompt(text, \[<b>default</b>\]);
 
-**text**:
+<b>text</b>:
 
 The text displayed in the prompt box.
 
-**default**).
+<b>default</b>).
 
 :
 
 A default value for the input field (optional
 
-**Examples**
+<b>Examples</b>
 
-**var**
+<b>var</b>
 
 age=prompt(\"How old are you?\");
 
@@ -391,17 +395,17 @@ console.log(age);
 <!--{width="4.603472222222222in" height="1.9548611111111112in"}-->
 
 If the user clicks the OK button, the input value is returned.
-Otherwise, the method returns **null**.
+Otherwise, the method returns <b>null</b>.
 >
 The return value of prompt is always a string, unless the user clicks
-Cancel , in which that case it returns **null**. Safari is an
+Cancel , in which that case it returns <b>null</b>. Safari is an
 exception in that when the user clicks Cancel, the function returns an
 empty string. From there, you can convert the return value to another
 type, such as an integer.
 >
-**Notes**
+<b>Notes</b>
 
-  **\<iframe**
+  <b>\<iframe</b>
 
 
 <p>While the prompt box is displayed, the user is prevented from
@@ -424,8 +428,8 @@ buttons, OK and Cancel.</p>
 result=window.confirm(message);
 </pre>
 
-Here, **message** is the optional string to be displayed in the dialog
-and **result** is a boolean value indicating whether OK or Cancel was
+Here, <b>message</b> is the optional string to be displayed in the dialog
+and <b>result</b> is a boolean value indicating whether OK or Cancel was
 selected (true means OK).
 
   window.confirm
@@ -436,8 +440,7 @@ dangerous operation like deleting
 
 something in a Control Panel:
 
-**if** 
-( window.confirm(\"Are you sure you want to delete this?\") ) { deleteItem (itemId);
+<b>if</b> ( window.confirm(\"Are you sure you want to delete this?\") ) { deleteItem (itemId);
 }
 
 <p>The output of that code would look like this in the browser:</p>
@@ -452,7 +455,7 @@ something in a Control Panel:
 If you need it for later use, you can simply store the result of the
 user\'s interaction in a variable:
 
-**var** deleteConfirm = window.confirm(\"Are you sure you want to
+<b>var</b> deleteConfirm = window.confirm(\"Are you sure you want to
 delete this?\");
 
 **Notes**
@@ -484,26 +487,23 @@ similarly named methods.
 <p>HTML provides the canvas element for building raster-based images.</p>
 <p>First build a canvas for holding image pixel information.</p>
 
-**var** canvas = document.
-createElement ( \'canvas\' );
-canvas.
-width=500;
-canvas.
-height=250;
+<pre>
+<b>var</b> canvas = document.createElement ( 'canvas' );
+canvas.width=500;
+canvas.height=250;
+</pre>
 
-Then select a context for the canvas, in this case two-dimensional:
-
-**var**
+<p>Then select a context for the canvas, in this case two-dimensional:</p>
 
 <pre>
-ctx=canvas.getContext ( \'2d\' );
+<b>var</b> ctx=canvas.getContext ( '2d' );
 </pre>
 
 <p>Then set properties related to the text:</p>
 
 <pre>
-ctx.font = \'30px Cursive\';
-ctx.fillText ( \"Hello world!\", 50, 50 );
+ctx.font = '30px Cursive';
+ctx.fillText ( "Hello world!", 50, 50 );
 </pre>
 
 Then insert the canvas element into the page to take effect:
@@ -580,14 +580,18 @@ Variables are what make up most of JavaScript. These variables make up
 things from numbers to objects, which are all over JavaScript to make
 one\'s life much easier.
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-1">Section 2.1: Defining a Variable</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var** myVariable = \"This is a variable!\";
 
 This is an example of defining variables. This variable is called a
 \"string\" because it has ASCII characters (A-Z, 0-9, !@#\$, etc.)
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-2">Section 2.2: Using a Variable</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var** number1 = 5;
 number1=3;
@@ -620,7 +624,9 @@ together. For example:</p>
 myString = \"I am a \" \+ \"string!\" ;
 *// \"I am a string!\"*
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-3">Section 2.3: Types of Variables</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
 
@@ -689,7 +695,9 @@ myNull=**null**;
 
 *// etc\...*
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-4">Section 2.4: Arrays and Objects</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
 
@@ -957,7 +965,9 @@ Rather than making an array \[ and
 
 <h2 id="ch3">Chapter 3: Built-in Constants</h2>
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-1">Section 3.1: null</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **null** is used for representing the intentional absence of an object
 value and is a primitive value. Unlike **undefined**, it is not a
@@ -1018,7 +1028,9 @@ a
 
 *// true*
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-2">Section 3.2: Testing for NaN using isNaN()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   **window.isNaN**
@@ -1162,11 +1174,17 @@ taken:
 3.  Otherwise, return **false**.
 
 Some examples:
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image011.png"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:7.486in;" />
+<!-- ![](./images/image011.png){width="7.486805555555556in" height="4.891666666666667in"} -->
 
-![](./images/image011.png){width="7.486805555555556in"
-height="4.891666666666667in"}
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-3">Section 3.3: NaN</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 [**NaN**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN)
 stands for \"Not a Number.\" When a mathematical function or operation
@@ -1230,7 +1248,9 @@ instead.
 
 *// false*
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-4">Section 3.4: undefined and null</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 At first glance it may appear that **null** and **undefined** are
 basically the same, however there are subtle but important
@@ -1488,7 +1508,9 @@ Version \< 5
 Before ECMAScript 5 you could actually change the value of the
 property to any other value potentially breaking everything.
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-5">Section 3.5: Infinity and -Infinity</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 1
 
@@ -1762,7 +1784,9 @@ b
 
 *// Try your own!*
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-6">Section 3.6: Number constants</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The Number constructor has some built in constants that can be useful
 
@@ -1869,7 +1893,9 @@ two different Number values. One reason to use this is due to the
 nature of how numbers are stored by JavaScript see Check the equality
 of two numbers
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-7">Section 3.7: Operations that return NaN</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Mathematical operations on values other than numbers return NaN.
 
@@ -1944,7 +1970,9 @@ Dividing zero by zero returns **NaN**.
 Note: In mathematics generally (unlike in JavaScript programming),
 dividing by zero is not possible.
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-8">Section 3.8: Math library functions that return NaN</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Generally, Math functions that are given non-numeric arguments will
 return NaN.
@@ -1985,9 +2013,11 @@ sqrt
 
 )
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch4">Chapter 4: Comments</h2>
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch4-1">Section 4.1: Using Comments</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To add annotations, hints, or exclude some code from being executed
 JavaScript provides two ways of commenting code lines
@@ -2091,7 +2121,9 @@ clientY
 
 */\* TODO: write more useful comments! \*/*
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch4-2">Section 4.2: Using HTML comments in JavaScript (Bad practice)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 HTML comments (optionally preceded by whitespace) will cause code (on
 the same line) to be ignored by the browser also, though this is
@@ -2456,7 +2488,9 @@ information is accessed through the
 [console](https://developer.mozilla.org/en-US/docs/Web/API/Console)
 object.
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-1">Section 5.1: Measuring time - console.time()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   console.time
@@ -2701,7 +2735,9 @@ Loop time
 
 40.716ms
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-2">Section 5.2: Formatting console output</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Many of the console\'s print methods can also handle C-like string
 formatting, using % tokens:
@@ -2758,9 +2794,13 @@ string, the print method will accept a second parameter with CSS rules
 which allow fine-grained control over the formatting of that string:
 console.log(\'%cHello world!\', \'color: blue; font-size: xx-large\');
 Displays:
-
-![](./images/image013.jpg){width="7.477777777777778in"
-height="0.6666666666666666in"}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image013.jpg"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:7.477in;" />
+<!-- ![](./images/image013.jpg){width="7.477777777777778in" height="0.6666666666666666in"} -->
 
 It is possible to use multiple %c format specifiers:
 >
@@ -2786,9 +2826,13 @@ substring*
 substring* );
 >
 Displays:
-
-![](./images/image014.jpg){width="7.477777777777778in"
-height="0.6395833333333333in"}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image014.jpg"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:7.477in;" />
+<!-- ![](./images/image014.jpg){width="7.477777777777778in" height="0.6395833333333333in"} -->
 
 **Using groups to indent output**
 >
@@ -2831,16 +2875,24 @@ collapsible layers within each other:
 
   
   Collapsed group expanded =\>
-  
 
-  
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image015.jpg"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:2.108in;" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="./images/image016.jpg"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:2.081in;" />
+<!-- ![](./images/image015.jpg){width="2.1083333333333334in" height="3.009027777777778in"} -->
+<!-- ![](./images/image016.jpg){width="2.08125in" height="3.729861111111111in"} -->
 
-![](./images/image015.jpg){width="2.1083333333333334in"
-height="3.009027777777778in"} =
-![](./images/image016.jpg){width="2.08125in"
-height="3.729861111111111in"}
-
-## Section 5.3: Printing to a browser\'s debugging console
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch5-3">Section 5.3: Printing to a browser\'s debugging console</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 A browser\'s debugging console can be used in order to print simple
 messages. This debugging or [web
@@ -3371,9 +3423,13 @@ anonymous
 **function**
 
 )
-
-![](./images/image017.jpg){width="7.477777777777778in"
-height="1.3243055555555556in"}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image017.jpg"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:7.477in;" />
+<!-- ![](./images/image017.jpg){width="7.477777777777778in" height="1.3243055555555556in"} -->
 
 The above image shows all the functions, with the exception of
 timeStamp, in Chrome version 56.
@@ -3393,7 +3449,9 @@ which refers to the respective object properties. These collapsing
 object properties can be open or closed on log. See the for additional
 information on this
 
-## Section 5.4: Including a stack trace when logging console.trace()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch5-4">Section 5.4: Including a stack trace when logging console.trace()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **function**
 
@@ -3501,7 +3559,9 @@ stack
 
 ;
 
-## Section 5.5: Tabulating values - console.table()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch5-5">Section 5.5: Tabulating values - console.table()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   console.table
@@ -3753,11 +3813,17 @@ personArr
 ;
 
 displays like:
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image018.jpg"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:7.477in;" />
+<!-- ![](./images/image018.jpg){width="7.477777777777778in" height="4.279166666666667in"} -->
 
-![](./images/image018.jpg){width="7.477777777777778in"
-height="4.279166666666667in"}
-
-## Section 5.6: Counting - console.count()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch5-6">Section 5.6: Counting - console.count()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   [console.count](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)   [(\[](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)   [obj](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
@@ -4596,7 +4662,9 @@ count
 
 3
 
-## Section 5.7: Clearing the console - console.clear()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch5-7">Section 5.7: Clearing the console - console.clear()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   console.clear
@@ -4608,7 +4676,9 @@ You can clear the console window using the () method. This removes all
 previously printed messages in the console and may print a message
 like \"Console was cleared\" in some environments.
 
-## Section 5.8: Displaying objects and XML interactively console.dir(), console.dirxml()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch5-8">Section 5.8: Displaying objects and XML interactively console.dir(), console.dirxml()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   console.dir                                 (   object
@@ -4661,9 +4731,13 @@ myObject
 ;
 
 displays:
-
-![](./images/image019.jpg){width="7.477777777777778in"
-height="2.657638888888889in"}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image019.jpg"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:7.477in;" />
+<!-- ![](./images/image019.jpg){width="7.477777777777778in" height="2.657638888888889in"} -->
 
   -
   console.dirxml                                  (   object
@@ -4700,9 +4774,13 @@ document
 )
 
 displays:
-
-![](./images/image020.jpg){width="7.477777777777778in"
-height="1.6847222222222222in"}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image020.jpg"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:7.477in;" />
+<!-- ![](./images/image020.jpg){width="7.477777777777778in" height="1.6847222222222222in"} -->
 
 **Example 2:**
 
@@ -4717,9 +4795,13 @@ document
 )
 
 displays:
-
-![](./images/image021.jpg){width="7.477777777777778in"
-height="1.8020833333333333in"}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image021.jpg"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:7.477in;" />
+<!-- ![](./images/image021.jpg){width="7.477777777777778in" height="1.8020833333333333in"} -->
 
 **Example 3:**
 
@@ -4762,11 +4844,17 @@ myObject
 ;
 
 displays:
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image022.jpg"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:6.5in;" />
+<!-- ![](./images/image022.jpg){width="6.504166666666666in" height="2.6486111111111112in"} -->
 
-![](./images/image022.jpg){width="6.504166666666666in"
-height="2.6486111111111112in"}
-
-## Section 5.9: Debugging with assertions - console.assert()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch5-9">Section 5.9: Debugging with assertions - console.assert()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Writes an error message to the console if the assertion is **false**.
 Otherwise, if the assertion is **true**, this does nothing.
@@ -4790,9 +4878,13 @@ assert
 Multiple arguments can be provided after the assertionthese can be
 strings or other objectsthat will only be printed if the assertion
 is **false**:
-
-![](./images/image024.jpg){width="6.46875in"
-height="1.2069444444444444in"}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image024.jpg"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:6.5in;" />
+<!-- ![](./images/image024.jpg){width="6.46875in" height="1.2069444444444444in"} -->
 
   
   [console.assert](https://developer.mozilla.org/en-US/docs/Web/API/console/assert)
@@ -4806,9 +4898,11 @@ this method is incompatible
 with most testing frameworks and that code execution will not break on
 a failed assertion.
 
-# Chapter 6: Datatypes in JavaScript
-
-## Section 6.1: typeof
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch6">Chapter 6: Datatypes in JavaScript</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch6-1">Section 6.1: typeof</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **typeof** is the \'official\' function that one uses to get the type
 in JavaScript, however in certain cases it might yield some unexpected
@@ -4884,7 +4978,9 @@ or or or or
 
 \"undefined\"
 
-## Section 6.2: Finding an object\'s class
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch6-2">Section 6.2: Finding an object\'s class</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To find whether an object was constructed by a certain constructor or
 one inheriting from it, you can use the
@@ -5127,23 +5223,12 @@ Boolean
 )
 
 *//false*
-
-console.
-
-log
-
+console.log(Symbol
 (
-
-Symbol
-
-(
-
 )
 
-**instanceof**
-
+<b>instanceof</b>
 Symbol
-
 )
 
 *//false*
@@ -5151,14 +5236,14 @@ Symbol
 Every value in JavaScript besides **null** and **undefined** also has
 a constructor property storing the function that was used to construct
 it. This even works with primitives.
->
+
 *//Whereas instanceof also catches instances of subclasses, //using
 obj.constructor does not* console.log(\[\] **instanceof** Object, \[\]
 **instanceof** Array) *//true true* console.log(\[\].constructor ===
 Object, \[\].constructor === Array) *//false true*
->
+
 **function** isNumber(value) {
->
+
 *//null.constructor and undefined.constructor throw an error when
 accessed* **if** (value === **null** \|\| value === **undefined**)
 **return** **false** **return** value.constructor === Number }
@@ -5167,11 +5252,13 @@ false* console.log(isNumber(\'abc\'), isNumber(\[\]), isNumber(() =\>
 1)) *//false false false* console.log(isNumber(0),
 isNumber(Number(\'10.1\')), isNumber(**NaN**)) *//true true true*
 
-## Section 6.3: Getting object type by constructor name
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch6-3">Section 6.3: Getting object type by constructor name</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 When one with **typeof** operator one gets type object it falls into
 somewhat wast category\...
->
+
 In practice you might need to narrow it down to what sort of
 \'object\' it actually is and one way to do it is to use
 
@@ -5379,9 +5466,11 @@ object constructor name to get what flavour of object it actually is:
 
 \"\[object Error\]\"
 
-# Chapter 7: Strings
-
-## Section 7.1: Basic Info and String Concatenation
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch7">Chapter 7: Strings</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-1">Section 7.1: Basic Info and String Concatenation</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Strings in JavaScript can be enclosed in Single quotes \'hello\',
 Double quotes \"Hello\" and (from ES2015, ES6) in Template Literals
@@ -5889,7 +5978,9 @@ raw
 
 *// = a\\\\b*
 
-## Section 7.2: Reverse String
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-2">Section 7.2: Reverse String</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The most \"popular\" way of reversing a string in JavaScript is the
 following code fragment, which is quite common:
@@ -6299,7 +6390,9 @@ reverse
 
 *// \"arbez\"*
 
-## Section 7.3: Comparing Strings Lexicographically
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-3">Section 7.3: Comparing Strings Lexicographically</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   [localeCompare](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare)
@@ -6588,7 +6681,9 @@ arr
 
 *// \[ \"apples\", \"bananas\", \"cranberries\" \]*
 
-## Section 7.4: Access character at index in string
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-4">Section 7.4: Access character at index in string</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   [charAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt)
@@ -6711,7 +6806,9 @@ Note that these methods are all getter methods (return a value).
 Strings in JavaScript are immutable. In other words, none of them can
 be used to set a character at a position in the string.
 
-## Section 7.5: Escaping quotes
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-5">Section 7.5: Escaping quotes</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 If your string is enclosed (i.e.) in single quotes you need to escape
 the inner literal quote with *backslash* \\
@@ -6837,7 +6934,9 @@ and
 
 \' can become very annoying\`;
 
-## Section 7.6: Word Counter
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-6">Section 7.6: Word Counter</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   **\<textarea**
@@ -6988,7 +7087,9 @@ words
 
 [e](http://jsfiddle.net/RokoCB/5nfay7d1/206/)
 
-## Section 7.7: Trim whitespace
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-7">Section 7.7: Trim whitespace</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   String               .   **prototype**                  .   trim
@@ -7068,7 +7169,9 @@ trimRight
 
 *// \" this is me\"*
 
-## Section 7.8: Splitting a string into an array
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-8">Section 7.8: Splitting a string into an array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   split
@@ -7132,7 +7235,9 @@ join
 
 *// \"one\two\three\four\five\"*
 
-## Section 7.9: Strings are unicode
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-9">Section 7.9: Strings are unicode</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **All JavaScript strings are unicode!**
 
@@ -7185,7 +7290,9 @@ charCodeAt
 There are no raw byte or binary strings in JavaScript. To effectively
 handle binary data, use Typed Arrays.
 
-## Section 7.10: Detecting a string
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-10">Section 7.10: Detecting a string</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To detect whether a parameter is a *primitive* string, use **typeof**:
 
@@ -7497,7 +7604,9 @@ substring
 
 }
 
-## Section 7.11: Substrings with slice
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-11">Section 7.11: Substrings with slice</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   slice
@@ -7570,15 +7679,17 @@ slice
 
 *// \"abcdefg\"*
 
-## Section 7.12: Character code
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-12">Section 7.12: Character code</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The method charCodeAt retrieves the Unicode character code of a single
 character: **var** charCode = \"µ\".charCodeAt(); *// The character
 code of the letter* µ *is 181*
->
+
 To get the character code of a character in a string, the 0-based
 position of the character is passed as a parameter to charCodeAt:
->
+
 **var** charCode = \"ABCDE\".charCodeAt(3); *// The character code of
 \"D\" is 68*
 
@@ -7609,7 +7720,9 @@ codePointAt
 
 ;
 
-## Section 7.13: String Representations of Numbers
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-13">Section 7.13: String Representations of Numbers</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 JavaScript has native conversion from *Number* to its *String
 representation* for any base from *2 to 36*.
@@ -7833,7 +7946,9 @@ It may be desirable to perform some kind of rounding afterwards.
 errors due to the accuracy and maximum values of *Numbers* of the
 environment the conversions are happening in.
 
-## Section 7.14: String Find and Replace Functions
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-14">Section 7.14: String Find and Replace Functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To search for a string inside a string, there are several functions:
 
@@ -8247,7 +8362,9 @@ string
 
 *// \"Hello, World!\"*
 
-## Section 7.15: Find the index of a substring inside a string
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-15">Section 7.15: Find the index of a substring inside a string</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   indexOf
@@ -8327,7 +8444,9 @@ indexOf
 
 *// -1*
 
-## Section 7.16: String to Upper Case
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-16">Section 7.16: String to Upper Case</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 String.prototype.toUpperCase():
 
@@ -8353,7 +8472,9 @@ toUpperCase
 
 *// \'QWERTY\'*
 
-## Section 7.17: String to Lower Case
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-17">Section 7.17: String to Lower Case</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 String.prototype.toLowerCase()
 
@@ -8379,7 +8500,9 @@ toLowerCase
 
 *// \'qwerty\'*
 
-## Section 7.18: Repeat a String
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch7-18">Section 7.18: Repeat a String</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 6
 
@@ -8532,7 +8655,9 @@ myString
 
 *// Returns \"abcabcabc\"*
 
-# Chapter 8: Date
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch8">Chapter 8: Date</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Parameter Details**
 
@@ -8594,7 +8719,9 @@ the range 0-. minute Optional: The minute, in the range 0-. second
 Optional: The second, in the range 0-. millisecond Optional: The
 millisecond, in the range 0-.
 
-## Section 8.1: Create a new Date object
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch8-1">Section 8.1: Create a new Date object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   Date
@@ -8816,7 +8943,9 @@ toString
 
 // true
 
-## Section 8.2: Convert to a string format
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch8-2">Section 8.2: Convert to a string format</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Convert to String**
 
@@ -9094,22 +9223,24 @@ See [the
 MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#Example:_Checking_for_support_for_locales_and_options_arguments)
 for more details.
 
-## Section 8.3: Creating a Date from UTC
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch8-3">Section 8.3: Creating a Date from UTC</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 By default, a Date object is created as local time. This is not always
 desirable, for example when communicating a date between a server and
 a client that do not reside in the same timezone. In this scenario,
 one doesn\'t want to worry about timezones at all until the date needs
 to be displayed in local time, if that is even required at all.
->
+
 **The problem**
->
+
 In this problem we want to communicate a specific date (day, month,
 year) with someone in a different timezone. The first implementation
 naively uses local times, which results in wrong results. The second
 implementation uses UTC dates to avoid timezones where they are not
 needed.
->
+
 **Naive approach with WRONG results**
 
 **function**
@@ -10346,7 +10477,9 @@ Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
 
 /code\>
 
-## Section 8.4: Formatting a JavaScript date
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch8-4">Section 8.4: Formatting a JavaScript date</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Formatting a JavaScript date in modern browsers**
 
@@ -10477,9 +10610,13 @@ Output if executed on January 24 ʰ, 2036 :
 If () isn\'t flexible enough to fulfill whatever need you may have,
 you might want to consider creating a custom Date object that looks
 like this:
-
-![](./images/image025.png){width="7.486805555555556in"
-height="4.675694444444445in"}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image025.png"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:7.48in;" />
+<!-- ![](./images/image025.png){width="7.486805555555556in" height="4.675694444444445in"} -->
 
 }
 
@@ -10592,7 +10729,9 @@ MDN**](http://programmers.stackexchange.com/questions/56490/what-does-nightly-bu
 Opera 15+ & Safari [**nightly
 build**](http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean)
 
-## Section 8.5: Get the number of milliseconds elapsed since 1 January 1970 00:00:00 UTC
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch8-5">Section 8.5: Get the number of milliseconds elapsed since 1 January 1970 00:00:00 UTC</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   Date                                .        now
@@ -10659,7 +10798,9 @@ getTime
 
 ;
 
-## Section 8.6: Get the current time and date
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch8-6">Section 8.6: Get the current time and date</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   **new** Date
@@ -11111,7 +11252,9 @@ getTime
 
 ;
 
-## Section 8.7: Increment a Date Object
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch8-7">Section 8.7: Increment a Date Object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To increment date objects in JavaScript, we can usually do this:
 
@@ -11403,7 +11546,9 @@ startDate
 
 }
 
-## Section 8.8: Convert to JSON
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch8-8">Section 8.8: Convert to JSON</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
 
@@ -11433,9 +11578,11 @@ toJSON
 
 Returns: \"2016-04-14T23:49:08.596Z\"
 
-# Chapter 9: Date Comparison
-
-## Section 9.1: Comparing Date values
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch9">Chapter 9: Date Comparison</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch9-1">Section 9.1: Comparing Date values</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To check the equality of
 
@@ -11759,7 +11906,9 @@ Sample output:
 
 **true**
 
-## Section 9.2: Date Dierence Calculation
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch9-2">Section 9.2: Date Difference Calculation</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To compare the difference of two dates, we can do the comparison based
 on the timestamp.
@@ -11882,12 +12031,14 @@ dateDiffInYears
 
 ;
 
-# Chapter 10: Comparison Operations
-
-## Section 10.1: Abstract equality / inequality and type conversion
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch10">Chapter 10: Comparison Operations</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-1">Section 10.1: Abstract equality / inequality and type conversion</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **The Problem**
->
+
 The abstract equality and inequality operators (== and !=) convert
 their operands if the operand types do not match. This type coercion
 is a common source of confusion about the results of these operators,
@@ -12345,7 +12496,9 @@ comparisons?](http://stackoverflow.com/questions/359494/does-it-matter-which-equ
 
 Abstract Equality (==)
 
-## Section 10.2: NaN Property of the Global Object
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-2">Section 10.2: NaN Property of the Global Object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   \"two\"
@@ -13065,7 +13218,9 @@ NaN itself is a number, meaning that it does not equal to the string
 
 *//true*
 
-## Section 10.3: Short-circuiting in boolean operators
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-3">Section 10.3: Short-circuiting in boolean operators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The and-operator (&&) and the or-operator (\|\|) employ
 short-circuiting to prevent unnecessary work if the outcome of the
@@ -13464,8 +13619,9 @@ cb
 
 Of course, the test above does not validate that cb is in fact a
 **function** and not just an Object/Array/String/Number.
-
-## Section 10.4: Null and Undefined
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-4">Section 10.4: Null and Undefined</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **The differences between null and undefined null** and **undefined**
 share abstract equality == but not strict equality ===,
@@ -13614,15 +13770,17 @@ property *bar* from an *Object* foo, **delete** ; instead.
 Existence testing identifier foo against **undefined** **could throw a
 Reference Error**, use against \"undefined\" instead.
 
-## Section 10.5: Abstract Equality (==)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-5">Section 10.5: Abstract Equality (==)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Operands of the abstract equality operator are compared *after* being
 converted to a common type. How this conversion happens is based on
 the specification of the operator:
->
+
 [Specification for the ==
 operator:](https://tc39.github.io/ecma262/#sec-abstract-equality-comparison)
->
+
 **7.2.13 Abstract Equality Comparison**
 
   
@@ -13722,27 +13880,29 @@ The comparison , where x and y are values, produces **true** or
 10. Return **false**.
 
 **Examples:**
->
+
 1 == 1; *// true*
->
+
 1 == **true**; *// true (operand converted to number: true =\1)*
->
+
 1 == \'1\'; *// true (operand converted to number: \'1\' =\1 )*
->
+
 1 == \'1.00\'; *// true*
->
+
 1 == \'1.00000000001\'; *// false*
->
+
 1 == \'1.00000000000000001\'; *// true (true due to precision loss)*
 **null** == **undefined**; *// true (spec #2)*
->
+
 1 == 2; *// false* 0 == **false**; *// true*
->
+
 0 == **undefined**; *// false*
->
+
 0 == \"\"; *// true*
 
-## Section 10.6: Logic Operators with Booleans
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-6">Section 10.6: Logic Operators with Booleans</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
 
@@ -13763,7 +13923,7 @@ y
 ;
 
 **AND**
->
+
 This operator will return true if both of the expressions evaluate to
 true. This boolean operator will employ shortcircuiting and will not
 evaluate y if x evaluates to **false**.
@@ -13777,9 +13937,9 @@ y
 ;
 
 This will return false, because y is false.
->
+
 **OR**
->
+
 This operator will return true if one of the two expressions evaluate
 to true. This boolean operator will employ short-circuiting and y will
 not be evaluated if x evaluates to **true**.
@@ -13793,9 +13953,9 @@ y
 ;
 
 This will return true, because x is true.
->
+
 **NOT**
->
+
 This operator will return false if the expression on the right
 evaluates to true, and return true if the expression on the right
 evaluates to false.
@@ -13808,11 +13968,13 @@ x
 
 This will return false, because x is true.
 
-## Section 10.7: Automatic Type Conversions
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-7">Section 10.7: Automatic Type Conversions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Beware that numbers can accidentally be converted to strings or NaN
 (Not a Number).
->
+
 JavaScript is loosely typed. A variable can contain different data
 types, and a variable can change its data type:
 
@@ -13840,7 +14002,7 @@ x
 
 When doing mathematical operations, JavaScript can convert numbers to
 strings:
->
+
 **var** x = 5 + 7; *// x.valueOf() is 12, typeof x is a number*
 **var** x = 5 + \"7\"; *// x.valueOf() is 57, typeof x is a string*
 **var** x = \"5\" + 7; *// x.valueOf() is 57, typeof x is a string*
@@ -13848,7 +14010,7 @@ strings:
 **var** x = 5 - \"7\"; *// x.valueOf() is -2, typeof x is a number*
 **var** x = \"5\" - 7; *// x.valueOf() is -2, typeof x is a number*
 **var** x = 5 - \"x\"; *// x.valueOf() is NaN, typeof x is a number*
->
+
 Subtracting a string from a string, does not generate an error but
 returns NaN (Not a Number):
 
@@ -13860,28 +14022,30 @@ returns NaN (Not a Number):
 
 *// returns NaN*
 
-## Section 10.8: Logic Operators with Non-boolean values (boolean coercion)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-8">Section 10.8: Logic Operators with Non-boolean values (boolean coercion)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Logical OR (\|\|), reading left to right, will evaluate to the first
 *truthy* value. If no *truthy* value is found, the last value is
 returned.
->
+
 **var** a = \'hello\' \|\| \'\'; *// a = \'hello\'* **var** b = \'\'
 \|\| \[\]; *// b = \[\]* **var** c = \'\' \|\| **undefined**; *// c =
 undefined* **var** d = 1 \|\| 5; *// d = 1* **var** e = 0 \|\| {}; *//
 e = {}* **var** f = 0 \|\| \'\' \|\| 5; *// f = 5* **var** g = \'\'
 \|\| \'yay\' \|\| \'boo\'; *// g = \'yay\'*
->
+
 Logical AND (&&), reading left to right, will evaluate to the first
 *falsy* value. If no *falsey* value is found, the last value is
 returned.
->
+
 **var** a = \'hello\' && \'\'; *// a = \'\'* **var** b = \'\' && \[\];
 *// b = \'\'* **var** c = **undefined** && 0; *// c = undefined*
 **var** d = 1 && 5; *// d = 5* **var** e = 0 && {}; *// e = 0* **var**
 f = \'hi\' && \[\] && \'done\'; *// f = \'done\'* **var** g = \'bye\'
 && **undefined** && \'adios\'; *// g = undefined*
->
+
 This trick can be used, for example, to set a default value to a
 function argument (prior to ES6).
 
@@ -14022,7 +14186,9 @@ empty string are also often valid values that should be able to be
 explicitly passed and override a default, which, with this pattern,
 they won't (because they are *falsy*).
 
-## Section 10.9: Empty Array
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-9">Section 10.9: Empty Array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 */\* ToNumber(ToPrimitive(\[\])) == ToNumber(false) \*/*
 
@@ -14056,7 +14222,9 @@ Object:
 *// Internally this is evaluated as ToBoolean(\[\]) === true ?
 \'truthy\' : \'falsy\'* \[\] ? \'truthy\' : \'falsy\'; *// \'truthy\'*
 
-## Section 10.10: Equality comparison operations
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-10">Section 10.10: Equality comparison operations</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 JavaScript has four different equality comparison operations.
 
@@ -14762,7 +14930,9 @@ relation](https://en.wikipedia.org/wiki/Equivalence_relation) because
 [Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation) does
 not hold, e.g. 0
 
-## Section 10.11: Relational operators (\<, \<=, \>, \>=)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-11">Section 10.11: Relational operators (\<, \<=, \>, \>=)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 When both operands are numeric, they are compared normally:
 
@@ -14985,17 +15155,19 @@ toString
 
 *//true*
 
-## Section 10.12: Inequality
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-12">Section 10.12: Inequality</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Operator != is the inverse of the == operator.
->
+
 Will return **true** if the operands aren\'t equal.
->
+
 The JavaScript engine will try and convert both operands to matching
 types if they aren\'t of the same type. **Note:** if the two operands
 have different internal references in memory, then **false** will be
 returned.
->
+
 **Sample:**
 
 1
@@ -15023,10 +15195,10 @@ returned.
 In the sample above, 1 is **false** because, a primitive number type
 is being compared to a char value. Therefore, the JavaScript engine
 doesn\'t care about the datatype of the R.H.S value.
->
+
 Operator: !== is the inverse of the === operator. Will return true if
 the operands are not equal or if their types do not match.
->
+
 Example:
 
 1
@@ -15053,7 +15225,9 @@ Example:
 
 *// false*
 
-## Section 10.13: List of Comparison Operators
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-13">Section 10.13: List of Comparison Operators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Operator Comparison Example**
 
@@ -15121,7 +15295,9 @@ Example:
 
 \<= Less than or equal5
 
-## Section 10.14: Grouping multiple logic statements
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-14">Section 10.14: Grouping multiple logic statements</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 You can group multiple boolean logic statements within parenthesis in
 order to create a more complex logic evaluation, especially useful in
@@ -15297,7 +15473,9 @@ same result. I do prefer using parenthesis as it allows me to
 understand clearer what I intended and might prevent for logic
 mistakes.
 
-## Section 10.15: Bit fields to optimise comparison of multi state data
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-15">Section 10.15: Bit fields to optimise comparison of multi state data</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 A bit field is a variable that holds various boolean states as
 individual bits. A bit on would represent true, and off would be
@@ -15305,13 +15483,13 @@ false. In the past bit fields were routinely used as they saved memory
 and reduced processing load. Though the need to use bit field is no
 longer so important they do offer some benefits that can simplify many
 processing tasks.
->
+
 For example user input. When getting input from a keyboard\'s
 direction keys up, down, left, right you can encode the various keys
 into a single variable with each direction assigned a bit.
->
+
 Example reading keyboard via bitfield
->
+
 **var** bitField = 0; *// the value to hold the bits* **const**
 KEY_BITS = \[4,1,8,2\]; *// left up right down* **const** KEY_MASKS =
 \[0b1011,0b1110,0b0111,0b1101\]; *// left up right down*
@@ -15709,7 +15887,9 @@ have various states that must in combination be acted on. JavaScript
 can use up to 32 bits for a bit field. Using them can offer
 significant performance increases. They are worth being familiar with.
 
-# Chapter 11: Conditions
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch11">Chapter 11: Conditions</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Conditional expressions, involving keywords such as if and else,
 provide JavaScript programs with the ability to perform different
@@ -15717,7 +15897,9 @@ actions depending on a Boolean condition: true or false. This section
 covers the use of JavaScript conditionals, Boolean logic, and ternary
 statements.
 
-## Section 11.1: Ternary operators
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch11-1">Section 11.1: Ternary operators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Can be used to shorten if/else operations. This comes in handy for
 returning a value quickly (i.e. in order to assign it to another
@@ -16210,7 +16392,9 @@ animal
 
 ;
 
-## Section 11.2: Switch statement
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch11-2">Section 11.2: Switch statement</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Switch statements compare the value of an expression against 1 or more
 values and executes different sections of code based on that
@@ -16717,7 +16901,9 @@ log
 
 }
 
-## Section 11.3: If / Else If / Else Control
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch11-3">Section 11.3: If / Else If / Else Control</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 In its most simple form, an if condition can be used like this:
 
@@ -17156,13 +17342,15 @@ log
 
 ;
 
-## Section 11.4: Strategy
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch11-4">Section 11.4: Strategy</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 A strategy pattern can be used in JavaScript in many cases to replace
 a switch statement. It is especially helpful when the number of
 conditions is dynamic or very large. It allows the code for each
 condition to be independent and separately testable.
->
+
 Strategy object is simple an object with multiple functions,
 representing each separate condition. Example:
 
@@ -17358,7 +17546,9 @@ makeAnimalSpeak
 
 In the last case, our default function handles any missing animals.
 
-## Section 11.5: Using \|\| and && short circuiting
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch11-5">Section 11.5: Using \|\| and && short circuiting</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The Boolean operators \|\| and && will \"short circuit\" and not
 evaluate the second parameter if the first is true or false
@@ -17404,12 +17594,14 @@ alert
 
 )
 
-# Chapter 12: Arrays
-
-## Section 12.1: Converting Array-like Objects to Arrays
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch12">Chapter 12: Arrays</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-1">Section 12.1: Converting Array-like Objects to Arrays</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **What are Array-like Objects?**
->
+
 JavaScript has \"Array-like Objects\", which are Object
 representations of Arrays with a length property. For example:
 
@@ -17490,7 +17682,7 @@ object in functions and
 or
 [NodeList](https://developer.mozilla.org/en-US/docs/Web/API/NodeList)
 objects returned from methods like .
->
+
 However, one key difference between Arrays and Array-like Objects is
 that Array-like objects inherit from
 
@@ -18215,10 +18407,12 @@ Version ≥ 6
 
 Array.from(domList, element =\element.tagName); *// Creates an array
 of tagName\'s*
->
+
 See Arrays are Objects for a detailed analysis.
 
-## Section 12.2: Reducing values
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-2">Section 12.2: Reducing values</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 5.1
 
@@ -18959,11 +19153,13 @@ prev
 
 *\[1, 2, 5, 9\]*
 
-## Section 12.3: Mapping values
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-3">Section 12.3: Mapping values</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 It is often necessary to generate a new array based on the values of
 an existing array.
->
+
 For example, to generate an array of string lengths from an array of
 strings:
 
@@ -19249,7 +19445,9 @@ documentation
 
 ;
 
-## Section 12.4: Filtering Object Arrays
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-4">Section 12.4: Filtering Object Arrays</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   filter
@@ -19768,7 +19966,9 @@ age
 
 \]
 
-## Section 12.5: Sorting Arrays
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-5">Section 12.5: Sorting Arrays</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   sort
@@ -20837,10 +21037,12 @@ Results in:
 
 \]
 
-## Section 12.6: Iteration
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-6">Section 12.6: Iteration</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **A traditional for-loop**
->
+
 A traditional **for** loop has three components:
 
 1.  **The initialization:** executed before the look block is executed
@@ -22614,7 +22816,9 @@ was originally posted:
 [Loop through an array in
 JavaScript](https://stackoverflow.com/questions/3010840/loop-through-an-array-in-javascript/35707349#35707349)
 
-## Section 12.7: Destructuring an array
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-7">Section 12.7: Destructuring an array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 6
 
@@ -22919,7 +23123,9 @@ not needed.*
 
 Learn more about destructuring syntax.
 
-## Section 12.8: Removing duplicate elements
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-8">Section 12.8: Removing duplicate elements</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [**prototype**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
@@ -22995,7 +23201,9 @@ Set
 
 ;
 
-## Section 12.9: Array comparison
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-9">Section 12.9: Array comparison</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 For simple array comparison you can use JSON stringify and compare the
 output strings:
@@ -23380,7 +23588,9 @@ is
 
 **false**
 
-## Section 12.10: Reversing arrays
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-10">Section 12.10: Reversing arrays</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   reverse
@@ -23696,14 +23906,16 @@ arr
 
 *// -\\[\[\[\'c\',\'b\',\'a\'\], 3, 2, 1\], 3, 2, 1\]*
 
-## Section 12.11: Shallow cloning an array
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-11">Section 12.11: Shallow cloning an array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Sometimes, you need to work with an array while ensuring you don\'t
 modify the original. Instead of a clone method, arrays have a slice
 method that lets you perform a shallow copy of any part of an array.
 Keep in mind that this only clones the first level. This works well
 with primitive types, like numbers and strings, but not objects.
->
+
 To shallow-clone an array (i.e. have a new array instance but with the
 same elements), you can use the following one-liner:
 
@@ -23907,7 +24119,9 @@ arrayToClone
 
 ;
 
-## Section 12.12: Concatenating Arrays
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-12">Section 12.12: Concatenating Arrays</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Two Arrays**
 
@@ -24568,7 +24782,9 @@ Results in a new Array:
 
 \]
 
-## Section 12.13: Merge two array as key value pair
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-13">Section 12.13: Merge two array as key value pair</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 When we have two separate array and we want to make key value pair
 from that two array, we can use array\'s reduce function like below:
@@ -24755,7 +24971,9 @@ Age
 
 }
 
-## Section 12.14: Array spread / rest
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-14">Section 12.14: Array spread / rest</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Spread operator**
 
@@ -25071,7 +25289,9 @@ myFunction
 
 *// rest is \[2, 3, 4, 5, 6\]*
 
-## Section 12.15: Filtering values
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-15">Section 12.15: Filtering values</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   filter
@@ -25387,7 +25607,9 @@ startsWithLetterA
 
 *//\[\"a\", \"and\", \"also\", \"a\", \"and\", \"array\", \"as\"\]*
 
-## Section 12.16: Searching an Array
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-16">Section 12.16: Searching an Array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The recommended way (Since ES5) is to use
 [Array.prototype.find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find):
@@ -25700,7 +25922,9 @@ value
 
 *// -1*
 
-## Section 12.17: Convert a String to an Array
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-17">Section 12.17: Convert a String to an Array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   -
   split   () method splits a string into an array of substrings. By    split
@@ -25759,7 +25983,9 @@ Using the spread operator (\...), to convert a string into an array.
 *// strArray = \[\"s\", \"k\", \"y\", \" \", \"i\", \"s\", \" \",
 \"b\", \"l\", \"u\", \"e\"\]*
 
-## Section 12.18: Removing items from an array
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-18">Section 12.18: Removing items from an array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Shift**
 
@@ -26200,7 +26426,9 @@ array
 
 *// \[1, 2\]*
 
-## Section 12.19: Removing all elements
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-19">Section 12.19: Removing all elements</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
 
@@ -26465,7 +26693,9 @@ containing the* *// removed items*
 [Related
 question](http://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript).
 
-## Section 12.20: Finding the minimum or maximum element
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-20">Section 12.20: Finding the minimum or maximum element</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   Math                 .     min             .     apply
@@ -27093,7 +27323,9 @@ apply
 
 For the details on how to properly use reduce see Reducing values.
 
-## Section 12.21: Standard array initialization
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-21">Section 12.21: Standard array initialization</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 There are many ways to create arrays. The most common are to use array
 literals, or the Array constructor:
@@ -27345,7 +27577,9 @@ will result:
 
 \]
 
-## Section 12.22: Joining array elements in a string
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-22">Section 12.22: Joining array elements in a string</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To join all of an array\'s elements into a string, you can use the
 join method:
@@ -27392,7 +27626,9 @@ console.log(\[1, 800, 555, 1234\].join(\"-\")); *//
 As you can see in the second line, items that are not strings will be
 converted first.
 
-## Section 12.23: Removing/Adding elements using splice()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-23">Section 12.23: Removing/Adding elements using splice()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   splice
@@ -27586,7 +27822,9 @@ remove/insert elements. The second argument is the number of elements
 to remove. The third argument and onwards are the values to insert
 into the array.
 
-## Section 12.24: The entries() method
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-24">Section 12.24: The entries() method</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   entries
@@ -27693,7 +27931,9 @@ Contributors](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/
 licensed under [CC-by-SA
 2.5](http://creativecommons.org/licenses/by-sa/2.5/)*
 
-## Section 12.25: Remove value from array
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-25">Section 12.25: Remove value from array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 When you need to remove a specific value from an array, you can use
 the following one-liner to create a copy array without the given
@@ -27789,7 +28029,9 @@ index
 
 }
 
-## Section 12.26: Flattening Arrays
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-26">Section 12.26: Flattening Arrays</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **2 Dimensional arrays** Version ≥ 6
 >
@@ -28173,7 +28415,9 @@ Both of the above methods only work when the array is made up
 exclusively of numbers. A multi-dimensional array of objects cannot be
 flattened by this method.
 
-## Section 12.27: Append / Prepend items to Array
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-27">Section 12.27: Append / Prepend items to Array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Unshift**
 
@@ -28341,7 +28585,9 @@ array results in:
 
 Both methods return the new array length.
 
-## Section 12.28: Object keys and values to array
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-28">Section 12.28: Object keys and values to array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
 
@@ -28493,7 +28739,9 @@ Now array is
 
 \]
 
-## Section 12.29: Logical connective of values
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-29">Section 12.29: Logical connective of values</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 5.1
 
@@ -28767,7 +29015,9 @@ value
 
 *// Result: true*
 
-## Section 12.30: Checking if an object is an Array
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-30">Section 12.30: Checking if an object is an Array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   Array                .    isArray                       (    obj
@@ -28944,7 +29194,9 @@ Array
 
 *// false*
 
-## Section 12.31: Insert an item into an array at a specific index
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-31">Section 12.31: Insert an item into an array at a specific index</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   -
   [Array.**prototype**.splice](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
@@ -29350,7 +29602,9 @@ join
 
 *// \"a-b-V-W-X-Y-Z-c-d\"*
 
-## Section 12.32: Sorting multidimensional array
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-32">Section 12.32: Sorting multidimensional array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Given the following array
 
@@ -29560,7 +29814,9 @@ leaving the original one intact. This is especially important to note
 if you use a functional programming style and expect functions to not
 have side-effects.
 
-## Section 12.33: Test all array items for equality
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-33">Section 12.33: Test all array items for equality</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   every
@@ -29838,7 +30094,9 @@ name
 
 *// true*
 
-## Section 12.34: Copy part of an Array
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-23">Section 12.34: Copy part of an Array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The slice() method returns a copy of a portion of an array.
 
@@ -30023,7 +30281,9 @@ descriptor or not. **get** A function to be called that will return
 the value of the property. **set** A function to be called when the
 property is assigned a value.
 
-## Section 13.1: Shallow cloning
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-1">Section 13.1: Shallow cloning</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 6
 
@@ -30267,7 +30527,9 @@ prop
 
 }
 
-## Section 13.2: Object.freeze
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-2">Section 13.2: Object.freeze</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 5
 
@@ -30459,7 +30721,9 @@ foo
 
 ;
 
-## Section 13.3: Object cloning
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-3">Section 13.3: Object cloning</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 When you want a complete copy of an object (i.e. the object properties
 and the values inside those properties, etc\...), that is called
@@ -30568,26 +30832,32 @@ c
   
 
 Note that will not convert the string back into a Date.
->
+
 There is no built-in function in JavaScript for creating deep clones,
 and it is not possible in general to create deep clones for every
 object for many reasons. For example,
->
+
 objects can have non-enumerable and hidden properties which cannot be
 detected. object getters and setters cannot be copied. objects can
 have a cyclic structure. function properties can depend on state in a
 hidden scope.
->
+
 Assuming that you have a \"nice\" object whose properties only contain
 primitive values, dates, arrays, or other \"nice\" objects, then the
 following function can be used for making deep clones. It is a
 recursive function that can detect objects with a cyclic structure and
 will throw an error in such cases.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image026.png"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:7.48in;" />
+<!-- ![](./images/image026.png){width="7.486805555555556in" height="7.639583333333333in"} -->
 
-![](./images/image026.png){width="7.486805555555556in"
-height="7.639583333333333in"}
-
-## Section 13.4: Object properties iteration
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-4">Section 13.4: Object properties iteration</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 You can access each property that belongs to an object with this loop
 
@@ -30737,7 +31007,9 @@ key
 
 *// outputs: 0, 1, 2*
 
-## Section 13.5: Object.assign
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-35">Section 13.5: Object.assign</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The
 [Object.assign()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
@@ -31082,7 +31354,9 @@ Use it as reducer: (merges an array to an object)
 **return** users.reduce((result, user) =\Object.assign({},
 {\[user.id\]: user})
 
-## Section 13.6: Object rest/spread (\...)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-36">Section 13.6: Object rest/spread (\...)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version \7
 
@@ -31219,7 +31493,9 @@ specification](https://github.com/sebmarkbage/ecmascript-rest-spread)
 is currently in [stage
 3](http://www.2ality.com/2015/11/tc39-process.html)
 
-## Section 13.7: Object.defineProperty
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-7">Section 13.7: Object.defineProperty</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 5
 
@@ -60910,7 +61186,9 @@ elem
   alt="."
   style="border: 2px solid #000000; width:7.197in;" />
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch29-5">Section 29.5: Callback using Arrow function</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Using arrow function as callback function can reduce lines of
 code.**
@@ -61040,7 +61318,9 @@ x
 
 Here the callback function (x)
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch29-6">Section 29.6: Error handling and control-flow branching</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Callbacks are often used to provide error handling. This is a form of
 control flow branching, where some instructions are executed only when
@@ -61346,9 +61626,11 @@ written with callbacks that are optional (by using a
 [Null Object
 pattern](https://en.wikipedia.org/wiki/Null_Object_pattern)).
 
-# Chapter 30: Intervals and Timeouts
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch30">Chapter 30: Intervals and Timeouts</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch30-1">Section 30.1: Recursive setTimeout</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To repeat a function indefinitely, setTimeout can be called
 recursively:
@@ -61412,7 +61694,9 @@ executions. This behaviour also varies because an exception before the
 recursive call to setTimeout will prevent it from repeating again,
 while setInterval would repeat indefinitely regardless of exceptions.
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch30-2">Section 30.2: Intervals</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **function**
 
@@ -61454,7 +61738,9 @@ waitFunc
 
 ;
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch30-3">Section 30.3: Intervals</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Standard**
 >
@@ -61522,7 +61808,9 @@ callee
 
 )
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch30-4">Section 30.4: Removing intervals</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   window.setInterval
 
@@ -61622,7 +61910,9 @@ interval
 This will log every 5 seconds, but will stop it after 32 seconds. So
 it will log the message 6 times.
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch30-5">Section 30.5: Removing timeouts</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   window.setTimout
 
@@ -61722,7 +62012,9 @@ stopFunc
 This will not log the message because the timer is stopped after 3
 seconds.
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch30-6">Section 30.6: setTimeout, order of operations, clearTimeout</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **setTimeout**
 >
@@ -62051,28 +62343,32 @@ timeout
 
 *// The timeout will no longer be executed*
 
-# Chapter 31: Regular expressions
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch31">Chapter 31: Regular expressions</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Flags Details** g **g**lobal. All matches (don\'t return on the
 first match). m **m**ulti-line. Causes **\^** & **\$** to match the
 begin/end of each line (not only begin/end of string). i
 **i**nsensitive. Case insensitive match (ignores case of \[a-zA-Z\]).
->
+
 u **u**nicode : Pattern strings are treated as **UTF-16**. Also causes
 escape sequences to match Unicode characters. stick**y**: matches only
 from the index indicated by the lastIndex property of this regular
 expression in the
->
+
 y target string (and does not attempt to match from any later
 indexes).
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch31-1">Section 31.1: Creating a RegExp Object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Standard Creation**
->
+
 It is recommended to use this form only when creating regex from
 dynamic variables.
->
+
 Use when the expression may change or the expression is user
 generated.
 
@@ -62183,7 +62479,9 @@ re
 
 ;
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch31-2">Section 31.2: RegExp Flags</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   -
   test                                     /          gi
@@ -62221,7 +62519,9 @@ u - Unicode. If this flag is not supported you must match specific
 Unicode characters with \\uXXXX where XXXX is the character\'s value
 in hexadecimal. y - Finds all consecutive/adjacent matches.
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch31-3">Section 31.3: Check if string contains pattern using .test()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
 
@@ -62270,7 +62570,9 @@ matches a string. The regular expression \[a-z\]+ will search for one
 or more lowercase letters. Since the pattern matches the string,
 "match exists" will be logged to the console.
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch31-4">Section 31.4: Matching With .exec()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   **exec**
 
@@ -62434,7 +62736,9 @@ Expected output
 found \'a\', next exec starts at index \'2\' found \'a\', next exec
 starts at index \'5\' found \'a\', next exec starts at index \'8\'
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch31-5">Section 31.5: Using RegExp With Strings</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The String object has the following methods that accept regular
 expressions as arguments.
@@ -62651,7 +62955,9 @@ Expected output
 >
 -1
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch31-6">Section 31.6: RegExp Groups</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 JavaScript supports several types of group in its Regular Expressions,
 *capture groups*, *non-capture groups* and *lookaheads*. Currently,
@@ -62879,7 +63185,9 @@ re
 
 *// \"aa b cc+1+2\"*
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch31-7">Section 31.7: Replacing string match with a callback function</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   String#replace
 
@@ -63029,7 +63337,9 @@ slice
 
 *// \"My name is Doe, John Doe\"*
 
-## Section 31.8: Using Regex.exec() with parentheses regex to extract matches of a string
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch31-8">Section 31.8: Using Regex.exec() with parentheses regex to extract matches of a string</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Sometimes you doesn\'t want to simply replace or remove the string.
 Sometimes you want to extract and process matches. Here an example of
@@ -117203,9 +117513,9 @@ For a more information about configuring JSLint check out
 [NPM](https://www.npmjs.com/package/jslint) or
 [github](https://gist.github.com/bretdavidson/3189814#file-jslint-options-descriptions).
 
-# Chapter 103: Anti-patterns
+<h2 id="ch103">Chapter 103: Anti-patterns</h2>
 
-## Section 103.1: Chaining assignments in var declarations
+<h3 id="ch103-1">Section 103.1: Chaining assignments in var declarations</h3>
 
 Chaining assignments as part of a **var** declaration will create
 global variables unintentionally.
@@ -117363,7 +117673,9 @@ of certain language features. Overuse of some features can decrease
 performance, while some techniques can be used to increase
 performance.
 
-## Section 104.1: Avoid try/catch in performance-critical functions
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch104-1">Section 104.1: Avoid try/catch in performance-critical functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Some JavaScript engines (for example, the current version of Node.js
 and older versions of Chrome before Ignition+turbofan) don\'t run the
@@ -117496,10 +117808,10 @@ Here\'s a jsPerf benchmark showing the difference:
 of most browsers, there shouldn\'t be much difference if any, but in
 less recent versions of Chrome and Firefox, or IE, the version that
 calls a helper function inside the try/catch is likely to be faster.
->
+
 Note that optimizations like this should be made carefully and with
 actual evidence based on profiling your code. As
->
+
 JavaScript engines get better, it could end up hurting performance
 instead of helping, or making no difference at all (but complicating
 the code for no reason). Whether it helps, hurts, or makes no
@@ -117508,18 +117820,20 @@ effects on your code. That\'s true of all optimizations, but
 especially microoptimizations like this that depend on low-level
 details of the compiler/runtime.
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-2">Section 104.2: Limit DOM Updates</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 A common mistake seen in JavaScript when run in a browser environment
 is updating the DOM more often than necessary.
->
+
 The issue here is that every update in the DOM interface causes the
 browser to re-render the screen. If an update changes the layout of an
 element in the page, the entire page layout needs to be re-computed,
 and this is very performance-heavy even in the simplest of cases. The
 process of re-drawing a page is known as *reflow* and can cause a
 browser to run slowly or even become unresponsive.
->
+
 The consequence of updating the document too frequently is illustrated
 with the following example of adding items to a list.
 
@@ -117914,7 +118228,9 @@ fragment
 
 ;
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-3">Section 104.3: Benchmarking your code - measuring execution time</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Most performance tips are very dependent of the current state of JS
 engines and are expected to be only relevant at a given time. The
@@ -118358,7 +118674,9 @@ nanoseconds\`
 
 *// logs: Operation took 1000002325 nanoseconds*
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-4">Section 104.4: Use a memoizer for heavy-computing functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 If you are building a function that may be heavy on the processor
 (either clientside or serverside) you may want to consider a
@@ -118941,7 +119259,9 @@ newFunction
 
 *// -\\"meaning of life42\"*
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-5">Section 104.5: Initializing object properties with null</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 All modern JavaScript JIT compilers trying to optimize code based on
 expected object structures. Some tip from
@@ -119068,7 +119388,9 @@ f2 1,700 9,600
 As we can see, the performance improvements are very different between
 the two.
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-6">Section 104.6: Reuse objects rather than recreate</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Example A**
 
@@ -119574,7 +119896,9 @@ a
 
 Loop B is 5 (500%) times faster than loop A
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-7">Section 104.7: Prefer local variables to globals, attributes, and indexed values</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 JavaScript engines first look for variables within the local scope
 before extending their search to larger scopes. If the variable is an
@@ -119758,12 +120082,14 @@ For every iteration in the rewritten **for** loop, the engine will
 lookup li, lookup items, lookup the value at index i, and lookup
 local_variable, this time only needing to check the local scope.
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-8">Section 104.8: Be consistent in use of Numbers</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 If the engine is able to correctly predict you\'re using a specific
 small type for your values, it will be able to optimize the executed
 code.
->
+
 In this example, we\'ll use this trivial function summing the elements
 of an array and outputting the time it took:
 
@@ -120311,13 +120637,17 @@ contact
 Thus, would be great to avoid using private method only if it\'s
 necessary.
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="chA">Appendix A: Reserved Keywords</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Certain words - so-called *keywords* - are treated specially in
 JavaScript. There\'s a plethora of different kinds of keywords, and
 they have changed in different versions of the language.
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="chA-1">Section A.1: Reserved Keywords</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **JavaScript has a predefined collection of *reserved keywords* which
 you cannot use as variables, labels, or function names.**
@@ -123806,7 +124136,7 @@ Proxyquire
 [Section 101.3: Evaluation and Math
 [444](#section-101.3-evaluation-and-math)](#section-101.3-evaluation-and-math)
 
-[**Chapter 102: Linters - Ensuring code quality**
+[<b>Chapter 102: Linters - Ensuring code quality</b>
 [445](#chapter-102-lintersensuring-code-quality)](#chapter-102-lintersensuring-code-quality)
 
 [Section 102.1: JSHint
@@ -123818,13 +124148,13 @@ Proxyquire
 [Section 102.3: JSLint
 [446](#section-102.3-jslint)](#section-102.3-jslint)
 
-[**Chapter 103: Anti-patterns**
+[<b>Chapter 103: Anti-patterns</b>
 [447](#chapter-103-anti-patterns)](#chapter-103-anti-patterns)
 
 [Section 103.1: Chaining assignments in var declarations
 [447](#section-103.1-chaining-assignments-in-var-declarations)](#section-103.1-chaining-assignments-in-var-declarations)
 
-[**Chapter 104: Performance Tips**
+[<b>Chapter 104: Performance Tips</b>
 [448](#chapter-104-performance-tips)](#chapter-104-performance-tips)
 
 [Section 104.1: Avoid try/catch in performance-critical functions
@@ -123852,13 +124182,13 @@ indexed values
 [Section 104.8: Be consistent in use of Numbers
 [456](#section-104.8-be-consistent-in-use-of-numbers)](#section-104.8-be-consistent-in-use-of-numbers)
 
-[**Chapter 105: Memory eciency**
+[<b>Chapter 105: Memory efficiency</b>
 [458](#chapter-105-memory-eciency)](#chapter-105-memory-eciency)
 
 [Section 105.1: Drawback of creating true private method
 [458](#section-105.1-drawback-of-creating-true-private-method)](#section-105.1-drawback-of-creating-true-private-method)
 
-[**Appendix A: Reserved Keywords**
+[<b>Appendix A: Reserved Keywords</b>
 [459](#appendix-a-reserved-keywords)](#appendix-a-reserved-keywords)
 
 [Section A.1: Reserved Keywords
@@ -123867,7 +124197,7 @@ indexed values
 [Section A.2: Identifiers & Identifier Names
 [461](#section-a.2-identifiers-identifier-names)](#section-a.2-identifiers-identifier-names)
 
-[**Credits** [463](#credits)](#credits)
+[<b>Credits</b> [463](#credits)](#credits)
 
-[**You may also like** [474](#you-may-also-like)](#you-may-also-like)
+[<b>You may also like</b> [474](#you-may-also-like)](#you-may-also-like)
 
