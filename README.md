@@ -830,35 +830,35 @@ concept of an "empty" property.</p>
 <ul>
   <li>A variable when it is declared but not assigned a value (i.e. defined)
     <ul>
-	  <li><b>let</b> foo;
-	    console.log('is undefined?', foo === <b>undefined</b>);
+	  <li><b>let</b> foo;<br>
+	    console.log('is undefined?', foo === <b>undefined</b>);<br>
         // is undefined? true
 	  </li>
 	</ul>
   <li>Accessing the value of a property that doesn't exist
     <ul>
-	  <li><b>let</b> foo = { a: 'a' };
-	    console.log('is undefined?', foo.b === <b>undefined</b>);
+	  <li><b>let</b> foo = { a: 'a' };<br>
+	    console.log('is undefined?', foo.b === <b>undefined</b>);<br>
         // is undefined? true
 	  </li>
 	</ul>
   <li>The return value of a function that doesn't return a value
     <ul>
-	  <li><b>function</b> foo() { <b>return</b>; }
-        console.log('is undefined?', foo() === <b>undefined</b>);
+	  <li><b>function</b> foo() { <b>return</b>; }<br>
+        console.log('is undefined?', foo() === <b>undefined</b>);<br>
 		// is undefined? true
       </li>
 	</ul>
   <li>The value of a function argument that is declared but has been omitted
     from the function call
 	<ul>
-      <li><b>function</b> foo(param) {
-        console.log('is undefined?', param === <b>undefined</b>);
-		}
-        foo('a');
-        foo();
-        // is undefined? false
-        // is undefined? true
+      <li><b>function</b> foo(param) {<br>
+        console.log('is undefined?', param === <b>undefined</b>);<br>
+		}<br>
+        foo('a');<br>
+        foo();<br>
+        // is undefined? false<br>
+        // is undefined? true<br>
 	  </li>
 	</ul>
 
@@ -877,36 +877,24 @@ window.<b>undefined</b> property to any other value potentially breaking everyth
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-5">Section 3.5: Infinity and -Infinity</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+1 / 0; // Infinity
+// Wait! WHAAAT?
+</pre>
 
-1
+<p><b>Infinity</b> is a property of the global object (therefore a global
+variable) that represents mathematical infinity. It is a reference to Number.POSITIVE_INFINITY</p>
 
-/
-
-0
-
-;
-
-*// Infinity*
-
-*// Wait! WHAAAT?*
-
-  -
-  Number            .   POSITIVE_INFINITY
-    
-
-  -
-
-<b>Infinity</b> is a property of the global object (therefore a global
-variable) that represents mathematical infinity. It is a reference to
->
-It is greater than any other value, and you can get it by dividing by
-0 or by evaluating the expression of a number that\'s so big that
+<p>It is greater than any other value, and you can get it by dividing by
+0 or by evaluating the expression of a number that's so big that
 overflows. This actually means there is no division by 0 errors in
-JavaScript, there is Infinity!
+JavaScript, there is Infinity!</p>
 
-  
-  <b>Infinity</b>
-  
+<p>To get 
+
+<pre>
+- <b>Infinity</b>; // -Infinity
+</pre>
 
   
 
@@ -916,334 +904,59 @@ lower than any other value.
   -
   <b>Infinity</b>   you negate <b>Infinity</b>, or get a       Number   .   NEGATIVE_INFINITY
                  reference to it in                                   
-      
+				 To get -.
 
-  -
+-
 
-To get -.
-
-\-
-
-(
-
-<b>Infinity</b>
-
-)
-
-;
-
+(<b>Infinity</b>);
 *// -Infinity*
 
 Now let\'s have some fun with examples:
 
 <b>Infinity</b>
-
 \>
 
-123192310293
-
-;
-
-*// true*
-
-\-
-
-<b>Infinity</b>
+123192310293; // true
+- <b>Infinity</b>
 
 \<
-
 \-
-
-123192310293
-
-;
-
-*// true*
-
-1
-
-/
-
-0
-
-;
-
-*// Infinity*
-
-Math
-
-.
-
-pow
-
-(
-
-123123123
-
-,
-
-9123192391023
-
-)
-
-;
-
-*// Infinity*
-
-Number
-
-.
-
-MAX_VALUE
-
-\*
-
-2
-
-;
-
-*// Infinity*
-
-23
-
-/
-
-<b>Infinity</b>
-
-;
-
-*// 0*
-
-\-
-
-<b>Infinity</b>
-
-;
-
-*// -Infinity*
-
-\-
-
-<b>Infinity</b>
-
-===
-
-Number
-
-.
-
-NEGATIVE_INFINITY
-
-;
-
-*// true*
-
-\-
-
-0
-
-;
-
-*// -0 , yes there is a negative 0 in the language*
-
-0
-
-===
-
-\-
-
-0
-
-;
-
-*// true*
-
-1
-
-/
-
-\-
-
-0
-
-;
-
-*// -Infinity*
-
-1
-
-/
-
-0
-
-===
-
-1
-
-/
-
-\-
-
-0
-
-;
-
-*// false*
-
-<b>Infinity</b>
-
-\+
-
-<b>Infinity</b>
-
-;
-
-*// Infinity*
-
-<b>var</b>
-
-a
-
-=
-
-0
-
-,
-
-b
-
-=
-
-\-
-
-0
-
-;
-
-a
-
-===
-
-b
-
-;
-
-*// true*
-
-1
-
-/
-
-a
-
-===
-
-1
-
-/
-
-b
-
-;
-
-*// false*
-
-*// Try your own!*
-
+123192310293; // true
+1/0; // Infinity
+Math.pow(123123123,9123192391023); // Infinity
+Number.MAX_VALUE\*2; // Infinity
+23/<b>Infinity</b>; // 0
+\-<b>Infinity</b>;  // -Infinity
+\-<b>Infinity</b> === Number.NEGATIVE_INFINITY; // true
+\-0; // -0 , yes there is a negative 0 in the language
+0 === \- 0; // true
+1 / \-0; // -Infinity
+1 / 0 === 1 / \- 0;  // false
+<b>Infinity</b>\+<b>Infinity</b>;  // Infinity
+<b>var</b> a = 0 , b = \- 0;
+a === b ;  // true
+1 / a === 1 / b;  // false
+// Try your own!
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-6">Section 3.6: Number constants</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>The Number constructor has some built in constants that can be useful</p>
 
-The Number constructor has some built in constants that can be useful
+<pre>
+Number.MAX_VALUE;  // 1.7976931348623157e+308
+Number.MAX_SAFE_INTEGER;  // 9007199254740991
+Number.MIN_VALUE;  // 5e-324
+Number.MIN_SAFE_INTEGER;  // -9007199254740991
+Number.EPSILON; // 0.0000000000000002220446049250313
+Number.POSITIVE_INFINITY; // Infinity
+Number.NEGATIVE_INFINITY;  // -Infinity
+Number.<b>NaN</b>;  // NaN
+</pre>
 
-Number
+<p>In many cases the various operators in JavaScript will break with
+values outside the range of</p>
 
-.
-
-MAX_VALUE
-
-;
-
-*// 1.7976931348623157e+308*
-
-Number
-
-.
-
-MAX_SAFE_INTEGER
-
-;
-
-*// 9007199254740991*
-
-Number
-
-.
-
-MIN_VALUE
-
-;
-
-*// 5e-324*
-
-Number
-
-.
-
-MIN_SAFE_INTEGER
-
-;
-
-*// -9007199254740991*
-
-Number
-
-.
-
-EPSILON
-
-;
-
-*// 0.0000000000000002220446049250313*
-
-Number
-
-.
-
-POSITIVE_INFINITY
-
-;
-
-*// Infinity*
-
-Number
-
-.
-
-NEGATIVE_INFINITY
-
-;
-
-*// -Infinity*
-
-Number
-
-.
-
-<b>NaN</b>
-
-;
-
-*// NaN*
-
-In many cases the various operators in JavaScript will break with
-values outside the range of
-
-  -
   Number    .   MIN_SAFE_INTEGER         ,   Number    .   MAX_SAFE_INTEGER
-    -    -
-
-  -
 
 ()
 
