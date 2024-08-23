@@ -236,7 +236,7 @@ document.getElementById("paragraph").textContent = "Hello, World";
 </pre>
 
 <p>This will select the element that with the id paragraph and set its
-text content to \"Hello, World\":</p>
+text content to "Hello, World":</p>
 
 <pre>
 <b>&lt;p</b> id="paragraph"&gt;Hello, World<b>&lt;/p&gt;</b>
@@ -360,7 +360,7 @@ unless its sandbox attribute has the value allow-modal</a>.
 <h4>Syntax</h4>
 
 <pre>
-prompt(text, \[<b>default</b>]);
+prompt(text, [<b>default</b>]);
 </pre>
 
 <ul>
@@ -405,7 +405,7 @@ type, such as an integer.</p>
 <p>The window.confirm() method displays a modal dialog with an optional message and two
 buttons, OK and Cancel.</p>
 
-<p>Now, let\'s take the following example:</p>
+<p>Now, let's take the following example:</p>
 
 <pre>
 result = window.confirm(message);
@@ -434,19 +434,17 @@ dangerous operation like deleting something in a Control Panel:</p>
 <!--{width="4.603472222222222in" height="1.4597222222222221in"}-->
 
 <p>If you need it for later use, you can simply store the result of the
-user\'s interaction in a variable:</p>
+user's interaction in a variable:</p>
 
-<pre>
-<p><b>var</b> deleteConfirm = window.confirm(\"Are you sure you want to
-delete this?\");</p>
-</pre>
+<pre><p><b>var</b> deleteConfirm = window.confirm("Are you sure you want to
+delete this?");</p></pre>
 
 <h4>Notes</h4>
 
 <ul>
   <li>The argument is optional and not required by the specification.</li>
   <li>Dialog boxes are modal windows - they prevent the user from accessing
-    the rest of the program\'s interface until the dialog box is closed.
+    the rest of the program's interface until the dialog box is closed.
 	For this reason, you should not overuse any function that creates a
 	dialog box (or modal window). And regardless, there are very good reasons 
 	to avoid using dialog boxes for confirmation.</li>
@@ -554,7 +552,7 @@ value <b>{Required when using Assignment}</b> The value of a variable
 
 <p>Variables are what make up most of JavaScript. These variables make up
 things from numbers to objects, which are all over JavaScript to make
-one\'s life much easier.</p>
+one's life much easier.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-1">Section 2.1: Defining a Variable</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -563,7 +561,7 @@ one\'s life much easier.</p>
 </pre>
 
 <p>This is an example of defining variables. This variable is called a
-\"string\" because it has ASCII characters (A-Z, 0-9, !@#\$, etc.)</p>
+"string" because it has ASCII characters (A-Z, 0-9, !@#$, etc.)</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-2">Section 2.2: Using a Variable</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -572,9 +570,9 @@ one\'s life much easier.</p>
 number1=3;
 </pre>
 
-<p>Here, we defined a number called \"number1\" which was equal to 5. 
+<p>Here, we defined a number called "number1" which was equal to 5. 
 However, on the second line, we changed the value to 3. To show the 
-value of a variable, we log it to the console or use ():</p>
+value of a variable, we log it to the console or use window.alert():</p>
 
 <pre>
 console.log(number1); // 3
@@ -599,8 +597,7 @@ together. For example:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-3">Section 2.3: Types of Variables</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<pre>
-<b>var</b> myInteger = 12; // 32-bit number (from -2,147,483,648 to 2,147,483,647)
+<pre><b>var</b> myInteger = 12; // 32-bit number (from -2,147,483,648 to 2,147,483,647)
 <b>var</b> myLong = 9310141419482 ; // 64-bit number (from -9,223,372,036,854,775,808 to
   9,223,372,036,854,775,807)
 <b>var</b> myFloat = 5.5; // 32-bit floating-point number (decimal)
@@ -616,8 +613,7 @@ together. For example:</p>
 window.alert(aRandomVariable); // undefined
 
 <b>var</b> myNull=<b>null</b>; // null
-<i>// etc...</i>
-</pre>
+<i>// etc...</i></pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-4">Section 2.4: Arrays and Objects</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -636,11 +632,11 @@ window.alert(aRandomVariable); // undefined
 
 myArray = &lbrack;"zero" , "one" , "two" &rbrack;;
 window.alert ( myArray &lbrack;0&rbrack;); // 0 is the first element of an array
-                                           // in this case, the value would be "zero"
-myArray = &lbrack;"John Doe\", "Billy"&rbrack;;
+                                 // in this case, the value would be "zero"
+myArray = &lbrack;"John Doe", "Billy"&rbrack;;
 elementNumber = 1;
 
-window.alert(myArray&lbrack;elementNumber&brack;); // Billy
+window.alert(myArray&lbrack;elementNumber&rbrack;); // Billy
 </pre>
 
 <p>An object is a group of values; unlike arrays, we can do something
@@ -701,41 +697,39 @@ if the value is a number, if not tries to convert it (*), and then
 checks if the resulting value is <b>NaN</b>. For this reason, <b>this
 testing method may cause confusion</b>.</p>
 
-<p>(*) The "conversion" method is not that simple, see [ECMA-262
-18.2.3](http://www.ecma-international.org/ecma-262/6.0/#sec-isnan-number)
+<p>(*) The "conversion" method is not that simple, see <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-isnan-number">ECMA-262 18.2.3</a>
 for a detailed explanation of the algorithm.</p>
 
 <p>These examples will help you better understand the isNaN() behavior:</p>
 
 <pre>
-isNaN(<b>NaN</b>);          // true
-isNaN(1);               // false: 1 is a number
-isNaN(-2e-4);           // false: -2e-4 is a number (-0.0002) in scientific notation
-isNaN(<b>Infinity</b>);    // false: Infinity is a number
-isNaN(<b>true</b>);        // false: converted to 1, which is a number
-isNaN(<b>false</b>);       // false: converted to 0, which is a number
-isNaN(<b>null</b>);        // false: converted to 0, which is a number
+isNaN(<b>NaN</b>);   // true
+isNaN(1);            // false: 1 is a number
+isNaN(-2e-4);              // false: -2e-4 is a number (-0.0002) in scientific notation
+isNaN(<b>Infinity</b>);        // false: Infinity is a number
+isNaN(<b>true</b>);            // false: converted to 1, which is a number
+isNaN(<b>false</b>);           // false: converted to 0, which is a number
+isNaN(<b>null</b>);            // false: converted to 0, which is a number
 isNaN("");                 // false: converted to 0, which is a number
 isNaN("");                 // false: converted to 0, which is a number
 isNaN("45.3");             // false: string representing a number, converted to 45.3
 isNaN("1.2e3");            // false: string representing a number, converted to 1.2e3
 isNaN("Infinity");         // false: string representing a number, converted to Infinity
-isNaN(<b>new</b> Date); // false: Date object, converted to milliseconds since epoch
-isNaN("10$");              //true : conversion fails, the dollar sign is not a digit
-isNaN("hello");            // true : conversion fails, no digits at all
+isNaN(<b>new</b> Date);    // false: Date object, converted to milliseconds since epoch
+isNaN("10$");        //true : conversion fails, the dollar sign is not a digit
+isNaN("hello");      // true : conversion fails, no digits at all
 isNaN(<b>undefined</b>);   // true : converted to NaN 
-isNaN();                   // true : converted to NaN (implicitly undefined)
+isNaN();             // true : converted to NaN (implicitly undefined)
 isNaN(<b>function</b>(){}); //true : conversion fails
-isNaN({});                  // true : conversion fails
-isNaN([1, 2]);              // true : converted to "1, 2", which can't be converted to a number
-isNaN([]) and isNaN ([34]) both return <b>false</b>, but isNaN
+isNaN({});           // true : conversion fails
+isNaN([1, 2]);       // true : converted to "1, 2", which can't be converted to a number
+isNaN(&lbrack;&rbrack;) and isNaN (&lbrack;34&rbrack;) both return <b>false</b>, but isNaN
 </pre>
 
 <p>This last one is a bit tricky: checking if an Array is <b>NaN</b>. To do
-this, the () constructor first converts the array to a string, then to
-a number; this is the reason why (\[1, isNaN (\[          <b>true</b>
-<b>isNaN</b>2\]) and \]) both return <b>true</b>: because they get converted to \"\",
-\"34\", \"1,2\" and \"true\" respectively. In general, <b>an array is
+the Number() constructor first converts the array to a string, then to
+a number; this is the reason why isNaN(&lbrack;&rbrack) and isNaN (&lbrack;34&rbrack;), 
+"1,2", and <b>true</b> respectively. In general, <b>an array is
 considered NaN by () unless it only holds one element whose string
 representation can be converted to a valid number</b>.</p>
 
@@ -744,18 +738,11 @@ Version ≥ 6
 <b>Number.isNaN</b>
 </pre>  
 
-<p>In ECMAScript 6, the () function has been implemented primarily to
-avoid the problem of window.isNaN   () of forcefully converting the parameter to a  Number   .   isNaN
- number.                                                      
-  Number                     .    isNaN                  (    <b>NaN</b>
-    -  -
-
-  
-
-(), indeed, <b>doesn\'t try to convert</b> the value to a number before
-testing. This also means that <b>only values of the type number, that
-are also NaN, return true</b> (which basically means only )).
->
+<p>In ECMAScript 6, the Number.isNaN() function has been implemented primarily to
+avoid the problem of window.isNaN() of forcefully converting the parameter to a 
+number.Number.isNaN(), indeed, <b>doesn't try to convert </b> the value to a number 
+before testing. This also means that <b>only values of the type number, that
+are also NaN, return true</b> (which basically means only )).</p>
 
 <p>From <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-number.isnan">
 ECMA-262 20.1.2.4</a>:</p>
@@ -770,8 +757,8 @@ ECMA-262 20.1.2.4</a>:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image011.png"
-  title=" "
-  alt="."
+  title="Examples; Number.isNaN"
+  alt="Examples; Number.isNaN."
   style="border: 2px solid #000000; width:7.486in;" />
 <!-- ![](./images/image011.png){width="7.486805555555556in" height="4.891666666666667in"} -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -781,14 +768,16 @@ ECMA-262 20.1.2.4</a>:</p>
 stands for "Not a Number." When a mathematical function or operation in JavaScript cannot return a specific 
 number, it returns the value <b>NaN</b> instead.</p>
 
-[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN)
-[.](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN)   
-[<b>NaN</b>](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN)
-    
+<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN">Number</a>
+<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN">.</a>
+<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN"><b>NaN</b></a>
+
 <p>It is a property of the global object, and a reference to 
+<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN">
+Number.NaN</a></p>
 
 <pre>
-window.hasOwnProperty(\'NaN\'); // true
+window.hasOwnProperty('NaN'); // true
 <b>NaN</b>; // NaN
 </pre>
 
@@ -801,269 +790,90 @@ window.hasOwnProperty(\'NaN\'); // true
 <p>Don\'t check for <b>NaN</b> using the equality operator. See isNaN instead.</p>
 
 <pre>
-<b>NaN</b> == <b>NaN</b> // false
+<b>NaN</b> == <b>NaN</b>  // false
 <b>NaN</b> === <b>NaN</b> // false
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-4">Section 3.4: undefined and null</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-At first glance it may appear that <b>null</b> and <b>undefined</b> are
+<p>At first glance it may appear that <b>null</b> and <b>undefined</b> are
 basically the same, however there are subtle but important
-differences.
+differences.</p>
 
-<b>undefined</b> is the absence of a value in the compiler, because where
+<p><b>undefined</b> is the absence of a value in the compiler, because where
 it should be a value, there hasn\'t been put one, like the case of an
-unassigned variable.
+unassigned variable.</p>
 
-<b>undefined</b> is a global value that represents the absence of an
-assigned value.
+<ul>
+  <li><b>undefined</b> is a global value that represents the absence of an
+    assigned value.
+	<ul>
+	  <li><b>typeof</b> <b>undefined</b> === 'undefined'</li>
+	</ul>
+  </li>
+  <li><b>null</b> is an object that indicates that a variable has been
+    explicitly assigned "no value".
+	<ul>
+	  <li><b>typeof</b> <b>null</b> === 'object'</li>
+	</ul>
+  </li>
+</ul>
 
-  
-<b>typeof</b> <b>undefined</b> === \'undefined\'
-  
-
-  
-
-<b>null</b> is an object that indicates that a variable has been
-explicitly assigned \"no value\".
-
-  
-  <b>typeof</b> <b>null</b> === \'object\'
-  
-
-  
-
-Setting a variable to <b>undefined</b> means the variable effectively
+<p>Setting a variable to <b>undefined</b> means the variable effectively
 does not exist. Some processes, such as JSON serialization, may strip
 <b>undefined</b> properties from objects. In contrast, <b>null</b>
 properties indicate will be preserved so you can explicitly convey the
-concept of an \"empty\" property.
->
-The following evaluate to <b>undefined</b>:
->
-A variable when it is declared but not assigned a value (i.e. defined)
-
-<b>let</b>
-
-foo
-
-;
-
-console.
-
-log
-
-(
-
-\'is undefined?\'
-
-,
-
-foo
-
-===
-
-<b>undefined</b>
-
-)
-
-;
-
-*// is undefined? true*
-
-Accessing the value of a property that doesn\'t exist
-
-<b>let</b>
-
-foo
-
-=
-
-{
-
-a
-
-:
-
-\'a\'
-
-}
-
-;
-
-console.
-
-log
-
-(
-
-\'is undefined?\'
-
-,
-
-foo.
-
-b
-
-===
-
-<b>undefined</b>
-
-)
-
-;
-
-*// is undefined? true*
-
-The return value of a function that doesn\'t return a value
-
-<b>function</b>
-
-foo
-
-(
-
-)
-
-{
-
-<b>return</b>
-
-;
-
-}
-
-console.
-
-log
-
-(
-
-\'is undefined?\'
-
-,
-
-foo
-
-(
-
-)
-
-===
-
-<b>undefined</b>
-
-)
-
-;
-
-*// is undefined? true*
-
-The value of a function argument that is declared but has been omitted
-from the function call
-
-<b>function</b>
-
-foo
-
-(
-
-param
-
-)
-
-{
-
-console.
-
-log
-
-(
-
-\'is undefined?\'
-
-,
-
-param
-
-===
-
-<b>undefined</b>
-
-)
-
-;
-
-}
-
-foo
-
-(
-
-\'a\'
-
-)
-
-;
-
-foo
-
-(
-
-)
-
-;
-
-*// is undefined? false*
-
-*// is undefined? true*
-
-<b>undefined</b> is also a property of the global window object.
-
-*// Only in browsers*
-
-console.
-
-log
-
-(
-
-window.
-
-<b>undefined</b>
-
-)
-
-;
-
-*// undefined*
-
-window.
-
-hasOwnProperty
-
-(
-
-\'undefined\'
-
-)
-
-;
-
-*// true*
-
-Version \< 5
-
-  
-  window.<b>undefined</b>
-  
-
-  
-
-Before ECMAScript 5 you could actually change the value of the
-property to any other value potentially breaking everything.
-
+concept of an "empty" property.</p>
+
+<p>The following evaluate to <b>undefined</b>:</p>
+
+<ul>
+  <li>A variable when it is declared but not assigned a value (i.e. defined)
+    <ul>
+	  <li><b>let</b> foo;
+	    console.log('is undefined?', foo === <b>undefined</b>);
+        // is undefined? true
+	  </li>
+	</ul>
+  <li>Accessing the value of a property that doesn't exist
+    <ul>
+	  <li><b>let</b> foo = { a: 'a' };
+	    console.log('is undefined?', foo.b === <b>undefined</b>);
+        // is undefined? true
+	  </li>
+	</ul>
+  <li>The return value of a function that doesn't return a value
+    <ul>
+	  <li><b>function</b> foo() { <b>return</b>; }
+        console.log('is undefined?', foo() === <b>undefined</b>);
+		// is undefined? true
+      </li>
+	</ul>
+  <li>The value of a function argument that is declared but has been omitted
+    from the function call
+	<ul>
+      <li><b>function</b> foo(param) {
+        console.log('is undefined?', param === <b>undefined</b>);
+		}
+        foo('a');
+        foo();
+        // is undefined? false
+        // is undefined? true
+	  </li>
+	</ul>
+
+<p><b>undefined</b> is also a property of the global window object.</p>
+
+<pre>
+// Only in browsers
+console.log(window.<b>undefined</b>); // undefined
+window.hasOwnProperty('undefined'); // true
+</pre>
+
+<p>Version &lt; 5</p>
+
+<p>Before ECMAScript 5 you could actually change the value of the
+window.<b>undefined</b> property to any other value potentially breaking everything.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-5">Section 3.5: Infinity and -Infinity</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
