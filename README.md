@@ -98,7 +98,7 @@ in the variable that you want to be displayed in the console, for example:</p>
 
 <pre>
 <b>var</b>foo = &quot;bar&quot;;
-console.log (foo);
+console.log(foo);
 </pre>
 
 <p>This will log the following to the console:</p>
@@ -126,8 +126,8 @@ console.log("thisVar:", thisVar, "and thatVar:", thatVar);
 <p>This will log the following to the console:</p>
 
 <pre>
-&gt; <b>var</b>thisVar = 'first value';
-  <b>var</b>thatVar = 'second value';
+&gt; <b>var</b> thisVar = 'first value';
+  <b>var</b> thatVar = 'second value';
   console.log("thisVar:", thisVar, "and thatVar:", thatVar);
 </pre>
 
@@ -147,7 +147,7 @@ console.log("thisVar:", thisVar, "and thatVar:", thatVar);
 <p>You can use () in combination with placeholders:</p>
 
 <pre>
-<b>var</b>greet="Hello", who="World";
+<b>var</b> greet="Hello", who="World";
 console.log ("%s, %s!", greet, who);
 </pre>
 
@@ -174,7 +174,7 @@ console.log ( {
   'Id': 33, 
   'IsHiddenInUI': <b>false</b>,
   'IsSiteAdmin': <b>false</b>, 
-  'LoginName': 'i:0#.w\|virtualdomain\\user2',
+  'LoginName': 'i:0#.w|virtualdomain\\user2',
   'PrincipalType': 1, 
   'Title': 'user2' 
 } );
@@ -199,7 +199,7 @@ console.log ( {
 <p>In this case we log the body element:</p>
 
 <pre>
-console.log ( document.body );
+console.log(document.body);
 </pre>
 
 <p>This will log the following to the console:</p>
@@ -226,7 +226,7 @@ text on a web page.</p>
 <p>For example, consider the following HTML tag:</p>
 
 <pre>
-<b>&lt;p</b>id="paragraph"<b>&gt;&lt;/p&gt;</b>
+<b>&lt;p</b> id="paragraph"<b>&gt;&lt;/p&gt;</b>
 </pre>
 
 <p>To change its textContent property, we can run the following JavaScript:</p>
@@ -239,7 +239,7 @@ document.getElementById("paragraph").textContent = "Hello, World";
 text content to \"Hello, World\":</p>
 
 <pre>
-<b>&lt;</b>id="paragraph"&gt;Hello, World<b>&lt;/p&gt;</b>
+<b>&lt;p</b> id="paragraph"&gt;Hello, World<b>&lt;/p&gt;</b>
 </pre>
 
 <p><a href="http://jsbin.com/fuzijox/edit?html,js,console,output">(See also this demo)</a></p>
@@ -256,7 +256,7 @@ consider an HTML document with the following body:</p>
 and add it at the end of the html body:</p>
 
 <pre>
-<b>var</b>element = document.createElement('p');
+<b>var</b> element = document.createElement('p');
 element.textContent = "Hello, World";
 document.body.appendChild(element); //add the newly created element to the DOM
 </pre>
@@ -271,12 +271,13 @@ document.body.appendChild(element); //add the newly created element to the DOM
 </pre>
 
 <p>Note that in order to manipulate elements in the DOM using JavaScript,
-the JavaScript code must be run *after* the relevant element has been
+the JavaScript code must be run <i>after</i> the relevant element has been
 created in the document. This can be achieved by putting the
-JavaScript <b>\></b> tags *after* all of your other <b>\></b> content.
-Alternatively, you can also use <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">
+JavaScript <b>&lt;script&gt;</b> tags <i>after</i> all of your other 
+<b>&lt;body&gt;</b> content. Alternatively, you can also use 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">
 an event listener</a> to listen to eg. <a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload">
-window\'s onload event</a>, adding your code to that event listener 
+window's onload event</a>, adding your code to that event listener 
 will delay running your code until after the whole content on your page has been loaded.</p>
 
 <p>A third way to make sure all your DOM has been loaded, is 
@@ -658,7 +659,7 @@ window.alert(billy.firstname); // Billy
 </pre>
 
 <p>Rather than making an array &lbrack;"John Doe", "Billy"&rbrack; and calling myArray&lbrack;0&rbrack;, we
-can just call john.fullanme and billy.fullname.</p>
+can just call john.fullname and billy.fullname.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch3">Chapter 3: Built-in Constants</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
