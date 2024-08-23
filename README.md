@@ -274,25 +274,22 @@ document.body.appendChild(element); //add the newly created element to the DOM
 the JavaScript code must be run *after* the relevant element has been
 created in the document. This can be achieved by putting the
 JavaScript <b>\></b> tags *after* all of your other <b>\></b> content.
-Alternatively, you can also use [an event
-listener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
-to listen to eg. [window\'s onload
-event](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload),
-adding your code to that event listener will delay running your code
-until after the whole content on your page has been loaded.</p>
+Alternatively, you can also use <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">
+an event listener</a> to listen to eg. <a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload">
+window\'s onload event</a>, adding your code to that event listener 
+will delay running your code until after the whole content on your page has been loaded.</p>
 
-<p>A third way to make sure all your DOM has been loaded, is [to wrap the
-DOM manipulation code with a timeout function of 0
-ms](https://stackoverflow.com/questions/779379/why-is-settimeoutfn-0-sometimes-useful).
-This way, this JavaScript code is re-queued at the end of the
+<p>A third way to make sure all your DOM has been loaded, is 
+<a href="https://stackoverflow.com/questions/779379/why-is-settimeoutfn-0-sometimes-useful">
+to wrap the DOM manipulation code with a timeout function of 0 ms</a>.</p>
+
+<p>This way, this JavaScript code is re-queued at the end of the
 execution queue, which gives the browser a chance to finish doing some
 non-JavaScript things that have been waiting to finish before
 attending to this new piece of JavaScript.</p>
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch1-3">Section 1.3: Using window.alert()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 <p>The alert method displays a visual alert box on screen. The alert
 method parameter is displayed to the user in <b>plain</b> text:</p>
 
@@ -306,7 +303,7 @@ window.alert(message);
 alert(message);
 </pre>
 
-<p>So what does <pre>window.alert()</predo? Well, let's take the following example:</p>
+<p>So what does <pre>window.alert()</pre> do? Well, let's take the following example:</p>
 
 <pre>
 alert('hello, world');
@@ -323,10 +320,10 @@ alert('hello, world');
 
 <h4>Notes</h4>
 
-The alert method is technically a property of window object, but since
+<p>The alert method is technically a property of window object, but since
 all window properties are automatically global variables, we can use
 alert as a global variable instead of as a property of window meaning
-you can directly use ().
+you can directly use ().</p>
 
 <p>Unlike using , alert acts as a modal prompt meaning that the code
 calling alert will pause until the prompt is answered. Traditionally
@@ -351,9 +348,9 @@ that do not block users from interacting with the page - in order to
 create a better user experience. Nevertheless, it can be useful for
 debugging.</p>
 
-<p>Starting with Chrome 46.0, <b>\></b> [unless its sandbox attribute has the
-value allow-modal](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert).
-
+<p>Starting with Chrome 46.0, <b>\></b> 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/alert">
+unless its sandbox attribute has the value allow-modal</a>.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch1-4">Section 1.4: Using window.prompt()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -396,13 +393,13 @@ console.log(age);
 
 If the user clicks the OK button, the input value is returned.
 Otherwise, the method returns <b>null</b>.
->
+
 The return value of prompt is always a string, unless the user clicks
 Cancel , in which that case it returns <b>null</b>. Safari is an
 exception in that when the user clicks Cancel, the function returns an
 empty string. From there, you can convert the return value to another
 type, such as an integer.
->
+
 <b>Notes</b>
 
   <b>\<iframe</b>
@@ -428,17 +425,15 @@ buttons, OK and Cancel.</p>
 result=window.confirm(message);
 </pre>
 
-Here, <b>message</b> is the optional string to be displayed in the dialog
+<p>Here, <b>message</b> is the optional string to be displayed in the dialog
 and <b>result</b> is a boolean value indicating whether OK or Cancel was
-selected (true means OK).
+selected (true means OK).</p>
 
-  window.confirm
+window.confirm
 
 
-() is typically used to ask for user confirmation before doing a
-dangerous operation like deleting
-
-something in a Control Panel:
+<p>() is typically used to ask for user confirmation before doing a
+dangerous operation like deleting something in a Control Panel:</p>
 
 <b>if</b> ( window.confirm(\"Are you sure you want to delete this?\") ) { deleteItem (itemId);
 }
@@ -452,11 +447,11 @@ something in a Control Panel:
   style="border: 2px solid #000000; width:4.603in;" />
 <!--{width="4.603472222222222in" height="1.4597222222222221in"}-->
 
-If you need it for later use, you can simply store the result of the
-user\'s interaction in a variable:
+<p>If you need it for later use, you can simply store the result of the
+user\'s interaction in a variable:</p>
 
-<b>var</b> deleteConfirm = window.confirm(\"Are you sure you want to
-delete this?\");
+<p><b>var</b> deleteConfirm = window.confirm(\"Are you sure you want to
+delete this?\");</p>
 
 **Notes**
 
