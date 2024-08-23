@@ -599,22 +599,22 @@ together. For example:</p>
 <h3 id="ch2-3">Section 2.3: Types of Variables</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <pre>
-**var** myInteger = 12; // 32-bit number (from -2,147,483,648 to 2,147,483,647)
-**var** myLong = 9310141419482 ; // 64-bit number (from -9,223,372,036,854,775,808 to
-*9,223,372,036,854,775,807)
-**var** myFloat = 5.5; // 32-bit floating-point number (decimal)
-**var** myDouble = 9310141419482.22; // 64-bit floating-point number
+<b>var</b> myInteger = 12; // 32-bit number (from -2,147,483,648 to 2,147,483,647)
+<b>var</b> myLong = 9310141419482 ; // 64-bit number (from -9,223,372,036,854,775,808 to
+  9,223,372,036,854,775,807)
+<b>var</b> myFloat = 5.5; // 32-bit floating-point number (decimal)
+<b>var</b> myDouble = 9310141419482.22; // 64-bit floating-point number
 
-**var** myBoolean = **true**; // 1-bit true/false (0 or 1)
-**var** myBoolean2 = **false**;
+<b>var</b> myBoolean = <b>true</b>; // 1-bit true/false (0 or 1)
+<b>var</b> myBoolean2 = <b>false</b>;
 
-**var** myNotANumber = **NaN**;
-**var** NaN_Example = 0 / 0 ; // NaN: Division by Zero is not possible
+<b>var</b> myNotANumber = <b>NaN</b>;
+<b>var</b> NaN_Example = 0 / 0 ; // NaN: Division by Zero is not possible
 
-**var** notDefined ; // undefined: we didn\'t define it to anything yet
+<b>var</b> notDefined ; // undefined: we didn\'t define it to anything yet
 window.alert(aRandomVariable); // undefined
 
-**var** myNull=**null**; // null
+<b>var</b> myNull=<b>null</b>; // null
 <i>// etc...</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -633,393 +633,142 @@ window.alert(aRandomVariable); // undefined
 <b>var</b> primeNumbers = &lbrack;2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31&rbrack;;
 <b>var</b> randomVariables = &lbrack;2, "any type works", <b>undefined</b>, <b>null</b>, <b>true</b>, 2.51&rbrack;;
 
-myArray = \[ \"zero\" , \"one\" , \"two\" \];
-window.alert ( myArray \[0 \] );
-                          // 0 is the first element of an array*
-
-// in this case, the value would be \"zero\"*
-
-myArray
-
-=
-
-\[
-
-\"John Doe\"
-
-,
-
-\"Billy\"
-
-\]
-
-;
-
-elementNumber
-
-=
-
-1
-
-;
-
-window.
-
-alert
-
-(
-
-myArray
-
-\[
-
-elementNumber
-
-\]
-
-)
-
-;
-
-*// Billy*
-
-An object is a group of values; unlike arrays, we can do something
-better than them:
-
-myObject
-
-=
-
-{
-
-}
-
-;
-
-john
-
-=
-
-{
-
-firstname
-
-:
-
-\"John\"
-
-,
-
-lastname
-
-:
-
-\"Doe\"
-
-,
-
-fullname
-
-:
-
-\"John Doe\"
-
-}
-
-;
-
-billy
-
-=
-
-{
-
-firstname
-
-:
-
-\"Billy\"
-
-,
-
-lastname
-
-:
-
-**undefined**
-
-,
-
-fullname
-
-:
-
-\"Billy\"
-
-}
-
-;
-
-window.
-
-alert
-
-(
-
-john.
-
-fullname
-
-)
-
-;
-
-*// John Doe*
-
-window.
-
-alert
-
-(
-
-billy.
-
-firstname
-
-)
-
-;
-
-*// Billy*
-
-  
-  \"John     ,   \"Billy\"   \] and      myArray   \[0\], we can just john.fullname
-  Doe\"                      calling               call               
-  -     - 
-
-  
-
-Rather than making an array \[ and
-
-  
-  billy.fullname
-  
-
-  
-
-.
-
+myArray = &lbrack;"zero" , "one" , "two" &rbrack;;
+window.alert ( myArray &lbrack;0&rbrack;); // 0 is the first element of an array
+                                           // in this case, the value would be "zero"
+myArray = &lbrack;"John Doe\", "Billy"&rbrack;;
+elementNumber = 1;
+
+window.alert(myArray&lbrack;elementNumber&brack;); // Billy
+</pre>
+
+<p>An object is a group of values; unlike arrays, we can do something
+better than them:</p>
+
+<pre>
+myObject = {};
+john = {firstname: "John", lastname: "Doe", fullname: "John Doe"};
+billy = {
+  firstname: "Billy",
+  lastname: <b>undefined</b>,
+  fullname: "Billy"
+};
+window.alert(john.fullname); // John Doe
+window.alert(billy.firstname); // Billy
+</pre>
+
+<p>Rather than making an array &lbrack;"John Doe", "Billy"&rbrack; and calling myArray&lbrack;0&rbrack;, we
+can just call john.fullanme and billy.fullname.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch3">Chapter 3: Built-in Constants</h2>
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-1">Section 3.1: null</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p><b>null</b> is used for representing the intentional absence of an object value and is a 
+primitive value. Unlike <b>undefined</b>, it is not a property of the global object.</p>
 
-**null** is used for representing the intentional absence of an object
-value and is a primitive value. Unlike **undefined**, it is not a
-property of the global object.
->
-It is equal to **undefined** but not identical to it.
+<p>It is equal to <b>undefined</b> but not identical to it.</p>
 
-**null**
+<pre>
+<b>null</b> == <b>undefined</b>; // true
+<b>null</b> === <b>undefined</b>; // false
 
-==
+<p><b>CAREFUL</b>: The <b>typeof null</b> is 'object'.</p>
 
-**undefined**
+<pre>
+<b>typeof null</b>; // 'object';
+</pre>
 
-;
+<p>To properly check if a value is <b>null</b>, compare it with the strict equality operator.</p>
 
-*// true*
+<pre>
+<b>var</b> a = <b>null</b>;
 
-**null**
-
-===
-
-**undefined**
-
-;
-
-*// false*
-
-**CAREFUL**: The **typeof** **null** is \'object\'.
-
-**typeof**
-
-**null**
-
-;
-
-*// \'object\';*
-
-To properly check if a value is **null**, compare it with the strict
-equality operator
-
-**var**
-
-a
-
-=
-
-**null**
-
-;
-
-a
-
-===
-
-**null**
-
-;
-
-*// true*
-
+a === <b>null</b>; // true
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-2">Section 3.2: Testing for NaN using isNaN()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+<b>window.isNaN</b>
+</pre>  
 
-  
-  **window.isNaN**
-  
+<p>The global function () can be used to check if a certain value or
+expression evaluates to <b>NaN</b>. This function (in short) first checks
+if the value is a number, if not tries to convert it (*), and then
+checks if the resulting value is <b>NaN</b>. For this reason, <b>this
+testing method may cause confusion</b>.</p>
 
-  
-
-**()**
-
-  
-  isNaN
-  
-
-  
-
-The global function () can be used to check if a certain value or
-expression evaluates to **NaN**. This function (in short) first checks
-if the value is a number, if not tries to convert it (\*), and then
-checks if the resulting value is **NaN**. For this reason, **this
-testing method may cause confusion**.
->
-(\*) The \"conversion\" method is not that simple, see [ECMA-262
+<p>(*) The "conversion" method is not that simple, see [ECMA-262
 18.2.3](http://www.ecma-international.org/ecma-262/6.0/#sec-isnan-number)
-for a detailed explanation of the algorithm.
+for a detailed explanation of the algorithm.</p>
 
-  
-  isNaN
-  
+<p>These examples will help you better understand the isNaN() behavior:</p>
 
-  
-
-These examples will help you better understand the () behavior:
->
-isNaN(**NaN**); *// true* isNaN(1); *// false: 1 is a number*
+<pre>
+isNaN(<b>NaN</b>); *// true* isNaN(1); *// false: 1 is a number*
 isNaN(-2e-4); *// false: -2e-4 is a number (-0.0002) in scientific
-notation* isNaN(**Infinity**); *// false: Infinity is a number*
-isNaN(**true**); *// false: converted to 1, which is a number*
-isNaN(**false**); *// false: converted to 0, which is a number*
-isNaN(**null**); *// false: converted to 0, which is a number*
+notation* isNaN(<b>Infinity</b>); *// false: Infinity is a number*
+isNaN(<b>true</b>); *// false: converted to 1, which is a number*
+isNaN(<b>false</b>); *// false: converted to 0, which is a number*
+isNaN(<b>null</b>); *// false: converted to 0, which is a number*
 isNaN(\"\"); *// false: converted to 0, which is a number* isNaN(\"
 \"); *// false: converted to 0, which is a number* isNaN(\"45.3\");
 *// false: string representing a number, converted to 45.3*
 isNaN(\"1.2e3\"); *// false: string representing a number, converted
 to 1.2e3* isNaN(\"Infinity\"); *// false: string representing a
-number, converted to Infinity* isNaN(**new** Date); *// false: Date
+number, converted to Infinity* isNaN(<b>new</b> Date); *// false: Date
 object, converted to milliseconds since epoch* isNaN(\"10\$\"); *//
 true : conversion fails, the dollar sign is not a digit*
 isNaN(\"hello\"); *// true : conversion fails, no digits at all*
-isNaN(**undefined**); *// true : converted to NaN* isNaN(); *// true :
-converted to NaN (implicitly undefined)* isNaN(**function**(){}); *//
+isNaN(<b>undefined</b>); *// true : converted to NaN* isNaN(); *// true :
+converted to NaN (implicitly undefined)* isNaN(<b>function</b>(){}); *//
 true : conversion fails* isNaN({}); *// true : conversion fails*
->
+
 isNaN(\[1, 2\]); *// true : converted to \"1, 2\", which can\'t be
 converted to a number*
-
   
   Number
-  
+  isNaN   (\[\]) and  isNaN   (\[   34   \]) both return <b>false</b>, but  isNaN
 
-  
-
-  -
-  isNaN   (\[\]) and  isNaN   (\[   34   \]) both return **false**, but  isNaN
-  -  - -   -
-
-  -
-
-This last one is a bit tricky: checking if an Array is **NaN**. To do
+<p>This last one is a bit tricky: checking if an Array is <b>NaN</b>. To do
 this, the () constructor first converts the array to a string, then to
-a number; this is the reason why (\[1,
-
-  
-  isNaN                            (\[          **true**
-  -  
-
-  
-
-  
-  **isNaN**
-  
-
-  
-
-2\]) and \]) both return **true**: because they get converted to \"\",
-\"34\", \"1,2\" and \"true\" respectively. In general, **an array is
+a number; this is the reason why (\[1, isNaN 
+(\[          <b>true</b>
+  <b>isNaN</b>
+2\]) and \]) both return <b>true</b>: because they get converted to \"\",
+\"34\", \"1,2\" and \"true\" respectively. In general, <b>an array is
 considered NaN by () unless it only holds one element whose string
-representation can be converted to a valid number**.
+representation can be converted to a valid number</b>.</p>
 
+<pre>
 Version ≥ 6
+<b>Number.isNaN</b>
+</pre>  
 
-  
-  **Number**                          **.**   **isNaN**
-   - 
-
-  
-
-**()**
-
-  
-  Number                              .     isNaN
-   - 
-
-  
-
-In ECMAScript 6, the () function has been implemented primarily to
-avoid the problem of
-
-  
-  window.isNaN   () of forcefully converting the parameter to a  Number   .   isNaN
-                 number.                                                      
-      -
-
-  
-
-  
-  Number                     .    isNaN                  (    **NaN**
+<p>In ECMAScript 6, the () function has been implemented primarily to
+avoid the problem of window.isNaN   () of forcefully converting the parameter to a  Number   .   isNaN
+ number.                                                      
+  Number                     .    isNaN                  (    <b>NaN</b>
     -  -
 
   
 
-(), indeed, **doesn\'t try to convert** the value to a number before
-testing. This also means that **only values of the type number, that
-are also NaN, return true** (which basically means only )).
+(), indeed, <b>doesn\'t try to convert</b> the value to a number before
+testing. This also means that <b>only values of the type number, that
+are also NaN, return true</b> (which basically means only )).
 >
-From [ECMA-262
-20.1.2.4](http://www.ecma-international.org/ecma-262/6.0/#sec-number.isnan):
 
-  
-  Number                              .     isNaN
-   - 
+<p>From <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-number.isnan">
+ECMA-262 20.1.2.4</a>:</p>
 
-  
+<p>When the Number .isNaN is called with one argument number, the following steps are taken:</p>
 
-When the is called with one argument number, the following steps are
-taken:
+1.  If Type(number) is not Number, return <b>false</b>.
+2.  If number is <b>NaN</b>, return <b>true</b>.
+3.  Otherwise, return <b>false</b>.
 
-1.  If Type(number) is not Number, return **false**.
-
-2.  If number is **NaN**, return **true**.
-
-3.  Otherwise, return **false**.
-
-Some examples:
+<p>Some examples:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image011.png"
@@ -1027,114 +776,77 @@ Some examples:
   alt="."
   style="border: 2px solid #000000; width:7.486in;" />
 <!-- ![](./images/image011.png){width="7.486805555555556in" height="4.891666666666667in"} -->
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-3">Section 3.3: NaN</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN"><b>NaN</b></a> 
+stands for "Not a Number." When a mathematical function or operation in JavaScript cannot return a specific 
+number, it returns the value <b>NaN</b> instead.</p>
 
-[**NaN**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN)
-stands for \"Not a Number.\" When a mathematical function or operation
-in JavaScript cannot return a specific number, it returns the value
-**NaN** instead.
-
-  -
-  [Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN)   [.](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN)   [**NaN**](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN)
+[Number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN)
+[.](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN)   
+[<b>NaN</b>](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN)
     
+<p>It is a property of the global object, and a reference to 
 
-  -
+<pre>
+window.hasOwnProperty(\'NaN\'); // true
+<b>NaN</b>; // NaN
+</pre>
 
-It is a property of the global object, and a reference to
+<p>Perhaps confusingly, <b>NaN</b> is still considered a number.</p>
 
-window.
+<pre>
+<b>typeof</b> <b>NaN</b>; // 'number'
+</pre>
 
-hasOwnProperty
+<p>Don\'t check for <b>NaN</b> using the equality operator. See isNaN instead.</p>
 
-(
-
-\'NaN\'
-
-)
-
-;
-
-*// true*
-
-**NaN**
-
-;
-
-*// NaN*
-
-Perhaps confusingly, **NaN** is still considered a number.
-
-**typeof**
-
-**NaN**
-
-;
-
-*// \'number\'*
-
-Don\'t check for **NaN** using the equality operator. See isNaN
-instead.
-
-**NaN**
-
-==
-
-**NaN**
-
-*// false*
-
-**NaN**
-
-===
-
-**NaN**
-
-*// false*
-
+<pre>
+<b>NaN</b> == <b>NaN</b> // false
+<b>NaN</b> === <b>NaN</b> // false
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-4">Section 3.4: undefined and null</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-At first glance it may appear that **null** and **undefined** are
+At first glance it may appear that <b>null</b> and <b>undefined</b> are
 basically the same, however there are subtle but important
 differences.
 >
-**undefined** is the absence of a value in the compiler, because where
+<b>undefined</b> is the absence of a value in the compiler, because where
 it should be a value, there hasn\'t been put one, like the case of an
 unassigned variable.
 >
-**undefined** is a global value that represents the absence of an
+<b>undefined</b> is a global value that represents the absence of an
 assigned value.
 
   
-  **typeof** **undefined** === \'undefined\'
+  <b>typeof</b> <b>undefined</b> === \'undefined\'
   
 
   
 
-**null** is an object that indicates that a variable has been
+<b>null</b> is an object that indicates that a variable has been
 explicitly assigned \"no value\".
 
   
-  **typeof** **null** === \'object\'
+  <b>typeof</b> <b>null</b> === \'object\'
   
 
   
 
-Setting a variable to **undefined** means the variable effectively
+Setting a variable to <b>undefined</b> means the variable effectively
 does not exist. Some processes, such as JSON serialization, may strip
-**undefined** properties from objects. In contrast, **null**
+<b>undefined</b> properties from objects. In contrast, <b>null</b>
 properties indicate will be preserved so you can explicitly convey the
 concept of an \"empty\" property.
 >
-The following evaluate to **undefined**:
+The following evaluate to <b>undefined</b>:
 >
 A variable when it is declared but not assigned a value (i.e. defined)
 
-**let**
+<b>let</b>
 
 foo
 
@@ -1154,7 +866,7 @@ foo
 
 ===
 
-**undefined**
+<b>undefined</b>
 
 )
 
@@ -1164,7 +876,7 @@ foo
 
 Accessing the value of a property that doesn\'t exist
 
-**let**
+<b>let</b>
 
 foo
 
@@ -1198,7 +910,7 @@ b
 
 ===
 
-**undefined**
+<b>undefined</b>
 
 )
 
@@ -1208,7 +920,7 @@ b
 
 The return value of a function that doesn\'t return a value
 
-**function**
+<b>function</b>
 
 foo
 
@@ -1218,7 +930,7 @@ foo
 
 {
 
-**return**
+<b>return</b>
 
 ;
 
@@ -1242,7 +954,7 @@ foo
 
 ===
 
-**undefined**
+<b>undefined</b>
 
 )
 
@@ -1253,7 +965,7 @@ foo
 The value of a function argument that is declared but has been omitted
 from the function call
 
-**function**
+<b>function</b>
 
 foo
 
@@ -1279,7 +991,7 @@ param
 
 ===
 
-**undefined**
+<b>undefined</b>
 
 )
 
@@ -1309,7 +1021,7 @@ foo
 
 *// is undefined? true*
 
-**undefined** is also a property of the global window object.
+<b>undefined</b> is also a property of the global window object.
 
 *// Only in browsers*
 
@@ -1321,7 +1033,7 @@ log
 
 window.
 
-**undefined**
+<b>undefined</b>
 
 )
 
@@ -1346,7 +1058,7 @@ hasOwnProperty
 Version \< 5
 
   
-  window.**undefined**
+  window.<b>undefined</b>
   
 
   
@@ -1376,7 +1088,7 @@ property to any other value potentially breaking everything.
 
   -
 
-**Infinity** is a property of the global object (therefore a global
+<b>Infinity</b> is a property of the global object (therefore a global
 variable) that represents mathematical infinity. It is a reference to
 >
 It is greater than any other value, and you can get it by dividing by
@@ -1385,7 +1097,7 @@ overflows. This actually means there is no division by 0 errors in
 JavaScript, there is Infinity!
 
   
-  **Infinity**
+  <b>Infinity</b>
   
 
   
@@ -1394,7 +1106,7 @@ There is also - which is mathematical negative infinity, and it\'s
 lower than any other value.
 
   -
-  **Infinity**   you negate **Infinity**, or get a       Number   .   NEGATIVE_INFINITY
+  <b>Infinity</b>   you negate <b>Infinity</b>, or get a       Number   .   NEGATIVE_INFINITY
                  reference to it in                                   
       
 
@@ -1406,7 +1118,7 @@ To get -.
 
 (
 
-**Infinity**
+<b>Infinity</b>
 
 )
 
@@ -1416,7 +1128,7 @@ To get -.
 
 Now let\'s have some fun with examples:
 
-**Infinity**
+<b>Infinity</b>
 
 \>
 
@@ -1428,7 +1140,7 @@ Now let\'s have some fun with examples:
 
 \-
 
-**Infinity**
+<b>Infinity</b>
 
 \<
 
@@ -1488,7 +1200,7 @@ MAX_VALUE
 
 /
 
-**Infinity**
+<b>Infinity</b>
 
 ;
 
@@ -1496,7 +1208,7 @@ MAX_VALUE
 
 \-
 
-**Infinity**
+<b>Infinity</b>
 
 ;
 
@@ -1504,7 +1216,7 @@ MAX_VALUE
 
 \-
 
-**Infinity**
+<b>Infinity</b>
 
 ===
 
@@ -1570,17 +1282,17 @@ NEGATIVE_INFINITY
 
 *// false*
 
-**Infinity**
+<b>Infinity</b>
 
 \+
 
-**Infinity**
+<b>Infinity</b>
 
 ;
 
 *// Infinity*
 
-**var**
+<b>var</b>
 
 a
 
@@ -1710,7 +1422,7 @@ Number
 
 .
 
-**NaN**
+<b>NaN</b>
 
 ;
 
@@ -1803,7 +1515,7 @@ Also, remember that the + operator concatenates strings.
 
 *// Returns \"ab\"*
 
-Dividing zero by zero returns **NaN**.
+Dividing zero by zero returns <b>NaN</b>.
 
 0
 
@@ -1868,14 +1580,14 @@ sqrt
 To add annotations, hints, or exclude some code from being executed
 JavaScript provides two ways of commenting code lines
 >
-**Single line Comment //**
+<b>Single line Comment //</b>
 >
 Everything after the // until the end of the line is excluded from
 execution.
 
 *// TODO: write more cool stuff!*
 
-**function**
+<b>function</b>
 
 elementAt
 
@@ -1889,7 +1601,7 @@ event
 
 *// Gets the element from Event coordinates*
 
-**return**
+<b>return</b>
 
 document.
 
@@ -1914,7 +1626,7 @@ clientY
 }
 
 **Multi-line Comment */\*\*/***
->
+
 Everything between the opening /\* and the closing \*/ is excluded
 from execution, even if the opening and closing are on different
 lines.
@@ -1929,7 +1641,7 @@ lines.
 
 *\*/*
 
-**function**
+<b>function</b>
 
 elementAt
 
@@ -1941,7 +1653,7 @@ event
 
 {
 
-**return**
+<b>return</b>
 
 document.
 
@@ -1973,11 +1685,11 @@ clientY
 
 HTML comments (optionally preceded by whitespace) will cause code (on
 the same line) to be ignored by the browser also, though this is
-considered **bad practice**.
+considered <b>bad practice</b>.
 >
 One-line comments with the HTML comment opening sequence (\<!\):
 
-**Note:**
+<b>Note:</b>
 
 the JavaScript interpreter ignores the closing characters of HTML
 comments (
@@ -2003,9 +1715,9 @@ the closing \`\\>\` is ignored.
 This technique can be observed in legacy code to hide JavaScript from
 browsers that didn\'t support it:
 
-**\<**
+<b>\<</b>
 
-**script**
+<b>script</b>
 
 type
 
@@ -2019,7 +1731,7 @@ language
 
 \"JavaScript\"
 
-**\>**
+<b>\></b>
 
 \<!\
 
@@ -2031,13 +1743,13 @@ it as HTML code. \*/
 
 // \
 
-**\>**
+<b>\></b>
 
-**\<**
+<b>\<</b>
 
-**/script**
+<b>/script</b>
 
-**\>**
+<b>\></b>
 
 An HTML closing comment can also be used in JavaScript (independent of
 an opening comment) at the beginning of a line (optionally preceded by
@@ -2065,11 +1777,11 @@ DOCTYPE html
 
 \>
 
-**\<**
+<b>\<</b>
 
-**script**
+<b>script</b>
 
-**\>**
+<b>\></b>
 
 var w1 = new Worker(\'#1\');
 
@@ -2081,11 +1793,11 @@ console.log(e.data); // \'reached JS \"file\"
 
 ;
 
-**\<**
+<b>\<</b>
 
-**/script**
+<b>/script</b>
 
-**\>**
+<b>\></b>
 
 *\<!\*
 
@@ -2152,7 +1864,7 @@ timeline timelineEnd
 [trace](https://developer.mozilla.org/en-US/docs/Web/API/Console/trace)
 [warn](https://developer.mozilla.org/en-US/docs/Web/API/Console/warn)
 >
-**Opening the Console**
+<b>Opening the Console</b>
 >
 In most current browsers, the JavaScript Console has been integrated
 as a tab within Developer Tools. The shortcut keys listed below will
