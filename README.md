@@ -533,62 +533,56 @@ together. For example:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-3">Section 2.3: Types of Variables</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<pre><b>var</b> myInteger = 12; // 32-bit number (from -2,147,483,648 to 2,147,483,647)
-<b>var</b> myLong = 9310141419482 ; // 64-bit number (from -9,223,372,036,854,775,808 to
-  9,223,372,036,854,775,807)
-<b>var</b> myFloat = 5.5; // 32-bit floating-point number (decimal)
-<b>var</b> myDouble = 9310141419482.22; // 64-bit floating-point number
+<pre><b>var</b> myInteger = 12; // <i>32-bit number (from -2,147,483,648 to 2,147,483,647)</i>
+<b>var</b> myLong = 9310141419482 ; // <i>64-bit number (from -9,223,372,036,854,775,808 to
+  9,223,372,036,854,775,807)</i>
+<b>var</b> myFloat = 5.5; // <i>32-bit floating-point number (decimal)</i>
+<b>var</b> myDouble = 9310141419482.22; // <i>64-bit floating-point number</i>
 
-<b>var</b> myBoolean = <b>true</b>; // 1-bit true/false (0 or 1)
+<b>var</b> myBoolean = <b>true</b>; // <i>1-bit true/false (0 or 1)</i>
 <b>var</b> myBoolean2 = <b>false</b>;
 
 <b>var</b> myNotANumber = <b>NaN</b>;
-<b>var</b> NaN_Example = 0 / 0 ; // NaN: Division by Zero is not possible
+<b>var</b> NaN_Example = 0 / 0 ; // <i>NaN: Division by Zero is not possible</i>
 
-<b>var</b> notDefined ; // undefined: we didn\'t define it to anything yet
-window.alert(aRandomVariable); // undefined
+<b>var</b> notDefined; // <i>undefined: we didn\'t define it to anything yet</i>
+window.alert(aRandomVariable); // <i>undefined</i>
 
-<b>var</b> myNull=<b>null</b>; // null
+<b>var</b> myNull=<b>null</b>; // <i>null</i>
 <i>// etc...</i></pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-4">Section 2.4: Arrays and Objects</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<pre>
-<b>var</b> myArray=[]; // empty array
-</pre>
+<pre><b>var</b> myArray=&lbrack;&rbrack;; // <i>empty array</i></pre>
 
 <p>An array is a set of variables. For example:</p>
 
-<pre>
-<b>var</b> favoriteFruits = &lbrack;"apple", "orange", "strawberry"&rbrack;;
+<pre><b>var</b> favoriteFruits = &lbrack;"apple", "orange", "strawberry"&rbrack;;
 <b>var</b> carsInParkingLot = &lbrack;"Toyota", "Ferrari", "Lexus"&rbrack;;
 <b>var</b> employees = &lbrack;"Billy", "Bob", "Joe"&rbrack;;
 <b>var</b> primeNumbers = &lbrack;2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31&rbrack;;
 <b>var</b> randomVariables = &lbrack;2, "any type works", <b>undefined</b>, <b>null</b>, <b>true</b>, 2.51&rbrack;;
 
 myArray = &lbrack;"zero" , "one" , "two" &rbrack;;
-window.alert ( myArray &lbrack;0&rbrack;); // 0 is the first element of an array
-                                 // in this case, the value would be "zero"
+window.alert ( myArray &lbrack;0&rbrack;); // <i>0 is the first element of an array</i>
+                             // <i>in this case, the value would be "zero"</i>
 myArray = &lbrack;"John Doe", "Billy"&rbrack;;
 elementNumber = 1;
 
-window.alert(myArray&lbrack;elementNumber&rbrack;); // Billy
-</pre>
+window.alert(myArray&lbrack;elementNumber&rbrack;); // <i>Billy</i></pre>
 
 <p>An object is a group of values; unlike arrays, we can do something
 better than them:</p>
 
-<pre>
-myObject = {};
+<pre>myObject = {};
 john = {firstname: "John", lastname: "Doe", fullname: "John Doe"};
 billy = {
   firstname: "Billy",
   lastname: <b>undefined</b>,
   fullname: "Billy"
 };
-window.alert(john.fullname); // John Doe
-window.alert(billy.firstname); // Billy
-</pre>
+window.alert(john.fullname); // <i>John Doe</i>
+window.alert(billy.firstname); // <i>Billy</i></pre>
 
 <p>Rather than making an array &lbrack;"John Doe", "Billy"&rbrack; and calling myArray&lbrack;0&rbrack;, we
 can just call john.fullname and billy.fullname.</p>
@@ -602,15 +596,12 @@ primitive value. Unlike <b>undefined</b>, it is not a property of the global obj
 
 <p>It is equal to <b>undefined</b> but not identical to it.</p>
 
-<pre>
-<b>null</b> == <b>undefined</b>; // true
-<b>null</b> === <b>undefined</b>; // false
-</pre>
+<pre><b>null</b> == <b>undefined</b>; // true
+<b>null</b> === <b>undefined</b>; // false</pre>
 
 <p><b>CAREFUL</b>: The <b>typeof null</b> is 'object'.</p>
 
-<pre>
-<b>typeof null</b>; // 'object';
+<pre><b>typeof null</b>; // 'object';
 </pre>
 
 <p>To properly check if a value is <b>null</b>, compare it with the strict equality operator.</p>
@@ -618,14 +609,11 @@ primitive value. Unlike <b>undefined</b>, it is not a property of the global obj
 <pre>
 <b>var</b> a = <b>null</b>;
 
-a === <b>null</b>; // true
-</pre>
+a === <b>null</b>; // true</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-2">Section 3.2: Testing for NaN using isNaN()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<pre>
-<b>window.isNaN</b>
-</pre>  
+<pre><b>window.isNaN</b></pre>  
 
 <p>The global function () can be used to check if a certain value or
 expression evaluates to <b>NaN</b>. This function (in short) first checks
@@ -638,29 +626,26 @@ for a detailed explanation of the algorithm.</p>
 
 <p>These examples will help you better understand the isNaN() behavior:</p>
 
-<pre>
-isNaN(<b>NaN</b>);        // true
-isNaN(1);               // false: 1 is a number
-isNaN(-2e-4);            // false: -2e-4 is a number (-0.0002) in scientific notation
-isNaN(<b>Infinity</b>);        // false: Infinity is a number
-isNaN(<b>true</b>);            // false: converted to 1, which is a number
-isNaN(<b>false</b>);           // false: converted to 0, which is a number
-isNaN(<b>null</b>);            // false: converted to 0, which is a number
-isNaN("");              // false: converted to 0, which is a number
-isNaN("");              // false: converted to 0, which is a number
-isNaN("45.3");          // false: string representing a number, converted to 45.3
-isNaN("1.2e3");         // false: string representing a number, converted to 1.2e3
-isNaN("Infinity");      // false: string representing a number, converted to Infinity
-isNaN(<b>new</b> Date);        // false: Date object, converted to milliseconds since epoch
-isNaN("10$");           //true : conversion fails, the dollar sign is not a digit
-isNaN("hello");         // true : conversion fails, no digits at all
-isNaN(<b>undefined</b>);     // true : converted to NaN 
-isNaN();               // true : converted to NaN (implicitly undefined)
-isNaN(<b>function</b>(){});  //true : conversion fails
-isNaN({});            // true : conversion fails
-isNaN([1, 2]);        // true : converted to "1, 2", which can't be converted to a number
-isNaN(&lbrack;&rbrack;) and isNaN (&lbrack;34&rbrack;) both return <b>false</b>, but isNaN
-</pre>
+<pre>isNaN(<b>NaN</b>);        // <i>true</i>
+isNaN(1);             // <i>false: 1 is a number</i>
+isNaN(-2e-4);         // <i>false: -2e-4 is a number (-0.0002) in scientific notation</i>
+isNaN(<b>Infinity</b>);      // <i>false: Infinity is a number</i>
+isNaN(<b>true</b>);          // <i>false: converted to 1, which is a number</i>
+isNaN(<b>false</b>);         // <i>false: converted to 0, which is a number</i>
+isNaN(<b>null</b>);          // <i>false: converted to 0, which is a number</i>
+isNaN("");            // <i>false: converted to 0, which is a number</i>
+isNaN("");            // <i>false: converted to 0, which is a number</i>
+isNaN("45.3");        // <i>false: string representing a number, converted to 45.3</i>
+isNaN("1.2e3");       // <i>false: string representing a number, converted to 1.2e3</i>
+isNaN("Infinity");    // <i>false: string representing a number, converted to Infinity</i>
+isNaN(<b>new</b> Date);      // <i>false: Date object, converted to milliseconds since epoch</i>
+isNaN("10$");         // <i>true : conversion fails, the dollar sign is not a digit</i>
+isNaN("hello");       // <i>true : conversion fails, no digits at all</i>
+isNaN(<b>undefined</b>);     // <i>true : converted to NaN</i>
+isNaN();               // <i>true : converted to NaN (implicitly undefined)</i>
+isNaN(<b>function</b>(){}); // <i>true : conversion fails</i>
+isNaN({});            // <i>true : conversion fails</i>
+isNaN([1, 2]);        // <i>true : converted to "1, 2", which can't be converted to a number</i></pre>
 
 <p>This last one is a bit tricky: checking if an Array is <b>NaN</b>. To do
 the Number() constructor first converts the array to a string, then to
@@ -669,10 +654,8 @@ a number; this is the reason why isNaN(&lbrack;&rbrack) and isNaN (&lbrack;34&rb
 considered NaN by () unless it only holds one element whose string
 representation can be converted to a valid number</b>.</p>
 
-<pre>
-Version ≥ 6
-<b>Number.isNaN</b>
-</pre>  
+<pre>Version ≥ 6
+<b>Number.isNaN</b></pre>  
 
 <p>In ECMAScript 6, the Number.isNaN() function has been implemented primarily to
 avoid the problem of window.isNaN() of forcefully converting the parameter to a 
@@ -683,11 +666,13 @@ are also NaN, return true</b> (which basically means only )).</p>
 <p>From <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-number.isnan">
 ECMA-262 20.1.2.4</a>:</p>
 
+<blockquote>
 <p>When the Number .isNaN is called with one argument number, the following steps are taken:</p>
 
 1.  If Type(number) is not Number, return <b>false</b>.
 2.  If number is <b>NaN</b>, return <b>true</b>.
 3.  Otherwise, return <b>false</b>.
+</blockquote>
 
 <p>Some examples:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -704,31 +689,21 @@ ECMA-262 20.1.2.4</a>:</p>
 stands for "Not a Number." When a mathematical function or operation in JavaScript cannot return a specific 
 number, it returns the value <b>NaN</b> instead.</p>
 
-<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN">Number</a>
-<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN">.</a>
-<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN"><b>NaN</b></a>
-
 <p>It is a property of the global object, and a reference to 
 <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN">
 Number.NaN</a></p>
 
-<pre>
-window.hasOwnProperty('NaN'); // true
-<b>NaN</b>; // NaN
-</pre>
+<pre>window.hasOwnProperty('NaN'); // <i>true</i>
+<b>NaN</b>; // <i>NaN</i></pre>
 
 <p>Perhaps confusingly, <b>NaN</b> is still considered a number.</p>
 
-<pre>
-<b>typeof</b> <b>NaN</b>; // 'number'
-</pre>
+<pre><b>typeof</b> <b>NaN</b>; // <i>'number'</i></pre>
 
 <p>Don\'t check for <b>NaN</b> using the equality operator. See isNaN instead.</p>
 
-<pre>
-<b>NaN</b> == <b>NaN</b>  // false
-<b>NaN</b> === <b>NaN</b> // false
-</pre>
+<pre><b>NaN</b> == <b>NaN</b>  // <i>false</i>
+<b>NaN</b> === <b>NaN</b> // <i>false</i></pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-4">Section 3.4: undefined and null</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -768,21 +743,21 @@ concept of an "empty" property.</p>
     <ul>
 	  <li><b>let</b> foo;<br>
 	    console.log('is undefined?', foo === <b>undefined</b>);<br>
-        // is undefined? true
+        // <i>is undefined? true</i>
 	  </li>
 	</ul>
   <li>Accessing the value of a property that doesn't exist
     <ul>
 	  <li><b>let</b> foo = { a: 'a' };<br>
 	    console.log('is undefined?', foo.b === <b>undefined</b>);<br>
-        // is undefined? true
+        // <i>is undefined? true</i>
 	  </li>
 	</ul>
   <li>The return value of a function that doesn't return a value
     <ul>
 	  <li><b>function</b> foo() { <b>return</b>; }<br>
         console.log('is undefined?', foo() === <b>undefined</b>);<br>
-		// is undefined? true
+		// <i>is undefined? true</i>
       </li>
 	</ul>
   <li>The value of a function argument that is declared but has been omitted
@@ -793,8 +768,8 @@ concept of an "empty" property.</p>
 		}<br>
         foo('a');<br>
         foo();<br>
-        // is undefined? false<br>
-        // is undefined? true<br>
+        // <i>is undefined? false</i><br>
+        // <i>is undefined? true</i><br>
 	  </li>
 	</ul>
   </li>
@@ -802,9 +777,9 @@ concept of an "empty" property.</p>
 
 <p><b>undefined</b> is also a property of the global window object.</p>
 
-<pre>// Only in browsers
-console.log(window.<b>undefined</b>); // undefined
-window.hasOwnProperty('undefined'); // true</pre>
+<pre>// <i>Only in browsers</i>
+console.log(window.<b>undefined</b>); // <i>undefined</i>
+window.hasOwnProperty('undefined'); // <i>true</i></pre>
 
 <h5>Version &lt; 5</h5>
 
@@ -813,10 +788,8 @@ window.<b>undefined</b> property to any other value potentially breaking everyth
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-5">Section 3.5: Infinity and -Infinity</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<pre>
-1 / 0; // Infinity
-// Wait! WHAAAT?
-</pre>
+<pre>1 / 0; // <i>Infinity</i>
+// <i>Wait! WHAAAT?</i></pre>
 
 <p><b>Infinity</b> is a property of the global object (therefore a global
 variable) that represents mathematical infinity. It is a reference to Number.POSITIVE_INFINITY</p>
@@ -832,52 +805,46 @@ than any other value.</p>
 <p>To get <b>-Infinity</b> you negate <b>Infinity</b>, or get a reference to it in 
 <b>Number.NEGATIVE_INFINITY</b>.
 
-<pre>
-- <b>Infinity</b>; // -Infinity
-</pre>
+<pre>- <b>Infinity</b>; // <i>-Infinity</i></pre>
 
 <p>Now let's have some fun with examples:</p>
 
-<pre>
-<b>Infinity</b> &gt; 123192310293;  // true
-<b>-Infinity</b> &lt; -123192310293;  //true
-1 / 0;  // Infinity
-Math.pow(123123123, 9123192391023); // Infinity
-Number.MAX_VALUE * 2;  // Infinity
-23 / <b>Infinity;</b>  // 0
-<b>-Infinity;</b>  // -Infinity
-<b>-Infinity</b> === Number.NEGATIVE_INFINITY;  // true
--0;  // -0 , yes there is a negative 0 in the Language
-0 === -0;  // true
-1 / -0;  // -Infinity
-1 / 0 === 1 / -0;  // false
-<b>Infinity + Infinity</b>  // Infinity
+<pre><b>Infinity</b> &gt; 123192310293;  // <i>true</i>
+<b>-Infinity</b> &lt; -123192310293;  // <i>true</i>
+1 / 0;  // <i>Infinity</i>
+Math.pow(123123123, 9123192391023); // <i>Infinity</i>
+Number.MAX_VALUE * 2;  // <i>Infinity</i>
+23 / <b>Infinity;</b>  // <i>0</i>
+<b>-Infinity;</b>  // <i>-Infinity</i>
+<b>-Infinity</b> === Number.NEGATIVE_INFINITY;  // <i>true</i>
+-0;  // <i>-0 , yes there is a negative 0 in the Language</i>
+0 === -0;  // <i>true</i>
+1 / -0;  // <i>-Infinity</i>
+1 / 0 === 1 / -0;  // <i>false</i>
+<b>Infinity + Infinity</b>  // <i>Infinity</i>
 
 <b>var</b> a = 0, b = -0;
 
-a === b;  // true
-1 / a === 1 / b;  // false
+a === b;  // <i>true</i>
+1 / a === 1 / b;  // <i>false</i>
 
-// Try your own!
-</pre>
+// <i>Try your own!</i></pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-6">Section 3.6: Number constants</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The Number constructor has some built in constants that can be useful</p>
 
-<pre>
-Number.MAX_VALUE;  // 1.7976931348623157e+308
-Number.MAX_SAFE_INTEGER;  // 9007199254740991
-Number.MIN_VALUE;  // 5e-324
-Number.MIN_SAFE_INTEGER;  // -9007199254740991
+<pre>Number.MAX_VALUE;  // <i>1.7976931348623157e+308</i>
+Number.MAX_SAFE_INTEGER;  // <i>9007199254740991</i>
+Number.MIN_VALUE;  // <i>5e-324</i>
+Number.MIN_SAFE_INTEGER;  // <i>-9007199254740991</i>
 
-Number.EPSILON; // 0.0000000000000002220446049250313
+Number.EPSILON; // <i>0.0000000000000002220446049250313</i>
 
-Number.POSITIVE_INFINITY; // Infinity
-Number.NEGATIVE_INFINITY;  // -Infinity
+Number.POSITIVE_INFINITY; // <i>Infinity</i>
+Number.NEGATIVE_INFINITY;  // <i>-Infinity</i>
 
-Number.<b>NaN</b>;  // NaN
-</pre>
+Number.<b>NaN</b>;  // <i>NaN</i></pre>
 
 <p>In many cases the various operators in JavaScript will break with
 values outside the range of (Number.MIN_SAFE_INTEGER,Number.MAX_SAFE_INTEGER)</p>
@@ -892,29 +859,21 @@ of two numbers.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Mathematical operations on values other than numbers return NaN.</p>
 
-<pre>
-"b" * 3
+<pre>"b" &ast; 3
 "cde" - "e"
-&lbrack;1, 2, 3&rbrack; * 2
-</pre>
+&lbrack;1, 2, 3&rbrack; &ast; 2</pre>
 
 <p>An exception: Single-number arrays.</p>
 
-<pre>
-&lbrack;2&rbrack; * &lbrack;3&rbrack;  // Returns 6
-</pre>
+<pre>&lbrack;2&rbrack; &ast; &lbrack;3&rbrack;  // <i>Returns 6</i></pre>
 
 <p>Also, remember that the + operator concatenates strings.</p>
 
-<pre>
-"a" + "b"  // Returns "ab"
-</pre>
+<pre>"a" + "b"  // <i>Returns "ab"</i></pre>
 
 <p>Dividing zero by zero returns <b>NaN</b>.</p>
 
-<pre>
-0 / 0  // NaN
-</pre>
+<pre>0 / 0  // <i>NaN</i></pre>
 
 <p>Note: In mathematics generally (unlike in JavaScript programming),
 dividing by zero is not possible.</p>
@@ -924,17 +883,13 @@ dividing by zero is not possible.</p>
 <p>Generally, Math functions that are given non-numeric arguments will
 return NaN.</p>
 
-<pre>
-Math.floor("a")
-</pre>
+<pre>Math.floor("a")</pre>
 
 <p>The square root of a negative number returns NaN, because does not
 support <a href="https://en.wikipedia.org/wiki/Imaginary_number">imaginary</a> or
 <a href="https://en.wikipedia.org/wiki/Complex_number">complex</a> numbers.</p>
 
-<pre>
-Math.sqrt(-1)
-</pre>
+<pre>Math.sqrt(-1)</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch4">Chapter 4: Comments</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -61454,9 +61409,11 @@ To go further :
 >
 Nested parenthesis
 
-# Chapter 32: Cookies
-
-## Section 32.1: Test if cookies are enabled
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch32">Chapter 32: Cookies</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch32-1">Section 32.1: Test if cookies are enabled</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   navigator.cookieEnabled
@@ -61490,41 +61447,40 @@ alert
 \"Error: cookies not enabled!\"
 
 )
-
 ;
-
 }
-
   
   navigator.cookieEnabled
+ 
   
-
-  
-
 Note that on older browsers may not exist and be undefined. In those
 cases you won\'t detect that cookies are not enabled.
 
-## Section 32.2: Adding and Setting Cookies
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch32-2">Section 32.2: Adding and Setting Cookies</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The following variables set up the below example:
->
+
 **var** COOKIE_NAME = \"Example Cookie\"; */\* The cookie\'s name.
 \*/* **var** COOKIE_VALUE = \"Hello, world!\"; */\* The cookie\'s
 value. \*/* **var** COOKIE_PATH = \"/foo/bar\"; */\* The cookie\'s
 path. \*/* **var** COOKIE_EXPIRES; */\* The cookie\'s expiration date
 (config\'d below). \*/*
->
+
 */\* Set the cookie expiration to 1 minute in future (60000ms = 1
 minute). \*/* COOKIE_EXPIRES = (**new** Date(Date.now() +
 60000)).toUTCString();
->
+
 document.cookie += COOKIE_NAME + \"=\" + COOKIE_VALUE
->
+
 \+ \"; expires=\" + COOKIE_EXPIRES
->
+
 \+ \"; path=\" + COOKIE_PATH;
 
-## Section 32.3: Reading cookies
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch32-3">Section 32.3: Reading cookies</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
 
@@ -61705,7 +61661,9 @@ If the cookie is not set, it will set cookie_value to
 
 **null**
 
-## Section 32.4: Removing cookies
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch32-4">Section 32.4: Removing cookies</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
 
@@ -61773,12 +61731,14 @@ toGMTString
 
 This will remove the cookie with a given name.
 
-# Chapter 33: Web Storage
+<h2 id="ch33">Chapter 33: Web Storage</h2>
 
 **Parameter Description** *name* The key/name of the item *value* The
 value of the item
 
-## Section 33.1: Using localStorage
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-1">Section 33.1: Using localStorage</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The localStorage object provides persistent (but not permanent - see
 limits below) key-value storage of strings. Any changes are
@@ -61895,7 +61855,9 @@ Version 40 27 34 6-8 9-11
 
 Space available 10MB 10MB 10MB 5MB 10MB
 
-## Section 33.2: Simpler way of handling Storage
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-2">Section 33.2: Simpler way of handling Storage</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 localStorage, sessionStorage are JavaScript **Objects** and you can
 treat them as such.
@@ -62137,7 +62099,9 @@ clear
 
 ;
 
-## Section 33.3: Storage events
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-3">Section 33.3: Storage events</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Whenever a value in set in localStorage, a storage event will be
 dispatched on all other windows from the same origin. This can be used
@@ -62560,7 +62524,9 @@ newValue
 
 ;
 
-## Section 33.4: sessionStorage
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-4">Section 33.4: sessionStorage</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The sessionStorage object implements the same Storage interface as
 localStorage. However, instead of being shared with all pages from the
@@ -62694,92 +62660,51 @@ getItem
 ;
 
 Remove saved data from sessionStorage
-
 sessionStorage.
-
 removeItem
-
 (
-
 \'key\'
-
 )
-
-## Section 33.5: localStorage length
-
-  
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-5">Section 33.5: localStorage length</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
   localStorage.length
-  
-
-  
-
 property returns an integer number indicating the number of elements in
 the localStorage
-
 Example:
->
 Set Items
-
 localStorage.
-
 setItem
-
 (
-
 \'StackOverflow\'
-
 ,
-
 \'Documentation\'
-
 )
-
 ;
-
 localStorage.
-
 setItem
-
 (
-
 \'font\'
-
 ,
-
 \'Helvetica\'
-
 )
-
 ;
-
 localStorage.
-
 setItem
-
 (
-
 \'image\'
-
 ,
-
 \'sprite.svg\'
-
 )
-
 ;
-
 Get length
-
 localStorage.
-
 length
-
 ;
-
 *// 3*
-
-## Section 33.6: Error conditions
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-6">Section 33.6: Error conditions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 Most browsers, when configured to block cookies, will also block
 localStorage. Attempts to use it will result in an exception. Do not
 forget to manage these cases.
@@ -62801,11 +62726,8 @@ querySelector
 )
 
 **try**
-
 {
-
 video.
-
 volume
 
 =
@@ -62856,7 +62778,9 @@ play
 
 If error were not handled, program would stop functioning properly.
 
-## Section 33.7: Clearing storage
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-7">Section 33.7: Clearing storage</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To clear the storage, simply run
 
@@ -62870,7 +62794,9 @@ clear
 
 ;
 
-## Section 33.8: Remove Storage Item
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-8">Section 33.8: Remove Storage Item</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To remove a specific item from the browser Storage (the opposite of
 setItem) use removeItem
@@ -62941,9 +62867,11 @@ getItem
 
 (Same applies for sessionStorage)
 
-# Chapter 34: Data attributes
-
-## Section 34.1: Accessing data attributes
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch34">Chapter 34: Data attributes</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch34-1">Section 34.1: Accessing data attributes</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Using the dataset property**
 
@@ -63279,14 +63207,10 @@ A basic overview can be found on the [json.org](http://json.org/)
 website which also contains links to implementations of the standard
 in many different programming languages.
 
-## Section 35.1: JSON versus JavaScript literals
-
-  
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch35-1">Section 35.1: JSON versus JavaScript literals</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
   eval
-  
-
-  
-
 JSON stands for \"JavaScript Object Notation\", but it\'s not
 JavaScript. Think of it as just a *data serialization format* that
 *happens* to be directly usable as a JavaScript literal. However, it
@@ -63295,7 +63219,7 @@ fetched from an external source. Functionally, JSON isn\'t very
 different from XML or YAML  some confusion can be avoided if JSON is
 just imagined as some serialization format that looks very much like
 JavaScript.
->
+
 Even though the name implies just objects, and even though the
 majority of use cases through some kind of API always happen to be
 objects and arrays, JSON is not for just objects or arrays. The
@@ -63560,7 +63484,9 @@ string doesn\'t have to hold an object as a value. \"JSON string\" is
 a better term. Just like \"XML string\" or \"YAML string\". You get a
 string, you parse it, and you end up with a value.
 
-## Section 35.2: Parsing with a reviver function
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch35-2">Section 35.2: Parsing with a reviver function</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 A reviver function can be used to filter or transform the value being
 parsed.
@@ -63903,14 +63829,10 @@ value at the end of each iteration. If the reviver function returns
 the function, the property is deleted from the object. Otherwise, the
 property is redefined to be the return value.
 
-## Section 35.3: Serializing a value
-
-  
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch35-3">Section 35.3: Serializing a value</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
   JSON.stringify
-  
-
-  
-
 A JavaScript value can be converted to a JSON string using the
 function.
 
@@ -64221,7 +64143,9 @@ y
 
 *\*/*
 
-## Section 35.4: Serializing and restoring class instances
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch35-4">Section 35.4: Serializing and restoring class instances</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 You can use a custom toJSON method and reviver function to transmit
 instances of your own class in JSON. If an object has a toJSON method,
@@ -64631,7 +64555,9 @@ id\_
 
 }
 
-## Section 35.5: Serializing with a replacer function
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch35-5">Section 35.5: Serializing with a replacer function</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 A replacer function can be used to filter or transform values being
 serialized.
@@ -64845,22 +64771,20 @@ This produces the following string:
 
 \'
 
-## Section 35.6: Parsing a simple JSON string
-
-  
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch35-6">Section 35.6: Parsing a simple JSON string</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
   JSON.parse
-  
-
-  
-
 The () method parses a string as JSON and returns a JavaScript
 primitive, array or object:
->
+
 **const** array = JSON.parse(\'\[1, 2, \"c\", \"d\", {\"e\":
 false}\]\'); console.log(array); *// logs: \[1, 2, \"c\", \"d\", {e:
 false}\]*
 
-## Section 35.7: Cyclic object values
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch35-7">Section 35.7: Cyclic object values</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Not all objects can be converted to a JSON string. When an object has
 cyclic self-references, the conversion will fail. This is typically
@@ -64886,7 +64810,6 @@ name
 regions
 
 :
-
 \[
 
 \]
@@ -65007,14 +64930,18 @@ world
 As soon as the process detects a cycle, the exception is raised. If
 there were no cycle detection, the string would be infinitely long.
 
-# Chapter 36: AJAX
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch36">Chapter 36: AJAX</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 AJAX stands for \"Asynchronous JavaScript and XML\". Although the name
 includes XML, JSON is more often used due to its simpler formatting
 and lower redundancy. AJAX allows the user to communicate with
 external resources without reloading the webpage.
 
-## Section 36.1: Sending and Receiving JSON Data via POST
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch36-1">Section 36.1: Sending and Receiving JSON Data via POST</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 6
 
@@ -65234,7 +65161,9 @@ error
 
 ;
 
-## Section 36.2: Add an AJAX preloader
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch36-2">Section 36.2: Add an AJAX preloader</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Here\'s a way to show a GIF preloader while an AJAX call is executing.
 We need to prepare our add and remove preloader functions:
@@ -65516,7 +65445,9 @@ send
 
 ;
 
-## Section 36.3: Displaying the top JavaScript questions of the month from Stack Overflow\'s API
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch36-3">Section 36.3: Displaying the top JavaScript questions of the month from Stack Overflow\'s API</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 We can make an AJAX request to [Stack Exchange\'s
 API](http://api.stackexchange.com/docs) to retrieve a list of the top
@@ -65843,7 +65774,9 @@ error
 
 ;
 
-## Section 36.4: Using GET with parameters
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch36-4">Section 36.4: Using GET with parameters</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 This function runs an AJAX call using GET allowing us to send
 **parameters** (object) to a **file** (string) and launch a
@@ -66124,7 +66057,9 @@ been:
 
 The color of your car is purple. It is a Volvo model 300!
 
-## Section 36.5: Check if a file exists via a HEAD request
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch36-5">Section 36.5: Check if a file exists via a HEAD request</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 This function executes an AJAX request using the HEAD method allowing
 us to **check whether a file exists in the directory** given as an
@@ -66243,7 +66178,9 @@ send
 
 ;
 
-## Section 36.6: Using GET and no parameters
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch36-6">Section 36.6: Using GET and no parameters</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
 
@@ -66418,7 +66355,9 @@ length
 
 ;
 
-## Section 36.7: Listening to AJAX events at a global level
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch36-7">Section 36.7: Listening to AJAX events at a global level</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 *// Store a reference to the native method*
 
@@ -66516,9 +66455,11 @@ arguments
 
 ;
 
-# Chapter 37: Enumerations
-
-## Section 37.1: Enum definition using Object.freeze()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch37">Chapter 37: Enumerations</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch37-1">Section 37.1: Enum definition using Object.freeze()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 5.1
 
@@ -66693,7 +66634,9 @@ TestEnum
 
 After that you can define a variable and print like before.
 
-## Section 37.2: Alternate definition
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch37-2">Section 37.2: Alternate definition</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   Object.freeze()
@@ -66751,7 +66694,9 @@ GRAY
 
 ;
 
-## Section 37.3: Printing an enum variable
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch37-3">Section 37.3: Printing an enum variable</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 After defining an enum using any of the above ways and setting a
 variable, you can print both the variable\'s value as well as the
@@ -66913,7 +66858,9 @@ name
 
 }
 
-## Section 37.4: Implementing Enums Using Symbols
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch37-4">Section 37.4: Implementing Enums Using Symbols</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 As ES6 introduced
 [**Symbols**](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol),
@@ -67113,7 +67060,9 @@ The [Symbols in ECMAScript
 6](http://www.2ality.com/2014/12/es6-symbols.html) article covers this
 new primitive type more in detail.
 
-## Section 37.5: Automatic Enumeration Value
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch37-5">Section 37.5: Automatic Enumeration Value</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 5.1
 
@@ -67344,7 +67293,9 @@ callback Callback function called with three parameters: value, key,
 and the map. thisArg Value which will be used as **this** when
 executing callback.
 
-## Section 38.1: Creating a Map
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch38-1">Section 38.1: Creating a Map</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 A Map is a basic mapping of keys to values. Maps are different from
 objects in that their keys can be anything (primitive values as well
@@ -67372,13 +67323,15 @@ Map
 It has an optional parameter, which can be any iterable object (for
 example an array) which contains arrays of two elements  first is
 the key, the seconds is the value. For example:
->
+
 **const** map = **new** Map(\[\[**new** Date(), {foo: \"bar\"}\],
 \[document.body, \"body\"\]\]);
->
+
 *// \^key \^value \^key \^value*
 
-## Section 38.2: Clearing a Map
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch38-2">Section 38.2: Clearing a Map</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   clear
@@ -67506,7 +67459,9 @@ map.
 
 *// undefined*
 
-## Section 38.3: Removing an element from a Map
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch38-3">Section 38.3: Removing an element from a Map</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   **delete**
@@ -67717,7 +67672,9 @@ map.
 
 *// false*
 
-## Section 38.4: Checking if a key exists in a Map
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch38-4">Section 38.4: Checking if a key exists in a Map</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   has
@@ -67827,7 +67784,9 @@ has
 
 *// false*
 
-## Section 38.5: Iterating Maps
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch38-5">Section 38.5: Iterating Maps</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   keys    (), .   values     () and .      entries      (). .   entries
@@ -68033,7 +67992,7 @@ Map also has .() method. The first parameter is a callback function,
 which will be called for each element in the map, and the second
 parameter is the value which will be used as **this** when executing
 the callback function.
->
+
 The callback function has three arguments: value, key, and the map
 object.
 
@@ -68147,21 +68106,15 @@ value
 
 *// key: 3, value: 4*
 
-## Section 38.6: Getting and setting elements
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch38-6">Section 38.6: Getting and setting elements</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
   
   **get**   (   key   ) to get value by key and .          **set**   (   key   ,   value
-    - -   -  
-
-  
 
 Use .) to assign a value to a key.
-
   
   **get**
-  
-
-  
 
 If the element with the specified key doesn\'t exist in the map, .()
 returns **undefined**.
@@ -68264,28 +68217,18 @@ map.
 
 *// 2*
 
-## Section 38.7: Getting the number of elements of a Map
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch38-7">Section 38.7: Getting the number of elements of a Map</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-  
   .size
-  
-
-  
-
 To get the numbers of elements of a Map, use the property:
-
 **const**
-
 map
-
 =
-
 **new**
-
 Map
-
 (
-
 \[
 
 \[
@@ -68323,62 +68266,41 @@ log
 (
 
 map.
-
 size
-
 )
-
 ;
-
 *// 2*
 
-# Chapter 39: Timestamps
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch39">Chapter 39: Timestamps</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch39-1">Section 39.1: High-resolution timestamps</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-## Section 39.1: High-resolution timestamps
-
-  -
   [performance.now()](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)
-  -
-
-  -
 
 returns a precise timestamp: The number of milliseconds, including
 microseconds, since the
 
 current web page started to load.
-
   
   [performanceTiming.navigationStart](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/navigationStart)
-  
-
-  
 
 More generally, it returns the time elapsed since the event.
-
 t
-
 =
-
 performance.
-
 now
-
 (
-
 )
-
 ;
-
-  
   performance.now()
-  
-
-  
-
 For example, in a web browser\'s main context, returns 6288.319 if the
 web page began to load 6288 milliseconds and 319 microseconds ago.
 
-## Section 39.2: Get Timestamp in Seconds
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch39-2">Section 39.2: Get Timestamp in Seconds</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To get the timestamp in seconds
 
@@ -68416,7 +68338,9 @@ getTime
 
 )
 
-## Section 39.3: Low-resolution timestamps
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch39-3">Section 39.3: Low-resolution timestamps</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   [Date.now()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now)
@@ -68452,7 +68376,9 @@ now
 For example, returns 1461069314 if it was called on 19 April 2016 at
 12:35:14 GMT.
 
-## Section 39.4: Support for legacy browsers
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch39-4">Section 39.4: Support for legacy browsers</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   -
   Date.now()     is unavailable, use      [(**new**
@@ -68558,9 +68484,11 @@ getTime
 
 }
 
-# Chapter 40: Unary Operators
-
-## Section 40.1: Overview
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch40">hapter 40: Unary Operators</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-1">Section 40.1: Overview</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Unary operators are operators with only one operand. Unary operators
 are more efficient than standard JavaScript function calls.
@@ -68591,7 +68519,9 @@ negates it. example
 
 ! Logical NOT operator. example
 
-## Section 40.2: The typeof operator
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-2">Section 40.2: The typeof operator</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The **typeof** operator returns the data type of the unevaluated
 operand as a string.
@@ -68925,7 +68855,9 @@ iterator
 
 ;
 
-## Section 40.3: The delete operator
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-3">Section 40.3: The delete operator</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The **delete** operator deletes a property from an object.
 >
@@ -69193,7 +69125,9 @@ PI
 
 *// 3.141592653589793 (Not deleted)*
 
-## Section 40.4: The unary plus operator (+)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-4">Section 40.4: The unary plus operator (+)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The unary plus (+) precedes its operand *and evaluates* to its
 operand. It attempts to convert the operand to a number, if it isn\'t
@@ -69389,393 +69323,215 @@ The operator then attempts to convert those strings to numbers:
 
 *// NaN ( === +\'1,2\' )*
 
-## Section 40.5: The void operator
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-5">Section 40.5: The void operator</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The **void** operator evaluates the given expression and then returns
 **undefined**.
->
 **Syntax:**
-
 **void**
-
 expression
-
 **Returns:**
->
 **undefined Description**
-
-  -
   **void**                    0 or                  **void**
-    -
-
-  -
-
 The **void** operator is often used to obtain the **undefined**
 primitive value, by means of writing (0). Note that **void** is an
 operator, not a function, so () is not required.
->
+
 Usually the result of a **void** expression and **undefined** can be
 used interchangeably.
-
-  
+ 
   window.**undefined**
   
-
-  
-
 However, in older versions of ECMAScript, could be assigned any value,
 and it is still possible to use **undefined** as name for function
 parameters variables inside functions, thus disrupting other code that
 relies on the value of **undefined**. **void** will always yield the
 *true* **undefined** value though.
-
   
   **void**
   
-
-  
-
-  
   window.**undefined**
-  
-
-  
 
 0 is also commonly used in code minification as a shorter way of
 writing **undefined**. In addition, it\'s probably safer as some other
 code could\'ve tampered with .
->
 **Examples:**
-
 Returning
-
 **undefined**
-
 :
-
 **function**
-
 foo
-
 (
-
 )
-
 {
-
 **return**
-
 **void**
-
 0
-
 ;
-
 }
-
 console.
-
 log
-
 (
-
 foo
-
 (
-
 )
-
 )
-
 ;
-
 *// undefined*
-
 Changing the value of **undefined** inside a certain scope:
-
 (
-
 **function**
-
 (
-
 **undefined**
-
 )
-
 {
-
 **var**
-
 str
-
 =
-
 \'foo\'
-
 ;
-
 console.
-
 log
-
 (
-
 str
-
 ===
-
 **undefined**
-
 )
-
 ;
-
 *// true*
-
 }
-
 )
-
 (
-
 \'foo\'
-
 )
-
 ;
-
-## Section 40.6: The unary negation operator (-)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-6">Section 40.6: The unary negation operator (-)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The unary negation (-) precedes its operand and negates it, after
 trying to convert it to number.
->
 **Syntax:**
-
 -expression **Returns:** a Number.
-
 **Description**
->
 The unary negation (-) can convert the same types / values as the
 unary plus (+) operator can.
-
-  
+ 
   **NaN**
-  
-
-  
 
 Values that can\'t be converted will evaluate to **NaN** (there is no
 -).
->
 **Examples:**
-
 \-
-
 42
-
 *// -42*
-
 \-
-
 \"42\"
-
 *// -42*
-
 \-
-
 **true**
-
 *// -1*
-
 \-
-
 **false**
-
 *// -0*
-
 \-
-
 **null**
-
 *// -0*
-
 \-
-
 **undefined**
-
 *// NaN*
-
 \-
-
 **NaN**
-
 *// NaN*
-
 \-
-
 \"foo\"
-
 *// NaN*
-
 \-
-
 {
-
 }
-
 *// NaN*
-
 \-
-
 **function**
-
 (
-
 )
-
 {
-
 }
-
 *// NaN*
-
 Note that attempting to convert an array can result in unexpected
 return values. In the background, arrays are first converted to their
 string representations:
-
 \[
-
 \]
-
 .
-
 toString
-
 (
-
 )
-
 ===
-
 \'\'
-
 ;
-
 \[
-
 1
-
 \]
-
 .
-
 toString
-
 (
-
 )
-
 ===
-
 \'1\'
-
 ;
-
 \[
-
 1
-
 ,
-
 2
-
 \]
-
 .
-
 toString
-
 (
-
 )
-
 ===
-
 \'1,2\'
-
 ;
-
 The operator then attempts to convert those strings to numbers:
-
 \-
-
 \[
-
 \]
-
 *// -0 ( === -\'\' )*
-
 \-
-
 \[
-
 1
-
 \]
-
 *// -1 ( === -\'1\' )*
-
 \-
-
 \[
-
 1
-
 ,
-
 2
-
 \]
-
 *// NaN ( === -\'1,2\' )*
 
-## Section 40.7: The bitwise NOT operator (\~)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-7">Section 40.7: The bitwise NOT operator (\~)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The bitwise NOT (\~) performs a NOT operation on each bit in a value.
->
 **Syntax:**
-
 \~expression **Returns:**
-
 a Number.
->
 **Description**
->
 The truth table for the NOT operation is:
->
 **a NOT a**
-
 0
-
 1
-
 1
-
 0
-
 1337
-
 (
-
 base
-
 10
-
 )
-
 =
-
 0000010100111001
 
 (
@@ -69801,452 +69557,243 @@ base
 =
 
 1111101011000110
-
 (
-
 base
-
 2
-
 )
-
 =
-
 \-
-
 1338
-
 (
-
 base
-
 10
-
 )
-
 A bitwise not on a number results in:
-
 \-
-
 (
-
 x
-
 \+
-
 1
-
 )
-
 .
-
 **Examples: value (base 10) value (base 2) return (base 2) return
 (base 10)**
-
   
   2                       00000010              11111100                -3
-     
+    
   1                       00000001              11111110                -2
-
   0                       00000000              11111111                -1
-
   -1                      11111111              00000000                0
-
   -2                      11111110              00000001                1
-
   -3                      11111100              00000010                2
-  
+ 
 
-## Section 40.8: The logical NOT operator (!)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-8">Section 40.8: The logical NOT operator (!)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The logical NOT (!) operator performs logical negation on an
 expression.
->
+
 **Syntax:**
-
 !expression **Returns:** a Boolean.
-
 **Description**
->
+
 The logical NOT (!) operator performs logical negation on an
 expression.
-
   
   **true** === **false**        and !       **false** === **true**
-    
-
+   
   
-
 Boolean values simply get inverted: !.
->
+
 Non-boolean values get converted to boolean values first, then are
 negated.
->
+
 This means that a double logical NOT (!!) can be used to cast any
 value to a boolean:
-
 !!
-
 \"FooBar\"
-
 ===
-
 **true**
-
 !!
-
 1
-
 ===
-
 **true**
-
 !!
-
 0
-
 ===
-
 **false**
-
   
   **true**
+ 
   
-
-  
-
 These are all equal to !:
-
 !
-
 \'true\'
-
 ===
-
 !
-
 **new**
-
 Boolean
-
 (
-
 \'true\'
-
 )
-
 ;
-
 !
-
 \'false\'
-
 ===
-
 !
-
 **new**
-
 Boolean
-
 (
-
 \'false\'
-
 )
-
 ;
-
 !
-
 \'FooBar\'
-
 ===
-
 !
-
 **new**
-
 Boolean
-
 (
-
 \'FooBar\'
-
 )
-
 ;
-
 !
-
 \[
-
 \]
-
 ===
-
 !
-
 **new**
-
 Boolean
-
 (
-
 \[
-
 \]
-
 )
-
 ;
-
 !
-
 {
-
 }
-
 ===
-
 !
-
 **new**
-
 Boolean
-
 (
-
 {
-
 }
-
 )
-
 ;
-
 These are all equal to
-
 !
-
 **false**
-
 :
-
 !
-
 0
-
 ===
-
 !
-
 **new**
-
 Boolean
-
 (
-
 0
-
 )
-
 ;
-
 !
-
 \'\'
-
 ===
-
 !
-
 **new**
-
 Boolean
-
 (
-
 \'\'
-
 )
-
 ;
-
 !
-
 **NaN**
-
 ===
-
 !
-
 **new**
-
 Boolean
-
 (
-
 **NaN**
-
 )
-
 ;
-
 !
-
 **null**
-
 ===
-
 !
-
 **new**
-
 Boolean
-
 (
-
 **null**
-
 )
-
 ;
-
 !
-
 **undefined**
-
 ===
-
 !
-
 **new**
-
 Boolean
-
 (
-
 **undefined**
-
 )
-
 ;
-
 **Examples:**
-
 !
-
 **true**
-
 *// false*
-
 !-
-
 1
-
 *// false*
-
 !
-
 \"-1\"
-
 *// false*
-
 !
-
 42
-
 *// false*
-
 !
-
 \"42\"
-
 *// false*
-
 !
-
 \"foo\"
-
 *// false*
-
 !
-
 \"true\"
-
 *// false*
-
 !
-
 \"false\"
-
 *// false*
-
 !
-
 {
-
 }
-
 *// false*
-
 !
-
 \[
-
 \]
-
 *// false*
-
 !
-
 **function**
-
 (
-
 )
-
 {
-
 }
-
 *// false*
-
 !
-
 **false**
-
 *// true*
-
 !
-
 **null**
-
 *// true*
-
 !
-
 **undefined**
-
 *// true*
-
 !
-
 **NaN**
-
 *// true*
-
 !
-
 0
-
 *// true*
-
 !
-
 \"\"
-
 *// true*
 
 # Chapter 41: Generators
@@ -70261,7 +69808,9 @@ Generator functions (defined by the \* keyword) run as coroutines,
 generating a series of values as they\'re requested through an
 iterator.
 
-## Section 41.1: Generator Functions
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch41-1">Section 41.1: Generator Functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   **function**
@@ -70603,7 +70152,9 @@ next
 
 *// no code executed. returns { value: undefined, done: true }*
 
-## Section 41.2: Sending Values to Generator
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch41-2">Section 41.2: Sending Values to Generator</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   next()
@@ -70788,7 +70339,9 @@ value
 
 *// 111*
 
-## Section 41.3: Delegating to other Generator
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch41-3">Section 41.3: Delegating to other Generator</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   yield\*
@@ -71003,311 +70556,167 @@ next
 
 *// undefined*
 
-## Section 41.4: Iteration
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch41-4">Section 41.4: Iteration</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
   
   **for**\...of
+ 
   
-
-  
-
 A generator is *iterable*. It can be looped over with a statement, and
 used in other constructs which depend on the iteration protocol.
-
 **function**
-
 \*
-
 range
-
 (
-
 n
-
 )
-
 {
-
 **for**
-
 (
-
 **let**
-
 i
-
 =
-
 0
-
 ;
-
 i
-
 \<
-
 n
-
 ;
-
 ++
-
 i
-
 )
-
 {
-
 yield i
-
 ;
-
 }
-
 }
-
 *// looping*
-
 **for**
-
 (
-
 **let**
-
 n of range
-
 (
-
 10
-
 )
-
 )
-
 {
-
 *// n takes on the values 0, 1, \... 9*
-
 }
-
 *// spread operator*
-
 **let**
-
 nums
-
 =
-
 \[
-
 \...
-
 range
-
 (
-
 3
-
 )
-
 \]
-
 ;
-
 *// \[0, 1, 2\]*
-
 **let**
-
 max
-
 =
-
 Math
-
 .
-
 max
-
 (
-
 \...
-
 range
-
 (
-
 100
-
 )
-
 )
-
 ;
-
 *// 99*
-
   
   **function**
+ 
   
-
-  
-
 Here is another example of use generator to custom iterable object in
 ES6. Here anonymous generator function \* used.
-
 **let**
-
 user
-
 =
-
 {
-
 name
-
 :
-
 \"sam\"
-
 ,
-
 totalReplies
-
 :
-
 17
-
 ,
-
 isBlocked
-
 :
-
 **false**
-
 }
-
 ;
-
 user
-
 \[
-
 Symbol.
-
 iterator
-
 \]
-
 =
-
 **function**
-
 \*
-
 (
-
 )
-
 {
-
 **let**
-
 properties
-
 =
-
 Object
-
 .
-
 keys
-
 (
-
 **this**
-
 )
-
 ;
-
 **let**
-
 count
-
 =
-
 0
-
 ;
-
 **let**
-
 isDone
-
 =
-
 **false**
-
 ;
-
 **for**
-
 (
-
 **let**
-
 p of properties
-
 )
-
 {
-
 yield
-
 **this**
-
 \[
-
 p
-
 \]
-
 ;
-
 }
-
 }
-
 ;
-
 **for**
-
 (
-
 **let**
-
 p of user
-
 )
-
 {
-
 console.
-
 log
-
 (
-
 p
-
 )
-
 ;
-
 }
 
-## Section 41.5: Async flow with generators
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch41-5">Section 41.5: Async flow with generators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Generators are functions which are able to pause and then resume
 execution. This allows to emulate async functions using external
@@ -71495,68 +70904,43 @@ yield asyncError
 }
 
 **catch**
-
 (
-
 e
-
 )
-
 {
-
 console.
-
 error
-
 (
-
 e
-
 )
-
 *// Something went wrong*
-
 }
-
 }
-
 )
-
 Using co would work exactly the same but with
-
 co
-
 (
-
 **function**
-
 \*
-
 (
-
 )
-
 {
-
 \...
-
 }
-
 )
-
 instead of
-
 q\.
-
 spawn
 
-## Section 41.6: Iterator-Observer interface
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch41-6">Section 41.6: Iterator-Observer interface</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 A generator is a combination of two things - an Iterator and an
 Observer.
->
+
 **Iterator**
->
+
 An iterator is something when invoked returns an iterable. An iterable
 is something you can iterate upon. From ES6/ES2015 onwards, all
 collections (Array, Map, Set, WeakMap, WeakSet) conform to the
@@ -72016,13 +71400,15 @@ will make debugging easy. Also the code will look neat.
 
 This feature is coming to future versions of JavaScript - as . But you
 can use them today in
->
+
 ES2015/ES6 using the spawn function defined in the libraries - taskjs,
 co, or bluebird
 
-# Chapter 42: Promises
-
-## Section 42.1: Introduction
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch42">Chapter 42: Promises</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-1">Section 42.1: Introduction</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 A
 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
@@ -72031,22 +71417,22 @@ produce* a value. Promises provide a robust way to wrap the (possibly
 pending) result of asynchronous work, mitigating the problem of deeply
 nested callbacks (known as \"[callback
 hell](http://callbackhell.com/)\").
->
+
 **States and control flow**
->
+
 A promise can be in one of three states:
->
+
 *pending*  The underlying operation has not yet completed, and the
 promise is *pending* fulfillment.
->
+
 *fulfilled*  The operation has finished, and the promise is
 *fulfilled* with a *value*. This is analogous to returning a value
 from a synchronous function.
->
+
 *rejected*  An error has occurred during the operation, and the
 promise is *rejected* with a *reason*. This is analogous to throwing
 an error in a synchronous function.
->
+
 A promise is said to be *settled* (or *resolved*) when it is either
 fulfilled or rejected. Once a promise is settled, it becomes
 immutable, and its state cannot change. The
@@ -72063,167 +71449,89 @@ height="1.9819444444444445in"}
 **Example**
 
 **const**
-
 promise
-
 =
-
 **new**
-
 Promise
-
 (
-
 (
-
 resolve
-
 ,
-
 reject
-
 )
-
 =\>
-
 {
-
 *// Perform some work (possibly asynchronous)*
-
 *// \...*
-
 **if**
-
 (
-
 */\* Work has successfully finished and produced \"value\" \*/*
-
 )
-
 {
-
 resolve
-
 (
-
 value
-
 )
-
 ;
-
 }
-
 **else**
-
 {
-
 *// Something went wrong because of \"reason\"*
-
 *// The reason is traditionally an Error object, although*
-
 *// this is not required or enforced.*
-
 **let**
-
 reason
-
 =
-
 **new**
-
 Error
-
 (
-
 message
-
 )
-
 ;
-
 reject
-
 (
-
 reason
-
 )
-
 ;
-
 *// Throwing an error also rejects the promise.*
-
 **throw**
-
 reason
-
 ;
-
 }
-
 }
-
 )
-
 ;
-
 The
-[then](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
+then](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
 and
 [**catch**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
 methods can be used to attach fulfillment and rejection callbacks:
-
 promise.
-
 then
-
 (
-
 value
-
 =\>
-
 {
-
 *// Work has completed successfully,*
-
 *// promise has been fulfilled with \"value\"*
-
 }
-
 )
-
 .
-
 **catch**
-
 (
-
 reason
-
 =\>
-
 {
-
 *// Something went wrong,*
-
 *// promise has been rejected with \"reason\"*
-
 }
-
 )
-
 ;
-
-  
+ 
   promise.then           (   \...   ) and     promise.**catch**        (   \...
-  -    -  
-
-  
 
 **Note:** Calling ) on the same promise might result in an Uncaught
->
+
 exception **in** Promise if an error occurs, either while executing
 the promise or inside one of the callbacks, so the preferred way would
 be to attach the next listener on the promise returned by the previous
@@ -72231,23 +71539,14 @@ then / **catch**.
 >
 Alternatively, both callbacks can be attached in a single call to
 [then](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then):
-
 promise.
-
 then
-
 (
-
 onFulfilled
-
 ,
-
 onRejected
-
 )
-
 ;
-
 Attaching callbacks to a promise that has already been settled will
 immediately place them in the [microtask
 queue](http://stackoverflow.com/a/25933985/5931915), and they will be
@@ -72255,225 +71554,121 @@ invoked \"as soon as possible\" (i.e. immediately after the currently
 executing script). It is not necessary to check the state of the
 promise before attaching callbacks, unlike with many other
 event-emitting implementations.
-
 [Live demo](https://jsfiddle.net/SO_AMK/sy8s7a3a/)
 
-## Section 42.2: Promise chaining
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-2">Section 42.2: Promise chaining</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The
-
-[the]{.underline}
-
+[the]
 [n](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
-
 method of a promise returns a new promise.
-
 **const**
-
 promise
-
 =
-
 **new**
-
 Promise
-
 (
-
 resolve
-
 =\>
-
 setTimeout
-
 (
-
 resolve
-
 ,
-
 5000
-
 )
-
 )
-
 ;
-
 promise
-
 *// 5 seconds later*
-
 .
-
 then
-
 (
-
 (
-
 )
-
 =\>
-
 2
-
 )
-
 *// returning a value from a then callback will cause*
-
 *// the new promise to resolve with this value*
-
 .
-
 then
-
 (
-
 value
-
 =\>
-
 {
-
 */\* value === 2 \*/*
-
 }
-
 )
-
 ;
-
 Returning a
 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 from a
 [then](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
 callback will append it to the promise chain.
-
 **function**
-
 wait
-
 (
-
 millis
-
 )
-
 {
-
 **return**
-
 **new**
-
 Promise
-
 (
-
 resolve
-
 =\>
-
 setTimeout
-
 (
-
 resolve
-
 ,
-
 millis
-
 )
-
 )
-
 ;
-
 }
-
 **const**
-
 p
-
 =
-
 wait
-
 (
-
 5000
-
 )
-
 .
-
 then
-
 (
-
 (
-
 )
-
 =\>
-
 wait
-
 (
-
 4000
-
 )
-
 )
-
 .
-
 then
-
 (
-
 (
-
 )
-
 =\>
-
 wait
-
 (
-
 1000
-
 )
-
 )
-
 ;
-
 p\.
-
 then
-
 (
-
 (
-
 )
-
 =\>
-
 {
-
 */\* 10 seconds have passed \*/*
-
 }
-
 )
-
 ;
-
 A
 [**catch**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
 allows a rejected promise to recover, similar to how **catch** in a
@@ -72483,243 +71678,136 @@ after a
 [**catch**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
 will execute its resolve handler using the value resolved from the
 [**catch**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch).
->
+
 **const** p = **new** Promise(resolve =\{**throw** \'oh no\'});
->
+
 p.**catch**(() =\\'oh yes\').then(console.log.bind(console)); *//
 outputs \"oh yes\"*
->
+
 If there are no
 [**catch**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
 or reject handlers in the middle of the chain, a
 [**catch**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
 at the end will capture any rejection in the chain:
-
 p\.
-
 **catch**
-
 (
-
 (
-
 )
-
 =\>
-
 Promise.
-
 reject
-
 (
-
 \'oh yes\'
-
 )
-
 )
-
 .
-
 then
-
 (
-
 console.
-
 log
-
 .
-
 bind
-
 (
-
 console
-
 )
-
 )
-
 *// won\'t be called*
-
 .**catch**(console.error.bind(console)); *// outputs \"oh yes\"*
->
+
 On certain occasions, you may want to \"branch\" the execution of the
 functions. You can do it by returning different promises from a
 function depending on the condition. Later in the code, you can merge
 all of these branches into one to call other functions on them and/or
 to handle all errors in one place.
-
 promise
-
 .
-
 then
-
 (
-
 result
-
 =\>
-
 {
-
 **if**
-
 (
-
 result.
-
 condition
-
 )
-
 {
-
 **return**
-
 handlerFn1
-
 (
-
 )
-
 .
-
 then
-
 (
-
 handlerFn2
-
 )
-
 ;
-
 }
-
 **else**
-
 **if**
-
 (
-
 result.
-
 condition2
-
 )
-
 {
-
 **return**
-
 handlerFn3
-
 (
-
 )
-
 .
-
 then
-
 (
-
 handlerFn4
-
 )
-
 ;
-
 }
-
 **else**
-
 {
-
 **throw**
-
 **new**
-
 Error
-
 (
-
 \"Invalid result\"
-
 )
-
 ;
-
 }
-
 }
-
 )
-
 .
-
 then
-
 (
-
 handlerFn5
-
 )
-
 .
-
 **catch**
-
 (
-
 err
-
 =\>
-
 {
-
 console.
-
 error
-
 (
-
 err
-
 )
-
 ;
-
 }
-
 )
-
 ;
-
 Thus, the execution order of the functions looks like:
->
 promise \\handlerFn1 -\handlerFn2 \\handlerFn5 \~\~\>
 .**catch**()
->
 \| \^
->
 V \|
->
 -\handlerFn3 -\handlerFn4 -\^
->
 The single **catch** will get the error on whichever branch it may
 occur.
 
-## Section 42.3: Waiting for multiple concurrent promises
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-3">Section 42.3: Waiting for multiple concurrent promises</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
   
   [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
-  
-
-  
 
 The
 [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
@@ -72731,511 +71819,269 @@ in the iterable have rejected.
 *// wait \"millis\" ms, then resolve with \"value\"*
 
 **function**
-
 resolve
-
 (
-
 value
-
 ,
-
 milliseconds
-
 )
-
 {
-
 **return**
-
 **new**
-
 Promise
-
 (
-
 resolve
-
 =\>
-
 setTimeout
-
 (
-
 (
-
 )
-
 =\>
-
 resolve
-
 (
-
 value
-
 )
-
 ,
-
 milliseconds
-
 )
-
 )
-
 ;
-
 }
-
 *// wait \"millis\" ms, then reject with \"reason\"*
-
 **function**
-
 reject
-
 (
-
 reason
-
 ,
-
 milliseconds
-
 )
-
 {
-
 **return**
-
 **new**
-
 Promise
-
 (
-
 (
-
 \_
-
 ,
-
 reject
-
 )
-
 =\>
-
 setTimeout
-
 (
-
 (
-
 )
-
 =\>
-
 reject
-
 (
-
 reason
-
 )
-
 ,
-
 milliseconds
-
 )
-
 )
-
 ;
-
 }
-
 Promise.
-
 all
-
 (
-
 \[
-
 resolve
-
 (
-
 1
-
 ,
-
 5000
-
 )
-
 ,
-
 resolve
-
 (
-
 2
-
 ,
-
 6000
-
 )
-
 ,
-
 resolve
-
 (
-
 3
-
 ,
-
 7000
-
 )
-
 \]
-
 )
-
 .
-
 then
-
 (
-
 values
-
 =\>
-
 console.
-
 log
-
 (
-
 values
-
 )
-
 )
-
 ;
-
 *// outputs \"\[1, 2, 3\]\" after 7 seconds.*
-
 Promise.
-
 all
-
 (
-
 \[
-
 resolve
-
 (
-
 1
-
 ,
-
 5000
-
 )
-
 ,
-
 reject
-
 (
-
 \'Error!\'
-
 ,
-
 6000
-
 )
-
 ,
-
 resolve
-
 (
-
 2
-
 ,
-
 7000
-
 )
-
 \]
-
 )
-
 .
-
 then
-
 (
-
 values
-
 =\>
-
 console.
-
 log
-
 (
-
 values
-
 )
-
 )
-
 *// does not output anything*
-
 .**catch**(reason =\console.log(reason)); *// outputs \"Error!\"
 after 6 seconds.*
->
+
 Non-promise values in the iterable are \"promisified\".
-
 Promise.
-
 all
-
 (
-
 \[
-
 resolve
-
 (
-
 1
-
 ,
-
 5000
-
 )
-
 ,
-
 resolve
-
 (
-
 2
-
 ,
-
 6000
-
 )
-
 ,
-
 {
-
 hello
-
 :
-
 3
-
 }
-
 \]
-
 )
-
 .
-
 then
-
 (
-
 values
-
 =\>
-
 console.
-
 log
-
 (
-
 values
-
 )
-
 )
-
 ;
-
 *// outputs \"\[1, 2, { hello: 3 }\]\" after 6 seconds*
-
 Destructuring assignment can help to retrieve results from multiple
 promises.
-
 Promise.
-
 all
-
 (
-
 \[
-
 resolve
-
 (
-
 1
-
 ,
-
 5000
-
 )
-
 ,
-
 resolve
-
 (
-
 2
-
 ,
-
 6000
-
 )
-
 ,
-
 resolve
-
 (
-
 3
-
 ,
-
 7000
-
 )
-
 \]
-
 )
-
 .
-
 then
-
 (
-
 (
-
 \[
-
 result1
-
 ,
-
 result2
-
 ,
-
 result3
-
 \]
-
 )
-
 =\>
-
 {
-
 console.
-
 log
-
 (
-
 result1
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 result2
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 result3
-
 )
-
 ;
-
 }
-
 )
-
 ;
 
-## Section 42.4: Reduce an array to chained promises
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-4">Section 42.4: Reduce an array to chained promises</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 This design pattern is useful for generating a sequence of
 asynchronous actions from a list of elements.
->
+
 There are two variants :
->
+
 the \"then\" reduction, which builds a chain that continues as long as
 the chain experiences success.
->
+
 the \"catch\" reduction, which builds a chain that continues as long
 as the chain experiences error.
->
+
 **The \"then\" reduction**
 
-  -
   [then](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
-  -
-
-  -
 
 This variant of the pattern builds a
 [.()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
@@ -73245,172 +72091,89 @@ of dependent HTTP requests.
 \[
 
 1
-
 ,
-
 3
-
 ,
-
 5
-
 ,
-
 7
-
 ,
-
 9
-
 \]
-
 .
-
 reduce
-
 (
-
 (
-
 seq
-
 ,
-
 n
-
 )
-
 =\>
-
 {
-
 **return**
-
 seq.
-
 then
-
 (
-
 (
-
 )
-
 =\>
-
 {
-
 console.
-
 log
-
 (
-
 n
-
 )
-
 ;
-
 **return**
-
 **new**
-
 Promise
-
 (
-
 res
-
 =\>
-
 setTimeout
-
 (
-
 res
-
 ,
-
 1000
-
 )
-
 )
-
 ;
-
 }
-
 )
-
 ;
-
 }
-
 ,
-
 Promise.
-
 resolve
-
 (
-
 )
-
 )
-
 .
-
 then
-
 (
-
 (
-
 )
-
 =\>
-
 console.
-
 log
-
 (
-
 \'done\'
-
 )
-
 ,
-
 (
-
 e
-
 )
-
 =\>
-
 console.
-
 log
-
 (
-
 e
-
 )
-
 )
-
 ;
-
 *// will log 1, 3, 5, 7, 9, \'done\' in 1s intervals*
-
 Explanation:
-
-  
+ 
   [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)   [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)   [Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
                                                                                                             on a source array, and provide                                                                        
    - 
@@ -73790,7 +72553,9 @@ execute.
 Note: The \"catch\" reduction is a sequential counterpart of , but not
 currently in native ECMAScript).
 
-## Section 42.5: Waiting for the first of multiple concurrent promises
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-5">Section 42.5: Waiting for the first of multiple concurrent promises</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   -
   [Promise.race](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race)
@@ -74108,7 +72873,9 @@ message
 
 *// outputs \"bad things!\" after 1 second*
 
-## Section 42.6: \"Promisifying\" functions with callbacks
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-6">Section 42.6: \"Promisifying\" functions with callbacks</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Given a function that accepts a Node-style callback,
 
@@ -74496,7 +73263,9 @@ err
 
 ;
 
-## Section 42.7: Error Handling
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-7">Section 42.7: Error Handling</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Errors thrown from promises are handled by the second parameter
 (reject) passed to then or by the handler passed to **catch**:
@@ -75704,7 +74473,9 @@ arg
 
 }
 
-## Section 42.8: Reconciling synchronous and asynchronous operations
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-8">Section 42.8: Reconciling synchronous and asynchronous operations</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 In some cases you may want to wrap a synchronous operation inside a
 promise to prevent repetition in code branches. Take this example:
@@ -75917,7 +74688,9 @@ cachedPromise
 
 }
 
-## Section 42.9: Delay function call
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-9">Section 42.9: Delay function call</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout)
@@ -76016,7 +74789,9 @@ log
 
 ;
 
-## Section 42.10: \"Promisifying\" values
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-10">Section 42.10: \"Promisifying\" values</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   [Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
@@ -76281,7 +75056,9 @@ reason
 
 ;
 
-## Section 42.11: Using ES2017 async/await
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-11">Section 42.11: Using ES2017 async/await</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   **try**                 /       **catch**
@@ -76535,7 +75312,9 @@ error
 
 ;
 
-## Section 42.12: Performing cleanup with finally()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-12">Section 42.12: Performing cleanup with finally()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 There is currently a
 [proposal](https://github.com/tc39/proposal-promise-finally) (not yet
@@ -76760,7 +75539,9 @@ error
 
 }
 
-## Section 42.13: forEach with promises
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-13">Section 42.13: forEach with promises</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 It is possible to effectively apply a function (cb) which returns a
 promise to each element of an array, with each element waiting to be
@@ -76927,7 +75708,9 @@ items, one at a time. Using a regular **for** loop to create the
 promises will create them all at once and take up a significant amount
 of RAM.
 
-## Section 42.14: Asynchronous API request
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-14">Section 42.14: Asynchronous API request</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 This is an example of a simple GET API call wrapped in a promise to
 take advantage of its asynchronous functionality.
@@ -77234,37 +76017,39 @@ statusText
 
 ;
 
-# Chapter 43: Set
+<h2 id="ch43">Chapter 43: Set</h2>
 
 **Parameter Details**
 
 If an iterable object is passed, all of its elements will be added to
 the new Set. null is treated as iterable undefined.
->
+
 value The value of the element to add to the Set object. callback
 Function to execute for each element. thisArg Optional. Value to use
 as this when executing callback.
->
+
 The Set object lets you store unique values of any type, whether
 primitive values or object references.
->
+
 Set objects are collections of values. You can iterate through the
 elements of a set in insertion order. A value in the Set may only
 occur **ONCE**; it is unique in the Set\'s collection. Distinct values
 are discriminated using the *SameValueZero* comparison algorithm.
->
+
 [Standard Specification About
 Set](http://www.ecma-international.org/ecma-262/6.0/#sec-set-objects)
 
-## Section 43.1: Creating a Set
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-1">Section 43.1: Creating a Set</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The Set object lets you store unique values of any type, whether
 primitive values or object references.
->
+
 You can push items into a set and iterate them similar to a plain
 JavaScript array, but unlike array, you cannot add a value to a Set if
 the value already exist in it.
->
+
 To create a new set:
 
 **const**
@@ -77366,7 +76151,9 @@ In the example above the set content would be
 
 the original array used to create it.
 
-## Section 43.2: Adding a value to a Set
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-2">Section 43.2: Adding a value to a Set</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   add
@@ -77432,7 +76219,9 @@ add
 
 ;
 
-## Section 43.3: Removing value from a set
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-3">Section 43.3: Removing value from a set</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   **delete**
@@ -77457,7 +76246,9 @@ some_val
 This function will return **true** if the value existed in the set and
 was removed, or **false** otherwise.
 
-## Section 43.4: Checking if a value exist in a set
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-4">Section 43.4: Checking if a value exist in a set</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   has
@@ -77482,7 +76273,9 @@ someVal
 Will return **true** if someVal appears in the set, **false**
 otherwise.
 
-## Section 43.5: Clearing a Set
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-5">Section 43.5: Clearing a Set</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   clear
@@ -77502,7 +76295,9 @@ clear
 
 ;
 
-## Section 43.6: Getting set length
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-6">Section 43.6: Getting set length</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   size
@@ -77594,11 +76389,13 @@ size
 *// 4*
 
 In strict mode it even throws an error:
->
+
 TypeError: Cannot **set** property size of #\<Set\which has only a
 getter
 
-## Section 43.7: Converting Sets to arrays
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-7">Section 43.7: Converting Sets to arrays</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   Array                   .    **prototype**
@@ -77747,7 +76544,9 @@ mySet
 
 *// Set {2, 4}*
 
-## Section 43.8: Intersection and dierence in Sets
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-8">Section 43.8: Intersection and difference in Sets</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 There are no build-in methods for intersection and difference in Sets,
 but you can still achieve that but converting them to arrays,
@@ -77760,7 +76559,9 @@ filtering, and converting back to Sets:
 set2.has(x)));*//Set {3, 4}* **const** difference = **new**
 Set(Array.from(set1).filter(x =\!set2.has(x))); *//Set {1, 2}*
 
-## Section 43.9: Iterating Sets
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-9">Section 43.9: Iterating Sets</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 You can use a simple for-of loop to iterate a Set:
 
@@ -77916,9 +76717,11 @@ argument is the Set itself.
 mySet.forEach((value, value2, **set**) =\console.log(value)); *//
 logs 1, 2 and 3*
 
-# Chapter 44: Modals - Prompts
-
-## Section 44.1: About User Prompts
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch44">Chapter 44: Modals - Prompts</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch44-1">Section 44.1: About User Prompts</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 [User
 Prompts](https://www.w3.org/TR/html5/webappapis.html#user-prompts) are
@@ -77995,7 +76798,9 @@ print
 
 ;
 
-## Section 44.2: Persistent Prompt Modal
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch44-2">Section 44.2: Persistent Prompt Modal</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 When using **prompt** a user can always click ***Cancel*** and no
 value will be returned. To prevent empty values and make it more
@@ -78145,7 +76950,9 @@ script
 
 [jsFiddle demo](https://jsfiddle.net/RokoCB/2r3ekqzk/1/)
 
-## Section 44.3: Confirm to Delete element
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch44-3">Section 44.3: Confirm to Delete element</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   confirm
@@ -78429,7 +77236,9 @@ deleteParentPost
 
 [jsFiddle demo](https://jsfiddle.net/RokoCB/6d652ycL/)
 
-## Section 44.4: Usage of alert()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch44-4">Section 44.4: Usage of alert()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   alert
@@ -78503,7 +77312,9 @@ displayed.
 >
 **Return value** alert function doesn\'t return any value
 
-## Section 44.5: Usage of prompt()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch44-5">Section 44.5: Usage of prompt()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Prompt will display a dialog to the user requesting their input. You
 can provide a message that will be placed above the text field. The
@@ -78596,7 +77407,7 @@ message Required. Text to display above the text field of the prompt.
 default Optional. Default text to display in the text field when the
 prompt is displayed.
 
-# Chapter 45: execCommand and contenteditable
+<h2 id="ch45">Chapter 45: execCommand and contenteditable</h2>
 
 **commandId value**
 
@@ -78629,23 +77440,25 @@ formatBlock \"address\", \"dd\", \"div\", \"dt\", \"h1\", \"h2\",
 \"h3\", \"h4\", \"h5\", \"h6\", \"p\", \"pre\"
 
 forwardDelete insertHorizontalRule
->
+
 insertHTML HTML String insertImage URL String insertLineBreak
 insertOrderedList insertParagraph insertText Text string
 insertUnorderedList justifyCenter justifyFull justifyLeft justifyRight
 outdent
->
+
 ⋮ **Clipboard commands** copy Currently Selected String cut Currently
 Selected String paste
->
+
 ⋮ **Miscellaneous commands** defaultParagraphSeparator redo selectAll
 styleWithCSS undo useCSS
 
-## Section 45.1: Listening to Changes of contenteditable
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch45-1">Section 45.1: Listening to Changes of contenteditable</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Events that work with most form elements (e.g., change, keydown,
 keyup, keypress) do not work with contenteditable.
->
+
 Instead, you can listen to changes of contenteditable contents with
 the input event. Assuming contenteditableHtmlElement is a JS DOM
 object that is contenteditable:
@@ -78686,7 +77499,9 @@ log
 
 ;
 
-## Section 45.2: Getting started
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch45-2">Section 45.2: Getting started</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The HTML attribute contenteditable provides a simple way to turn a
 HTML element into a user-editable area
@@ -79067,7 +77882,9 @@ need *better* support for other browsers and more features like
 HTMLTable editing etc. a rule of thumbs is to look for an **already
 existent** and robust **Rich-Text** editor.
 
-## Section 45.3: Copy to clipboard from textarea using execCommand(\"copy\")
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch45-3">Section 45.3: Copy to clipboard from textarea using execCommand(\"copy\")</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Example:
 
@@ -79305,29 +78122,33 @@ execCommand
 
 copies the current selection to the clipboard
 
-## Section 45.4: Formatting
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch45-4">Section 45.4: Formatting</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Users can add formatting to contenteditable documents or elements
 using their browser\'s features, such as common keyboard shortcuts for
 formatting ( Ctrl-B for **bold**, Ctrl-I for *italic*, etc.) or by
 dragging and dropping images, links, or markup from the clipboard.
->
+
 Additionally, developers can use JavaScript to apply formatting to the
 current selection (highlighted text).
->
+
 document.execCommand(\'bold\', **false**, **null**); *// toggles bold
 formatting* document.execCommand(\'italic\', **false**, **null**); *//
 toggles italic formatting* document.execCommand(\'underline\',
 **false**, **null**); *// toggles underline*
 
-# Chapter 46: History
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch46">Chapter 46: History</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 **Parameter Details**
 
 domain The domain you want to update to title The title to update to
 path The path to update to
-
-## Section 46.1: history.pushState()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch46-1">Section 46.1: history.pushState()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Syntax :
 
@@ -79368,7 +78189,9 @@ page title.
 Note this is different from the (). Which updates the current history
 entry, rather than adding a new one.
 
-## Section 46.2: history.replaceState()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch46-2">Section 46.2: history.replaceState()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Syntax :**
 
@@ -79411,7 +78234,9 @@ title.
 Note this is different from the (). Which inserts a new history entry,
 rather than replacing the current one.
 
-## Section 46.3: Load a specific URL from the history list
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch46-3">Section 46.3: Load a specific URL from the history list</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **go() method**
 >
@@ -79525,9 +78350,11 @@ onclick
 
 **\>**
 
-# Chapter 47: Navigator Object
-
-## Section 47.1: Get some basic browser data and return it as a JSON object
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch47">Chapter 47: Navigator Object</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch47-1">Section 47.1: Get some basic browser data and return it as a JSON object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The following function can be used to get some basic information about
 the current browser and return it in JSON format.
@@ -79796,14 +78623,15 @@ json
 
 ;
 
-# Chapter 48: BOM (Browser Object Model)
-
-## Section 48.1: Introduction
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch48">Chapter 48: BOM (Browser Object Model)</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch48-1">Section 48.1: Introduction</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 The BOM (Browser Object Model) contains objects that represent the
 current browser window and components; objects that model things like
 *history, device\'s screen,* etc
->
+
 The topmost object in BOM is the window object, which represents the
 current browser window or tab.
 
@@ -79827,7 +78655,9 @@ represents information about browser.
 
 represents device\'s display information.
 
-## Section 48.2: Window Object Properties
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch48-2">Section 48.2: Window Object Properties</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The Window Object contains the following properties.
 
@@ -79853,8 +78683,9 @@ window.screen Reference to screen object window.pageXOffset Distance
 document has been scrolled horizontally window.pageYOffset Distance
 document has been scrolled vertically
 
-## Section 48.3: Window Object Methods
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch48-3">Section 48.3: Window Object Methods</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
   
   Browser Object Model
   
@@ -79906,9 +78737,11 @@ window.getComputedStyle() Get CSS styles applied to an element
   window.stop()          Stop window from loading
   
 
-# Chapter 49: The Event Loop
-
-## Section 49.1: The event loop in a web browser
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch49">Chapter 49: The Event Loop</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch49-1">Section 49.1: The event loop in a web browser</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The vast majority of modern JavaScript environments work according to
 an *event loop*. This is a common concept in computer programming
@@ -80040,7 +78873,9 @@ the above code to log \"onclick\" in between the two 1/2\"s. This is
 due to the way the taskposting works; it is cooperative and
 queue-based, instead of preemptive.
 
-## Section 49.2: Asynchronous operations and the event loop
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch49-2">Section 49.2: Asynchronous operations and the event loop</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Many interesting operations in common JavaScript programming
 environments are asynchronous. For example, in the browser we see
@@ -80147,9 +78982,11 @@ listening for user input, and continually looking for posted tasks.
 When it sees these posted tasks to call the callbacks, it will call
 back into JavaScript. That\'s how you get asynchronous behavior!
 
-# Chapter 50: Strict mode
-
-## Section 50.1: For entire scripts
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch50">Chapter 50: Strict mode</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch50-1">Section 50.1: For entire scripts</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   \"use strict\"
@@ -80175,7 +79012,9 @@ Version ≥ 6
 **Note:** All code written inside ES2015+ modules and classes are
 strict by default.
 
-## Section 50.2: For functions
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch50-2">Section 50.2: For functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   \"use strict\"
@@ -80240,7 +79079,9 @@ notStrict
 
 Strict mode will also apply to any inner scoped functions.
 
-## Section 50.3: Changes to properties
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch50-3">Section 50.3: Changes to properties</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Strict mode also prevents you from deleting undeletable properties.
 
@@ -80347,7 +79188,7 @@ age
 
 }
 
-## Section 50.4: Changes to global properties
+<h3 id="ch50-4">Section 50.4: Changes to global properties</h3>
 
 In a non-strict-mode scope, when a variable is assigned without being
 initialized with the **var**, **const** or the **let** keyword, it is
@@ -80586,7 +79427,7 @@ a
 
 *// \>\bar*
 
-## Section 50.5: Duplicate Parameters
+<h3 id="ch50-5">Section 50.5: Duplicate Parameters</h3>
 
 Strict mode does not allow you to use duplicate function parameter
 names.
@@ -80637,7 +79478,7 @@ bar
 
 *// SyntaxError: duplicate formal argument bar*
 
-## Section 50.6: Function scoping in strict mode
+<h3 id="ch50-6">Section 50.6: Function scoping in strict mode</h3>
 
 In Strict Mode, functions declared in a local block are inaccessible
 outside the block.
@@ -80697,7 +79538,7 @@ f
 Scope-wise, function declarations in Strict Mode have the same kind of
 binding as **let** or **const**.
 
-## Section 50.7: Behaviour of a function\'s arguments list
+<h3 id="ch50-7">Section 50.7: Behaviour of a function\'s arguments list</h3>
 
 arguments object behave different in *strict* and *non strict* mode.
 In *non-strict* mode, the argument object will reflect the changes in
@@ -81166,7 +80007,7 @@ add
 
 *// 5, undefined*
 
-## Section 50.8: Non-Simple parameter lists
+<h3 id="ch50-8">Section 50.8: Non-Simple parameter lists</h3>
 
 **function**
 
@@ -81280,7 +80121,7 @@ args
 
 }
 
-# Chapter 51: Custom Elements
+<h2 id="ch51">Chapter 51: Custom Elements</h2>
 
 **Parameter Details**
 
@@ -81288,7 +80129,7 @@ name The name of the new custom element. options.extends The name of
 the native element being extended, if any. options.prototype The
 custom prototype to use for the custom element, if any.
 
-## Section 51.1: Extending Native Elements
+<h3 id="ch51-1">Section 51.1: Extending Native Elements</h3>
 
   
   **\<img\>**
@@ -81430,7 +80271,7 @@ src
 
 **/\>**
 
-## Section 51.2: Registering New Elements
+<h3 id="ch51-2">Section 51.2: Registering New Elements</h3>
 
   
   **\<initially-hidden\>**
@@ -81687,9 +80528,9 @@ World
 
 **\>**
 
-# Chapter 52: Data Manipulation
+<h2 id="ch52">Chapter 52: Data Manipulation</h2>
 
-## Section 52.1: Format numbers as money
+<h3 id="ch52-1">Section 52.1: Format numbers as money</h3>
 
   
   1234567.89 =\\"1,234,567.89\"
@@ -82065,7 +80906,7 @@ format
 
 *// \"123,456,789.00\"*
 
-## Section 52.2: Extract extension from file name
+<h3 id="ch52-2">Section 52.2: Extract extension from file name</h3>
 
 Fast and short way to extract extension from file name in JavaScript
 will be:
@@ -82206,7 +81047,7 @@ get_extension
 
 *// \"ext\"*
 
-## Section 52.3: Set object property given its string name
+<h3 id="ch52-3">Section 52.3: Set object property given its string name</h3>
 
 **function**
 
@@ -82440,9 +81281,9 @@ propName
 
 *// }*
 
-# Chapter 53: Binary Data
+<h2 id="ch53">Chapter 53: Binary Data</h2>
 
-## Section 53.1: Getting binary representation of an image file
+<h3 id="ch53-1">Section 53.1: Getting binary representation of an image file</h3>
 
 This example is inspired by [this
 question](http://stackoverflow.com/q/38334315/2271269).
@@ -83165,7 +82006,7 @@ array
 
 ;
 
-## Section 53.3: Manipulating ArrayBuers with DataViews
+<h3 id="ch53-3">Section 53.3: Manipulating ArrayBuers with DataViews</h3>
 
 DataViews provide methods to read and write individual values from an
 ArrayBuffer, instead of viewing the entire thing as an array of a
@@ -83293,7 +82134,7 @@ getUint16
 
 *// 511*
 
-## Section 53.4: Creating a TypedArray from a Base64 string
+<h3 id="ch53-4">Section 53.4: Creating a TypedArray from a Base64 string</h3>
 
 **var**
 
