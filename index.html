@@ -29344,20 +29344,22 @@ writable
 
 ;
 
-## Section 13.8: Accesor properties (get and set)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-8">Section 13.8: Accesor properties (get and set)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 5
 
 Treat a property as a combination of two functions, one to get the
 value from it, and another one to set the value in it.
->
+
 The **get** property of the property descriptor is a function that
 will be called to retrieve the value from the property.
->
+
 The **set** property is also a function, it will be called when the
 property has been assigned a value, and the new value will be passed
 as an argument.
->
+
 You cannot assign a value or writable to a descriptor that has **get**
 or **set**
 
@@ -29563,7 +29565,9 @@ name
 
 *// -\\"Mary\"*
 
-## Section 13.9: Dynamic / variable property names
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-9">Section 13.9: Dynamic / variable property names</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Sometimes the property name needs to be stored into a variable. In
 this example, we ask the user what word needs to be looked up, and
@@ -29779,7 +29783,9 @@ property
 
 ;
 
-## Section 13.10: Arrays are Objects
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-10">Section 13.10: Arrays are Objects</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   form.elements
@@ -29947,7 +29953,9 @@ true true* console.log(anArray **instanceof** Array, anObject
 console.log(Array.isArray(anArray), Array.isArray(anObject)); *//
 outputs: true false*
 
-## Section 13.11: Object.seal
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-11">Section 13.11: Object.seal</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 5
 
@@ -30247,7 +30255,9 @@ newFoo
 
 ;
 
-## Section 13.12: Convert object\'s values to array
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-12">Section 13.12: Convert object\'s values to array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Given this object:
 
@@ -30355,19 +30365,21 @@ array
 
 *// \[\"hello\", \"this is\", \"javascript!\"\]*
 
-## Section 13.13: Retrieving properties from an object
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-13">Section 13.13: Retrieving properties from an object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 ***Characteristics of properties :***
 
 Properties that can be retrieved from an *object* could have the
 following characteristics,
->
+
 Enumerable Non - Enumerable own
->
+
 While creating the properties using
 [*Object.defineProperty(ies)*](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty),
 we could set its characteristics except *\"own\"*.
->
+
 Properties which are available in the direct level not in the
 *prototype* level (\_\_proto\_\_) of an object are called as *own*
 properties.
@@ -30400,7 +30412,7 @@ Properties from an object could be retrieved by the following methods,
   -
 
 1\. loop
->
+
 This loop is very useful in retrieving enumerable properties from an
 object. Additionally this loop will retrieve enumerable own properties
 as well as it will do the same retrieval by traversing through the
@@ -31397,7 +31409,9 @@ x
 And this will be supported by the browsers which supports ECMAScript
 5.
 
-## Section 13.14: Read-Only property
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-14">Section 13.14: Read-Only property</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 5
 
@@ -31486,7 +31500,9 @@ Console output
 
 original
 
-## Section 13.15: Non enumerable property
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-15">Section 13.15: Non enumerable property</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 5
 
@@ -31630,7 +31646,9 @@ Console output
 
 show
 
-## Section 13.16: Lock property description
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-16">Section 13.16: Lock property description</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 5
 
@@ -31764,7 +31782,9 @@ Console output
 
 original value
 
-## Section 13.17: Object.getOwnPropertyDescriptor
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-17">Section 13.17: Object.getOwnPropertyDescriptor</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Get the description of a specific property in an object.
 
@@ -31807,7 +31827,9 @@ sampleObject
 *// Object {value: \"world\", writable: true, enumerable: true,
 configurable: true}*
 
-## Section 13.18: Descriptors and Named Properties
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-18">Section 13.18: Descriptors and Named Properties</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   object.propertyName
@@ -31831,7 +31853,7 @@ property when it is
 accessed (what happens to the property and what is the value returned
 from accessing it). By and large, a property associates a name to a
 behavior (we can think of the behavior as a black box).
->
+
 There are two types of named properties:
 
 1.  *data property*: the property\'s name is associated with a value.
@@ -31840,25 +31862,25 @@ There are two types of named properties:
     two accessor functions.
 
 Demonstration:
->
+
 obj.propertyName1 = 5; *//translates behind the scenes into*
->
+
 *//either assigning 5 to the value field\* if it is a data property*
->
+
 *//or calling the set function with the parameter 5 if accessor
 property*
->
+
 *//\*actually whether an assignment would take place in the case of a
 data property*
->
+
 *//also depends on the presence and value of the writable field - on
 that later on*
->
+
 The property\'s type is determined by its descriptor\'s fields, and a
 property cannot be of both types.
->
+
 **Data descriptors** -
->
+
 Required fields: value or writable or both Optional
 fields:configurable,enumerable
 >
@@ -31885,11 +31907,11 @@ writable
 }
 
 **Accessor descriptors** -
->
+
 Required fields: **get** or **set** or both
->
+
 Optional fields: configurable, enumerable
->
+
 Sample:
 
 {
@@ -31926,41 +31948,41 @@ enumerable
 
 **meaning of fields and their defaults** configurable,enumerable and
 writable:
->
+
 These keys all default to **false**. configurable is **true** if and
 only if the type of this property descriptor may be changed and if the
 property may be deleted from the corresponding object.
->
+
 enumerable is **true** if and only if this property shows up during
 enumeration of the properties on the corresponding object.
->
+
 writable is **true** if and only if the value associated with the
 property may be changed with an assignment operator.
->
+
 **get** and **set**:
->
+
 These keys default to **undefined**. **get** is a function which
 serves as a getter for the property, or **undefined** if there is no
 getter. The function return will be used as the value of the property.
->
+
 **set** is a function which serves as a setter for the property, or
 **undefined** if there is no setter. The function will receive as only
 argument the new value being assigned to the property.
->
+
 value:
->
+
 This key defaults to **undefined**.
->
+
 The value associated with the property. Can be any valid JavaScript
 value (number, object, function, etc).
->
+
 Example:
->
+
 **var** obj = {propertyName1: 1}; *//the pair is actually
 (\'propertyName1\', {value:1,* *// writable:true,*
->
+
 *// enumerable:true,*
->
+
 *// configurable:true})* Object.defineProperty(obj, \'propertyName2\',
 {**get**: **function**() { console.log(\'this will be logged \' +
 \'every time propertyName2 is accessed to get its value\'); },
@@ -31981,7 +32003,9 @@ propertyName2\'s value is tried to be set*
 console.log(obj.propertyName2); *//this will be logged every time
 propertyName2 is accessed to get its value*
 
-## Section 13.19: Object.keys
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-19">Section 13.19: Object.keys</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 5
 
@@ -32067,7 +32091,9 @@ keys
 
 *// \[\"a\", \"b\", \"c\"\]*
 
-## Section 13.20: Properties with special characters or reserved words
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-20">Section 13.20: Properties with special characters or reserved words</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   myObject.property
@@ -32140,7 +32166,9 @@ describing octal, hexadecimal and exponent notation)
 
 See also: \[Arrays are Objects\] example.
 
-## Section 13.21: Creating an Iterable object
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-21">Section 13.21: Creating an Iterable object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 6
 
@@ -32323,7 +32351,9 @@ Console output
 
 One
 
-## Section 13.22: Iterating over Object entries - Object.entries()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-22">Section 13.22: Iterating over Object entries - Object.entries()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 8
 
@@ -32502,7 +32532,9 @@ value
 
 }
 
-## Section 13.23: Object.values()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-23">Section 13.23: Object.values()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 8
 
@@ -32580,9 +32612,11 @@ obj
 For browser support, please refer to this
 [link](http://kangax.github.io/compat-table/es2016plus/#test-Object.values)
 
-# Chapter 14: Arithmetic (Math)
+<h2 id="ch14">Chapter 14: Arithmetic (Math)</h2>
 
-## Section 14.1: Constants
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-1">Section 14.1: Constants</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Constants Description Approximate**
 
@@ -32729,7 +32763,9 @@ Value of positive infinity (∞)
 
 **Infinity** Value of positive infinity (∞)
 
-## Section 14.2: Remainder / Modulus (%)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-2">Section 14.2: Remainder / Modulus (%)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The remainder / modulus operator (%) returns the remainder after
 (integer) division.
@@ -33152,7 +33188,9 @@ myNum
 
 *// -0.857142857142857*
 
-## Section 14.3: Rounding
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-3">Section 14.3: Rounding</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Rounding**
 
@@ -33845,7 +33883,9 @@ power
 
 }
 
-## Section 14.4: Trigonometry
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-4">Section 14.4: Trigonometry</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   180              \*   r            /    Math                 .    PI
@@ -34090,12 +34130,14 @@ and
 
 including π.
 
-## Section 14.5: Bitwise operators
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-5">Section 14.5: Bitwise operators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Note that all bitwise operations operate on 32-bit integers by passing
 any operands to the internal function
 [ToInt32](http://www.ecma-international.org/ecma-262/6.0/#sec-toint32).
->
+
 **Bitwise or**
 
 **var**
@@ -34760,7 +34802,9 @@ as the logical operators && (and) and \|\| (or). They will provide
 incorrect results if used as logical operators. The \^ operator is
 **not** the power operator (*ab*).
 
-## Section 14.6: Incrementing (++)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-6">Section 14.6: Incrementing (++)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The Increment operator (++) increments its operand by one.
 
@@ -34883,7 +34927,9 @@ Notice how the *prefix* variant is used. This ensures that a
 temporarily variable isn\'t needlessly created (to return the value
 prior to the operation).
 
-## Section 14.7: Exponentiation (Math.pow() or \*\*)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-7">Section 14.7: Exponentiation (Math.pow() or \*\*)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Exponentiation makes the second operand the power of the first operand
 (ab).
@@ -34979,7 +35025,9 @@ root of 16 = 4* **var** c = Math.pow(a, 1 / 3); *// return the cubed
 root of 16 = 2.5198420997897464* **var** d = Math.pow(a, 1 / 4); *//
 return the 4th root of 16 = 2*
 
-## Section 14.8: Random Integers and Floats
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-8">Section 14.8: Random Integers and Floats</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
 
@@ -35254,7 +35302,9 @@ min
 Functions taken from
 <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random>
 
-## Section 14.9: Addition (+)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-9">Section 14.9: Addition (+)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The addition operator (+) adds numbers.
 
@@ -35463,7 +35513,9 @@ value is converted to a string instead:
 
 *// \"falsebar\"*
 
-## Section 14.10: Little / Big endian for typed arrays when using bitwise operators
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-10">Section 14.10: Little / Big endian for typed arrays when using bitwise operators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To detect the endian of the device
 
@@ -36134,7 +36186,9 @@ imgData
 
 ;
 
-## Section 14.11: Get Random Between Two Numbers
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-11">Section 14.11: Get Random Between Two Numbers</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Returns a random integer between min and max:
 
@@ -36326,7 +36380,9 @@ random
 
 ;
 
-## Section 14.12: Simulating events with dierent probabilities
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-12">Section 14.12: Simulating events with different probabilities</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Sometimes you may only need to simulate an event with two outcomes,
 maybe with different probabilities, but you may find yourself in a
@@ -36752,7 +36808,9 @@ time)*
 console.log(\"You get a \"+rewards\[simulateEvent(likelihoods)\]); *//
 You get a silver coin*
 
-## Section 14.13: Subtraction (-)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-13">Section 14.13: Subtraction (-)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The subtraction operator (-) subtracts numbers.
 
@@ -36849,7 +36907,9 @@ be **NaN**:
 
 *// NaN*
 
-## Section 14.14: Multiplication (\*)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-14">Section 14.14: Multiplication (\*)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The multiplication operator (\*) perform arithmetic multiplication on
 numbers (literals or variables).
@@ -36934,7 +36994,9 @@ log
 
 *// 15*
 
-## Section 14.15: Getting maximum and minimum
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-15">Section 14.15: Getting maximum and minimum</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   Math                                .        max
@@ -37286,7 +37348,9 @@ min
 
 *// Logs: 1*
 
-## Section 14.16: Restrict Number to Min/Max Range
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-16">Section 14.16: Restrict Number to Min/Max Range</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 If you need to clamp a number to keep it inside a specific range
 boundary
@@ -37475,7 +37539,9 @@ clamp
 
 [Use-case example (jsFiddle)](https://jsfiddle.net/RokoCB/8drqL3vo/)
 
-## Section 14.17: Ceiling and Floor
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-17">Section 14.17: Ceiling and Floor</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **ceil()**
 
@@ -37787,7 +37853,9 @@ ceil
 
 *// -6*
 
-## Section 14.18: Getting roots of a number
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-18">Section 14.18: Getting roots of a number</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Square Root**
 
@@ -37868,7 +37936,9 @@ pow
 
 2
 
-## Section 14.19: Random with gaussian distribution
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-19">Section 14.19: Random with gaussian distribution</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   Math                      .      random
@@ -38006,7 +38076,9 @@ Chrome
 
 This method is most efficient at v\<5
 
-## Section 14.20: Math.atan2 to find direction
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-20">Section 14.20: Math.atan2 to find direction</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 If you are working with vectors or lines you will at some stage want
 to get the direction of a vector, or line. Or the direction from a
@@ -38207,7 +38279,9 @@ x
 **var** dir = Math.atan2(point2.y - point1.y, point2.x - point1.x);
 *// -0.04326303140726714*
 
-## Section 14.21: Sin & Cos to create a vector given direction & distance
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-21">Section 14.21: Sin & Cos to create a vector given direction & distance</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 If you have a vector in polar form (direction & distance) you will
 want to convert it to a cartesian vector with a x and y component. For
@@ -38448,7 +38522,9 @@ dir
 
 *// get the y component*
 
-## Section 14.22: Math.hypot
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-22">Section 14.22: Math.hypot</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To find the distance between two points we use pythagoras to get the
 square root of the sum of the square of the component of the vector
@@ -39139,7 +39215,9 @@ i
 
 ;
 
-## Section 14.23: Periodic functions using Math.sin
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-23">Section 14.23: Periodic functions using Math.sin</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   Math           .   sin        and            Math           .   cos
@@ -39323,7 +39401,9 @@ phase \* Math.PI \* 2) \* amplitude + offset; }
 >
 All the arguments apart from time are optional
 
-## Section 14.24: Division (/)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-24">Section 14.24: Division (/)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The division operator (/) perform arithmetic division on numbers
 (literals or variables).
@@ -39364,7 +39444,9 @@ log
 
 *// 3.75*
 
-## Section 14.25: Decrementing (\)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-25">Section 14.25: Decrementing (\)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The decrement operator (\) decrements numbers by one.
 
@@ -39615,9 +39697,11 @@ log
 *// ReferenceError: Invalid left-hand side expression in postfix
 operation.*
 
-# Chapter 15: Bitwise operators
+<h2 id="ch15">Chapter 15: Bitwise operators</h2>
 
-## Section 15.1: Bitwise operators
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch15-1">Section 15.1: Bitwise operators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Bitwise operators perform operations on bit values of data. These
 operators convert operands to signed 32-bit integers in [two\'s
@@ -40085,11 +40169,13 @@ b
 
 *// a is now 22 and b is now 11*
 
-## Section 15.2: Shift Operators
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch15-2">Section 15.2: Shift Operators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Bitwise shifting can be thought as \"moving\" the bits either left or
 right, and hence changing the value of the data operated on.
->
+
 **Left Shift**
 
   
@@ -40202,10 +40288,11 @@ numbers into positive ones.
 Zero-fill right shift and sign-propagating right shift yield the same
 result for non negative numbers.
 
-# Chapter 16: Constructor functions
-
-## Section 16.1: Declaring a constructor function
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch16">Chapter 16: Constructor functions</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch16-1">Section 16.1: Declaring a constructor function</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 Constructor functions are functions designed to construct a new
 object. Within a constructor function, the keyword **this** refers to
 a newly created object which values can be assigned to. Constructor
@@ -40351,10 +40438,11 @@ Cat
 
 *// Returns \"true\"*
 
-# Chapter 17: Declarations and Assignments
-
-## Section 17.1: Modifying constants
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch17">Chapter 17: Declarations and Assignments</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch17-1">Section 17.1: Modifying constants</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 Declaring a variable **const** only prevents its value from being
 *replaced* by a new value. **const** does not put any restrictions on
 the internal state of an object. The following example shows that a
@@ -40487,7 +40575,9 @@ The name of the person is Steve and the surname is Fox
 In this example we\'ve created constant object called person and
 we\'ve reassigned property and created new property.
 
-## Section 17.2: Declaring and initializing constants
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch17-2">Section 17.2: Declaring and initializing constants</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 You can initialize a constant by using the **const** keyword.
 
@@ -40568,11 +40658,12 @@ arrowFun
 ;
 
 **Important**
->
+
 You must declare and initialize a constant in the same statement.
 
-## Section 17.3: Declaration
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch17-3">Section 17.3: Declaration</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 There are four principle ways to declare a variable in JavaScript:
 using the **var**, **let** or **const** keywords, or without a keyword
 at all (\"bare\" declaration). The method used determines the
@@ -40638,11 +40729,13 @@ c
 Keep in mind that you can\'t declare constants without initializing
 them at the same time. **const** foo; *// \"Uncaught SyntaxError:
 Missing initializer in const declaration\"*
->
+
 (An example of keyword-less variable declaration is not included above
 for technical reasons. Continue reading to see an example.)
 
-## Section 17.4: Undefined
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch17-4">Section 17.4: Undefined</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Declared variable without a value will have the value **undefined**
 
@@ -40716,7 +40809,9 @@ variableDoesNotExist
 
 *// logs: true*
 
-## Section 17.5: Data Types
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch17-5">Section 17.5: Data Types</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 JavaScript variables can hold many data types: numbers, strings,
 arrays, objects and more:
@@ -40832,7 +40927,9 @@ a
 
 *// a is a String*
 
-## Section 17.6: Mathematic operations and assignment
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch17-6">Section 17.6: Mathematic operations and assignment</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Increment by**
 
@@ -41060,7 +41157,9 @@ a
 
 ;
 
-## Section 17.7: Assignment
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch17-7">Section 17.7: Assignment</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To assign a value to a previously declared variable, use the
 assignment operator, =:
@@ -41243,9 +41342,11 @@ does not matter. You may freely intermix the two.
 
 Function declaration effectively creates variables, as well.
 
-# Chapter 18: Loops
-
-## Section 18.1: Standard \"for\" loops
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch18"># Chapter 18: Loops</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-1">Section 18.1: Standard \"for\" loops</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Standard usage**
 
@@ -41509,7 +41610,9 @@ Expected output:
 >
 0
 
-## Section 18.2: \"for \... of\" loop
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-2">Section 18.2: \"for \... of\" loop</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 6
 
@@ -41977,7 +42080,9 @@ Expected output:
 
 name: Mike
 
-## Section 18.3: \"for \... in\" loop
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-3">Section 18.3: \"for \... in\" loop</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Warning**
 
@@ -42160,10 +42265,12 @@ Expected output:
 
 object.b, bar object.c, baz
 
-## Section 18.4: \"while\" Loops
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-4">Section 18.4: \"while\" Loops</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Standard While Loop**
->
+
 A standard while loop will execute until the condition given is false:
 
 **var**
@@ -42331,7 +42438,9 @@ Expected output:
 
 101
 
-## Section 18.5: \"continue\" a loop
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-5">Section 18.5: \"continue\" a loop</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Continuing a \"for\" Loop**
 
@@ -42508,7 +42617,9 @@ Expected output:
 >
 2
 
-## Section 18.6: Break specific nested loops
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-6">Section 18.6: Break specific nested loops</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 We can name our loops and break the specific one when necessary.
 
@@ -42640,7 +42751,9 @@ Output:
 
 1
 
-## Section 18.7: \"do \... while\" loop
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-7">Section 18.7: \"do \... while\" loop</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
 
@@ -42693,7 +42806,9 @@ checked at the end of an iteration. A traditional while loop may run
 zero or more times as its condition is checked at the beginning of an
 iteration.
 
-## Section 18.8: Break and continue labels
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-8">Section 18.8: Break and continue labels</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Break and continue statements can be followed by an optional label
 which works like some kind of a goto statement, resumes execution from
@@ -42851,7 +42966,7 @@ j
 
 ***i=4 j=4 does not log and loops are done***
 
-# Chapter 19: Functions
+<h2 id="ch19">Chapter 19: Functions</h2>
 
 Functions in JavaScript provide organized, reusable code to perform a
 set of actions. Functions simplify the coding process, prevent
@@ -42859,10 +42974,12 @@ redundant logic, and make code easier to follow. This topic describes
 the declaration and utilization of functions, arguments, parameters,
 return statements and scope in JavaScript.
 
-## Section 19.1: Function Scoping
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-1">Section 19.1: Function Scoping</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 When you define a function, it creates a *scope*.
->
+
 Everything defined within the function is not accessible by code
 outside the function. Only code within this scope can see the entities
 defined inside the scope.
@@ -43334,25 +43451,27 @@ are using **let** or **const**). **let** and **const** declarations
 have a scope of the nearest block statement. See here for a more
 detailed description.
 
-## Section 19.2: Currying
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-2">Section 19.2: Currying</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 [Currying](https://en.wikipedia.org/wiki/Currying) is the
 transformation of a function of n arity or arguments into a sequence
 of n functions taking only one argument.
->
+
 Use cases: When the values of some arguments are available before
 others, you can use currying to decompose a function into a series of
 functions that complete the work in stages, as each value arrives.
 This can be useful:
->
+
 When the value of an argument almost never changes (e.g., a conversion
 factor), but you need to maintain the flexibility of setting that
 value (rather than hard-coding it as a constant).
->
+
 When the result of a curried function is useful before the other
 curried functions have run. To validate the arrival of the functions
 in a specific sequence.
->
+
 For example, the volume of a rectangular prism can be explained by a
 function of three factors: length (l), width (w), and height (h):
 
@@ -43516,7 +43635,9 @@ of placeholder values; thus, while you can use (2)(3) to create a
 function](https://en.wikipedia.org/wiki/Partial_application), you
 cannot use ()(3)(5).
 
-## Section 19.3: Immediately Invoked Function Expressions
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-3">Section 19.3: Immediately Invoked Function Expressions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Sometimes you don\'t want to have your function accessible/stored as a
 variable. You can create an Immediately Invoked Function Expression
@@ -43788,7 +43909,9 @@ log
 
 *// =\Hello!*
 
-## Section 19.4: Named Functions
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-4">Section 19.4: Named Functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Functions can either be named or unnamed (anonymous functions):
 
@@ -44610,7 +44733,9 @@ name
 
 *// outputs \'bar\'*
 
-## Section 19.5: Binding \`this\` and arguments
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-5">Section 19.5: Binding \`this\` and arguments</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 5.1
 
@@ -45259,7 +45384,9 @@ console
 
 ;
 
-## Section 19.6: Functions with an Unknown Number of Arguments (variadic functions)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-6">Section 19.6: Functions with an Unknown Number of Arguments (variadic functions)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 To create a function which accepts an undetermined number of
 arguments, there are two methods depending on your environment.
@@ -45604,7 +45731,9 @@ generateNumbers
 
 *// output: Array \[ \"a\", 6, 5, 4, \"p\", \"q\", \"r\", \"b\" \]*
 
-## Section 19.7: Anonymous Function
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-7">Section 19.7: Anonymous Function</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Defining an Anonymous Function**
 >
@@ -46418,7 +46547,9 @@ n
 *// fib = false (the anonymous function name did not overwrite our fib
 variable)*
 
-## Section 19.8: Default parameters
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-8">Section 19.8: Default parameters</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Before ECMAScript 2015 (ES6), a parameter\'s default value could be
 assigned in the following way:
@@ -47027,12 +47158,13 @@ foo
 
 *// info: 2 \>\\[5, 6\] \| log: 5, 6*
 
-## Section 19.9: Call and apply
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-9">Section 19.9: Call and apply</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 Functions have two built-in methods that allow the programmer to
 supply arguments and the **this** variable differently: call and
 apply.
->
+
 This is useful, because functions that operate on one object (the
 object that they are a property of) can be repurposed to operate on
 another, compatible object. Additionally, arguments can be given in
@@ -47423,14 +47555,16 @@ sayName
 
 *// outputs \"student2:Ravi\"*
 
-## Section 19.10: Partial Application
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-10">Section 19.10: Partial Application</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Similar to currying, partial application is used to reduce the number
 of arguments passed to a function. Unlike currying, the number need
 not go down by one.
->
+
 Example:
->
+
 This function \...
 
 **function**
@@ -47583,8 +47717,9 @@ multiplyTwoThenAddTen
 The \"application\" part of partial application simply means fixing
 parameters of a function.
 
-## Section 19.11: Passing arguments by reference or value
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-11">Section 19.11: Passing arguments by reference or value</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 In JavaScript all arguments are passed by value. When a function
 assigns a new value to an argument variable, that change will not be
 visible to the caller:
@@ -47982,8 +48117,9 @@ a
 
 *// 3*
 
-## Section 19.12: Function Arguments, \"arguments\" object, rest and spread parameters
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-12">Section 19.12: Function Arguments, \"arguments\" object, rest and spread parameters</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 Functions can take inputs in form of variables that can be used and
 assigned inside their own scope. The following function takes two
 numeric values and returns their sum:
@@ -48292,15 +48428,17 @@ nums
 
 *// -\a b c 42*
 
-## Section 19.13: Function Composition
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-13">Section 19.13: Function Composition</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Composing multiple functions into one is a functional programming
 common practice;
->
+
 composition makes a pipeline through which our data will transit and
 get modified simply working on the functioncomposition (just like
 snapping pieces of a track together)\...
->
+
 you start out with some single responsibility functions:
 
 Version ≥ 6 **const** capitalize = x =\x.replace(*/\^\\w/*, m =\>
@@ -48404,7 +48542,9 @@ x
 
 ;
 
-## Section 19.14: Get the name of a function object
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-14">Section 19.14: Get the name of a function object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 6 **ES6**:
 
@@ -48493,7 +48633,9 @@ result
 
 }
 
-## Section 19.15: Recursive Function
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-15">Section 19.15: Recursive Function</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 A recursive function is simply a function, that would call itself.
 
@@ -48671,8 +48813,9 @@ check to avoid infinite loops. In the first example above, when n is
 less than or equal to 1, the recursion stops, allowing the result of
 each call to be returned back up the call stack.
 
-## Section 19.16: Using the Return Statement
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-16">Section 19.16: Using the Return Statement</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 The return statement can be a useful way to create output for a
 function. The return statement is especially useful if you do not know
 in which context the function will be used yet.
@@ -48919,8 +49062,9 @@ age
 
 ;
 
-## Section 19.17: Functions as a variable
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-17">Section 19.17: Functions as a variable</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 A normal function declaration looks like this:
 
 **function**
@@ -49627,14 +49771,15 @@ functionVariable
 
 ;
 
-# Chapter 20: Functional JavaScript
-
-## Section 20.1: Higher-Order Functions
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch20">Chapter 20: Functional JavaScript</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch20-1">Section 20.1: Higher-Order Functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 In general, functions that operate on other functions, either by
 taking them as arguments or by returning them (or both), are called
 higher-order functions.
->
+
 A higher-order function is a function that can take another function
 as an argument. You are using higher-order functions when passing
 callbacks.
@@ -49760,15 +49905,16 @@ iAmJustFunction
 
 ;
 
-## Section 20.2: Identity Monad
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch20-2">Section 20.2: Identity Monad</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 This is an example of an implementation of the identity monad in
 JavaScript, and could serve as a starting point to create other
 monads.
->
+
 Based on the [conference by Douglas Crockford on monads and
 gonads](https://www.youtube.com/watch?v=b0EF0VTs9Dc)
->
+
 Using this approach reusing your functions will be easier because of
 the flexibility this monad provides, and composition nightmares:
 
@@ -50619,19 +50765,21 @@ log
 
 *// Logs 29*
 
-## Section 20.3: Pure Functions
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch20-3">Section 20.3: Pure Functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 A basic principle of functional programming is that it **avoids
 changing** the application state (statelessness) and variables outside
 its scope (immutability).
->
+
 Pure functions are functions that:
->
+
 with a given input, always return the same output they do not rely on
 any variable outside their scope
->
+
 they do not modify the state of the application (**no side effects**)
->
+
 Let\'s take a look at some examples:
 
 Pure functions must not change any variable outside their scope
@@ -50984,7 +51132,9 @@ pure
 The pure\'s function result **does not rely** on any variable outside
 its scope.
 
-## Section 20.4: Accepting Functions as Arguments
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch20-4">Section 20.4: Accepting Functions as Arguments</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **function**
 
@@ -51164,7 +51314,7 @@ x
 
 *// \[2, 4, 6, 8\]*
 
-# Chapter 21: Prototypes, objects
+<h2 id="ch21">Chapter 21: Prototypes, objects</h2>
 
 In the conventional JS there are no class instead we have prototypes.
 Like the class, prototype inherits the properties including the
@@ -51173,7 +51323,9 @@ instance of the object whenever it is necessary by,
 Object.create(PrototypeName); (we can give the value for the
 constructor as well)
 
-## Section 21.1: Creation and initialising Prototype
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch21-1">Section 21.1: Creation and initialising Prototype</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
 
@@ -51817,9 +51969,11 @@ greet
 
 ;
 
-# Chapter 22: Classes
-
-## Section 22.1: Class Constructor
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch22">Chapter 22: Classes</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-1">Section 22.1: Class Constructor</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 The fundamental part of most classes is its constructor, which sets up
 each instance\'s initial state and handles any parameters that were
@@ -51887,7 +52041,9 @@ A small thing to note is that a class constructor cannot be made
 static via the **static** keyword, as described below for other
 methods.
 
-## Section 22.2: Class Inheritance
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-2">Section 22.2: Class Inheritance</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Inheritance works just like it does in other object-oriented
 languages: methods defined on the superclass are accessible in the
@@ -52040,7 +52196,9 @@ log
 
 *// logs: \"Hello subclass\"*
 
-## Section 22.3: Static Methods
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-3">Section 22.3: Static Methods</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Static methods and properties are defined on *the class/constructor
 itself*, not on instance objects. These are specified in a class
@@ -52214,7 +52372,9 @@ myStaticProperty
 
 *// logs: \"Goodbye\"*
 
-## Section 22.4: Getters and Setters
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-4">Section 22.4: Getters and Setters</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Getters and setters allow you to define custom behaviour for reading
 and writing a given property on your class. To the user, they appear
@@ -52222,7 +52382,7 @@ the same as any typical property. However, internally a custom
 function you provide is used to determine the value when the property
 is accessed (the getter), and to perform any necessary changes when
 the property is assigned (the setter).
->
+
 In a class definition, a getter is written like a no-argument method
 prefixed by the **get** keyword. A setter is similar, except that it
 accepts one argument (the new value being assigned) and the **set**
@@ -52557,7 +52717,9 @@ prop
 
 *// logs: 5*
 
-## Section 22.5: Private Members
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-5">Section 22.5: Private Members</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 JavaScript does not technically support private members as a language
 feature. Privacy - [described by Douglas
@@ -52865,7 +53027,9 @@ additional memory will be consumed for every *own property* method
 the amount/size of state that is going to be stored within such a
 closure.
 
-## Section 22.6: Methods
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-6">Section 22.6: Methods</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Methods can be defined in classes to perform a function and optionally
 return a result. They can receive arguments from the caller.
@@ -52962,8 +53126,9 @@ doSomething
 
 *// returns: { data: {}, text: \"hi\" }*
 
-## Section 22.7: Dynamic Method Names
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-7">Section 22.7: Dynamic Method Names</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 There is also the ability to evaluate expressions when naming methods
 similar to how you can access an objects\' properties with \[\]. This
 can be useful for having dynamic property names, however is often used
@@ -53212,14 +53377,15 @@ METADATA
 
 *// { make: \"Mazda\", model: \"MPV\" }*
 
-## Section 22.8: Managing Private Data with Classes
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-8">Section 22.8: Managing Private Data with Classes</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 One of the most common obstacles using classes is finding the proper
 approach to handle private states. There are 4 common solutions for
 handling private states:
->
+
 **Using Symbols**
->
+
 Symbols are new primitive type introduced on in ES2015, as defined at
 [MDN](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol)
 
@@ -53695,7 +53861,9 @@ this_topSecret
 
 }
 
-## Section 22.9: Class Name binding
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-9">Section 22.9: Class Name binding</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 ClassDeclaration\'s Name is bound in different ways in different
 scopes -
@@ -53829,9 +53997,11 @@ A
 
 *// works*
 
-# Chapter 23: Namespacing
-
-## Section 23.1: Namespace by direct assignment
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch23">Chapter 23: Namespacing</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch23-1">Section 23.1: Namespace by direct assignment</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 *//Before: antipattern 3 global variables*
 
@@ -53956,8 +54126,9 @@ redirection
 
 }
 
-## Section 23.2: Nested Namespaces
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch23-2">Section 23.2: Nested Namespaces</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 When multiple modules are involved, avoid proliferating global names
 by creating a single global namespace. From there, any sub-modules can
 be added to the global namespace. (Further nesting will slow down
@@ -54072,9 +54243,11 @@ ember
 
 ;
 
-# Chapter 24: Context (this)
-
-## Section 24.1: this with simple objects
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch24">Chapter 24: Context (this)</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch24-1">Section 24.1: this with simple objects</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
 
@@ -54196,8 +54369,9 @@ loses its context.
 In non-strict mode, the default context is the global object (window).
 In strict mode it is **undefined**.
 
-## Section 24.2: Saving this for use in nested functions / objects
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch24-2">Section 24.2: Saving this for use in nested functions / objects</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 One common pitfall is to try and use **this** in a nested function or
 an object, where the context has been lost.
 
@@ -54423,7 +54597,9 @@ className
 
 }
 
-## Section 24.3: Binding function context
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch24-3">Section 24.3: Binding function context</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 5.1
 
@@ -54860,7 +55036,9 @@ So, as you can remark in the example above, whatever object you pass to
 
 .
 
-## Section 24.4: this in constructor functions
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch24-4">Section 24.4: this in constructor functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 When using a function as a constructor, it has a special **this**
 binding, which refers to the newly created object:
@@ -54965,12 +55143,16 @@ name
 
 *// error! cannot access property of undefined*
 
-# Chapter 25: Setters and Getters
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch25">Chapter 25: Setters and Getters</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Setters and getters are object properties that call a function when
 they are set/gotten.
 
-## Section 25.1: Defining a Setter/Getter Using Object.defineProperty
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch25-1">Section 25.1: Defining a Setter/Getter Using Object.defineProperty</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
 
@@ -55060,7 +55242,9 @@ value
 
 ;
 
-## Section 25.2: Defining an Setter/Getter in a Newly Created Object
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch25-2">Section 25.2: Defining an Setter/Getter in a Newly Created Object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 JavaScript allows us to define getters and setters in the object
 literal syntax. Here\'s an example:
@@ -55327,7 +55511,9 @@ the setter function, which would then parse the string and set , and
 . Trying to pass an incorrectly formatted string (such as \"hello\")
 would throw an error.
 
-## Section 25.3: Defining getters and setters in ES6 class
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch25-3">Section 25.3: Defining getters and setters in ES6 class</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 class
 
@@ -55547,9 +55733,11 @@ lastname
 
 *// Foo Bar*
 
-# Chapter 26: Events
-
-## Section 26.1: Page, DOM and Browser loading
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch26">Chapter 26: Events</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch26-1">Section 26.1: Page, DOM and Browser loading</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 This is an example to explain the variations of load events.
 
@@ -55699,9 +55887,11 @@ Here, the message gets logged as soon as the browser interprets the
 anonymous function. It means, this function can get executed even
 before the DOM is loaded.
 
-# Chapter 27: Inheritance
-
-## Section 27.1: Standard function prototype
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch27">Chapter 27: Inheritance</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch27-1">Section 27.1: Standard function prototype</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Start by defining a Foo function that we\'ll use as a constructor.
 
@@ -55793,7 +55983,9 @@ bar
 
 *// logs \`I am bar\`*
 
-## Section 27.2: Dierence between Object.key and Object.prototype.key
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch27-2">Section 27.2: Difference between Object.key and Object.prototype.key</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Unlike in languages like Python, static properties of the constructor
 function are *not* inherited to instances. Instances only inherit from
@@ -55918,7 +56110,9 @@ style
 
 *// \'italic\'*
 
-## Section 27.3: Prototypal inheritance
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch27-3">Section 27.3: Prototypal inheritance</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Suppose we have a plain object called **prototype**: **var**
 **prototype** = { foo: \'foo\', bar: **function** () { **return**
@@ -56091,8 +56285,9 @@ Console output
 **Fun fact** I\'ve used the browser console to make these examples and
 broken this page by adding that breakingLibraries property.
 
-## Section 27.4: Pseudo-classical inheritance
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch27-4">Section 27.4: Pseudo-classical inheritance</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 It\'s an emulation of classical inheritance using prototypical
 inheritance which shows how powerful prototypes are. It was made to
 make the language more attractive to programmers coming from other
@@ -56319,7 +56514,9 @@ Object
 
 true
 
-## Section 27.5: Setting an Object\'s prototype
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch27-5">Section 27.5: Setting an Object\'s prototype</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Version ≥ 5
 
@@ -56666,9 +56863,11 @@ fizz
 This behaviour is close enough to that it is possible to write a
 polyfill.
 
-# Chapter 28: Method Chaining
-
-## Section 28.1: Chainable object design and chaining
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch28">Chapter 28: Method Chaining</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch28-1">Section 28.1: Chainable object design and chaining</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Chaining and Chainable is a design methodology used to design object
 behaviors so that calls to object functions return references to self,
@@ -57256,7 +57455,9 @@ having to create variables to hold interim results. With the last word
 being that chainable objects can be used in a conventional way as well
 so you don\'t enforce chaining by making an object chainable.
 
-## Section 28.2: Method Chaining
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch28-2">Section 28.2: Method Chaining</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Method chaining is a programming strategy that simplifies your code
 and beautifies it. Method chaining is done by ensuring that each
@@ -57586,9 +57787,11 @@ doorStatus
 Note that each method in returns **this**, which refers to the entire
 instance of that Door object.
 
-# Chapter 29: Callbacks
-
-## Section 29.1: Simple Callback Usage Examples
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch29">Chapter 29: Callbacks</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch29-1">Section 29.1: Simple Callback Usage Examples</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Callbacks offer a way to extend the functionality of a function (or
 method) ***without changing*** its code. This approach is often used
@@ -58205,7 +58408,9 @@ because the latter does not wait for () (an asynchronous function) to
 complete, and therefore the element is hidden right away, producing an
 undesirable effect.
 
-## Section 29.2: Continuation (synchronous and asynchronous)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch29-2">Section 29.2: Continuation (synchronous and asynchronous)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Callbacks can be used to provide code to be executed after a method
 has completed:
@@ -58414,7 +58619,9 @@ Providing a callback as the last instruction in a function is called a
 [optimized by ES2015
 interpreters](http://www.2ality.com/2015/06/tail-call-optimization.html).
 
-## Section 29.3: What is a callback?
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch29-3">Section 29.3: What is a callback?</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 This is a normal function call:
 
@@ -58578,7 +58785,9 @@ What\'s more interesting is that the function then returns before
 either of the callbacks are called. Hence, a callback function may be
 called even after the original function has returned.
 
-## Section 29.4: Callbacks and \`this\`
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch29-4">Section 29.4: Callbacks and \`this\`</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Often when using a callback you want access to a specific context.
 
@@ -61467,9 +61676,11 @@ To go further :
 >
 Nested parenthesis
 
-# Chapter 32: Cookies
-
-## Section 32.1: Test if cookies are enabled
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch32"># Chapter 32: Cookies</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch32-1">Section 32.1: Test if cookies are enabled</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
   
   navigator.cookieEnabled
@@ -61517,7 +61728,7 @@ alert
 Note that on older browsers may not exist and be undefined. In those
 cases you won\'t detect that cookies are not enabled.
 
-## Section 32.2: Adding and Setting Cookies
+<h3 id="ch32-2">Section 32.2: Adding and Setting Cookies</h3>
 
 The following variables set up the below example:
 >
@@ -61537,7 +61748,7 @@ document.cookie += COOKIE_NAME + \"=\" + COOKIE_VALUE
 >
 \+ \"; path=\" + COOKIE_PATH;
 
-## Section 32.3: Reading cookies
+<h3 id="ch32-3">Section 32.3: Reading cookies</h3>
 
 **var**
 
@@ -61718,7 +61929,7 @@ If the cookie is not set, it will set cookie_value to
 
 **null**
 
-## Section 32.4: Removing cookies
+<h3 id="ch32-4">Section 32.4: Removing cookies</h3>
 
 **var**
 
@@ -61786,12 +61997,12 @@ toGMTString
 
 This will remove the cookie with a given name.
 
-# Chapter 33: Web Storage
+<h2 id="ch33">Chapter 33: Web Storage</h2>
 
 **Parameter Description** *name* The key/name of the item *value* The
 value of the item
 
-## Section 33.1: Using localStorage
+<h3 id="ch33-1">Section 33.1: Using localStorage</h3>
 
 The localStorage object provides persistent (but not permanent - see
 limits below) key-value storage of strings. Any changes are
@@ -61908,7 +62119,7 @@ Version 40 27 34 6-8 9-11
 
 Space available 10MB 10MB 10MB 5MB 10MB
 
-## Section 33.2: Simpler way of handling Storage
+<h3 id="ch33-2">Section 33.2: Simpler way of handling Storage</h3>
 
 localStorage, sessionStorage are JavaScript **Objects** and you can
 treat them as such.
@@ -62150,7 +62361,7 @@ clear
 
 ;
 
-## Section 33.3: Storage events
+<h3 id="ch33-3">Section 33.3: Storage events</h3>
 
 Whenever a value in set in localStorage, a storage event will be
 dispatched on all other windows from the same origin. This can be used
@@ -62573,7 +62784,7 @@ newValue
 
 ;
 
-## Section 33.4: sessionStorage
+<h3 id="ch33-4">Section 33.4: sessionStorage</h3>
 
 The sessionStorage object implements the same Storage interface as
 localStorage. However, instead of being shared with all pages from the
@@ -62718,7 +62929,7 @@ removeItem
 
 )
 
-## Section 33.5: localStorage length
+<h3 id="ch33-5">Section 33.5: localStorage length</h3>
 
   
   localStorage.length
@@ -62791,7 +63002,7 @@ length
 
 *// 3*
 
-## Section 33.6: Error conditions
+<h3 id="ch33-6">Section 33.6: Error conditions</h3>
 
 Most browsers, when configured to block cookies, will also block
 localStorage. Attempts to use it will result in an exception. Do not
@@ -62869,7 +63080,7 @@ play
 
 If error were not handled, program would stop functioning properly.
 
-## Section 33.7: Clearing storage
+<h3 id="ch33-7">Section 33.7: Clearing storage</h3>
 
 To clear the storage, simply run
 
@@ -62883,7 +63094,7 @@ clear
 
 ;
 
-## Section 33.8: Remove Storage Item
+<h3 id="ch33-8">Section 33.8: Remove Storage Item</h3>
 
 To remove a specific item from the browser Storage (the opposite of
 setItem) use removeItem
@@ -62954,9 +63165,9 @@ getItem
 
 (Same applies for sessionStorage)
 
-# Chapter 34: Data attributes
+<h2 id="ch34">Chapter 34: Data attributes</h2>
 
-## Section 34.1: Accessing data attributes
+<h3 id="ch34-1">Section 34.1: Accessing data attributes</h3>
 
 **Using the dataset property**
 
@@ -63292,7 +63503,7 @@ A basic overview can be found on the [json.org](http://json.org/)
 website which also contains links to implementations of the standard
 in many different programming languages.
 
-## Section 35.1: JSON versus JavaScript literals
+<h3 id="ch35-1">Section 35.1: JSON versus JavaScript literals</h3>
 
   
   eval
@@ -63573,7 +63784,7 @@ string doesn\'t have to hold an object as a value. \"JSON string\" is
 a better term. Just like \"XML string\" or \"YAML string\". You get a
 string, you parse it, and you end up with a value.
 
-## Section 35.2: Parsing with a reviver function
+<h3 id="ch35-2">Section 35.2: Parsing with a reviver function</h3>
 
 A reviver function can be used to filter or transform the value being
 parsed.
@@ -63916,7 +64127,7 @@ value at the end of each iteration. If the reviver function returns
 the function, the property is deleted from the object. Otherwise, the
 property is redefined to be the return value.
 
-## Section 35.3: Serializing a value
+<h3 id="ch35-3">Section 35.3: Serializing a value</h3>
 
   
   JSON.stringify
@@ -64234,7 +64445,7 @@ y
 
 *\*/*
 
-## Section 35.4: Serializing and restoring class instances
+<h3 id="ch35-4">Section 35.4: Serializing and restoring class instances</h3>
 
 You can use a custom toJSON method and reviver function to transmit
 instances of your own class in JSON. If an object has a toJSON method,
@@ -64644,7 +64855,7 @@ id\_
 
 }
 
-## Section 35.5: Serializing with a replacer function
+<h3 id="ch35-5">Section 35.5: Serializing with a replacer function</h3>
 
 A replacer function can be used to filter or transform values being
 serialized.
@@ -64858,7 +65069,7 @@ This produces the following string:
 
 \'
 
-## Section 35.6: Parsing a simple JSON string
+<h3 id="ch35-6">Section 35.6: Parsing a simple JSON string</h3>
 
   
   JSON.parse
@@ -64873,7 +65084,7 @@ primitive, array or object:
 false}\]\'); console.log(array); *// logs: \[1, 2, \"c\", \"d\", {e:
 false}\]*
 
-## Section 35.7: Cyclic object values
+<h3 id="ch35-7">Section 35.7: Cyclic object values</h3>
 
 Not all objects can be converted to a JSON string. When an object has
 cyclic self-references, the conversion will fail. This is typically
@@ -65020,14 +65231,14 @@ world
 As soon as the process detects a cycle, the exception is raised. If
 there were no cycle detection, the string would be infinitely long.
 
-# Chapter 36: AJAX
+<h2 id="ch36">Chapter 36: AJAX</h2>
 
 AJAX stands for \"Asynchronous JavaScript and XML\". Although the name
 includes XML, JSON is more often used due to its simpler formatting
 and lower redundancy. AJAX allows the user to communicate with
 external resources without reloading the webpage.
 
-## Section 36.1: Sending and Receiving JSON Data via POST
+<h3 id="ch36-1">Section 36.1: Sending and Receiving JSON Data via POST</h3>
 
 Version ≥ 6
 
@@ -65247,7 +65458,7 @@ error
 
 ;
 
-## Section 36.2: Add an AJAX preloader
+<h3 id="ch36-2">Section 36.2: Add an AJAX preloader</h3>
 
 Here\'s a way to show a GIF preloader while an AJAX call is executing.
 We need to prepare our add and remove preloader functions:
@@ -65529,7 +65740,7 @@ send
 
 ;
 
-## Section 36.3: Displaying the top JavaScript questions of the month from Stack Overflow\'s API
+<h3 id="ch36-3">Section 36.3: Displaying the top JavaScript questions of the month from Stack Overflow\'s API</h3>
 
 We can make an AJAX request to [Stack Exchange\'s
 API](http://api.stackexchange.com/docs) to retrieve a list of the top
@@ -65856,7 +66067,7 @@ error
 
 ;
 
-## Section 36.4: Using GET with parameters
+<h3 id="ch36-4">Section 36.4: Using GET with parameters</h3>
 
 This function runs an AJAX call using GET allowing us to send
 **parameters** (object) to a **file** (string) and launch a
@@ -66137,7 +66348,7 @@ been:
 
 The color of your car is purple. It is a Volvo model 300!
 
-## Section 36.5: Check if a file exists via a HEAD request
+<h3 id="ch36-5">Section 36.5: Check if a file exists via a HEAD request</h3>
 
 This function executes an AJAX request using the HEAD method allowing
 us to **check whether a file exists in the directory** given as an
@@ -66256,7 +66467,7 @@ send
 
 ;
 
-## Section 36.6: Using GET and no parameters
+<h3 id="ch36-6">Section 36.6: Using GET and no parameters</h3>
 
 **var**
 
@@ -66431,7 +66642,7 @@ length
 
 ;
 
-## Section 36.7: Listening to AJAX events at a global level
+<h3 id="ch36-7">Section 36.7: Listening to AJAX events at a global level</h3>
 
 *// Store a reference to the native method*
 
@@ -66529,9 +66740,9 @@ arguments
 
 ;
 
-# Chapter 37: Enumerations
+<h2 id="ch37">Chapter 37: Enumerations</h2>
 
-## Section 37.1: Enum definition using Object.freeze()
+<h3 id="ch37-1">Section 37.1: Enum definition using Object.freeze()</h3>
 
 Version ≥ 5.1
 
@@ -66706,7 +66917,7 @@ TestEnum
 
 After that you can define a variable and print like before.
 
-## Section 37.2: Alternate definition
+<h3 id="ch37-2">Section 37.2: Alternate definition</h3>
 
   
   Object.freeze()
@@ -66764,7 +66975,7 @@ GRAY
 
 ;
 
-## Section 37.3: Printing an enum variable
+<h3 id="ch37-3">Section 37.3: Printing an enum variable</h3>
 
 After defining an enum using any of the above ways and setting a
 variable, you can print both the variable\'s value as well as the
@@ -66926,7 +67137,7 @@ name
 
 }
 
-## Section 37.4: Implementing Enums Using Symbols
+<h3 id="ch37-4">Section 37.4: Implementing Enums Using Symbols</h3>
 
 As ES6 introduced
 [**Symbols**](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol),
@@ -67126,7 +67337,7 @@ The [Symbols in ECMAScript
 6](http://www.2ality.com/2014/12/es6-symbols.html) article covers this
 new primitive type more in detail.
 
-## Section 37.5: Automatic Enumeration Value
+<h3 id="ch37-5">Section 37.5: Automatic Enumeration Value</h3>
 
 Version ≥ 5.1
 
@@ -67341,7 +67552,7 @@ log
 
 }
 
-# Chapter 38: Map
+<h2 id="ch38">Chapter 38: Map</h2>
 
 **Parameter Details**
 
@@ -67357,7 +67568,7 @@ callback Callback function called with three parameters: value, key,
 and the map. thisArg Value which will be used as **this** when
 executing callback.
 
-## Section 38.1: Creating a Map
+<h3 id="ch38-1">Section 38.1: Creating a Map</h3>
 
 A Map is a basic mapping of keys to values. Maps are different from
 objects in that their keys can be anything (primitive values as well
