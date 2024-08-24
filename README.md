@@ -1345,69 +1345,22 @@ can be directly opened in the browser ( F12 key in most browsers
 see *Remarks* below for further information) and the log method of the
 console JavaScript object can be invoked by typing the following:
 
-console.
-
-log
-
-(
-
-\'My message\'
-
-)
-
-;
+console.log(\'My message\');
 
 Then, by pressing Enter , this will display My message in the
 debugging console.
 
   
-  console.log
-  
+console.log() can be called with any number of arguments and variables available in
+the current scope. Multiple arguments will be printed in one line with a small space between them.
 
-  
-
-() can be called with any number of arguments and variables available in
-the current scope. Multiple
-
-arguments will be printed in one line with a small space between them.
-
-**var**
-
-obj
-=
-{
-test
-:
-1
-}
-;
-console.
-log
-(
-\[
-\'string\'
-\]
-,
-1
-,
-obj
-,
-window
-)
-;
+**var** obj = {test: 1};
+console.log(\[\'string\'\], 1, obj, window);
 The log method will display the following in the debugging console:
-\[
-\'string\'
-\]
-1
-Object
-{
-test
-:
-1
-}
-Window
-{
+\[\'string\'\]
+1 Object 
+{ test: 1 }
+Window {
 */\* truncated \*/*
 }
   
@@ -1429,58 +1382,14 @@ Object { key1: 'val', key2: Array \[2\], key3: Object }
 Certain types such as Date objects and **function**s may be displayed
 differently:
 
-console.log
-(
-**new**
-Date
-(
-0
-)
-)
-;
-console.
-log
-(
-**function**
-test
-(
-a
-,
-b
-)
-{
-**return**
-c
-;
+console.log( **new** Date ( 0 ) );
+console.log( **function** test(a, b) {
+**return** c;
 }
-)
-;
-Displays:
-Wed Dec
-31
-1969
-19
-:
-00
-:
-00
-GMT
-\-
-0500
-(
-Eastern Standard Time
-)
-**function**
-test
-(
-a
-,
-b
-)
-{
-**return**
-c
-;
+);
+Displays: Wed Dec 31 1969 19:00:00 GMT \- 0500 (Eastern Standard Time)
+**function** test (a , b) {
+**return** c;
 }
 **Other print methods**
 
@@ -1515,73 +1424,41 @@ methods:
 -   small warning icon (!) appears on the left side. In some browsers,
     the background of the log is yellow.
 
-[console.error](https://developer.mozilla.org/en-US/docs/Web/API/Console/error)
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/error">console.error</a>
 
 small times icon (⊗) appears on the left side. In some browsers, the
 background of the log is red.
 
-[console]{.underline}
-
+[console]
 [.](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeStamp)
 
-[timeStam]{.underline}
-
+[timeStam]
 [p](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeStamp)
 
 
 outputs the current time and a specified string, but is non-standard:
 
-console.timeStamp
-(
-\'msg\'
-)
-;
-Displays:
-00
-:
-00
-:
-00.001
+console.timeStamp(\'msg\');
+Displays: 00:00:00.001
 msg
-[console]{.underline}
+
+[console]
 [.](https://developer.mozilla.org/en-US/docs/Web/API/Console/trace)
 [trac]{.underline}
 [e](https://developer.mozilla.org/en-US/docs/Web/API/Console/trace)
 
 outputs the current stack trace or displays the same output as the
-log
-method if invoked in
-the global scope.
+log method if invoked in the global scope.
+
 **function**
-sec
-(
-)
-{
-first
-(
-)
-;
+sec () {first();
 }
 **function**
-first
-(
-)
-{
-console.
-trace
-(
-)
-;
+first (){console.trace();
 }
-sec
-(
-)
-;
+sec ();
 Displays:
-first
-sec
-(
-anonymous
+first sec(anonymous
 
 **function**
 )
@@ -1611,196 +1488,57 @@ information on this
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-4">Section 5.4: Including a stack trace when logging console.trace()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-**function**
-foo
-(
-)
-{
-console.
-trace
-(
-\'My log statement\'
-)
-;
+**function** foo(){console.trace(\'My log statement\');
 }
-foo
-(
-)
-;
+foo();
+
 Will display this in the console:
-My log statement VM696
-:
-1
-foo
-@
-VM696
-:
-1
-(
-anonymous
-**function**
-)
-@
-(
-program
-)
-:
-1
+My log statement VM696:
+1 foo @ VM696 : 1 (anonymous **function**)
+@ ( program ) : 1
 Note: Where available it\'s also useful to know that the same stack
 trace is accessible as a property of the Error object. This can be
 useful for post-processing and gathering automated feedback.
 
-**var**
-e
-=
-**new**
-Error
-(
-\'foo\'
-)
-;
-console.
-log
-(
-e\.
-stack
-)
-;
+**var** e = **new**
+Error (\'foo\');
+console.log(e\.stack);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-5">Section 5.5: Tabulating values - console.table()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-  
-  console.table
+console.table 
  
   
 In most environments, () can be used to display objects and arrays in
 a tabular format.
 
 **For example:**
-console.
-table
-(
-\[
-\'Hello\'
-,
-\'world\'
-\]
-)
-;
+
+console.table(\[\'Hello\',\'world\'\]);
 displays like:
 
 *(index) value**
 
 0 \"Hello\" 1 \"world\"
-console.
-table
-(
-{
-foo
-:
-\'bar\'
-,
-bar
-:
-\'baz\'
-}
-)
-;
+console.table({foo: \'bar\', bar: \'baz\'});
 
 displays like:
 
 **(index) value**
 \"foo\" \"bar\" \"bar\" \"baz\"
-**var**
-personArr
-=
-\[
-{
-\"personId\"
-:
-123
-,
-\"name\"
-:
-\"Jhon\"
-,
-\"city\"
-:
-\"Melbourne\"
-,
-\"phoneNo\"
-:
-\"1234567890\"
-}
-,
-{
-\"personId\"
-:
-124
-,
-\"name\"
-:
-\"Amelia\"
-,
-\"city\"
-:
-\"Sydney\"
-,
-\"phoneNo\"
-:
-\"1234567890\"
-}
-,
-{
-\"personId\"
-:
-125
-,
-\"name\"
-:
-\"Emily\"
-,
-\"city\"
-:
-\"Perth\"
-,
-\"phoneNo\"
-:
-\"1234567890\"
-}
-,
-{
-\"personId\"
-:
-126
-,
-\"name\"
-:
-\"Abraham\"
-,
-\"city\"
-:
-\"Perth\"
-,
-\"phoneNo\"
-:
-\"1234567890\"
-}
-\]
-;
-console.
-table
-(
-personArr
-,
-\[
-\'name\'
-,
-\'personId\'
-\]
-)
-;
+**var** personArr = \[ { \"personId\": 123, \"name\": \"Jhon\", \"city\": \"Melbourne\", \"phoneNo\"
+: \"1234567890\"}, {\"personId\": 124, \"name\": \"Amelia\", \"city\": \"Sydney\",
+\"phoneNo\": \"1234567890\" }, {
+\"personId\": 125,
+\"name\": \"Emily\",
+\"city\": \"Perth\",
+\"phoneNo\": \"1234567890\"},
+{\"personId\": 126,
+\"name\": \"Abraham\",
+\"city\": \"Perth\",
+\"phoneNo\": \"1234567890\"}
+\];
+console.table(personArr, \[\'name\', \'personId\'\]);
 
 displays like:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -1810,26 +1548,20 @@ displays like:
   alt="."
   style="border: 2px solid #000000; width:7.477in;" />
 <!-- ![](./images/image018.jpg){width="7.477777777777778in" height="4.279166666666667in"} -->
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-6">Section 5.6: Counting - console.count()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-  
-  [console.count](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)   [(\[](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)   [obj](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
+[console.count](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
+[(\[](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
+[obj](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
 
 [\])](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
 places a counter on the object\'s value provided as argument. Each time
-this method is
-
-invoked, the counter is increased (with the exception of the empty
+this method is invoked, the counter is increased (with the exception of the empty
 string \'\'). A label together with a number is displayed in the
 debugging console according to the following format:
 
-\[
-label
-\]
-:
-X
+\[label\]: X
 
 label represents the value of the object passed as argument and X
 represents the counter\'s value.
@@ -1837,357 +1569,65 @@ represents the counter\'s value.
 An object\'s value is always considered, even if variables are
 provided as arguments:
 
-**var**
-o1
-=
-1
-,
-o2
-=
-\'2\'
-,
-o3
-=
-\"\"
-;
-console.
-count
-(
-o1
-)
-;
-console.
-count
-(
-o2
-)
-;
-console.
-count
-(
-o3
-)
-;
-console.
-count
-(
-1
-)
-;
-console.
-count
-(
-\'2\'
-)
-;
-console.
-count
-(
-\'\'
-)
-;
-Displays:
-1
-:
-1
-2
-:
-1
-:
-1
-1
-:
-2
-2
-:
-2
-:
-1
-Strings with numbers are converted to
-Number
-objects:
-console.
-count
-(
-42.3
-)
-;
-console.
-count
-(
-Number
-(
-\'42.3\'
-)
-)
-;
-console.
-count
-(
-\'42.3\'
-)
-;
-Displays:
-42.3
-:
-1
-42.3
-:
-2
-42.3
-:
-3
+**var** o1 = 1, o2 = \'2\', o3 = \"\";
+console.count(o1);
+console.count(o2);
+console.count(o3);
+console.count(1);
+console.count(\'2\');
+console.count(\'\');
+Displays:1:12:1:11:22:2:1
+Strings with numbers are converted to Number
+objects: console.count(42.3);
+console.count(Number(\'42.3\'));
+console.count(\'42.3\');
+Displays:42.3:142.3:242.3:3
 Functions point always to the global
-Function
-object:
-console.
-count
-(
-console.
-constructor
-)
-;
-console.
-count
-(
-**function**
-(
-)
-{
-}
-)
-;
-console.
-count
-(
-Object
-)
-;
-**var**
-fn1
-=
-**function**
-myfn
-(
-)
-{
-}
-;
-console.
-count
-(
-fn1
-)
-;
-console.
-count
-(
-Number
-)
-;
+Function object: console.count(console.constructor);
+console.count(**function**(){});
+console.count(Object);
+**var** fn1 = **function** myfn ( ){};
+console.count(fn1);
+console.count(Number);
 Displays:
-\[
-object
-Function
-\]
-:
-1
-\[
-object
-Function
-\]
-:
-2
-\[
-object
-Function
-\]
-:
-3
-\[
-object
-Function
-\]
-:
-4
-\[
-object
-Function
-\]
-:
-5
-Certain objects get specific counters associated to the type of object
-they refer to:
+\[object Function\]: 1 \[object Function\]: 2
+\[object Function\]: 3 \[object Function\]: 4
+\[object Function\]: 5 
+Certain objects get specific counters associated to the type of object they refer to:
 
-console.
-count
-(
-**undefined**
-)
-;
-console.
-count
-(
-document.
-Batman
-)
-;
-**var**
-obj
-;
-console.
-count
-(
-obj
-)
-;
-console.
-count
-(
-Number
-(
-
-**undefined**
-
-)
-)
-;
-console.
-count
-(
-**NaN**
-)
-;
-console.
-count
-(
-**NaN**
-\+
-3
-)
-;
-console.
-count
-(
-1
-/
-0
-)
-;
-console.
-count
-(
-String
-(
-1
-/
-0
-)
-)
-;
-console.
-count
-(
-window
-)
-;
-console.
-count
-(
-document
-)
-;
-console.
-count
-(
-console
-)
-;
-console.
-count
-(
-console.
-\_\_proto\_\_
-)
-;
-console.
-count
-(
-console.
-constructor
-.
+console.count(**undefined**);
+console.count(document.Batman);
+**var** obj;
+console.count(obj);
+console.count(Number(**undefined**));
+console.count(**NaN**);
+console.count(**NaN** \+ 3);
+console.count(1 /0);
+console.count(String ( 1 /0));
+console.count(window);
+console.count(document);
+console.count(console);
+console.count(console.\_\_proto\_\_);
+console.count(console.constructor
+.**prototype**);
+console.count(
+console.\_\_proto\_\_.constructor.
 **prototype**
-)
-;
-console.
-count
-(
-console.
-\_\_proto\_\_
-.
-constructor
-.
-**prototype**
-)
-;
-console.
-count
-(
-Object
-.
-getPrototypeOf
-(
-console
-)
-)
-;
-console.
-count
-(
-**null**
-)
-;
+);
+console.count(Object.getPrototypeOf(console));
+console.count(**null**);
 Displays:
-**undefined**
-:
-1
-**undefined**
-:
-2
-**undefined**
-:
-3
-**NaN**
-:
-1
-**NaN**
-:
-2
-**NaN**
-:
-3
-**Infinity**
-:
-1
-**Infinity**
-:
-2
-\[
-object Window
-\]
-:
-1
-\[
-object HTMLDocument
-\]
-:
-1
-\[
-object
-Object
-\]
-:
-1
+**undefined**:1
+**undefined**:2
+**undefined**:3
+**NaN**:1
+**NaN**:2
+**NaN**:3
+**Infinity**:1
+**Infinity**:2
+\[object Window\]:
+1\[object HTMLDocument\]:
+1\[object Object\]: 1
 \[
 object
 Object
@@ -2221,96 +1661,29 @@ If no argument is provided while **sequentially inputting the count
 method in the debugging console**, an empty string is assumed as
 parameter, i.e.:
 
-console.
-count
-(
-)
-;
-:
-1
-\>
-console.
-count
-(
-\'\'
-)
-;
-:
-2
-\>
-console.
-count
-(
-\"\"
-)
-;
-:
-3
-
+console.count();
+:1\> console.count(\'\');
+:2\> console.count(\"\");
+:3
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-7">Section 5.7: Clearing the console - console.clear()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-  
-  console.clear
-
  
 You can clear the console window using the () method. This removes all
 previously printed messages in the console and may print a message
 like \"Console was cleared\" in some environments.
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-8">Section 5.8: Displaying objects and XML interactively console.dir(), console.dirxml()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-  
-  console.dir                                 (   object
-    
-
-  
-
-) displays an interactive list of the properties of the specified
+displays an interactive list of the properties of the specified
 JavaScript object. The output is
 
 presented as a hierarchical listing with disclosure triangles that let
 you see the contents of child objects.
 
-**var**
+**var** myObject = { \"foo\" : { \"bar\" : \"data\" } };
 
-myObject
-
-=
-
-{
-
-\"foo\"
-
-:
-
-{
-
-\"bar\"
-
-:
-
-\"data\"
-
-}
-
-}
-
-;
-
-console.
-
-dir
-
-(
-
-myObject
-
-)
-
-;
+console.dir ( myObject );
 
 displays:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2321,40 +1694,13 @@ displays:
   style="border: 2px solid #000000; width:7.477in;" />
 <!-- ![](./images/image019.jpg){width="7.477777777777778in" height="2.657638888888889in"} -->
 
-  -
-  console.dirxml                                  (   object
-    
-
-  -
-
-  
-  console.dirxml
-  
-
-  
-
-  
-  console.log
-  
-
-  
-
-) prints an XML representation of the descendant elements of object if
+prints an XML representation of the descendant elements of object if
 possible, or the JavaScript representation if not. Calling () on HTML
 and XML elements is equivalent to calling ().
->
+
 **Example 1:**
 
-console.
-
-dirxml
-
-(
-
-document
-
-)
-
+console.dirxml ( document )
 displays:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
@@ -2366,15 +1712,7 @@ displays:
 
 **Example 2:**
 
-console.
-
-log
-
-(
-
-document
-
-)
+console.log(document)
 
 displays:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2387,43 +1725,9 @@ displays:
 
 **Example 3:**
 
-**var**
+**var** myObject = { \"foo\" : { \"bar\" : \"data\" } };
 
-myObject
-
-=
-
-{
-
-\"foo\"
-
-:
-
-{
-
-\"bar\"
-
-:
-
-\"data\"
-
-}
-
-}
-
-;
-
-console.
-
-dirxml
-
-(
-
-myObject
-
-)
-
-;
+console.dirxml ( myObject );
 
 displays:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2441,21 +1745,7 @@ displays:
 Writes an error message to the console if the assertion is **false**.
 Otherwise, if the assertion is **true**, this does nothing.
 
-console.
-
-assert
-
-(
-
-\'one\'
-
-===
-
-1
-
-)
-
-;
+console.assert ( \'one\' === 1 );
 
 Multiple arguments can be provided after the assertionthese can be
 strings or other objectsthat will only be printed if the assertion
@@ -2468,16 +1758,10 @@ is **false**:
   style="border: 2px solid #000000; width:6.5in;" />
 <!-- ![](./images/image024.jpg){width="6.46875in" height="1.2069444444444444in"} -->
 
-  
-  [console.assert](https://developer.mozilla.org/en-US/docs/Web/API/console/assert)
-  
-
-  
+[console.assert](https://developer.mozilla.org/en-US/docs/Web/API/console/assert)
 
 does *not* throw an AssertionError (except in Node.js), meaning that
-this method is incompatible
-
-with most testing frameworks and that code execution will not break on
+this method is incompatible with most testing frameworks and that code execution will not break on
 a failed assertion.
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2491,73 +1775,34 @@ in JavaScript, however in certain cases it might yield some unexpected
 results \...
 
 1.  **Strings**
-
 **typeof** \"String\" or
-
 **typeof** Date(2011,01,01)
-
 \"string\"
 
 2.  **Numbers**
-
 **typeof** 42
-
 \"number\"
 
 3.  **Bool**
-
-  
   **typeof** **true**
-  
-
-  
-
 (valid values **true** and **false**)
-
 \"boolean\"
 
 4.  **Object**
-
-  
   **typeof** {}
-  
-
-  
-
-  
   **typeof** \[\]
-  
-
-  
-
-  
   **typeof** **null**
-  
-
-  
-
-  
   **typeof** /aaa/
-  
-
-  
-
 or or or or
-
 **typeof** Error()
-
 \"object\"
 
 5.  **Function**
-
 **typeof** **function**(){}
-
 \"function\"
 
 6.  **Undefined**
-
 **var** var1; **typeof** var1
-
 \"undefined\"
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2570,245 +1815,90 @@ one inheriting from it, you can use the
 **instanceof**
 
 command:
-
 *//We want this function to take the sum of the numbers passed to it*
 
 *//It can be called as sum(1, 2, 3) or sum(\[1, 2, 3\]) and should give
 6*
 
 **function**
+sum ( \... arguments ) { **if**
+( arguments.
 
-sum
-
-(
-
-\...
-
-arguments
-
-)
-
+length === 1 )
 {
+**const** \[ firstArg \] = arguments **if** ( firstArg **instanceof**
 
-**if**
-
-(
-
-arguments.
-
-length
-
-===
-
-1
-
-)
-
-{
-
-**const**
-
-\[
-
-firstArg
-
-\]
-
-=
-
-arguments
-
-**if**
-
-(
-
-firstArg
-
-**instanceof**
-
-Array
-
-)
-
-{
+Array ) {
 
 *//firstArg is something like \[1, 2, 3\]*
 
 **return**
 
-sum
+sum ( \...
+firstArg )
 
-(
-
-\...
-
-firstArg
-
-)
-
-*//calls sum(1, 2, 3)*
-
+*//calls sum(1, 2, 3)* }
 }
-
-}
-
 **return**
-
 arguments.
-
 reduce
+( (a, b) =\> a \+ b ) }
 
-(
-
-(
-
-a
-
-,
-
-b
-
-)
-
-=\>
-
-a
-
-\+
-
-b
-
-)
-
-}
-
-console.
-
-log
-
-(
-
-sum
-
-(
-
-1
-
-,
-
-2
-
-,
-
-3
-
-)
-
-)
+console.log ( sum ( 1 , 2 , 3 ) )
 
 *//6*
 
-console.
-
-log
-
-(
-
+console.log (
 sum
-
 (
-
 \[
-
 1
-
 ,
-
 2
-
 ,
-
 3
-
 \]
-
 )
-
 )
-
 *//6*
-
 console.
-
 log
-
 (
-
 sum
-
 (
-
 4
-
 )
-
 )
-
 *//4*
 
 Note that primitive values are not considered instances of any class:
-
 console.
-
 log
-
 (
-
 2
-
 **instanceof**
-
 Number
-
 )
-
 *//false*
-
 console.
-
 log
-
 (
-
 \'abc\'
-
 **instanceof**
-
 String
-
 )
-
 *//false*
-
 console.
-
 log
-
 (
-
 **true**
-
 **instanceof**
-
 Boolean
-
 )
-
 *//false*
 console.log(Symbol
 (
 )
-
 <b>instanceof</b>
 Symbol
 )
@@ -2840,176 +1930,69 @@ isNumber(Number(\'10.1\')), isNumber(**NaN**)) *//true true true*
 
 When one with **typeof** operator one gets type object it falls into
 somewhat wast category\...
-
 In practice you might need to narrow it down to what sort of
 \'object\' it actually is and one way to do it is to use
-
-  -
   Object     .   **prototype**   .   toString      .   call   (   yourObject
-  -    -    
-
-  -
-
 object constructor name to get what flavour of object it actually is:
 )
-
 1.  **String**
-
-  -
   Object     .   **prototype**    .   toString       .   call    (   \"String\"
-  -  -    -  
-
-  -
-
 )
 
 \"\[object String\]\"
 
 2.  **Number**
-
-  
   Object       .   **prototype**       .   toString          .   call     (   42
-          
-
-  
-
 )
-
 \"\[object Number\]\"
 
 3.  **Bool**
-
-  -
   Object       .   **prototype**      .   toString         .   call     (   **true**
-    -  -    -
-
-  -
-
 )
-
 \"\[object Boolean\]\"
 
 4.  **Object**
-
-  
   Object
-  
-
-  
-
-  
   call
-  
   call
-
-  
-
-  
   toString
-  
   toString
-
-  
-
-  
   **prototype**
-  
   **prototype**
-
-  
-
-  
   Object
-  
   Object
-
-  
-
 \...(()) or \...({})
-
 \"\[object Object\]\"
 
 5.  **Function**
-
-  -
   Object     .   **prototype**    .   toString       .   call    (   **function**
-  -  -    -  
-
-  -
-
 (){})
-
 \"\[object Function\]\"
 
 6.  **Date**
-
-  
   Object   .   **prototype**   .   toString    .   call   (   **new**     (   2015   ,   10   ,   21
                                                               Date                                
-                
-
-  
-
 ))
 
 \"\[object Date\]\"
 
 7.  **Regex**
-
-  
   **new** RegExp
-  
-
-  
-
-  
   call
-  
   call
-
-  
-
-  
   toString
-  
   toString
-
-  
-
-  
   **prototype**
-  
   **prototype**
-
-  
-
-  
   Object
-  
   Object
-
-  
-
-  
   */foo/*
-  
-
-  
-
 \...(()) or \...();
-
 \"\[object RegExp\]\"
 
 8.  **Array**
-
-  
   Object         .   **prototype**         .   toString           .   call
-      -  
-
-  
-
 (\[\]);
-
 \"\[object Array\]\"
 
 9.  **Null**
@@ -3058,196 +2041,46 @@ Strings in JavaScript can be enclosed in Single quotes \'hello\',
 Double quotes \"Hello\" and (from ES2015, ES6) in Template Literals
 (*backticks*) \`hello\`.
 
-**var**
-
-hello
-
-=
-
-\"Hello\"
-
-;
-
-**var**
-
-world
-
-=
-
-\'world\'
-
-;
-
-**var**
-
-helloW
-
-=
-
-\`Hello World\`
-
-;
+**var** hello = \"Hello\";
+**var** world = \'world\';
+**var** helloW = \`Hello World\`;
 
 *// ES2015 / ES6*
-
-  
-  String
-  
-
-  
-
+String
 Strings can be created from other types using the () function.
 
-**var**
-
-intString
-
-=
-
-String
-
-(
-
-32
-
-)
-
-;
+**var** intString = String ( 32 );
 
 *// \"32\"*
 
-**var**
+**var** booleanString = String ( **true** );
 
-booleanString
+*// \"true\"* 
 
-=
-
-String
-
-(
-
-**true**
-
-)
-
-;
-
-*// \"true\"*
-
-**var**
-
-nullString
-
-=
-
-String
-
-(
-
-**null**
-
-)
-
-;
+**var** nullString = String ( **null** );
 
 *// \"null\"*
-
-  
-  toString
-  
-
-  
-
+toString
 Or, () can be used to convert Numbers, Booleans or Objects to Strings.
 
-**var**
-
-intString
-
-=
-
-(
-
-5232
-
-)
-
-.
-
-toString
-
-(
-
-)
-
-;
+**var** intString = ( 5232 ) . toString ();
 
 *// \"5232\"*
 
-**var**
-
-booleanString
-
-=
-
-(
-
-**false**
-
-)
-
-.
-
-toString
-
-(
-
-)
-
-;
+**var** booleanString = ( **false** ).toString();
 
 *// \"false\"*
 
-**var**
-
-objString
-
-=
-
-(
-
-{
-
-}
-
-)
-
-.
-
-toString
-
-(
-
-)
-
-;
+**var** objString = ( { } ) . toString ( );
 
 *// \"\[object Object\]\"*
 
   
-  String                 .   fromCharCode
-  -  
-
-  
-
+String                 .   fromCharCode
 Strings also can be created by using method.
-
 String
-
 .
-
 fromCharCode
-
 (
 
 104
@@ -25290,120 +24123,30 @@ i
 values.
 
 splice
-
 (
-
 i
-
 ,
-
 1
-
 )
-
 ;
-
 }
-
 *// \[1, 2, 4, 5, 3\]*
-
-  
-  splice
-  
-
-  
+splice
 
 The () method can also be used to add elements to an array. In this
 example, we will insert the numbers 6, 7, and 8 to the end of the
 array.
 
-**var**
-
-values
-
-=
-
-\[
-
-1
-
-,
-
-2
-
-,
-
-4
-
-,
-
-5
-
-,
-
-3
-
-\]
-
-;
-
-**var**
-
-i
-
-=
-
-values.
-
-length
-
-\+
-
-1
-
-;
-
-values.
-
-splice
-
-(
-
-i
-
-,
-
-0
-
-,
-
-6
-
-,
-
-7
-
-,
-
-8
-
-)
-
-;
-
+**var** values = \[1, 2, 4, 5, 3\];
+**var** i = values.length \+ 1;
+values.splice (i, 0, 6, 7, 8);
 *//\[1, 2, 4, 5, 3, 6, 7, 8\]*
-
-  
-  splice
-  
-
-  
+splice
 
 The first argument of the () method is the index at which to
 remove/insert elements. The second argument is the number of elements
 to remove. The third argument and onwards are the values to insert
 into the array.
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-24">Section 12.24: The entries() method</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -25418,96 +24161,50 @@ The () method returns a new Array Iterator object that contains the
 key/value pairs for each index in the array. Version ≥ 6
 
 **var**
-
 letters
-
 =
-
 \[
-
 \'a\'
-
 ,
-
 \'b\'
-
 ,
-
 \'c\'
-
 \]
-
 ;
-
 **for**
-
 (
-
 **const**
-
 \[
-
 index
-
 ,
-
 element
-
 \]
-
 of letters.
-
 entries
-
 (
-
 )
-
 )
-
 {
-
 console.
-
 log
-
 (
-
 index
-
 ,
-
 element
-
 )
-
 ;
-
 }
-
 result
-
 0
-
 \"a\"
-
 1
-
 \"b\"
-
 2
-
 \"c\"
 
 **Note**: [This method is not supported in Internet
 Explorer.](http://kangax.github.io/compat-table/es6/#test-Array.prototype_methods_Array.prototype.entries)
-
-  
   [*Array*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [*.*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [***prototype***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [*.*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [*entries*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)
-  - -  - 
-
-  
-
 *Portions of this content from by [Mozilla
 Contributors](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries$history)
 licensed under [CC-by-SA
@@ -25516,42 +24213,11 @@ licensed under [CC-by-SA
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-25">Section 12.25: Remove value from array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 When you need to remove a specific value from an array, you can use
 the following one-liner to create a copy array without the given
 value:
 
-array.
-
-filter
-
-(
-
-**function**
-
-(
-
-val
-
-)
-
-{
-
-**return**
-
-val
-
-!==
-
-to_remove
-
-;
-
-}
-
-)
-
-;
+array.filter (**function**(val){**return** val !== to_remove; });
 
 Or if you want to change the array itself without creating a copy (for
 example if you write a function that get an array as a function and
@@ -25561,151 +24227,59 @@ to remove just the first value found, remove the while loop:
 
 **var**
 
-index
+index = array.indexOf (to_remove);
 
-=
-
-array.
-
-indexOf
-
-(
-
-to_remove
-
-)
-
-;
-
-**if**
-
-(
-
-index
-
-!==
-
-\-
-
-1
-
-)
-
-{
-
-array.
-
-splice
-
-(
-
-index
-
-,
-
-1
-
-)
-
-;
-
-}
-
+**if** ( index !== \- 1) {array.splice (index, 1); }
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-26">Section 12.26: Flattening Arrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **2 Dimensional arrays** Version ≥ 6
->
+
 In ES6, we can flatten the array by the spread operator
 [\...](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator):
 
 **function**
 
-flattenES6
-
-(
-
-arr
-
-)
-
-{
-
-**return**
+flattenES6 ( arr ) {**return**
 
 \[
-
 \]
-
 .
-
 concat
-
 (
-
 \...
-
 arr
-
 )
-
 ;
-
 }
 
 **var**
-
 arrL1
-
 =
-
 \[
-
 1
-
 ,
-
 2
-
 ,
-
 \[
-
 3
-
 ,
-
 4
-
 \]
-
 \]
-
 ;
-
 console.
-
 log
-
 (
-
 flattenES6
-
 (
-
 arrL1
-
 )
-
 )
-
 ;
-
 *// \[1, 2, 3, 4\]*
-
 Version ≥ 5
-
 In ES5, we can achieve that by
 [.apply()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply):
 
@@ -25714,285 +24288,146 @@ In ES5, we can achieve that by
 flatten
 
 (
-
 arr
-
 )
-
 {
-
 **return**
-
 \[
-
 \]
-
 .
-
 concat
-
 .
-
 apply
-
 (
-
 \[
-
 \]
-
 ,
-
 arr
-
 )
-
 ;
-
 }
-
 **var**
-
 arrL1
-
 =
-
 \[
-
 1
-
 ,
-
 2
-
 ,
-
 \[
-
 3
-
 ,
-
 4
-
 \]
-
 \]
 
 ;
-
 console.
-
 log
-
 (
-
 flatten
-
 (
-
 arrL1
-
 )
-
 )
-
 ;
-
 *// \[1, 2, 3, 4\]*
-
 **Higher Dimension Arrays**
->
 Given a deeply nested array like so
-
 **var**
-
 deeplyNested
-
 =
-
 \[
-
 4
-
 ,
-
 \[
-
 5
-
 ,
-
 6
-
 ,
-
 \[
-
 7
-
 ,
-
 8
-
 \]
-
 ,
-
 9
-
 \]
-
 \]
-
 ;
-
 It can be flattened with this magic
-
 console.
-
 log
-
 (
-
 String
-
 (
-
 deeplyNested
-
 )
-
 .
-
 split
-
 (
-
 \',\'
-
 )
-
 .
-
 map
-
 (
-
 Number
-
 )
-
 ;
-
 \#
-
 =\>
-
 \[
-
 4
-
 ,
-
 5
-
 ,
-
 6
-
 ,
-
 7
-
 ,
-
 8
-
 ,
-
 9
-
 \]
-
 Or
-
 **const**
-
 flatten
-
 =
-
 deeplyNested.
-
 toString
-
 (
-
 )
-
 .
-
 split
-
 (
-
 \',\'
-
 )
-
 .
-
 map
-
 (
-
 Number
-
 )
-
 console.
-
 log
-
 (
-
 flatten
-
 )
-
 ;
-
 \#
-
 =\>
-
 \[
-
 4
-
 ,
-
 5
-
 ,
-
 6
-
 ,
-
 7
-
 ,
-
 8
-
 ,
-
 9
-
 \]
-
 Both of the above methods only work when the array is made up
 exclusively of numbers. A multi-dimensional array of objects cannot be
 flattened by this method.
@@ -26002,1188 +24437,593 @@ flattened by this method.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Unshift**
-
-  
   .unshift
-  
-
-  
-
 Use to add one or more items in the beginning of an array.
->
+
 For example:
 
 **var**
-
 array
-
 =
-
 \[
-
 3
-
 ,
-
 4
-
 ,
-
 5
-
 ,
-
 6
-
 \]
-
 ;
-
 array.
-
 unshift
-
 (
-
 1
-
 ,
-
 2
-
 )
-
 ;
-
 array results in:
-
 \[
-
 1
-
 ,
-
 2
-
 ,
-
 3
-
 ,
-
 4
-
 ,
-
 5
-
 ,
-
 6
-
 \]
-
 **Push**
-
-  
+ 
   .push
-  
-
-  
-
 Further is used to add items after the last currently existent item.
->
+
 For example:
 
 **var**
-
 array
-
 =
-
 \[
-
 1
-
 ,
-
 2
-
 ,
-
 3
-
 \]
-
 ;
-
 array.
-
 push
-
 (
-
 4
-
 ,
-
 5
-
 ,
-
 6
-
 )
-
 ;
-
 array results in:
-
 \[
-
 1
-
 ,
-
 2
-
 ,
-
 3
-
 ,
-
 4
-
 ,
-
 5
-
 ,
-
 6
-
 \]
-
 Both methods return the new array length.
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-28">Section 12.28: Object keys and values to array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **var**
-
 object
-
 =
-
 {
-
 key1
-
 :
-
 10
-
 ,
-
 key2
-
 :
-
 3
-
 ,
-
 key3
-
 :
-
 40
-
 ,
-
 key4
-
 :
-
 20
-
 }
-
 ;
-
 **var**
-
 array
-
 =
-
 \[
-
 \]
-
 ;
-
 **for**
-
 (
-
 **var**
-
 people
-
 **in**
-
 object
-
 )
-
 {
-
 array.
-
 push
-
 (
-
 \[
-
 people
-
 ,
-
 object
-
 \[
-
 people
-
 \]
-
 \]
-
 )
-
 ;
-
 }
-
 Now array is
-
 \[
-
 \[
-
 \"key1\"
-
 ,
-
 10
-
 \]
-
 ,
-
 \[
-
 \"key2\"
-
 ,
-
 3
-
 \]
-
 ,
-
 \[
-
 \"key3\"
-
 ,
-
 40
-
 \]
-
 ,
-
 \[
-
 \"key4\"
-
 ,
-
 20
-
 \]
-
 \]
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-29">Section 12.29: Logical connective of values</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 Version ≥ 5.1
-
-  
   some                and .                      every
-    -
-
-  
-
 . allow a logical connective of Array values.
-
-  
-  some   combines the return values with OR, .                   every
-    
-
-  
-
+some   combines the return values with OR, .                   every
 While . combines them with AND.
-
-  
-  some
-  
-
-  
-
+some
 Examples for .
-
 \[
-
 **false**
-
 ,
-
 **false**
-
 \]
-
 .
-
 some
-
 (
-
 **function**
-
 (
-
 value
-
 )
-
 {
-
 **return**
-
 value
-
 ;
-
 }
-
 )
-
 ;
-
 *// Result: false*
-
 \[
-
 **false**
-
 ,
-
 **true**
-
 \]
-
 .
-
 some
-
 (
-
 **function**
-
 (
-
 value
-
 )
-
 {
-
 **return**
-
 value
-
 ;
-
 }
-
 )
-
 ;
-
 *// Result: true*
-
 \[
-
 **true**
-
 ,
-
 **true**
-
 \]
-
 .
-
 some
-
 (
-
 **function**
-
 (
-
 value
-
 )
-
 {
-
 **return**
-
 value
-
 ;
-
 }
-
 )
-
 ;
-
 *// Result: true*
-
 And examples for
-
 .
-
 every
-
 \[
-
 **false**
-
 ,
-
 **false**
-
 \]
-
 .
-
 every
-
 (
-
 **function**
-
 (
-
 value
-
 )
-
 {
-
 **return**
-
 value
-
 ;
-
 }
-
 )
-
 ;
-
 *// Result: false*
-
 \[
-
 **false**
-
 ,
-
 **true**
-
 \]
-
 .
-
 every
-
 (
-
 **function**
-
 (
-
 value
-
 )
-
 {
-
 **return**
-
 value
-
 ;
-
 }
-
 )
-
 ;
-
 *// Result: false*
-
 \[
-
 **true**
-
 ,
-
 **true**
-
 \]
-
 .
-
 every
-
 (
-
 **function**
-
 (
-
 value
-
 )
-
 {
-
 **return**
-
 value
-
 ;
-
 }
-
 )
-
 ;
-
 *// Result: true*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<h3 id="ch12-30">Section 12.30: Checking if an object is an Array</h3>
+h3 id="ch12-30">Section 12.30: Checking if an object is an Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-  
   Array                .    isArray                       (    obj
-      
-
-  
-
 ) returns **true** if the object is an Array, otherwise **false**.
-
 Array
-
 .
-
 isArray
-
 (
-
 \[
-
 \]
-
 )
-
 *// true*
-
 Array
-
 .
-
 isArray
-
 (
-
 \[
-
 1
-
 ,
-
 2
-
 ,
-
 3
-
 \]
-
 )
-
 *// true*
-
 Array
-
 .
-
 isArray
-
 (
-
 {
-
 }
-
 )
-
 *// false*
-
 Array
-
 .
-
 isArray
-
 (
-
 1
-
 )
-
 *// false*
-
 In most cases you can **instanceof** to check if an object is an
 Array.
-
 \[
-
 \]
-
 **instanceof**
-
 Array
-
 ;
-
 *// true*
-
 {
-
 }
-
 **instanceof**
-
 Array
-
 ;
-
 *// false*
-
-  -
   Array                       .     isArray
-   - 
-
-  -
-
 has the an advantage over using a **instanceof** check in that it will
 still return **true** even if the
->
+
 prototype of the array has been changed and will return **false** if a
 non-arrays prototype was changed to the Array prototype.
-
 **var**
-
 arr
-
 =
-
 \[
-
 \]
-
 ;
-
 Object
-
 .
-
 setPrototypeOf
-
 (
-
 arr
-
 ,
-
 **null**
-
 )
-
 ;
-
 Array
-
 .
-
 isArray
-
 (
-
 arr
-
 )
-
 ;
-
 *// true*
-
 arr
-
 **instanceof**
-
 Array
-
 ;
-
 *// false*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-31">Section 12.31: Insert an item into an array at a specific index</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-  -
-  [Array.**prototype**.splice](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
-  -
-
-  -
-
+[Array.**prototype**.splice](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
 Simple item insertion can be done with method:
-
 arr.
-
 splice
-
 (
-
 index
-
 ,
-
 0
-
 ,
-
 item
-
 )
-
 ;
-
 More advanced variant with multiple arguments and chaining support:
-
 */\* Syntax:*
-
 *array.insert(index, value1, value2, \..., valueN) \*/*
-
 Array
-
 .
-
 **prototype**
-
 .
-
 insert
-
 =
-
 **function**
-
 (
-
 index
-
 )
-
 {
-
 **this**
-
 .
-
 splice
-
 .
-
 apply
-
 (
-
 **this**
-
 ,
-
 \[
-
 index
-
 ,
-
 0
-
 \]
-
 .
-
 concat
-
 (
-
 Array
-
 .
-
 **prototype**
-
 .
-
 slice
-
 .
-
 call
-
 (
-
 arguments
-
 ,
-
 1
-
 )
-
 )
-
 )
-
 ;
-
 **return**
-
 **this**
-
 ;
-
 }
-
 ;
-
 \[
-
 \"a\"
-
 ,
-
 \"b\"
-
 ,
-
 \"c\"
-
 ,
-
 \"d\"
-
 \]
-
 .
-
 insert
-
 (
-
 2
-
 ,
-
 \"X\"
-
 ,
-
 \"Y\"
-
 ,
-
 \"Z\"
-
 )
-
 .
-
 slice
-
 (
-
 1
-
 ,
-
 6
-
 )
-
 ;
-
 *// \[\"b\", \"X\", \"Y\", \"Z\", \"c\"\]*
-
 And with array-type arguments merging and chaining support:
-
 */\* Syntax:*
-
 *array.insert(index, value1, value2, \..., valueN) \*/*
-
 Array
-
 .
-
 **prototype**
-
 .
-
 insert
-
 =
-
 **function**
-
 (
-
 index
-
 )
-
 {
-
 index
-
 =
-
 Math
-
 .
-
 min
-
 (
-
 index
-
 ,
-
 **this**
-
 .
-
 length
-
 )
-
 ;
-
 arguments.
-
 length
-
 \>
-
 1
-
 &&
-
 **this**
-
 .
-
 splice
-
 .
-
 apply
-
 (
-
 **this**
-
 ,
-
 \[
-
 index
-
 ,
-
 0
-
 \]
-
 .
-
 concat
-
 (
-
 \[
-
 \]
-
 .
-
 pop
-
 .
-
 call
-
 (
-
 arguments
-
 )
-
 )
-
 )
-
 &&
-
 **this**
-
 .
-
 insert
-
 .
-
 apply
-
 (
-
 **this**
-
 ,
-
 arguments
-
 )
-
 ;
-
 **return**
-
 **this**
-
 ;
-
 }
-
 ;
-
 \[
-
 \"a\"
-
 ,
-
 \"b\"
-
 ,
-
 \"c\"
-
 ,
-
 \"d\"
-
 \]
-
 .
-
 insert
-
 (
-
 2
-
 ,
-
 \"V\"
-
 ,
-
 \[
-
 \"W\"
-
 ,
-
 \"X\"
-
 ,
-
 \"Y\"
-
 \]
-
 ,
-
 \"Z\"
-
 )
-
 .
-
 join
-
 (
-
 \"-\"
-
 )
-
 ;
-
 *// \"a-b-V-W-X-Y-Z-c-d\"*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-32">Section 12.32: Sorting multidimensional array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
