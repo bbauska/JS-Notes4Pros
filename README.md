@@ -7,8 +7,7 @@
   <img src="./images/image001.jpeg"
   title="JavaScript Notes 4 Professionals logo"
   alt="JavaScript Notes 4 Professionals logo."
-  style="border: 2px solid #000000; width:8.25in;" />
-
+  style="border: 2px solid #000000; width:4in;" />
 <!--{width="8.25in" height="11.663194444444445in"}-->
 
 <h4>Contents</h4>
