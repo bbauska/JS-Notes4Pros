@@ -40,7 +40,9 @@ property of their respective company owners.</p>
 nor accurate, use at your own risk.</p>
 
 <p>Please send feedback and corrections to [web@petercv.com].</p>
+
 <!--page 2-->
+
 <h2 id="ch1">Chapter 1: Getting started with JavaScript</h2>
 
 <h4>Version Release Date</h4>
@@ -55,7 +57,7 @@ nor accurate, use at your own risk.</p>
 7.  2016-06-14
 8.  2017-06-27
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--~~~~~~~~~~~~~~~~~~~~~ readme.md of js-notes4-pros.org ~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ readme.md of js-notes4-pros.org ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch1-1">Section 1.1: Using console.log()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -102,7 +104,7 @@ console.log(foo);
 </pre>
 
 <p>This will log the following to the console:</p>
-<!-- page 3 -->
+<!-- page 2 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image003.jpg"
@@ -124,7 +126,7 @@ console.log("thisVar:", thisVar, "and thatVar:", thatVar);
 </pre>
 
 <p>This will log the following to the console:</p>
-
+<!-- page 3 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image004.jpg"
@@ -171,6 +173,7 @@ console.log ( {
 } );
 </pre>
 
+<!-- page 4 -->
 <p>This will log the following to the console:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -217,6 +220,8 @@ text on a web page.</p>
 <pre><b>&lt;p</b> id="paragraph"<b>&gt;&lt;/p&gt;</b></pre>
 
 <p>To change its textContent property, we can run the following JavaScript:</p>
+
+<!-- page 5 -->
 
 <pre>document.getElementById("paragraph").textContent = "Hello, World";</pre>
 
@@ -281,6 +286,8 @@ method parameter is displayed to the user in <b>plain</b> text:</p>
 
 <pre>alert('hello, world');</pre>
 
+<!-- page 6 -->
+
 <p>In Chrome, that would produce a pop-up like this:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
@@ -343,6 +350,7 @@ unless its sandbox attribute has the value allow-modal</a>.
 <b>var</b> age = prompt("How old are you?");
 console.log(age); // <i>Prints the value inserted by the user</i>
 </pre>
+<!-- page 7 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image009.png"
@@ -400,6 +408,8 @@ dangerous operation like deleting something in a Control Panel:</p>
 
 <p>If you need it for later use, you can simply store the result of the
 user's interaction in a variable:</p>
+
+<!-- page 8 -->
 
 <pre><b>var</b> deleteConfirm = window.confirm("Are you sure you want to delete this?");</pre>
 
@@ -461,6 +471,8 @@ svg.height = 50;</pre>
 <p>Then build a text element with the desired positioning and font
 characteristics:</p>
 
+<!-- page 9 -->
+
 <pre><b>var</b> text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
 text.setAttribute('x', '0');
 text.setAttribute('y', '50');
@@ -486,6 +498,7 @@ the image to the document as follows:</p>
 <pre><b>var</b> img = <b>new</b> Image ( );
 img.src = 'https://i.ytimg.com/vi/zecueq-mo4M/maxresdefault.jpg';
 document.body.appendChild(img);</pre>
+<!-- page 10 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch2">Chapter 2: JavaScript Variables</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -550,6 +563,8 @@ window.alert(aRandomVariable); // <i>undefined</i>
 
 <b>var</b> myNull=<b>null</b>; // <i>null</i>
 <i>// etc...</i></pre>
+
+<!-- page 11 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-4">Section 2.4: Arrays and Objects</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -586,6 +601,8 @@ window.alert(billy.firstname); // <i>Billy</i></pre>
 
 <p>Rather than making an array &lbrack;"John Doe", "Billy"&rbrack; and calling myArray&lbrack;0&rbrack;, we
 can just call john.fullname and billy.fullname.</p>
+
+<!-- page 12 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch3">Chapter 3: Built-in Constants</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -647,6 +664,7 @@ isNaN(<b>function</b>(){}); // <i>true : conversion fails</i>
 isNaN({});            // <i>true : conversion fails</i>
 isNaN([1, 2]);        // <i>true : converted to "1, 2", which can't be converted to a number</i></pre>
 
+<!-- page 13 -->
 <p>This last one is a bit tricky: checking if an Array is <b>NaN</b>. To do
 the Number() constructor first converts the array to a string, then to
 a number; this is the reason why isNaN(&lbrack;&rbrack) and isNaN (&lbrack;34&rbrack;), 
@@ -688,6 +706,8 @@ ECMA-262 20.1.2.4</a>:</p>
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN"><b>NaN</b></a> 
 stands for "Not a Number." When a mathematical function or operation in JavaScript cannot return a specific 
 number, it returns the value <b>NaN</b> instead.</p>
+
+<!-- page 14 -->
 
 <p>It is a property of the global object, and a reference to 
 <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN">
@@ -775,6 +795,7 @@ concept of an "empty" property.</p>
   </li>
 </ul>
 
+<!-- page 15 -->
 <p><b>undefined</b> is also a property of the global window object.</p>
 
 <pre>// <i>Only in browsers</i>
@@ -832,6 +853,7 @@ a === b;  // <i>true</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-6">Section 3.6: Number constants</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- page 16 -->
 <p>The Number constructor has some built in constants that can be useful</p>
 
 <pre>Number.MAX_VALUE;  // <i>1.7976931348623157e+308</i>
@@ -890,6 +912,7 @@ support <a href="https://en.wikipedia.org/wiki/Imaginary_number">imaginary</a> o
 <a href="https://en.wikipedia.org/wiki/Complex_number">complex</a> numbers.</p>
 
 <pre>Math.sqrt(-1)</pre>
+<!-- page 17 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch4">Chapter 4: Comments</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -898,16 +921,16 @@ support <a href="https://en.wikipedia.org/wiki/Imaginary_number">imaginary</a> o
 <p>To add annotations, hints, or exclude some code from being executed
 JavaScript provides two ways of commenting code lines.</p>
 
-<h4>Single line Comment</h4>
+<h4>Single line Comment //</h4>
 
 <p>Everything after the // until the end of the line is excluded from execution.</p>
 
 <pre>
 <b>function</b> elementAt( event ) {
-// Gets the element from Event coordinates
+// <i>Gets the element from Event coordinates</i>
   <b>return</b> document.elementFromPoint(event.clientX, event.clientY);
 }
-*// TODO: write more cool stuff!*
+&ast;// <i>TODO: write more cool stuff!</i>
 </pre>
 
 <h4>Multi-line Comment /&ast;&ast;/</h4>
@@ -918,14 +941,14 @@ lines.</p>
 
 <pre>
 /*
-   Gets the element from Event coordinates.
+   <i>Gets the element from Event coordinates.
    Use like:
-     var clickedEl = someEl.addEventListener("click", elementAt, false);
+     var clickedEl = someEl.addEventListener("click", elementAt, false);</i>
 */
 <b>function</b> elementAt( event ) {
   <b>return</b> document.elementFromPoint(event.clientX, event.clientY);
 }
-/* TODO: write more useful comments! */
+/&ast; <i>TODO: write more useful comments!</i> */
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch4-2">Section 4.2: Using HTML comments in JavaScript (Bad practice)</h3>
@@ -957,6 +980,7 @@ browsers that didn't support it:</p>
 &lt;/script&gt;
 </pre>
 
+<!-- page 18 -->
 <p>An HTML closing comment can also be used in JavaScript (independent of
 an opening comment) at the beginning of a line (optionally preceded by
 whitespace) in which case it too causes the rest of the line to be
@@ -990,304 +1014,235 @@ w1.onmessage = function (e) {
 comments are ignored, so the JavaScript contained therein is ignored
 when run as HTML.</p>
 
-<p>As JavaScript, however, while the lines beginning with &lt;!-&dash; and &dash-&gt;
+<p>As JavaScript, however, while the lines beginning with &lt;!-&dash; and &dash;-&gt;
 are ignored, their effect is not to escape over <i>multiple</i>
 lines, so the lines following them (e.g., self.postMessage(...) will not be ignored when
 run as JavaScript, at least until they reach a <i>JavaScript</i> comment,
 marked by /* and */. Such JavaScript comments are used in the above
-example to ignore the remaining <i>HTML</i> text (until the &dash-> which is
+example to ignore the remaining <i>HTML</i> text (until the &dash;-&gt; which is
 also ignored as JavaScript).</p>
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch5">Chapter 5: Console</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-  console.dir       (   console    ). Besides the      console.memory
+<!-- page 19 -->
+<p>The information displayed by a <a href="https://developer.mozilla.org/en-US/docs/Tools/Web_Console">
+debugging/web console</a> is made available through the multiple <a href="https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/console">
+methods of the console Javascript object</a> that can be consulted through property, the methods 
+displayed are generally the following (taken from Chromium\'s output):
 
-The information displayed by a [debugging/web
-console](https://developer.mozilla.org/en-US/docs/Tools/Web_Console)
-is made available through the multiple [methods of the console
-Javascript
-object](https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/console)
-that can be consulted through property, the methods displayed are
-generally the following (taken from Chromium\'s output):
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/console/assert">assert</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/clear">clear</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/count">count</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/console#console.debug(...)">debug</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/dir">dir</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/dirxml">dirxml</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/error">error</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/group">group</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed">groupCollapsed</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupEnd">groupEnd</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/info">info</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/log">log</a></li>
+  <li>markTimeline</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/profile">profile</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/profileEnd">profileEnd</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/table">table</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/time">time</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd">timeEnd</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeStamp">timeStamp</a></li>
+  <li>timeline</li>
+  <li>timelineEnd</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/trace">trace</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/warn">warn</a></li>
+</ul>
 
-[assert](https://developer.mozilla.org/en-US/docs/Web/API/console/assert)
-[clear](https://developer.mozilla.org/en-US/docs/Web/API/Console/clear)
-[count](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
-[debug](https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/console#console.debug(...))
+<h4>Opening the Console</h4>
 
-[dir](https://developer.mozilla.org/en-US/docs/Web/API/Console/dir)
-[dirxml](https://developer.mozilla.org/en-US/docs/Web/API/Console/dirxml)
-[error](https://developer.mozilla.org/en-US/docs/Web/API/Console/error)
-[group](https://developer.mozilla.org/en-US/docs/Web/API/Console/group)
-[groupCollapsed](https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed)
-[groupEnd](https://developer.mozilla.org/en-US/docs/Web/API/Console/groupEnd)
-
-[info](https://developer.mozilla.org/en-US/docs/Web/API/Console/info)
-[log](https://developer.mozilla.org/en-US/docs/Web/API/Console/log)
-markTimeline
-[profile](https://developer.mozilla.org/en-US/docs/Web/API/Console/profile)
-[profileEnd](https://developer.mozilla.org/en-US/docs/Web/API/Console/profileEnd)
-[table](https://developer.mozilla.org/en-US/docs/Web/API/Console/table)
-[time](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)
-[timeEnd](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd)
-[timeStamp](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeStamp)
-timeline timelineEnd
-[trace](https://developer.mozilla.org/en-US/docs/Web/API/Console/trace)
-[warn](https://developer.mozilla.org/en-US/docs/Web/API/Console/warn)
-
-<b>Opening the Console</b>
-
-In most current browsers, the JavaScript Console has been integrated
+<p>In most current browsers, the JavaScript Console has been integrated
 as a tab within Developer Tools. The shortcut keys listed below will
 open Developer Tools, it might be necessary to switch to the right tab
-after that.
-**Chrome**
-Opening the "Console" panel of Chrome's **DevTools**:
-Windows / Linux: any of the following options.
-Ctrl + Shift + J
-Ctrl + Shift + I , then click on the "Web Console" tab **or** press
-ESC to toggle the console on and off
-F12 , then click on the "Console" tab **or** press ESC to toggle the
-console on and off
-Mac OS: Cmd + Opt + J
-**Firefox**
-Opening the "Console" panel in Firefox's **Developer Tools**:
-Windows / Linux: any of the following options.
-Ctrl + Shift + K
-Ctrl + Shift + I , then click on the "Web Console" tab **or** press
-ESC to toggle the console on and off
-F12 , then click on the "Web Console" tab **or** press ESC to toggle
-the console on and off
-Mac OS: Cmd + Opt + K
-**Edge and Internet Explorer**
-Opening the "Console" panel in the **F12 Developer Tools**:
-F12 , then click on the "Console" tab
-**Safari**
-Opening the "Console" panel in Safari's **Web Inspector** you must
-first enable the develop menu in Safari\'s
-Preferences
-Then you can either pick \"Develop-\>Show Error Console\" from the menus
-or press
-⌘
-\+
-Option
-\+
-C
-**Opera**
->
-Opening the "Console" in opera:
->
-Ctrl + Shift + I ,then click on the "Console" tab
->
-**Compatibility**
+after that.</p>
 
-  
-  console.log
-  
+<h4>Chrome</h4>
 
-  
+<p>Opening the "Console" panel of Chrome's <b>DevTools</b>:</p>
 
-When using or emulating Internet Explorer 8 or earlier versions (e.g.
+<ul>
+  <li>Windows / Linux: any of the following options.
+    <ul>
+      <li>Ctrl + Shift + J</li>
+      <li>Ctrl + Shift + I , then click on the "Web Console" tab <b>or</b> press ESC to toggle the console on and off</li>
+      <li>F12 , then click on the "Console" tab <b>or</b> press ESC to toggle the console on and off</li>
+    </ul>
+  </li>
+  <li>Mac OS: Cmd + Opt + J</li>
+</ul>
+
+<h4>Firefox</h4>
+<!-- page 20 -->
+<p>Opening the "Console" panel in Firefox's <b>Developer Tools</b>:</p>
+
+<ul>
+  <li>Windows / Linux: any of the following options.
+    <ul>
+	  <li>Ctrl + Shift + K</li>
+	  <li>Ctrl + Shift + I , then click on the "Web Console" tab <b>or</b> press ESC to toggle the console on and off</li>
+	  <li>F12 , then click on the "Web Console" tab <b>or</b> press ESC to toggle the console on and off</li>
+	</ul>
+	</li>
+  <li>Mac OS: Cmd + Opt + K</li>
+</ul>
+
+<h4>Edge and Internet Explorer</h4>
+
+<p>Opening the "Console" panel in the <b>F12 Developer Tools</b>:</p>
+
+<ul>
+  <li>F12 , then click on the "Console" tab</li>
+</ul>
+
+<h4Safari</h4>
+
+<p>Opening the "Console" panel in Safari's <b>Web Inspector</b> you must
+first enable the develop menu in Safari\'s Preferences</p>
+
+<!-- image goes here top of pg 21 -->
+
+<p>Then you can either pick &quot;Develop-&gt;Show Error Console&quot; from the menus or press ⌘
+&plus; Option &plus; C</p>
+
+<h4>Opera</h4>
+
+<p>Opening the "Console" in opera:</p>
+
+<ul>
+  <li>Ctrl + Shift + I ,then click on the "Console" tab</li>
+</ul>
+
+<h4>Compatibility</h4>
+
+<p>When using or emulating Internet Explorer 8 or earlier versions (e.g.
 through Compatibility View / Enterprise Mode) the console will
-**only** be defined when the Developer Tools are active, so ()
+<b>only</b> be defined when the Developer Tools are active, so console.log ()
 statements can cause an exception and prevent code from executing. To
 mitigate this, you can check to see if the console is available before
-you log:
+you log:</p>
 
-**if**
-
-(
-
-**typeof**
-
-window.
-
-console
-
-!==
-
-\'undefined\'
-
-)
-
+<pre>
+<b>if</b> (<b>typeof</b> window.console !== &apos;undefined&apos)
 {
-
-console.
-
-log
-
-(
-
-\"Hello World\"
-
-)
-
-;
-
+  console.log(&quot;Hello World&quot;);
 }
+</pre>
 
-Or at the start of your script you can identify if the console is
-available and if not, define a null function to catch all of your
-references and prevent exceptions.
+<p>Or at the start of your script you can identify if the console is available and if not, define a null function to catch all of your
+references and prevent exceptions.</p>
 
-**if**
+<!-- page 22 -->
 
-(
-
-!
-
-window.
-
-console
-
-)
-
+<pre>
+<b>if</b> (!window.console)
 {
-
-console
-
-=
-
-{
-
-log
-
-:
-
-**function**
-(
-)
-{
+  console = {log: <b>function</b>() {}};
 }
-}
-;
-}
-Note this second example will stop **all** console logs even if the
-developer window has been opened.
-  console.dir  ( obj
+</pre>
 
-Using this second example will preclude use of other functions such as
-) unless that is specifically added.
+<p>Note this second example will stop <b>all</b> console logs even if the developer window has been opened.</p>
 
-A browser\'s debugging console or [web
-console](https://developer.mozilla.org/en-US/docs/Tools/Web_Console)
+<p>Using this second example will preclude use of other functions such as console.dir(obj) unless that is specifically added.</p>
+
+<p>A browser&apos;s debugging console or <a href="https://developer.mozilla.org/en-US/docs/Tools/Web_Console">web console</a>
 is generally used by developers to identify errors, understand flow of
 execution, log data and for many other purpose at runtime. This
-information is accessed through the
-[console](https://developer.mozilla.org/en-US/docs/Web/API/Console)
-object.
+information is accessed through the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console">
+console</a> object.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-1">Section 5.1: Measuring time - console.time()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-console.time() can be used to measure how long a task in your code takes to run.
+<p>console.time() can be used to measure how long a task in your code takes to run.</p>
 
-[console.time](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)   [(\[](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)   [label](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)   [\])](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)   [console.timeEnd](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd)   [(\[](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd)   [label](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd)
+<p>Calling <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd">
+console.time(&lbrack;label&rbrack;)</a> starts a new timer. When 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/time">
+console.timeEnd(&lbrack;label&rbrack;) is called, the elapsed time, in milliseconds, Since
+the original .time() call is calculated and logged. Because of this behavior, you can call 
+.timeEnd() multiple times with the same label to log the elapsed time since the original .time()
+call was made.</p>
 
-Calling
-[\])](https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd)
-is called, the elapsed time, in time milliseconds, since the original .() call is calculated and logged.
-Because of this behavior, you can call
-  timeEnd   () multiple times with the same label to log the elapsed time time
-            since the original .                                          
-.() call was made.
-**Example 1:**
-console.
-time
-(
-\'response in\'
-)
-;
-alert
-(
-\'Click to continue\'
-)
-;
-console.
-timeEnd
-(
-\'response in\'
-)
-;
-alert
-(
-\'One more time\'
-)
-;
-console.
-timeEnd
-(
-\'response in\'
-);
-will output:
-response
-**in**
-:
-774.967ms
-response
-**in**
-:
-1402.199ms
-**Example 2:**
-**var**
-elms
-=
-document.
-getElementsByTagName
-(
-\'\*\'
-)
-;
-*//select all elements on the page*
-console.time(\'Loop time\');
-**for**(**var** i = 0;
-i \< 5000;
-i ++ ) {
-**for** (
-**var** j = 0, length = elms.length;
-j \< length;
-j ++ ) { // nothing to do ...
-}
+<h4>Example 1:</h4>
+
+<pre>
+console.time(&apos;response in&apos;);
+
+alert(&apos;Click to continue&apos;);
+console.timeEnd(&apos;response in&apos;);
+
+alert(&apos;One more time&apos;);
+console.timeEnd(&apos;response in&apos;);
+</pre>
+
+<p>will output:</p>
+
+<pre>
+response <b>in</b>: 774.967ms
+response <b>in</b>: 1402.199ms
+</pre>
+
+<h4>Example 2:</h4>
+
+<pre>
+<b>var</b> elms = document.getElementsByTagName(&apos;*&apos;); // <i>select all elements on the page</i>
+
+console.time(&apos;Loop time&apos;);
+
+<b>for</b>(<b>var</b> i = 0; i &lt; 5000; i ++ ) {
+  <b>for</b> (<b>var</b> j = 0, length = elms.length; j &lt; length; j ++ ) { 
+    // <i>nothing to do ...</i>
+  }
 } 
-console.timeEnd(\'Loop time\');
-will output: 
-Loop time: 40.716ms
+console.timeEnd(&apos;Loop time&apos;);
+</pre>
 
+<p>will output:</p>
+
+<pre>
+Loop time: 40.716ms
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-2">Section 5.2: Formatting console output</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- page 23 -->
+<p>Many of the console\'s print methods can also handle C-like string
+formatting, using % tokens:</p>
 
-Many of the console\'s print methods can also handle C-like string
-formatting, using % tokens:
+<pre>
+console.log(&apos;%s has %d points&apos;,&apos;Sam&apos;,100);
+</pre>
 
-console.log(\'%s has %d points\',\'Sam\',100);
-  
-  Sam has 100 points Displays .
+<p>Display Sam has 100 points.</p>
 
-The full list of format specifiers in JavaScript is:
+<p>The full list of format specifiers in JavaScript is:</p>
 
-**Specifier Output**
+| <b>Specifier | Output</b>                             |
+|---------|:-------------------------------------------:|
+| %s | Formats the value as a string |
+| %i or %d | Formats the value as an integer |
+| %f | Formats the value as a floating point value |
+| %o | Formats the value as an expandable DOM element |
+| %O | Formats the value as an expandable JavaScript object |
+| %c | Applies CSS style rules to the output string as specified by the second parameter |
 
-%s Formats the value as a string
+<h4>Advanced styling</h4>
 
-%i or %d Formats the value as an integer
-
-%f Formats the value as a floating point value
-
-%o Formats the value as an expandable DOM element
-
-%O Formats the value as an expandable JavaScript object
-
-%c Applies CSS style rules to the output string as specified by the
-second parameter
-
-**Advanced styling**
-
-When the CSS format specifier (%c) is placed at the left side of the
+<p>When the CSS format specifier (%c) is placed at the left side of the
 string, the print method will accept a second parameter with CSS rules
-which allow fine-grained control over the formatting of that string:
-console.log(\'%cHello world!\', \'color: blue; font-size: xx-large\');
-Displays:
+which allow fine-grained control over the formatting of that string:</p>
+
+<pre>
+console.log(&apos;%cHello world!&apos;, &apos;color: blue; font-size: xx-large&apos;);</p>
+</pre>
+
+<p>Displays:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image013.jpg"
@@ -1296,19 +1251,21 @@ Displays:
   style="border: 2px solid #000000; width:7.477in;" />
 <!-- ![](./images/image013.jpg){width="7.477777777777778in" height="0.6666666666666666in"} -->
 
-It is possible to use multiple %c format specifiers:
+<p>It is possible to use multiple %c format specifiers:</p>
 
-any substring to the right of a %c has a corresponding parameter in
-the print method; this parameter may be an empty string, if there is
-no need to apply CSS rules to that same substring; if two %c format
-specifiers are found, the 1st (encased in %c) and 2nd substring will
-have their rules defined in the 2nd and 3rd parameter of the print
-method respectively.
+<ul>
+  <li>any substring to the right of a %c has a corresponding parameter in
+    the print method;</li>
+  <li>this parameter may be an empty string, if there is no need to apply CSS 
+    rules to that same substring;</li>
+  <li>if two %c format specifiers are found, the 1st (encased in %c) and 2nd 
+    substring will have their rules defined in the 2nd and 3rd parameter of the print
+	method respectively.</li>
+  <li>if three %c format specifiers are found, then the 1st, 2nd and 3rd substrings will 
+    have their rules defined in the 2nd , 3rd and 4th parameter respectively, and so on\...</li>
+</ul>
 
-if three %c format specifiers are found, then the 1st, 2nd and 3rd
-substrings will have their rules defined in the 2nd , 3rd and 4th
-parameter respectively, and so on\...
-
+<pre>
 console.log(\"%cHello %cWorld%c!!\", *// string to be printed*
 
 \"color: blue;\", *// applies color formatting to the 1st substring*
@@ -1316,10 +1273,11 @@ console.log(\"%cHello %cWorld%c!!\", *// string to be printed*
 \"font-size: xx-large;\", *// applies font formatting to the 2nd
 substring*
 
-\"/\* no CSS rule\*/\" *// does not apply any rule to the remaining
-substring* );
+&quot;/&ast; no CSS rule&ast;/&quot; // <i>does not apply any rule to the remaining substring</i>
+);
+</pre>
 
-Displays:
+<p>Displays:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image014.jpg"
