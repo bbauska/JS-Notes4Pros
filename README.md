@@ -125,14 +125,6 @@ console.log("thisVar:", thisVar, "and thatVar:", thatVar);
 
 <p>This will log the following to the console:</p>
 
-<pre>
-&gt; <b>var</b> thisVar = 'first value';
-  <b>var</b> thatVar = 'second value';
-  console.log("thisVar:", thisVar, "and thatVar:", thatVar);
-</pre>
-
-<p>This will log the following to the console:</p>
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image004.jpg"
@@ -144,15 +136,14 @@ console.log("thisVar:", thisVar, "and thatVar:", thatVar);
 
 <h4>Placeholders</h4>
 
-<p>You can use () in combination with placeholders:</p>
+<p>You can use console.log() in combination with placeholders:</p>
 
 <pre>
-<b>var</b> greet="Hello", who="World";
+<b>var</b> greet = "Hello", who = "World";
 console.log ("%s, %s!", greet, who);
 </pre>
 
 <p>This will log the following to the console:</p>
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image005.jpg"
@@ -181,7 +172,6 @@ console.log ( {
 </pre>
 
 <p>This will log the following to the console:</p>
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
@@ -195,8 +185,7 @@ console.log ( {
 
 <p>You have the ability to log any element which exists within the
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">
-<i>DOM</i></a>.</p>
-<p>In this case we log the body element:</p>
+<i>DOM</i></a>. In this case we log the body element:</p>
 
 <pre>
 console.log(document.body);
@@ -225,41 +214,31 @@ text on a web page.</p>
 
 <p>For example, consider the following HTML tag:</p>
 
-<pre>
-<b>&lt;p</b> id="paragraph"<b>&gt;&lt;/p&gt;</b>
-</pre>
+<pre><b>&lt;p</b> id="paragraph"<b>&gt;&lt;/p&gt;</b></pre>
 
 <p>To change its textContent property, we can run the following JavaScript:</p>
 
-<pre>
-document.getElementById("paragraph").textContent = "Hello, World";
-</pre>
+<pre>document.getElementById("paragraph").textContent = "Hello, World";</pre>
 
 <p>This will select the element that with the id paragraph and set its
 text content to "Hello, World":</p>
 
-<pre>
-<b>&lt;p</b> id="paragraph"&gt;Hello, World<b>&lt;/p&gt;</b>
-</pre>
+<pre><b>&lt;p</b> id="paragraph"&gt;Hello, World<b>&lt;/p&gt;</b></pre>
 
 <p><a href="http://jsbin.com/fuzijox/edit?html,js,console,output">(See also this demo)</a></p>
 <p>You can also use JavaScript to create a new HTML element programmatically. For example, 
 consider an HTML document with the following body:</p>
 
-<pre>
-<b>&lt;body&gt;</b>
+<pre><b>&lt;body&gt;</b>
   <b>&lt;h1&gt;</b>Adding an element<b>&lt;/h1&gt;</b>
-<b>&lt;/body&gt;</b>
-</pre>
+<b>&lt;/body&gt;</b></pre>
 
 <p>In our JavaScript, we create a new <b>&lt;p&gt;</b>tag with a textContent property of 
 and add it at the end of the html body:</p>
 
-<pre>
-<b>var</b> element = document.createElement('p');
+<pre><b>var</b> element = document.createElement('p');
 element.textContent = "Hello, World";
-document.body.appendChild(element); //add the newly created element to the DOM
-</pre>
+document.body.appendChild(element); //<i>add the newly created element to the DOM</i></pre>
 
 <p>That will change your HTML body to the following:</p>
 
@@ -282,33 +261,25 @@ will delay running your code until after the whole content on your page has been
 
 <p>A third way to make sure all your DOM has been loaded, is 
 <a href="https://stackoverflow.com/questions/779379/why-is-settimeoutfn-0-sometimes-useful">
-to wrap the DOM manipulation code with a timeout function of 0 ms</a>.</p>
-
-<p>This way, this JavaScript code is re-queued at the end of the
-execution queue, which gives the browser a chance to finish doing some
-non-JavaScript things that have been waiting to finish before
-attending to this new piece of JavaScript.</p>
+to wrap the DOM manipulation code with a timeout function of 0 ms</a>. This way, this 
+JavaScript code is re-queued at the end of the execution queue, which gives the browser 
+a chance to finish doing some non-JavaScript things that have been waiting to finish 
+before attending to this new piece of JavaScript.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch1-3">Section 1.3: Using window.alert()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The alert method displays a visual alert box on screen. The alert
 method parameter is displayed to the user in <b>plain</b> text:</p>
 
-<pre>
-window.alert(message);
-</pre>
+<pre>window.alert(message);</pre>
 
 <p>Because window is the global object, you can call also use the following shorthand:</p>
 
-<pre>
-alert(message);
-</pre>
+<pre>alert(message);</pre>
 
 <p>So what does window.alert() do? Well, let's take the following example:</p>
 
-<pre>
-alert('hello, world');
-</pre>
+<pre>alert('hello, world');</pre>
 
 <p>In Chrome, that would produce a pop-up like this:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -333,10 +304,8 @@ calling alert will pause until the prompt is answered. Traditionally
 this means that <i>no other JavaScript code will execute</i> until the
 alert is dismissed:</p>
 
-<pre>
-alert('Pause!');
-console.log('Alert was dismissed');
-</pre>
+<pre>alert('Pause!');
+console.log('Alert was dismissed');</pre>
 
 <p>However the specification actually allows other event-triggered code
 to continue to execute even though a modal dialog is still being
@@ -361,9 +330,7 @@ unless its sandbox attribute has the value allow-modal</a>.
 
 <h4>Syntax</h4>
 
-<pre>
-prompt(text, [<b>default</b>]);
-</pre>
+<pre>prompt(text, &lbrack;<b>default</b>&rbrack;);</pre>
 
 <ul>
   <li><b>text</b>: The text displayed in the prompt box.</li>
@@ -409,9 +376,7 @@ buttons, OK and Cancel.</p>
 
 <p>Now, let's take the following example:</p>
 
-<pre>
-result = window.confirm(message);
-</pre>
+<pre>result = window.confirm(message);</pre>
 
 <p>Here, <b>message</b> is the optional string to be displayed in the dialog
 and <b>result</b> is a boolean value indicating whether OK or Cancel was
@@ -420,11 +385,9 @@ selected (true means OK).</p>
 <p>window.confirm() is typically used to ask for user confirmation before doing a
 dangerous operation like deleting something in a Control Panel:</p>
 
-<pre>
-<b>if</b> (window.confirm("Are you sure you want to delete this?")) { 
+<pre><b>if</b> (window.confirm("Are you sure you want to delete this?")) { 
   deleteItem (itemId);
-}
-</pre>
+}</pre>
 
 <p>The output of that code would look like this in the browser:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -458,38 +421,31 @@ user's interaction in a variable:</p>
 	similarly named methods.</li>
 </ul>
 
-<h2 id="ch1-6">Section 1.6: Using the DOM API (with graphical text: Canvas, SVG, or image file)</h2>
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch1-6">Section 1.6: Using the DOM API (with graphical text: Canvas, SVG, or image file)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h4>Using canvas elements</h4>
 
 <p>HTML provides the canvas element for building raster-based images.</p>
 
 <p>First build a canvas for holding image pixel information.</p>
 
-<pre>
-<b>var</b> canvas = document.createElement('canvas');
+<pre><b>var</b> canvas = document.createElement('canvas');
 canvas.width = 500;
-canvas.height = 250;
-</pre>
+canvas.height = 250;</pre>
 
 <p>Then select a context for the canvas, in this case two-dimensional:</p>
 
-<pre>
-<b>var</b> ctx=canvas.getContext ('2d');
-</pre>
+<pre><b>var</b> ctx=canvas.getContext ('2d');</pre>
 
 <p>Then set properties related to the text:</p>
 
-<pre>
-ctx.font = '30px Cursive';
-ctx.fillText ("Hello world!", 50, 50);
-</pre>
+<pre>ctx.font = '30px Cursive';
+ctx.fillText ("Hello world!", 50, 50);</pre>
 
 <p>Then insert the canvas element into the page to take effect:</p>
 
-<pre>
-document.body.appendChild(canvas);
-</pre>
+<pre>document.body.appendChild(canvas);</pre>
 
 <h4>Using SVG</h4>
 
@@ -498,36 +454,28 @@ within HTML.</p>
 
 <p>First create an SVG element container with dimensions:</p>
 
-<pre>
-<b>var</b> svg=document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+<pre><b>var</b> svg=document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 svg.width = 500;
-svg.height = 50;
-</pre>
+svg.height = 50;</pre>
 
 <p>Then build a text element with the desired positioning and font
 characteristics:</p>
 
-<pre>
-<b>var</b> text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+<pre><b>var</b> text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
 text.setAttribute('x', '0');
 text.setAttribute('y', '50');
 text.style.fontFamily = 'Times New Roman';
-text.style.fontSize = '50';
-</pre>
+text.style.fontSize = '50';</pre>
 
 <p>Then add the actual text to display to the textelement:</p>
 
-<pre>
-text.textContent = 'Hello world!';
-</pre>
+<pre>text.textContent = 'Hello world!';</pre>
 
 <p>Finally add the text element to our svg container and add the svg
 container element to the HTML document:</p>
 
-<pre>
-svg.appendChild(text);
-document.body.appendChild(svg);
-</pre>
+<pre>svg.appendChild(text);
+document.body.appendChild(svg);</pre>
 
 <h4>Image file</h4>
 
@@ -535,22 +483,18 @@ document.body.appendChild(svg);
 it placed on a server, you can add the URL of the image and then add
 the image to the document as follows:</p>
 
-<pre>
-<b>var</b> img = <b>new</b> Image ( );
+<pre><b>var</b> img = <b>new</b> Image ( );
 img.src = 'https://i.ytimg.com/vi/zecueq-mo4M/maxresdefault.jpg';
-document.body.appendChild(img);
-</pre>
-
+document.body.appendChild(img);</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch2">Chapter 2: JavaScript Variables</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<b>variable_name {Required} The name of the variable: used when calling
-it.</b>
+<p><b>variable_name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{Required} The name of the variable: used when calling it.</b></p>
 
-= <b>&lbrack;Optional&rbrack;</b> Assignment (defining the variable)
+<p>= &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>&lbrack;Optional&rbrack;</b> Assignment (defining the variable)</p>
 
-value <b>{Required when using Assignment}</b> The value of a variable
-<b>&lbrack;default: undefined&rbrack;</b>
+<p>value &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<b>{Required when using Assignment}</b> The value of a variable
+<b>&lbrack;default: undefined&rbrack;</b></p>
 
 <p>Variables are what make up most of JavaScript. These variables make up
 things from numbers to objects, which are all over JavaScript to make
@@ -558,44 +502,34 @@ one's life much easier.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-1">Section 2.1: Defining a Variable</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<pre>
-<b>var</b> myVariable = "This is a variable!";
-</pre>
+<pre><b>var</b> myVariable = "This is a variable!";</pre>
 
 <p>This is an example of defining variables. This variable is called a
 "string" because it has ASCII characters (A-Z, 0-9, !@#$, etc.)</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-2">Section 2.2: Using a Variable</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<pre>
-<b>var</b> number1 = 5;
-number1=3;
-</pre>
+<pre><b>var</b> number1 = 5;
+number1 = 3;</pre>
 
 <p>Here, we defined a number called "number1" which was equal to 5. 
 However, on the second line, we changed the value to 3. To show the 
 value of a variable, we log it to the console or use window.alert():</p>
 
-<pre>
-console.log(number1); // 3
-window.alert(number1); // 3 
-</pre>
+<pre>console.log(number1); // <i>3</i>
+window.alert(number1); // <i>3</i></pre>
 
 <p>To add, subtract, multiply, divide, etc., we do like so:</p>
 
-<pre>
-number1 = number1 + 5; // 3 + 5 = 8
-number1 = number1 - 6; // 8 - 6 = 2
-<b>var</b> number2 = number1 * 10; // 2 (times) 10 = 20
-<b>var</b> number3 = number2 / number1; // 20 (divided by) 2 = 10;
-</pre>
+<pre>number1 = number1 + 5; // <i>3 + 5 = 8</i>
+number1 = number1 - 6; // <i>8 - 6 = 2</i>
+<b>var</b> number2 = number1 &ast; 10; // <i>2 (times) 10 = 20</i>
+<b>var</b> number3 = number2 / number1; // <i>20 (divided by) 2 = 10;</i></pre>
 
 <p>We can also add strings which will concatenate them, or put them
 together. For example:</p>
 
-<pre>
-<b>var</b> myString = "I am a " + "string!" ; // "I am a string!"
-</pre>
+<pre><b>var</b> myString = "I am a " + "string!" ; // <i>"I am a string!"</i></pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-3">Section 2.3: Types of Variables</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
