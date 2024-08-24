@@ -8,6 +8,7 @@
   title="JavaScript Notes 4 Professionals logo"
   alt="JavaScript Notes 4 Professionals logo."
   style="border: 2px solid #000000; width:4in;" />
+
 <!--{width="8.25in" height="11.663194444444445in"}-->
 
 <h4>Contents</h4>
@@ -320,14 +321,16 @@ alert('hello, world');
 
 <h4>Notes</h4>
 
-<p>The alert method is technically a property of window object, but since
-all window properties are automatically global variables, we can use
-alert as a global variable instead of as a property of window meaning
-you can directly use ().</p>
+<blockquote>
+  The alert method is technically a property of window object, but since
+  all window properties are automatically global variables, we can use
+  alert as a global variable instead of as a property of window meaning
+  you can directly use alert() intead of window.alert().
+</blockquote>
 
-<p>Unlike using , alert acts as a modal prompt meaning that the code
+<p>Unlike using console.log, alert acts as a modal prompt meaning that the code
 calling alert will pause until the prompt is answered. Traditionally
-this means that *no other JavaScript code will execute* until the
+this means that <i>no other JavaScript code will execute</i> until the
 alert is dismissed:</p>
 
 <pre>
@@ -370,8 +373,8 @@ prompt(text, [<b>default</b>]);
 <h4>Examples</h4>
 
 <pre>
-<b>var</b> age=prompt("How old are you?");
-console.log(age); // Prints the value inserted by the user
+<b>var</b> age = prompt("How old are you?");
+console.log(age); // <i>Prints the value inserted by the user</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
@@ -435,8 +438,7 @@ dangerous operation like deleting something in a Control Panel:</p>
 <p>If you need it for later use, you can simply store the result of the
 user's interaction in a variable:</p>
 
-<pre><p><b>var</b> deleteConfirm = window.confirm("Are you sure you want to
-delete this?");</p></pre>
+<pre><b>var</b> deleteConfirm = window.confirm("Are you sure you want to delete this?");</pre>
 
 <h4>Notes</h4>
 
@@ -480,7 +482,7 @@ canvas.height = 250;
 
 <pre>
 ctx.font = '30px Cursive';
-ctx.fillText ( "Hello world!", 50, 50 );
+ctx.fillText ("Hello world!", 50, 50);
 </pre>
 
 <p>Then insert the canvas element into the page to take effect:</p>
@@ -498,25 +500,25 @@ within HTML.</p>
 
 <pre>
 <b>var</b> svg=document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-svg.width=500;
-svg.height=50;
+svg.width = 500;
+svg.height = 50;
 </pre>
 
 <p>Then build a text element with the desired positioning and font
 characteristics:</p>
 
 <pre>
-<b>var</b> text = document.createElementNS('http://www.w3.org/2000/svg','text');
-text.setAttribute('x','0');
-text.setAttribute('y','50');
-text.style.fontFamily='Times New Roman';
-text.style.fontSize='50';
+<b>var</b> text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+text.setAttribute('x', '0');
+text.setAttribute('y', '50');
+text.style.fontFamily = 'Times New Roman';
+text.style.fontSize = '50';
 </pre>
 
 <p>Then add the actual text to display to the textelement:</p>
 
 <pre>
-text.textContent='Hello world!';
+text.textContent = 'Hello world!';
 </pre>
 
 <p>Finally add the text element to our svg container and add the svg
@@ -534,13 +536,14 @@ it placed on a server, you can add the URL of the image and then add
 the image to the document as follows:</p>
 
 <pre>
-<b>var</b> img=<b>new</b> Image ( );
-img.src= 'https://i.ytimg.com/vi/zecueq-mo4M/maxresdefault.jpg';
+<b>var</b> img = <b>new</b> Image ( );
+img.src = 'https://i.ytimg.com/vi/zecueq-mo4M/maxresdefault.jpg';
 document.body.appendChild(img);
 </pre>
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch2">Chapter 2: JavaScript Variables</h2>
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <b>variable_name {Required} The name of the variable: used when calling
 it.</b>
 
@@ -702,26 +705,26 @@ for a detailed explanation of the algorithm.</p>
 <p>These examples will help you better understand the isNaN() behavior:</p>
 
 <pre>
-isNaN(<b>NaN</b>);   // true
-isNaN(1);            // false: 1 is a number
-isNaN(-2e-4);              // false: -2e-4 is a number (-0.0002) in scientific notation
+isNaN(<b>NaN</b>);        // true
+isNaN(1);               // false: 1 is a number
+isNaN(-2e-4);            // false: -2e-4 is a number (-0.0002) in scientific notation
 isNaN(<b>Infinity</b>);        // false: Infinity is a number
 isNaN(<b>true</b>);            // false: converted to 1, which is a number
 isNaN(<b>false</b>);           // false: converted to 0, which is a number
 isNaN(<b>null</b>);            // false: converted to 0, which is a number
-isNaN("");                 // false: converted to 0, which is a number
-isNaN("");                 // false: converted to 0, which is a number
-isNaN("45.3");             // false: string representing a number, converted to 45.3
-isNaN("1.2e3");            // false: string representing a number, converted to 1.2e3
-isNaN("Infinity");         // false: string representing a number, converted to Infinity
-isNaN(<b>new</b> Date);    // false: Date object, converted to milliseconds since epoch
-isNaN("10$");        //true : conversion fails, the dollar sign is not a digit
-isNaN("hello");      // true : conversion fails, no digits at all
-isNaN(<b>undefined</b>);   // true : converted to NaN 
-isNaN();             // true : converted to NaN (implicitly undefined)
-isNaN(<b>function</b>(){}); //true : conversion fails
-isNaN({});           // true : conversion fails
-isNaN([1, 2]);       // true : converted to "1, 2", which can't be converted to a number
+isNaN("");              // false: converted to 0, which is a number
+isNaN("");              // false: converted to 0, which is a number
+isNaN("45.3");          // false: string representing a number, converted to 45.3
+isNaN("1.2e3");         // false: string representing a number, converted to 1.2e3
+isNaN("Infinity");      // false: string representing a number, converted to Infinity
+isNaN(<b>new</b> Date);        // false: Date object, converted to milliseconds since epoch
+isNaN("10$");           //true : conversion fails, the dollar sign is not a digit
+isNaN("hello");         // true : conversion fails, no digits at all
+isNaN(<b>undefined</b>);     // true : converted to NaN 
+isNaN();               // true : converted to NaN (implicitly undefined)
+isNaN(<b>function</b>(){});  //true : conversion fails
+isNaN({});            // true : conversion fails
+isNaN([1, 2]);        // true : converted to "1, 2", which can't be converted to a number
 isNaN(&lbrack;&rbrack;) and isNaN (&lbrack;34&rbrack;) both return <b>false</b>, but isNaN
 </pre>
 
