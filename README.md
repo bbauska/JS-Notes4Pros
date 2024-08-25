@@ -2143,94 +2143,77 @@ reverse&quot;zebra&quot;);  // <i>&quot;arbez&quot;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-3">Section 7.3: Comparing Strings Lexicographically</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>To compare strings alphabetically, use
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare">
+localCompare(). This returns a negative value if the reference string is lexicographically 
+(alphabetically) before the compared string (the parameter), a positive value if it comes 
+afterwards, and a value of 0 if they are equal.</p>
+
+<pre>
+<b>var</b> a = &quot;hello&quot;;
+<b>var</b> b = &quot;world&quot;;
+
+console.log(a&period;localeCompare(b)); // <i>-1</i>
+</pre>
   
-  [localeCompare](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare)
+<p>The &gt; and &lt; operators can also be used to compare strings lexicographically, but 
+they cannot return a value of zero (this can be tested with the == equality operator). As 
+a result, a form of the localCompare() function can be written like so:</p>
 
-To compare strings alphabetically, use
-[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare).
-This returns a negative value if the reference string is
-lexicographically (alphabetically) before the compared string (the
-parameter), a positive value if it comes afterwards, and a value of 0
-if they are equal.
-
-<b>var</b>
-a
-=
-&quot;hello&quot;
-;
-<b>var</b>
-b
-=
-&quot;world&quot;
-;
-console.
-log
-(
-a&period;
-localeCompare
-(
-b
-)
-)
-;
-*// -1*
-  
-  localeCompare
-
-The &bsol;and &lt; operators can also be used to compare strings
-lexicographically, but they cannot return a value of zero (this can be
-tested with the == equality operator). As a result, a form of the ()
-function can be written like so:
-
-<b>function</b>
-
-strcmp(a,b){**if**(a===b){**return**0;
+<pre>
+<b>function</b> strcmp(a,b){
+  <b>if</b>(a===b){
+    <b>return</b>0; 
+  }
+  <b>if</b> (a &gt; b) {
+    <b>return</b> 1;
+  }
+  <b>return</b> &minus; 1;
 }
-**if** ( a &gt; b ) { **return** 1 ;
-}
-**return** &minus; 1 ;
-}
-console.log ( strcmp ( &quot;hello&quot; , &quot;world&quot; ) ) ;
-*// -1* console.log ( strcmp ( &quot;hello&quot; , &quot;hello&quot; ) ) ;
-*// 0* console.log ( strcmp ( &quot;world&quot; , &quot;hello&quot; ) ) ;
-*// 1* 
 
-This is especially useful when using a sorting function that compares
-based on the sign of the return value (such as sort).
+console.log (strcmp (&quot;hello&quot;, &quot;world&quot;)); // <i>-1</i>
+console.log (strcmp(&quot;hello&quot;, &quot;hello&quot;));  // <i>0</i>
+console.log (strcmp(&quot;world&quot;, &quot;hello&quot;));  // <i>1</i>
+</pre>
 
-**var** arr = &lbrack; &quot;bananas&quot; , &quot;cranberries&quot; , &quot;apples&quot; &rbrack; ;
-arr.sort ( **function** ( a , b ) { **return** a&period; localeCompare ( b ) ; });
-console.log ( arr ) ;
-*// &lbrack; &quot;apples&quot;, &quot;bananas&quot;, &quot;cranberries&quot; &rbrack;*
+<p>This is especially useful when using a sorting function that compares based on the sign 
+of the return value (such as sort).</p>
 
+<pre>
+<b>var</b> arr = &lbrack; &quot;bananas&quot;, &quot;cranberries&quot;, &quot;apples&quot; &rbrack;;
+arr.sort (<b>function</b>(a, b) {
+  <b>return</b> a&period;localeCompare(b);
+});
+
+console.log(arr);  // <i>&lbrack; &quot;apples&quot;, &quot;bananas&quot;, &quot;cranberries&quot; &rbrack;</i>
+</pre>
+<!-- page 40 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-4">Section 7.4: Access character at index in string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-[charAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt)
-  
-Use
-[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt)
-to get a character at the specified index in the string.
+<p>Use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt">
+charAt()</a> to get a character at the specified index in the string.</p>
 
-**var** string = &quot;Hello, World!&quot; ;
-console.log ( string. charAt ( 4 ) ) ;
+<pre>
+<b>var</b> string = &quot;Hello, World!&quot;;
+console.log( string.charAt(4) ); // <i>&quot;o&quot;</i>
+</pre>
 
-*// &quot;o&quot;*
+<p>Alternatively, because strings can be treated like arrays, use the index via 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">
+bracket notation</a>.</p>
 
-Alternatively, because strings can be treated like arrays, use the
-index via [bracket
-notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors).
-
-**var** string = &quot;Hello, World!&quot; ; 
-console.log ( string &lbrack; 4 &rbrack; );
-*// &quot;o&quot;*
+<pre>
+<b>var</b> string = &quot;Hello, World!&quot;;
+console.log ( string &lbrack;4&rbrack; ); // <i>&quot;o&quot;</i>
+</pre>
 
 [charCodeAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt)
 
 To get the character code of the character at a specified index, use
 [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt).
 
-**var** string = &quot;Hello, World!&quot; ;
+<b>var</b> string = &quot;Hello, World!&quot; ;
 console.log ( string. charCodeAt ( 4 ) ) ;
 
 *// 111*
@@ -2246,11 +2229,11 @@ be used to set a character at a position in the string.
 If your string is enclosed (i.e.) in single quotes you need to escape
 the inner literal quote with *backslash* &bsol;&bsol;
 
-**var**
+<b>var</b>
 text
 =
 &apos;L
-**&amp;amp;apos;**
+<b>&amp;amp;apos;</b>
 albero means tree in Italian&apos;
 ;
 console.
@@ -2262,22 +2245,22 @@ text
 &bsol;&bsol;&bsol;&bsol;
 &quot;L&apos;albero means tree in Italian&quot;
 Same goes for double quotes:
-**var**
+<b>var</b>
 text
 =
 &quot;I feel
-**&amp;amp;quot;**
+<b>&amp;amp;quot;</b>
 high
-**&amp;amp;quot;**
+<b>&amp;amp;quot;</b>
 &quot;
 ;
 Special attention must be given to escaping quotes if you&apos;re storing
 HTML representations within a String, since HTML strings make large
 use of quotations i.e. in attributes:
 
-**var** content = &quot;&lt;p class=**&amp;amp;quot;**special**&amp;amp;quot;**&gt;Hello
-World!&lt;/p&gt;&quot;; *// valid String* **var** hello = &apos;&lt;p
-class=&quot;special&quot;&gt;I**&amp;amp;apos;**d like to say &quot;Hi&quot;&lt;/p&gt;&apos;; *// valid
+<b>var</b> content = &quot;&lt;p class=<b>&amp;amp;quot;</b>special<b>&amp;amp;quot;</b>&gt;Hello
+World!&lt;/p&gt;&quot;; *// valid String* <b>var</b> hello = &apos;&lt;p
+class=&quot;special&quot;&gt;I<b>&amp;amp;apos;</b>d like to say &quot;Hi&quot;&lt;/p&gt;&apos;; *// valid
 String*
   
   apos   ; (or &#  39   ;) as a single quote and &       quot   ; ( or &#  34
@@ -2285,8 +2268,8 @@ String*
 Quotes in HTML strings can also be represented using &;) as double
 quotes.
 
-**var** hi = &quot;&lt;p class=&apos;special&apos;&gt;I&apos;d like to say
-&quot;Hi&quot;&lt;/p&gt;&quot;; *// valid String* **var** hello = &apos;&lt;p
+<b>var</b> hi = &quot;&lt;p class=&apos;special&apos;&gt;I&apos;d like to say
+&quot;Hi&quot;&lt;/p&gt;&quot;; *// valid String* <b>var</b> hello = &apos;&lt;p
 class=&quot;special&quot;&gt;I&apos;d like to say &quot;Hi&quot;&lt;/p&gt;&apos;; *// valid
 String*
   
@@ -2295,15 +2278,15 @@ apos                ; and &                         quot
 *Note:* The use of &; will not overwrite double quotes that browsers
 can automatically place on
 
-  **&lt;p**            **&gt;** being     **&lt;p**   =   &quot;special&quot;   **&gt;**,   quot
+  <b>&lt;p</b>            <b>&gt;</b> being     <b>&lt;p</b>   =   &quot;special&quot;   <b>&gt;</b>,   quot
   class=special      made to          class                       using &   
 
 attribute quotes. For example ; can lead to
 
-  **&lt;p**    =   &quot;&quot;special&quot;&quot;   **&gt;** where &amp;amp;quot;    **&lt;p**    =   &quot;special&quot;
+  <b>&lt;p</b>    =   &quot;&quot;special&quot;&quot;   <b>&gt;</b> where &amp;amp;quot;    <b>&lt;p</b>    =   &quot;special&quot;
   class                            will be              class          
 
-**&gt;**.
+<b>&gt;</b>.
 
 Version ≥ 6
 
@@ -2312,7 +2295,7 @@ literals (*also known as template strings in previous ES6 editions*),
 which do not require you to escape &apos; and &quot;. These use backticks (&grave;)
 instead of single or double quotes.
 
-**var**
+<b>var</b>
 x
 =
 &grave;
@@ -2324,22 +2307,22 @@ and
 <h3 id="ch7-6">Section 7.6: Word Counter</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-  **&lt;textarea**
+  <b>&lt;textarea</b>
 
-Say you have a **&gt;** and you want to retrieve info about the number
+Say you have a <b>&gt;</b> and you want to retrieve info about the number
 of:
 
 Characters (total)
 Characters (no spaces)
 Words
 Lines
-**function**
+<b>function</b>
 wordCount
 (
 val
 )
 {
-**var**
+<b>var</b>
 wom
 =
 val.
@@ -2348,7 +2331,7 @@ match
 */&bsol;&bsol;S+/g*
 )
 ;
-**return**
+<b>return</b>
 {
 charactersNoSpaces
 :
@@ -2359,101 +2342,52 @@ replace
 ,
 &apos;&apos;
 )
-
 .
-
 length
-
 ,
-
 characters
-
 :
-
 val.
-
 length
-
 ,
-
 words
-
 :
-
 wom
-
 ?
-
 wom.
-
 length
-
 :
-
 0
-
 ,
-
 lines
-
 :
-
 val.
-
 split
-
 (
-
 */&bsol;&bsol;r&ast;&bsol;&bsol;n/*
-
 )
-
 .
-
 length
-
 }
-
 ;
-
 }
-
 *// Use like:*
-
 wordCount
-
 (
-
 someMultilineText
-
 )
-
 .
-
 words
-
 ;
-
 *// (Number of words)*
-
 [jsFiddle exampl]{.underline}
-
 [e](http://jsfiddle.net/RokoCB/5nfay7d1/206/)
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-7">Section 7.7: Trim whitespace</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-  
-  String               .   **prototype**                  .   trim
-    -  -
-
-  
-
+String               .   <b>prototype</b>                  .   trim
 To trim whitespace from the edges of a string, use :
->
 &quot; some whitespaced string &quot;.trim(); *// &quot;some whitespaced string&quot;*
->
 Many JavaScript engines, but [not Internet
 Explorer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/TrimLeft#Browser_compatibility),
 have implemented non-standard trimLeft and trimRight methods. There is
@@ -2463,181 +2397,91 @@ currently at Stage 1 of the process, for standardised trimStart and
 trimEnd methods, aliased to trimLeft and trimRight for compatibility.
 
 *// Stage 1 proposal*
-
 &quot; this is me &quot;
-
 .
-
 trimStart
-
 (
-
 )
-
 ;
-
 *// &quot;this is me &quot;*
-
 &quot; this is me &quot;
-
 .
-
 trimEnd
-
 (
-
 )
-
 ;
-
 *// &quot; this is me&quot;*
-
 *// Non-standard methods, but currently implemented by most engines*
-
 &quot; this is me &quot;
-
 .
-
 trimLeft
-
 (
-
 )
-
 ;
-
 *// &quot;this is me &quot;*
-
 &quot; this is me &quot;
-
 .
-
 trimRight
-
 (
-
 )
-
 ;
-
 *// &quot; this is me&quot;*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-8">Section 7.8: Splitting a string into an array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-  
-  split
-  
-
-  
-
+split
 Use . to go from strings to an array of the split substrings:
-
-**var**
-
+<b>var</b>
 s
-
 =
-
 &quot;one, two, three, four, five&quot;
-
 s&period;
-
 split
-
 (
-
 &quot;, &quot;
-
 )
-
 ;
-
 *// &lbrack;&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;, &quot;five&quot;&rbrack;*
-
-  
-  join
-  
-
-  
-
-Use the **array method** . to go back to a string:
-
-s&period;
-
-split
-
-(
-
-&quot;, &quot;
-
-)
-
-.
-
 join
-
+Use the <b>array method</b> . to go back to a string:
+s&period;
+split
 (
-
-&quot;&amp;quot;
-
+&quot;, &quot;
 )
-
+.
+join
+(
+&quot;&amp;quot;
+)
 ;
-
 *// &quot;one&bsol;two&bsol;three&bsol;four&bsol;five&quot;*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-9">Section 7.9: Strings are unicode</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-**All JavaScript strings are unicode!**
-
-**var**
-
+<b>All JavaScript strings are unicode!</b>
+<b>var</b>
 s
-
 =
-
 &quot;some
-
 ∆
-
 ≈
-
 ƒ
-
 unicode
-
 ¡
-
 ™
-
 £
-
 ¢
-
 ¢
-
 ¢
-
 &quot;
-
 ;
-
 s&period;
-
 charCodeAt
-
 (
-
 5
-
 )
-
 ;
-
 *// 8710*
 
 There are no raw byte or binary strings in JavaScript. To effectively
@@ -2646,1217 +2490,631 @@ handle binary data, use Typed Arrays.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-10">Section 7.10: Detecting a string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-To detect whether a parameter is a *primitive* string, use **typeof**:
-
-**var**
-
+To detect whether a parameter is a *primitive* string, use <b>typeof</b>:
+<b>var</b>
 aString
-
 =
-
 &quot;my string&quot;
-
 ;
-
-**var**
-
+<b>var</b>
 anInt
-
 =
-
 5
-
 ;
-
-**var**
-
+<b>var</b>
 anObj
-
 =
-
 {
-
 }
-
 ;
-
-**typeof**
-
+<b>typeof</b>
 aString
-
 ===
-
 &quot;string&quot;
-
 ;
-
 *// true*
-
-**typeof**
-
+<b>typeof</b>
 anInt
-
 ===
-
 &quot;string&quot;
-
 ;
-
 *// false*
-
-**typeof**
-
+<b>typeof</b>
 anObj
-
 ===
-
 &quot;string&quot;
-
 ;
-
 *// false*
-
-  
-  **new** String                      (   &quot;somestr&quot;
-    
-
-  
+<b>new</b> String                      (   &quot;somestr&quot;
 
 If you ever have a String object, via ), then the above will not work.
-In this instance, we can use **instanceof**:
-
-**var**
-
+In this instance, we can use <b>instanceof</b>:
+<b>var</b>
 aStringObj
-
 =
-
-**new**
-
+<b>new</b>
 String
-
 (
-
 &quot;my string&quot;
-
 )
-
 ;
-
 aStringObj
-
-**instanceof**
-
+<b>instanceof</b>
 String
-
 ;
-
 *// true*
-
 To cover both instances, we can write a simple helper function:
-
-**var**
-
+<b>var</b>
 isString
-
 =
-
-**function**
-
+<b>function</b>
 (
-
 value
-
 )
-
 {
-
-**return**
-
-**typeof**
-
+<b>return</b>
+<b>typeof</b>
 value
-
 ===
-
 &quot;string&quot;
-
 &vert;&vert;
-
 value
-
-**instanceof**
-
+<b>instanceof</b>
 String
-
 ;
-
 }
-
 ;
-
-**var**
-
+<b>var</b>
 aString
-
 =
-
 &quot;Primitive String&quot;
-
 ;
-
-**var**
-
+<b>var</b>
 aStringObj
-
 =
-
-**new**
-
+<b>new</b>
 String
-
 (
-
 &quot;String Object&quot;
-
 )
-
 ;
-
 isString
-
 (
-
 aString
-
 )
-
 ;
-
 *// true*
-
 isString
-
 (
-
 aStringObj
-
 )
-
 ;
-
 *// true*
-
 isString
-
 (
-
 {
-
 }
-
 )
-
 ;
-
 *// false*
-
 isString
-
 (
-
 5
-
 )
-
 ;
-
 *// false*
-
 Or we can make use of toString function of Object. This can be useful
 if we have to check for other types as well say in a switch statement,
-as this method supports other datatypes as well just like **typeof**.
->
-**var** pString = &quot;Primitive String&quot;;
->
-**var** oString = **new** String(&quot;Object Form of String&quot;);
->
-Object.**prototype**.toString.call(pString);*//&quot;&lbrack;object String&rbrack;&quot;*
->
-Object.**prototype**.toString.call(oString);*//&quot;&lbrack;object String&rbrack;&quot;*
->
+as this method supports other datatypes as well just like <b>typeof</b>.
+<b>var</b> pString = &quot;Primitive String&quot;;
+<b>var</b> oString = <b>new</b> String(&quot;Object Form of String&quot;);
+Object.<b>prototype</b>.toString.call(pString);*//&quot;&lbrack;object String&rbrack;&quot;*
+Object.<b>prototype</b>.toString.call(oString);*//&quot;&lbrack;object String&rbrack;&quot;*
 A more robust solution is to not *detect* a string at all, rather only
 check for what functionality is required. For example:
-
-**var**
-
+<b>var</b>
 aString
-
 =
-
 &quot;Primitive String&quot;
-
 ;
-
 *// Generic check for a substring method*
-
-**if**
-
+<b>if</b>
 (
-
 aString.
-
 substring
-
 )
-
 {
-
 }
-
 *// Explicit check for the String substring prototype method*
-
-**if**
-
+<b>if</b>
 (
-
 aString.
-
 substring
-
 ===
-
 String
-
 .
-
-**prototype**
-
+<b>prototype</b>
 .
-
 substring
-
 )
-
 {
-
 aString.
-
 substring
-
 (
-
 0
-
 ,
-
 )
-
 ;
-
 }
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-11">Section 7.11: Substrings with slice</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-  
-  slice
-  
-
-  
+slice
 
 Use .() to extract substrings given two indices:
-
-**var**
-
+<b>var</b>
 s
-
 =
-
 &quot;0123456789abcdefg&quot;
-
 ;
-
 s&period;
-
 slice
-
 (
-
 0
-
 ,
-
 5
-
 )
-
 ;
-
 *// &quot;01234&quot;*
-
 s&period;
-
 slice
-
 (
-
 5
-
 ,
-
 6
-
 )
-
 ;
-
 *// &quot;5&quot;*
-
 Given one index, it will take from that index to the end of the
 string:
-
 s&period;
-
 slice
-
 (
-
 10
-
 )
-
 ;
-
 *// &quot;abcdefg&quot;*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-12">Section 7.12: Character code</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 The method charCodeAt retrieves the Unicode character code of a single
-character: **var** charCode = &quot;µ&quot;.charCodeAt(); *// The character
+character: <b>var</b> charCode = &quot;µ&quot;.charCodeAt(); *// The character
 code of the letter* µ *is 181*
-
 To get the character code of a character in a string, the 0-based
 position of the character is passed as a parameter to charCodeAt:
-
-**var** charCode = &quot;ABCDE&quot;.charCodeAt(3); *// The character code of
+<b>var</b> charCode = &quot;ABCDE&quot;.charCodeAt(3); *// The character code of
 &quot;D&quot; is 68*
-
 Version ≥ 6
-
 Some Unicode symbols don&apos;t fit in a single character, and instead
 require two UTF-16 surrogate pairs to encode. This is the case of
 character codes beyond 216 - 1 or 63553. These extended character
 codes or *code point* values can be retrieved with codePointAt:
 
 *// The Grinning Face Emoji has code point 128512 or 0x1F600*
-
-**var**
-
+<b>var</b>
 codePoint
-
 =
-
 &quot;????&quot;
-
 .
-
 codePointAt
-
 (
-
 )
-
 ;
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-13">Section 7.13: String Representations of Numbers</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 JavaScript has native conversion from *Number* to its *String
 representation* for any base from *2 to 36*.
->
+
 The most common representation after *decimal (base 10)* is
 *hexadecimal (base 16)*, but the contents of this section work for all
 bases in the range.
->
+
 In order to convert a *Number* from decimal (base 10) to its
 hexadecimal (base 16) *String representation* the *toString* method
 can be used with *radix 16*.
-
 *// base 10 Number*
-
-**var**
-
+<b>var</b>
 b10
-
 =
-
 12
-
 ;
-
 *// base 16 String representation*
-
-**var**
-
+<b>var<b>
 b16
-
 =
-
 b10.
-
 toString
-
 (
-
 16
-
 )
-
 ;
-
 *// &quot;c&quot;*
-
 If the number represented is an integer, the inverse operation for
 this can be done with parseInt and the *radix 16* again
-
 *// base 16 String representation*
-
-**var**
-
+<b>var</b>
 b16
-
 =
-
 &apos;c&apos;
-
 ;
-
 *// base 10 Number*
-
-**var**
-
+<b>var</b>
 b10
-
 =
-
 parseInt
-
 (
-
 b16
-
 ,
-
 16
-
 )
-
 ;
-
 *// 12*
-
 To convert an arbitrary number (i.e. non-integer) from its *String
 representation* into a *Number*, the operation must be split into two
 parts; the integer part and the fraction part.
-
 Version ≥ 6
-
-**let**
-
+<b>let</b>
 b16
-
 =
-
 &apos;3.243f3e0370cdc&apos;
-
 ;
-
 *// Split into integer and fraction parts*
-
-**let**
-
+<b>let</b>
 &lbrack;
-
 i16
-
 ,
-
 f16
-
 &rbrack;
-
 =
-
 b16.
-
 split
-
 (
-
 &apos;.&apos;
-
 )
-
 ;
-
 *// Calculate base 10 integer part*
-
-**let**
-
+<b>let</b>
 i10
-
 =
-
 parseInt
-
 (
-
 i16
-
 ,
-
 16
-
 )
-
 ;
-
 *// 3*
-
 *// Calculate the base 10 fraction part*
-
-**let**
-
+<b>let</b>
 f10
-
 =
-
 parseInt
-
 (
-
 f16
-
 ,
-
 16
-
 )
-
 /
-
 Math
-
 .
-
 pow
-
 (
-
 16
-
 ,
-
 f16.
-
 length
-
 )
-
 ;
-
 *// 0.14158999999999988*
-
 *// Put the base 10 parts together to find the Number*
-
-**let**
-
+<b>let</b>
 b10
-
 =
-
 i10
-
 &plus;
-
 f10
-
 ;
-
 *// 3.14159*
 
-**Note 1:** Be careful as small errors may be in the result due to
+<b>Note 1:</b> Be careful as small errors may be in the result due to
 differences in what is possible to be represented in different bases.
 It may be desirable to perform some kind of rounding afterwards.
->
-**Note 2:** Very long representations of numbers may also result in
+
+<b>Note 2:</b> Very long representations of numbers may also result in
 errors due to the accuracy and maximum values of *Numbers* of the
 environment the conversions are happening in.
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-14">Section 7.14: String Find and Replace Functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 To search for a string inside a string, there are several functions:
-
-  
-  [**indexOf**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [**(**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [**searchString**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   **[)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [**lastIndexOf**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)   [**(**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)   [**searchString**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
-                                                                                                                                                                                                                                                                                                                                                    and**                                                                                                                                                                                                                                                                                                                                            
-        
-
-  
-
-[**)**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
-
-  
-  indexOf
-  
-
-  
-
+ 
+[<b>indexOf</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [<b>(</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [<b>searchString</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   <b>[)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [</b>lastIndexOf<b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)   [</b>(<b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)   [</b>searchString<b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
+[<b>)</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
+indexOf
 () will return the index of the first occurrence of searchString in
 the string. If searchString is not found, then -1 is returned.
-
-**var**
-
+<b>var</b>
 string
-
 =
-
 &quot;Hello, World!&quot;
-
 ;
-
 console.
-
 log
-
 (
-
 string.
-
 indexOf
-
 (
-
 &quot;o&quot;
-
 )
-
 )
-
 ;
-
 *// 4*
-
 console.
-
 log
-
 (
-
 string.
-
 indexOf
-
 (
-
 &quot;foo&quot;
-
 )
-
 )
-
 ;
-
 *// -1*
-
-  
-  lastIndexOf
-  
-
-  
-
+ 
+lastIndexOf
 Similarly, () will return the index of the last occurrence of
 searchstring or -1 if not found.
-
-**var**
-
+<b>var</b>
 string
-
 =
-
 &quot;Hello, World!&quot;
-
 ;
-
 console.
-
 log
-
 (
-
 string.
-
 lastIndexOf
-
 (
-
 &quot;o&quot;
-
 )
-
 )
-
 ;
-
 *// 8*
-
 console.
-
 log
-
 (
-
 string.
-
 lastIndexOf
-
 (
-
 &quot;foo&quot;
-
 )
-
 )
-
 ;
-
 *// -1*
+[<b>includes</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>(</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>searchString</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>,</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>start</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
 
-  
-  [**includes**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [**(**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [**searchString**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [**,**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [**start**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
-   -  - -
+[<b>)</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
 
-  
-
-[**)**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
-
-  
   includes
-  
-
-  
-
-  
   indexOf
-  
-
-  
 
 () will return a boolean that tells whether searchString exists in the
 string, starting from index start (defaults to 0). This is better than
 () if you simply need to test for existence of a substring.
 
-**var**
-
+<b>var</b>
 string
-
 =
-
 &quot;Hello, World!&quot;
-
 ;
-
 console.
-
 log
-
 (
-
 string.
-
 includes
-
 (
-
 &quot;Hello&quot;
-
 )
-
 )
-
 ;
-
 *// true*
-
 console.
-
 log
-
 (
-
 string.
-
 includes
-
 (
-
 &quot;foo&quot;
-
 )
-
 )
-
 ;
-
 *// false*
-
-  -
-  [**replace**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [**(**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [**regexp**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [**&vert;**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [**substring**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [**,**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [**replacement**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [**&vert;**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [**replaceFunction**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
-    - -   - - 
-
-  -
-
-[**)**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
-
+  [<b>replace</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>(</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>regexp</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>&vert;</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>substring</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>,</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>replacement</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>&vert;</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>replaceFunction</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
+[<b>)</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
   
-  replace
-  
-
-  
+replace
 
 () will return a string that has all occurrences of substrings
 matching the
 [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
 regexp or string substring with a string replacement or the returned
 value of replaceFunction.
->
+
 Note that this does not modify the string in place, but returns the
 string with replacements.
 
-**var**
-
+<b>var</b>
 string
-
 =
-
 &quot;Hello, World!&quot;
-
 ;
-
 string
-
 =
-
 string.
-
 replace
-
 (
-
 &quot;Hello&quot;
-
 ,
-
 &quot;Bye&quot;
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 string
-
 )
-
 ;
-
 *// &quot;Bye, World!&quot;*
-
 string
-
 =
-
 string.
-
 replace
-
 (
-
 */W.{3}d/g*
-
 ,
-
 &quot;Universe&quot;
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 string
-
 )
-
 ;
-
 *// &quot;Bye, Universe!&quot;*
-
 replaceFunction can be used for conditional replacements for regular
 expression objects (i.e., with use with regexp). The parameters are in
 the following order:
 
-**Parameter Meaning**
-
+<b>Parameter Meaning</b>
 match the substring that matches the entire regular expressiong g1,
 g2, g3, &hellip; the matching groups in the regular expression offset the
 offset of the match in the entire string string the entire string
->
+
 Note that all parameters are optional.
-
-**var**
-
+<b>var</b>
 string
-
 =
-
 &quot;heLlo, woRlD!&quot;
-
 ;
-
 string
-
 =
-
 string.
-
 replace
-
 (
-
 */(&lbrack;a-zA-Z&rbrack;)(&lbrack;a-zA-Z&rbrack;+)/g*
-
 ,
-
-**function**
-
+<b>function</b>
 (
-
 match
-
 ,
-
 g1
-
 ,
-
 g2
-
 )
-
 {
-
-**return**
-
+<b>return</b>
 g1.
-
 toUpperCase
-
 (
-
 )
-
 &plus;
-
 g2.
-
 toLowerCase
-
 (
-
 )
-
 ;
-
 }
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 string
-
 )
-
 ;
-
 *// &quot;Hello, World!&quot;*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-15">Section 7.15: Find the index of a substring inside a string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-  
-  indexOf
-  
-
-  
-
+indexOf
 The . method returns the index of a substring inside another string
 (if exists, or -1 if otherwise)
-
 &apos;Hellow World&apos;
-
 .
-
 indexOf
-
 (
-
 &apos;Wor&apos;
-
 )
-
 ;
-
 *// 7*
-
-  
-  indexOf
-  
-
-  
-
+indexOf
 . also accepts an additional numeric argument that indicates on what
 index should the function start looking
-
 &quot;harr dee harr dee harr&quot;
-
 .
-
 indexOf
-
 (
-
 &quot;dee&quot;
-
 ,
-
 10
-
 )
-
 ;
-
 *// 14*
-
-  
-  indexOf
-  
-
-  
-
-You should note that . is case sensitive
-
-&apos;Hellow World&apos;
-
-.
-
 indexOf
-
+You should note that . is case sensitive
+&apos;Hellow World&apos;
+.
+indexOf
 (
-
 &apos;WOR&apos;
-
 )
-
 ;
-
 *// -1*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-16">Section 7.16: String to Upper Case</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 String.prototype.toUpperCase():
-
 console.
-
 log
-
 (
-
 &apos;qwerty&apos;
-
 .
-
 toUpperCase
-
 (
-
 )
-
 )
-
 ;
-
 *// &apos;QWERTY&apos;*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-17">Section 7.17: String to Lower Case</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 String.prototype.toLowerCase()
-
 console.
-
 log
-
 (
-
 &apos;QWERTY&apos;
-
 .
-
 toLowerCase
-
 (
-
 )
-
 )
-
 ;
-
 *// &apos;qwerty&apos;*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-18">Section 7.18: Repeat a String</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 Version ≥ 6
 
 This can be done using the
@@ -3864,155 +3122,83 @@ This can be done using the
 method:
 
 &quot;abc&quot;
-
 .
-
 repeat
-
 (
-
 3
-
 )
-
 ;
-
 *// Returns &quot;abcabcabc&quot;*
-
 &quot;abc&quot;
-
 .
-
 repeat
-
 (
-
 0
-
 )
-
 ;
-
 *// Returns &quot;&quot;*
-
 &quot;abc&quot;
-
 .
-
 repeat
-
 (
-
 &minus;
-
 1
-
 )
-
 ;
-
 *// Throws a RangeError*
-
 Version
-
 &lt;
-
 6
-
 In the general case, this should be done using a correct polyfill for
 the ES6
 [String.prototype.repeat()](http://www.ecma-international.org/ecma-262/6.0/#sec-string.prototype.repeat)
 method.
-
 Otherwise, the idiom
-
-**new**
-
+<b>new</b>
 Array
-
 (
-
 n
-
 &plus;
-
 1
-
 )
-
 .
-
 join
-
 (
-
 myString
-
 )
-
 can repeat
-
 n
-
 times the string
-
 myString
-
 :
-
-**var**
-
+<b>var</b>
 myString
-
 =
-
 &quot;abc&quot;
-
 ;
-
-**var**
-
+<b>var</b>
 n
-
 =
-
 3
-
 ;
-
-**new**
-
+<b>new</b>
 Array
-
 (
-
 n
-
 &plus;
-
 1
-
 )
-
 .
-
 join
-
 (
-
 myString
-
 )
-
 ;
-
 *// Returns &quot;abcabcabc&quot;*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch8">Chapter 8: Date</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-**Parameter Details**
+<b>Parameter Details</b>
 
 value The number of milliseconds since 1 January 1970 00:00:00.000 UTC
 (Unix epoch) dateAsString A date formatted as a string (see examples
@@ -4036,36 +3222,11 @@ range for this and the
 month following parameters will not result in an error, but rather
 cause the resulting date to &quot;roll over&quot; to the next value. See the
 examples.
-
-  
   31
-  
-
-  
-
-  
   23
-  
-
-  
-
-  
   59
-  
-
-  
-
-  
   59
-  
-
-  
-
-  
   999
-  
-
-  
 
 day Optional: The date, in the range 1-. hour Optional: The hour, in
 the range 0-. minute Optional: The minute, in the range 0-. second
@@ -4075,354 +3236,213 @@ millisecond, in the range 0-.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-1">Section 8.1: Create a new Date object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-  
-  Date
-  
-
-  
-
+Date
 To create a new Date object use the () constructor:
->
-**with no arguments**
 
-  
+<b>with no arguments</b>
   Date
-  
-
-  
-
 () creates a Date instance containing the current time (up to
 milliseconds) and date.
->
-**with one integer argument**
 
-  
+<b>with one integer argument</b>
   Date
-  
-
-  
-
-  -
-  **new** Date                (   749019369738
-    -
-
-  -
+<b>new</b> Date                (   749019369738
 
 &lpar;m&rpar; creates a Date instance containing the time and date
 corresponding to the Epoch time (1 January, 1970 UTC) plus m
 milliseconds. Example: ) gives the date *Sun, 26 Sep 1993 04:56:09
 GMT*.
->
-**with a string argument**
-
-  
+<b>with a string argument</b>
   Date   (   dateString   ) returns the Date object that results after      Date   .   parse
                           parsing dateString with                                      
-        -
-
-  
-
 .
-
-**with two or more integer arguments**
-
-  
+<b>with two or more integer arguments</b>
   Date       (   i1    ,   i2      ,   i3      ,   i4      ,   i5      ,   i6
-  -  -  -  -  -  -  -
-
-  
-
 ) reads the arguments as year, month, day, hours, minutes, seconds,
-
-  
-  **new** Date                                (     2017
-   - 
-
-  
-
+  <b>new</b> Date                                (     2017
 milliseconds and instantiates the corresponding Dateobject. Note that
 the month is 0-indexed in JavaScript, so 0 means January and 11 means
 December. Example: , 5, 1) gives *June 1st, 2017*.
->
-**Exploring dates**
->
+
+<b>Exploring dates</b>
+
 Note that these examples were generated on a browser in the Central
 Time Zone of the US, during Daylight Time,
 
-  
-  Date       .   **prototype**            .   toISOString
-  -  -  -
-
-  
+Date       .   <b>prototype</b>            .   toISOString
 
 as evidenced by the code. Where comparison with UTC was instructive,
 () was used to show the date and time in UTC (the Z in the formatted
 string denotes UTC).
->
+
 *// Creates a Date object with the current date and time from the //
-user&apos;s browser* **var** now = **new** Date(); now.toString() ===
+user&apos;s browser* <b>var</b> now = <b>new</b> Date(); now.toString() ===
 &apos;Mon Apr 11 2016 16:10:41 GMT-0500 (Central Daylight Time)&apos; *//
 true*
->
+
 *// well, at the time of this writing, anyway*
->
+
 *// Creates a Date object at the Unix Epoch (i.e.,
-&apos;1970-01-01T00:00:00.000Z&apos;)* **var** epoch = **new** Date(0);
+&apos;1970-01-01T00:00:00.000Z&apos;)* <b>var</b> epoch = <b>new</b> Date(0);
 epoch.toISOString() === &apos;1970-01-01T00:00:00.000Z&apos; *// true*
->
+
 *// Creates a Date object with the date and time 2,012 milliseconds //
-after the Unix Epoch (i.e., &apos;1970-01-01T00:00:02.012Z&apos;).* **var** ms
-= **new** Date(2012); date2012.toISOString() ===
+after the Unix Epoch (i.e., &apos;1970-01-01T00:00:02.012Z&apos;).* <b>var</b> ms
+= <b>new</b> Date(2012); date2012.toISOString() ===
 &apos;1970-01-01T00:00:02.012Z&apos; *// true*
->
+
 *// Creates a Date object with the first day of February of the year
-2012 // in the local timezone.* **var** one = **new** Date(2012, 1);
+2012 // in the local timezone.* <b>var</b> one = <b>new</b> Date(2012, 1);
 one.toString() === &apos;Wed Feb 01 2012 00:00:00 GMT-0600 (Central
 Standard Time)&apos; *// true*
->
+
 *// Creates a Date object with the first day of the year 2012 in the
-local // timezone. // (Months are zero-based)* **var** zero = **new**
+local // timezone. // (Months are zero-based)* <b>var</b> zero = <b>new</b>
 Date(2012, 0); zero.toString() === &apos;Sun Jan 01 2012 00:00:00 GMT-0600
 (Central Standard Time)&apos; *// true*
->
+
 *// Creates a Date object with the first day of the year 2012, in
-UTC.* **var** utc = **new** Date(Date.UTC(2012, 0)); utc.toString()
+UTC.* <b>var</b> utc = <b>new</b> Date(Date.UTC(2012, 0)); utc.toString()
 === &apos;Sat Dec 31 2011 18:00:00 GMT-0600 (Central Standard Time)&apos;
->
+
 *// true* utc.toISOString() === &apos;2012-01-01T00:00:00.000Z&apos;
->
+
 *// true*
->
+
 *// Parses a string into a Date object (ISO 8601 format added in
 ECMAScript 5.1) // Implementations should assumed UTC because of ISO
-8601 format and Z designation* **var** iso = **new**
+8601 format and Z designation* <b>var</b> iso = <b>new</b>
 Date(&apos;2012-01-01T00:00:00.000Z&apos;); iso.toISOString() ===
 &apos;2012-01-01T00:00:00.000Z&apos; *// true*
->
+
 *// Parses a string into a Date object (RFC in JavaScript 1.0)*
-**var** local = **new** Date(&apos;Sun, 01 Jan 2012 00:00:00 -0600&apos;);
+<b>var</b> local = <b>new</b> Date(&apos;Sun, 01 Jan 2012 00:00:00 -0600&apos;);
 local.toString() === &apos;Sun Jan 01 2012 00:00:00 GMT-0600 (Central
 Standard Time)&apos; *// true*
->
+
 *// Parses a string in no particular format, most of the time. Note
 that parsing*
->
+
 *// logic in these cases is very implementation-dependent, and
 therefore can vary // across browsers and versions.*
->
-**var** anything = **new** Date(&apos;11/12/2012&apos;); anything.toString()
+
+<b>var</b> anything = <b>new</b> Date(&apos;11/12/2012&apos;); anything.toString()
 === &apos;Mon Nov 12 2012 00:00:00 GMT-0600 (Central Standard Time)&apos; *//
 true, in Chrome 49 64-bit on Windows 10 in the en-US locale. Other
 versions in // other locales may get a different result.*
->
+
 *// Rolls values outside of a specified range to the next value.*
->
-**var** rollover = **new** Date(2012, 12, 32, 25, 62, 62, 1023);
+
+<b>var</b> rollover = <b>new</b> Date(2012, 12, 32, 25, 62, 62, 1023);
 rollover.toString() === &apos;Sat Feb 02 2013 02:03:03 GMT-0600 (Central
 Standard Time)&apos; *// true; note that the month rolled over to Feb;
 first the month rolled over to*
->
+
 *// Jan based on the month 12 (11 being December), then again because
 of the day 32 // (January having 31 days).*
 
 *// Special dates for years in the range 0-99*
 
-**var**
-
+<b>var</b>
 special1
-
 =
-
-**new**
-
+<b>new</b>
 Date
-
 (
-
 12
-
 ,
-
 0
-
 )
-
 ;
-
 special1.
-
 toString
-
 (
-
 )
-
 ===
-
 &apos;Mon Jan 01 1912 00:00:00 GMT-0600 (Central Standard Time)&grave;
-
 // true
-
 // If you actually wanted to set the year to the year 12 CE, you&apos;
-
 d need to use the
-
 *// setFullYear() method:*
-
 special1.
-
 setFullYear
-
 (
-
 12
-
 )
-
 ;
-
 special1.
-
 toString
-
 (
-
 )
-
 ===
-
 &apos;Sun Jan 01 12 00:00:00 GMT-0600 (Central Standard Time)&grave;
-
 // true
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-2">Section 8.2: Convert to a string format</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-**Convert to String**
-
-**var**
-
+<b>Convert to String</b>
+<b>var</b>
 date1
-
 =
-
-**new**
-
+<b>new</b>
 Date
-
 (
-
 )
-
 ;
-
 date1.
-
 toString
-
 (
-
 )
-
 ;
-
 Returns: &quot;Fri Apr 15 2016 07:48:48 GMT-0400 (Eastern Daylight Time)&quot;
-
-**Convert to Time String**
-
-**var**
-
+<b>Convert to Time String</b>
+<b>var</b>
 date1
-
 =
-
-**new**
-
+<b>new</b>
 Date
-
 (
-
 )
-
 ;
-
 date1.
-
 toTimeString
-
 (
-
 )
-
 ;
-
 Returns: &quot;07:48:48 GMT-0400 (Eastern Daylight Time)&quot;
-
-**Convert to Date String**
-
-**var**
-
+<b>Convert to Date String</b>
+<b>var</b>
 date1
-
 =
-
-**new**
-
+<b>new</b>
 Date
-
 (
-
 )
-
 ;
-
 date1.
-
 toDateString
-
 (
-
 )
-
 ;
-
 Returns: &quot;Thu Apr 14 2016&quot;
-
-**Convert to UTC String**
-
-**var**
-
-date1 = **new** Date ( );
-
+<b>Convert to UTC String</b>
+<b>var</b>
+date1 = <b>new</b> Date ( );
 date1.toUTCString ( );
-
 Returns: &quot;Fri, 15 Apr 2016 11:48:48 GMT&quot;
-
-**Convert to ISO String**
-
-**var** date1 = **new** Date ( ) ;
-
+<b>Convert to ISO String</b>
+<b>var</b> date1 = <b>new</b> Date ( ) ;
 date1.toISOString ( ) ;
-
 Returns: &quot;2016-04-14T23:49:08.596Z&quot;
-
-**Convert to GMT String**
-
-**var** date1 = **new** Date ( ) ;
-
+<b>Convert to GMT String</b>
+<b>var</b> date1 = <b>new</b> Date ( ) ;
 date1.toGMTString ( ) ;
-
 Returns: &quot;Thu, 14 Apr 2016 23:49:08 GMT&quot;
-
 This function has been marked as deprecated so some browsers may not
 support it in the future. It is suggested to use toUTCString()
 instead.
-
-**Convert to Locale Date String**
-
-**var** date1 = **new** Date ( ) ;
+<b>Convert to Locale Date String</b>
+<b>var</b> date1 = <b>new</b> Date ( ) ;
 
 date1.toLocaleDateString ( ) ;
 
@@ -4442,7 +3462,7 @@ would attempt to print the string in the Chinese locale using United
 States English as a fallback. The options parameter can be used to
 provide specific formatting. For example:
 
-**var** options = { weekday: &apos;long&apos;, year: &apos;numeric&apos;, month:
+<b>var</b> options = { weekday: &apos;long&apos;, year: &apos;numeric&apos;, month:
 &apos;long&apos;, day: &apos;numeric&apos; }; date1.toLocaleDateString(&lbrack;&rbrack;, options);
 would result in
 
@@ -4462,7 +3482,7 @@ a client that do not reside in the same timezone. In this scenario,
 one doesn&apos;t want to worry about timezones at all until the date needs
 to be displayed in local time, if that is even required at all.
 
-**The problem**
+<b>The problem</b>
 
 In this problem we want to communicate a specific date (day, month,
 year) with someone in a different timezone. The first implementation
@@ -4470,1109 +3490,561 @@ naively uses local times, which results in wrong results. The second
 implementation uses UTC dates to avoid timezones where they are not
 needed.
 
-**Naive approach with WRONG results**
+<b>Naive approach with WRONG results</b>
 
-**function**
-
+<b>function</b>
 formatDate
-
 (
-
 dayOfWeek
-
 ,
-
 day
-
 ,
-
 month
-
 ,
-
 year
-
 )
-
 {
-
-**var**
-
+<b>var</b>
 daysOfWeek
-
 =
-
 &lbrack;
-
 &quot;Sun&quot;
-
 ,
-
 &quot;Mon&quot;
-
 ,
-
 &quot;Tue&quot;
-
 ,
-
 &quot;Wed&quot;
-
 ,
-
 &quot;Thu&quot;
-
 ,
-
 &quot;Fri&quot;
-
 ,
-
 &quot;Sat&quot;
-
 &rbrack;
-
 ;
-
-**var**
-
+<b>var</b>
 months
-
 =
-
 &lbrack;
-
 &quot;Jan&quot;
-
 ,
-
 &quot;Feb&quot;
-
 ,
-
 &quot;Mar&quot;
-
 ,
-
 &quot;Apr&quot;
-
 ,
-
 &quot;May&quot;
-
 ,
-
 &quot;Jun&quot;
-
 ,
-
 &quot;Jul&quot;
-
 ,
-
 &quot;Aug&quot;
-
 ,
-
-&quot;Sep&quot;
-
+quot;Sep&quot;
 ,
-
 &quot;Oct&quot;
-
 ,
-
 &quot;Nov&quot;
-
 ,
-
 &quot;Dec&quot;
-
 &rbrack;
-
 ;
-
-**return**
-
+<b>return</b>
 daysOfWeek
-
 &lbrack;
-
 dayOfWeek
-
 &rbrack;
-
 &plus;
-
 &quot; &quot;
-
 &plus;
-
 months
-
 &lbrack;
-
 month
-
 &rbrack;
-
 &plus;
-
 &quot; &quot;
-
 &plus;
-
 day
-
 &plus;
-
 &quot; &quot;
-
 &plus;
-
 year
-
 ;
-
 }
-
 *//Foo lives in a country with timezone GMT + 1*
-
-**var**
-
+<b>var</b>
 birthday
-
 =
-
-**new**
-
+<b>new</b>
 Date
-
 (
-
 2000
-
 ,
-
 0
-
 ,
-
 1
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 &quot;Foo was born on: &quot;
-
 &plus;
-
 formatDate
-
 (
-
 birthday.
-
 getDay
-
 (
-
 )
-
 ,
-
 birthday.
-
 getDate
-
 (
-
 )
-
 ,
-
 birthday.
-
 getMonth
-
 (
-
 )
-
 ,
-
 birthday.
-
 getFullYear
-
 (
-
 )
-
 )
-
 )
-
 ;
-
 sendToBar
-
 (
-
 birthday.
-
 getTime
-
 (
-
 )
-
 )
-
 ;
-
 Sample output:
-
 Foo was born on: Sat Jan 1 2000
-
 *//Meanwhile somewhere else&hellip;*
-
 *//Bar lives in a country with timezone GMT - 1*
-
-**var**
-
+<b>var</b>
 birthday
-
 =
-
-**new**
-
+<b>new</b>
 Date
-
 (
-
 receiveFromFoo
-
 (
-
 )
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 &quot;Foo was born on: &quot;
-
 &plus;
-
 formatDate
-
 (
-
 birthday.
-
 getDay
-
 (
-
 )
-
 ,
-
 birthday.
-
 getDate
-
 (
-
 )
-
 ,
-
 birthday.
-
 getMonth
-
 (
-
 )
-
 ,
-
 birthday.
-
 getFullYear
-
 (
-
 )
-
 )
-
 )
-
 ;
-
 Sample output:
-
 Foo was born on: Fri Dec 31 1999
-
 And thus, Bar would always believe Foo was born on the last day of
 1999.
->
-**Correct approach**
-
-**function**
-
+<b>Correct approach</b>
+<b>function</b>
 formatDate
-
 (
-
 dayOfWeek
-
 ,
-
 day
-
 ,
-
 month
-
 ,
-
 year
-
 )
-
 {
-
-**var**
-
+<b>var</b>
 daysOfWeek
-
 =
-
 &lbrack;
-
 &quot;Sun&quot;
-
 ,
-
 &quot;Mon&quot;
-
 ,
-
 &quot;Tue&quot;
-
 ,
-
 &quot;Wed&quot;
-
 ,
-
 &quot;Thu&quot;
-
 ,
-
 &quot;Fri&quot;
-
 ,
-
 &quot;Sat&quot;
-
 &rbrack;
-
 ;
-
-**var**
-
+<b>var</b>
 months
-
 =
-
 &lbrack;
-
 &quot;Jan&quot;
-
 ,
-
 &quot;Feb&quot;
-
 ,
-
 &quot;Mar&quot;
-
 ,
-
 &quot;Apr&quot;
-
 ,
-
 &quot;May&quot;
-
 ,
-
 &quot;Jun&quot;
-
 ,
-
 &quot;Jul&quot;
-
 ,
-
 &quot;Aug&quot;
-
 ,
-
 &quot;Sep&quot;
-
 ,
-
 &quot;Oct&quot;
-
 ,
-
 &quot;Nov&quot;
-
 ,
-
 &quot;Dec&quot;
-
 &rbrack;
-
 ;
-
-**return**
-
+<b>return</b>
 daysOfWeek
-
 &lbrack;
-
 dayOfWeek
-
 &rbrack;
-
 &plus;
-
 &quot; &quot;
-
 &plus;
-
 months
-
 &lbrack;
-
 month
-
 &rbrack;
-
 &plus;
-
 &quot; &quot;
-
 &plus;
-
 day
-
 &plus;
-
 &quot; &quot;
-
 &plus;
-
 year
-
 ;
-
 }
-
 *//Foo lives in a country with timezone GMT + 1*
-
-**var**
-
+<b>var</b>
 birthday
-
 =
-
-**new**
-
+<b>new</b>
 Date
-
 (
-
 Date
-
 .
-
 UTC
-
 (
-
 2000
-
 ,
-
 0
-
 ,
-
 1
-
 )
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 &quot;Foo was born on: &quot;
-
 &plus;
-
 formatDate
-
 (
-
 birthday.
-
 getUTCDay
-
 (
-
 )
-
 ,
-
 birthday.
-
 getUTCDate
-
 (
-
 )
-
 ,
-
 birthday.
-
 getUTCMonth
-
 (
-
 )
-
 ,
-
 birthday.
-
 getUTCFullYear
-
 (
-
 )
-
 )
-
 )
-
 ;
-
 sendToBar
-
 (
-
 birthday.
-
 getTime
-
 (
-
 )
-
 )
-
 ;
-
 Sample output:
-
 Foo was born on: Sat Jan 1 2000
-
 *//Meanwhile somewhere else&hellip;*
-
 *//Bar lives in a country with timezone GMT - 1*
-
-**var**
-
+<b>var</b>
 birthday
-
 =
-
-**new**
-
+<b>new</b>
 Date
-
 (
-
 receiveFromFoo
-
 (
-
 )
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 &quot;Foo was born on: &quot;
-
 &plus;
-
 formatDate
-
 (
-
 birthday.
-
 getUTCDay
-
 (
-
 )
-
 ,
-
 birthday.
-
 getUTCDate
-
 (
-
 )
-
 ,
-
 birthday.
-
 getUTCMonth
-
 (
-
 )
-
 ,
-
 birthday.
-
 getUTCFullYear
-
 (
-
 )
-
 )
-
 )
-
 ;
-
 Sample output:
-
 Foo was born on: Sat Jan 1 2000
-
-**Creating a Date from UTC**
-
+<b>Creating a Date from UTC</b>
   
   Date                    .     UTC               (     &hellip;
-   -  - 
-
-  
 
 If one wants to create a Date object based on UTC or GMT, the ) method
 can be used. It uses the same arguments as the longest Date
 constructor. This method will return a number representing the time
 that has passed since January 1, 1970, 00:00:00 UTC.
-
 console.
-
 log
-
 (
-
 Date
-
 .
-
 UTC
-
 (
-
 2000
-
 ,
-
 0
-
 ,
-
 31
-
 ,
-
 12
-
 )
-
 )
-
 ;
-
 Sample output:
-
 949320000000
-
-**var**
-
+<b>var</b>
 utcDate
-
 =
-
-**new**
-
+<b>new</b>
 Date
-
 (
-
 Date
-
 .
-
 UTC
-
 (
-
 2000
-
 ,
-
 0
-
 ,
-
 31
-
 ,
-
 12
-
 )
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 utcDate
-
 )
-
 ;
-
 Sample output:
-
 Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
-
 Unsurprisingly, the difference between UTC time and local time is, in
 fact, the timezone offset converted to milliseconds.
-
-**var**
-
+<b>var</b>
 utcDate
-
 =
-
-**new**
-
+<b>new</b>
 Date
-
 (
-
 Date
-
 .
-
 UTC
-
 (
-
 2000
-
 ,
-
 0
-
 ,
-
 31
-
 ,
-
 12
-
 )
-
 )
-
 ;
-
-**var**
-
+<b>var</b>
 localDate
-
 =
-
-**new**
-
+<b>new</b>
 Date
-
 (
-
 2000
-
 ,
-
 0
-
 ,
-
 31
-
 ,
-
 12
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 localDate
-
 &minus;
-
 utcDate
-
 ===
-
 utcDate.
-
 getTimezoneOffset
-
 (
-
 )
-
 &ast;
-
 60
-
 &ast;
-
 1000
-
 )
-
 ;
-
 Sample output:
-
-**true**
-
-**Changing a Date object**
-
-  
+<b>true</b>
+<b>Changing a Date object</b>
   setDate         (   &hellip;   ) and       setFullYear              (   &hellip;
-      -  
-
-  
-
 All Date object modifiers, such as ) have an equivalent takes an
 argument in
->
 UTC time rather than in local time.
-
-**var**
-
+<b>var</b>
 date
-
 =
-
-**new**
-
+<b>new</b>
 Date
-
 (
-
 )
-
 ;
-
 date.
-
 setUTCFullYear
-
 (2000, 0, 31);
-
 date.setUTCHours ( 12 , 0 , 0 , 0);
-
 console.log ( date ) ;
-
 Sample output:
-
 Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
-
-  -
   setUTCMonth                     (), .       setUTCDate
-    
-
-  -
 
 The other UTC-specific modifiers are .() (for the day of the month),
-
-  
   setUTCMinutes    (), . setUTCSeconds    () and .  setUTCMilliseconds
-  - - -  
-
-  
-
 .().
 
-**Avoiding ambiguity with getTime() and setTime()**
->
+<b>Avoiding ambiguity with getTime() and setTime()</b>
+
 Where the methods above are required to differentiate between
 ambiguity in dates, it is usually easier to communicate a date as the
 amount of time that has passed since January 1, 1970, 00:00:00 UTC.
 This single number represents a single point in time, and can be
 converted to local time whenever necessary.
-
-**var**
-
+<b>var</b>
 date
-
 =
-
-**new**
-
+<b>new</b>
 Date
-
 (
-
 Date
-
 .
-
 UTC
-
 (
-
 2000
-
 ,
-
 0
-
 ,
-
 31
-
 ,
-
 12
-
 )
-
 )
-
 ;
-
-**var**
-
+<b>var</b>
 timestamp
-
 =
-
 date.
-
 getTime
-
 (
-
 )
-
 ;
-
 *//Alternatively*
-
-**var**
-
+<b>var</b>
 timestamp2
-
 =
-
 Date
-
 .
-
 UTC
-
 ( 2000, 0, 31, 12);
-
 console.log ( timestamp === timestamp2 );
-
 Sample output:
-
-**true**
-
+<b>true</b>
 *//And when constructing a date from it elsewhere&hellip;*
-
-**var**
-
+<b>var</b>
 otherDate
-
-= **new** Date ( timestamp ) ; 
+= <b>new</b> Date ( timestamp ) ; 
 *//Represented as a universal date*
 console.log ( otherDate. toUTCString ( ) );
 *//Represented as a local date*
@@ -5585,8 +4057,8 @@ Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
 <h3 id="ch8-4">Section 8.4: Formatting a JavaScript date</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-**Formatting a JavaScript date in modern browsers**
-  [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [**prototype**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [toLocaleDateString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
+<b>Formatting a JavaScript date in modern browsers</b>
+  [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [toLocaleDateString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
 
 In modern browsers (&ast;),
 [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
@@ -5602,31 +4074,27 @@ or an array of such strings.
 The options parameter should be an object with some or all of the
 following properties:
 
-**localeMatcher** : possible values are &quot;lookup&quot; and &quot;best fit&quot;;
-the default is &quot;best fit&quot; **timeZone** : the only value
+<b>localeMatcher</b> : possible values are &quot;lookup&quot; and &quot;best fit&quot;;
+the default is &quot;best fit&quot; <b>timeZone</b> : the only value
 implementations must recognize is &quot;UTC&quot;; the default is the
-runtime&apos;s default time zone **hour12** :possible values are **true**
-and **false**; the default is locale dependent **formatMatcher** :
+runtime&apos;s default time zone <b>hour12</b> :possible values are <b>true</b>
+and <b>false</b>; the default is locale dependent <b>formatMatcher</b> :
 possible values are &quot;basic&quot; and &quot;best fit&quot;; the default is &quot;best
-fit&quot; **weekday** : possible values are &quot;narrow&quot;, &quot;short&quot; &
-&quot;long&quot; **era** : possible values are &quot;narrow&quot;, &quot;short&quot; &
-&quot;long&quot; **year** : possible values are &quot;numeric&quot; & &quot;2-digit&quot;
-**month** : possible values are &quot;numeric&quot;, &quot;2-digit&quot;, &quot;narrow&quot;,
-&quot;short&quot; & &quot;long&quot; **day** : possible values are &quot;numeric&quot; &
-&quot;2-digit&quot; **hour** : possible values are &quot;numeric&quot; & &quot;2-digit&quot;
-**minute** : possible values are &quot;numeric&quot; & &quot;2-digit&quot; **second**
-: possible values are &quot;numeric&quot; & &quot;2-digit&quot; **timeZoneName** :
+fit&quot; <b>weekday</b> : possible values are &quot;narrow&quot;, &quot;short&quot; &
+&quot;long&quot; <b>era</b> : possible values are &quot;narrow&quot;, &quot;short&quot; &
+&quot;long&quot; <b>year</b> : possible values are &quot;numeric&quot; & &quot;2-digit&quot;
+<b>month</b> : possible values are &quot;numeric&quot;, &quot;2-digit&quot;, &quot;narrow&quot;,
+&quot;short&quot; & &quot;long&quot; <b>day</b> : possible values are &quot;numeric&quot; &
+&quot;2-digit&quot; <b>hour</b> : possible values are &quot;numeric&quot; & &quot;2-digit&quot;
+<b>minute</b> : possible values are &quot;numeric&quot; & &quot;2-digit&quot; <b>second</b>
+: possible values are &quot;numeric&quot; & &quot;2-digit&quot; <b>timeZoneName</b> :
 possible values are &quot;short&quot; & &quot;long&quot;
->
-**How to use**
 
-**var**
-
+<b>How to use</b>
+<b>var</b>
 today
-
 =
-
-**new**
+<b>new</b>
 
 <!-- the end thru 8/23/24 -->
 Date().toLocaleDateString(&apos;en-GB&apos;,{day:&apos;numeric&apos;,month:&apos;short&apos;,year:&apos;numeric&apos;});
@@ -5635,9 +4103,9 @@ Output if executed on January 24 ʰ, 2036 :
 
 &apos;24 Jan 2036&apos;
 
-**Going custom**
+<b>Going custom</b>
   
-  Date     .   **prototype**       .   toLocaleDateString
+  Date     .   <b>prototype</b>       .   toLocaleDateString
 
 If () isn&apos;t flexible enough to fulfill whatever need you may have,
 you might want to consider creating a custom Date object that looks
@@ -5649,487 +4117,201 @@ like this:
   alt="."
   style="border: 2px solid #000000; width:7.48in;" />
 <!-- ![](./images/image025.png){width="7.486805555555556in" height="4.675694444444445in"} -->
-
 }
-
 }
-
 ;
-
-**return**
-
+<b>return</b>
 date
-
 ;
-
 }
-
 )
-
 (
-
 )
-
 ;
-
-  
-  **new** DateObject
-  
-
-  
-
+  <b>new</b> DateObject
 If you included that code and executed () on January 20 ʰ, 2019, it
 would produce an object with the following properties:
-
 day
-
 :
-
 20
-
 dayPadded
-
 :
-
 &quot;20&quot;
-
 month
-
 :
-
 1
-
 monthPadded
-
 :
-
 &quot;01&quot;
-
 monthName
-
 :
-
 &quot;January&quot;
-
 year
-
 :
-
 2019
-
 To get a formatted string, you could do something like this:
-
-**new**
-
+<b>new</b>
 DateObject
-
 (
-
 )
-
 .
-
-**get**
-
+<b>get</b>
 (
-
 &lbrack;
-
 &apos;dayPadded&apos;
-
 ,
-
 &apos;monthPadded&apos;
-
 ,
-
 &apos;year&apos;
-
 &rbrack;
-
 )
-
 ;
-
 That would produce the following output:
-
 20-01-2016
 
-(&ast;) [**According to the
-MDN**](http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean),
+(&ast;) [<b>According to the
+MDN</b>](http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean),
 &quot;modern browsers&quot; means Chrome 24+, Firefox 29+, IE11, Edge12+,
-Opera 15+ & Safari [**nightly
-build**](http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean)
+Opera 15+ & Safari [<b>nightly
+build</b>](http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean)
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-5">Section 8.5: Get the number of milliseconds elapsed since 1 January 1970 00:00:00 UTC</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-  
   Date                                .        now
-    
-
-  
-
 The static method returns the number of milliseconds that have elapsed
 since 1 January 1970 00:00:00 UTC. To get the number of milliseconds
 that have elapsed since that time using an instance of a Date object,
 use its getTime method.
-
 *// get milliseconds using static method now of Date*
-
 console.
-
 log
-
 (
-
 Date
-
 .
-
 now
-
 (
-
 )
-
 )
-
 ;
-
 *// get milliseconds using method getTime of Date instance*
-
 console.
-
 log
-
 (
-
 (
-
-**new**
-
-Date
-
-(
-
-)
-
-)
-
-.
-
-getTime
-
-(
-
-)
-
-)
-
-;
-
+<b>new</b> Date ( ) ) .getTime ());
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-6">Section 8.6: Get the current time and date</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-  
-  **new** Date
-  
-
-  
-
+  <b>new</b> Date
 Use () to generate a new Date object containing the current date and
 time.
-
-  
-  Date   () *called without arguments is equivalent    **new**   (   Date   .   now
-         to*                                           Date                     
-   -     -
-
-  
-
+Date   () *called without arguments is equivalent    <b>new</b>   (   Date   .   now
+to*                                           Date                     
 *Note that* ())*.*
 
 Once you have a date object, you can apply any of the several
 available methods to extract its properties (e.g.
 
-  
-  getFullYear
-  
+getFullYear() to get the 4-digits year).
 
-  
-
-() to get the 4-digits year).
->
 Below are some common date methods.
->
-**Get the current year**
 
-**var**
-
-year
-
-=
-
-(
-
-**new**
-
-Date
-
-(
-
-)
-
-)
-
-.
-
-getFullYear
-
-(
-
-)
-
-;
-
-console.
-
-log
-
-(
-
-year
-
-)
-
-;
-
-*// Sample output: 2016*
-
+<b>Get the current year</b>
+<b>var</b> year = (**new** Date ( ) ) .getFullYear ( );
+console.log(year); // <i>Sample output: 2016</i>
 **Get the current month**
-
-**var**
-
-month
-
-=
-
-(
-
-**new**
-
-Date
-
-(
-
-)
-
-)
-
-.
-
-getMonth
-
-(
-
-)
-
-;
-
-console.
-
-log
-
-(
-
-month
-
-)
-
-;
-
-*// Sample output: 0*
-
+**var** month = ( **new** Date ( ) ) . getMonth ( ) ;
+console.log(month);  // <i>Sample output: 0</i>
 Please note that 0 = January. This is because months range from *0* to
 *11*, so it is often desirable to add +1 to the index.
->
 **Get the current day**
-
 *// Sample output: 31*
-
 **var**
-
 day
-
 =
-
 (
-
 **new**
-
 Date
-
 (
-
 )
-
 )
-
 .
-
 getDate
-
 (
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 day
-
 )
-
 ;
-
 **Get the current hour**
-
 *// Sample output: 10*
-
 **var**
-
 hours
-
 =
-
 (
-
 **new**
-
 Date
-
 (
-
 )
-
 )
-
 .
-
 getHours
-
 (
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 hours
-
 )
-
 ;
-
 **Get the current minutes**
-
 **var**
-
 minutes
-
 =
-
 (
-
 **new**
-
 Date
-
 (
-
 )
-
 )
-
 .
-
 getMinutes
-
 (
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 minutes
-
 )
-
 ;
-
 *// Sample output: 39*
-
 **Get the current seconds**
-
 **var**
-
 seconds
-
 =
-
 (
-
 **new**
-
 Date
-
 (
-
 )
-
 )
-
 .
-
 getSeconds
-
 (
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 second
-
 )
-
 ;
-
 *// Sample output: 48*
 
 **Get the current milliseconds**
@@ -6138,1411 +4320,703 @@ To get the milliseconds (ranging from 0 to 999) of an instance of a
 Date object, use its getMilliseconds method.
 
 *// Output: milliseconds right now*
-
 **var**
-
 milliseconds
-
 =
-
 (
-
 **new**
-
 Date
-
 (
-
 )
-
 )
-
 .
-
 getMilliseconds
-
 (
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 milliseconds
-
 )
-
 ;
-
 **Convert the current time and date to a human-readable string**
-
 **var**
-
 now
-
 =
-
 **new**
-
 Date
-
 (
-
 )
-
 ;
-
 *// convert date to a string in UTC timezone format:*
-
 console.
-
 log
-
 (
-
 now.
-
 toUTCString
-
 (
-
 )
-
 )
-
 ;
-
 *// Output: Wed, 21 Jun 2017 09:13:01 GMT*
-
   
-  Date                                .        now
-    
-
-  
+Date                                .        now
 
 The static method () returns the number of milliseconds that have
 elapsed since 1 January 1970 00:00:00 UTC. To get the number of
 milliseconds that have elapsed since that time using an instance of a
 Date object, use its getTime method.
-
 *// get milliseconds using static method now of Date*
-
-console.
-
-log
-
-(
-
-Date
-
-.
-
-now
-
-(
-
-)
-
-)
-
-;
-
+console.log(Date.now());
 *// get milliseconds using method getTime of Date instance*
 
-console.
-
-log
-
-(
-
-(
-
-**new**
-
-Date
-
-(
-
-)
-
-)
-
-.
-
-getTime
-
-(
-
-)
-
-)
-
-;
+console.log((**new** Date()).getTime());
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-7">Section 8.7: Increment a Date Object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 To increment date objects in JavaScript, we can usually do this:
-
-**var**
-
-checkoutDate
-
-=
-
-**new**
-
-Date
-
-(
-
-)
-
-;
+**var** checkoutDate = **new** Date();
 
 *// Thu Jul 21 2016 10:05:13 GMT-0400 (EDT)*
 
-checkoutDate.
-
-setDate
-
-(
-
-checkoutDate.
-
-getDate
-
-(
-
-)
-
-&plus;
-
-1
-
-)
-
-;
+checkoutDate.setDate (checkoutDate.getDate() &plus; 1);
 
 console.log(checkoutDate); *// Fri Jul 22 2016 10:05:13 GMT-0400
 (EDT)*
->
+
 It is possible to use setDate to change the date to a day in the
 following month by using a value larger than the number of days in the
 current month -
->
+
 **var** checkoutDate = **new** Date(); *// Thu Jul 21 2016 10:05:13
 GMT-0400 (EDT)* checkoutDate.setDate( checkoutDate.getDate() + 12 );
->
+
 console.log(checkoutDate); *// Tue Aug 02 2016 10:05:13 GMT-0400
 (EDT)*
->
+
 The same applies to other methods such as getHours(), getMonth(),etc.
->
+
 **Adding Work Days**
->
+
 If you wish to add work days (in this case I am assuming Monday -
 Friday) you can use the setDate function although you need a little
 extra logic to account for the weekends (obviously this will not take
 account of national holidays) -
 
 **function**
-
 addWorkDays
-
 (
-
 startDate
-
 ,
-
 days
-
 )
-
 {
-
 *// Get the day of the week as a number (0 = Sunday, 1 = Monday, &hellip;. 6
 = Saturday)*
-
 **var**
-
 dow
-
 =
-
 startDate.
-
 getDay
-
 (
-
 )
-
 ;
-
 **var**
-
 daysToAdd
-
 =
-
 days
-
 ;
-
 *// If the current day is Sunday add one day*
-
 **if**
-
 (
-
 dow
-
 ==
-
 0
-
 )
-
 daysToAdd
-
 ++
-
 ;
-
 *// If the start date plus the additional days falls on or after the
 closest Saturday calculate*
-
 *weekends*
-
 **if**
-
 (
-
 dow
-
 &plus;
-
 daysToAdd
-
 &gt;=
-
 6
-
 )
-
 {
-
 *//Subtract days in current working week from work days*
-
 **var**
-
 remainingWorkDays
-
 =
-
 daysToAdd
-
 &minus;
-
 (
-
 5
-
 &minus;
-
 dow
-
 )
-
 ;
-
 *//Add current working week&apos;s weekend*
-
 daysToAdd
-
 +=
-
 2
-
 ;
-
 **if**
-
 (
-
 remainingWorkDays
-
 &gt;
-
 5
-
 )
-
 {
-
 *//Add two days for each working week by calculating how many weeks are
 included*
-
 daysToAdd
-
 +=
-
 2
-
 &ast;
-
 Math
-
 .
-
 floor
-
 (
-
 remainingWorkDays
-
 /
-
 5
-
 )
-
 ;
-
 *//Exclude final weekend if remainingWorkDays resolves to an exact
 number of weeks*
-
 **if**
-
 (
-
 remainingWorkDays
-
 &percnt;
-
 5
-
 ==
-
 0
-
 )
-
 daysToAdd
-
 -=
-
 2
-
 ;
-
 }
-
 }
-
 startDate.
-
 setDate
-
 (
-
 startDate.
-
 getDate
-
 (
-
 )
-
 &plus;
-
 daysToAdd
-
 )
-
 ;
-
 **return**
-
 startDate
-
 ;
-
 }
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-8">Section 8.8: Convert to JSON</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 **var**
-
 date1
-
 =
-
 **new**
-
 Date
-
 (
-
 )
-
 ;
-
 date1.
-
 toJSON
-
 (
-
 )
-
 ;
-
 Returns: &quot;2016-04-14T23:49:08.596Z&quot;
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch9">Chapter 9: Date Comparison</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch9-1">Section 9.1: Comparing Date values</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 To check the equality of
-
 Date
-
 values:
-
 **var**
-
 date1
-
 =
-
 **new**
-
 Date
-
 (
-
 )
-
 ;
-
 **var**
-
 date2
-
 =
-
 **new**
-
 Date
-
 (
-
 date1.
-
 valueOf
-
 (
-
 )
-
 &plus;
-
 10
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 date1.
-
 valueOf
-
 (
-
 )
-
 ===
-
 date2.
-
 valueOf
-
 (
-
 )
-
 )
-
 ;
-
 Sample output:
-
 **false**
-
-  -
   valueOf                    () or              getTime
-   - 
-
-  -
 
 Note that you must use () to compare the values of Date objects
 because the equality operator will compare if two object references
 are the same. For example:
 
 **var**
-
 date1
-
 =
-
 **new**
-
 Date
-
 (
-
 )
-
 ;
-
 **var**
-
 date2
-
 =
-
 **new**
-
 Date
-
 (
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 date1
-
 ===
-
 date2
-
 )
-
 ;
-
 Sample output:
-
 **false**
-
 Whereas if the variables point to the same object:
-
 **var**
-
 date1
-
 =
-
 **new**
-
 Date
-
 (
-
 )
-
 ;
-
 **var**
-
 date2
-
 =
-
 date1
-
 ;
-
 console.
-
 log
-
 (
-
 date1
-
 ===
-
 date2
-
 )
-
 ;
-
 Sample output:
-
 **true**
-
 However, the other comparison operators will work as usual and you can
 use &lt; and &bsol;to compare that one date is earlier or later than the
 other. For example:
-
 **var**
-
 date1
-
 =
-
 **new**
-
 Date
-
 (
-
 )
-
 ;
-
 **var**
-
 date2
-
 =
-
 **new**
-
 Date
-
 (
-
 date1.
-
 valueOf
-
 (
-
 )
-
 &plus;
-
 10
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 date1
-
 &lt;
-
 date2
-
 )
-
 ;
-
 Sample output:
-
 **true**
-
 It works even if the operator includes equality:
-
 **var**
-
 date1
-
 =
-
 **new**
-
 Date
-
 (
-
 )
-
 ;
-
 **var**
-
 date2
-
 =
-
 **new**
-
 Date
-
 (
-
 date1.
-
 valueOf
-
 (
-
 )
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 date1
-
 &lt;=
-
 date2
-
 )
-
 ;
-
 Sample output:
-
 **true**
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch9-2">Section 9.2: Date Difference Calculation</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 To compare the difference of two dates, we can do the comparison based
 on the timestamp.
-
 **var**
-
 date1
-
 =
-
 **new**
-
 Date
-
 (
-
 )
-
 ;
-
 **var**
-
 date2
-
 =
-
 **new**
-
 Date
-
 (
-
 date1.
-
 valueOf
-
 (
-
 )
-
 &plus;
-
 5000
-
 )
-
 ;
-
 **var**
-
 dateDiff
-
 =
-
 date1.
-
 valueOf
-
 (
-
 )
-
 &minus;
-
 date2.
-
 valueOf
-
 (
-
 )
-
 ;
-
 **var**
-
 dateDiffInYears
-
 =
-
 dateDiff
-
 /
-
 1000
-
 /
-
 60
-
 /
-
 60
-
 /
-
 24
-
 /
-
 365
-
 ;
-
 *//convert milliseconds into years*
-
 console.
-
 log
-
 (
-
 &quot;Date difference in years : &quot;
-
 &plus;
-
 dateDiffInYears
-
 )
-
 ;
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch10">Chapter 10: Comparison Operations</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-1">Section 10.1: Abstract equality / inequality and type conversion</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 **The Problem**
-
 The abstract equality and inequality operators (== and !=) convert
 their operands if the operand types do not match. This type coercion
 is a common source of confusion about the results of these operators,
 in particular, these operators aren&apos;t always transitive as one would
 expect.
-
 &quot;&quot;
-
 ==
-
 0
-
 ;
-
 *// true A*
-
 0
-
 ==
-
 &quot;0&quot;
-
 ;
-
 *// true A*
-
 &quot;&quot;
-
 ==
-
 &quot;0&quot;
-
 ;
-
 *// false B*
-
 **false**
-
 ==
-
 0
-
 ;
-
 *// true*
-
 **false**
-
 ==
-
 &quot;0&quot;
-
 ;
-
 *// true*
-
 &quot;&quot;
-
 !=
-
 0
-
 ;
-
 *// false A*
-
 0
-
 !=
-
 &quot;0&quot;
-
 ;
-
 *// false A*
-
 &quot;&quot;
-
 !=
-
 &quot;0&quot;
-
 ;
-
 *// true B*
-
 **false**
-
 !=
-
 0
-
 ;
-
 *// false*
-
 **false**
-
 !=
-
 &quot;0&quot;
-
 ;
-
 *// false*
-
 The results start to make sense if you consider how JavaScript
 converts empty strings to numbers.
-
 Number
-
 (
-
 &quot;&quot;
-
 )
-
 ;
-
 *// 0*
-
 Number
-
 (
-
 &quot;0&quot;
-
 )
-
 ;
-
 *// 0*
-
 Number
-
 (
-
 **false**
-
 )
-
 ;
-
 *// 0*
-
 **The Solution**
-
   
   **false** B
-  
-
-  
-
-  
   &quot;&quot; == &quot;0&quot;
-  
-
-  
-
 In the statement , both the operands are strings (&quot;&quot; and &quot;0&quot;),
 hence there will be **no type conversion** and since &quot;&quot; and &quot;0&quot;
 are not the same value, is **false** as expected.
->
+
 One way to eliminate unexpected behavior here is making sure that you
 always compare operands of the same type. For example, if you want the
 results of numerical comparison use explicit conversion:
 
 **var**
-
 test
-
 =
-
 (
-
 a
-
 ,
-
 b
-
 )
-
 =&gt;
-
 Number
-
 (
-
 a
-
 )
-
 ==
-
 Number
-
 (
-
 b
-
 )
-
 ;
-
 test
-
 (
-
 &quot;&quot;
-
 ,
-
 0
-
 )
-
 ;
-
 *// true;*
-
 test
-
 (
-
 &quot;0&quot;
-
 ,
-
 0
-
 )
-
 ;
-
 *// true*
-
 test
-
 (
-
 &quot;&quot;
-
 ,
-
 &quot;0&quot;
-
 )
-
 ;
-
 *// true;*
-
 test
-
 (
-
 &quot;abc&quot;
-
 ,
-
 &quot;abc&quot;
-
 )
-
 ;
-
 *// false as operands are not numbers*
-
 Or, if you want string comparison:
-
 **var**
-
 test
-
 =
-
 (
-
 a
-
 ,
-
 b
-
 )
-
 =&gt;
-
 String
-
 (
-
 a
-
 )
-
 ==
-
 String
-
 (
-
 b
-
 )
-
 ;
-
 test
-
 (
-
 &quot;&quot;
-
 ,
-
 0
-
 )
-
 ;
-
 *// false;*
-
 test
-
 (
-
 &quot;0&quot;
-
 ,
-
 0
-
 )
-
 ;
-
 *// true*
-
 test
-
 (
-
 &quot;&quot;
-
 ,
-
 &quot;0&quot;
-
 )
-
 ;
-
 *// false;*
-
-  -
   Number         (   &quot;0&quot;   ) and        **new** Number           (   &quot;0&quot;
-    -  -  -
-
-  -
 
 *Side-note*: ) isn&apos;t the same thing! While the former performs a type
 conversion,
->
+
 the latter will create a new object. Objects are compared by reference
 and not by value which explains the results below.
 
 Number
-
 (
-
 &quot;0&quot;
-
 )
-
 ==
-
 Number
-
 (
-
 &quot;0&quot;
-
 )
-
 ;
-
 *// true;*
-
 **new**
-
 Number
-
 (
-
 &quot;0&quot;
-
 )
-
 ==
-
 **new**
-
 Number
-
 (
-
 &quot;0&quot;
-
 )
-
 ;
-
 *// false*
-
 Finally, you have the option to use strict equality and inequality
 operators which will not perform any implicit type conversions.
-
 &quot;&quot;
-
 ===
-
 0
-
 ;
-
 *// false*
-
 0
-
 ===
-
 &quot;0&quot;
-
 ;
-
 *// false*
-
 &quot;&quot;
-
 ===
-
 &quot;0&quot;
-
 ;
-
 *// false*
-
 Further reference to this topic can be found here:
->
+
 [Which equals operator (== vs ===) should be used in JavaScript
 comparisons?](http://stackoverflow.com/questions/359494/does-it-matter-which-equals-operator-vs-i-use-in-javascript-comparisons).
-
 Abstract Equality (==)
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-2">Section 10.2: NaN Property of the Global Object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+&quot;two&quot;
 
-  
-  &quot;two&quot;
-  
-
-  
-
-  
-  Math                            .       sqrt
-   - 
-
-  
+Math                            .       sqrt
 
 **NaN** (&quot;**N**ot **a** **N**umber&quot;) is a special value defined by
 the [*IEEE Standard for Floating-Point
@@ -7550,1103 +5024,573 @@ Arithmetic*](https://en.wikipedia.org/wiki/IEEE_floating_point), which
 is used when a non-numeric value is provided but a number is expected
 (1 &ast;), or when a calculation doesn&apos;t have a valid number result
 ((-1)).
->
+
 Any equality or relational comparisons with **NaN** returns **false**,
 even comparing it with itself. Because, **NaN** is supposed to denote
 the result of a nonsensical computation, and as such, it isn't equal
 to the result of any other nonsensical computations.
-
 (
-
 1
-
 &ast;
-
 &quot;two&quot;
-
 )
-
 ===
-
 **NaN**
-
 *//false*
-
 **NaN**
-
 ===
-
 0
-
 ;
-
 *// false*
-
 **NaN**
-
 ===
-
 **NaN**
-
 ;
-
 *// false*
-
 Number
-
 .
-
 **NaN**
-
 ===
-
 **NaN**
-
 ;
-
 *// false*
-
 **NaN**
-
 &lt;
-
 0
-
 ;
-
 *// false*
-
 **NaN**
-
 &gt;
-
 0
-
 ;
-
 *// false*
-
 **NaN**
-
 &gt;
-
 0
-
 ;
-
 *// false*
-
 **NaN**
-
 &gt;=
-
 **NaN**
-
 ;
-
 *// false*
-
 **NaN**
-
 &gt;=
-
 &apos;two&apos;
-
 ;
-
 *// false*
-
 Non-equal comparisons will always return
-
 **true**
-
 :
-
 **NaN** !== 0; *// true*
->
 **NaN** !== **NaN**; *// true*
->
 **Checking if a value is NaN** Version ≥ 6
->
+
 You can test a value or expression for **NaN** by using the function
 Number.isNaN():
-
 Number
-
 .
-
 isNaN
-
 (
-
 **NaN**
-
 )
-
 ;
-
 *// true*
-
 Number
-
 .
-
 isNaN
-
 (
-
 0
-
 /
-
 0
-
 )
-
 ;
-
 *// true*
-
 Number
-
 .
-
 isNaN
-
 (
-
 &apos;str&apos;
-
 &minus;
-
 12
-
 )
-
 ;
-
 *// true*
-
 Number
-
 .
-
 isNaN
-
 (
-
 24
-
 )
-
 ;
-
 *// false*
-
 Number
-
 .
-
 isNaN
-
 (
-
 &apos;24&apos;
-
 )
-
 ;
-
 *// false*
-
 Number
-
 .
-
 isNaN
-
 (
-
 1
-
 /
-
 0
-
 )
-
 ;
-
 *// false*
-
 Number
-
 .
-
 isNaN
-
 (
-
 **Infinity**
-
 )
-
 ;
-
 *// false*
-
 Number
-
 .
-
 isNaN
-
 (
-
 &apos;str&apos;
-
 )
-
 ;
-
 *// false*
-
 Number
-
 .
-
 isNaN
-
 (
-
 **undefined**
-
 )
-
 ;
-
 *// false*
-
 Number
-
 .
-
 isNaN
-
 (
-
 {
-
 }
-
 )
-
 ;
-
 *// false*
-
 Version &lt; 6
-
 You can check if a value is **NaN** by comparing it with itself:
-
 value
-
 !==
-
 value
-
 ;
-
 *// true for NaN, false for any other value*
-
   
-  Number                              .     isNaN
-   - 
-
-  
-
+Number                              .     isNaN
 You can use the following polyfill for ():
-
 Number
-
 .
-
 isNaN
-
 =
-
 Number
-
 .
-
 isNaN
-
 &vert;&vert;
-
 **function**
-
 (
-
 value
-
 )
-
 {
-
 **return**
-
 value
-
 !==
-
 value
-
 ;
-
 }
-
-  
-  isNaN
-  
-
-  
+ 
+isNaN
 
 By contrast, the global function () returns **true** not only for
 **NaN**, but also for any value or expression that cannot be coerced
 into a number:
 
 isNaN
-
 (
-
 **NaN**
-
 )
-
 ;
-
 *// true*
-
 isNaN
-
 (
-
 0
-
 /
-
 0
-
 )
-
 ;
-
 *// true*
-
 isNaN
-
 (
-
 &apos;str&apos;
-
 &minus;
-
 12
-
 )
-
 ;
-
 *// true*
-
 isNaN
-
 (
-
 24
-
 )
-
 ;
-
 *// false*
-
 isNaN
-
 (
-
 &apos;24&apos;
-
 )
-
 ;
-
 *// false*
-
 isNaN
-
 (
-
 **Infinity**
-
 )
-
 ;
-
 *// false*
-
 isNaN
-
 (
-
 &apos;str&apos;
-
 )
-
 ;
-
 *// true*
-
 isNaN
-
 (
-
 **undefined**
-
 )
-
 ;
-
 *// true*
-
 isNaN
-
 (
-
 {
-
 }
-
 )
-
 ;
-
 *// true*
 
 ECMAScript defines a "sameness" algorithm called SameValue which,
 since ECMAScript 6, can be invoked with
-
-  
-  Object   .   is   . Unlike the == and === comparison, using       Object   .   is
-        
-
-  
+Object   .   is   . Unlike the == and === comparison, using       Object   .   is
 
 () will treat **NaN** as identical with itself (and -0 as not
-
 **NaN** === **NaN** *// false*
-
 identical with
-
 +0
-
 ):
-
 Object
-
 .
-
 is
-
 (
-
 **NaN**
-
 ,
-
 **NaN**
-
 )
-
 *// true*
-
 Object
-
 .
-
 is
-
 (
-
 &plus;
-
 0
-
 ,
-
 0
-
 )
-
 *// false*
-
 &plus;
-
 0
-
 ===
-
 0
-
 *// true*
-
 Version &lt; 6
-
-  
-  Object                                          .       is
-   - 
-
-  
-
+Object                                          .       is
 You can use the following polyfill for () (from
 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Polyfill_for_non-ES6_browsers)):
-
 **if**
-
 (
-
 !
-
 Object
-
 .
-
 is
-
 )
-
 {
-
 Object
-
 .
-
 is
-
 =
-
 **function**
-
 (
-
 x
-
 ,
-
 y
-
 )
-
 {
-
 *// SameValue algorithm*
-
 **if**
-
 (
-
 x
-
 ===
-
 y
-
 )
-
 {
-
 *// Steps 1-5, 7-10*
-
 *// Steps 6.b-6.e: +0 != -0*
-
 **return**
-
 x
-
 !==
-
 0
-
 &vert;&vert;
-
 1
-
 /
-
 x
-
 ===
-
 1
-
 /
-
 y
-
 ;
-
 }
-
 **else**
-
 {
-
 *// Step 6.a: NaN == NaN*
-
 **return**
-
 x
-
 !==
-
 x
-
 &&
-
 y
-
 !==
-
 y
-
 ;
-
 }
-
 }
-
 ;
-
 }
-
 **Points to note**
->
 NaN itself is a number, meaning that it does not equal to the string
 &quot;NaN&quot;, and most importantly (though perhaps unintuitively):
-
 **typeof**
-
 (
-
 **NaN**
-
 )
-
 ===
-
 &quot;number&quot;
-
 ;
-
 *//true*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-3">Section 10.3: Short-circuiting in boolean operators</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 The and-operator (&&) and the or-operator (&vert;&vert;) employ
 short-circuiting to prevent unnecessary work if the outcome of the
 operation does not change with the extra work.
 
-  
-  x && y
-  
-
-  
+x && y
 
 In , y will not be evaluated if x evaluates to **false**, because the
 whole expression is guaranteed to be **false**.
-
-  
-  x &vert;&vert; y
-  
-
-  
+x &vert;&vert; y
 
 In , y will not be evaluated if x evaluated to **true**, because the
 whole expression is guaranteed to be **true**. **Example with
+
 functions**
->
+
 Take the following two functions:
-
 **function**
-
 T
-
 (
-
 )
-
 {
-
 *// True*
-
 console.
-
 log
-
 (
-
 &quot;T&quot;
-
 )
-
 ;
-
 **return**
-
 **true**
-
 ;
-
 }
-
 **function**
-
 F
-
 (
-
 )
-
 {
-
 *// False*
-
 console.
-
 log
-
 (
-
 &quot;F&quot;
-
 )
-
 ;
-
 **return**
-
 **false**
-
 ;
-
 }
-
 ***Example 1***
-
 T
-
 (
-
 )
-
 &&
-
 F
-
 (
-
 )
-
 ;
-
 *// false*
-
 Output:
->
 &apos;T&apos;
->
-&apos;F&apos;
 
+&apos;F&apos;
 ***Example 2***
-
 F
-
 (
-
 )
-
 &&
-
 T
-
 (
-
 )
-
 ;
-
 *// false*
-
 Output:
-
 &apos;F&apos;
-
 ***Example 3***
-
 T
-
 (
-
 )
-
 &vert;&vert;
-
 F
-
 (
-
 )
-
 ;
-
 *// true*
-
 Output:
-
 &apos;T&apos;
-
 ***Example 4***
-
 F
-
 (
-
 )
-
 &vert;&vert;
-
 T
-
 (
-
 )
-
 ;
-
 *// true*
-
 Output:
->
 &apos;F&apos;
->
 &apos;T&apos;
->
 **Short-circuiting to prevent errors**
->
 **var** obj; *// object has value of undefined* **if**(obj.property){
 }*// TypeError: Cannot read property &apos;property&apos; of undefined*
 **if**(obj.property && obj !== **undefined**){}*// Line A TypeError:
 Cannot read property &apos;property&apos; of undefined*
->
 Line A: if you reverse the order the first conditional statement will
 prevent the error on the second by not executing it if it would throw
 the error
-
 **if**
-
 (
-
 obj
-
 !==
-
 **undefined**
-
 &&
-
 obj.
-
 property
-
 )
-
 {
-
 }
-
 ;
-
 *// no error thrown*
-
 But should only be used if you expect **undefined**
->
+
 **if**(**typeof** obj === &quot;object&quot; && obj.property){}; *// safe
 option but slower*
->
+
 **Short-circuiting to provide a default value**
->
+
 The &vert;&vert; operator can be used to select either a &quot;truthy&quot; value, or
 the default value.
->
+
 For example, this can be used to ensure that a nullable value is
 converted to a non-nullable value:
-
 **var**
-
 nullableObj
-
 =
-
 **null**
-
 ;
-
 **var**
-
 obj
-
 =
-
 nullableObj
-
 &vert;&vert;
-
 {
-
 }
-
 ;
-
 *// this selects {}*
-
 **var**
-
 nullableObj2
-
 =
-
 {
-
 x
-
 :
-
 5
-
 }
-
 ;
-
 **var**
-
 obj2
-
 =
-
 nullableObj2
-
 &vert;&vert;
-
 {
-
 }
-
 *// this selects {x: 5}*
-
 Or to return the first truthy value
-
 **var**
-
 truthyValue
-
 =
-
 {
-
 x
-
 :
-
 10
-
 }
-
 ;
-
 **return**
-
 truthyValue
-
 &vert;&vert;
-
 {
-
 }
-
 ;
-
 *// will return {x: 10}*
-
 The same can be used to fall back multiple times:
->
 envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue *// select the
 first &quot;truthy&quot; of these*
->
 **Short-circuiting to call an optional function**
->
 The && operator can be used to evaluate a callback, only if it is
 passed:
-
 **function**
-
 myMethod
-
 (
-
 cb
-
 )
-
 {
-
 *// This can be simplified*
-
 **if**
-
 (
-
 cb
-
 )
-
 {
-
 cb
-
 (
-
 )
-
 ;
-
 }
-
 *// To this*
-
 cb
-
 &&
-
 cb
-
 (
-
 )
-
 ;
-
 }
 
 Of course, the test above does not validate that cb is in fact a
@@ -8654,37 +5598,26 @@ Of course, the test above does not validate that cb is in fact a
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-4">Section 10.4: Null and Undefined</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 **The differences between null and undefined null** and **undefined**
 share abstract equality == but not strict equality ===,
-
 **null**
-
 ==
-
 **undefined**
-
 *// true*
-
 **null**
-
 ===
-
 **undefined**
-
 *// false*
-
 They represent slightly different things:
->
 **undefined** represents the *absence of a value*, such as before an
 identifier/Object property has been created or in the period between
 identifier/Function parameter creation and it&apos;s first set, if any.
->
+
 **null** represents the ***intentional** absence of a value* for an
 identifier or property which has already been created.
->
+
 They are different types of syntax:
->
+
 **undefined** is a *property of the global Object*, usually immutable
 in the global scope. This means anywhere you can define an identifier
 other than in the global namespace could hide **undefined** from that
@@ -8692,298 +5625,139 @@ scope (although things can still **be** **undefined**) **null** is a
 *word literal*, so it&apos;s meaning can never be changed and attempting
 to do so will throw an *Error*. **The similarities between null and
 undefined null** and **undefined** are both falsy.
-
 **if**
-
 (
-
 **null**
-
 )
-
 console.
-
 log
-
 (
-
 &quot;won&apos;t be logged&quot;
-
 )
-
 ;
-
 **if**
-
 (
-
 **undefined**
-
 )
-
 console.
-
 log
-
 (
-
 &quot;won&apos;t be logged&quot;
-
 )
-
 ;
-
 Neither **null** or **undefined** equal **false** (see [this
 question](http://stackoverflow.com/q/19277458/220060)).
-
 **false**
-
 ==
-
 **undefined**
-
 *// false*
-
 **false**
-
 ==
-
 **null**
-
 *// false*
-
 **false**
-
 ===
-
 **undefined**
-
 *// false*
-
 **false**
-
 ===
-
 **null**
-
 *// false*
-
 **Using**
-
 **undefined**
-
   
-  **void**
-  
-
-  
-
-  
-  foo.bar
-  
-
-  
-
-  
-  **typeof** foo
-  
-
-  
-
+**void**
+foo.bar
+**typeof** foo
 If the current scope can&apos;t be trusted, use something which evaluates
 to *undefined*, for example 0;.
->
+
 If **undefined** is shadowed by another value, it&apos;s just as bad as
 shadowing Array or Number.
->
+
 Avoid *setting* something as **undefined**. If you want to remove a
 property *bar* from an *Object* foo, **delete** ; instead.
->
+
 Existence testing identifier foo against **undefined** **could throw a
 Reference Error**, use against &quot;undefined&quot; instead.
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-5">Section 10.5: Abstract Equality (==)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 Operands of the abstract equality operator are compared *after* being
 converted to a common type. How this conversion happens is based on
 the specification of the operator:
-
 [Specification for the ==
 operator:](https://tc39.github.io/ecma262/#sec-abstract-equality-comparison)
-
 **7.2.13 Abstract Equality Comparison**
-
-  
   x == y
-  
-
-  
-
 The comparison , where x and y are values, produces **true** or
 **false**. Such a comparison is performed as follows:
-
-  
   Type        &lpar;x&rpar; is the same as                            Type
-    
-
-  
-
 1.  If (y), then:
-
-  
-  x === y
-  
-
-  
-
+x === y
 **a.** Return the result of performing Strict Equality Comparison .
-
 2.  If x is **null** and y is **undefined**, return **true**.
-
 3.  If x is **undefined** and y is **null**, return **true**.
-
-  -
   Type   &lpar;x&rpar; is      Type   &lpar;y&rpar; is String, return the result of  x ==
          Number and           the comparison                         ToNumber
-   -   
-
-  
-
 4.  If (y).
-
-  
   Type   &lpar;x&rpar; is      Type   &lpar;y&rpar; is Number, return the result of ToNumber   &lpar;x&rpar;   == y
          String and           the comparison                                           
-        
-
-  
-
 5.  If .
-
-  
   Type   &lpar;x&rpar; is Boolean, return the result of the       ToNumber   &lpar;x&rpar;   == y
          comparison                                                          
-      
-
-  
-
 6.  If .
-
-  
   Type   &lpar;y&rpar; is Boolean, return the result of comparison x == ToNumber
          the                                    
-    
-
-  
-
 7.  If (y).
-
-  
   Type   &lpar;x&rpar; is either String, Number, or Symbol and              Type
-    
-
-  
-
-  
   x == ToPrimitive
-  
-
-  
-
 8.  If (y) is Object, return the result of the comparison (y).
-
-  
   Type         &lpar;x&rpar; is Object and                            Type
-    
-
-  
-
-  
   ToPrimitive                               &lpar;x&rpar;       == y
-    
-
-  
-
 9.  If (y) is either String, Number, or Symbol, return the result of the
     comparison .
-
 10. Return **false**.
-
 **Examples:**
-
 1 == 1; *// true*
-
 1 == **true**; *// true (operand converted to number: true =&bsol;1)*
-
 1 == &apos;1&apos;; *// true (operand converted to number: &apos;1&apos; =&bsol;1 )*
-
 1 == &apos;1.00&apos;; *// true*
-
 1 == &apos;1.00000000001&apos;; *// false*
-
 1 == &apos;1.00000000000000001&apos;; *// true (true due to precision loss)*
 **null** == **undefined**; *// true (spec #2)*
-
 1 == 2; *// false* 0 == **false**; *// true*
-
 0 == **undefined**; *// false*
-
 0 == &quot;&quot;; *// true*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-6">Section 10.6: Logic Operators with Booleans</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 **var**
-
 x
-
 =
-
 **true**
-
 ,
-
 y
-
 =
-
 **false**
-
 ;
-
 **AND**
-
 This operator will return true if both of the expressions evaluate to
 true. This boolean operator will employ shortcircuiting and will not
 evaluate y if x evaluates to **false**.
-
 x
-
 &&
-
 y
-
 ;
-
 This will return false, because y is false.
-
 **OR**
-
 This operator will return true if one of the two expressions evaluate
 to true. This boolean operator will employ short-circuiting and y will
 not be evaluated if x evaluates to **true**.
-
 x
-
 &vert;&vert;
-
 y
-
 ;
-
 This will return true, because x is true.
 
 **NOT**
@@ -8993,17 +5767,12 @@ evaluates to true, and return true if the expression on the right
 evaluates to false.
 
 !
-
 x
-
 ;
-
 This will return false, because x is true.
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-7">Section 10.7: Automatic Type Conversions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 Beware that numbers can accidentally be converted to strings or NaN
 (Not a Number).
 
@@ -9011,25 +5780,15 @@ JavaScript is loosely typed. A variable can contain different data
 types, and a variable can change its data type:
 
 **var**
-
 x
-
 =
-
 &quot;Hello&quot;
-
 ;
-
 *// typeof x is a string*
-
 x
-
 =
-
 5
-
 ;
-
 *// changes typeof x to a number*
 
 When doing mathematical operations, JavaScript can convert numbers to
@@ -9047,13 +5806,9 @@ Subtracting a string from a string, does not generate an error but
 returns NaN (Not a Number):
 
 &quot;Hello&quot;
-
 &minus;
-
 &quot;Dolly&quot;
-
 *// returns NaN*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-8">Section 10.8: Logic Operators with Non-boolean values (boolean coercion)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -9077,187 +5832,105 @@ returned.
 **var** d = 1 && 5; *// d = 5* **var** e = 0 && {}; *// e = 0* **var**
 f = &apos;hi&apos; && &lbrack;&rbrack; && &apos;done&apos;; *// f = &apos;done&apos;* **var** g = &apos;bye&apos;
 && **undefined** && &apos;adios&apos;; *// g = undefined*
-
 This trick can be used, for example, to set a default value to a
 function argument (prior to ES6).
-
 **var**
-
 foo
-
 =
-
 **function**
-
 (
-
 val
-
 )
-
 {
-
 *// if val evaluates to falsey, &apos;default&apos; will be returned instead.*
-
 **return**
-
 val
-
 &vert;&vert;
-
 &apos;default&apos;
-
 ;
-
 }
-
 console.
-
 log
-
 (
-
 foo
-
 (
-
 &apos;burger&apos;
-
 )
-
 )
-
 ;
-
 *// burger*
-
 console.
-
 log
-
 (
-
 foo
-
 (
-
 100
-
 )
-
 )
-
 ;
-
 *// 100*
-
 console.
-
 log
-
 (
-
 foo
-
 (
-
 &lbrack;
-
 &rbrack;
-
 )
-
 )
-
 ;
-
 *// &lbrack;&rbrack;*
-
 console.
-
 log
-
 (
-
 foo
-
 (
-
 0
-
 )
-
 )
-
 ;
-
 *// default*
-
 console.
-
 log
-
 (
-
 foo
-
 (
-
 **undefined**
-
 )
-
 )
-
 ;
-
 *// default*
-
 Just keep in mind that for arguments, 0 and (to a lesser extent) the
 empty string are also often valid values that should be able to be
 explicitly passed and override a default, which, with this pattern,
 they won't (because they are *falsy*).
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-9">Section 10.9: Empty Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 */&ast; ToNumber(ToPrimitive(&lbrack;&rbrack;)) == ToNumber(false) &ast;/*
-
 &lbrack;
-
 &rbrack;
-
 ==
-
 **false**
-
 ;
-
 *// true*
-  
-  toString   () is executed it     join   () if it      Object   .   **prototype**   .   toString
-             calls &lbrack;&rbrack;.                  exists, or                                     
 
-  
-
-  
-  join
+toString   () is executed it     join   () if it      Object   .   **prototype**   .   toString
+calls &lbrack;&rbrack;.                  exists, or                                     
+join
 
 When &lbrack;&rbrack;.() otherwise. This comparison is returning **true** because
 &lbrack;&rbrack;.() returns &apos;&apos; which, coerced into 0, is equal to false
 [ToNumber](http://www.ecma-international.org/ecma-262/5.1/#sec-9.3).
->
+
 Beware though, all objects are truthy and Array is an instance of
 Object:
->
+
 *// Internally this is evaluated as ToBoolean(&lbrack;&rbrack;) === true ?
 &apos;truthy&apos; : &apos;falsy&apos;* &lbrack;&rbrack; ? &apos;truthy&apos; : &apos;falsy&apos;; *// &apos;truthy&apos;*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-10">Section 10.10: Equality comparison operations</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 JavaScript has four different equality comparison operations.
 
 [**SameValue**](http://www.ecma-international.org/ecma-262/6.0/#sec-samevalue)
@@ -9266,202 +5939,112 @@ It returns **true** if both operands belong to the same Type and are
 the same value.
 
 Note: the value of an object is a reference.
-
   
   Object                                          .       is
-   - 
-
-  
 
 You can use this comparison algorithm via (ECMAScript 6).
 
 Examples:
-
 Object
-
 .
-
 is
-
 (
-
 1
-
 ,
-
 1
-
 )
-
 ;
-
 *// true*
-
 Object
-
 .
-
 is
-
 (
-
 &plus;
-
 0
-
 ,
-
 &minus;
-
 0
-
 )
-
 ;
-
-*// false*
-
+// false*
 Object
-
 .
-
 is
-
 (
-
 **NaN**
-
 ,
-
 **NaN**
-
 )
-
 ;
-
 *// true*
-
 Object
-
 .
-
 is
-
 (
-
 **true**
-
 ,
-
 &quot;true&quot;
-
 )
-
 ;
-
 *// false*
-
 Object
-
 .
-
 is
-
 (
-
 **false**
-
 ,
-
 0
-
 )
-
 ;
-
 *// false*
-
 Object
-
 .
-
 is
-
 (
-
 **null**
-
 ,
-
 **undefined**
-
 )
-
 ;
-
 *// false*
-
 Object
-
 .
-
 is
-
 (
-
 1
-
 ,
-
 &quot;1&quot;
-
 )
-
 ;
-
 *// false*
-
 Object
-
 .
-
 is
-
 (
-
 &lbrack;
-
 &rbrack;
-
 ,
-
 &lbrack;
-
 &rbrack;
-
 )
-
 ;
-
 *// false*
 
 This algorithm has the properties of an [equivalence
 relation](https://en.wikipedia.org/wiki/Equivalence_relation):
 
-  
-  Object                         .     is         (x,             x
-  
-  Object   .   is   (x,   y   ) is **true** if, and only    Object   .   is   (y,   x
-                              if,                                                   
-  Object   .   is   (x,   y   ) and  Object   .   is   (y,   z   ) are **true**,  Object   .   is   (x,   z
-                                                                 then                                     
+Object                         .     is         (x,             x
+Object   .   is   (x,   y   ) is **true** if, and only    Object   .   is   (y,   x
+if,                                                   
+Object   .   is   (x,   y   ) and  Object   .   is   (y,   z   ) are **true**,  Object   .   is   (x,   z
+then                                     
 
 [Reflexivity](https://en.wikipedia.org/wiki/Reflexive_relation): ) is
 **true**, for any value x
->
+
 [Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation): ) is
 **true**, for any values x and y.
->
+
 [Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation): If )
 is also **true**, for any values x, y and z.
 
@@ -9469,11 +6052,7 @@ is also **true**, for any values x, y and z.
 
 It behaves like SameValue, but considers +0 and -0 to be equal.
 
-  
   Array          .   **prototype**              .   includes
-      
-
-  
 
 You can use this comparison algorithm via (ECMAScript 7).
 
@@ -9568,25 +6147,25 @@ relation](https://en.wikipedia.org/wiki/Equivalence_relation):
   
   includes      &lpar;y&rpar; is **true** if, and only if, &lbrack;y&rbrack;.   includes
   
-  includes   &lpar;y&rpar; and      includes   &lpar;z&rpar; are **true**, then  includes
+  includes   &lpar;y&rpar; and      includes   &lpar;z&rpar; are <b>true</b>, then  includes
              &lbrack;y&rbrack;.                    &lbrack;x&rbrack;.                    
 
 [Reflexivity](https://en.wikipedia.org/wiki/Reflexive_relation):
-&lbrack;x&rbrack;.(x) is **true**, for any value x
+&lbrack;x&rbrack;.(x) is <b>true</b>, for any value x
 
 [Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation):
-&lbrack;x&rbrack;.(x) is **true**, for any values x and y.
+&lbrack;x&rbrack;.(x) is <b>true</b>, for any values x and y.
 [Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation): If
-&lbrack;x&rbrack;.(z) is also **true**, for any values x, y and z.
+&lbrack;x&rbrack;.(z) is also <b>true</b>, for any values x, y and z.
 
-[**Strict Equality
-Comparison**](http://www.ecma-international.org/ecma-262/6.0/#sec-strict-equality-comparison)
+[<b>Strict Equality
+Comparison</b>](http://www.ecma-international.org/ecma-262/6.0/#sec-strict-equality-comparison)
 
 It behaves like SameValue, but
 
 Considers +0 and -0 to be equal.
 
-Considers **NaN** different than any value, including itself
+Considers <b>NaN</b> different than any value, including itself
 
 You can use this comparison algorithm via the === operator (ECMAScript 3).
 
@@ -9605,17 +6184,17 @@ Examples:
 0
 ;
 *// true*
-**NaN**
+<b>NaN</b>
 ===
-**NaN**
+<b>NaN</b>
 ;
 *// false*
-**true**
+<b>true</b>
 ===
 &quot;true&quot;
 ;
 *// false*
-**false**
+<b>false</b>
 ===
 0
 ;
@@ -9625,9 +6204,9 @@ Examples:
 &quot;1&quot;
 ;
 *// false*
-**null**
+<b>null</b>
 ===
-**undefined**
+<b>undefined</b>
 ;
 *// false*
 &lbrack;
@@ -9639,37 +6218,33 @@ Examples:
 *// false*
 This algorithm has the following properties:
   
-x === y   is **true** if, and only if, y ===        **for** any values
+x === y   is <b>true</b> if, and only if, y ===        <b>for</b> any values
             xistrue,                                  
 
-x === y      and     y === z      are **true**, then       x === z
+x === y      and     y === z      are <b>true</b>, then       x === z
 
 [Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation): xandy&grave;.
 
 [Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation): If
-is also **true**, for any values x, y and z.
+is also <b>true</b>, for any values x, y and z.
 
 But is not an [equivalence
 relation](https://en.wikipedia.org/wiki/Equivalence_relation) because
 
-  
-  **NaN** !== **NaN**
-  
+  <b>NaN</b> !== <b>NaN</b>
 
-  
-
-**NaN** is not
+<b>NaN</b> is not
 [reflexive](https://en.wikipedia.org/wiki/Reflexive_relation):
 
-[**Abstract Equality
-Comparison**](http://www.ecma-international.org/ecma-262/6.0/#sec-abstract-equality-comparison)
+[<b>Abstract Equality
+Comparison</b>](http://www.ecma-international.org/ecma-262/6.0/#sec-abstract-equality-comparison)
 
 If both operands belong to the same Type, it behaves like the Strict
 Equality Comparison.
 
 Otherwise, it coerces them as follows:
 
-**undefined** and **null** are considered to be equal
+<b>undefined</b> and <b>null</b> are considered to be equal
 
 When comparing a number with a string, the string is coerced to a
 number
@@ -9679,7 +6254,7 @@ to a number
 
 When comparing an object with a number, string or symbol, the object is
 coerced to a primitive If there was a coercion, the coerced values are
-compared recursively. Otherwise the algorithm returns **false**.
+compared recursively. Otherwise the algorithm returns <b>false</b>.
 
 You can use this comparison algorithm via the == operator (ECMAScript
 1).
@@ -9700,17 +6275,17 @@ Examples:
 0
 ;
 *// true*
-**NaN**
+<b>NaN</b>
 ==
-**NaN**
+<b>NaN</b>
 ;
 *// false*
-**true**
+<b>true</b>
 ==
 &quot;true&quot;
 ;
 *// false*
-**false**
+<b>false</b>
 ==
 0
 ;
@@ -9720,9 +6295,9 @@ Examples:
 &quot;1&quot;
 ;
 *// true*
-**null**
+<b>null</b>
 ==
-**undefined**
+<b>undefined</b>
 ;
 *// true*
 &lbrack;
@@ -9734,19 +6309,19 @@ Examples:
 *// false*
 This algorithm has the following property:
   
-  x == y        is **true** if, and only if,                y == x
+  x == y        is <b>true</b> if, and only if,                y == x
 
 [Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation): is
-**true**, for any values x and y.
+<b>true</b>, for any values x and y.
 
 But is not an [equivalence
 relation](https://en.wikipedia.org/wiki/Equivalence_relation) because
   
-  **NaN** != **NaN**
+  <b>NaN</b> != <b>NaN</b>
 
   == &apos;&apos;       and 0       == &apos;0&apos;        , but     &apos;&apos; != &apos;0&apos;
 
-**NaN** is not
+<b>NaN</b> is not
 [reflexive](https://en.wikipedia.org/wiki/Reflexive_relation):
 [Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation) does
 not hold, e.g. 0
@@ -9766,9 +6341,9 @@ When both operands are numeric, they are compared normally:
 &gt;=
 5
 *// false*
-**true**
+<b>true</b>
 &lt;
-**false**
+<b>false</b>
 *// false (implicitly converted to numbers, 1 &bsol;0)*
 When both operands are strings, they are compared lexicographically
 (according to alphabetical order):
@@ -9793,12 +6368,12 @@ converted to a number before comparison:
 &gt;
 2
 *// true*
-**true**
+<b>true</b>
 &gt;
 &apos;2&apos;
 *// false (true implicitly converted to number, 1 &lt; 2)*
-When the string is non-numeric, numeric conversion returns **NaN**
-(not-a-number). Comparing with **NaN** always returns **false**:
+When the string is non-numeric, numeric conversion returns <b>NaN</b>
+(not-a-number). Comparing with <b>NaN</b> always returns <b>false</b>:
 1
 &lt;
 &apos;abc&apos;
@@ -9807,8 +6382,8 @@ When the string is non-numeric, numeric conversion returns **NaN**
 &gt;
 &apos;abc&apos;
 *// false*
-But be careful when comparing a numeric value with **null**,
-**undefined** or empty strings:
+But be careful when comparing a numeric value with <b>null</b>,
+<b>undefined</b> or empty strings:
 1
 &gt;
 &apos;&apos;
@@ -9819,26 +6394,26 @@ But be careful when comparing a numeric value with **null**,
 *// false*
 1
 &gt;
-**null**
+<b>null</b>
 *// true*
 1
 &lt;
-**null**
+<b>null</b>
 *// false*
 1
 &gt;
-**undefined**
+<b>undefined</b>
 *// false*
 1
 &lt;
-**undefined**
+<b>undefined</b>
 *// false*
-  Number                     (    **null**          );       *//0*
+  Number                     (    <b>null</b>          );       *//0*
 
 When one operand is a object and the other is a number, the object is
-converted to a number before comparison.So **null** is particular case
+converted to a number before comparison.So <b>null</b> is particular case
 because
-**new**
+<b>new</b>
 Date
 (
 2015
@@ -9846,7 +6421,7 @@ Date
 &lt;
 1479480185280
 *// true*
-**null**
+<b>null</b>
 &gt;
 &minus;
 1
@@ -9855,11 +6430,11 @@ Date
 {
 toString
 :
-**function**
+<b>function</b>
 (
 )
 {
-**return**
+<b>return</b>
 123
 }
 }
@@ -9871,12 +6446,12 @@ toString
 <h3 id="ch10-12">Section 10.12: Inequality</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 Operator != is the inverse of the == operator.
-Will return **true** if the operands aren&apos;t equal.
+Will return <b>true</b> if the operands aren&apos;t equal.
 The JavaScript engine will try and convert both operands to matching
-types if they aren&apos;t of the same type. **Note:** if the two operands
-have different internal references in memory, then **false** will be
+types if they aren&apos;t of the same type. <b>Note:</b> if the two operands
+have different internal references in memory, then <b>false</b> will be
 returned.
-**Sample:**
+<b>Sample:</b>
 1
 !=
 &apos;1&apos;
@@ -9886,7 +6461,7 @@ returned.
 2
 *// true*
 != &apos;1&apos;
-In the sample above, 1 is **false** because, a primitive number type
+In the sample above, 1 is <b>false</b> because, a primitive number type
 is being compared to a char value. Therefore, the JavaScript engine
 doesn&apos;t care about the datatype of the R.H.S value.
 
@@ -9910,39 +6485,23 @@ Example:
 <h3 id="ch10-13">Section 10.13: List of Comparison Operators</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-**Operator Comparison Example**
-
+<b>Operator Comparison Example</b>
   i ==
-
 == Equal0
-
   i === &quot;5&quot;
-
 === Equal Value and Type
-
   i !=
-
 != Not Equal5
-
   i !==
-
 !== Not Equal Value or Type5
-
   i
-
 &bsol;Greater than&bsol;5
   i
-
 &lt; Less than&lt; 5
-
   i &gt;=
-
 &gt;= Greater than or equal5
-
   i &lt;=
-
 &lt;= Less than or equal5
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-14">Section 10.14: Grouping multiple logic statements</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -9950,7 +6509,7 @@ You can group multiple boolean logic statements within parenthesis in
 order to create a more complex logic evaluation, especially useful in
 if statements.
 
-**if**
+<b>if</b>
 (
 (
 age
@@ -9980,49 +6539,49 @@ log
 }
 We could also move the grouped logic to variables to make the
 statement a bit shorter and descriptive:
-**var**
+<b>var</b>
 isLegal
 =
 age
 &gt;=
 18
 ;
-**var**
+<b>var</b>
 tall
 =
 height
 &gt;=
 5.11
 ;
-**var**
+<b>var</b>
 suitable
 =
 isLegal
 &&
 tall
 ;
-**var**
+<b>var</b>
 isRoyalty
 =
 status
 ===
 &apos;royalty&apos;
 ;
-**var**
+<b>var</b>
 specialCase
 =
 isRoyalty
 &&
 hasInvitation
 ;
-**var**
+<b>var</b>
 canEnterOurBar
 =
 suitable
 &vert;&vert;
 specialCase
 ;
-**if**
+<b>if</b>
 (
 canEnterOurBar
 )
@@ -10057,191 +6616,101 @@ into a single variable with each direction assigned a bit.
 
 Example reading keyboard via bitfield
 
-**var** bitField = 0; *// the value to hold the bits* **const**
-KEY_BITS = &lbrack;4,1,8,2&rbrack;; *// left up right down* **const** KEY_MASKS =
+<b>var</b> bitField = 0; *// the value to hold the bits* <b>const</b>
+KEY_BITS = &lbrack;4,1,8,2&rbrack;; *// left up right down* <b>const</b> KEY_MASKS =
 &lbrack;0b1011,0b1110,0b0111,0b1101&rbrack;; *// left up right down*
-window.onkeydown = window.onkeyup = **function** (e) {
-**if**(e.keyCode &gt;= 37 && e.keyCode &lt;41){
+window.onkeydown = window.onkeyup = <b>function</b> (e) {
+<b>if</b>(e.keyCode &gt;= 37 && e.keyCode &lt;41){
 
-**if**
+<b>if</b>
 
 (
-
 e&period;
-
 type
-
 ===
-
 &quot;keydown&quot;
-
 )
-
 {
-
 bitField
-
 &vert;=
-
 KEY_BITS
-
 &lbrack;
-
 e&period;
-
 keyCode
-
 &minus;
-
 37
-
 &rbrack;
-
 ;
-
 }
-
-**else**
-
+<b>else</b>
 {
-
 bitField
-
 &=
-
 KEY_MASKS
-
 &lbrack;
-
 e&period;
-
 keyCode
-
 &minus;
-
 37
-
 &rbrack;
-
 ;
-
 }
-
 }
-
 }
-
 <p><b>Example reading as an array</b></p>
-
-**var**
-
+<b>var</b>
 directionState
-
 =
-
 &lbrack;
-
-**false**
-
+<b>false</b>
 ,
-
-**false**
-
+<b>false</b>
 ,
-
-**false**
-
+<b>false</b>
 ,
-
-**false**
-
+<b>false</b>
 &rbrack;
-
 ;
-
 window.
-
 onkeydown
-
 =
-
 window.
-
 onkeyup
-
 =
-
-**function**
-
+<b>function</b>
 (
-
 e
-
 )
-
 {
-
-**if**
-
+<b>if</b>
 (
-
 e&period;
-
 keyCode
-
 &gt;=
-
 37
-
 &&
-
 e&period;
-
 keyCode
-
 &lt;
-
 41
-
 )
-
 {
-
 directionState
-
 &lbrack;
-
 e&period;
-
 keyCode
-
 &minus;
-
 37
-
 &rbrack;
-
 =
-
 e&period;
-
 type
-
 ===
-
 &quot;keydown&quot;
-
 ;
-
 }
-
 }
-
-  
-  &vert;= 0b10
-  
-
-  
+&vert;= 0b10
 
 To turn on a bit use bitwise *or* &vert; and the value corresponding to
 the bit. So if you wish to set the 2nd bit bitField will turn it on.
