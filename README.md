@@ -635,11 +635,11 @@ a === <b>null</b>; // true</pre>
 
 <p>The global function () can be used to check if a certain value or
 expression evaluates to <b>NaN</b>. This function (in short) first checks
-if the value is a number, if not tries to convert it (*), and then
+if the value is a number, if not tries to convert it (&ast;), and then
 checks if the resulting value is <b>NaN</b>. For this reason, <b>this
 testing method may cause confusion</b>.</p>
 
-<p>(*) The "conversion" method is not that simple, see <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-isnan-number">ECMA-262 18.2.3</a>
+<p>(&ast;) The "conversion" method is not that simple, see <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-isnan-number">ECMA-262 18.2.3</a>
 for a detailed explanation of the algorithm.</p>
 
 <p>These examples will help you better understand the isNaN() behavior:</p>
@@ -834,7 +834,7 @@ than any other value.</p>
 <b>-Infinity</b> &lt; -123192310293;  // <i>true</i>
 1 / 0;  // <i>Infinity</i>
 Math.pow(123123123, 9123192391023); // <i>Infinity</i>
-Number.MAX_VALUE * 2;  // <i>Infinity</i>
+Number.MAX_VALUE &ast; 2;  // <i>Infinity</i>
 23 / <b>Infinity;</b>  // <i>0</i>
 <b>-Infinity;</b>  // <i>-Infinity</i>
 <b>-Infinity</b> === Number.NEGATIVE_INFINITY;  // <i>true</i>
@@ -945,7 +945,7 @@ lines.</p>
 <b>function</b> elementAt( event ) {
   <b>return</b> document.elementFromPoint(event.clientX, event.clientY);
 }
-/&ast; <i>TODO: write more useful comments!</i> */</pre>
+/&ast; <i>TODO: write more useful comments!</i> &ast;/</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch4-2">Section 4.2: Using HTML comments in JavaScript (Bad practice)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -987,7 +987,7 @@ first as HTML and secondly as JavaScript. For example:</p>
 
 <pre>&lt;!-&dash;
  self.postMessage('reached JS "file"');
-/*
+/&ast;
 &dash;-&gt;
 <b>&lt;!DOCTYPE html&gt;</b>
 <b>&lt;script&gt;</b>
@@ -997,7 +997,7 @@ w1.onmessage = function (e) {
 };
 <b>&lt;/script&gt;</b>
 &lt;!-&dash;
-*/
+&ast;/
 &dash;-&gt;</pre>
 
 <p>When run a HTML, all the multiline text between the &lt;!-&dash; and &dash;-&gt;
@@ -1008,7 +1008,7 @@ when run as HTML.</p>
 are ignored, their effect is not to escape over <i>multiple</i>
 lines, so the lines following them (e.g., self.postMessage(...) will not be ignored when
 run as JavaScript, at least until they reach a <i>JavaScript</i> comment,
-marked by /* and */. Such JavaScript comments are used in the above
+marked by /&ast; and &ast;/. Such JavaScript comments are used in the above
 example to ignore the remaining <i>HTML</i> text (until the &dash;-&gt; which is
 also ignored as JavaScript).</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -1177,7 +1177,7 @@ response <b>in</b>: 1402.199ms</pre>
 
 <p><b>Example 2:</b></p>
 
-<pre><b>var</b> elms = document.getElementsByTagName(&apos;*&apos;); // <i>select all elements on the page</i>
+<pre><b>var</b> elms = document.getElementsByTagName(&apos;&ast;&apos;); // <i>select all elements on the page</i>
 console.time(&apos;Loop time&apos;);
 
 <b>for</b>(<b>var</b> i = 0; i &lt; 5000; i++) {
@@ -1349,7 +1349,7 @@ console.log(&lbrack;'string'&rbrack;, 1, obj, window);</pre>
 
 <p>The log method will display the following in the debugging console:</p>
 
-<pre>&lbrack;'string'&rbrack; 1 Object { test: 1 } Window { /* <i>truncated</i> */ }</pre>
+<pre>&lbrack;'string'&rbrack; 1 Object { test: 1 } Window { /&ast; <i>truncated</i> </i>/ }</pre>
 
 <p>Beside plain strings, console.log() can handle other types, like arrays, objects, dates, functions, etc.:</p>
 
@@ -1944,6 +1944,7 @@ actually is: Object.<b>prototype</b>.toString.call(yourObject)</p>
 	&quot;&lbrack;object Error&rbrack;&quot;
 	</blockquote></li>
 </ol>
+<!-- page 37 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch7">Chapter 7: Strings</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2113,7 +2114,7 @@ perfectly.</p>
 <pre>
 Version ≥ 6
 </pre>
-
+<!-- page 39 -->
 <pre>
 <b>function</b> reverseString(str) {
 <b>return</b>&lbrack;&hellip;String(str)&rbrack;.reverse().join(&apos;&apos;);
@@ -2261,6 +2262,7 @@ and &quot;. These use backticks (&grave;) instead of single or double quotes.</p
 <pre>
 <b>var</b> x = &grave;&quot;Escaping &quot; and &apos; can become very annoying&grave;;
 </pre>
+<!-- page 41 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-6">Section 7.6: Word Counter</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2327,6 +2329,7 @@ s&period;split(&quot;, &quot;);  // <i>&lbrack;&quot;one&quot;, &quot;two&quot;,
 <pre>
 s&period;split(&quot;, &quot;).join(&quot;&minus;&minus;quot;);  // <i>&quot;one&minus;&minus;two&minus;&minus;three&minus;&minus;four&minus;&minus;five&quot;</i>
 </pre>
+<!-- page 42 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-9">Section 7.9: Strings are unicode</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2400,6 +2403,7 @@ functionality is required. For example:</p>
   aString.substring(0, );
 }
 </pre>
+<!-- page 43 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-11">Section 7.11: Substrings with slice</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2461,12 +2465,13 @@ can be used with <i>radix 16</i>.</p>
 <b>var</b> b10 = 12;
 
 // <i>base 16 String representation</i>
-<b>var<b> b16 = b10.toString(16); // <i>&quot;c&quot;</i>
+<b>var</b> b16 = b10.toString(16); // <i>&quot;c&quot;</i>
 </pre>
 
 <p>If the number represented is an integer, the inverse operation for
 this can be done with parseInt and the <i>radix 16</i> again.</p>
 
+<!-- page 44 -->
 <pre>
 // <i>base 16 String representation</i>
 <b>var</b> b16 = &apos;c&apos;;
@@ -2506,12 +2511,20 @@ environment the conversions are happening in.</p>
 <h3 id="ch7-14">Section 7.14: String Find and Replace Functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>To search for a string inside a string, there are several functions:</p>
- 
-[<b>indexOf</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [<b>(</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [<b>searchString</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   <b>[)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [</b>lastIndexOf<b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)   [</b>(<b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)   [</b>searchString<b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
+
+<!--
+[<b>indexOf</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [<b>(</b>]
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [<b>searchString</b>]
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   <b>[)]
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [</b>lastIndexOf<b>]
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)   [</b>(<b>]
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)   [</b>searchString<b>]
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
 [<b>)</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
-indexOf
-() will return the index of the first occurrence of searchString in
-the string. If searchString is not found, then -1 is returned.
+-->
+
+<p>indexOf() will return the index of the first occurrence of searchString in
+the string. If searchString is not found, then -1 is returned.</p>
 
 <pre>
 <b>var</b> string = &quot;Hello, World!&quot;;
@@ -2528,33 +2541,40 @@ console.log( string.lastIndexOf(&quot;o&quot;)); // <i>8</i>
 console.log( string.lastIndexOf(&quot;foo&quot;));  // <i>-1</i>
 </pre>
 
+<!--
 [<b>includes</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>(</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>searchString</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>,</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>start</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
 
 [<b>)</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
+-->
 
-() will return a boolean that tells whether searchString exists in the
+<p>includes() will return a boolean that tells whether searchString exists in the
 string, starting from index start (defaults to 0). This is better than
-() if you simply need to test for existence of a substring.
+() if you simply need to test for existence of a substring.</p>
 
 <pre>
 <b>var</b> string = &quot;Hello, World!&quot;;
 console.log( string.includes(&quot;Hello&quot;) ); // <i>true</i>
 console.log( string.includes(&quot;foo&quot;));  // <i>false</i>
 </pre>
+<!-- page 45 -->
 
-[<b>replace</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>(</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>regexp</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>&vert;</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>substring</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>,</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>replacement</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>&vert;</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>replaceFunction</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
-[<b>)</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
-  
-replace
+<!-- [<b>replace</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>(</b>]
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>regexp</b>]
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>&vert;</b>]
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>substring</b>]
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>,</b>]
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>replacement</b>]
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>&vert;</b>]
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>replaceFunction</b>]
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) -->
 
-() will return a string that has all occurrences of substrings
-matching the
-[RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
+<p>replace() will return a string that has all occurrences of substrings matching the 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">RegExp</a>
 regexp or string substring with a string replacement or the returned
-value of replaceFunction.
+value of replaceFunction.</p>
 
-Note that this does not modify the string in place, but returns the
-string with replacements.
+<p>Note that this does not modify the string in place, but returns the
+string with replacements.</p>
 
 <pre>
 <b>var</b> string = &quot;Hello, World!&quot;;
@@ -2570,11 +2590,34 @@ expression objects (i.e., with use with regexp). The parameters are in
 the following order:</p>
 
 <b>Parameter Meaning</b>
-match the substring that matches the entire regular expressiong g1,
-g2, g3, &hellip; the matching groups in the regular expression offset the
-offset of the match in the entire string string the entire string
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+	  <th>Parameter</th>
+	  <th>Meaning</th>
+	</tr>
+  </thead>
+  <tbody>
+    <tr>
+	  <td>match</td>
+	  <td>the substring that matches the entire regular expression</td>
+	</tr>
+	<tr>
+	  <td>g1,g2,g3,...</td>
+	  <td>the matching groups in the regular expression</td>
+	</tr>
+	<tr>
+	  <td>offset</td>
+	  <td>the offset of the match in the entire string</td>
+	</tr>
+	<tr>
+	  <td>string</td>
+	  <td>the entire string</td>
+	</tr>
+  </tbody>
+</table>
 
-Note that all parameters are optional.
+<p>Note that all parameters are optional.</p>
 
 <pre>
 <b>var</b> string = &quot;heLlo, woRlD!&quot;;
@@ -2587,170 +2630,86 @@ console.log( string );  // <i>&quot;Hello, World!&quot;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-15">Section 7.15: Find the index of a substring inside a string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-indexOf
-The . method returns the index of a substring inside another string
-(if exists, or -1 if otherwise)
-&apos;Hellow World&apos;
-.
-indexOf
-(
-&apos;Wor&apos;
-)
-;
-<i>// 7</i>
-indexOf
-. also accepts an additional numeric argument that indicates on what
-index should the function start looking
-&quot;harr dee harr dee harr&quot;
-.
-indexOf
-(
-&quot;dee&quot;
-,
-10
-)
-;
-<i>// 14</i>
-indexOf
-You should note that . is case sensitive
-&apos;Hellow World&apos;
-.
-indexOf
-(
-&apos;WOR&apos;
-)
-;
-<i>// -1</i>
+<p>The .indexOf method returns the index of a substring inside another string (if exists, 
+or -1 if otherwise)</p>
+
+<pre>
+&apos;Hellow World&apos;.indexOf(&apos;Wor&apos;);  // <i>7</i>
+</pre>
+
+<p>.indexOf also accepts an additional numeric argument that indicates on what index 
+should the function start looking</p>
+
+<pre>
+&quot;harr dee harr dee harr&quot; .indexOf(&quot;dee&quot;, 10); // <i>14</i>
+</pre>
+
+<p>You should note that .indexOf is case sensitive</p>
+
+<pre>
+&apos;Hellow World&apos; .indexOf(&apos;WOR&apos;);  // <i>-1</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-16">Section 7.16: String to Upper Case</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<blockquote>
 String.prototype.toUpperCase():
-console.
-log
-(
-&apos;qwerty&apos;
-.
-toUpperCase
-(
-)
-)
-;
-<i>// &apos;QWERTY&apos;</i>
+</blockquote>
+
+<pre>
+console.log(&apos;qwerty&apos;.toUpperCase()); // <i>&apos;QWERTY&apos;</i>
+</pre>
+<!-- page 46 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-17">Section 7.17: String to Lower Case</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-String.prototype.toLowerCase()
-console.
-log
-(
-&apos;QWERTY&apos;
-.
-toLowerCase
-(
-)
-)
-;
-<i>// &apos;qwerty&apos;</i>
+<p>String.prototype.toLowerCase()</p>
+
+<pre>
+console.log(&apos;QWERTY&apos;.toLowerCase());  // <i>&apos;qwerty&apos;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-18">Section 7.18: Repeat a String</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-Version ≥ 6
+<p>Version ≥ 6</p>
 
-This can be done using the
-[.repeat()](http://www.ecma-international.org/ecma-262/6.0/#sec-string.prototype.repeat)
-method:
+<p>This can be done using the <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-string.prototype.repeat">.repeat()</a> 
+method:</p>
 
-&quot;abc&quot;
-.
-repeat
-(
-3
-)
-;
-<i>// Returns &quot;abcabcabc&quot;</i>
-&quot;abc&quot;
-.
-repeat
-(
-0
-)
-;
-<i>// Returns &quot;&quot;</i>
-&quot;abc&quot;
-.
-repeat
-(
-&minus;
-1
-)
-;
-<i>// Throws a RangeError</i>
-Version
-&lt;
-6
-In the general case, this should be done using a correct polyfill for
-the ES6
-[String.prototype.repeat()](http://www.ecma-international.org/ecma-262/6.0/#sec-string.prototype.repeat)
-method.
-Otherwise, the idiom
-<b>new</b>
-Array
-(
-n
-&plus;
-1
-)
-.
-join
-(
-myString
-)
-can repeat
-n
-times the string
-myString
-:
-<b>var</b>
-myString
-=
-&quot;abc&quot;
-;
-<b>var</b>
-n
-=
-3
-;
-<b>new</b>
-Array
-(
-n
-&plus;
-1
-)
-.
-join
-(
-myString
-)
-;
-<i>// Returns &quot;abcabcabc&quot;</i>
+<pre>
+&quot;abc&quot;.repeat(3);    // <i>Returns &quot;abcabcabc&quot;</i>
+&quot;abc&quot;.repeat(0);   // <i>Returns &quot;&quot;</i>
+&quot;abc&quot;.repeat(&minus;1);  // <i>Throws a RangeError</i>
+</pre>
+<p>Version &lt; 6</p>
+
+<p>In the general case, this should be done using a correct polyfill for
+the ES6 <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-string.prototype.repeat">
+String.prototype.repeat()</a> method. Otherwise, the idiom <b>new</b> Array(n &plus; 1).join(myString) 
+can repeat n times the string myString:</p>
+
+<pre>
+<b>var</b> myString = &quot;abc&quot;;
+<b>var</b> n = 3;
+
+<b>new</b> Array(n &plus; 1).join(myString);  // <i>Returns &quot;abcabcabc&quot;</i>
+</pre>
+<!-- page 47 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch8">Chapter 8: Date</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <b>Parameter Details</b>
 
-value The number of milliseconds since 1 January 1970 00:00:00.000 UTC
+<p>value The number of milliseconds since 1 January 1970 00:00:00.000 UTC
 (Unix epoch) dateAsString A date formatted as a string (see examples
-for more information)
+for more information)</p>
 
-The year value of the date. Note that month must also be provided, or
-the value will be interpreted
+<p>The year value of the date. Note that month must also be provided, or
+the value will be interpreted year as a number of milliseconds. Also note that values between 0 and
+99 have special meaning. See the examples.</p>
 
-year as a number of milliseconds. Also note that values between 0 and
-99 have special meaning. See the examples.
-
-  
-  11
+<!--  
+11
   
 
   
@@ -2771,7 +2730,7 @@ day Optional: The date, in the range 1-. hour Optional: The hour, in
 the range 0-. minute Optional: The minute, in the range 0-. second
 Optional: The second, in the range 0-. millisecond Optional: The
 millisecond, in the range 0-.
-
+-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-1">Section 8.1: Create a new Date object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2779,7 +2738,7 @@ Date
 To create a new Date object use the () constructor:
 
 <b>with no arguments</b>
-  Date
+Date
 () creates a Date instance containing the current time (up to
 milliseconds) and date.
 
@@ -2808,7 +2767,7 @@ December. Example: , 5, 1) gives <i>June 1st, 2017</i>.
 Note that these examples were generated on a browser in the Central
 Time Zone of the US, during Daylight Time,
 
-Date       .   <b>prototype</b>            .   toISOString
+Date.<b>prototype</b>.toISOString
 
 as evidenced by the code. Where comparison with UTC was instructive,
 () was used to show the date and time in UTC (the Z in the formatted
@@ -2876,92 +2835,39 @@ rollover.toString() === &apos;Sat Feb 02 2013 02:03:03 GMT-0600 (Central
 Standard Time)&apos; // <i>true; note that the month rolled over to Feb;
 first the month rolled over to</i>
 
+<pre>
 // <i>Jan based on the month 12 (11 being December), then again because
 of the day 32 // (January having 31 days).</i>
 
 // <i>Special dates for years in the range 0-99</i>
 
-<b>var</b>
-special1
-=
-<b>new</b>
-Date
-(
-12
-,
-0
-)
-;
-special1.
-toString
-(
-)
-===
+<b>var</b> special1 = <b>new</b> Date(12, 0);
+special1.toString() ===
 &apos;Mon Jan 01 1912 00:00:00 GMT-0600 (Central Standard Time)&grave;
 // true
-// If you actually wanted to set the year to the year 12 CE, you&apos;
-d need to use the
-*// setFullYear() method:</i>
-special1.
-setFullYear
-(
-12
-)
-;
-special1.
-toString
-(
-)
-===
+// If you actually wanted to set the year to the year 12 CE, you&apos;d need to use the
+// <i> setFullYear() method:</i>
+special1.setFullYear(12);
+special1.toString() ===
 &apos;Sun Jan 01 12 00:00:00 GMT-0600 (Central Standard Time)&grave;
 // true
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-2">Section 8.2: Convert to a string format</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<b>Convert to String</b>
-<b>var</b>
-date1
-=
-<b>new</b>
-Date
-(
-)
-;
-date1.
-toString
-(
-)
-;
+<p><b>Convert to String</b></p>
+
+<pre>
+<b>var</b> date1 = <b>new</b> Date();
+date1.toString();
 Returns: &quot;Fri Apr 15 2016 07:48:48 GMT-0400 (Eastern Daylight Time)&quot;
 <b>Convert to Time String</b>
-<b>var</b>
-date1
-=
-<b>new</b>
-Date
-(
-)
-;
-date1.
-toTimeString
-(
-)
-;
+<b>var</b> date1 = <b>new</b> Date();
+date1.toTimeString();
 Returns: &quot;07:48:48 GMT-0400 (Eastern Daylight Time)&quot;
 <b>Convert to Date String</b>
-<b>var</b>
-date1
-=
-<b>new</b>
-Date
-(
-)
-;
-date1.
-toDateString
-(
-)
-;
+<b>var</b> date1 = <b>new</b> Date();
+date1.toDateString();
 Returns: &quot;Thu Apr 14 2016&quot;
 <b>Convert to UTC String</b>
 <b>var</b>
@@ -2975,126 +2881,87 @@ Returns: &quot;2016-04-14T23:49:08.596Z&quot;
 <b>Convert to GMT String</b>
 <b>var</b> date1 = <b>new</b> Date ( ) ;
 date1.toGMTString ( ) ;
-Returns: &quot;Thu, 14 Apr 2016 23:49:08 GMT&quot;
+</pre>
+
+<p>Returns: &quot;Thu, 14 Apr 2016 23:49:08 GMT&quot;
 This function has been marked as deprecated so some browsers may not
 support it in the future. It is suggested to use toUTCString()
-instead.
-<b>Convert to Locale Date String</b>
+instead.</p>
+
+<p><b>Convert to Locale Date String</b></p>
+
+<pre>
 <b>var</b> date1 = <b>new</b> Date ( ) ;
-
 date1.toLocaleDateString ( ) ;
+</pre>
 
-Returns: &quot;4/14/2016&quot;
+<p>Returns: &quot;4/14/2016&quot;</p>
 
-This function returns a locale sensitive date string based upon the
-user&apos;s location by default.
+<p>This function returns a locale sensitive date string based upon the
+user&apos;s location by default.</p>
 
+<pre>
 date1.toLocaleDateString(&lbrack;locales&lbrack;, options &rbrack;&rbrack;)
+</pre>
 
-can be used to provide specific locales but is browser implementation
-specific. For example,
+<p>can be used to provide specific locales but is browser implementation
+specific. For example,</p>
 
+<pre>
 date1.toLocaleDateString(&lbrack; &quot;zh&quot; , &quot;en-US&quot; &rbrack; );
+</pre>
 
-would attempt to print the string in the Chinese locale using United
+<p>would attempt to print the string in the Chinese locale using United
 States English as a fallback. The options parameter can be used to
-provide specific formatting. For example:
+provide specific formatting. For example:</p>
 
+<pre>
 <b>var</b> options = { weekday: &apos;long&apos;, year: &apos;numeric&apos;, month:
 &apos;long&apos;, day: &apos;numeric&apos; }; date1.toLocaleDateString(&lbrack;&rbrack;, options);
-would result in
+</pre>
 
+<p>would result in</p>
+
+<pre>
 &quot;Thursday, April 14, 2016&quot;.
+</pre>
 
-See [the
-MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#Example:_Checking_for_support_for_locales_and_options_arguments)
-for more details.
-
+<p>See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#Example:_Checking_for_support_for_locales_and_options_arguments">
+the MDN</a> for more details.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-3">Section 8.3: Creating a Date from UTC</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-By default, a Date object is created as local time. This is not always
+<p>By default, a Date object is created as local time. This is not always
 desirable, for example when communicating a date between a server and
 a client that do not reside in the same timezone. In this scenario,
 one doesn&apos;t want to worry about timezones at all until the date needs
-to be displayed in local time, if that is even required at all.
+to be displayed in local time, if that is even required at all.</p>
 
-<b>The problem</b>
+<p><b>The problem</b></p>
 
-In this problem we want to communicate a specific date (day, month,
+<p>In this problem we want to communicate a specific date (day, month,
 year) with someone in a different timezone. The first implementation
 naively uses local times, which results in wrong results. The second
 implementation uses UTC dates to avoid timezones where they are not
-needed.
+needed.</p>
 
-<b>Naive approach with WRONG results</b>
+<p><b>Naive approach with WRONG results</b></p>
 
-<b>function</b>
-formatDate
+<pre>
+<b>function</b> formatDate
 (
-dayOfWeek
-,
-day
-,
-month
-,
-year
-)
-{
-<b>var</b>
-daysOfWeek
-=
-&lbrack;
-&quot;Sun&quot;
-,
-&quot;Mon&quot;
-,
-&quot;Tue&quot;
-,
-&quot;Wed&quot;
-,
-&quot;Thu&quot;
-,
-&quot;Fri&quot;
-,
-&quot;Sat&quot;
-&rbrack;
-;
-<b>var</b>
-months
-=
-&lbrack;
-&quot;Jan&quot;
-,
-&quot;Feb&quot;
-,
-&quot;Mar&quot;
-,
-&quot;Apr&quot;
-,
-&quot;May&quot;
-,
-&quot;Jun&quot;
-,
-&quot;Jul&quot;
-,
-&quot;Aug&quot;
-,
-quot;Sep&quot;
-,
-&quot;Oct&quot;
-,
-&quot;Nov&quot;
-,
-&quot;Dec&quot;
-&rbrack;
-;
+dayOfWeek, day, month, year) {
+<b>var</b> daysOfWeek = &lbrack;
+&quot;Sun&quot;, &quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;
+&rbrack;;
+<b>var</b> months = &lbrack;
+&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;,
+&quot;Jun&quot;, &quot;Jul&quot;, &quot;Aug&quot;, quot;Sep&quot;, &quot;Oct&quot;,
+&quot;Nov&quot;, &quot;Dec&quot;
+&rbrack;;
 <b>return</b>
-daysOfWeek
-&lbrack;
-dayOfWeek
-&rbrack;
+daysOfWeek &lbrack;
+dayOfWeek &rbrack;
 &plus;
 &quot; &quot;
 &plus;
@@ -3112,61 +2979,22 @@ day
 year
 ;
 }
-*//Foo lives in a country with timezone GMT + 1</i>
+// <i>Foo lives in a country with timezone GMT + 1</i>
 <b>var</b>
 birthday
 =
-<b>new</b>
-Date
-(
-2000
-,
-0
-,
-1
-)
-;
-console.
-log
-(
-&quot;Foo was born on: &quot;
-&plus;
-formatDate
-(
-birthday.
-getDay
-(
-)
-,
-birthday.
-getDate
-(
-)
-,
-birthday.
-getMonth
-(
-)
-,
-birthday.
-getFullYear
-(
-)
-)
-)
-;
-sendToBar
-(
-birthday.
-getTime
-(
-)
-)
-;
+<b>new</b> Date(2000, 0, 1);
+console.log(&quot;Foo was born on: &quot; &plus; formatDate(
+birthday.getDay(), birthday.getDate(),
+birthday.getMonth(), birthday.getFullYear()
+));
+sendToBar(birthday.getTime());
+</pre>
+
 Sample output:
 Foo was born on: Sat Jan 1 2000
-*//Meanwhile somewhere else&hellip;</i>
-*//Bar lives in a country with timezone GMT - 1</i>
+// <i>Meanwhile somewhere else&hellip;</i>
+// <i>Bar lives in a country with timezone GMT - 1</i>
 <b>var</b>
 birthday
 =
@@ -3294,7 +3122,7 @@ day
 year
 ;
 }
-*//Foo lives in a country with timezone GMT + 1</i>
+// <i>Foo lives in a country with timezone GMT + 1</i>
 <b>var</b>
 birthday
 =
@@ -3352,8 +3180,8 @@ getTime
 ;
 Sample output:
 Foo was born on: Sat Jan 1 2000
-*//Meanwhile somewhere else&hellip;</i>
-*//Bar lives in a country with timezone GMT - 1</i>
+// <i>Meanwhile somewhere else&hellip;</i>
+// <i>Bar lives in a country with timezone GMT - 1</i>
 <b>var</b>
 birthday
 =
@@ -3568,7 +3396,7 @@ getTime
 (
 )
 ;
-*//Alternatively</i>
+// <i>Alternatively</i>
 <b>var</b>
 timestamp2
 =
@@ -3579,13 +3407,13 @@ UTC
 console.log ( timestamp === timestamp2 );
 Sample output:
 <b>true</b>
-*//And when constructing a date from it elsewhere&hellip;</i>
+// <i>And when constructing a date from it elsewhere&hellip;</i>
 <b>var</b>
 otherDate
 = <b>new</b> Date ( timestamp ) ; 
-*//Represented as a universal date</i>
+// <i>Represented as a universal date</i>
 console.log ( otherDate. toUTCString ( ) );
-*//Represented as a local date</i>
+// <i>Represented as a local date</i>
 console.log ( otherDate ); 
 Sample output:
 Mon, 31 Jan 2000 12:00:00 GMT
@@ -3721,7 +3549,7 @@ The static method returns the number of milliseconds that have elapsed
 since 1 January 1970 00:00:00 UTC. To get the number of milliseconds
 that have elapsed since that time using an instance of a Date object,
 use its getTime method.
-*// get milliseconds using static method now of Date</i>
+// <i> get milliseconds using static method now of Date</i>
 console.
 log
 (
@@ -3732,7 +3560,7 @@ now
 )
 )
 ;
-*// get milliseconds using method getTime of Date instance</i>
+// <i> get milliseconds using method getTime of Date instance</i>
 console.
 log
 (
@@ -3744,9 +3572,9 @@ log
   <b>new</b> Date
 Use () to generate a new Date object containing the current date and
 time.
-Date   () *called without arguments is equivalent    <b>new</b>   (   Date   .   now
+Date   () <i>called without arguments</i> is equivalent    <b>new</b>   (   Date   .   now
 to</i>                                           Date                     
-*Note that</i> ())*.</i>
+<i>Note that</i> ())</i>.</i>
 
 Once you have a date object, you can apply any of the several
 available methods to extract its properties (e.g.
@@ -3761,10 +3589,10 @@ console.log(year); // <i>Sample output: 2016</i>
 <b>Get the current month</b>
 <b>var</b> month = ( <b>new</b> Date ( ) ) . getMonth ( ) ;
 console.log(month);  // <i>Sample output: 0</i>
-Please note that 0 = January. This is because months range from *0* to
-*11*, so it is often desirable to add +1 to the index.
+Please note that 0 = January. This is because months range from <i>0</i> to
+<i>11</i>, so it is often desirable to add +1 to the index.
 <b>Get the current day</b>
-*// Sample output: 31*
+// <i> Sample output: 31</i>
 <b>var</b>
 day
 =
@@ -3786,7 +3614,7 @@ day
 )
 ;
 <b>Get the current hour</b>
-*// Sample output: 10*
+// <i> Sample output: 10</i>
 <b>var</b>
 hours
 =
@@ -3828,7 +3656,7 @@ log
 minutes
 )
 ;
-*// Sample output: 39*
+// <i> Sample output: 39</i>
 <b>Get the current seconds</b>
 <b>var</b>
 seconds
@@ -3850,14 +3678,14 @@ log
 second
 )
 ;
-*// Sample output: 48*
+// <i> Sample output: 48</i>
 
 <b>Get the current milliseconds</b>
 
 To get the milliseconds (ranging from 0 to 999) of an instance of a
 Date object, use its getMilliseconds method.
 
-*// Output: milliseconds right now*
+// <i> Output: milliseconds right now</i>
 <b>var</b>
 milliseconds
 =
@@ -3887,7 +3715,7 @@ Date
 (
 )
 ;
-*// convert date to a string in UTC timezone format:*
+// <i> convert date to a string in UTC timezone format:</i>
 console.
 log
 (
@@ -3897,7 +3725,7 @@ toUTCString
 )
 )
 ;
-*// Output: Wed, 21 Jun 2017 09:13:01 GMT*
+// <i> Output: Wed, 21 Jun 2017 09:13:01 GMT</i>
   
 Date                                .        now
 
@@ -3905,9 +3733,9 @@ The static method () returns the number of milliseconds that have
 elapsed since 1 January 1970 00:00:00 UTC. To get the number of
 milliseconds that have elapsed since that time using an instance of a
 Date object, use its getTime method.
-*// get milliseconds using static method now of Date*
+// <i> get milliseconds using static method now of Date</i>
 console.log(Date.now());
-*// get milliseconds using method getTime of Date instance*
+// <i> get milliseconds using method getTime of Date instance</i>
 
 console.log((<b>new</b> Date()).getTime());
 
@@ -3917,22 +3745,22 @@ console.log((<b>new</b> Date()).getTime());
 To increment date objects in JavaScript, we can usually do this:
 <b>var</b> checkoutDate = <b>new</b> Date();
 
-*// Thu Jul 21 2016 10:05:13 GMT-0400 (EDT)*
+// <i> Thu Jul 21 2016 10:05:13 GMT-0400 (EDT)</i>
 
 checkoutDate.setDate (checkoutDate.getDate() &plus; 1);
 
-console.log(checkoutDate); *// Fri Jul 22 2016 10:05:13 GMT-0400
-(EDT)*
+console.log(checkoutDate); // <i> Fri Jul 22 2016 10:05:13 GMT-0400
+(EDT)</i>
 
 It is possible to use setDate to change the date to a day in the
 following month by using a value larger than the number of days in the
 current month -
 
-<b>var</b> checkoutDate = <b>new</b> Date(); *// Thu Jul 21 2016 10:05:13
-GMT-0400 (EDT)* checkoutDate.setDate( checkoutDate.getDate() + 12 );
+<b>var</b> checkoutDate = <b>new</b> Date(); // <i> Thu Jul 21 2016 10:05:13
+GMT-0400 (EDT)</i> checkoutDate.setDate( checkoutDate.getDate() + 12 );
 
-console.log(checkoutDate); *// Tue Aug 02 2016 10:05:13 GMT-0400
-(EDT)*
+console.log(checkoutDate); // <i> Tue Aug 02 2016 10:05:13 GMT-0400
+(EDT)</i>
 
 The same applies to other methods such as getHours(), getMonth(),etc.
 
@@ -3951,8 +3779,8 @@ startDate
 days
 )
 {
-*// Get the day of the week as a number (0 = Sunday, 1 = Monday, &hellip;. 6
-= Saturday)*
+// <i> Get the day of the week as a number (0 = Sunday, 1 = Monday, &hellip;. 6
+= Saturday)</i>
 <b>var</b>
 dow
 =
@@ -3966,7 +3794,7 @@ daysToAdd
 =
 days
 ;
-*// If the current day is Sunday add one day*
+// <i> If the current day is Sunday add one day</i>
 <b>if</b>
 (
 dow
@@ -3976,9 +3804,9 @@ dow
 daysToAdd
 ++
 ;
-*// If the start date plus the additional days falls on or after the
-closest Saturday calculate*
-*weekends*
+// <i> If the start date plus the additional days falls on or after the
+closest Saturday calculate</i>
+<i>weekends</i>
 <b>if</b>
 (
 dow
@@ -3988,7 +3816,7 @@ daysToAdd
 6
 )
 {
-*//Subtract days in current working week from work days*
+// <i>Subtract days in current working week from work days</i>
 <b>var</b>
 remainingWorkDays
 =
@@ -4000,7 +3828,7 @@ daysToAdd
 dow
 )
 ;
-*//Add current working week&apos;s weekend*
+// <i>Add current working week&apos;s weekend</i>
 daysToAdd
 +=
 2
@@ -4012,8 +3840,8 @@ remainingWorkDays
 5
 )
 {
-*//Add two days for each working week by calculating how many weeks are
-included*
+// <i>Add two days for each working week by calculating how many weeks are
+included</i>
 daysToAdd
 +=
 2
@@ -4027,8 +3855,8 @@ remainingWorkDays
 5
 )
 ;
-*//Exclude final weekend if remainingWorkDays resolves to an exact
-number of weeks*
+// <i>Exclude final weekend if remainingWorkDays resolves to an exact
+number of weeks</i>
 <b>if</b>
 (
 remainingWorkDays
@@ -4224,23 +4052,8 @@ Date
 <b>var</b>
 date2
 =
-<b>new</b>
-Date
-(
-date1.
-valueOf
-(
-)
-)
-;
-console.
-log
-(
-date1
-&lt;=
-date2
-)
-;
+<b>new</b> Date(date1.valueOf());
+console.log( date1 &lt;= date2);
 Sample output:
 <b>true</b>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -4248,65 +4061,13 @@ Sample output:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 To compare the difference of two dates, we can do the comparison based
 on the timestamp.
-<b>var</b>
-date1
-=
-<b>new</b>
-Date
-(
-)
-;
-<b>var</b>
-date2
-=
-<b>new</b>
-Date
-(
-date1.
-valueOf
-(
-)
-&plus;
-5000
-)
-;
-<b>var</b>
-dateDiff
-=
-date1.
-valueOf
-(
-)
-&minus;
-date2.
-valueOf
-(
-)
-;
-<b>var</b>
-dateDiffInYears
-=
-dateDiff
-/
-1000
-/
-60
-/
-60
-/
-24
-/
-365
-;
-*//convert milliseconds into years*
-console.
-log
-(
-&quot;Date difference in years : &quot;
-&plus;
-dateDiffInYears
-)
-;
+<pre>
+<b>var</b> date1 = <b>new</b> Date();
+<b>var</b> date2 = <b>new</b> Date(date1.valueOf() &plus; 5000);
+<b>var</b> dateDiff = date1.valueOf() &minus; date2.valueOf();
+<b>var</b> dateDiffInYears = dateDiff / 1000 / 60 / 60 / 24 / 365; // <i>convert milliseconds into years</i>
+console.log( &quot;Date difference in years : &quot; &plus; dateDiffInYears);
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch10">Chapter 10: Comparison Operations</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -4318,247 +4079,112 @@ their operands if the operand types do not match. This type coercion
 is a common source of confusion about the results of these operators,
 in particular, these operators aren&apos;t always transitive as one would
 expect.
-&quot;&quot;
-==
-0
-;
-*// true A*
-0
-==
-&quot;0&quot;
-;
-*// true A*
-&quot;&quot;
-==
-&quot;0&quot;
-;
-*// false B*
-<b>false</b>
-==
-0
-;
-*// true*
-<b>false</b>
-==
-&quot;0&quot;
-;
-*// true*
-&quot;&quot;
-!=
-0
-;
-*// false A*
-0
-!=
-&quot;0&quot;
-;
-*// false A*
-&quot;&quot;
-!=
-&quot;0&quot;
-;
-*// true B*
-<b>false</b>
-!=
-0
-;
-*// false*
-<b>false</b>
-!=
-&quot;0&quot;
-;
-*// false*
-The results start to make sense if you consider how JavaScript
-converts empty strings to numbers.
-Number
-(
-&quot;&quot;
-)
-;
-*// 0*
-Number
-(
-&quot;0&quot;
-)
-;
-*// 0*
-Number
-(
-<b>false</b>
-)
-;
-*// 0*
-<b>The Solution</b>
+
+<pre>
+&quot;&quot; == 0;  // <i> true A</i>
+0 == &quot;0&quot;; // <i> true A</i>
+&quot;&quot; == &quot;0&quot;; // <i> false B</i>
+<b>false</b> == 0;  // <i> true</i>
+<b>false</b> == &quot;0&quot;;  // <i> true</i>
+&quot;&quot; != 0;  // <i> false A</i>
+0 != &quot;0&quot;;  // <i> false A</i>
+&quot;&quot; != &quot;0&quot;;  // <i> true B</i>
+<b>false</b> != 0;  // <i> false</i>
+<b>false</b> != &quot;0&quot;;  // <i> false</i>
+</pre>
+
+<p>The results start to make sense if you consider how JavaScript
+converts empty strings to numbers.</p>
+
+<pre>
+Number( &quot;&quot; );  // <i> 0</i>
+Number( &quot;0&quot; );  // <i> 0</i>
+Number( <b>false</b> );  // <i> 0</i>
+</pre>
+
+<p><b>The Solution</b></p>
   
-  <b>false</b> B
-  &quot;&quot; == &quot;0&quot;
-In the statement , both the operands are strings (&quot;&quot; and &quot;0&quot;),
+<b>false</b> B
+
+<pre>&quot;&quot; == &quot;0&quot;</pre>
+
+<p>In the statement , both the operands are strings (&quot;&quot; and &quot;0&quot;),
 hence there will be <b>no type conversion</b> and since &quot;&quot; and &quot;0&quot;
-are not the same value, is <b>false</b> as expected.
+are not the same value, is <b>false</b> as expected.</p>
 
-One way to eliminate unexpected behavior here is making sure that you
+<p>One way to eliminate unexpected behavior here is making sure that you
 always compare operands of the same type. For example, if you want the
-results of numerical comparison use explicit conversion:
+results of numerical comparison use explicit conversion:</p>
 
-<b>var</b>
-test
-=
-(
-a
-,
-b
-)
-=&gt;
-Number
-(
-a
-)
-==
-Number
-(
-b
-)
-;
-test
-(
-&quot;&quot;
-,
-0
-)
-;
-*// true;*
-test
-(
-&quot;0&quot;
-,
-0
-)
-;
-*// true*
-test
-(
-&quot;&quot;
-,
-&quot;0&quot;
-)
-;
-*// true;*
-test
-(
-&quot;abc&quot;
-,
-&quot;abc&quot;
-)
-;
-*// false as operands are not numbers*
-Or, if you want string comparison:
-<b>var</b>
-test
-=
-(
-a
-,
-b
-)
-=&gt;
-String
-(
-a
-)
-==
-String
-(
-b
-)
-;
-test
-(
-&quot;&quot;
-,
-0
-)
-;
-*// false;*
-test
-(
-&quot;0&quot;
-,
-0
-)
-;
-*// true*
-test
-(
-&quot;&quot;
-,
-&quot;0&quot;
-)
-;
-*// false;*
-  Number         (   &quot;0&quot;   ) and        <b>new</b> Number           (   &quot;0&quot;
+<pre>
+<b>var</b> test = (a, b) =&gt; Number(a) == Number(b);
+test(&quot;&quot;, 0 );  // <i> true;</i>
+test(&quot;0&quot;, 0);  // <i> true</i>
+test(&quot;&quot;, &quot;0&quot;);  // <i> true;</i>
+test(&quot;abc&quot;, &quot;abc&quot;);  // <i> false as operands are not numbers</i>
+</pre>
 
-*Side-note*: ) isn&apos;t the same thing! While the former performs a type
+<p>Or, if you want string comparison:</p>
+
+<pre>
+<b>var</b> test = (a, b) =&gt; String(a) == String(b);
+test(&quot;&quot;, 0);  // <i> false;</i>
+test(&quot;0&quot;, 0);  // <i> true</i>
+test(&quot;&quot;, &quot;0&quot;);  // <i> false;</i>
+</pre>
+
+<!-- Number         (   &quot;0&quot;   ) and        <b>new</b> Number           (   &quot;0&quot; -->
+
+</i>Side-note</i>: ) isn&apos;t the same thing! While the former performs a type
 conversion,
 
-the latter will create a new object. Objects are compared by reference
-and not by value which explains the results below.
+<p>the latter will create a new object. Objects are compared by reference
+and not by value which explains the results below.</p>
 
-Number
-(
-&quot;0&quot;
-)
-==
-Number
-(
-&quot;0&quot;
-)
-;
-*// true;*
-<b>new</b>
-Number
-(
-&quot;0&quot;
-)
-==
-<b>new</b>
-Number
-(
-&quot;0&quot;
-)
-;
-*// false*
-Finally, you have the option to use strict equality and inequality
-operators which will not perform any implicit type conversions.
+<pre>
+Number(&quot;0&quot;) == Number(&quot;0&quot;);  // <i> true;</i>
+<b>new</b> Number(&quot;0&quot;) == <b>new</b> Number (&quot;0&quot;);  // <i> false</i>
+</pre>
+
+<p>Finally, you have the option to use strict equality and inequality
+operators which will not perform any implicit type conversions.</p>
+
+<pre>
 &quot;&quot;
 ===
 0
 ;
-*// false*
+// <i> false</i>
 0
 ===
 &quot;0&quot;
 ;
-*// false*
+// <i> false</i>
 &quot;&quot;
 ===
 &quot;0&quot;
 ;
-*// false*
-Further reference to this topic can be found here:
+// <i> false</i>
+</pre>
 
+<p>Further reference to this topic can be found here:</p>
+
+<!-- 
 [Which equals operator (== vs ===) should be used in JavaScript
-comparisons?](http://stackoverflow.com/questions/359494/does-it-matter-which-equals-operator-vs-i-use-in-javascript-comparisons).
+comparisons?]
+(http://stackoverflow.com/questions/359494/does-it-matter-which-equals-operator-vs-i-use-in-javascript-comparisons).
 Abstract Equality (==)
+-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-2">Section 10.2: NaN Property of the Global Object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 &quot;two&quot;
-
-Math                            .       sqrt
+Math.sqrt
 
 <b>NaN</b> (&quot;<b>N</b>ot <b>a</b> <b>N</b>umber&quot;) is a special value defined by
-the [*IEEE Standard for Floating-Point
-Arithmetic*](https://en.wikipedia.org/wiki/IEEE_floating_point), which
+the &lbrack;<i>IEEE Standard for Floating-Point
+Arithmetic</i>&rbrack;(https://en.wikipedia.org/wiki/IEEE_floating_point), which
 is used when a non-numeric value is provided but a number is expected
 (1 &ast;), or when a calculation doesn&apos;t have a valid number result
 ((-1)).
@@ -4574,54 +4200,54 @@ to the result of any other nonsensical computations.
 )
 ===
 <b>NaN</b>
-*//false*
+// <i>false</i>
 <b>NaN</b>
 ===
 0
 ;
-*// false*
+// <i> false</i>
 <b>NaN</b>
 ===
 <b>NaN</b>
 ;
-*// false*
+// <i> false</i>
 Number
 .
 <b>NaN</b>
 ===
 <b>NaN</b>
 ;
-*// false*
+// <i> false</i>
 <b>NaN</b>
 &lt;
 0
 ;
-*// false*
+// <i> false</i>
 <b>NaN</b>
 &gt;
 0
 ;
-*// false*
+// <i> false</i>
 <b>NaN</b>
 &gt;
 0
 ;
-*// false*
+// <i> false</i>
 <b>NaN</b>
 &gt;=
 <b>NaN</b>
 ;
-*// false*
+// <i> false</i>
 <b>NaN</b>
 &gt;=
 &apos;two&apos;
 ;
-*// false*
+// <i> false</i>
 Non-equal comparisons will always return
 <b>true</b>
 :
-<b>NaN</b> !== 0; *// true*
-<b>NaN</b> !== <b>NaN</b>; *// true*
+<b>NaN</b> !== 0; // <i> true</i>
+<b>NaN</b> !== <b>NaN</b>; // <i> true</i>
 <b>Checking if a value is NaN</b> Version ≥ 6
 
 You can test a value or expression for <b>NaN</b> by using the function
@@ -4633,7 +4259,7 @@ isNaN
 <b>NaN</b>
 )
 ;
-*// true*
+// <i> true</i>
 Number
 .
 isNaN
@@ -4643,7 +4269,7 @@ isNaN
 0
 )
 ;
-*// true*
+// <i> true</i>
 Number
 .
 isNaN
@@ -4653,7 +4279,7 @@ isNaN
 12
 )
 ;
-*// true*
+// <i> true</i>
 Number
 .
 isNaN
@@ -4661,7 +4287,7 @@ isNaN
 24
 )
 ;
-*// false*
+// <i> false</i>
 Number
 .
 isNaN
@@ -4669,7 +4295,7 @@ isNaN
 &apos;24&apos;
 )
 ;
-*// false*
+// <i> false</i>
 Number
 .
 isNaN
@@ -4679,7 +4305,7 @@ isNaN
 0
 )
 ;
-*// false*
+// <i> false</i>
 Number
 .
 isNaN
@@ -4687,7 +4313,7 @@ isNaN
 <b>Infinity</b>
 )
 ;
-*// false*
+// <i> false</i>
 Number
 .
 isNaN
@@ -4695,7 +4321,7 @@ isNaN
 &apos;str&apos;
 )
 ;
-*// false*
+// <i> false</i>
 Number
 .
 isNaN
@@ -4703,7 +4329,7 @@ isNaN
 <b>undefined</b>
 )
 ;
-*// false*
+// <i> false</i>
 Number
 .
 isNaN
@@ -4712,14 +4338,14 @@ isNaN
 }
 )
 ;
-*// false*
+// <i> false</i>
 Version &lt; 6
 You can check if a value is <b>NaN</b> by comparing it with itself:
 value
 !==
 value
 ;
-*// true for NaN, false for any other value*
+// <i> true for NaN, false for any other value</i>
   
 Number                              .     isNaN
 You can use the following polyfill for ():
@@ -4754,7 +4380,7 @@ isNaN
 <b>NaN</b>
 )
 ;
-*// true*
+// <i> true</i>
 isNaN
 (
 0
@@ -4762,7 +4388,7 @@ isNaN
 0
 )
 ;
-*// true*
+// <i> true</i>
 isNaN
 (
 &apos;str&apos;
@@ -4770,51 +4396,51 @@ isNaN
 12
 )
 ;
-*// true*
+// <i> true</i>
 isNaN
 (
 24
 )
 ;
-*// false*
+// <i> false</i>
 isNaN
 (
 &apos;24&apos;
 )
 ;
-*// false*
+// <i> false</i>
 isNaN
 (
 <b>Infinity</b>
 )
 ;
-*// false*
+// <i> false</i>
 isNaN
 (
 &apos;str&apos;
 )
 ;
-*// true*
+// <i> true</i>
 isNaN
 (
 <b>undefined</b>
 )
 ;
-*// true*
+// <i> true</i>
 isNaN
 (
 {
 }
 )
 ;
-*// true*
+// <i> true</i>
 
 ECMAScript defines a "sameness" algorithm called SameValue which,
 since ECMAScript 6, can be invoked with
 Object   .   is   . Unlike the == and === comparison, using       Object   .   is
 
 () will treat <b>NaN</b> as identical with itself (and -0 as not
-<b>NaN</b> === <b>NaN</b> *// false*
+<b>NaN</b> === <b>NaN</b> // <i> false</i>
 identical with
 +0
 ):
@@ -4826,7 +4452,7 @@ is
 ,
 <b>NaN</b>
 )
-*// true*
+// <i> true</i>
 Object
 .
 is
@@ -4836,12 +4462,12 @@ is
 ,
 0
 )
-*// false*
+// <i> false</i>
 &plus;
 0
 ===
 0
-*// true*
+// <i> true</i>
 Version &lt; 6
 Object                                          .       is
 You can use the following polyfill for () (from
@@ -4865,7 +4491,7 @@ x
 y
 )
 {
-*// SameValue algorithm*
+// <i> SameValue algorithm</i>
 <b>if</b>
 (
 x
@@ -4873,8 +4499,8 @@ x
 y
 )
 {
-*// Steps 1-5, 7-10*
-*// Steps 6.b-6.e: +0 != -0*
+// <i> Steps 1-5, 7-10</i>
+// <i> Steps 6.b-6.e: +0 != -0</i>
 <b>return</b>
 x
 !==
@@ -4891,7 +4517,7 @@ y
 }
 <b>else</b>
 {
-*// Step 6.a: NaN == NaN*
+// <i> Step 6.a: NaN == NaN</i>
 <b>return</b>
 x
 !==
@@ -4915,7 +4541,9 @@ NaN itself is a number, meaning that it does not equal to the string
 ===
 &quot;number&quot;
 ;
-*//true*
+// <i>true</i>
+
+-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-3">Section 10.3: Short-circuiting in boolean operators</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -4938,7 +4566,7 @@ T
 (
 )
 {
-*// True*
+// <i> True</i>
 console.
 log
 (
@@ -4954,7 +4582,7 @@ F
 (
 )
 {
-*// False*
+// <i> False</i>
 console.
 log
 (
@@ -4974,12 +4602,12 @@ F
 (
 )
 ;
-*// false*
+// <i> false</i>
 Output:
 &apos;T&apos;
 
 &apos;F&apos;
-***Example 2***
+<i><b>Example 2</b></i>
 F
 (
 )
@@ -4988,10 +4616,10 @@ T
 (
 )
 ;
-*// false*
+// <i> false</i>
 Output:
 &apos;F&apos;
-***Example 3***
+<i><b>Example 3</b></i>
 T
 (
 )
@@ -5000,10 +4628,10 @@ F
 (
 )
 ;
-*// true*
+// <i> true</i>
 Output:
 &apos;T&apos;
-***Example 4***
+<i><b>Example 4</b></i>
 F
 (
 )
@@ -5012,15 +4640,15 @@ T
 (
 )
 ;
-*// true*
+// <i> true</i>
 Output:
 &apos;F&apos;
 &apos;T&apos;
 <b>Short-circuiting to prevent errors</b>
-<b>var</b> obj; *// object has value of undefined* <b>if</b>(obj.property){
-}*// TypeError: Cannot read property &apos;property&apos; of undefined*
-<b>if</b>(obj.property && obj !== <b>undefined</b>){}*// Line A TypeError:
-Cannot read property &apos;property&apos; of undefined*
+<b>var</b> obj; // <i> object has value of undefined</i> <b>if</b>(obj.property){
+}// <i> TypeError: Cannot read property &apos;property&apos; of undefined</i>
+<b>if</b>(obj.property && obj !== <b>undefined</b>){}// <i> Line A TypeError:
+Cannot read property &apos;property&apos; of undefined</i>
 Line A: if you reverse the order the first conditional statement will
 prevent the error on the second by not executing it if it would throw
 the error
@@ -5036,11 +4664,11 @@ property
 {
 }
 ;
-*// no error thrown*
+// <i> no error thrown</i>
 But should only be used if you expect <b>undefined</b>
 
-<b>if</b>(<b>typeof</b> obj === &quot;object&quot; && obj.property){}; *// safe
-option but slower*
+<b>if</b>(<b>typeof</b> obj === &quot;object&quot; && obj.property){}; // <i> safe
+option but slower</i>
 
 <b>Short-circuiting to provide a default value</b>
 
@@ -5062,7 +4690,7 @@ nullableObj
 {
 }
 ;
-*// this selects {}*
+// <i> this selects {}</i>
 <b>var</b>
 nullableObj2
 =
@@ -5079,7 +4707,7 @@ nullableObj2
 &vert;&vert;
 {
 }
-*// this selects {x: 5}*
+// <i> this selects {x: 5}</i>
 Or to return the first truthy value
 <b>var</b>
 truthyValue
@@ -5096,10 +4724,10 @@ truthyValue
 {
 }
 ;
-*// will return {x: 10}*
+// <i> will return {x: 10}</i>
 The same can be used to fall back multiple times:
-envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue *// select the
-first &quot;truthy&quot; of these*
+envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue // <i> select the
+first &quot;truthy&quot; of these</i>
 <b>Short-circuiting to call an optional function</b>
 The && operator can be used to evaluate a callback, only if it is
 passed:
@@ -5109,7 +4737,7 @@ myMethod
 cb
 )
 {
-*// This can be simplified*
+// <i> This can be simplified</i>
 <b>if</b>
 (
 cb
@@ -5120,7 +4748,7 @@ cb
 )
 ;
 }
-*// To this*
+// <i> To this</i>
 cb
 &&
 cb
@@ -5139,27 +4767,27 @@ share abstract equality == but not strict equality ===,
 <b>null</b>
 ==
 <b>undefined</b>
-*// true*
+// <i> true</i>
 <b>null</b>
 ===
 <b>undefined</b>
-*// false*
+// <i> false</i>
 They represent slightly different things:
-<b>undefined</b> represents the *absence of a value*, such as before an
+<b>undefined</b> represents the <i>absence of a value</i>, such as before an
 identifier/Object property has been created or in the period between
 identifier/Function parameter creation and it&apos;s first set, if any.
 
-<b>null</b> represents the <b>*intentional</b> absence of a value* for an
+<b>null</b> represents the <i><b>intentional</b> absence of a value</i> for an
 identifier or property which has already been created.
 
 They are different types of syntax:
 
-<b>undefined</b> is a *property of the global Object*, usually immutable
+<b>undefined</b> is a <i>property of the global Object</i>, usually immutable
 in the global scope. This means anywhere you can define an identifier
 other than in the global namespace could hide <b>undefined</b> from that
 scope (although things can still <b>be</b> <b>undefined</b>) <b>null</b> is a
-*word literal*, so it&apos;s meaning can never be changed and attempting
-to do so will throw an *Error*. <b>The similarities between null and
+<i>word literal</i>, so it&apos;s meaning can never be changed and attempting
+to do so will throw an <i>Error</i>. <b>The similarities between null and
 undefined null</b> and <b>undefined</b> are both falsy.
 <b>if</b>
 (
@@ -5186,19 +4814,19 @@ question](http://stackoverflow.com/q/19277458/220060)).
 <b>false</b>
 ==
 <b>undefined</b>
-*// false*
+// <i> false</i>
 <b>false</b>
 ==
 <b>null</b>
-*// false*
+// <i> false</i>
 <b>false</b>
 ===
 <b>undefined</b>
-*// false*
+// <i> false</i>
 <b>false</b>
 ===
 <b>null</b>
-*// false*
+// <i> false</i>
 <b>Using</b>
 <b>undefined</b>
   
@@ -5206,20 +4834,20 @@ question](http://stackoverflow.com/q/19277458/220060)).
 foo.bar
 <b>typeof</b> foo
 If the current scope can&apos;t be trusted, use something which evaluates
-to *undefined*, for example 0;.
+to <i>undefined</i>, for example 0;.
 
 If <b>undefined</b> is shadowed by another value, it&apos;s just as bad as
 shadowing Array or Number.
 
-Avoid *setting* something as <b>undefined</b>. If you want to remove a
-property *bar* from an *Object* foo, <b>delete</b> ; instead.
+Avoid <i>setting</i> something as <b>undefined</b>. If you want to remove a
+property <i>bar</i> from an <i>Object</i> foo, <b>delete</b> ; instead.
 
 Existence testing identifier foo against <b>undefined</b> <b>could throw a
 Reference Error</b>, use against &quot;undefined&quot; instead.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-5">Section 10.5: Abstract Equality (==)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-Operands of the abstract equality operator are compared *after* being
+Operands of the abstract equality operator are compared <i>after</i> being
 converted to a common type. How this conversion happens is based on
 the specification of the operator:
 [Specification for the ==
@@ -5227,13 +4855,13 @@ operator:](https://tc39.github.io/ecma262/#sec-abstract-equality-comparison)
 <b>7.2.13 Abstract Equality Comparison</b>
   x == y
 The comparison , where x and y are values, produces <b>true</b> or
-**false**. Such a comparison is performed as follows:
+<b>false</b>. Such a comparison is performed as follows:
   Type        &lpar;x&rpar; is the same as                            Type
 1.  If (y), then:
 x === y
-**a.** Return the result of performing Strict Equality Comparison .
-2.  If x is **null** and y is **undefined**, return **true**.
-3.  If x is **undefined** and y is **null**, return **true**.
+<b>a.</b> Return the result of performing Strict Equality Comparison .
+2.  If x is <b>null</b> and y is <b>undefined</b>, return <b>true</b>.
+3.  If x is <b>undefined</b> and y is <b>null</b>, return <b>true</b>.
   Type   &lpar;x&rpar; is      Type   &lpar;y&rpar; is String, return the result of  x ==
          Number and           the comparison                         ToNumber
 4.  If (y).
@@ -5253,50 +4881,50 @@ x === y
   ToPrimitive                               &lpar;x&rpar;       == y
 9.  If (y) is either String, Number, or Symbol, return the result of the
     comparison .
-10. Return **false**.
-**Examples:**
-1 == 1; *// true*
-1 == **true**; *// true (operand converted to number: true =&bsol;1)*
-1 == &apos;1&apos;; *// true (operand converted to number: &apos;1&apos; =&bsol;1 )*
-1 == &apos;1.00&apos;; *// true*
-1 == &apos;1.00000000001&apos;; *// false*
-1 == &apos;1.00000000000000001&apos;; *// true (true due to precision loss)*
-**null** == **undefined**; *// true (spec #2)*
-1 == 2; *// false* 0 == **false**; *// true*
-0 == **undefined**; *// false*
-0 == &quot;&quot;; *// true*
+10. Return <b>false</b>.
+<b>Examples:</b>
+1 == 1; // <i> true</i>
+1 == <b>true</b>; // <i> true (operand converted to number: true =&bsol;1)</i>
+1 == &apos;1&apos;; // <i> true (operand converted to number: &apos;1&apos; =&bsol;1 )</i>
+1 == &apos;1.00&apos;; // <i> true</i>
+1 == &apos;1.00000000001&apos;; // <i> false</i>
+1 == &apos;1.00000000000000001&apos;; // <i> true (true due to precision loss)</i>
+<b>null</b> == <b>undefined</b>; // <i> true (spec #2)</i>
+1 == 2; // <i> false</i> 0 == <b>false</b>; // <i> true</i>
+0 == <b>undefined</b>; // <i> false</i>
+0 == &quot;&quot;; // <i> true</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-6">Section 10.6: Logic Operators with Booleans</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-**var**
+<b>var</b>
 x
 =
-**true**
+<b>true</b>
 ,
 y
 =
-**false**
+<b>false</b>
 ;
-**AND**
+<b>AND</b>
 This operator will return true if both of the expressions evaluate to
 true. This boolean operator will employ shortcircuiting and will not
-evaluate y if x evaluates to **false**.
+evaluate y if x evaluates to <b>false</b>.
 x
 &&
 y
 ;
 This will return false, because y is false.
-**OR**
+<b>OR</b>
 This operator will return true if one of the two expressions evaluate
 to true. This boolean operator will employ short-circuiting and y will
-not be evaluated if x evaluates to **true**.
+not be evaluated if x evaluates to <b>true</b>.
 x
 &vert;&vert;
 y
 ;
 This will return true, because x is true.
 
-**NOT**
+<b>NOT</b>
 
 This operator will return false if the expression on the right
 evaluates to true, and return true if the expression on the right
@@ -5315,28 +4943,28 @@ Beware that numbers can accidentally be converted to strings or NaN
 JavaScript is loosely typed. A variable can contain different data
 types, and a variable can change its data type:
 
-**var**
+<b>var</b>
 x
 =
 &quot;Hello&quot;
 ;
-*// typeof x is a string*
+// <i> typeof x is a string</i>
 x
 =
 5
 ;
-*// changes typeof x to a number*
+// <i> changes typeof x to a number</i>
 
 When doing mathematical operations, JavaScript can convert numbers to
 strings:
 
-**var** x = 5 + 7; *// x.valueOf() is 12, typeof x is a number*
-**var** x = 5 + &quot;7&quot;; *// x.valueOf() is 57, typeof x is a string*
-**var** x = &quot;5&quot; + 7; *// x.valueOf() is 57, typeof x is a string*
-**var** x = 5 - 7; *// x.valueOf() is -2, typeof x is a number*
-**var** x = 5 - &quot;7&quot;; *// x.valueOf() is -2, typeof x is a number*
-**var** x = &quot;5&quot; - 7; *// x.valueOf() is -2, typeof x is a number*
-**var** x = 5 - &quot;x&quot;; *// x.valueOf() is NaN, typeof x is a number*
+<b>var</b> x = 5 + 7; // <i> x.valueOf() is 12, typeof x is a number</i>
+<b>var</b> x = 5 + &quot;7&quot;; // <i> x.valueOf() is 57, typeof x is a string</i>
+<b>var</b> x = &quot;5&quot; + 7; // <i> x.valueOf() is 57, typeof x is a string</i>
+<b>var</b> x = 5 - 7; // <i> x.valueOf() is -2, typeof x is a number</i>
+<b>var</b> x = 5 - &quot;7&quot;; // <i> x.valueOf() is -2, typeof x is a number</i>
+<b>var</b> x = &quot;5&quot; - 7; // <i> x.valueOf() is -2, typeof x is a number</i>
+<b>var</b> x = 5 - &quot;x&quot;; // <i> x.valueOf() is NaN, typeof x is a number</i>
 
 Subtracting a string from a string, does not generate an error but
 returns NaN (Not a Number):
@@ -5344,42 +4972,42 @@ returns NaN (Not a Number):
 &quot;Hello&quot;
 &minus;
 &quot;Dolly&quot;
-*// returns NaN*
+// <i> returns NaN</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-8">Section 10.8: Logic Operators with Non-boolean values (boolean coercion)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 Logical OR (&vert;&vert;), reading left to right, will evaluate to the first
-*truthy* value. If no *truthy* value is found, the last value is
+<i>truthy</i> value. If no <i>truthy</i> value is found, the last value is
 returned.
 
-**var** a = &apos;hello&apos; &vert;&vert; &apos;&apos;; *// a = &apos;hello&apos;* **var** b = &apos;&apos;
-&vert;&vert; &lbrack;&rbrack;; *// b = &lbrack;&rbrack;* **var** c = &apos;&apos; &vert;&vert; **undefined**; *// c =
-undefined* **var** d = 1 &vert;&vert; 5; *// d = 1* **var** e = 0 &vert;&vert; {}; *//
-e = {}* **var** f = 0 &vert;&vert; &apos;&apos; &vert;&vert; 5; *// f = 5* **var** g = &apos;&apos;
-&vert;&vert; &apos;yay&apos; &vert;&vert; &apos;boo&apos;; *// g = &apos;yay&apos;*
+<b>var</b> a = &apos;hello&apos; &vert;&vert; &apos;&apos;; // <i> a = &apos;hello&apos;</i> <b>var</b> b = &apos;&apos;
+&vert;&vert; &lbrack;&rbrack;; // <i> b = &lbrack;&rbrack;</i> <b>var</b> c = &apos;&apos; &vert;&vert; <b>undefined</b>; // <i> c =
+undefined</i> <b>var</b> d = 1 &vert;&vert; 5; // <i> d = 1</i> <b>var</b> e = 0 &vert;&vert; {}; // <i>
+e = {}</i> <b>var</b> f = 0 &vert;&vert; &apos;&apos; &vert;&vert; 5; // <i> f = 5</i> <b>var</b> g = &apos;&apos;
+&vert;&vert; &apos;yay&apos; &vert;&vert; &apos;boo&apos;; // <i> g = &apos;yay&apos;</i>
 
 Logical AND (&&), reading left to right, will evaluate to the first
-*falsy* value. If no *falsey* value is found, the last value is
+<i>falsy</i> value. If no <i>falsey</i> value is found, the last value is
 returned.
 
-**var** a = &apos;hello&apos; && &apos;&apos;; *// a = &apos;&apos;* **var** b = &apos;&apos; && &lbrack;&rbrack;;
-*// b = &apos;&apos;* **var** c = **undefined** && 0; *// c = undefined*
-**var** d = 1 && 5; *// d = 5* **var** e = 0 && {}; *// e = 0* **var**
-f = &apos;hi&apos; && &lbrack;&rbrack; && &apos;done&apos;; *// f = &apos;done&apos;* **var** g = &apos;bye&apos;
-&& **undefined** && &apos;adios&apos;; *// g = undefined*
+<b>var</b> a = &apos;hello&apos; && &apos;&apos;; // <i> a = &apos;&apos;</i> <b>var</b> b = &apos;&apos; && &lbrack;&rbrack;;
+// <i> b = &apos;&apos;</i> <b>var</b> c = <b>undefined</b> && 0; // <i> c = undefined</i>
+<b>var</b> d = 1 && 5; // <i> d = 5</i> <b>var</b> e = 0 && {}; // <i> e = 0</i> <b>var</b>
+f = &apos;hi&apos; && &lbrack;&rbrack; && &apos;done&apos;; // <i> f = &apos;done&apos;</i> <b>var</b> g = &apos;bye&apos;
+&& <b>undefined</b> && &apos;adios&apos;; // <i> g = undefined</i>
 This trick can be used, for example, to set a default value to a
 function argument (prior to ES6).
-**var**
+<b>var</b>
 foo
 =
-**function**
+<b>function</b>
 (
 val
 )
 {
-*// if val evaluates to falsey, &apos;default&apos; will be returned instead.*
-**return**
+// <i> if val evaluates to falsey, &apos;default&apos; will be returned instead.</i>
+<b>return</b>
 val
 &vert;&vert;
 &apos;default&apos;
@@ -5394,7 +5022,7 @@ foo
 )
 )
 ;
-*// burger*
+// <i> burger</i>
 console.
 log
 (
@@ -5404,7 +5032,7 @@ foo
 )
 )
 ;
-*// 100*
+// <i> 100</i>
 console.
 log
 (
@@ -5415,7 +5043,7 @@ foo
 )
 )
 ;
-*// &lbrack;&rbrack;*
+// <i> &lbrack;&rbrack;</i>
 console.
 log
 (
@@ -5425,53 +5053,53 @@ foo
 )
 )
 ;
-*// default*
+// <i> default</i>
 console.
 log
 (
 foo
 (
-**undefined**
+<b>undefined</b>
 )
 )
 ;
-*// default*
+// <i>default</i>
 Just keep in mind that for arguments, 0 and (to a lesser extent) the
 empty string are also often valid values that should be able to be
 explicitly passed and override a default, which, with this pattern,
-they won't (because they are *falsy*).
+they won't (because they are <i>falsy</i>).
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-9">Section 10.9: Empty Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-*/&ast; ToNumber(ToPrimitive(&lbrack;&rbrack;)) == ToNumber(false) &ast;/*
+/<i>&ast; ToNumber(ToPrimitive(&lbrack;&rbrack;)) == ToNumber(false) &ast;/</i>
 &lbrack;
 &rbrack;
 ==
-**false**
+<b>false</b>
 ;
-*// true*
+// <i>true</i>
 
-toString   () is executed it     join   () if it      Object   .   **prototype**   .   toString
+toString   () is executed it     join   () if it      Object   .   <b>prototype</b>   .   toString
 calls &lbrack;&rbrack;.                  exists, or                                     
 join
 
-When &lbrack;&rbrack;.() otherwise. This comparison is returning **true** because
+When &lbrack;&rbrack;.() otherwise. This comparison is returning <b>true</b> because
 &lbrack;&rbrack;.() returns &apos;&apos; which, coerced into 0, is equal to false
 [ToNumber](http://www.ecma-international.org/ecma-262/5.1/#sec-9.3).
 
 Beware though, all objects are truthy and Array is an instance of
 Object:
 
-*// Internally this is evaluated as ToBoolean(&lbrack;&rbrack;) === true ?
-&apos;truthy&apos; : &apos;falsy&apos;* &lbrack;&rbrack; ? &apos;truthy&apos; : &apos;falsy&apos;; *// &apos;truthy&apos;*
+// <i>Internally this is evaluated as ToBoolean(&lbrack;&rbrack;) === true ?
+&apos;truthy&apos; : &apos;falsy&apos;</i> &lbrack;&rbrack; ? &apos;truthy&apos; : &apos;falsy&apos;; // <i>&apos;truthy&apos;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-10">Section 10.10: Equality comparison operations</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 JavaScript has four different equality comparison operations.
 
-[**SameValue**](http://www.ecma-international.org/ecma-262/6.0/#sec-samevalue)
+[<b>SameValue</b>](http://www.ecma-international.org/ecma-262/6.0/#sec-samevalue)
 
-It returns **true** if both operands belong to the same Type and are
+It returns <b>true</b> if both operands belong to the same Type and are
 the same value.
 
 Note: the value of an object is a reference.
@@ -5490,7 +5118,7 @@ is
 1
 )
 ;
-*// true*
+// <i> true</i>
 Object
 .
 is
@@ -5502,47 +5130,47 @@ is
 0
 )
 ;
-// false*
+// false</i>
 Object
 .
 is
 (
-**NaN**
+<b>NaN</b>
 ,
-**NaN**
+<b>NaN</b>
 )
 ;
-*// true*
+// <i> true</i>
 Object
 .
 is
 (
-**true**
+<b>true</b>
 ,
 &quot;true&quot;
 )
 ;
-*// false*
+// <i> false</i>
 Object
 .
 is
 (
-**false**
+<b>false</b>
 ,
 0
 )
 ;
-*// false*
+// <i>false</i>
 Object
 .
 is
 (
-**null**
+<b>null</b>
 ,
-**undefined**
+<b>undefined</b>
 )
 ;
-*// false*
+// <i>false</i>
 Object
 .
 is
@@ -5552,7 +5180,7 @@ is
 &quot;1&quot;
 )
 ;
-*// false*
+// <i>false</i>
 Object
 .
 is
@@ -5564,19 +5192,19 @@ is
 &rbrack;
 )
 ;
-*// false*
+//<i> false</i>
 
 This algorithm has the properties of an [equivalence
 relation](https://en.wikipedia.org/wiki/Equivalence_relation):
 
 Object                         .     is         (x,             x
-Object   .   is   (x,   y   ) is **true** if, and only    Object   .   is   (y,   x
+Object   .   is   (x,   y   ) is <b>true</b> if, and only    Object   .   is   (y,   x
 if,                                                   
-Object   .   is   (x,   y   ) and  Object   .   is   (y,   z   ) are **true**,  Object   .   is   (x,   z
+Object   .   is   (x,   y   ) and  Object   .   is   (y,   z   ) are <b>true</b>,  Object   .   is   (x,   z
 then                                     
 
 [Reflexivity](https://en.wikipedia.org/wiki/Reflexive_relation): ) is
-**true**, for any value x
+</b>true</b>, for any value x
 
 [Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation): ) is
 <b>true</b>, for any values x and y.
@@ -5602,7 +5230,7 @@ includes
 1
 )
 ;
-*// true*
+// <i> true</i>
 &lbrack;
 &plus;
 0
@@ -5614,7 +5242,7 @@ includes
 0
 )
 ;
-*// true*
+// <i> true</i>
 &lbrack;
 <b>NaN</b>
 &rbrack;
@@ -5624,7 +5252,7 @@ includes
 <b>NaN</b>
 )
 ;
-*// true*
+// <i> true</i>
 &lbrack;
 <b>true</b>
 &rbrack;
@@ -5634,7 +5262,7 @@ includes
 &quot;true&quot;
 )
 ;
-*// false*
+// <i> false</i>
 &lbrack;
 <b>false</b>
 &rbrack;
@@ -5644,7 +5272,7 @@ includes
 0
 )
 ;
-*// false*
+// <i> false</i>
 &lbrack;
 1
 &rbrack;
@@ -5654,7 +5282,7 @@ includes
 &quot;1&quot;
 )
 ;
-*// false*
+// <i> false</i>
 &lbrack;
 <b>null</b>
 &rbrack;
@@ -5664,7 +5292,7 @@ includes
 <b>undefined</b>
 )
 ;
-*// false*
+// <i> false</i>
 &lbrack;
 &lbrack;
 &rbrack;
@@ -5676,7 +5304,7 @@ includes
 &rbrack;
 )
 ;
-*// false*
+// <i> false</i>
 This algorithm still has the properties of an [equivalence
 relation](https://en.wikipedia.org/wiki/Equivalence_relation):
   includes
@@ -5712,46 +5340,46 @@ Examples:
 ===
 1
 ;
-*// true*
+// <i> true</i>
 &plus;
 0
 ===
 &minus;
 0
 ;
-*// true*
+// <i> true</i>
 <b>NaN</b>
 ===
 <b>NaN</b>
 ;
-*// false*
+// <i> false</i>
 <b>true</b>
 ===
 &quot;true&quot;
 ;
-*// false*
+// <i> false</i>
 <b>false</b>
 ===
 0
 ;
-*// false*
+// <i> false</i>
 1
 ===
 &quot;1&quot;
 ;
-*// false*
+// <i> false</i>
 <b>null</b>
 ===
 <b>undefined</b>
 ;
-*// false*
+// <i> false</i>
 &lbrack;
 &rbrack;
 ===
 &lbrack;
 &rbrack;
 ;
-*// false*
+// <i> false</i>
 This algorithm has the following properties:
   
 x === y   is <b>true</b> if, and only if, y ===        <b>for</b> any values
@@ -5803,46 +5431,46 @@ Examples:
 ==
 1
 ;
-*// true*
+// <i> true</i>
 &plus;
 0
 ==
 &minus;
 0
 ;
-*// true*
+// <i> true</i>
 <b>NaN</b>
 ==
 <b>NaN</b>
 ;
-*// false*
+// <i> false</i>
 <b>true</b>
 ==
 &quot;true&quot;
 ;
-*// false*
+// <i> false</i>
 <b>false</b>
 ==
 0
 ;
-*// true*
+// <i> true</i>
 1
 ==
 &quot;1&quot;
 ;
-*// true*
+// <i> true</i>
 <b>null</b>
 ==
 <b>undefined</b>
 ;
-*// true*
+// <i> true</i>
 &lbrack;
 &rbrack;
 ==
 &lbrack;
 &rbrack;
 ;
-*// false*
+// <i> false</i>
 This algorithm has the following property:
   
   x == y        is <b>true</b> if, and only if,                y == x
@@ -5868,83 +5496,83 @@ When both operands are numeric, they are compared normally:
 1
 &lt;
 2
-*// true*
+// <i> true</i>
 2
 &lt;=
 2
-*// true*
+// <i> true</i>
 3
 &gt;=
 5
-*// false*
+// <i> false</i>
 <b>true</b>
 &lt;
 <b>false</b>
-*// false (implicitly converted to numbers, 1 &bsol;0)*
+// <i> false (implicitly converted to numbers, 1 &bsol;0)</i>
 When both operands are strings, they are compared lexicographically
 (according to alphabetical order):
 &apos;a&apos;
 &lt;
 &apos;b&apos;
-*// true*
+// <i> true</i>
 &apos;1&apos;
 &lt;
 &apos;2&apos;
-*// true*
-&apos;100&apos; &amp;apos;12&apos; *// false (&apos;100&apos; is less than &apos;12&apos;
-lexicographically!)*
+// <i> true</i>
+&apos;100&apos; &amp;apos;12&apos; // <i> false (&apos;100&apos; is less than &apos;12&apos;
+lexicographically!)</i>
 
 When one operand is a string and the other is a number, the string is
 converted to a number before comparison:
 &apos;1&apos;
 &lt;
 2
-*// true*
+// <i> true</i>
 &apos;3&apos;
 &gt;
 2
-*// true*
+// <i> true</i>
 <b>true</b>
 &gt;
 &apos;2&apos;
-*// false (true implicitly converted to number, 1 &lt; 2)*
+// <i> false (true implicitly converted to number, 1 &lt; 2)</i>
 When the string is non-numeric, numeric conversion returns <b>NaN</b>
 (not-a-number). Comparing with <b>NaN</b> always returns <b>false</b>:
 1
 &lt;
 &apos;abc&apos;
-*// false*
+// <i> false</i>
 1
 &gt;
 &apos;abc&apos;
-*// false*
+// <i> false</i>
 But be careful when comparing a numeric value with <b>null</b>,
 <b>undefined</b> or empty strings:
 1
 &gt;
 &apos;&apos;
-*// true*
+// <i> true</i>
 1
 &lt;
 &apos;&apos;
-*// false*
+// <i> false</i>
 1
 &gt;
 <b>null</b>
-*// true*
+// <i> true</i>
 1
 &lt;
 <b>null</b>
-*// false*
+// <i> false</i>
 1
 &gt;
 <b>undefined</b>
-*// false*
+// <i> false</i>
 1
 &lt;
 <b>undefined</b>
-*// false*
-  Number                     (    <b>null</b>          );       *//0*
+// <i> false</i>
+  Number                     (    <b>null</b>          );       // <i>0</i>
 
 When one operand is a object and the other is a number, the object is
 converted to a number before comparison.So <b>null</b> is particular case
@@ -5956,12 +5584,12 @@ Date
 )
 &lt;
 1479480185280
-*// true*
+// <i> true</i>
 <b>null</b>
 &gt;
 &minus;
 1
-*//true*
+// <i>true</i>
 (
 {
 toString
@@ -5977,7 +5605,7 @@ toString
 )
 &gt;
 122
-*//true*
+// <i>true</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-12">Section 10.12: Inequality</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -5991,11 +5619,11 @@ returned.
 1
 !=
 &apos;1&apos;
-*// false*
+// <i> false</i>
 1
 !=
 2
-*// true*
+// <i> true</i>
 != &apos;1&apos;
 In the sample above, 1 is <b>false</b> because, a primitive number type
 is being compared to a char value. Therefore, the JavaScript engine
@@ -6007,15 +5635,15 @@ Example:
 1
 !==
 &apos;1&apos;
-*// true*
+// <i> true</i>
 1
 !==
 2
-*// true*
+// <i> true</i>
 1
 !==
 1
-*// false*
+// <i> false</i>
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-13">Section 10.13: List of Comparison Operators</h3>
@@ -6152,9 +5780,9 @@ into a single variable with each direction assigned a bit.
 
 Example reading keyboard via bitfield
 
-<b>var</b> bitField = 0; *// the value to hold the bits* <b>const</b>
-KEY_BITS = &lbrack;4,1,8,2&rbrack;; *// left up right down* <b>const</b> KEY_MASKS =
-&lbrack;0b1011,0b1110,0b0111,0b1101&rbrack;; *// left up right down*
+<b>var</b> bitField = 0; // <i> the value to hold the bits</i> <b>const</b>
+KEY_BITS = &lbrack;4,1,8,2&rbrack;; // <i> left up right down</i> <b>const</b> KEY_MASKS =
+&lbrack;0b1011,0b1110,0b0111,0b1101&rbrack;; // <i> left up right down</i>
 window.onkeydown = window.onkeyup = <b>function</b> (e) {
 <b>if</b>(e.keyCode &gt;= 37 && e.keyCode &lt;41){
 
@@ -6226,31 +5854,16 @@ keyCode
 37
 &&
 e&period;
-keyCode
-&lt;
-41
-)
-{
-directionState
-&lbrack;
-e&period;
-keyCode
-&minus;
-37
-&rbrack;
-=
-e&period;
-type
-===
-&quot;keydown&quot;
-;
-}
-}
+keyCode &lt;
+41){
+directionState &lbrack; e&period; 
+keyCode &minus; 37 &rbrack; = e&period; type === &quot;keydown&quot;;
+}}
 &vert;= 0b10
 
-To turn on a bit use bitwise *or* &vert; and the value corresponding to
+To turn on a bit use bitwise <i>or</i> &vert; and the value corresponding to
 the bit. So if you wish to set the 2nd bit bitField will turn it on.
-If you wish to turn a bit off use bitwise *and* & with a value that
+If you wish to turn a bit off use bitwise <i>and</i> & with a value that
 has all by the required bit on.
   bitfield &= 0b1101
 
@@ -6261,14 +5874,9 @@ the various key states to an array. Yes, it is a little more complex
 to set but the advantage comes when interrogating the state.
 
 If you want to test if all keys are up.
-*// as bit field*
-<b>if</b>
-(
-!
-bitfield
-)
-*// no keys are on*
-*// as array test each item in array*
+// <i>as bit field</i>
+<b>if</b> ( ! bitfield ) // <i>no keys are on</i>
+// <i>as array test each item in array</i>
 <b>if</b>
 (
 !
@@ -6296,35 +5904,27 @@ directionState
 )
 {
 You can set some constants to make things easier
-*// postfix U,D,L,R for Up down left right*
-<b>const</b>
-KEY_U
-=
-1
-;
-<b>const</b>
-KEY_D
-=
-2
-;
-<b>const</b> KEY_L = 4 ;
-<b>const</b> KEY_R = 8 ;
+// <i> postfix U,D,L,R for Up down left right</i>
+<b>const</b> KEY_U = 1; 
+<b>const</b> KEY_D = 2;
+<b>const</b> KEY_L = 4;
+<b>const</b> KEY_R = 8;
 <b>const</b> KEY_UL = KEY_U &plus; KEY_L ;
-*// up left* <b>const</b> KEY_UR = KEY_U &plus; KEY_R ;
-*// up Right* <b>const</b> KEY_DL = KEY_D &plus; KEY_L ;
-*// down left* <b>const</b> KEY_DR = KEY_D &plus; KEY_R ;
-*// down right* 
+// <i> up left</i> <b>const</b> KEY_UR = KEY_U &plus; KEY_R;
+// <i> up Right</i> <b>const</b> KEY_DL = KEY_D &plus; KEY_L;
+// <i> down left</i> <b>const</b> KEY_DR = KEY_D &plus; KEY_R;
+// <i> down right</i> 
 
 You can then quickly test for many various keyboard states
 
-<b>if</b> ((bitfield & KEY_UL) === KEY_UL) { *// is UP and LEFT only
-down* <b>if</b> (bitfield & KEY_UL) { *// is Up left down* <b>if</b>
-((bitfield & KEY_U) === KEY_U) { *// is Up only down* <b>if</b> (bitfield
-& KEY_U) { *// is Up down (any other key may be down)* <b>if</b>
-(!(bitfield & KEY_U)) { *// is Up up (any other key may be down)*
-<b>if</b> (!bitfield ) { *// no keys are down*
+<b>if</b> ((bitfield & KEY_UL) === KEY_UL) { // <i> is UP and LEFT only
+down</i> <b>if</b> (bitfield & KEY_UL) { // <i> is Up left down</i> <b>if</b>
+((bitfield & KEY_U) === KEY_U) { // <i> is Up only down</i> <b>if</b> (bitfield
+& KEY_U) { // <i> is Up down (any other key may be down)</i> <b>if</b>
+(!(bitfield & KEY_U)) { // <i> is Up up (any other key may be down)</i>
+<b>if</b> (!bitfield ) { // <i> no keys are down</i>
 
-<b>if</b> (bitfield ) { *// any one or more keys are down*
+<b>if</b> (bitfield ) { // <i> any one or more keys are down</i>
 
 The keyboard input is just one example. Bitfields are useful when you
 have various states that must in combination be acted on. JavaScript
