@@ -204,6 +204,7 @@ console.log(document.body);
 <!--{width="6.522222222222222in" height="2.3784722222222223in"}-->
 
 <h4>End Note</h4>
+
 <p>For more information on the capabilities of the console, see the 
 Console topic.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -344,7 +345,7 @@ unless its sandbox attribute has the value allow-modal</a>.
   <li><b>default</b>): A default value for the input field (optional).</li>
 </ul>
 
-<h4>Examples</h4>
+<p><b>Examples</b></p>
 
 <pre>
 <b>var</b> age = prompt("How old are you?");
@@ -1159,7 +1160,7 @@ the original .time() call is calculated and logged. Because of this behavior, yo
 .timeEnd() multiple times with the same label to log the elapsed time since the original .time()
 call was made.</p>
 
-<h4>Example 1:</h4>
+<p><b>Example 1:</b></p>
 
 <pre>console.time(&apos;response in&apos;);
 
@@ -1174,7 +1175,7 @@ console.timeEnd(&apos;response in&apos;);</pre>
 <pre>response <b>in</b>: 774.967ms
 response <b>in</b>: 1402.199ms</pre>
 
-<h4>Example 2:</h4>
+<p><b>Example 2:</b></p>
 
 <pre><b>var</b> elms = document.getElementsByTagName(&apos;*&apos;); // <i>select all elements on the page</i>
 console.time(&apos;Loop time&apos;);
@@ -1343,30 +1344,22 @@ console JavaScript object can be invoked by typing the following:</p>
 <p>console.log() can be called with any number of arguments and variables available in
 the current scope. Multiple arguments will be printed in one line with a small space between them.</p>
 
-<pre>
-<b>var</b> obj = {test: 1};
-console.log(&lbrack;'string'&rbrack;, 1, obj, window);
-</pre>
+<pre><b>var</b> obj = {test: 1};
+console.log(&lbrack;'string'&rbrack;, 1, obj, window);</pre>
 
 <p>The log method will display the following in the debugging console:</p>
 
-<pre>
-&lbrack;'string'&rbrack; 1 Object { test: 1 } Window { /* <i>truncated</i> */ }
-</pre>
+<pre>&lbrack;'string'&rbrack; 1 Object { test: 1 } Window { /* <i>truncated</i> */ }</pre>
 
 <p>Beside plain strings, console.log() can handle other types, like arrays, objects, dates, functions, etc.:</p>
 
-<pre>
-console.log(&lbrack;0, 3, 32, 'a string' &rbrack;);
-console.log({key1: 'value', key2: 'another value'});
-</pre>
+<pre>console.log(&lbrack;0, 3, 32, 'a string' &rbrack;);
+console.log({key1: 'value', key2: 'another value'});</pre>
 
 <p>Displays:</p>
 
-<pre>
-Array &lbrack;0, 3, 32, 'a string'&rbrack;
-Object { key1: 'value', key2: 'another value'}
-</pre>
+<pre>Array &lbrack;0, 3, 32, 'a string'&rbrack;
+Object { key1: 'value', key2: 'another value'}</pre>
 
 <p>Nested objects may be collapsed:</p>
 
@@ -1374,23 +1367,17 @@ Object { key1: 'value', key2: 'another value'}
 
 <p>Displays:</p>
 
-<pre>
-Object { key1: 'val', key2: Array &lbrack;2&rbrack;, key3: Object }
-</pre>
+<pre>Object { key1: 'val', key2: Array &lbrack;2&rbrack;, key3: Object }</pre>
 
 <p>Certain types such as Date objects and <b>function</b>s may be displayed differently:</p>
 
-<pre>
-console.log(<b>new</b> Date(0));
-console.log(<b>function</b> test(a, b) { <b>return</b> c; });
-</pre>
+<pre>console.log(<b>new</b> Date(0));
+console.log(<b>function</b> test(a, b) { <b>return</b> c; });</pre>
 
 <p>Displays:</p>
 
-<pre>
-Wed Dec 31 1969 19:00:00 GMT &minus; 0500 (Eastern Standard Time)
-<b>function</b> test (a , b) { <b>return</b> c; }
-</pre>
+<pre>Wed Dec 31 1969 19:00:00 GMT &minus; 0500 (Eastern Standard Time)
+<b>function</b> test (a , b) { <b>return</b> c; }</pre>
 
 <h4>Other print methods</h4>
 
@@ -1424,23 +1411,19 @@ Wed Dec 31 1969 19:00:00 GMT &minus; 0500 (Eastern Standard Time)
 </ul>
 <!-- page 26 -->
 
-<pre>
-<b>function</b> sec () {
+<pre><b>function</b> sec () {
   first();
 }
 <b>function</b> first () {
   console.trace();
 }
-sec ();
-</pre>
+sec ();</pre>
 
 <h4>Displays:</h4>
 
-<pre>
-first
+<pre>first
 sec
-(anonymous <b>function</b>)
-</pre>
+(anonymous <b>function</b>)</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image017.jpg"
@@ -1491,7 +1474,7 @@ console.log(e&period;stack);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>In most environments, () can be used to display objects and arrays in a tabular format.</p>
 
-<h4>For example:</h4>
+<p><b>For example:</b></p>
 <!-- page 27 -->
 
 <pre>console.table(&lbrack;&apos;Hello&apos;,&apos;world&apos;&rbrack;);</pre>
@@ -1500,8 +1483,8 @@ console.log(e&period;stack);
 
 <pre>
 <b>(index) value</b>
-0          &quot;Hello&quot;
-1          &quot;world&quot;
+0       &quot;Hello&quot;
+1       &quot;world&quot;
 </pre>
 
 <pre>console.table({foo: &apos;bar&apos;, bar: &apos;baz&apos;});</pre>
@@ -1510,13 +1493,11 @@ console.log(e&period;stack);
 
 <pre>
 <b>(index) value</b>
-&quot;foo&quot; &quot;bar&quot;
-&quot;bar&quot; &quot;baz&quot;
+&quot;foo&quot;   &quot;bar&quot;
+&quot;bar&quot;   &quot;baz&quot;
 </pre>
 
-<pre>
-
-<b>var</b> personArr = &lbrack;
+<pre><b>var</b> personArr = &lbrack;
 { 
   &quot;personId&quot;: 123,
   &quot;name&quot;: &quot;Jhon&quot;, 
@@ -1541,8 +1522,7 @@ console.log(e&period;stack);
   &quot;phoneNo&quot;: &quot;1234567890&quot;
 }
 &rbrack;;
-  console.table(personArr, &lbrack;&apos;name&apos;, &apos;personId&apos;&rbrack;);
-</pre>
+  console.table(personArr, &lbrack;&apos;name&apos;, &apos;personId&apos;&rbrack;);</pre>
 
 <p>displays like:</p>
 <!-- page 28 -->
@@ -1604,32 +1584,26 @@ console.count(&apos;42.3&apos;);
 
 <p>Displays:</p>
 
-<pre>
-42.3:1
-42.3:2
-42.3:3
-</pre>
+<pre>42.3: 1
+42.3: 2
+42.3: 3</pre>
 
 <p>Functions point always to the global Function object:</p>
 
-<pre>
-console.count(console.constructor);
+<pre>console.count(console.constructor);
 console.count(<b>function</b>(){});
 console.count(Object);
 <b>var</b> fn1 = <b>function</b> myfn(){};
 console.count(fn1);
-console.count(Number);
-</pre>
+console.count(Number);</pre>
 
 <p>Displays:</p>
 
-<pre>
-&lbrack;object Function&rbrack;: 1
+<pre>&lbrack;object Function&rbrack;: 1
 &lbrack;object Function&rbrack;: 2
 &lbrack;object Function&rbrack;: 3
 &lbrack;object Function&rbrack;: 4
-&lbrack;object Function&rbrack;: 5
-</pre>
+&lbrack;object Function&rbrack;: 5</pre>
 
 <p>Certain objects get specific counters associated to the type of object they refer to:</p>
 
@@ -1647,27 +1621,23 @@ console.count(window);
 console.count(document);
 console.count(console);
 console.count(console.&lowbar;&lowbar;proto&lowbar;&lowbar;);
-console.count(console.constructor
-.<b>prototype</b>);
+console.count(console.constructor.<b>prototype</b>);
 console.count(
-console.&lowbar;&lowbar;proto&lowbar;&lowbar;.constructor.
-<b>prototype</b>
-);
+console.&lowbar;&lowbar;proto&lowbar;&lowbar;.constructor.<b>prototype</b>);
 console.count(Object.getPrototypeOf(console));
 console.count(<b>null</b>);
 </pre>
 
 <p>Displays:</p>
 
-<pre>
-<b>undefined</b>:1
-<b>undefined</b>:2
-<b>undefined</b>:3
-<b>NaN</b>:1
-<b>NaN</b>:2
-<b>NaN</b>:3
-<b>Infinity</b>:1
-<b>Infinity</b>:2
+<pre><b>undefined</b>: 1
+<b>undefined</b>: 2
+<b>undefined</b>: 3
+<b>NaN</b>: 1
+<b>NaN</b>: 2
+<b>NaN</b>: 3
+<b>Infinity</b>: 1
+<b>Infinity</b>: 2
 &lbrack;object Window&rbrack;: 1
 &lbrack;object HTMLDocument&rbrack;: 1
 &lbrack;object Object&rbrack;: 1
@@ -1675,9 +1645,9 @@ console.count(<b>null</b>);
 &lbrack;object Object&rbrack;: 3
 &lbrack;object Object&rbrack;: 4
 &lbrack;object Object&rbrack;: 5
-<b>null</b>: 1
-</pre>
+<b>null</b>: 1</pre>
 
+<!-- page 30 -->
 <p><b>Empty string or absence of argument</b></p>
 
 <p>If no argument is provided while <b>sequentially inputting the count
@@ -1685,11 +1655,11 @@ method in the debugging console</b>, an empty string is assumed as parameter, i.
 
 <pre>
 &gt; console.count();
-  :1
+  : 1
 &gt; console.count(&apos;&apos;);
-  :2
+  : 2
 &gt; console.count(&quot;&quot;);
-  :3
+  : 3
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-7">Section 5.7: Clearing the console - console.clear()</h3>
@@ -1719,14 +1689,16 @@ displays:
   style="border: 2px solid #000000; width:7.477in;" />
 <!-- ![](./images/image019.jpg){width="7.477777777777778in" height="2.657638888888889in"} -->
 
-prints an XML representation of the descendant elements of object if
-possible, or the JavaScript representation if not. Calling () on HTML
-and XML elements is equivalent to calling ().
+<p>console.dirxml(object) prints an XML representation of the descendant elements of object if
+possible, or the JavaScript representation if not. Calling console.dirxml() on HTML
+and XML elements is equivalent to calling console.log().</p>
+<!-- page 31 -->
 
-<b>Example 1:</b>
+<p><b>Example 1:</b></p>
 
-console.dirxml ( document )
-displays:
+<pre>console.dirxml ( document )</pre>
+
+<p>displays:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image020.jpg"
@@ -1735,8 +1707,9 @@ displays:
   style="border: 2px solid #000000; width:7.477in;" />
 <!-- ![](./images/image020.jpg){width="7.477777777777778in" height="1.6847222222222222in"} -->
 
-<b>Example 2:</b>
+<p><b>Example 2:</b></p>
 
+<pre.
 console.log(document)
 
 displays:
@@ -1748,7 +1721,7 @@ displays:
   style="border: 2px solid #000000; width:7.477in;" />
 <!-- ![](./images/image021.jpg){width="7.477777777777778in" height="1.8020833333333333in"} -->
 
-<b>Example 3:</b>
+<p><b>Example 3:</b></p>
 
 <b>var</b> myObject = { &quot;foo&quot; : { &quot;bar&quot; : &quot;data&quot; } };
 
@@ -10507,7 +10480,7 @@ keyCode
 
 }
 
-Example reading as an array
+<p><b>Example reading as an array</b></p>
 
 **var**
 
