@@ -1752,9 +1752,7 @@ console.dirxml ( myObject );
 <p>Writes an error message to the console if the assertion is <b>false</b>.
 Otherwise, if the assertion is <b>true</b>, this does nothing.</p>
 
-<pre>
-console.assert ( &apos;one&apos; === 1 );
-</p>
+<pre>console.assert ( &apos;one&apos; === 1 );</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image023.png"
@@ -1764,7 +1762,7 @@ console.assert ( &apos;one&apos; === 1 );
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Multiple arguments can be provided after the assertionthese can be
 strings or other objectsthat will only be printed if the assertion
-is <b>false</b>:
+is <b>false</b>:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image024.jpg"
