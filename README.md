@@ -2589,7 +2589,8 @@ console.log( string ); // <i>&quot;Bye, Universe!&quot;</i>
 expression objects (i.e., with use with regexp). The parameters are in
 the following order:</p>
 
-<b>Parameter Meaning</b>
+<p><b>Parameter Meaning</b></p>
+
 <table border="1" style="width:200px">
   <thead>
     <tr>
@@ -2677,7 +2678,7 @@ console.log(&apos;QWERTY&apos;.toLowerCase());  // <i>&apos;qwerty&apos;</i>
 method:</p>
 
 <pre>
-&quot;abc&quot;.repeat(3);    // <i>Returns &quot;abcabcabc&quot;</i>
+&quot;abc&quot;.repeat(3);   // <i>Returns &quot;abcabcabc&quot;</i>
 &quot;abc&quot;.repeat(0);   // <i>Returns &quot;&quot;</i>
 &quot;abc&quot;.repeat(&minus;1);  // <i>Throws a RangeError</i>
 </pre>
@@ -2698,39 +2699,52 @@ can repeat n times the string myString:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch8">Chapter 8: Date</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<b>Parameter Details</b>
-
-<p>value The number of milliseconds since 1 January 1970 00:00:00.000 UTC
-(Unix epoch) dateAsString A date formatted as a string (see examples
-for more information)</p>
-
-<p>The year value of the date. Note that month must also be provided, or
-the value will be interpreted year as a number of milliseconds. Also note that values between 0 and
-99 have special meaning. See the examples.</p>
-
-<!--  
-11
-  
-
-  
-
-The month, in the range 0-. Note that using values outside the specified
-range for this and the
-
-month following parameters will not result in an error, but rather
-cause the resulting date to &quot;roll over&quot; to the next value. See the
-examples.
-  31
-  23
-  59
-  59
-  999
-
-day Optional: The date, in the range 1-. hour Optional: The hour, in
-the range 0-. minute Optional: The minute, in the range 0-. second
-Optional: The second, in the range 0-. millisecond Optional: The
-millisecond, in the range 0-.
--->
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+	  <th>Parameter</th>
+	  <th>Details</th>
+	</tr>
+  </thead>
+  <tbody>
+    <tr>
+	  <td>value</td>
+	  <td>The number of milliseconds since 1 January 1970 00:00:00:000 UTC (Unix epoch)</td>
+	</tr>
+	<tr>
+	  <td>dateAsString</td>
+	  <td>A date formatted as a string (see examples for more information)</td>
+	</tr>
+	<tr>
+	  <td>year</td>
+	  <td>The year value of the date. Note that month must also be provided, or the value will be interpreted as a number of milliseconds. Also note that values between 0 and 99 have special meaning. See the examples.</td>
+	</tr>
+	<tr>
+	  <td>month</td>
+	  <td>The month, in the range 0-11. Note that using values outside the specified range for this and the following parameters will not result in an error, but rather cause the resulting date to "roll over" to the next value. See the examples.</td>
+	</tr>
+	<tr>
+	  <td>day</td>
+	  <td>Optional: The date, in the range 1-31.</td>
+	</tr>
+	<tr>
+	  <td>hour</td>
+	  <td>Optional: the hour, in the range 0-23.</td>
+	</tr>
+	<tr>
+	  <td>minute</td>
+	  <td>Optional: The minute, in the range 0-59.</td>
+	</tr>
+	<tr>
+	  <td>second</td>
+	  <td>Optional: The second, in the range 0-59.</td>
+	</tr>
+	<tr>
+	  <td>milliseconds</td>
+	  <td>Optional: The millisecond, in the range 0-999.</td>
+	</tr>
+  </tbody>
+</table>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-1">Section 8.1: Create a new Date object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -4762,6 +4776,7 @@ Of course, the test above does not validate that cb is in fact a
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-4">Section 10.4: Null and Undefined</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 <b>The differences between null and undefined null</b> and <b>undefined</b>
 share abstract equality == but not strict equality ===,
 <b>null</b>
@@ -4847,6 +4862,7 @@ Reference Error</b>, use against &quot;undefined&quot; instead.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-5">Section 10.5: Abstract Equality (==)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 Operands of the abstract equality operator are compared <i>after</i> being
 converted to a common type. How this conversion happens is based on
 the specification of the operator:
@@ -4896,6 +4912,7 @@ x === y
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-6">Section 10.6: Logic Operators with Booleans</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 <b>var</b>
 x
 =
@@ -4937,6 +4954,7 @@ This will return false, because x is true.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-7">Section 10.7: Automatic Type Conversions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 Beware that numbers can accidentally be converted to strings or NaN
 (Not a Number).
 
@@ -4976,7 +4994,7 @@ returns NaN (Not a Number):
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-8">Section 10.8: Logic Operators with Non-boolean values (boolean coercion)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
+<!--
 Logical OR (&vert;&vert;), reading left to right, will evaluate to the first
 <i>truthy</i> value. If no <i>truthy</i> value is found, the last value is
 returned.
@@ -5071,7 +5089,8 @@ they won't (because they are <i>falsy</i>).
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-9">Section 10.9: Empty Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-/<i>&ast; ToNumber(ToPrimitive(&lbrack;&rbrack;)) == ToNumber(false) &ast;/</i>
+<!--
+<i>&ast; ToNumber(ToPrimitive(&lbrack;&rbrack;)) == ToNumber(false) &ast;/</i>
 &lbrack;
 &rbrack;
 ==
@@ -5095,6 +5114,7 @@ Object:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-10">Section 10.10: Equality comparison operations</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 JavaScript has four different equality comparison operations.
 
 [<b>SameValue</b>](http://www.ecma-international.org/ecma-262/6.0/#sec-samevalue)
@@ -5492,6 +5512,7 @@ not hold, e.g. 0
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-11">Section 10.11: Relational operators (&lt;, &lt;=, &gt;, &gt;=)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 When both operands are numeric, they are compared normally:
 1
 &lt;
@@ -5609,6 +5630,7 @@ toString
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-12">Section 10.12: Inequality</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 Operator != is the inverse of the == operator.
 Will return <b>true</b> if the operands aren&apos;t equal.
 The JavaScript engine will try and convert both operands to matching
@@ -5648,7 +5670,7 @@ Example:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-13">Section 10.13: List of Comparison Operators</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
+<!--
 <b>Operator Comparison Example</b>
   i ==
 == Equal0
@@ -5669,6 +5691,7 @@ Example:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-14">Section 10.14: Grouping multiple logic statements</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 You can group multiple boolean logic statements within parenthesis in
 order to create a more complex logic evaluation, especially useful in
 if statements.
@@ -5766,7 +5789,7 @@ mistakes.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-15">Section 10.15: Bit fields to optimise comparison of multi state data</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
+<!--
 A bit field is a variable that holds various boolean states as
 individual bits. A bit on would represent true, and off would be
 false. In the past bit fields were routinely used as they saved memory
@@ -5930,3 +5953,33 @@ The keyboard input is just one example. Bitfields are useful when you
 have various states that must in combination be acted on. JavaScript
 can use up to 32 bits for a bit field. Using them can offer
 significant performance increases. They are worth being familiar with.
+
+<b>Parameter Details</b>
+
+<p>value The number of milliseconds since 1 January 1970 00:00:00.000 UTC
+(Unix epoch) dateAsString A date formatted as a string (see examples
+for more information)</p>
+
+<p>The year value of the date. Note that month must also be provided, or
+the value will be interpreted year as a number of milliseconds. Also note that values between 0 and
+99 have special meaning. See the examples.</p>
+
+<!--  
+11
+The month, in the range 0-. Note that using values outside the specified
+range for this and the
+
+month following parameters will not result in an error, but rather
+cause the resulting date to &quot;roll over&quot; to the next value. See the
+examples.
+  31
+  23
+  59
+  59
+  999
+
+day Optional: The date, in the range 1-. hour Optional: The hour, in
+the range 0-. minute Optional: The minute, in the range 0-. second
+Optional: The second, in the range 0-. millisecond Optional: The
+millisecond, in the range 0-.
+-->
