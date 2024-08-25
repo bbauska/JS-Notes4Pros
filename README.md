@@ -2446,233 +2446,103 @@ codes or <i>code point<i> values can be retrieved with codePointAt:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-13">Section 7.13: String Representations of Numbers</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>JavaScript has native conversion from <i>Number</i> to its <i>String representation</i> for any base from <i>2 to 36</i>.
+<p>JavaScript has native conversion from <i>Number</i> to its <i>String representation</i> for any base from <i>2 to 36</i>.</p>
 
-The most common representation after <i>decimal (base 10)</i> is
+<p>The most common representation after <i>decimal (base 10)</i> is
 <i>hexadecimal (base 16)</i>, but the contents of this section work for all
-bases in the range.
+bases in the range.</p>
 
-In order to convert a <i>Number</i> from decimal (base 10) to its
+<p>In order to convert a <i>Number</i> from decimal (base 10) to its
 hexadecimal (base 16) <i>String representation</i> the <i>toString</i> method
-can be used with <i>radix 16</i>.
-<i>// base 10 Number</i>
-<b>var</b>
-b10
-=
-12
-;
-<i>// base 16 String representation</i>
-<b>var<b>
-b16
-=
-b10.
-toString
-(
-16
-)
-;
-<i>// &quot;c&quot;</i>
-If the number represented is an integer, the inverse operation for
-this can be done with parseInt and the <i>radix 16</i> again
-<i>// base 16 String representation</i>
-<b>var</b>
-b16
-=
-&apos;c&apos;
-;
-<i>// base 10 Number</i>
-<b>var</b>
-b10
-=
-parseInt
-(
-b16
-,
-16
-)
-;
-<i>// 12</i>
-To convert an arbitrary number (i.e. non-integer) from its <i>String
+can be used with <i>radix 16</i>.</p>
+
+<pre>
+// <i>base 10 Number</i>
+<b>var</b> b10 = 12;
+
+// <i>base 16 String representation</i>
+<b>var<b> b16 = b10.toString(16); // <i>&quot;c&quot;</i>
+</pre>
+
+<p>If the number represented is an integer, the inverse operation for
+this can be done with parseInt and the <i>radix 16</i> again.</p>
+
+<pre>
+// <i>base 16 String representation</i>
+<b>var</b> b16 = &apos;c&apos;;
+
+// <i>base 10 Number</i>
+<b>var</b> b10 = parseInt(b16, 16); // <i>12</i>
+</pre>
+
+<p>To convert an arbitrary number (i.e. non-integer) from its <i>String
 representation</i> into a <i>Number</i>, the operation must be split into two
-parts; the integer part and the fraction part.
-Version ≥ 6
-<b>let</b>
-b16
-=
-&apos;3.243f3e0370cdc&apos;
-;
-<i>// Split into integer and fraction parts</i>
-<b>let</b>
-&lbrack;
-i16
-,
-f16
-&rbrack;
-=
-b16.
-split
-(
-&apos;.&apos;
-)
-;
-<i>// Calculate base 10 integer part</i>
-<b>let</b>
-i10
-=
-parseInt
-(
-i16
-,
-16
-)
-;
-<i>// 3</i>
-<i>// Calculate the base 10 fraction part</i>
-<b>let</b>
-f10
-=
-parseInt
-(
-f16
-,
-16
-)
-/
-Math
-.
-pow
-(
-16
-,
-f16.
-length
-)
-;
-<i>// 0.14158999999999988</i>
-<i>// Put the base 10 parts together to find the Number</i>
-<b>let</b>
-b10
-=
-i10
-&plus;
-f10
-;
-<i>// 3.14159</i>
+parts; the integer part and the fraction part.</p>
 
-<b>Note 1:</b> Be careful as small errors may be in the result due to
+<p>Version ≥ 6</p>
+
+<pre>
+<b>let</b> b16 = &apos;3.243f3e0370cdc&apos;;
+// <i>Split into integer and fraction parts</i>
+<b>let</b> &lbrack;i16, f16&rbrack; = b16.split(&apos;.&apos;);
+
+// <i>Calculate base 10 integer part</i>
+<b>let</b> i10 = parseInt(i16, 16);  // <i>3</i>
+
+// <i>Calculate the base 10 fraction part</i>
+<b>let</b> f10 = parseInt(f16, 16) / Math.pow(16, f16.length); // <i>0.14158999999999988</i>
+
+// <i>Put the base 10 parts together to find the Number</i>
+<b>let</b> b10 = i10 &plus; f10; // <i>3.14159</i>
+</pre>
+
+<p><b>Note 1:</b> Be careful as small errors may be in the result due to
 differences in what is possible to be represented in different bases.
-It may be desirable to perform some kind of rounding afterwards.
-
+It may be desirable to perform some kind of rounding afterwards.<br/>
 <b>Note 2:</b> Very long representations of numbers may also result in
 errors due to the accuracy and maximum values of <i>Numbers</i> of the
-environment the conversions are happening in.
+environment the conversions are happening in.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-14">Section 7.14: String Find and Replace Functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-To search for a string inside a string, there are several functions:
+<p>To search for a string inside a string, there are several functions:</p>
  
 [<b>indexOf</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [<b>(</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [<b>searchString</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   <b>[)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [</b>lastIndexOf<b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)   [</b>(<b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)   [</b>searchString<b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
 [<b>)</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
 indexOf
 () will return the index of the first occurrence of searchString in
 the string. If searchString is not found, then -1 is returned.
-<b>var</b>
-string
-=
-&quot;Hello, World!&quot;
-;
-console.
-log
-(
-string.
-indexOf
-(
-&quot;o&quot;
-)
-)
-;
-<i>// 4</i>
-console.
-log
-(
-string.
-indexOf
-(
-&quot;foo&quot;
-)
-)
-;
-<i>// -1</i>
- 
-lastIndexOf
-Similarly, () will return the index of the last occurrence of
-searchstring or -1 if not found.
-<b>var</b>
-string
-=
-&quot;Hello, World!&quot;
-;
-console.
-log
-(
-string.
-lastIndexOf
-(
-&quot;o&quot;
-)
-)
-;
-<i>// 8</i>
-console.
-log
-(
-string.
-lastIndexOf
-(
-&quot;foo&quot;
-)
-)
-;
-<i>// -1</i>
+
+<pre>
+<b>var</b> string = &quot;Hello, World!&quot;;
+console.log( string.indexOf(&quot;o&quot;));  // <i>4</i>
+console.log( string.indexOf(&quot;foo&quot;) ); // <i>-1</i>
+</pre>
+
+<p>Similarly, lastIndexOf() will return the index of the last occurrence of
+searchstring or -1 if not found.</p>
+
+<pre>
+<b>var</b> string = &quot;Hello, World!&quot;; 
+console.log( string.lastIndexOf(&quot;o&quot;)); // <i>8</i>
+console.log( string.lastIndexOf(&quot;foo&quot;));  // <i>-1</i>
+</pre>
+
 [<b>includes</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>(</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>searchString</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>,</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>start</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
 
 [<b>)</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
-
-  includes
-  indexOf
 
 () will return a boolean that tells whether searchString exists in the
 string, starting from index start (defaults to 0). This is better than
 () if you simply need to test for existence of a substring.
 
-<b>var</b>
-string
-=
-&quot;Hello, World!&quot;
-;
-console.
-log
-(
-string.
-includes
-(
-&quot;Hello&quot;
-)
-)
-;
-<i>// true</i>
-console.
-log
-(
-string.
-includes
-(
-&quot;foo&quot;
-)
-)
-;
-<i>// false</i>
-  [<b>replace</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>(</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>regexp</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>&vert;</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>substring</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>,</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>replacement</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>&vert;</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>replaceFunction</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
+<pre>
+<b>var</b> string = &quot;Hello, World!&quot;;
+console.log( string.includes(&quot;Hello&quot;) ); // <i>true</i>
+console.log( string.includes(&quot;foo&quot;));  // <i>false</i>
+</pre>
+
+[<b>replace</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>(</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>regexp</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>&vert;</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>substring</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>,</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>replacement</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>&vert;</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>replaceFunction</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
 [<b>)</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
   
 replace
@@ -2686,48 +2556,18 @@ value of replaceFunction.
 Note that this does not modify the string in place, but returns the
 string with replacements.
 
-<b>var</b>
-string
-=
-&quot;Hello, World!&quot;
-;
-string
-=
-string.
-replace
-(
-&quot;Hello&quot;
-,
-&quot;Bye&quot;
-)
-;
-console.
-log
-(
-string
-)
-;
-<i>// &quot;Bye, World!&quot;</i>
-string
-=
-string.
-replace
-(
-<i>/W.{3}d/g</i>
-,
-&quot;Universe&quot;
-)
-;
-console.
-log
-(
-string
-)
-;
-<i>// &quot;Bye, Universe!&quot;</i>
-replaceFunction can be used for conditional replacements for regular
+<pre>
+<b>var</b> string = &quot;Hello, World!&quot;;
+string = string.replace( &quot;Hello&quot;, &quot;Bye&quot; );
+console.log( string ); // <i>&quot;Bye, World!&quot;</i>
+
+string = string.replace( <i>/W.{3}d/g</i>, &quot;Universe&quot; );
+console.log( string ); // <i>&quot;Bye, Universe!&quot;</i>
+</pre>
+
+<p>replaceFunction can be used for conditional replacements for regular
 expression objects (i.e., with use with regexp). The parameters are in
-the following order:
+the following order:</p>
 
 <b>Parameter Meaning</b>
 match the substring that matches the entire regular expressiong g1,
@@ -2735,48 +2575,15 @@ g2, g3, &hellip; the matching groups in the regular expression offset the
 offset of the match in the entire string string the entire string
 
 Note that all parameters are optional.
-<b>var</b>
-string
-=
-&quot;heLlo, woRlD!&quot;
-;
-string
-=
-string.
-replace
-(
-<i>/(&lbrack;a-zA-Z&rbrack;)(&lbrack;a-zA-Z&rbrack;+)/g</i>
-,
-<b>function</b>
-(
-match
-,
-g1
-,
-g2
-)
-{
-<b>return</b>
-g1.
-toUpperCase
-(
-)
-&plus;
-g2.
-toLowerCase
-(
-)
-;
-}
-)
-;
-console.
-log
-(
-string
-)
-;
-<i>// &quot;Hello, World!&quot;</i>
+
+<pre>
+<b>var</b> string = &quot;heLlo, woRlD!&quot;;
+string = string.replace( <i>/(&lbrack;a-zA-Z&rbrack;)(&lbrack;a-zA-Z&rbrack;+)/g</i>, <b>function</b>(match, g1, g2) {
+  <b>return</b> g1.toUpperCase() &plus; g2.toLowerCase();
+});
+
+console.log( string );  // <i>&quot;Hello, World!&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-15">Section 7.15: Find the index of a substring inside a string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
