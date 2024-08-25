@@ -1537,7 +1537,7 @@ console.log(e&period;stack);
 <h3 id="ch5-6">Section 5.6: Counting - console.count()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/count">
-console.count)&lbrack;obj&rbrack;)</a> places a counter on the object&apos;s value 
+console.count(&lbrack;obj&rbrack;)</a> places a counter on the object&apos;s value 
 provided as argument. Each time this method is invoked, the counter is increased 
 (with the exception of the empty string &apos;&apos;). A label together with a 
 number is displayed in the debugging console according to the following format:</p>
@@ -2218,7 +2218,7 @@ be used to set a character at a position in the string.</p>
 <h3 id="ch7-5">Section 7.5: Escaping quotes</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>If your string is enclosed (i.e.) in single quotes you need to escape the inner literal 
-quote with <i>backslash</i> &bsol;</p>
+quote with <i>backslash</i> &bsol;.</p>
 
 <pre>
 <b>var</b> text = &apos;L&bsol;&apos;albero means tree in Italian&apos;;
@@ -2236,8 +2236,8 @@ HTML representations within a String, since HTML strings make large
 use of quotations i.e. in attributes:</p>
 
 <pre>
-<b>var</b> content = &quot;&lt;p class=<b>&bsol;quot;special&bsol;&quot;&gt;</b>Hello World!&lt;/p&gt;; // <i>valid String</i>
-<b>var</b> hello   = &apos;&lt;p class=&quot;special&quot;&gt;I<b>&bsol;apos;</b>d like to say &quot;Hi&quot;&lt;/p&gt;&apos;; // <i>valid String</i>
+<b>var</b> content = &quot;&lt;p class=<b>&bsol;&quot;special&bsol;&quot;&gt;</b>Hello World!&lt;/p&gt;; // <i>valid String</i>
+<b>var</b> hello   = &apos;&lt;p class=&quot;special&quot;&gt;I<b>&bsol;&apos;</b>d like to say &quot;Hi&quot;&lt;/p&gt;&apos;; // <i>valid String</i>
 </pre>
   
 <p>Quotes in HTML strings can also be represented using &apos;(or &#39;) as a single quote 
@@ -2250,7 +2250,7 @@ and &quot; (or &#34;) as double quotes.</p>
   
 <p><i>Note:</i> The use of &; will not overwrite double quotes that browsers can 
 automatically place on attribute quotes. For example <b>&lt;p</b> class=special<b>&gt;</b> being made to <b>&lt;p</b> class="special"&gt;,
-using &quoit; can lead to <b>&lt;p</b> class=""speical""&gt; where &bsol;" will be &lt;p class="special"&gt;.</p>
+using &quot; can lead to <b>&lt;p</b> class=""special""&gt; where &bsol;" will be &lt;p class="special"&gt;.</p>
 
 <p>Version ≥ 6</p>
 
@@ -2382,8 +2382,8 @@ as this method supports other datatypes as well just like <b>typeof</b>.</p>
 <pre>
 <b>var</b> pString = &quot;Primitive String&quot;;
 <b>var</b> oString = <b>new</b> String(&quot;Object Form of String&quot;);
-Object.<b>prototype</b>.toString.call(pString);*//&quot;&lbrack;object String&rbrack;&quot;*
-Object.<b>prototype</b>.toString.call(oString);*//&quot;&lbrack;object String&rbrack;&quot;*
+Object.<b>prototype</b>.toString.call(pString);  //<i>&quot;&lbrack;object String&rbrack;&quot;</i>
+Object.<b>prototype</b>.toString.call(oString);  //<i>&quot;&lbrack;object String&rbrack;&quot;</i>
 </pre>
 
 <p>A more robust solution is to not *detect* a string at all, rather only check for what 
@@ -2391,7 +2391,7 @@ functionality is required. For example:</p>
 
 <pre>
 <b>var</b> aString = &quot;Primitive String&quot;;
-// <i>Generic check for a substring method<?i>
+// <i>Generic check for a substring method</i>
 <b>if</b>(aString.substring) {
 
 }
