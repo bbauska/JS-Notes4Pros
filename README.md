@@ -794,7 +794,6 @@ concept of an "empty" property.</p>
 	</ul>
   </li>
 </ul>
-
 <!-- page 15 -->
 <p><b>undefined</b> is also a property of the global window object.</p>
 
@@ -925,13 +924,11 @@ JavaScript provides two ways of commenting code lines.</p>
 
 <p>Everything after the // until the end of the line is excluded from execution.</p>
 
-<pre>
-<b>function</b> elementAt( event ) {
+<pre><b>function</b> elementAt( event ) {
 // <i>Gets the element from Event coordinates</i>
   <b>return</b> document.elementFromPoint(event.clientX, event.clientY);
 }
-&ast;// <i>TODO: write more cool stuff!</i>
-</pre>
+&ast;// <i>TODO: write more cool stuff!</i></pre>
 
 <h4>Multi-line Comment /&ast;&ast;/</h4>
 
@@ -939,8 +936,7 @@ JavaScript provides two ways of commenting code lines.</p>
 from execution, even if the opening and closing are on different
 lines.</p>
 
-<pre>
-/*
+<pre>/*
    <i>Gets the element from Event coordinates.
    Use like:
      var clickedEl = someEl.addEventListener("click", elementAt, false);</i>
@@ -948,8 +944,7 @@ lines.</p>
 <b>function</b> elementAt( event ) {
   <b>return</b> document.elementFromPoint(event.clientX, event.clientY);
 }
-/&ast; <i>TODO: write more useful comments!</i> */
-</pre>
+/&ast; <i>TODO: write more useful comments!</i> */</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch4-2">Section 4.2: Using HTML comments in JavaScript (Bad practice)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -959,26 +954,24 @@ considered <b>bad practice</b>.</p>
 
 <p>One-line comments with the HTML comment opening sequence (&lt;!-&dash;):
 
-<p><b>Note:</b> the JavaScript interpreter ignores the closing characters of HTML comments (&dash;-&gt;) here.</p>
+<blockquote>
+<b>Note:</b> the JavaScript interpreter ignores the closing characters of HTML comments (&dash;-&gt;) here.
+</blockquote>
 
-<pre>
-&lt;!-- A single-line comment.
+<pre>&lt;!-- A single-line comment.
 &lt;!-- --&gt; Identical to using `//` since
-&lt;!-- --&gt; the closing '--&gt;' is ignored.
-</pre>
+&lt;!-- --&gt; the closing '--&gt;' is ignored.</pre>
 
 <p>This technique can be observed in legacy code to hide JavaScript from
 browsers that didn't support it:</p>
 
-<pre>
-<b>script</b> type="text/javascript" language="JavaScript"<b>&gt;</b>
+<pre><b>script</b> type="text/javascript" language="JavaScript"<b>&gt;</b>
 &lt;!-&dash;
 /* Arbitrary JavaScript code.
    Old browsers would treat
    it as HTML code. */
 // --&gt;
-&lt;/script&gt;
-</pre>
+&lt;/script&gt;</pre>
 
 <!-- page 18 -->
 <p>An HTML closing comment can also be used in JavaScript (independent of
@@ -986,15 +979,12 @@ an opening comment) at the beginning of a line (optionally preceded by
 whitespace) in which case it too causes the rest of the line to be
 ignored:</p>
 
-<pre>
-&dash;-&gt; Unreachable JS code
-</pre>
+<pre>&dash;-&gt; Unreachable JS code</pre>
 
 <p>These facts have also been exploited to allow a page to call itself
 first as HTML and secondly as JavaScript. For example:</p>
 
-<pre>
-&lt;!-&dash;
+<pre>&lt;!-&dash;
  self.postMessage('reached JS "file"');
 /*
 &dash;-&gt;
@@ -1007,8 +997,7 @@ w1.onmessage = function (e) {
 <b>&lt;/script&gt;</b>
 &lt;!-&dash;
 */
-&dash;-&gt;
-</pre>
+&dash;-&gt;</pre>
 
 <p>When run a HTML, all the multiline text between the &lt;!-&dash; and &dash;-&gt;
 comments are ignored, so the JavaScript contained therein is ignored
@@ -1101,12 +1090,17 @@ after that.</p>
   <li>F12 , then click on the "Console" tab</li>
 </ul>
 
-<h4Safari</h4>
+<h4>Safari</h4>
 
 <p>Opening the "Console" panel in Safari's <b>Web Inspector</b> you must
 first enable the develop menu in Safari&apos;s Preferences</p>
-
-<!-- image goes here top of pg 21 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="center">
+  <img src="./images/image012.png"
+  title=""
+  alt="."
+  style="border: 2px solid #000000; width:773px;" />
+<!-- page 21 image012 -->
 
 <p>Then you can either pick &quot;Develop-&gt;Show Error Console&quot; from the menus or press ⌘
 &plus; Option &plus; C</p>
@@ -1128,24 +1122,20 @@ statements can cause an exception and prevent code from executing. To
 mitigate this, you can check to see if the console is available before
 you log:</p>
 
-<pre>
-<b>if</b> (<b>typeof</b> window.console !== &apos;undefined&apos)
+<pre><b>if</b> (<b>typeof</b> window.console !== &apos;undefined&apos)
 {
   console.log(&quot;Hello World&quot;);
-}
-</pre>
+}</pre>
 
 <p>Or at the start of your script you can identify if the console is available and if not, define a null function to catch all of your
 references and prevent exceptions.</p>
 
 <!-- page 22 -->
 
-<pre>
-<b>if</b> (!window.console)
+<pre><b>if</b> (!window.console)
 {
   console = {log: <b>function</b>() {}};
-}
-</pre>
+}</pre>
 
 <p>Note this second example will stop <b>all</b> console logs even if the developer window has been opened.</p>
 
@@ -1171,36 +1161,30 @@ call was made.</p>
 
 <h4>Example 1:</h4>
 
-<pre>
-console.time(&apos;response in&apos;);
+<pre>console.time(&apos;response in&apos;);
 
 alert(&apos;Click to continue&apos;);
 console.timeEnd(&apos;response in&apos;);
 
 alert(&apos;One more time&apos;);
-console.timeEnd(&apos;response in&apos;);
-</pre>
+console.timeEnd(&apos;response in&apos;);</pre>
 
 <p>will output:</p>
 
-<pre>
-response <b>in</b>: 774.967ms
-response <b>in</b>: 1402.199ms
-</pre>
+<pre>response <b>in</b>: 774.967ms
+response <b>in</b>: 1402.199ms</pre>
 
 <h4>Example 2:</h4>
 
-<pre>
-<b>var</b> elms = document.getElementsByTagName(&apos;*&apos;); // <i>select all elements on the page</i>
+<pre><b>var</b> elms = document.getElementsByTagName(&apos;*&apos;); // <i>select all elements on the page</i>
 console.time(&apos;Loop time&apos;);
 
-<b>for</b>(<b>var</b> i = 0; i &lt; 5000; i ++ ) {
-  <b>for</b> (<b>var</b> j = 0, length = elms.length; j &lt; length; j ++ ) { 
+<b>for</b>(<b>var</b> i = 0; i &lt; 5000; i++) {
+  <b>for</b> (<b>var</b> j = 0, length = elms.length; j &lt; length; j++) { 
     // <i>nothing to do ...</i>
   }
 } 
-console.timeEnd(&apos;Loop time&apos;);
-</pre>
+console.timeEnd(&apos;Loop time&apos;);</pre>
 
 <p>will output:</p>
 
@@ -1215,7 +1199,7 @@ Loop time: 40.716ms
 formatting, using % tokens:</p>
 
 <pre>
-console.log(&apos;%s has %d points&apos;,&apos;Sam&apos;,100);
+console.log(&apos;%s has %d points&apos;,&apos;Sam&apos;, 100);
 </pre>
 
 <p>Display Sam has 100 points.</p>
@@ -1263,9 +1247,7 @@ console.log(&apos;%s has %d points&apos;,&apos;Sam&apos;,100);
 string, the print method will accept a second parameter with CSS rules
 which allow fine-grained control over the formatting of that string:</p>
 
-<pre>
-console.log(&apos;%cHello world!&apos;, &apos;color: blue; font-size: xx-large&apos;);</p>
-</pre>
+<pre>console.log(&apos;%cHello world!&apos;, &apos;color: blue; font-size: xx-large&apos;);</pre>
 
 <p>Displays:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -1331,9 +1313,6 @@ debugging console with the following methods:</p>
 </ul>
 
 <p>Groups can be cascaded to allow multiple indented output or collapsible layers within each other:</p>
-
-  
- 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="center">
   <img src="./images/image015.jpg"
