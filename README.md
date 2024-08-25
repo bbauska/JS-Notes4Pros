@@ -2119,8 +2119,8 @@ Version ≥ 6
 <b>return</b>&lbrack;&hellip;String(str)&rbrack;.reverse().join(&apos;&apos;);
 }
 console.log(reverseString(&apos;stackoverflow&apos;));  // <i>&quot;wolfrevokcats&quot;</i>
-console.log(reverseString(1337));                       // <i>&quot;7331&quot;</i>
-console.log(reverseString(&lbrack;1, 2, 3&rbrack;));    // <i>&quot;3,2,1&quot;</i>
+console.log(reverseString(1337));             // <i>&quot;7331&quot;</i>
+console.log(reverseString(&lbrack;1, 2, 3&rbrack;));       // <i>&quot;3,2,1&quot;</i>
 </pre>
 
 <p><b>Custom reverse() function</b></p>
@@ -2128,7 +2128,7 @@ console.log(reverseString(&lbrack;1, 2, 3&rbrack;));    // <i>&quot;3,2,1&quot;<
 <pre>
 <b>function</b> reverse(string) {
   <b>var</b> strRev = &quot;&quot;;
-  <b>for</b> (<b>var</b> i = string.length &minus; 1; i &gt;= 0; i&bsol;) {
+  <b>for</b> (<b>var</b> i = string.length &minus; 1; i &gt;= 0; i&minus;&minus;) {
     strRev += string&lbrack;i&rbrack;;
   }
   <b>return</b> strRev;
@@ -2159,12 +2159,12 @@ a result, a form of the localCompare() function can be written like so:</p>
 <pre>
 <b>function</b> strcmp(a,b){
   <b>if</b>(a===b){
-    <b>return</b>0; 
+    <b>return</b> 0; 
   }
   <b>if</b> (a &gt; b) {
     <b>return</b> 1;
   }
-  <b>return</b> &minus; 1;
+  <b>return</b> &minus;1;
 }
 
 console.log (strcmp (&quot;hello&quot;, &quot;world&quot;)); // <i>-1</i>
@@ -2176,7 +2176,7 @@ console.log (strcmp(&quot;world&quot;, &quot;hello&quot;));  // <i>1</i>
 of the return value (such as sort).</p>
 
 <pre>
-<b>var</b> arr = &lbrack; &quot;bananas&quot;, &quot;cranberries&quot;, &quot;apples&quot; &rbrack;;
+<b>var</b> arr = &lbrack;&quot;bananas&quot;, &quot;cranberries&quot;, &quot;apples&quot;&rbrack;;
 arr.sort (<b>function</b>(a, b) {
   <b>return</b> a&period;localeCompare(b);
 });
@@ -2204,114 +2204,78 @@ bracket notation</a>.</p>
 console.log ( string &lbrack;4&rbrack; ); // <i>&quot;o&quot;</i>
 </pre>
 
-[charCodeAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt)
+<p>To get the character code of the character at a specified index, use 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt">
+charCodeAt()</a>.</p>
 
-To get the character code of the character at a specified index, use
-[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt).
+<pre>
+<b>var</b> string = &quot;Hello, World!&quot;;
+console.log( string. charCodeAt(4) ); // <i>111</i>
+</pre>
 
-<b>var</b> string = &quot;Hello, World!&quot; ;
-console.log ( string. charCodeAt ( 4 ) ) ;
-
-*// 111*
-
-Note that these methods are all getter methods (return a value).
+<p>Note that these methods are all getter methods (return a value).
 Strings in JavaScript are immutable. In other words, none of them can
-be used to set a character at a position in the string.
-
+be used to set a character at a position in the string.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-5">Section 7.5: Escaping quotes</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>If your string is enclosed (i.e.) in single quotes you need to escape the inner literal 
+quote with <i>backslash</i> &bsol;</p>
 
-If your string is enclosed (i.e.) in single quotes you need to escape
-the inner literal quote with *backslash* &bsol;&bsol;
+<pre>
+<b>var</b> text = &apos;L&absol;albero means tree in Italian&apos;;
+console.log( text ); \\ &quot;L&apos;albero means tree in Itealian
+</pre>
 
-<b>var</b>
-text
-=
-&apos;L
-<b>&amp;amp;apos;</b>
-albero means tree in Italian&apos;
-;
-console.
-log
-(
-text
-)
-;
-&bsol;&bsol;&bsol;&bsol;
-&quot;L&apos;albero means tree in Italian&quot;
-Same goes for double quotes:
-<b>var</b>
-text
-=
-&quot;I feel
-<b>&amp;amp;quot;</b>
-high
-<b>&amp;amp;quot;</b>
-&quot;
-;
-Special attention must be given to escaping quotes if you&apos;re storing
+<p>Same goes for double quotes:</p>
+
+<pre>
+<b>var</b> text = "I feel &absol;"high&absol;";
+</pre>
+
+<p>Special attention must be given to escaping quotes if you&apos;re storing
 HTML representations within a String, since HTML strings make large
-use of quotations i.e. in attributes:
+use of quotations i.e. in attributes:</p>
 
-<b>var</b> content = &quot;&lt;p class=<b>&amp;amp;quot;</b>special<b>&amp;amp;quot;</b>&gt;Hello
-World!&lt;/p&gt;&quot;; *// valid String* <b>var</b> hello = &apos;&lt;p
-class=&quot;special&quot;&gt;I<b>&amp;amp;apos;</b>d like to say &quot;Hi&quot;&lt;/p&gt;&apos;; *// valid
-String*
+<pre>
+<b>var</b> content = &quot;&lt;p class=<b>&absol;quot;special&absol;&quot;&gt;</b>Hello World!&lt;/p&gt;; // <i>valid String</i>
+<b>var</b> hello   = &apos;&lt;p class=&quot;special&quot;&gt;I<b>&absol;apos;</b>d like to say &quot;Hi&quot;&lt;/p&gt;&apos;; // <i>valid String</i>
+</pre>
   
-  apos   ; (or &#  39   ;) as a single quote and &       quot   ; ( or &#  34
- 
-Quotes in HTML strings can also be represented using &;) as double
-quotes.
+<p>Quotes in HTML strings can also be represented using &apos;(or &#39;) as a single quote 
+and &quot; (or &#34;) as double quotes.</p>
 
-<b>var</b> hi = &quot;&lt;p class=&apos;special&apos;&gt;I&apos;d like to say
-&quot;Hi&quot;&lt;/p&gt;&quot;; *// valid String* <b>var</b> hello = &apos;&lt;p
-class=&quot;special&quot;&gt;I&apos;d like to say &quot;Hi&quot;&lt;/p&gt;&apos;; *// valid
-String*
+<pre>
+<b>var</b> hi = &quot;&lt;p class=&apos;special&apos;&gt;I&apos;d like to say &quot;Hi&quot;&lt;/p&gt;&quot;; // <i>valid String</i>
+<b>var</b> hello = &apos;&lt;p class=&quot;special&quot;&gt;I&apos;d like to say &quot;Hi&quot;&lt;/p&gt;&apos;; // <i>valid String</i>
+</pre>
   
-apos                ; and &                         quot
-  
-*Note:* The use of &; will not overwrite double quotes that browsers
-can automatically place on
+<p><i>Note:</i> The use of &; will not overwrite double quotes that browsers can 
+automatically place on attribute quotes. For example <b>&lt;p</b> class=special<b>&gt;</b> being made to <b>&lt;p</b> class="special"&gt;,
+using &quoit; can lead to <b>&lt;p</b> class=""speical""&gt; where &absol;" will be &lt;p class="special"&gt;.</p>
 
-  <b>&lt;p</b>            <b>&gt;</b> being     <b>&lt;p</b>   =   &quot;special&quot;   <b>&gt;</b>,   quot
-  class=special      made to          class                       using &   
+<p>Version ≥ 6</p>
 
-attribute quotes. For example ; can lead to
+<p>If a string has &apos; and &quot; you may want to consider using template literals (<i>also 
+known as template strings in previous ES6 editions</i>), which do not require you to escape &apos; 
+and &quot;. These use backticks (&grave;) instead of single or double quotes.</p>
 
-  <b>&lt;p</b>    =   &quot;&quot;special&quot;&quot;   <b>&gt;</b> where &amp;amp;quot;    <b>&lt;p</b>    =   &quot;special&quot;
-  class                            will be              class          
-
-<b>&gt;</b>.
-
-Version ≥ 6
-
-If a string has &apos; and &quot; you may want to consider using template
-literals (*also known as template strings in previous ES6 editions*),
-which do not require you to escape &apos; and &quot;. These use backticks (&grave;)
-instead of single or double quotes.
-
-<b>var</b>
-x
-=
-&grave;
-&quot;Escaping &quot;
-and
-&apos; can become very annoying&grave;;
-
+<pre>
+<b>var</b> x = &grave;&quot;Escaping &quot; and &apos; can become very annoying&grave;;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-6">Section 7.6: Word Counter</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Say you have a <b>&lt;textarea&gt;</b> and you want to retrieve info about the number of:</p>
 
-  <b>&lt;textarea</b>
+<ul>
+  <li>Characters (total)</li>
+  <li>Characters (no spaces)</li>
+  <li>Words</li>
+  <li>Lines</li>
+</ul>
 
-Say you have a <b>&gt;</b> and you want to retrieve info about the number
-of:
-
-Characters (total)
-Characters (no spaces)
-Words
-Lines
+<pre>
 <b>function</b>
 wordCount
 (
@@ -2355,29 +2319,13 @@ length
 :
 0
 ,
-lines
-:
-val.
-split
-(
-*/&bsol;&bsol;r&ast;&bsol;&bsol;n/*
-)
-.
-length
-}
-;
-}
-*// Use like:*
-wordCount
-(
-someMultilineText
-)
-.
-words
-;
-*// (Number of words)*
-[jsFiddle exampl]{.underline}
-[e](http://jsfiddle.net/RokoCB/5nfay7d1/206/)
+    lines   : val.split(*/&bsol;&bsol;r&ast;&bsol;&bsol;n/*).length
+  };
+} 
+// <i>Use like:</i>
+wordCount(someMultilineText ).words;  // <i>(Number of words)</i>
+
+<p><a href="http://jsfiddle.net/RokoCB/5nfay7d1/206/">jsFiddle example</a>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-7">Section 7.7: Trim whitespace</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
