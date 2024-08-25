@@ -1957,6 +1957,7 @@ Double quotes &quot;Hello&quot; and (from ES2015, ES6) in Template Literals
 <b>var</b> hello = &quot;Hello&quot;;
 <b>var</b> world = &apos;world&apos;;
 <b>var</b> helloW = &grave;Hello World&grave;; //<i> ES2015 / ES6</i>
+</pre>
 
 <p>String can be created from other types using the String() function.</p>
 
@@ -2002,6 +2003,7 @@ console.log(foo &plus; &quot; &quot;&plus; bar);  // <i>=&amp;quot;Foo Bar&quot;
 
 foo.concat(bar)               // <i>=&amp;quot;FooBar&quot;</i>
 &quot;a&quot;.concat(&quot;b&quot;, &quot; &quot;, &quot;d&quot;) // <i>=&amp;quot;ab d&quot;</i>
+</pre>
 
 <p>Strings can be concatenated with non-string variables but will type-convert the non-string variables into strings.</p>
 
