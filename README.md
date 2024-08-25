@@ -1565,12 +1565,12 @@ console.count(&apos;&apos;);
 <p>Displays:</p>
 
 <pre>
-1:1
-2:1
-:1
-1:2
-2:2
-:1
+1: 1
+2: 1
+: 1
+1: 2
+2: 2
+: 1
 </pre>
 
 <p>Strings with numbers are converted to Number objects:</p>
@@ -1670,17 +1670,21 @@ like &quot;Console was cleared&quot; in some environments.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-8">Section 5.8: Displaying objects and XML interactively console.dir(), console.dirxml()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-displays an interactive list of the properties of the specified
-JavaScript object. The output is
+<p>console.dir(object) displays an interactive list of the properties of the specified
+JavaScript object. The output is presented as a hierarchical listing with disclosure triangles that let
+you see the contents of child objects.</p>
 
-presented as a hierarchical listing with disclosure triangles that let
-you see the contents of child objects.
-
-<b>var</b> myObject = { &quot;foo&quot; : { &quot;bar&quot; : &quot;data&quot; } };
+<pre>
+<b>var</b> myObject = {
+  &quot;foo&quot; : {
+    &quot;bar&quot; : &quot;data&quot; 
+  }
+};
 
 console.dir ( myObject );
+</pre>
 
-displays:
+<p>displays:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image019.jpg"
@@ -1723,11 +1727,17 @@ displays:
 
 <p><b>Example 3:</b></p>
 
-<b>var</b> myObject = { &quot;foo&quot; : { &quot;bar&quot; : &quot;data&quot; } };
+<pre>
+<b>var</b> myObject = {
+  &quot;foo&quot;:{
+    &quot;bar&quot; : &quot;data&quot;
+  }
+};
 
 console.dirxml ( myObject );
+</pre>
 
-displays:
+<p>displays:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image022.jpg"
@@ -1735,17 +1745,23 @@ displays:
   alt="."
   style="border: 2px solid #000000; width:6.5in;" />
 <!-- ![](./images/image022.jpg){width="6.504166666666666in" height="2.6486111111111112in"} -->
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-9">Section 5.9: Debugging with assertions - console.assert()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Writes an error message to the console if the assertion is <b>false</b>.
+Otherwise, if the assertion is <b>true</b>, this does nothing.</p>
 
-Writes an error message to the console if the assertion is <b>false</b>.
-Otherwise, if the assertion is <b>true</b>, this does nothing.
-
+<pre>
 console.assert ( &apos;one&apos; === 1 );
-
-Multiple arguments can be provided after the assertionthese can be
+</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image023.png"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:6.5in;" />
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Multiple arguments can be provided after the assertionthese can be
 strings or other objectsthat will only be printed if the assertion
 is <b>false</b>:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -1755,587 +1771,312 @@ is <b>false</b>:
   alt="."
   style="border: 2px solid #000000; width:6.5in;" />
 <!-- ![](./images/image024.jpg){width="6.46875in" height="1.2069444444444444in"} -->
-
-[console.assert](https://developer.mozilla.org/en-US/docs/Web/API/console/assert)
-
-does *not* throw an AssertionError (except in Node.js), meaning that
-this method is incompatible with most testing frameworks and that code execution will not break on
-a failed assertion.
-
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/console/assert">console.assert</a> does 
+<i>not</i> throw an AssertionError (except in Node.js), meaning that this method is incompatible 
+with most testing frameworks and that code execution will not break on a failed assertion.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch6">Chapter 6: Datatypes in JavaScript</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch6-1">Section 6.1: typeof</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-<b>typeof</b> is the &apos;official&apos; function that one uses to get the type
+<p><b>typeof</b> is the &apos;official&apos; function that one uses to get the type
 in JavaScript, however in certain cases it might yield some unexpected
-results &hellip;
+results &hellip;</p>
 
-1.  <b>Strings</b>
-<b>typeof</b> &quot;String&quot; or
-<b>typeof</b> Date(2011,01,01)
-&quot;string&quot;
+<ol>
+  <li><b>Strings</b><br/>
+  <b>typeof</b> &quot;String&quot; or<br/>
+  <b>typeof</b> Date(2011,01,01)
+  <blockquote>
+  &quot;string&quot;
+  </blockquote></li>
 
-2.  <b>Numbers</b>
-<b>typeof</b> 42
-&quot;number&quot;
+  <li><b>Numbers</b><br/>
+  
+  <b>typeof</b> 42
+  <blockquote>
+  &quot;number&quot;
+  </blockquote></li>
 
-3.  <b>Bool</b>
-  <b>typeof</b> <b>true</b>
-(valid values <b>true</b> and <b>false</b>)
-&quot;boolean&quot;
+  <li><b>Bool</b><br/>
+  <b>typeof</b> <b>true</b> (valid values <b>true</b> and <b>false</b>)
+  <blockquote>
+  &quot;boolean&quot;
+  </blockquote></li>
 
-4.  <b>Object</b>
-  <b>typeof<b> {}
-  <b>typeof</b> &lbrack;&rbrack;
-  <b>typeof</b> <b>null</b>
-  <b>typeof</b> /aaa/
-or or or or
-<b>typeof</b> Error()
-&quot;object&quot;
+  <li><b>Object</b><br/>
+  <b>typeof<b> {} or<br/>
+  <b>typeof</b> &lbrack;&rbrack; or<br/>
+  <b>typeof</b> <b>null</b> or<br/>
+  <b>typeof</b> /aaa/ or<br/>
+  <b>typeof</b> Error()
+  <blockquote>
+  &quot;object&quot;
+  </blockquote></li>
 
-5.  <b>Function</b>
-<b>typeof</b> <b>function</b>(){}
-&quot;function&quot;
+  <li><b>Function</b><br/>
+  <b>typeof</b> <b>function</b>(){}
+  <blockquote>
+  &quot;function&quot;
+  </blockquote></li>
 
-6.  <b>Undefined</b>
-<b>var</b> var1; <b>typeof</b> var1
-&quot;undefined&quot;
-
+  <li><b>Undefined</b><br/>
+  <b>var</b> var1; <b>typeof</b> var1
+  <blockquote>
+  &quot;undefined&quot;
+  </blockquote></li>
+</ol>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch6-2">Section 6.2: Finding an object&apos;s class</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>To find whether an object was constructed by a certain constructor or
+one inheriting from it, you can use the <b>instanceof</b> command:</p>
 
-To find whether an object was constructed by a certain constructor or
-one inheriting from it, you can use the
-
-<b>instanceof</b>
-
-command:
-*//We want this function to take the sum of the numbers passed to it*
-
-*//It can be called as sum(1, 2, 3) or sum(&lbrack;1, 2, 3&rbrack;) and should give
-6*
-
-<b>function</b>
-sum ( &hellip; arguments ) { <b>if</b>
-( arguments.
-
-length === 1 )
-{
-<b>const</b> &lbrack; firstArg &rbrack; = arguments <b>if</b> ( firstArg <b>instanceof</b>
-
-Array ) {
-
-*//firstArg is something like &lbrack;1, 2, 3&rbrack;*
-
-<b>return</b>
-
-sum ( &hellip;
-firstArg )
-
-*//calls sum(1, 2, 3)* }
+<pre>
+//<i>We want this function to take the sum of the numbers passed to it</i>
+//<i>It can be called as sum(1, 2, 3) or sum(&lbrack;1, 2, 3&rbrack;) and should give 6</i>
+<b>function</b> sum ( &hellip; arguments ) {
+  <b>if</b> ( arguments.length === 1 ) {
+    <b>const</b> &lbrack; firstArg &rbrack; = arguments
+	<b>if</b> ( firstArg <b>instanceof</b> Array ) { //<i>firstArg is something like &lbrack;1, 2, 3&rbrack;</i>
+      <b>return</b> sum (&hellip;firstArg) //<i>calls sum(1, 2, 3)</i>
+    }
+  }
+  <b>return</b> arguments.reduce((a, b) =&gt; a &plus; b)
 }
-<b>return</b>
-arguments.
-reduce
-( (a, b) =&gt; a &plus; b ) }
+console.log(sum (1, 2, 3)) //<i>6</i>
+console.log(sum (&lbrack;1, 2, 3&rbrack;)) //<i>6</i>
+console.log(sum (4))                       //<i>4</i>
+</pre>
 
-console.log ( sum ( 1 , 2 , 3 ) )
+<p>Note that primitive values are not considered instances of any class:</p>
+<pre>
+console.log(2 <b>instanceof</b> Number)          //<i>false</i>
+console.log(&apos;abc&apos; <b>instanceof</b> String)   //<i>false</i>
+console.log(<b>true</b> <b>instanceof</b> Boolean)      //<i>false</i>
+console.log(Symbol() <b>instanceof</b> Symbol)  //<i>false</i>
+</pre>
 
-*//6*
-
-console.log (
-sum
-(
-&lbrack;
-1
-,
-2
-,
-3
-&rbrack;
-)
-)
-*//6*
-console.
-log
-(
-sum
-(
-4
-)
-)
-*//4*
-
-Note that primitive values are not considered instances of any class:
-console.
-log
-(
-2
-<b>instanceof</b>
-Number
-)
-*//false*
-console.
-log
-(
-&apos;abc&apos;
-<b>instanceof</b>
-String
-)
-*//false*
-console.
-log
-(
-<b>true</b>
-<b>instanceof</b>
-Boolean
-)
-*//false*
-console.log(Symbol
-(
-)
-<b>instanceof</b>
-Symbol
-)
-
-*//false*
-
-Every value in JavaScript besides <b>null</b> and <b>undefined</b> also has
+<p>Every value in JavaScript besides <b>null</b> and <b>undefined</b> also has
 a constructor property storing the function that was used to construct
-it. This even works with primitives.
+it. This even works with primitives.</p>
 
-*//Whereas instanceof also catches instances of subclasses, //using
-obj.constructor does not* console.log(&lbrack;&rbrack; <b>instanceof</b> Object, &lbrack;&rbrack;
-<b>instanceof</b> Array) *//true true* console.log(&lbrack;&rbrack;.constructor ===
-Object, &lbrack;&rbrack;.constructor === Array) *//false true*
+<pre>
+//<i>Whereas instanceof also catches instances of subclasses,</i>
+//<i>using obj.constructor does not</i>
+console.log(&lbrack;&rbrack; <b>instanceof</b> Object, &lbrack;&rbrack; <b>instanceof</b> Array)        //<i>true true</i>
+console.log(&lbrack;&rbrack;.constructor === Object, &lbrack;&rbrack;.constructor === Array) //<i>false true</i>
 
 <b>function</b> isNumber(value) {
-
-*//null.constructor and undefined.constructor throw an error when
-accessed* <b>if</b> (value === <b>null</b> &vert;&vert; value === <b>undefined</b>)
-<b>return</b> <b>false</b> <b>return</b> value.constructor === Number }
-console.log(isNumber(<b>null</b>), isNumber(<b>undefined</b>)) *//false
-false* console.log(isNumber(&apos;abc&apos;), isNumber(&lbrack;&rbrack;), isNumber(() =&gt;
-1)) *//false false false* console.log(isNumber(0),
-isNumber(Number(&apos;10.1&apos;)), isNumber(<b>NaN</b>)) *//true true true*
-
+  //<i>null.constructor and undefined.constructor throw an error when accessed</i>
+  <b>if</b> (value === <b>null</b> &vert;&vert; value === <b>undefined</b>)
+  <b>return</b> <b>false</b> <b>return</b> value.constructor === Number 
+}
+console.log(isNumber(<b>null</b>), isNumber(<b>undefined</b>))                          //<i>false false</i>
+console.log(isNumber(&apos;abc&apos;), isNumber(&lbrack;&rbrack;), isNumber(() =&gt; 1))     //<i>false false false</i>
+console.log(isNumber(0), isNumber(Number(&apos;10.1&apos;)), isNumber(<b>NaN</b>)) //<i>true true true</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch6-3">Section 6.3: Getting object type by constructor name</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>When one with <b>typeof</b> operator one gets type object it falls into
+somewhat wast category&hellip;</p>
 
-When one with <b>typeof</b> operator one gets type object it falls into
-somewhat wast category&hellip;
-In practice you might need to narrow it down to what sort of
-&apos;object&apos; it actually is and one way to do it is to use
-  Object     .   <b>prototype</b>   .   toString      .   call   (   yourObject
-object constructor name to get what flavour of object it actually is:
-)
-1.  <b>String</b>
-  Object     .   <b>prototype</b>    .   toString       .   call    (   &quot;String&quot;
-)
+<p>In practice you might need to narrow it down to what sort of &apos;object&apos; it actually 
+is and one way to do it is to use object constructor name to get what flavor of object it 
+actually is: Object.<b>prototype</b>.toString.call(yourObject)</p>
 
-&quot;&lbrack;object String&rbrack;&quot;
-
-2.  <b>Number</b>
-  Object       .   <b>prototype</b>       .   toString          .   call     (   42
-)
-&quot;&lbrack;object Number&rbrack;&quot;
-
-3.  <b>Bool</b>
-  Object       .   <b>prototype</b>      .   toString         .   call     (   <b>true</b>
-)
-&quot;&lbrack;object Boolean&rbrack;&quot;
-
-4.  <b>Object</b>
-  Object
-  call
-  call
-  toString
-  toString
-  <b>prototype</b>
-  <b>prototype</b>
-  Object
-  Object
-&hellip;(()) or &hellip;({})
-&quot;&lbrack;object Object&rbrack;&quot;
-
-5.  <b>Function</b>
-  Object     .   <b>prototype</b>    .   toString       .   call    (   <b>function</b>
-(){})
-&quot;&lbrack;object Function&rbrack;&quot;
-
-6.  <b>Date</b>
-  Object   .   <b>prototype</b>   .   toString    .   call   (   <b>new</b>     (   2015   ,   10   ,   21
-                                                              Date                                
-))
-
-&quot;&lbrack;object Date&rbrack;&quot;
-
-7.  <b>Regex</b>
-  <b>new</b> RegExp
-  call
-  call
-  toString
-  toString
-  <b>prototype</b>
-  <b>prototype</b>
-  Object
-  Object
-  */foo/*
-&hellip;(()) or &hellip;();
-&quot;&lbrack;object RegExp&rbrack;&quot;
-
-8.  <b>Array</b>
-  Object         .   <b>prototype</b>         .   toString           .   call
-(&lbrack;&rbrack;);
-&quot;&lbrack;object Array&rbrack;&quot;
-
-9.  <b>Null</b>
-
-  -
-  Object       .   <b>prototype</b>      .   toString         .   call     (   <b>null</b>
-    -  -    -
-
-  -
-
-);
-
-&quot;&lbrack;object Null&rbrack;&quot;
-
-10. <b>Undefined</b>
-
-  -
-  Object     .   <b>prototype</b>   .   toString       .   call    (   <b>undefined</b>
-  -      -  
-
-  -
-
-);
-
-&quot;&lbrack;object Undefined&rbrack;&quot;
-
-11. <b>Error</b>
-
-  
-  Object      .   <b>prototype</b>     .   toString        .   call    (   Error
-        -  
-
-  
-
-());
-
-&quot;&lbrack;object Error&rbrack;&quot;
-
+<ol>
+  <li><b>String</b><br/>
+    Object.<b>prototype</b>.toString.call(&quot;String&quot;)<br/>
+    <blockquote>
+    &quot;&lbrack;object String&rbrack;&quot;
+    </blockquote></li>
+  <li><b>Number</b><br/>
+    Object.<b>prototype</b>.toString.call(42)<br/>
+    <blockquote>
+    &quot;&lbrack;object Number&rbrack;&quot;
+    </blockquote></li>
+  <li><b>Bool</b><br/>
+    Object.<b>prototype</b>.toString.call(<b>true</b>)<br/>
+    <blockquote>
+    &quot;&lbrack;object Boolean&rbrack;&quot;
+    </blockquote></li>
+  <li><b>Object</b><br/>
+    Object.<b>prototype</b>.toString.call(Object()) or<br/>
+	Object.<b>prototype</br>.toString.call({})<br/>
+	<blockquote>
+    &quot;&lbrack;object Object&rbrack;&quot;
+    </blockquote></li>
+  <li><b>Function</b><br/>
+    Object.<b>prototype</b>.toString.call(<b>function</b>(){})<br/>
+	<blockquote>
+    &quot;&lbrack;object Function&rbrack;&quot;
+	</blockquote></li>
+  <li><b>Date</b><br/>
+    Object.<b>prototype</b>.toString.call(<b>new</b> Date(2015,10,21))<br/>
+    <blockquote>
+    &quot;&lbrack;object Date&rbrack;&quot;
+    </blockquote></li>
+  <li><b>Regex</b><br/>
+    Object.<b>prototype</b>.toString.call(<b>new</b> RegExp()) or<br/>
+	Object.<b>prototype</b>.toString.call(/<i>foo/</i>);<br/>
+	<blockquote>
+	&quot;&lbrack;object.RegExp&rbrack;&quot;
+	</blockquote></li>
+  <li><b>Array</b><br/>
+    Object.<b>prototype</b>.toString.call(&lbrack;&rbrack;);<br/>
+    <blockquote>
+    &quot;&lbrack;object Array&rbrack;&quot;
+	</blockquote></li>
+  <li><b>Null</b><br/>
+    Object.<b>prototype</b>.toString.call(<b>null</b>);<br/>
+    <blockquote>
+    &quot;&lbrack;object Null&rbrack;&quot;
+    </blockquote></li>
+  <li><b>Undefined</b><br/>
+    Object.<b>prototype</b>.toString.call(<b>undefined</b>);<br/>
+    <blockquote>
+	&quot;&lbrack;object Undefined&rbrack;&quot;
+	</blockquote></li>
+  <li><b>Error</b><br/>
+    Object.<b>prototype</b>.toString.call(Error());<br/>
+    <blockquote>
+	&quot;&lbrack;object Error&rbrack;&quot;
+	</blockquote></li>
+</ol>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch7">Chapter 7: Strings</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-1">Section 7.1: Basic Info and String Concatenation</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-Strings in JavaScript can be enclosed in Single quotes &apos;hello&apos;,
+<p>Strings in JavaScript can be enclosed in Single quotes &apos;hello&apos;,
 Double quotes &quot;Hello&quot; and (from ES2015, ES6) in Template Literals
-(*backticks*) &grave;hello&grave;.
+(*backticks*) &grave;hello&grave;.</p>
 
+<pre>
 <b>var</b> hello = &quot;Hello&quot;;
 <b>var</b> world = &apos;world&apos;;
-<b>var</b> helloW = &grave;Hello World&grave;;
+<b>var</b> helloW = &grave;Hello World&grave;; //<i> ES2015 / ES6</i>
 
-*// ES2015 / ES6*
-String
-Strings can be created from other types using the () function.
+<p>String can be created from other types using the String() function.</p>
 
-<b>var</b> intString = String ( 32 );
+<pre>
+<b>var</b> intString = String(32); //<i> &quot;32&quot;</i>
+<b>var</b> booleanString = String(<b>true</b>); // <i>&quot;true&quot;</i>
+<b>var</b> nullString = String(<b>null</b>); // <i>&quot;null&quot;</i>
+</pre>
 
-*// &quot;32&quot;*
+<p>Or, toString() can be used to convert Numbers, Booleans or Objects to Strings.</p>
 
-<b>var</b> booleanString = String ( <b>true</b> );
+<pre>
+<b>var</b> intString = (5232).toString(); // <i>&quot;5232&quot;</i>
+<b>var</b> booleanString = (<b>false</b>).toString(); // <i>&quot;false&quot;</i>
+<b>var</b> objString = ({}).toString(); // <i>&quot;&lbrack;object Object&rbrack;&quot;</i>
+</pre>
 
-*// &quot;true&quot;* 
+<p>Strings also can be created by using String.fromCharCode method.</p>
 
-<b>var</b> nullString = String ( <b>null</b> );
+<pre>
+String.fromCharCode(104,101,108,108,111)  //<i>&quot;hello&quot;</i>
+</pre>
 
-*// &quot;null&quot;*
-toString
-Or, () can be used to convert Numbers, Booleans or Objects to Strings.
+<p>Creating a String object using <b>new</b> keyword is allowed, but is not recommended as 
+it behaves like Objects unlike primitive strings.</p>
 
-<b>var</b> intString = ( 5232 ) . toString ();
+<pre>
+<b>var</b> objectString = <b>new</b> String(&quot;Yes, I am a String object&quot;);
+<b>typeof</b> objectString; //<i>&quot;object&quot;</i>
+<b>typeof</b> objectString.valueOf(); //<i>&quot;string&quot;</i>
+</pre>
 
-*// &quot;5232&quot;*
+<p><b>Concatenating Strings</b></p>
 
-<b>var</b> booleanString = ( <b>false</b> ).toString();
+<p>String concatenation can be done with the + concatenation operator, or with the built-in concat() 
+method on the String object prototype.</p>
 
-*// &quot;false&quot;*
+<pre>
+<b>var</b> foo = &quot;Foo&quot;;
+<b>var</b> bar = &quot;Bar&quot;;
+console.log(foo &plus; bar);      // <i>=&amp;quot;FooBar&quot;</i>
+console.log(foo &plus; &quot; &quot;&plus; bar);  // <i>=&amp;quot;Foo Bar&quot;</i>
 
-<b>var</b> objString = ( { } ) . toString ( );
+foo.concat(bar)               // <i>=&amp;quot;FooBar&quot;</i>
+&quot;a&quot;.concat(&quot;b&quot;, &quot; &quot;, &quot;d&quot;) // <i>=&amp;quot;ab d&quot;</i>
 
-*// &quot;&lbrack;object Object&rbrack;&quot;*
+<p>Strings can be concatenated with non-string variables but will type-convert the non-string variables into strings.</p>
 
-  
-String                 .   fromCharCode
-Strings also can be created by using method.
-String
-.
-fromCharCode
-(
+<pre>
+<b>var</b> string = &quot;string&quot;;
+<b>var</b> number = 32;
+<b>var</b> boolean = <b>true</b>;
 
-104
+console.log(string &plus; number &plus; boolean); // <i>&quot;string32true&quot;</i>
+</pre>
 
-,
+<p><b>String Templates</b></p>
 
-101
-
-,
-
-108
-
-,
-
-108
-
-,
-
-111
-
-)
-
-*//&quot;hello&quot;*
-
-Creating a String object using <b>new</b> keyword is allowed, but is not
-recommended as it behaves like Objects unlike primitive strings.
-
-<b>var</b>
-
-objectString
-
-=
-
-<b>new</b>
-
-String
-
-(
-
-&quot;Yes, I am a String object&quot;
-
-)
-
-;
-
-<b>typeof</b>
-
-objectString
-
-;
-
-*//&quot;object&quot;*
-
-<b>typeof</b>
-objectString.
-valueOf
-(
-)
-;
-*//&quot;string&quot;*
-<b>Concatenating Strings</b>
-  concat
-String concatenation can be done with the + concatenation operator, or
-with the built-in () method on the String object prototype.
-<b>var</b>
-foo
-=
-&quot;Foo&quot;
-;
-<b>var</b>
-bar
-=
-&quot;Bar&quot;
-;
-console.
-log
-(
-foo
-&plus;
-bar
-)
-;
-*// =&amp;quot;FooBar&quot;*
-console.
-log
-(
-foo
-&plus;
-&quot; &quot;
-&plus;
-bar
-)
-;
-*// =&amp;quot;Foo Bar&quot;*
-foo.
-concat
-(
-bar
-)
-*// =&amp;quot;FooBar&quot;*
-&quot;a&quot;
-.
-concat
-(
-&quot;b&quot;
-,
-&quot; &quot;
-,
-&quot;d&quot;
-)
-*// =&amp;quot;ab d&quot;*
-Strings can be concatenated with non-string variables but will
-type-convert the non-string variables into strings.
-<b>var</b>
-string
-=
-&quot;string&quot;
-;
-<b>var</b>
-number
-=
-32
-;
-<b>var</b>
-boolean
-=
-<b>true</b>
-;
-console.
-log
-(
-string
-&plus;
-number
-&plus;
-boolean
-)
-;
-*// &quot;string32true&quot;*
-<b>String Templates</b>
+<!-- page 38 -->
+<pre>
 Version ≥ 6
-Strings can be created using template literals (*backticks*)
-&grave;hello&grave;.
-<b>var</b>
-greeting
-=
-&grave;Hello&grave;
-;
-variable
-With template literals, you can do string interpolation using &dollar;{}
-inside template literals:
-<b>var</b>
-place
-=
-&grave;World&grave;
-;
-<b>var</b>
-greet
-=
-&grave;Hello &dollar;
-{
-place
-}
-!
-&grave;
-console.
-log
-(
-greet
-)
-;
-*// &quot;Hello World!&quot;*
+</pre>
 
-You can use String.raw to get backslashes to be in the string without
-modification.
+<p>Strings can be created using template literals (<i>backticks</i>) &grave;hello&grave;.</p>
 
-&grave;a&bsol;&bsol;&bsol;&bsol;b&grave;
+<pre>
+<b>var</b> greeting = &grave;Hello&grave;;
+</pre>
 
-*// = a&bsol;&bsol;b*
-String
-.
-raw
-&grave;a&bsol;&bsol;&bsol;&bsol;b&grave;
-*// = a&bsol;&bsol;&bsol;&bsol;b*
+<p>With template literals, you can do string interpolation using &dollar;{variable} inside template literals:</p>
 
+<pre>
+<b>var</b> place = &grave;World&grave;; 
+<b>var</b> greet = &grave;Hello &dollar;{place}!&grave;
+
+console.log(greet); // <i>&quot;Hello World!&quot;</i>
+</pre>
+
+<p>You can use String.raw to get backslashes to be in the string without modification.</p>
+
+<pre>
+&grave;a&bsol;&bsol;&bsol;&bsol;b&grave; // </i>= a&bsol;&bsol;b</i>
+String.raw&grave;a&bsol;&bsol;&bsol;&bsol;b&grave;  // <i>= a&bsol;&bsol;&bsol;&bsol;b</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-2">Section 7.2: Reverse String</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-The most &quot;popular&quot; way of reversing a string in JavaScript is the
-following code fragment, which is quite common:
+<p>The most &quot;popular&quot; way of reversing a string in JavaScript is the following code 
+fragment, which is quite common:</p>
 
-<b>function</b>
-reverseString
-(
-str
-)
-{
-<b>return</b>
-str.
-split
-(
-&apos;&apos;
-)
-.
-reverse
-(
-)
-.
-join
-(
-&apos;&apos;
-)
-;
+<pre>
+<b>function</b> reverseString (str) {
+  <b>return</b> str.split(&apos;&apos;).reverse().join(&apos;&apos;);
 }
-reverseString
-(
-&apos;string&apos;
-)
-;
-*// &quot;gnirts&quot;*
+reverseString(&apos;string&apos;);   // <i>&quot;gnirts&quot;</i>
+</pre>
 
-However, this will work only so long as the string being reversed does
+<p>However, this will work only so long as the string being reversed does
 not contain surrogate pairs. Astral symbols, i.e. characters outside
 of the basic multilingual plane, may be represented by two code units,
 and will lead this naive technique to produce wrong results. Moreover,
 characters with combining marks (e.g. diaeresis) will appear on the
 logical &quot;next&quot; character instead of the original one it was combined
-with.
+with.</p>
 
-&apos;?????.&apos;
-.
-split
-(
-&apos;&apos;
-)
-.
-reverse
-(
-)
-.
-join
-(
-&apos;&apos;
-)
-;
-*//fails*
+<pre>
+&apos;?????.&apos;.split(&apos;&apos;).reverse().join(&apos;&apos;);  //<i>fails</i>
+</pre>
 
-While the method will work fine for most languages, a truly accurate,
-encoding respecting algorithm for string reversal is slightly more
-involved. One such implementation is a tiny library called
-[Esrever](https://github.com/mathiasbynens/esrever), which uses
-regular expressions for matching combining marks and surrogate pairs
-in order to perform the reversing perfectly.
->
-<b>Explanation</b>
->
-<b>Section Explanation Result</b> str The input string &quot;string&quot;
+<p>While the method will work fine for most languages, a truly accurate, encoding respecting 
+algorithm for string reversal is slightly more involved. One such implementation is a tiny 
+library called <a href="https://github.com/mathiasbynens/esreverwhich">Esrever</a> uses regular 
+expressions for matching combining marks and surrogate pairs in order to perform the reversing 
+perfectly.</p>
+
+<p><b>Explanation</b></p>
+
+<b>Section Explanation Result</b>
+str The input string &quot;string&quot;
 
   [String.<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)   
 
