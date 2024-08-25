@@ -1804,7 +1804,7 @@ results &hellip;</p>
   </blockquote></li>
 
   <li><b>Object</b><br/>
-  <b>typeof<b> {} or<br/>
+  <b>typeof</b> {} or<br/>
   <b>typeof</b> &lbrack;&rbrack; or<br/>
   <b>typeof</b> <b>null</b> or<br/>
   <b>typeof</b> /aaa/ or<br/>
@@ -1903,7 +1903,7 @@ actually is: Object.<b>prototype</b>.toString.call(yourObject)</p>
     </blockquote></li>
   <li><b>Object</b><br/>
     Object.<b>prototype</b>.toString.call(Object()) or<br/>
-	Object.<b>prototype</br>.toString.call({})<br/>
+	Object.<b>prototype</b>.toString.call({})<br/>
 	<blockquote>
     &quot;&lbrack;object Object&rbrack;&quot;
     </blockquote></li>
@@ -2112,123 +2112,34 @@ string. The &quot;&quot; parameter means an empty
 [)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
 deliminator (i.e., the elements of the array are put right next to each other).
 
-<b>Using spread operator</b>
+<p><b>Using spread operator</b></p>
 
+<pre>
 Version ≥ 6
-<b>function</b>
-reverseString
-(
-str
-)
-{
-<b>return</b>
-&lbrack;
-&hellip;
-String
-(
-str
-)
-&rbrack;
-.
-reverse
-(
-)
-.
-join
-(
-&apos;&apos;
-)
-;
-}
-console.
-log
-(
-reverseString
-(
-&apos;stackoverflow&apos;
-)
-)
-;
-*// &quot;wolfrevokcats&quot;*
-console.
-log
-(
-reverseString
-(
-1337
-)
-)
-;
-*// &quot;7331&quot;*
-console.
-log
-(
-reverseString
-(
-&lbrack;
-1
-,
-2
-,
-3
-&rbrack;
-)
-)
-;
-*// &quot;3,2,1&quot;*
-<b>Custom</b>
-<b>e</b>
-<b>revers</b>
-<b>(</b>
-<b>)</b>
-<b>function</b>
-<b>function</b>
-reverse
-(
-string
-)
-{
-<b>var</b>
-strRev
-=
-&quot;&quot;
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-string.
-length
-&minus;
-1
-;
-i
-&gt;=
-0
-;
-i
-&bsol;
-)
-{
-strRev
-+=
-string
-&lbrack;
-i
-&rbrack;
-;
-}
-<b>return</b>
-strRev
-;
-}
-reverse
-&quot;zebra&quot;
-)
-;
-*// &quot;arbez&quot;*
+</pre>
 
+<pre>
+<b>function</b> reverseString(str) {
+<b>return</b>&lbrack;&hellip;String(str)&rbrack;.reverse().join(&apos;&apos;);
+}
+console.log(reverseString(&apos;stackoverflow&apos;));  // <i>&quot;wolfrevokcats&quot;</i>
+console.log(reverseString(1337));                       // <i>&quot;7331&quot;</i>
+console.log(reverseString(&lbrack;1, 2, 3&rbrack;));    // <i>&quot;3,2,1&quot;</i>
+</pre>
+
+<p><b>Custom reverse() function</b></p>
+
+<pre>
+<b>function</b> reverse(string) {
+  <b>var</b> strRev = &quot;&quot;;
+  <b>for</b> (<b>var</b> i = string.length &minus; 1; i &gt;= 0; i&bsol;) {
+    strRev += string&lbrack;i&rbrack;;
+  }
+  <b>return</b> strRev;
+}
+
+reverse&quot;zebra&quot;);  // <i>&quot;arbez&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-3">Section 7.3: Comparing Strings Lexicographically</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
