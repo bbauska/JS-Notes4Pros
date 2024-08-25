@@ -1681,7 +1681,7 @@ you see the contents of child objects.</p>
   }
 };
 
-console.dir ( myObject );
+console.dir (myObject);
 </pre>
 
 <p>displays:</p>
@@ -1713,10 +1713,11 @@ and XML elements is equivalent to calling console.log().</p>
 
 <p><b>Example 2:</b></p>
 
-<pre.
+<pre>
 console.log(document)
+</pre>
 
-displays:
+<p>displays:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image021.jpg"
