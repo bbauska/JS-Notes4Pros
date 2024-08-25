@@ -1998,11 +1998,11 @@ method on the String object prototype.</p>
 <pre>
 <b>var</b> foo = &quot;Foo&quot;;
 <b>var</b> bar = &quot;Bar&quot;;
-console.log(foo &plus; bar);      // <i>=&amp;quot;FooBar&quot;</i>
-console.log(foo &plus; &quot; &quot;&plus; bar);  // <i>=&amp;quot;Foo Bar&quot;</i>
+console.log(foo &plus; bar);      // <i>=&gt;&quot;FooBar&quot;</i>
+console.log(foo &plus; &quot; &quot;&plus; bar);  // <i>=&gt;&quot;Foo Bar&quot;</i>
 
-foo.concat(bar)               // <i>=&amp;quot;FooBar&quot;</i>
-&quot;a&quot;.concat(&quot;b&quot;, &quot; &quot;, &quot;d&quot;) // <i>=&amp;quot;ab d&quot;</i>
+foo.concat(bar)               // <i>=&gt;&quot;FooBar&quot;</i>
+&quot;a&quot;.concat(&quot;b&quot;, &quot; &quot;, &quot;d&quot;) // <i>=&gt;&quot;ab d&quot;</i>
 </pre>
 
 <p>Strings can be concatenated with non-string variables but will type-convert the non-string variables into strings.</p>
@@ -2040,8 +2040,8 @@ console.log(greet); // <i>&quot;Hello World!&quot;</i>
 <p>You can use String.raw to get backslashes to be in the string without modification.</p>
 
 <pre>
-&grave;a&bsol;&bsol;&bsol;&bsol;b&grave; // </i>= a&bsol;&bsol;b</i>
-String.raw&grave;a&bsol;&bsol;&bsol;&bsol;b&grave;  // <i>= a&bsol;&bsol;&bsol;&bsol;b</i>
+&grave;a&bsol;&bsol;b&grave; // </i>= a&bsol;b</i>
+String.raw&grave;a&bsol;&bsol;b&grave;  // <i>= a&bsol;&bsol;b</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-2">Section 7.2: Reverse String</h3>
@@ -2076,43 +2076,37 @@ perfectly.</p>
 
 <p><b>Explanation</b></p>
 
-<b>Section Explanation Result</b>
-str The input string &quot;string&quot;
-
-  [String.<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)   
-
-  [deliminator )](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)          
-
-  [split](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
-
-  &quot;s&quot;     ,   &quot;t&quot;     ,   &quot;r&quot;     ,   &quot;i&quot;     ,   &quot;n&quot;     ,   &quot;g&quot;
-
-Splits string str into an array. The
-
-[.(](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
-
-parameter &quot;&quot; means to split between each &lbrack;&rbrack; character.
-  
-[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)   [reverse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)
-  
-&quot;g&quot;     ,   &quot;n&quot;     ,   &quot;i&quot;     ,   &quot;r&quot;     ,   &quot;t&quot;     ,   &quot;s&quot;
-
-Returns the array from the split string with
-
-[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)
-&lbrack;&rbrack; its elements in reverse order.
-
-Joins the elements in the array together into
-
-[<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)   [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)   [(](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)   [deliminator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
-
-[Array.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)a
-string. The &quot;&quot; parameter means an empty
-
-&quot;gnirts&quot;
-
-[)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
-deliminator (i.e., the elements of the array are put right next to each other).
+<table border="1" style="width:500px">
+  <thead>
+    <tr>
+	  <th>Section</th>
+	  <th>Explanation</th>
+	  <th>Result</th>
+	</tr>
+  </thead>
+  <tbody>
+    <tr>
+	  <th>str</th>
+	  <th>The input string</th>
+	  <th>"string"</th>
+	</tr>
+    <tr>
+	  <th><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split">String.prototype.split(deliminator)</a></th>
+	  <th>Splits string str into an array. The parameter "" means to split between each character</th>
+	  <th>&lbrack;"s","t","r","i","n","g"&rbrack;</th>
+	</tr>
+    <tr>
+	  <th><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse">Array.prototype.reverse()</a></th>
+	  <th>Returns the array from the split string with its elements in reverse order</th>
+	  <th>&lbrack;"g","n","i","r","t","s"&rbrack;</th>
+	</tr>
+    <tr>
+	  <th><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join">Array.prototype.join(deliminator)</a></th>
+	  <th>Joins the elements in the array together into a sting. The "" parameter means an empty deliminator (i.e., the elements of the array are put right next to each other).</th>
+	  <th>"gnirts"</th>
+	</tr>
+  </tbody>
+</table>
 
 <p><b>Using spread operator</b></p>
 
