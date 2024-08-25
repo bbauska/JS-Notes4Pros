@@ -2141,7 +2141,7 @@ reverse&quot;zebra&quot;);  // <i>&quot;arbez&quot;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>To compare strings alphabetically, use
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare">
-localCompare(). This returns a negative value if the reference string is lexicographically 
+localCompare()</a>. This returns a negative value if the reference string is lexicographically 
 (alphabetically) before the compared string (the parameter), a positive value if it comes 
 afterwards, and a value of 0 if they are equal.</p>
 
@@ -2158,7 +2158,7 @@ a result, a form of the localCompare() function can be written like so:</p>
 
 <pre>
 <b>function</b> strcmp(a,b){
-  <b>if</b>(a===b) {
+  <b>if</b>(a === b) {
     <b>return</b> 0; 
   }
   <b>if</b> (a &gt; b) {
@@ -2166,7 +2166,6 @@ a result, a form of the localCompare() function can be written like so:</p>
   }
   <b>return</b> &minus;1;
 }
-
 console.log (strcmp (&quot;hello&quot;, &quot;world&quot;)); // <i>-1</i>
 console.log (strcmp(&quot;hello&quot;, &quot;hello&quot;));  // <i>0</i>
 console.log (strcmp(&quot;world&quot;, &quot;hello&quot;));  // <i>1</i>
@@ -2180,7 +2179,6 @@ of the return value (such as sort).</p>
 arr.sort (<b>function</b>(a, b) {
   <b>return</b> a&period;localeCompare(b);
 });
-
 console.log(arr);  // <i>&lbrack; &quot;apples&quot;, &quot;bananas&quot;, &quot;cranberries&quot; &rbrack;</i>
 </pre>
 <!-- page 40 -->
@@ -2276,326 +2274,137 @@ and &quot;. These use backticks (&grave;) instead of single or double quotes.</p
 </ul>
 
 <pre>
-<b>function</b>
-wordCount
-(
-val
-)
-{
-<b>var</b>
-wom
-=
-val.
-match
-(
-*/&bsol;&bsol;S+/g*
-)
-;
-<b>return</b>
-{
-charactersNoSpaces
-:
-val.
-replace
-(
-*/&bsol;&bsol;s+/g*
-,
-&apos;&apos;
-)
-.
-length
-,
-characters
-:
-val.
-length
-,
-words
-:
-wom
-?
-wom.
-length
-:
-0
-,
-    lines   : val.split(*/&bsol;&bsol;r&ast;&bsol;&bsol;n/*).length
+<b>function</b> wordCount( val ){
+  <b>var</b> wom = val.match(*/&bsol;&bsol;S+/g*);
+  <b>return</b> {
+    charactersNoSpaces: val.replace(*/&bsol;&bsol;s+/g*, &apos;&apos;).length,
+    characters        : val.length,
+    words             : wom ? wom.length :0,
+    lines             : val.split(*/&bsol;&bsol;r&ast;&bsol;&bsol;n/*).length
   };
-} 
+}
 // <i>Use like:</i>
-wordCount(someMultilineText ).words;  // <i>(Number of words)</i>
+wordCount( someMultilineText ).words;  // <i>(Number of words)</i>
+</pre>
 
 <p><a href="http://jsfiddle.net/RokoCB/5nfay7d1/206/">jsFiddle example</a>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-7">Section 7.7: Trim whitespace</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-String               .   <b>prototype</b>                  .   trim
-To trim whitespace from the edges of a string, use :
-&quot; some whitespaced string &quot;.trim(); *// &quot;some whitespaced string&quot;*
-Many JavaScript engines, but [not Internet
-Explorer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/TrimLeft#Browser_compatibility),
-have implemented non-standard trimLeft and trimRight methods. There is
-a
-[proposal](https://github.com/sebmarkbage/ecmascript-string-left-right-trim),
-currently at Stage 1 of the process, for standardised trimStart and
-trimEnd methods, aliased to trimLeft and trimRight for compatibility.
+<p>To trim whitespace from the edges of a string, use String.prototype.trim:</p>
 
-*// Stage 1 proposal*
-&quot; this is me &quot;
-.
-trimStart
-(
-)
-;
-*// &quot;this is me &quot;*
-&quot; this is me &quot;
-.
-trimEnd
-(
-)
-;
-*// &quot; this is me&quot;*
-*// Non-standard methods, but currently implemented by most engines*
-&quot; this is me &quot;
-.
-trimLeft
-(
-)
-;
-*// &quot;this is me &quot;*
-&quot; this is me &quot;
-.
-trimRight
-(
-)
-;
-*// &quot; this is me&quot;*
+<pre>
+&quot;   some whitespaced string   &quot;.trim(); // <i>&quot;some whitespaced string&quot;</i>
+</pre>
+
+<p>Many JavaScript engines, but <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/TrimLeft#Browser_compatibility">not Internet Explorer</a>,
+have implemented non-standard trimLeft and trimRight methods. There is a
+<a href="https://github.com/sebmarkbage/ecmascript-string-left-right-trim">proposal</a>,
+currently at Stage 1 of the process, for standardised trimStart and
+trimEnd methods, aliased to trimLeft and trimRight for compatibility.</p>
+
+<pre>
+// <i>Stage 1 proposal</i>
+&quot;   this is me   &quot;.trimStart();  // <i>&quot;this is me &quot;</i>
+&quot;   this is me   &quot;.trimEnd();  // <i>&quot; this is me&quot;</i>
+
+// <i>Non-standard methods, but currently implemented by most engines</i>
+&quot;   this is me   &quot;.trimLeft();  // <i>&quot;this is me &quot;</i>
+&quot;   this is me   &quot;.trimRight();  // <i>&quot; this is me&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-8">Section 7.8: Splitting a string into an array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-split
-Use . to go from strings to an array of the split substrings:
-<b>var</b>
-s
-=
-&quot;one, two, three, four, five&quot;
-s&period;
-split
-(
-&quot;, &quot;
-)
-;
-*// &lbrack;&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;, &quot;five&quot;&rbrack;*
-join
-Use the <b>array method</b> . to go back to a string:
-s&period;
-split
-(
-&quot;, &quot;
-)
-.
-join
-(
-&quot;&amp;quot;
-)
-;
-*// &quot;one&bsol;two&bsol;three&bsol;four&bsol;five&quot;*
+<p>Use .split to go from strings to an array of the split substrings:</p>
+
+<pre>
+<b>var</b> s = &quot;one, two, three, four, five&quot;
+s&period;split(&quot;, &quot;);  // <i>&lbrack;&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;, &quot;five&quot;&rbrack;</i>
+</pre>
+
+<p>Use the <b>array method</b>.join to go back to a string:</p>
+
+<pre>
+s&period;split(&quot;, &quot;).join(&quot;&minus;&minus;quot;);  // <i>&quot;one&minus;&minus;two&minus;&minus;three&minus;&minus;four&minus;&minus;five&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-9">Section 7.9: Strings are unicode</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<b>All JavaScript strings are unicode!</b>
-<b>var</b>
-s
-=
-&quot;some
-∆
-≈
-ƒ
-unicode
-¡
-™
-£
-¢
-¢
-¢
-&quot;
-;
-s&period;
-charCodeAt
-(
-5
-)
-;
-*// 8710*
+<p><b>All JavaScript strings are unicode!</b></p>
 
-There are no raw byte or binary strings in JavaScript. To effectively
-handle binary data, use Typed Arrays.
+<pre>
+<b>var</b> s = &quot;some ∆≈ƒ unicode ¡™£¢¢¢&quot;;
+s&period;charCodeAt(5);  // <i>8710</i>
+</pre>
 
+<p>There are no raw byte or binary strings in JavaScript. To effectively handle binary 
+data, use Typed Arrays.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-10">Section 7.10: Detecting a string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-To detect whether a parameter is a *primitive* string, use <b>typeof</b>:
-<b>var</b>
-aString
-=
-&quot;my string&quot;
-;
-<b>var</b>
-anInt
-=
-5
-;
-<b>var</b>
-anObj
-=
-{
-}
-;
-<b>typeof</b>
-aString
-===
-&quot;string&quot;
-;
-*// true*
-<b>typeof</b>
-anInt
-===
-&quot;string&quot;
-;
-*// false*
-<b>typeof</b>
-anObj
-===
-&quot;string&quot;
-;
-*// false*
-<b>new</b> String                      (   &quot;somestr&quot;
+<p>To detect whether a parameter is a *primitive* string, use <b>typeof</b>:</p>
 
-If you ever have a String object, via ), then the above will not work.
-In this instance, we can use <b>instanceof</b>:
-<b>var</b>
-aStringObj
-=
-<b>new</b>
-String
-(
-&quot;my string&quot;
-)
-;
-aStringObj
-<b>instanceof</b>
-String
-;
-*// true*
-To cover both instances, we can write a simple helper function:
-<b>var</b>
-isString
-=
-<b>function</b>
-(
-value
-)
-{
-<b>return</b>
-<b>typeof</b>
-value
-===
-&quot;string&quot;
-&vert;&vert;
-value
-<b>instanceof</b>
-String
-;
-}
-;
-<b>var</b>
-aString
-=
-&quot;Primitive String&quot;
-;
-<b>var</b>
-aStringObj
-=
-<b>new</b>
-String
-(
-&quot;String Object&quot;
-)
-;
-isString
-(
-aString
-)
-;
-*// true*
-isString
-(
-aStringObj
-)
-;
-*// true*
-isString
-(
-{
-}
-)
-;
-*// false*
-isString
-(
-5
-)
-;
-*// false*
-Or we can make use of toString function of Object. This can be useful
+<pre>
+<b>var</b> aString = &quot;my string&quot;;
+<b>var</b> anInt = 5;
+<b>var</b> anObj = {};
+<b>typeof</b> aString === &quot;string&quot;;  // <i>true</i>
+<b>typeof</b> anInt === &quot;string&quot;;    // <i>false</i>
+<b>typeof</b> anObj === &quot;string&quot;;    // <i>false</i>
+</pre>
+
+<p>If you ever have a String object, via new String("somestr"), then the above will not 
+work. In this instance, we can use <b>instanceof</b>:</p>
+
+<pre>
+<b>var</b> aStringObj = <b>new</b> String(&quot;my string&quot;);
+aStringObj <b>instanceof</b> String;  // <i>true</i>
+</pre>
+
+<p>To cover both instances, we can write a simple helper function:</p>
+
+<pre>
+<b>var</b> isString = <b>function</b>(value) {
+  <b>return</b> <b>typeof</b> value === &quot;string&quot; &vert;&vert; value <b>instanceof</b> String;
+};
+<b>var</b> aString = &quot;Primitive String&quot;;
+<b>var</b> aStringObj = <b>new</b> String(&quot;String Object&quot;);
+isString(aString);  // <i>true</i>
+isString(aStringObj); // <i>true</i>
+isString({});  // <i>false</i>
+isString(5);   // <i>false</i>
+</pre>
+
+<p>Or we can make use of toString function of Object. This can be useful
 if we have to check for other types as well say in a switch statement,
-as this method supports other datatypes as well just like <b>typeof</b>.
+as this method supports other datatypes as well just like <b>typeof</b>.</p>
+
+<pre>
 <b>var</b> pString = &quot;Primitive String&quot;;
 <b>var</b> oString = <b>new</b> String(&quot;Object Form of String&quot;);
 Object.<b>prototype</b>.toString.call(pString);*//&quot;&lbrack;object String&rbrack;&quot;*
 Object.<b>prototype</b>.toString.call(oString);*//&quot;&lbrack;object String&rbrack;&quot;*
-A more robust solution is to not *detect* a string at all, rather only
-check for what functionality is required. For example:
-<b>var</b>
-aString
-=
-&quot;Primitive String&quot;
-;
-*// Generic check for a substring method*
-<b>if</b>
-(
-aString.
-substring
-)
-{
+</pre>
+
+<p>A more robust solution is to not *detect* a string at all, rather only check for what 
+functionality is required. For example:</p>
+
+<pre>
+<b>var</b> aString = &quot;Primitive String&quot;;
+// <i>Generic check for a substring method<?i>
+<b>if</b>(aString.substring) {
+
 }
-*// Explicit check for the String substring prototype method*
-<b>if</b>
-(
-aString.
-substring
-===
-String
-.
-<b>prototype</b>
-.
-substring
-)
-{
-aString.
-substring
-(
-0
-,
-)
-;
+// <i>Explicit check for the String substring prototype method</i>
+<b>if</b>(aString.substring === String.<b>prototype</b>.substring) {
+  aString.substring(0, );
 }
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-11">Section 7.11: Substrings with slice</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-slice
+<p>Use slice.() to extract substrings given two indices:</p>
 
-Use .() to extract substrings given two indices:
 <b>var</b>
 s
 =
