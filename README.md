@@ -2158,7 +2158,7 @@ a result, a form of the localCompare() function can be written like so:</p>
 
 <pre>
 <b>function</b> strcmp(a,b){
-  <b>if</b>(a===b){
+  <b>if</b>(a===b) {
     <b>return</b> 0; 
   }
   <b>if</b> (a &gt; b) {
@@ -2223,14 +2223,14 @@ be used to set a character at a position in the string.</p>
 quote with <i>backslash</i> &bsol;</p>
 
 <pre>
-<b>var</b> text = &apos;L&absol;albero means tree in Italian&apos;;
-console.log( text ); \\ &quot;L&apos;albero means tree in Itealian
+<b>var</b> text = &apos;L&bsol;&apos;albero means tree in Italian&apos;;
+console.log( text ); \\ &quot;L&apos;albero means tree in Italian&quot;
 </pre>
 
 <p>Same goes for double quotes:</p>
 
 <pre>
-<b>var</b> text = "I feel &absol;"high&absol;";
+<b>var</b> text = "I feel &bsol;"high&bsol;";
 </pre>
 
 <p>Special attention must be given to escaping quotes if you&apos;re storing
@@ -2238,8 +2238,8 @@ HTML representations within a String, since HTML strings make large
 use of quotations i.e. in attributes:</p>
 
 <pre>
-<b>var</b> content = &quot;&lt;p class=<b>&absol;quot;special&absol;&quot;&gt;</b>Hello World!&lt;/p&gt;; // <i>valid String</i>
-<b>var</b> hello   = &apos;&lt;p class=&quot;special&quot;&gt;I<b>&absol;apos;</b>d like to say &quot;Hi&quot;&lt;/p&gt;&apos;; // <i>valid String</i>
+<b>var</b> content = &quot;&lt;p class=<b>&bsol;quot;special&bsol;&quot;&gt;</b>Hello World!&lt;/p&gt;; // <i>valid String</i>
+<b>var</b> hello   = &apos;&lt;p class=&quot;special&quot;&gt;I<b>&bsol;apos;</b>d like to say &quot;Hi&quot;&lt;/p&gt;&apos;; // <i>valid String</i>
 </pre>
   
 <p>Quotes in HTML strings can also be represented using &apos;(or &#39;) as a single quote 
@@ -2252,7 +2252,7 @@ and &quot; (or &#34;) as double quotes.</p>
   
 <p><i>Note:</i> The use of &; will not overwrite double quotes that browsers can 
 automatically place on attribute quotes. For example <b>&lt;p</b> class=special<b>&gt;</b> being made to <b>&lt;p</b> class="special"&gt;,
-using &quoit; can lead to <b>&lt;p</b> class=""speical""&gt; where &absol;" will be &lt;p class="special"&gt;.</p>
+using &quoit; can lead to <b>&lt;p</b> class=""speical""&gt; where &bsol;" will be &lt;p class="special"&gt;.</p>
 
 <p>Version ≥ 6</p>
 
