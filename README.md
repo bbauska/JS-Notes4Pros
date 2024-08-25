@@ -1164,7 +1164,7 @@ console</a> object.</p>
 <p>Calling <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd">
 console.time(&lbrack;label&rbrack;)</a> starts a new timer. When 
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/time">
-console.timeEnd(&lbrack;label&rbrack;) is called, the elapsed time, in milliseconds, Since
+console.timeEnd(&lbrack;label&rbrack;)</a> is called, the elapsed time, in milliseconds, Since
 the original .time() call is calculated and logged. Because of this behavior, you can call 
 .timeEnd() multiple times with the same label to log the elapsed time since the original .time()
 call was made.</p>
@@ -1192,7 +1192,6 @@ response <b>in</b>: 1402.199ms
 
 <pre>
 <b>var</b> elms = document.getElementsByTagName(&apos;*&apos;); // <i>select all elements on the page</i>
-
 console.time(&apos;Loop time&apos;);
 
 <b>for</b>(<b>var</b> i = 0; i &lt; 5000; i ++ ) {
@@ -1223,14 +1222,40 @@ console.log(&apos;%s has %d points&apos;,&apos;Sam&apos;,100);
 
 <p>The full list of format specifiers in JavaScript is:</p>
 
-| <b>Specifier | Output</b>                             |
-|---------|:-------------------------------------------:|
-| %s | Formats the value as a string |
-| %i or %d | Formats the value as an integer |
-| %f | Formats the value as a floating point value |
-| %o | Formats the value as an expandable DOM element |
-| %O | Formats the value as an expandable JavaScript object |
-| %c | Applies CSS style rules to the output string as specified by the second parameter |
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+	  <th>Specifier</th>
+	  <th>Output</th>
+	</tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>%s</td>
+      <td>Formats the value as a string</td>
+	</tr>
+	<tr>
+	  <td>%i or %d</td>
+	  <td>Formats the value as an integer</td>
+	</tr>
+	<tr>
+	  <td>%f</td>
+	  <td>Formats the value as a floating point value</td>
+	</tr>
+	<tr>
+	  <td>%o</td>
+	  <td>Formats the value as an expandable DOM element</td>
+	</tr>
+	<tr>
+	  <td>%O</td>
+	  <td>Formats the value as an expandable JavaScript object</td>
+	</tr>
+	<tr>
+	  <td>%c</td>
+	  <td>Applies CSS style rules to the output string as specified by the second parameter</td>
+	</tr>
+  </tfoot>
+</table>
 
 <h4>Advanced styling</h4>
 
@@ -1267,12 +1292,9 @@ console.log(&apos;%cHello world!&apos;, &apos;color: blue; font-size: xx-large&a
 
 <pre>
 console.log("%cHello %cWorld%c!!", // <i>string to be printed</i>
-
-"color: blue;", // <i>applies color formatting to the 1st substring</i>
-
-&quot;font-size: xx-large;&quot;, // <i>applies font formatting to the 2nd substring</i>
-
-&quot;/&ast; no CSS rule&ast;/&quot; // <i>does not apply any rule to the remaining substring</i>
+            "color: blue;", // <i>applies color formatting to the 1st substring</i>
+            &quot;font-size: xx-large;&quot;, // <i>applies font formatting to the 2nd substring</i>
+            &quot;/&ast; no CSS rule &ast;/&quot; // <i>does not apply any rule to the remaining substring</i>
 );
 </pre>
 
@@ -1284,53 +1306,48 @@ console.log("%cHello %cWorld%c!!", // <i>string to be printed</i>
   alt="."
   style="border: 2px solid #000000; width:7.477in;" />
 <!-- (./images/image014.jpg){width="7.477777777777778in" height="0.6395833333333333in"} -->
+<!-- page 24 -->
+<h4>Using groups to indent output</h4>
 
-**Using groups to indent output**
+<p>Output can be indented and enclosed in a collapsible group in the
+debugging console with the following methods:</p>
 
-Output can be indented and enclosed in a collapsible group in the
-debugging console with the following methods:
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed">
+    console.groupCollapsed()</a>: creates a collapsed group of entries that can be expanded 
+	through the disclosure button in order to reveal all the entries performed after this 
+	method is invoked;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/group">
+    console.group()</a>: creates an expanded group of entries that can be collapsed in order to
+	hide the entries after this method is invoked.</li>
+</ul>
 
-[groupCollapsed](https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed):
-creates a collapsed group of entries that can be expanded through the
+<p>The indentation can be removed for posterior entries by using the following method:</p>
 
-  [console.groupCollapsed](https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed)
-  
-  [console.group](https://developer.mozilla.org/en-US/docs/Web/API/Console/group)
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupEnd">
+    console.groupEnd()</a>: exits the current group, allowing newer entries to be printed in the
+	parent group after this method is invoked.</li>
+</ul>
 
-disclosure button in order to reveal all the entries performed after
-this method is invoked;
-
-[Console group](https://developer.mozilla.org/en-US/docs/Web/API/Console/group):
-creates an expanded group of entries that can be collapsed in order to
-hide the entries after this method is invoked.
-
-The indentation can be removed for posterior entries by using the
-following method:
-
-[console.groupEnd()](https://developer.mozilla.org/en-US/docs/Web/API/Console/groupEnd):
-exits the current group, allowing newer entries to be printed in the
-parent group after this method is invoked.
-
-Groups can be cascaded to allow multiple indented output or
-collapsible layers within each other:
+<p>Groups can be cascaded to allow multiple indented output or collapsible layers within each other:</p>
 
   
-  Collapsed group expanded =&gt;
-
+ 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p align="left">
+<p align="center">
   <img src="./images/image015.jpg"
   title=" "
   alt="."
-  style="border: 2px solid #000000; width:2.108in;" />
+  style="border: 2px solid #000000; width:2.1in;" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="./images/image016.jpg"
   title=" "
   alt="."
-  style="border: 2px solid #000000; width:2.081in;" />
+  style="border: 2px solid #000000; width:2.1in;" />
 <!-- ![](./images/image015.jpg){width="2.1083333333333334in" height="3.009027777777778in"} -->
 <!-- ![](./images/image016.jpg){width="2.08125in" height="3.729861111111111in"} -->
-
+<p align="center">= Collapsed group expanded =&gt;</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-3">Section 5.3: Printing to a browser&apos;s debugging console</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -1340,9 +1357,7 @@ console</a> can be directly opened in the browser (F12 key in most browsers
 see <i>Remarks</i> below for further information) and the log method of the
 console JavaScript object can be invoked by typing the following:</p>
 
-<pre>
-console.log('My message');
-</pre>
+<pre>console.log('My message');</pre>
 
 <p>Then, by pressing Enter, this will display "My message" in the debugging console.
 
@@ -1367,7 +1382,7 @@ console.log(&lbrack;0, 3, 32, 'a string' &rbrack;);
 console.log({key1: 'value', key2: 'another value'});
 </pre>
 
-<h4>Displays:</h4>
+<p>Displays:</p>
 
 <pre>
 Array &lbrack;0, 3, 32, 'a string'&rbrack;
@@ -1376,30 +1391,27 @@ Object { key1: 'value', key2: 'another value'}
 
 <p>Nested objects may be collapsed:</p>
 
-<pre>
-console.log({ key1: 'val', key2:
-&lbrack;'one', 'two'&rbrack;, key3: { a: 1, b: 2 } });
-</pre>
+<pre>console.log({ key1: 'val', key2: &lbrack;'one', 'two'&rbrack;, key3: { a: 1, b: 2 } });</pre>
 
-<h4>Displays:</h4>
+<p>Displays:</p>
 
 <pre>
 Object { key1: 'val', key2: Array &lbrack;2&rbrack;, key3: Object }
 </pre>
 
-<p>Certain types such as Date objects and **function**s may be displayed
-differently:</p>
+<p>Certain types such as Date objects and <b>function</b>s may be displayed differently:</p>
 
 <pre>
-console.log( **new** Date ( 0 ) );
-console.log( **function** test(a, b) { **return** c; });
+console.log(<b>new</b> Date(0));
+console.log(<b>function</b> test(a, b) { <b>return</b> c; });
+</pre>
 
-
-<h4>Displays:</h4>
+<p>Displays:</p>
 
 <pre>
 Wed Dec 31 1969 19:00:00 GMT &minus; 0500 (Eastern Standard Time)
-**function** test (a , b) { **return** c;}
+<b>function</b> test (a , b) { <b>return</b> c; }
+</pre>
 
 <h4>Other print methods</h4>
 
@@ -1420,23 +1432,19 @@ Wed Dec 31 1969 19:00:00 GMT &minus; 0500 (Eastern Standard Time)
 	is non-standard:</li>
 </ul>
 
-<back
-<pre>
-console.timeStamp('msg');
-</pre>
+<pre>console.timeStamp('msg');</pre>
 
 <h4>Displays:</h4>
 
-<pre>
-00:00:00.001 msg
-</pre>
+<pre>00:00:00.001 msg</pre>
 
 <ul>
   <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/trace">
-    console.trace</a> outputs the current stack trace or displays the same output as the
+    console.trace</a> - outputs the current stack trace or displays the same output as the
 	log method if invoked in the global scope.</li>
 </ul>
 <!-- page 26 -->
+
 <pre>
 <b>function</b> sec () {
   first();
@@ -1483,7 +1491,7 @@ information on this.</p>
 foo();
 </pre>
 
-<h4>Will display this in the console:</h4>
+<p>Will display this in the console:</p>
 
 <pre>
 My log statement VM696:1
@@ -1502,41 +1510,63 @@ console.log(e&period;stack);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-5">Section 5.5: Tabulating values - console.table()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-console.table 
- 
-  
-In most environments, () can be used to display objects and arrays in
-a tabular format.
+<p>In most environments, () can be used to display objects and arrays in a tabular format.</p>
 
-**For example:**
+<h4>For example:</h4>
+<!-- page 27 -->
 
-console.table(&lbrack;&apos;Hello&apos;,&apos;world&apos;&rbrack;);
-displays like:
+<pre>console.table(&lbrack;&apos;Hello&apos;,&apos;world&apos;&rbrack;);</pre>
 
-*(index) value**
+<p>displays like:</p>
 
-0 &quot;Hello&quot; 1 &quot;world&quot;
-console.table({foo: &apos;bar&apos;, bar: &apos;baz&apos;});
+<pre>
+<b>(index) value</b>
+0          &quot;Hello&quot;
+1          &quot;world&quot;
+</pre>
 
-displays like:
+<pre>console.table({foo: &apos;bar&apos;, bar: &apos;baz&apos;});</pre>
 
-**(index) value**
-&quot;foo&quot; &quot;bar&quot; &quot;bar&quot; &quot;baz&quot;
-**var** personArr = &lbrack; { &quot;personId&quot;: 123, &quot;name&quot;: &quot;Jhon&quot;, &quot;city&quot;: &quot;Melbourne&quot;, &quot;phoneNo&quot;
-: &quot;1234567890&quot;}, {&quot;personId&quot;: 124, &quot;name&quot;: &quot;Amelia&quot;, &quot;city&quot;: &quot;Sydney&quot;,
-&quot;phoneNo&quot;: &quot;1234567890&quot; }, {
-&quot;personId&quot;: 125,
-&quot;name&quot;: &quot;Emily&quot;,
-&quot;city&quot;: &quot;Perth&quot;,
-&quot;phoneNo&quot;: &quot;1234567890&quot;},
-{&quot;personId&quot;: 126,
-&quot;name&quot;: &quot;Abraham&quot;,
-&quot;city&quot;: &quot;Perth&quot;,
-&quot;phoneNo&quot;: &quot;1234567890&quot;}
+<p>displays like:</p>
+
+<pre>
+<b>(index) value</b>
+&quot;foo&quot; &quot;bar&quot;
+&quot;bar&quot; &quot;baz&quot;
+</pre>
+
+<pre>
+
+<b>var</b> personArr = &lbrack;
+{ 
+  &quot;personId&quot;: 123,
+  &quot;name&quot;: &quot;Jhon&quot;, 
+  &quot;city&quot;: &quot;Melbourne&quot;,
+  &quot;phoneNo&quot;: &quot;1234567890&quot;
+},
+{ 
+  {&quot;personId&quot;: 124, 
+  &quot;name&quot;: &quot;Amelia&quot;, 
+  &quot;city&quot;: &quot;Sydney&quot;,
+  &quot;phoneNo&quot;: &quot;1234567890&quot; 
+}, {
+  &quot;personId&quot;: 125,
+  &quot;name&quot;: &quot;Emily&quot;,
+  &quot;city&quot;: &quot;Perth&quot;,
+  &quot;phoneNo&quot;: &quot;1234567890&quot;
+},
+{
+  &quot;personId&quot;: 126,
+  &quot;name&quot;: &quot;Abraham&quot;,
+  &quot;city&quot;: &quot;Perth&quot;,
+  &quot;phoneNo&quot;: &quot;1234567890&quot;
+}
 &rbrack;;
-console.table(personArr, &lbrack;&apos;name&apos;, &apos;personId&apos;&rbrack;);
+  console.table(personArr, &lbrack;&apos;name&apos;, &apos;personId&apos;&rbrack;);
+</pre>
 
-displays like:
+<p>displays like:</p>
+<!-- page 28 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image018.jpg"
@@ -1547,127 +1577,147 @@ displays like:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-6">Section 5.6: Counting - console.count()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-[console.count](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
-[(&lbrack;](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
-[obj](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/count">
+console.count)&lbrack;obj&rbrack;)</a> places a counter on the object&apos;s value 
+provided as argument. Each time this method is invoked, the counter is increased 
+(with the exception of the empty string &apos;&apos;). A label together with a 
+number is displayed in the debugging console according to the following format:</p>
 
-[&rbrack;)](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
-places a counter on the object&apos;s value provided as argument. Each time
-this method is invoked, the counter is increased (with the exception of the empty
-string &apos;&apos;). A label together with a number is displayed in the
-debugging console according to the following format:
-
+<pre>
 &lbrack;label&rbrack;: X
+</pre>
 
-label represents the value of the object passed as argument and X
-represents the counter&apos;s value.
+<p>label represents the value of the object passed as argument and X
+represents the counter&apos;s value.</p>
 
-An object&apos;s value is always considered, even if variables are
-provided as arguments:
+<p>An object&apos;s value is always considered, even if variables are provided as arguments:</p>
 
-**var** o1 = 1, o2 = &apos;2&apos;, o3 = &quot;&quot;;
+<pre>
+<b>var</b> o1 = 1, o2 = &apos;2&apos;, o3 = &quot;&quot;;
 console.count(o1);
 console.count(o2);
 console.count(o3);
+
 console.count(1);
 console.count(&apos;2&apos;);
 console.count(&apos;&apos;);
-Displays:1:12:1:11:22:2:1
-Strings with numbers are converted to Number
-objects: console.count(42.3);
+</pre>
+
+<p>Displays:</p>
+
+<pre>
+1:1
+2:1
+:1
+1:2
+2:2
+:1
+</pre>
+
+<p>Strings with numbers are converted to Number objects:</p>
+
+<!-- page 29 -->
+<pre>
+console.count(42.3);
 console.count(Number(&apos;42.3&apos;));
 console.count(&apos;42.3&apos;);
-Displays:42.3:142.3:242.3:3
-Functions point always to the global
-Function object: console.count(console.constructor);
-console.count(**function**(){});
+</pre>
+
+<p>Displays:</p>
+
+<pre>
+42.3:1
+42.3:2
+42.3:3
+</pre>
+
+<p>Functions point always to the global Function object:</p>
+
+<pre>
+console.count(console.constructor);
+console.count(<b>function</b>(){});
 console.count(Object);
-**var** fn1 = **function** myfn ( ){};
+<b>var</b> fn1 = <b>function</b> myfn(){};
 console.count(fn1);
 console.count(Number);
-Displays:
-&lbrack;object Function&rbrack;: 1 &lbrack;object Function&rbrack;: 2
-&lbrack;object Function&rbrack;: 3 &lbrack;object Function&rbrack;: 4
-&lbrack;object Function&rbrack;: 5 
-Certain objects get specific counters associated to the type of object they refer to:
+</pre>
 
-console.count(**undefined**);
+<p>Displays:</p>
+
+<pre>
+&lbrack;object Function&rbrack;: 1
+&lbrack;object Function&rbrack;: 2
+&lbrack;object Function&rbrack;: 3
+&lbrack;object Function&rbrack;: 4
+&lbrack;object Function&rbrack;: 5
+</pre>
+
+<p>Certain objects get specific counters associated to the type of object they refer to:</p>
+
+<pre>
+console.count(<b>undefined</b>);
 console.count(document.Batman);
-**var** obj;
+<b>var</b> obj;
 console.count(obj);
-console.count(Number(**undefined**));
-console.count(**NaN**);
-console.count(**NaN** &plus; 3);
-console.count(1 /0);
-console.count(String ( 1 /0));
+console.count(Number(<b>undefined</b>));
+console.count(<b>NaN</b>);
+console.count(<b>NaN</b>&plus;3);
+console.count(1/0);
+console.count(String(1/0));
 console.count(window);
 console.count(document);
 console.count(console);
 console.count(console.&lowbar;&lowbar;proto&lowbar;&lowbar;);
 console.count(console.constructor
-.**prototype**);
+.<b>prototype</b>);
 console.count(
 console.&lowbar;&lowbar;proto&lowbar;&lowbar;.constructor.
-**prototype**
+<b>prototype</b>
 );
 console.count(Object.getPrototypeOf(console));
-console.count(**null**);
-Displays:
-**undefined**:1
-**undefined**:2
-**undefined**:3
-**NaN**:1
-**NaN**:2
-**NaN**:3
-**Infinity**:1
-**Infinity**:2
-&lbrack;object Window&rbrack;:
-1&lbrack;object HTMLDocument&rbrack;:
-1&lbrack;object Object&rbrack;: 1
-&lbrack;
-object
-Object
-&rbrack;
-:
-2
-&lbrack;
-object
-Object
-&rbrack;
-:
-3
-&lbrack;
-object
-Object
-&rbrack;
-:
-4
-&lbrack;
-object
-Object
-&rbrack;
-:
+console.count(<b>null</b>);
+</pre>
 
-**null**
-:
-1
-**Empty string or absence of argument**
+<p>Displays:</p>
 
-If no argument is provided while **sequentially inputting the count
-method in the debugging console**, an empty string is assumed as
-parameter, i.e.:
+<pre>
+<b>undefined</b>:1
+<b>undefined</b>:2
+<b>undefined</b>:3
+<b>NaN</b>:1
+<b>NaN</b>:2
+<b>NaN</b>:3
+<b>Infinity</b>:1
+<b>Infinity</b>:2
+&lbrack;object Window&rbrack;: 1
+&lbrack;object HTMLDocument&rbrack;: 1
+&lbrack;object Object&rbrack;: 1
+&lbrack;object Object&rbrack;: 2
+&lbrack;object Object&rbrack;: 3
+&lbrack;object Object&rbrack;: 4
+&lbrack;object Object&rbrack;: 5
+<b>null</b>: 1
+</pre>
 
-console.count();
-:1&gt; console.count(&apos;&apos;);
-:2&gt; console.count(&quot;&quot;);
-:3
+<p><b>Empty string or absence of argument</b></p>
+
+<p>If no argument is provided while <b>sequentially inputting the count
+method in the debugging console</b>, an empty string is assumed as parameter, i.e.:
+
+<pre>
+&gt; console.count();
+  :1
+&gt; console.count(&apos;&apos;);
+  :2
+&gt; console.count(&quot;&quot;);
+  :3
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-7">Section 5.7: Clearing the console - console.clear()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
- 
-You can clear the console window using the () method. This removes all
+<p>You can clear the console window using the () method. This removes all
 previously printed messages in the console and may print a message
-like &quot;Console was cleared&quot; in some environments.
+like &quot;Console was cleared&quot; in some environments.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-8">Section 5.8: Displaying objects and XML interactively console.dir(), console.dirxml()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -1677,7 +1727,7 @@ JavaScript object. The output is
 presented as a hierarchical listing with disclosure triangles that let
 you see the contents of child objects.
 
-**var** myObject = { &quot;foo&quot; : { &quot;bar&quot; : &quot;data&quot; } };
+<b>var</b> myObject = { &quot;foo&quot; : { &quot;bar&quot; : &quot;data&quot; } };
 
 console.dir ( myObject );
 
@@ -1694,7 +1744,7 @@ prints an XML representation of the descendant elements of object if
 possible, or the JavaScript representation if not. Calling () on HTML
 and XML elements is equivalent to calling ().
 
-**Example 1:**
+<b>Example 1:</b>
 
 console.dirxml ( document )
 displays:
@@ -1706,7 +1756,7 @@ displays:
   style="border: 2px solid #000000; width:7.477in;" />
 <!-- ![](./images/image020.jpg){width="7.477777777777778in" height="1.6847222222222222in"} -->
 
-**Example 2:**
+<b>Example 2:</b>
 
 console.log(document)
 
@@ -1719,9 +1769,9 @@ displays:
   style="border: 2px solid #000000; width:7.477in;" />
 <!-- ![](./images/image021.jpg){width="7.477777777777778in" height="1.8020833333333333in"} -->
 
-**Example 3:**
+<b>Example 3:</b>
 
-**var** myObject = { &quot;foo&quot; : { &quot;bar&quot; : &quot;data&quot; } };
+<b>var</b> myObject = { &quot;foo&quot; : { &quot;bar&quot; : &quot;data&quot; } };
 
 console.dirxml ( myObject );
 
@@ -1738,14 +1788,14 @@ displays:
 <h3 id="ch5-9">Section 5.9: Debugging with assertions - console.assert()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-Writes an error message to the console if the assertion is **false**.
-Otherwise, if the assertion is **true**, this does nothing.
+Writes an error message to the console if the assertion is <b>false</b>.
+Otherwise, if the assertion is <b>true</b>, this does nothing.
 
 console.assert ( &apos;one&apos; === 1 );
 
 Multiple arguments can be provided after the assertionthese can be
 strings or other objectsthat will only be printed if the assertion
-is **false**:
+is <b>false</b>:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image024.jpg"
@@ -1766,39 +1816,39 @@ a failed assertion.
 <h3 id="ch6-1">Section 6.1: typeof</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-**typeof** is the &apos;official&apos; function that one uses to get the type
+<b>typeof</b> is the &apos;official&apos; function that one uses to get the type
 in JavaScript, however in certain cases it might yield some unexpected
 results &hellip;
 
-1.  **Strings**
-**typeof** &quot;String&quot; or
-**typeof** Date(2011,01,01)
+1.  <b>Strings</b>
+<b>typeof</b> &quot;String&quot; or
+<b>typeof</b> Date(2011,01,01)
 &quot;string&quot;
 
-2.  **Numbers**
-**typeof** 42
+2.  <b>Numbers</b>
+<b>typeof</b> 42
 &quot;number&quot;
 
-3.  **Bool**
-  **typeof** **true**
-(valid values **true** and **false**)
+3.  <b>Bool</b>
+  <b>typeof</b> <b>true</b>
+(valid values <b>true</b> and <b>false</b>)
 &quot;boolean&quot;
 
-4.  **Object**
-  **typeof** {}
-  **typeof** &lbrack;&rbrack;
-  **typeof** **null**
-  **typeof** /aaa/
+4.  <b>Object</b>
+  <b>typeof<b> {}
+  <b>typeof</b> &lbrack;&rbrack;
+  <b>typeof</b> <b>null</b>
+  <b>typeof</b> /aaa/
 or or or or
-**typeof** Error()
+<b>typeof</b> Error()
 &quot;object&quot;
 
-5.  **Function**
-**typeof** **function**(){}
+5.  <b>Function</b>
+<b>typeof</b> <b>function</b>(){}
 &quot;function&quot;
 
-6.  **Undefined**
-**var** var1; **typeof** var1
+6.  <b>Undefined</b>
+<b>var</b> var1; <b>typeof</b> var1
 &quot;undefined&quot;
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -1808,7 +1858,7 @@ or or or or
 To find whether an object was constructed by a certain constructor or
 one inheriting from it, you can use the
 
-**instanceof**
+<b>instanceof</b>
 
 command:
 *//We want this function to take the sum of the numbers passed to it*
@@ -1816,26 +1866,26 @@ command:
 *//It can be called as sum(1, 2, 3) or sum(&lbrack;1, 2, 3&rbrack;) and should give
 6*
 
-**function**
-sum ( &hellip; arguments ) { **if**
+<b>function</b>
+sum ( &hellip; arguments ) { <b>if</b>
 ( arguments.
 
 length === 1 )
 {
-**const** &lbrack; firstArg &rbrack; = arguments **if** ( firstArg **instanceof**
+<b>const</b> &lbrack; firstArg &rbrack; = arguments <b>if</b> ( firstArg <b>instanceof</b>
 
 Array ) {
 
 *//firstArg is something like &lbrack;1, 2, 3&rbrack;*
 
-**return**
+<b>return</b>
 
 sum ( &hellip;
 firstArg )
 
 *//calls sum(1, 2, 3)* }
 }
-**return**
+<b>return</b>
 arguments.
 reduce
 ( (a, b) =&gt; a &plus; b ) }
@@ -1872,7 +1922,7 @@ console.
 log
 (
 2
-**instanceof**
+<b>instanceof</b>
 Number
 )
 *//false*
@@ -1880,15 +1930,15 @@ console.
 log
 (
 &apos;abc&apos;
-**instanceof**
+<b>instanceof</b>
 String
 )
 *//false*
 console.
 log
 (
-**true**
-**instanceof**
+<b>true</b>
+<b>instanceof</b>
 Boolean
 )
 *//false*
@@ -1901,100 +1951,100 @@ Symbol
 
 *//false*
 
-Every value in JavaScript besides **null** and **undefined** also has
+Every value in JavaScript besides <b>null</b> and <b>undefined</b> also has
 a constructor property storing the function that was used to construct
 it. This even works with primitives.
 
 *//Whereas instanceof also catches instances of subclasses, //using
-obj.constructor does not* console.log(&lbrack;&rbrack; **instanceof** Object, &lbrack;&rbrack;
-**instanceof** Array) *//true true* console.log(&lbrack;&rbrack;.constructor ===
+obj.constructor does not* console.log(&lbrack;&rbrack; <b>instanceof</b> Object, &lbrack;&rbrack;
+<b>instanceof</b> Array) *//true true* console.log(&lbrack;&rbrack;.constructor ===
 Object, &lbrack;&rbrack;.constructor === Array) *//false true*
 
-**function** isNumber(value) {
+<b>function</b> isNumber(value) {
 
 *//null.constructor and undefined.constructor throw an error when
-accessed* **if** (value === **null** &vert;&vert; value === **undefined**)
-**return** **false** **return** value.constructor === Number }
-console.log(isNumber(**null**), isNumber(**undefined**)) *//false
+accessed* <b>if</b> (value === <b>null</b> &vert;&vert; value === <b>undefined</b>)
+<b>return</b> <b>false</b> <b>return</b> value.constructor === Number }
+console.log(isNumber(<b>null</b>), isNumber(<b>undefined</b>)) *//false
 false* console.log(isNumber(&apos;abc&apos;), isNumber(&lbrack;&rbrack;), isNumber(() =&gt;
 1)) *//false false false* console.log(isNumber(0),
-isNumber(Number(&apos;10.1&apos;)), isNumber(**NaN**)) *//true true true*
+isNumber(Number(&apos;10.1&apos;)), isNumber(<b>NaN</b>)) *//true true true*
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch6-3">Section 6.3: Getting object type by constructor name</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-When one with **typeof** operator one gets type object it falls into
+When one with <b>typeof</b> operator one gets type object it falls into
 somewhat wast category&hellip;
 In practice you might need to narrow it down to what sort of
 &apos;object&apos; it actually is and one way to do it is to use
-  Object     .   **prototype**   .   toString      .   call   (   yourObject
+  Object     .   <b>prototype</b>   .   toString      .   call   (   yourObject
 object constructor name to get what flavour of object it actually is:
 )
-1.  **String**
-  Object     .   **prototype**    .   toString       .   call    (   &quot;String&quot;
+1.  <b>String</b>
+  Object     .   <b>prototype</b>    .   toString       .   call    (   &quot;String&quot;
 )
 
 &quot;&lbrack;object String&rbrack;&quot;
 
-2.  **Number**
-  Object       .   **prototype**       .   toString          .   call     (   42
+2.  <b>Number</b>
+  Object       .   <b>prototype</b>       .   toString          .   call     (   42
 )
 &quot;&lbrack;object Number&rbrack;&quot;
 
-3.  **Bool**
-  Object       .   **prototype**      .   toString         .   call     (   **true**
+3.  <b>Bool</b>
+  Object       .   <b>prototype</b>      .   toString         .   call     (   <b>true</b>
 )
 &quot;&lbrack;object Boolean&rbrack;&quot;
 
-4.  **Object**
+4.  <b>Object</b>
   Object
   call
   call
   toString
   toString
-  **prototype**
-  **prototype**
+  <b>prototype</b>
+  <b>prototype</b>
   Object
   Object
 &hellip;(()) or &hellip;({})
 &quot;&lbrack;object Object&rbrack;&quot;
 
-5.  **Function**
-  Object     .   **prototype**    .   toString       .   call    (   **function**
+5.  <b>Function</b>
+  Object     .   <b>prototype</b>    .   toString       .   call    (   <b>function</b>
 (){})
 &quot;&lbrack;object Function&rbrack;&quot;
 
-6.  **Date**
-  Object   .   **prototype**   .   toString    .   call   (   **new**     (   2015   ,   10   ,   21
+6.  <b>Date</b>
+  Object   .   <b>prototype</b>   .   toString    .   call   (   <b>new</b>     (   2015   ,   10   ,   21
                                                               Date                                
 ))
 
 &quot;&lbrack;object Date&rbrack;&quot;
 
-7.  **Regex**
-  **new** RegExp
+7.  <b>Regex</b>
+  <b>new</b> RegExp
   call
   call
   toString
   toString
-  **prototype**
-  **prototype**
+  <b>prototype</b>
+  <b>prototype</b>
   Object
   Object
   */foo/*
 &hellip;(()) or &hellip;();
 &quot;&lbrack;object RegExp&rbrack;&quot;
 
-8.  **Array**
-  Object         .   **prototype**         .   toString           .   call
+8.  <b>Array</b>
+  Object         .   <b>prototype</b>         .   toString           .   call
 (&lbrack;&rbrack;);
 &quot;&lbrack;object Array&rbrack;&quot;
 
-9.  **Null**
+9.  <b>Null</b>
 
   -
-  Object       .   **prototype**      .   toString         .   call     (   **null**
+  Object       .   <b>prototype</b>      .   toString         .   call     (   <b>null</b>
     -  -    -
 
   -
@@ -2003,10 +2053,10 @@ object constructor name to get what flavour of object it actually is:
 
 &quot;&lbrack;object Null&rbrack;&quot;
 
-10. **Undefined**
+10. <b>Undefined</b>
 
   -
-  Object     .   **prototype**   .   toString       .   call    (   **undefined**
+  Object     .   <b>prototype</b>   .   toString       .   call    (   <b>undefined</b>
   -      -  
 
   -
@@ -2015,10 +2065,10 @@ object constructor name to get what flavour of object it actually is:
 
 &quot;&lbrack;object Undefined&rbrack;&quot;
 
-11. **Error**
+11. <b>Error</b>
 
   
-  Object      .   **prototype**     .   toString        .   call    (   Error
+  Object      .   <b>prototype</b>     .   toString        .   call    (   Error
         -  
 
   
@@ -2037,37 +2087,37 @@ Strings in JavaScript can be enclosed in Single quotes &apos;hello&apos;,
 Double quotes &quot;Hello&quot; and (from ES2015, ES6) in Template Literals
 (*backticks*) &grave;hello&grave;.
 
-**var** hello = &quot;Hello&quot;;
-**var** world = &apos;world&apos;;
-**var** helloW = &grave;Hello World&grave;;
+<b>var</b> hello = &quot;Hello&quot;;
+<b>var</b> world = &apos;world&apos;;
+<b>var</b> helloW = &grave;Hello World&grave;;
 
 *// ES2015 / ES6*
 String
 Strings can be created from other types using the () function.
 
-**var** intString = String ( 32 );
+<b>var</b> intString = String ( 32 );
 
 *// &quot;32&quot;*
 
-**var** booleanString = String ( **true** );
+<b>var</b> booleanString = String ( <b>true</b> );
 
 *// &quot;true&quot;* 
 
-**var** nullString = String ( **null** );
+<b>var</b> nullString = String ( <b>null</b> );
 
 *// &quot;null&quot;*
 toString
 Or, () can be used to convert Numbers, Booleans or Objects to Strings.
 
-**var** intString = ( 5232 ) . toString ();
+<b>var</b> intString = ( 5232 ) . toString ();
 
 *// &quot;5232&quot;*
 
-**var** booleanString = ( **false** ).toString();
+<b>var</b> booleanString = ( <b>false</b> ).toString();
 
 *// &quot;false&quot;*
 
-**var** objString = ( { } ) . toString ( );
+<b>var</b> objString = ( { } ) . toString ( );
 
 *// &quot;&lbrack;object Object&rbrack;&quot;*
 
@@ -2101,16 +2151,16 @@ fromCharCode
 
 *//&quot;hello&quot;*
 
-Creating a String object using **new** keyword is allowed, but is not
+Creating a String object using <b>new</b> keyword is allowed, but is not
 recommended as it behaves like Objects unlike primitive strings.
 
-**var**
+<b>var</b>
 
 objectString
 
 =
 
-**new**
+<b>new</b>
 
 String
 
@@ -2122,7 +2172,7 @@ String
 
 ;
 
-**typeof**
+<b>typeof</b>
 
 objectString
 
@@ -2130,246 +2180,124 @@ objectString
 
 *//&quot;object&quot;*
 
-**typeof**
-
+<b>typeof</b>
 objectString.
-
 valueOf
-
 (
-
 )
-
 ;
-
 *//&quot;string&quot;*
-
-**Concatenating Strings**
-
-  
+<b>Concatenating Strings</b>
   concat
-  
-
-  
-
 String concatenation can be done with the + concatenation operator, or
 with the built-in () method on the String object prototype.
-
-**var**
-
+<b>var</b>
 foo
-
 =
-
 &quot;Foo&quot;
-
 ;
-
-**var**
-
+<b>var</b>
 bar
-
 =
-
 &quot;Bar&quot;
-
 ;
-
 console.
-
 log
-
 (
-
 foo
-
 &plus;
-
 bar
-
 )
-
 ;
-
 *// =&amp;quot;FooBar&quot;*
-
 console.
-
 log
-
 (
-
 foo
-
 &plus;
-
 &quot; &quot;
-
 &plus;
-
 bar
-
 )
-
 ;
-
 *// =&amp;quot;Foo Bar&quot;*
-
 foo.
-
 concat
-
 (
-
 bar
-
 )
-
 *// =&amp;quot;FooBar&quot;*
-
 &quot;a&quot;
-
 .
-
 concat
-
 (
-
 &quot;b&quot;
-
 ,
-
 &quot; &quot;
-
 ,
-
 &quot;d&quot;
-
 )
-
 *// =&amp;quot;ab d&quot;*
-
 Strings can be concatenated with non-string variables but will
 type-convert the non-string variables into strings.
-
-**var**
-
+<b>var</b>
 string
-
 =
-
 &quot;string&quot;
-
 ;
-
-**var**
-
+<b>var</b>
 number
-
 =
-
 32
-
 ;
-
-**var**
-
+<b>var</b>
 boolean
-
 =
-
-**true**
-
+<b>true</b>
 ;
-
 console.
-
 log
-
 (
-
 string
-
 &plus;
-
 number
-
 &plus;
-
 boolean
-
 )
-
 ;
-
 *// &quot;string32true&quot;*
-
-**String Templates**
-
+<b>String Templates</b>
 Version ≥ 6
-
 Strings can be created using template literals (*backticks*)
 &grave;hello&grave;.
-
-**var**
-
+<b>var</b>
 greeting
-
 =
-
 &grave;Hello&grave;
-
 ;
-
-  
-  variable
-  
-
-  
-
+variable
 With template literals, you can do string interpolation using &dollar;{}
 inside template literals:
-
-**var**
-
+<b>var</b>
 place
-
 =
-
 &grave;World&grave;
-
 ;
-
-**var**
-
+<b>var</b>
 greet
-
 =
-
 &grave;Hello &dollar;
-
 {
-
 place
-
 }
-
 !
-
 &grave;
-
 console.
-
 log
-
 (
-
 greet
-
 )
-
 ;
-
 *// &quot;Hello World!&quot;*
 
 You can use String.raw to get backslashes to be in the string without
@@ -2378,80 +2306,46 @@ modification.
 &grave;a&bsol;&bsol;&bsol;&bsol;b&grave;
 
 *// = a&bsol;&bsol;b*
-
 String
-
 .
-
 raw
-
 &grave;a&bsol;&bsol;&bsol;&bsol;b&grave;
-
 *// = a&bsol;&bsol;&bsol;&bsol;b*
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-2">Section 7.2: Reverse String</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 The most &quot;popular&quot; way of reversing a string in JavaScript is the
 following code fragment, which is quite common:
 
-**function**
-
+<b>function</b>
 reverseString
-
 (
-
 str
-
 )
-
 {
-
-**return**
-
+<b>return</b>
 str.
-
 split
-
 (
-
 &apos;&apos;
-
 )
-
 .
-
 reverse
-
 (
-
 )
-
 .
-
 join
-
 (
-
 &apos;&apos;
-
 )
-
 ;
-
 }
-
 reverseString
-
 (
-
 &apos;string&apos;
-
 )
-
 ;
-
 *// &quot;gnirts&quot;*
 
 However, this will work only so long as the string being reversed does
@@ -2463,37 +2357,21 @@ logical &quot;next&quot; character instead of the original one it was combined
 with.
 
 &apos;?????.&apos;
-
 .
-
 split
-
 (
-
 &apos;&apos;
-
 )
-
 .
-
 reverse
-
 (
-
 )
-
 .
-
 join
-
 (
-
 &apos;&apos;
-
 )
-
 ;
-
 *//fails*
 
 While the method will work fine for most languages, a truly accurate,
@@ -2503,313 +2381,167 @@ involved. One such implementation is a tiny library called
 regular expressions for matching combining marks and surrogate pairs
 in order to perform the reversing perfectly.
 >
-**Explanation**
+<b>Explanation</b>
 >
-**Section Explanation Result** str The input string &quot;string&quot;
+<b>Section Explanation Result</b> str The input string &quot;string&quot;
 
-  
-  [String.**prototype**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)   
-  - -
+  [String.<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)   
+
   [deliminator )](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)          
 
-  
-
-  
   [split](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
-  
 
-  
-
-  
   &quot;s&quot;     ,   &quot;t&quot;     ,   &quot;r&quot;     ,   &quot;i&quot;     ,   &quot;n&quot;     ,   &quot;g&quot;
-            
-
-  
 
 Splits string str into an array. The
->
+
 [.(](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
->
+
 parameter &quot;&quot; means to split between each &lbrack;&rbrack; character.
-
   
-  [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)   [**prototype**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)   [reverse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)
-   - - - -
-
+[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)   [reverse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)
   
-
-  
-  &quot;g&quot;     ,   &quot;n&quot;     ,   &quot;i&quot;     ,   &quot;r&quot;     ,   &quot;t&quot;     ,   &quot;s&quot;
-            
-
-  
+&quot;g&quot;     ,   &quot;n&quot;     ,   &quot;i&quot;     ,   &quot;r&quot;     ,   &quot;t&quot;     ,   &quot;s&quot;
 
 Returns the array from the split string with
 
 [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)
-&lbrack;&rbrack;
+&lbrack;&rbrack; its elements in reverse order.
 
-its elements in reverse order.
->
 Joins the elements in the array together into
 
-  -
-  [**prototype**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)   [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)   [(](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)   [deliminator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
-    -  
-
-  -
+[<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)   [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)   [(](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)   [deliminator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
 
 [Array.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)a
 string. The &quot;&quot; parameter means an empty
->
+
 &quot;gnirts&quot;
 
 [)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
-deliminator (i.e., the elements of the array
+deliminator (i.e., the elements of the array are put right next to each other).
 
-are put right next to each other).
->
-**Using spread operator**
+<b>Using spread operator</b>
 
 Version ≥ 6
-
-**function**
-
+<b>function</b>
 reverseString
-
 (
-
 str
-
 )
-
 {
-
-**return**
-
+<b>return</b>
 &lbrack;
-
 &hellip;
-
 String
-
 (
-
 str
-
 )
-
 &rbrack;
-
 .
-
 reverse
-
 (
-
 )
-
 .
-
 join
-
 (
-
 &apos;&apos;
-
 )
-
 ;
-
 }
-
 console.
-
 log
-
 (
-
 reverseString
-
 (
-
 &apos;stackoverflow&apos;
-
 )
-
 )
-
 ;
-
 *// &quot;wolfrevokcats&quot;*
-
 console.
-
 log
-
 (
-
 reverseString
-
 (
-
 1337
-
 )
-
 )
-
 ;
-
 *// &quot;7331&quot;*
-
 console.
-
 log
-
 (
-
 reverseString
-
 (
-
 &lbrack;
-
 1
-
 ,
-
 2
-
 ,
-
 3
-
 &rbrack;
-
 )
-
 )
-
 ;
-
 *// &quot;3,2,1&quot;*
-
-**Custom**
-
-**e**
-
-**revers**
-
-**(**
-
-**)**
-
-**function**
-
-**function**
-
+<b>Custom</b>
+<b>e</b>
+<b>revers</b>
+<b>(</b>
+<b>)</b>
+<b>function</b>
+<b>function</b>
 reverse
-
 (
-
 string
-
 )
-
 {
-
-**var**
-
+<b>var</b>
 strRev
-
 =
-
 &quot;&quot;
-
 ;
-
-**for**
-
+<b>for</b>
 (
-
-**var**
-
+<b>var</b>
 i
-
 =
-
 string.
-
 length
-
 &minus;
-
 1
-
 ;
-
 i
-
 &gt;=
-
 0
-
 ;
-
 i
-
 &bsol;
-
 )
-
 {
-
 strRev
-
 +=
-
 string
-
 &lbrack;
-
 i
-
 &rbrack;
-
 ;
-
 }
-
-**return**
-
+<b>return</b>
 strRev
-
 ;
-
 }
-
 reverse
-
-(
-
 &quot;zebra&quot;
-
 )
-
 ;
-
 *// &quot;arbez&quot;*
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-3">Section 7.3: Comparing Strings Lexicographically</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
   
   [localeCompare](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare)
-  
-
-  
 
 To compare strings alphabetically, use
 [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare).
@@ -2818,323 +2550,67 @@ lexicographically (alphabetically) before the compared string (the
 parameter), a positive value if it comes afterwards, and a value of 0
 if they are equal.
 
-**var**
-
+<b>var</b>
 a
-
 =
-
 &quot;hello&quot;
-
 ;
-
-**var**
-
+<b>var</b>
 b
-
 =
-
 &quot;world&quot;
-
 ;
-
 console.
-
 log
-
 (
-
 a&period;
-
 localeCompare
-
 (
-
 b
-
 )
-
 )
-
 ;
-
 *// -1*
-
   
   localeCompare
-  
-
-  
 
 The &bsol;and &lt; operators can also be used to compare strings
 lexicographically, but they cannot return a value of zero (this can be
 tested with the == equality operator). As a result, a form of the ()
 function can be written like so:
 
-**function**
+<b>function</b>
 
-strcmp
-
-(
-
-a
-
-,
-
-b
-
-)
-
-{
-
-**if**
-
-(
-
-a
-
-===
-
-b
-
-)
-
-{
-
-**return**
-
-0
-
-;
-
+strcmp(a,b){**if**(a===b){**return**0;
 }
-
-**if**
-
-(
-
-a
-
-&gt;
-
-b
-
-)
-
-{
-
-**return**
-
-1
-
-;
-
+**if** ( a &gt; b ) { **return** 1 ;
 }
-
-**return**
-
-&minus;
-
-1
-
-;
-
+**return** &minus; 1 ;
 }
-
-console.
-
-log
-
-(
-
-strcmp
-
-(
-
-&quot;hello&quot;
-
-,
-
-&quot;world&quot;
-
-)
-
-)
-
-;
-
-*// -1*
-
-console.
-
-log
-
-(
-
-strcmp
-
-(
-
-&quot;hello&quot;
-
-,
-
-&quot;hello&quot;
-
-)
-
-)
-
-;
-
-*// 0*
-
-console.
-
-log
-
-(
-
-strcmp
-
-(
-
-&quot;world&quot;
-
-,
-
-&quot;hello&quot;
-
-)
-
-)
-
-;
-
-*// 1*
+console.log ( strcmp ( &quot;hello&quot; , &quot;world&quot; ) ) ;
+*// -1* console.log ( strcmp ( &quot;hello&quot; , &quot;hello&quot; ) ) ;
+*// 0* console.log ( strcmp ( &quot;world&quot; , &quot;hello&quot; ) ) ;
+*// 1* 
 
 This is especially useful when using a sorting function that compares
 based on the sign of the return value (such as sort).
 
-**var**
-
-arr
-
-=
-
-&lbrack;
-
-&quot;bananas&quot;
-
-,
-
-&quot;cranberries&quot;
-
-,
-
-&quot;apples&quot;
-
-&rbrack;
-
-;
-
-arr.
-
-sort
-
-(
-
-**function**
-
-(
-
-a
-
-,
-
-b
-
-)
-
-{
-
-**return**
-
-a&period;
-
-localeCompare
-
-(
-
-b
-
-)
-
-;
-
-}
-
-)
-
-;
-
-console.
-
-log
-
-(
-
-arr
-
-)
-
-;
-
+**var** arr = &lbrack; &quot;bananas&quot; , &quot;cranberries&quot; , &quot;apples&quot; &rbrack; ;
+arr.sort ( **function** ( a , b ) { **return** a&period; localeCompare ( b ) ; });
+console.log ( arr ) ;
 *// &lbrack; &quot;apples&quot;, &quot;bananas&quot;, &quot;cranberries&quot; &rbrack;*
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-4">Section 7.4: Access character at index in string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
+[charAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt)
   
-  [charAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt)
-  
-
-  
-
 Use
 [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt)
 to get a character at the specified index in the string.
 
-**var**
-
-string
-
-=
-
-&quot;Hello, World!&quot;
-
-;
-
-console.
-
-log
-
-(
-
-string.
-
-charAt
-
-(
-
-4
-
-)
-
-)
-
-;
+**var** string = &quot;Hello, World!&quot; ;
+console.log ( string. charAt ( 4 ) ) ;
 
 *// &quot;o&quot;*
 
@@ -3142,74 +2618,17 @@ Alternatively, because strings can be treated like arrays, use the
 index via [bracket
 notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors).
 
-**var**
-
-string
-
-=
-
-&quot;Hello, World!&quot;
-
-;
-
-console.
-
-log
-
-(
-
-string
-
-&lbrack;
-
-4
-
-&rbrack;
-
-)
-
-;
-
+**var** string = &quot;Hello, World!&quot; ; 
+console.log ( string &lbrack; 4 &rbrack; );
 *// &quot;o&quot;*
 
-  
-  [charCodeAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt)
-  
-
-  
+[charCodeAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt)
 
 To get the character code of the character at a specified index, use
 [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt).
 
-**var**
-
-string
-
-=
-
-&quot;Hello, World!&quot;
-
-;
-
-console.
-
-log
-
-(
-
-string.
-
-charCodeAt
-
-(
-
-4
-
-)
-
-)
-
-;
+**var** string = &quot;Hello, World!&quot; ;
+console.log ( string. charCodeAt ( 4 ) ) ;
 
 *// 111*
 
@@ -3225,102 +2644,61 @@ If your string is enclosed (i.e.) in single quotes you need to escape
 the inner literal quote with *backslash* &bsol;&bsol;
 
 **var**
-
 text
-
 =
-
 &apos;L
-
 **&amp;amp;apos;**
-
 albero means tree in Italian&apos;
-
 ;
-
 console.
-
 log
-
 (
-
 text
-
 )
-
 ;
-
 &bsol;&bsol;&bsol;&bsol;
-
 &quot;L&apos;albero means tree in Italian&quot;
-
 Same goes for double quotes:
-
 **var**
-
 text
-
 =
-
 &quot;I feel
-
 **&amp;amp;quot;**
-
 high
-
 **&amp;amp;quot;**
-
 &quot;
-
 ;
-
 Special attention must be given to escaping quotes if you&apos;re storing
 HTML representations within a String, since HTML strings make large
 use of quotations i.e. in attributes:
->
+
 **var** content = &quot;&lt;p class=**&amp;amp;quot;**special**&amp;amp;quot;**&gt;Hello
 World!&lt;/p&gt;&quot;; *// valid String* **var** hello = &apos;&lt;p
 class=&quot;special&quot;&gt;I**&amp;amp;apos;**d like to say &quot;Hi&quot;&lt;/p&gt;&apos;; *// valid
 String*
-
   
   apos   ; (or &#  39   ;) as a single quote and &       quot   ; ( or &#  34
-     -  - 
-
-  
-
+ 
 Quotes in HTML strings can also be represented using &;) as double
 quotes.
->
+
 **var** hi = &quot;&lt;p class=&apos;special&apos;&gt;I&apos;d like to say
 &quot;Hi&quot;&lt;/p&gt;&quot;; *// valid String* **var** hello = &apos;&lt;p
 class=&quot;special&quot;&gt;I&apos;d like to say &quot;Hi&quot;&lt;/p&gt;&apos;; *// valid
 String*
-
   
-  apos                ; and &                         quot
-    
-
+apos                ; and &                         quot
   
-
 *Note:* The use of &; will not overwrite double quotes that browsers
 can automatically place on
 
-  
   **&lt;p**            **&gt;** being     **&lt;p**   =   &quot;special&quot;   **&gt;**,   quot
   class=special      made to          class                       using &   
-  - -   -  
-
-  
 
 attribute quotes. For example ; can lead to
 
-  
   **&lt;p**    =   &quot;&quot;special&quot;&quot;   **&gt;** where &amp;amp;quot;    **&lt;p**    =   &quot;special&quot;
   class                            will be              class          
-  -    -  -
-
-  
 
 **&gt;**.
 
@@ -3332,90 +2710,51 @@ which do not require you to escape &apos; and &quot;. These use backticks (&grav
 instead of single or double quotes.
 
 **var**
-
 x
-
 =
-
 &grave;
-
 &quot;Escaping &quot;
-
 and
-
 &apos; can become very annoying&grave;;
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-6">Section 7.6: Word Counter</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-  
   **&lt;textarea**
-  
-
-  
 
 Say you have a **&gt;** and you want to retrieve info about the number
 of:
 
 Characters (total)
-
 Characters (no spaces)
-
 Words
-
 Lines
-
 **function**
-
 wordCount
-
 (
-
 val
-
 )
-
 {
-
 **var**
-
 wom
-
 =
-
 val.
-
 match
-
 (
-
 */&bsol;&bsol;S+/g*
-
 )
-
 ;
-
 **return**
-
 {
-
 charactersNoSpaces
-
 :
-
 val.
-
 replace
-
 (
-
 */&bsol;&bsol;s+/g*
-
 ,
-
 &apos;&apos;
-
 )
 
 .
@@ -10534,202 +9873,104 @@ It behaves like SameValue, but considers +0 and -0 to be equal.
   
 
 You can use this comparison algorithm via (ECMAScript 7).
->
+
 Examples:
-
 &lbrack;
-
 1
-
 &rbrack;
-
 .
-
 includes
-
 (
-
 1
-
 )
-
 ;
-
 *// true*
-
 &lbrack;
-
 &plus;
-
 0
-
 &rbrack;
-
 .
-
 includes
-
 (
-
 &minus;
-
 0
-
 )
-
 ;
-
 *// true*
-
 &lbrack;
-
 **NaN**
-
 &rbrack;
-
 .
-
 includes
-
 (
-
 **NaN**
-
 )
-
 ;
-
 *// true*
-
 &lbrack;
-
 **true**
-
 &rbrack;
-
 .
-
 includes
-
 (
-
 &quot;true&quot;
-
 )
-
 ;
-
 *// false*
-
 &lbrack;
-
 **false**
-
 &rbrack;
-
 .
-
 includes
-
 (
-
 0
-
 )
-
 ;
-
 *// false*
-
 &lbrack;
-
 1
-
 &rbrack;
-
 .
-
 includes
-
 (
-
 &quot;1&quot;
-
 )
-
 ;
-
 *// false*
-
 &lbrack;
-
 **null**
-
 &rbrack;
-
 .
-
 includes
-
 (
-
 **undefined**
-
 )
-
 ;
-
 *// false*
-
 &lbrack;
-
 &lbrack;
-
 &rbrack;
-
 &rbrack;
-
 .
-
 includes
-
 (
-
 &lbrack;
-
 &rbrack;
-
 )
-
 ;
-
 *// false*
-
 This algorithm still has the properties of an [equivalence
 relation](https://en.wikipedia.org/wiki/Equivalence_relation):
-
-  
   includes
   
-
-  
-
-  
   includes      &lpar;y&rpar; is **true** if, and only if, &lbrack;y&rbrack;.   includes
-  -  -
-
-  
-
   
   includes   &lpar;y&rpar; and      includes   &lpar;z&rpar; are **true**, then  includes
              &lbrack;y&rbrack;.                    &lbrack;x&rbrack;.                    
-  -  -  -
-
-  
 
 [Reflexivity](https://en.wikipedia.org/wiki/Reflexive_relation):
 &lbrack;x&rbrack;.(x) is **true**, for any value x
->
+
 [Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation):
 &lbrack;x&rbrack;.(x) is **true**, for any values x and y.
 [Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation): If
@@ -10739,127 +9980,72 @@ relation](https://en.wikipedia.org/wiki/Equivalence_relation):
 Comparison**](http://www.ecma-international.org/ecma-262/6.0/#sec-strict-equality-comparison)
 
 It behaves like SameValue, but
->
+
 Considers +0 and -0 to be equal.
->
+
 Considers **NaN** different than any value, including itself
->
-You can use this comparison algorithm via the === operator (ECMAScript
-3).
->
+
+You can use this comparison algorithm via the === operator (ECMAScript 3).
+
 There is also the !== operator (ECMAScript 3), which negates the
 result of ===.
->
 Examples:
-
 1
-
 ===
-
 1
-
 ;
-
 *// true*
-
 &plus;
-
 0
-
 ===
-
 &minus;
-
 0
-
 ;
-
 *// true*
-
 **NaN**
-
 ===
-
 **NaN**
-
 ;
-
 *// false*
-
 **true**
-
 ===
-
 &quot;true&quot;
-
 ;
-
 *// false*
-
 **false**
-
 ===
-
 0
-
 ;
-
 *// false*
-
 1
-
 ===
-
 &quot;1&quot;
-
 ;
-
 *// false*
-
 **null**
-
 ===
-
 **undefined**
-
 ;
-
 *// false*
-
 &lbrack;
-
 &rbrack;
-
 ===
-
 &lbrack;
-
 &rbrack;
-
 ;
-
 *// false*
-
 This algorithm has the following properties:
-
   
-  x === y   is **true** if, and only if, y ===        **for** any values
+x === y   is **true** if, and only if, y ===        **for** any values
             xistrue,                                  
-    
 
-  
-
-  
-  x === y      and     y === z      are **true**, then       x === z
-   -  - 
-
-  
+x === y      and     y === z      are **true**, then       x === z
 
 [Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation): xandy&grave;.
->
+
 [Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation): If
 is also **true**, for any values x, y and z.
->
+
 But is not an [equivalence
 relation](https://en.wikipedia.org/wiki/Equivalence_relation) because
 
@@ -10877,14 +10063,14 @@ Comparison**](http://www.ecma-international.org/ecma-262/6.0/#sec-abstract-equal
 
 If both operands belong to the same Type, it behaves like the Strict
 Equality Comparison.
->
+
 Otherwise, it coerces them as follows:
->
+
 **undefined** and **null** are considered to be equal
->
+
 When comparing a number with a string, the string is coerced to a
 number
->
+
 When comparing a boolean with something else, the boolean is coerced
 to a number
 
@@ -10894,425 +10080,227 @@ compared recursively. Otherwise the algorithm returns **false**.
 
 You can use this comparison algorithm via the == operator (ECMAScript
 1).
->
+
 There is also the != operator (ECMAScript 1), which negates the result
 of ==.
->
+
 Examples:
-
 1
-
 ==
-
 1
-
 ;
-
 *// true*
-
 &plus;
-
 0
-
 ==
-
 &minus;
-
 0
-
 ;
-
 *// true*
-
 **NaN**
-
 ==
-
 **NaN**
-
 ;
-
 *// false*
-
 **true**
-
 ==
-
 &quot;true&quot;
-
 ;
-
 *// false*
-
 **false**
-
 ==
-
 0
-
 ;
-
 *// true*
-
 1
-
 ==
-
 &quot;1&quot;
-
 ;
-
 *// true*
-
 **null**
-
 ==
-
 **undefined**
-
 ;
-
 *// true*
-
 &lbrack;
-
 &rbrack;
-
 ==
-
 &lbrack;
-
 &rbrack;
-
 ;
-
 *// false*
-
 This algorithm has the following property:
-
   
   x == y        is **true** if, and only if,                y == x
-  -  -
-
-  
 
 [Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation): is
 **true**, for any values x and y.
 
 But is not an [equivalence
 relation](https://en.wikipedia.org/wiki/Equivalence_relation) because
-
   
   **NaN** != **NaN**
-  
 
-  
-
-  -
   == &apos;&apos;       and 0       == &apos;0&apos;        , but     &apos;&apos; != &apos;0&apos;
-  -    
-
-  -
 
 **NaN** is not
 [reflexive](https://en.wikipedia.org/wiki/Reflexive_relation):
-
 [Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation) does
 not hold, e.g. 0
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-11">Section 10.11: Relational operators (&lt;, &lt;=, &gt;, &gt;=)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 When both operands are numeric, they are compared normally:
-
 1
-
 &lt;
-
 2
-
 *// true*
-
 2
-
 &lt;=
-
 2
-
 *// true*
-
 3
-
 &gt;=
-
 5
-
 *// false*
-
 **true**
-
 &lt;
-
 **false**
-
 *// false (implicitly converted to numbers, 1 &bsol;0)*
-
 When both operands are strings, they are compared lexicographically
 (according to alphabetical order):
-
 &apos;a&apos;
-
 &lt;
-
 &apos;b&apos;
-
 *// true*
-
 &apos;1&apos;
-
 &lt;
-
 &apos;2&apos;
-
 *// true*
-
 &apos;100&apos; &amp;apos;12&apos; *// false (&apos;100&apos; is less than &apos;12&apos;
 lexicographically!)*
->
+
 When one operand is a string and the other is a number, the string is
 converted to a number before comparison:
-
 &apos;1&apos;
-
 &lt;
-
 2
-
 *// true*
-
 &apos;3&apos;
-
 &gt;
-
 2
-
 *// true*
-
 **true**
-
 &gt;
-
 &apos;2&apos;
-
 *// false (true implicitly converted to number, 1 &lt; 2)*
-
 When the string is non-numeric, numeric conversion returns **NaN**
 (not-a-number). Comparing with **NaN** always returns **false**:
-
 1
-
 &lt;
-
 &apos;abc&apos;
-
 *// false*
-
 1
-
 &gt;
-
 &apos;abc&apos;
-
 *// false*
-
 But be careful when comparing a numeric value with **null**,
 **undefined** or empty strings:
-
 1
-
 &gt;
-
 &apos;&apos;
-
 *// true*
-
 1
-
 &lt;
-
 &apos;&apos;
-
 *// false*
-
 1
-
 &gt;
-
 **null**
-
 *// true*
-
 1
-
 &lt;
-
 **null**
-
 *// false*
-
 1
-
 &gt;
-
 **undefined**
-
 *// false*
-
 1
-
 &lt;
-
 **undefined**
-
 *// false*
-
-  -
   Number                     (    **null**          );       *//0*
-      -
-
-  -
 
 When one operand is a object and the other is a number, the object is
 converted to a number before comparison.So **null** is particular case
 because
-
 **new**
-
 Date
-
 (
-
 2015
-
 )
-
 &lt;
-
 1479480185280
-
 *// true*
-
 **null**
-
 &gt;
-
 &minus;
-
 1
-
 *//true*
-
 (
-
 {
-
 toString
-
 :
-
 **function**
-
 (
-
 )
-
 {
-
 **return**
-
 123
-
 }
-
 }
-
 )
-
 &gt;
-
 122
-
 *//true*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-12">Section 10.12: Inequality</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 Operator != is the inverse of the == operator.
-
 Will return **true** if the operands aren&apos;t equal.
-
 The JavaScript engine will try and convert both operands to matching
 types if they aren&apos;t of the same type. **Note:** if the two operands
 have different internal references in memory, then **false** will be
 returned.
-
 **Sample:**
-
 1
-
 !=
-
 &apos;1&apos;
-
 *// false*
-
 1
-
 !=
-
 2
-
 *// true*
-
-  
-  != &apos;1&apos;
-  
-
-  
-
+!= &apos;1&apos;
 In the sample above, 1 is **false** because, a primitive number type
 is being compared to a char value. Therefore, the JavaScript engine
 doesn&apos;t care about the datatype of the R.H.S value.
 
 Operator: !== is the inverse of the === operator. Will return true if
 the operands are not equal or if their types do not match.
-
 Example:
-
 1
-
 !==
-
 &apos;1&apos;
-
 *// true*
-
 1
-
 !==
-
 2
-
 *// true*
-
 1
-
 !==
-
 1
-
 *// false*
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -11321,239 +10309,125 @@ Example:
 
 **Operator Comparison Example**
 
-  
   i ==
-  
-
-  
 
 == Equal0
 
-  
   i === &quot;5&quot;
-  
-
-  
 
 === Equal Value and Type
 
-  
   i !=
-  
-
-  
 
 != Not Equal5
 
-  
   i !==
-  
-
-  
 
 !== Not Equal Value or Type5
 
-  
   i
-  
-
-  
 
 &bsol;Greater than&bsol;5
-
-  
   i
-  
-
-  
 
 &lt; Less than&lt; 5
 
-  
   i &gt;=
-  
-
-  
 
 &gt;= Greater than or equal5
 
-  
   i &lt;=
-  
-
-  
 
 &lt;= Less than or equal5
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-14">Section 10.14: Grouping multiple logic statements</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
 You can group multiple boolean logic statements within parenthesis in
 order to create a more complex logic evaluation, especially useful in
 if statements.
 
 **if**
-
 (
-
 (
-
 age
-
 &gt;=
-
 18
-
 &&
-
 height
-
 &gt;=
-
 5.11
-
 )
-
 &vert;&vert;
-
 (
-
 status
-
 ===
-
 &apos;royalty&apos;
-
 &&
-
 hasInvitation
-
 )
-
 )
-
 {
-
 console.
-
 log
-
 (
-
 &apos;You can enter our club&apos;
-
 )
-
 ;
-
 }
-
 We could also move the grouped logic to variables to make the
 statement a bit shorter and descriptive:
-
 **var**
-
 isLegal
-
 =
-
 age
-
 &gt;=
-
 18
-
 ;
-
 **var**
-
 tall
-
 =
-
 height
-
 &gt;=
-
 5.11
-
 ;
-
 **var**
-
 suitable
-
 =
-
 isLegal
-
 &&
-
 tall
-
 ;
-
 **var**
-
 isRoyalty
-
 =
-
 status
-
 ===
-
 &apos;royalty&apos;
-
 ;
-
 **var**
-
 specialCase
-
 =
-
 isRoyalty
-
 &&
-
 hasInvitation
-
 ;
-
 **var**
-
 canEnterOurBar
-
 =
-
 suitable
-
 &vert;&vert;
-
 specialCase
-
 ;
-
 **if**
-
 (
-
 canEnterOurBar
-
 )
-
 console.
-
 log
-
 (
-
 &apos;You can enter our club&apos;
-
 )
-
 ;
 
 Notice that in this particular example (and many others), grouping the
@@ -11770,208 +10644,80 @@ To turn on a bit use bitwise *or* &vert; and the value corresponding to
 the bit. So if you wish to set the 2nd bit bitField will turn it on.
 If you wish to turn a bit off use bitwise *and* & with a value that
 has all by the required bit on.
-
-  
   bitfield &= 0b1101
-  
-
-  
 
 Using 4 bits and turning the 2nd bit off ;
->
+
 You may say the above example seems a lot more complex than assigning
 the various key states to an array. Yes, it is a little more complex
 to set but the advantage comes when interrogating the state.
->
+
 If you want to test if all keys are up.
-
 *// as bit field*
-
-**if**
-
+<b>if</b>
 (
-
 !
-
 bitfield
-
 )
-
 *// no keys are on*
-
 *// as array test each item in array*
-
-**if**
-
+<b>if</b>
 (
-
 !
-
 (
-
 directionState
-
 &lbrack;
-
 0
-
 &rbrack;
-
 &&
-
 directionState
-
 &lbrack;
-
 1
-
 &rbrack;
-
 &&
-
 directionState
-
 &lbrack;
-
 2
-
 &rbrack;
-
 &&
-
 directionState
-
 &lbrack;
-
 3
-
 &rbrack;
-
 )
-
 )
-
 {
-
 You can set some constants to make things easier
-
 *// postfix U,D,L,R for Up down left right*
-
-**const**
-
+<b>const</b>
 KEY_U
-
 =
-
 1
-
 ;
-
-**const**
-
+<b>const</b>
 KEY_D
-
 =
-
 2
-
 ;
-
-**const**
-
-KEY_L
-
-=
-
-4
-
-;
-
-**const**
-
-KEY_R
-
-=
-
-8
-
-;
-
-**const**
-
-KEY_UL
-
-=
-
-KEY_U
-
-&plus;
-
-KEY_L
-
-;
-
-*// up left*
-
-**const**
-
-KEY_UR
-
-=
-
-KEY_U
-
-&plus;
-
-KEY_R
-
-;
-
-*// up Right*
-
-**const**
-
-KEY_DL
-
-=
-
-KEY_D
-
-&plus;
-
-KEY_L
-
-;
-
-*// down left*
-
-**const**
-
-KEY_DR
-
-=
-
-KEY_D
-
-&plus;
-
-KEY_R
-
-;
-
-*// down right*
+<b>const</b> KEY_L = 4 ;
+<b>const</b> KEY_R = 8 ;
+<b>const</b> KEY_UL = KEY_U &plus; KEY_L ;
+*// up left* <b>const</b> KEY_UR = KEY_U &plus; KEY_R ;
+*// up Right* <b>const</b> KEY_DL = KEY_D &plus; KEY_L ;
+*// down left* <b>const</b> KEY_DR = KEY_D &plus; KEY_R ;
+*// down right* 
 
 You can then quickly test for many various keyboard states
->
-**if** ((bitfield & KEY_UL) === KEY_UL) { *// is UP and LEFT only
-down* **if** (bitfield & KEY_UL) { *// is Up left down* **if**
-((bitfield & KEY_U) === KEY_U) { *// is Up only down* **if** (bitfield
-& KEY_U) { *// is Up down (any other key may be down)* **if**
+
+<b>if</b> ((bitfield & KEY_UL) === KEY_UL) { *// is UP and LEFT only
+down* <b>if</b> (bitfield & KEY_UL) { *// is Up left down* <b>if</b>
+((bitfield & KEY_U) === KEY_U) { *// is Up only down* <b>if</b> (bitfield
+& KEY_U) { *// is Up down (any other key may be down)* <b>if</b>
 (!(bitfield & KEY_U)) { *// is Up up (any other key may be down)*
-**if** (!bitfield ) { *// no keys are down*
->
-**if** (bitfield ) { *// any one or more keys are down*
->
+<b>if</b> (!bitfield ) { *// no keys are down*
+
+<b>if</b> (bitfield ) { *// any one or more keys are down*
+
 The keyboard input is just one example. Bitfields are useful when you
 have various states that must in combination be acted on. JavaScript
 can use up to 32 bits for a bit field. Using them can offer
