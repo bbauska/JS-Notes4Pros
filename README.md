@@ -167,7 +167,7 @@ console.log ( {
   'Id': 33, 
   'IsHiddenInUI': <b>false</b>,
   'IsSiteAdmin': <b>false</b>, 
-  'LoginName': 'i:0#.w|virtualdomain\\user2',
+  'LoginName': 'i:0#.w|virtualdomain&bsol;&bsol;user2',
   'PrincipalType': 1, 
   'Title': 'user2' 
 } );
@@ -2035,11 +2035,11 @@ object constructor name to get what flavour of object it actually is:
 
 Strings in JavaScript can be enclosed in Single quotes &apos;hello&apos;,
 Double quotes &quot;Hello&quot; and (from ES2015, ES6) in Template Literals
-(*backticks*) \`hello\`.
+(*backticks*) &grave;hello&grave;.
 
 **var** hello = &quot;Hello&quot;;
 **var** world = &apos;world&apos;;
-**var** helloW = \`Hello World\`;
+**var** helloW = &grave;Hello World&grave;;
 
 *// ES2015 / ES6*
 String
@@ -2309,7 +2309,7 @@ boolean
 Version ≥ 6
 
 Strings can be created using template literals (*backticks*)
-\`hello\`.
+&grave;hello&grave;.
 
 **var**
 
@@ -2317,7 +2317,7 @@ greeting
 
 =
 
-\`Hello\`
+&grave;Hello&grave;
 
 ;
 
@@ -2336,7 +2336,7 @@ place
 
 =
 
-\`World\`
+&grave;World&grave;
 
 ;
 
@@ -2346,7 +2346,7 @@ greet
 
 =
 
-\`Hello &dollar;
+&grave;Hello &dollar;
 
 {
 
@@ -2356,7 +2356,7 @@ place
 
 !
 
-\`
+&grave;
 
 console.
 
@@ -2375,9 +2375,9 @@ greet
 You can use String.raw to get backslashes to be in the string without
 modification.
 
-\`a\\\\b\`
+&grave;a&bsol;&bsol;&bsol;&bsol;b&grave;
 
-*// = a\\b*
+*// = a&bsol;&bsol;b*
 
 String
 
@@ -2385,9 +2385,9 @@ String
 
 raw
 
-\`a\\\\b\`
+&grave;a&bsol;&bsol;&bsol;&bsol;b&grave;
 
-*// = a\\\\b*
+*// = a&bsol;&bsol;&bsol;&bsol;b*
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-2">Section 7.2: Reverse String</h3>
@@ -2759,7 +2759,7 @@ i
 
 i
 
-\
+&bsol;
 
 )
 
@@ -2866,7 +2866,7 @@ b
 
   
 
-The \and &lt; operators can also be used to compare strings
+The &bsol;and &lt; operators can also be used to compare strings
 lexicographically, but they cannot return a value of zero (this can be
 tested with the == equality operator). As a result, a form of the ()
 function can be written like so:
@@ -3222,7 +3222,7 @@ be used to set a character at a position in the string.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 If your string is enclosed (i.e.) in single quotes you need to escape
-the inner literal quote with *backslash* \\
+the inner literal quote with *backslash* &bsol;&bsol;
 
 **var**
 
@@ -3250,7 +3250,7 @@ text
 
 ;
 
-\\\\
+&bsol;&bsol;&bsol;&bsol;
 
 &quot;L&apos;albero means tree in Italian&quot;
 
@@ -3328,7 +3328,7 @@ Version ≥ 6
 
 If a string has &apos; and &quot; you may want to consider using template
 literals (*also known as template strings in previous ES6 editions*),
-which do not require you to escape &apos; and &quot;. These use backticks (\`)
+which do not require you to escape &apos; and &quot;. These use backticks (&grave;)
 instead of single or double quotes.
 
 **var**
@@ -3337,13 +3337,13 @@ x
 
 =
 
-\`
+&grave;
 
 &quot;Escaping &quot;
 
 and
 
-&apos; can become very annoying\`;
+&apos; can become very annoying&grave;;
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-6">Section 7.6: Word Counter</h3>
@@ -3390,7 +3390,7 @@ match
 
 (
 
-*/\\S+/g*
+*/&bsol;&bsol;S+/g*
 
 )
 
@@ -3410,7 +3410,7 @@ replace
 
 (
 
-*/\\s+/g*
+*/&bsol;&bsol;s+/g*
 
 ,
 
@@ -3462,7 +3462,7 @@ split
 
 (
 
-*/\\r&ast;\\n/*
+*/&bsol;&bsol;r&ast;&bsol;&bsol;n/*
 
 )
 
@@ -3644,7 +3644,7 @@ join
 
 ;
 
-*// &quot;one\two\three\four\five&quot;*
+*// &quot;one&bsol;two&bsol;three&bsol;four&bsol;five&quot;*
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-9">Section 7.9: Strings are unicode</h3>
@@ -5167,7 +5167,7 @@ milliseconds) and date.
 
   -
 
-\(m\) creates a Date instance containing the time and date
+&lpar;m&rpar; creates a Date instance containing the time and date
 corresponding to the Epoch time (1 January, 1970 UTC) plus m
 milliseconds. Example: ) gives the date *Sun, 26 Sep 1993 04:56:09
 GMT*.
@@ -5318,7 +5318,7 @@ toString
 
 ===
 
-&apos;Mon Jan 01 1912 00:00:00 GMT-0600 (Central Standard Time)\`
+&apos;Mon Jan 01 1912 00:00:00 GMT-0600 (Central Standard Time)&grave;
 
 // true
 
@@ -5350,7 +5350,7 @@ toString
 
 ===
 
-&apos;Sun Jan 01 12 00:00:00 GMT-0600 (Central Standard Time)\`
+&apos;Sun Jan 01 12 00:00:00 GMT-0600 (Central Standard Time)&grave;
 
 // true
 
@@ -5452,89 +5452,25 @@ Returns: &quot;Thu Apr 14 2016&quot;
 
 **var**
 
-date1
+date1 = **new** Date ( );
 
-=
-
-**new**
-
-Date
-
-(
-
-)
-
-;
-
-date1.
-
-toUTCString
-
-(
-
-)
-
-;
+date1.toUTCString ( );
 
 Returns: &quot;Fri, 15 Apr 2016 11:48:48 GMT&quot;
 
 **Convert to ISO String**
 
-**var**
+**var** date1 = **new** Date ( ) ;
 
-date1
-
-=
-
-**new**
-
-Date
-
-(
-
-)
-
-;
-
-date1.
-
-toISOString
-
-(
-
-)
-
-;
+date1.toISOString ( ) ;
 
 Returns: &quot;2016-04-14T23:49:08.596Z&quot;
 
 **Convert to GMT String**
 
-**var**
+**var** date1 = **new** Date ( ) ;
 
-date1
-
-=
-
-**new**
-
-Date
-
-(
-
-)
-
-;
-
-date1.
-
-toGMTString
-
-(
-
-)
-
-;
+date1.toGMTString ( ) ;
 
 Returns: &quot;Thu, 14 Apr 2016 23:49:08 GMT&quot;
 
@@ -5544,81 +5480,21 @@ instead.
 
 **Convert to Locale Date String**
 
-**var**
+**var** date1 = **new** Date ( ) ;
 
-date1
-
-=
-
-**new**
-
-Date
-
-(
-
-)
-
-;
-
-date1.
-
-toLocaleDateString
-
-(
-
-)
-
-;
+date1.toLocaleDateString ( ) ;
 
 Returns: &quot;4/14/2016&quot;
 
 This function returns a locale sensitive date string based upon the
 user&apos;s location by default.
 
-date1.
-
-toLocaleDateString
-
-(
-
-&lbrack;
-
-locales
-
-&lbrack;
-
-,
-
-options
-
-&rbrack;
-
-&rbrack;
-
-)
+date1.toLocaleDateString(&lbrack;locales&lbrack;, options &rbrack;&rbrack;)
 
 can be used to provide specific locales but is browser implementation
 specific. For example,
 
-date1.
-
-toLocaleDateString
-
-(
-
-&lbrack;
-
-&quot;zh&quot;
-
-,
-
-&quot;en-US&quot;
-
-&rbrack;
-
-)
-
-;
+date1.toLocaleDateString(&lbrack; &quot;zh&quot; , &quot;en-US&quot; &rbrack; );
 
 would attempt to print the string in the Chinese locale using United
 States English as a fallback. The options parameter can be used to
@@ -6636,57 +6512,11 @@ date.
 
 setUTCFullYear
 
-(
+(2000, 0, 31);
 
-2000
+date.setUTCHours ( 12 , 0 , 0 , 0);
 
-,
-
-0
-
-,
-
-31
-
-)
-
-;
-
-date.
-
-setUTCHours
-
-(
-
-12
-
-,
-
-0
-
-,
-
-0
-
-,
-
-0
-
-)
-
-;
-
-console.
-
-log
-
-(
-
-date
-
-)
-
-;
+console.log ( date ) ;
 
 Sample output:
 
@@ -6786,41 +6616,9 @@ Date
 
 UTC
 
-(
+( 2000, 0, 31, 12);
 
-2000
-
-,
-
-0
-
-,
-
-31
-
-,
-
-12
-
-)
-
-;
-
-console.
-
-log
-
-(
-
-timestamp
-
-===
-
-timestamp2
-
-)
-
-;
+console.log ( timestamp === timestamp2 );
 
 Sample output:
 
@@ -6832,108 +6630,36 @@ Sample output:
 
 otherDate
 
-=
-
-**new**
-
-Date
-
-(
-
-timestamp
-
-)
-
-;
-
+= **new** Date ( timestamp ) ; 
 *//Represented as a universal date*
-
-console.
-
-log
-
-(
-
-otherDate.
-
-toUTCString
-
-(
-
-)
-
-)
-
-;
-
+console.log ( otherDate. toUTCString ( ) );
 *//Represented as a local date*
-
-console.
-
-log
-
-(
-
-otherDate
-
-)
-
-;
-
+console.log ( otherDate ); 
 Sample output:
-
 Mon, 31 Jan 2000 12:00:00 GMT
-
 Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
-
 /code&gt;
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-4">Section 8.4: Formatting a JavaScript date</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 **Formatting a JavaScript date in modern browsers**
-
-  
   [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [**prototype**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [toLocaleDateString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
-   -  - -
-
-  
 
 In modern browsers (&ast;),
 [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
 allows you to define the formatting of a Date in a convenient manner.
->
+
 It requires the following format :
 
-dateObj.
-
-toLocaleDateString
-
-(
-
-&lbrack;
-
-locales
-
-&lbrack;
-
-,
-
-options
-
-&rbrack;
-
-&rbrack;
-
-)
+dateObj.toLocaleDateString(&lbrack; locales&lbrack;, options &rbrack; &rbrack; )
 
 The locales parameter should be a string with a BCP 47 language tag,
 or an array of such strings.
->
+
 The options parameter should be an object with some or all of the
 following properties:
->
+
 **localeMatcher** : possible values are &quot;lookup&quot; and &quot;best fit&quot;;
 the default is &quot;best fit&quot; **timeZone** : the only value
 implementations must recognize is &quot;UTC&quot;; the default is the
@@ -6960,3 +6686,5293 @@ today
 
 **new**
 
+<!-- the end thru 8/23/24 -->
+Date().toLocaleDateString(&apos;en-GB&apos;,{day:&apos;numeric&apos;,month:&apos;short&apos;,year:&apos;numeric&apos;});
+
+Output if executed on January 24 ʰ, 2036 :
+
+&apos;24 Jan 2036&apos;
+
+**Going custom**
+  
+  Date     .   **prototype**       .   toLocaleDateString
+
+If () isn&apos;t flexible enough to fulfill whatever need you may have,
+you might want to consider creating a custom Date object that looks
+like this:
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image025.png"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:7.48in;" />
+<!-- ![](./images/image025.png){width="7.486805555555556in" height="4.675694444444445in"} -->
+
+}
+
+}
+
+;
+
+**return**
+
+date
+
+;
+
+}
+
+)
+
+(
+
+)
+
+;
+
+  
+  **new** DateObject
+  
+
+  
+
+If you included that code and executed () on January 20 ʰ, 2019, it
+would produce an object with the following properties:
+
+day
+
+:
+
+20
+
+dayPadded
+
+:
+
+&quot;20&quot;
+
+month
+
+:
+
+1
+
+monthPadded
+
+:
+
+&quot;01&quot;
+
+monthName
+
+:
+
+&quot;January&quot;
+
+year
+
+:
+
+2019
+
+To get a formatted string, you could do something like this:
+
+**new**
+
+DateObject
+
+(
+
+)
+
+.
+
+**get**
+
+(
+
+&lbrack;
+
+&apos;dayPadded&apos;
+
+,
+
+&apos;monthPadded&apos;
+
+,
+
+&apos;year&apos;
+
+&rbrack;
+
+)
+
+;
+
+That would produce the following output:
+
+20-01-2016
+
+(&ast;) [**According to the
+MDN**](http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean),
+&quot;modern browsers&quot; means Chrome 24+, Firefox 29+, IE11, Edge12+,
+Opera 15+ & Safari [**nightly
+build**](http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean)
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch8-5">Section 8.5: Get the number of milliseconds elapsed since 1 January 1970 00:00:00 UTC</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+  
+  Date                                .        now
+    
+
+  
+
+The static method returns the number of milliseconds that have elapsed
+since 1 January 1970 00:00:00 UTC. To get the number of milliseconds
+that have elapsed since that time using an instance of a Date object,
+use its getTime method.
+
+*// get milliseconds using static method now of Date*
+
+console.
+
+log
+
+(
+
+Date
+
+.
+
+now
+
+(
+
+)
+
+)
+
+;
+
+*// get milliseconds using method getTime of Date instance*
+
+console.
+
+log
+
+(
+
+(
+
+**new**
+
+Date
+
+(
+
+)
+
+)
+
+.
+
+getTime
+
+(
+
+)
+
+)
+
+;
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch8-6">Section 8.6: Get the current time and date</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+  
+  **new** Date
+  
+
+  
+
+Use () to generate a new Date object containing the current date and
+time.
+
+  
+  Date   () *called without arguments is equivalent    **new**   (   Date   .   now
+         to*                                           Date                     
+   -     -
+
+  
+
+*Note that* ())*.*
+
+Once you have a date object, you can apply any of the several
+available methods to extract its properties (e.g.
+
+  
+  getFullYear
+  
+
+  
+
+() to get the 4-digits year).
+>
+Below are some common date methods.
+>
+**Get the current year**
+
+**var**
+
+year
+
+=
+
+(
+
+**new**
+
+Date
+
+(
+
+)
+
+)
+
+.
+
+getFullYear
+
+(
+
+)
+
+;
+
+console.
+
+log
+
+(
+
+year
+
+)
+
+;
+
+*// Sample output: 2016*
+
+**Get the current month**
+
+**var**
+
+month
+
+=
+
+(
+
+**new**
+
+Date
+
+(
+
+)
+
+)
+
+.
+
+getMonth
+
+(
+
+)
+
+;
+
+console.
+
+log
+
+(
+
+month
+
+)
+
+;
+
+*// Sample output: 0*
+
+Please note that 0 = January. This is because months range from *0* to
+*11*, so it is often desirable to add +1 to the index.
+>
+**Get the current day**
+
+*// Sample output: 31*
+
+**var**
+
+day
+
+=
+
+(
+
+**new**
+
+Date
+
+(
+
+)
+
+)
+
+.
+
+getDate
+
+(
+
+)
+
+;
+
+console.
+
+log
+
+(
+
+day
+
+)
+
+;
+
+**Get the current hour**
+
+*// Sample output: 10*
+
+**var**
+
+hours
+
+=
+
+(
+
+**new**
+
+Date
+
+(
+
+)
+
+)
+
+.
+
+getHours
+
+(
+
+)
+
+;
+
+console.
+
+log
+
+(
+
+hours
+
+)
+
+;
+
+**Get the current minutes**
+
+**var**
+
+minutes
+
+=
+
+(
+
+**new**
+
+Date
+
+(
+
+)
+
+)
+
+.
+
+getMinutes
+
+(
+
+)
+
+;
+
+console.
+
+log
+
+(
+
+minutes
+
+)
+
+;
+
+*// Sample output: 39*
+
+**Get the current seconds**
+
+**var**
+
+seconds
+
+=
+
+(
+
+**new**
+
+Date
+
+(
+
+)
+
+)
+
+.
+
+getSeconds
+
+(
+
+)
+
+;
+
+console.
+
+log
+
+(
+
+second
+
+)
+
+;
+
+*// Sample output: 48*
+
+**Get the current milliseconds**
+
+To get the milliseconds (ranging from 0 to 999) of an instance of a
+Date object, use its getMilliseconds method.
+
+*// Output: milliseconds right now*
+
+**var**
+
+milliseconds
+
+=
+
+(
+
+**new**
+
+Date
+
+(
+
+)
+
+)
+
+.
+
+getMilliseconds
+
+(
+
+)
+
+;
+
+console.
+
+log
+
+(
+
+milliseconds
+
+)
+
+;
+
+**Convert the current time and date to a human-readable string**
+
+**var**
+
+now
+
+=
+
+**new**
+
+Date
+
+(
+
+)
+
+;
+
+*// convert date to a string in UTC timezone format:*
+
+console.
+
+log
+
+(
+
+now.
+
+toUTCString
+
+(
+
+)
+
+)
+
+;
+
+*// Output: Wed, 21 Jun 2017 09:13:01 GMT*
+
+  
+  Date                                .        now
+    
+
+  
+
+The static method () returns the number of milliseconds that have
+elapsed since 1 January 1970 00:00:00 UTC. To get the number of
+milliseconds that have elapsed since that time using an instance of a
+Date object, use its getTime method.
+
+*// get milliseconds using static method now of Date*
+
+console.
+
+log
+
+(
+
+Date
+
+.
+
+now
+
+(
+
+)
+
+)
+
+;
+
+*// get milliseconds using method getTime of Date instance*
+
+console.
+
+log
+
+(
+
+(
+
+**new**
+
+Date
+
+(
+
+)
+
+)
+
+.
+
+getTime
+
+(
+
+)
+
+)
+
+;
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch8-7">Section 8.7: Increment a Date Object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+To increment date objects in JavaScript, we can usually do this:
+
+**var**
+
+checkoutDate
+
+=
+
+**new**
+
+Date
+
+(
+
+)
+
+;
+
+*// Thu Jul 21 2016 10:05:13 GMT-0400 (EDT)*
+
+checkoutDate.
+
+setDate
+
+(
+
+checkoutDate.
+
+getDate
+
+(
+
+)
+
+&plus;
+
+1
+
+)
+
+;
+
+console.log(checkoutDate); *// Fri Jul 22 2016 10:05:13 GMT-0400
+(EDT)*
+>
+It is possible to use setDate to change the date to a day in the
+following month by using a value larger than the number of days in the
+current month -
+>
+**var** checkoutDate = **new** Date(); *// Thu Jul 21 2016 10:05:13
+GMT-0400 (EDT)* checkoutDate.setDate( checkoutDate.getDate() + 12 );
+>
+console.log(checkoutDate); *// Tue Aug 02 2016 10:05:13 GMT-0400
+(EDT)*
+>
+The same applies to other methods such as getHours(), getMonth(),etc.
+>
+**Adding Work Days**
+>
+If you wish to add work days (in this case I am assuming Monday -
+Friday) you can use the setDate function although you need a little
+extra logic to account for the weekends (obviously this will not take
+account of national holidays) -
+
+**function**
+
+addWorkDays
+
+(
+
+startDate
+
+,
+
+days
+
+)
+
+{
+
+*// Get the day of the week as a number (0 = Sunday, 1 = Monday, &hellip;. 6
+= Saturday)*
+
+**var**
+
+dow
+
+=
+
+startDate.
+
+getDay
+
+(
+
+)
+
+;
+
+**var**
+
+daysToAdd
+
+=
+
+days
+
+;
+
+*// If the current day is Sunday add one day*
+
+**if**
+
+(
+
+dow
+
+==
+
+0
+
+)
+
+daysToAdd
+
+++
+
+;
+
+*// If the start date plus the additional days falls on or after the
+closest Saturday calculate*
+
+*weekends*
+
+**if**
+
+(
+
+dow
+
+&plus;
+
+daysToAdd
+
+&gt;=
+
+6
+
+)
+
+{
+
+*//Subtract days in current working week from work days*
+
+**var**
+
+remainingWorkDays
+
+=
+
+daysToAdd
+
+&minus;
+
+(
+
+5
+
+&minus;
+
+dow
+
+)
+
+;
+
+*//Add current working week&apos;s weekend*
+
+daysToAdd
+
++=
+
+2
+
+;
+
+**if**
+
+(
+
+remainingWorkDays
+
+&gt;
+
+5
+
+)
+
+{
+
+*//Add two days for each working week by calculating how many weeks are
+included*
+
+daysToAdd
+
++=
+
+2
+
+&ast;
+
+Math
+
+.
+
+floor
+
+(
+
+remainingWorkDays
+
+/
+
+5
+
+)
+
+;
+
+*//Exclude final weekend if remainingWorkDays resolves to an exact
+number of weeks*
+
+**if**
+
+(
+
+remainingWorkDays
+
+&percnt;
+
+5
+
+==
+
+0
+
+)
+
+daysToAdd
+
+-=
+
+2
+
+;
+
+}
+
+}
+
+startDate.
+
+setDate
+
+(
+
+startDate.
+
+getDate
+
+(
+
+)
+
+&plus;
+
+daysToAdd
+
+)
+
+;
+
+**return**
+
+startDate
+
+;
+
+}
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch8-8">Section 8.8: Convert to JSON</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+**var**
+
+date1
+
+=
+
+**new**
+
+Date
+
+(
+
+)
+
+;
+
+date1.
+
+toJSON
+
+(
+
+)
+
+;
+
+Returns: &quot;2016-04-14T23:49:08.596Z&quot;
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch9">Chapter 9: Date Comparison</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch9-1">Section 9.1: Comparing Date values</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+To check the equality of
+
+Date
+
+values:
+
+**var**
+
+date1
+
+=
+
+**new**
+
+Date
+
+(
+
+)
+
+;
+
+**var**
+
+date2
+
+=
+
+**new**
+
+Date
+
+(
+
+date1.
+
+valueOf
+
+(
+
+)
+
+&plus;
+
+10
+
+)
+
+;
+
+console.
+
+log
+
+(
+
+date1.
+
+valueOf
+
+(
+
+)
+
+===
+
+date2.
+
+valueOf
+
+(
+
+)
+
+)
+
+;
+
+Sample output:
+
+**false**
+
+  -
+  valueOf                    () or              getTime
+   - 
+
+  -
+
+Note that you must use () to compare the values of Date objects
+because the equality operator will compare if two object references
+are the same. For example:
+
+**var**
+
+date1
+
+=
+
+**new**
+
+Date
+
+(
+
+)
+
+;
+
+**var**
+
+date2
+
+=
+
+**new**
+
+Date
+
+(
+
+)
+
+;
+
+console.
+
+log
+
+(
+
+date1
+
+===
+
+date2
+
+)
+
+;
+
+Sample output:
+
+**false**
+
+Whereas if the variables point to the same object:
+
+**var**
+
+date1
+
+=
+
+**new**
+
+Date
+
+(
+
+)
+
+;
+
+**var**
+
+date2
+
+=
+
+date1
+
+;
+
+console.
+
+log
+
+(
+
+date1
+
+===
+
+date2
+
+)
+
+;
+
+Sample output:
+
+**true**
+
+However, the other comparison operators will work as usual and you can
+use &lt; and &bsol;to compare that one date is earlier or later than the
+other. For example:
+
+**var**
+
+date1
+
+=
+
+**new**
+
+Date
+
+(
+
+)
+
+;
+
+**var**
+
+date2
+
+=
+
+**new**
+
+Date
+
+(
+
+date1.
+
+valueOf
+
+(
+
+)
+
+&plus;
+
+10
+
+)
+
+;
+
+console.
+
+log
+
+(
+
+date1
+
+&lt;
+
+date2
+
+)
+
+;
+
+Sample output:
+
+**true**
+
+It works even if the operator includes equality:
+
+**var**
+
+date1
+
+=
+
+**new**
+
+Date
+
+(
+
+)
+
+;
+
+**var**
+
+date2
+
+=
+
+**new**
+
+Date
+
+(
+
+date1.
+
+valueOf
+
+(
+
+)
+
+)
+
+;
+
+console.
+
+log
+
+(
+
+date1
+
+&lt;=
+
+date2
+
+)
+
+;
+
+Sample output:
+
+**true**
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch9-2">Section 9.2: Date Difference Calculation</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+To compare the difference of two dates, we can do the comparison based
+on the timestamp.
+
+**var**
+
+date1
+
+=
+
+**new**
+
+Date
+
+(
+
+)
+
+;
+
+**var**
+
+date2
+
+=
+
+**new**
+
+Date
+
+(
+
+date1.
+
+valueOf
+
+(
+
+)
+
+&plus;
+
+5000
+
+)
+
+;
+
+**var**
+
+dateDiff
+
+=
+
+date1.
+
+valueOf
+
+(
+
+)
+
+&minus;
+
+date2.
+
+valueOf
+
+(
+
+)
+
+;
+
+**var**
+
+dateDiffInYears
+
+=
+
+dateDiff
+
+/
+
+1000
+
+/
+
+60
+
+/
+
+60
+
+/
+
+24
+
+/
+
+365
+
+;
+
+*//convert milliseconds into years*
+
+console.
+
+log
+
+(
+
+&quot;Date difference in years : &quot;
+
+&plus;
+
+dateDiffInYears
+
+)
+
+;
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch10">Chapter 10: Comparison Operations</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-1">Section 10.1: Abstract equality / inequality and type conversion</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+**The Problem**
+
+The abstract equality and inequality operators (== and !=) convert
+their operands if the operand types do not match. This type coercion
+is a common source of confusion about the results of these operators,
+in particular, these operators aren&apos;t always transitive as one would
+expect.
+
+&quot;&quot;
+
+==
+
+0
+
+;
+
+*// true A*
+
+0
+
+==
+
+&quot;0&quot;
+
+;
+
+*// true A*
+
+&quot;&quot;
+
+==
+
+&quot;0&quot;
+
+;
+
+*// false B*
+
+**false**
+
+==
+
+0
+
+;
+
+*// true*
+
+**false**
+
+==
+
+&quot;0&quot;
+
+;
+
+*// true*
+
+&quot;&quot;
+
+!=
+
+0
+
+;
+
+*// false A*
+
+0
+
+!=
+
+&quot;0&quot;
+
+;
+
+*// false A*
+
+&quot;&quot;
+
+!=
+
+&quot;0&quot;
+
+;
+
+*// true B*
+
+**false**
+
+!=
+
+0
+
+;
+
+*// false*
+
+**false**
+
+!=
+
+&quot;0&quot;
+
+;
+
+*// false*
+
+The results start to make sense if you consider how JavaScript
+converts empty strings to numbers.
+
+Number
+
+(
+
+&quot;&quot;
+
+)
+
+;
+
+*// 0*
+
+Number
+
+(
+
+&quot;0&quot;
+
+)
+
+;
+
+*// 0*
+
+Number
+
+(
+
+**false**
+
+)
+
+;
+
+*// 0*
+
+**The Solution**
+
+  
+  **false** B
+  
+
+  
+
+  
+  &quot;&quot; == &quot;0&quot;
+  
+
+  
+
+In the statement , both the operands are strings (&quot;&quot; and &quot;0&quot;),
+hence there will be **no type conversion** and since &quot;&quot; and &quot;0&quot;
+are not the same value, is **false** as expected.
+>
+One way to eliminate unexpected behavior here is making sure that you
+always compare operands of the same type. For example, if you want the
+results of numerical comparison use explicit conversion:
+
+**var**
+
+test
+
+=
+
+(
+
+a
+
+,
+
+b
+
+)
+
+=&gt;
+
+Number
+
+(
+
+a
+
+)
+
+==
+
+Number
+
+(
+
+b
+
+)
+
+;
+
+test
+
+(
+
+&quot;&quot;
+
+,
+
+0
+
+)
+
+;
+
+*// true;*
+
+test
+
+(
+
+&quot;0&quot;
+
+,
+
+0
+
+)
+
+;
+
+*// true*
+
+test
+
+(
+
+&quot;&quot;
+
+,
+
+&quot;0&quot;
+
+)
+
+;
+
+*// true;*
+
+test
+
+(
+
+&quot;abc&quot;
+
+,
+
+&quot;abc&quot;
+
+)
+
+;
+
+*// false as operands are not numbers*
+
+Or, if you want string comparison:
+
+**var**
+
+test
+
+=
+
+(
+
+a
+
+,
+
+b
+
+)
+
+=&gt;
+
+String
+
+(
+
+a
+
+)
+
+==
+
+String
+
+(
+
+b
+
+)
+
+;
+
+test
+
+(
+
+&quot;&quot;
+
+,
+
+0
+
+)
+
+;
+
+*// false;*
+
+test
+
+(
+
+&quot;0&quot;
+
+,
+
+0
+
+)
+
+;
+
+*// true*
+
+test
+
+(
+
+&quot;&quot;
+
+,
+
+&quot;0&quot;
+
+)
+
+;
+
+*// false;*
+
+  -
+  Number         (   &quot;0&quot;   ) and        **new** Number           (   &quot;0&quot;
+    -  -  -
+
+  -
+
+*Side-note*: ) isn&apos;t the same thing! While the former performs a type
+conversion,
+>
+the latter will create a new object. Objects are compared by reference
+and not by value which explains the results below.
+
+Number
+
+(
+
+&quot;0&quot;
+
+)
+
+==
+
+Number
+
+(
+
+&quot;0&quot;
+
+)
+
+;
+
+*// true;*
+
+**new**
+
+Number
+
+(
+
+&quot;0&quot;
+
+)
+
+==
+
+**new**
+
+Number
+
+(
+
+&quot;0&quot;
+
+)
+
+;
+
+*// false*
+
+Finally, you have the option to use strict equality and inequality
+operators which will not perform any implicit type conversions.
+
+&quot;&quot;
+
+===
+
+0
+
+;
+
+*// false*
+
+0
+
+===
+
+&quot;0&quot;
+
+;
+
+*// false*
+
+&quot;&quot;
+
+===
+
+&quot;0&quot;
+
+;
+
+*// false*
+
+Further reference to this topic can be found here:
+>
+[Which equals operator (== vs ===) should be used in JavaScript
+comparisons?](http://stackoverflow.com/questions/359494/does-it-matter-which-equals-operator-vs-i-use-in-javascript-comparisons).
+
+Abstract Equality (==)
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-2">Section 10.2: NaN Property of the Global Object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+  
+  &quot;two&quot;
+  
+
+  
+
+  
+  Math                            .       sqrt
+   - 
+
+  
+
+**NaN** (&quot;**N**ot **a** **N**umber&quot;) is a special value defined by
+the [*IEEE Standard for Floating-Point
+Arithmetic*](https://en.wikipedia.org/wiki/IEEE_floating_point), which
+is used when a non-numeric value is provided but a number is expected
+(1 &ast;), or when a calculation doesn&apos;t have a valid number result
+((-1)).
+>
+Any equality or relational comparisons with **NaN** returns **false**,
+even comparing it with itself. Because, **NaN** is supposed to denote
+the result of a nonsensical computation, and as such, it isn't equal
+to the result of any other nonsensical computations.
+
+(
+
+1
+
+&ast;
+
+&quot;two&quot;
+
+)
+
+===
+
+**NaN**
+
+*//false*
+
+**NaN**
+
+===
+
+0
+
+;
+
+*// false*
+
+**NaN**
+
+===
+
+**NaN**
+
+;
+
+*// false*
+
+Number
+
+.
+
+**NaN**
+
+===
+
+**NaN**
+
+;
+
+*// false*
+
+**NaN**
+
+&lt;
+
+0
+
+;
+
+*// false*
+
+**NaN**
+
+&gt;
+
+0
+
+;
+
+*// false*
+
+**NaN**
+
+&gt;
+
+0
+
+;
+
+*// false*
+
+**NaN**
+
+&gt;=
+
+**NaN**
+
+;
+
+*// false*
+
+**NaN**
+
+&gt;=
+
+&apos;two&apos;
+
+;
+
+*// false*
+
+Non-equal comparisons will always return
+
+**true**
+
+:
+
+**NaN** !== 0; *// true*
+>
+**NaN** !== **NaN**; *// true*
+>
+**Checking if a value is NaN** Version ≥ 6
+>
+You can test a value or expression for **NaN** by using the function
+Number.isNaN():
+
+Number
+
+.
+
+isNaN
+
+(
+
+**NaN**
+
+)
+
+;
+
+*// true*
+
+Number
+
+.
+
+isNaN
+
+(
+
+0
+
+/
+
+0
+
+)
+
+;
+
+*// true*
+
+Number
+
+.
+
+isNaN
+
+(
+
+&apos;str&apos;
+
+&minus;
+
+12
+
+)
+
+;
+
+*// true*
+
+Number
+
+.
+
+isNaN
+
+(
+
+24
+
+)
+
+;
+
+*// false*
+
+Number
+
+.
+
+isNaN
+
+(
+
+&apos;24&apos;
+
+)
+
+;
+
+*// false*
+
+Number
+
+.
+
+isNaN
+
+(
+
+1
+
+/
+
+0
+
+)
+
+;
+
+*// false*
+
+Number
+
+.
+
+isNaN
+
+(
+
+**Infinity**
+
+)
+
+;
+
+*// false*
+
+Number
+
+.
+
+isNaN
+
+(
+
+&apos;str&apos;
+
+)
+
+;
+
+*// false*
+
+Number
+
+.
+
+isNaN
+
+(
+
+**undefined**
+
+)
+
+;
+
+*// false*
+
+Number
+
+.
+
+isNaN
+
+(
+
+{
+
+}
+
+)
+
+;
+
+*// false*
+
+Version &lt; 6
+
+You can check if a value is **NaN** by comparing it with itself:
+
+value
+
+!==
+
+value
+
+;
+
+*// true for NaN, false for any other value*
+
+  
+  Number                              .     isNaN
+   - 
+
+  
+
+You can use the following polyfill for ():
+
+Number
+
+.
+
+isNaN
+
+=
+
+Number
+
+.
+
+isNaN
+
+&vert;&vert;
+
+**function**
+
+(
+
+value
+
+)
+
+{
+
+**return**
+
+value
+
+!==
+
+value
+
+;
+
+}
+
+  
+  isNaN
+  
+
+  
+
+By contrast, the global function () returns **true** not only for
+**NaN**, but also for any value or expression that cannot be coerced
+into a number:
+
+isNaN
+
+(
+
+**NaN**
+
+)
+
+;
+
+*// true*
+
+isNaN
+
+(
+
+0
+
+/
+
+0
+
+)
+
+;
+
+*// true*
+
+isNaN
+
+(
+
+&apos;str&apos;
+
+&minus;
+
+12
+
+)
+
+;
+
+*// true*
+
+isNaN
+
+(
+
+24
+
+)
+
+;
+
+*// false*
+
+isNaN
+
+(
+
+&apos;24&apos;
+
+)
+
+;
+
+*// false*
+
+isNaN
+
+(
+
+**Infinity**
+
+)
+
+;
+
+*// false*
+
+isNaN
+
+(
+
+&apos;str&apos;
+
+)
+
+;
+
+*// true*
+
+isNaN
+
+(
+
+**undefined**
+
+)
+
+;
+
+*// true*
+
+isNaN
+
+(
+
+{
+
+}
+
+)
+
+;
+
+*// true*
+
+ECMAScript defines a "sameness" algorithm called SameValue which,
+since ECMAScript 6, can be invoked with
+
+  
+  Object   .   is   . Unlike the == and === comparison, using       Object   .   is
+        
+
+  
+
+() will treat **NaN** as identical with itself (and -0 as not
+
+**NaN** === **NaN** *// false*
+
+identical with
+
++0
+
+):
+
+Object
+
+.
+
+is
+
+(
+
+**NaN**
+
+,
+
+**NaN**
+
+)
+
+*// true*
+
+Object
+
+.
+
+is
+
+(
+
+&plus;
+
+0
+
+,
+
+0
+
+)
+
+*// false*
+
+&plus;
+
+0
+
+===
+
+0
+
+*// true*
+
+Version &lt; 6
+
+  
+  Object                                          .       is
+   - 
+
+  
+
+You can use the following polyfill for () (from
+[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Polyfill_for_non-ES6_browsers)):
+
+**if**
+
+(
+
+!
+
+Object
+
+.
+
+is
+
+)
+
+{
+
+Object
+
+.
+
+is
+
+=
+
+**function**
+
+(
+
+x
+
+,
+
+y
+
+)
+
+{
+
+*// SameValue algorithm*
+
+**if**
+
+(
+
+x
+
+===
+
+y
+
+)
+
+{
+
+*// Steps 1-5, 7-10*
+
+*// Steps 6.b-6.e: +0 != -0*
+
+**return**
+
+x
+
+!==
+
+0
+
+&vert;&vert;
+
+1
+
+/
+
+x
+
+===
+
+1
+
+/
+
+y
+
+;
+
+}
+
+**else**
+
+{
+
+*// Step 6.a: NaN == NaN*
+
+**return**
+
+x
+
+!==
+
+x
+
+&&
+
+y
+
+!==
+
+y
+
+;
+
+}
+
+}
+
+;
+
+}
+
+**Points to note**
+>
+NaN itself is a number, meaning that it does not equal to the string
+&quot;NaN&quot;, and most importantly (though perhaps unintuitively):
+
+**typeof**
+
+(
+
+**NaN**
+
+)
+
+===
+
+&quot;number&quot;
+
+;
+
+*//true*
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-3">Section 10.3: Short-circuiting in boolean operators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+The and-operator (&&) and the or-operator (&vert;&vert;) employ
+short-circuiting to prevent unnecessary work if the outcome of the
+operation does not change with the extra work.
+
+  
+  x && y
+  
+
+  
+
+In , y will not be evaluated if x evaluates to **false**, because the
+whole expression is guaranteed to be **false**.
+
+  
+  x &vert;&vert; y
+  
+
+  
+
+In , y will not be evaluated if x evaluated to **true**, because the
+whole expression is guaranteed to be **true**. **Example with
+functions**
+>
+Take the following two functions:
+
+**function**
+
+T
+
+(
+
+)
+
+{
+
+*// True*
+
+console.
+
+log
+
+(
+
+&quot;T&quot;
+
+)
+
+;
+
+**return**
+
+**true**
+
+;
+
+}
+
+**function**
+
+F
+
+(
+
+)
+
+{
+
+*// False*
+
+console.
+
+log
+
+(
+
+&quot;F&quot;
+
+)
+
+;
+
+**return**
+
+**false**
+
+;
+
+}
+
+***Example 1***
+
+T
+
+(
+
+)
+
+&&
+
+F
+
+(
+
+)
+
+;
+
+*// false*
+
+Output:
+>
+&apos;T&apos;
+>
+&apos;F&apos;
+
+***Example 2***
+
+F
+
+(
+
+)
+
+&&
+
+T
+
+(
+
+)
+
+;
+
+*// false*
+
+Output:
+
+&apos;F&apos;
+
+***Example 3***
+
+T
+
+(
+
+)
+
+&vert;&vert;
+
+F
+
+(
+
+)
+
+;
+
+*// true*
+
+Output:
+
+&apos;T&apos;
+
+***Example 4***
+
+F
+
+(
+
+)
+
+&vert;&vert;
+
+T
+
+(
+
+)
+
+;
+
+*// true*
+
+Output:
+>
+&apos;F&apos;
+>
+&apos;T&apos;
+>
+**Short-circuiting to prevent errors**
+>
+**var** obj; *// object has value of undefined* **if**(obj.property){
+}*// TypeError: Cannot read property &apos;property&apos; of undefined*
+**if**(obj.property && obj !== **undefined**){}*// Line A TypeError:
+Cannot read property &apos;property&apos; of undefined*
+>
+Line A: if you reverse the order the first conditional statement will
+prevent the error on the second by not executing it if it would throw
+the error
+
+**if**
+
+(
+
+obj
+
+!==
+
+**undefined**
+
+&&
+
+obj.
+
+property
+
+)
+
+{
+
+}
+
+;
+
+*// no error thrown*
+
+But should only be used if you expect **undefined**
+>
+**if**(**typeof** obj === &quot;object&quot; && obj.property){}; *// safe
+option but slower*
+>
+**Short-circuiting to provide a default value**
+>
+The &vert;&vert; operator can be used to select either a &quot;truthy&quot; value, or
+the default value.
+>
+For example, this can be used to ensure that a nullable value is
+converted to a non-nullable value:
+
+**var**
+
+nullableObj
+
+=
+
+**null**
+
+;
+
+**var**
+
+obj
+
+=
+
+nullableObj
+
+&vert;&vert;
+
+{
+
+}
+
+;
+
+*// this selects {}*
+
+**var**
+
+nullableObj2
+
+=
+
+{
+
+x
+
+:
+
+5
+
+}
+
+;
+
+**var**
+
+obj2
+
+=
+
+nullableObj2
+
+&vert;&vert;
+
+{
+
+}
+
+*// this selects {x: 5}*
+
+Or to return the first truthy value
+
+**var**
+
+truthyValue
+
+=
+
+{
+
+x
+
+:
+
+10
+
+}
+
+;
+
+**return**
+
+truthyValue
+
+&vert;&vert;
+
+{
+
+}
+
+;
+
+*// will return {x: 10}*
+
+The same can be used to fall back multiple times:
+>
+envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue *// select the
+first &quot;truthy&quot; of these*
+>
+**Short-circuiting to call an optional function**
+>
+The && operator can be used to evaluate a callback, only if it is
+passed:
+
+**function**
+
+myMethod
+
+(
+
+cb
+
+)
+
+{
+
+*// This can be simplified*
+
+**if**
+
+(
+
+cb
+
+)
+
+{
+
+cb
+
+(
+
+)
+
+;
+
+}
+
+*// To this*
+
+cb
+
+&&
+
+cb
+
+(
+
+)
+
+;
+
+}
+
+Of course, the test above does not validate that cb is in fact a
+**function** and not just an Object/Array/String/Number.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-4">Section 10.4: Null and Undefined</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+**The differences between null and undefined null** and **undefined**
+share abstract equality == but not strict equality ===,
+
+**null**
+
+==
+
+**undefined**
+
+*// true*
+
+**null**
+
+===
+
+**undefined**
+
+*// false*
+
+They represent slightly different things:
+>
+**undefined** represents the *absence of a value*, such as before an
+identifier/Object property has been created or in the period between
+identifier/Function parameter creation and it&apos;s first set, if any.
+>
+**null** represents the ***intentional** absence of a value* for an
+identifier or property which has already been created.
+>
+They are different types of syntax:
+>
+**undefined** is a *property of the global Object*, usually immutable
+in the global scope. This means anywhere you can define an identifier
+other than in the global namespace could hide **undefined** from that
+scope (although things can still **be** **undefined**) **null** is a
+*word literal*, so it&apos;s meaning can never be changed and attempting
+to do so will throw an *Error*. **The similarities between null and
+undefined null** and **undefined** are both falsy.
+
+**if**
+
+(
+
+**null**
+
+)
+
+console.
+
+log
+
+(
+
+&quot;won&apos;t be logged&quot;
+
+)
+
+;
+
+**if**
+
+(
+
+**undefined**
+
+)
+
+console.
+
+log
+
+(
+
+&quot;won&apos;t be logged&quot;
+
+)
+
+;
+
+Neither **null** or **undefined** equal **false** (see [this
+question](http://stackoverflow.com/q/19277458/220060)).
+
+**false**
+
+==
+
+**undefined**
+
+*// false*
+
+**false**
+
+==
+
+**null**
+
+*// false*
+
+**false**
+
+===
+
+**undefined**
+
+*// false*
+
+**false**
+
+===
+
+**null**
+
+*// false*
+
+**Using**
+
+**undefined**
+
+  
+  **void**
+  
+
+  
+
+  
+  foo.bar
+  
+
+  
+
+  
+  **typeof** foo
+  
+
+  
+
+If the current scope can&apos;t be trusted, use something which evaluates
+to *undefined*, for example 0;.
+>
+If **undefined** is shadowed by another value, it&apos;s just as bad as
+shadowing Array or Number.
+>
+Avoid *setting* something as **undefined**. If you want to remove a
+property *bar* from an *Object* foo, **delete** ; instead.
+>
+Existence testing identifier foo against **undefined** **could throw a
+Reference Error**, use against &quot;undefined&quot; instead.
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-5">Section 10.5: Abstract Equality (==)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+Operands of the abstract equality operator are compared *after* being
+converted to a common type. How this conversion happens is based on
+the specification of the operator:
+
+[Specification for the ==
+operator:](https://tc39.github.io/ecma262/#sec-abstract-equality-comparison)
+
+**7.2.13 Abstract Equality Comparison**
+
+  
+  x == y
+  
+
+  
+
+The comparison , where x and y are values, produces **true** or
+**false**. Such a comparison is performed as follows:
+
+  
+  Type        &lpar;x&rpar; is the same as                            Type
+    
+
+  
+
+1.  If (y), then:
+
+  
+  x === y
+  
+
+  
+
+**a.** Return the result of performing Strict Equality Comparison .
+
+2.  If x is **null** and y is **undefined**, return **true**.
+
+3.  If x is **undefined** and y is **null**, return **true**.
+
+  -
+  Type   &lpar;x&rpar; is      Type   &lpar;y&rpar; is String, return the result of  x ==
+         Number and           the comparison                         ToNumber
+   -   
+
+  
+
+4.  If (y).
+
+  
+  Type   &lpar;x&rpar; is      Type   &lpar;y&rpar; is Number, return the result of ToNumber   &lpar;x&rpar;   == y
+         String and           the comparison                                           
+        
+
+  
+
+5.  If .
+
+  
+  Type   &lpar;x&rpar; is Boolean, return the result of the       ToNumber   &lpar;x&rpar;   == y
+         comparison                                                          
+      
+
+  
+
+6.  If .
+
+  
+  Type   &lpar;y&rpar; is Boolean, return the result of comparison x == ToNumber
+         the                                    
+    
+
+  
+
+7.  If (y).
+
+  
+  Type   &lpar;x&rpar; is either String, Number, or Symbol and              Type
+    
+
+  
+
+  
+  x == ToPrimitive
+  
+
+  
+
+8.  If (y) is Object, return the result of the comparison (y).
+
+  
+  Type         &lpar;x&rpar; is Object and                            Type
+    
+
+  
+
+  
+  ToPrimitive                               &lpar;x&rpar;       == y
+    
+
+  
+
+9.  If (y) is either String, Number, or Symbol, return the result of the
+    comparison .
+
+10. Return **false**.
+
+**Examples:**
+
+1 == 1; *// true*
+
+1 == **true**; *// true (operand converted to number: true =&bsol;1)*
+
+1 == &apos;1&apos;; *// true (operand converted to number: &apos;1&apos; =&bsol;1 )*
+
+1 == &apos;1.00&apos;; *// true*
+
+1 == &apos;1.00000000001&apos;; *// false*
+
+1 == &apos;1.00000000000000001&apos;; *// true (true due to precision loss)*
+**null** == **undefined**; *// true (spec #2)*
+
+1 == 2; *// false* 0 == **false**; *// true*
+
+0 == **undefined**; *// false*
+
+0 == &quot;&quot;; *// true*
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-6">Section 10.6: Logic Operators with Booleans</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+**var**
+
+x
+
+=
+
+**true**
+
+,
+
+y
+
+=
+
+**false**
+
+;
+
+**AND**
+
+This operator will return true if both of the expressions evaluate to
+true. This boolean operator will employ shortcircuiting and will not
+evaluate y if x evaluates to **false**.
+
+x
+
+&&
+
+y
+
+;
+
+This will return false, because y is false.
+
+**OR**
+
+This operator will return true if one of the two expressions evaluate
+to true. This boolean operator will employ short-circuiting and y will
+not be evaluated if x evaluates to **true**.
+
+x
+
+&vert;&vert;
+
+y
+
+;
+
+This will return true, because x is true.
+
+**NOT**
+
+This operator will return false if the expression on the right
+evaluates to true, and return true if the expression on the right
+evaluates to false.
+
+!
+
+x
+
+;
+
+This will return false, because x is true.
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-7">Section 10.7: Automatic Type Conversions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+Beware that numbers can accidentally be converted to strings or NaN
+(Not a Number).
+
+JavaScript is loosely typed. A variable can contain different data
+types, and a variable can change its data type:
+
+**var**
+
+x
+
+=
+
+&quot;Hello&quot;
+
+;
+
+*// typeof x is a string*
+
+x
+
+=
+
+5
+
+;
+
+*// changes typeof x to a number*
+
+When doing mathematical operations, JavaScript can convert numbers to
+strings:
+
+**var** x = 5 + 7; *// x.valueOf() is 12, typeof x is a number*
+**var** x = 5 + &quot;7&quot;; *// x.valueOf() is 57, typeof x is a string*
+**var** x = &quot;5&quot; + 7; *// x.valueOf() is 57, typeof x is a string*
+**var** x = 5 - 7; *// x.valueOf() is -2, typeof x is a number*
+**var** x = 5 - &quot;7&quot;; *// x.valueOf() is -2, typeof x is a number*
+**var** x = &quot;5&quot; - 7; *// x.valueOf() is -2, typeof x is a number*
+**var** x = 5 - &quot;x&quot;; *// x.valueOf() is NaN, typeof x is a number*
+
+Subtracting a string from a string, does not generate an error but
+returns NaN (Not a Number):
+
+&quot;Hello&quot;
+
+&minus;
+
+&quot;Dolly&quot;
+
+*// returns NaN*
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-8">Section 10.8: Logic Operators with Non-boolean values (boolean coercion)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+Logical OR (&vert;&vert;), reading left to right, will evaluate to the first
+*truthy* value. If no *truthy* value is found, the last value is
+returned.
+
+**var** a = &apos;hello&apos; &vert;&vert; &apos;&apos;; *// a = &apos;hello&apos;* **var** b = &apos;&apos;
+&vert;&vert; &lbrack;&rbrack;; *// b = &lbrack;&rbrack;* **var** c = &apos;&apos; &vert;&vert; **undefined**; *// c =
+undefined* **var** d = 1 &vert;&vert; 5; *// d = 1* **var** e = 0 &vert;&vert; {}; *//
+e = {}* **var** f = 0 &vert;&vert; &apos;&apos; &vert;&vert; 5; *// f = 5* **var** g = &apos;&apos;
+&vert;&vert; &apos;yay&apos; &vert;&vert; &apos;boo&apos;; *// g = &apos;yay&apos;*
+
+Logical AND (&&), reading left to right, will evaluate to the first
+*falsy* value. If no *falsey* value is found, the last value is
+returned.
+
+**var** a = &apos;hello&apos; && &apos;&apos;; *// a = &apos;&apos;* **var** b = &apos;&apos; && &lbrack;&rbrack;;
+*// b = &apos;&apos;* **var** c = **undefined** && 0; *// c = undefined*
+**var** d = 1 && 5; *// d = 5* **var** e = 0 && {}; *// e = 0* **var**
+f = &apos;hi&apos; && &lbrack;&rbrack; && &apos;done&apos;; *// f = &apos;done&apos;* **var** g = &apos;bye&apos;
+&& **undefined** && &apos;adios&apos;; *// g = undefined*
+
+This trick can be used, for example, to set a default value to a
+function argument (prior to ES6).
+
+**var**
+
+foo
+
+=
+
+**function**
+
+(
+
+val
+
+)
+
+{
+
+*// if val evaluates to falsey, &apos;default&apos; will be returned instead.*
+
+**return**
+
+val
+
+&vert;&vert;
+
+&apos;default&apos;
+
+;
+
+}
+
+console.
+
+log
+
+(
+
+foo
+
+(
+
+&apos;burger&apos;
+
+)
+
+)
+
+;
+
+*// burger*
+
+console.
+
+log
+
+(
+
+foo
+
+(
+
+100
+
+)
+
+)
+
+;
+
+*// 100*
+
+console.
+
+log
+
+(
+
+foo
+
+(
+
+&lbrack;
+
+&rbrack;
+
+)
+
+)
+
+;
+
+*// &lbrack;&rbrack;*
+
+console.
+
+log
+
+(
+
+foo
+
+(
+
+0
+
+)
+
+)
+
+;
+
+*// default*
+
+console.
+
+log
+
+(
+
+foo
+
+(
+
+**undefined**
+
+)
+
+)
+
+;
+
+*// default*
+
+Just keep in mind that for arguments, 0 and (to a lesser extent) the
+empty string are also often valid values that should be able to be
+explicitly passed and override a default, which, with this pattern,
+they won't (because they are *falsy*).
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-9">Section 10.9: Empty Array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+*/&ast; ToNumber(ToPrimitive(&lbrack;&rbrack;)) == ToNumber(false) &ast;/*
+
+&lbrack;
+
+&rbrack;
+
+==
+
+**false**
+
+;
+
+*// true*
+  
+  toString   () is executed it     join   () if it      Object   .   **prototype**   .   toString
+             calls &lbrack;&rbrack;.                  exists, or                                     
+
+  
+
+  
+  join
+
+When &lbrack;&rbrack;.() otherwise. This comparison is returning **true** because
+&lbrack;&rbrack;.() returns &apos;&apos; which, coerced into 0, is equal to false
+[ToNumber](http://www.ecma-international.org/ecma-262/5.1/#sec-9.3).
+>
+Beware though, all objects are truthy and Array is an instance of
+Object:
+>
+*// Internally this is evaluated as ToBoolean(&lbrack;&rbrack;) === true ?
+&apos;truthy&apos; : &apos;falsy&apos;* &lbrack;&rbrack; ? &apos;truthy&apos; : &apos;falsy&apos;; *// &apos;truthy&apos;*
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-10">Section 10.10: Equality comparison operations</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+JavaScript has four different equality comparison operations.
+
+[**SameValue**](http://www.ecma-international.org/ecma-262/6.0/#sec-samevalue)
+
+It returns **true** if both operands belong to the same Type and are
+the same value.
+
+Note: the value of an object is a reference.
+
+  
+  Object                                          .       is
+   - 
+
+  
+
+You can use this comparison algorithm via (ECMAScript 6).
+
+Examples:
+
+Object
+
+.
+
+is
+
+(
+
+1
+
+,
+
+1
+
+)
+
+;
+
+*// true*
+
+Object
+
+.
+
+is
+
+(
+
+&plus;
+
+0
+
+,
+
+&minus;
+
+0
+
+)
+
+;
+
+*// false*
+
+Object
+
+.
+
+is
+
+(
+
+**NaN**
+
+,
+
+**NaN**
+
+)
+
+;
+
+*// true*
+
+Object
+
+.
+
+is
+
+(
+
+**true**
+
+,
+
+&quot;true&quot;
+
+)
+
+;
+
+*// false*
+
+Object
+
+.
+
+is
+
+(
+
+**false**
+
+,
+
+0
+
+)
+
+;
+
+*// false*
+
+Object
+
+.
+
+is
+
+(
+
+**null**
+
+,
+
+**undefined**
+
+)
+
+;
+
+*// false*
+
+Object
+
+.
+
+is
+
+(
+
+1
+
+,
+
+&quot;1&quot;
+
+)
+
+;
+
+*// false*
+
+Object
+
+.
+
+is
+
+(
+
+&lbrack;
+
+&rbrack;
+
+,
+
+&lbrack;
+
+&rbrack;
+
+)
+
+;
+
+*// false*
+
+This algorithm has the properties of an [equivalence
+relation](https://en.wikipedia.org/wiki/Equivalence_relation):
+
+  
+  Object                         .     is         (x,             x
+  
+  Object   .   is   (x,   y   ) is **true** if, and only    Object   .   is   (y,   x
+                              if,                                                   
+  Object   .   is   (x,   y   ) and  Object   .   is   (y,   z   ) are **true**,  Object   .   is   (x,   z
+                                                                 then                                     
+
+[Reflexivity](https://en.wikipedia.org/wiki/Reflexive_relation): ) is
+**true**, for any value x
+>
+[Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation): ) is
+**true**, for any values x and y.
+>
+[Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation): If )
+is also **true**, for any values x, y and z.
+
+[**SameValueZero**](http://www.ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+
+It behaves like SameValue, but considers +0 and -0 to be equal.
+
+  
+  Array          .   **prototype**              .   includes
+      
+
+  
+
+You can use this comparison algorithm via (ECMAScript 7).
+>
+Examples:
+
+&lbrack;
+
+1
+
+&rbrack;
+
+.
+
+includes
+
+(
+
+1
+
+)
+
+;
+
+*// true*
+
+&lbrack;
+
+&plus;
+
+0
+
+&rbrack;
+
+.
+
+includes
+
+(
+
+&minus;
+
+0
+
+)
+
+;
+
+*// true*
+
+&lbrack;
+
+**NaN**
+
+&rbrack;
+
+.
+
+includes
+
+(
+
+**NaN**
+
+)
+
+;
+
+*// true*
+
+&lbrack;
+
+**true**
+
+&rbrack;
+
+.
+
+includes
+
+(
+
+&quot;true&quot;
+
+)
+
+;
+
+*// false*
+
+&lbrack;
+
+**false**
+
+&rbrack;
+
+.
+
+includes
+
+(
+
+0
+
+)
+
+;
+
+*// false*
+
+&lbrack;
+
+1
+
+&rbrack;
+
+.
+
+includes
+
+(
+
+&quot;1&quot;
+
+)
+
+;
+
+*// false*
+
+&lbrack;
+
+**null**
+
+&rbrack;
+
+.
+
+includes
+
+(
+
+**undefined**
+
+)
+
+;
+
+*// false*
+
+&lbrack;
+
+&lbrack;
+
+&rbrack;
+
+&rbrack;
+
+.
+
+includes
+
+(
+
+&lbrack;
+
+&rbrack;
+
+)
+
+;
+
+*// false*
+
+This algorithm still has the properties of an [equivalence
+relation](https://en.wikipedia.org/wiki/Equivalence_relation):
+
+  
+  includes
+  
+
+  
+
+  
+  includes      &lpar;y&rpar; is **true** if, and only if, &lbrack;y&rbrack;.   includes
+  -  -
+
+  
+
+  
+  includes   &lpar;y&rpar; and      includes   &lpar;z&rpar; are **true**, then  includes
+             &lbrack;y&rbrack;.                    &lbrack;x&rbrack;.                    
+  -  -  -
+
+  
+
+[Reflexivity](https://en.wikipedia.org/wiki/Reflexive_relation):
+&lbrack;x&rbrack;.(x) is **true**, for any value x
+>
+[Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation):
+&lbrack;x&rbrack;.(x) is **true**, for any values x and y.
+[Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation): If
+&lbrack;x&rbrack;.(z) is also **true**, for any values x, y and z.
+
+[**Strict Equality
+Comparison**](http://www.ecma-international.org/ecma-262/6.0/#sec-strict-equality-comparison)
+
+It behaves like SameValue, but
+>
+Considers +0 and -0 to be equal.
+>
+Considers **NaN** different than any value, including itself
+>
+You can use this comparison algorithm via the === operator (ECMAScript
+3).
+>
+There is also the !== operator (ECMAScript 3), which negates the
+result of ===.
+>
+Examples:
+
+1
+
+===
+
+1
+
+;
+
+*// true*
+
+&plus;
+
+0
+
+===
+
+&minus;
+
+0
+
+;
+
+*// true*
+
+**NaN**
+
+===
+
+**NaN**
+
+;
+
+*// false*
+
+**true**
+
+===
+
+&quot;true&quot;
+
+;
+
+*// false*
+
+**false**
+
+===
+
+0
+
+;
+
+*// false*
+
+1
+
+===
+
+&quot;1&quot;
+
+;
+
+*// false*
+
+**null**
+
+===
+
+**undefined**
+
+;
+
+*// false*
+
+&lbrack;
+
+&rbrack;
+
+===
+
+&lbrack;
+
+&rbrack;
+
+;
+
+*// false*
+
+This algorithm has the following properties:
+
+  
+  x === y   is **true** if, and only if, y ===        **for** any values
+            xistrue,                                  
+    
+
+  
+
+  
+  x === y      and     y === z      are **true**, then       x === z
+   -  - 
+
+  
+
+[Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation): xandy&grave;.
+>
+[Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation): If
+is also **true**, for any values x, y and z.
+>
+But is not an [equivalence
+relation](https://en.wikipedia.org/wiki/Equivalence_relation) because
+
+  
+  **NaN** !== **NaN**
+  
+
+  
+
+**NaN** is not
+[reflexive](https://en.wikipedia.org/wiki/Reflexive_relation):
+
+[**Abstract Equality
+Comparison**](http://www.ecma-international.org/ecma-262/6.0/#sec-abstract-equality-comparison)
+
+If both operands belong to the same Type, it behaves like the Strict
+Equality Comparison.
+>
+Otherwise, it coerces them as follows:
+>
+**undefined** and **null** are considered to be equal
+>
+When comparing a number with a string, the string is coerced to a
+number
+>
+When comparing a boolean with something else, the boolean is coerced
+to a number
+
+When comparing an object with a number, string or symbol, the object is
+coerced to a primitive If there was a coercion, the coerced values are
+compared recursively. Otherwise the algorithm returns **false**.
+
+You can use this comparison algorithm via the == operator (ECMAScript
+1).
+>
+There is also the != operator (ECMAScript 1), which negates the result
+of ==.
+>
+Examples:
+
+1
+
+==
+
+1
+
+;
+
+*// true*
+
+&plus;
+
+0
+
+==
+
+&minus;
+
+0
+
+;
+
+*// true*
+
+**NaN**
+
+==
+
+**NaN**
+
+;
+
+*// false*
+
+**true**
+
+==
+
+&quot;true&quot;
+
+;
+
+*// false*
+
+**false**
+
+==
+
+0
+
+;
+
+*// true*
+
+1
+
+==
+
+&quot;1&quot;
+
+;
+
+*// true*
+
+**null**
+
+==
+
+**undefined**
+
+;
+
+*// true*
+
+&lbrack;
+
+&rbrack;
+
+==
+
+&lbrack;
+
+&rbrack;
+
+;
+
+*// false*
+
+This algorithm has the following property:
+
+  
+  x == y        is **true** if, and only if,                y == x
+  -  -
+
+  
+
+[Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation): is
+**true**, for any values x and y.
+
+But is not an [equivalence
+relation](https://en.wikipedia.org/wiki/Equivalence_relation) because
+
+  
+  **NaN** != **NaN**
+  
+
+  
+
+  -
+  == &apos;&apos;       and 0       == &apos;0&apos;        , but     &apos;&apos; != &apos;0&apos;
+  -    
+
+  -
+
+**NaN** is not
+[reflexive](https://en.wikipedia.org/wiki/Reflexive_relation):
+
+[Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation) does
+not hold, e.g. 0
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-11">Section 10.11: Relational operators (&lt;, &lt;=, &gt;, &gt;=)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+When both operands are numeric, they are compared normally:
+
+1
+
+&lt;
+
+2
+
+*// true*
+
+2
+
+&lt;=
+
+2
+
+*// true*
+
+3
+
+&gt;=
+
+5
+
+*// false*
+
+**true**
+
+&lt;
+
+**false**
+
+*// false (implicitly converted to numbers, 1 &bsol;0)*
+
+When both operands are strings, they are compared lexicographically
+(according to alphabetical order):
+
+&apos;a&apos;
+
+&lt;
+
+&apos;b&apos;
+
+*// true*
+
+&apos;1&apos;
+
+&lt;
+
+&apos;2&apos;
+
+*// true*
+
+&apos;100&apos; &amp;apos;12&apos; *// false (&apos;100&apos; is less than &apos;12&apos;
+lexicographically!)*
+>
+When one operand is a string and the other is a number, the string is
+converted to a number before comparison:
+
+&apos;1&apos;
+
+&lt;
+
+2
+
+*// true*
+
+&apos;3&apos;
+
+&gt;
+
+2
+
+*// true*
+
+**true**
+
+&gt;
+
+&apos;2&apos;
+
+*// false (true implicitly converted to number, 1 &lt; 2)*
+
+When the string is non-numeric, numeric conversion returns **NaN**
+(not-a-number). Comparing with **NaN** always returns **false**:
+
+1
+
+&lt;
+
+&apos;abc&apos;
+
+*// false*
+
+1
+
+&gt;
+
+&apos;abc&apos;
+
+*// false*
+
+But be careful when comparing a numeric value with **null**,
+**undefined** or empty strings:
+
+1
+
+&gt;
+
+&apos;&apos;
+
+*// true*
+
+1
+
+&lt;
+
+&apos;&apos;
+
+*// false*
+
+1
+
+&gt;
+
+**null**
+
+*// true*
+
+1
+
+&lt;
+
+**null**
+
+*// false*
+
+1
+
+&gt;
+
+**undefined**
+
+*// false*
+
+1
+
+&lt;
+
+**undefined**
+
+*// false*
+
+  -
+  Number                     (    **null**          );       *//0*
+      -
+
+  -
+
+When one operand is a object and the other is a number, the object is
+converted to a number before comparison.So **null** is particular case
+because
+
+**new**
+
+Date
+
+(
+
+2015
+
+)
+
+&lt;
+
+1479480185280
+
+*// true*
+
+**null**
+
+&gt;
+
+&minus;
+
+1
+
+*//true*
+
+(
+
+{
+
+toString
+
+:
+
+**function**
+
+(
+
+)
+
+{
+
+**return**
+
+123
+
+}
+
+}
+
+)
+
+&gt;
+
+122
+
+*//true*
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-12">Section 10.12: Inequality</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+Operator != is the inverse of the == operator.
+
+Will return **true** if the operands aren&apos;t equal.
+
+The JavaScript engine will try and convert both operands to matching
+types if they aren&apos;t of the same type. **Note:** if the two operands
+have different internal references in memory, then **false** will be
+returned.
+
+**Sample:**
+
+1
+
+!=
+
+&apos;1&apos;
+
+*// false*
+
+1
+
+!=
+
+2
+
+*// true*
+
+  
+  != &apos;1&apos;
+  
+
+  
+
+In the sample above, 1 is **false** because, a primitive number type
+is being compared to a char value. Therefore, the JavaScript engine
+doesn&apos;t care about the datatype of the R.H.S value.
+
+Operator: !== is the inverse of the === operator. Will return true if
+the operands are not equal or if their types do not match.
+
+Example:
+
+1
+
+!==
+
+&apos;1&apos;
+
+*// true*
+
+1
+
+!==
+
+2
+
+*// true*
+
+1
+
+!==
+
+1
+
+*// false*
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-13">Section 10.13: List of Comparison Operators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+**Operator Comparison Example**
+
+  
+  i ==
+  
+
+  
+
+== Equal0
+
+  
+  i === &quot;5&quot;
+  
+
+  
+
+=== Equal Value and Type
+
+  
+  i !=
+  
+
+  
+
+!= Not Equal5
+
+  
+  i !==
+  
+
+  
+
+!== Not Equal Value or Type5
+
+  
+  i
+  
+
+  
+
+&bsol;Greater than&bsol;5
+
+  
+  i
+  
+
+  
+
+&lt; Less than&lt; 5
+
+  
+  i &gt;=
+  
+
+  
+
+&gt;= Greater than or equal5
+
+  
+  i &lt;=
+  
+
+  
+
+&lt;= Less than or equal5
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-14">Section 10.14: Grouping multiple logic statements</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+You can group multiple boolean logic statements within parenthesis in
+order to create a more complex logic evaluation, especially useful in
+if statements.
+
+**if**
+
+(
+
+(
+
+age
+
+&gt;=
+
+18
+
+&&
+
+height
+
+&gt;=
+
+5.11
+
+)
+
+&vert;&vert;
+
+(
+
+status
+
+===
+
+&apos;royalty&apos;
+
+&&
+
+hasInvitation
+
+)
+
+)
+
+{
+
+console.
+
+log
+
+(
+
+&apos;You can enter our club&apos;
+
+)
+
+;
+
+}
+
+We could also move the grouped logic to variables to make the
+statement a bit shorter and descriptive:
+
+**var**
+
+isLegal
+
+=
+
+age
+
+&gt;=
+
+18
+
+;
+
+**var**
+
+tall
+
+=
+
+height
+
+&gt;=
+
+5.11
+
+;
+
+**var**
+
+suitable
+
+=
+
+isLegal
+
+&&
+
+tall
+
+;
+
+**var**
+
+isRoyalty
+
+=
+
+status
+
+===
+
+&apos;royalty&apos;
+
+;
+
+**var**
+
+specialCase
+
+=
+
+isRoyalty
+
+&&
+
+hasInvitation
+
+;
+
+**var**
+
+canEnterOurBar
+
+=
+
+suitable
+
+&vert;&vert;
+
+specialCase
+
+;
+
+**if**
+
+(
+
+canEnterOurBar
+
+)
+
+console.
+
+log
+
+(
+
+&apos;You can enter our club&apos;
+
+)
+
+;
+
+Notice that in this particular example (and many others), grouping the
+statements with parenthesis works the same as if we removed them, just
+follow a linear logic evaluation and you&apos;ll find yourself with the
+same result. I do prefer using parenthesis as it allows me to
+understand clearer what I intended and might prevent for logic
+mistakes.
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch10-15">Section 10.15: Bit fields to optimise comparison of multi state data</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+A bit field is a variable that holds various boolean states as
+individual bits. A bit on would represent true, and off would be
+false. In the past bit fields were routinely used as they saved memory
+and reduced processing load. Though the need to use bit field is no
+longer so important they do offer some benefits that can simplify many
+processing tasks.
+
+For example user input. When getting input from a keyboard&apos;s
+direction keys up, down, left, right you can encode the various keys
+into a single variable with each direction assigned a bit.
+
+Example reading keyboard via bitfield
+
+**var** bitField = 0; *// the value to hold the bits* **const**
+KEY_BITS = &lbrack;4,1,8,2&rbrack;; *// left up right down* **const** KEY_MASKS =
+&lbrack;0b1011,0b1110,0b0111,0b1101&rbrack;; *// left up right down*
+window.onkeydown = window.onkeyup = **function** (e) {
+**if**(e.keyCode &gt;= 37 && e.keyCode &lt;41){
+
+**if**
+
+(
+
+e&period;
+
+type
+
+===
+
+&quot;keydown&quot;
+
+)
+
+{
+
+bitField
+
+&vert;=
+
+KEY_BITS
+
+&lbrack;
+
+e&period;
+
+keyCode
+
+&minus;
+
+37
+
+&rbrack;
+
+;
+
+}
+
+**else**
+
+{
+
+bitField
+
+&=
+
+KEY_MASKS
+
+&lbrack;
+
+e&period;
+
+keyCode
+
+&minus;
+
+37
+
+&rbrack;
+
+;
+
+}
+
+}
+
+}
+
+Example reading as an array
+
+**var**
+
+directionState
+
+=
+
+&lbrack;
+
+**false**
+
+,
+
+**false**
+
+,
+
+**false**
+
+,
+
+**false**
+
+&rbrack;
+
+;
+
+window.
+
+onkeydown
+
+=
+
+window.
+
+onkeyup
+
+=
+
+**function**
+
+(
+
+e
+
+)
+
+{
+
+**if**
+
+(
+
+e&period;
+
+keyCode
+
+&gt;=
+
+37
+
+&&
+
+e&period;
+
+keyCode
+
+&lt;
+
+41
+
+)
+
+{
+
+directionState
+
+&lbrack;
+
+e&period;
+
+keyCode
+
+&minus;
+
+37
+
+&rbrack;
+
+=
+
+e&period;
+
+type
+
+===
+
+&quot;keydown&quot;
+
+;
+
+}
+
+}
+
+  
+  &vert;= 0b10
+  
+
+  
+
+To turn on a bit use bitwise *or* &vert; and the value corresponding to
+the bit. So if you wish to set the 2nd bit bitField will turn it on.
+If you wish to turn a bit off use bitwise *and* & with a value that
+has all by the required bit on.
+
+  
+  bitfield &= 0b1101
+  
+
+  
+
+Using 4 bits and turning the 2nd bit off ;
+>
+You may say the above example seems a lot more complex than assigning
+the various key states to an array. Yes, it is a little more complex
+to set but the advantage comes when interrogating the state.
+>
+If you want to test if all keys are up.
+
+*// as bit field*
+
+**if**
+
+(
+
+!
+
+bitfield
+
+)
+
+*// no keys are on*
+
+*// as array test each item in array*
+
+**if**
+
+(
+
+!
+
+(
+
+directionState
+
+&lbrack;
+
+0
+
+&rbrack;
+
+&&
+
+directionState
+
+&lbrack;
+
+1
+
+&rbrack;
+
+&&
+
+directionState
+
+&lbrack;
+
+2
+
+&rbrack;
+
+&&
+
+directionState
+
+&lbrack;
+
+3
+
+&rbrack;
+
+)
+
+)
+
+{
+
+You can set some constants to make things easier
+
+*// postfix U,D,L,R for Up down left right*
+
+**const**
+
+KEY_U
+
+=
+
+1
+
+;
+
+**const**
+
+KEY_D
+
+=
+
+2
+
+;
+
+**const**
+
+KEY_L
+
+=
+
+4
+
+;
+
+**const**
+
+KEY_R
+
+=
+
+8
+
+;
+
+**const**
+
+KEY_UL
+
+=
+
+KEY_U
+
+&plus;
+
+KEY_L
+
+;
+
+*// up left*
+
+**const**
+
+KEY_UR
+
+=
+
+KEY_U
+
+&plus;
+
+KEY_R
+
+;
+
+*// up Right*
+
+**const**
+
+KEY_DL
+
+=
+
+KEY_D
+
+&plus;
+
+KEY_L
+
+;
+
+*// down left*
+
+**const**
+
+KEY_DR
+
+=
+
+KEY_D
+
+&plus;
+
+KEY_R
+
+;
+
+*// down right*
+
+You can then quickly test for many various keyboard states
+>
+**if** ((bitfield & KEY_UL) === KEY_UL) { *// is UP and LEFT only
+down* **if** (bitfield & KEY_UL) { *// is Up left down* **if**
+((bitfield & KEY_U) === KEY_U) { *// is Up only down* **if** (bitfield
+& KEY_U) { *// is Up down (any other key may be down)* **if**
+(!(bitfield & KEY_U)) { *// is Up up (any other key may be down)*
+**if** (!bitfield ) { *// no keys are down*
+>
+**if** (bitfield ) { *// any one or more keys are down*
+>
+The keyboard input is just one example. Bitfields are useful when you
+have various states that must in combination be acted on. JavaScript
+can use up to 32 bits for a bit field. Using them can offer
+significant performance increases. They are worth being familiar with.
