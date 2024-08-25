@@ -1951,7 +1951,7 @@ actually is: Object.<b>prototype</b>.toString.call(yourObject)</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Strings in JavaScript can be enclosed in Single quotes &apos;hello&apos;,
 Double quotes &quot;Hello&quot; and (from ES2015, ES6) in Template Literals
-(*backticks*) &grave;hello&grave;.</p>
+(<i>backticks</i>) &grave;hello&grave;.</p>
 
 <pre>
 <b>var</b> hello = &quot;Hello&quot;;
@@ -2275,12 +2275,12 @@ and &quot;. These use backticks (&grave;) instead of single or double quotes.</p
 
 <pre>
 <b>function</b> wordCount( val ){
-  <b>var</b> wom = val.match(*/&bsol;&bsol;S+/g*);
+  <b>var</b> wom = val.match(<i>/&bsol;&bsol;S+/g</i>);
   <b>return</b> {
-    charactersNoSpaces: val.replace(*/&bsol;&bsol;s+/g*, &apos;&apos;).length,
+    charactersNoSpaces: val.replace(<i>/&bsol;&bsol;s+/g</i>, &apos;&apos;).length,
     characters        : val.length,
     words             : wom ? wom.length :0,
-    lines             : val.split(*/&bsol;&bsol;r&ast;&bsol;&bsol;n/*).length
+    lines             : val.split(<i>/&bsol;&bsol;r&ast;&bsol;&bsol;n/</i>).length
   };
 }
 // <i>Use like:</i>
@@ -2342,7 +2342,7 @@ data, use Typed Arrays.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-10">Section 7.10: Detecting a string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>To detect whether a parameter is a *primitive* string, use <b>typeof</b>:</p>
+<p>To detect whether a parameter is a <i>primitive</i> string, use <b>typeof</b>:</p>
 
 <pre>
 <b>var</b> aString = &quot;my string&quot;;
@@ -2386,7 +2386,7 @@ Object.<b>prototype</b>.toString.call(pString);  //<i>&quot;&lbrack;object Strin
 Object.<b>prototype</b>.toString.call(oString);  //<i>&quot;&lbrack;object String&rbrack;&quot;</i>
 </pre>
 
-<p>A more robust solution is to not *detect* a string at all, rather only check for what 
+<p>A more robust solution is to not <i>detect</i> a string at all, rather only check for what 
 functionality is required. For example:</p>
 
 <pre>
@@ -2405,84 +2405,63 @@ functionality is required. For example:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Use slice.() to extract substrings given two indices:</p>
 
-<b>var</b>
-s
-=
-&quot;0123456789abcdefg&quot;
-;
-s&period;
-slice
-(
-0
-,
-5
-)
-;
-*// &quot;01234&quot;*
-s&period;
-slice
-(
-5
-,
-6
-)
-;
-*// &quot;5&quot;*
-Given one index, it will take from that index to the end of the
-string:
-s&period;
-slice
-(
-10
-)
-;
-*// &quot;abcdefg&quot;*
+<pre>
+<b>var</b> s = &quot;0123456789abcdefg&quot;;
+s&period;slice (0, 5);  // <i>&quot;01234&quot;</i>
+s&period;slice (5, 6);  // <i>&quot;5&quot;</i>
+</pre>
+
+<p>Given one index, it will take from that index to the end of the string:</p>
+
+<pre>
+s&period;slice(10);  // <i>&quot;abcdefg&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-12">Section 7.12: Character code</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-The method charCodeAt retrieves the Unicode character code of a single
-character: <b>var</b> charCode = &quot;µ&quot;.charCodeAt(); *// The character
-code of the letter* µ *is 181*
-To get the character code of a character in a string, the 0-based
-position of the character is passed as a parameter to charCodeAt:
-<b>var</b> charCode = &quot;ABCDE&quot;.charCodeAt(3); *// The character code of
-&quot;D&quot; is 68*
-Version ≥ 6
-Some Unicode symbols don&apos;t fit in a single character, and instead
+<p>The method charCodeAt retrieves the Unicode character code of a single character:</p>
+
+<pre>
+<b>var</b> charCode = &quot;µ&quot;.charCodeAt(); // <i>The character code of the letter µ is 181</i>
+</pre>
+
+<p>To get the character code of a character in a string, the 0-based
+position of the character is passed as a parameter to charCodeAt:</p>
+
+<pre>
+<b>var</b> charCode = &quot;ABCDE&quot;.charCodeAt(3); // <i>The character code of &quot;D&quot; is 68</i>
+</pre>
+
+<p>Version ≥ 6</p>
+
+<p>Some Unicode symbols don&apos;t fit in a single character, and instead
 require two UTF-16 surrogate pairs to encode. This is the case of
 character codes beyond 216 - 1 or 63553. These extended character
-codes or *code point* values can be retrieved with codePointAt:
+codes or <i>code point<i> values can be retrieved with codePointAt:</p>
 
-*// The Grinning Face Emoji has code point 128512 or 0x1F600*
-<b>var</b>
-codePoint
-=
-&quot;????&quot;
-.
-codePointAt
-(
-)
-;
+<pre>
+// <i>The Grinning Face Emoji has code point 128512 or 0x1F600</i>
+<b>var</b> codePoint = &quot;????&quot;.codePointAt();
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-13">Section 7.13: String Representations of Numbers</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-JavaScript has native conversion from *Number* to its *String
-representation* for any base from *2 to 36*.
+<p>JavaScript has native conversion from <i>Number</i> to its <i>String representation</i> for any base from <i>2 to 36</i>.
 
-The most common representation after *decimal (base 10)* is
-*hexadecimal (base 16)*, but the contents of this section work for all
+The most common representation after <i>decimal (base 10)</i> is
+<i>hexadecimal (base 16)</i>, but the contents of this section work for all
 bases in the range.
 
-In order to convert a *Number* from decimal (base 10) to its
-hexadecimal (base 16) *String representation* the *toString* method
-can be used with *radix 16*.
-*// base 10 Number*
+In order to convert a <i>Number</i> from decimal (base 10) to its
+hexadecimal (base 16) <i>String representation</i> the <i>toString</i> method
+can be used with <i>radix 16</i>.
+<i>// base 10 Number</i>
 <b>var</b>
 b10
 =
 12
 ;
-*// base 16 String representation*
+<i>// base 16 String representation</i>
 <b>var<b>
 b16
 =
@@ -2492,16 +2471,16 @@ toString
 16
 )
 ;
-*// &quot;c&quot;*
+<i>// &quot;c&quot;</i>
 If the number represented is an integer, the inverse operation for
-this can be done with parseInt and the *radix 16* again
-*// base 16 String representation*
+this can be done with parseInt and the <i>radix 16</i> again
+<i>// base 16 String representation</i>
 <b>var</b>
 b16
 =
 &apos;c&apos;
 ;
-*// base 10 Number*
+<i>// base 10 Number</i>
 <b>var</b>
 b10
 =
@@ -2512,9 +2491,9 @@ b16
 16
 )
 ;
-*// 12*
-To convert an arbitrary number (i.e. non-integer) from its *String
-representation* into a *Number*, the operation must be split into two
+<i>// 12</i>
+To convert an arbitrary number (i.e. non-integer) from its <i>String
+representation</i> into a <i>Number</i>, the operation must be split into two
 parts; the integer part and the fraction part.
 Version ≥ 6
 <b>let</b>
@@ -2522,7 +2501,7 @@ b16
 =
 &apos;3.243f3e0370cdc&apos;
 ;
-*// Split into integer and fraction parts*
+<i>// Split into integer and fraction parts</i>
 <b>let</b>
 &lbrack;
 i16
@@ -2536,7 +2515,7 @@ split
 &apos;.&apos;
 )
 ;
-*// Calculate base 10 integer part*
+<i>// Calculate base 10 integer part</i>
 <b>let</b>
 i10
 =
@@ -2547,8 +2526,8 @@ i16
 16
 )
 ;
-*// 3*
-*// Calculate the base 10 fraction part*
+<i>// 3</i>
+<i>// Calculate the base 10 fraction part</i>
 <b>let</b>
 f10
 =
@@ -2569,8 +2548,8 @@ f16.
 length
 )
 ;
-*// 0.14158999999999988*
-*// Put the base 10 parts together to find the Number*
+<i>// 0.14158999999999988</i>
+<i>// Put the base 10 parts together to find the Number</i>
 <b>let</b>
 b10
 =
@@ -2578,14 +2557,14 @@ i10
 &plus;
 f10
 ;
-*// 3.14159*
+<i>// 3.14159</i>
 
 <b>Note 1:</b> Be careful as small errors may be in the result due to
 differences in what is possible to be represented in different bases.
 It may be desirable to perform some kind of rounding afterwards.
 
 <b>Note 2:</b> Very long representations of numbers may also result in
-errors due to the accuracy and maximum values of *Numbers* of the
+errors due to the accuracy and maximum values of <i>Numbers</i> of the
 environment the conversions are happening in.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-14">Section 7.14: String Find and Replace Functions</h3>
@@ -2612,7 +2591,7 @@ indexOf
 )
 )
 ;
-*// 4*
+<i>// 4</i>
 console.
 log
 (
@@ -2623,7 +2602,7 @@ indexOf
 )
 )
 ;
-*// -1*
+<i>// -1</i>
  
 lastIndexOf
 Similarly, () will return the index of the last occurrence of
@@ -2643,7 +2622,7 @@ lastIndexOf
 )
 )
 ;
-*// 8*
+<i>// 8</i>
 console.
 log
 (
@@ -2654,7 +2633,7 @@ lastIndexOf
 )
 )
 ;
-*// -1*
+<i>// -1</i>
 [<b>includes</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>(</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>searchString</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>,</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>start</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
 
 [<b>)</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
@@ -2681,7 +2660,7 @@ includes
 )
 )
 ;
-*// true*
+<i>// true</i>
 console.
 log
 (
@@ -2692,7 +2671,7 @@ includes
 )
 )
 ;
-*// false*
+<i>// false</i>
   [<b>replace</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>(</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>regexp</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>&vert;</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>substring</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>,</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>replacement</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>&vert;</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>replaceFunction</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
 [<b>)</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
   
@@ -2728,13 +2707,13 @@ log
 string
 )
 ;
-*// &quot;Bye, World!&quot;*
+<i>// &quot;Bye, World!&quot;</i>
 string
 =
 string.
 replace
 (
-*/W.{3}d/g*
+<i>/W.{3}d/g</i>
 ,
 &quot;Universe&quot;
 )
@@ -2745,7 +2724,7 @@ log
 string
 )
 ;
-*// &quot;Bye, Universe!&quot;*
+<i>// &quot;Bye, Universe!&quot;</i>
 replaceFunction can be used for conditional replacements for regular
 expression objects (i.e., with use with regexp). The parameters are in
 the following order:
@@ -2766,7 +2745,7 @@ string
 string.
 replace
 (
-*/(&lbrack;a-zA-Z&rbrack;)(&lbrack;a-zA-Z&rbrack;+)/g*
+<i>/(&lbrack;a-zA-Z&rbrack;)(&lbrack;a-zA-Z&rbrack;+)/g</i>
 ,
 <b>function</b>
 (
@@ -2797,7 +2776,7 @@ log
 string
 )
 ;
-*// &quot;Hello, World!&quot;*
+<i>// &quot;Hello, World!&quot;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-15">Section 7.15: Find the index of a substring inside a string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2811,7 +2790,7 @@ indexOf
 &apos;Wor&apos;
 )
 ;
-*// 7*
+<i>// 7</i>
 indexOf
 . also accepts an additional numeric argument that indicates on what
 index should the function start looking
@@ -2824,7 +2803,7 @@ indexOf
 10
 )
 ;
-*// 14*
+<i>// 14</i>
 indexOf
 You should note that . is case sensitive
 &apos;Hellow World&apos;
@@ -2834,7 +2813,7 @@ indexOf
 &apos;WOR&apos;
 )
 ;
-*// -1*
+<i>// -1</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-16">Section 7.16: String to Upper Case</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2849,7 +2828,7 @@ toUpperCase
 )
 )
 ;
-*// &apos;QWERTY&apos;*
+<i>// &apos;QWERTY&apos;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-17">Section 7.17: String to Lower Case</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2864,7 +2843,7 @@ toLowerCase
 )
 )
 ;
-*// &apos;qwerty&apos;*
+<i>// &apos;qwerty&apos;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-18">Section 7.18: Repeat a String</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2881,7 +2860,7 @@ repeat
 3
 )
 ;
-*// Returns &quot;abcabcabc&quot;*
+<i>// Returns &quot;abcabcabc&quot;</i>
 &quot;abc&quot;
 .
 repeat
@@ -2889,7 +2868,7 @@ repeat
 0
 )
 ;
-*// Returns &quot;&quot;*
+<i>// Returns &quot;&quot;</i>
 &quot;abc&quot;
 .
 repeat
@@ -2898,7 +2877,7 @@ repeat
 1
 )
 ;
-*// Throws a RangeError*
+<i>// Throws a RangeError</i>
 Version
 &lt;
 6
@@ -2947,7 +2926,7 @@ join
 myString
 )
 ;
-*// Returns &quot;abcabcabc&quot;*
+<i>// Returns &quot;abcabcabc&quot;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch8">Chapter 8: Date</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -3003,8 +2982,8 @@ milliseconds) and date.
 
 &lpar;m&rpar; creates a Date instance containing the time and date
 corresponding to the Epoch time (1 January, 1970 UTC) plus m
-milliseconds. Example: ) gives the date *Sun, 26 Sep 1993 04:56:09
-GMT*.
+milliseconds. Example: ) gives the date <i>Sun, 26 Sep 1993 04:56:09
+GMT</i>.
 <b>with a string argument</b>
   Date   (   dateString   ) returns the Date object that results after      Date   .   parse
                           parsing dateString with                                      
@@ -3015,7 +2994,7 @@ GMT*.
   <b>new</b> Date                                (     2017
 milliseconds and instantiates the corresponding Dateobject. Note that
 the month is 0-indexed in JavaScript, so 0 means January and 11 means
-December. Example: , 5, 1) gives *June 1st, 2017*.
+December. Example: , 5, 1) gives <i>June 1st, 2017</i>.
 
 <b>Exploring dates</b>
 
@@ -3028,73 +3007,72 @@ as evidenced by the code. Where comparison with UTC was instructive,
 () was used to show the date and time in UTC (the Z in the formatted
 string denotes UTC).
 
-*// Creates a Date object with the current date and time from the //
-user&apos;s browser* <b>var</b> now = <b>new</b> Date(); now.toString() ===
-&apos;Mon Apr 11 2016 16:10:41 GMT-0500 (Central Daylight Time)&apos; *//
-true*
+<i>// Creates a Date object with the current date and time from the //
+user&apos;s browser</i> <b>var</b> now = <b>new</b> Date(); now.toString() ===
+&apos;Mon Apr 11 2016 16:10:41 GMT-0500 (Central Daylight Time)&apos; <i>//
+true</i>
 
-*// well, at the time of this writing, anyway*
+<i>// well, at the time of this writing, anyway</i>
 
-*// Creates a Date object at the Unix Epoch (i.e.,
-&apos;1970-01-01T00:00:00.000Z&apos;)* <b>var</b> epoch = <b>new</b> Date(0);
-epoch.toISOString() === &apos;1970-01-01T00:00:00.000Z&apos; *// true*
+<i>// Creates a Date object at the Unix Epoch (i.e.,
+&apos;1970-01-01T00:00:00.000Z&apos;)</i> <b>var</b> epoch = <b>new</b> Date(0);
+epoch.toISOString() === &apos;1970-01-01T00:00:00.000Z&apos; <i>// true</i>
 
-*// Creates a Date object with the date and time 2,012 milliseconds //
-after the Unix Epoch (i.e., &apos;1970-01-01T00:00:02.012Z&apos;).* <b>var</b> ms
+<i>// Creates a Date object with the date and time 2,012 milliseconds //
+after the Unix Epoch (i.e., &apos;1970-01-01T00:00:02.012Z&apos;).</i> <b>var</b> ms
 = <b>new</b> Date(2012); date2012.toISOString() ===
-&apos;1970-01-01T00:00:02.012Z&apos; *// true*
+&apos;1970-01-01T00:00:02.012Z&apos; <i>// true</i>
 
-*// Creates a Date object with the first day of February of the year
-2012 // in the local timezone.* <b>var</b> one = <b>new</b> Date(2012, 1);
+<i>// Creates a Date object with the first day of February of the year
+2012 // in the local timezone.</i> <b>var</b> one = <b>new</b> Date(2012, 1);
 one.toString() === &apos;Wed Feb 01 2012 00:00:00 GMT-0600 (Central
-Standard Time)&apos; *// true*
+Standard Time)&apos; <i>// true</i>
 
-*// Creates a Date object with the first day of the year 2012 in the
-local // timezone. // (Months are zero-based)* <b>var</b> zero = <b>new</b>
+<i>// Creates a Date object with the first day of the year 2012 in the
+local // timezone. // (Months are zero-based)</i> <b>var</b> zero = <b>new</b>
 Date(2012, 0); zero.toString() === &apos;Sun Jan 01 2012 00:00:00 GMT-0600
-(Central Standard Time)&apos; *// true*
+(Central Standard Time)&apos; <i>// true</i>
 
-*// Creates a Date object with the first day of the year 2012, in
-UTC.* <b>var</b> utc = <b>new</b> Date(Date.UTC(2012, 0)); utc.toString()
+<i>// Creates a Date object with the first day of the year 2012, in
+UTC.</i> <b>var</b> utc = <b>new</b> Date(Date.UTC(2012, 0)); utc.toString()
 === &apos;Sat Dec 31 2011 18:00:00 GMT-0600 (Central Standard Time)&apos;
 
-*// true* utc.toISOString() === &apos;2012-01-01T00:00:00.000Z&apos;
+<i>// true</i> utc.toISOString() === &apos;2012-01-01T00:00:00.000Z&apos;
 
-*// true*
+<i>// true</i>
 
-*// Parses a string into a Date object (ISO 8601 format added in
+<i>// Parses a string into a Date object (ISO 8601 format added in
 ECMAScript 5.1) // Implementations should assumed UTC because of ISO
-8601 format and Z designation* <b>var</b> iso = <b>new</b>
+8601 format and Z designation</i> <b>var</b> iso = <b>new</b>
 Date(&apos;2012-01-01T00:00:00.000Z&apos;); iso.toISOString() ===
-&apos;2012-01-01T00:00:00.000Z&apos; *// true*
+&apos;2012-01-01T00:00:00.000Z&apos; <i>// true</i>
 
-*// Parses a string into a Date object (RFC in JavaScript 1.0)*
+<i>// Parses a string into a Date object (RFC in JavaScript 1.0)</i>
 <b>var</b> local = <b>new</b> Date(&apos;Sun, 01 Jan 2012 00:00:00 -0600&apos;);
 local.toString() === &apos;Sun Jan 01 2012 00:00:00 GMT-0600 (Central
-Standard Time)&apos; *// true*
+Standard Time)&apos; // <i>true</i>
 
-*// Parses a string in no particular format, most of the time. Note
-that parsing*
+// <i>Parses a string in no particular format, most of the time. Note that parsing</i>
 
-*// logic in these cases is very implementation-dependent, and
-therefore can vary // across browsers and versions.*
+// <i>logic in these cases is very implementation-dependent, and
+therefore can vary // across browsers and versions.</i>
 
 <b>var</b> anything = <b>new</b> Date(&apos;11/12/2012&apos;); anything.toString()
-=== &apos;Mon Nov 12 2012 00:00:00 GMT-0600 (Central Standard Time)&apos; *//
+=== &apos;Mon Nov 12 2012 00:00:00 GMT-0600 (Central Standard Time)&apos; // <i>
 true, in Chrome 49 64-bit on Windows 10 in the en-US locale. Other
-versions in // other locales may get a different result.*
+versions in // other locales may get a different result.</i>
 
-*// Rolls values outside of a specified range to the next value.*
+// <i>Rolls values outside of a specified range to the next value.</i>
 
 <b>var</b> rollover = <b>new</b> Date(2012, 12, 32, 25, 62, 62, 1023);
 rollover.toString() === &apos;Sat Feb 02 2013 02:03:03 GMT-0600 (Central
-Standard Time)&apos; *// true; note that the month rolled over to Feb;
-first the month rolled over to*
+Standard Time)&apos; // <i>true; note that the month rolled over to Feb;
+first the month rolled over to</i>
 
-*// Jan based on the month 12 (11 being December), then again because
-of the day 32 // (January having 31 days).*
+// <i>Jan based on the month 12 (11 being December), then again because
+of the day 32 // (January having 31 days).</i>
 
-*// Special dates for years in the range 0-99*
+// <i>Special dates for years in the range 0-99</i>
 
 <b>var</b>
 special1
@@ -3116,7 +3094,7 @@ toString
 // true
 // If you actually wanted to set the year to the year 12 CE, you&apos;
 d need to use the
-*// setFullYear() method:*
+*// setFullYear() method:</i>
 special1.
 setFullYear
 (
@@ -3327,7 +3305,7 @@ day
 year
 ;
 }
-*//Foo lives in a country with timezone GMT + 1*
+*//Foo lives in a country with timezone GMT + 1</i>
 <b>var</b>
 birthday
 =
@@ -3380,8 +3358,8 @@ getTime
 ;
 Sample output:
 Foo was born on: Sat Jan 1 2000
-*//Meanwhile somewhere else&hellip;*
-*//Bar lives in a country with timezone GMT - 1*
+*//Meanwhile somewhere else&hellip;</i>
+*//Bar lives in a country with timezone GMT - 1</i>
 <b>var</b>
 birthday
 =
@@ -3509,7 +3487,7 @@ day
 year
 ;
 }
-*//Foo lives in a country with timezone GMT + 1*
+*//Foo lives in a country with timezone GMT + 1</i>
 <b>var</b>
 birthday
 =
@@ -3567,8 +3545,8 @@ getTime
 ;
 Sample output:
 Foo was born on: Sat Jan 1 2000
-*//Meanwhile somewhere else&hellip;*
-*//Bar lives in a country with timezone GMT - 1*
+*//Meanwhile somewhere else&hellip;</i>
+*//Bar lives in a country with timezone GMT - 1</i>
 <b>var</b>
 birthday
 =
@@ -3783,7 +3761,7 @@ getTime
 (
 )
 ;
-*//Alternatively*
+*//Alternatively</i>
 <b>var</b>
 timestamp2
 =
@@ -3794,13 +3772,13 @@ UTC
 console.log ( timestamp === timestamp2 );
 Sample output:
 <b>true</b>
-*//And when constructing a date from it elsewhere&hellip;*
+*//And when constructing a date from it elsewhere&hellip;</i>
 <b>var</b>
 otherDate
 = <b>new</b> Date ( timestamp ) ; 
-*//Represented as a universal date*
+*//Represented as a universal date</i>
 console.log ( otherDate. toUTCString ( ) );
-*//Represented as a local date*
+*//Represented as a local date</i>
 console.log ( otherDate ); 
 Sample output:
 Mon, 31 Jan 2000 12:00:00 GMT
@@ -3936,7 +3914,7 @@ The static method returns the number of milliseconds that have elapsed
 since 1 January 1970 00:00:00 UTC. To get the number of milliseconds
 that have elapsed since that time using an instance of a Date object,
 use its getTime method.
-*// get milliseconds using static method now of Date*
+*// get milliseconds using static method now of Date</i>
 console.
 log
 (
@@ -3947,7 +3925,7 @@ now
 )
 )
 ;
-*// get milliseconds using method getTime of Date instance*
+*// get milliseconds using method getTime of Date instance</i>
 console.
 log
 (
@@ -3960,8 +3938,8 @@ log
 Use () to generate a new Date object containing the current date and
 time.
 Date   () *called without arguments is equivalent    <b>new</b>   (   Date   .   now
-to*                                           Date                     
-*Note that* ())*.*
+to</i>                                           Date                     
+*Note that</i> ())*.</i>
 
 Once you have a date object, you can apply any of the several
 available methods to extract its properties (e.g.
@@ -3971,20 +3949,20 @@ getFullYear() to get the 4-digits year).
 Below are some common date methods.
 
 <b>Get the current year</b>
-<b>var</b> year = (**new** Date ( ) ) .getFullYear ( );
+<b>var</b> year = (<b>new</b> Date ( ) ) .getFullYear ( );
 console.log(year); // <i>Sample output: 2016</i>
-**Get the current month**
-**var** month = ( **new** Date ( ) ) . getMonth ( ) ;
+<b>Get the current month</b>
+<b>var</b> month = ( <b>new</b> Date ( ) ) . getMonth ( ) ;
 console.log(month);  // <i>Sample output: 0</i>
 Please note that 0 = January. This is because months range from *0* to
 *11*, so it is often desirable to add +1 to the index.
-**Get the current day**
+<b>Get the current day</b>
 *// Sample output: 31*
-**var**
+<b>var</b>
 day
 =
 (
-**new**
+<b>new</b>
 Date
 (
 )
@@ -4000,13 +3978,13 @@ log
 day
 )
 ;
-**Get the current hour**
+<b>Get the current hour</b>
 *// Sample output: 10*
-**var**
+<b>var</b>
 hours
 =
 (
-**new**
+<b>new</b>
 Date
 (
 )
@@ -4022,12 +4000,12 @@ log
 hours
 )
 ;
-**Get the current minutes**
-**var**
+<b>Get the current minutes</b>
+<b>var</b>
 minutes
 =
 (
-**new**
+<b>new</b>
 Date
 (
 )
@@ -4044,12 +4022,12 @@ minutes
 )
 ;
 *// Sample output: 39*
-**Get the current seconds**
-**var**
+<b>Get the current seconds</b>
+<b>var</b>
 seconds
 =
 (
-**new**
+<b>new</b>
 Date
 (
 )
@@ -4067,17 +4045,17 @@ second
 ;
 *// Sample output: 48*
 
-**Get the current milliseconds**
+<b>Get the current milliseconds</b>
 
 To get the milliseconds (ranging from 0 to 999) of an instance of a
 Date object, use its getMilliseconds method.
 
 *// Output: milliseconds right now*
-**var**
+<b>var</b>
 milliseconds
 =
 (
-**new**
+<b>new</b>
 Date
 (
 )
@@ -4093,11 +4071,11 @@ log
 milliseconds
 )
 ;
-**Convert the current time and date to a human-readable string**
-**var**
+<b>Convert the current time and date to a human-readable string</b>
+<b>var</b>
 now
 =
-**new**
+<b>new</b>
 Date
 (
 )
@@ -4124,13 +4102,13 @@ Date object, use its getTime method.
 console.log(Date.now());
 *// get milliseconds using method getTime of Date instance*
 
-console.log((**new** Date()).getTime());
+console.log((<b>new</b> Date()).getTime());
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-7">Section 8.7: Increment a Date Object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 To increment date objects in JavaScript, we can usually do this:
-**var** checkoutDate = **new** Date();
+<b>var</b> checkoutDate = <b>new</b> Date();
 
 *// Thu Jul 21 2016 10:05:13 GMT-0400 (EDT)*
 
@@ -4143,7 +4121,7 @@ It is possible to use setDate to change the date to a day in the
 following month by using a value larger than the number of days in the
 current month -
 
-**var** checkoutDate = **new** Date(); *// Thu Jul 21 2016 10:05:13
+<b>var</b> checkoutDate = <b>new</b> Date(); *// Thu Jul 21 2016 10:05:13
 GMT-0400 (EDT)* checkoutDate.setDate( checkoutDate.getDate() + 12 );
 
 console.log(checkoutDate); *// Tue Aug 02 2016 10:05:13 GMT-0400
@@ -4151,14 +4129,14 @@ console.log(checkoutDate); *// Tue Aug 02 2016 10:05:13 GMT-0400
 
 The same applies to other methods such as getHours(), getMonth(),etc.
 
-**Adding Work Days**
+<b>Adding Work Days</b>
 
 If you wish to add work days (in this case I am assuming Monday -
 Friday) you can use the setDate function although you need a little
 extra logic to account for the weekends (obviously this will not take
 account of national holidays) -
 
-**function**
+<b>function</b>
 addWorkDays
 (
 startDate
@@ -4168,7 +4146,7 @@ days
 {
 *// Get the day of the week as a number (0 = Sunday, 1 = Monday, &hellip;. 6
 = Saturday)*
-**var**
+<b>var</b>
 dow
 =
 startDate.
@@ -4176,13 +4154,13 @@ getDay
 (
 )
 ;
-**var**
+<b>var</b>
 daysToAdd
 =
 days
 ;
 *// If the current day is Sunday add one day*
-**if**
+<b>if</b>
 (
 dow
 ==
@@ -4194,7 +4172,7 @@ daysToAdd
 *// If the start date plus the additional days falls on or after the
 closest Saturday calculate*
 *weekends*
-**if**
+<b>if</b>
 (
 dow
 &plus;
@@ -4204,7 +4182,7 @@ daysToAdd
 )
 {
 *//Subtract days in current working week from work days*
-**var**
+<b>var</b>
 remainingWorkDays
 =
 daysToAdd
@@ -4220,7 +4198,7 @@ daysToAdd
 +=
 2
 ;
-**if**
+<b>if</b>
 (
 remainingWorkDays
 &gt;
@@ -4244,7 +4222,7 @@ remainingWorkDays
 ;
 *//Exclude final weekend if remainingWorkDays resolves to an exact
 number of weeks*
-**if**
+<b>if</b>
 (
 remainingWorkDays
 &percnt;
@@ -4269,17 +4247,17 @@ getDate
 daysToAdd
 )
 ;
-**return**
+<b>return</b>
 startDate
 ;
 }
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-8">Section 8.8: Convert to JSON</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-**var**
+<b>var</b>
 date1
 =
-**new**
+<b>new</b>
 Date
 (
 )
@@ -4298,18 +4276,18 @@ Returns: &quot;2016-04-14T23:49:08.596Z&quot;
 To check the equality of
 Date
 values:
-**var**
+<b>var</b>
 date1
 =
-**new**
+<b>new</b>
 Date
 (
 )
 ;
-**var**
+<b>var</b>
 date2
 =
-**new**
+<b>new</b>
 Date
 (
 date1.
@@ -4335,25 +4313,25 @@ valueOf
 )
 ;
 Sample output:
-**false**
+<b>false</b>
   valueOf                    () or              getTime
 
 Note that you must use () to compare the values of Date objects
 because the equality operator will compare if two object references
 are the same. For example:
 
-**var**
+<b>var</b>
 date1
 =
-**new**
+<b>new</b>
 Date
 (
 )
 ;
-**var**
+<b>var</b>
 date2
 =
-**new**
+<b>new</b>
 Date
 (
 )
@@ -4367,17 +4345,17 @@ date2
 )
 ;
 Sample output:
-**false**
+<b>false</b>
 Whereas if the variables point to the same object:
-**var**
+<b>var</b>
 date1
 =
-**new**
+<b>new</b>
 Date
 (
 )
 ;
-**var**
+<b>var</b>
 date2
 =
 date1
@@ -4391,22 +4369,22 @@ date2
 )
 ;
 Sample output:
-**true**
+<b>true</b>
 However, the other comparison operators will work as usual and you can
 use &lt; and &bsol;to compare that one date is earlier or later than the
 other. For example:
-**var**
+<b>var</b>
 date1
 =
-**new**
+<b>new</b>
 Date
 (
 )
 ;
-**var**
+<b>var</b>
 date2
 =
-**new**
+<b>new</b>
 Date
 (
 date1.
@@ -4426,20 +4404,20 @@ date2
 )
 ;
 Sample output:
-**true**
+<b>true</b>
 It works even if the operator includes equality:
-**var**
+<b>var</b>
 date1
 =
-**new**
+<b>new</b>
 Date
 (
 )
 ;
-**var**
+<b>var</b>
 date2
 =
-**new**
+<b>new</b>
 Date
 (
 date1.
@@ -4457,24 +4435,24 @@ date2
 )
 ;
 Sample output:
-**true**
+<b>true</b>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch9-2">Section 9.2: Date Difference Calculation</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 To compare the difference of two dates, we can do the comparison based
 on the timestamp.
-**var**
+<b>var</b>
 date1
 =
-**new**
+<b>new</b>
 Date
 (
 )
 ;
-**var**
+<b>var</b>
 date2
 =
-**new**
+<b>new</b>
 Date
 (
 date1.
@@ -4485,7 +4463,7 @@ valueOf
 5000
 )
 ;
-**var**
+<b>var</b>
 dateDiff
 =
 date1.
@@ -4498,7 +4476,7 @@ valueOf
 (
 )
 ;
-**var**
+<b>var</b>
 dateDiffInYears
 =
 dateDiff
@@ -4527,7 +4505,7 @@ dateDiffInYears
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-1">Section 10.1: Abstract equality / inequality and type conversion</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-**The Problem**
+<b>The Problem</b>
 The abstract equality and inequality operators (== and !=) convert
 their operands if the operand types do not match. This type coercion
 is a common source of confusion about the results of these operators,
@@ -4548,12 +4526,12 @@ expect.
 &quot;0&quot;
 ;
 *// false B*
-**false**
+<b>false</b>
 ==
 0
 ;
 *// true*
-**false**
+<b>false</b>
 ==
 &quot;0&quot;
 ;
@@ -4573,12 +4551,12 @@ expect.
 &quot;0&quot;
 ;
 *// true B*
-**false**
+<b>false</b>
 !=
 0
 ;
 *// false*
-**false**
+<b>false</b>
 !=
 &quot;0&quot;
 ;
@@ -4599,23 +4577,23 @@ Number
 *// 0*
 Number
 (
-**false**
+<b>false</b>
 )
 ;
 *// 0*
-**The Solution**
+<b>The Solution</b>
   
-  **false** B
+  <b>false</b> B
   &quot;&quot; == &quot;0&quot;
 In the statement , both the operands are strings (&quot;&quot; and &quot;0&quot;),
-hence there will be **no type conversion** and since &quot;&quot; and &quot;0&quot;
-are not the same value, is **false** as expected.
+hence there will be <b>no type conversion</b> and since &quot;&quot; and &quot;0&quot;
+are not the same value, is <b>false</b> as expected.
 
 One way to eliminate unexpected behavior here is making sure that you
 always compare operands of the same type. For example, if you want the
 results of numerical comparison use explicit conversion:
 
-**var**
+<b>var</b>
 test
 =
 (
@@ -4667,7 +4645,7 @@ test
 ;
 *// false as operands are not numbers*
 Or, if you want string comparison:
-**var**
+<b>var</b>
 test
 =
 (
@@ -4710,7 +4688,7 @@ test
 )
 ;
 *// false;*
-  Number         (   &quot;0&quot;   ) and        **new** Number           (   &quot;0&quot;
+  Number         (   &quot;0&quot;   ) and        <b>new</b> Number           (   &quot;0&quot;
 
 *Side-note*: ) isn&apos;t the same thing! While the former performs a type
 conversion,
@@ -4729,13 +4707,13 @@ Number
 )
 ;
 *// true;*
-**new**
+<b>new</b>
 Number
 (
 &quot;0&quot;
 )
 ==
-**new**
+<b>new</b>
 Number
 (
 &quot;0&quot;
@@ -4771,15 +4749,15 @@ Abstract Equality (==)
 
 Math                            .       sqrt
 
-**NaN** (&quot;**N**ot **a** **N**umber&quot;) is a special value defined by
+<b>NaN</b> (&quot;<b>N</b>ot <b>a</b> <b>N</b>umber&quot;) is a special value defined by
 the [*IEEE Standard for Floating-Point
 Arithmetic*](https://en.wikipedia.org/wiki/IEEE_floating_point), which
 is used when a non-numeric value is provided but a number is expected
 (1 &ast;), or when a calculation doesn&apos;t have a valid number result
 ((-1)).
 
-Any equality or relational comparisons with **NaN** returns **false**,
-even comparing it with itself. Because, **NaN** is supposed to denote
+Any equality or relational comparisons with <b>NaN</b> returns <b>false</b>,
+even comparing it with itself. Because, <b>NaN</b> is supposed to denote
 the result of a nonsensical computation, and as such, it isn't equal
 to the result of any other nonsensical computations.
 (
@@ -4788,64 +4766,64 @@ to the result of any other nonsensical computations.
 &quot;two&quot;
 )
 ===
-**NaN**
+<b>NaN</b>
 *//false*
-**NaN**
+<b>NaN</b>
 ===
 0
 ;
 *// false*
-**NaN**
+<b>NaN</b>
 ===
-**NaN**
+<b>NaN</b>
 ;
 *// false*
 Number
 .
-**NaN**
+<b>NaN</b>
 ===
-**NaN**
+<b>NaN</b>
 ;
 *// false*
-**NaN**
+<b>NaN</b>
 &lt;
 0
 ;
 *// false*
-**NaN**
+<b>NaN</b>
 &gt;
 0
 ;
 *// false*
-**NaN**
+<b>NaN</b>
 &gt;
 0
 ;
 *// false*
-**NaN**
+<b>NaN</b>
 &gt;=
-**NaN**
+<b>NaN</b>
 ;
 *// false*
-**NaN**
+<b>NaN</b>
 &gt;=
 &apos;two&apos;
 ;
 *// false*
 Non-equal comparisons will always return
-**true**
+<b>true</b>
 :
-**NaN** !== 0; *// true*
-**NaN** !== **NaN**; *// true*
-**Checking if a value is NaN** Version ≥ 6
+<b>NaN</b> !== 0; *// true*
+<b>NaN</b> !== <b>NaN</b>; *// true*
+<b>Checking if a value is NaN</b> Version ≥ 6
 
-You can test a value or expression for **NaN** by using the function
+You can test a value or expression for <b>NaN</b> by using the function
 Number.isNaN():
 Number
 .
 isNaN
 (
-**NaN**
+<b>NaN</b>
 )
 ;
 *// true*
@@ -4899,7 +4877,7 @@ Number
 .
 isNaN
 (
-**Infinity**
+<b>Infinity</b>
 )
 ;
 *// false*
@@ -4915,7 +4893,7 @@ Number
 .
 isNaN
 (
-**undefined**
+<b>undefined</b>
 )
 ;
 *// false*
@@ -4929,7 +4907,7 @@ isNaN
 ;
 *// false*
 Version &lt; 6
-You can check if a value is **NaN** by comparing it with itself:
+You can check if a value is <b>NaN</b> by comparing it with itself:
 value
 !==
 value
@@ -4946,12 +4924,12 @@ Number
 .
 isNaN
 &vert;&vert;
-**function**
+<b>function</b>
 (
 value
 )
 {
-**return**
+<b>return</b>
 value
 !==
 value
@@ -4960,13 +4938,13 @@ value
  
 isNaN
 
-By contrast, the global function () returns **true** not only for
-**NaN**, but also for any value or expression that cannot be coerced
+By contrast, the global function () returns <b>true</b> not only for
+<b>NaN</b>, but also for any value or expression that cannot be coerced
 into a number:
 
 isNaN
 (
-**NaN**
+<b>NaN</b>
 )
 ;
 *// true*
@@ -5000,7 +4978,7 @@ isNaN
 *// false*
 isNaN
 (
-**Infinity**
+<b>Infinity</b>
 )
 ;
 *// false*
@@ -5012,7 +4990,7 @@ isNaN
 *// true*
 isNaN
 (
-**undefined**
+<b>undefined</b>
 )
 ;
 *// true*
@@ -5028,8 +5006,8 @@ ECMAScript defines a "sameness" algorithm called SameValue which,
 since ECMAScript 6, can be invoked with
 Object   .   is   . Unlike the == and === comparison, using       Object   .   is
 
-() will treat **NaN** as identical with itself (and -0 as not
-**NaN** === **NaN** *// false*
+() will treat <b>NaN</b> as identical with itself (and -0 as not
+<b>NaN</b> === <b>NaN</b> *// false*
 identical with
 +0
 ):
@@ -5037,9 +5015,9 @@ Object
 .
 is
 (
-**NaN**
+<b>NaN</b>
 ,
-**NaN**
+<b>NaN</b>
 )
 *// true*
 Object
@@ -5061,7 +5039,7 @@ Version &lt; 6
 Object                                          .       is
 You can use the following polyfill for () (from
 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Polyfill_for_non-ES6_browsers)):
-**if**
+<b>if</b>
 (
 !
 Object
@@ -5073,7 +5051,7 @@ Object
 .
 is
 =
-**function**
+<b>function</b>
 (
 x
 ,
@@ -5081,7 +5059,7 @@ y
 )
 {
 *// SameValue algorithm*
-**if**
+<b>if</b>
 (
 x
 ===
@@ -5090,7 +5068,7 @@ y
 {
 *// Steps 1-5, 7-10*
 *// Steps 6.b-6.e: +0 != -0*
-**return**
+<b>return</b>
 x
 !==
 0
@@ -5104,10 +5082,10 @@ x
 y
 ;
 }
-**else**
+<b>else</b>
 {
 *// Step 6.a: NaN == NaN*
-**return**
+<b>return</b>
 x
 !==
 x
@@ -5120,12 +5098,12 @@ y
 }
 ;
 }
-**Points to note**
+<b>Points to note</b>
 NaN itself is a number, meaning that it does not equal to the string
 &quot;NaN&quot;, and most importantly (though perhaps unintuitively):
-**typeof**
+<b>typeof</b>
 (
-**NaN**
+<b>NaN</b>
 )
 ===
 &quot;number&quot;
@@ -5140,17 +5118,15 @@ operation does not change with the extra work.
 
 x && y
 
-In , y will not be evaluated if x evaluates to **false**, because the
-whole expression is guaranteed to be **false**.
+In , y will not be evaluated if x evaluates to <b>false</b>, because the
+whole expression is guaranteed to be <b>false</b>.
 x &vert;&vert; y
 
-In , y will not be evaluated if x evaluated to **true**, because the
-whole expression is guaranteed to be **true**. **Example with
-
-functions**
+In , y will not be evaluated if x evaluated to <b>true</b>, because the
+whole expression is guaranteed to be <b>true</b>. <b>Example with functions</b>
 
 Take the following two functions:
-**function**
+<b>function</b>
 T
 (
 )
@@ -5162,11 +5138,11 @@ log
 &quot;T&quot;
 )
 ;
-**return**
-**true**
+<b>return</b>
+<b>true</b>
 ;
 }
-**function**
+<b>function</b>
 F
 (
 )
@@ -5178,11 +5154,11 @@ log
 &quot;F&quot;
 )
 ;
-**return**
-**false**
+<b>return</b>
+<b>false</b>
 ;
 }
-***Example 1***
+<i><b>Example 1</b></i>
 T
 (
 )
@@ -5233,19 +5209,19 @@ T
 Output:
 &apos;F&apos;
 &apos;T&apos;
-**Short-circuiting to prevent errors**
-**var** obj; *// object has value of undefined* **if**(obj.property){
+<b>Short-circuiting to prevent errors</b>
+<b>var</b> obj; *// object has value of undefined* <b>if</b>(obj.property){
 }*// TypeError: Cannot read property &apos;property&apos; of undefined*
-**if**(obj.property && obj !== **undefined**){}*// Line A TypeError:
+<b>if</b>(obj.property && obj !== <b>undefined</b>){}*// Line A TypeError:
 Cannot read property &apos;property&apos; of undefined*
 Line A: if you reverse the order the first conditional statement will
 prevent the error on the second by not executing it if it would throw
 the error
-**if**
+<b>if</b>
 (
 obj
 !==
-**undefined**
+<b>undefined</b>
 &&
 obj.
 property
@@ -5254,24 +5230,24 @@ property
 }
 ;
 *// no error thrown*
-But should only be used if you expect **undefined**
+But should only be used if you expect <b>undefined</b>
 
-**if**(**typeof** obj === &quot;object&quot; && obj.property){}; *// safe
+<b>if</b>(<b>typeof</b> obj === &quot;object&quot; && obj.property){}; *// safe
 option but slower*
 
-**Short-circuiting to provide a default value**
+<b>Short-circuiting to provide a default value</b>
 
 The &vert;&vert; operator can be used to select either a &quot;truthy&quot; value, or
 the default value.
 
 For example, this can be used to ensure that a nullable value is
 converted to a non-nullable value:
-**var**
+<b>var</b>
 nullableObj
 =
-**null**
+<b>null</b>
 ;
-**var**
+<b>var</b>
 obj
 =
 nullableObj
@@ -5280,7 +5256,7 @@ nullableObj
 }
 ;
 *// this selects {}*
-**var**
+<b>var</b>
 nullableObj2
 =
 {
@@ -5289,7 +5265,7 @@ x
 5
 }
 ;
-**var**
+<b>var</b>
 obj2
 =
 nullableObj2
@@ -5298,7 +5274,7 @@ nullableObj2
 }
 *// this selects {x: 5}*
 Or to return the first truthy value
-**var**
+<b>var</b>
 truthyValue
 =
 {
@@ -5307,7 +5283,7 @@ x
 10
 }
 ;
-**return**
+<b>return</b>
 truthyValue
 &vert;&vert;
 {
@@ -5317,17 +5293,17 @@ truthyValue
 The same can be used to fall back multiple times:
 envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue *// select the
 first &quot;truthy&quot; of these*
-**Short-circuiting to call an optional function**
+<b>Short-circuiting to call an optional function</b>
 The && operator can be used to evaluate a callback, only if it is
 passed:
-**function**
+<b>function</b>
 myMethod
 (
 cb
 )
 {
 *// This can be simplified*
-**if**
+<b>if</b>
 (
 cb
 )
@@ -5347,40 +5323,40 @@ cb
 }
 
 Of course, the test above does not validate that cb is in fact a
-**function** and not just an Object/Array/String/Number.
+<b>function</b> and not just an Object/Array/String/Number.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-4">Section 10.4: Null and Undefined</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-**The differences between null and undefined null** and **undefined**
+<b>The differences between null and undefined null</b> and <b>undefined</b>
 share abstract equality == but not strict equality ===,
-**null**
+<b>null</b>
 ==
-**undefined**
+<b>undefined</b>
 *// true*
-**null**
+<b>null</b>
 ===
-**undefined**
+<b>undefined</b>
 *// false*
 They represent slightly different things:
-**undefined** represents the *absence of a value*, such as before an
+<b>undefined</b> represents the *absence of a value*, such as before an
 identifier/Object property has been created or in the period between
 identifier/Function parameter creation and it&apos;s first set, if any.
 
-**null** represents the ***intentional** absence of a value* for an
+<b>null</b> represents the <b>*intentional</b> absence of a value* for an
 identifier or property which has already been created.
 
 They are different types of syntax:
 
-**undefined** is a *property of the global Object*, usually immutable
+<b>undefined</b> is a *property of the global Object*, usually immutable
 in the global scope. This means anywhere you can define an identifier
-other than in the global namespace could hide **undefined** from that
-scope (although things can still **be** **undefined**) **null** is a
+other than in the global namespace could hide <b>undefined</b> from that
+scope (although things can still <b>be</b> <b>undefined</b>) <b>null</b> is a
 *word literal*, so it&apos;s meaning can never be changed and attempting
-to do so will throw an *Error*. **The similarities between null and
-undefined null** and **undefined** are both falsy.
-**if**
+to do so will throw an *Error*. <b>The similarities between null and
+undefined null</b> and <b>undefined</b> are both falsy.
+<b>if</b>
 (
-**null**
+<b>null</b>
 )
 console.
 log
@@ -5388,9 +5364,9 @@ log
 &quot;won&apos;t be logged&quot;
 )
 ;
-**if**
+<b>if</b>
 (
-**undefined**
+<b>undefined</b>
 )
 console.
 log
@@ -5398,41 +5374,41 @@ log
 &quot;won&apos;t be logged&quot;
 )
 ;
-Neither **null** or **undefined** equal **false** (see [this
+Neither <b>null</b> or <b>undefined</b> equal <b>false</b> (see [this
 question](http://stackoverflow.com/q/19277458/220060)).
-**false**
+<b>false</b>
 ==
-**undefined**
+<b>undefined</b>
 *// false*
-**false**
+<b>false</b>
 ==
-**null**
+<b>null</b>
 *// false*
-**false**
+<b>false</b>
 ===
-**undefined**
+<b>undefined</b>
 *// false*
-**false**
+<b>false</b>
 ===
-**null**
+<b>null</b>
 *// false*
-**Using**
-**undefined**
+<b>Using</b>
+<b>undefined</b>
   
-**void**
+<b>void</b>
 foo.bar
-**typeof** foo
+<b>typeof</b> foo
 If the current scope can&apos;t be trusted, use something which evaluates
 to *undefined*, for example 0;.
 
-If **undefined** is shadowed by another value, it&apos;s just as bad as
+If <b>undefined</b> is shadowed by another value, it&apos;s just as bad as
 shadowing Array or Number.
 
-Avoid *setting* something as **undefined**. If you want to remove a
-property *bar* from an *Object* foo, **delete** ; instead.
+Avoid *setting* something as <b>undefined</b>. If you want to remove a
+property *bar* from an *Object* foo, <b>delete</b> ; instead.
 
-Existence testing identifier foo against **undefined** **could throw a
-Reference Error**, use against &quot;undefined&quot; instead.
+Existence testing identifier foo against <b>undefined</b> <b>could throw a
+Reference Error</b>, use against &quot;undefined&quot; instead.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-5">Section 10.5: Abstract Equality (==)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -5441,9 +5417,9 @@ converted to a common type. How this conversion happens is based on
 the specification of the operator:
 [Specification for the ==
 operator:](https://tc39.github.io/ecma262/#sec-abstract-equality-comparison)
-**7.2.13 Abstract Equality Comparison**
+<b>7.2.13 Abstract Equality Comparison</b>
   x == y
-The comparison , where x and y are values, produces **true** or
+The comparison , where x and y are values, produces <b>true</b> or
 **false**. Such a comparison is performed as follows:
   Type        &lpar;x&rpar; is the same as                            Type
 1.  If (y), then:
@@ -5796,16 +5772,16 @@ then
 **true**, for any value x
 
 [Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation): ) is
-**true**, for any values x and y.
+<b>true</b>, for any values x and y.
 
 [Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation): If )
-is also **true**, for any values x, y and z.
+is also <b>true</b>, for any values x, y and z.
 
-[**SameValueZero**](http://www.ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+[<b>SameValueZero</b>](http://www.ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
 
 It behaves like SameValue, but considers +0 and -0 to be equal.
 
-  Array          .   **prototype**              .   includes
+  Array          .   <b>prototype</b>              .   includes
 
 You can use this comparison algorithm via (ECMAScript 7).
 
@@ -5833,17 +5809,17 @@ includes
 ;
 *// true*
 &lbrack;
-**NaN**
+<b>NaN</b>
 &rbrack;
 .
 includes
 (
-**NaN**
+<b>NaN</b>
 )
 ;
 *// true*
 &lbrack;
-**true**
+<b>true</b>
 &rbrack;
 .
 includes
@@ -5853,7 +5829,7 @@ includes
 ;
 *// false*
 &lbrack;
-**false**
+<b>false</b>
 &rbrack;
 .
 includes
@@ -5873,12 +5849,12 @@ includes
 ;
 *// false*
 &lbrack;
-**null**
+<b>null</b>
 &rbrack;
 .
 includes
 (
-**undefined**
+<b>undefined</b>
 )
 ;
 *// false*
@@ -5898,7 +5874,7 @@ This algorithm still has the properties of an [equivalence
 relation](https://en.wikipedia.org/wiki/Equivalence_relation):
   includes
   
-  includes      &lpar;y&rpar; is **true** if, and only if, &lbrack;y&rbrack;.   includes
+  includes      &lpar;y&rpar; is <b>true</b> if, and only if, &lbrack;y&rbrack;.   includes
   
   includes   &lpar;y&rpar; and      includes   &lpar;z&rpar; are <b>true</b>, then  includes
              &lbrack;y&rbrack;.                    &lbrack;x&rbrack;.                    
