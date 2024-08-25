@@ -2279,10 +2279,10 @@ and &quot;. These use backticks (&grave;) instead of single or double quotes.</p
 <b>function</b> wordCount( val ){
   <b>var</b> wom = val.match(<i>/&bsol;&bsol;S+/g</i>);
   <b>return</b> {
-    charactersNoSpaces: val.replace(<i>/&bsol;&bsol;s+/g</i>, &apos;&apos;).length,
+    charactersNoSpaces: val.replace(<i>/&bsol;s+/g</i>, &apos;&apos;).length,
     characters        : val.length,
-    words             : wom ? wom.length :0,
-    lines             : val.split(<i>/&bsol;&bsol;r&ast;&bsol;&bsol;n/</i>).length
+    words             : wom ? wom.length : 0,
+    lines             : val.split(<i>/&bsol;&bsol;r&ast;&bsol;n/</i>).length
   };
 }
 // <i>Use like:</i>
@@ -2296,7 +2296,7 @@ wordCount( someMultilineText ).words;  // <i>(Number of words)</i>
 <p>To trim whitespace from the edges of a string, use String.prototype.trim:</p>
 
 <pre>
-&quot;   some whitespaced string   &quot;.trim(); // <i>&quot;some whitespaced string&quot;</i>
+&quot;   some whitespaced string   &quot;.trim();  // <i>&quot;some whitespaced string&quot;</i>
 </pre>
 
 <p>Many JavaScript engines, but <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/TrimLeft#Browser_compatibility">not Internet Explorer</a>,
@@ -2307,12 +2307,12 @@ trimEnd methods, aliased to trimLeft and trimRight for compatibility.</p>
 
 <pre>
 // <i>Stage 1 proposal</i>
-&quot;   this is me   &quot;.trimStart();  // <i>&quot;this is me &quot;</i>
-&quot;   this is me   &quot;.trimEnd();  // <i>&quot; this is me&quot;</i>
+&quot;    this is me    &quot;.trimStart();  // <i>&quot;this is me    &quot;</i>
+&quot;    this is me    &quot;.trimEnd();  // <i>&quot;    this is me&quot;</i>
 
 // <i>Non-standard methods, but currently implemented by most engines</i>
-&quot;   this is me   &quot;.trimLeft();  // <i>&quot;this is me &quot;</i>
-&quot;   this is me   &quot;.trimRight();  // <i>&quot; this is me&quot;</i>
+&quot;    this is me    &quot;.trimLeft();  // <i>&quot;this is me    &quot;</i>
+&quot;    this is me    &quot;.trimRight();  // <i>&quot;    this is me&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-8">Section 7.8: Splitting a string into an array</h3>
@@ -2327,7 +2327,7 @@ s&period;split(&quot;, &quot;);  // <i>&lbrack;&quot;one&quot;, &quot;two&quot;,
 <p>Use the <b>array method</b>.join to go back to a string:</p>
 
 <pre>
-s&period;split(&quot;, &quot;).join(&quot;&minus;&minus;quot;);  // <i>&quot;one&minus;&minus;two&minus;&minus;three&minus;&minus;four&minus;&minus;five&quot;</i>
+s&period;split(&quot;, &quot;).join(&quot;&minus;&minus;&quot;);  // <i>&quot;one&minus;&minus;two&minus;&minus;three&minus;&minus;four&minus;&minus;five&quot;</i>
 </pre>
 <!-- page 42 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2356,12 +2356,12 @@ data, use Typed Arrays.</p>
 <b>typeof</b> anObj === &quot;string&quot;;    // <i>false</i>
 </pre>
 
-<p>If you ever have a String object, via new String("somestr"), then the above will not 
+<p>If you ever have a String object, via <b>new</b> String("somestr"), then the above will not 
 work. In this instance, we can use <b>instanceof</b>:</p>
 
 <pre>
 <b>var</b> aStringObj = <b>new</b> String(&quot;my string&quot;);
-aStringObj <b>instanceof</b> String;  // <i>true</i>
+aStringObj <b>instanceof</b> String;   // <i>true</i>
 </pre>
 
 <p>To cover both instances, we can write a simple helper function:</p>
@@ -2372,10 +2372,10 @@ aStringObj <b>instanceof</b> String;  // <i>true</i>
 };
 <b>var</b> aString = &quot;Primitive String&quot;;
 <b>var</b> aStringObj = <b>new</b> String(&quot;String Object&quot;);
-isString(aString);  // <i>true</i>
+isString(aString); // <i>true</i>
 isString(aStringObj); // <i>true</i>
-isString({});  // <i>false</i>
-isString(5);   // <i>false</i>
+isString({}); // <i>false</i>
+isString(5); // <i>false</i>
 </pre>
 
 <p>Or we can make use of toString function of Object. This can be useful
@@ -2441,7 +2441,7 @@ position of the character is passed as a parameter to charCodeAt:</p>
 <p>Some Unicode symbols don&apos;t fit in a single character, and instead
 require two UTF-16 surrogate pairs to encode. This is the case of
 character codes beyond 216 - 1 or 63553. These extended character
-codes or <i>code point<i> values can be retrieved with codePointAt:</p>
+codes or <i>code point</i> values can be retrieved with codePointAt:</p>
 
 <pre>
 // <i>The Grinning Face Emoji has code point 128512 or 0x1F600</i>
@@ -2537,7 +2537,7 @@ searchstring or -1 if not found.</p>
 
 <pre>
 <b>var</b> string = &quot;Hello, World!&quot;; 
-console.log( string.lastIndexOf(&quot;o&quot;)); // <i>8</i>
+console.log( string.lastIndexOf(&quot;o&quot;));    // <i>8</i>
 console.log( string.lastIndexOf(&quot;foo&quot;));  // <i>-1</i>
 </pre>
 
@@ -2554,7 +2554,7 @@ string, starting from index start (defaults to 0). This is better than
 <pre>
 <b>var</b> string = &quot;Hello, World!&quot;;
 console.log( string.includes(&quot;Hello&quot;) ); // <i>true</i>
-console.log( string.includes(&quot;foo&quot;));  // <i>false</i>
+console.log( string.includes(&quot;foo&quot;));   // <i>false</i>
 </pre>
 <!-- page 45 -->
 
