@@ -4314,14 +4314,14 @@ relation</a>:</p>
 <p>Examples:</p>
 
 <pre>
-1 == 1;           // <i>true</i>
-&plus;0 == &minus;0;        // <i>true</i>
-<b>NaN</b> == <b>NaN</b>;     // <i>false</i>
-<b>true</b> == &quot;true&quot;;  // <i>false</i>
-<b>false</b> == 0;     // <i>true</i>
-1 == &quot;1&quot;;      // <i>true</i>
+1 == 1;               // <i>true</i>
+&plus;0 == &minus;0;            // <i>true</i>
+<b>NaN</b> == <b>NaN</b>;          // <i>false</i>
+<b>true</b> == &quot;true&quot;;      // <i>false</i>
+<b>false</b> == 0;          // <i>true</i>
+1 == &quot;1&quot;;           // <i>true</i>
 <b>null</b> == <b>undefined</b>;  // <i>true</i>
-&lbrack;&rbrack; == &lbrack;&rbrack;;&nbsp;&nbsp;&nbsp;// <i>false</i>
+&lbrack;&rbrack; == &lbrack;&rbrack;;&nbsp;&nbsp;&nbsp;//        <i>false</i>
 </pre>
 
 <p>This algorithm has the following property:</p>
@@ -4344,7 +4344,7 @@ relation</a>:</p>
 <pre>
 1 &lt; 2         // <i>true</i>
 2 &lt;= 2        // <i>true</i>
-3 &gt;= 5        // <i>false</i>
+3 &gt;= 5       // <i>false</i>
 <b>true</b> &lt; <b>false</b> // <i>false (implicitly converted to numbers, 1 &bsol;0)</i>
 </pre>
 
@@ -4361,7 +4361,7 @@ relation</a>:</p>
 converted to a number before comparison:</p>
 
 <pre>
-&apos;1&apos; &lt; 2      // <i>true</i>
+&apos;1&apos; &lt; 2     // <i>true</i>
 &apos;3&apos; &gt; 2     // <i>true</i>
 <b>true</b> &gt; &apos;2&apos;  // <i>false (true implicitly converted to number, 1 &lt; 2)</i>
 </pre>
@@ -4391,8 +4391,8 @@ converted to a number before comparison. So <b>null</b> is particular case
 because Number(<b>null</b>);//0</p>
 
 <pre>
-<b>new</b> Date(2015) &lt; 1479480185280          // <i>true</i>
-<b>null</b> &gt; &minus;1                             // <i>true</i>
+<b>new</b> Date(2015) &lt; 1479480185280             // <i>true</i>
+<b>null</b> &gt; &minus;1                                 // <i>true</i>
 ({toString:<b>function</b>(){<b>return</b> 123}}) &gt; 122 // <i>true</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -4408,7 +4408,7 @@ have different internal references in memory, then <b>false</b> will be returned
 
 <pre>
 1 != &apos;1&apos;  // <i>false</i>
-1 != 2      // <i>true</i>
+1 != 2    // <i>true</i>
 </pre>
 
 <p>In the sample above, 1 != '1' is <b>false</b> because, a primitive number type
@@ -4422,8 +4422,8 @@ the operands are not equal or if their types do not match.</p>
 
 <pre>
 1 !== &apos;1&apos;     // <i>true</i>
-1 !== 2          // <i>true</i>
-1 !== 1          // <i>false</i>
+1 !== 2      // <i>true</i>
+1 !== 1      // <i>false</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-13">Section 10.13: List of Comparison Operators</h3>
@@ -4489,7 +4489,7 @@ if statements.</p>
 
 <pre>
 <b>if</b> ((age &gt;= 18 && height &gt;= 5.11) &vert;&vert; (status === &apos;royalty&apos; && hasInvitation)) {
-console.log(&apos;You can enter our club&apos;);
+  console.log(&apos;You can enter our club&apos;);
 }
 </pre>
 
