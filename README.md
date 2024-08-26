@@ -3364,7 +3364,7 @@ its properties (e.g. getFullYear() to get the 4-digits year).</p>
 console.log(year);
 // <i>Sample output: 2016</i>
 </pre>
-
+<!-- page 56 -->
 <p><b>Get the current month</b></p>
 <pre>
 <b>var</b> month = (<b>new</b> Date()).getMonth();
@@ -3442,12 +3442,10 @@ console.log((<b>new</b> Date()).getTime());
 
 <pre>
 <b>var</b> checkoutDate = <b>new</b> Date(); // <i>Thu Jul 21 2016 10:05:13 GMT-0400 (EDT)</i>
-
 checkoutDate.setDate (checkoutDate.getDate() &plus; 1);
-
 console.log(checkoutDate); // <i>Fri Jul 22 2016 10:05:13 GMT-0400 (EDT)</i>
 </pre>
-
+<!-- page 57 -->
 <p>It is possible to use setDate to change the date to a day in the
 following month by using a value larger than the number of days in the
 current month.</p>
@@ -3505,6 +3503,7 @@ date1.toJSON();
 <blockquote>
 Returns: &quot;2016-04-14T23:49:08.596Z&quot;
 </blockquote>
+<!-- page 58 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch9">Chapter 9: Date Comparison</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -3519,13 +3518,8 @@ console.log(date1.valueOf() === date2.valueOf());
 </pre>
 
 <blockquote>
-<p>Sample output: <b>false</b>
+Sample output: <b>false</b>
 </blockquote>
-
-<pre>
-<b>false</b>
-  valueOf() or getTime
-</pre>
 
 <p>Note that you must use () to compare the values of Date objects
 because the equality operator will compare if two object references
@@ -3537,26 +3531,21 @@ are the same. For example:</p>
 console.log(date1 === date2);
 </pre>
 
-<p>Sample output:</p>
-
-<pre>
-<b>false</b>
-<pre>
+<blockquote>
+Sample output: <b>false</b>
+</blockquote>
 
 <p>Whereas if the variables point to the same object:</p>
 
 <pre>
-<b>var</b>
-date1
-=
-<b>new</b> Date();
+<b>var</b> date1 = <b>new</b> Date();
 <b>var</b> date2 = date1;
 console.log(date1 === date2);
 </pre>
 
-<p>Sample output:</p>
-
-<pre><b>true</b></pre>
+<blockquote>
+Sample output: <b>true</b>
+</blockquote>
 
 <p>However, the other comparison operators will work as usual and you can
 use &lt; and &bsol;to compare that one date is earlier or later than the
@@ -3568,9 +3557,9 @@ other. For example:</p>
 console.log(date1 &lt; date2);
 </pre>
 
-<p>Sample output:</p>
-
-<pre><b>true</b></pre>
+<blockquote>
+Sample output: <b>true</b>
+</blockquote>
 
 <p>It works even if the operator includes equality:</p>
 
@@ -3580,17 +3569,19 @@ console.log(date1 &lt; date2);
 console.log( date1 &lt;= date2);
 </pre>
 
-<p>Sample output:</p>
-
-<pre><b>true</b></pre>
+<blockquote>
+Sample output: <b>true</b>
+</blockquote>
+<!-- page 59 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch9-2">Section 9.2: Date Difference Calculation</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-To compare the difference of two dates, we can do the comparison based
-on the timestamp.
+<p>To compare the difference of two dates, we can do the comparison based
+on the timestamp.</p>
 <pre>
 <b>var</b> date1 = <b>new</b> Date();
 <b>var</b> date2 = <b>new</b> Date(date1.valueOf() &plus; 5000);
+
 <b>var</b> dateDiff = date1.valueOf() &minus; date2.valueOf();
 <b>var</b> dateDiffInYears = dateDiff / 1000 / 60 / 60 / 24 / 365; // <i>convert milliseconds into years</i>
 console.log( &quot;Date difference in years : &quot; &plus; dateDiffInYears);
@@ -3600,12 +3591,12 @@ console.log( &quot;Date difference in years : &quot; &plus; dateDiffInYears);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-1">Section 10.1: Abstract equality / inequality and type conversion</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<b>The Problem</b>
-The abstract equality and inequality operators (== and !=) convert
+<p><b>The Problem</b></p>
+<p>The abstract equality and inequality operators (== and !=) convert
 their operands if the operand types do not match. This type coercion
 is a common source of confusion about the results of these operators,
 in particular, these operators aren&apos;t always transitive as one would
-expect.
+expect.</p>
 
 <pre>
 &quot;&quot; == 0;  // <i>true A</i>
@@ -3630,14 +3621,10 @@ Number( <b>false</b> );  // <i>0</i>
 </pre>
 
 <p><b>The Solution</b></p>
-  
-<b>false</b> B
 
-<pre>&quot;&quot; == &quot;0&quot;</pre>
-
-<p>In the statement , both the operands are strings (&quot;&quot; and &quot;0&quot;),
+<p>In the statement <b>false B</b>, both the operands are strings (&quot;&quot; and &quot;0&quot;),
 hence there will be <b>no type conversion</b> and since &quot;&quot; and &quot;0&quot;
-are not the same value, is <b>false</b> as expected.</p>
+are not the same value, &quot;&quot; == &quot;0&quot; is <b>false</b> as expected.</p>
 
 <p>One way to eliminate unexpected behavior here is making sure that you
 always compare operands of the same type. For example, if you want the
@@ -3660,13 +3647,9 @@ test(&quot;0&quot;, 0);  // <i>true</i>
 test(&quot;&quot;, &quot;0&quot;);  // <i>false;</i>
 </pre>
 
-<!-- Number         (   &quot;0&quot;   ) and        <b>new</b> Number           (   &quot;0&quot; -->
-
-</i>Side-note</i>: ) isn&apos;t the same thing! While the former performs a type
-conversion,
-
-<p>the latter will create a new object. Objects are compared by reference
-and not by value which explains the results below.</p>
+<p></i>Side-note</i>: Number(&quot;0&quot;) and <b>new Number(&quot;0&quot;) isn&apos;t the same thing! 
+While the former performs a type conversion, the latter will create a new object. Objects are 
+compared by reference and not by value which explains the results below.</p>
 
 <pre>
 Number(&quot;0&quot;) == Number(&quot;0&quot;);  // <i>true;</i>
@@ -3677,37 +3660,21 @@ Number(&quot;0&quot;) == Number(&quot;0&quot;);  // <i>true;</i>
 operators which will not perform any implicit type conversions.</p>
 
 <pre>
-&quot;&quot;
-===
-0
-;
-// <i>false</i>
-0
-===
-&quot;0&quot;
-;
-// <i>false</i>
-&quot;&quot;
-===
-&quot;0&quot;
-;
-// <i>false</i>
+&quot;&quot; === 0; // <i>false</i>
+0 === &quot;0&quot;; // <i>false</i>
+&quot;&quot; === &quot;0&quot;; // <i>false</i>
 </pre>
 
 <p>Further reference to this topic can be found here:</p>
 
-<!-- 
-[Which equals operator (== vs ===) should be used in JavaScript
-comparisons?]
-(http://stackoverflow.com/questions/359494/does-it-matter-which-equals-operator-vs-i-use-in-javascript-comparisons).
-Abstract Equality (==)
--->
+<p><a href="http://stackoverflow.com/questions/359494/does-it-matter-which-equals-operator-vs-i-use-in-javascript-comparisons">
+Which equals operator (== vs ===) should be used in JavaScript comparisons?</a>.</p>
+
+<p>Abstract Equality (==)</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-2">Section 10.2: NaN Property of the Global Object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-&quot;two&quot;
-Math.sqrt
 
 <b>NaN</b> (&quot;<b>N</b>ot <b>a</b> <b>N</b>umber&quot;) is a special value defined by
 the &lbrack;<i>IEEE Standard for Floating-Point
