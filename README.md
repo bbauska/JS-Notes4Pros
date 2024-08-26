@@ -3297,6 +3297,10 @@ you might want to consider creating a custom Date object that looks like this:</
   title="DateObject function"
   alt="DateObject function."
   style="border: 2px solid #000000; width:7.48in;" />
+<img src="./images/image025b.png"
+  title="DateObject function, pg2"
+  alt="DateObject function, pg2."
+  style="border: 2px solid #000000; width:7.48in;" />
 <!-- ![](./images/image025.png){width="7.486805555555556in" height="4.675694444444445in"} -->
 <!-- page 55 -->
 <p>If you included that code and executed new DateObject() on January 20 ʰ, 2019, it
