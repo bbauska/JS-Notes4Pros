@@ -81,6 +81,7 @@ console.log("Hello, World!");
 
 <p>This will log the following to the console:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 02.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image002.jpg"
   title=""
@@ -106,6 +107,7 @@ console.log(foo);
 <p>This will log the following to the console:</p>
 <!-- page 2 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 03. example foobar console (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image003.jpg"
   title="foobar console example."
@@ -128,6 +130,7 @@ console.log("thisVar:", thisVar, "and thatVar:", thatVar);
 <p>This will log the following to the console:</p>
 <!-- page 3 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 04. thisVar and thatVar (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image004.jpg"
   title="thisVar and thatVar"
@@ -147,6 +150,7 @@ console.log ("%s, %s!", greet, who);
 
 <p>This will log the following to the console:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 05. greet Hello, World (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image005.jpg"
   title="greet Hello, World"
@@ -176,7 +180,7 @@ console.log ( {
 <!-- page 4 -->
 <p>This will log the following to the console:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 06.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image006.jpg"
   title=" "
@@ -196,6 +200,7 @@ console.log(document.body);
 
 <p>This will log the following to the console:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 07.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image007.jpg"
   title=" "
@@ -291,6 +296,7 @@ method parameter is displayed to the user in <b>plain</b> text:</p>
 
 <p>In Chrome, that would produce a pop-up like this:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 08.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image008.png"
   title=" "
@@ -353,6 +359,7 @@ console.log(age); // <i>Prints the value inserted by the user</i>
 </pre>
 <!-- page 7 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 09.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image009.png"
   title=" "
@@ -400,6 +407,7 @@ dangerous operation like deleting something in a Control Panel:</p>
 
 <p>The output of that code would look like this in the browser:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 10.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image010.jpg"
   title=" "
@@ -695,6 +703,7 @@ ECMA-262 20.1.2.4</a>:</p>
 
 <p>Some examples:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 11. examples: Number.isNaN (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image011.png"
   title="Examples; Number.isNaN"
@@ -1096,6 +1105,7 @@ after that.</p>
 <p>Opening the "Console" panel in Safari's <b>Web Inspector</b> you must
 first enable the develop menu in Safari&apos;s Preferences</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 12.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="center">
   <img src="./images/image012.png"
   title=""
@@ -1252,6 +1262,7 @@ which allow fine-grained control over the formatting of that string:</p>
 
 <p>Displays:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 13.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image013.jpg"
   title=" "
@@ -1283,6 +1294,7 @@ console.log("%cHello %cWorld%c!!", // <i>string to be printed</i>
 
 <p>Displays:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 14.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image014.jpg"
   title=" "
@@ -1315,6 +1327,7 @@ debugging console with the following methods:</p>
 
 <p>Groups can be cascaded to allow multiple indented output or collapsible layers within each other:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 15/16.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="center">
   <img src="./images/image015.jpg"
   title=" "
@@ -1425,6 +1438,7 @@ sec ();</pre>
 sec
 (anonymous <b>function</b>)</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 17.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image017.jpg"
   title=" "
@@ -1527,6 +1541,7 @@ console.log(e&period;stack);
 <p>displays like:</p>
 <!-- page 28 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 18.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image018.jpg"
   title=" "
@@ -1686,6 +1701,7 @@ console.dir (myObject);
 
 <p>displays:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 19.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image019.jpg"
   title=" "
@@ -1704,6 +1720,7 @@ and XML elements is equivalent to calling console.log().</p>
 
 <p>displays:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 20.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image020.jpg"
   title=" "
@@ -1719,6 +1736,7 @@ console.log(document)
 
 <p>displays:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 21.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image021.jpg"
   title=" "
@@ -1740,6 +1758,7 @@ console.dirxml ( myObject );
 
 <p>displays:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 22.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image022.jpg"
   title=" "
@@ -1754,6 +1773,7 @@ Otherwise, if the assertion is <b>true</b>, this does nothing.</p>
 
 <pre>console.assert ( &apos;one&apos; === 1 );</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 23.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image023.png"
   title=" "
@@ -1764,11 +1784,12 @@ Otherwise, if the assertion is <b>true</b>, this does nothing.</p>
 strings or other objectsthat will only be printed if the assertion
 is <b>false</b>:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 24.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image024.jpg"
   title=" "
   alt="."
-  style="border: 2px solid #000000; width:6.5in;" />
+  style="border: 2px solid #000000; width:6.468in;" />
 <!-- ![](./images/image024.jpg){width="6.46875in" height="1.2069444444444444in"} -->
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/console/assert">console.assert</a> does 
 <i>not</i> throw an AssertionError (except in Node.js), meaning that this method is incompatible 
@@ -2774,7 +2795,7 @@ Time Zone of the US, during Daylight Time, Date.<b>prototype</b>.toISOString
 as evidenced by the code. Where comparison with UTC was instructive, 
 Date.prototype.toISOString() was used to show the date and time in UTC 
 (the Z in the formatted string denotes UTC).</p>
-
+<!-- page 48 -->
 <pre>
 // <i>Creates a Date object with the current date and time from the </i>
 // <i>user&apos;s browser</i>
@@ -2847,6 +2868,7 @@ special1.setFullYear(12);
 special1.toString() === &apos;Sun Jan 01    12 00:00:00 GMT-0600 (Central Standard Time)&grave;
 // true
 </pre>
+<!-- page 49 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-2">Section 8.2: Convert to a string format</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -3213,10 +3235,11 @@ Date.<b>prototype</b>.toLocaleDateString
 <p>If Date.prototype.toLocalDateString() isn&apos;t flexible enough to fulfill whatever need you may have,
 you might want to consider creating a custom Date object that looks like this:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 25. DateObject (54) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image025.png"
-  title=" "
-  alt="."
+  title="DateObject function"
+  alt="DateObject function."
   style="border: 2px solid #000000; width:7.48in;" />
 <!-- ![](./images/image025.png){width="7.486805555555556in" height="4.675694444444445in"} -->
 <!-- page 55 -->
@@ -3244,37 +3267,26 @@ year: 2019
 20-01-2016
 </pre>
 
-(&ast;) [<b>According to the
-MDN</b>](http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean),
-&quot;modern browsers&quot; means Chrome 24+, Firefox 29+, IE11, Edge12+,
-Opera 15+ & Safari [<b>nightly
-build</b>](http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean)
+<p>(&ast;) <a href="http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean">
+<b>According to the MDN</b></a>, &quot;modern browsers&quot; means Chrome 24+, Firefox 29+, 
+IE11, Edge12+, Opera 15+ & Safari 
+<a href="http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean">
+<b>nightly build</b></a>.</p>
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-5">Section 8.5: Get the number of milliseconds elapsed since 1 January 1970 00:00:00 UTC</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-  Date                                .        now
-The static method returns the number of milliseconds that have elapsed
+<p>The static method Date.now returns the number of milliseconds that have elapsed
 since 1 January 1970 00:00:00 UTC. To get the number of milliseconds
 that have elapsed since that time using an instance of a Date object,
-use its getTime method.
+use its getTime method.</p>
+<pre>
 // <i> get milliseconds using static method now of Date</i>
-console.
-log
-(
-Date
-.
-now
-(
-)
-)
-;
+console.log(Date.now());
+
 // <i> get milliseconds using method getTime of Date instance</i>
-console.
-log
-(
-(
-<b>new</b> Date ( ) ) .getTime ());
+console.log((<b>new</b> Date ( ) ) .getTime ());
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-6">Section 8.6: Get the current time and date</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
