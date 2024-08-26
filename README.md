@@ -4315,13 +4315,13 @@ relation</a>:</p>
 
 <pre>
 1 == 1;           // <i>true</i>
-&plus;0 == &minus;0; // <i>true</i>
-<b>NaN</b> == <b>NaN</b>;  // <i>false</i>
+&plus;0 == &minus;0;        // <i>true</i>
+<b>NaN</b> == <b>NaN</b>;     // <i>false</i>
 <b>true</b> == &quot;true&quot;;  // <i>false</i>
-<b>false</b> == 0;  // <i>true</i>
-1 == &quot;1&quot;;  // <i>true</i>
+<b>false</b> == 0;     // <i>true</i>
+1 == &quot;1&quot;;      // <i>true</i>
 <b>null</b> == <b>undefined</b>;  // <i>true</i>
-&lbrack;&rbrack; == &lbrack;&rbrack;;  // <i>false</i>
+&lbrack;&rbrack; == &lbrack;&rbrack;;         // <i>false</i>
 </pre>
 
 <p>This algorithm has the following property:</p>
@@ -4361,9 +4361,9 @@ relation</a>:</p>
 converted to a number before comparison:</p>
 
 <pre>
-&apos;1&apos; &lt; 2         // <i>true</i>
-&apos;3&apos; &gt; 2         // <i>true</i>
-<b>true</b> &gt; &apos;2&apos;    // <i>false (true implicitly converted to number, 1 &lt; 2)</i>
+&apos;1&apos; &lt; 2      // <i>true</i>
+&apos;3&apos; &gt; 2      // <i>true</i>
+<b>true</b> &gt; &apos;2&apos;  // <i>false (true implicitly converted to number, 1 &lt; 2)</i>
 </pre>
 
 <p>When the string is non-numeric, numeric conversion returns <b>NaN</b>
@@ -4378,10 +4378,10 @@ converted to a number before comparison:</p>
 <b>undefined</b> or empty strings:</p>
 
 <pre>
-1 &gt; &apos;&apos;      // <i>true</i>
-1 &lt; &apos;&apos;      // <i>false</i>
-1 &gt; <b>null</b>     // <i>true</i>
-1 &lt; <b>null</b>     // <i>false</i>
+1 &gt; &apos;&apos;         // <i>true</i>
+1 &lt; &apos;&apos;         // <i>false</i>
+1 &gt; <b>null</b>      // <i>true</i>
+1 &lt; <b>null</b>      // <i>false</i>
 1 &gt; <b>undefined</b> // <i>false</i>
 1 &lt; <b>undefined</b> // <i>false</i>
 </pre>
@@ -4398,9 +4398,9 @@ because Number(<b>null</b>);//0</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-12">Section 10.12: Inequality</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>Operator != is the inverse of the == operator.</p>
-<p>Will return <b>true</b> if the operands aren&apos;t equal.</p>
-<p>The JavaScript engine will try and convert both operands to matching
+<p>Operator != is the inverse of the == operator.<br/>
+Will return <b>true</b> if the operands aren&apos;t equal.<br/>
+The JavaScript engine will try and convert both operands to matching
 types if they aren&apos;t of the same type. <b>Note:</b> if the two operands
 have different internal references in memory, then <b>false</b> will be returned.</p>
 
@@ -4408,7 +4408,7 @@ have different internal references in memory, then <b>false</b> will be returned
 
 <pre>
 1 != &apos;1&apos;  // <i>false</i>
-1 != 2              // <i>true</i>
+1 != 2      // <i>true</i>
 </pre>
 
 <p>In the sample above, 1 != '1' is <b>false</b> because, a primitive number type
@@ -4421,9 +4421,9 @@ the operands are not equal or if their types do not match.</p>
 <p>Example:</p>
 
 <pre>
-1 !== &apos;1&apos;  // <i>true</i>
-1 !== 2              // <i>true</i>
-1 !== 1              // <i>false</i>
+1 !== &apos;1&apos;     // <i>true</i>
+1 !== 2          // <i>true</i>
+1 !== 1          // <i>false</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-13">Section 10.13: List of Comparison Operators</h3>
