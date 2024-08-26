@@ -2748,122 +2748,103 @@ can repeat n times the string myString:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-1">Section 8.1: Create a new Date object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-Date
-To create a new Date object use the () constructor:
+<p>To create a new Date object use the () constructor:</p>
 
-<b>with no arguments</b>
-Date
-() creates a Date instance containing the current time (up to
-milliseconds) and date.
+<ul>
+  <li><b>with no arguments</b><br/>
+    Date() creates a Date instance containing the current time (up to milliseconds) and date.</li>
+  <li><b>with one integer argument</b><br/>
+    Date&lpar;m&rpar; creates a Date instance containing the time and date corresponding to the 
+	Epoch time (1 January, 1970 UTC) plus m milliseconds. Example: <b>new</b> Date((749019369738) 
+	gives the date <i>Sun, 26 Sep 1993 04:56:09 GMT</i>.</li>
+  <li><b>with a string argument</b><br/>
+    Date(dateString) returns the Date object that results after parsing dateString with 
+	Date.parse.</li>
+  <li>with two or more integer arguments<br/>
+    Date(i1, i2, i3, i4, i5, i6)) reads the arguments as year, month, day, hours, minutes, seconds,
+	milliseconds and instantiates the corresponding Dateobject. Note that the month is 0-indexed 
+	in JavaScript, so 0 means January and 11 means December. Example: Date(2017, 5, 1) gives 
+	<i>June 1st, 2017</i>.</li>
+</ul>
 
-<b>with one integer argument</b>
-  Date
-<b>new</b> Date                (   749019369738
+<p><b>Exploring dates</b></p>
 
-&lpar;m&rpar; creates a Date instance containing the time and date
-corresponding to the Epoch time (1 January, 1970 UTC) plus m
-milliseconds. Example: ) gives the date <i>Sun, 26 Sep 1993 04:56:09
-GMT</i>.
-<b>with a string argument</b>
-  Date   (   dateString   ) returns the Date object that results after      Date   .   parse
-                          parsing dateString with                                      
-.
-<b>with two or more integer arguments</b>
-  Date       (   i1    ,   i2      ,   i3      ,   i4      ,   i5      ,   i6
-) reads the arguments as year, month, day, hours, minutes, seconds,
-  <b>new</b> Date                                (     2017
-milliseconds and instantiates the corresponding Dateobject. Note that
-the month is 0-indexed in JavaScript, so 0 means January and 11 means
-December. Example: , 5, 1) gives <i>June 1st, 2017</i>.
-
-<b>Exploring dates</b>
-
-Note that these examples were generated on a browser in the Central
-Time Zone of the US, during Daylight Time,
-
-Date.<b>prototype</b>.toISOString
-
-as evidenced by the code. Where comparison with UTC was instructive,
-() was used to show the date and time in UTC (the Z in the formatted
-string denotes UTC).
-
-<i>// Creates a Date object with the current date and time from the //
-user&apos;s browser</i> <b>var</b> now = <b>new</b> Date(); now.toString() ===
-&apos;Mon Apr 11 2016 16:10:41 GMT-0500 (Central Daylight Time)&apos; <i>//
-true</i>
-
-<i>// well, at the time of this writing, anyway</i>
-
-<i>// Creates a Date object at the Unix Epoch (i.e.,
-&apos;1970-01-01T00:00:00.000Z&apos;)</i> <b>var</b> epoch = <b>new</b> Date(0);
-epoch.toISOString() === &apos;1970-01-01T00:00:00.000Z&apos; <i>// true</i>
-
-<i>// Creates a Date object with the date and time 2,012 milliseconds //
-after the Unix Epoch (i.e., &apos;1970-01-01T00:00:02.012Z&apos;).</i> <b>var</b> ms
-= <b>new</b> Date(2012); date2012.toISOString() ===
-&apos;1970-01-01T00:00:02.012Z&apos; <i>// true</i>
-
-<i>// Creates a Date object with the first day of February of the year
-2012 // in the local timezone.</i> <b>var</b> one = <b>new</b> Date(2012, 1);
-one.toString() === &apos;Wed Feb 01 2012 00:00:00 GMT-0600 (Central
-Standard Time)&apos; <i>// true</i>
-
-<i>// Creates a Date object with the first day of the year 2012 in the
-local // timezone. // (Months are zero-based)</i> <b>var</b> zero = <b>new</b>
-Date(2012, 0); zero.toString() === &apos;Sun Jan 01 2012 00:00:00 GMT-0600
-(Central Standard Time)&apos; <i>// true</i>
-
-<i>// Creates a Date object with the first day of the year 2012, in
-UTC.</i> <b>var</b> utc = <b>new</b> Date(Date.UTC(2012, 0)); utc.toString()
-=== &apos;Sat Dec 31 2011 18:00:00 GMT-0600 (Central Standard Time)&apos;
-
-<i>// true</i> utc.toISOString() === &apos;2012-01-01T00:00:00.000Z&apos;
-
-<i>// true</i>
-
-<i>// Parses a string into a Date object (ISO 8601 format added in
-ECMAScript 5.1) // Implementations should assumed UTC because of ISO
-8601 format and Z designation</i> <b>var</b> iso = <b>new</b>
-Date(&apos;2012-01-01T00:00:00.000Z&apos;); iso.toISOString() ===
-&apos;2012-01-01T00:00:00.000Z&apos; <i>// true</i>
-
-<i>// Parses a string into a Date object (RFC in JavaScript 1.0)</i>
-<b>var</b> local = <b>new</b> Date(&apos;Sun, 01 Jan 2012 00:00:00 -0600&apos;);
-local.toString() === &apos;Sun Jan 01 2012 00:00:00 GMT-0600 (Central
-Standard Time)&apos; // <i>true</i>
-
-// <i>Parses a string in no particular format, most of the time. Note that parsing</i>
-
-// <i>logic in these cases is very implementation-dependent, and
-therefore can vary // across browsers and versions.</i>
-
-<b>var</b> anything = <b>new</b> Date(&apos;11/12/2012&apos;); anything.toString()
-=== &apos;Mon Nov 12 2012 00:00:00 GMT-0600 (Central Standard Time)&apos; // <i>
-true, in Chrome 49 64-bit on Windows 10 in the en-US locale. Other
-versions in // other locales may get a different result.</i>
-
-// <i>Rolls values outside of a specified range to the next value.</i>
-
-<b>var</b> rollover = <b>new</b> Date(2012, 12, 32, 25, 62, 62, 1023);
-rollover.toString() === &apos;Sat Feb 02 2013 02:03:03 GMT-0600 (Central
-Standard Time)&apos; // <i>true; note that the month rolled over to Feb;
-first the month rolled over to</i>
+<p>Note that these examples were generated on a browser in the Central
+Time Zone of the US, during Daylight Time, Date.<b>prototype</b>.toISOString
+as evidenced by the code. Where comparison with UTC was instructive, 
+Date.prototype.toISOString() was used to show the date and time in UTC 
+(the Z in the formatted string denotes UTC).</p>
 
 <pre>
-// <i>Jan based on the month 12 (11 being December), then again because
-of the day 32 // (January having 31 days).</i>
+// <i>Creates a Date object with the current date and time from the </i>
+// <i>user&apos;s browser</i>
+<b>var</b> now = <b>new</b> Date();
+now.toString() === &apos;Mon Apr 11 2016 16:10:41 GMT-0500 (Central Daylight Time)&apos; 
+// <i>true</i>
+// <i>well, at the time of this writing, anyway</i>
 
+// <i>Creates a Date object at the Unix Epoch (i.e., &apos;1970-01-01T00:00:00.000Z&apos;)</i>
+<b>var</b> epoch = <b>new</b> Date(0);
+epoch.toISOString() === &apos;1970-01-01T00:00:00.000Z&apos; // <i>true</i>
+
+// <i>Creates a Date object with the date and time 2,012 milliseconds</i>
+// <i>after the Unix Epoch (i.e., &apos;1970-01-01T00:00:02.012Z&apos;).</i>
+<b>var</b> ms = <b>new</b> Date(2012);
+date2012.toISOString() === &apos;1970-01-01T00:00:02.012Z&apos; // <i>true</i>
+
+// <i>Creates a Date object with the first day of February of the year 2012</i>
+// <i>in the local timezone.</i>
+<b>var</b> one = <b>new</b> Date(2012, 1);
+one.toString() === &apos;Wed Feb 01 2012 00:00:00 GMT-0600 (Central Standard Time)&apos;
+// <i>true</i>
+
+// <i>Creates a Date object with the first day of the year 2012 in the local</i>
+// <i>timezone.</i>
+// <i>(Months are zero-based)</i>
+<b>var</b> zero = <b>new</b> Date(2012, 0);
+zero.toString() === &apos;Sun Jan 01 2012 00:00:00 GMT-0600 (Central Standard Time)&apos;
+// <i>true</i>
+
+// <i>Creates a Date object with the first day of the year 2012, in UTC.</i>
+<b>var</b> utc = <b>new</b> Date(Date.UTC(2012, 0));
+utc.toString() === &apos;Sat Dec 31 2011 18:00:00 GMT-0600 (Central Standard Time)&apos;
+// <i>true</i>
+utc.toISOString() === &apos;2012-01-01T00:00:00.000Z&apos;
+// <i>true</i>
+
+// <i>Parses a string into a Date object (ISO 8601 format added in ECMAScript 5.1)
+// <i>Implementations should assumed UTC because of ISO 8601 format and Z designation</i>
+<b>var</b> iso = <b>new</b> Date(&apos;2012-01-01T00:00:00.000Z&apos;);
+iso.toISOString() === &apos;2012-01-01T00:00:00.000Z&apos; <i>// true</i>
+
+// <i>Parses a string into a Date object (RFC in JavaScript 1.0)</i>
+<b>var</b> local = <b>new</b> Date(&apos;Sun, 01 Jan 2012 00:00:00 -0600&apos;);
+local.toString() === &apos;Sun Jan 01 2012 00:00:00 GMT-0600 (Central Standard Time)&apos;
+// <i>true</i>
+
+// <i>Parses a string in no particular format, most of the time. Note that parsing</i>
+// <i>logic in these cases is very implementation-dependent, and therefore can vary</i>
+// <i>across browsers and versions.</i>
+<b>var</b> anything = <b>new</b> Date(&apos;11/12/2012&apos;);
+anything.toString() === &apos;Mon Nov 12 2012 00:00:00 GMT-0600 (Central Standard Time)&apos;
+// <i>true, in Chrome 49 64-bit on Windows 10 in the en-US locale. Other versions in
+// other locales may get a different result.</i>
+
+// <i>Rolls values outside of a specified range to the next value.</i>
+<b>var</b> rollover = <b>new</b> Date(2012, 12, 32, 25, 62, 62, 1023);
+rollover.toString() === &apos;Sat Feb 02 2013 02:03:03 GMT-0600 (Central Standard Time)&apos;
+// <i>true; note that the month rolled over to Feb; first the month rolled over to</i>
+// <i>Jan based on the month 12 (11 being December), then again because of the day 32</i>
+// <i>(January having 31 days).</i>
 // <i>Special dates for years in the range 0-99</i>
-
 <b>var</b> special1 = <b>new</b> Date(12, 0);
-special1.toString() ===
-&apos;Mon Jan 01 1912 00:00:00 GMT-0600 (Central Standard Time)&grave;
+special1.toString() === &apos;Mon Jan 01 1912 00:00:00 GMT-0600 (Central Standard Time)&grave;
 // true
+
 // If you actually wanted to set the year to the year 12 CE, you&apos;d need to use the
-// <i> setFullYear() method:</i>
+// <i>setFullYear() method:</i>
 special1.setFullYear(12);
-special1.toString() ===
-&apos;Sun Jan 01 12 00:00:00 GMT-0600 (Central Standard Time)&grave;
+special1.toString() === &apos;Sun Jan 01    12 00:00:00 GMT-0600 (Central Standard Time)&grave;
 // true
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2874,31 +2855,66 @@ special1.toString() ===
 <pre>
 <b>var</b> date1 = <b>new</b> Date();
 date1.toString();
+</pre>
+
+<blockquote>
 Returns: &quot;Fri Apr 15 2016 07:48:48 GMT-0400 (Eastern Daylight Time)&quot;
-<b>Convert to Time String</b>
+</blockquote>
+
+<p><b>Convert to Time String</b></p>
+
+<pre>
 <b>var</b> date1 = <b>new</b> Date();
 date1.toTimeString();
+</pre>
+
+<blockquote>
 Returns: &quot;07:48:48 GMT-0400 (Eastern Daylight Time)&quot;
-<b>Convert to Date String</b>
+</blockquote>
+
+<p><b>Convert to Date String</b></p>
+
+<pre>
 <b>var</b> date1 = <b>new</b> Date();
 date1.toDateString();
+</pre>
+<blockquote>
 Returns: &quot;Thu Apr 14 2016&quot;
-<b>Convert to UTC String</b>
-<b>var</b>
-date1 = <b>new</b> Date ( );
-date1.toUTCString ( );
+</blockquote>
+
+<p><b>Convert to UTC String</b></p>
+
+<pre>
+<b>var</b> date1 = <b>new</b> Date ();
+date1.toUTCString ();
+</pre>
+
+<blockquote>
 Returns: &quot;Fri, 15 Apr 2016 11:48:48 GMT&quot;
-<b>Convert to ISO String</b>
-<b>var</b> date1 = <b>new</b> Date ( ) ;
-date1.toISOString ( ) ;
+</blockquote>
+
+<p><b>Convert to ISO String</b></p>
+
+<pre>
+<b>var</b> date1 = <b>new</b> Date ();
+date1.toISOString ();
+</pre>
+
+<blockquote>
 Returns: &quot;2016-04-14T23:49:08.596Z&quot;
-<b>Convert to GMT String</b>
+</blockquote>
+
+<p><b>Convert to GMT String</b></p>
+<pre>
 <b>var</b> date1 = <b>new</b> Date ( ) ;
 date1.toGMTString ( ) ;
 </pre>
 
+<blockquote>
 <p>Returns: &quot;Thu, 14 Apr 2016 23:49:08 GMT&quot;
-This function has been marked as deprecated so some browsers may not
+</blockquote>
+
+<p>This function has been marked as deprecated so some browsers may not
 support it in the future. It is suggested to use toUTCString()
 instead.</p>
 
@@ -2909,7 +2925,9 @@ instead.</p>
 date1.toLocaleDateString ( ) ;
 </pre>
 
+<blockquote>
 <p>Returns: &quot;4/14/2016&quot;</p>
+</blockquote>
 
 <p>This function returns a locale sensitive date string based upon the
 user&apos;s location by default.</p>
@@ -2930,8 +2948,8 @@ States English as a fallback. The options parameter can be used to
 provide specific formatting. For example:</p>
 
 <pre>
-<b>var</b> options = { weekday: &apos;long&apos;, year: &apos;numeric&apos;, month:
-&apos;long&apos;, day: &apos;numeric&apos; }; date1.toLocaleDateString(&lbrack;&rbrack;, options);
+<b>var</b> options = { weekday: &apos;long&apos;, year: &apos;numeric&apos;, month: &apos;long&apos;, day: &apos;numeric&apos; }; 
+date1.toLocaleDateString(&lbrack;&rbrack;, options);
 </pre>
 
 <p>would result in</p>
@@ -2960,413 +2978,135 @@ implementation uses UTC dates to avoid timezones where they are not
 needed.</p>
 
 <p><b>Naive approach with WRONG results</b></p>
+<!-- page 51 -->
 
 <pre>
-<b>function</b> formatDate
-(
-dayOfWeek, day, month, year) {
-<b>var</b> daysOfWeek = &lbrack;
-&quot;Sun&quot;, &quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;
-&rbrack;;
-<b>var</b> months = &lbrack;
-&quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;,
-&quot;Jun&quot;, &quot;Jul&quot;, &quot;Aug&quot;, quot;Sep&quot;, &quot;Oct&quot;,
-&quot;Nov&quot;, &quot;Dec&quot;
-&rbrack;;
-<b>return</b>
-daysOfWeek &lbrack;
-dayOfWeek &rbrack;
-&plus;
-&quot; &quot;
-&plus;
-months
-&lbrack;
-month
-&rbrack;
-&plus;
-&quot; &quot;
-&plus;
-day
-&plus;
-&quot; &quot;
-&plus;
-year
-;
+<b>function</b> formatDate(dayOfWeek, day, month, year) {
+  <b>var</b> daysOfWeek = &lbrack;&quot;Sun&quot;,&quot;Mon&quot;,&quot;Tue&quot;,&quot;Wed&quot;,&quot;Thu&quot;,&quot;Fri&quot;,&quot;Sat&quot;&rbrack;;
+  <b>var</b> months = &lbrack;&quot;Jan&quot;, &quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dec&quot;&rbrack;;
+  <b>return</b> daysOfWeek &lbrack;dayOfWeek &rbrack; &plus; &quot; &quot; &plus; months&lbrack;month&rbrack; &plus; &quot; &quot; &plus; day &plus; &quot; &quot; &plus; year;
 }
+
 // <i>Foo lives in a country with timezone GMT + 1</i>
-<b>var</b>
-birthday
-=
-<b>new</b> Date(2000, 0, 1);
-console.log(&quot;Foo was born on: &quot; &plus; formatDate(
-birthday.getDay(), birthday.getDate(),
-birthday.getMonth(), birthday.getFullYear()
-));
+<b>var</b> birthday = <b>new</b> Date(2000, 0, 1);
+console.log(&quot;Foo was born on: &quot; &plus; formatDate(birthday.getDay(), birthday.getDate(),
+  birthday.getMonth(), birthday.getFullYear()));
+
 sendToBar(birthday.getTime());
 </pre>
 
+<blockquote>
 Sample output:
 Foo was born on: Sat Jan 1 2000
+</blockquote>
+
+<pre>
 // <i>Meanwhile somewhere else&hellip;</i>
+
 // <i>Bar lives in a country with timezone GMT - 1</i>
-<b>var</b>
-birthday
-=
-<b>new</b>
-Date
-(
-receiveFromFoo
-(
-)
-)
-;
-console.
-log
-(
-&quot;Foo was born on: &quot;
-&plus;
-formatDate
-(
-birthday.
-getDay
-(
-)
-,
-birthday.
-getDate
-(
-)
-,
-birthday.
-getMonth
-(
-)
-,
-birthday.
-getFullYear
-(
-)
-)
-)
-;
+<b>var</b> birthday = <b>new</b> Date(receiveFromFoo());
+console.log(&quot;Foo was born on: &quot; &plus; formatDate(birthday.getDay(), birthday.getDate(),
+  birthday.getMonth(), birthday.getFullYear()));
+</pre>
+
+<blockquote>
 Sample output:
 Foo was born on: Fri Dec 31 1999
-And thus, Bar would always believe Foo was born on the last day of
-1999.
-<b>Correct approach</b>
-<b>function</b>
-formatDate
-(
-dayOfWeek
-,
-day
-,
-month
-,
-year
-)
-{
-<b>var</b>
-daysOfWeek
-=
-&lbrack;
-&quot;Sun&quot;
-,
-&quot;Mon&quot;
-,
-&quot;Tue&quot;
-,
-&quot;Wed&quot;
-,
-&quot;Thu&quot;
-,
-&quot;Fri&quot;
-,
-&quot;Sat&quot;
-&rbrack;
-;
-<b>var</b>
-months
-=
-&lbrack;
-&quot;Jan&quot;
-,
-&quot;Feb&quot;
-,
-&quot;Mar&quot;
-,
-&quot;Apr&quot;
-,
-&quot;May&quot;
-,
-&quot;Jun&quot;
-,
-&quot;Jul&quot;
-,
-&quot;Aug&quot;
-,
-&quot;Sep&quot;
-,
-&quot;Oct&quot;
-,
-&quot;Nov&quot;
-,
-&quot;Dec&quot;
-&rbrack;
-;
-<b>return</b>
-daysOfWeek
-&lbrack;
-dayOfWeek
-&rbrack;
-&plus;
-&quot; &quot;
-&plus;
-months
-&lbrack;
-month
-&rbrack;
-&plus;
-&quot; &quot;
-&plus;
-day
-&plus;
-&quot; &quot;
-&plus;
-year
-;
-}
-// <i>Foo lives in a country with timezone GMT + 1</i>
-<b>var</b>
-birthday
-=
-<b>new</b>
-Date
-(
-Date
-.
-UTC
-(
-2000
-,
-0
-,
-1
-)
-)
-;
-console.
-log
-(
-&quot;Foo was born on: &quot;
-&plus;
-formatDate
-(
-birthday.
-getUTCDay
-(
-)
-,
-birthday.
-getUTCDate
-(
-)
-,
-birthday.
-getUTCMonth
-(
-)
-,
-birthday.
-getUTCFullYear
-(
-)
-)
-)
-;
-sendToBar
-(
-birthday.
-getTime
-(
-)
-)
-;
-Sample output:
-Foo was born on: Sat Jan 1 2000
-// <i>Meanwhile somewhere else&hellip;</i>
-// <i>Bar lives in a country with timezone GMT - 1</i>
-<b>var</b>
-birthday
-=
-<b>new</b>
-Date
-(
-receiveFromFoo
-(
-)
-)
-;
-console.
-log
-(
-&quot;Foo was born on: &quot;
-&plus;
-formatDate
-(
-birthday.
-getUTCDay
-(
-)
-,
-birthday.
-getUTCDate
-(
-)
-,
-birthday.
-getUTCMonth
-(
-)
-,
-birthday.
-getUTCFullYear
-(
-)
-)
-)
-;
-Sample output:
-Foo was born on: Sat Jan 1 2000
-<b>Creating a Date from UTC</b>
-  
-  Date                    .     UTC               (     &hellip;
+</blockquote>
 
-If one wants to create a Date object based on UTC or GMT, the ) method
+<p>And thus, Bar would always believe Foo was born on the last day of 1999.</p>
+
+<p><b>Correct approach</b></p>
+
+<pre>
+<b>function</b> formatDate(dayOfWeek, day, month, year) {
+  <b>var</b> daysOfWeek = &lbrack;&quot;Sun&quot;,&quot;Mon&quot;,&quot;Tue&quot;,&quot;Wed&quot;,&quot;Thu&quot;,&quot;Fri&quot;,&quot;Sat&quot;&rbrack;;
+  <b>var</b> months = &lbrack;&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dec&quot;&rbrack;;
+  <b>return</b> daysOfWeek&lbrack;dayOfWeek&rbrack; &plus; &quot; &quot; &plus; months&lbrack;month&rbrack; &plus; &quot; &quot; &plus; day &plus; &quot; &quot; &plus; year;
+}
+
+// <i>Foo lives in a country with timezone GMT + 1</i>
+<b>var</b> birthday = <b>new</b> Date(Date.UTC(2000,0,1));
+console.log(&quot;Foo was born on: &quot; &plus; formatDate(birthday.getUTCDay(), birthday.getUTCDate(),
+  birthday.getUTCMonth(), birthday.getUTCFullYear()));
+
+sendToBar (birthday.getTime());
+</pre>
+
+<blockquote>
+Sample output:
+
+Foo was born on: Sat Jan 1 2000
+</blockquote>
+
+<pre>
+// <i>Meanwhile somewhere else&hellip;</i>
+
+// <i>Bar lives in a country with timezone GMT - 1</i>
+<b>var</b> birthday = <b>new</b> Date(receiveFromFoo());
+console.log(&quot;Foo was born on: &quot;&plus;formatDate(birthday.getUTCDay(), birthday.getUTCDate(),
+  birthday.getUTCMonth(), birthday.getUTCFullYear()));
+</pre>
+
+<!-- page 52 -->
+
+<blockquote>
+Sample output:
+Foo was born on: Sat Jan 1 2000
+</blockquote>
+
+<p><b>Creating a Date from UTC</b></p>
+
+<p>If one wants to create a Date object based on UTC or GMT, the ) method
 can be used. It uses the same arguments as the longest Date
 constructor. This method will return a number representing the time
-that has passed since January 1, 1970, 00:00:00 UTC.
-console.
-log
-(
-Date
-.
-UTC
-(
-2000
-,
-0
-,
-31
-,
-12
-)
-)
-;
+that has passed since January 1, 1970, 00:00:00 UTC.</p>
+
+<pre>
+console.log(Date.UTC(2000,0,31,12));
+</pre>
+
+<blockquote>
 Sample output:
 949320000000
-<b>var</b>
-utcDate
-=
-<b>new</b>
-Date
-(
-Date
-.
-UTC
-(
-2000
-,
-0
-,
-31
-,
-12
-)
-)
-;
-console.
-log
-(
-utcDate
-)
-;
+</blockquote>
+
+<pre>
+<b>var</b> utcDate = <b>new</b> Date(Date.UTC(2000,0,31,12));
+console.log(utcDate);
+</pre>
+
+<blockquote>
 Sample output:
 Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
-Unsurprisingly, the difference between UTC time and local time is, in
-fact, the timezone offset converted to milliseconds.
-<b>var</b>
-utcDate
-=
-<b>new</b>
-Date
-(
-Date
-.
-UTC
-(
-2000
-,
-0
-,
-31
-,
-12
-)
-)
-;
-<b>var</b>
-localDate
-=
-<b>new</b>
-Date
-(
-2000
-,
-0
-,
-31
-,
-12
-)
-;
-console.
-log
-(
-localDate
-&minus;
-utcDate
-===
-utcDate.
-getTimezoneOffset
-(
-)
-&ast;
-60
-&ast;
-1000
-)
-;
-Sample output:
-<b>true</b>
-<b>Changing a Date object</b>
+</blockquote>
+
+<p>Unsurprisingly, the difference between UTC time and local time is, in
+fact, the timezone offset converted to milliseconds.</p>
+
+<pre>
+<b>var</b> utcDate = <b>new</b> Date ( Date.UTC(2000,0,31,12));
+<b>var</b> localDate = <b>new</b> Date(2000,0,31,12);
+
+console.log(localDate&minus; utcDate === utcDate.getTimezoneOffset()&ast;60&ast;1000);
+</pre>
+
+<blockquote>
+Sample output: <b>true</b>
+</blockquote>
+
+<p><b>Changing a Date object</b></p>
+
   setDate         (   &hellip;   ) and       setFullYear              (   &hellip;
 All Date object modifiers, such as ) have an equivalent takes an
 argument in
 UTC time rather than in local time.
-<b>var</b>
-date
-=
-<b>new</b>
-Date
-(
-)
-;
-date.
-setUTCFullYear
-(2000, 0, 31);
+<b>var</b> date = <b>new</b> Date();
+date.setUTCFullYear (2000, 0, 31);
 date.setUTCHours ( 12 , 0 , 0 , 0);
-console.log ( date ) ;
+console.log ( date );
+</pre>
+
 Sample output:
 Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
   setUTCMonth                     (), .       setUTCDate
@@ -3382,44 +3122,16 @@ ambiguity in dates, it is usually easier to communicate a date as the
 amount of time that has passed since January 1, 1970, 00:00:00 UTC.
 This single number represents a single point in time, and can be
 converted to local time whenever necessary.
-<b>var</b>
-date
-=
-<b>new</b>
-Date
-(
-Date
-.
-UTC
-(
-2000
-,
-0
-,
-31
-,
-12
-)
-)
-;
-<b>var</b>
-timestamp
-=
-date.
-getTime
-(
-)
-;
+<b>var</b> date = <b>new</b> Date (Date.UTC(2000,0,31,12));
+<b>var</b> timestamp = date.getTime();
 // <i>Alternatively</i>
-<b>var</b>
-timestamp2
-=
-Date
-.
-UTC
-( 2000, 0, 31, 12);
+<b>var</b> timestamp2 = Date.UTC( 2000, 0, 31, 12);
 console.log ( timestamp === timestamp2 );
-Sample output:
+</pre>
+
+<p>Sample output:</p>
+
+<pre>
 <b>true</b>
 // <i>And when constructing a date from it elsewhere&hellip;</i>
 <b>var</b>
@@ -3436,60 +3148,70 @@ Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-4">Section 8.4: Formatting a JavaScript date</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p><b>Formatting a JavaScript date in modern browsers</b></p>
 
-<b>Formatting a JavaScript date in modern browsers</b>
-  [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   [toLocaleDateString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
+<!--  [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
+  [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   
+  [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
+  [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
+  [toLocaleDateString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
+-->
 
-In modern browsers (&ast;),
-[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
-allows you to define the formatting of a Date in a convenient manner.
+<p>In modern browsers (&ast;), <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString">
+Date.prototype.toLocalDateString()</a> allows you to define the formatting of a Date in a convenient manner.</p>
 
-It requires the following format :
+<p>It requires the following format:</p>
 
-dateObj.toLocaleDateString(&lbrack; locales&lbrack;, options &rbrack; &rbrack; )
+<pre>
+dateObj.toLocaleDateString(&lbrack; locales &lbrack;, options &rbrack; &rbrack;)
+</pre>
 
-The locales parameter should be a string with a BCP 47 language tag,
-or an array of such strings.
+<p>The locales parameter should be a string with a BCP 47 language tag, or an array of such strings.</p>
+<!-- page 54 -->
+<p>The options parameter should be an object with some or all of the following properties:</p>
 
-The options parameter should be an object with some or all of the
-following properties:
+<ul>
+  <li><b>localeMatcher</b>:possible values are &quot;lookup&quot; and &quot;best fit&quot;;
+    the default is &quot;best fit&quot;</li>
+  <li><b>timeZone</b>:the only value implementations must recognize is &quot;UTC&quot;; the default is the
+    runtime&apos;s default time zone</li>
+  <li><b>hour12</b>:possible values are <b>true</b> and <b>false</b>; the default is locale dependent</li>
+  <li><b>formatMatcher</b>:possible values are &quot;basic&quot; and &quot;best fit&quot;; the default is 
+    &quot;best fit&quot;</li>
+  <li><b>weekday</b>:possible values are &quot;narrow&quot;, &quot;short&quot; & &quot;long&quot;</li>
+  <li><b>era</b>:possible values are &quot;narrow&quot;, &quot;short&quot; & &quot;long&quot;</li>
+  <li><b>year</b>:possible values are &quot;numeric&quot; & &quot;2-digit&quot;</li>
+  <li><b>month</b>:possible values are &quot;numeric&quot;, &quot;2-digit&quot;, &quot;narrow&quot;,
+    &quot;short&quot; & &quot;long&quot;</li>
+  <li><b>day</b>:possible values are &quot;numeric&quot; & &quot;2-digit&quot;</li>
+  <li><b>hour</b>:possible values are &quot;numeric&quot; & &quot;2-digit&quot;</li>
+  <li><b>minute</b>:possible values are &quot;numeric&quot; & &quot;2-digit&quot;</li>
+  <li><b>second</b>:possible values are &quot;numeric&quot; & &quot;2-digit&quot;</li>
+  <li><b>timeZoneName</b>:possible values are &quot;short&quot; & &quot;long&quot;</li>
+</ul>
 
-<b>localeMatcher</b> : possible values are &quot;lookup&quot; and &quot;best fit&quot;;
-the default is &quot;best fit&quot; <b>timeZone</b> : the only value
-implementations must recognize is &quot;UTC&quot;; the default is the
-runtime&apos;s default time zone <b>hour12</b> :possible values are <b>true</b>
-and <b>false</b>; the default is locale dependent <b>formatMatcher</b> :
-possible values are &quot;basic&quot; and &quot;best fit&quot;; the default is &quot;best
-fit&quot; <b>weekday</b> : possible values are &quot;narrow&quot;, &quot;short&quot; &
-&quot;long&quot; <b>era</b> : possible values are &quot;narrow&quot;, &quot;short&quot; &
-&quot;long&quot; <b>year</b> : possible values are &quot;numeric&quot; & &quot;2-digit&quot;
-<b>month</b> : possible values are &quot;numeric&quot;, &quot;2-digit&quot;, &quot;narrow&quot;,
-&quot;short&quot; & &quot;long&quot; <b>day</b> : possible values are &quot;numeric&quot; &
-&quot;2-digit&quot; <b>hour</b> : possible values are &quot;numeric&quot; & &quot;2-digit&quot;
-<b>minute</b> : possible values are &quot;numeric&quot; & &quot;2-digit&quot; <b>second</b>
-: possible values are &quot;numeric&quot; & &quot;2-digit&quot; <b>timeZoneName</b> :
-possible values are &quot;short&quot; & &quot;long&quot;
+<p><b>How to use</b></p>
 
-<b>How to use</b>
-<b>var</b>
-today
-=
-<b>new</b>
+<pre>
+<b>var</b> today = <b>new</b> Date().toLocaleDateString(&apos;en-GB&apos;,{
+  day   : &apos;numeric&apos;,
+  month : &apos;short&apos;,
+  year  : &apos;numeric&apos;
+});
+</pre>
 
-<!-- the end thru 8/23/24 -->
-Date().toLocaleDateString(&apos;en-GB&apos;,{day:&apos;numeric&apos;,month:&apos;short&apos;,year:&apos;numeric&apos;});
+<p>Output if executed on January 24 ʰ, 2036 :</p>
 
-Output if executed on January 24 ʰ, 2036 :
-
+<pre>
 &apos;24 Jan 2036&apos;
+</pre>
 
-<b>Going custom</b>
+<p><b>Going custom</b></p>
   
-  Date     .   <b>prototype</b>       .   toLocaleDateString
+Date.<b>prototype</b>.toLocaleDateString
 
-If () isn&apos;t flexible enough to fulfill whatever need you may have,
-you might want to consider creating a custom Date object that looks
-like this:
+<p>If Date.prototype.toLocalDateString() isn&apos;t flexible enough to fulfill whatever need you may have,
+you might want to consider creating a custom Date object that looks like this:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image025.png"
@@ -3497,57 +3219,30 @@ like this:
   alt="."
   style="border: 2px solid #000000; width:7.48in;" />
 <!-- ![](./images/image025.png){width="7.486805555555556in" height="4.675694444444445in"} -->
-}
-}
-;
-<b>return</b>
-date
-;
-}
-)
-(
-)
-;
-  <b>new</b> DateObject
-If you included that code and executed () on January 20 ʰ, 2019, it
-would produce an object with the following properties:
-day
-:
-20
-dayPadded
-:
-&quot;20&quot;
-month
-:
-1
-monthPadded
-:
-&quot;01&quot;
-monthName
-:
-&quot;January&quot;
-year
-:
-2019
-To get a formatted string, you could do something like this:
-<b>new</b>
-DateObject
-(
-)
-.
-<b>get</b>
-(
-&lbrack;
-&apos;dayPadded&apos;
-,
-&apos;monthPadded&apos;
-,
-&apos;year&apos;
-&rbrack;
-)
-;
-That would produce the following output:
+<!-- page 55 -->
+<p>If you included that code and executed new DateObject() on January 20 ʰ, 2019, it
+would produce an object with the following properties:</p>
+
+<pre>
+day: 20
+dayPadded: &quot;20&quot;
+month: 1
+monthPadded: &quot;01&quot;
+monthName: &quot;January&quot;
+year: 2019
+</pre>
+
+<p>To get a formatted string, you could do something like this:</p>
+
+<pre>
+<b>new</b> DateObject().<b>get</b>(&lbrack;&apos;dayPadded&apos;, &apos;monthPadded&apos;, &apos;year&apos;&rbrack;);
+</pre>
+
+<p>That would produce the following output:</p>
+
+<pre>
 20-01-2016
+</pre>
 
 (&ast;) [<b>According to the
 MDN</b>](http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean),
