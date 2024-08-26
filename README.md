@@ -1346,11 +1346,11 @@ debugging console with the following methods:</p>
 <ul>
   <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed" 
     target="_blank" rel="noreferrer noopener">console.groupCollapsed()</a>: creates a collapsed 
-	group of entries that can be expanded through the disclosure button in order to reveal all 
-	the entries performed after this method is invoked;</li>
+    group of entries that can be expanded through the disclosure button in order to reveal all 
+    the entries performed after this method is invoked;</li>
   <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/group" 
     target="_blank" rel="noreferrer noopener">console.group()</a>: creates an expanded group 
-	of entries that can be collapsed in order to hide the entries after this method is invoked.</li>
+    of entries that can be collapsed in order to hide the entries after this method is invoked.</li>
 </ul>
 
 <p>The indentation can be removed for posterior entries by using the following method:</p>
@@ -1358,7 +1358,7 @@ debugging console with the following methods:</p>
 <ul>
   <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupEnd" 
     target="_blank" rel="noreferrer noopener">console.groupEnd()</a>: exits the current group, 
-	allowing newer entries to be printed in the parent group after this method is invoked.</li>
+    allowing newer entries to be printed in the parent group after this method is invoked.</li>
 </ul>
 
 <p>Groups can be cascaded to allow multiple indented output or collapsible layers within each other:</p>
@@ -3934,7 +3934,7 @@ envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue // <i>select
 <ul>
   <li><b>undefined</b> represents the <i>absence of a value</i>, such as before an
     identifier/Object property has been created or in the period between
-	identifier/Function parameter creation and it&apos;s first set, if any.</li>
+    identifier/Function parameter creation and it&apos;s first set, if any.</li>
   <li><b>null</b> represents the <i><b>intentional</b> absence of a value</i> for an
     identifier or property which has already been created.</li>
 </ul>
@@ -3943,8 +3943,8 @@ envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue // <i>select
 <ul>
   <li><b>undefined</b> is a <i>property of the global Object</i>, usually immutable
     in the global scope. This means anywhere you can define an identifier
-	other than in the global namespace could hide <b>undefined</b> from that
-	scope (although things can still <b>be undefined</b>)</li>
+    other than in the global namespace could hide <b>undefined</b> from that
+    scope (although things can still <b>be undefined</b>)</li>
   <li><b>null</b> is a <i>word literal</i>, so it&apos;s meaning can never be changed 
     and attempting to do so will throw an <i>Error</i>.</li>
 </ul>
@@ -3963,9 +3963,9 @@ envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue // <i>select
 
 <pre>
 <b>false</b> == <b>undefined</b>  // <i>false</i>
-<b>false</b> == <b>null</b>      // <i>false</i>
+<b>false</b> == <b>null</b>       // <i>false</i>
 <b>false</b> === <b>undefined</b> // <i>false</i>
-<b>false</b> === <b>null</b>     // <i>false</i>
+<b>false</b> === <b>null</b>      // <i>false</i>
 </pre>
 
 <p><b>Using undefined</b></p>
@@ -3999,8 +3999,8 @@ comparison is performed as follows:
   <li>If Type(x) is the same as Type(y), then:
     <ul>
       <li><b>a.</b> Return the result of performing Strict Equality Comparison x === y.</li>
-	</li>
-	</ul>
+    </li>
+    </ul>
   </li>
   <li>If x is <b>null</b> and y is <b>undefined</b>, return <b>true</b>.</li>
   <li>If x is <b>undefined</b> and y is <b>null</b>, return <b>true</b>.</li>
@@ -4020,17 +4020,17 @@ comparison is performed as follows:
 <b>Examples:</b>
 
 <pre>
-1 == 1; // <i>true</i>
-1 == <b>true</b>; // <i>true (operand converted to number: true =&bsol;1)</i>
-1 == &apos;1&apos;; // <i>true (operand converted to number: &apos;1&apos; =&bsol;1 )</i>
-1 == &apos;1.00&apos;; // <i>true</i>
-1 == &apos;1.00000000001&apos;; // <i>false</i>
+1 == 1;                                 // <i>true</i>
+1 == <b>true</b>;                       // <i>true (operand converted to number: true =&bsol;1)</i>
+1 == &apos;1&apos;;                     // <i>true (operand converted to number: &apos;1&apos; =&bsol;1 )</i>
+1 == &apos;1.00&apos;;                  // <i>true</i>
+1 == &apos;1.00000000001&apos;;         // <i>false</i>
 1 == &apos;1.00000000000000001&apos;; // <i>true (true due to precision loss)</i>
-<b>null</b> == <b>undefined</b>; // <i>true (spec #2)</i>
-1 == 2; // <i>false</i> 
-0 == <b>false</b>; // <i>true</i>
-0 == <b>undefined</b>; // <i>false</i>
-0 == &quot;&quot;; // <i>true</i>
+<b>null</b> == <b>undefined</b>;       // <i>true (spec #2)</i>
+1 == 2;                                 // <i>false</i> 
+0 == <b>false</b>;                      // <i>true</i>
+0 == <b>undefined</b>;                  // <i>false</i>
+0 == &quot;&quot;;                      // <i>true</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-6">Section 10.6: Logic Operators with Booleans</h3>
@@ -4208,7 +4208,7 @@ Object.is(&lbrack;&rbrack;, &lbrack;&rbrack;); //<i>false</i>
 </pre>
 
 <p>This algorithm has the properties of an <a href="https://en.wikipedia.org/wiki/Equivalence_relation">
-equivalence relation</a></p>:
+equivalence relation</a>:</p>
 
 <ul>
   <li><a href="https://en.wikipedia.org/wiki/Reflexive_relation">Reflexivity</a>: Object.is(x, x) is <b>true</b>,
