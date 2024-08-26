@@ -3208,13 +3208,6 @@ Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><b>Formatting a JavaScript date in modern browsers</b></p>
 
-<!--  [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
-  [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)   
-  [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
-  [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
-  [toLocaleDateString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
--->
-
 <p>In modern browsers (&ast;), <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString" 
 target="_blank" rel="noreferrer noopener">Date.prototype.toLocalDateString()</a> 
 allows you to define the formatting of a Date in a convenient manner.</p>
@@ -3580,24 +3573,24 @@ in particular, these operators aren&apos;t always transitive as one would
 expect.</p>
 
 <pre>
-&quot;&quot; == 0;  // <i>true A</i>
-0 == &quot;0&quot;; // <i>true A</i>
+&quot;&quot; == 0;       // <i>true A</i>
+0 == &quot;0&quot;;      // <i>true A</i>
 &quot;&quot; == &quot;0&quot;; // <i>false B</i>
-<b>false</b> == 0;  // <i>true</i>
+<b>false</b> == 0;     // <i>true</i>
 <b>false</b> == &quot;0&quot;;  // <i>true</i>
-&quot;&quot; != 0;  // <i>false A</i>
-0 != &quot;0&quot;;  // <i>false A</i>
-&quot;&quot; != &quot;0&quot;;  // <i>true B</i>
-<b>false</b> != 0;  // <i>false</i>
-<b>false</b> != &quot;0&quot;;  // <i>false</i>
+&quot;&quot; != 0;           // <i>false A</i>
+0 != &quot;0&quot;;          // <i>false A</i>
+&quot;&quot; != &quot;0&quot;;        // <i>true B</i>
+<b>false</b> != 0;        // <i>false</i>
+<b>false</b> != &quot;0&quot;; // <i>false</i>
 </pre>
 
 <p>The results start to make sense if you consider how JavaScript
 converts empty strings to numbers.</p>
 
 <pre>
-Number( &quot;&quot; );  // <i>0</i>
-Number( &quot;0&quot; );  // <i>0</i>
+Number( &quot;&quot; );     // <i>0</i>
+Number( &quot;0&quot; );    // <i>0</i>
 Number( <b>false</b> );  // <i>0</i>
 </pre>
 
@@ -3613,9 +3606,9 @@ results of numerical comparison use explicit conversion:</p>
 
 <pre>
 <b>var</b> test = (a, b) =&gt; Number(a) == Number(b);
-test(&quot;&quot;, 0 );  // <i>true;</i>
-test(&quot;0&quot;, 0);  // <i>true</i>
-test(&quot;&quot;, &quot;0&quot;);  // <i>true;</i>
+test(&quot;&quot;, 0 );         // <i>true;</i>
+test(&quot;0&quot;, 0);         // <i>true</i>
+test(&quot;&quot;, &quot;0&quot;);       // <i>true;</i>
 test(&quot;abc&quot;, &quot;abc&quot;);  // <i>false as operands are not numbers</i>
 </pre>
 
@@ -3623,8 +3616,8 @@ test(&quot;abc&quot;, &quot;abc&quot;);  // <i>false as operands are not numbers
 
 <pre>
 <b>var</b> test = (a, b) =&gt; String(a) == String(b);
-test(&quot;&quot;, 0);  // <i>false;</i>
-test(&quot;0&quot;, 0);  // <i>true</i>
+test(&quot;&quot;, 0);    // <i>false;</i>
+test(&quot;0&quot;, 0);   // <i>true</i>
 test(&quot;&quot;, &quot;0&quot;);  // <i>false;</i>
 </pre>
 
@@ -3633,7 +3626,7 @@ While the former performs a type conversion, the latter will create a new object
 compared by reference and not by value which explains the results below.</p>
 
 <pre>
-Number(&quot;0&quot;) == Number(&quot;0&quot;);  // <i>true;</i>
+Number(&quot;0&quot;) == Number(&quot;0&quot;);          // <i>true;</i>
 <b>new</b> Number(&quot;0&quot;) == <b>new</b> Number (&quot;0&quot;);  // <i>false</i>
 </pre>
 
@@ -3641,8 +3634,8 @@ Number(&quot;0&quot;) == Number(&quot;0&quot;);  // <i>true;</i>
 operators which will not perform any implicit type conversions.</p>
 
 <pre>
-&quot;&quot; === 0; // <i>false</i>
-0 === &quot;0&quot;; // <i>false</i>
+&quot;&quot; === 0;    // <i>false</i>
+0 === &quot;0&quot;;   // <i>false</i>
 &quot;&quot; === &quot;0&quot;; // <i>false</i>
 </pre>
 
