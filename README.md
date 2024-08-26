@@ -19,12 +19,15 @@
 <p>Please feel free to share this PDF with anyone for free, latest 
 version of this book can be downloaded from:</p>
 
-<p><a href="https://goalkicker.com/JavaScriptBook">JS Notes 4 Pros</a></p>
+<p><a href="https://goalkicker.com/JavaScriptBook" target="_blank" rel="noreferrer noopener">
+JS Notes 4 Pros</a></p>
 
 <p>This <i>JavaScript® Notes for Professionals</i> book is compiled from 
-<a href="https://archive.org/details/documentation-dump.7z">Stack Overflow</a>.</p>
+<a href="https://archive.org/details/documentation-dump.7z" 
+target="_blank" rel="noreferrer noopener">Stack Overflow</a>.</p>
 
-<p><a href="https://archive.org/details/documentation-dump.7z">Documentation</a>, the
+<p><a href="https://archive.org/details/documentation-dump.7z" 
+target="_blank" rel="noreferrer noopener">Documentation</a>, the
 content is written by the beautiful people at Stack Overflow.</p>
 
 <p>Text content is released under Creative Commons BY-SA, see credits at 
@@ -45,14 +48,16 @@ nor accurate, use at your own risk.</p>
 
 <h2 id="ch1">Chapter 1: Getting started with JavaScript</h2>
 
-<h4>Version Release Date</h4>
+<h5>Version Release Date</h5>
 
 1.  1997-06-01
 2.  1998-06-01
 3.  1998-12-01
-<a href="http://www-archive.mozilla.org/js/language/ECMA-357.pdf">E4X</a> 2004-06-01<br>
-<a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205th%20edition%20December%202009.pdf">5</a> 2009-12-01<br>
-<a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205.1%20edition%20June%202011.pdf">5.1</a> 2011-06-01<br>
+<a href="http://www-archive.mozilla.org/js/language/ECMA-357.pdf" target="_blank" rel="noreferrer noopener">E4X</a> 2004-06-01<br>
+<a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205th%20edition%20December%202009.pdf" 
+target="_blank" rel="noreferrer noopener">5</a> 2009-12-01<br>
+<a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262%205.1%20edition%20June%202011.pdf" 
+target="_blank" rel="noreferrer noopener">5.1</a> 2011-06-01<br>
 6.  2015-06-01
 7.  2016-06-14
 8.  2017-06-27
@@ -191,8 +196,8 @@ console.log ( {
 <h4>Logging HTML elements</h4>
 
 <p>You have the ability to log any element which exists within the
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">
-<i>DOM</i></a>. In this case we log the body element:</p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" 
+target="_blank" rel="noreferrer noopener"><i>DOM</i></a>. In this case we log the body element:</p>
 
 <pre>
 console.log(document.body);
@@ -236,7 +241,9 @@ text content to "Hello, World":</p>
 
 <pre><b>&lt;p</b> id="paragraph"&gt;Hello, World<b>&lt;/p&gt;</b></pre>
 
-<p><a href="http://jsbin.com/fuzijox/edit?html,js,console,output">(See also this demo)</a></p>
+<p><a href="http://jsbin.com/fuzijox/edit?html,js,console,output" 
+target="_blank" rel="noreferrer noopener">(See also this demo)</a></p>
+
 <p>You can also use JavaScript to create a new HTML element programmatically. For example, 
 consider an HTML document with the following body:</p>
 
@@ -265,17 +272,19 @@ the JavaScript code must be run <i>after</i> the relevant element has been
 created in the document. This can be achieved by putting the
 JavaScript <b>&lt;script&gt;</b> tags <i>after</i> all of your other 
 <b>&lt;body&gt;</b> content. Alternatively, you can also use 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">
-an event listener</a> to listen to eg. <a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload">
-window's onload event</a>, adding your code to that event listener 
-will delay running your code until after the whole content on your page has been loaded.</p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener" 
+target="_blank" rel="noreferrer noopener">an event listener</a> to listen to eg. 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload" 
+target="_blank" rel="noreferrer noopener">window's onload event</a>, adding your code to 
+that event listener will delay running your code until after the whole content on your 
+page has been loaded.</p>
 
 <p>A third way to make sure all your DOM has been loaded, is 
-<a href="https://stackoverflow.com/questions/779379/why-is-settimeoutfn-0-sometimes-useful">
-to wrap the DOM manipulation code with a timeout function of 0 ms</a>. This way, this 
-JavaScript code is re-queued at the end of the execution queue, which gives the browser 
-a chance to finish doing some non-JavaScript things that have been waiting to finish 
-before attending to this new piece of JavaScript.</p>
+<a href="https://stackoverflow.com/questions/779379/why-is-settimeoutfn-0-sometimes-useful" 
+target="_blank" rel="noreferrer noopener">to wrap the DOM manipulation code with a timeout 
+function of 0 ms</a>. This way, this JavaScript code is re-queued at the end of the execution 
+queue, which gives the browser a chance to finish doing some non-JavaScript things that have 
+been waiting to finish before attending to this new piece of JavaScript.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch1-3">Section 1.3: Using window.alert()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -335,8 +344,8 @@ create a better user experience. Nevertheless, it can be useful for
 debugging.</p>
 
 <p>Starting with Chrome 46.0, window.alert() is blocked inside an <b>&lt;iframe&gt;</b> 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/alert">
-unless its sandbox attribute has the value allow-modal</a>.
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/alert" 
+target="_blank" rel="noreferrer noopener">unless its sandbox attribute has the value allow-modal</a>.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch1-4">Section 1.4: Using window.prompt()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -428,16 +437,16 @@ user's interaction in a variable:</p>
   <li>The argument is optional and not required by the specification.</li>
   <li>Dialog boxes are modal windows - they prevent the user from accessing
     the rest of the program's interface until the dialog box is closed.
-	For this reason, you should not overuse any function that creates a
-	dialog box (or modal window). And regardless, there are very good reasons 
-	to avoid using dialog boxes for confirmation.</li>
+    For this reason, you should not overuse any function that creates a
+    dialog box (or modal window). And regardless, there are very good reasons 
+    to avoid using dialog boxes for confirmation.</li>
   <li>Starting with Chrome 46.0 this method is blocked inside an <b>&lt;iframe&gt;</b>
     unless its sandbox attribute has the value allow-modal.</li>
   <li>It is commonly accepted to call the confirm method with the window
     notation removed as the window object is always implicit. However, it
-	is recommended to explicitly define the window object as expected
-	behavior may change due to implementation at a lower scope level with
-	similarly named methods.</li>
+    is recommended to explicitly define the window object as expected
+    behavior may change due to implementation at a lower scope level with
+    similarly named methods.</li>
 </ul>
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -589,7 +598,7 @@ window.alert(aRandomVariable); // <i>undefined</i>
 
 myArray = &lbrack;"zero" , "one" , "two" &rbrack;;
 window.alert ( myArray &lbrack;0&rbrack;); // <i>0 is the first element of an array</i>
-                             // <i>in this case, the value would be "zero"</i>
+                  // <i>in this case, the value would be "zero"</i>
 myArray = &lbrack;"John Doe", "Billy"&rbrack;;
 elementNumber = 1;
 
@@ -647,8 +656,10 @@ if the value is a number, if not tries to convert it (&ast;), and then
 checks if the resulting value is <b>NaN</b>. For this reason, <b>this
 testing method may cause confusion</b>.</p>
 
-<p>(&ast;) The "conversion" method is not that simple, see <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-isnan-number">ECMA-262 18.2.3</a>
-for a detailed explanation of the algorithm.</p>
+<p>(&ast;) The "conversion" method is not that simple, see 
+<a href="http://www.ecma-international.org/ecma-262/6.0/#sec-isnan-number" 
+target="_blank" rel="noreferrer noopener">ECMA-262 18.2.3</a> for a detailed explanation 
+of the algorithm.</p>
 
 <p>These examples will help you better understand the isNaN() behavior:</p>
 
@@ -681,8 +692,9 @@ a number; this is the reason why isNaN(&lbrack;&rbrack) and isNaN (&lbrack;34&rb
 considered NaN by () unless it only holds one element whose string
 representation can be converted to a valid number</b>.</p>
 
-<pre>Version ≥ 6
-<b>Number.isNaN</b></pre>  
+<h5>Version ≥ 6</h5>
+
+<pre>Number.isNaN</pre>
 
 <p>In ECMAScript 6, the Number.isNaN() function has been implemented primarily to
 avoid the problem of window.isNaN() of forcefully converting the parameter to a 
@@ -690,8 +702,8 @@ number.Number.isNaN(), indeed, <b>doesn't try to convert </b> the value to a num
 before testing. This also means that <b>only values of the type number, that
 are also NaN, return true</b> (which basically means only )).</p>
 
-<p>From <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-number.isnan">
-ECMA-262 20.1.2.4</a>:</p>
+<p>From <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-number.isnan" 
+target="_blank" rel="noreferrer noopener">ECMA-262 20.1.2.4</a>:</p>
 
 <blockquote>
 <p>When the Number .isNaN is called with one argument number, the following steps are taken:</p>
@@ -713,15 +725,16 @@ ECMA-262 20.1.2.4</a>:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-3">Section 3.3: NaN</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN"><b>NaN</b></a> 
-stands for "Not a Number." When a mathematical function or operation in JavaScript cannot return a specific 
-number, it returns the value <b>NaN</b> instead.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN" 
+target="_blank" rel="noreferrer noopener"><b>NaN</b></a> stands for "Not a Number." When a mathematical 
+function or operation in JavaScript cannot return a specific number, it returns the value <b>NaN</b> 
+instead.</p>
 
 <!-- page 14 -->
 
 <p>It is a property of the global object, and a reference to 
-<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN">
-Number.NaN</a></p>
+<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN" 
+target="_blank" rel="noreferrer noopener">Number.NaN</a></p>
 
 <pre>window.hasOwnProperty('NaN'); // <i>true</i>
 <b>NaN</b>; // <i>NaN</i></pre>
@@ -748,15 +761,15 @@ unassigned variable.</p>
 <ul>
   <li><b>undefined</b> is a global value that represents the absence of an
     assigned value.
-	<ul>
-	  <li><b>typeof</b> <b>undefined</b> === 'undefined'</li>
-	</ul>
+    <ul>
+      <li><b>typeof</b> <b>undefined</b> === 'undefined'</li>
+    </ul>
   </li>
   <li><b>null</b> is an object that indicates that a variable has been
     explicitly assigned "no value".
-	<ul>
-	  <li><b>typeof</b> <b>null</b> === 'object'</li>
-	</ul>
+    <ul>
+      <li><b>typeof</b> <b>null</b> === 'object'</li>
+    </ul>
   </li>
 </ul>
 
@@ -771,37 +784,37 @@ concept of an "empty" property.</p>
 <ul>
   <li>A variable when it is declared but not assigned a value (i.e. defined)
     <ul>
-	  <li><b>let</b> foo;<br>
-	    console.log('is undefined?', foo === <b>undefined</b>);<br>
+      <li><b>let</b> foo;<br>
+        console.log('is undefined?', foo === <b>undefined</b>);<br>
         // <i>is undefined? true</i>
-	  </li>
-	</ul>
+      </li>
+    </ul>
   <li>Accessing the value of a property that doesn't exist
     <ul>
-	  <li><b>let</b> foo = { a: 'a' };<br>
-	    console.log('is undefined?', foo.b === <b>undefined</b>);<br>
+      <li><b>let</b> foo = { a: 'a' };<br>
+        console.log('is undefined?', foo.b === <b>undefined</b>);<br>
         // <i>is undefined? true</i>
-	  </li>
-	</ul>
+      </li>
+    </ul>
   <li>The return value of a function that doesn't return a value
     <ul>
-	  <li><b>function</b> foo() { <b>return</b>; }<br>
+      <li><b>function</b> foo() { <b>return</b>; }<br>
         console.log('is undefined?', foo() === <b>undefined</b>);<br>
-		// <i>is undefined? true</i>
+        // <i>is undefined? true</i>
       </li>
-	</ul>
+    </ul>
   <li>The value of a function argument that is declared but has been omitted
     from the function call
-	<ul>
+    <ul>
       <li><b>function</b> foo(param) {<br>
           console.log('is undefined?', param === <b>undefined</b>);<br>
-		}<br>
+        }<br>
         foo('a');<br>
         foo();<br>
         // <i>is undefined? false</i><br>
         // <i>is undefined? true</i><br>
-	  </li>
-	</ul>
+      </li>
+    </ul>
   </li>
 </ul>
 <!-- page 15 -->
@@ -917,8 +930,10 @@ return NaN.</p>
 <pre>Math.floor("a")</pre>
 
 <p>The square root of a negative number returns NaN, because does not
-support <a href="https://en.wikipedia.org/wiki/Imaginary_number">imaginary</a> or
-<a href="https://en.wikipedia.org/wiki/Complex_number">complex</a> numbers.</p>
+support <a href="https://en.wikipedia.org/wiki/Imaginary_number" 
+target="_blank" rel="noreferrer noopener">imaginary</a> or
+<a href="https://en.wikipedia.org/wiki/Complex_number" 
+target="_blank" rel="noreferrer noopener">complex</a> numbers.</p>
 
 <pre>Math.sqrt(-1)</pre>
 <!-- page 17 -->
@@ -1030,29 +1045,49 @@ methods of the console Javascript object</a> that can be consulted through prope
 displayed are generally the following (taken from Chromium&apos;s output):
 
 <ul>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/console/assert">assert</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/clear">clear</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/count">count</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/console#console.debug(...)">debug</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/dir">dir</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/dirxml">dirxml</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/error">error</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/group">group</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed">groupCollapsed</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupEnd">groupEnd</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/info">info</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/log">log</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/console/assert" 
+    target="_blank" rel="noreferrer noopener">assert</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/clear" 
+    target="_blank" rel="noreferrer noopener">clear</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/count" 
+    target="_blank" rel="noreferrer noopener">count</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/console#console.debug(...)" 
+    target="_blank" rel="noreferrer noopener">debug</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/dir" 
+    target="_blank" rel="noreferrer noopener">dir</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/dirxml" 
+    target="_blank" rel="noreferrer noopener">dirxml</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/error" 
+    target="_blank" rel="noreferrer noopener">error</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/group" 
+    target="_blank" rel="noreferrer noopener">group</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed" 
+    target="_blank" rel="noreferrer noopener">groupCollapsed</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupEnd" 
+    target="_blank" rel="noreferrer noopener">groupEnd</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/info" 
+    target="_blank" rel="noreferrer noopener">info</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/log" 
+    target="_blank" rel="noreferrer noopener">log</a></li>
   <li>markTimeline</li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/profile">profile</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/profileEnd">profileEnd</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/table">table</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/time">time</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd">timeEnd</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeStamp">timeStamp</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/profile" 
+    target="_blank" rel="noreferrer noopener">profile</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/profileEnd" 
+    target="_blank" rel="noreferrer noopener">profileEnd</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/table" 
+    target="_blank" rel="noreferrer noopener">table</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/time" 
+    target="_blank" rel="noreferrer noopener">time</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd" 
+    target="_blank" rel="noreferrer noopener">timeEnd</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeStamp" 
+    target="_blank" rel="noreferrer noopener">timeStamp</a></li>
   <li>timeline</li>
   <li>timelineEnd</li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/trace">trace</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/warn">warn</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/trace" 
+    target="_blank" rel="noreferrer noopener">trace</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/warn" 
+    target="_blank" rel="noreferrer noopener">warn</a></li>
 </ul>
 
 <h4>Opening the Console</h4>
@@ -1084,11 +1119,11 @@ after that.</p>
 <ul>
   <li>Windows / Linux: any of the following options.
     <ul>
-	  <li>Ctrl + Shift + K</li>
-	  <li>Ctrl + Shift + I , then click on the "Web Console" tab <b>or</b> press ESC to toggle the console on and off</li>
-	  <li>F12 , then click on the "Web Console" tab <b>or</b> press ESC to toggle the console on and off</li>
-	</ul>
-	</li>
+      <li>Ctrl + Shift + K</li>
+      <li>Ctrl + Shift + I , then click on the "Web Console" tab <b>or</b> press ESC to toggle the console on and off</li>
+      <li>F12 , then click on the "Web Console" tab <b>or</b> press ESC to toggle the console on and off</li>
+    </ul>
+    </li>
   <li>Mac OS: Cmd + Opt + K</li>
 </ul>
 
@@ -1152,23 +1187,24 @@ references and prevent exceptions.</p>
 
 <p>Using this second example will preclude use of other functions such as console.dir(obj) unless that is specifically added.</p>
 
-<p>A browser&apos;s debugging console or <a href="https://developer.mozilla.org/en-US/docs/Tools/Web_Console">web console</a>
-is generally used by developers to identify errors, understand flow of
-execution, log data and for many other purpose at runtime. This
-information is accessed through the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console">
-console</a> object.</p>
+<p>A browser&apos;s debugging console or <a href="https://developer.mozilla.org/en-US/docs/Tools/Web_Console" 
+target="_blank" rel="noreferrer noopener">web console</a> is generally used by developers to identify errors, 
+understand flow of execution, log data and for many other purpose at runtime. This information is accessed 
+through the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console" 
+target="_blank" rel="noreferrer noopener">console</a> object.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-1">Section 5.1: Measuring time - console.time()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>console.time() can be used to measure how long a task in your code takes to run.</p>
 
-<p>Calling <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd">
-console.time(&lbrack;label&rbrack;)</a> starts a new timer. When 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/time">
-console.timeEnd(&lbrack;label&rbrack;)</a> is called, the elapsed time, in milliseconds, Since
-the original .time() call is calculated and logged. Because of this behavior, you can call 
-.timeEnd() multiple times with the same label to log the elapsed time since the original .time()
-call was made.</p>
+<p>Calling <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd" 
+target="_blank" rel="noreferrer noopener">console.time(&lbrack;label&rbrack;)</a> 
+starts a new timer. When 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/time" 
+target="_blank" rel="noreferrer noopener">console.timeEnd(&lbrack;label&rbrack;)</a> is 
+called, the elapsed time, in milliseconds, Since the original .time() call is calculated 
+and logged. Because of this behavior, you can call .timeEnd() multiple times with the same 
+label to log the elapsed time since the original .time() call was made.</p>
 
 <p><b>Example 1:</b></p>
 
@@ -1220,35 +1256,35 @@ console.log(&apos;%s has %d points&apos;,&apos;Sam&apos;, 100);
 <table border="1" style="width:200px">
   <thead>
     <tr>
-	  <th>Specifier</th>
-	  <th>Output</th>
-	</tr>
+      <th>Specifier</th>
+      <th>Output</th>
+    </tr>
   </thead>
   <tbody>
     <tr>
       <td>%s</td>
       <td>Formats the value as a string</td>
-	</tr>
-	<tr>
-	  <td>%i or %d</td>
-	  <td>Formats the value as an integer</td>
-	</tr>
-	<tr>
-	  <td>%f</td>
-	  <td>Formats the value as a floating point value</td>
-	</tr>
-	<tr>
-	  <td>%o</td>
-	  <td>Formats the value as an expandable DOM element</td>
-	</tr>
-	<tr>
-	  <td>%O</td>
-	  <td>Formats the value as an expandable JavaScript object</td>
-	</tr>
-	<tr>
-	  <td>%c</td>
-	  <td>Applies CSS style rules to the output string as specified by the second parameter</td>
-	</tr>
+    </tr>
+    <tr>
+      <td>%i or %d</td>
+      <td>Formats the value as an integer</td>
+    </tr>
+    <tr>
+      <td>%f</td>
+      <td>Formats the value as a floating point value</td>
+    </tr>
+    <tr>
+      <td>%o</td>
+      <td>Formats the value as an expandable DOM element</td>
+    </tr>
+    <tr>
+      <td>%O</td>
+      <td>Formats the value as an expandable JavaScript object</td>
+    </tr>
+    <tr>
+      <td>%c</td>
+      <td>Applies CSS style rules to the output string as specified by the second parameter</td>
+    </tr>
   </tfoot>
 </table>
 
@@ -1279,7 +1315,7 @@ which allow fine-grained control over the formatting of that string:</p>
     rules to that same substring;</li>
   <li>if two %c format specifiers are found, the 1st (encased in %c) and 2nd 
     substring will have their rules defined in the 2nd and 3rd parameter of the print
-	method respectively.</li>
+    method respectively.</li>
   <li>if three %c format specifiers are found, then the 1st, 2nd and 3rd substrings will 
     have their rules defined in the 2nd , 3rd and 4th parameter respectively, and so on&hellip;</li>
 </ul>
@@ -1308,21 +1344,21 @@ console.log("%cHello %cWorld%c!!", // <i>string to be printed</i>
 debugging console with the following methods:</p>
 
 <ul>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed">
-    console.groupCollapsed()</a>: creates a collapsed group of entries that can be expanded 
-	through the disclosure button in order to reveal all the entries performed after this 
-	method is invoked;</li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/group">
-    console.group()</a>: creates an expanded group of entries that can be collapsed in order to
-	hide the entries after this method is invoked.</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed" 
+    target="_blank" rel="noreferrer noopener">console.groupCollapsed()</a>: creates a collapsed 
+	group of entries that can be expanded through the disclosure button in order to reveal all 
+	the entries performed after this method is invoked;</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/group" 
+    target="_blank" rel="noreferrer noopener">console.group()</a>: creates an expanded group 
+	of entries that can be collapsed in order to hide the entries after this method is invoked.</li>
 </ul>
 
 <p>The indentation can be removed for posterior entries by using the following method:</p>
 
 <ul>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupEnd">
-    console.groupEnd()</a>: exits the current group, allowing newer entries to be printed in the
-	parent group after this method is invoked.</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupEnd" 
+    target="_blank" rel="noreferrer noopener">console.groupEnd()</a>: exits the current group, 
+	allowing newer entries to be printed in the parent group after this method is invoked.</li>
 </ul>
 
 <p>Groups can be cascaded to allow multiple indented output or collapsible layers within each other:</p>
@@ -1345,10 +1381,10 @@ debugging console with the following methods:</p>
 <h3 id="ch5-3">Section 5.3: Printing to a browser&apos;s debugging console</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>A browser&apos;s debugging console can be used in order to print simple
-messages. This debugging or <a href="https://developer.mozilla.org/en-US/docs/Tools/Web_Console">web
-console</a> can be directly opened in the browser (F12 key in most browsers 
-see <i>Remarks</i> below for further information) and the log method of the
-console JavaScript object can be invoked by typing the following:</p>
+messages. This debugging or <a href="https://developer.mozilla.org/en-US/docs/Tools/Web_Console" 
+target="_blank" rel="noreferrer noopener">web console</a> can be directly opened in the 
+browser (F12 key in most browsers see <i>Remarks</i> below for further information) and 
+the log method of the console JavaScript object can be invoked by typing the following:</p>
 
 <pre>console.log('My message');</pre>
 
@@ -1397,18 +1433,21 @@ console.log(<b>function</b> test(a, b) { <b>return</b> c; });</pre>
 <p>In addition to the log method, modern browsers also support similar methods:</p>
 
 <ul>
-  <li><a href="https://developer.mozilla.org/es/docs/Web/API/Console/info">
+  <li><a href="https://developer.mozilla.org/es/docs/Web/API/Console/info" 
+    target="_blank" rel="noreferrer noopener">
     console.info</a> - small informative icon (ⓘ) appears on the left side of the printed
     string(s) or object(s).</li>
-  <li><a href="a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/warning">
+  <li><a href="a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/warning" 
+    target="_blank" rel="noreferrer noopener">
     console.warn</a> - small warning icon (!) appears on the left side. In some browsers,
     the background of the log is yellow.</li>
-  <li><a href="a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/error">
+  <li><a href="a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/error" 
+    target="_blank" rel="noreferrer noopener">
     console.error</a> - small times icon (⊗) appears on the left side. In some browsers, 
-	the background of the log is red.</li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeStamp">
-    console.timeStamp</a> - outputs the current time and a specified string, but 
-	is non-standard:</li>
+    the background of the log is red.</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeStamp" 
+    target="_blank" rel="noreferrer noopener">console.timeStamp</a> - outputs the current 
+    time and a specified string, but is non-standard:</li>
 </ul>
 
 <pre>console.timeStamp('msg');</pre>
@@ -1418,9 +1457,10 @@ console.log(<b>function</b> test(a, b) { <b>return</b> c; });</pre>
 <pre>00:00:00.001 msg</pre>
 
 <ul>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/trace">
-    console.trace</a> - outputs the current stack trace or displays the same output as the
-	log method if invoked in the global scope.</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/trace" 
+    target="_blank" rel="noreferrer noopener">console.trace</a> - outputs the current 
+    stack trace or displays the same output as the log method if invoked in the global 
+    scope.</li>
 </ul>
 <!-- page 26 -->
 
@@ -1551,11 +1591,12 @@ console.log(e&period;stack);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch5-6">Section 5.6: Counting - console.count()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/count">
-console.count(&lbrack;obj&rbrack;)</a> places a counter on the object&apos;s value 
-provided as argument. Each time this method is invoked, the counter is increased 
-(with the exception of the empty string &apos;&apos;). A label together with a 
-number is displayed in the debugging console according to the following format:</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/count" 
+target="_blank" rel="noreferrer noopener">console.count(&lbrack;obj&rbrack;)</a> 
+places a counter on the object&apos;s value provided as argument. Each time this method is 
+invoked, the counter is increased (with the exception of the empty string &apos;&apos;). 
+A label together with a number is displayed in the debugging console according to the 
+following format:</p>
 
 <pre>
 &lbrack;label&rbrack;: X
@@ -1791,9 +1832,11 @@ is <b>false</b>:</p>
   alt="."
   style="border: 2px solid #000000; width:6.468in;" />
 <!-- ![](./images/image024.jpg){width="6.46875in" height="1.2069444444444444in"} -->
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/console/assert">console.assert</a> does 
-<i>not</i> throw an AssertionError (except in Node.js), meaning that this method is incompatible 
-with most testing frameworks and that code execution will not break on a failed assertion.</p>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/console/assert" 
+target="_blank" rel="noreferrer noopener">console.assert</a> does <i>not</i> throw an 
+AssertionError (except in Node.js), meaning that this method is incompatible with most 
+testing frameworks and that code execution will not break on a failed assertion.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch6">Chapter 6: Datatypes in JavaScript</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -1858,7 +1901,7 @@ one inheriting from it, you can use the <b>instanceof</b> command:</p>
 <b>function</b> sum ( &hellip; arguments ) {
   <b>if</b> ( arguments.length === 1 ) {
     <b>const</b> &lbrack; firstArg &rbrack; = arguments
-	<b>if</b> ( firstArg <b>instanceof</b> Array ) { //<i>firstArg is something like &lbrack;1, 2, 3&rbrack;</i>
+    <b>if</b> ( firstArg <b>instanceof</b> Array ) { //<i>firstArg is something like &lbrack;1, 2, 3&rbrack;</i>
       <b>return</b> sum (&hellip;firstArg) //<i>calls sum(1, 2, 3)</i>
     }
   }
@@ -1924,15 +1967,15 @@ actually is: Object.<b>prototype</b>.toString.call(yourObject)</p>
     </blockquote></li>
   <li><b>Object</b><br/>
     Object.<b>prototype</b>.toString.call(Object()) or<br/>
-	Object.<b>prototype</b>.toString.call({})<br/>
-	<blockquote>
+    Object.<b>prototype</b>.toString.call({})<br/>
+    <blockquote>
     &quot;&lbrack;object Object&rbrack;&quot;
     </blockquote></li>
   <li><b>Function</b><br/>
     Object.<b>prototype</b>.toString.call(<b>function</b>(){})<br/>
-	<blockquote>
+    <blockquote>
     &quot;&lbrack;object Function&rbrack;&quot;
-	</blockquote></li>
+    </blockquote></li>
   <li><b>Date</b><br/>
     Object.<b>prototype</b>.toString.call(<b>new</b> Date(2015,10,21))<br/>
     <blockquote>
@@ -1940,15 +1983,15 @@ actually is: Object.<b>prototype</b>.toString.call(yourObject)</p>
     </blockquote></li>
   <li><b>Regex</b><br/>
     Object.<b>prototype</b>.toString.call(<b>new</b> RegExp()) or<br/>
-	Object.<b>prototype</b>.toString.call(/<i>foo/</i>);<br/>
-	<blockquote>
-	&quot;&lbrack;object.RegExp&rbrack;&quot;
-	</blockquote></li>
+    Object.<b>prototype</b>.toString.call(/<i>foo/</i>);<br/>
+    <blockquote>
+    &quot;&lbrack;object.RegExp&rbrack;&quot;
+    </blockquote></li>
   <li><b>Array</b><br/>
     Object.<b>prototype</b>.toString.call(&lbrack;&rbrack;);<br/>
     <blockquote>
     &quot;&lbrack;object Array&rbrack;&quot;
-	</blockquote></li>
+    </blockquote></li>
   <li><b>Null</b><br/>
     Object.<b>prototype</b>.toString.call(<b>null</b>);<br/>
     <blockquote>
@@ -1957,13 +2000,13 @@ actually is: Object.<b>prototype</b>.toString.call(yourObject)</p>
   <li><b>Undefined</b><br/>
     Object.<b>prototype</b>.toString.call(<b>undefined</b>);<br/>
     <blockquote>
-	&quot;&lbrack;object Undefined&rbrack;&quot;
-	</blockquote></li>
+    &quot;&lbrack;object Undefined&rbrack;&quot;
+    </blockquote></li>
   <li><b>Error</b><br/>
     Object.<b>prototype</b>.toString.call(Error());<br/>
     <blockquote>
-	&quot;&lbrack;object Error&rbrack;&quot;
-	</blockquote></li>
+    &quot;&lbrack;object Error&rbrack;&quot;
+    </blockquote></li>
 </ol>
 <!-- page 37 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2040,9 +2083,7 @@ console.log(string &plus; number &plus; boolean); // <i>&quot;string32true&quot;
 <p><b>String Templates</b></p>
 
 <!-- page 38 -->
-<pre>
-Version ≥ 6
-</pre>
+<h5>Version ≥ 6</h5>
 
 <p>Strings can be created using template literals (<i>backticks</i>) &grave;hello&grave;.</p>
 
@@ -2092,49 +2133,51 @@ with.</p>
 
 <p>While the method will work fine for most languages, a truly accurate, encoding respecting 
 algorithm for string reversal is slightly more involved. One such implementation is a tiny 
-library called <a href="https://github.com/mathiasbynens/esreverwhich">Esrever</a> uses regular 
-expressions for matching combining marks and surrogate pairs in order to perform the reversing 
-perfectly.</p>
+library called <a href="https://github.com/mathiasbynens/esreverwhich" 
+target="_blank" rel="noreferrer noopener">Esrever</a> uses regular expressions for matching 
+combining marks and surrogate pairs in order to perform the reversing perfectly.</p>
 
 <p><b>Explanation</b></p>
 
 <table border="1" style="width:500px">
   <thead>
     <tr>
-	  <th>Section</th>
-	  <th>Explanation</th>
-	  <th>Result</th>
-	</tr>
+      <th>Section</th>
+      <th>Explanation</th>
+      <th>Result</th>
+    </tr>
   </thead>
   <tbody>
     <tr>
-	  <th>str</th>
-	  <th>The input string</th>
-	  <th>"string"</th>
-	</tr>
+      <th>str</th>
+      <th>The input string</th>
+      <th>"string"</th>
+    </tr>
     <tr>
-	  <th><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split">String.prototype.split(deliminator)</a></th>
-	  <th>Splits string str into an array. The parameter "" means to split between each character</th>
-	  <th>&lbrack;"s","t","r","i","n","g"&rbrack;</th>
-	</tr>
+      <th><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split" 
+        target="_blank" rel="noreferrer noopener">String.prototype.split(deliminator)</a></th>
+      <th>Splits string str into an array. The parameter "" means to split between each character</th>
+      <th>&lbrack;"s","t","r","i","n","g"&rbrack;</th>
+    </tr>
     <tr>
-	  <th><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse">Array.prototype.reverse()</a></th>
-	  <th>Returns the array from the split string with its elements in reverse order</th>
-	  <th>&lbrack;"g","n","i","r","t","s"&rbrack;</th>
-	</tr>
+      <th><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse" 
+        target="_blank" rel="noreferrer noopener">Array.prototype.reverse()</a></th>
+      <th>Returns the array from the split string with its elements in reverse order</th>
+      <th>&lbrack;"g","n","i","r","t","s"&rbrack;</th>
+    </tr>
     <tr>
-	  <th><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join">Array.prototype.join(deliminator)</a></th>
-	  <th>Joins the elements in the array together into a sting. The "" parameter means an empty deliminator (i.e., the elements of the array are put right next to each other).</th>
-	  <th>"gnirts"</th>
-	</tr>
+      <th><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join" 
+        target="_blank" rel="noreferrer noopener">Array.prototype.join(deliminator)</a></th>
+      <th>Joins the elements in the array together into a sting. The "" parameter means an empty deliminator (i.e., the elements of the array are put right next to each other).</th>
+      <th>"gnirts"</th>
+    </tr>
   </tbody>
 </table>
 
 <p><b>Using spread operator</b></p>
 
-<pre>
-Version ≥ 6
-</pre>
+<h5>Version ≥ 6</h5>
+
 <!-- page 39 -->
 <pre>
 <b>function</b> reverseString(str) {
@@ -2162,10 +2205,10 @@ reverse&quot;zebra&quot;);  // <i>&quot;arbez&quot;</i>
 <h3 id="ch7-3">Section 7.3: Comparing Strings Lexicographically</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>To compare strings alphabetically, use
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare">
-localCompare()</a>. This returns a negative value if the reference string is lexicographically 
-(alphabetically) before the compared string (the parameter), a positive value if it comes 
-afterwards, and a value of 0 if they are equal.</p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare" 
+target="_blank" rel="noreferrer noopener">localCompare()</a>. This returns a negative value 
+if the reference string is lexicographically (alphabetically) before the compared string (the parameter), 
+a positive value if it comes afterwards, and a value of 0 if they are equal.</p>
 
 <pre>
 <b>var</b> a = &quot;hello&quot;;
@@ -2207,8 +2250,8 @@ console.log(arr);  // <i>&lbrack; &quot;apples&quot;, &quot;bananas&quot;, &quot
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-4">Section 7.4: Access character at index in string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>Use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt">
-charAt()</a> to get a character at the specified index in the string.</p>
+<p>Use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt" 
+target="_blank" rel="noreferrer noopener">charAt()</a> to get a character at the specified index in the string.</p>
 
 <pre>
 <b>var</b> string = &quot;Hello, World!&quot;;
@@ -2216,8 +2259,8 @@ console.log( string.charAt(4) ); // <i>&quot;o&quot;</i>
 </pre>
 
 <p>Alternatively, because strings can be treated like arrays, use the index via 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors">
-bracket notation</a>.</p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors" 
+target="_blank" rel="noreferrer noopener">bracket notation</a>.</p>
 
 <pre>
 <b>var</b> string = &quot;Hello, World!&quot;;
@@ -2225,8 +2268,8 @@ console.log ( string &lbrack;4&rbrack; ); // <i>&quot;o&quot;</i>
 </pre>
 
 <p>To get the character code of the character at a specified index, use 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt">
-charCodeAt()</a>.</p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt" 
+target="_blank" rel="noreferrer noopener">charCodeAt()</a>.</p>
 
 <pre>
 <b>var</b> string = &quot;Hello, World!&quot;;
@@ -2274,7 +2317,7 @@ and &quot; (or &#34;) as double quotes.</p>
 automatically place on attribute quotes. For example <b>&lt;p</b> class=special<b>&gt;</b> being made to <b>&lt;p</b> class="special"&gt;,
 using &quot; can lead to <b>&lt;p</b> class=""special""&gt; where &bsol;" will be &lt;p class="special"&gt;.</p>
 
-<p>Version ≥ 6</p>
+<h5>Version ≥ 6</h5>
 
 <p>If a string has &apos; and &quot; you may want to consider using template literals (<i>also 
 known as template strings in previous ES6 editions</i>), which do not require you to escape &apos; 
@@ -2310,7 +2353,8 @@ and &quot;. These use backticks (&grave;) instead of single or double quotes.</p
 wordCount( someMultilineText ).words;  // <i>(Number of words)</i>
 </pre>
 
-<p><a href="http://jsfiddle.net/RokoCB/5nfay7d1/206/">jsFiddle example</a>.</p>
+<p><a href="http://jsfiddle.net/RokoCB/5nfay7d1/206/" target="_blank" rel="noreferrer noopener">
+jsFiddle example</a>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-7">Section 7.7: Trim whitespace</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2320,11 +2364,13 @@ wordCount( someMultilineText ).words;  // <i>(Number of words)</i>
 &quot;   some whitespaced string   &quot;.trim();  // <i>&quot;some whitespaced string&quot;</i>
 </pre>
 
-<p>Many JavaScript engines, but <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/TrimLeft#Browser_compatibility">not Internet Explorer</a>,
-have implemented non-standard trimLeft and trimRight methods. There is a
-<a href="https://github.com/sebmarkbage/ecmascript-string-left-right-trim">proposal</a>,
-currently at Stage 1 of the process, for standardised trimStart and
-trimEnd methods, aliased to trimLeft and trimRight for compatibility.</p>
+<p>Many JavaScript engines, but 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/TrimLeft#Browser_compatibility" 
+target="_blank" rel="noreferrer noopener">not Internet Explorer</a>, have implemented 
+non-standard trimLeft and trimRight methods. There is a <a href="https://github.com/sebmarkbage/ecmascript-string-left-right-trim" 
+target="_blank" rel="noreferrer noopener">proposal</a>, currently at Stage 1 of the process, 
+for standardised trimStart and trimEnd methods, aliased to trimLeft and trimRight for 
+compatibility.</p>
 
 <pre>
 // <i>Stage 1 proposal</i>
@@ -2457,7 +2503,7 @@ position of the character is passed as a parameter to charCodeAt:</p>
 <b>var</b> charCode = &quot;ABCDE&quot;.charCodeAt(3); // <i>The character code of &quot;D&quot; is 68</i>
 </pre>
 
-<p>Version ≥ 6</p>
+<h5>Version ≥ 6</h5>
 
 <p>Some Unicode symbols don&apos;t fit in a single character, and instead
 require two UTF-16 surrogate pairs to encode. This is the case of
@@ -2505,7 +2551,7 @@ this can be done with parseInt and the <i>radix 16</i> again.</p>
 representation</i> into a <i>Number</i>, the operation must be split into two
 parts; the integer part and the fraction part.</p>
 
-<p>Version ≥ 6</p>
+<h5>Version ≥ 6</h5>
 
 <pre>
 <b>let</b> b16 = &apos;3.243f3e0370cdc&apos;;
@@ -2590,9 +2636,9 @@ console.log( string.includes(&quot;foo&quot;));   // <i>false</i>
 (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) -->
 
 <p>replace() will return a string that has all occurrences of substrings matching the 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">RegExp</a>
-regexp or string substring with a string replacement or the returned
-value of replaceFunction.</p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp" 
+target="_blank" rel="noreferrer noopener">RegExp</a> regexp or string substring with a string 
+replacement or the returned value of replaceFunction.</p>
 
 <p>Note that this does not modify the string in place, but returns the
 string with replacements.</p>
@@ -2615,27 +2661,27 @@ the following order:</p>
 <table border="1" style="width:200px">
   <thead>
     <tr>
-	  <th>Parameter</th>
-	  <th>Meaning</th>
-	</tr>
+      <th>Parameter</th>
+      <th>Meaning</th>
+    </tr>
   </thead>
   <tbody>
     <tr>
-	  <td>match</td>
-	  <td>the substring that matches the entire regular expression</td>
-	</tr>
-	<tr>
-	  <td>g1,g2,g3,...</td>
-	  <td>the matching groups in the regular expression</td>
-	</tr>
-	<tr>
-	  <td>offset</td>
-	  <td>the offset of the match in the entire string</td>
-	</tr>
-	<tr>
-	  <td>string</td>
-	  <td>the entire string</td>
-	</tr>
+      <td>match</td>
+      <td>the substring that matches the entire regular expression</td>
+    </tr>
+    <tr>
+      <td>g1,g2,g3,...</td>
+      <td>the matching groups in the regular expression</td>
+    </tr>
+    <tr>
+      <td>offset</td>
+      <td>the offset of the match in the entire string</td>
+    </tr>
+    <tr>
+      <td>string</td>
+      <td>the entire string</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2693,20 +2739,22 @@ console.log(&apos;QWERTY&apos;.toLowerCase());  // <i>&apos;qwerty&apos;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-18">Section 7.18: Repeat a String</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>Version ≥ 6</p>
+<h5>Version ≥ 6</h5>
 
-<p>This can be done using the <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-string.prototype.repeat">.repeat()</a> 
-method:</p>
+<p>This can be done using the <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-string.prototype.repeat" 
+target="_blank" rel="noreferrer noopener">.repeat()</a> method:</p>
 
 <pre>
 &quot;abc&quot;.repeat(3);   // <i>Returns &quot;abcabcabc&quot;</i>
 &quot;abc&quot;.repeat(0);   // <i>Returns &quot;&quot;</i>
 &quot;abc&quot;.repeat(&minus;1);  // <i>Throws a RangeError</i>
 </pre>
-<p>Version &lt; 6</p>
+
+<h5>Version &lt; 6</h5>
 
 <p>In the general case, this should be done using a correct polyfill for
-the ES6 <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-string.prototype.repeat">
+the ES6 <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-string.prototype.repeat" 
+target="_blank" rel="noreferrer noopener">
 String.prototype.repeat()</a> method. Otherwise, the idiom <b>new</b> Array(n &plus; 1).join(myString) 
 can repeat n times the string myString:</p>
 
@@ -2723,47 +2771,47 @@ can repeat n times the string myString:</p>
 <table border="1" style="width:200px">
   <thead>
     <tr>
-	  <th>Parameter</th>
-	  <th>Details</th>
-	</tr>
+      <th>Parameter</th>
+      <th>Details</th>
+    </tr>
   </thead>
   <tbody>
     <tr>
-	  <td>value</td>
-	  <td>The number of milliseconds since 1 January 1970 00:00:00:000 UTC (Unix epoch)</td>
-	</tr>
-	<tr>
-	  <td>dateAsString</td>
-	  <td>A date formatted as a string (see examples for more information)</td>
-	</tr>
-	<tr>
-	  <td>year</td>
-	  <td>The year value of the date. Note that month must also be provided, or the value will be interpreted as a number of milliseconds. Also note that values between 0 and 99 have special meaning. See the examples.</td>
-	</tr>
-	<tr>
-	  <td>month</td>
-	  <td>The month, in the range 0-11. Note that using values outside the specified range for this and the following parameters will not result in an error, but rather cause the resulting date to "roll over" to the next value. See the examples.</td>
-	</tr>
-	<tr>
-	  <td>day</td>
-	  <td>Optional: The date, in the range 1-31.</td>
-	</tr>
-	<tr>
-	  <td>hour</td>
-	  <td>Optional: the hour, in the range 0-23.</td>
-	</tr>
-	<tr>
-	  <td>minute</td>
-	  <td>Optional: The minute, in the range 0-59.</td>
-	</tr>
-	<tr>
-	  <td>second</td>
-	  <td>Optional: The second, in the range 0-59.</td>
-	</tr>
-	<tr>
-	  <td>milliseconds</td>
-	  <td>Optional: The millisecond, in the range 0-999.</td>
-	</tr>
+      <td>value</td>
+      <td>The number of milliseconds since 1 January 1970 00:00:00:000 UTC (Unix epoch)</td>
+    </tr>
+    <tr>
+      <td>dateAsString</td>
+      <td>A date formatted as a string (see examples for more information)</td>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>The year value of the date. Note that month must also be provided, or the value will be interpreted as a number of milliseconds. Also note that values between 0 and 99 have special meaning. See the examples.</td>
+    </tr>
+    <tr>
+      <td>month</td>
+      <td>The month, in the range 0-11. Note that using values outside the specified range for this and the following parameters will not result in an error, but rather cause the resulting date to "roll over" to the next value. See the examples.</td>
+    </tr>
+    <tr>
+      <td>day</td>
+      <td>Optional: The date, in the range 1-31.</td>
+    </tr>
+    <tr>
+      <td>hour</td>
+      <td>Optional: the hour, in the range 0-23.</td>
+    </tr>
+    <tr>
+      <td>minute</td>
+      <td>Optional: The minute, in the range 0-59.</td>
+    </tr>
+    <tr>
+      <td>second</td>
+      <td>Optional: The second, in the range 0-59.</td>
+    </tr>
+    <tr>
+      <td>milliseconds</td>
+      <td>Optional: The millisecond, in the range 0-999.</td>
+    </tr>
   </tbody>
 </table>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2772,20 +2820,20 @@ can repeat n times the string myString:</p>
 <p>To create a new Date object use the () constructor:</p>
 
 <ul>
-  <li><b>with no arguments</b><br/>
-    Date() creates a Date instance containing the current time (up to milliseconds) and date.</li>
-  <li><b>with one integer argument</b><br/>
+  <li><b>with no arguments</b><br/><br/>
+    Date() creates a Date instance containing the current time (up to milliseconds) and date.<br/></li>
+  <li><b>with one integer argument</b><br/><br/>
     Date&lpar;m&rpar; creates a Date instance containing the time and date corresponding to the 
-	Epoch time (1 January, 1970 UTC) plus m milliseconds. Example: <b>new</b> Date((749019369738) 
-	gives the date <i>Sun, 26 Sep 1993 04:56:09 GMT</i>.</li>
-  <li><b>with a string argument</b><br/>
+    Epoch time (1 January, 1970 UTC) plus m milliseconds. Example: <b>new</b> Date(749019369738) 
+    gives the date <i>Sun, 26 Sep 1993 04:56:09 GMT</i>.<br/></li>
+  <li><b>with a string argument</b><br/><br/>
     Date(dateString) returns the Date object that results after parsing dateString with 
-	Date.parse.</li>
-  <li>with two or more integer arguments<br/>
+    Date.parse.<br/></li>
+  <li><b>with two or more integer arguments</b><br/><br/>
     Date(i1, i2, i3, i4, i5, i6)) reads the arguments as year, month, day, hours, minutes, seconds,
-	milliseconds and instantiates the corresponding Dateobject. Note that the month is 0-indexed 
-	in JavaScript, so 0 means January and 11 means December. Example: Date(2017, 5, 1) gives 
-	<i>June 1st, 2017</i>.</li>
+    milliseconds and instantiates the corresponding Dateobject. Note that the month is 0-indexed 
+    in JavaScript, so 0 means January and 11 means December. Example: new Date(2017, 5, 1) gives 
+    <i>June 1st, 2017</i>.<br/></li>
 </ul>
 
 <p><b>Exploring dates</b></p>
@@ -2797,7 +2845,7 @@ Date.prototype.toISOString() was used to show the date and time in UTC
 (the Z in the formatted string denotes UTC).</p>
 <!-- page 48 -->
 <pre>
-// <i>Creates a Date object with the current date and time from the </i>
+// <i>Creates a Date object with the current date and time from the</i>
 // <i>user&apos;s browser</i>
 <b>var</b> now = <b>new</b> Date();
 now.toString() === &apos;Mon Apr 11 2016 16:10:41 GMT-0500 (Central Daylight Time)&apos; 
@@ -2833,7 +2881,7 @@ utc.toString() === &apos;Sat Dec 31 2011 18:00:00 GMT-0600 (Central Standard Tim
 utc.toISOString() === &apos;2012-01-01T00:00:00.000Z&apos;
 // <i>true</i>
 
-// <i>Parses a string into a Date object (ISO 8601 format added in ECMAScript 5.1)
+// <i>Parses a string into a Date object (ISO 8601 format added in ECMAScript 5.1)</i>
 // <i>Implementations should assumed UTC because of ISO 8601 format and Z designation</i>
 <b>var</b> iso = <b>new</b> Date(&apos;2012-01-01T00:00:00.000Z&apos;);
 iso.toISOString() === &apos;2012-01-01T00:00:00.000Z&apos; <i>// true</i>
@@ -2980,8 +3028,8 @@ date1.toLocaleDateString(&lbrack;&rbrack;, options);
 &quot;Thursday, April 14, 2016&quot;.
 </pre>
 
-<p>See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#Example:_Checking_for_support_for_locales_and_options_arguments">
-the MDN</a> for more details.</p>
+<p>See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#Example:_Checking_for_support_for_locales_and_options_arguments" 
+target="_blank" rel="noreferrer noopener">the MDN</a> for more details.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-3">Section 8.3: Creating a Date from UTC</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -3119,7 +3167,7 @@ Sample output: <b>true</b>
 
 <p><b>Changing a Date object</b></p>
 
-  setDate         (   &hellip;   ) and       setFullYear              (   &hellip;
+  setDate         (   &hellip;   ) and       setFullYear   (   &hellip;
 All Date object modifiers, such as ) have an equivalent takes an
 argument in
 UTC time rather than in local time.
@@ -3131,7 +3179,7 @@ console.log ( date );
 
 Sample output:
 Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
-  setUTCMonth                     (), .       setUTCDate
+  setUTCMonth          (), .       setUTCDate
 
 The other UTC-specific modifiers are .() (for the day of the month),
   setUTCMinutes    (), . setUTCSeconds    () and .  setUTCMilliseconds
@@ -3179,8 +3227,9 @@ Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
   [toLocaleDateString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
 -->
 
-<p>In modern browsers (&ast;), <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString">
-Date.prototype.toLocalDateString()</a> allows you to define the formatting of a Date in a convenient manner.</p>
+<p>In modern browsers (&ast;), <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString" 
+target="_blank" rel="noreferrer noopener">Date.prototype.toLocalDateString()</a> 
+allows you to define the formatting of a Date in a convenient manner.</p>
 
 <p>It requires the following format:</p>
 
@@ -3267,12 +3316,12 @@ year: 2019
 20-01-2016
 </pre>
 
-<p>(&ast;) <a href="http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean">
+<p>(&ast;) <a href="http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean" 
+target="_blank" rel="noreferrer noopener">
 <b>According to the MDN</b></a>, &quot;modern browsers&quot; means Chrome 24+, Firefox 29+, 
 IE11, Edge12+, Opera 15+ & Safari 
-<a href="http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean">
-<b>nightly build</b></a>.</p>
-
+<a href="http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean" 
+target="_blank" rel="noreferrer noopener"><b>nightly build</b></a>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-5">Section 8.5: Get the number of milliseconds elapsed since 1 January 1970 00:00:00 UTC</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -3281,28 +3330,25 @@ since 1 January 1970 00:00:00 UTC. To get the number of milliseconds
 that have elapsed since that time using an instance of a Date object,
 use its getTime method.</p>
 <pre>
-// <i> get milliseconds using static method now of Date</i>
+// <i>get milliseconds using static method now of Date</i>
 console.log(Date.now());
 
-// <i> get milliseconds using method getTime of Date instance</i>
+// <i>get milliseconds using method getTime of Date instance</i>
 console.log((<b>new</b> Date ( ) ) .getTime ());
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-6">Section 8.6: Get the current time and date</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-  <b>new</b> Date
+<b>new</b> Date
 Use () to generate a new Date object containing the current date and
 time.
 Date   () <i>called without arguments</i> is equivalent    <b>new</b>   (   Date   .   now
-to</i>                                           Date                     
-<i>Note that</i> ())</i>.</i>
+to  Date <i>Note that</i> ())</i>.</i>
 
-Once you have a date object, you can apply any of the several
-available methods to extract its properties (e.g.
+<p>Once you have a date object, you can apply any of the several available methods to extract 
+its properties (e.g. getFullYear() to get the 4-digits year).</p>
 
-getFullYear() to get the 4-digits year).
-
-Below are some common date methods.
+<p>Below are some common date methods.</p>
 
 <b>Get the current year</b>
 <b>var</b> year = (<b>new</b> Date ( ) ) .getFullYear ( );
@@ -3313,100 +3359,28 @@ console.log(month);  // <i>Sample output: 0</i>
 Please note that 0 = January. This is because months range from <i>0</i> to
 <i>11</i>, so it is often desirable to add +1 to the index.
 <b>Get the current day</b>
-// <i> Sample output: 31</i>
-<b>var</b>
-day
-=
-(
-<b>new</b>
-Date
-(
-)
-)
-.
-getDate
-(
-)
-;
-console.
-log
-(
-day
-)
-;
+// <i>Sample output: 31</i>
+<b>var</b> day = (<b>new</b> Date()).getDate();
+console.log(day);
 <b>Get the current hour</b>
-// <i> Sample output: 10</i>
-<b>var</b>
-hours
-=
-(
-<b>new</b>
-Date
-(
-)
-)
-.
-getHours
-(
-)
-;
-console.
-log
-(
-hours
-)
-;
+// <i>Sample output: 10</i>
+<b>var</b> hours = (<b>new</b> Date()).getHours();
+console.log(hours);
 <b>Get the current minutes</b>
-<b>var</b>
-minutes
-=
-(
-<b>new</b>
-Date
-(
-)
-)
-.
-getMinutes
-(
-)
-;
-console.
-log
-(
-minutes
-)
-;
-// <i> Sample output: 39</i>
+<b>var</b> minutes = (<b>new</b> Date()).getMinutes();
+console.log(minutes);
+// <i>Sample output: 39</i>
 <b>Get the current seconds</b>
-<b>var</b>
-seconds
-=
-(
-<b>new</b>
-Date
-(
-)
-)
-.
-getSeconds
-(
-)
-;
-console.
-log
-(
-second
-)
-;
-// <i> Sample output: 48</i>
+<b>var</b> seconds = (<b>new</b> Date()).getSeconds();
+console.log(second);
+// <i>Sample output: 48</i>
 
 <b>Get the current milliseconds</b>
 
 To get the milliseconds (ranging from 0 to 999) of an instance of a
 Date object, use its getMilliseconds method.
 
-// <i> Output: milliseconds right now</i>
+// <i>Output: milliseconds right now</i>
 <b>var</b>
 milliseconds
 =
@@ -3436,7 +3410,7 @@ Date
 (
 )
 ;
-// <i> convert date to a string in UTC timezone format:</i>
+// <i>convert date to a string in UTC timezone format:</i>
 console.
 log
 (
@@ -3446,17 +3420,17 @@ toUTCString
 )
 )
 ;
-// <i> Output: Wed, 21 Jun 2017 09:13:01 GMT</i>
+// <i>Output: Wed, 21 Jun 2017 09:13:01 GMT</i>
   
-Date                                .        now
+Date.now
 
 The static method () returns the number of milliseconds that have
 elapsed since 1 January 1970 00:00:00 UTC. To get the number of
 milliseconds that have elapsed since that time using an instance of a
 Date object, use its getTime method.
-// <i> get milliseconds using static method now of Date</i>
+// <i>get milliseconds using static method now of Date</i>
 console.log(Date.now());
-// <i> get milliseconds using method getTime of Date instance</i>
+// <i>get milliseconds using method getTime of Date instance</i>
 
 console.log((<b>new</b> Date()).getTime());
 
@@ -3466,21 +3440,21 @@ console.log((<b>new</b> Date()).getTime());
 To increment date objects in JavaScript, we can usually do this:
 <b>var</b> checkoutDate = <b>new</b> Date();
 
-// <i> Thu Jul 21 2016 10:05:13 GMT-0400 (EDT)</i>
+// <i>Thu Jul 21 2016 10:05:13 GMT-0400 (EDT)</i>
 
 checkoutDate.setDate (checkoutDate.getDate() &plus; 1);
 
-console.log(checkoutDate); // <i> Fri Jul 22 2016 10:05:13 GMT-0400
+console.log(checkoutDate); // <i>Fri Jul 22 2016 10:05:13 GMT-0400
 (EDT)</i>
 
 It is possible to use setDate to change the date to a day in the
 following month by using a value larger than the number of days in the
 current month -
 
-<b>var</b> checkoutDate = <b>new</b> Date(); // <i> Thu Jul 21 2016 10:05:13
+<b>var</b> checkoutDate = <b>new</b> Date(); // <i>Thu Jul 21 2016 10:05:13
 GMT-0400 (EDT)</i> checkoutDate.setDate( checkoutDate.getDate() + 12 );
 
-console.log(checkoutDate); // <i> Tue Aug 02 2016 10:05:13 GMT-0400
+console.log(checkoutDate); // <i>Tue Aug 02 2016 10:05:13 GMT-0400
 (EDT)</i>
 
 The same applies to other methods such as getHours(), getMonth(),etc.
@@ -3500,7 +3474,7 @@ startDate
 days
 )
 {
-// <i> Get the day of the week as a number (0 = Sunday, 1 = Monday, &hellip;. 6
+// <i>Get the day of the week as a number (0 = Sunday, 1 = Monday, &hellip;. 6
 = Saturday)</i>
 <b>var</b>
 dow
@@ -3515,7 +3489,7 @@ daysToAdd
 =
 days
 ;
-// <i> If the current day is Sunday add one day</i>
+// <i>If the current day is Sunday add one day</i>
 <b>if</b>
 (
 dow
@@ -3525,7 +3499,7 @@ dow
 daysToAdd
 ++
 ;
-// <i> If the start date plus the additional days falls on or after the
+// <i>If the start date plus the additional days falls on or after the
 closest Saturday calculate</i>
 <i>weekends</i>
 <b>if</b>
@@ -3610,20 +3584,13 @@ startDate
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-8">Section 8.8: Convert to JSON</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
 <b>var</b>
-date1
-=
-<b>new</b>
-Date
-(
-)
-;
-date1.
-toJSON
-(
-)
-;
-Returns: &quot;2016-04-14T23:49:08.596Z&quot;
+date1 = <b>new</b> Date();
+date1.toJSON();
+</pre>
+
+<p>Returns: &quot;2016-04-14T23:49:08.596Z&quot;</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch9">Chapter 9: Date Comparison</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -3632,151 +3599,74 @@ Returns: &quot;2016-04-14T23:49:08.596Z&quot;
 To check the equality of
 Date
 values:
-<b>var</b>
-date1
-=
-<b>new</b>
-Date
-(
-)
-;
-<b>var</b>
-date2
-=
-<b>new</b>
-Date
-(
-date1.
-valueOf
-(
-)
-&plus;
-10
-)
-;
-console.
-log
-(
-date1.
-valueOf
-(
-)
-===
-date2.
-valueOf
-(
-)
-)
-;
-Sample output:
-<b>false</b>
-  valueOf                    () or              getTime
+<b>var</b> date1 = <b>new</b> Date ();
+<b>var</b> date2 = <b>new</b> Date (date1.valueOf() &plus; 10);
+console.log(date1.valueOf() === date2.valueOf());
+</pre>
 
-Note that you must use () to compare the values of Date objects
+<p>Sample output:</p>
+
+<pre>
+<b>false</b>
+  valueOf() or getTime
+</pre>
+
+<p>Note that you must use () to compare the values of Date objects
 because the equality operator will compare if two object references
-are the same. For example:
+are the same. For example:</p>
 
-<b>var</b>
-date1
-=
-<b>new</b>
-Date
-(
-)
-;
-<b>var</b>
-date2
-=
-<b>new</b>
-Date
-(
-)
-;
-console.
-log
-(
-date1
-===
-date2
-)
-;
-Sample output:
+<pre>
+<b>var</b> date1 = <b>new</b> Date();
+<b>var</b> date2 = <b>new</b> Date();
+console.log(date1 === date2);
+</pre>
+
+<p>Sample output:</p>
+
+<pre>
 <b>false</b>
-Whereas if the variables point to the same object:
+<pre>
+
+<p>Whereas if the variables point to the same object:</p>
+
+<pre>
 <b>var</b>
 date1
 =
-<b>new</b>
-Date
-(
-)
-;
-<b>var</b>
-date2
-=
-date1
-;
-console.
-log
-(
-date1
-===
-date2
-)
-;
-Sample output:
-<b>true</b>
-However, the other comparison operators will work as usual and you can
+<b>new</b> Date();
+<b>var</b> date2 = date1;
+console.log(date1 === date2);
+</pre>
+
+<p>Sample output:</p>
+
+<pre><b>true</b></pre>
+
+<p>However, the other comparison operators will work as usual and you can
 use &lt; and &bsol;to compare that one date is earlier or later than the
-other. For example:
-<b>var</b>
-date1
-=
-<b>new</b>
-Date
-(
-)
-;
-<b>var</b>
-date2
-=
-<b>new</b>
-Date
-(
-date1.
-valueOf
-(
-)
-&plus;
-10
-)
-;
-console.
-log
-(
-date1
-&lt;
-date2
-)
-;
-Sample output:
-<b>true</b>
-It works even if the operator includes equality:
-<b>var</b>
-date1
-=
-<b>new</b>
-Date
-(
-)
-;
-<b>var</b>
-date2
-=
-<b>new</b> Date(date1.valueOf());
+other. For example:</p>
+
+<pre>
+<b>var</b> date1 = <b>new</b> Date();
+<b>var</b> date2 = <b>new</b> Date(date1.valueOf() &plus; 10);
+console.log(date1 &lt; date2);
+</pre>
+
+<p>Sample output:</p>
+
+<pre><b>true</b></pre>
+
+<p>It works even if the operator includes equality:</p>
+
+<pre>
+<b>var</b> date1 = <b>new</b> Date();
+<b>var</b> date2 = <b>new</b> Date(date1.valueOf());
 console.log( date1 &lt;= date2);
-Sample output:
-<b>true</b>
+</pre>
+
+<p>Sample output:</p>
+
+<pre><b>true</b></pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch9-2">Section 9.2: Date Difference Calculation</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -3802,25 +3692,25 @@ in particular, these operators aren&apos;t always transitive as one would
 expect.
 
 <pre>
-&quot;&quot; == 0;  // <i> true A</i>
-0 == &quot;0&quot;; // <i> true A</i>
-&quot;&quot; == &quot;0&quot;; // <i> false B</i>
-<b>false</b> == 0;  // <i> true</i>
-<b>false</b> == &quot;0&quot;;  // <i> true</i>
-&quot;&quot; != 0;  // <i> false A</i>
-0 != &quot;0&quot;;  // <i> false A</i>
-&quot;&quot; != &quot;0&quot;;  // <i> true B</i>
-<b>false</b> != 0;  // <i> false</i>
-<b>false</b> != &quot;0&quot;;  // <i> false</i>
+&quot;&quot; == 0;  // <i>true A</i>
+0 == &quot;0&quot;; // <i>true A</i>
+&quot;&quot; == &quot;0&quot;; // <i>false B</i>
+<b>false</b> == 0;  // <i>true</i>
+<b>false</b> == &quot;0&quot;;  // <i>true</i>
+&quot;&quot; != 0;  // <i>false A</i>
+0 != &quot;0&quot;;  // <i>false A</i>
+&quot;&quot; != &quot;0&quot;;  // <i>true B</i>
+<b>false</b> != 0;  // <i>false</i>
+<b>false</b> != &quot;0&quot;;  // <i>false</i>
 </pre>
 
 <p>The results start to make sense if you consider how JavaScript
 converts empty strings to numbers.</p>
 
 <pre>
-Number( &quot;&quot; );  // <i> 0</i>
-Number( &quot;0&quot; );  // <i> 0</i>
-Number( <b>false</b> );  // <i> 0</i>
+Number( &quot;&quot; );  // <i>0</i>
+Number( &quot;0&quot; );  // <i>0</i>
+Number( <b>false</b> );  // <i>0</i>
 </pre>
 
 <p><b>The Solution</b></p>
@@ -3839,19 +3729,19 @@ results of numerical comparison use explicit conversion:</p>
 
 <pre>
 <b>var</b> test = (a, b) =&gt; Number(a) == Number(b);
-test(&quot;&quot;, 0 );  // <i> true;</i>
-test(&quot;0&quot;, 0);  // <i> true</i>
-test(&quot;&quot;, &quot;0&quot;);  // <i> true;</i>
-test(&quot;abc&quot;, &quot;abc&quot;);  // <i> false as operands are not numbers</i>
+test(&quot;&quot;, 0 );  // <i>true;</i>
+test(&quot;0&quot;, 0);  // <i>true</i>
+test(&quot;&quot;, &quot;0&quot;);  // <i>true;</i>
+test(&quot;abc&quot;, &quot;abc&quot;);  // <i>false as operands are not numbers</i>
 </pre>
 
 <p>Or, if you want string comparison:</p>
 
 <pre>
 <b>var</b> test = (a, b) =&gt; String(a) == String(b);
-test(&quot;&quot;, 0);  // <i> false;</i>
-test(&quot;0&quot;, 0);  // <i> true</i>
-test(&quot;&quot;, &quot;0&quot;);  // <i> false;</i>
+test(&quot;&quot;, 0);  // <i>false;</i>
+test(&quot;0&quot;, 0);  // <i>true</i>
+test(&quot;&quot;, &quot;0&quot;);  // <i>false;</i>
 </pre>
 
 <!-- Number         (   &quot;0&quot;   ) and        <b>new</b> Number           (   &quot;0&quot; -->
@@ -3863,8 +3753,8 @@ conversion,
 and not by value which explains the results below.</p>
 
 <pre>
-Number(&quot;0&quot;) == Number(&quot;0&quot;);  // <i> true;</i>
-<b>new</b> Number(&quot;0&quot;) == <b>new</b> Number (&quot;0&quot;);  // <i> false</i>
+Number(&quot;0&quot;) == Number(&quot;0&quot;);  // <i>true;</i>
+<b>new</b> Number(&quot;0&quot;) == <b>new</b> Number (&quot;0&quot;);  // <i>false</i>
 </pre>
 
 <p>Finally, you have the option to use strict equality and inequality
@@ -3875,17 +3765,17 @@ operators which will not perform any implicit type conversions.</p>
 ===
 0
 ;
-// <i> false</i>
+// <i>false</i>
 0
 ===
 &quot;0&quot;
 ;
-// <i> false</i>
+// <i>false</i>
 &quot;&quot;
 ===
 &quot;0&quot;
 ;
-// <i> false</i>
+// <i>false</i>
 </pre>
 
 <p>Further reference to this topic can be found here:</p>
@@ -3914,180 +3804,79 @@ Any equality or relational comparisons with <b>NaN</b> returns <b>false</b>,
 even comparing it with itself. Because, <b>NaN</b> is supposed to denote
 the result of a nonsensical computation, and as such, it isn't equal
 to the result of any other nonsensical computations.
-(
-1
-&ast;
-&quot;two&quot;
-)
-===
+( 1 &ast; &quot;two&quot; ) ===
 <b>NaN</b>
 // <i>false</i>
 <b>NaN</b>
-===
-0
-;
-// <i> false</i>
-<b>NaN</b>
-===
-<b>NaN</b>
-;
-// <i> false</i>
+=== 0;
+// <i>false</i>
+<b>NaN</b> === <b>NaN</b>;
+// <i>false</i>
 Number
 .
 <b>NaN</b>
 ===
 <b>NaN</b>
 ;
-// <i> false</i>
+// <i>false</i>
 <b>NaN</b>
-&lt;
-0
-;
-// <i> false</i>
+&lt; 0;
+// <i>false</i>
 <b>NaN</b>
-&gt;
-0
-;
-// <i> false</i>
+&gt; 0;
+// <i>false</i>
 <b>NaN</b>
-&gt;
-0
-;
-// <i> false</i>
+&gt; 0;
+// <i>false</i>
 <b>NaN</b>
 &gt;=
-<b>NaN</b>
-;
-// <i> false</i>
+<b>NaN</b>;
+// <i>false</i>
 <b>NaN</b>
 &gt;=
-&apos;two&apos;
-;
-// <i> false</i>
+&apos;two&apos;;
+// <i>false</i>
 Non-equal comparisons will always return
 <b>true</b>
 :
-<b>NaN</b> !== 0; // <i> true</i>
-<b>NaN</b> !== <b>NaN</b>; // <i> true</i>
+<b>NaN</b> !== 0; // <i>true</i>
+<b>NaN</b> !== <b>NaN</b>; // <i>true</i>
 <b>Checking if a value is NaN</b> Version ≥ 6
 
 You can test a value or expression for <b>NaN</b> by using the function
 Number.isNaN():
-Number
-.
-isNaN
-(
-<b>NaN</b>
-)
-;
-// <i> true</i>
-Number
-.
-isNaN
-(
-0
-/
-0
-)
-;
-// <i> true</i>
-Number
-.
-isNaN
-(
-&apos;str&apos;
-&minus;
-12
-)
-;
-// <i> true</i>
-Number
-.
-isNaN
-(
-24
-)
-;
-// <i> false</i>
-Number
-.
-isNaN
-(
-&apos;24&apos;
-)
-;
-// <i> false</i>
-Number
-.
-isNaN
-(
-1
-/
-0
-)
-;
-// <i> false</i>
-Number
-.
-isNaN
-(
-<b>Infinity</b>
-)
-;
-// <i> false</i>
-Number
-.
-isNaN
-(
-&apos;str&apos;
-)
-;
-// <i> false</i>
-Number
-.
-isNaN
-(
-<b>undefined</b>
-)
-;
-// <i> false</i>
-Number
-.
-isNaN
-(
-{
-}
-)
-;
-// <i> false</i>
+Number.isNaN(<b>NaN</b>);
+// <i>true</i>
+Number.isNaN( 0 / 0 );
+// <i>true</i>
+Number.isNaN( &apos;str&apos; &minus; 12 );
+// <i>true</i>
+Number.isNaN(24);
+// <i>false</i>
+Number.isNaN(&apos;24&apos;);
+// <i>false</i>
+Number.isNaN(1/0);
+// <i>false</i>
+Number.isNaN(<b>Infinity</b>);
+// <i>false</i>
+Number.isNaN(&apos;str&apos;);
+// <i>false</i>
+Number.isNaN(<b>undefined</b>);
+// <i>false</i>
+Number.isNaN({});
+// <i>false</i>
 Version &lt; 6
 You can check if a value is <b>NaN</b> by comparing it with itself:
-value
-!==
-value
-;
+value !== value;
 // <i> true for NaN, false for any other value</i>
   
-Number                              .     isNaN
+Number.isNaN
 You can use the following polyfill for ():
-Number
-.
-isNaN
-=
-Number
-.
-isNaN
-&vert;&vert;
+Number.isNaN = Number.isNaN &vert;&vert;
 <b>function</b>
-(
-value
-)
-{
+(value) {
 <b>return</b>
-value
-!==
-value
-;
+value !== value;
 }
  
 isNaN
@@ -4096,64 +3885,23 @@ By contrast, the global function () returns <b>true</b> not only for
 <b>NaN</b>, but also for any value or expression that cannot be coerced
 into a number:
 
-isNaN
-(
-<b>NaN</b>
-)
-;
+isNaN ( <b>NaN</b> );
+// <i>true</i>
+isNaN(0/0);
+// <i>true</i>
+isNaN(&apos;str&apos;&minus;12);
+// <i>true</i>
+isNaN(24);
+// <i>false</i>
+isNaN(&apos;24&apos;);
+// <i>false</i>
+isNaN(<b>Infinity</b>);
+// <i>false</i>
+isNaN(&apos;str&apos;);
+// <i>true</i>
+isNaN(<b>undefined</b>);
 // <i> true</i>
-isNaN
-(
-0
-/
-0
-)
-;
-// <i> true</i>
-isNaN
-(
-&apos;str&apos;
-&minus;
-12
-)
-;
-// <i> true</i>
-isNaN
-(
-24
-)
-;
-// <i> false</i>
-isNaN
-(
-&apos;24&apos;
-)
-;
-// <i> false</i>
-isNaN
-(
-<b>Infinity</b>
-)
-;
-// <i> false</i>
-isNaN
-(
-&apos;str&apos;
-)
-;
-// <i> true</i>
-isNaN
-(
-<b>undefined</b>
-)
-;
-// <i> true</i>
-isNaN
-(
-{
-}
-)
-;
+isNaN({});
 // <i> true</i>
 
 ECMAScript defines a "sameness" algorithm called SameValue which,
@@ -4190,7 +3938,7 @@ is
 0
 // <i> true</i>
 Version &lt; 6
-Object                                          .       is
+Object         .       is
 You can use the following polyfill for () (from
 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Polyfill_for_non-ES6_browsers)):
 <b>if</b>
@@ -4283,84 +4031,38 @@ whole expression is guaranteed to be <b>true</b>. <b>Example with functions</b>
 
 Take the following two functions:
 <b>function</b>
-T
-(
-)
-{
+T ( ) {
 // <i> True</i>
-console.
-log
-(
-&quot;T&quot;
-)
-;
+console.log( &quot;T&quot; );
 <b>return</b>
 <b>true</b>
 ;
 }
 <b>function</b>
-F
-(
-)
-{
-// <i> False</i>
-console.
-log
-(
-&quot;F&quot;
-)
-;
+F ( ) { // <i> False</i>
+console.log( &quot;F&quot; );
 <b>return</b>
-<b>false</b>
-;
+<b>false</b>;
 }
 <i><b>Example 1</b></i>
-T
-(
-)
-&&
-F
-(
-)
-;
+T ( ) && F ( );
 // <i> false</i>
 Output:
 &apos;T&apos;
 
 &apos;F&apos;
 <i><b>Example 2</b></i>
-F
-(
-)
-&&
-T
-(
-)
-;
+F ( ) && T ( );
 // <i> false</i>
 Output:
 &apos;F&apos;
 <i><b>Example 3</b></i>
-T
-(
-)
-&vert;&vert;
-F
-(
-)
-;
+T ( ) &vert;&vert; F ( );
 // <i> true</i>
 Output:
 &apos;T&apos;
 <i><b>Example 4</b></i>
-F
-(
-)
-&vert;&vert;
-T
-(
-)
-;
+F ( ) &vert;&vert; T ( );
 // <i> true</i>
 Output:
 &apos;F&apos;
@@ -4373,18 +4075,8 @@ Cannot read property &apos;property&apos; of undefined</i>
 Line A: if you reverse the order the first conditional statement will
 prevent the error on the second by not executing it if it would throw
 the error
-<b>if</b>
-(
-obj
-!==
-<b>undefined</b>
-&&
-obj.
-property
-)
-{
-}
-;
+<b>if</b> ( obj !==
+<b>undefined</b> && obj.property ) {};
 // <i> no error thrown</i>
 But should only be used if you expect <b>undefined</b>
 
@@ -4407,44 +4099,23 @@ nullableObj
 obj
 =
 nullableObj
-&vert;&vert;
-{
-}
-;
+&vert;&vert; { };
 // <i> this selects {}</i>
 <b>var</b>
-nullableObj2
-=
-{
-x
-:
-5
-}
-;
+nullableObj2 = { x : 5 };
 <b>var</b>
 obj2
 =
 nullableObj2
-&vert;&vert;
-{
-}
+&vert;&vert; {}
 // <i> this selects {x: 5}</i>
 Or to return the first truthy value
 <b>var</b>
-truthyValue
-=
-{
-x
-:
-10
-}
-;
+truthyValue = { x : 10 };
 <b>return</b>
 truthyValue
-&vert;&vert;
-{
-}
-;
+&vert;&vert; {};
+
 // <i> will return {x: 10}</i>
 The same can be used to fall back multiple times:
 envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue // <i> select the
@@ -4452,30 +4123,15 @@ first &quot;truthy&quot; of these</i>
 <b>Short-circuiting to call an optional function</b>
 The && operator can be used to evaluate a callback, only if it is
 passed:
-<b>function</b>
-myMethod
-(
-cb
-)
-{
+<b>function</b> myMethod (
+cb){
+
 // <i> This can be simplified</i>
-<b>if</b>
-(
-cb
-)
-{
-cb
-(
-)
-;
+<b>if</b> (cb) {
+cb();
 }
 // <i> To this</i>
-cb
-&&
-cb
-(
-)
-;
+cb && cb ();
 }
 
 Of course, the test above does not validate that cb is in fact a
@@ -4579,29 +4235,29 @@ operator:](https://tc39.github.io/ecma262/#sec-abstract-equality-comparison)
   x == y
 The comparison , where x and y are values, produces <b>true</b> or
 <b>false</b>. Such a comparison is performed as follows:
-  Type        &lpar;x&rpar; is the same as                            Type
+  Type  &lpar;x&rpar; is the same as Type
 1.  If (y), then:
 x === y
 <b>a.</b> Return the result of performing Strict Equality Comparison .
 2.  If x is <b>null</b> and y is <b>undefined</b>, return <b>true</b>.
 3.  If x is <b>undefined</b> and y is <b>null</b>, return <b>true</b>.
   Type   &lpar;x&rpar; is      Type   &lpar;y&rpar; is String, return the result of  x ==
-         Number and           the comparison                         ToNumber
+         Number and           the comparison   ToNumber
 4.  If (y).
   Type   &lpar;x&rpar; is      Type   &lpar;y&rpar; is Number, return the result of ToNumber   &lpar;x&rpar;   == y
-         String and           the comparison                                           
+         String and           the comparison          
 5.  If .
   Type   &lpar;x&rpar; is Boolean, return the result of the       ToNumber   &lpar;x&rpar;   == y
-         comparison                                                          
+         comparison   
 6.  If .
   Type   &lpar;y&rpar; is Boolean, return the result of comparison x == ToNumber
-         the                                    
+         the   
 7.  If (y).
-  Type   &lpar;x&rpar; is either String, Number, or Symbol and              Type
+  Type   &lpar;x&rpar; is either String, Number, or Symbol and   Type
   x == ToPrimitive
 8.  If (y) is Object, return the result of the comparison (y).
-  Type         &lpar;x&rpar; is Object and                            Type
-  ToPrimitive                               &lpar;x&rpar;       == y
+  Type         &lpar;x&rpar; is Object and      Type
+  ToPrimitive         &lpar;x&rpar;       == y
 9.  If (y) is either String, Number, or Symbol, return the result of the
     comparison .
 10. Return <b>false</b>.
@@ -4806,7 +4462,7 @@ they won't (because they are <i>falsy</i>).
 // <i>true</i>
 
 toString   () is executed it     join   () if it      Object   .   <b>prototype</b>   .   toString
-calls &lbrack;&rbrack;.                  exists, or                                     
+calls &lbrack;&rbrack;.       exists, or    
 join
 
 When &lbrack;&rbrack;.() otherwise. This comparison is returning <b>true</b> because
@@ -4831,7 +4487,7 @@ the same value.
 
 Note: the value of an object is a reference.
   
-  Object                                          .       is
+  Object         .       is
 
 You can use this comparison algorithm via (ECMAScript 6).
 
@@ -4924,11 +4580,11 @@ is
 This algorithm has the properties of an [equivalence
 relation](https://en.wikipedia.org/wiki/Equivalence_relation):
 
-Object                         .     is         (x,             x
+Object   .     is         (x,  x
 Object   .   is   (x,   y   ) is <b>true</b> if, and only    Object   .   is   (y,   x
-if,                                                   
+if,       
 Object   .   is   (x,   y   ) and  Object   .   is   (y,   z   ) are <b>true</b>,  Object   .   is   (x,   z
-then                                     
+then    
 
 [Reflexivity](https://en.wikipedia.org/wiki/Reflexive_relation): ) is
 </b>true</b>, for any value x
@@ -4943,7 +4599,7 @@ is also <b>true</b>, for any values x, y and z.
 
 It behaves like SameValue, but considers +0 and -0 to be equal.
 
-  Array          .   <b>prototype</b>              .   includes
+  Array          .   <b>prototype</b>   .   includes
 
 You can use this comparison algorithm via (ECMAScript 7).
 
@@ -5039,7 +4695,7 @@ relation](https://en.wikipedia.org/wiki/Equivalence_relation):
   includes      &lpar;y&rpar; is <b>true</b> if, and only if, &lbrack;y&rbrack;.   includes
   
   includes   &lpar;y&rpar; and      includes   &lpar;z&rpar; are <b>true</b>, then  includes
-             &lbrack;y&rbrack;.                    &lbrack;x&rbrack;.                    
+  &lbrack;y&rbrack;.         &lbrack;x&rbrack;.         
 
 [Reflexivity](https://en.wikipedia.org/wiki/Reflexive_relation):
 &lbrack;x&rbrack;.(x) is <b>true</b>, for any value x
@@ -5110,7 +4766,7 @@ Examples:
 This algorithm has the following properties:
   
 x === y   is <b>true</b> if, and only if, y ===        <b>for</b> any values
-            xistrue,                                  
+ xistrue, 
 
 x === y      and     y === z      are <b>true</b>, then       x === z
 
@@ -5200,7 +4856,7 @@ Examples:
 // <i> false</i>
 This algorithm has the following property:
   
-  x == y        is <b>true</b> if, and only if,                y == x
+  x == y        is <b>true</b> if, and only if,     y == x
 
 [Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation): is
 <b>true</b>, for any values x and y.
@@ -5300,7 +4956,7 @@ But be careful when comparing a numeric value with <b>null</b>,
 &lt;
 <b>undefined</b>
 // <i> false</i>
-  Number                     (    <b>null</b>          );       // <i>0</i>
+  Number          (    <b>null</b>          );       // <i>0</i>
 
 When one operand is a object and the other is a number, the object is
 converted to a number before comparison.So <b>null</b> is particular case
