@@ -4006,7 +4006,7 @@ comparison is performed as follows:
   <li>If x is <b>undefined</b> and y is <b>null</b>, return <b>true</b>.</li>
   <li>If Type(x) is <b>Number</b> and <b>Type(y)</b> is String, return the result of the comparison
     x == ToNumber(y).</li>
-  <li>If <b>Type(x)</b> is Sring and <b>Type(y)</b> is Number, return the result of the comparison x == <b>ToNumber(y)</b>.</li>
+  <li>If <b>Type(x)</b> is String and <b>Type(y)</b> is Number, return the result of the comparison x == <b>ToNumber(y)</b>.</li>
   <li>If <b>Type(x)</b> is Boolean, return the result of the comparison ToNumber(x) == y.</li>
   <li>If Type(y) is Boolean, return the result of the comparison X == ToNumber(y).</li>
   <li>If Type(x) is either String, Number, or Symbol and Type(y) is Object, return the result of the
@@ -4027,7 +4027,8 @@ comparison is performed as follows:
 1 == &apos;1.00000000001&apos;; // <i>false</i>
 1 == &apos;1.00000000000000001&apos;; // <i>true (true due to precision loss)</i>
 <b>null</b> == <b>undefined</b>; // <i>true (spec #2)</i>
-1 == 2; // <i>false</i> 0 == <b>false</b>; // <i>true</i>
+1 == 2; // <i>false</i> 
+0 == <b>false</b>; // <i>true</i>
 0 == <b>undefined</b>; // <i>false</i>
 0 == &quot;&quot;; // <i>true</i>
 </pre>
