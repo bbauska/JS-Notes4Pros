@@ -4354,34 +4354,34 @@ relation</a>:</p>
 <pre>
 &apos;a&apos; &lt; &apos;b&apos; // <i>true</i>
 &apos;1&apos; &lt; &apos;2&apos; // <i>true</i>
-&apos;100&apos; &amp;apos;12&apos; // <i>false (&apos;100&apos; is less than &apos;12&apos; lexicographically!)</i>
+&apos;100&apos; &apos;12&apos; // <i>false (&apos;100&apos; is less than &apos;12&apos; lexicographically!)</i>
 </pre>
 <!-- page 71 -->
 <p>When one operand is a string and the other is a number, the string is
 converted to a number before comparison:</p>
 
 <pre>
-&apos;1&apos; &lt; 2  // <i>true</i>
-&apos;3&apos; &gt; 2  // <i>true</i>
-<b>true</b> &gt; &apos;2&apos; // <i>false (true implicitly converted to number, 1 &lt; 2)</i>
-<pre>
+&apos;1&apos; &lt; 2         // <i>true</i>
+&apos;3&apos; &gt; 2         // <i>true</i>
+<b>true</b> &gt; &apos;2&apos;    // <i>false (true implicitly converted to number, 1 &lt; 2)</i>
+</pre>
 
 <p>When the string is non-numeric, numeric conversion returns <b>NaN</b>
 (not-a-number). Comparing with <b>NaN</b> always returns <b>false</b>:</p>
 
 <pre>
-1 &lt; &apos;abc&apos;  // <i>false</i>
-1 &gt; &apos;abc&apos;  // <i>false</i>
+1 &lt; &apos;abc&apos;    // <i>false</i>
+1 &gt; &apos;abc&apos;    // <i>false</i>
 </pre>
 
 <p>But be careful when comparing a numeric value with <b>null</b>,
 <b>undefined</b> or empty strings:</p>
 
 <pre>
-1 &gt; &apos;&apos;  // <i>true</i>
-1 &lt; &apos;&apos;  // <i>false</i>
-1 &gt; <b>null</b>   // <i>true</i>
-1 &lt; <b>null</b>   // <i>false</i>
+1 &gt; &apos;&apos;      // <i>true</i>
+1 &lt; &apos;&apos;      // <i>false</i>
+1 &gt; <b>null</b>     // <i>true</i>
+1 &lt; <b>null</b>     // <i>false</i>
 1 &gt; <b>undefined</b> // <i>false</i>
 1 &lt; <b>undefined</b> // <i>false</i>
 </pre>
