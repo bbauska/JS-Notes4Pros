@@ -3722,7 +3722,7 @@ also for any value or expression that cannot be coerced into a number:</p>
 <pre>
 isNaN (<b>NaN</b>);     // <i>true</i>
 isNaN(0/0);        // <i>true</i>
-isNaN(&apos;str&apos;&minus;12); // <i>true</i>
+isNaN(&apos;str&apos;&minus; 12); // <i>true</i>
 
 isNaN(24);          // <i>false</i>
 isNaN(&apos;24&apos;);      // <i>false</i>
@@ -3738,11 +3738,11 @@ be invoked with Object.is. Unlike the == and === comparison, using Object.is() w
 <b>NaN</b> as identical with itself (and -0 as note identical with +0):</p>
 
 <pre>
-Object.is(<b>NaN, NaN</b>)       // <i>true</i>
-Object.is(+0, 0)            // <i>false</i>
+Object.is(<b>NaN, NaN</b>)      // <i>true</i>
+Object.is(+0, 0)         // <i>false</i>
 
 <b>NaN</b> === <b>NaN</b>            // <i>false</i>
-+0 === 0                    // <i>true</i>
++0 === 0                 // <i>true</i>
 </pre>
 <h5>Version &lt; 6</h5>
 
@@ -4006,26 +4006,20 @@ comparison is performed as follows:
   <li>If x is <b>undefined</b> and y is <b>null</b>, return <b>true</b>.</li>
   <li>If Type(x) is <b>Number</b> and <b>Type(y)</b> is String, return the result of the comparison
     x == ToNumber(y).</li>
-  <li>
-  If (y).
-  Type   &lpar;x&rpar; is      Type   &lpar;y&rpar; is Number, return the result of ToNumber   &lpar;x&rpar;   == y
-         String and           the comparison          
-5.  If .
-  Type   &lpar;x&rpar; is Boolean, return the result of the       ToNumber   &lpar;x&rpar;   == y
-         comparison   
-6.  If .
-  Type   &lpar;y&rpar; is Boolean, return the result of comparison x == ToNumber
-         the   
-7.  If (y).
-  Type   &lpar;x&rpar; is either String, Number, or Symbol and   Type
-  x == ToPrimitive
-8.  If (y) is Object, return the result of the comparison (y).
-  Type         &lpar;x&rpar; is Object and      Type
-  ToPrimitive         &lpar;x&rpar;       == y
-9.  If (y) is either String, Number, or Symbol, return the result of the
-    comparison .
-10. Return <b>false</b>.
+  <li>If <b>Type(x)</b> is Sring and <b>Type(y)</b> is Number, return the result of the comparison x == <b>ToNumber(y)</b>.</li>
+  <li>If <b>Type(x)</b> is Boolean, return the result of the comparison ToNumber(x) == y.</li>
+  <li>If Type(y) is Boolean, return the result of the comparison X == ToNumber(y).</li>
+  <li>If Type(x) is either String, Number, or Symbol and Type(y) is Object, return the result of the
+    comparison x == ToPrimitive(y).</li>
+  <li>If Type(x) is Object and Type(y) is either String, Number, or Symbol, return the result of the
+    comparison ToPrimitive(x) == y.</li>
+  <li>Return <b>false</b>.</li>
+</ol>
+</blockquote>
+
 <b>Examples:</b>
+
+<pre>
 1 == 1; // <i>true</i>
 1 == <b>true</b>; // <i>true (operand converted to number: true =&bsol;1)</i>
 1 == &apos;1&apos;; // <i>true (operand converted to number: &apos;1&apos; =&bsol;1 )</i>
@@ -4036,6 +4030,7 @@ comparison is performed as follows:
 1 == 2; // <i>false</i> 0 == <b>false</b>; // <i>true</i>
 0 == <b>undefined</b>; // <i>false</i>
 0 == &quot;&quot;; // <i>true</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-6">Section 10.6: Logic Operators with Booleans</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
