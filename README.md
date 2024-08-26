@@ -1847,43 +1847,43 @@ in JavaScript, however in certain cases it might yield some unexpected
 results &hellip;</p>
 
 <ol>
-  <li><b>Strings</b><br/><br/>
-  <b>typeof</b> &quot;String&quot; or<br/>
-  <b>typeof</b> Date(2011,01,01)<br/>
+  <li><b>Strings</b><br/>
+  <b>typeof</b> &quot;String&quot; or
+  <b>typeof</b> Date(2011,01,01)
   <blockquote>
   &quot;string&quot;
   </blockquote></li>
 
-  <li><b>Numbers</b><br/><br/>
-  <b>typeof</b> 42<br/>
+  <li><b>Numbers</b><br/>
+  <b>typeof</b> 42
   <blockquote>
   &quot;number&quot;
   </blockquote></li>
 
-  <li><b>Bool</b><br/><br/>
-  <b>typeof</b> <b>true</b> (valid values <b>true</b> and <b>false</b>)<br/>
+  <li><b>Bool</b><br/>
+  <b>typeof</b> <b>true</b> (valid values <b>true</b> and <b>false</b>)
   <blockquote>
   &quot;boolean&quot;
   </blockquote></li>
 
-  <li><b>Object</b><br/><br/>
-  <b>typeof</b> {} or<br/>
-  <b>typeof</b> &lbrack;&rbrack; or<br/>
-  <b>typeof</b> <b>null</b> or<br/>
-  <b>typeof</b> /aaa/ or<br/>
-  <b>typeof</b> Error()<br/>
+  <li><b>Object</b><br/>
+  <b>typeof</b> {} or
+  <b>typeof</b> &lbrack;&rbrack; or
+  <b>typeof</b> <b>null</b> or
+  <b>typeof</b> /aaa/ or
+  <b>typeof</b> Error()
   <blockquote>
   &quot;object&quot;
   </blockquote></li>
 
-  <li><b>Function</b><br/><br/>
-  <b>typeof</b> <b>function</b>(){}<br/>
+  <li><b>Function</b><br/>
+  <b>typeof</b> <b>function</b>(){}
   <blockquote>
   &quot;function&quot;
   </blockquote></li>
 
-  <li><b>Undefined</b><br/><br/>
-  <b>var</b> var1; <b>typeof</b> var1<br/>
+  <li><b>Undefined</b><br/>
+  <b>var</b> var1; <b>typeof</b> var1
   <blockquote>
   &quot;undefined&quot;
   </blockquote></li>
