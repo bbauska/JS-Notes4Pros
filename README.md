@@ -4483,295 +4483,125 @@ the operands are not equal or if their types do not match.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-14">Section 10.14: Grouping multiple logic statements</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-You can group multiple boolean logic statements within parenthesis in
+<p>You can group multiple boolean logic statements within parenthesis in
 order to create a more complex logic evaluation, especially useful in
-if statements.
+if statements.</p>
 
-<b>if</b>
-(
-(
-age
-&gt;=
-18
-&&
-height
-&gt;=
-5.11
-)
-&vert;&vert;
-(
-status
-===
-&apos;royalty&apos;
-&&
-hasInvitation
-)
-)
-{
-console.
-log
-(
-&apos;You can enter our club&apos;
-)
-;
+<pre>
+<b>if</b> ((age &gt;= 18 && height &gt;= 5.11) &vert;&vert; (status === &apos;royalty&apos; && hasInvitation)) {
+console.log(&apos;You can enter our club&apos;);
 }
-We could also move the grouped logic to variables to make the
-statement a bit shorter and descriptive:
-<b>var</b>
-isLegal
-=
-age
-&gt;=
-18
-;
-<b>var</b>
-tall
-=
-height
-&gt;=
-5.11
-;
-<b>var</b>
-suitable
-=
-isLegal
-&&
-tall
-;
-<b>var</b>
-isRoyalty
-=
-status
-===
-&apos;royalty&apos;
-;
-<b>var</b>
-specialCase
-=
-isRoyalty
-&&
-hasInvitation
-;
-<b>var</b>
-canEnterOurBar
-=
-suitable
-&vert;&vert;
-specialCase
-;
-<b>if</b>
-(
-canEnterOurBar
-)
-console.
-log
-(
-&apos;You can enter our club&apos;
-)
-;
+</pre>
 
-Notice that in this particular example (and many others), grouping the
+<p>We could also move the grouped logic to variables to make the
+statement a bit shorter and descriptive:</p>
+
+<pre>
+<b>var</b> isLegal = age &gt;= 18;
+<b>var</b> tall = height &gt;= 5.11;
+<b>var</b> suitable = isLegal && tall;
+<b>var</b> isRoyalty = status === &apos;royalty&apos;;
+<b>var</b> specialCase = isRoyalty && hasInvitation;
+<b>var</b> canEnterOurBar = suitable &vert;&vert; specialCase;
+
+<b>if</b> (canEnterOurBar) console.log(&apos;You can enter our club&apos;);
+</pre>
+
+<p>Notice that in this particular example (and many others), grouping the
 statements with parenthesis works the same as if we removed them, just
 follow a linear logic evaluation and you&apos;ll find yourself with the
 same result. I do prefer using parenthesis as it allows me to
 understand clearer what I intended and might prevent for logic
-mistakes.
-
+mistakes.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-15">Section 10.15: Bit fields to optimise comparison of multi state data</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-A bit field is a variable that holds various boolean states as
+<p>A bit field is a variable that holds various boolean states as
 individual bits. A bit on would represent true, and off would be
 false. In the past bit fields were routinely used as they saved memory
 and reduced processing load. Though the need to use bit field is no
 longer so important they do offer some benefits that can simplify many
-processing tasks.
+processing tasks.</p>
 
-For example user input. When getting input from a keyboard&apos;s
+<p>For example user input. When getting input from a keyboard&apos;s
 direction keys up, down, left, right you can encode the various keys
-into a single variable with each direction assigned a bit.
+into a single variable with each direction assigned a bit.</p>
 
-Example reading keyboard via bitfield
+<p>Example reading keyboard via bitfield</p>
 
-<b>var</b> bitField = 0; // <i>the value to hold the bits</i> <b>const</b>
-KEY_BITS = &lbrack;4,1,8,2&rbrack;; // <i>left up right down</i> <b>const</b> KEY_MASKS =
-&lbrack;0b1011,0b1110,0b0111,0b1101&rbrack;; // <i>left up right down</i>
+<pre>
+<b>var</b> bitField = 0; // <i>the value to hold the bits</i>
+<b>const</b> KEY_BITS = &lbrack;4,1,8,2&rbrack;; // <i>left up right down</i>
+<b>const</b> KEY_MASKS = &lbrack;0b1011,0b1110,0b0111,0b1101&rbrack;; // <i>left up right down</i>
 window.onkeydown = window.onkeyup = <b>function</b> (e) {
-<b>if</b>(e.keyCode &gt;= 37 && e.keyCode &lt;41){
+  <b>if</b>(e.keyCode &gt;= 37 && e.keyCode &lt;41){
+    <b>if</b>(e&period;type === &quot;keydown&quot;) {
+      bitField &vert;= KEY_BITS&lbrack;e&period;keyCode &minus; 37&rbrack;;
+    } <b>else</b>{
+      bitField &= KEY_MASKS&lbrack;e&period;keyCode &minus; 37&rbrack;;
+    }
+  }
+}
+</pre>
 
-<b>if</b>
-
-(
-e&period;
-type
-===
-&quot;keydown&quot;
-)
-{
-bitField
-&vert;=
-KEY_BITS
-&lbrack;
-e&period;
-keyCode
-&minus;
-37
-&rbrack;
-;
-}
-<b>else</b>
-{
-bitField
-&=
-KEY_MASKS
-&lbrack;
-e&period;
-keyCode
-&minus;
-37
-&rbrack;
-;
-}
-}
-}
 <p><b>Example reading as an array</b></p>
-<b>var</b>
-directionState
-=
-&lbrack;
-<b>false</b>
-,
-<b>false</b>
-,
-<b>false</b>
-,
-<b>false</b>
-&rbrack;
-;
-window.
-onkeydown
-=
-window.
-onkeyup
-=
-<b>function</b>
-(
-e
-)
-{
-<b>if</b>
-(
-e&period;
-keyCode
-&gt;=
-37
-&&
-e&period;
-keyCode &lt;
-41){
-directionState &lbrack; e&period; 
-keyCode &minus; 37 &rbrack; = e&period; type === &quot;keydown&quot;;
-}}
-&vert;= 0b10
 
-To turn on a bit use bitwise <i>or</i> &vert; and the value corresponding to
-the bit. So if you wish to set the 2nd bit bitField will turn it on.
-If you wish to turn a bit off use bitwise <i>and</i> & with a value that
-has all by the required bit on.
-  bitfield &= 0b1101
+<pre>
+<b>var</b> directionState = &lbrack;<b>false</b>,<b>false</b>,<b>false</b>,<b>false</b>&rbrack;;
+window.onkeydown = window.onkeyup = <b>function</b> (e) {
+  <b>if</b>(e&period;keyCode &gt;= 37 && e&period;keyCode &lt; 41){
+    directionState &lbrack; e&period; keyCode &minus; 37 &rbrack; = e&period; type === &quot;keydown&quot;;
+  }
+}
+</pre>
 
-Using 4 bits and turning the 2nd bit off ;
+<p>To turn on a bit use bitwise <i>or</i> &vert; and the value corresponding to
+the bit. So if you wish to set the 2nd bit bitField will turn it on. If you wish 
+to turn a bit off use bitwise <i>and</i> & with a value that has all by the 
+required bit on. Using 4 bits and turning the 2nd bit off bitfield &= 0b1101;</p>
 
-You may say the above example seems a lot more complex than assigning
+<p>You may say the above example seems a lot more complex than assigning
 the various key states to an array. Yes, it is a little more complex
-to set but the advantage comes when interrogating the state.
+to set but the advantage comes when interrogating the state.</p>
 
-If you want to test if all keys are up.
+<p>If you want to test if all keys are up.</p>
+
+<pre>
 // <i>as bit field</i>
 <b>if</b> ( ! bitfield ) // <i>no keys are on</i>
+
 // <i>as array test each item in array</i>
-<b>if</b>
-(
-!
-(
-directionState
-&lbrack;
-0
-&rbrack;
-&&
-directionState
-&lbrack;
-1
-&rbrack;
-&&
-directionState
-&lbrack;
-2
-&rbrack;
-&&
-directionState
-&lbrack;
-3
-&rbrack;
-)
-)
-{
-You can set some constants to make things easier
+<b>if</b> (!(directionState&lbrack;0&rbrack; && directionState&lbrack;1&rbrack; && directionState&lbrack;2&rbrack; && directionState&lbrack;3&rbrack;)){
+</pre>
+
+<p>You can set some constants to make things easier</p>
+
+<pre>
 // <i>postfix U,D,L,R for Up down left right</i>
 <b>const</b> KEY_U = 1; 
 <b>const</b> KEY_D = 2;
 <b>const</b> KEY_L = 4;
 <b>const</b> KEY_R = 8;
-<b>const</b> KEY_UL = KEY_U &plus; KEY_L ;
-// <i>up left</i> <b>const</b> KEY_UR = KEY_U &plus; KEY_R;
-// <i>up Right</i> <b>const</b> KEY_DL = KEY_D &plus; KEY_L;
-// <i>down left</i> <b>const</b> KEY_DR = KEY_D &plus; KEY_R;
-// <i>down right</i> 
+<b>const</b> KEY_UL = KEY_U &plus; KEY_L; // <i>up left</i>
+<b>const</b> KEY_UR = KEY_U &plus; KEY_R; // <i>up Right</i>
+<b>const</b> KEY_DL = KEY_D &plus; KEY_L; // <i>down left</i>
+<b>const</b> KEY_DR = KEY_D &plus; KEY_R; // <i>down right</i> 
+</pre>
 
-You can then quickly test for many various keyboard states
+<p>You can then quickly test for many various keyboard states</p>
 
-<b>if</b> ((bitfield & KEY_UL) === KEY_UL) { // <i>is UP and LEFT only
-down</i> <b>if</b> (bitfield & KEY_UL) { // <i>is Up left down</i> <b>if</b>
-((bitfield & KEY_U) === KEY_U) { // <i>is Up only down</i> <b>if</b> (bitfield
-& KEY_U) { // <i>is Up down (any other key may be down)</i> <b>if</b>
-(!(bitfield & KEY_U)) { // <i>is Up up (any other key may be down)</i>
+<pre>
+<b>if</b> ((bitfield & KEY_UL) === KEY_UL) { // <i>is UP and LEFT only down</i>
+<b>if</b> (bitfield & KEY_UL) { // <i>is Up left down</i>
+<b>if</b> ((bitfield & KEY_U) === KEY_U) { // <i>is Up only down</i>
+<b>if</b> (bitfield & KEY_U) { // <i>is Up down (any other key may be down)</i>
+<b>if</b> (!(bitfield & KEY_U)) { // <i>is Up up (any other key may be down)</i>
 <b>if</b> (!bitfield ) { // <i>no keys are down</i>
-
 <b>if</b> (bitfield ) { // <i>any one or more keys are down</i>
+</pre>
 
-The keyboard input is just one example. Bitfields are useful when you
+<p>The keyboard input is just one example. Bitfields are useful when you
 have various states that must in combination be acted on. JavaScript
 can use up to 32 bits for a bit field. Using them can offer
-significant performance increases. They are worth being familiar with.
+significant performance increases. They are worth being familiar with.</p>
 
-<b>Parameter Details</b>
-
-<p>value The number of milliseconds since 1 January 1970 00:00:00.000 UTC
-(Unix epoch) dateAsString A date formatted as a string (see examples
-for more information)</p>
-
-<p>The year value of the date. Note that month must also be provided, or
-the value will be interpreted year as a number of milliseconds. Also note that values between 0 and
-99 have special meaning. See the examples.</p>
-
-<!--  
-11
-The month, in the range 0-. Note that using values outside the specified
-range for this and the
-
-month following parameters will not result in an error, but rather
-cause the resulting date to &quot;roll over&quot; to the next value. See the
-examples.
-  31
-  23
-  59
-  59
-  999
-
-day Optional: The date, in the range 1-. hour Optional: The hour, in
-the range 0-. minute Optional: The minute, in the range 0-. second
-Optional: The second, in the range 0-. millisecond Optional: The
-millisecond, in the range 0-.
--->
