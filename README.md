@@ -2821,14 +2821,14 @@ can repeat n times the string myString:</p>
 
 <ul>
   <li><b>with no arguments</b><br/><br/>
-    Date() creates a Date instance containing the current time (up to milliseconds) and date.<br/></li>
+    Date() creates a Date instance containing the current time (up to milliseconds) and date.<br/><br/></li>
   <li><b>with one integer argument</b><br/><br/>
     Date&lpar;m&rpar; creates a Date instance containing the time and date corresponding to the 
     Epoch time (1 January, 1970 UTC) plus m milliseconds. Example: <b>new</b> Date(749019369738) 
-    gives the date <i>Sun, 26 Sep 1993 04:56:09 GMT</i>.<br/></li>
+    gives the date <i>Sun, 26 Sep 1993 04:56:09 GMT</i>.<br/><br/></li>
   <li><b>with a string argument</b><br/><br/>
     Date(dateString) returns the Date object that results after parsing dateString with 
-    Date.parse.<br/></li>
+    Date.parse.<br/><br/></li>
   <li><b>with two or more integer arguments</b><br/><br/>
     Date(i1, i2, i3, i4, i5, i6)) reads the arguments as year, month, day, hours, minutes, seconds,
     milliseconds and instantiates the corresponding Dateobject. Note that the month is 0-indexed 
@@ -3066,7 +3066,7 @@ sendToBar(birthday.getTime());
 </pre>
 
 <blockquote>
-Sample output:
+Sample output:<br/><br/>
 Foo was born on: Sat Jan 1 2000
 </blockquote>
 
@@ -3177,7 +3177,7 @@ console.log ( date );
 </pre>
 
 <blockquote>
-Sample output:<br/>
+Sample output:<br/><br/>
 Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
 </blockquote>
 
@@ -3200,9 +3200,8 @@ converted to local time whenever necessary.</p>
 console.log ( timestamp === timestamp2 );
 </pre>
 
-
 <blockquote>
-<p>Sample output:</p> <b>true</b>
+Sample output: <b>true</b>
 </blockquote>
 
 <pre>
@@ -3217,7 +3216,6 @@ console.log ( otherDate );
 
 <blockquote>
 Sample output:<br/>
-
 <pre>
 Mon, 31 Jan 2000 12:00:00 GMT
 Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
