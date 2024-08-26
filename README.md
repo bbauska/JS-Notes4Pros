@@ -3291,7 +3291,7 @@ Date.<b>prototype</b>.toLocaleDateString
 <p>If Date.prototype.toLocalDateString() isn&apos;t flexible enough to fulfill whatever need you may have,
 you might want to consider creating a custom Date object that looks like this:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 25. DateObject (54) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 25/25b. DateObject (54) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image025.png"
   title="DateObject function"
@@ -3340,282 +3340,187 @@ target="_blank" rel="noreferrer noopener"><b>nightly build</b></a>.</p>
 since 1 January 1970 00:00:00 UTC. To get the number of milliseconds
 that have elapsed since that time using an instance of a Date object,
 use its getTime method.</p>
-<pre>
-// <i>get milliseconds using static method now of Date</i>
+
+<pre>// <i>get milliseconds using static method now of Date</i>
 console.log(Date.now());
 
 // <i>get milliseconds using method getTime of Date instance</i>
-console.log((<b>new</b> Date ( ) ) .getTime ());
-</pre>
+console.log((<b>new</b> Date ( ) ) .getTime ());</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-6">Section 8.6: Get the current time and date</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<b>new</b> Date
-Use () to generate a new Date object containing the current date and
-time.
-Date   () <i>called without arguments</i> is equivalent    <b>new</b>   (   Date   .   now
-to  Date <i>Note that</i> ())</i>.</i>
+<p>Use <b>new</b> Date() to generate a new Date object containing the current date and time.</p>
+
+<p><i>Note that</i> Date() <i>called without arguments</i> is equivalent to</i> <b>new</b> Date(Date.now()).</p>
 
 <p>Once you have a date object, you can apply any of the several available methods to extract 
 its properties (e.g. getFullYear() to get the 4-digits year).</p>
 
 <p>Below are some common date methods.</p>
 
-<b>Get the current year</b>
-<b>var</b> year = (<b>new</b> Date ( ) ) .getFullYear ( );
-console.log(year); // <i>Sample output: 2016</i>
-<b>Get the current month</b>
-<b>var</b> month = ( <b>new</b> Date ( ) ) . getMonth ( ) ;
-console.log(month);  // <i>Sample output: 0</i>
-Please note that 0 = January. This is because months range from <i>0</i> to
-<i>11</i>, so it is often desirable to add +1 to the index.
-<b>Get the current day</b>
-// <i>Sample output: 31</i>
+<p><b>Get the current year</b></p>
+<pre>
+<b>var</b> year = (<b>new</b> Date()).getFullYear();
+console.log(year);
+// <i>Sample output: 2016</i>
+</pre>
+
+<p><b>Get the current month</b></p>
+<pre>
+<b>var</b> month = (<b>new</b> Date()).getMonth();
+console.log(month);
+// <i>Sample output: 0</i>
+</pre>
+
+<p>Please note that 0 = January. This is because months range from <i>0</i> to
+<i>11</i>, so it is often desirable to add +1 to the index.</p>
+
+<p><b>Get the current day</b></p>
+<pre>
 <b>var</b> day = (<b>new</b> Date()).getDate();
 console.log(day);
-<b>Get the current hour</b>
-// <i>Sample output: 10</i>
+// <i>Sample output: 31</i>
+</pre>
+
+<p><b>Get the current hour</b></p>
+<pre>
 <b>var</b> hours = (<b>new</b> Date()).getHours();
 console.log(hours);
-<b>Get the current minutes</b>
+// <i>Sample output: 10</i>
+</pre>
+
+<p><b>Get the current minutes</b></p>
+<pre>
 <b>var</b> minutes = (<b>new</b> Date()).getMinutes();
 console.log(minutes);
 // <i>Sample output: 39</i>
-<b>Get the current seconds</b>
+</pre>
+
+<p><b>Get the current seconds</b></p>
+<pre>
 <b>var</b> seconds = (<b>new</b> Date()).getSeconds();
 console.log(second);
 // <i>Sample output: 48</i>
+</pre>
 
-<b>Get the current milliseconds</b>
+<p><b>Get the current milliseconds</b></p>
 
-To get the milliseconds (ranging from 0 to 999) of an instance of a
-Date object, use its getMilliseconds method.
+<p>To get the milliseconds (ranging from 0 to 999) of an instance of a
+Date object, use its getMilliseconds method.</p>
 
+<pre>
+<b>var</b> milliseconds = (<b>new</b> Date()).getMilliseconds();
+console.log(milliseconds);
 // <i>Output: milliseconds right now</i>
-<b>var</b>
-milliseconds
-=
-(
-<b>new</b>
-Date
-(
-)
-)
-.
-getMilliseconds
-(
-)
-;
-console.
-log
-(
-milliseconds
-)
-;
-<b>Convert the current time and date to a human-readable string</b>
-<b>var</b>
-now
-=
-<b>new</b>
-Date
-(
-)
-;
-// <i>convert date to a string in UTC timezone format:</i>
-console.
-log
-(
-now.
-toUTCString
-(
-)
-)
-;
-// <i>Output: Wed, 21 Jun 2017 09:13:01 GMT</i>
-  
-Date.now
+</pre>
 
-The static method () returns the number of milliseconds that have
+<p><b>Convert the current time and date to a human-readable string</b></p>
+
+<pre>
+<b>var</b> now = <b>new</b> Date();
+// <i>convert date to a string in UTC timezone format:</i>
+console.log(now.toUTCString());
+// <i>Output: Wed, 21 Jun 2017 09:13:01 GMT</i>
+</pre>
+  
+<p>The static method Date.now() returns the number of milliseconds that have
 elapsed since 1 January 1970 00:00:00 UTC. To get the number of
 milliseconds that have elapsed since that time using an instance of a
-Date object, use its getTime method.
+Date object, use its getTime method.</p>
+
+<pre>
 // <i>get milliseconds using static method now of Date</i>
 console.log(Date.now());
+
 // <i>get milliseconds using method getTime of Date instance</i>
-
 console.log((<b>new</b> Date()).getTime());
-
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-7">Section 8.7: Increment a Date Object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-To increment date objects in JavaScript, we can usually do this:
-<b>var</b> checkoutDate = <b>new</b> Date();
+<p>To increment date objects in JavaScript, we can usually do this:</p>
 
-// <i>Thu Jul 21 2016 10:05:13 GMT-0400 (EDT)</i>
+<pre>
+<b>var</b> checkoutDate = <b>new</b> Date(); // <i>Thu Jul 21 2016 10:05:13 GMT-0400 (EDT)</i>
 
 checkoutDate.setDate (checkoutDate.getDate() &plus; 1);
 
-console.log(checkoutDate); // <i>Fri Jul 22 2016 10:05:13 GMT-0400
-(EDT)</i>
+console.log(checkoutDate); // <i>Fri Jul 22 2016 10:05:13 GMT-0400 (EDT)</i>
+</pre>
 
-It is possible to use setDate to change the date to a day in the
+<p>It is possible to use setDate to change the date to a day in the
 following month by using a value larger than the number of days in the
-current month -
+current month.</p>
 
-<b>var</b> checkoutDate = <b>new</b> Date(); // <i>Thu Jul 21 2016 10:05:13
-GMT-0400 (EDT)</i> checkoutDate.setDate( checkoutDate.getDate() + 12 );
+<pre>
+<b>var</b> checkoutDate = <b>new</b> Date(); // <i>Thu Jul 21 2016 10:05:13 GMT-0400 (EDT)</i>
+checkoutDate.setDate( checkoutDate.getDate() + 12 );
+console.log(checkoutDate); // <i>Tue Aug 02 2016 10:05:13 GMT-0400 (EDT)</i>
+</pre>
 
-console.log(checkoutDate); // <i>Tue Aug 02 2016 10:05:13 GMT-0400
-(EDT)</i>
+<p>The same applies to other methods such as getHours(), getMonth(),etc.</p>
 
-The same applies to other methods such as getHours(), getMonth(),etc.
+<p><b>Adding Work Days</b></p>
 
-<b>Adding Work Days</b>
-
-If you wish to add work days (in this case I am assuming Monday -
+<p>If you wish to add work days (in this case I am assuming Monday -
 Friday) you can use the setDate function although you need a little
 extra logic to account for the weekends (obviously this will not take
-account of national holidays) -
+account of national holidays)</p>
 
-<b>function</b>
-addWorkDays
-(
-startDate
-,
-days
-)
-{
-// <i>Get the day of the week as a number (0 = Sunday, 1 = Monday, &hellip;. 6
-= Saturday)</i>
-<b>var</b>
-dow
-=
-startDate.
-getDay
-(
-)
-;
-<b>var</b>
-daysToAdd
-=
-days
-;
-// <i>If the current day is Sunday add one day</i>
-<b>if</b>
-(
-dow
-==
-0
-)
-daysToAdd
-++
-;
-// <i>If the start date plus the additional days falls on or after the
-closest Saturday calculate</i>
-<i>weekends</i>
-<b>if</b>
-(
-dow
-&plus;
-daysToAdd
-&gt;=
-6
-)
-{
-// <i>Subtract days in current working week from work days</i>
-<b>var</b>
-remainingWorkDays
-=
-daysToAdd
-&minus;
-(
-5
-&minus;
-dow
-)
-;
-// <i>Add current working week&apos;s weekend</i>
-daysToAdd
-+=
-2
-;
-<b>if</b>
-(
-remainingWorkDays
-&gt;
-5
-)
-{
-// <i>Add two days for each working week by calculating how many weeks are
-included</i>
-daysToAdd
-+=
-2
-&ast;
-Math
-.
-floor
-(
-remainingWorkDays
-/
-5
-)
-;
-// <i>Exclude final weekend if remainingWorkDays resolves to an exact
-number of weeks</i>
-<b>if</b>
-(
-remainingWorkDays
-&percnt;
-5
-==
-0
-)
-daysToAdd
--=
-2
-;
+<pre>
+<b>function</b> addWorkDays(startDate, days) {
+  // <i>Get the day of the week as a number (0 = Sunday, 1 = Monday, &hellip;. 6 = Saturday)</i>
+  <b>var</b> dow = startDate.getDay();
+  <b>var</b> daysToAdd = days;
+  // <i>If the current day is Sunday add one day</i>
+  <b>if</b> (dow == 0)
+    daysToAdd++;
+  // <i>If the start date plus the additional days falls on or after the closest Saturday calculate</i>
+  <i>weekends</i>
+  <b>if</b> (dow &plus; daysToAdd &gt;= 6) {
+    // <i>Subtract days in current working week from work days</i>
+    <b>var</b> remainingWorkDays = daysToAdd &minus; (5 &minus; dow);
+    // <i>Add current working week&apos;s weekend</i>
+    daysToAdd += 2;
+    <b>if</b> (remainingWorkDays &gt; 5) {
+      // <i>Add two days for each working week by calculating how many weeks are included</i>
+      daysToAdd += 2 &ast; Math.floor(remainingWorkDays / 5);
+      // <i>Exclude final weekend if remainingWorkDays resolves to an exact number of weeks</i>
+      <b>if</b> (remainingWorkDays &percnt; 5 == 0)
+        daysToAdd -= 2;
+    }
+  }
+  startDate.setDate(startDate.getDate() &plus; daysToAdd);
+  <b>return</b> startDate;
 }
-}
-startDate.
-setDate
-(
-startDate.
-getDate
-(
-)
-&plus;
-daysToAdd
-)
-;
-<b>return</b>
-startDate
-;
-}
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-8">Section 8.8: Convert to JSON</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <pre>
-<b>var</b>
-date1 = <b>new</b> Date();
+<b>var</b> date1 = <b>new</b> Date();
 date1.toJSON();
 </pre>
 
-<p>Returns: &quot;2016-04-14T23:49:08.596Z&quot;</p>
+<blockquote>
+Returns: &quot;2016-04-14T23:49:08.596Z&quot;
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch9">Chapter 9: Date Comparison</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch9-1">Section 9.1: Comparing Date values</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-To check the equality of
-Date
-values:
-<b>var</b> date1 = <b>new</b> Date ();
-<b>var</b> date2 = <b>new</b> Date (date1.valueOf() &plus; 10);
+<p>To check the equality of Date values:</p>
+
+<pre>
+<b>var</b> date1 = <b>new</b> Date();
+<b>var</b> date2 = <b>new</b> Date(date1.valueOf() &plus; 10);
 console.log(date1.valueOf() === date2.valueOf());
 </pre>
 
-<p>Sample output:</p>
+<blockquote>
+<p>Sample output: <b>false</b>
+</blockquote>
 
 <pre>
 <b>false</b>
