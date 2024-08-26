@@ -4265,14 +4265,14 @@ relation</a>:</p>
 <p>Examples:</p>
 
 <pre>
-1 === 1;                           // <i>true</i>
-&plus;0 === &minus;0;              // <i>true</i>
-<b>NaN</b> === <b>NaN</b>;         // <i>false</i>
-<b>true</b> === &quot;true&quot;;  // <i>false</i>
-<b>false</b> === 0;                // <i>false</i>
-1 === &quot;1&quot;;               // <i>false</i>
+1 === 1;                              // <i>true</i>
+&plus;0 === &minus;0;                       // <i>true</i>
+<b>NaN</b> === <b>NaN</b>;              // <i>false</i>
+<b>true</b> === &quot;true&quot;;     // <i>false</i>
+<b>false</b> === 0;                     // <i>false</i>
+1 === &quot;1&quot;;                      // <i>false</i>
 <b>null</b> === <b>undefined</b>;  // <i>false</i>
-&lbrack;&rbrack; === &lbrack;&rbrack;; // <i>false</i>
+&lbrack;&rbrack; === &lbrack;&rbrack;;        // <i>false</i>
 </pre>
 
 <p>This algorithm has the following properties:</p>
