@@ -1906,16 +1906,16 @@ one inheriting from it, you can use the <b>instanceof</b> command:</p>
   }
   <b>return</b> arguments.reduce((a, b) =&gt; a &plus; b)
 }
-console.log(sum (1, 2, 3)) //<i>6</i>
+console.log(sum (1, 2, 3))   //<i>6</i>
 console.log(sum (&lbrack;1, 2, 3&rbrack;)) //<i>6</i>
-console.log(sum (4))                       //<i>4</i>
+console.log(sum (4))         //<i>4</i>
 </pre>
 
 <p>Note that primitive values are not considered instances of any class:</p>
 <pre>
 console.log(2 <b>instanceof</b> Number)          //<i>false</i>
-console.log(&apos;abc&apos; <b>instanceof</b> String)   //<i>false</i>
-console.log(<b>true</b> <b>instanceof</b> Boolean)      //<i>false</i>
+console.log(&apos;abc&apos; <b>instanceof</b> String)      //<i>false</i>
+console.log(<b>true</b> <b>instanceof</b> Boolean)     //<i>false</i>
 console.log(Symbol() <b>instanceof</b> Symbol)  //<i>false</i>
 </pre>
 
@@ -1926,7 +1926,7 @@ it. This even works with primitives.</p>
 <pre>
 //<i>Whereas instanceof also catches instances of subclasses,</i>
 //<i>using obj.constructor does not</i>
-console.log(&lbrack;&rbrack; <b>instanceof</b> Object, &lbrack;&rbrack; <b>instanceof</b> Array)        //<i>true true</i>
+console.log(&lbrack;&rbrack; <b>instanceof</b> Object, &lbrack;&rbrack; <b>instanceof</b> Array)            //<i>true true</i>
 console.log(&lbrack;&rbrack;.constructor === Object, &lbrack;&rbrack;.constructor === Array) //<i>false true</i>
 
 <b>function</b> isNumber(value) {
@@ -1934,7 +1934,7 @@ console.log(&lbrack;&rbrack;.constructor === Object, &lbrack;&rbrack;.constructo
   <b>if</b> (value === <b>null</b> &vert;&vert; value === <b>undefined</b>)
   <b>return</b> <b>false</b> <b>return</b> value.constructor === Number 
 }
-console.log(isNumber(<b>null</b>), isNumber(<b>undefined</b>))                          //<i>false false</i>
+console.log(isNumber(<b>null</b>), isNumber(<b>undefined</b>))                   //<i>false false</i>
 console.log(isNumber(&apos;abc&apos;), isNumber(&lbrack;&rbrack;), isNumber(() =&gt; 1))     //<i>false false false</i>
 console.log(isNumber(0), isNumber(Number(&apos;10.1&apos;)), isNumber(<b>NaN</b>)) //<i>true true true</i>
 </pre>
@@ -2578,16 +2578,8 @@ environment the conversions are happening in.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>To search for a string inside a string, there are several functions:</p>
 
-<!--
-[<b>indexOf</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [<b>(</b>]
-(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [<b>searchString</b>]
-(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   <b>[)]
-(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)   [</b>lastIndexOf<b>]
-(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)   [</b>(<b>]
-(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)   [</b>searchString<b>]
-(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
-[<b>)</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
--->
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf">
+indexOf( searchString ) <b>and</b> lastIndexOf( searchString )</a></p>
 
 <p>indexOf() will return the index of the first occurrence of searchString in
 the string. If searchString is not found, then -1 is returned.</p>
@@ -2607,11 +2599,8 @@ console.log( string.lastIndexOf(&quot;o&quot;));    // <i>8</i>
 console.log( string.lastIndexOf(&quot;foo&quot;));  // <i>-1</i>
 </pre>
 
-<!--
-[<b>includes</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>(</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>searchString</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>,</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)   [<b>start</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
-
-[<b>)</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
--->
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes">
+includes( searchString, start )</a></p>
 
 <p>includes() will return a boolean that tells whether searchString exists in the
 string, starting from index start (defaults to 0). This is better than
@@ -2624,15 +2613,8 @@ console.log( string.includes(&quot;foo&quot;));   // <i>false</i>
 </pre>
 <!-- page 45 -->
 
-<!-- [<b>replace</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>(</b>]
-(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>regexp</b>]
-(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>&vert;</b>]
-(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>substring</b>]
-(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>,</b>]
-(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>replacement</b>]
-(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>&vert;</b>]
-(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)   [<b>replaceFunction</b>]
-(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) -->
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace">
+replace( regexp|substring, replacement|replaceFunction )</a></p>
 
 <p>replace() will return a string that has all occurrences of substrings matching the 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp" 
