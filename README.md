@@ -3557,7 +3557,7 @@ on the timestamp.</p>
 <b>var</b> date2 = <b>new</b> Date(date1.valueOf() &plus; 5000);<br>
 
 <b>var</b> dateDiff = date1.valueOf() &minus; date2.valueOf();
-<b>var</b> dateDiffInYears = dateDiff / 1000 / 60 / 60 / 24 / 365; // <i>convert milliseconds into years</i><br>
+<b>var</b> dateDiffInYears = dateDiff/1000/60/60/24/365; // <i>convert milliseconds into years</i><br>
 console.log( &quot;Date difference in years : &quot; &plus; dateDiffInYears);
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -3577,11 +3577,11 @@ expect.</p>
 0 == &quot;0&quot;;      // <i>true A</i>
 &quot;&quot; == &quot;0&quot;;     // <i>false B</i>
 <b>false</b> == 0;    // <i>true</i>
-<b>false</b> == &quot;0&quot;; // <i>true</i>
-&quot;&quot; != 0;        // <i>false A</i>
-0 != &quot;0&quot;;       // <i>false A</i>
-&quot;&quot; != &quot;0&quot;;     // <i>true B</i>
-<b>false</b> != 0;    // <i>false</i>
+<b>false</b> == &quot;0&quot;;  // <i>true</i>
+&quot;&quot; != 0;      // <i>false A</i>
+0 != &quot;0&quot;;     // <i>false A</i>
+&quot;&quot; != &quot;0&quot;;    // <i>true B</i>
+<b>false</b> != 0;   // <i>false</i>
 <b>false</b> != &quot;0&quot;; // <i>false</i>
 </pre>
 
@@ -3634,7 +3634,7 @@ Number(&quot;0&quot;) == Number(&quot;0&quot;);           // <i>true;</i>
 operators which will not perform any implicit type conversions.</p>
 
 <pre>
-&quot;&quot; === 0;    // <i>false</i>
+&quot;&quot; === 0;   // <i>false</i>
 0 === &quot;0&quot;;  // <i>false</i>
 &quot;&quot; === &quot;0&quot;; // <i>false</i>
 </pre>
@@ -3984,25 +3984,30 @@ envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue // <i>select
 <h3 id="ch10-5">Section 10.5: Abstract Equality (==)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!-- page 66 -->
-<!--
-Operands of the abstract equality operator are compared <i>after</i> being
+<p>Operands of the abstract equality operator are compared <i>after</i> being
 converted to a common type. How this conversion happens is based on
-the specification of the operator:
-[Specification for the ==
-operator:](https://tc39.github.io/ecma262/#sec-abstract-equality-comparison)
+the specification of the operator:</p>
+
+<p><a href="https://tc39.github.io/ecma262/#sec-abstract-equality-comparison">
+Specification for the == operator:</a></p>
+
+<blockquote>
 <b>7.2.13 Abstract Equality Comparison</b>
-  x == y
-The comparison , where x and y are values, produces <b>true</b> or
-<b>false</b>. Such a comparison is performed as follows:
-  Type  &lpar;x&rpar; is the same as Type
-1.  If (y), then:
-x === y
-<b>a.</b> Return the result of performing Strict Equality Comparison .
-2.  If x is <b>null</b> and y is <b>undefined</b>, return <b>true</b>.
-3.  If x is <b>undefined</b> and y is <b>null</b>, return <b>true</b>.
-  Type   &lpar;x&rpar; is      Type   &lpar;y&rpar; is String, return the result of  x ==
-         Number and           the comparison   ToNumber
-4.  If (y).
+The comparison x == y, where x and y are values, produces <b>true</b> or <b>false</b>. Such a 
+comparison is performed as follows:
+<ol>
+  <li>If Type(x) is the same as Type(y), then:
+    <ul>
+      <li><b>a.</b> Return the result of performing Strict Equality Comparison x === y.</li>
+	</li>
+	</ul>
+  </li>
+  <li>If x is <b>null</b> and y is <b>undefined</b>, return <b>true</b>.</li>
+  <li>If x is <b>undefined</b> and y is <b>null</b>, return <b>true</b>.</li>
+  <li>If Type(x) is <b>Number</b> and <b>Type(y)</b> is String, return the result of the comparison
+    x == ToNumber(y).</li>
+  <li>
+  If (y).
   Type   &lpar;x&rpar; is      Type   &lpar;y&rpar; is Number, return the result of ToNumber   &lpar;x&rpar;   == y
          String and           the comparison          
 5.  If .
@@ -4034,7 +4039,6 @@ x === y
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-6">Section 10.6: Logic Operators with Booleans</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <pre>
 <b>var</b> x = <b>true</b>,
    y = <b>false</b>;
@@ -4079,7 +4083,6 @@ evaluates to false.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-7">Section 10.7: Automatic Type Conversions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>Beware that numbers can accidentally be converted to strings or NaN (Not a Number).</p>
 
 <p>JavaScript is loosely typed. A variable can contain different data
