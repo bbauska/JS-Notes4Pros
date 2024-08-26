@@ -4321,7 +4321,7 @@ relation</a>:</p>
 <b>false</b> == 0;     // <i>true</i>
 1 == &quot;1&quot;;      // <i>true</i>
 <b>null</b> == <b>undefined</b>;  // <i>true</i>
-&lbrack;&rbrack; == &lbrack;&rbrack;;         // <i>false</i>
+&lbrack;&rbrack; == &lbrack;&rbrack;;&nbsp;&nbsp;&nbsp;// <i>false</i>
 </pre>
 
 <p>This algorithm has the following property:</p>
@@ -4342,9 +4342,9 @@ relation</a>:</p>
 <p>When both operands are numeric, they are compared normally:</p>
 
 <pre>
-1 &lt; 2          // <i>true</i>
-2 &lt;= 2         // <i>true</i>
-3 &gt;= 5         // <i>false</i>
+1 &lt; 2         // <i>true</i>
+2 &lt;= 2        // <i>true</i>
+3 &gt;= 5        // <i>false</i>
 <b>true</b> &lt; <b>false</b> // <i>false (implicitly converted to numbers, 1 &bsol;0)</i>
 </pre>
 
@@ -4352,8 +4352,8 @@ relation</a>:</p>
 (according to alphabetical order):</p>
 
 <pre>
-&apos;a&apos; &lt; &apos;b&apos; // <i>true</i>
-&apos;1&apos; &lt; &apos;2&apos; // <i>true</i>
+&apos;a&apos; &lt; &apos;b&apos;  // <i>true</i>
+&apos;1&apos; &lt; &apos;2&apos;  // <i>true</i>
 &apos;100&apos; &apos;12&apos; // <i>false (&apos;100&apos; is less than &apos;12&apos; lexicographically!)</i>
 </pre>
 <!-- page 71 -->
@@ -4362,7 +4362,7 @@ converted to a number before comparison:</p>
 
 <pre>
 &apos;1&apos; &lt; 2      // <i>true</i>
-&apos;3&apos; &gt; 2      // <i>true</i>
+&apos;3&apos; &gt; 2     // <i>true</i>
 <b>true</b> &gt; &apos;2&apos;  // <i>false (true implicitly converted to number, 1 &lt; 2)</i>
 </pre>
 
@@ -4378,8 +4378,8 @@ converted to a number before comparison:</p>
 <b>undefined</b> or empty strings:</p>
 
 <pre>
-1 &gt; &apos;&apos;         // <i>true</i>
-1 &lt; &apos;&apos;         // <i>false</i>
+1 &gt; &apos;&apos;        // <i>true</i>
+1 &lt; &apos;&apos;        // <i>false</i>
 1 &gt; <b>null</b>      // <i>true</i>
 1 &lt; <b>null</b>      // <i>false</i>
 1 &gt; <b>undefined</b> // <i>false</i>
@@ -4391,8 +4391,8 @@ converted to a number before comparison. So <b>null</b> is particular case
 because Number(<b>null</b>);//0</p>
 
 <pre>
-<b>new</b> Date(2015) &lt; 1479480185280   // <i>true</i>
-<b>null</b> &gt; &minus;1                  // <i>true</i>
+<b>new</b> Date(2015) &lt; 1479480185280          // <i>true</i>
+<b>null</b> &gt; &minus;1                             // <i>true</i>
 ({toString:<b>function</b>(){<b>return</b> 123}}) &gt; 122 // <i>true</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
