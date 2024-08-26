@@ -4111,7 +4111,6 @@ NaN (Not a Number):</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-8">Section 10.8: Logic Operators with Non-boolean values (boolean coercion)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>Logical OR (&vert;&vert;), reading left to right, will evaluate to the first
 <i>truthy</i> value. If no <i>truthy</i> value is found, the last value is
 returned.</p>
@@ -4164,9 +4163,8 @@ they won't (because they are <i>falsy</i>).</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-9">Section 10.9: Empty Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <pre>
-/<i>&ast; ToNumber(ToPrimitive(&lbrack;&rbrack;)) == ToNumber(false)</i> &ast;/
+<i>&ast; ToNumber(ToPrimitive(&lbrack;&rbrack;)) == ToNumber(false)</i> &ast;/
 &lbrack;&rbrack; == <b>false</b>; // <i>true</i>
 </pre>
 
@@ -4185,568 +4183,303 @@ Object.<b>prototype</b>.toString() otherwise.  This comparison is returning <b>t
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-10">Section 10.10: Equality comparison operations</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-JavaScript has four different equality comparison operations.
+<p>JavaScript has four different equality comparison operations.</p>
 
-[<b>SameValue</b>](http://www.ecma-international.org/ecma-262/6.0/#sec-samevalue)
+<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-samevalue"><b>SameValue</b></a></p>
 
-It returns <b>true</b> if both operands belong to the same Type and are
-the same value.
+<p>It returns <b>true</b> if both operands belong to the same Type and are
+the same value.</p>
 
-Note: the value of an object is a reference.
+<p>Note: the value of an object is a reference.</p>
+
+<p>You can use this comparison algorithm via (ECMAScript 6).</p>
+
+<p>Examples:</p>
+
+<pre>
+Object.is(1, 1);                    // <i>true</i>
+Object.is(&plus;0, &minus;0);       // false</i>
+Object.is(<b>NaN</b>, <b>NaN</b>);  // <i>true</i>
+Object.is(<b>true</b>, &quot;true&quot;); // <i>false</i>
+Object.is(<b>false</b>, 0);               // <i>false</i>
+Object.is(<b>null</b>, <b>undefined</b>); // <i>false</i>
+Object.is(1, &quot;1&quot;);              // <i>false</i>
+Object.is(&lbrack;&rbrack;, &lbrack;&rbrack;); //<i>false</i>
+</pre>
+
+<p>This algorithm has the properties of an <a href="https://en.wikipedia.org/wiki/Equivalence_relation">
+equivalence relation</a></p>:
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Reflexive_relation">Reflexivity</a>: Object.is(x, x) is <b>true</b>,
+    for any value x</li>
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Symmetry</a>: Object.is(x, y) is <b>true</b> if,
+    and only if, Object.is(y, x) is <b>true</b>, for any values x and y.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Transitivity</a>: If Object.is(x, y) and
+    Object.is(y, z) are </b>true</b>, then Object.is(x, z) is also <b>true</b>, for any values x, y, and z.</li>
+</ul>
+
+<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-samevaluezero">SameValueZero</a></p>
+
+<p>It behaves like SameValue, but considers +0 and -0 to be equal.</p>
+
+<p>You can use this comparison algorithm via (ECMAScript 7).</p>
+
+<p>Examples:</p>
+
+<pre>
+&lbrack;1&rbrack;.includes(1); // <i>true</i>
+&lbrack;&plus;0&rbrack;.includes(&minus;0); // <i>true</i>
+&lbrack;<b>NaN</b>&rbrack;.includes(<b>NaN</b>); // <i>true</i>
+&lbrack;<b>true</b>&rbrack;.includes(&quot;true&quot;); // <i>false</i>
+&lbrack;<b>false</b>&rbrack;.includes(0);  // <i>false</i>
+&lbrack;1&rbrack;.includes(&quot;1&quot;);  // <i>false</i>
+&lbrack;<b>null</b>&rbrack;.includes(<b>undefined</b>);  // <i>false</i>
+&lbrack;&lbrack;&rbrack;&rbrack;.includes(&lbrack;&rbrack;);  // <i>false</i>
+</pre>
+
+<p>This algorithm still has the properties of an <a href="https://en.wikipedia.org/wiki/Equivalence_relation">equivalence
+relation</a>:</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Reflexive_relation">Reflexivity</a>:&lbrack;x&rbrack;.(x) is <b>true</b>, for any value x</li>
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Symmetry</a>:&lbrack;x&rbrack;.(x) is <b>true</b> if, and only if, &lbrack;y&rbrack;.includes(x) 
+    is <b>true</b>, for any values x and y.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Transitivity</a>: If &lbrack;x&rbrack;.includes(y) and &lbrack;y&rbrack;.includes(z) are <b>true</b>,
+    then &lbrack;x&rbrack;.includes(z) is also <b>true</b>, for any values x, y, and z.</li>
+</ul>
+
+<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-strict-equality-comparison"><b>Strict Equality Comparison</b></a></p>
+
+<p>It behaves like SameValue, but</p>
+
+<ul>
+  <li>Considers +0 and -0 to be equal.</li>
+  <li>Considers <b>NaN</b> different than any value, including itself</li>
+</ul>
+
+<p>You can use this comparison algorithm via the === operator (ECMAScript 3).</p>
+
+<p>There is also the !== operator (ECMAScript 3), which negates the result of ===.</p>
+
+<p>Examples:</p>
+
+<pre>
+1 === 1;                           // <i>true</i>
+&plus;0 === &minus;0;              // <i>true</i>
+<b>NaN</b> === <b>NaN</b>;         // <i>false</i>
+<b>true</b> === &quot;true&quot;;  // <i>false</i>
+<b>false</b> === 0;                // <i>false</i>
+1 === &quot;1&quot;;               // <i>false</i>
+<b>null</b> === <b>undefined</b>;  // <i>false</i>
+&lbrack;&rbrack; === &lbrack;&rbrack;; // <i>false</i>
+</pre>
+
+<p>This algorithm has the following properties:</p>
+<!-- page 70 -->
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Symmetry</a>: x === y is <b>true</b> 
+    if, and only if, y === <b>for</b> any values x and y&grave;</li>
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Transitivity</a>: If x === y and 
+    y === z are <b>true</b>, then x === z is also <b>true</b>, for any values x, y and z.</li>
+</ul>
+ 
+<p>But is not an <a href="https://en.wikipedia.org/wiki/Equivalence_relation">equivalence relation</a> because</p>
+
+<ul>
+  <li><b>NaN</b> is not <a href="https://en.wikipedia.org/wiki/Reflexive_relation">reflexive</a>: 
+    <b>NaN</b> !== <b>NaN</b></li>
+</ul>
+
+<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-abstract-equality-comparison"><b>Abstract Equality Comparison</b></a></p>
+
+<p>If both operands belong to the same Type, it behaves like the Strict Equality Comparison.</p>
+
+<p>Otherwise, it coerces them as follows:</p>
+
+<ul>
+  <li><b>undefined</b> and <b>null</b> are considered to be equal</li>
+  <li>When comparing a number with a string, the string is coerced to a number</li>
+  <li>When comparing a boolean with something else, the boolean is coerced to a number</li>
+  <li>When comparing an object with a number, string or symbol, the object is coerced to a primitive</li>
+</ul>
   
-  Object. is
+<p>If there was a coercion, the coerced values are compared recursively. Otherwise the algorithm returns <b>false</b>.</p>
 
-You can use this comparison algorithm via (ECMAScript 6).
+<p>You can use this comparison algorithm via the == operator (ECMAScript 1).</p>
 
-Examples:
-Object . is ( 1 , 1 );
-// <i>true</i>
-Object. is ( &plus;
-0
-,
-&minus;
-0
-)
-;
-// false</i>
-Object
-.
-is
-(
-<b>NaN</b>
-,
-<b>NaN</b>
-)
-;
-// <i>true</i>
-Object
-.
-is
-(
-<b>true</b>
-,
-&quot;true&quot;
-)
-;
-// <i>false</i>
-Object
-.
-is
-(
-<b>false</b>
-,
-0
-)
-;
-// <i>false</i>
-Object
-.
-is
-(
-<b>null</b>
-,
-<b>undefined</b>
-)
-;
-// <i>false</i>
-Object
-.
-is
-(
-1
-,
-&quot;1&quot;
-)
-;
-// <i>false</i>
-Object
-.
-is
-(
-&lbrack;
-&rbrack;
-,
-&lbrack;
-&rbrack;
-)
-;
-//<i>false</i>
+<p>There is also the != operator (ECMAScript 1), which negates the result of ==.</p>
 
-This algorithm has the properties of an [equivalence
-relation](https://en.wikipedia.org/wiki/Equivalence_relation):
+<p>Examples:</p>
 
-Object   .     is         (x,  x
-Object   .   is   (x,   y   ) is <b>true</b> if, and only    Object   .   is   (y,   x
-if,       
-Object   .   is   (x,   y   ) and  Object   .   is   (y,   z   ) are <b>true</b>,  Object   .   is   (x,   z
-then    
+<pre>
+1 == 1;           // <i>true</i>
+&plus;0 == &minus;0; // <i>true</i>
+<b>NaN</b> == <b>NaN</b>;  // <i>false</i>
+<b>true</b> == &quot;true&quot;;  // <i>false</i>
+<b>false</b> == 0;  // <i>true</i>
+1 == &quot;1&quot;;  // <i>true</i>
+<b>null</b> == <b>undefined</b>;  // <i>true</i>
+&lbrack;&rbrack; == &lbrack;&rbrack;;  // <i>false</i>
+</pre>
 
-[Reflexivity](https://en.wikipedia.org/wiki/Reflexive_relation): ) is
-</b>true</b>, for any value x
+<p>This algorithm has the following property:</p>
 
-[Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation): ) is
-<b>true</b>, for any values x and y.
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Symmetry</a>: x == y is <b>true</b> if, and only if, y == x is <b>true</b>, for any values x and y.</li>
+</ul>
 
-[Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation): If )
-is also <b>true</b>, for any values x, y and z.
+<p>But is not an <a href="https://en.wikipedia.org/wiki/Equivalence_relation">equivalence relation</a>because</p>
 
-[<b>SameValueZero</b>](http://www.ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
-
-It behaves like SameValue, but considers +0 and -0 to be equal.
-
-  Array          .   <b>prototype</b>   .   includes
-
-You can use this comparison algorithm via (ECMAScript 7).
-
-Examples:
-&lbrack;
-1
-&rbrack;
-.
-includes
-(
-1
-)
-;
-// <i>true</i>
-&lbrack;
-&plus;
-0
-&rbrack;
-.
-includes
-(
-&minus;
-0
-)
-;
-// <i>true</i>
-&lbrack;
-<b>NaN</b>
-&rbrack;
-.
-includes
-(
-<b>NaN</b>
-)
-;
-// <i>true</i>
-&lbrack;
-<b>true</b>
-&rbrack;
-.
-includes
-(
-&quot;true&quot;
-)
-;
-// <i>false</i>
-&lbrack;
-<b>false</b>
-&rbrack;
-.
-includes
-(
-0
-)
-;
-// <i>false</i>
-&lbrack;
-1
-&rbrack;
-.
-includes
-(
-&quot;1&quot;
-)
-;
-// <i>false</i>
-&lbrack;
-<b>null</b>
-&rbrack;
-.
-includes
-(
-<b>undefined</b>
-)
-;
-// <i>false</i>
-&lbrack;
-&lbrack;
-&rbrack;
-&rbrack;
-.
-includes
-(
-&lbrack;
-&rbrack;
-)
-;
-// <i>false</i>
-This algorithm still has the properties of an [equivalence
-relation](https://en.wikipedia.org/wiki/Equivalence_relation):
-  includes
-  
-  includes      &lpar;y&rpar; is <b>true</b> if, and only if, &lbrack;y&rbrack;.   includes
-  
-  includes   &lpar;y&rpar; and      includes   &lpar;z&rpar; are <b>true</b>, then  includes
-  &lbrack;y&rbrack;.         &lbrack;x&rbrack;.         
-
-[Reflexivity](https://en.wikipedia.org/wiki/Reflexive_relation):
-&lbrack;x&rbrack;.(x) is <b>true</b>, for any value x
-
-[Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation):
-&lbrack;x&rbrack;.(x) is <b>true</b>, for any values x and y.
-[Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation): If
-&lbrack;x&rbrack;.(z) is also <b>true</b>, for any values x, y and z.
-
-[<b>Strict Equality
-Comparison</b>](http://www.ecma-international.org/ecma-262/6.0/#sec-strict-equality-comparison)
-
-It behaves like SameValue, but
-
-Considers +0 and -0 to be equal.
-
-Considers <b>NaN</b> different than any value, including itself
-
-You can use this comparison algorithm via the === operator (ECMAScript 3).
-
-There is also the !== operator (ECMAScript 3), which negates the
-result of ===.
-Examples:
-1
-===
-1
-;
-// <i>true</i>
-&plus;
-0
-===
-&minus;
-0
-;
-// <i>true</i>
-<b>NaN</b>
-===
-<b>NaN</b>
-;
-// <i>false</i>
-<b>true</b>
-===
-&quot;true&quot;
-;
-// <i>false</i>
-<b>false</b>
-===
-0
-;
-// <i>false</i>
-1
-===
-&quot;1&quot;
-;
-// <i>false</i>
-<b>null</b>
-===
-<b>undefined</b>
-;
-// <i>false</i>
-&lbrack;
-&rbrack;
-===
-&lbrack;
-&rbrack;
-;
-// <i>false</i>
-This algorithm has the following properties:
-  
-x === y   is <b>true</b> if, and only if, y ===        <b>for</b> any values
- xistrue, 
-
-x === y      and     y === z      are <b>true</b>, then       x === z
-
-[Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation): xandy&grave;.
-
-[Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation): If
-is also <b>true</b>, for any values x, y and z.
-
-But is not an [equivalence
-relation](https://en.wikipedia.org/wiki/Equivalence_relation) because
-
-  <b>NaN</b> !== <b>NaN</b>
-
-<b>NaN</b> is not
-[reflexive](https://en.wikipedia.org/wiki/Reflexive_relation):
-
-[<b>Abstract Equality
-Comparison</b>](http://www.ecma-international.org/ecma-262/6.0/#sec-abstract-equality-comparison)
-
-If both operands belong to the same Type, it behaves like the Strict
-Equality Comparison.
-
-Otherwise, it coerces them as follows:
-
-<b>undefined</b> and <b>null</b> are considered to be equal
-
-When comparing a number with a string, the string is coerced to a
-number
-
-When comparing a boolean with something else, the boolean is coerced
-to a number
-
-When comparing an object with a number, string or symbol, the object is
-coerced to a primitive If there was a coercion, the coerced values are
-compared recursively. Otherwise the algorithm returns <b>false</b>.
-
-You can use this comparison algorithm via the == operator (ECMAScript
-1).
-
-There is also the != operator (ECMAScript 1), which negates the result
-of ==.
-
-Examples:
-1
-==
-1
-;
-// <i>true</i>
-&plus;
-0
-==
-&minus;
-0
-;
-// <i>true</i>
-<b>NaN</b>
-==
-<b>NaN</b>
-;
-// <i>false</i>
-<b>true</b>
-==
-&quot;true&quot;
-;
-// <i>false</i>
-<b>false</b>
-==
-0
-;
-// <i>true</i>
-1
-==
-&quot;1&quot;
-;
-// <i>true</i>
-<b>null</b>
-==
-<b>undefined</b>
-;
-// <i>true</i>
-&lbrack;
-&rbrack;
-==
-&lbrack;
-&rbrack;
-;
-// <i>false</i>
-This algorithm has the following property:
-  
-  x == y        is <b>true</b> if, and only if,     y == x
-
-[Symmetry](https://en.wikipedia.org/wiki/Symmetric_relation): is
-<b>true</b>, for any values x and y.
-
-But is not an [equivalence
-relation](https://en.wikipedia.org/wiki/Equivalence_relation) because
-  
-  <b>NaN</b> != <b>NaN</b>
-
-  == &apos;&apos;       and 0       == &apos;0&apos;        , but     &apos;&apos; != &apos;0&apos;
-
-<b>NaN</b> is not
-[reflexive](https://en.wikipedia.org/wiki/Reflexive_relation):
-[Transitivity](https://en.wikipedia.org/wiki/Symmetric_relation) does
-not hold, e.g. 0
+<ul>
+  <li><b>NaN</b> is not <a href="https://en.wikipedia.org/wiki/Reflexive_relation">reflexive</a>: <b>NaN</b> != <b>NaN</b></li>
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Transitivity</a> does not hold, e.g. 0 == &apos;&apos; and 0 == &apos;0&apos;, but &apos;&apos; != &apos;0&apos;</li>
+</ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-11">Section 10.11: Relational operators (&lt;, &lt;=, &gt;, &gt;=)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-When both operands are numeric, they are compared normally:
-1
-&lt;
-2
-// <i>true</i>
-2
-&lt;=
-2
-// <i>true</i>
-3
-&gt;=
-5
-// <i>false</i>
-<b>true</b>
-&lt;
-<b>false</b>
-// <i>false (implicitly converted to numbers, 1 &bsol;0)</i>
-When both operands are strings, they are compared lexicographically
-(according to alphabetical order):
-&apos;a&apos;
-&lt;
-&apos;b&apos;
-// <i>true</i>
-&apos;1&apos;
-&lt;
-&apos;2&apos;
-// <i>true</i>
-&apos;100&apos; &amp;apos;12&apos; // <i>false (&apos;100&apos; is less than &apos;12&apos;
-lexicographically!)</i>
+<p>When both operands are numeric, they are compared normally:</p>
 
-When one operand is a string and the other is a number, the string is
-converted to a number before comparison:
-&apos;1&apos;
-&lt;
-2
-// <i>true</i>
-&apos;3&apos;
-&gt;
-2
-// <i>true</i>
-<b>true</b>
-&gt;
-&apos;2&apos;
-// <i>false (true implicitly converted to number, 1 &lt; 2)</i>
-When the string is non-numeric, numeric conversion returns <b>NaN</b>
-(not-a-number). Comparing with <b>NaN</b> always returns <b>false</b>:
-1
-&lt;
-&apos;abc&apos;
-// <i>false</i>
-1
-&gt;
-&apos;abc&apos;
-// <i>false</i>
-But be careful when comparing a numeric value with <b>null</b>,
-<b>undefined</b> or empty strings:
-1
-&gt;
-&apos;&apos;
-// <i>true</i>
-1
-&lt;
-&apos;&apos;
-// <i>false</i>
-1
-&gt;
-<b>null</b>
-// <i>true</i>
-1
-&lt;
-<b>null</b>
-// <i>false</i>
-1
-&gt;
-<b>undefined</b>
-// <i>false</i>
-1
-&lt;
-<b>undefined</b>
-// <i>false</i>
-  Number          (    <b>null</b>          );       // <i>0</i>
+<pre>
+1 &lt; 2          // <i>true</i>
+2 &lt;= 2         // <i>true</i>
+3 &gt;= 5         // <i>false</i>
+<b>true</b> &lt; <b>false</b> // <i>false (implicitly converted to numbers, 1 &bsol;0)</i>
+</pre>
 
-When one operand is a object and the other is a number, the object is
-converted to a number before comparison.So <b>null</b> is particular case
-because
-<b>new</b>
-Date
-(
-2015
-)
-&lt;
-1479480185280
-// <i>true</i>
-<b>null</b>
-&gt;
-&minus;
-1
-// <i>true</i>
-(
-{
-toString
-:
-<b>function</b>
-(
-)
-{
-<b>return</b>
-123
-}
-}
-)
-&gt;
-122
-// <i>true</i>
+<p>When both operands are strings, they are compared lexicographically
+(according to alphabetical order):</p>
+
+<pre>
+&apos;a&apos; &lt; &apos;b&apos; // <i>true</i>
+&apos;1&apos; &lt; &apos;2&apos; // <i>true</i>
+&apos;100&apos; &amp;apos;12&apos; // <i>false (&apos;100&apos; is less than &apos;12&apos; lexicographically!)</i>
+</pre>
+<!-- page 71 -->
+<p>When one operand is a string and the other is a number, the string is
+converted to a number before comparison:</p>
+
+<pre>
+&apos;1&apos; &lt; 2  // <i>true</i>
+&apos;3&apos; &gt; 2  // <i>true</i>
+<b>true</b> &gt; &apos;2&apos; // <i>false (true implicitly converted to number, 1 &lt; 2)</i>
+<pre>
+
+<p>When the string is non-numeric, numeric conversion returns <b>NaN</b>
+(not-a-number). Comparing with <b>NaN</b> always returns <b>false</b>:</p>
+
+<pre>
+1 &lt; &apos;abc&apos;  // <i>false</i>
+1 &gt; &apos;abc&apos;  // <i>false</i>
+</pre>
+
+<p>But be careful when comparing a numeric value with <b>null</b>,
+<b>undefined</b> or empty strings:</p>
+
+<pre>
+1 &gt; &apos;&apos;  // <i>true</i>
+1 &lt; &apos;&apos;  // <i>false</i>
+1 &gt; <b>null</b>   // <i>true</i>
+1 &lt; <b>null</b>   // <i>false</i>
+1 &gt; <b>undefined</b> // <i>false</i>
+1 &lt; <b>undefined</b> // <i>false</i>
+</pre>
+
+<p>When one operand is a object and the other is a number, the object is
+converted to a number before comparison. So <b>null</b> is particular case
+because Number(<b>null</b>);//0</p>
+
+<pre>
+<b>new</b> Date(2015) &lt; 1479480185280   // <i>true</i>
+<b>null</b> &gt; &minus;1                  // <i>true</i>
+({toString:<b>function</b>(){<b>return</b> 123}}) &gt; 122 // <i>true</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-12">Section 10.12: Inequality</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Operator != is the inverse of the == operator.
-Will return <b>true</b> if the operands aren&apos;t equal.
-The JavaScript engine will try and convert both operands to matching
+<p>Operator != is the inverse of the == operator.</p>
+<p>Will return <b>true</b> if the operands aren&apos;t equal.</p>
+<p>The JavaScript engine will try and convert both operands to matching
 types if they aren&apos;t of the same type. <b>Note:</b> if the two operands
-have different internal references in memory, then <b>false</b> will be
-returned.
-<b>Sample:</b>
-1
-!=
-&apos;1&apos;
-// <i>false</i>
-1
-!=
-2
-// <i>true</i>
-!= &apos;1&apos;
-In the sample above, 1 is <b>false</b> because, a primitive number type
+have different internal references in memory, then <b>false</b> will be returned.</p>
+
+<p><b>Sample:</b></p>
+
+<pre>
+1 != &apos;1&apos;  // <i>false</i>
+1 != 2              // <i>true</i>
+</pre>
+
+<p>In the sample above, 1 != '1' is <b>false</b> because, a primitive number type
 is being compared to a char value. Therefore, the JavaScript engine
-doesn&apos;t care about the datatype of the R.H.S value.
+doesn&apos;t care about the datatype of the R.H.S value.</p>
 
-Operator: !== is the inverse of the === operator. Will return true if
-the operands are not equal or if their types do not match.
-Example:
-1
-!==
-&apos;1&apos;
-// <i>true</i>
-1
-!==
-2
-// <i>true</i>
-1
-!==
-1
-// <i>false</i>
+<p>Operator: !== is the inverse of the === operator. Will return true if
+the operands are not equal or if their types do not match.</p>
 
+<p>Example:</p>
+
+<pre>
+1 !== &apos;1&apos;  // <i>true</i>
+1 !== 2              // <i>true</i>
+1 !== 1              // <i>false</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-13">Section 10.13: List of Comparison Operators</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Operator Comparison Example</b>
-  i ==
-== Equal0
-  i === &quot;5&quot;
-=== Equal Value and Type
-  i !=
-!= Not Equal5
-  i !==
-!== Not Equal Value or Type5
-  i
-&bsol;Greater than&bsol;5
-  i
-&lt; Less than&lt; 5
-  i &gt;=
-&gt;= Greater than or equal5
-  i &lt;=
-&lt;= Less than or equal5
+<table>
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Operator</b></th>
+      <th><b>Comparison</b></th>
+      <th><b>Example</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>==</td>
+      <td>Equal</td>
+      <td>i == 0</td>
+    </tr>
+    <tr>
+      <td>===</td>
+      <td>Equal Value and Type</td>
+      <td>i === &quot;5&quot;</td>
+    </tr>
+    <tr>
+      <td>!=</td>
+      <td>Not Equal</td>
+      <td>i != 5</td>
+    </tr>
+    <tr>
+      <td>!==</td>
+      <td>Not Equal Value or Type</td>
+      <td>i !== 5</td>
+    </tr>
+    <tr>
+      <td>&gt;</td>
+      <td>Greater than</td>
+      <td>i &gt; 5</td>
+    </tr>
+    <tr>
+      <td>&lt;</td>
+      <td>Less than</td>
+      <td>i &lt; 5</td>
+    </tr>
+    <tr>
+      <td>&gt;=</td>
+      <td>Greater than or equal</td>
+      <td>i &gt;= 5</td>
+    </tr>
+    <tr>
+      <td>&lt;=</td>
+      <td>Less than or equal</td>
+      <td>i &lt;= 5</td>
+    </tr>
+  </tbody>
+</table>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-14">Section 10.14: Grouping multiple logic statements</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
