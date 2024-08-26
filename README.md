@@ -2021,13 +2021,13 @@ Double quotes &quot;Hello&quot; and (from ES2015, ES6) in Template Literals
 <pre>
 <b>var</b> hello = &quot;Hello&quot;;
 <b>var</b> world = &apos;world&apos;;
-<b>var</b> helloW = &grave;Hello World&grave;; //<i> ES2015 / ES6</i>
+<b>var</b> helloW = &grave;Hello World&grave;; // <i>ES2015 / ES6</i>
 </pre>
 
 <p>String can be created from other types using the String() function.</p>
 
 <pre>
-<b>var</b> intString = String(32); //<i> &quot;32&quot;</i>
+<b>var</b> intString = String(32); // <i>&quot;32&quot;</i>
 <b>var</b> booleanString = String(<b>true</b>); // <i>&quot;true&quot;</i>
 <b>var</b> nullString = String(<b>null</b>); // <i>&quot;null&quot;</i>
 </pre>
@@ -3080,7 +3080,7 @@ console.log(&quot;Foo was born on: &quot; &plus; formatDate(birthday.getDay(), b
 </pre>
 
 <blockquote>
-Sample output:
+Sample output:<br/><br/>
 Foo was born on: Fri Dec 31 1999
 </blockquote>
 
@@ -3104,8 +3104,7 @@ sendToBar (birthday.getTime());
 </pre>
 
 <blockquote>
-Sample output:
-
+Sample output:<br/><br/>
 Foo was born on: Sat Jan 1 2000
 </blockquote>
 
@@ -3121,7 +3120,7 @@ console.log(&quot;Foo was born on: &quot;&plus;formatDate(birthday.getUTCDay(), 
 <!-- page 52 -->
 
 <blockquote>
-Sample output:
+Sample output:<br/><br/>
 Foo was born on: Sat Jan 1 2000
 </blockquote>
 
@@ -3137,7 +3136,7 @@ console.log(Date.UTC(2000,0,31,12));
 </pre>
 
 <blockquote>
-Sample output:
+Sample output:<br/><br/>
 949320000000
 </blockquote>
 
@@ -3147,7 +3146,7 @@ console.log(utcDate);
 </pre>
 
 <blockquote>
-Sample output:
+Sample output:<br/><br/>
 Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
 </blockquote>
 
@@ -3167,31 +3166,33 @@ Sample output: <b>true</b>
 
 <p><b>Changing a Date object</b></p>
 
-  setDate         (   &hellip;   ) and       setFullYear   (   &hellip;
-All Date object modifiers, such as ) have an equivalent takes an
-argument in
-UTC time rather than in local time.
+<p>All Date object modifiers, such as ) have an equivalent takes an argument in UTC time 
+rather than in local time.</p>
+
+<pre>
 <b>var</b> date = <b>new</b> Date();
 date.setUTCFullYear (2000, 0, 31);
 date.setUTCHours ( 12 , 0 , 0 , 0);
 console.log ( date );
 </pre>
 
-Sample output:
+<blockquote>
+Sample output:<br/>
 Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
-  setUTCMonth          (), .       setUTCDate
+</blockquote>
 
-The other UTC-specific modifiers are .() (for the day of the month),
-  setUTCMinutes    (), . setUTCSeconds    () and .  setUTCMilliseconds
-.().
+<p>The other UTC-specific modifiers are .setUTCMonth(), .setUTCDate() (for the day of the month), 
+setUTCMinutes(), .setUTCSeconds() and .setUTCMilliseconds().</p>
 
-<b>Avoiding ambiguity with getTime() and setTime()</b>
+<p><b>Avoiding ambiguity with getTime() and setTime()</b></p>
 
-Where the methods above are required to differentiate between
+<p>Where the methods above are required to differentiate between
 ambiguity in dates, it is usually easier to communicate a date as the
 amount of time that has passed since January 1, 1970, 00:00:00 UTC.
 This single number represents a single point in time, and can be
-converted to local time whenever necessary.
+converted to local time whenever necessary.</p>
+
+<pre>
 <b>var</b> date = <b>new</b> Date (Date.UTC(2000,0,31,12));
 <b>var</b> timestamp = date.getTime();
 // <i>Alternatively</i>
@@ -3199,22 +3200,30 @@ converted to local time whenever necessary.
 console.log ( timestamp === timestamp2 );
 </pre>
 
-<p>Sample output:</p>
+
+<blockquote>
+<p>Sample output:</p> <b>true</b>
+</blockquote>
 
 <pre>
-<b>true</b>
 // <i>And when constructing a date from it elsewhere&hellip;</i>
-<b>var</b>
-otherDate
-= <b>new</b> Date ( timestamp ) ; 
+<b>var</b> otherDate = <b>new</b> Date(timestamp);
+
 // <i>Represented as a universal date</i>
 console.log ( otherDate. toUTCString ( ) );
 // <i>Represented as a local date</i>
-console.log ( otherDate ); 
-Sample output:
+console.log ( otherDate );
+</pre>
+
+<blockquote>
+Sample output:<br/>
+
+<pre>
 Mon, 31 Jan 2000 12:00:00 GMT
 Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
 /code&gt;
+</pre>
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-4">Section 8.4: Formatting a JavaScript date</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -3868,7 +3877,7 @@ Number.isNaN({});
 Version &lt; 6
 You can check if a value is <b>NaN</b> by comparing it with itself:
 value !== value;
-// <i> true for NaN, false for any other value</i>
+// <i>true for NaN, false for any other value</i>
   
 Number.isNaN
 You can use the following polyfill for ():
@@ -3900,16 +3909,16 @@ isNaN(<b>Infinity</b>);
 isNaN(&apos;str&apos;);
 // <i>true</i>
 isNaN(<b>undefined</b>);
-// <i> true</i>
+// <i>true</i>
 isNaN({});
-// <i> true</i>
+// <i>true</i>
 
 ECMAScript defines a "sameness" algorithm called SameValue which,
 since ECMAScript 6, can be invoked with
 Object   .   is   . Unlike the == and === comparison, using       Object   .   is
 
 () will treat <b>NaN</b> as identical with itself (and -0 as not
-<b>NaN</b> === <b>NaN</b> // <i> false</i>
+<b>NaN</b> === <b>NaN</b> // <i>false</i>
 identical with
 +0
 ):
@@ -3921,7 +3930,7 @@ is
 ,
 <b>NaN</b>
 )
-// <i> true</i>
+// <i>true</i>
 Object
 .
 is
@@ -3931,12 +3940,12 @@ is
 ,
 0
 )
-// <i> false</i>
+// <i>false</i>
 &plus;
 0
 ===
 0
-// <i> true</i>
+// <i>true</i>
 Version &lt; 6
 Object         .       is
 You can use the following polyfill for () (from
@@ -3960,7 +3969,7 @@ x
 y
 )
 {
-// <i> SameValue algorithm</i>
+// <i>SameValue algorithm</i>
 <b>if</b>
 (
 x
@@ -3968,8 +3977,8 @@ x
 y
 )
 {
-// <i> Steps 1-5, 7-10</i>
-// <i> Steps 6.b-6.e: +0 != -0</i>
+// <i>Steps 1-5, 7-10</i>
+// <i>Steps 6.b-6.e: +0 != -0</i>
 <b>return</b>
 x
 !==
@@ -3986,7 +3995,7 @@ y
 }
 <b>else</b>
 {
-// <i> Step 6.a: NaN == NaN</i>
+// <i>Step 6.a: NaN == NaN</i>
 <b>return</b>
 x
 !==
@@ -4032,55 +4041,55 @@ whole expression is guaranteed to be <b>true</b>. <b>Example with functions</b>
 Take the following two functions:
 <b>function</b>
 T ( ) {
-// <i> True</i>
+// <i>True</i>
 console.log( &quot;T&quot; );
 <b>return</b>
 <b>true</b>
 ;
 }
 <b>function</b>
-F ( ) { // <i> False</i>
+F ( ) { // <i>False</i>
 console.log( &quot;F&quot; );
 <b>return</b>
 <b>false</b>;
 }
 <i><b>Example 1</b></i>
 T ( ) && F ( );
-// <i> false</i>
+// <i>false</i>
 Output:
 &apos;T&apos;
 
 &apos;F&apos;
 <i><b>Example 2</b></i>
 F ( ) && T ( );
-// <i> false</i>
+// <i>false</i>
 Output:
 &apos;F&apos;
 <i><b>Example 3</b></i>
 T ( ) &vert;&vert; F ( );
-// <i> true</i>
+// <i>true</i>
 Output:
 &apos;T&apos;
 <i><b>Example 4</b></i>
 F ( ) &vert;&vert; T ( );
-// <i> true</i>
+// <i>true</i>
 Output:
 &apos;F&apos;
 &apos;T&apos;
 <b>Short-circuiting to prevent errors</b>
-<b>var</b> obj; // <i> object has value of undefined</i> <b>if</b>(obj.property){
-}// <i> TypeError: Cannot read property &apos;property&apos; of undefined</i>
-<b>if</b>(obj.property && obj !== <b>undefined</b>){}// <i> Line A TypeError:
+<b>var</b> obj; // <i>object has value of undefined</i> <b>if</b>(obj.property){
+}// <i>TypeError: Cannot read property &apos;property&apos; of undefined</i>
+<b>if</b>(obj.property && obj !== <b>undefined</b>){}// <i>Line A TypeError:
 Cannot read property &apos;property&apos; of undefined</i>
 Line A: if you reverse the order the first conditional statement will
 prevent the error on the second by not executing it if it would throw
 the error
 <b>if</b> ( obj !==
 <b>undefined</b> && obj.property ) {};
-// <i> no error thrown</i>
+// <i>no error thrown</i>
 But should only be used if you expect <b>undefined</b>
 
-<b>if</b>(<b>typeof</b> obj === &quot;object&quot; && obj.property){}; // <i> safe
+<b>if</b>(<b>typeof</b> obj === &quot;object&quot; && obj.property){}; // <i>safe
 option but slower</i>
 
 <b>Short-circuiting to provide a default value</b>
@@ -4100,7 +4109,7 @@ obj
 =
 nullableObj
 &vert;&vert; { };
-// <i> this selects {}</i>
+// <i>this selects {}</i>
 <b>var</b>
 nullableObj2 = { x : 5 };
 <b>var</b>
@@ -4108,7 +4117,7 @@ obj2
 =
 nullableObj2
 &vert;&vert; {}
-// <i> this selects {x: 5}</i>
+// <i>this selects {x: 5}</i>
 Or to return the first truthy value
 <b>var</b>
 truthyValue = { x : 10 };
@@ -4116,9 +4125,9 @@ truthyValue = { x : 10 };
 truthyValue
 &vert;&vert; {};
 
-// <i> will return {x: 10}</i>
+// <i>will return {x: 10}</i>
 The same can be used to fall back multiple times:
-envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue // <i> select the
+envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue // <i>select the
 first &quot;truthy&quot; of these</i>
 <b>Short-circuiting to call an optional function</b>
 The && operator can be used to evaluate a callback, only if it is
@@ -4126,11 +4135,11 @@ passed:
 <b>function</b> myMethod (
 cb){
 
-// <i> This can be simplified</i>
+// <i>This can be simplified</i>
 <b>if</b> (cb) {
 cb();
 }
-// <i> To this</i>
+// <i>To this</i>
 cb && cb ();
 }
 
@@ -4145,11 +4154,11 @@ share abstract equality == but not strict equality ===,
 <b>null</b>
 ==
 <b>undefined</b>
-// <i> true</i>
+// <i>true</i>
 <b>null</b>
 ===
 <b>undefined</b>
-// <i> false</i>
+// <i>false</i>
 They represent slightly different things:
 <b>undefined</b> represents the <i>absence of a value</i>, such as before an
 identifier/Object property has been created or in the period between
@@ -4192,19 +4201,19 @@ question](http://stackoverflow.com/q/19277458/220060)).
 <b>false</b>
 ==
 <b>undefined</b>
-// <i> false</i>
+// <i>false</i>
 <b>false</b>
 ==
 <b>null</b>
-// <i> false</i>
+// <i>false</i>
 <b>false</b>
 ===
 <b>undefined</b>
-// <i> false</i>
+// <i>false</i>
 <b>false</b>
 ===
 <b>null</b>
-// <i> false</i>
+// <i>false</i>
 <b>Using</b>
 <b>undefined</b>
   
@@ -4262,16 +4271,16 @@ x === y
     comparison .
 10. Return <b>false</b>.
 <b>Examples:</b>
-1 == 1; // <i> true</i>
-1 == <b>true</b>; // <i> true (operand converted to number: true =&bsol;1)</i>
-1 == &apos;1&apos;; // <i> true (operand converted to number: &apos;1&apos; =&bsol;1 )</i>
-1 == &apos;1.00&apos;; // <i> true</i>
-1 == &apos;1.00000000001&apos;; // <i> false</i>
-1 == &apos;1.00000000000000001&apos;; // <i> true (true due to precision loss)</i>
-<b>null</b> == <b>undefined</b>; // <i> true (spec #2)</i>
-1 == 2; // <i> false</i> 0 == <b>false</b>; // <i> true</i>
-0 == <b>undefined</b>; // <i> false</i>
-0 == &quot;&quot;; // <i> true</i>
+1 == 1; // <i>true</i>
+1 == <b>true</b>; // <i>true (operand converted to number: true =&bsol;1)</i>
+1 == &apos;1&apos;; // <i>true (operand converted to number: &apos;1&apos; =&bsol;1 )</i>
+1 == &apos;1.00&apos;; // <i>true</i>
+1 == &apos;1.00000000001&apos;; // <i>false</i>
+1 == &apos;1.00000000000000001&apos;; // <i>true (true due to precision loss)</i>
+<b>null</b> == <b>undefined</b>; // <i>true (spec #2)</i>
+1 == 2; // <i>false</i> 0 == <b>false</b>; // <i>true</i>
+0 == <b>undefined</b>; // <i>false</i>
+0 == &quot;&quot;; // <i>true</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-6">Section 10.6: Logic Operators with Booleans</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -4329,23 +4338,23 @@ x
 =
 &quot;Hello&quot;
 ;
-// <i> typeof x is a string</i>
+// <i>typeof x is a string</i>
 x
 =
 5
 ;
-// <i> changes typeof x to a number</i>
+// <i>changes typeof x to a number</i>
 
 When doing mathematical operations, JavaScript can convert numbers to
 strings:
 
-<b>var</b> x = 5 + 7; // <i> x.valueOf() is 12, typeof x is a number</i>
-<b>var</b> x = 5 + &quot;7&quot;; // <i> x.valueOf() is 57, typeof x is a string</i>
-<b>var</b> x = &quot;5&quot; + 7; // <i> x.valueOf() is 57, typeof x is a string</i>
-<b>var</b> x = 5 - 7; // <i> x.valueOf() is -2, typeof x is a number</i>
-<b>var</b> x = 5 - &quot;7&quot;; // <i> x.valueOf() is -2, typeof x is a number</i>
-<b>var</b> x = &quot;5&quot; - 7; // <i> x.valueOf() is -2, typeof x is a number</i>
-<b>var</b> x = 5 - &quot;x&quot;; // <i> x.valueOf() is NaN, typeof x is a number</i>
+<b>var</b> x = 5 + 7; // <i>x.valueOf() is 12, typeof x is a number</i>
+<b>var</b> x = 5 + &quot;7&quot;; // <i>x.valueOf() is 57, typeof x is a string</i>
+<b>var</b> x = &quot;5&quot; + 7; // <i>x.valueOf() is 57, typeof x is a string</i>
+<b>var</b> x = 5 - 7; // <i>x.valueOf() is -2, typeof x is a number</i>
+<b>var</b> x = 5 - &quot;7&quot;; // <i>x.valueOf() is -2, typeof x is a number</i>
+<b>var</b> x = &quot;5&quot; - 7; // <i>x.valueOf() is -2, typeof x is a number</i>
+<b>var</b> x = 5 - &quot;x&quot;; // <i>x.valueOf() is NaN, typeof x is a number</i>
 
 Subtracting a string from a string, does not generate an error but
 returns NaN (Not a Number):
@@ -4353,7 +4362,7 @@ returns NaN (Not a Number):
 &quot;Hello&quot;
 &minus;
 &quot;Dolly&quot;
-// <i> returns NaN</i>
+// <i>returns NaN</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-8">Section 10.8: Logic Operators with Non-boolean values (boolean coercion)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -4362,88 +4371,43 @@ Logical OR (&vert;&vert;), reading left to right, will evaluate to the first
 <i>truthy</i> value. If no <i>truthy</i> value is found, the last value is
 returned.
 
-<b>var</b> a = &apos;hello&apos; &vert;&vert; &apos;&apos;; // <i> a = &apos;hello&apos;</i> <b>var</b> b = &apos;&apos;
-&vert;&vert; &lbrack;&rbrack;; // <i> b = &lbrack;&rbrack;</i> <b>var</b> c = &apos;&apos; &vert;&vert; <b>undefined</b>; // <i> c =
-undefined</i> <b>var</b> d = 1 &vert;&vert; 5; // <i> d = 1</i> <b>var</b> e = 0 &vert;&vert; {}; // <i>
-e = {}</i> <b>var</b> f = 0 &vert;&vert; &apos;&apos; &vert;&vert; 5; // <i> f = 5</i> <b>var</b> g = &apos;&apos;
-&vert;&vert; &apos;yay&apos; &vert;&vert; &apos;boo&apos;; // <i> g = &apos;yay&apos;</i>
+<b>var</b> a = &apos;hello&apos; &vert;&vert; &apos;&apos;; // <i>a = &apos;hello&apos;</i> <b>var</b> b = &apos;&apos;
+&vert;&vert; &lbrack;&rbrack;; // <i>b = &lbrack;&rbrack;</i> <b>var</b> c = &apos;&apos; &vert;&vert; <b>undefined</b>; // <i>c =
+undefined</i> <b>var</b> d = 1 &vert;&vert; 5; // <i>d = 1</i> <b>var</b> e = 0 &vert;&vert; {}; // <i>
+e = {}</i> <b>var</b> f = 0 &vert;&vert; &apos;&apos; &vert;&vert; 5; // <i>f = 5</i> <b>var</b> g = &apos;&apos;
+&vert;&vert; &apos;yay&apos; &vert;&vert; &apos;boo&apos;; // <i>g = &apos;yay&apos;</i>
 
 Logical AND (&&), reading left to right, will evaluate to the first
 <i>falsy</i> value. If no <i>falsey</i> value is found, the last value is
 returned.
 
-<b>var</b> a = &apos;hello&apos; && &apos;&apos;; // <i> a = &apos;&apos;</i> <b>var</b> b = &apos;&apos; && &lbrack;&rbrack;;
-// <i> b = &apos;&apos;</i> <b>var</b> c = <b>undefined</b> && 0; // <i> c = undefined</i>
-<b>var</b> d = 1 && 5; // <i> d = 5</i> <b>var</b> e = 0 && {}; // <i> e = 0</i> <b>var</b>
-f = &apos;hi&apos; && &lbrack;&rbrack; && &apos;done&apos;; // <i> f = &apos;done&apos;</i> <b>var</b> g = &apos;bye&apos;
-&& <b>undefined</b> && &apos;adios&apos;; // <i> g = undefined</i>
+<b>var</b> a = &apos;hello&apos; && &apos;&apos;;
+// <i>a = &apos;&apos;</i> <b>var</b> b = &apos;&apos; && &lbrack;&rbrack;;
+// <i>b = &apos;&apos;</i> <b>var</b> c = <b>undefined</b> && 0;
+// <i>c = undefined</i>
+<b>var</b> d = 1 && 5; // <i>d = 5</i> <b>var</b> e = 0 && {}; 
+// <i>e = 0</i> <b>var</b>
+f = &apos;hi&apos; && &lbrack;&rbrack; && &apos;done&apos;; 
+// <i>f = &apos;done&apos;</i> <b>var</b> g = &apos;bye&apos;
+&& <b>undefined</b> && &apos;adios&apos;; // 
+<i>g = undefined</i>
 This trick can be used, for example, to set a default value to a
 function argument (prior to ES6).
 <b>var</b>
-foo
-=
-<b>function</b>
-(
-val
-)
-{
-// <i> if val evaluates to falsey, &apos;default&apos; will be returned instead.</i>
+foo = <b>function</b> (val) {
+// <i>if val evaluates to falsey, &apos;default&apos; will be returned instead.</i>
 <b>return</b>
-val
-&vert;&vert;
-&apos;default&apos;
-;
+val &vert;&vert; &apos;default&apos;;
 }
-console.
-log
-(
-foo
-(
-&apos;burger&apos;
-)
-)
-;
-// <i> burger</i>
-console.
-log
-(
-foo
-(
-100
-)
-)
-;
-// <i> 100</i>
-console.
-log
-(
-foo
-(
-&lbrack;
-&rbrack;
-)
-)
-;
-// <i> &lbrack;&rbrack;</i>
-console.
-log
-(
-foo
-(
-0
-)
-)
-;
-// <i> default</i>
-console.
-log
-(
-foo
-(
-<b>undefined</b>
-)
-)
-;
+console.log(foo(&apos;burger&apos;));
+// <i>burger</i>
+console.log(foo(100));
+// <i>100</i>
+console.log(foo(&lbrack;&rbrack;));
+// <i>&lbrack;&rbrack;</i>
+console.log(foo(0));
+// <i>default</i>
+console.log(foo(<b>undefined</b>));
 // <i>default</i>
 Just keep in mind that for arguments, 0 and (to a lesser extent) the
 empty string are also often valid values that should be able to be
@@ -4487,26 +4451,14 @@ the same value.
 
 Note: the value of an object is a reference.
   
-  Object         .       is
+  Object. is
 
 You can use this comparison algorithm via (ECMAScript 6).
 
 Examples:
-Object
-.
-is
-(
-1
-,
-1
-)
-;
-// <i> true</i>
-Object
-.
-is
-(
-&plus;
+Object . is ( 1 , 1 );
+// <i>true</i>
+Object. is ( &plus;
 0
 ,
 &minus;
@@ -4523,7 +4475,7 @@ is
 <b>NaN</b>
 )
 ;
-// <i> true</i>
+// <i>true</i>
 Object
 .
 is
@@ -4533,7 +4485,7 @@ is
 &quot;true&quot;
 )
 ;
-// <i> false</i>
+// <i>false</i>
 Object
 .
 is
@@ -4575,7 +4527,7 @@ is
 &rbrack;
 )
 ;
-//<i> false</i>
+//<i>false</i>
 
 This algorithm has the properties of an [equivalence
 relation](https://en.wikipedia.org/wiki/Equivalence_relation):
@@ -4613,7 +4565,7 @@ includes
 1
 )
 ;
-// <i> true</i>
+// <i>true</i>
 &lbrack;
 &plus;
 0
@@ -4625,7 +4577,7 @@ includes
 0
 )
 ;
-// <i> true</i>
+// <i>true</i>
 &lbrack;
 <b>NaN</b>
 &rbrack;
@@ -4635,7 +4587,7 @@ includes
 <b>NaN</b>
 )
 ;
-// <i> true</i>
+// <i>true</i>
 &lbrack;
 <b>true</b>
 &rbrack;
@@ -4645,7 +4597,7 @@ includes
 &quot;true&quot;
 )
 ;
-// <i> false</i>
+// <i>false</i>
 &lbrack;
 <b>false</b>
 &rbrack;
@@ -4655,7 +4607,7 @@ includes
 0
 )
 ;
-// <i> false</i>
+// <i>false</i>
 &lbrack;
 1
 &rbrack;
@@ -4665,7 +4617,7 @@ includes
 &quot;1&quot;
 )
 ;
-// <i> false</i>
+// <i>false</i>
 &lbrack;
 <b>null</b>
 &rbrack;
@@ -4675,7 +4627,7 @@ includes
 <b>undefined</b>
 )
 ;
-// <i> false</i>
+// <i>false</i>
 &lbrack;
 &lbrack;
 &rbrack;
@@ -4687,7 +4639,7 @@ includes
 &rbrack;
 )
 ;
-// <i> false</i>
+// <i>false</i>
 This algorithm still has the properties of an [equivalence
 relation](https://en.wikipedia.org/wiki/Equivalence_relation):
   includes
@@ -4723,46 +4675,46 @@ Examples:
 ===
 1
 ;
-// <i> true</i>
+// <i>true</i>
 &plus;
 0
 ===
 &minus;
 0
 ;
-// <i> true</i>
+// <i>true</i>
 <b>NaN</b>
 ===
 <b>NaN</b>
 ;
-// <i> false</i>
+// <i>false</i>
 <b>true</b>
 ===
 &quot;true&quot;
 ;
-// <i> false</i>
+// <i>false</i>
 <b>false</b>
 ===
 0
 ;
-// <i> false</i>
+// <i>false</i>
 1
 ===
 &quot;1&quot;
 ;
-// <i> false</i>
+// <i>false</i>
 <b>null</b>
 ===
 <b>undefined</b>
 ;
-// <i> false</i>
+// <i>false</i>
 &lbrack;
 &rbrack;
 ===
 &lbrack;
 &rbrack;
 ;
-// <i> false</i>
+// <i>false</i>
 This algorithm has the following properties:
   
 x === y   is <b>true</b> if, and only if, y ===        <b>for</b> any values
@@ -4814,46 +4766,46 @@ Examples:
 ==
 1
 ;
-// <i> true</i>
+// <i>true</i>
 &plus;
 0
 ==
 &minus;
 0
 ;
-// <i> true</i>
+// <i>true</i>
 <b>NaN</b>
 ==
 <b>NaN</b>
 ;
-// <i> false</i>
+// <i>false</i>
 <b>true</b>
 ==
 &quot;true&quot;
 ;
-// <i> false</i>
+// <i>false</i>
 <b>false</b>
 ==
 0
 ;
-// <i> true</i>
+// <i>true</i>
 1
 ==
 &quot;1&quot;
 ;
-// <i> true</i>
+// <i>true</i>
 <b>null</b>
 ==
 <b>undefined</b>
 ;
-// <i> true</i>
+// <i>true</i>
 &lbrack;
 &rbrack;
 ==
 &lbrack;
 &rbrack;
 ;
-// <i> false</i>
+// <i>false</i>
 This algorithm has the following property:
   
   x == y        is <b>true</b> if, and only if,     y == x
@@ -4880,30 +4832,30 @@ When both operands are numeric, they are compared normally:
 1
 &lt;
 2
-// <i> true</i>
+// <i>true</i>
 2
 &lt;=
 2
-// <i> true</i>
+// <i>true</i>
 3
 &gt;=
 5
-// <i> false</i>
+// <i>false</i>
 <b>true</b>
 &lt;
 <b>false</b>
-// <i> false (implicitly converted to numbers, 1 &bsol;0)</i>
+// <i>false (implicitly converted to numbers, 1 &bsol;0)</i>
 When both operands are strings, they are compared lexicographically
 (according to alphabetical order):
 &apos;a&apos;
 &lt;
 &apos;b&apos;
-// <i> true</i>
+// <i>true</i>
 &apos;1&apos;
 &lt;
 &apos;2&apos;
-// <i> true</i>
-&apos;100&apos; &amp;apos;12&apos; // <i> false (&apos;100&apos; is less than &apos;12&apos;
+// <i>true</i>
+&apos;100&apos; &amp;apos;12&apos; // <i>false (&apos;100&apos; is less than &apos;12&apos;
 lexicographically!)</i>
 
 When one operand is a string and the other is a number, the string is
@@ -4911,51 +4863,51 @@ converted to a number before comparison:
 &apos;1&apos;
 &lt;
 2
-// <i> true</i>
+// <i>true</i>
 &apos;3&apos;
 &gt;
 2
-// <i> true</i>
+// <i>true</i>
 <b>true</b>
 &gt;
 &apos;2&apos;
-// <i> false (true implicitly converted to number, 1 &lt; 2)</i>
+// <i>false (true implicitly converted to number, 1 &lt; 2)</i>
 When the string is non-numeric, numeric conversion returns <b>NaN</b>
 (not-a-number). Comparing with <b>NaN</b> always returns <b>false</b>:
 1
 &lt;
 &apos;abc&apos;
-// <i> false</i>
+// <i>false</i>
 1
 &gt;
 &apos;abc&apos;
-// <i> false</i>
+// <i>false</i>
 But be careful when comparing a numeric value with <b>null</b>,
 <b>undefined</b> or empty strings:
 1
 &gt;
 &apos;&apos;
-// <i> true</i>
+// <i>true</i>
 1
 &lt;
 &apos;&apos;
-// <i> false</i>
+// <i>false</i>
 1
 &gt;
 <b>null</b>
-// <i> true</i>
+// <i>true</i>
 1
 &lt;
 <b>null</b>
-// <i> false</i>
+// <i>false</i>
 1
 &gt;
 <b>undefined</b>
-// <i> false</i>
+// <i>false</i>
 1
 &lt;
 <b>undefined</b>
-// <i> false</i>
+// <i>false</i>
   Number          (    <b>null</b>          );       // <i>0</i>
 
 When one operand is a object and the other is a number, the object is
@@ -4968,7 +4920,7 @@ Date
 )
 &lt;
 1479480185280
-// <i> true</i>
+// <i>true</i>
 <b>null</b>
 &gt;
 &minus;
@@ -5004,11 +4956,11 @@ returned.
 1
 !=
 &apos;1&apos;
-// <i> false</i>
+// <i>false</i>
 1
 !=
 2
-// <i> true</i>
+// <i>true</i>
 != &apos;1&apos;
 In the sample above, 1 is <b>false</b> because, a primitive number type
 is being compared to a char value. Therefore, the JavaScript engine
@@ -5020,15 +4972,15 @@ Example:
 1
 !==
 &apos;1&apos;
-// <i> true</i>
+// <i>true</i>
 1
 !==
 2
-// <i> true</i>
+// <i>true</i>
 1
 !==
 1
-// <i> false</i>
+// <i>false</i>
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-13">Section 10.13: List of Comparison Operators</h3>
@@ -5166,9 +5118,9 @@ into a single variable with each direction assigned a bit.
 
 Example reading keyboard via bitfield
 
-<b>var</b> bitField = 0; // <i> the value to hold the bits</i> <b>const</b>
-KEY_BITS = &lbrack;4,1,8,2&rbrack;; // <i> left up right down</i> <b>const</b> KEY_MASKS =
-&lbrack;0b1011,0b1110,0b0111,0b1101&rbrack;; // <i> left up right down</i>
+<b>var</b> bitField = 0; // <i>the value to hold the bits</i> <b>const</b>
+KEY_BITS = &lbrack;4,1,8,2&rbrack;; // <i>left up right down</i> <b>const</b> KEY_MASKS =
+&lbrack;0b1011,0b1110,0b0111,0b1101&rbrack;; // <i>left up right down</i>
 window.onkeydown = window.onkeyup = <b>function</b> (e) {
 <b>if</b>(e.keyCode &gt;= 37 && e.keyCode &lt;41){
 
@@ -5290,27 +5242,27 @@ directionState
 )
 {
 You can set some constants to make things easier
-// <i> postfix U,D,L,R for Up down left right</i>
+// <i>postfix U,D,L,R for Up down left right</i>
 <b>const</b> KEY_U = 1; 
 <b>const</b> KEY_D = 2;
 <b>const</b> KEY_L = 4;
 <b>const</b> KEY_R = 8;
 <b>const</b> KEY_UL = KEY_U &plus; KEY_L ;
-// <i> up left</i> <b>const</b> KEY_UR = KEY_U &plus; KEY_R;
-// <i> up Right</i> <b>const</b> KEY_DL = KEY_D &plus; KEY_L;
-// <i> down left</i> <b>const</b> KEY_DR = KEY_D &plus; KEY_R;
-// <i> down right</i> 
+// <i>up left</i> <b>const</b> KEY_UR = KEY_U &plus; KEY_R;
+// <i>up Right</i> <b>const</b> KEY_DL = KEY_D &plus; KEY_L;
+// <i>down left</i> <b>const</b> KEY_DR = KEY_D &plus; KEY_R;
+// <i>down right</i> 
 
 You can then quickly test for many various keyboard states
 
-<b>if</b> ((bitfield & KEY_UL) === KEY_UL) { // <i> is UP and LEFT only
-down</i> <b>if</b> (bitfield & KEY_UL) { // <i> is Up left down</i> <b>if</b>
-((bitfield & KEY_U) === KEY_U) { // <i> is Up only down</i> <b>if</b> (bitfield
-& KEY_U) { // <i> is Up down (any other key may be down)</i> <b>if</b>
-(!(bitfield & KEY_U)) { // <i> is Up up (any other key may be down)</i>
-<b>if</b> (!bitfield ) { // <i> no keys are down</i>
+<b>if</b> ((bitfield & KEY_UL) === KEY_UL) { // <i>is UP and LEFT only
+down</i> <b>if</b> (bitfield & KEY_UL) { // <i>is Up left down</i> <b>if</b>
+((bitfield & KEY_U) === KEY_U) { // <i>is Up only down</i> <b>if</b> (bitfield
+& KEY_U) { // <i>is Up down (any other key may be down)</i> <b>if</b>
+(!(bitfield & KEY_U)) { // <i>is Up up (any other key may be down)</i>
+<b>if</b> (!bitfield ) { // <i>no keys are down</i>
 
-<b>if</b> (bitfield ) { // <i> any one or more keys are down</i>
+<b>if</b> (bitfield ) { // <i>any one or more keys are down</i>
 
 The keyboard input is just one example. Bitfields are useful when you
 have various states that must in combination be acted on. JavaScript
