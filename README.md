@@ -4164,7 +4164,7 @@ they won't (because they are <i>falsy</i>).</p>
 <h3 id="ch10-9">Section 10.9: Empty Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <pre>
-<i>&ast; ToNumber(ToPrimitive(&lbrack;&rbrack;)) == ToNumber(false)</i> &ast;/
+/<i>&ast; ToNumber(ToPrimitive(&lbrack;&rbrack;)) == ToNumber(false)</i> &ast;/
 &lbrack;&rbrack; == <b>false</b>; // <i>true</i>
 </pre>
 
@@ -4197,14 +4197,14 @@ the same value.</p>
 <p>Examples:</p>
 
 <pre>
-Object.is(1, 1);                    // <i>true</i>
-Object.is(&plus;0, &minus;0);       // false</i>
-Object.is(<b>NaN</b>, <b>NaN</b>);  // <i>true</i>
-Object.is(<b>true</b>, &quot;true&quot;); // <i>false</i>
-Object.is(<b>false</b>, 0);               // <i>false</i>
+Object.is(1, 1);            // <i>true</i>
+Object.is(&plus;0, &minus;0);          // false</i>
+Object.is(<b>NaN</b>, <b>NaN</b>);        // <i>true</i>
+Object.is(<b>true</b>, &quot;true&quot;);   // <i>false</i>
+Object.is(<b>false</b>, 0);       // <i>false</i>
 Object.is(<b>null</b>, <b>undefined</b>); // <i>false</i>
-Object.is(1, &quot;1&quot;);              // <i>false</i>
-Object.is(&lbrack;&rbrack;, &lbrack;&rbrack;); //<i>false</i>
+Object.is(1, &quot;1&quot;);          // <i>false</i>
+Object.is(&lbrack;&rbrack;, &lbrack;&rbrack;);      //<i>false</i>
 </pre>
 
 <p>This algorithm has the properties of an <a href="https://en.wikipedia.org/wiki/Equivalence_relation">
