@@ -3554,10 +3554,10 @@ Sample output: <b>true</b>
 on the timestamp.</p>
 <pre>
 <b>var</b> date1 = <b>new</b> Date();
-<b>var</b> date2 = <b>new</b> Date(date1.valueOf() &plus; 5000);
+<b>var</b> date2 = <b>new</b> Date(date1.valueOf() &plus; 5000);<br>
 
 <b>var</b> dateDiff = date1.valueOf() &minus; date2.valueOf();
-<b>var</b> dateDiffInYears = dateDiff / 1000 / 60 / 60 / 24 / 365; // <i>convert milliseconds into years</i>
+<b>var</b> dateDiffInYears = dateDiff / 1000 / 60 / 60 / 24 / 365; // <i>convert milliseconds into years</i><br>
 console.log( &quot;Date difference in years : &quot; &plus; dateDiffInYears);
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -3575,13 +3575,13 @@ expect.</p>
 <pre>
 &quot;&quot; == 0;       // <i>true A</i>
 0 == &quot;0&quot;;      // <i>true A</i>
-&quot;&quot; == &quot;0&quot;; // <i>false B</i>
-<b>false</b> == 0;     // <i>true</i>
-<b>false</b> == &quot;0&quot;;  // <i>true</i>
-&quot;&quot; != 0;           // <i>false A</i>
-0 != &quot;0&quot;;          // <i>false A</i>
-&quot;&quot; != &quot;0&quot;;        // <i>true B</i>
-<b>false</b> != 0;        // <i>false</i>
+&quot;&quot; == &quot;0&quot;;     // <i>false B</i>
+<b>false</b> == 0;    // <i>true</i>
+<b>false</b> == &quot;0&quot;; // <i>true</i>
+&quot;&quot; != 0;        // <i>false A</i>
+0 != &quot;0&quot;;       // <i>false A</i>
+&quot;&quot; != &quot;0&quot;;     // <i>true B</i>
+<b>false</b> != 0;    // <i>false</i>
 <b>false</b> != &quot;0&quot;; // <i>false</i>
 </pre>
 
@@ -3606,8 +3606,8 @@ results of numerical comparison use explicit conversion:</p>
 
 <pre>
 <b>var</b> test = (a, b) =&gt; Number(a) == Number(b);
-test(&quot;&quot;, 0 );         // <i>true;</i>
-test(&quot;0&quot;, 0);         // <i>true</i>
+test(&quot;&quot;, 0 );        // <i>true;</i>
+test(&quot;0&quot;, 0);        // <i>true</i>
 test(&quot;&quot;, &quot;0&quot;);       // <i>true;</i>
 test(&quot;abc&quot;, &quot;abc&quot;);  // <i>false as operands are not numbers</i>
 </pre>
@@ -3621,12 +3621,12 @@ test(&quot;0&quot;, 0);   // <i>true</i>
 test(&quot;&quot;, &quot;0&quot;);  // <i>false;</i>
 </pre>
 
-<p></i>Side-note</i>: Number(&quot;0&quot;) and <b>new Number(&quot;0&quot;) isn&apos;t the same thing! 
+<p><i>Side-note</i>: Number(&quot;0&quot;) and <b>new</b> Number(&quot;0&quot;) isn&apos;t the same thing! 
 While the former performs a type conversion, the latter will create a new object. Objects are 
 compared by reference and not by value which explains the results below.</p>
 
 <pre>
-Number(&quot;0&quot;) == Number(&quot;0&quot;);          // <i>true;</i>
+Number(&quot;0&quot;) == Number(&quot;0&quot;);           // <i>true;</i>
 <b>new</b> Number(&quot;0&quot;) == <b>new</b> Number (&quot;0&quot;);  // <i>false</i>
 </pre>
 
@@ -3635,7 +3635,7 @@ operators which will not perform any implicit type conversions.</p>
 
 <pre>
 &quot;&quot; === 0;    // <i>false</i>
-0 === &quot;0&quot;;   // <i>false</i>
+0 === &quot;0&quot;;  // <i>false</i>
 &quot;&quot; === &quot;0&quot;; // <i>false</i>
 </pre>
 
@@ -3648,351 +3648,275 @@ Which equals operator (== vs ===) should be used in JavaScript comparisons?</a>.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-2">Section 10.2: NaN Property of the Global Object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<p><b>NaN</b> (&quot;<b>N</b>ot <b>a</b> <b>N</b>umber&quot;) is a special value defined by the 
+<a href=""><i>IEEE Standard for Floating-Point Arithmetic</i></a>, which is used when a non-numeric 
+value is provided but a number is expected (1 &ast; "two"), or when a calculation doesn&apos;t have a 
+valid number result ((-1)).</p>
 
-<b>NaN</b> (&quot;<b>N</b>ot <b>a</b> <b>N</b>umber&quot;) is a special value defined by
-the &lbrack;<i>IEEE Standard for Floating-Point
-Arithmetic</i>&rbrack;(https://en.wikipedia.org/wiki/IEEE_floating_point), which
-is used when a non-numeric value is provided but a number is expected
-(1 &ast;), or when a calculation doesn&apos;t have a valid number result
-((-1)).
+<p>Any equality or relational comparisons with <b>NaN</b> returns <b>false</b>, even comparing it 
+with itself. Because, <b>NaN</b> is supposed to denote the result of a nonsensical computation, 
+and as such, it isn't equal to the result of any other nonsensical computations.</p>
 
-Any equality or relational comparisons with <b>NaN</b> returns <b>false</b>,
-even comparing it with itself. Because, <b>NaN</b> is supposed to denote
-the result of a nonsensical computation, and as such, it isn't equal
-to the result of any other nonsensical computations.
-( 1 &ast; &quot;two&quot; ) ===
-<b>NaN</b>
-// <i>false</i>
-<b>NaN</b>
-=== 0;
-// <i>false</i>
-<b>NaN</b> === <b>NaN</b>;
-// <i>false</i>
-Number
-.
-<b>NaN</b>
-===
-<b>NaN</b>
-;
-// <i>false</i>
-<b>NaN</b>
-&lt; 0;
-// <i>false</i>
-<b>NaN</b>
-&gt; 0;
-// <i>false</i>
-<b>NaN</b>
-&gt; 0;
-// <i>false</i>
-<b>NaN</b>
-&gt;=
-<b>NaN</b>;
-// <i>false</i>
-<b>NaN</b>
-&gt;=
-&apos;two&apos;;
-// <i>false</i>
-Non-equal comparisons will always return
-<b>true</b>
-:
+<pre>
+( 1 &ast; &quot;two&quot; ) === <b>NaN</b> // <i>false</i>
+<b>NaN</b> === 0; // <i>false</i>
+<b>NaN</b> === <b>NaN</b>; // <i>false</i>
+Number.<b>NaN</b> === <b>NaN</b>; // <i>false</i>
+
+<b>NaN</b> &lt; 0; // <i>false</i>
+<b>NaN</b> &gt; 0; // <i>false</i>
+<b>NaN</b> &gt; 0; // <i>false</i>
+<b>NaN</b> &gt;= <b>NaN</b>; // <i>false</i>
+<b>NaN</b> &gt;= &apos;two&apos;; // <i>false</i>
+</pre>
+
+<p>Non-equal comparisons will always return <b>true</b>:</p>
+
+<pre>
 <b>NaN</b> !== 0; // <i>true</i>
 <b>NaN</b> !== <b>NaN</b>; // <i>true</i>
-<b>Checking if a value is NaN</b> Version ≥ 6
+</pre>
 
-You can test a value or expression for <b>NaN</b> by using the function
-Number.isNaN():
-Number.isNaN(<b>NaN</b>);
-// <i>true</i>
-Number.isNaN( 0 / 0 );
-// <i>true</i>
-Number.isNaN( &apos;str&apos; &minus; 12 );
-// <i>true</i>
-Number.isNaN(24);
-// <i>false</i>
-Number.isNaN(&apos;24&apos;);
-// <i>false</i>
-Number.isNaN(1/0);
-// <i>false</i>
-Number.isNaN(<b>Infinity</b>);
-// <i>false</i>
-Number.isNaN(&apos;str&apos;);
-// <i>false</i>
-Number.isNaN(<b>undefined</b>);
-// <i>false</i>
-Number.isNaN({});
-// <i>false</i>
-Version &lt; 6
-You can check if a value is <b>NaN</b> by comparing it with itself:
-value !== value;
-// <i>true for NaN, false for any other value</i>
+<p><b>Checking if a value is NaN</b></p>
+
+<h5>Version ≥ 6</h5>
+
+<p>You can test a value or expression for <b>NaN</b> by using the function Number.isNaN():</p>
+
+<pre>
+Number.isNaN(<b>NaN</b>);  // <i>true</i>
+Number.isNaN(0 / 0);      // <i>true</i>
+Number.isNaN(&apos;str&apos; &minus; 12);  // <i>true</i>
+
+Number.isNaN(24);           // <i>false</i>
+Number.isNaN(&apos;24&apos;);    // <i>false</i>
+Number.isNaN(1 / 0);           // <i>false</i>
+Number.isNaN(<b>Infinity</b>);   // <i>false</i>
+
+Number.isNaN(&apos;str&apos;);     // <i>false</i>
+Number.isNaN(<b>undefined</b>);   // <i>false</i>
+Number.isNaN({});                  // <i>false</i>
+</pre>
+
+<!-- page 62 -->
+<h5>Version &lt; 6</h5>
+
+<p>You can check if a value is <b>NaN</b> by comparing it with itself:</p>
+
+<pre>
+value !== value;  // <i>true for NaN, false for any other value</i>
+</pre>
   
-Number.isNaN
-You can use the following polyfill for ():
-Number.isNaN = Number.isNaN &vert;&vert;
-<b>function</b>
-(value) {
-<b>return</b>
-value !== value;
-}
- 
-isNaN
+<p>You can use the following polyfill for Number.isNaN():</p>
 
-By contrast, the global function () returns <b>true</b> not only for
-<b>NaN</b>, but also for any value or expression that cannot be coerced
-into a number:
-
-isNaN ( <b>NaN</b> );
-// <i>true</i>
-isNaN(0/0);
-// <i>true</i>
-isNaN(&apos;str&apos;&minus;12);
-// <i>true</i>
-isNaN(24);
-// <i>false</i>
-isNaN(&apos;24&apos;);
-// <i>false</i>
-isNaN(<b>Infinity</b>);
-// <i>false</i>
-isNaN(&apos;str&apos;);
-// <i>true</i>
-isNaN(<b>undefined</b>);
-// <i>true</i>
-isNaN({});
-// <i>true</i>
-
-ECMAScript defines a "sameness" algorithm called SameValue which,
-since ECMAScript 6, can be invoked with
-Object   .   is   . Unlike the == and === comparison, using       Object   .   is
-
-() will treat <b>NaN</b> as identical with itself (and -0 as not
-<b>NaN</b> === <b>NaN</b> // <i>false</i>
-identical with
-+0
-):
-Object
-.
-is
-(
-<b>NaN</b>
-,
-<b>NaN</b>
-)
-// <i>true</i>
-Object
-.
-is
-(
-&plus;
-0
-,
-0
-)
-// <i>false</i>
-&plus;
-0
-===
-0
-// <i>true</i>
-Version &lt; 6
-Object         .       is
-You can use the following polyfill for () (from
-[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Polyfill_for_non-ES6_browsers)):
-<b>if</b>
-(
-!
-Object
-.
-is
-)
-{
-Object
-.
-is
-=
-<b>function</b>
-(
-x
-,
-y
-)
-{
-// <i>SameValue algorithm</i>
-<b>if</b>
-(
-x
-===
-y
-)
-{
-// <i>Steps 1-5, 7-10</i>
-// <i>Steps 6.b-6.e: +0 != -0</i>
-<b>return</b>
-x
-!==
-0
-&vert;&vert;
-1
-/
-x
-===
-1
-/
-y
-;
+<pre>
+Number.isNaN = Number.isNaN &vert;&vert; <b>function</b>(value) {
+  <b>return</b> value !== value;
 }
-<b>else</b>
-{
-// <i>Step 6.a: NaN == NaN</i>
-<b>return</b>
-x
-!==
-x
-&&
-y
-!==
-y
-;
-}
-}
-;
-}
-<b>Points to note</b>
-NaN itself is a number, meaning that it does not equal to the string
-&quot;NaN&quot;, and most importantly (though perhaps unintuitively):
-<b>typeof</b>
-(
-<b>NaN</b>
-)
-===
-&quot;number&quot;
-;
-// <i>true</i>
+</pre>
 
--->
+<p>By contrast, the global function () returns <b>true</b> not only for <b>NaN</b>, but 
+also for any value or expression that cannot be coerced into a number:</p>
+
+<pre>
+isNaN (<b>NaN</b>);  // <i>true</i>
+isNaN(0/0);          // <i>true</i>
+isNaN(&apos;str&apos;&minus;12);  // <i>true</i>
+
+isNaN(24);             // <i>false</i>
+isNaN(&apos;24&apos;);  // <i>false</i>
+isNaN(<b>Infinity</b>);  // <i>false</i>
+
+isNaN(&apos;str&apos;);  // <i>true</i>
+isNaN(<b>undefined</b>);  // <i>true</i>
+isNaN({});               // <i>true</i>
+</pre>
+
+<p>ECMAScript defines a "sameness" algorithm called SameValue which, since ECMAScript 6, can 
+be invoked with Object.is. Unlike the == and === comparison, using Object.is() will treat 
+<b>NaN</b> as identical with itself (and -0 as note identical with +0):</p>
+
+<pre>
+Object.is(<b>NaN, NaN</b>)       // <i>true</i>
+Object.is(+0, 0)                 // <i>false</i>
+
+<b>NaN</b> === <b>NaN</b>        // <i>false</i>
++0 === 0                         // <i>true</i>
+</pre>
+<h5>Version &lt; 6</h5>
+
+<p>You can use the following polyfill for Object.is() (from
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Polyfill_for_non-ES6_browsers">
+MDN</a>):</p>
+
+<pre>
+<b>if</b> (!Object.is) {
+  Object.is = <b>function</b>(x, y) {
+    // <i>SameValue algorithm</i>
+    <b>if</b> (x === y) { // <i>Steps 1-5, 7-10</i>
+      // <i>Steps 6.b-6.e: +0 != -0</i>
+      <b>return</b> x !== 0 &vert;&vert; 1 / x === 1 / y;
+    } <b>else</b> {
+      // <i>Step 6.a: NaN == NaN</i>
+      <b>return</b> x !== x && y !== y;
+    }
+  };
+}
+</pre>
+
+<p><b>Points to note</b></p>
+<p>NaN itself is a number, meaning that it does not equal to the string
+&quot;NaN&quot;, and most importantly (though perhaps unintuitively):</p>
+<!-- page 63 -->
+
+<pre>
+<b>typeof</b>(<b>NaN</b>) === &quot;number&quot;;  // <i>true</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-3">Section 10.3: Short-circuiting in boolean operators</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-The and-operator (&&) and the or-operator (&vert;&vert;) employ
+<p>The and-operator (&&) and the or-operator (&vert;&vert;) employ
 short-circuiting to prevent unnecessary work if the outcome of the
-operation does not change with the extra work.
+operation does not change with the extra work.</p>
 
-x && y
+<p>In x && y, will not be evaluated if x evaluates to <b>false</b>, because the whole expression is 
+guaranteed to be <b>false</b>.</p>
 
-In , y will not be evaluated if x evaluates to <b>false</b>, because the
-whole expression is guaranteed to be <b>false</b>.
-x &vert;&vert; y
+<p>In x &vert;&vert; y will not be evaluated if x evaluated to <b>true</b>, because the whole expression 
+is guaranteed to be <b>true</b>.</p>
 
-In , y will not be evaluated if x evaluated to <b>true</b>, because the
-whole expression is guaranteed to be <b>true</b>. <b>Example with functions</b>
+<p><b>Example with functions</b></p>
 
-Take the following two functions:
-<b>function</b>
-T ( ) {
-// <i>True</i>
-console.log( &quot;T&quot; );
-<b>return</b>
-<b>true</b>
-;
+<p>Take the following two functions:</p>
+
+<pre>
+<b>function</b> T() {  // <i>True</i>
+  console.log(&quot;T&quot;);
+  <b>return</b> <b>true</b>;
 }
-<b>function</b>
-F ( ) { // <i>False</i>
-console.log( &quot;F&quot; );
-<b>return</b>
-<b>false</b>;
+
+<b>function</b> F() { // <i>False</i>
+  console.log(&quot;F&quot;);
+  <b>return</b> <b>false</b>;
 }
-<i><b>Example 1</b></i>
-T ( ) && F ( );
-// <i>false</i>
-Output:
+</pre>
+
+<p><i><b>Example 1</b></i></p>
+
+<pre>
+T ( ) && F ( );  // <i>false</i>
+</pre>
+
+<p>Output:</p>
+
+<blockquote>
 &apos;T&apos;
+&apos;F&apos;
+</blockquote>
 
+<p><i><b>Example 2</b></i></p>
+
+<pre>
+F ( ) && T ( ); // <i>false</i>
+</pre>
+
+<p>Output:</p>
+
+<blockquote>
 &apos;F&apos;
-<i><b>Example 2</b></i>
-F ( ) && T ( );
-// <i>false</i>
-Output:
-&apos;F&apos;
-<i><b>Example 3</b></i>
-T ( ) &vert;&vert; F ( );
-// <i>true</i>
-Output:
+</blockquote>
+
+<p><i><b>Example 3</b></i></p>
+
+<pre>
+T ( ) &vert;&vert; F ( );  // <i>true</i>
+</pre>
+
+<p>Output:</p>
+
+<blockquote>
 &apos;T&apos;
-<i><b>Example 4</b></i>
-F ( ) &vert;&vert; T ( );
-// <i>true</i>
-Output:
+</blockquote>
+
+<p><i><b>Example 4</b></i></p>
+
+<pre>
+F ( ) &vert;&vert; T ( ); // <i>true</i>
+</pre>
+
+<p>Output:</p>
+
+<blockquote>
 &apos;F&apos;
 &apos;T&apos;
-<b>Short-circuiting to prevent errors</b>
-<b>var</b> obj; // <i>object has value of undefined</i> <b>if</b>(obj.property){
-}// <i>TypeError: Cannot read property &apos;property&apos; of undefined</i>
-<b>if</b>(obj.property && obj !== <b>undefined</b>){}// <i>Line A TypeError:
-Cannot read property &apos;property&apos; of undefined</i>
-Line A: if you reverse the order the first conditional statement will
-prevent the error on the second by not executing it if it would throw
-the error
-<b>if</b> ( obj !==
-<b>undefined</b> && obj.property ) {};
-// <i>no error thrown</i>
-But should only be used if you expect <b>undefined</b>
+</blockquote>
 
-<b>if</b>(<b>typeof</b> obj === &quot;object&quot; && obj.property){}; // <i>safe
-option but slower</i>
+<p><b>Short-circuiting to prevent errors</b></p>
 
-<b>Short-circuiting to provide a default value</b>
+<pre>
+<b>var</b> obj; // <i>object has value of undefined</i>
+<b>if</b>(obj.property){ }// <i>TypeError: Cannot read property &apos;property&apos; of undefined</i>
+<b>if</b>(obj.property && obj !== <b>undefined</b>){}// <i>Line A TypeError: Cannot read property &apos;property&apos; of 
+undefined</i>
+</pre>
 
-The &vert;&vert; operator can be used to select either a &quot;truthy&quot; value, or
-the default value.
+<p>Line A: if you reverse the order the first conditional statement will prevent the error on the second 
+by not executing it if it would throw the error.</p>
 
-For example, this can be used to ensure that a nullable value is
-converted to a non-nullable value:
-<b>var</b>
-nullableObj
-=
-<b>null</b>
-;
-<b>var</b>
-obj
-=
-nullableObj
-&vert;&vert; { };
-// <i>this selects {}</i>
-<b>var</b>
-nullableObj2 = { x : 5 };
-<b>var</b>
-obj2
-=
-nullableObj2
-&vert;&vert; {}
-// <i>this selects {x: 5}</i>
-Or to return the first truthy value
-<b>var</b>
-truthyValue = { x : 10 };
-<b>return</b>
-truthyValue
-&vert;&vert; {};
+<pre>
+<b>if</b> (obj !== <b>undefined</b> && obj.property ) {}; // <i>no error thrown</i>
+</pre>
 
-// <i>will return {x: 10}</i>
-The same can be used to fall back multiple times:
-envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue // <i>select the
-first &quot;truthy&quot; of these</i>
-<b>Short-circuiting to call an optional function</b>
-The && operator can be used to evaluate a callback, only if it is
-passed:
-<b>function</b> myMethod (
-cb){
+<p>But should only be used if you expect <b>undefined</b>.</p>
 
-// <i>This can be simplified</i>
-<b>if</b> (cb) {
-cb();
+<pre>
+<b>if</b>(<b>typeof</b> obj === &quot;object&quot; && obj.property){}; // <i>safe option but slower</i>
+</pre>
+
+<p><b>Short-circuiting to provide a default value</b></p>
+
+<p>The &vert;&vert; operator can be used to select either a &quot;truthy&quot; value, or the default value.</p>
+
+<p>For example, this can be used to ensure that a nullable value is converted to a non-nullable value:</p>
+
+<pre>
+<b>var</b> nullableObj = <b>null</b>;
+<b>var</b> obj = nullableObj &vert;&vert; { }; // <i>this selects {}</i>
+
+<b>var</b> nullableObj2 = { x : 5 };
+<b>var</b> obj2 = nullableObj2 &vert;&vert; {} // <i>this selects {x: 5}</i>
+</pre>
+
+<p>Or to return the first truthy value</p>
+
+<pre>
+<b>var</b> truthyValue = { x : 10 };
+<b>return</b> truthyValue &vert;&vert; {}; // <i>will return {x: 10}</i>
+</pre>
+
+<p>The same can be used to fall back multiple times:</p>
+
+<pre>
+envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue // <i>select the first &quot;truthy&quot; of these</i>
+</pre>
+
+<p><b>Short-circuiting to call an optional function</b></p>
+
+<p>The && operator can be used to evaluate a callback, only if it is passed:</p>
+
+<pre>
+<b>function</b> myMethod (cb){
+  // <i>This can be simplified</i>
+  <b>if</b> (cb) {
+    cb();
+  }
+  // <i>To this</i>
+  cb && cb ();
 }
-// <i>To this</i>
-cb && cb ();
-}
+</pre>
 
-Of course, the test above does not validate that cb is in fact a
-<b>function</b> and not just an Object/Array/String/Number.
+<p>Of course, the test above does not validate that cb is in fact a
+<b>function</b> and not just an Object/Array/String/Number.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-4">Section 10.4: Null and Undefined</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
