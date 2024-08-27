@@ -5009,7 +5009,6 @@ x == 10 &vert;&vert; alert(&quot;x is not 10&quot;)
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-1">Section 12.1: Converting Array-like Objects to Arrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p><b>What are Array-like Objects?</b></p>
 
 <p>JavaScript has &quot;Array-like Objects&quot;, which are Object
@@ -5092,7 +5091,7 @@ realArray.forEach(value =&gt; {/&ast; Do something &ast;/}); // <i>Works</i>
 }
 </pre>
 <!-- page 81 -->
-<!--
+
 <ol start="3">
   <li>Spread operator:</li>
 </ol>
@@ -5136,7 +5135,10 @@ arrayLike
 )
 
 Array <b>prototype</b>.slice
-Use like so:
+
+<p>Use like so:</p>
+
+<pre>
 <b>var</b>
 arrayLike
 =
@@ -5166,6 +5168,7 @@ realArray = &lbrack;&rbrack;.slice.call(arrayLike);
 realArray.indexOf(&apos;Value 1&apos;);
 // <i>Wow! this works</i>
 Function.<b>prototype</b>.call to call Array.<b>prototype</b>
+
 You can also use methods on Array-like objects directly, without
 converting them: Version ≥ 5.1
 <b>var</b>
