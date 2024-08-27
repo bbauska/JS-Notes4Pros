@@ -5261,13 +5261,12 @@ array.reduce((obj, current) =&gt; Object.assign(obj, {
 array.reduce((obj, current) =&lpar;{&hellip;obj, &lbrack;current.key&rbrack;: current.value}), {});
 </pre>
 
-Note that the [Rest/Spread
-Properties](https://github.com/sebmarkbage/ecmascript-rest-spread) is
-not in the list of [finished proposals of
-ES2016](https://github.com/tc39/proposals/blob/master/finished-proposals.md).
-It isn&apos;t supported by ES2016. But we can use babel plugin
-[babel-plugin-transform-object-rest-spread](https://babeljs.io/docs/plugins/transform-object-rest-spread/)
-to support it.
+<p>Note that the <a href="https://github.com/sebmarkbage/ecmascript-rest-spread">
+Rest/Spread Properties</a> is not in the list of 
+<a href="https://github.com/tc39/proposals/blob/master/finished-proposals.md">
+finished proposals of ES2016</a>. It isn&apos;t supported by ES2016. But we can 
+use babel plugin <a href="https://babeljs.io/docs/plugins/transform-object-rest-spread/">babel-plugin-transform-object-rest-spread</a>
+to support it.</p>
 
 <p>All of the above examples for Flatten Array result in:</p>
 
@@ -5283,11 +5282,12 @@ to support it.
 
 <p><b>Map Using Reduce</b></p>
 
-As another example of using the <i>initial value</i> parameter, consider
+<p>As another example of using the <i>initial value</i> parameter, consider
 the task of calling a function on an array of items, returning the
 results in a new array. Since arrays are ordinary values and list
 concatenation is an ordinary function, we can use reduce to accumulate
-a list, as the following example demonstrates:
+a list, as the following example demonstrates:</p>
+
 <b>function</b>
 map
 (
@@ -5296,7 +5296,7 @@ list
 fn
 )
 {
-</b>return</b>
+<b>return</b>
 list.
 reduce
 (
@@ -5307,7 +5307,7 @@ newList
 item
 )
 {
-</b>return</b>
+<b>return</b>
 newList.
 concat
 (
@@ -5324,7 +5324,7 @@ item
 )
 ;
 }
-// <i> Usage:</i>
+// <i>Usage:</i>
 map
 (
 &lbrack;
@@ -5351,16 +5351,18 @@ n
 *//*
 →
 <i>&lbrack;1, 4, 9&rbrack;</i>
-Note that this is for illustration (of the initial value parameter)
+
+<p>Note that this is for illustration (of the initial value parameter)
 only, use the native map for working with list transformations (see
-Mapping values for the details).
+Mapping values for the details).</p>
 
 <h5>Version ≥ 5.1</h5>
 
-<b>Find Min or Max Value</b>
+<p><b>Find Min or Max Value</b></p>
 
-We can use the accumulator to keep track of an array element as well.
-Here is an example leveraging this to find the min value:
+<p>We can use the accumulator to keep track of an array element as well.
+Here is an example leveraging this to find the min value:</p>
+
 <b>var</b>
 arr
 =
@@ -5405,7 +5407,7 @@ b
 
 <h5>Version ≥ 6</h5>
 
-<b>Find Unique Values</b>
+<p><b>Find Unique Values</b></p>
 
 Here is an example that uses reduce to return the unique numbers to an
 array. An empty array is passed as the second argument and is
