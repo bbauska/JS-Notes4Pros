@@ -4621,8 +4621,8 @@ variable).</p>
 
 <pre>
 For example:
-**var** animal = &apos;kitty&apos;;
-**var** result = (animal === &apos;kitty&apos;) ? &apos;cute&apos; : &apos;still nice&apos;;
+<b>var</b> animal = &apos;kitty&apos;;
+<b>var</b> result = (animal === &apos;kitty&apos;) ? &apos;cute&apos; : &apos;still nice&apos;;
 </pre>
 
 <p>In this case, result gets the &apos;cute&apos; value, because the value of
@@ -4632,22 +4632,22 @@ animal is &apos;kitty&apos;. If animal had another value, result would get the
 <p>Compare this to what the code would like with conditions.</p>
 
 <pre>
-**var** animal = &apos;kitty&apos;;
-**var** result = &apos;&apos;;
-**if** (animal === &apos;kitty&apos;) {
+<b>var</b> animal = &apos;kitty&apos;;
+<b>var</b> result = &apos;&apos;;
+<b>if</b> (animal === &apos;kitty&apos;) {
   result = &apos;cute&apos;;
-} **else** {
+} <b>else</b> {
   result = &apos;still nice&apos;;
 }
 </pre>
 
-<p>The if or **else** conditions may have several operations. In this
+<p>The if or <b>else</b> conditions may have several operations. In this
 case the operator returns the result of the last expression.</p>
 
 <pre>
-**var** a = 0;
-**var** str = &apos;not a&apos;;
-**var** b = &apos;&apos;;
+<b>var</b> a = 0;
+<b>var</b> str = &apos;not a&apos;;
+<b>var</b> b = &apos;&apos;;
 b = a === 0 ? ( a = 1 , str += &apos; test&apos; ) : (a = 2);
 </pre>
 
@@ -4662,424 +4662,189 @@ similar in the else branch - this doesn&apos;t matter if you aren&apos;t using
 the return value but just shortening (or attempting to shorten) the operation.</p>
 
 <pre>
-**var** a = =1;
+<b>var</b> a = =1;
 a === 1 ? alert (&apos;Hey, it is 1!&apos;) : 0;
 </pre>
 
-**if**   (   a ===        1&rpar;   alert        (   &apos;Hey, it is 1!&apos;
+<p>As you see, if (a ===1) alert('He, it is 1!'); would do the same thing. It would be just a char
+longer, since it doesn&apos;t need an obligatory <b>else</b> condition. If an <b>else</b>
+condition was involved, the ternary method would be much cleaner.</p>
 
-As you see, ); would do the same thing. It would be just a char
-longer, since
+<pre>
+a === 1 ? alert(&apos;Hey, it is 1!&apos;) : alert(&apos;Weird, what could it be?&apos;);
+<b>if</b> (a === 1) alert(&apos;Hey, it is 1!&apos;) <b>else</b> alert(&apos;Weird, what could it be?&apos;);
+</pre>
+<!-- page 75 -->
 
-it doesn&apos;t need an obligatory **else** condition. If an **else**
-condition was involved, the ternary method would be much cleaner.
+<p>Ternaries can be nested to encapsulate additional logic. For example</p>
 
-a === 1 ? alert(&apos;Hey, it is 1!&apos;) : alert(&apos;Weird, what could it
-be?&apos;); **if** (a === 1) alert(&apos;Hey, it is 1!&apos;) **else**
-alert(&apos;Weird, what could it be?&apos;);
+<pre>
+foo ? bar ? 1 : 2 : 3
 
-Ternaries can be nested to encapsulate additional logic. For example
-foo
-?
-bar
-?
-1
-:
-2
-:
-3
-*// To be clear, this is evaluated left to right*
-*// and can be more explicitly expressed as:*
-foo
-?
-(
-bar
-?
-1
-:
-2
-)
-:
-3
+// <i>To be clear, this is evaluated left to right</i>
+// <i>and can be more explicitly expressed as:</i>
 
- **if**               /          **else**
+foo ? (bar ? 1 : 2) : 3
+</pre>
 
-This is the same as the following
+<p>This is the same as the following</p>
 
-**if**
-(
-foo
-)
-{
-**if**
-(
-bar
-)
-{
-1
+<pre>
+  <b>if</b> (foo) {
+    <b>if</b> (bar) {
+      1
+    } <b>else</b> {
+      2
+      }
+  } <b>else</b> {
+    3
 }
-**else**
-{
-2
-}
-}
-**else**
-{
-3
-}
+</pre>
 
-Stylistically this should only be used with short variable names, as
-multi-line ternaries can drastically decrease readability.
+<p>Stylistically this should only be used with short variable names, as
+multi-line ternaries can drastically decrease readability.</p>
 
-The only statements which cannot be used in ternaries are control
+<p>The only statements which cannot be used in ternaries are control
 statements. For example, you cannot use return or break with
-ternaries. The following expression will be invalid.
+ternaries. The following expression will be invalid.</p>
 
-**var**
-animal
-=
-&apos;kitty&apos;
-;
-**for**
-(
-**var**
-i
-=
-0
-;
-i
-&lt;
-5
-;
-++
-i
-)
-{
-(
-animal
-===
-&apos;kitty&apos;
-)
-?
-**break**
-:
-console.
-log
-(
-i
-)
-;
+<pre>
+<b>var</b> animal = &apos;kitty&apos;;
+<b>for</b> (<b>var</b> i = 0; i &lt; 5; ++i) {
+  (animal === &apos;kitty&apos;) ? <b>break</b>:console.log(i);
 }
-For return statements, the following would also be invalid:
-**var**
-animal
-=
-&apos;kitty&apos;
-;
-(
-animal
-===
-&apos;kitty&apos;
-)
-?
-**return**
-&apos;meow&apos;
-:
-**return**
-&apos;woof&apos;
-;
-To do the above properly, you would return the ternary as follows:
-**var**
-animal
-=
-&apos;kitty&apos;
-;
-**return**
-(
-animal
-===
-&apos;kitty&apos;
-)
-?
-&apos;meow&apos;
-:
-&apos;woof&apos;
-;
+</pre>
+
+<p>For return statements, the following would also be invalid:</p>
+
+<pre>
+<b>var</b> animal = &apos;kitty&apos;;
+(animal === &apos;kitty&apos;) ? <b>return</b> &apos;meow&apos; : <b>return</b> &apos;woof&apos;;
+</pre>
+
+<p>To do the above properly, you would return the ternary as follows:</p>
+
+<pre>
+<b>var</b> animal = &apos;kitty&apos;;
+<b>return</b> (animal === &apos;kitty&apos;) ? &apos;meow&apos; : &apos;woof&apos;;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch11-2">Section 11.2: Switch statement</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-Switch statements compare the value of an expression against 1 or more
-values and executes different sections of code based on that
-comparison.
+<p>Switch statements compare the value of an expression against 1 or more
+values and executes different sections of code based on that comparison.</p>
 
-**var**
-value
-=
-1
-;
-**switch**
-(
-value
-)
-{
-**case**
-1
-:
-console.
-log
-(
-&apos;I will always run&apos;
-)
-;
-**break**
-;
-**case**
-2
-:
-console.
-log
-(
-&apos;I will never run&apos;
-)
-;
-**break**
-;
+<pre>
+<b>var</b> value = 1;
+<b>switch</b> (value) {
+  <b>case</b> 1:
+    console.log(&apos;I will always run&apos;);
+    <b>break</b>;
+  <b>case</b> 2:
+    console.log(&apos;I will never run&apos;);
+  <b>break</b>;
 }
-The **break** statement &quot;breaks&quot; out of the switch statement and
+</pre>
+<!-- page 75 -->
+<p>The <b>break</b> statement &quot;breaks&quot; out of the switch statement and
 ensures no more code within the switch statement is executed. This is
 how sections are defined and allows the user to make &quot;fall through&quot;
-cases.
+cases.</p>
 
-**Warning**
-
-:
-lack of a
-**break**
-or
-**return**
-statement for each case means the program will continue to evaluate
+<blockquote>
+<b>Warning</b>: lack of a <b>break</b> or <b>return</b> statement for each case means the program will continue to evaluate
 the next case, even if the case criteria is unmet!
-**switch**
-(
-value
-)
-{
-**case**
-1
-:
-console.
-log
-(
-&apos;I will only run if value === 1&apos;
-)
-;
-*// Here, the code &quot;falls through&quot; and will run the code under case 2*
-**case**
-2
-:
-console.
-log
-(
-&apos;I will run if value === 1 or value === 2&apos;
-)
-;
-**break**
-;
-**case**
-3
-:
-console.
-log
-(
-&apos;I will only run if value === 3&apos;
-)
-;
-**break**
+</blockquote>
 
-;
+<pre>
+<b>switch</b> (value) {
+  <b>case</b> 1:
+    console.log(&apos;I will only run if value === 1&apos;);
+    // <i>Here, the code &quot;falls through&quot; and will run the code under case 2</i>
+  <b>case</b> 2:
+    console.log(&apos;I will run if value === 1 or value === 2&apos;);
+    <b>break</b>;
+  <b>case</b> 3:
+    console.log(&apos;I will only run if value === 3&apos;);
+    <b>break</b>;
 }
-The last case is the **default** case. This one will run if no other
-matches were made.
-**var**
-animal
-=
-&apos;Lion&apos;
-;
-**switch**
-(
-animal
-)
-{
-**case**
-&apos;Dog&apos;
-:
-console.
-log
-(
-&apos;I will not run since animal !== &quot;Dog&quot;&apos;
-)
-;
-**break**
-;
-**case**
-&apos;Cat&apos;
-:
-console.
-log
-(
-&apos;I will not run since animal !== &quot;Cat&quot;&apos;
-)
-;
-**break**
-;
-**default**
-:
-console.
-log
-(
-&apos;I will run since animal does not match any other case&apos;
-)
-;
+</pre>
+
+<p>The last case is the <b>default</b> case. This one will run if no other
+matches were made.</p>
+
+<pre>
+<b>var</b> animal = &apos;Lion&apos;;
+<b>switch</b> (animal) {
+  <b>case</b> &apos;Dog&apos;:
+    console.log(&apos;I will not run since animal !== &quot;Dog&quot;&apos;);
+    <b>break</b>;
+  <b>case</b> &apos;Cat&apos;:
+    console.log(&apos;I will not run since animal !== &quot;Cat&quot;&apos;);
+    <b>break</b>;
+  <b>default</b>:
+    console.log(&apos;I will run since animal does not match any other case&apos;);
 }
-It should be noted that a case expression can be any kind of
+</pre>
+
+<p>It should be noted that a case expression can be any kind of
 expression. This means you can use comparisons, function calls, etc.
-as case values.
+as case values.</p>
 
-**function**
-john
-(
-)
-{
-**return**
-&apos;John&apos;
-;
+<pre>
+<b>function</b> john() {
+  <b>return</b> &apos;John&apos;;
 }
-**function**
-jacob
-(
-)
-{
-**return**
-&apos;Jacob&apos;
-;
+<b>function</b> jacob() {
+  <b>return</b> &apos;Jacob&apos;;
 }
-**switch**
-(
-name
-)
-{
-**case**
-john
-(
-)
-:
-*// Compare name with the return value of john() (name == &quot;John&quot;)*
-console.
-log
-(
-&apos;I will run if name === &quot;John&quot;&apos;
-)
-;
-**break**
-;
-**case**
-&apos;Ja&apos;
-&plus;
-&apos;ne&apos;
-:
-*// Concatenate the strings together then compare (name == &quot;Jane&quot;)*
-console.
-log
-(
-&apos;I will run if name === &quot;Jane&quot;&apos;
-)
-;
-**break**
-;
-**case**
-john
-(
-)
-&plus;
-&apos; &apos;
-&plus;
-jacob
-(
-)
-&plus;
-&apos; Jingleheimer Schmidt&apos;
-:
-console.
-log
-(
-&apos;His name is equal to name too!&apos;
-)
-;
-**break**
-;
+<b>switch</b> (name) {
+  <b>case</b> john():  // <i>Compare name with the return value of john() (name == &quot;John&quot;)</i>
+    console.log(&apos;I will run if name === &quot;John&quot;&apos;);
+    <b>break</b>;
+  <b>case</b> &apos;Ja&apos; &plus; &apos;ne&apos;: // <i>Concatenate the strings together then compare (name == &quot;Jane&quot;)</i>
+    console.log(&apos;I will run if name === &quot;Jane&quot;&apos;);
+    <b>break</b>;
+  <b>case</b> john() &plus; &apos; &apos; &plus; jacob() &plus; &apos; Jingleheimer Schmidt&apos;:
+    console.log(&apos;His name is equal to name too!&apos;);
+    <b>break</b>;
 }
-**Multiple Inclusive Criteria for Cases**
+</pre>
 
-Since cases &quot;fall through&quot; without a **break** or **return**
-statement, you can use this to create multiple inclusive criteria:
-**var**
-x
-=
-&quot;c&quot;
-**switch**
-(
-x
-)
-{
-**case**
-&quot;a&quot;
-:
-**case**
-&quot;b&quot;
-:
-**case**
-&quot;c&quot;
-:
-console.log
-(
-&quot;Either a, b, or c was selected.&quot;
-)
-;
-**break**
-;
-**case**
-&quot;d&quot;
-:
-console.
-log
-(
-&quot;Only d was selected.&quot;
-)
-;
-**break**
-;
-**default**
-:
-console.
-log
-(
-&quot;No case was matched.&quot;
-)
-;
-**break**
-;
-*// precautionary break if case order changes*
+<p><b>Multiple Inclusive Criteria for Cases</b></p>
+
+<p>Since cases &quot;fall through&quot; without a <b>break</b> or <b>return</b>
+statement, you can use this to create multiple inclusive criteria:</p>
+
+<!-- page 77 -->
+
+<pre>
+<b>var</b> x = &quot;c&quot;
+<b>switch</b> (x) {
+  <b>case</b> &quot;a&quot;:
+  <b>case</b> &quot;b&quot;:
+  <b>case</b> &quot;c&quot;:
+    console.log(&quot;Either a, b, or c was selected.&quot;);
+    <b>break</b>;
+  <b>case</b> &quot;d&quot;:
+    console.log(&quot;Only d was selected.&quot;);
+    <b>break</b>;
+  <b>default</b>:
+    console.log(&quot;No case was matched.&quot;);
+    <b>break</b>;  // <i>precautionary break if case order changes</i>
 }
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch11-3">Section 11.3: If / Else If / Else Control</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 In its most simple form, an if condition can be used like this:
-**var**
+<b>var</b>
 i
 =
 0
 ;
-**if**
+<b>if</b>
 (
 i
 &lt;
@@ -5098,16 +4863,16 @@ i
 &lt;
 1
 is evaluated, and if it evaluates to
-**true**
+<b>true</b>
 the block that follows is executed. If it evaluates to
-**false**, the block is skipped.
+<b>false</b>, the block is skipped.
 
-An if condition can be expanded with an **else** block. The condition
-is checked *once* as above, and if it evaluates to **false** a
+An if condition can be expanded with an <b>else</b> block. The condition
+is checked *once* as above, and if it evaluates to <b>false</b> a
 secondary block will be executed (which would be skipped if the
-condition were **true**). An example:
+condition were <b>true</b>). An example:
 
-**if**
+<b>if</b>
 (
 i
 &lt;
@@ -5121,7 +4886,7 @@ log
 )
 ;
 }
-**else**
+<b>else</b>
 {
 console.
 log
@@ -5130,10 +4895,10 @@ log
 )
 ;
 }
-Supposing the **else** block contains nothing but another if block
-(with optionally an **else** block) like this:
+Supposing the <b>else</b> block contains nothing but another if block
+(with optionally an <b>else</b> block) like this:
 
-**if**
+<b>if</b>
 (
 i
 &lt;
@@ -5147,9 +4912,9 @@ log
 )
 ;
 }
-**else**
+<b>else</b>
 {
-**if**
+<b>if</b>
 (
 i
 &lt;
@@ -5163,7 +4928,7 @@ log
 )
 ;
 }
-**else**
+<b>else</b>
 {
 console.
 log
@@ -5176,7 +4941,7 @@ log
 Then there is also a different way to write this which reduces
 nesting:
 
-**if**
+<b>if</b>
 (
 i
 &lt;
@@ -5190,8 +4955,8 @@ log
 )
 ;
 }
-**else**
-**if**
+<b>else</b>
+<b>if</b>
 (
 i
 &lt;
@@ -5205,7 +4970,7 @@ log
 )
 ;
 }
-**else**
+<b>else</b>
 {
 console.
 log
@@ -5216,11 +4981,11 @@ log
 }
 Some important footnotes about the above examples:
 
-If any one condition evaluated to **true**, no other condition in that
+If any one condition evaluated to <b>true</b>, no other condition in that
 chain of blocks will be evaluated, and all corresponding blocks
-(including the **else** block) will not be executed.
+(including the <b>else</b> block) will not be executed.
 
-  **else** **if**
+<b>else</b> <b>if</b>
 
 The number of parts is practically unlimited. The last example above
 only contains one, but you can have as many as you like.
@@ -5229,7 +4994,7 @@ The *condition* inside an if statement can be anything that can be
 coerced to a boolean value, see the topic on boolean logic for more
 details;
 
-if             &minus;      else                         &minus;      **if**
+if &minus; else &minus; <b>if</b>
 
 The ladder exits at the first success. That is, in the example above,
 if the value of i is 0.5 then the first branch is executed. If the
@@ -5240,7 +5005,7 @@ is ignored.
 If you have only one statement, the braces around that statement are
 technically optional, e.g this is fine:
 
-**if**
+<b>if</b>
 (
 i
 &lt;
@@ -5253,7 +5018,7 @@ log
 )
 ;
 And this will work as well:
-**if**
+<b>if</b>
 (
 i
 &lt;
@@ -5268,7 +5033,7 @@ log
 If you want to execute multiple statements inside an if block, then
 the curly braces around them are mandatory. Only using indentation
 isn&apos;t enough. For example, the following code:
-**if**
+<b>if</b>
 (
 i
 &lt;
@@ -5288,7 +5053,7 @@ log
 ;
 *// Warning, see text!*
 is equivalent to:
-**if**
+<b>if</b>
 (
 i
 &lt;
@@ -5311,6 +5076,7 @@ log
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch11-4">Section 11.4: Strategy</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 A strategy pattern can be used in JavaScript in many cases to replace
 a switch statement. It is especially helpful when the number of
 conditions is dynamic or very large. It allows the code for each
@@ -5319,7 +5085,7 @@ condition to be independent and separately testable.
 Strategy object is simple an object with multiple functions,
 representing each separate condition. Example:
 
-**const**
+<b>const</b>
 AnimalSays
 =
 {
@@ -5327,7 +5093,7 @@ dog
 (
 )
 {
-**return**
+<b>return<b>
 &apos;woof&apos;
 ;
 }
@@ -5336,7 +5102,7 @@ cat
 (
 )
 {
-**return**
+<b>return</b>
 &apos;meow&apos;
 ;
 }
@@ -5345,31 +5111,31 @@ lion
 (
 )
 {
-**return**
+<b>return</b>
 &apos;roar&apos;
 ;
 }
 ,
 *// &hellip; other animals*
-**default**
+<b>default</b>
 (
 )
 {
-**return**
+<b>return</b>
 &apos;moo&apos;
 ;
 }
 }
 ;
 The above object can be used as follows:
-**function**
+<b>function</b>
 makeAnimalSpeak
 (
 animal
 )
 {
 *// Match the animal by type*
-**const**
+<b>const</b>
 speak
 =
 AnimalSays
@@ -5378,7 +5144,7 @@ animal
 &rbrack;
 &vert;&vert;
 AnimalSays.
-**default**
+<b>default</b>
 ;
 console.
 log
@@ -5418,10 +5184,11 @@ In the last case, our default function handles any missing animals.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch11-5">Section 11.5: Using &vert;&vert; and && short circuiting</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 The Boolean operators &vert;&vert; and && will &quot;short circuit&quot; and not
 evaluate the second parameter if the first is true or false
 respectively. This can be used to write short conditionals like:
-**var**
+<b>var</b>
 x
 =
 10
@@ -5446,10 +5213,11 @@ alert
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-1">Section 12.1: Converting Array-like Objects to Arrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-**What are Array-like Objects?**
+<!--
+<b>What are Array-like Objects?</b>
 JavaScript has &quot;Array-like Objects&quot;, which are Object
 representations of Arrays with a length property. For example:
-**var**
+<b>var</b>
 realArray
 =
 &lbrack;
@@ -5607,7 +5375,7 @@ value
 }
 )
 ;
-*// Errors*
+// <i>Errors</i>
 **const**
 realArray
 =
@@ -5628,10 +5396,12 @@ value
 }
 )
 ;
-*// Works*
+// <i>Works</i>
   **for**&hellip;of
 2.:
-Version ≥ 6
+
+<h5>Version ≥ 6</h5>
+
 **var**
 realArray
 =
@@ -5658,7 +5428,7 @@ element
 arrayLike
 &rbrack;
   
-Object                           .     values
+Object.values
 4.:
 <h5>Version ≥ 7</h5>
 **var**
@@ -5671,9 +5441,11 @@ values
 arrayLike
 )
 ;
-Object                                 .      keys
+Object.keys
 5.:
-Version ≥ 6
+
+<h5>Version ≥ 6</h5>
+
 .map((key) =&bsol;arrayLike&lbrack;key&rbrack;); **Convert Array-like Objects to
 Arrays in** ≤ **ES5**
 **var**
@@ -5685,7 +5457,8 @@ keys
 (
 arrayLike
 )
-Array            .   **prototype**                  .   slice
+
+Array **prototype**.slice
 Use like so:
 **var**
 arrayLike
@@ -5707,52 +5480,23 @@ length
 **var**
 realArray
 =
-Array
+Array.**prototype**
 .
-**prototype**
-.
-slice
-.
-call
-(
-arrayLike
-)
-;
-realArray
-=
-&lbrack;
-&rbrack;
-.
-slice
-.
-call
-(
-arrayLike
-)
-;
-*// Shorter version*
-realArray.
-indexOf
-(
-&apos;Value 1&apos;
-)
-;
-*// Wow! this works*
-Function     .   **prototype**   .   call   to call   Array    .   **prototype**
+slice.call
+(arrayLike);
+realArray = &lbrack;&rbrack;.slice.call(arrayLike);
+// <i>Shorter version</i>
+realArray.indexOf(&apos;Value 1&apos;);
+// <i>Wow! this works</i>
+Function.**prototype**.call to call Array.**prototype**
 You can also use methods on Array-like objects directly, without
 converting them: Version ≥ 5.1
 **var**
 domList
 =
 document.
-querySelectorAll
-(
-&apos;#myDropdown option&apos;
-)
-;
-domList.
-forEach
-(
+querySelectorAll (&apos;#myDropdown option&apos;);
+domList.forEach (
 
 **function**
 (
@@ -5762,7 +5506,7 @@ forEach
 }
 )
 ;
-*// Error! forEach is not defined.*
+// <i>Error! forEach is not defined.</i>
 Array
 .
 **prototype**
@@ -5780,7 +5524,7 @@ domList
 }
 )
 ;
-*// Wow! this works*
+// <i>Wow! this works</i>
 method.bind(arrayLikeObject
   
 You can also use &lbrack;&rbrack;.) to borrow array methods and glom them on to
@@ -5805,7 +5549,7 @@ length
 arrayLike.
 forEach
 (
-**function**
+<b>function</b>
 (
 )
 {
@@ -5813,7 +5557,7 @@ forEach
 }
 )
 ;
-*// Error! forEach is not defined.*
+// <i>Error! forEach is not defined.</i>
 &lbrack;
 &rbrack;
 .
@@ -5823,19 +5567,19 @@ forEach
 arrayLike
 )
 (
-**function**
+<b>function</b>
 (
 val
 )
 {
-*// Do stuff with val*
-}); *// Wow! this works*
-**Modifying Items During Conversion**
+// <i>Do stuff with val</i>
+}); // <i>Wow! this works</i>
+<b>Modifying Items During Conversion</b>
 Array                               .       from
 In ES6, while using , we can specify a map function that returns a
 mapped value for the new array being created.
 
-Version ≥ 6
+<h5>Version ≥ 6</h5>
 
 Array.from(domList, element =&bsol;element.tagName); *// Creates an array
 of tagName&apos;s*
