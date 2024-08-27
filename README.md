@@ -5664,24 +5664,24 @@ dates.sort(<b>function</b>(a, b) {
 <h3 id="ch12-6">Section 12.6: Iteration</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**A traditional for-loop**
+<b>A traditional for-loop</b>
 
-A traditional **for** loop has three components:
+A traditional <b>for</b> loop has three components:
 
-1.  **The initialization:** executed before the look block is executed
+1.  <b>The initialization:</b> executed before the look block is executed
     the first time
 
-2.  **The condition:** checks a condition every time before the loop
+2.  <b>The condition:</b> checks a condition every time before the loop
     block is executed, and quits the loop if false
 
-3.  **The afterthought:** performed every time after the loop block is
+3.  <b>The afterthought:</b> performed every time after the loop block is
     executed
 
 These three components are separated from each other by a ; symbol.
 Content for each of these three components is optional, which means
-that the following is the most minimal **for** loop possible:
+that the following is the most minimal <b>for</b> loop possible:
 
-**for**
+<b>for</b>
 
 (
 ;;
@@ -5690,37 +5690,37 @@ that the following is the most minimal **for** loop possible:
 *// Do stuff*
 }
 Of course, you will need to include an
-**if**
+<b>if</b>
 (
 condition
 ===
-**true**
+<b>true</b>
 )
 {
-**break**
+<b>break</b>
 ;
 }
 or an
-**if**
+<b>if</b>
 (
 condition
 ===
-**true**
+<b>true</b>
 )
 {
-**return**
+<b>return</b>
 ;
 }
 somewhere inside that
-**for**
+<b>for</b>
 &minus;
 loop to get it to stop running.
 Usually, though, the initialization is used to declare an index, the
 condition is used to compare that index with a minimum or maximum
 value, and the afterthought is used to increment the index:
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 i
 =
 0
@@ -5744,12 +5744,12 @@ i
 )
 ;
 }
-**Using a traditional for loop to loop through an array**
+<b>Using a traditional for loop to loop through an array</b>
 
 The traditional way to loop through an array, is this:
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 i
 =
 0
@@ -5778,9 +5778,9 @@ i
 ;
 }
 Or, if you prefer to loop backwards, you do this:
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 i
 =
 myArray.
@@ -5809,9 +5809,9 @@ i
 }
 There are, however, many variations possible, like for example this
 one:
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 key
 =
 0
@@ -5849,7 +5849,7 @@ value
 ;
 }
 &hellip; or this one &hellip;
-**var**
+<b>var</b>
 i
 =
 0
@@ -5859,7 +5859,7 @@ length
 myArray.
 length
 ;
-**for**
+<b>for</b>
 (
 ;
 i
@@ -5882,14 +5882,14 @@ i
 ;
 }
 &hellip; or this one:
-**var**
+<b>var</b>
 key
 =
 0
 ,
 value
 ;
-**for**
+<b>for</b>
 (
 ;
 value
@@ -5915,12 +5915,12 @@ the specific use case you&apos;re implementing.
 Note that each of these variations is supported by all browsers,
 including very very old ones!
 
-**A while loop**
+<b>A while loop</b>
 
-One alternative to a **for** loop is a while loop. To loop through an
+One alternative to a <b>for</b> loop is a while loop. To loop through an
 array, you could do this:
 
-**var**
+<b>var</b>
 key
 =
 0
@@ -5943,15 +5943,15 @@ value
 )
 ;
 }
-Like traditional **for** loops, while loops are supported by even the
+Like traditional <b>for</b> loops, while loops are supported by even the
 oldest of browsers.
 
-Also, note that every while loop can be rewritten as a **for** loop.
+Also, note that every while loop can be rewritten as a <b>for</b> loop.
 For example, the while loop hereabove behaves the exact same way as
-this **for**-loop:
-**for**
+this <b>for</b>-loop:
+<b>for</b>
 (
-**var**
+<b>var</b>
 key
 =
 0
@@ -5973,12 +5973,12 @@ value
 )
 ;
 }
-**for&hellip;in**
+<b>for&hellip;in</b>
 In JavaScript, you can also do this:
-**for**
+<b>for</b>
 (
 i
-**in**
+<b>in</b>
 myArray
 )
 {
@@ -5993,19 +5993,19 @@ i
 ;
 }
 This should be used with care, however, as it doesn&apos;t behave the same
-as a traditional **for** loop in all cases, and there are potential
-side-effects that need to be considered. See [**Why is using
-&quot;for&hellip;in&quot; with array iteration a bad**
-**idea?**](https://stackoverflow.com/questions/500504/why-is-using-for-in-with-array-iteration-such-a-bad-idea)
+as a traditional <b>for</b> loop in all cases, and there are potential
+side-effects that need to be considered. See [<b>Why is using
+&quot;for&hellip;in&quot; with array iteration a bad</b>
+<b>idea?</b>](https://stackoverflow.com/questions/500504/why-is-using-for-in-with-array-iteration-such-a-bad-idea)
 for more details.
-**for&hellip;of**
+<b>for&hellip;of</b>
 [for](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)   [-](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)   [of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)
 
 In ES 6, the loop is the recommended way of iterating over a the
 values of an array:
 
 <h5>Version ≥ 6</h5>
-**let**
+<b>let</b>
 myArray
 =
 &lbrack;
@@ -6018,13 +6018,13 @@ myArray
 4
 &rbrack;
 ;
-**for**
+<b>for</b>
 (
-**let**
+<b>let</b>
 value of myArray
 )
 {
-**let**
+<b>let</b>
 twoValue
 =
 value
@@ -6040,10 +6040,10 @@ twoValue
 )
 ;
 }
-**for**&hellip;of loop and a **for**&hellip;**in**
+<b>for</b>&hellip;of loop and a <b>for</b>&hellip;<b>in</b>
 The following example shows the difference between a loop:
 <h5>Version ≥ 6</h5>
-**let**
+<b>let</b>
 myArray
 =
 &lbrack;
@@ -6059,11 +6059,11 @@ foo
 =
 &quot;hello&quot;
 ;
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 i
-**in**
+<b>in</b>
 myArray
 )
 {
@@ -6075,9 +6075,9 @@ i
 ;
 *// logs 0, 1, 2, &quot;foo&quot;*
 }
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 i of myArray
 )
 {
@@ -6089,17 +6089,17 @@ i
 ;
 *// logs 3, 5, 7*
 }
-**Array**
-**.**
-**prototyp**
-**e**
-**.**
-**keys**
+<b>Array</b>
+<b>.</b>
+<b>prototyp</b>
+<b>e</b>
+<b>.</b>
+<b>keys</b>
 
-**(**
+<b>(</b>
 
-**)**
-  [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)   [**prototype**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)   [keys](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)
+<b>)</b>
+  [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)   [keys](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)
 
 The
 [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)
@@ -6107,7 +6107,7 @@ method can be used to iterate over indices like this:
 
 <h5>Version ≥ 6</h5>
 
-**let**
+<b>let</b>
 myArray
 =
 &lbrack;
@@ -6120,16 +6120,16 @@ myArray
 4
 &rbrack;
 ;
-**for**
+<b>for</b>
 (
-**let**
+<b>let</b>
 i of myArray.
 keys
 (
 )
 )
 {
-**let**
+<b>let</b>
 twoValue
 =
 myArray
@@ -6148,14 +6148,14 @@ twoValue
 )
 ;
 }
-**Array**
-**.**
-**prototyp**
-**e**
-**.**
-**forEach**
-**(**
-**)**
+<b>Array</b>
+<b>.</b>
+<b>prototyp</b>
+<b>e</b>
+<b>.</b>
+<b>forEach</b>
+<b>(</b>
+<b>)</b>
 [forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)   [(](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)   [&hellip;](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
 The
 [.)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
@@ -6175,7 +6175,7 @@ browsers, as well as Internet Explorer 9 and later.
 .
 forEach
 (
-**function**
+<b>function</b>
 (
 value
 ,
@@ -6184,7 +6184,7 @@ index
 arr
 )
 {
-**var**
+<b>var</b>
 twoValue
 =
 value
@@ -6204,14 +6204,14 @@ twoValue
 ;
 forEach
 
-Comparing with the traditional **for** loop, we can&apos;t jump out of the
-loop in .(). In this case, use the **for** loop, or use partial
+Comparing with the traditional <b>for</b> loop, we can&apos;t jump out of the
+loop in .(). In this case, use the <b>for</b> loop, or use partial
 iteration presented below.
 
 In all versions of JavaScript, it is possible to iterate through the
-indices of an array using a traditional C-style **for** loop.
+indices of an array using a traditional C-style <b>for</b> loop.
 
-**var**
+<b>var</b>
 myArray
 =
 &lbrack;
@@ -6224,9 +6224,9 @@ myArray
 4
 &rbrack;
 ;
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 i
 =
 0
@@ -6240,7 +6240,7 @@ length
 i
 )
 {
-**var**
+<b>var</b>
 twoValue
 =
 myArray
@@ -6262,7 +6262,7 @@ twoValue
 It&apos;s also possible to use
 while
 loop:
-**var**
+<b>var</b>
 myArray
 =
 &lbrack;
@@ -6304,10 +6304,10 @@ sum
 )
 ;
   
-**Array**        **.**   **prototype**                  **.**   **every**
-[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)   [**prototype**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)   [every](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)
+<b>Array</b>        <b>.</b>   <b>prototype</b>                  <b>.</b>   <b>every</b>
+[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)   [every](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)
 Since ES5, if you want to iterate over a portion of an array, you can
-use , which iterates until we return **false**: Version ≥ 5
+use , which iterates until we return <b>false</b>: Version ≥ 5
 
 *// &lbrack;&rbrack;.every() stops once it finds a false result*
 *// thus, this iteration will stop on value 7 (since 7 % 2 !== 0)*
@@ -6323,7 +6323,7 @@ use , which iterates until we return **false**: Version ≥ 5
 .
 every
 (
-**function**
+<b>function</b>
 (
 value
 ,
@@ -6338,7 +6338,7 @@ log
 value
 )
 ;
-**return**
+<b>return</b>
 value
 &percnt;
 2
@@ -6350,7 +6350,7 @@ value
 )
 ;
 Equivalent in any JavaScript version:
-**var**
+<b>var</b>
 arr
 =
 &lbrack;
@@ -6362,9 +6362,9 @@ arr
 ,
 9
 &rbrack;
-*for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 i
 =
 0
@@ -6401,9 +6401,9 @@ i
 )
 ;
 }
-**Array** **.** **prototype** **.** **some**
-[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)   [**prototype**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)   [some](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)
-iterates until we return **true**: Version ≥ 5
+<b>Array</b> <b>.</b> <b>prototype</b> <b>.</b> <b>some</b>
+[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)   [some](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)
+iterates until we return <b>true</b>: Version ≥ 5
 *// &lbrack;&rbrack;.some stops once it finds a false result*
 *// thus, this iteration will stop on value 7 (since 7 % 2 !== 0)*
 &lbrack;
@@ -6418,7 +6418,7 @@ iterates until we return **true**: Version ≥ 5
 .
 some
 (
-**function**
+<b>function</b>
 (
 value
 ,
@@ -6433,7 +6433,7 @@ log
 value
 )
 ;
-**return**
+<b>return</b>
 value
 ===
 7
@@ -6443,7 +6443,7 @@ value
 )
 ;
 Equivalent in any JavaScript version:
-**var**
+<b>var</b>
 arr
 =
 &lbrack;
@@ -6456,9 +6456,9 @@ arr
 9
 &rbrack;
 ;
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 i
 =
 0
@@ -6489,18 +6489,18 @@ i
 )
 ;
 }
-**Libraries**
+<b>Libraries</b>
 Finally, many utility libraries also have their own foreach variation.
 Three of the most popular ones are these:
-[**jQuery.each**](http://api.jquery.com/jquery.each/)
-[**()**](http://api.jquery.com/jquery.each/), in
-[**jQuery**](https://jquery.com/):
+[<b>jQuery.each</b>](http://api.jquery.com/jquery.each/)
+[<b>()</b>](http://api.jquery.com/jquery.each/), in
+[<b>jQuery</b>](https://jquery.com/):
 &dollar;.
 each
 (
 myArray
 ,
-**function**
+<b>function</b>
 (
 key
 ,
@@ -6516,15 +6516,15 @@ value
 }
 )
 ;
-[**&lowbar;.each**](http://underscorejs.org/#each)
-[**()**](http://underscorejs.org/#each), in
-[**Underscore.js**](http://underscorejs.org/):
+[<b>&lowbar;.each</b>](http://underscorejs.org/#each)
+[<b>()</b>](http://underscorejs.org/#each), in
+[<b>Underscore.js</b>](http://underscorejs.org/):
 &lowbar;.
 each
 (
 myArray
 ,
-**function**
+<b>function</b>
 (
 value
 ,
@@ -6542,15 +6542,15 @@ value
 }
 )
 ;
-[**&lowbar;.forEach**](https://lodash.com/docs#forEach)
-[**()**](https://lodash.com/docs#forEach), in
-[**Lodash.js**](https://lodash.com/):
+[<b>&lowbar;.forEach</b>](https://lodash.com/docs#forEach)
+[<b>()</b>](https://lodash.com/docs#forEach), in
+[<b>Lodash.js</b>](https://lodash.com/):
 &lowbar;.
 forEach
 (
 myArray
 ,
-**function**
+<b>function</b>
 (
 value
 ,
@@ -6576,7 +6576,7 @@ JavaScript](https://stackoverflow.com/questions/3010840/loop-through-an-array-in
 <!--
 <h5>Version ≥ 6</h5>
 An array can be destructured when being assigned to a new variable.
-**const**
+<b>const</b>
 triangle
 =
 &lbrack;
@@ -6587,7 +6587,7 @@ triangle
 5
 &rbrack;
 ;
-**const**
+<b>const</b>
 &lbrack;
 length
 ,
@@ -6620,7 +6620,7 @@ hypotneuse
 →
 *true*
 Elements can be skipped
-**const**
+<b>const</b>
 &lbrack;
 ,
 b
@@ -6650,7 +6650,7 @@ c
 →
 *2, 4*
 Rest operator can be used too
-**const**
+<b>const</b>
 &lbrack;
 b
 ,
@@ -6684,7 +6684,7 @@ xs
 →
 *2, 3, &lbrack;4, 5&rbrack;*
 An array can also be destructured if it&apos;s an argument to a function.
-**function**
+<b>function</b>
 area
 (
 &lbrack;
@@ -6694,7 +6694,7 @@ height
 &rbrack;
 )
 {
-**return**
+<b>return</b>
 (
 length
 &ast;
@@ -6704,7 +6704,7 @@ height
 2
 ;
 }
-**const**
+<b>const</b>
 triangle
 =
 &lbrack;
@@ -6730,7 +6730,7 @@ Learn more about destructuring syntax.
 <h3 id="ch12-8">Section 12.8: Removing duplicate elements</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [**prototype**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
 From ES5.1 onwards, you can use the native method to loop through an
 array and leave only entries that pass a given callback function.
 
@@ -6738,8 +6738,8 @@ In the following example, our callback checks if the given value
 occurs in the array. If it does, it is a duplicate and will not be
 copied to the resulting array.
 
-Version ≥ 5.1 **var** uniqueArray = &lbrack;&apos;a&apos;, 1, &apos;a&apos;, 2, &apos;1&apos;,
-1&rbrack;.filter(**function**(value, index, self) { **return**
+Version ≥ 5.1 <b>var</b> uniqueArray = &lbrack;&apos;a&apos;, 1, &apos;a&apos;, 2, &apos;1&apos;,
+1&rbrack;.filter(<b>function</b>(value, index, self) { <b>return</b>
 self.indexOf(value) === index;
 
 }); *// returns &lbrack;&apos;a&apos;, 1, 2, &apos;1&apos;&rbrack;*
@@ -6750,12 +6750,12 @@ object. This object lets you store unique values of any type, whether
 primitive values or object references:
 
 <h5>Version ≥ 6</h5>
-**var**
+<b>var</b>
 uniqueArray
 =
 &lbrack;
 &hellip;
-**new**
+<b>new</b>
 Set
 (
 &lbrack;
@@ -6791,7 +6791,7 @@ stringify
 (
 array2
 )
-**Note:**
+<b>Note:</b>
 that this will only work if both objects are JSON serializable and do
 not contain cyclic references. It
 may throw
@@ -6799,7 +6799,7 @@ TypeError
 :
 Converting circular structure to JSON
 You can use a recursive function to compare arrays.
-**function**
+<b>function</b>
 compareArrays
 (
 array1
@@ -6807,7 +6807,7 @@ array1
 array2
 )
 {
-**var**
+<b>var</b>
 i
 ,
 isA1
@@ -6832,7 +6832,7 @@ isArray
 array2
 )
 ;
-**if**
+<b>if</b>
 (
 isA1
 !==
@@ -6840,12 +6840,12 @@ isA2
 )
 {
 *// is one an array and the other not?*
-**return**
-**false**
+<b>return</b>
+<b>false</b>
 ;
 *// yes then can not be the same*
 }
-**if**
+<b>if</b>
 (
 !
 (
@@ -6856,14 +6856,14 @@ isA2
 )
 {
 *// Are both not arrays*
-**return**
+<b>return</b>
 array1
 ===
 array2
 ;
 *// return strict equality*
 }
-**if**
+<b>if</b>
 (
 array1.
 length
@@ -6873,12 +6873,12 @@ length
 )
 {
 *// if lengths differ then can not be the same*
-**return**
-**false**
+<b>return</b>
+<b>false</b>
 ;
 }
 *// iterate arrays and compare them*
-**for**
+<b>for</b>
 (
 i
 =
@@ -6894,7 +6894,7 @@ i
 1
 )
 {
-**if**
+<b>if</b>
 (
 !
 compareArrays
@@ -6912,18 +6912,18 @@ i
 )
 {
 *// Do items compare recursively*
-**return**
-**false**
+<b>return</b>
+<b>false</b>
 ;
 }
 }
-**return**
-**true**
+<b>return</b>
+<b>true</b>
 ;
 *// must be equal*
 }
-**WARNING:** Using the above function is dangerous and should be
-wrapped in a **try** **catch** if you suspect there is a chance the
+<b>WARNING:</b> Using the above function is dangerous and should be
+wrapped in a <b>try</b> <b>catch</b> if you suspect there is a chance the
 array has cyclic references (a reference to an array that contains a
 reference to itself)
 a
@@ -6955,7 +6955,7 @@ b
 )
 ;
 *// throws RangeError: Maximum call stack size exceeded*
-**Note:**
+<b>Note:</b>
 The function uses the strict equality operator
 ===
 to compare non array items
@@ -6971,7 +6971,7 @@ a
 0
 }
 is
-**false**
+<b>false</b>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-10">Section 12.10: Reversing arrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -7004,7 +7004,7 @@ Results in:
 ,
 1
 &rbrack;
-**Note**
+<b>Note</b>
 :
 Please note that
 .
@@ -7012,7 +7012,7 @@ reverse
 (
 Array
 .
-**prototype**
+<b>prototype</b>
 .
 reverse
 will reverse the array
@@ -7020,7 +7020,7 @@ will reverse the array
 *in place*
 . Instead of
 returning a reversed copy, it will return the same array, reversed.
-**var**
+<b>var</b>
 arr1
 =
 &lbrack;
@@ -7031,7 +7031,7 @@ arr1
 33
 &rbrack;
 ;
-**var**
+<b>var</b>
 arr2
 =
 arr1.
@@ -7054,7 +7054,7 @@ arr1
 ;
 *// &lbrack;33, 22, 11&rbrack;*
 You can also reverse an array &apos;deeply&apos; by:
-**function**
+<b>function</b>
 deepReverse
 (
 arr
@@ -7070,7 +7070,7 @@ forEach
 elem
 =&gt;
 {
-**if**
+<b>if</b>
 (
 Array
 .
@@ -7089,12 +7089,12 @@ elem
 }
 )
 ;
-**return**
+<b>return</b>
 arr
 ;
 }
 Example for deepReverse:
-**var**
+<b>var</b>
 arr
 =
 &lbrack;
@@ -7142,7 +7142,7 @@ with primitive types, like numbers and strings, but not objects.
 To shallow-clone an array (i.e. have a new array instance but with the
 same elements), you can use the following one-liner:
 
-**var**
+<b>var</b>
 clone
 =
 arrayToClone.
@@ -7150,7 +7150,7 @@ slice
 (
 )
 ;
-Array.**prototype**.slice
+Array.<b>prototype</b>.slice
 
 This calls the built-in JavaScript method. If you pass arguments to
 slice, you can get more
@@ -7223,7 +7223,7 @@ clone1
 =
 Array
 .
-**prototype**
+<b>prototype</b>
 .
 slice
 .
@@ -7248,8 +7248,8 @@ arrayToClone
 <h3 id="ch12-12">Section 12.12: Concatenating Arrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**Two Arrays**
-**var**
+<b>Two Arrays</b>
+<b>var</b>
 array1
 =
 &lbrack;
@@ -7258,7 +7258,7 @@ array1
 2
 &rbrack;
 ;
-**var**
+<b>var</b>
 array2
 =
 &lbrack;
@@ -7271,7 +7271,7 @@ array2
 ;
 
 <h5>Version ≥ 3</h5>
-**var**
+<b>var</b>
 array3
 =
 array1.
@@ -7282,7 +7282,7 @@ array2
 ;
 *// returns a new array*
 <h5>Version ≥ 6</h5>
-**var**
+<b>var</b>
 array3
 =
 &lbrack;
@@ -7304,8 +7304,8 @@ Results in a new Array:
 ,
 5
 &rbrack;
-**Multiple Arrays**
-**var**
+<b>Multiple Arrays</b>
+<b>var</b>
 array1
 =
 &lbrack;
@@ -7341,7 +7341,7 @@ array4
 <h5>Version ≥ 3</h5>
 array.concat
 Provide more Array arguments to ()
-**var**
+<b>var</b>
 arrConc
 =
 array1.
@@ -7356,7 +7356,7 @@ array4
 ;
 <h5>Version ≥ 6</h5>
 Provide more arguments to &lbrack;&rbrack;
-**var**
+<b>var</b>
 arrConc
 =
 &lbrack;
@@ -7390,8 +7390,8 @@ Results in a new Array:
 ,
 &quot;h&quot;
 &rbrack;
-**Without Copying the First Array**
-**var**
+<b>Without Copying the First Array</b>
+<b>var</b>
 longArray
 =
 &lbrack;
@@ -7422,7 +7422,7 @@ shortArray
 ;
 <h5>Version ≥ 3</h5>
 
-Function.**prototype**.apply
+Function.<b>prototype</b>.apply
 
 Provide the elements of shortArray as parameters to push using
 longArray.
@@ -7472,7 +7472,7 @@ you can iterate instead:
 shortArray.
 forEach
 (
-**function**
+<b>function</b>
 (
 elem
 )
@@ -7486,8 +7486,8 @@ elem
 }
 )
 ;
-**Array and non-array values**
-**var**
+<b>Array and non-array values</b>
+<b>var</b>
 array
 =
 &lbrack;
@@ -7497,7 +7497,7 @@ array
 &rbrack;
 ;
 <h5>Version ≥ 3</h5>
-**var**
+<b>var</b>
 arrConc
 =
 array.
@@ -7511,7 +7511,7 @@ concat
 
 <h5>Version ≥ 6</h5>
 
-**var**
+<b>var</b>
 arrConc
 =
 &lbrack;
@@ -7533,7 +7533,7 @@ Results in a new Array:
 &quot;d&quot;
 &rbrack;
 You can also mix arrays with non-arrays
-**var**
+<b>var</b>
 arr1
 =
 &lbrack;
@@ -7542,7 +7542,7 @@ arr1
 &quot;b&quot;
 &rbrack;
 ;
-**var**
+<b>var</b>
 arr2
 =
 &lbrack;
@@ -7551,7 +7551,7 @@ arr2
 &quot;f&quot;
 &rbrack;
 ;
-**var**
+<b>var</b>
 arrConc
 =
 arr1.
@@ -7584,7 +7584,7 @@ Results in a new Array:
 <!--
 When we have two separate array and we want to make key value pair
 from that two array, we can use array&apos;s reduce function like below:
-**var**
+<b>var</b>
 columns
 =
 &lbrack;
@@ -7599,7 +7599,7 @@ columns
 &quot;Age&quot;
 &rbrack;
 ;
-**var**
+<b>var</b>
 rows
 =
 &lbrack;
@@ -7614,13 +7614,13 @@ rows
 &quot;25&quot;
 &rbrack;
 ;
-**var**
+<b>var</b>
 result
 =
 rows.
 reduce
 (
-**function**
+<b>function</b>
 (
 result
 ,
@@ -7639,7 +7639,7 @@ index
 =
 field
 ;
-**return**
+<b>return</b>
 result
 ;
 }
@@ -7679,13 +7679,13 @@ Age
 <h3 id="ch12-14">Section 12.14: Array spread / rest</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**Spread operator**
+<b>Spread operator</b>
 
 <h5>Version ≥ 6</h5>
 
 With ES6, you can use spreads to separate individual elements into a
 comma-separated syntax:
-**let**
+<b>let</b>
 arr
 =
 &lbrack;
@@ -7730,11 +7730,11 @@ push
 The spread operator also acts upon strings, separating each individual
 character into a new string element. Therefore, using an array
 function for converting these into integers, the array created above
-is equivalent to the one below: **let** arr = &lbrack;1, 2, 3,
+is equivalent to the one below: <b>let</b> arr = &lbrack;1, 2, 3,
 &hellip;&lbrack;&hellip;&quot;456&quot;&rbrack;.map(x=&gt;parseInt(x))&rbrack;; *// &lbrack;1, 2, 3, 4, 5, 6&rbrack;*
 
 Or, using a single string, this could be simplified to:
-**let**
+<b>let</b>
 arr
 =
 &lbrack;
@@ -7754,7 +7754,7 @@ x
 ;
 *// &lbrack;1, 2, 3, 4, 5, 6&rbrack;*
 If the mapping is not performed then:
-**let**
+<b>let</b>
 arr
 =
 &lbrack;
@@ -7766,7 +7766,7 @@ arr
 The spread operator can also be used to spread arguments into a
 function:
 
-**function**
+<b>function</b>
 myFunction
 (
 a
@@ -7777,7 +7777,7 @@ c
 )
 {
 }
-**let**
+<b>let</b>
 args
 =
 &lbrack;
@@ -7798,12 +7798,12 @@ args
 myFunction.
 apply
 (
-**null**
+<b>null</b>
 ,
 args
 )
 ;
-**Rest operator**
+<b>Rest operator</b>
 
 The rest operator does the opposite of the spread operator by
 coalescing several elements into a single one
@@ -7811,7 +7811,7 @@ coalescing several elements into a single one
 &lbrack;a, b, &hellip;rest&rbrack; = &lbrack;1, 2, 3, 4, 5, 6&rbrack;; *// rest is assigned &lbrack;3, 4,
 5, 6&rbrack;* Collect arguments of a function:
 
-**function**
+<b>function</b>
 myFunction
 (
 a
@@ -7870,7 +7870,7 @@ pass a test provided as a function.
 .
 filter
 (
-**function**
+<b>function</b>
 (
 value
 ,
@@ -7879,7 +7879,7 @@ index
 arr
 )
 {
-**return**
+<b>return</b>
 value
 &gt;
 2
@@ -7912,40 +7912,40 @@ value
 ;
 Results in a new array:
 &lbrack;3, 4, 5&rbrack;
-**Filter falsy values**
-Version ≥ 5.1 **var** filtered = &lbrack; 0, **undefined**, {}, **null**,
-&apos;&apos;, **true**, 5&rbrack;.filter(Boolean);
+<b>Filter falsy values</b>
+Version ≥ 5.1 <b>var</b> filtered = &lbrack; 0, <b>undefined</b>, {}, <b>null</b>,
+&apos;&apos;, <b>true</b>, 5&rbrack;.filter(Boolean);
 Since Boolean is a native JavaScript function/constructor that takes
 &lbrack;one optional parameter&rbrack; and the filter method also takes a function
 and passes it the current array item as parameter, you could read it
 like the following:
 Boolean
 1. (0) returns false
-  Boolean                       (    **undefined**
+  Boolean                       (    <b>undefined</b>
 2. ) returns false
 Boolean
-3. ({}) returns **true** which means push it to the returned array
-Boolean ( **null**
+3. ({}) returns <b>true</b> which means push it to the returned array
+Boolean ( <b>null</b>
 4.  returns false
 Boolean ( &apos;&apos;
 5.  returns false
-Boolean ( **true**
-6.  returns **true** which means push it to the returned array
+Boolean ( <b>true</b>
+6.  returns <b>true</b> which means push it to the returned array
 Boolean
-7. (5) returns **true** which means push it to the returned array
+7. (5) returns <b>true</b> which means push it to the returned array
 so the overall process will result
-**true**
+<b>true</b>
 &lbrack; {},, 5 &rbrack;
-**Another simple example**
+<b>Another simple example</b>
 This example utilises the same concept of passing a function that
 takes one argument Version ≥ 5.1
-**function**
+<b>function</b>
 startsWithLetterA
 (
 str
 )
 {
-**if**
+<b>if</b>
 (
 str
 &&
@@ -7961,14 +7961,14 @@ toLowerCase
 &apos;a&apos;
 )
 {
-**return**
-**true**
+<b>return</b>
+<b>true</b>
 }
-**return**
-**false**
+<b>return</b>
+<b>false</b>
 ;
 }
-**var**
+<b>var</b>
 str
 =
 &apos;Since Boolean is a native javascript function/constructor that takes
@@ -7977,7 +7977,7 @@ optional parameter&rbrack; and the filter method also takes a function and
 passes it the current array
 item as a parameter, you could read it like the following&apos;
 ;
-**var**
+<b>var</b>
 strArray
 =
 str.
@@ -7986,7 +7986,7 @@ split
 &quot; &quot;
 )
 ;
-**var**
+<b>var</b>
 wordsStartsWithA
 =
 strArray.
@@ -8002,7 +8002,7 @@ startsWithLetterA
 <!--
 The recommended way (Since ES5) is to use
 [Array.prototype.find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find):
-**let**
+<b>let</b>
 people
 =
 &lbrack;
@@ -8019,7 +8019,7 @@ name
 }
 &rbrack;
 ;
-**let**
+<b>let</b>
 bob
 =
 people.
@@ -8034,18 +8034,18 @@ name
 )
 ;
 *// Or, more verbose*
-**let**
+<b>let</b>
 bob
 =
 people.
 find
 (
-**function**
+<b>function</b>
 (
 person
 )
 {
-**return**
+<b>return</b>
 person.
 name
 ===
@@ -8054,11 +8054,11 @@ name
 }
 )
 ;
-In any version of JavaScript, a standard **for** loop can be used as
+In any version of JavaScript, a standard <b>for</b> loop can be used as
 well:
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 i
 =
 0
@@ -8072,7 +8072,7 @@ i
 ++
 )
 {
-**if**
+<b>if</b>
 (
 people
 &lbrack;
@@ -8084,12 +8084,12 @@ name
 &quot;bob&quot;
 )
 {
-**break**
+<b>break</b>
 ;
 *// we found bob*
 }
 }
-**FindIndex**
+<b>FindIndex</b>
 The
 [findIndex()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
 method returns an index in the array, if an element in the array
@@ -8128,7 +8128,7 @@ value
 }
 &rbrack;
 ;
-**var**
+<b>var</b>
 index
 =
 array.
@@ -8143,7 +8143,7 @@ value
 )
 ;
 *// 2*
-**var**
+<b>var</b>
 index
 =
 array.
@@ -8174,27 +8174,27 @@ expression, to use for splitting the string.
 split
 slice ( &quot;&quot;
 To split a string into an array call . with an empty string (&quot;&quot;).
-**Important Note:** This only works if all of your characters fit in
+<b>Important Note:</b> This only works if all of your characters fit in
 the Unicode lower range characters, which covers most English and most
 European languages. For languages that require 3 and 4 byte Unicode
 characters, ) will separate them.
-**var** strArray = &quot;StackOverflow&quot;.split(&quot;&quot;);
+<b>var</b> strArray = &quot;StackOverflow&quot;.split(&quot;&quot;);
 *// strArray = &lbrack;&quot;S&quot;, &quot;t&quot;, &quot;a&quot;, &quot;c&quot;, &quot;k&quot;, &quot;O&quot;, &quot;v&quot;,
 &quot;e&quot;, &quot;r&quot;, &quot;f&quot;, &quot;l&quot;, &quot;o&quot;, &quot;w&quot;&rbrack;*
 <h5>Version ≥ 6</h5>
 Using the spread operator (&hellip;), to convert a string into an array.
-**var** strArray = &lbrack;&hellip;&quot;sky is blue&quot;&rbrack;;
+<b>var</b> strArray = &lbrack;&hellip;&quot;sky is blue&quot;&rbrack;;
 *// strArray = &lbrack;&quot;s&quot;, &quot;k&quot;, &quot;y&quot;, &quot; &quot;, &quot;i&quot;, &quot;s&quot;, &quot; &quot;,
 &quot;b&quot;, &quot;l&quot;, &quot;u&quot;, &quot;e&quot;&rbrack;*
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-18">Section 12.18: Removing items from an array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**Shift**
+<b>Shift</b>
 shift
 Use . to remove the first item of an array.
 For example:
-**var**
+<b>var</b>
 array
 =
 &lbrack;
@@ -8220,11 +8220,11 @@ array results in:
 ,
 4
 &rbrack;
-**Pop**
+<b>Pop</b>
 pop
 Further . is used to remove the last item from an array.
 For example:
-**var**
+<b>var</b>
 array
 =
 &lbrack;
@@ -8247,7 +8247,7 @@ array results in:
 2
 &rbrack;
 Both methods return the removed item;
-**Splice**
+<b>Splice</b>
 splice() to remove a series of elements from an array. .splice
 Use .() accepts two parameters, the starting
 splice
@@ -8255,7 +8255,7 @@ index, and an optional number of elements to delete. If the second
 parameter is left out .() will remove all elements from the starting
 index through the end of the array.
 For example:
-**var**
+<b>var</b>
 array
 =
 &lbrack;
@@ -8293,7 +8293,7 @@ the example above, the return would be:
 &rbrack;
 Thus, omitting the second parameter effectively splits the array into
 two arrays, with the original ending before the index specified:
-**var**
+<b>var</b>
 array
 =
 &lbrack;
@@ -8327,11 +8327,11 @@ and returns
 4
 &rbrack;
 .
-**Delete**
+<b>Delete</b>
 
-Use **delete** to remove item from array without changing the length
+Use <b>delete</b> to remove item from array without changing the length
 of array:
-**var**
+<b>var</b>
 array
 =
 &lbrack;
@@ -8354,7 +8354,7 @@ length
 )
 ;
 *// 5*
-**delete**
+<b>delete</b>
 array
 &lbrack;
 2
@@ -8375,7 +8375,7 @@ length
 )
 ;
 *// 5*
-**Array.prototype.length**
+<b>Array.prototype.length</b>
 
 Assigning value to length of array changes the length to given value.
 If new value is less than array length items will be removed from the
@@ -8410,7 +8410,7 @@ array
 <h3 id="ch12-19">Section 12.19: Removing all elements</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**var**
+<b>var</b>
 arr
 =
 &lbrack;
@@ -8423,7 +8423,7 @@ arr
 4
 &rbrack;
 ;
-**Method 1**
+<b>Method 1</b>
 Creates a new array and overwrites the existing array reference with a
 new one.
 arr
@@ -8437,19 +8437,19 @@ The array will remain in memory for the life of the function though
 you may not be aware of this. This is a common source of memory leaks.
 
 Example of a memory leak resulting from bad array clearing:
-**var**
+<b>var</b>
 count
 =
 0
 ;
-**function**
+<b>function</b>
 addListener
 (
 arr
 )
 {
 *// arr is closed over*
-**var**
+<b>var</b>
 b
 =
 document.
@@ -8470,7 +8470,7 @@ addEventListener
 (
 &quot;click&quot;
 ,
-**function**
+<b>function</b>
 (
 e
 )
@@ -8489,7 +8489,7 @@ arr
 &quot;big data&quot;
 &rbrack;
 ;
-**var**
+<b>var</b>
 i
 =
 100
@@ -8530,7 +8530,7 @@ array*
 To prevent the risk of a memory leak use the one of the following 2
 methods to empty the array in the above example&apos;s while loop.
 
-**Method 2**
+<b>Method 2</b>
 
 Setting the length property deletes all array element from the new
 array length to the old array length. It is the most efficient way to
@@ -8541,7 +8541,7 @@ length
 =
 0
 ;
-**Method 3**
+<b>Method 3</b>
 
 Similar to method 2 but returns a new array containing the removed
 items. If you do not need the items this method is inefficient as the
@@ -8550,7 +8550,7 @@ new array is still created only to be immediately dereferenced.
 arr.splice(0); *// should not use if you don&apos;t want the removed
 items*
 
-*// only use this method if you do the following* **var** keepArr =
+*// only use this method if you do the following* <b>var</b> keepArr =
 arr.splice(0); *// empties the array and creates a new array
 containing the* *// removed items*
 
@@ -8563,9 +8563,9 @@ question](http://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-
 Math                 .     min             .     apply
 Math . max . apply
 If your array or array-like object is *numeric*, that is, if all its
-elements are numbers, then you can use or by passing **null** as the
+elements are numbers, then you can use or by passing <b>null</b> as the
 first argument, and your array as the second.
-**var**
+<b>var</b>
 myArray
 =
 &lbrack;
@@ -8584,7 +8584,7 @@ min
 .
 apply
 (
-**null**
+<b>null</b>
 ,
 myArray
 )
@@ -8596,7 +8596,7 @@ max
 .
 apply
 (
-**null**
+<b>null</b>
 ,
 myArray
 )
@@ -8605,7 +8605,7 @@ myArray
 <h5>Version ≥ 6</h5>
 In ES6 you can use the &hellip; operator to spread an array and take the
 minimum or maximum element.
-**var**
+<b>var</b>
 myArray
 =
 &lbrack;
@@ -8622,7 +8622,7 @@ myArray
 20
 &rbrack;
 ;
-**var**
+<b>var</b>
 maxValue
 =
 Math
@@ -8634,7 +8634,7 @@ myArray
 )
 ;
 *// 99*
-**var**
+<b>var</b>
 minValue
 =
 Math
@@ -8647,9 +8647,9 @@ myArray
 ;
 *// 1*
 The following example uses a
-**for**
+<b>for</b>
 loop:
-**var**
+<b>var</b>
 maxValue
 =
 myArray
@@ -8657,9 +8657,9 @@ myArray
 0
 &rbrack;
 ;
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 i
 =
 1
@@ -8673,7 +8673,7 @@ i
 ++
 )
 {
-**var**
+<b>var</b>
 currentValue
 =
 myArray
@@ -8681,7 +8681,7 @@ myArray
 i
 &rbrack;
 ;
-**if**
+<b>if</b>
 (
 currentValue
 &gt;
@@ -8695,9 +8695,9 @@ currentValue
 }
 }
 <h5>Version ≥ 5.1</h5>
-Array . **prototype** . reduce
+Array . <b>prototype</b> . reduce
 The following example uses () to find the minimum or maximum:
-**var**
+<b>var</b>
 myArray
 =
 &lbrack;
@@ -8713,14 +8713,14 @@ myArray
 myArray.
 reduce
 (
-**function**
+<b>function</b>
 (
 a
 ,
 b
 )
 {
-**return**
+<b>return</b>
 Math
 .
 min
@@ -8737,14 +8737,14 @@ b
 myArray.
 reduce
 (
-**function**
+<b>function</b>
 (
 a
 ,
 b
 )
 {
-**return**
+<b>return</b>
 Math
 .
 max
@@ -8803,24 +8803,24 @@ b
 <h5>Version ≥ 5.1</h5>
 To generalize the reduce version we&apos;d have to pass in an *initial
 value* to cover the empty list case:
-**function**
+<b>function</b>
 myMax
 (
 array
 )
 {
-**return**
+<b>return</b>
 array.
 reduce
 (
-**function**
+<b>function</b>
 (
 maxSoFar
 ,
 element
 )
 {
-**return**
+<b>return</b>
 Math
 .
 max
@@ -8833,7 +8833,7 @@ element
 }
 ,
 &minus;
-**Infinity**
+<b>Infinity</b>
 )
 ;
 }
@@ -8860,7 +8860,7 @@ max
 .
 apply
 (
-**null**
+<b>null</b>
 ,
 &lbrack;
 &rbrack;
@@ -8874,7 +8874,7 @@ For the details on how to properly use reduce see Reducing values.
 <!--
 There are many ways to create arrays. The most common are to use array
 literals, or the Array constructor:
-**var**
+<b>var</b>
 arr
 =
 &lbrack;
@@ -8887,10 +8887,10 @@ arr
 4
 &rbrack;
 ;
-**var**
+<b>var</b>
 arr2
 =
-**new**
+<b>new</b>
 Array
 (
 1
@@ -8904,10 +8904,10 @@ Array
 ;
 If the Array constructor is used with no arguments, an empty array is
 created.
-**var**
+<b>var</b>
 arr3
 =
-**new**
+<b>new</b>
 Array
 (
 )
@@ -8916,12 +8916,12 @@ results in:
 &lbrack;
 &rbrack;
 Note that if it&apos;s used with exactly one argument and that argument is
-a number, an array of that length with all **undefined** values will
+a number, an array of that length with all <b>undefined</b> values will
 be created instead:
-**var**
+<b>var</b>
 arr4
 =
-**new**
+<b>new</b>
 Array
 (
 4
@@ -8929,19 +8929,19 @@ Array
 ;
 results in:
 &lbrack;
-**undefined**
+<b>undefined</b>
 ,
-**undefined**
+<b>undefined</b>
 ,
-**undefined**
+<b>undefined</b>
 ,
-**undefined**
+<b>undefined</b>
 &rbrack;
 That does not apply if the single argument is non-numeric:
-**var**
+<b>var</b>
 arr5
 =
-**new**
+<b>new</b>
 Array
 (
 &quot;foo&quot;
@@ -8979,7 +8979,7 @@ number such as ) will create a new array &lbrack;&rbrack;, rather than an Array
 with length 23.
 Array.from
 The other way to create and initialize an array would be
-**var** newArray = Array.from({ length: 5 }, (&lowbar;, index) =&gt;
+<b>var</b> newArray = Array.from({ length: 5 }, (&lowbar;, index) =&gt;
 Math.pow(index, 4));
 will result:
 &lbrack;
@@ -9028,7 +9028,7 @@ converted first.
 splice
 The ()method can be used to remove elements from an array. In this
 example, we remove the first 3 from the array.
-**var**
+<b>var</b>
 values
 =
 &lbrack;
@@ -9045,7 +9045,7 @@ values
 3
 &rbrack;
 ;
-**var**
+<b>var</b>
 i
 =
 values.
@@ -9054,7 +9054,7 @@ indexOf
 3
 )
 ;
-**if**
+<b>if</b>
 (
 i
 &gt;=
@@ -9075,7 +9075,7 @@ splice
 The () method can also be used to add elements to an array. In this
 example, we will insert the numbers 6, 7, and 8 to the end of the
 array.
-**var**
+<b>var</b>
 values
 =
 &lbrack;
@@ -9090,7 +9090,7 @@ values
 3
 &rbrack;
 ;
-**var**
+<b>var</b>
 i
 =
 values.
@@ -9125,7 +9125,7 @@ into the array.
 entries
 The () method returns a new Array Iterator object that contains the
 key/value pairs for each index in the array. Version ≥ 6
-**var**
+<b>var</b>
 letters
 =
 &lbrack;
@@ -9136,9 +9136,9 @@ letters
 &apos;c&apos;
 &rbrack;
 ;
-**for**
+<b>for</b>
 (
-**const**
+<b>const</b>
 &lbrack;
 index
 ,
@@ -9166,9 +9166,9 @@ result
 &quot;b&quot;
 2
 &quot;c&quot;
-**Note**: [This method is not supported in Internet
+<b>Note</b>: [This method is not supported in Internet
 Explorer.](http://kangax.github.io/compat-table/es6/#test-Array.prototype_methods_Array.prototype.entries)
-[*Array*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [*.*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [***prototype***](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [*.*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [*entries*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)
+[*Array*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [*.*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [*<b>prototype</b>*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [*.*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [*entries*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)
 *Portions of this content from by [Mozilla
 Contributors](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries$history)
 licensed under [CC-by-SA
@@ -9183,12 +9183,12 @@ value:
 array.
 filter
 (
-**function**
+<b>function</b>
 (
 val
 )
 {
-**return**
+<b>return</b>
 val
 !==
 to_remove
@@ -9201,7 +9201,7 @@ example if you write a function that get an array as a function and
 manipulates it) you can use this snippet: while(index =
 array.indexOf(3) !== -1) { array.splice(index, 1); } And if you need
 to remove just the first value found, remove the while loop:
-**var**
+<b>var</b>
 index
 =
 array.
@@ -9210,7 +9210,7 @@ indexOf
 to_remove
 )
 ;
-**if**
+<b>if</b>
 (
 index
 !==
@@ -9231,16 +9231,16 @@ index
 <h3 id="ch12-26">Section 12.26: Flattening Arrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**2 Dimensional arrays** Version ≥ 6
+<b>2 Dimensional arrays</b> Version ≥ 6
 In ES6, we can flatten the array by the spread operator
 [&hellip;](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator):
-**function**
+<b>function</b>
 flattenES6
 (
 arr
 )
 {
-**return**
+<b>return</b>
 &lbrack;
 &rbrack;
 .
@@ -9251,7 +9251,7 @@ arr
 )
 ;
 }
-**var**
+<b>var</b>
 arrL1
 =
 &lbrack;
@@ -9279,13 +9279,13 @@ arrL1
 <h5>Version ≥ 5</h5>
 In ES5, we can achieve that by
 [.apply()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply):
-**function**
+<b>function</b>
 flatten
 (
 arr
 )
 {
-**return**
+<b>return</b>
 &lbrack;
 &rbrack;
 .
@@ -9300,7 +9300,7 @@ arr
 )
 ;
 }
-**var**
+<b>var</b>
 arrL1
 =
 &lbrack;
@@ -9325,9 +9325,9 @@ arrL1
 )
 ;
 *// &lbrack;1, 2, 3, 4&rbrack;*
-**Higher Dimension Arrays**
+<b>Higher Dimension Arrays</b>
 Given a deeply nested array like so
-**var**
+<b>var</b>
 deeplyNested
 =
 &lbrack;
@@ -9383,7 +9383,7 @@ Number
 9
 &rbrack;
 Or
-**const**
+<b>const</b>
 flatten
 =
 deeplyNested.
@@ -9428,11 +9428,11 @@ flattened by this method.
 <h3 id="ch12-27">Section 12.27: Append / Prepend items to Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**Unshift**
+<b>Unshift</b>
 .unshift
 Use to add one or more items in the beginning of an array.
 For example:
-**var**
+<b>var</b>
 array
 =
 &lbrack;
@@ -9467,11 +9467,11 @@ array results in:
 ,
 6
 &rbrack;
-**Push**
+<b>Push</b>
 .push
 Further is used to add items after the last currently existent item.
 For example:
-**var**
+<b>var</b>
 array
 =
 &lbrack;
@@ -9511,7 +9511,7 @@ Both methods return the new array length.
 <h3 id="ch12-28">Section 12.28: Object keys and values to array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**var**
+<b>var</b>
 object
 =
 {
@@ -9532,17 +9532,17 @@ key4
 20
 }
 ;
-**var**
+</b>var</b>
 array
 =
 &lbrack;
 &rbrack;
 ;
-**for**
+<b>for</b>
 (
-**var**
+</b>var</b>
 people
-**in**
+<b>in</b>
 object
 )
 {
@@ -9598,19 +9598,19 @@ While . combines them with AND.
 some
 Examples for .
 &lbrack;
-**false**
+<b>false</b>
 ,
-**false**
+<b>false</b>
 &rbrack;
 .
 some
 (
-**function**
+<b>function</b>
 (
 value
 )
 {
-**return**
+<b>return</b>
 value
 ;
 }
@@ -9618,19 +9618,19 @@ value
 ;
 *// Result: false*
 &lbrack;
-**false**
+<b>false</b>
 ,
-**true**
+<b>true</b>
 &rbrack;
 .
 some
 (
-**function**
+<b>function</b>
 (
 value
 )
 {
-**return**
+<b>return</b>
 value
 ;
 }
@@ -9638,19 +9638,19 @@ value
 ;
 *// Result: true*
 &lbrack;
-**true**
+<b>true</b>
 ,
-**true**
+<b>true</b>
 &rbrack;
 .
 some
 (
-**function**
+<b>function</b>
 (
 value
 )
 {
-**return**
+<b>return</b>
 value
 ;
 }
@@ -9661,19 +9661,19 @@ And examples for
 .
 every
 &lbrack;
-**false**
+<b>false</b>
 ,
-**false**
+<b>false</b>
 &rbrack;
 .
 every
 (
-**function**
+<b>function</b>
 (
 value
 )
 {
-**return**
+<b>return</b>
 value
 ;
 }
@@ -9681,19 +9681,19 @@ value
 ;
 *// Result: false*
 &lbrack;
-**false**
+<b>false</b>
 ,
-**true**
+<b>true</b>
 &rbrack;
 .
 every
 (
-**function**
+<b>function</b>
 (
 value
 )
 {
-**return**
+<b>return</b>
 value
 ;
 }
@@ -9701,19 +9701,19 @@ value
 ;
 *// Result: false*
 &lbrack;
-**true**
+<b>true</b>
 ,
-**true**
+<b>true</b>
 &rbrack;
 .
 every
 (
-**function**
+<b>function</b>
 (
 value
 )
 {
-**return**
+<b>return</b>
 value
 ;
 }
