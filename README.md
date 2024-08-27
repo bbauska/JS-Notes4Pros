@@ -4621,8 +4621,9 @@ statements.</p>
 returning a value quickly (i.e. in order to assign it to another
 variable).</p>
 
+<p>For example:<p>
+
 <pre>
-For example:
 <b>var</b> animal = &apos;kitty&apos;;
 <b>var</b> result = (animal === &apos;kitty&apos;) ? &apos;cute&apos; : &apos;still nice&apos;;
 </pre>
@@ -5009,244 +5010,125 @@ x == 10 &vert;&vert; alert(&quot;x is not 10&quot;)
 <h3 id="ch12-1">Section 12.1: Converting Array-like Objects to Arrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-<b>What are Array-like Objects?</b>
-JavaScript has &quot;Array-like Objects&quot;, which are Object
-representations of Arrays with a length property. For example:
-<b>var</b>
-realArray
-=
-&lbrack;
-&apos;a&apos;
-,
-&apos;b&apos;
-,
-&apos;c&apos;
-&rbrack;
-;
-<b>var</b>
-arrayLike
-=
-{
-0
-:
-&apos;a&apos;
-,
-1
-:
-&apos;b&apos;
-,
-2
-:
-&apos;c&apos;
-,
-length
-:
-3
-}
-;
-[document.getElementsByTagName](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName)   or   [document.querySelectorAll](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll)
+<p><b>What are Array-like Objects?</b></p>
 
-Common examples of Array-like Objects are the
-[arguments](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/arguments)
-object in functions and
-[HTMLCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection)
-or
-[NodeList](https://developer.mozilla.org/en-US/docs/Web/API/NodeList)
-objects returned from methods like .
+<p>JavaScript has &quot;Array-like Objects&quot;, which are Object
+representations of Arrays with a length property. For example:</p>
 
-However, one key difference between Arrays and Array-like Objects is
-that Array-like objects inherit from
-  
-[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)   instead of       [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype)
-. This means that Array-like Objects can&apos;t access common
-[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype#Methods)
+<pre>
+<b>var</b> realArray = &lbrack;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&rbrack;;
+<b>var</b> arrayLike = {
+  0: &apos;a&apos;,
+  1: &apos;b&apos;,
+  2: &apos;c&apos;,
+  length: 3
+};
+</pre>
 
-[forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)   [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach),   [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push)   [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push),   [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)   [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),   [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),   [slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
-[prototype
-methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype#Methods)
-like
-[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice):
+<p>Common examples of Array-like Objects are the <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/arguments">
+arguments</a> object in functions and
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection">HTMLCollection</a> or 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeList"> NodeList</a> objects returned from methods like 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName">document.getElementsByTagName</a>
+ or <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll">document.querySelectorAll</a>.</p>
 
-<b>var</b>
-parent
-=
-document.
-getElementById
-(
-&apos;myDropdown&apos;
-)
-;
-<b>var</b>
-desiredOption
-=
-parent.
-querySelector
-(
-&apos;option&lbrack;value=&quot;desired&quot;&rbrack;&apos;
-)
-;
-<b>var</b>
-domList
-=
-parent.
-children
-;
-domList.
-indexOf
-(
-desiredOption
-)
-;
-// <i>Error! indexOf is not defined.</i>
-domList.
-forEach
-(
-<b>function</b>
-(
-)
-{
-arguments.
-map
-(
-*/&ast; Stuff here &ast;/*
-)
-// <i>Error! map is not defined.</i>
-}
-)
-;
-// <i>Error! forEach is not defined.</i>
-<b>function</b>
-func
-(
-)
-{
-console.
-log
-(
-arguments
-)
-;
-}
-func
-(
-1
-,
-2
-,
-3
-)
-;
-*//*
-→
-*&lbrack;1, 2, 3&rbrack;*
-<b>Convert Array-like Objects to Arrays in ES6</b>
-Array                               .       from
-1.:
-<h5>Version ≥ 6</h5>
-<b>const</b>
-arrayLike
-=
-{
-0
-:
-&apos;Value 0&apos;
-,
-1
-:
-&apos;Value 1&apos;
-,
-length
-:
-2
-}
-;
-arrayLike.
-forEach
-(
-value
-=&gt;
-{
-*/&ast; Do something &ast;/*
-}
-)
-;
-// <i>Errors</i>
-<b>const</b>
-realArray
-=
-Array
-.
-from
-(
-arrayLike
-)
-;
-realArray.
-forEach
-(
-value
-=&gt;
-{
-*/&ast; Do something &ast;/*
-}
-)
-;
-// <i>Works</i>
-  <b>for</b>&hellip;of
-2.:
+<p>However, one key difference between Arrays and Array-like Objects is
+that Array-like objects inherit from 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype">
+Object.prototype</a> instead of 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype">
+Array.prototype</a>. This means that Array-like Objects can&apost access common 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype">
+Array prototype methods</a> like 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">foreEach(),
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push">push(), 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map(), 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">filter()</a>, 
+and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice">slice()</a>:</p>
 
+<pre>
+<b>var</b> parent = document.getElementById(&apos;myDropdown&apos;);
+<b>var</b> desiredOption = parent.querySelector(&apos;option&lbrack;value=&quot;desired&quot;&rbrack;&apos;);
+<b>var</b> domList = parent.children;
+
+domList.indexOf(desiredOption);  // <i>Error! indexOf is not defined.</i>
+domList.forEach(<b>function</b>() {
+  arguments.map(/&ast; <i> Stuff here &ast;/)</i>) // <i>Error! map is not defined.</i>
+}); // <i>Error! forEach is not defined.</i>
+
+<b>function</b> func() {
+  console.log(arguments);
+}
+func (1, 2, 3); // <i> → &lbrack;1, 2, 3&rbrack;</i>
+</pre>
+
+<p><b>Convert Array-like Objects to Arrays in ES6</b></p>
+
+<ol>
+  <li>Array.from:</li>
+</ol>
 <h5>Version ≥ 6</h5>
 
-<b>var</b>
-realArray
-=
-&lbrack;
-&rbrack;
-;
-<b>for</b>
-(
-<b>const</b>
-element of arrayLike
-)
-{
-realArray.
-append
-(
-element
-)
-;
-}
-3&period; Spread operator:
+<pre>
+<b>const</b> arrayLike = {
+  0: &apos;Value 0&apos;,
+  1: &apos;Value 1&apos;,
+  length: 2
+};
+arrayLike.forEach(value =&gt; {/&ast; Do something &ast;/}); // <i>Errors</i>
+<b>const</b> realArray = Array.from(arrayLike);
+realArray.forEach(value =&gt; {/&ast; Do something &ast;/}); // <i>Works</i>
+</pre>
+
+<ol start="2">
+  <li><b>for</b>&hellip;of:</li>
+</ol>
 <h5>Version ≥ 6</h5>
-&lbrack;
-&hellip;
-arrayLike
-&rbrack;
-  
-Object.values
-4.:
+
+<pre>
+<b>var</b> realArray = &lbrack;&rbrack;;
+<b>for</b>(<b>const</b> element of arrayLike) {
+  realArray.append(element);
+}
+</pre>
+<!-- page 81 -->
+<!--
+<ol start="3">
+  <li>Spread operator:</li>
+</ol>
+<h5>Version ≥ 6</h5>
+
+<pre>
+&lbrack;&hellip;arrayLike&rbrack;
+</pre>
+
+<ol start="4">
+  <li>Object.values:</li>
+</ol>
 <h5>Version ≥ 7</h5>
-<b>var</b>
-realArray
-=
-Object
-.
-values
-(
-arrayLike
-)
-;
-Object.keys
-5.:
 
+<pre>
+<b>var</b> realArray = Object.values(arrayLike);
+</pre>
+
+<ol start="5">
+  <li>Object.keys:</li>
+</ol>
 <h5>Version ≥ 6</h5>
 
-.map((key) =&bsol;arrayLike&lbrack;key&rbrack;); <b>Convert Array-like Objects to
-Arrays in</b> ≤ <b>ES5</b>
-<b>var</b>
-realArray
-=
-Object
+<pre>
+<b>var</b> realArray = Object
+  .keys(arrayLike)
+  .map((key) =&gt; arrayLike&lbrack;key&rbrack;);
+</pre>
+  
+<p><b>Convert Array-like Objects to Arrays in</b> ≤ <b>ES5</b></p>
+
+<p>Use Array.prototype.slice like so:</p>
+
+<pre>
+<b>var</b> arrayLike = {
+realArray = Object
 .
 keys
 (
