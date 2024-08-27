@@ -5127,141 +5127,1310 @@ realArray.forEach(value =&gt; {/&ast; Do something &ast;/}); // <i>Works</i>
 
 <pre>
 <b>var</b> arrayLike = {
-realArray = Object
-.
-keys
-(
-arrayLike
-)
+  0: &apos;Value 0&apos;,
+  1: &apos;Value 1&apos;,
+  length: 2
+};
+<b>var</b> realArray = Array.<b>prototype</b>.slice.call(arrayLike);
+realArray = &lbrack;&rbrack;.slice.call(arrayLike); // <i>Shorter version</i>
 
-Array <b>prototype</b>.slice
+realArray.indexOf(&apos;Value 1&apos;); // <i>Wow! this works</i>
+</pre>
 
-<p>Use like so:</p>
-
-<pre>
-<b>var</b>
-arrayLike
-=
-{
-0
-:
-&apos;Value 0&apos;
-,
-1
-:
-&apos;Value 1&apos;
-,
-length
-:
-2
-}
-;
-<b>var</b>
-realArray
-=
-Array.<b>prototype</b>
-.
-slice.call
-(arrayLike);
-realArray = &lbrack;&rbrack;.slice.call(arrayLike);
-// <i>Shorter version</i>
-realArray.indexOf(&apos;Value 1&apos;);
-// <i>Wow! this works</i>
-Function.<b>prototype</b>.call to call Array.<b>prototype</b>
-
-You can also use methods on Array-like objects directly, without
-converting them: Version ≥ 5.1
-<b>var</b>
-domList
-=
-document.
-querySelectorAll (&apos;#myDropdown option&apos;);
-domList.forEach (
-
-<b>function</b>
-(
-)
-{
-// <i>Do stuff</i>
-}
-)
-;
-// <i>Error! forEach is not defined.</i>
-Array
-.
-<b>prototype</b>
-forEach
-.
-call
-(
-domList
-,
-<b>function</b>
-(
-)
-{
-// <i>Do stuff</i>
-}
-)
-;
-// <i>Wow! this works</i>
-method.bind(arrayLikeObject
-  
-You can also use &lbrack;&rbrack;.) to borrow array methods and glom them on to
-your object:
+<p>You can also use Function.<b>prototype</b>.call to call Array.<b>prototype</b> methods
+on Array-like objects directly, without converting them:</p>
 
 <h5>Version ≥ 5.1</h5>
 
+<pre>
+<b>var</b> domList = document.querySelectorAll(&apos;#myDropdown option&apos;);
+
+domList.forEach (<b>function</b>() {
+  // <i>Do stuff</i>
+}); // <i>Error! forEach is not defined.</i>
+
+Array.<b>prototype</b>forEach.call(domList, <b>function</b>() {
+  // <i>Do stuff</i>
+}); // <i>Wow! this works</i>
+</pre>
+
+<p>You can also use &lbrack;&rbrack;.method.bind( arrayLikeObject ) to borrow array 
+methods and glom them on to your object:</p>
+
+<h5>Version ≥ 5.1</h5>
+
+<pre>
 <b>var</b> arrayLike = {
-0
-:
-&apos;Value 0&apos;
-,
-1
-:
-&apos;Value 1&apos;
-,
-length
-:
-2
-}
-;
-arrayLike.
-forEach
-(
-<b>function</b>
-(
-)
-{
-// <i>Do stuff</i>
-}
-)
-;
-// <i>Error! forEach is not defined.</i>
-&lbrack;
-&rbrack;
-.
-forEach
-.bind
-(
-arrayLike
-)
-(
-<b>function</b>
-(
-val
-)
-{
+  0: &apos;Value 0&apos;,
+  1: &apos;Value 1&apos;,
+  length: 2
+};
+
+arrayLike.forEach(<b>function</b>() {
+  // <i>Do stuff</i>
+}); // <i>Error! forEach is not defined.</i>
+
+&lbrack;&rbrack;.forEach.bind(arrayLike)(<b>function</b>(val) {
 // <i>Do stuff with val</i>
 }); // <i>Wow! this works</i>
-<b>Modifying Items During Conversion</b>
-Array                               .       from
-In ES6, while using , we can specify a map function that returns a
-mapped value for the new array being created.
+</pre>
+<!-- page 82 -->
+
+<p><b>Modifying Items During Conversion</b></p>
+
+<p>In ES6, while using Array.from, we can specify a map function that returns a
+mapped value for the new array being created.</p>
+
+<h5>Version ≥ 6</h5>
+<pre>
+Array.from(domList, element =&bsol;element.tagName); // <i>Creates an array of tagName&apos;s</i>
+</pre>
+
+<p>See Arrays are Objects for a detailed analysis.</p>
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-2">Section 12.2: Reducing values</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h5>Version ≥ 5.1</h5>
+<p>The reduce() method applies a function against an accumulator and each value
+of the array (from left-to-right) to reduce it to a single value.</p>
+
+<p><b>Array Sum</b></p>
+
+<p>This method can be used to condense all values of an array into a single value:</p>
+
+<pre>
+&lbrack;1, 2, 3, 4&rbrack;.reduce(<b>function</b>(a, b) {
+  <b>return</b> a &plus; b;
+});
+// <i>→ 10</i>
+</pre>
+
+<p>Optional second parameter can be passed to (). Its value will be used
+as the first argument (specified as a) for the first call to the
+callback (specified as function(a, b))).</p>
+
+<pre>
+&lbrack;2&rbrack;.reduce(<b>function</b>(a, b) {
+  console.log(a, b); // <i>prints: 1 2</i>
+  <b>return</b> a &plus; b;
+}, 1);
+// <i>→ 3</i>
+</pre>
+
+<h5>Version ≥ 5.1</h5>
+
+<p><b>Flatten Array of Objects</b></p>
+
+<p>The example below shows how to flatten an array of objects into a single object.</p>
+
+<pre>
+<b>var</b> array = &lbrack;{
+  key: &apos;one&apos;,
+  value: 1
+}, {
+  key: &apos;two&apos;,
+  value: 2
+}, {
+  key: &apos;three&apos;,
+  value: 3
+}&rbrack;;
+</pre>
+
+<h5>Version ≤ 5.1</h5>
+
+<pre>
+array.reduce(<b>function</b>(obj, current) {
+  obj&lbrack;current.key&rbrack; = current.value;
+  <b>return</b> obj;
+}, {});
+</pre>
+<!-- page 83 -->
 
 <h5>Version ≥ 6</h5>
 
-Array.from(domList, element =&bsol;element.tagName); // <i>Creates an array
-of tagName&apos;s</i>
+<pre>
+array.reduce((obj, current) =&gt; Object.assign(obj, {
+  &lbrack;current.key&rbrack;: current.value
+}), {});
+</pre>
 
-See Arrays are Objects for a detailed analysis.
+<h5>Version ≥ 7</h5>
+
+<pre>
+array.reduce((obj, current) =&lpar;{&hellip;obj, &lbrack;current.key&rbrack;: current.value}), {});
+</pre>
+
+Note that the [Rest/Spread
+Properties](https://github.com/sebmarkbage/ecmascript-rest-spread) is
+not in the list of [finished proposals of
+ES2016](https://github.com/tc39/proposals/blob/master/finished-proposals.md).
+It isn&apos;t supported by ES2016. But we can use babel plugin
+[babel-plugin-transform-object-rest-spread](https://babeljs.io/docs/plugins/transform-object-rest-spread/)
+to support it.
+
+<p>All of the above examples for Flatten Array result in:</p>
+
+<pre>
+{
+  one: 1,
+  two: 2,
+  three: 3
+}
+</pre>
+
+<h5>Version ≥ 5.1</h5>
+
+<p><b>Map Using Reduce</b></p>
+
+As another example of using the <i>initial value</i> parameter, consider
+the task of calling a function on an array of items, returning the
+results in a new array. Since arrays are ordinary values and list
+concatenation is an ordinary function, we can use reduce to accumulate
+a list, as the following example demonstrates:
+<b>function</b>
+map
+(
+list
+,
+fn
+)
+{
+</b>return</b>
+list.
+reduce
+(
+<b>function</b>
+(
+newList
+,
+item
+)
+{
+</b>return</b>
+newList.
+concat
+(
+fn
+(
+item
+)
+)
+;
+}
+,
+&lbrack;
+&rbrack;
+)
+;
+}
+// <i> Usage:</i>
+map
+(
+&lbrack;
+1
+,
+2
+,
+3
+&rbrack;
+,
+<b>function</b>
+(
+n
+)
+{
+<b>return</b>
+n
+&ast;
+n
+;
+}
+)
+;
+*//*
+→
+<i>&lbrack;1, 4, 9&rbrack;</i>
+Note that this is for illustration (of the initial value parameter)
+only, use the native map for working with list transformations (see
+Mapping values for the details).
+
+<h5>Version ≥ 5.1</h5>
+
+<b>Find Min or Max Value</b>
+
+We can use the accumulator to keep track of an array element as well.
+Here is an example leveraging this to find the min value:
+<b>var</b>
+arr
+=
+&lbrack;
+4
+,
+2
+,
+1
+,
+&minus;
+10
+,
+9
+&rbrack;
+arr.
+reduce
+(
+<b>function</b>
+(
+a
+,
+b
+)
+{
+<b>return</b>
+a
+&lt;
+b
+?
+a
+:
+b
+}
+,
+<b>Infinity</b>
+)
+;
+*//*
+→
+<i>-10</i>
+
+<h5>Version ≥ 6</h5>
+
+<b>Find Unique Values</b>
+
+Here is an example that uses reduce to return the unique numbers to an
+array. An empty array is passed as the second argument and is
+referenced by prev.
+
+<b>var</b>
+arr
+=
+&lbrack;
+1
+,
+2
+,
+1
+,
+5
+,
+9
+,
+5
+&rbrack;
+;
+arr.
+reduce
+(
+(
+prev
+,
+number
+)
+=&gt;
+{
+<b>if</b>
+(
+prev.
+indexOf
+(
+number
+)
+===
+&minus;
+1
+)
+{
+prev.
+push
+(
+number
+)
+;
+}
+<b>return</b>
+prev
+;
+}
+,
+&lbrack;
+&rbrack;
+)
+;
+*//*
+→
+<i>&lbrack;1, 2, 5, 9&rbrack;</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-3">Section 12.3: Mapping values</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+It is often necessary to generate a new array based on the values of
+an existing array.
+
+For example, to generate an array of string lengths from an array of
+strings:
+
+<h5>Version ≥ 5.1</h5>
+
+&lbrack;
+&apos;one&apos;
+,
+&apos;two&apos;
+,
+&apos;three&apos;
+,
+&apos;four&apos;
+&rbrack;
+.
+map
+(
+<b>function</b>
+(
+value
+,
+index
+,
+arr
+)
+{
+<b>return</b>
+value.
+length
+;
+}
+)
+;
+*//*
+→
+<i>&lbrack;3, 3, 5, 4&rbrack;</i>
+
+<h5>Version ≥ 6</h5>
+
+&lbrack;
+&apos;one&apos;
+,
+&apos;two&apos;
+,
+&apos;three&apos;
+,
+&apos;four&apos;
+&rbrack;
+.
+map
+(
+value
+=&gt;
+value.
+length
+)
+;
+*//*
+→
+<i>&lbrack;3, 3, 5, 4&rbrack;</i>
+map
+In this example, an anonymous function is provided to the () function,
+and the map function will call it for every element in the array,
+providing the following parameters, in this order:
+The element itself 
+The index of the element (0, 1&hellip;)
+The entire array
+map
+Additionally, () provides an <i>optional</i> second parameter in order to
+set the value of <b>this</b> in the mapping function. Depending on the
+execution environment, the default value of <b>this</b> might vary:
+
+In a browser, the default value of <b>this</b> is always window:
+&lbrack;
+&apos;one&apos;
+,
+&apos;two&apos;
+&rbrack;
+.
+map
+(
+<b>function</b>
+(
+value
+,
+index
+,
+arr
+)
+{
+console.
+log
+(
+<b>this</b>
+)
+;
+// <i> window (the default value in browsers)</i>
+<b>return</b>
+value.
+length
+;
+}
+)
+;
+You can change it to any custom object like this:
+&lbrack;
+&apos;one&apos;
+,
+&apos;two&apos;
+&rbrack;
+.
+map
+(
+<b>function</b>
+(
+value
+,
+index
+,
+arr
+)
+{
+console.
+log
+(
+<b>this</b>
+)
+;
+// <i> Object { documentation: &quot;randomObject&quot; }</i>
+<b>return</b>
+value.
+length
+;
+}
+,
+{
+documentation
+:
+&apos;randomObject&apos;
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-4">Section 12.4: Filtering Object Arrays</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+filter
+The () method accepts a test function, and returns a new array
+containing only the elements of the original array that pass the test
+provided.
+
+// <i> Suppose we want to get all odd number in an array:</i>
+
+<b>var</b>
+numbers
+=
+&lbrack;
+5
+,
+32
+,
+43
+,
+4
+&rbrack;
+;
+
+<h5>Version ≥ 5.1</h5>
+
+<b>var</b>
+odd
+=
+numbers.
+filter
+(
+<b>function</b>
+(
+n
+)
+{
+<b>return</b>
+n
+&percnt;
+2
+!==
+0
+;
+}
+)
+;
+<h5>Version ≥</h5>
+
+6 <b>let</b> odd = numbers.filter(n =&bsol;n % 2 !== 0); // <i> can be
+shortened to (n =&bsol;n % 2)</i>
+  43
+odd would contain the following array: &lbrack;5,&rbrack;.
+It also works on an array of objects:
+<b>var</b>
+people
+=
+&lbrack;
+{
+id
+:
+1
+,
+name
+:
+&quot;John&quot;
+,
+age
+:
+28
+}
+,
+{
+id
+:
+2
+,
+name
+:
+&quot;Jane&quot;
+,
+age
+:
+31
+}
+,
+{
+id
+:
+3
+,
+name
+:
+&quot;Peter&quot;
+,
+age
+:
+55
+}
+&rbrack;
+;
+
+<h5>Version ≥ 5.1</h5>
+
+<b>var</b>
+young
+=
+people.
+filter
+(
+<b>function</b>
+(
+person
+)
+{
+<b>return</b>
+person.
+age
+&lt;
+35
+;
+}
+)
+;
+
+<h5>Version ≥ 6</h5>
+
+<b>let</b>
+young
+=
+people.
+filter
+(
+person
+=&gt;
+person.
+age
+&lt;
+35
+)
+;
+young
+would contain the following array:
+&lbrack;
+{
+id
+:
+1
+,
+name
+:
+&quot;John&quot;
+,
+age
+:
+28
+}
+,
+{
+id
+:
+2
+,
+name
+:
+&quot;Jane&quot;
+,
+age
+:
+31
+}
+&rbrack;
+You can search in the whole array for a value like this:
+<b>var</b>
+young
+=
+people.
+filter
+(
+(
+obj
+)
+=&gt;
+{
+<b>var</b>
+flag
+=
+<b>false</b>
+;
+Object
+.
+values
+(
+obj
+)
+.
+forEach
+(
+(
+val
+)
+=&gt;
+{
+<b>if</b>
+(
+String
+(
+val
+)
+.
+indexOf
+(
+&quot;J&quot;
+)
+&gt;
+&minus;
+1
+)
+{
+flag
+=
+<b>true</b>
+;
+<b>return</b>
+;
+}
+}
+)
+;
+<b>if</b>
+(
+flag
+)
+<b>return</b>
+obj
+;
+}
+)
+;
+This returns:
+&lbrack;
+{
+id
+:
+1
+,
+name
+:
+&quot;John&quot;
+,
+age
+:
+28
+}
+,
+{
+id
+:
+2
+,
+name
+:
+&quot;Jane&quot;
+,
+age
+:
+31
+}
+&rbrack;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-5">Section 12.5: Sorting Arrays</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The sort.() method sorts the elements of an array. The default method will
+sort the array according to string
+sort
+
+Unicode code points. To sort an array numerically the .() method needs
+to have a compareFunction passed to it.
+sort () method is impure. .sort
+
+<b>Note:</b> The .() will sort the array <b>in-place</b>, i.e., instead of
+creating a sorted copy of the original array, it will re-order the
+original array and return it.
+
+<b>Default Sort</b>
+
+Sorts the array in UNICODE order.
+
+&lbrack;&apos;s&apos;, &apos;t&apos;, &apos;a&apos;, 34, &apos;K&apos;, &apos;o&apos;, &apos;v&apos;, &apos;E&apos;, &apos;r&apos;, &apos;2&apos;,
+&apos;4&apos;, &apos;o&apos;, &apos;W&apos;, -1, &apos;-4&apos;&rbrack;.sort();
+
+Results in:
+&lbrack;
+&minus;
+1
+,
+&apos;-4&apos;
+,
+&apos;2&apos;
+,
+34
+,
+&apos;4&apos;
+,
+&apos;E&apos;
+,
+&apos;K&apos;
+,
+&apos;W&apos;
+,
+&apos;a&apos;
+,
+&apos;l&apos;
+,
+&apos;o&apos;
+,
+&apos;o&apos;
+,
+&apos;r&apos;
+,
+&apos;s&apos;
+,
+&apos;t&apos;
+,
+&apos;v&apos;
+&rbrack;
+
+<b>Note:</b>
+
+The uppercase characters have moved above lowercase. The array is not in
+alphabetical order, and
+
+numbers are not in numerical order.
+<b>Alphabetical Sort</b>
+&lbrack;
+&apos;s&apos;
+,
+&apos;t&apos;
+,
+&apos;a&apos;
+,
+&apos;c&apos;
+,
+&apos;K&apos;
+,
+&apos;o&apos;
+,
+&apos;v&apos;
+,
+&apos;E&apos;
+,
+&apos;r&apos;
+,
+&apos;f&apos;
+,
+&apos;l&apos;
+,
+&apos;W&apos;
+,
+&apos;2&apos;
+,
+&apos;1&apos;
+&rbrack;
+.
+sort
+(
+(
+a
+,
+b
+)
+=&gt;
+{
+<b>return</b>
+a&period;
+localeCompare
+(
+b
+)
+;
+}
+)
+;
+Results in:
+&lbrack;
+&apos;1&apos;
+,
+&apos;2&apos;
+,
+&apos;a&apos;
+,
+&apos;c&apos;
+,
+&apos;E&apos;
+,
+&apos;f&apos;
+,
+&apos;K&apos;
+,
+&apos;l&apos;
+,
+&apos;o&apos;
+,
+&apos;r&apos;
+,
+&apos;s&apos;
+,
+&apos;t&apos;
+,
+&apos;v&apos;
+,
+&apos;W&apos;
+&rbrack;
+<b>Note:</b>
+
+The above sort will throw an error if any array items are not a string.
+If you know that the array
+
+may contain items that are not strings use the safe version below.
+&lbrack;
+&apos;s&apos;
+,
+&apos;t&apos;
+,
+&apos;a&apos;
+,
+&apos;c&apos;
+,
+&apos;K&apos;
+,
+1
+,
+&apos;v&apos;
+,
+&apos;E&apos;
+,
+&apos;r&apos;
+,
+&apos;f&apos;
+,
+&apos;l&apos;
+,
+&apos;o&apos;
+,
+&apos;W&apos;
+&rbrack;
+.
+sort
+(
+(
+a
+,
+b
+)
+=&gt;
+{
+<b>return</b>
+a&period;
+toString
+(
+)
+.
+localeCompare
+(
+b
+)
+;
+}
+)
+;
+<b>String sorting by length (longest first)</b>
+&lbrack;
+&quot;zebras&quot;
+,
+&quot;dogs&quot;
+,
+&quot;elephants&quot;
+,
+&quot;penguins&quot;
+&rbrack;
+.
+sort
+(
+<b>function</b>
+(
+a
+,
+b
+)
+{
+<b>return</b>
+b&period;
+length
+&minus;
+a&period;
+length
+;
+}
+)
+;
+Results in
+&lbrack;
+&quot;elephants&quot;
+,
+&quot;penguins&quot;
+,
+&quot;zebras&quot;
+,
+&quot;dogs&quot;
+&rbrack;
+;
+<b>String sorting by length (shortest first)</b>
+&lbrack;
+&quot;zebras&quot;
+,
+&quot;dogs&quot;
+,
+&quot;elephants&quot;
+,
+&quot;penguins&quot;
+&rbrack;
+.
+sort
+(
+<b>function</b>
+(
+a
+,
+b
+)
+{
+<b>return</b>
+a&period;
+length
+&minus;
+b&period;
+length
+;
+}
+)
+;
+Results in
+&lbrack;
+&quot;dogs&quot;
+,
+&quot;zebras&quot;
+,
+&quot;penguins&quot;
+,
+&quot;elephants&quot;
+&rbrack;
+;
+<b>Numerical Sort (ascending)</b>
+&lbrack;
+100
+,
+1000
+,
+10
+,
+10000
+,
+1
+&rbrack;
+.
+sort
+(
+<b>function</b>
+(
+a
+,
+b
+)
+{
+<b>return</b>
+a
+&minus;
+b
+;
+}
+)
+;
+Results in:
+&lbrack;
+1
+,
+10
+,
+100
+,
+1000
+,
+10000
+&rbrack;
+<b>Numerical Sort (descending)</b>
+&lbrack;
+100
+,
+1000
+,
+10
+,
+10000
+,
+1
+&rbrack;
+.
+sort
+(
+<b>function</b>
+(
+a
+,
+b
+)
+{
+<b>return</b>
+b
+&minus;
+a
+;
+}
+)
+;
+Results in:
+&lbrack;
+10000
+,
+1000
+,
+100
+,
+10
+,
+1
+&rbrack;
+<b>Sorting array by even and odd numbers</b>
+&lbrack;
+10
+,
+21
+,
+4
+,
+15
+,
+7
+,
+99
+,
+0
+,
+12
+&rbrack;
+.
+sort
+(
+<b>function</b>
+(
+a
+,
+b
+)
+{
+<b>return</b>
+(
+a
+&
+1
+)
+&minus;
+(
+b
+&
+1
+)
+&vert;&vert;
+a
+&minus;
+b
+;
+}
+)
+;
+Results in:
+&lbrack;
+0
+,
+4
+,
+10
+,
+12
+,
+7
+,
+15
+,
+21
+,
+99
+&rbrack;
+<b>Date Sort (descending)</b>
+<b>var</b>
+dates
+=
+&lbrack;
+<b>new</b>
+Date
+(
+2007
+,
+11
+,
+10
+)
+,
+<b>new</b>
+Date
+(
+2014
+,
+2
+,
+21
+)
+,
+<b>new</b>
+Date
+(
+2009
+,
+6
+,
+11
+)
+,
+<b>new</b>
+Date
+(
+2016
+,
+7
+,
+23
+)
+&rbrack;
+;
+dates.
+sort
+(
+<b>function</b>
+(
+a
+,
+b
+)
+{
+<b>if</b>
+(
+a
+&gt;
+b
+)
+<b>return</b>
+&minus;
+1
+;
+<b>if</b>
+(
+a
+&lt;
+b
+)
+<b>return</b>
+1
+;
+<b>return</b>
+0
+;
+}
+)
+;
+// <i> the date objects can also sort by its difference</i>
+// <i> the same way that numbers array is sorting</i>
+dates.
+sort
+(
+<b>function</b>
+(
+a
+,
+b
+)
+{
+<b>return</b>
+b
+&minus;
+a
+;
+}
+)
+;
+Results in:
+&lbrack;
+&quot;Tue Aug 23 2016 00:00:00 GMT-0600 (MDT)&quot;
+,
+&quot;Fri Mar 21 2014 00:00:00 GMT-0600 (MDT)&quot;
+,
+&quot;Sat Jul 11 2009 00:00:00 GMT-0600 (MDT)&quot;
+,
+&quot;Mon Dec 10 2007 00:00:00 GMT-0700 (MST)&quot;
+&rbrack;
+
