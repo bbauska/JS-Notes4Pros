@@ -5664,692 +5664,247 @@ dates.sort(<b>function</b>(a, b) {
 <h3 id="ch12-6">Section 12.6: Iteration</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-<b>A traditional for-loop</b>
+<p><b>A traditional for-loop</b></p>
 
-A traditional <b>for</b> loop has three components:
+<p>A traditional <b>for</b> loop has three components:</p>
+<ol>
+  <li><b>The initialization:</b> executed before the look block is executed
+    the first time</li>
+  <li><b>The condition:</b> checks a condition every time before the loop
+    block is executed, and quits the loop if false</li>
+  <li><b>The afterthought:</b> performed every time after the loop block is
+    executed</li>
+</ol>
 
-1.  <b>The initialization:</b> executed before the look block is executed
-    the first time
-
-2.  <b>The condition:</b> checks a condition every time before the loop
-    block is executed, and quits the loop if false
-
-3.  <b>The afterthought:</b> performed every time after the loop block is
-    executed
-
-These three components are separated from each other by a ; symbol.
+<p>These three components are separated from each other by a ; symbol.
 Content for each of these three components is optional, which means
-that the following is the most minimal <b>for</b> loop possible:
+that the following is the most minimal <b>for</b> loop possible:</p>
 
-<b>for</b>
+<pre>
+<b>for</b>(;;) {
+  // <i>Do stuff</i>
+}
+</pre>
 
-(
-;;
-)
-{
-*// Do stuff*
-}
-Of course, you will need to include an
-<b>if</b>
-(
-condition
-===
-<b>true</b>
-)
-{
-<b>break</b>
-;
-}
-or an
-<b>if</b>
-(
-condition
-===
-<b>true</b>
-)
-{
-<b>return</b>
-;
-}
-somewhere inside that
-<b>for</b>
-&minus;
-loop to get it to stop running.
-Usually, though, the initialization is used to declare an index, the
-condition is used to compare that index with a minimum or maximum
-value, and the afterthought is used to increment the index:
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-,
-length
-=
-10
-;
-i
-&lt;
-length
-;
-i
-++
-)
-{
-console.
-log
-(
-i
-)
-;
-}
-<b>Using a traditional for loop to loop through an array</b>
+<p>Of course, you will need to include an <b>if</b>(condition === <b>true</b>) { <b>break</b>; }
+or an <b>if</b>(condition === <b>true</b>) { <b>return</b>; } somewhere inside that 
+<b>for</b>&minus;loop to get it to stop running.</p>
 
-The traditional way to loop through an array, is this:
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-,
-length
-=
-myArray.
-length
-;
-i
-&lt;
-length
-;
-i
-++
-)
-{
-console.
-log
-(
-myArray
-&lbrack;
-i
-&rbrack;
-)
-;
-}
-Or, if you prefer to loop backwards, you do this:
-<b>for</b>
-(
-<b>var</b>
-i
-=
-myArray.
-length
-&minus;
-1
-;
-i
-&gt;
-&minus;
-1
-;
-i
-&bsol;
-)
-{
-console.
-log
-(
-myArray
-&lbrack;
-i
-&rbrack;
-)
-;
-}
-There are, however, many variations possible, like for example this
-one:
-<b>for</b>
-(
-<b>var</b>
-key
-=
-0
-,
-value
-=
-myArray
-&lbrack;
-key
-&rbrack;
-,
-length
-=
-myArray.
-length
-;
-key
-&lt;
-length
-;
-value
-=
-myArray
-&lbrack;
-++
-key
-&rbrack;
-)
-{
-console.
-log
-(
-value
-)
-;
-}
-&hellip; or this one &hellip;
-<b>var</b>
-i
-=
-0
-,
-length
-=
-myArray.
-length
-;
-<b>for</b>
-(
-;
-i
-&lt;
-length
-;
-)
-{
-console.
-log
-(
-myArray
-&lbrack;
-i
-&rbrack;
-)
-;
-i
-++
-;
-}
-&hellip; or this one:
-<b>var</b>
-key
-=
-0
-,
-value
-;
-<b>for</b>
-(
-;
-value
-=
-myArray
-&lbrack;
-key
-++
-&rbrack;
-;
-)
-{
-console.
-log
-(
-value
-)
-;
-}
-Whichever works best is largely a matter of both personal taste and
-the specific use case you&apos;re implementing.
+<p>Usually, though, the initialization is used to declare an index, the condition 
+is used to compare that index with a minimum or maximum value, and the afterthought 
+is used to increment the index:</p>
 
-Note that each of these variations is supported by all browsers,
-including very very old ones!
-
-<b>A while loop</b>
-
-One alternative to a <b>for</b> loop is a while loop. To loop through an
-array, you could do this:
-
-<b>var</b>
-key
-=
-0
-;
-while
-(
-value
-=
-myArray
-&lbrack;
-key
-++
-&rbrack;
-)
-{
-console.
-log
-(
-value
-)
-;
+<pre>
+<b>for</b> (<b>var</b> i = 0, length = 10; i &lt; length; i++) {
+  console.log(i);
 }
-Like traditional <b>for</b> loops, while loops are supported by even the
-oldest of browsers.
+</pre>
 
-Also, note that every while loop can be rewritten as a <b>for</b> loop.
+<p><b>Using a traditional for loop to loop through an array</b></p>
+
+<p>The traditional way to loop through an array, is this:</p>
+<!-- page 89 -->
+<pre>
+<b>for</b> (<b>var</b> i = 0, length = myArray.length; i &lt; length; i++) {
+  console.log(myArray&lbrack;i&rbrack;);
+}
+</pre>
+
+<p>Or, if you prefer to loop backwards, you do this:</p>
+
+<pre>
+<b>for</b> (<b>var</b> i = myArray.length &minus; 1; i &gt; &minus;1; i&bsol;) {
+  console.log(myArray&lbrack;i&rbrack;);
+}
+</pre>
+
+<p>There are, however, many variations possible, like for example this one:</p>
+
+<pre>
+<b>for</b> (<b>var</b> key = 0, value = myArray&lbrack;key&rbrack;, length = myArray.length; key &lt; length; value =
+myArray&lbrack;++key&rbrack;) {
+  console.log(value);
+}
+</pre>
+
+<p>&hellip; or this one &hellip;</p>
+
+<pre>
+<b>var</b> i = 0, length = myArray.length;
+<b>for</b> (; i &lt; length;) {
+  console.log(myArray&lbrack;i&rbrack;);
+  i++;
+}
+</pre>
+
+<p>&hellip; or this one:</p>
+
+<pre>
+<b>var</b> key = 0, value;
+<b>for</b> (; value = myArray&lbrack;key++&rbrack;;) {
+  console.log(value);
+}
+</pre>
+
+<p>Whichever works best is largely a matter of both personal taste and
+the specific use case you&apos;re implementing.</p>
+
+<p>Note that each of these variations is supported by all browsers, including very very 
+old ones!</p>
+
+<p><b>A while loop</b></p>
+
+<p>One alternative to a <b>for</b> loop is a while loop. To loop through an
+array, you could do this:</p>
+
+<pre>
+<b>var</b> key = 0;
+while(value = myArray&lbrack;key++&rbrack;) {
+  console.log(value);
+}
+</pre>
+
+<p>Like traditional <b>for</b> loops, while loops are supported by even the oldest of 
+browsers.</p>
+
+<p>Also, note that every while loop can be rewritten as a <b>for</b> loop.
 For example, the while loop hereabove behaves the exact same way as
-this <b>for</b>-loop:
-<b>for</b>
-(
-<b>var</b>
-key
-=
-0
-;
-value
-=
-myArray
-&lbrack;
-key
-++
-&rbrack;
-;
-)
-{
-console.
-log
-(
-value
-)
-;
+this <b>for</b>-loop:</p>
+
+<pre>
+<b>for</b> (<b>var</b> key = 0; value = myArray&lbrack;key++&rbrack;;) {
+  console.log(value);
 }
-<b>for&hellip;in</b>
-In JavaScript, you can also do this:
-<b>for</b>
-(
-i
-<b>in</b>
-myArray
-)
-{
-console.
-log
-(
-myArray
-&lbrack;
-i
-&rbrack;
-)
-;
+</pre>
+
+<p><b>for&hellip;in</b></p>
+
+<p>In JavaScript, you can also do this:</p>
+<!-- page 90 -->
+
+<pre>
+<b>for</b> (i <b>in</b> myArray) {
+  console.log(myArray&lbrack;i&rbrack;);
 }
-This should be used with care, however, as it doesn&apos;t behave the same
+</pre>
+
+<p>This should be used with care, however, as it doesn&apos;t behave the same
 as a traditional <b>for</b> loop in all cases, and there are potential
-side-effects that need to be considered. See [<b>Why is using
-&quot;for&hellip;in&quot; with array iteration a bad</b>
-<b>idea?</b>](https://stackoverflow.com/questions/500504/why-is-using-for-in-with-array-iteration-such-a-bad-idea)
-for more details.
-<b>for&hellip;of</b>
-[for](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)   [-](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)   [of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)
+side-effects that need to be considered. See 
+<a href="https://stackoverflow.com/questions/500504/why-is-using-for-in-with-array-iteration-such-a-bad-idea">
+<b>Why is using &quot;for&hellip;in&quot; with array iteration a bad</b> <b>idea?</b></a>
+for more details.</p>
 
-In ES 6, the loop is the recommended way of iterating over a the
-values of an array:
+<p><b>for&hellip;of</b></p>
 
-<h5>Version ≥ 6</h5>
-<b>let</b>
-myArray
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-;
-<b>for</b>
-(
-<b>let</b>
-value of myArray
-)
-{
-<b>let</b>
-twoValue
-=
-value
-&ast;
-2
-;
-console.
-log
-(
-&quot;2 &ast; value is: %d&quot;
-,
-twoValue
-)
-;
-}
-<b>for</b>&hellip;of loop and a <b>for</b>&hellip;<b>in</b>
-The following example shows the difference between a loop:
-<h5>Version ≥ 6</h5>
-<b>let</b>
-myArray
-=
-&lbrack;
-3
-,
-5
-,
-7
-&rbrack;
-;
-myArray.
-foo
-=
-&quot;hello&quot;
-;
-<b>for</b>
-(
-<b>var</b>
-i
-<b>in</b>
-myArray
-)
-{
-console.
-log
-(
-i
-)
-;
-*// logs 0, 1, 2, &quot;foo&quot;*
-}
-<b>for</b>
-(
-<b>var</b>
-i of myArray
-)
-{
-console.
-log
-(
-i
-)
-;
-*// logs 3, 5, 7*
-}
-<b>Array</b>
-<b>.</b>
-<b>prototyp</b>
-<b>e</b>
-<b>.</b>
-<b>keys</b>
-
-<b>(</b>
-
-<b>)</b>
-  [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)   [keys](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)
-
-The
-[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys)
-method can be used to iterate over indices like this:
+<p>In ES 6, the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of">
+for-of</a> loop is the recommended way of iterating over a the values of an array:</p>
 
 <h5>Version ≥ 6</h5>
 
-<b>let</b>
-myArray
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-;
-<b>for</b>
-(
-<b>let</b>
-i of myArray.
-keys
-(
-)
-)
-{
-<b>let</b>
-twoValue
-=
-myArray
-&lbrack;
-i
-&rbrack;
-&ast;
-2
-;
-console.
-log
-(
-&quot;2 &ast; value is: %d&quot;
-,
-twoValue
-)
-;
+<pre>
+<b>let</b> myArray = &lbrack;1, 2, 3, 4&rbrack;;
+<b>for</b> (<b>let</b> value of myArray) {
+  <b>let</b> twoValue = value &ast; 2;
+  console.log(&quot;2 &ast; value is: %d&quot;, twoValue);
 }
-<b>Array</b>
-<b>.</b>
-<b>prototyp</b>
-<b>e</b>
-<b>.</b>
-<b>forEach</b>
-<b>(</b>
-<b>)</b>
-[forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)   [(](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)   [&hellip;](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
-The
-[.)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
-method is an option in ES 5 and above. It is supported by all modern
-browsers, as well as Internet Explorer 9 and later.
+</pre>
+
+<p>The following example shows the difference between a for...of loop and a for...in loop:</p>
+
+<h5>Version ≥ 6</h5>
+
+<pre>
+<b>let</b> myArray = &lbrack;3, 5, 7&rbrack;;
+myArray.foo = &quot;hello&quot;;
+
+<b>for</b> (<b>var</b> i <b>in</b> myArray) {
+  console.log(i);  // <i>logs 0, 1, 2, &quot;foo&quot;</i>
+}
+
+<b>for</b> (<b>var</b> i of myArray) {
+  console.log(i);  // <i>logs 3, 5, 7</i>
+}
+</pre>
+
+<p><b>Array.prototype.keys</b></p>
+
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys">
+Array.prototype.keys()</a> method can be used to iterate over indices like this:</p>
+
+<h5>Version ≥ 6</h5>
+
+<pre>
+<b>let</b> myArray = &lbrack;1, 2, 3, 4&rbrack;;
+<b>for</b> (<b>let</b> i of myArray.keys()) {
+  <b>let</b> twoValue = myArray&lbrack;i&rbrack; &ast; 2;
+  console.log(&quot;2 &ast; value is: %d&quot;, twoValue);
+}
+</pre>
+
+<p><b>Array.prototype.forEach()</b></p>
+
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">
+forEach(...)</a> method is an option in ES 5 and above. It is supported by all modern browsers, as well as 
+Internet Explorer 9 and later.</p>
+
+method is an option in ES 5 and above. 
 
 <h5>Version ≥ 5</h5>
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-.
-forEach
-(
-<b>function</b>
-(
-value
-,
-index
-,
-arr
-)
-{
-<b>var</b>
-twoValue
-=
-value
-&ast;
-2
-;
-console.
-log
-(
-&quot;2 &ast; value is: %d&quot;
-,
-twoValue
-)
-;
-}
-)
-;
-forEach
 
-Comparing with the traditional <b>for</b> loop, we can&apos;t jump out of the
+<pre>
+&lbrack;1, 2, 3, 4&rbrack;.forEach(<b>function</b>(value, index, arr) {
+  <b>var</b> twoValue = value &ast; 2;
+  console.log(&quot;2 &ast; value is: %d&quot;, twoValue);
+});
+</pre>
+
+<p>Comparing with the traditional <b>for</b> loop, we can&apos;t jump out of the
 loop in .(). In this case, use the <b>for</b> loop, or use partial
-iteration presented below.
+iteration presented below.</p>
 
-In all versions of JavaScript, it is possible to iterate through the
-indices of an array using a traditional C-style <b>for</b> loop.
+<!-- page 91 -->
+<p>In all versions of JavaScript, it is possible to iterate through the
+indices of an array using a traditional C-style <b>for</b> loop.</p>
 
-<b>var</b>
-myArray
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-myArray.
-length
-;
-++
-i
-)
-{
-<b>var</b>
-twoValue
-=
-myArray
-&lbrack;
-i
-&rbrack;
-&ast;
-2
-;
-console.
-log
-(
-&quot;2 &ast; value is: %d&quot;
-,
-twoValue
-)
-;
+<pre>
+<b>var</b> myArray = &lbrack;1, 2, 3, 4&rbrack;;
+<b>for</b>(<b>var</b> i = 0; i &lt; myArray.length; ++i) {
+  <b>var</b> twoValue = myArray&lbrack;i&rbrack; &ast; 2;
+  console.log(&quot;2 &ast; value is: %d&quot;, twoValue);
 }
-It&apos;s also possible to use
-while
-loop:
-<b>var</b>
-myArray
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-,
-i
-=
-0
-,
-sum
-=
-0
-;
-while
-(
-i
-++
-&lt;
-myArray.
-length
-)
-{
-sum
-+=
-i
-;
-}
-console.
-log
-(
-sum
-)
-;
-  
-<b>Array</b>        <b>.</b>   <b>prototype</b>                  <b>.</b>   <b>every</b>
-[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)   [every](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)
-Since ES5, if you want to iterate over a portion of an array, you can
-use , which iterates until we return <b>false</b>: Version ≥ 5
+</pre>
 
-*// &lbrack;&rbrack;.every() stops once it finds a false result*
-*// thus, this iteration will stop on value 7 (since 7 % 2 !== 0)*
-&lbrack;
-2
-,
-4
-,
-7
-,
-9
-&rbrack;
-.
-every
-(
-<b>function</b>
-(
-value
-,
-index
-,
-arr
-)
-{
-console.
-log
-(
-value
-)
-;
-<b>return</b>
-value
-&percnt;
-2
-===
-0
-;
-*// iterate until an odd number is found*
+<p>It&apos;s also possible to use while loop:</p>
+
+<pre>
+<b>var</b> myArray = &lbrack;1, 2, 3, 4&rbrack;, 
+  i = 0, sum = 0;
+while(i++ &lt; myArray.length) {
+  sum += i;
 }
-)
-;
-Equivalent in any JavaScript version:
+console.log(sum);
+</pre>
+
+<p><b>Array.prototype.every</b></p>
+
+<p>Since ES5, if you want to iterate over a portion of an array, you can
+use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every">
+Array.prototype.every</a>, which iterates until we return <b>false</b>:</p>
+
+<h5>Version ≥ 5</h5>
+
+<pre>
+// <i>&lbrack;&rbrack;.every() stops once it finds a false result</i>
+// <i>thus, this iteration will stop on value 7 (since 7 % 2 !== 0)</i>
+&lbrack;2, 4, 7, 9&rbrack;.every(<b>function</b>(value, index, arr) {
+  console.log(value);
+  <b>return</b> value &percnt; 2 === 0;  // <i>iterate until an odd number is found</i>
+});
+</pre>
+
+<p>Equivalent in any JavaScript version:</p>
+
 <b>var</b>
 arr
 =
