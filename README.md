@@ -4658,7 +4658,7 @@ test&apos;. The operation which involved str was the last, so b receives
 the result of the operation, which is the value contained in str, i.e.
 &apos;not a test&apos;.</p>
 
-<p>Ternary operators *always* expect else conditions, otherwise you&apos;ll
+<p>Ternary operators <i>always</i> expect else conditions, otherwise you&apos;ll
 get a syntax error. As a workaround you could return a zero something
 similar in the else branch - this doesn&apos;t matter if you aren&apos;t using
 the return value but just shortening (or attempting to shorten) the operation.</p>
@@ -4839,377 +4839,170 @@ statement, you can use this to create multiple inclusive criteria:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch11-3">Section 11.3: If / Else If / Else Control</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-In its most simple form, an if condition can be used like this:
-<b>var</b>
-i
-=
-0
-;
-<b>if</b>
-(
-i
-&lt;
-1
-)
-{
-console.
-log
-(
-&quot;i is smaller than 1&quot;
-)
-;
+<p>In its most simple form, an if condition can be used like this:</p>
+
+<pre>
+<b>var</b> i = 0;
+
+<b>if</b> (i &lt; 1) {
+  console.log(&quot;i is smaller than 1&quot;);
 }
-The condition
-i
-&lt;
-1
-is evaluated, and if it evaluates to
-<b>true</b>
-the block that follows is executed. If it evaluates to
-<b>false</b>, the block is skipped.
+</pre>
 
-An if condition can be expanded with an <b>else</b> block. The condition
-is checked *once* as above, and if it evaluates to <b>false</b> a
-secondary block will be executed (which would be skipped if the
-condition were <b>true</b>). An example:
+<p>The condition i &lt; 1 is evaluated, and if it evaluates to <b>true</b> the block that 
+follows is executed. If it evaluates to <b>false</b>, the block is skipped.</p>
 
-<b>if</b>
-(
-i
-&lt;
-1
-)
-{
-console.
-log
-(
-&quot;i is smaller than 1&quot;
-)
-;
+<p>An if condition can be expanded with an <b>else</b> block. The condition is checked 
+<i>once</i> as above, and if it evaluates to <b>false</b> a secondary block will be 
+executed (which would be skipped if the condition were <b>true</b>). An example:</p>
+
+<pre>
+<b>if</b> (i &lt; 1) {
+  console.log(&quot;i is smaller than 1&quot;);
+} <b>else</b> {
+  console.log(&quot;i was not smaller than 1&quot;);
 }
-<b>else</b>
-{
-console.
-log
-(
-&quot;i was not smaller than 1&quot;
-)
-;
+</pre>
+
+<p>Supposing the <b>else</b> block contains nothing but another if block
+(with optionally an <b>else</b> block) like this:</p>
+
+<pre>
+<b>if</b> (i &lt; 1) {
+  console.log(&quot;i is smaller than 1&quot;);
+} <b>else</b> {
+  <b>if</b> (i &lt; 2) {
+    console.log(&quot;i is smaller than 2&quot;);
+  } <b>else</b> {
+    console.log(&quot;none of the previous conditions was true&quot;);
+  }
 }
-Supposing the <b>else</b> block contains nothing but another if block
-(with optionally an <b>else</b> block) like this:
+</pre>
 
-<b>if</b>
-(
-i
-&lt;
-1
-)
-{
-console.
-log
-(
-&quot;i is smaller than 1&quot;
-)
-;
+<p>Then there is also a different way to write this which reduces nesting:</p>
+
+<pre>
+<b>if</b> (i &lt; 1) {
+  console.log(&quot;i is smaller than 1&quot;);
+} <b>else</b> <b>if</b> (i &lt; 2) {
+  console.log(&quot;i is smaller than 2&quot;);
+} <b>else</b> {
+  console.log(&quot;none of the previous conditions was true&quot;);
 }
-<b>else</b>
-{
-<b>if</b>
-(
-i
-&lt;
-2
-)
-{
-console.
-log
-(
-&quot;i is smaller than 2&quot;
-)
-;
-}
-<b>else</b>
-{
-console.
-log
-(
-&quot;none of the previous conditions was true&quot;
-)
-;
-}
-}
-Then there is also a different way to write this which reduces
-nesting:
+</pre>
+<!-- page 78 -->
 
-<b>if</b>
-(
-i
-&lt;
-1
-)
-{
-console.
-log
-(
-&quot;i is smaller than 1&quot;
-)
-;
-}
-<b>else</b>
-<b>if</b>
-(
-i
-&lt;
-2
-)
-{
-console.
-log
-(
-&quot;i is smaller than 2&quot;
-)
-;
-}
-<b>else</b>
-{
-console.
-log
-(
-&quot;none of the previous conditions was true&quot;
-)
-;
-}
-Some important footnotes about the above examples:
+<p>Some important footnotes about the above examples:</p>
 
-If any one condition evaluated to <b>true</b>, no other condition in that
-chain of blocks will be evaluated, and all corresponding blocks
-(including the <b>else</b> block) will not be executed.
+<ul>
+  <li>If any one condition evaluated to <b>true</b>, no other condition in that chain of 
+    blocks will be evaluated, and all corresponding blocks (including the <b>else</b> 
+	block) will not be executed.</li>
+  <li>The number of <b>else</b> <b>if</b> parts is practically unlimited. The last example 
+    above only contains one, but you can have as many as you like.</li>
+  <li>The <i>condition</i> inside an if statement can be anything that can be coerced to 
+    a boolean value, see the topic on boolean logic for more details;</li>
+  <li>The if-else-<b>if</b> ladder exits at the first success. That is, in the example above,
+    if the value of i is 0.5 then the first branch is executed. If the conditions overlap, 
+	the first criteria occurring in the flow of execution is executed. The other condition, 
+	which could also be true is ignored.</li>
+  <li>If you have only one statement, the braces around that statement are technically 
+    optional, e.g this is fine:<br/><br/>
+<pre>
+<b>if</b> (i &lt; 1) console.log(&quot;i is smaller than 1&quot;);
+</pre>
 
-<b>else</b> <b>if</b>
+<p>And this will work as well:</p>
 
-The number of parts is practically unlimited. The last example above
-only contains one, but you can have as many as you like.
+<pre>
+<b>if</b> (i &lt;1)
+  console.log(&quot;i is smaller than 1&quot;);
+</pre>
 
-The *condition* inside an if statement can be anything that can be
-coerced to a boolean value, see the topic on boolean logic for more
-details;
-
-if &minus; else &minus; <b>if</b>
-
-The ladder exits at the first success. That is, in the example above,
-if the value of i is 0.5 then the first branch is executed. If the
-conditions overlap, the first criteria occurring in the flow of
-execution is executed. The other condition, which could also be true
-is ignored.
-
-If you have only one statement, the braces around that statement are
-technically optional, e.g this is fine:
-
-<b>if</b>
-(
-i
-&lt;
-1
-)
-console.
-log
-(
-&quot;i is smaller than 1&quot;
-)
-;
-And this will work as well:
-<b>if</b>
-(
-i
-&lt;
-1
-)
-console.
-log
-(
-&quot;i is smaller than 1&quot;
-)
-;
-If you want to execute multiple statements inside an if block, then
+<p>If you want to execute multiple statements inside an if block, then
 the curly braces around them are mandatory. Only using indentation
-isn&apos;t enough. For example, the following code:
-<b>if</b>
-(
-i
-&lt;
-1
-)
-console.
-log
-(
-&quot;i is smaller than 1&quot;
-)
-;
-console.
-log
-(
-&quot;this will run REGARDLESS of the condition&quot;
-)
-;
-*// Warning, see text!*
-is equivalent to:
-<b>if</b>
-(
-i
-&lt;
-1
-)
-{
-console.
-log
-(
-&quot;i is smaller than 1&quot;
-)
-;
+isn&apos;t enough. For example, the following code:</p>
+
+<pre>
+<b>if</b> (i &lt;1)
+  console.log(&quot;i is smaller than 1&quot;);
+  console.log(&quot;this will run REGARDLESS of the condition&quot;); // <i>Warning, see text!</i>
+</pre>
+
+<p>is equivalent to:</p>
+
+<pre>
+<b>if</b> (i &lt;1) {
+  console.log(&quot;i is smaller than 1&quot;);
 }
-console.
-log
-(
-&quot;this will run REGARDLESS of the condition&quot;
-)
-;
+console.log(&quot;this will run REGARDLESS of the condition&quot;);
+</pre>
+  </li>
+</ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch11-4">Section 11.4: Strategy</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-A strategy pattern can be used in JavaScript in many cases to replace
+<p>A strategy pattern can be used in JavaScript in many cases to replace
 a switch statement. It is especially helpful when the number of
 conditions is dynamic or very large. It allows the code for each
-condition to be independent and separately testable.
+condition to be independent and separately testable.</p>
 
-Strategy object is simple an object with multiple functions,
-representing each separate condition. Example:
+<p>Strategy object is simple an object with multiple functions, representing each separate 
+condition. Example:</p>
 
-<b>const</b>
-AnimalSays
-=
-{
-dog
-(
-)
-{
-<b>return<b>
-&apos;woof&apos;
-;
+<pre>
+<b>const</b> AnimalSays = {
+  dog() {
+    <b>return<b> &apos;woof&apos;;
+  },
+  
+  cat() {
+    <b>return</b> &apos;meow&apos;;
+  },
+  lion() {
+    <b>return</b> &apos;roar&apos;;
+  },
+  // <i>&hellip; other animals</i>
+  <b>default</b> () {
+    <b>return</b> &apos;moo&apos;;
+  }
+};
+</pre>
+<!-- page 79 -->
+
+<p>The above object can be used as follows:</p>
+
+<pre>
+<b>function</b> makeAnimalSpeak(animal) {
+  // <i>Match the animal by type</i>
+  <b>const</b> speak = AnimalSays&lbrack;animal&rbrack; &vert;&vert; AnimalSays.<b>default</b>;
+  console.log(animal &plus; &apos; says &apos; &plus; speak());
 }
-,
-cat
-(
-)
-{
-<b>return</b>
-&apos;meow&apos;
-;
-}
-,
-lion
-(
-)
-{
-<b>return</b>
-&apos;roar&apos;
-;
-}
-,
-*// &hellip; other animals*
-<b>default</b>
-(
-)
-{
-<b>return</b>
-&apos;moo&apos;
-;
-}
-}
-;
-The above object can be used as follows:
-<b>function</b>
-makeAnimalSpeak
-(
-animal
-)
-{
-*// Match the animal by type*
-<b>const</b>
-speak
-=
-AnimalSays
-&lbrack;
-animal
-&rbrack;
-&vert;&vert;
-AnimalSays.
-<b>default</b>
-;
-console.
-log
-(
-animal
-&plus;
-&apos; says &apos;
-&plus;
-speak
-(
-)
-)
-;
-}
-Results:
-makeAnimalSpeak
-(
-&apos;dog&apos;
-)
-*// =&amp;apos;dog says woof&apos;*
-makeAnimalSpeak
-(
-&apos;cat&apos;
-)
-*// =&amp;apos;cat says meow&apos;*
-makeAnimalSpeak
-(
-&apos;lion&apos;
-)
-*// =&amp;apos;lion says roar&apos;*
-makeAnimalSpeak
-(
-&apos;snake&apos;
-)
-*// =&amp;apos;snake says moo&apos;*
-In the last case, our default function handles any missing animals.
+</pre>
+
+<p>Results:</p>
+
+<pre>
+makeAnimalSpeak(&apos;dog&apos;) // <i>=&gt;&apos;dog says woof&apos;</i>
+makeAnimalSpeak(&apos;cat&apos;) // <i>=&gt;&apos;cat says meow&apos;</i>
+makeAnimalSpeak(&apos;lion&apos;) // <i>=&gt;&apos;lion says roar&apos;</i>
+makeAnimalSpeak(&apos;snake&apos;) // <i>=&gt;&apos;snake says moo&apos;</i>
+</pre>
+
+<p>In the last case, our default function handles any missing animals.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch11-5">Section 11.5: Using &vert;&vert; and && short circuiting</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The Boolean operators &vert;&vert; and && will &quot;short circuit&quot; and not
+<p>The Boolean operators &vert;&vert; and && will &quot;short circuit&quot; and not
 evaluate the second parameter if the first is true or false
-respectively. This can be used to write short conditionals like:
-<b>var</b>
-x
-=
-10
-x
-==
-10
-&&
-alert
-(
-&quot;x is 10&quot;
-)
-x
-==
-10
-&vert;&vert;
-alert
-(
-&quot;x is not 10&quot;
-)
+respectively. This can be used to write short conditionals like:</p>
+
+<pre>
+<b>var</b> x = 10
+
+x == 10 && alert(&quot;x is 10&quot;)
+x == 10 &vert;&vert; alert(&quot;x is not 10&quot;)
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch12">Chapter 12: Arrays</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -5230,7 +5023,7 @@ realArray
 &apos;c&apos;
 &rbrack;
 ;
-**var**
+<b>var</b>
 arrayLike
 =
 {
@@ -5264,7 +5057,7 @@ objects returned from methods like .
 However, one key difference between Arrays and Array-like Objects is
 that Array-like objects inherit from
   
-[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)   [**prototype**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)   instead of       [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype)   [**prototype**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype)
+[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)   instead of       [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype)
 . This means that Array-like Objects can&apos;t access common
 [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype#Methods)
 
@@ -5274,7 +5067,7 @@ methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Globa
 like
 [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice):
 
-**var**
+<b>var</b>
 parent
 =
 document.
@@ -5283,7 +5076,7 @@ getElementById
 &apos;myDropdown&apos;
 )
 ;
-**var**
+<b>var</b>
 desiredOption
 =
 parent.
@@ -5292,7 +5085,7 @@ querySelector
 &apos;option&lbrack;value=&quot;desired&quot;&rbrack;&apos;
 )
 ;
-**var**
+<b>var</b>
 domList
 =
 parent.
@@ -5304,11 +5097,11 @@ indexOf
 desiredOption
 )
 ;
-*// Error! indexOf is not defined.*
+// <i>Error! indexOf is not defined.</i>
 domList.
 forEach
 (
-**function**
+<b>function</b>
 (
 )
 {
@@ -5317,12 +5110,12 @@ map
 (
 */&ast; Stuff here &ast;/*
 )
-*// Error! map is not defined.*
+// <i>Error! map is not defined.</i>
 }
 )
 ;
-*// Error! forEach is not defined.*
-**function**
+// <i>Error! forEach is not defined.</i>
+<b>function</b>
 func
 (
 )
@@ -5346,11 +5139,11 @@ func
 *//*
 →
 *&lbrack;1, 2, 3&rbrack;*
-**Convert Array-like Objects to Arrays in ES6**
+<b>Convert Array-like Objects to Arrays in ES6</b>
 Array                               .       from
 1.:
 <h5>Version ≥ 6</h5>
-**const**
+<b>const</b>
 arrayLike
 =
 {
@@ -5378,7 +5171,7 @@ value
 )
 ;
 // <i>Errors</i>
-**const**
+<b>const</b>
 realArray
 =
 Array
@@ -5399,20 +5192,20 @@ value
 )
 ;
 // <i>Works</i>
-  **for**&hellip;of
+  <b>for</b>&hellip;of
 2.:
 
 <h5>Version ≥ 6</h5>
 
-**var**
+<b>var</b>
 realArray
 =
 &lbrack;
 &rbrack;
 ;
-**for**
+<b>for</b>
 (
-**const**
+<b>const</b>
 element of arrayLike
 )
 {
@@ -5433,7 +5226,7 @@ arrayLike
 Object.values
 4.:
 <h5>Version ≥ 7</h5>
-**var**
+<b>var</b>
 realArray
 =
 Object
@@ -5448,9 +5241,9 @@ Object.keys
 
 <h5>Version ≥ 6</h5>
 
-.map((key) =&bsol;arrayLike&lbrack;key&rbrack;); **Convert Array-like Objects to
-Arrays in** ≤ **ES5**
-**var**
+.map((key) =&bsol;arrayLike&lbrack;key&rbrack;); <b>Convert Array-like Objects to
+Arrays in</b> ≤ <b>ES5</b>
+<b>var</b>
 realArray
 =
 Object
@@ -5460,9 +5253,9 @@ keys
 arrayLike
 )
 
-Array **prototype**.slice
+Array <b>prototype</b>.slice
 Use like so:
-**var**
+<b>var</b>
 arrayLike
 =
 {
@@ -5479,10 +5272,10 @@ length
 2
 }
 ;
-**var**
+<b>var</b>
 realArray
 =
-Array.**prototype**
+Array.<b>prototype</b>
 .
 slice.call
 (arrayLike);
@@ -5490,39 +5283,39 @@ realArray = &lbrack;&rbrack;.slice.call(arrayLike);
 // <i>Shorter version</i>
 realArray.indexOf(&apos;Value 1&apos;);
 // <i>Wow! this works</i>
-Function.**prototype**.call to call Array.**prototype**
+Function.<b>prototype</b>.call to call Array.<b>prototype</b>
 You can also use methods on Array-like objects directly, without
 converting them: Version ≥ 5.1
-**var**
+<b>var</b>
 domList
 =
 document.
 querySelectorAll (&apos;#myDropdown option&apos;);
 domList.forEach (
 
-**function**
+<b>function</b>
 (
 )
 {
-*// Do stuff*
+// <i>Do stuff</i>
 }
 )
 ;
 // <i>Error! forEach is not defined.</i>
 Array
 .
-**prototype**
+<b>prototype</b>
 forEach
 .
 call
 (
 domList
 ,
-**function**
+<b>function</b>
 (
 )
 {
-*// Do stuff*
+// <i>Do stuff</i>
 }
 )
 ;
@@ -5534,7 +5327,7 @@ your object:
 
 <h5>Version ≥ 5.1</h5>
 
-**var** arrayLike = {
+<b>var</b> arrayLike = {
 0
 :
 &apos;Value 0&apos;
@@ -5555,7 +5348,7 @@ forEach
 (
 )
 {
-*// Do stuff*
+// <i>Do stuff</i>
 }
 )
 ;
@@ -5583,7 +5376,7 @@ mapped value for the new array being created.
 
 <h5>Version ≥ 6</h5>
 
-Array.from(domList, element =&bsol;element.tagName); *// Creates an array
-of tagName&apos;s*
+Array.from(domList, element =&bsol;element.tagName); // <i>Creates an array
+of tagName&apos;s</i>
 
 See Arrays are Objects for a detailed analysis.
