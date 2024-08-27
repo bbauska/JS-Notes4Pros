@@ -4425,6 +4425,7 @@ the operands are not equal or if their types do not match.</p>
 1 !== 2      // <i>true</i>
 1 !== 1      // <i>false</i>
 </pre>
+<!-- page 72 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-13">Section 10.13: List of Comparison Operators</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -4543,7 +4544,7 @@ window.onkeydown = window.onkeyup = <b>function</b> (e) {
   }
 }
 </pre>
-
+<!-- page 73 -->
 <p><b>Example reading as an array</b></p>
 
 <pre>
@@ -4604,6 +4605,7 @@ to set but the advantage comes when interrogating the state.</p>
 have various states that must in combination be acted on. JavaScript
 can use up to 32 bits for a bit field. Using them can offer
 significant performance increases. They are worth being familiar with.</p>
+<!-- page 74 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch11">Chapter 11: Conditions</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -4745,7 +4747,7 @@ values and executes different sections of code based on that comparison.</p>
   <b>break</b>;
 }
 </pre>
-<!-- page 75 -->
+<!-- page 76 -->
 <p>The <b>break</b> statement &quot;breaks&quot; out of the switch statement and
 ensures no more code within the switch statement is executed. This is
 how sections are defined and allows the user to make &quot;fall through&quot;
