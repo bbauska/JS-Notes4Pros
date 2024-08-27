@@ -4421,7 +4421,7 @@ the operands are not equal or if their types do not match.</p>
 <p>Example:</p>
 
 <pre>
-1 !== &apos;1&apos;     // <i>true</i>
+1 !== &apos;1&apos;    // <i>true</i>
 1 !== 2      // <i>true</i>
 1 !== 1      // <i>false</i>
 </pre>
@@ -4604,4 +4604,1240 @@ to set but the advantage comes when interrogating the state.</p>
 have various states that must in combination be acted on. JavaScript
 can use up to 32 bits for a bit field. Using them can offer
 significant performance increases. They are worth being familiar with.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch11">Chapter 11: Conditions</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Conditional expressions, involving keywords such as if and else,
+provide JavaScript programs with the ability to perform different
+actions depending on a Boolean condition: true or false. This section
+covers the use of JavaScript conditionals, Boolean logic, and ternary
+statements.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch11-1">Section 11.1: Ternary operators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Can be used to shorten if/else operations. This comes in handy for
+returning a value quickly (i.e. in order to assign it to another
+variable).</p>
 
+<pre>
+For example:
+**var** animal = &apos;kitty&apos;;
+**var** result = (animal === &apos;kitty&apos;) ? &apos;cute&apos; : &apos;still nice&apos;;
+</pre>
+
+<p>In this case, result gets the &apos;cute&apos; value, because the value of
+animal is &apos;kitty&apos;. If animal had another value, result would get the
+&apos;still nice&apos; value.</p>
+
+<p>Compare this to what the code would like with conditions.</p>
+
+<pre>
+**var** animal = &apos;kitty&apos;;
+**var** result = &apos;&apos;;
+**if** (animal === &apos;kitty&apos;) {
+  result = &apos;cute&apos;;
+} **else** {
+  result = &apos;still nice&apos;;
+}
+</pre>
+
+<p>The if or **else** conditions may have several operations. In this
+case the operator returns the result of the last expression.</p>
+
+<pre>
+**var** a = 0;
+**var** str = &apos;not a&apos;;
+**var** b = &apos;&apos;;
+b = a === 0 ? ( a = 1 , str += &apos; test&apos; ) : (a = 2);
+</pre>
+
+<p>Because a was equal to 0, it becomes 1, and str becomes &apos;not a
+test&apos;. The operation which involved str was the last, so b receives
+the result of the operation, which is the value contained in str, i.e.
+&apos;not a test&apos;.</p>
+
+<p>Ternary operators *always* expect else conditions, otherwise you&apos;ll
+get a syntax error. As a workaround you could return a zero something
+similar in the else branch - this doesn&apos;t matter if you aren&apos;t using
+the return value but just shortening (or attempting to shorten) the operation.</p>
+
+<pre>
+**var** a = =1;
+a === 1 ? alert (&apos;Hey, it is 1!&apos;) : 0;
+</pre>
+
+**if**   (   a ===        1&rpar;   alert        (   &apos;Hey, it is 1!&apos;
+
+As you see, ); would do the same thing. It would be just a char
+longer, since
+
+it doesn&apos;t need an obligatory **else** condition. If an **else**
+condition was involved, the ternary method would be much cleaner.
+
+a === 1 ? alert(&apos;Hey, it is 1!&apos;) : alert(&apos;Weird, what could it
+be?&apos;); **if** (a === 1) alert(&apos;Hey, it is 1!&apos;) **else**
+alert(&apos;Weird, what could it be?&apos;);
+
+Ternaries can be nested to encapsulate additional logic. For example
+foo
+?
+bar
+?
+1
+:
+2
+:
+3
+*// To be clear, this is evaluated left to right*
+*// and can be more explicitly expressed as:*
+foo
+?
+(
+bar
+?
+1
+:
+2
+)
+:
+3
+
+ **if**               /          **else**
+
+This is the same as the following
+
+**if**
+(
+foo
+)
+{
+**if**
+(
+bar
+)
+{
+1
+}
+**else**
+{
+2
+}
+}
+**else**
+{
+3
+}
+
+Stylistically this should only be used with short variable names, as
+multi-line ternaries can drastically decrease readability.
+
+The only statements which cannot be used in ternaries are control
+statements. For example, you cannot use return or break with
+ternaries. The following expression will be invalid.
+
+**var**
+animal
+=
+&apos;kitty&apos;
+;
+**for**
+(
+**var**
+i
+=
+0
+;
+i
+&lt;
+5
+;
+++
+i
+)
+{
+(
+animal
+===
+&apos;kitty&apos;
+)
+?
+**break**
+:
+console.
+log
+(
+i
+)
+;
+}
+For return statements, the following would also be invalid:
+**var**
+animal
+=
+&apos;kitty&apos;
+;
+(
+animal
+===
+&apos;kitty&apos;
+)
+?
+**return**
+&apos;meow&apos;
+:
+**return**
+&apos;woof&apos;
+;
+To do the above properly, you would return the ternary as follows:
+**var**
+animal
+=
+&apos;kitty&apos;
+;
+**return**
+(
+animal
+===
+&apos;kitty&apos;
+)
+?
+&apos;meow&apos;
+:
+&apos;woof&apos;
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch11-2">Section 11.2: Switch statement</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+Switch statements compare the value of an expression against 1 or more
+values and executes different sections of code based on that
+comparison.
+
+**var**
+value
+=
+1
+;
+**switch**
+(
+value
+)
+{
+**case**
+1
+:
+console.
+log
+(
+&apos;I will always run&apos;
+)
+;
+**break**
+;
+**case**
+2
+:
+console.
+log
+(
+&apos;I will never run&apos;
+)
+;
+**break**
+;
+}
+The **break** statement &quot;breaks&quot; out of the switch statement and
+ensures no more code within the switch statement is executed. This is
+how sections are defined and allows the user to make &quot;fall through&quot;
+cases.
+
+**Warning**
+
+:
+lack of a
+**break**
+or
+**return**
+statement for each case means the program will continue to evaluate
+the next case, even if the case criteria is unmet!
+**switch**
+(
+value
+)
+{
+**case**
+1
+:
+console.
+log
+(
+&apos;I will only run if value === 1&apos;
+)
+;
+*// Here, the code &quot;falls through&quot; and will run the code under case 2*
+**case**
+2
+:
+console.
+log
+(
+&apos;I will run if value === 1 or value === 2&apos;
+)
+;
+**break**
+;
+**case**
+3
+:
+console.
+log
+(
+&apos;I will only run if value === 3&apos;
+)
+;
+**break**
+
+;
+}
+The last case is the **default** case. This one will run if no other
+matches were made.
+**var**
+animal
+=
+&apos;Lion&apos;
+;
+**switch**
+(
+animal
+)
+{
+**case**
+&apos;Dog&apos;
+:
+console.
+log
+(
+&apos;I will not run since animal !== &quot;Dog&quot;&apos;
+)
+;
+**break**
+;
+**case**
+&apos;Cat&apos;
+:
+console.
+log
+(
+&apos;I will not run since animal !== &quot;Cat&quot;&apos;
+)
+;
+**break**
+;
+**default**
+:
+console.
+log
+(
+&apos;I will run since animal does not match any other case&apos;
+)
+;
+}
+It should be noted that a case expression can be any kind of
+expression. This means you can use comparisons, function calls, etc.
+as case values.
+
+**function**
+john
+(
+)
+{
+**return**
+&apos;John&apos;
+;
+}
+**function**
+jacob
+(
+)
+{
+**return**
+&apos;Jacob&apos;
+;
+}
+**switch**
+(
+name
+)
+{
+**case**
+john
+(
+)
+:
+*// Compare name with the return value of john() (name == &quot;John&quot;)*
+console.
+log
+(
+&apos;I will run if name === &quot;John&quot;&apos;
+)
+;
+**break**
+;
+**case**
+&apos;Ja&apos;
+&plus;
+&apos;ne&apos;
+:
+*// Concatenate the strings together then compare (name == &quot;Jane&quot;)*
+console.
+log
+(
+&apos;I will run if name === &quot;Jane&quot;&apos;
+)
+;
+**break**
+;
+**case**
+john
+(
+)
+&plus;
+&apos; &apos;
+&plus;
+jacob
+(
+)
+&plus;
+&apos; Jingleheimer Schmidt&apos;
+:
+console.
+log
+(
+&apos;His name is equal to name too!&apos;
+)
+;
+**break**
+;
+}
+**Multiple Inclusive Criteria for Cases**
+
+Since cases &quot;fall through&quot; without a **break** or **return**
+statement, you can use this to create multiple inclusive criteria:
+**var**
+x
+=
+&quot;c&quot;
+**switch**
+(
+x
+)
+{
+**case**
+&quot;a&quot;
+:
+**case**
+&quot;b&quot;
+:
+**case**
+&quot;c&quot;
+:
+console.log
+(
+&quot;Either a, b, or c was selected.&quot;
+)
+;
+**break**
+;
+**case**
+&quot;d&quot;
+:
+console.
+log
+(
+&quot;Only d was selected.&quot;
+)
+;
+**break**
+;
+**default**
+:
+console.
+log
+(
+&quot;No case was matched.&quot;
+)
+;
+**break**
+;
+*// precautionary break if case order changes*
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch11-3">Section 11.3: If / Else If / Else Control</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+In its most simple form, an if condition can be used like this:
+**var**
+i
+=
+0
+;
+**if**
+(
+i
+&lt;
+1
+)
+{
+console.
+log
+(
+&quot;i is smaller than 1&quot;
+)
+;
+}
+The condition
+i
+&lt;
+1
+is evaluated, and if it evaluates to
+**true**
+the block that follows is executed. If it evaluates to
+**false**, the block is skipped.
+
+An if condition can be expanded with an **else** block. The condition
+is checked *once* as above, and if it evaluates to **false** a
+secondary block will be executed (which would be skipped if the
+condition were **true**). An example:
+
+**if**
+(
+i
+&lt;
+1
+)
+{
+console.
+log
+(
+&quot;i is smaller than 1&quot;
+)
+;
+}
+**else**
+{
+console.
+log
+(
+&quot;i was not smaller than 1&quot;
+)
+;
+}
+Supposing the **else** block contains nothing but another if block
+(with optionally an **else** block) like this:
+
+**if**
+(
+i
+&lt;
+1
+)
+{
+console.
+log
+(
+&quot;i is smaller than 1&quot;
+)
+;
+}
+**else**
+{
+**if**
+(
+i
+&lt;
+2
+)
+{
+console.
+log
+(
+&quot;i is smaller than 2&quot;
+)
+;
+}
+**else**
+{
+console.
+log
+(
+&quot;none of the previous conditions was true&quot;
+)
+;
+}
+}
+Then there is also a different way to write this which reduces
+nesting:
+
+**if**
+(
+i
+&lt;
+1
+)
+{
+console.
+log
+(
+&quot;i is smaller than 1&quot;
+)
+;
+}
+**else**
+**if**
+(
+i
+&lt;
+2
+)
+{
+console.
+log
+(
+&quot;i is smaller than 2&quot;
+)
+;
+}
+**else**
+{
+console.
+log
+(
+&quot;none of the previous conditions was true&quot;
+)
+;
+}
+Some important footnotes about the above examples:
+
+If any one condition evaluated to **true**, no other condition in that
+chain of blocks will be evaluated, and all corresponding blocks
+(including the **else** block) will not be executed.
+
+  **else** **if**
+
+The number of parts is practically unlimited. The last example above
+only contains one, but you can have as many as you like.
+
+The *condition* inside an if statement can be anything that can be
+coerced to a boolean value, see the topic on boolean logic for more
+details;
+
+if             &minus;      else                         &minus;      **if**
+
+The ladder exits at the first success. That is, in the example above,
+if the value of i is 0.5 then the first branch is executed. If the
+conditions overlap, the first criteria occurring in the flow of
+execution is executed. The other condition, which could also be true
+is ignored.
+
+If you have only one statement, the braces around that statement are
+technically optional, e.g this is fine:
+
+**if**
+(
+i
+&lt;
+1
+)
+console.
+log
+(
+&quot;i is smaller than 1&quot;
+)
+;
+And this will work as well:
+**if**
+(
+i
+&lt;
+1
+)
+console.
+log
+(
+&quot;i is smaller than 1&quot;
+)
+;
+If you want to execute multiple statements inside an if block, then
+the curly braces around them are mandatory. Only using indentation
+isn&apos;t enough. For example, the following code:
+**if**
+(
+i
+&lt;
+1
+)
+console.
+log
+(
+&quot;i is smaller than 1&quot;
+)
+;
+console.
+log
+(
+&quot;this will run REGARDLESS of the condition&quot;
+)
+;
+*// Warning, see text!*
+is equivalent to:
+**if**
+(
+i
+&lt;
+1
+)
+{
+console.
+log
+(
+&quot;i is smaller than 1&quot;
+)
+;
+}
+console.
+log
+(
+&quot;this will run REGARDLESS of the condition&quot;
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch11-4">Section 11.4: Strategy</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+A strategy pattern can be used in JavaScript in many cases to replace
+a switch statement. It is especially helpful when the number of
+conditions is dynamic or very large. It allows the code for each
+condition to be independent and separately testable.
+
+Strategy object is simple an object with multiple functions,
+representing each separate condition. Example:
+
+**const**
+AnimalSays
+=
+{
+dog
+(
+)
+{
+**return**
+&apos;woof&apos;
+;
+}
+,
+cat
+(
+)
+{
+**return**
+&apos;meow&apos;
+;
+}
+,
+lion
+(
+)
+{
+**return**
+&apos;roar&apos;
+;
+}
+,
+*// &hellip; other animals*
+**default**
+(
+)
+{
+**return**
+&apos;moo&apos;
+;
+}
+}
+;
+The above object can be used as follows:
+**function**
+makeAnimalSpeak
+(
+animal
+)
+{
+*// Match the animal by type*
+**const**
+speak
+=
+AnimalSays
+&lbrack;
+animal
+&rbrack;
+&vert;&vert;
+AnimalSays.
+**default**
+;
+console.
+log
+(
+animal
+&plus;
+&apos; says &apos;
+&plus;
+speak
+(
+)
+)
+;
+}
+Results:
+makeAnimalSpeak
+(
+&apos;dog&apos;
+)
+*// =&amp;apos;dog says woof&apos;*
+makeAnimalSpeak
+(
+&apos;cat&apos;
+)
+*// =&amp;apos;cat says meow&apos;*
+makeAnimalSpeak
+(
+&apos;lion&apos;
+)
+*// =&amp;apos;lion says roar&apos;*
+makeAnimalSpeak
+(
+&apos;snake&apos;
+)
+*// =&amp;apos;snake says moo&apos;*
+In the last case, our default function handles any missing animals.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch11-5">Section 11.5: Using &vert;&vert; and && short circuiting</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+The Boolean operators &vert;&vert; and && will &quot;short circuit&quot; and not
+evaluate the second parameter if the first is true or false
+respectively. This can be used to write short conditionals like:
+**var**
+x
+=
+10
+x
+==
+10
+&&
+alert
+(
+&quot;x is 10&quot;
+)
+x
+==
+10
+&vert;&vert;
+alert
+(
+&quot;x is not 10&quot;
+)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch12">Chapter 12: Arrays</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-1">Section 12.1: Converting Array-like Objects to Arrays</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+**What are Array-like Objects?**
+JavaScript has &quot;Array-like Objects&quot;, which are Object
+representations of Arrays with a length property. For example:
+**var**
+realArray
+=
+&lbrack;
+&apos;a&apos;
+,
+&apos;b&apos;
+,
+&apos;c&apos;
+&rbrack;
+;
+**var**
+arrayLike
+=
+{
+0
+:
+&apos;a&apos;
+,
+1
+:
+&apos;b&apos;
+,
+2
+:
+&apos;c&apos;
+,
+length
+:
+3
+}
+;
+[document.getElementsByTagName](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName)   or   [document.querySelectorAll](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll)
+
+Common examples of Array-like Objects are the
+[arguments](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/arguments)
+object in functions and
+[HTMLCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection)
+or
+[NodeList](https://developer.mozilla.org/en-US/docs/Web/API/NodeList)
+objects returned from methods like .
+
+However, one key difference between Arrays and Array-like Objects is
+that Array-like objects inherit from
+  
+[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)   [**prototype**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)   instead of       [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype)   [**prototype**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype)
+. This means that Array-like Objects can&apos;t access common
+[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype#Methods)
+
+[forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)   [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach),   [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push)   [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push),   [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)   [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),   [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),   [slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
+[prototype
+methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype#Methods)
+like
+[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice):
+
+**var**
+parent
+=
+document.
+getElementById
+(
+&apos;myDropdown&apos;
+)
+;
+**var**
+desiredOption
+=
+parent.
+querySelector
+(
+&apos;option&lbrack;value=&quot;desired&quot;&rbrack;&apos;
+)
+;
+**var**
+domList
+=
+parent.
+children
+;
+domList.
+indexOf
+(
+desiredOption
+)
+;
+*// Error! indexOf is not defined.*
+domList.
+forEach
+(
+**function**
+(
+)
+{
+arguments.
+map
+(
+*/&ast; Stuff here &ast;/*
+)
+*// Error! map is not defined.*
+}
+)
+;
+*// Error! forEach is not defined.*
+**function**
+func
+(
+)
+{
+console.
+log
+(
+arguments
+)
+;
+}
+func
+(
+1
+,
+2
+,
+3
+)
+;
+*//*
+→
+*&lbrack;1, 2, 3&rbrack;*
+**Convert Array-like Objects to Arrays in ES6**
+Array                               .       from
+1.:
+<h5>Version ≥ 6</h5>
+**const**
+arrayLike
+=
+{
+0
+:
+&apos;Value 0&apos;
+,
+1
+:
+&apos;Value 1&apos;
+,
+length
+:
+2
+}
+;
+arrayLike.
+forEach
+(
+value
+=&gt;
+{
+*/&ast; Do something &ast;/*
+}
+)
+;
+*// Errors*
+**const**
+realArray
+=
+Array
+.
+from
+(
+arrayLike
+)
+;
+realArray.
+forEach
+(
+value
+=&gt;
+{
+*/&ast; Do something &ast;/*
+}
+)
+;
+*// Works*
+  **for**&hellip;of
+2.:
+Version ≥ 6
+**var**
+realArray
+=
+&lbrack;
+&rbrack;
+;
+**for**
+(
+**const**
+element of arrayLike
+)
+{
+realArray.
+append
+(
+element
+)
+;
+}
+3&period; Spread operator:
+<h5>Version ≥ 6</h5>
+&lbrack;
+&hellip;
+arrayLike
+&rbrack;
+  
+Object                           .     values
+4.:
+<h5>Version ≥ 7</h5>
+**var**
+realArray
+=
+Object
+.
+values
+(
+arrayLike
+)
+;
+Object                                 .      keys
+5.:
+Version ≥ 6
+.map((key) =&bsol;arrayLike&lbrack;key&rbrack;); **Convert Array-like Objects to
+Arrays in** ≤ **ES5**
+**var**
+realArray
+=
+Object
+.
+keys
+(
+arrayLike
+)
+Array            .   **prototype**                  .   slice
+Use like so:
+**var**
+arrayLike
+=
+{
+0
+:
+&apos;Value 0&apos;
+,
+1
+:
+&apos;Value 1&apos;
+,
+length
+:
+2
+}
+;
+**var**
+realArray
+=
+Array
+.
+**prototype**
+.
+slice
+.
+call
+(
+arrayLike
+)
+;
+realArray
+=
+&lbrack;
+&rbrack;
+.
+slice
+.
+call
+(
+arrayLike
+)
+;
+*// Shorter version*
+realArray.
+indexOf
+(
+&apos;Value 1&apos;
+)
+;
+*// Wow! this works*
+Function     .   **prototype**   .   call   to call   Array    .   **prototype**
+You can also use methods on Array-like objects directly, without
+converting them: Version ≥ 5.1
+**var**
+domList
+=
+document.
+querySelectorAll
+(
+&apos;#myDropdown option&apos;
+)
+;
+domList.
+forEach
+(
+
+**function**
+(
+)
+{
+*// Do stuff*
+}
+)
+;
+*// Error! forEach is not defined.*
+Array
+.
+**prototype**
+forEach
+.
+call
+(
+domList
+,
+**function**
+(
+)
+{
+*// Do stuff*
+}
+)
+;
+*// Wow! this works*
+method.bind(arrayLikeObject
+  
+You can also use &lbrack;&rbrack;.) to borrow array methods and glom them on to
+your object:
+
+<h5>Version ≥ 5.1</h5>
+
+**var** arrayLike = {
+0
+:
+&apos;Value 0&apos;
+,
+1
+:
+&apos;Value 1&apos;
+,
+length
+:
+2
+}
+;
+arrayLike.
+forEach
+(
+**function**
+(
+)
+{
+*// Do stuff*
+}
+)
+;
+*// Error! forEach is not defined.*
+&lbrack;
+&rbrack;
+.
+forEach
+.bind
+(
+arrayLike
+)
+(
+**function**
+(
+val
+)
+{
+*// Do stuff with val*
+}); *// Wow! this works*
+**Modifying Items During Conversion**
+Array                               .       from
+In ES6, while using , we can specify a map function that returns a
+mapped value for the new array being created.
+
+Version ≥ 6
+
+Array.from(domList, element =&bsol;element.tagName); *// Creates an array
+of tagName&apos;s*
+
+See Arrays are Objects for a detailed analysis.
