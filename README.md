@@ -4953,7 +4953,7 @@ condition. Example:</p>
 <pre>
 <b>const</b> AnimalSays = {
   dog() {
-    <b>return<b> &apos;woof&apos;;
+    <b>return</b> &apos;woof&apos;;
   },
   
   cat() {
