@@ -7040,407 +7040,103 @@ array.push(4, 5, 6);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-30">Section 12.30: Checking if an object is an Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Array . isArray ( obj
-
-) returns <b>true</b> if the object is an Array, otherwise </b>false</b>.
-Array
-.
-isArray
-(
-&lbrack;
-&rbrack;
-)
-// <i> true</i>
-Array
-.
-isArray
-(
-&lbrack;
-1
-,
-2
-,
-3
-&rbrack;
-)
-// <i> true</i>
-Array
-.
-isArray
-(
-{
-}
-)
-// <i> false</i>
-Array
-.
-isArray
-(
-1
-)
-// <i> false</i>
-In most cases you can <b>instanceof</b> to check if an object is an Array.
-&lbrack;
-&rbrack;
-<b>instanceof</b>
-Array
-;
-// <i> true</i>
-{
-}
-<b>instanceof</b>
-Array
-;
-// <i> false</i>
-Array . isArray
-has the an advantage over using a <b>instanceof</b> check in that it will
-still return <b>true</b> even if the
-
-prototype of the array has been changed and will return <b>false</b> if a
-non-arrays prototype was changed to the Array prototype.
-<b>var</b>
-arr
-=
-&lbrack;
-&rbrack;
-;
-Object
-.
-setPrototypeOf
-(
-arr
-,
-<b>null</b>
-)
-;
-Array
-.
-isArray
-(
-arr
-)
-;
-// <i> true</i>
-arr
-<b>instanceof</b>
-Array
-;
-// <i> false</i>
+<p>Array.isArray (obj) returns <b>true</b> if the object is an Array, otherwise </b>false</b>.</p>
+<pre>
+Array.isArray(&lbrack;&rbrack;)       // <i> true</i>
+Array.isArray(&lbrack;1,2,3&rbrack;)  // <i> true</i>
+Array.isArray({})                     // <i> false</i>
+Array.isArray(1)                      // <i> false</i>
+</pre>
+<p>In most cases you can <b>instanceof</b> to check if an object is an Array.</p>
+<pre>
+&lbrack;&rbrack; <b>instanceof</b> Array;  // <i> true</i>
+{} <b>instanceof</b> Array;                // <i> false</i>
+</pre>
+<p>Array.isArray has the an advantage over using a <b>instanceof</b> check in that it will
+still return <b>true</b> even if the prototype of the array has been changed and will return 
+<b>false</b> if a non-arrays prototype was changed to the Array prototype.</p>
+<!-- page 109 -->
+<pre>
+<b>var</b> arr = &lbrack;&rbrack;;
+Object.setPrototypeOf(arr, <b>null</b>);
+Array.isArray(arr);  // <i> true</i>
+arr <b>instanceof</b> Array;  // <i> false</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-31">Section 12.31: Insert an item into an array at a specific index</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-[Array.<b>prototype</b>.splice](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
-Simple item insertion can be done with method:
-arr.splice
-(
-index
-,
-0
-,
-item
-)
-;
-More advanced variant with multiple arguments and chaining support:
-*/&ast; Syntax:*
-*array.insert(index, value1, value2, &hellip;, valueN) &ast;/*
-Array
-.
-<b>prototype</b>
-.
-insert
-=
-<b>function</b>
-(
-index
-)
-{
-<b>this</b>
-.
-splice
-.
-apply
-(
-<b>this</b>
-,
-&lbrack;
-index
-,
-0
-&rbrack;
-.
-concat
-(
-Array
-.
-<b>prototype</b>
-.
-slice
-.
-call
-(
-arguments
-,
-1
-)
-)
-)
-;
-<b>return</b>
-<b>this</b>
-;
-}
-;
-&lbrack;
-&quot;a&quot;
-,
-&quot;b&quot;
-,
-&quot;c&quot;
-,
-&quot;d&quot;
-&rbrack;
-.
-insert
-(
-2
-,
-&quot;X&quot;
-,
-&quot;Y&quot;
-,
-&quot;Z&quot;
-)
-.
-slice
-(
-1
-,
-6
-)
-;
-// <i> &lbrack;&quot;b&quot;, &quot;X&quot;, &quot;Y&quot;, &quot;Z&quot;, &quot;c&quot;&rbrack;</i>
-And with array-type arguments merging and chaining support:
-*/&ast; Syntax:*
-*array.insert(index, value1, value2, &hellip;, valueN) &ast;/*
-Array
-.
-<b>prototype</b>
-.
-insert
-=
-<b>function</b>
-(
-index
-)
-{
-index
-=
-Math
-.
-min
-(
-index
-,
-<b>this</b>
-.
-length
-)
-;
-arguments.
-length
-&gt;
-1
-&&
-<b>this</b>
-.
-splice
-.
-apply
-(
-<b>this</b>
-,
-&lbrack;
-index
-,
-0
-&rbrack;
-.
-concat
-(
-&lbrack;
-&rbrack;
-.
-pop
-.
-call
-(
-arguments
-)
-)
-)
-&&
-<b>this</b>
-.
-insert
-.
-apply
-(
-<b>this</b>
-,
-arguments
-)
-;
-<b>return</b>
-<b>this</b>
-;
-}
-;
-&lbrack;
-&quot;a&quot;
-,
-&quot;b&quot;
-,
-&quot;c&quot;
-,
-&quot;d&quot;
-&rbrack;
-.
-insert
-(
-2
-,
-&quot;V&quot;
-,
-&lbrack;
-&quot;W&quot;
-,
-&quot;X&quot;
-,
-&quot;Y&quot;
-&rbrack;
-,
-&quot;Z&quot;
-)
-.
-join
-(
-&quot;-&quot;
-)
-;
-// <i> &quot;a-b-V-W-X-Y-Z-c-d&quot;</i>
+<p>Simple item insertion can be done with 
+<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice">
+Array.<b>prototype</b>.splice</a> method:</p>
+<pre>
+arr.splice(index, 0, item);
+</pre>
+<p>More advanced variant with multiple arguments and chaining support:</p>
+<pre>
+/ <i>&ast; Syntax:</i>
+  <i>array.insert(index, value1, value2, &hellip;, valueN) &ast;/</i>
+
+Array.<b>prototype</b>.insert = <b>function</b>(index) {
+  <b>this</b>.splice.apply(<b>this</b>, &lbrack;index, 0&rbrack;.concat(
+    Array.<b>prototype</b>.slice.call(arguments, 1)));
+  <b>return</b> <b>this</b>;
+};
+
+&lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;&rbrack;.insert(2, &quot;X&quot;, &quot;Y&quot;, &quot;Z&quot;).slice(1, 6);  // <i> &lbrack;&quot;b&quot;, &quot;X&quot;, &quot;Y&quot;, &quot;Z&quot;, &quot;c&quot;&rbrack;</i>
+</pre>
+<p>And with array-type arguments merging and chaining support:</p>
+<pre>
+/<i>&ast; Syntax:</i>
+  <i>array.insert(index, value1, value2, &hellip;, valueN) &ast;/</i>
+  
+Array.<b>prototype</b>.insert = <b>function</b>(index) {
+  index = Math.min(index, <b>this</b>.length);
+  arguments.length &gt; 1
+  && <b>this</b>.splice.apply(<b>this</b>, &lbrack;index, 0&rbrack;.concat(&lbrack;&rbrack;.pop.call(arguments)))
+  && <b>this</b>.insert.apply(<b>this</b>, arguments);
+  <b>return</b> <b>this</b>;
+};
+
+&lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;&rbrack;.insert(2, &quot;V&quot;, &lbrack;&quot;W&quot;, &quot;X&quot;, &quot;Y&quot;rbrack;, &quot;Z&quot;).join(&quot;-&quot;); // <i> &quot;a-b-V-W-X-Y-Z-c-d&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-32">Section 12.32: Sorting multidimensional array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Given the following array
-<b>var</b>
-array
-=
-&lbrack;
-&lbrack;
-&quot;key1&quot;
-,
-10
-&rbrack;
-,
-&lbrack;
-&quot;key2&quot;
-,
-3
-&rbrack;
-,
-&lbrack;
-&quot;key3&quot;
-,
-40
-&rbrack;
-,
-&lbrack;
-&quot;key4&quot;
-,
-20
-&rbrack;
-&rbrack;
-;
-You can sort it sort it by number(second index)
-array.
-sort
-(
-<b>function</b>
-(
-a
-,
-b
-)
-{
-<b>return</b>
-a
-&lbrack;
-1
-&rbrack;
-&minus;
-b
-&lbrack;
-1
-&rbrack;
-;
-}
-)
+<p>Given the following array</p>
+<pre>
+<b>var</b> array = &lbrack;
+  &lbrack;&quot;key1&quot;, 10&rbrack;,
+  &lbrack;&quot;key2&quot;, 3&rbrack;,
+  &lbrack;&quot;key3&quot;, 40&rbrack;,
+  &lbrack;&quot;key4&quot;, 20&rbrack;
+&rbrack;;
+</pre>
+<p>You can sort it sort it by number(second index)</p>
+<pre>
+array.sort(<b>function</b>(a, b) {
+  <b>return</b> a&lbrack;1&rbrack; &minus; b&lbrack;1&rbrack;;
+})
+</pre>
+<!-- page 110 -->
 
 <h5>Version ≥ 6</h5>
-array.
-sort
-(
-(
-a
-,
-b
-)
-=&gt;
-a
+<pre>
+array.sort((a, b) =&gt; a&lbrack;1&rbrack; &minus; b&lbrack;1&rbrack;);
+</pre>
+<p>This will output</p>
+<pre>
 &lbrack;
-1
+  &lbrack;&quot;key2&quot;, 3&rbrack;,
+  &lbrack;&quot;key1&quot;, 10&rbrack;,
+  &lbrack;&quot;key4&quot;, 20&rbrack;,
+  &lbrack;&quot;key3&quot;, 40&rbrack;
 &rbrack;
-&minus;
-b
-&lbrack;
-1
-&rbrack;
-)
-;
-This will output
-&lbrack;
-&lbrack;
-&quot;key2&quot;
-,
-3
-&rbrack;
-,
-&lbrack;
-&quot;key1&quot;
-,
-10
-&rbrack;
-,
-&lbrack;
-&quot;key4&quot;
-,
-20
-&rbrack;
-,
-&lbrack;
-&quot;key3&quot;
-,
-40
-&rbrack;
-&rbrack;
-Be aware that the sort method operates on the array <i>in place</i>. It
+</pre>
+<p>Be aware that the sort method operates on the array <i>in place</i>. It
 changes the array. Most other array methods return a new array,
 leaving the original one intact. This is especially important to note
 if you use a functional programming style and expect functions to not
-have side-effects.
+have side-effects.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-33">Section 12.33: Test all array items for equality</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
