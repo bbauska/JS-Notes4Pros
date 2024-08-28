@@ -8353,15 +8353,14 @@ foo
 ;
 Console output
 foo
-Object               .   defineProperty
+Object  .defineProperty
 can be called with the following options:
 Object.defineProperty(obj, &apos;nameOfTheProperty&apos;, { value:
 valueOfTheProperty, writable: **true**, *// if false, the property is
 read-only* configurable : **true**, *// true means the property can be
 changed later* enumerable : **true** *// true means property can be
 enumerated such as in a for..in loop* });
-  Object             .   defineProperties
-
+Object .defineProperties
 allows you to define multiple properties at a time.
 **var**
 obj
@@ -9536,6 +9535,7 @@ original
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-15">Section 13.15: Non enumerable property</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 <h5>Version ≥ 5</h5>
 **for**            (    &hellip; **in** &hellip;
 
