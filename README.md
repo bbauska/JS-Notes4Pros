@@ -6868,9 +6868,6 @@ key/value pairs for each index in the array.</p>
 <p><b>Note</b>: <a href="http://kangax.github.io/compat-table/es6/#test-Array.prototype_methods_Array.prototype.entries">
 This method is not supported in Internet Explorer</a>.</p>
 
-[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)
-[<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [<i>entries</i>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)
-
 <p></i>Portions of this content from by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries$history">
 Mozilla Contributors</a> licensed by <a href="http://creativecommons.org/licenses/by-sa/2.5/">CC-by-SA 2.5</a></i></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -7140,254 +7137,110 @@ have side-effects.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-33">Section 12.33: Test all array items for equality</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-every
-The . method tests if all array elements pass a provided predicate
-test.
+<p>The .every method tests if all array elements pass a provided predicate test.</p>
 
-To test all objects for equality, you can use the following code
-snippets.
-
-&lbrack;1, 2, 1&rbrack;.every(<b>function</b>(item, i, list) { <b>return</b> item ===
-list&lbrack;0&rbrack;; }); // <i> false</i>
-
-&lbrack;1, 1, 1&rbrack;.every(<b>function</b>(item, i, list) { <b>return</b> item ===
-list&lbrack;0&rbrack;; }); // <i> true</i>
-
+<p>To test all objects for equality, you can use the following code snippets.</p>
+<pre>
+&lbrack;1, 2, 1&rbrack;.every(<b>function</b>(item, i, list) { <b>return</b> item === list&lbrack;0&rbrack;; }); // <i> false</i>
+&lbrack;1, 1, 1&rbrack;.every(<b>function</b>(item, i, list) { <b>return</b> item === list&lbrack;0&rbrack;; }); // <i> true</i>
+<pre>
 <h5>Version ≥ 6</h5>
-&lbrack;
-1
-,
-1
-,
-1
-&rbrack;
-.
-every
-(
-(
-item
-,
-i
-,
-list
-)
-=&gt;
-item
-===
-list
-&lbrack;
-0
-&rbrack;
-)
-;
-// <i> true</i>
-The following code snippets test for property equality
-<b>let</b>
-data
-=
-&lbrack;
-{
-name
-:
-&quot;alice&quot;
-,
-id
-:
-111
-}
-,
-{
-name
-:
-&quot;alice&quot;
-,
-id
-:
-222
-}
-&rbrack;
-;
-data.
-every
-(
-<b>function</b>
-(
-item
-,
-i
-,
-list
-)
-{
-<b>return</b>
-item
-===
-list
-&lbrack;
-0
-&rbrack;
-;
-}
-)
-;
-// <i> false</i>
-data.
-every
-(
-<b>function</b>
-(
-item
-,
-i
-,
-list
-)
-{
-<b>return</b>
-item.
-name
-===
-list
-&lbrack;
-0
-&rbrack;
-.
-name
-;
-}
-)
-;
-// <i> true</i>
+<pre>
+&lbrack;1, 1, 1&rbrack;.every((item, i, list) =&gt; item === list&lbrack;0&rbrack;); // <i> true</i>
+</pre>
+<p>The following code snippets test for property equality</p>
+<pre>
+<b>let</b> data = &lbrack;
+  { name: &quot;alice&quot;, id: 111 },
+  { name: &quot;alice&quot;, id: 222 }
+&rbrack;;
 
+data.every(<b>function</b>(item, i, list) { <b>return</b> item === list&lbrack;0&rbrack;; }); // <i> false</i>
+data.every(<b>function</b>(item, i, list) { <b>return</b> item.name === list&lbrack;0&rbrack;.name; }); // <i> true</i>
+</pre>
 <h5>Version ≥ 6</h5>
-
-data.
-every
-(
-(
-item
-,
-i
-,
-list
-)
-=&gt;
-item.
-name
-===
-list
-&lbrack;
-0
-&rbrack;
-.
-name
-)
-;
-// <i> true</i>
+<pre>
+data.every((item, i, list) =&gt; item.name === list&lbrack;0&rbrack;.name);  // <i> true</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-23">Section 12.34: Copy part of an Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The slice() method returns a copy of a portion of an array.
-  arr.slice                     (&lbrack;    begin            &lbrack;,    end
-It takes two parameters, &rbrack;&rbrack;) :
-<b>begin</b>
-Zero-based index which is the beginning of extraction.
-<b>end</b>
-Zero-based index which is the end of extraction, slicing up to this
-index but it&apos;s not included.
-end = arr.length &plus; end
-If the end is a negative number,.
+<p>The slice() method returns a copy of a portion of an array.</p>
+It takes two parameters, arr.slice(&lbrack;begin&lbrack;, end&rbrack;&rbrack;):</p>
+<p><b>begin</b></p>
+<p>Zero-based index which is the beginning of extraction.</p>
+<p><b>end</b></p>
+<p>Zero-based index which is the end of extraction, slicing up to this index but 
+it&apos;s not included.</p>
+<p>If the end is a negative number, end = arr.length + end.</p>
 
-<b>Example 1</b>
+<p><b>Example 1</b></p>
+<!-- page 111 -->
+<pre>
 // <i> Let&apos;s say we have this Array of Alphabets</i>
-<b>var</b>
-arr
-=
-&lbrack;
-&quot;a&quot;
-,
-&quot;b&quot;
-,
-&quot;c&quot;
-,
-&quot;d&quot;
-&hellip;
-&rbrack;
-;
+<b>var</b> arr = &lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;&hellip;&rbrack;;
+
 // <i> I want an Array of the first two Alphabets</i>
-<b>var</b>
-newArr
-=
-arr.
-slice
-(
-0
-,
-2
-)
-;
-// <i> newArr === &lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;</i>
-<b>Example 2</b>
+<b>var</b> newArr = arr.slice(0, 2);  // <i> newArr === &lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;</i>
+</pre>
+<p><b>Example 2</b></p>
+<pre>
 // <i> Let&apos;s say we have this Array of Numbers</i>
 // <i> and I don&apos;t know it&apos;s end</i>
-<b>var</b>
-arr
-=
-&lbrack;
-0
-,
-1
-,
-2
-,
-3
-,
-4
-,
-5
-,
-6
-,
-7
-,
-8
-,
-9
-&hellip;
-&rbrack;
-;
+<b>var</b> arr =&lbrack;0, 1, 2, 3, 4, 5, 6, 7, 8, 9&hellip;&rbrack;;
+
 // <i> I want to slice this Array starting from</i>
 // <i> number 5 to its end</i>
-<b>var</b>
-newArr
-=
-arr.
-slice
-(
-4
-)
-;
-// <i>newArr === &lbrack;5, 6, 7, 8, 9&hellip;&rbrack;</i>
+<b>var</b> newArr = arr.slice(4);  // <i>newArr === &lbrack;5, 6, 7, 8, 9&hellip;&rbrack;</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch13">Chapter 13: Objects</h2>
-<b>for</b> <b>in</b>
-<b>Property Description</b> value The value to assign to the property.
-writable Whether the value of the property can be changed or not.
-enumerable Whether the property will be enumerated in loops or not.
-configurable Whether it will be possible to redefine the property
-descriptor or not. <b>get</b> A function to be called that will return
-the value of the property. <b>set</b> A function to be called when the
-property is assigned a value.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<table>
+<table>
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Property</b></th>
+      <th><b>Description</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>value</td>
+      <td>The value to assign to the property.</td>
+    </tr>
+    <tr>
+      <td>writable</td>
+      <td>Whether the value of the property can be changed or not.</td>
+    </tr>
+    <tr>
+      <td>enumerable</td>
+      <td>Whether the property will be enumerated in <b>for in</b> loops or not.</td>
+    </tr>
+    <tr>
+      <td>configurable</td>
+      <td>Whether is will be possible to redefine the property description or not.</td>
+    </tr>
+    <tr>
+      <td><b>get</b></td>
+      <td>A function to be called that will return the value of the property.</td>
+    </tr>
+    <tr>
+      <td><b>set</b></td>
+      <td>A function to be called when the property is assigned a value.</td>
+    </tr>
+  </tbody>
+</table>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-1">Section 13.1: Shallow cloning</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 <h5>Version ≥ 6</h5>
-Object . assign
-ES6&apos;s () function can be used to copy all of the **enumerable**
-properties from an existing Object instance to a new one.
-**const**
+ES6&apos;s Object.assign() function can be used to copy all of the <b>enumerable</b> properties 
+from an existing Object instance to a new one.</p>
+<pre>
+<b>const</b>
 existing
 =
 {
@@ -7404,7 +7257,7 @@ c
 3
 }
 ;
-**const**
+<b>const</b>
 clone
 =
 Object
@@ -7424,7 +7277,7 @@ destructuring](https://github.com/tc39/proposal-object-rest-spread)
 which is currently a stage 3 proposal provides an even simpler way to
 create shallow clones of Object instances:
 
-**const**
+<b>const</b>
 existing
 =
 {
@@ -7441,7 +7294,7 @@ c
 3
 }
 ;
-**const**
+<b>const</b>
 {
 &hellip;
 clone
@@ -7453,7 +7306,7 @@ hasOwnProperty
 If you need to support older versions of JavaScript, the
 most-compatible way to clone an Object is by manually iterating over
 its properties and filtering out inherited ones using .().
-**var**
+<b>var</b>
 existing
 =
 {
@@ -7470,21 +7323,21 @@ c
 3
 }
 ;
-**var**
+<b>var</b>
 clone
 =
 {
 }
 ;
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 prop
-**in**
+<b>in</b>
 existing
 )
 {
-**if**
+<b>if</b>
 (
 existing.
 hasOwnProperty
@@ -7526,7 +7379,7 @@ is running in strict mode. If the code is in strict
 mode, a
 TypeError
 will be thrown.
-**var**
+<b>var</b>
 obj
 =
 {
@@ -7560,13 +7413,13 @@ freeze
 obj
 )
 ;
-*// Cannot add new properties*
+<i>// Cannot add new properties</i>
 obj.
 newProperty
 =
-**true**
+<b>true</b>
 ;
-*// Cannot modify existing values or their descriptors*
+<i>// Cannot modify existing values or their descriptors</i>
 obj.
 foo
 =
@@ -7583,16 +7436,16 @@ obj
 {
 writable
 :
-**true**
+<b>true</b>
 }
 )
 ;
-*// Cannot delete existing properties*
-**delete**
+<i>// Cannot delete existing properties</i>
+<b>delete</b>
 obj.
 foo
 ;
-*// Nested objects are not frozen*
+<i>// Nested objects are not frozen</i>
 obj.
 bar
 .
@@ -7614,7 +7467,7 @@ foo
 <!--
 When you want a complete copy of an object (i.e. the object properties
 and the values inside those properties, etc&hellip;), that is called
-**deep cloning**.
+<b>deep cloning</b>.
 
 <h5>Version ≥ 5.1</h5>
 JSON.parse
@@ -7622,7 +7475,7 @@ If an object can be serialized to JSON, then you can create a deep
 clone of it with a combination of and
 JSON.stringify
 :
-**var**
+<b>var</b>
 existing
 =
 {
@@ -7639,7 +7492,7 @@ c
 }
 }
 ;
-**var**
+<b>var</b>
 copy
 =
 JSON.
@@ -7691,16 +7544,16 @@ will throw an error in such cases.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 You can access each property that belongs to an object with this loop
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 property
-**in**
+<b>in</b>
 object
 )
 {
-*// always check if an object has a property*
-**if**
+<i>// always check if an object has a property</i>
+<b>if</b>
 (
 object.
 hasOwnProperty
@@ -7709,7 +7562,7 @@ property
 )
 )
 {
-*// do stuff*
+<i>// do stuff</i>
 }
 }
 You should include the additional check for hasOwnProperty because an
@@ -7721,7 +7574,7 @@ Array.map or Array.forEach
 You can also use function which return an Array containing all
 properties of an object and then you can loop through this array with
 function.
-**var**
+<b>var</b>
 obj
 =
 {
@@ -7747,7 +7600,7 @@ obj
 .
 map
 (
-**function**
+<b>function</b>
 (
 key
 )
@@ -7773,7 +7626,7 @@ from one or more source objects to a target object. It will return the
 target object.
 
 Use it to assign values to an existing object:
-**var**
+<b>var</b>
 user
 =
 {
@@ -7805,9 +7658,9 @@ log
 user
 )
 ;
-*// Logs: {firstName: &quot;John&quot;, lastName: &quot;Doe&quot;, age: 39}*
+<i>// Logs: {firstName: &quot;John&quot;, lastName: &quot;Doe&quot;, age: 39}</i>
 Or to create a shallow copy of an object:
-**var**
+<b>var</b>
 obj
 =
 Object
@@ -7828,7 +7681,7 @@ obj
 ;
 // <i>Logs: {firstName: &quot;John&quot;, lastName: &quot;Doe&quot;, age: 39}</i>
 Or merge many properties from multiple objects to one:
-**var**
+<b>var</b>
 obj1
 =
 {
@@ -7837,7 +7690,7 @@ a
 1
 }
 ;
-**var**
+<b>var</b>
 obj2
 =
 {
@@ -7846,7 +7699,7 @@ b
 2
 }
 ;
-**var**
+<b>var</b>
 obj3
 =
 {
@@ -7855,7 +7708,7 @@ c
 3
 }
 ;
-**var**
+<b>var</b>
 obj
 =
 Object
@@ -7875,31 +7728,31 @@ log
 obj
 )
 ;
-*// Logs: { a: 1, b: 2, c: 3 }*
+//<i> Logs: { a: 1, b: 2, c: 3 }</i>
 console.
 log
 (
 obj1
 )
 ;
-*// Logs: { a: 1, b: 2, c: 3 }, target object itself is changed*
+// <i>Logs: { a: 1, b: 2, c: 3 }, target object itself is changed</i>
 Primitives will be wrapped, null and undefined will be ignored:
-**var**
+<b>var</b>
 var_1
 =
 &apos;abc&apos;
 ;
-**var**
+<b>var</b>
 var_2
 =
-**true**
+<b>true</b>
 ;
-**var**
+<b>var</b>
 var_3
 =
 10
 ;
-**var**
+<b>var</b>
 var_4
 =
 Symbol
@@ -7907,7 +7760,7 @@ Symbol
 &apos;foo&apos;
 )
 ;
-**var**
+<b>var</b>
 obj
 =
 Object
@@ -7919,11 +7772,11 @@ assign
 ,
 var_1
 ,
-**null**
+<b>null</b>
 ,
 var_2
 ,
-**undefined**
+<b>undefined</b>
 ,
 var_3
 ,
@@ -7936,10 +7789,10 @@ log
 obj
 )
 ;
-*// Logs: { &quot;0&quot;: &quot;a&quot;, &quot;1&quot;: &quot;b&quot;, &quot;2&quot;: &quot;c&quot; }*
+// <i> Logs: { &quot;0&quot;: &quot;a&quot;, &quot;1&quot;: &quot;b&quot;, &quot;2&quot;: &quot;c&quot; }</i>
 Note, only string wrappers can have own enumerable properties
 Use it as reducer: (merges an array to an object)
-**return** users.reduce((result, user) =&bsol;Object.assign({},
+<b>return</b> users.reduce((result, user) =&bsol;Object.assign({},
 {&lbrack;user.id&rbrack;: user})
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-36">Section 13.6: Object rest/spread (&hellip;)</h3>
@@ -7951,7 +7804,7 @@ Object       .   assign       ({},     obj1       ,   &hellip;     ,   objn
 Object spreading is just syntactic sugar for );
 
 It is done with the &hellip; operator:
-**let**
+<b>let</b>
 obj
 =
 {
@@ -7960,7 +7813,7 @@ a
 1
 }
 ;
-**let**
+<b>let</b>
 obj2
 =
 {
@@ -7982,10 +7835,10 @@ log
 obj2
 )
 ;
-*// { a: 1, b: 2, c: 3 };*
+// <i> { a: 1, b: 2, c: 3 };</i>
 Object . assign
-As it does **shallow** merging, not deep merging.
-**let**
+As it does <b>shallow</b> merging, not deep merging.
+<b>let</b>
 obj3
 =
 {
@@ -8007,8 +7860,8 @@ log
 obj3
 )
 ;
-*// { a: 1, b: { c: 2 } };*
-**NOTE**: [This
+// <i> { a: 1, b: { c: 2 } };</i>
+<b>NOTE</b>: [This
 specification](https://github.com/sebmarkbage/ecmascript-rest-spread)
 is currently in [stage
 3](http://www.2ality.com/2015/11/tc39-process.html)
@@ -8020,7 +7873,7 @@ is currently in [stage
 
 It allows us to define a property in an existing object using a
 property descriptor.
-**var**
+<b>var</b>
 obj
 =
 {
@@ -8053,13 +7906,13 @@ foo
 Object  .defineProperty
 can be called with the following options:
 Object.defineProperty(obj, &apos;nameOfTheProperty&apos;, { value:
-valueOfTheProperty, writable: **true**, *// if false, the property is
-read-only* configurable : **true**, *// true means the property can be
-changed later* enumerable : **true** *// true means property can be
-enumerated such as in a for..in loop* });
+valueOfTheProperty, writable: <b>true</b>, // <i> if false, the property is
+read-only</i> configurable : <b>true</b>, // <i> true means the property can be
+changed later</i> enumerable : <b>true</b> // <i> true means property can be
+enumerated such as in a for..in loop</i> });
 Object .defineProperties
 allows you to define multiple properties at a time.
-**var**
+<b>var</b>
 obj
 =
 {
@@ -8077,11 +7930,11 @@ property1
 {
 value
 :
-**true**
+<b>true</b>
 ,
 writable
 :
-**true**
+<b>true</b>
 }
 ,
 property2
@@ -8093,7 +7946,7 @@ value
 ,
 writable
 :
-**false**
+<b>false</b>
 }
 }
 )
@@ -8107,17 +7960,17 @@ writable
 Treat a property as a combination of two functions, one to get the
 value from it, and another one to set the value in it.
 
-The **get** property of the property descriptor is a function that
+The <b>get</b> property of the property descriptor is a function that
 will be called to retrieve the value from the property.
 
-The **set** property is also a function, it will be called when the
+The <b>set</b> property is also a function, it will be called when the
 property has been assigned a value, and the new value will be passed
 as an argument.
 
-You cannot assign a value or writable to a descriptor that has **get**
-or **set**
+You cannot assign a value or writable to a descriptor that has <b>get</b>
+or <b>set</b>
 
-**var**
+<b>var</b>
 person
 =
 {
@@ -8139,38 +7992,38 @@ person
 &apos;fullName&apos;
 ,
 {
-**get**
+<b>get</b>
 :
-**function**
+<b>function</b>
 (
 )
 {
-**return**
-**this**
+<b>return</b>
+<b>this</b>
 .
 name
 &plus;
 &quot; &quot;
 &plus;
-**this**
+<b>this</b>
 .
 surname
 ;
 }
 ,
-**set**
+<b>set</b>
 :
-**function**
+<b>function</b>
 (
 value
 )
 {
 &lbrack;
-**this**
+<b>this</b>
 .
 name
 ,
-**this**
+<b>this</b>
 .
 surname
 &rbrack;
@@ -8192,7 +8045,7 @@ person.
 fullName
 )
 ;
-*// -&amp;quot;John Doe&quot;*
+// <i> -&amp;quot;John Doe&quot;</i>
 person.
 surname
 =
@@ -8205,7 +8058,7 @@ person.
 fullName
 )
 ;
-*// -&amp;quot;John Hill&quot;*
+// <i> -&amp;quot;John Hill&quot;</i>
 person.
 fullName
 =
@@ -8217,7 +8070,7 @@ log
 person.
 name
 )
-*// -&amp;quot;Mary&quot;*
+// <i> -&amp;quot;Mary&quot;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-9">Section 13.9: Dynamic / variable property names</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -8225,7 +8078,7 @@ name
 Sometimes the property name needs to be stored into a variable. In
 this example, we ask the user what word needs to be looked up, and
 then provide the result from an object I&apos;ve named dictionary.
-**var**
+<b>var</b>
 dictionary
 =
 {
@@ -8248,16 +8101,16 @@ apple
 Apple
 :
 &apos;Steve Jobs rocks!&apos;
-*// properties are case-sensitive*
+// <i> properties are case-sensitive</i>
 }
-**var**
+<b>var</b>
 word
 =
 prompt
 (
 &apos;What word would you like to look up today?&apos;
 )
-**var**
+<b>var</b>
 definition
 =
 dictionary
@@ -8269,8 +8122,8 @@ alert
 word
 &plus;
 &apos;
-**&bsol;&bsol;n**
-**&bsol;&bsol;n**
+<b>&bsol;&bsol;n</b>
+<b>&bsol;&bsol;n</b>
 &apos;
 &plus;
 definition
@@ -8279,26 +8132,26 @@ Note how we are using &lbrack;&rbrack; bracket notation to look at the variable
 named word; if we were to use the traditional . notation, then it
 would take the value literally, hence:
 
-console.log(dictionary.word) *// doesn&apos;t work because word is taken
-literally and dictionary has no field named &grave;word&grave;*
-console.log(dictionary.apple) *// it works! because apple is taken
-literally*
-console.log(dictionary&lbrack;word&rbrack;) *// it works! because word is a
+console.log(dictionary.word) // <i> doesn&apos;t work because word is taken
+literally and dictionary has no field named &grave;word&grave;</i>
+console.log(dictionary.apple) // <i> it works! because apple is taken
+literally</i>
+console.log(dictionary&lbrack;word&rbrack;) // <i> it works! because word is a
 variable, and the user perfectly typed in one of the words from our
-dictionary when prompted*
-console.log(dictionary&lbrack;apple&rbrack;) *// error! apple is not defined (as a
-variable)*
+dictionary when prompted</i>
+console.log(dictionary&lbrack;apple&rbrack;) // <i> error! apple is not defined (as a
+variable)</i>
 You could also write literal values with &lbrack;&rbrack; notation by replacing
 the variable word with a string &apos;apple&apos;. See &lbrack;Properties with
 special characters or reserved words&rbrack; example.
 
 You can also set dynamic properties with the bracket syntax:
-**var**
+<b>var</b>
 property
 =
 &quot;test&quot;
 ;
-**var**
+<b>var</b>
 obj
 =
 {
@@ -8317,14 +8170,14 @@ obj.
 test
 )
 ;
-*//1*
+// <i>1</i>
 It does the same as:
-**var**
+<b>var</b>
 property
 =
 &quot;test&quot;
 ;
-**var**
+<b>var</b>
 obj
 =
 {
@@ -8343,13 +8196,13 @@ property
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 form.elements
-**Disclaimer:** Creating array-like objects is not recommend. However,
+<b>Disclaimer:</b> Creating array-like objects is not recommend. However,
 it is helpful to understand how they work, especially when working
 with DOM. This will explain why regular array operations don&apos;t work
 on DOM objects returned from many DOM document functions. (i.e.
 querySelectorAll, ) Supposing we created the following object which
 has some properties you would expect to see in an Array.
-**var**
+<b>var</b>
 anObject
 =
 {
@@ -8371,7 +8224,7 @@ length
 }
 ;
 Then we&apos;ll create an array.
-**var**
+<b>var</b>
 anArray
 =
 &lbrack;
@@ -8383,18 +8236,18 @@ anArray
 Now, notice how we can inspect both the object, and the array in the
 same way.
 
-console.log(anArray&lbrack;0&rbrack;, anObject&lbrack;0&rbrack;); *// outputs: zero. zero!*
-console.log(anArray&lbrack;1&rbrack;, anObject&lbrack;1&rbrack;); *// outputs: one. one!*
+console.log(anArray&lbrack;0&rbrack;, anObject&lbrack;0&rbrack;); // <i> outputs: zero. zero!</i>
+console.log(anArray&lbrack;1&rbrack;, anObject&lbrack;1&rbrack;); // <i> outputs: one. one!</i>
 
-console.log(anArray.length, anObject.length); *// outputs: 2
-interesting*
+console.log(anArray.length, anObject.length); // <i> outputs: 2
+interesting</i>
 
-console.log(anArray.foo, anObject.foo); *// outputs: undefined bar*
+console.log(anArray.foo, anObject.foo); // <i> outputs: undefined bar</i>
 
 Since anArray is actually an object, just like anObject, we can even
 add custom wordy properties to anArray
 
-**Disclaimer:**
+<b>Disclaimer:</b>
 Arrays with custom properties are not usually recommended as they can be
 confusing, but it
 can be useful in advanced cases where you need the optimized functions
@@ -8418,10 +8271,10 @@ length
 =
 2
 ;
-Then you can use the C-style **for** loop to iterate over anObject
+Then you can use the C-style <b>for</b> loop to iterate over anObject
 just as if it were an Array. See Array Iteration
-  Array                   .    **prototype**
-Note that anObject is only an **array-like** object. (also known as a
+  Array                   .    <b>prototype</b>
+Note that anObject is only an <b>array-like</b> object. (also known as a
 List) It is not a true Array. This is important, because functions
 like push and forEach (or any convenience function found in ) will not
 work by default on array-like objects.
@@ -8430,13 +8283,13 @@ Many of the DOM document functions will return a List (i.e.
 querySelectorAll, ) which is similar to the array-like anObject we
 created above. See Converting Array-like Objects to Arrays
 
-console.log(**typeof** anArray == &apos;object&apos;, **typeof** anObject ==
-&apos;object&apos;); *// outputs: true true* console.log(anArray
-**instanceof** Object, anObject **instanceof** Object); *// outputs:
-true true* console.log(anArray **instanceof** Array, anObject
-**instanceof** Array); *// outputs: true false*
-console.log(Array.isArray(anArray), Array.isArray(anObject)); *//
-outputs: true false*
+console.log(<b>typeof</b> anArray == &apos;object&apos;, <b>typeof</b> anObject ==
+&apos;object&apos;); // <i> outputs: true true</i> console.log(anArray
+<b>instanceof</b> Object, anObject <b>instanceof</b> Object); // <i> outputs:
+true true</i> console.log(anArray <b>instanceof</b> Array, anObject
+<b>instanceof</b> Array); // <i> outputs: true false</i>
+console.log(Array.isArray(anArray), Array.isArray(anObject)); // <i>
+outputs: true false</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-11">Section 13.11: Object.seal</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -8451,7 +8304,7 @@ property descriptors can&apos;t be converted to another type. Unlike it
 does allow properties to be edited.
 
 Attempts to do this operations on a sealed object will fail silently
-**var**
+<b>var</b>
 obj
 =
 {
@@ -8461,11 +8314,11 @@ foo
 ,
 bar
 :
-**function**
+<b>function</b>
 (
 )
 {
-**return**
+<b>return</b>
 &apos;bar&apos;
 ;
 }
@@ -8485,25 +8338,25 @@ newFoo
 obj.
 bar
 =
-**function**
+<b>function</b>
 (
 )
 {
-**return**
+<b>return</b>
 &apos;foo&apos;
 }
 ;
 obj.
 newFoo
 ;
-*// undefined*
+// <i> undefined</i>
 obj.
 bar
 (
 )
 ;
-*// &apos;foo&apos;*
-*// Can&apos;t make foo an accessor property*
+// <i> &apos;foo&apos;</i>
+// <i> Can&apos;t make foo an accessor property</i>
 Object
 .
 defineProperty
@@ -8513,21 +8366,21 @@ obj
 &apos;foo&apos;
 ,
 {
-**get**
+<b>get</b>
 :
-**function**
+<b>function</b>
 (
 )
 {
-**return**
+<b>return</b>
 &apos;newFoo&apos;
 ;
 }
 }
 )
 ;
-*// TypeError*
-*// But you can make it read only*
+// <i> TypeError</i>
+// <i> But you can make it read only</i>
 Object
 .
 defineProperty
@@ -8539,11 +8392,11 @@ obj
 {
 writable
 :
-**false**
+<b>false</b>
 }
 )
 ;
-*// TypeError*
+// <i> TypeError</i>
 obj.
 foo
 =
@@ -8552,17 +8405,17 @@ foo
 obj.
 foo
 ;
-*// &apos;foo&apos;;*
+// <i> &apos;foo&apos;;</i>
 In strict mode these operations will throw a
 TypeError
 (
-**function**
+<b>function</b>
 (
 )
 {
 &apos;use strict&apos;
 ;
-**var**
+<b>var</b>
 obj
 =
 {
@@ -8583,7 +8436,7 @@ newFoo
 =
 &apos;newFoo&apos;
 ;
-*// TypeError*
+// <i> TypeError</i>
 }
 (
 )
@@ -8594,7 +8447,7 @@ newFoo
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 Given this object:
-**var**
+<b>var</b>
 obj
 =
 {
@@ -8613,7 +8466,7 @@ c
 }
 ;
 You can convert its values to an array by doing:
-**var**
+<b>var</b>
 array
 =
 Object
@@ -8625,12 +8478,12 @@ obj
 .
 map
 (
-**function**
+<b>function</b>
 (
 key
 )
 {
-**return**
+<b>return</b>
 obj
 &lbrack;
 key
@@ -8645,24 +8498,24 @@ log
 array
 )
 ;
-*// &lbrack;&quot;hello&quot;, &quot;this is&quot;, &quot;javascript!&quot;&rbrack;*
+// <i> &lbrack;&quot;hello&quot;, &quot;this is&quot;, &quot;javascript!&quot;&rbrack;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-13">Section 13.13: Retrieving properties from an object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-***Characteristics of properties :***
+<i><b>Characteristics of properties :</b></i>
 
-Properties that can be retrieved from an *object* could have the
+Properties that can be retrieved from an <i>object</i> could have the
 following characteristics,
 
 Enumerable Non - Enumerable own
 
 While creating the properties using
-[*Object.defineProperty(ies)*](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty),
-we could set its characteristics except *&quot;own&quot;*.
+[<i>Object.defineProperty(ies)</i>](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty),
+we could set its characteristics except <i>&quot;own&quot;</i>.
 
 Properties which are available in the direct level not in the
-*prototype* level (&lowbar;&lowbar;proto&lowbar;&lowbar;) of an object are called as *own*
+<i>prototype</i> level (&lowbar;&lowbar;proto&lowbar;&lowbar;) of an object are called as <i>own</i>
 properties.
 Object  . defindProperty ( ies
 
@@ -8670,23 +8523,23 @@ And the properties that are added into an object without using ) will
 don&apos;t have its enumerable characteristic. That means it be considered
 as true.
 
-***Purpose of enumerability :***
+<i><b>Purpose of enumerability :</b></i>
 
 The main purpose of setting enumerable characteristics to a property
 is to make the particular property&apos;s availability when retrieving it
 from its object, by using different programmatical methods. Those
 different methods will be discussed deeply below.
-***Methods of retrieving properties :***
+<i><b>Methods of retrieving properties :</b></i>
 Properties from an object could be retrieved by the following methods,
-[**for**..**in**](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in)
+[<b>for</b>..<b>in</b>](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in)
 1&period; loop
 
 This loop is very useful in retrieving enumerable properties from an
 object. Additionally this loop will retrieve enumerable own properties
 as well as it will do the same retrieval by traversing through the
 prototype chain until it sees the prototype as null.
-*//Ex 1 : Simple data*
-**var**
+// <i>Ex 1 : Simple data</i>
+<b>var</b>
 x
 =
 {
@@ -8704,10 +8557,10 @@ props
 &lbrack;
 &rbrack;
 ;
-**for**
+<b>for</b>
 (
 prop
-**in**
+<b>in</b>
 x
 )
 {
@@ -8724,9 +8577,9 @@ log
 props
 )
 ;
-*//&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;*
-*//Ex 2 : Data with enumerable properties in prototype chain*
-**var**
+// <i>&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;</i>
+// <i>Ex 2 : Data with enumerable properties in prototype chain</i>
+<b>var</b>
 x
 =
 {
@@ -8748,10 +8601,10 @@ props
 &lbrack;
 &rbrack;
 ;
-**for**
+<b>for</b>
 (
 prop
-**in**
+<b>in</b>
 x
 )
 {
@@ -8768,9 +8621,9 @@ log
 props
 )
 ;
-*//&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;*
-*//Ex 3 : Data with non enumerable properties*
-**var**
+// <i>&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;</i>
+// <i>Ex 3 : Data with non enumerable properties</i>
+<b>var</b>
 x
 =
 {
@@ -8799,14 +8652,14 @@ value
 ,
 enumerable
 :
-**false**
+<b>false</b>
 }
 )
 ;
-**for**
+<b>for</b>
 (
 prop
-**in**
+<b>in</b>
 x
 )
 {
@@ -8823,12 +8676,12 @@ log
 props
 )
 ;
-*//&lbrack;&quot;a&quot;&rbrack;*
+// <i>&lbrack;&quot;a&quot;&rbrack;</i>
 [Object](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)   [.](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)   [keys](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
 2.[()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
 function
-[**for**..**in**](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in)
-[Object](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [.](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [**prototype**](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [.](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [hasOwnProperty](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)
+[<b>for</b>..<b>in</b>](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in)
+[Object](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [.](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [<b>prototype</b>](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [.](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [hasOwnProperty](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)
 
 This function was unveiled as a part of ECMAScript 5. It is used to
 retrieve enumerable own properties from an object. Prior to its
@@ -8836,8 +8689,8 @@ release people used to retrieve own properties from an object by
 combining loop and
 [()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)
 function.
-*//Ex 1 : Simple data*
-**var**
+// <i>Ex 1 : Simple data</i>
+<b>var</b>
 x
 =
 {
@@ -8867,9 +8720,9 @@ log
 props
 )
 ;
-*//&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;*
-*//Ex 2 : Data with enumerable properties in prototype chain*
-**var**
+// <i>&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;</i>
+// <i>Ex 2 : Data with enumerable properties in prototype chain</i>
+<b>var</b>
 x
 =
 {
@@ -8903,9 +8756,9 @@ log
 props
 )
 ;
-*//&lbrack;&quot;a&quot;&rbrack;*
-*//Ex 3 : Data with non enumerable properties*
-**var**
+// <i>&lbrack;&quot;a&quot;&rbrack;</i>
+// <i>Ex 3 : Data with non enumerable properties</i>
+<b>var</b>
 x
 =
 {
@@ -8931,7 +8784,7 @@ value
 ,
 enumerable
 :
-**false**
+<b>false</b>
 }
 )
 ;
@@ -8958,7 +8811,7 @@ This function will retrieve both enumerable and non enumerable, own
 properties from an object. It was also released as a part of
 ECMAScript 5.
 // <i>Ex 1 : Simple data</i>
-**var**
+<b>var</b>
 x
 =
 {
@@ -8988,9 +8841,9 @@ log
 props
 )
 ;
-*//&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;*
-*//Ex 2 : Data with enumerable properties in prototype chain*
-**var**
+// <i>&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;</i>
+// <i>Ex 2 : Data with enumerable properties in prototype chain</i>
+<b>var</b>
 x
 =
 {
@@ -9024,9 +8877,9 @@ log
 props
 )
 ;
-*//&lbrack;&quot;a&quot;&rbrack;*
-*//Ex 3 : Data with non enumerable properties*
-**var**
+// <i>&lbrack;&quot;a&quot;&rbrack;</i>
+// <i>Ex 3 : Data with non enumerable properties</i>
+<b>var</b>
 x
 =
 {
@@ -9052,7 +8905,7 @@ value
 ,
 enumerable
 :
-**false**
+<b>false</b>
 }
 )
 ;
@@ -9071,11 +8924,11 @@ log
 props
 )
 ;
-*//&lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;*
-***Miscellaneous :***
+// <i>&lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;</i>
+<i><b>Miscellaneous :</b></i>
 A technique for retrieving all (own, enumerable, non enumerable, all
 prototype level) properties from an object is given below,
-**function**
+<b>function</b>
 getAllProperties
 (
 obj
@@ -9086,10 +8939,10 @@ props
 &rbrack;
 )
 {
-**return**
+<b>return</b>
 obj
 ==
-**null**
+<b>null</b>
 ?
 props
 :
@@ -9115,7 +8968,7 @@ obj
 )
 ;
 }
-**var**
+<b>var</b>
 x
 =
 {
@@ -9136,7 +8989,7 @@ c
 }
 }
 ;
-*//adding a non enumerable property to first level prototype*
+// <i>adding a non enumerable property to first level prototype</i>
 Object
 .
 defineProperty
@@ -9153,7 +9006,7 @@ value
 ,
 enumerable
 :
-**false**
+<b>false</b>
 }
 )
 ;
@@ -9190,7 +9043,7 @@ changed and no error will be thrown.
 
 The writable property in a property descriptor indicates whether that
 property can be changed or not.
-**var**
+<b>var</b>
 a
 =
 {
@@ -9211,7 +9064,7 @@ value
 ,
 writable
 :
-**false**
+<b>false</b>
 }
 )
 ;
@@ -9234,14 +9087,14 @@ original
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 <h5>Version ≥ 5</h5>
-**for**            (    &hellip; **in** &hellip;
+<b>for</b>            (    &hellip; <b>in</b> &hellip;
 
 We can avoid a property from showing up in ) loops
 
 The enumerable property of the property descriptor tells whether that
 property will be enumerated while looping through the object&apos;s
 properties.
-**var**
+<b>var</b>
 obj
 =
 {
@@ -9262,7 +9115,7 @@ value
 ,
 enumerable
 :
-**true**
+<b>true</b>
 }
 )
 ;
@@ -9281,15 +9134,15 @@ value
 ,
 enumerable
 :
-**false**
+<b>false</b>
 }
 )
 ;
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 prop
-**in**
+<b>in</b>
 obj
 )
 {
@@ -9318,7 +9171,7 @@ throw an exception.
 
 The configurable property of the property descriptor is used to
 disallow any further changes on the descriptor.
-**var**
+<b>var</b>
 obj
 =
 {
@@ -9340,11 +9193,11 @@ value
 ,
 writable
 :
-**false**
+<b>false</b>
 ,
 configurable
 :
-**false**
+<b>false</b>
 }
 )
 ;
@@ -9359,7 +9212,7 @@ obj
 {
 writable
 :
-**true**
+<b>true</b>
 }
 )
 ;
@@ -9384,7 +9237,7 @@ original value
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 Get the description of a specific property in an object.
-**var**
+<b>var</b>
 sampleObject
 =
 {
@@ -9423,9 +9276,9 @@ from accessing it). By and large, a property associates a name to a
 behavior (we can think of the behavior as a black box).
 
 There are two types of named properties:
-1.  *data property*: the property&apos;s name is associated with a value.
+1.  <i>data property</i>: the property&apos;s name is associated with a value.
 
-2.  *accessor property*: the property&apos;s name is associated with one or
+2.  <i>accessor property</i>: the property&apos;s name is associated with one or
     two accessor functions.
 Demonstration:
 obj.propertyName1 = 5; // <i>translates behind the scenes into</i>
@@ -9436,7 +9289,7 @@ obj.propertyName1 = 5; // <i>translates behind the scenes into</i>
 
 The property&apos;s type is determined by its descriptor&apos;s fields, and a
 property cannot be of both types.
-**Data descriptors** -
+<b>Data descriptors</b> -
 Required fields: value or writable or both Optional
 fields:configurable,enumerable
 Sample:
@@ -9447,59 +9300,59 @@ value
 ,
 writable
 :
-**true**
+<b>true</b>
 ;
 }
-**Accessor descriptors** -
-Required fields: **get** or **set** or both
+<b>Accessor descriptors</b> -
+Required fields: <b>get</b> or <b>set</b> or both
 Optional fields: configurable, enumerable
 Sample:
 {
-**get**
+<b>get</b>
 :
-**function**
+<b>function</b>
 (
 )
 {
-**return**
+<b>return</b>
 10
 ;
 }
 ,
 enumerable
 :
-**true**
+<b>true</b>
 }
-**meaning of fields and their defaults** configurable,enumerable and
+<b>meaning of fields and their defaults</b> configurable,enumerable and
 writable:
-These keys all default to **false**. configurable is **true** if and
+These keys all default to <b>false</b>. configurable is <b>true</b> if and
 only if the type of this property descriptor may be changed and if the
 property may be deleted from the corresponding object.
-enumerable is **true** if and only if this property shows up during
+enumerable is <b>true</b> if and only if this property shows up during
 enumeration of the properties on the corresponding object.
-writable is **true** if and only if the value associated with the
+writable is <b>true</b> if and only if the value associated with the
 property may be changed with an assignment operator.
-**get** and **set**:
-These keys default to **undefined**. **get** is a function which
-serves as a getter for the property, or **undefined** if there is no
+<b>get</b> and <b>set</b>:
+These keys default to <b>undefined</b>. <b>get</b> is a function which
+serves as a getter for the property, or <b>undefined</b> if there is no
 getter. The function return will be used as the value of the property.
-**set** is a function which serves as a setter for the property, or
-**undefined** if there is no setter. The function will receive as only
+<b>set</b> is a function which serves as a setter for the property, or
+<b>undefined</b> if there is no setter. The function will receive as only
 argument the new value being assigned to the property.
 value:
-This key defaults to **undefined**.
+This key defaults to <b>undefined</b>.
 The value associated with the property. Can be any valid JavaScript
 value (number, object, function, etc).
 Example:
-**var** obj = {propertyName1: 1}; *//the pair is actually
-(&apos;propertyName1&apos;, {value:1,* *// writable:true,*
+<b>var</b> obj = {propertyName1: 1}; // <i>the pair is actually
+(&apos;propertyName1&apos;, {value:1,</i> // <i> writable:true,</i>
 // <i>enumerable:true,</i>
 // <i>configurable:true})</i>
 Object.defineProperty(obj, &apos;propertyName2&apos;,
-{**get**: **function**() { console.log(&apos;this will be logged &apos; +
+{<b>get</b>: <b>function</b>() { console.log(&apos;this will be logged &apos; +
 &apos;every time propertyName2 is accessed to get its value&apos;); },
-**set**: **function**() { console.log(&apos;and this will be logged &apos; +
-&apos;every time propertyName2**&amp;amp;apos;**s value is tried to be set&apos;)
+<b>set</b>: <b>function</b>() { console.log(&apos;and this will be logged &apos; +
+&apos;every time propertyName2<b>&amp;amp;apos;</b>s value is tried to be set&apos;)
 
 // <i>will be treated like it has enumerable:false, configurable:false</i>
 
@@ -9526,7 +9379,7 @@ keys
 obj
 )
 returns an array of a given object&apos;s keys.
-**var**
+<b>var</b>
 obj
 =
 {
@@ -9543,7 +9396,7 @@ c
 &quot;javascript!&quot;
 }
 ;
-**var**
+<b>var</b>
 keys
 =
 Object
@@ -9559,7 +9412,7 @@ log
 keys
 )
 ;
-*// &lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&rbrack;*
+// <i> &lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&rbrack;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-20">Section 13.20: Properties with special characters or reserved words</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -9591,18 +9444,18 @@ myObject
 &apos;
 &rbrack;
 )
-**All-digit properties:**
+<b>All-digit properties:</b>
 In addition to special characters, property names that are all-digits
 will require bracket notation. However, in this case the property need
 not be written as a string.
-myObject&lbrack;123&rbrack; = &apos;hi!&apos; *// number 123 is automatically converted to
-a string* console.log(myObject&lbrack;&apos;123&apos;&rbrack;) *// notice how using string
-123 produced the same result* console.log(myObject&lbrack;&apos;12&apos; + &apos;3&apos;&rbrack;)
-*// string concatenation* console.log(myObject&lbrack;120 + 3&rbrack;) *//
-arithmetic, still resulting in 123 and producing the same result*
-console.log(myObject&lbrack;123.0&rbrack;) *// this works too because 123.0
-evaluates to 123* console.log(myObject&lbrack;&apos;123.0&apos;&rbrack;) *// this does NOT
-work, because &apos;123&apos; != &apos;123.0&apos;*
+myObject&lbrack;123&rbrack; = &apos;hi!&apos; // <i> number 123 is automatically converted to
+a string</i> console.log(myObject&lbrack;&apos;123&apos;&rbrack;) // <i> notice how using string
+123 produced the same result</i> console.log(myObject&lbrack;&apos;12&apos; + &apos;3&apos;&rbrack;)
+// <i> string concatenation</i> console.log(myObject&lbrack;120 + 3&rbrack;) // <i>
+arithmetic, still resulting in 123 and producing the same result</i>
+console.log(myObject&lbrack;123.0&rbrack;) // <i> this works too because 123.0
+evaluates to 123</i> console.log(myObject&lbrack;&apos;123.0&apos;&rbrack;) // <i> this does NOT
+work, because &apos;123&apos; != &apos;123.0&apos;</i>
 However, leading zeros are not recommended as that is interpreted as
 Octal notation. (TODO, we should produce and link to an example
 describing octal, hexadecimal and exponent notation)
@@ -9612,7 +9465,7 @@ See also: &lbrack;Arrays are Objects&rbrack; example.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 <h5>Version ≥ 6</h5>
-**var**
+<b>var</b>
 myIterableObject
 =
 {
@@ -9625,42 +9478,42 @@ Symbol.
 iterator
 &rbrack;
 =
-**function**
+<b>function</b>
 (
 )
 {
 // <i>The iterator should return an Iterator object</i>
-**return**
+<b>return</b>
 {
 // <i>The Iterator object must implement a method, next()</i>
 next
 :
-**function**
+<b>function</b>
 (
 )
 {
 // <i>next must itself return an IteratorResult object</i>
-**if**
+<b>if</b>
 (
 !
-**this**
+<b>this</b>
 .
 iterated
 )
 {
-**this**
+<b>this</b>
 .
 iterated
 =
-**true**
+<b>true</b>
 ;
 // <i>The IteratorResult object has two properties</i>
-**return**
+<b>return</b>
 {
 // <i>whether the iteration is complete, and</i>
 done
 :
-**false**
+<b>false</b>
 ,
 // <i>the value of the current iteration</i>
 value
@@ -9669,26 +9522,26 @@ value
 }
 ;
 }
-**return**
+<b>return</b>
 {
 // <i>When iteration is complete, just the done property is needed</i>
 done
 :
-**true**
+<b>true</b>
 }
 ;
 }
 ,
 iterated
 :
-**false**
+<b>false</b>
 }
 ;
 }
 ;
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 c of myIterableObject
 )
 {
@@ -9714,10 +9567,10 @@ The [proposed
 ()](https://github.com/tc39/proposal-object-values-entries) method
 returns an array of key/value pairs for the given object. It does not
 return
-Array . **prototype**. entries   (), but the Array returned Object .entries
+Array . <b>prototype</b>. entries   (), but the Array returned Object .entries
 by
 an iterator like () can be iterated regardless.
-**const**
+<b>const</b>
 obj
 =
 {
@@ -9762,9 +9615,9 @@ Results in:
 &rbrack;
 &rbrack;
 It is an useful way of iterating over the key/value pairs of an object:
-**for**
+<b>for</b>
 (
-**const**
+<b>const</b>
 &lbrack;
 key
 ,
@@ -9785,7 +9638,7 @@ log
 key
 )
 ;
-*// &quot;one&quot;, &quot;two&quot; and &quot;three&quot;*
+// <i> &quot;one&quot;, &quot;two&quot; and &quot;three&quot;</i>
 console.
 log
 (
@@ -9805,7 +9658,7 @@ The () method returns an array of a given object&apos;s own enumerable
 property values, in the same order as that provided by a for&hellip;in
 loop (the difference being that a for-in loop enumerates properties in
 the prototype chain as well).
-**var**
+<b>var</b>
 obj
 =
 {
@@ -9833,8 +9686,8 @@ obj
 )
 )
 ;
-*// &lbrack;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&rbrack;*
-**Note:**
+// <i> &lbrack;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&rbrack;</i>
+<b>Note:</b>
 For browser support, please refer to this
 [link](http://kangax.github.io/compat-table/es2016plus/#test-Object.values)
 <h2 id="ch14">Chapter 14: Arithmetic (Math)</h2>
@@ -9842,17 +9695,17 @@ For browser support, please refer to this
 <h3 id="ch14-1">Section 14.1: Constants</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**Constants Description Approximate**
+<b>Constants Description Approximate</b>
 Math
-.E Base of natural logarithm *e* 2.718
+.E Base of natural logarithm <i>e</i> 2.718
 Math .LN10
 Natural logarithm of 10 2.302
 Math .LN2
 Natural logarithm of 2 0.693
 Math.LOG10E
-Base 10 logarithm of *e* 0.434
+Base 10 logarithm of <i>e</i> 0.434
 Math.LOG2E
-Base 2 logarithm of *e* 1.442
+Base 2 logarithm of <i>e</i> 1.442
 Math.PI
 Pi: the ratio of circle circumference to
 3.14 diameter (π)
@@ -9880,7 +9733,7 @@ Number.NEGATIVE_INFINITY
 Value of negative infinity (-∞)
 Number.POSITIVE_INFINITY
 Value of positive infinity (∞)
-**Infinity** Value of positive infinity (∞)
+<b>Infinity</b> Value of positive infinity (∞)
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-2">Section 14.2: Remainder / Modulus (%)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -9980,18 +9833,18 @@ Suppose that we need to increment integer value from 0 to (but not
 including) n, so the next value after n-1 become
 
 0&period; This can be done by such pseudocode:
-**var**
+<b>var</b>
 n
 =
 &hellip;
 ;
 // <i>given n</i>
-**var**
+<b>var</b>
 i
 =
 0
 ;
-**function**
+<b>function</b>
 inc
 (
 )
@@ -10009,7 +9862,7 @@ n
 }
 while
 (
-**true**
+<b>true</b>
 )
 {
 inc
@@ -10022,18 +9875,18 @@ Now generalize the above problem and suppose that we need to allow to
 both increment and decrement that value from 0 to (not including) n,
 so the next value after n-1 become 0 and the previous value before 0
 become n-1.
-**var**
+<b>var</b>
 n
 =
 &hellip;
 ;
 // <i>given n</i>
-**var**
+<b>var</b>
 i
 =
 0
 ;
-**function**
+<b>function</b>
 delta
 (
 d
@@ -10057,16 +9910,16 @@ n
 delta
 Now we can call () function passing any integer, both positive and
 negative, as delta parameter.
-**Using modulus to obtain the fractional part of a number**
-**var**
+<b>Using modulus to obtain the fractional part of a number</b>
+<b>var</b>
 myNum
 =
 10
 /
 4
 ;
-*// 2.5*
-**var**
+// <i> 2.5</i>
+<b>var</b>
 fraction
 =
 myNum
@@ -10093,11 +9946,11 @@ myNum
 <h3 id="ch14-3">Section 14.3: Rounding</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**Rounding**
+<b>Rounding</b>
 Math.round
-() will round the value to the closest integer using *half round up*
+() will round the value to the closest integer using <i>half round up</i>
 to break ties.
-**var**
+<b>var</b>
 a
 =
 Math
@@ -10108,7 +9961,7 @@ round
 )
 ;
 // <i>a is now 2</i>
-**var**
+<b>var</b>
 b
 =
 Math
@@ -10119,7 +9972,7 @@ round
 )
 ;
 // <i>b is now 3</i>
-**var**
+<b>var</b>
 c
 =
 Math
@@ -10131,7 +9984,7 @@ round
 ;
 // <i>c is now 3</i>
 But
-**var**
+<b>var</b>
 c
 =
 Math
@@ -10143,7 +9996,7 @@ round
 )
 ;
 // <i>c is now -3</i>
-**var**
+<b>var</b>
 c
 =
 Math
@@ -10160,10 +10013,10 @@ Note how - is rounded to -2. This is because half-way values are
 always rounded up, that is they&apos;re rounded to the integer with the
 next higher value.
 
-**Rounding up**
+<b>Rounding up</b>
 Math.ceil
 () will round the value up.
-**var**
+<b>var</b>
 a
 =
 Math
@@ -10174,7 +10027,7 @@ ceil
 )
 ;
 // <i>a is now 3</i>
-**var**
+<b>var</b>
 b
 =
 Math
@@ -10186,7 +10039,7 @@ ceil
 ;
 // <i>b is now 3</i>
 ceiling a negative number will round towards zero
-**var**
+<b>var</b>
 c
 =
 Math
@@ -10198,10 +10051,10 @@ ceil
 )
 ;
 // <i>c is now 1</i>
-**Rounding down**
+<b>Rounding down</b>
 Math.floor
 () will round the value down.
-**var**
+<b>var</b>
 a
 =
 Math
@@ -10212,7 +10065,7 @@ floor
 )
 ;
 // <i>a is now 2</i>
-**var**
+<b>var</b>
 b
 =
 Math
@@ -10224,7 +10077,7 @@ floor
 ;
 // <i>b is now 2</i>
 flooring a negative number will round it away from zero.
-**var**
+<b>var</b>
 c
 =
 Math
@@ -10236,46 +10089,46 @@ floor
 )
 ;
 // <i>c is now -1</i>
-**Truncating**
+<b>Truncating</b>
 2147483649
-**Caveat**: using bitwise operators (except &gt;&gt;&gt;) only applies to
+<b>Caveat</b>: using bitwise operators (except &gt;&gt;&gt;) only applies to
 numbers between - and 2147483648.
 
-2.3 &vert; 0; // <i>2 (floor)</i> -2.3 &vert; 0; // <i>-2 (ceil)</i> **NaN** &vert; 0; // <i>0</i>
+2.3 &vert; 0; // <i>2 (floor)</i> -2.3 &vert; 0; // <i>-2 (ceil)</i> <b>NaN</b> &vert; 0; // <i>0</i>
 <h5>Version ≥ 6</h5>
 Math.trunc
 ()
 Math.trunc(2.3); // <i>2 (floor)</i> Math.trunc(-2.3); // <i>-2 (ceil)</i>
 Math.trunc(2147483648.1); // <i>2147483648 (floor)</i>
 Math.trunc(-2147483649.1); // <i>-2147483649 (ceil)</i>
-Math.trunc(**NaN**); // <i>NaN</i>
-**Rounding to decimal places**
+Math.trunc(<b>NaN</b>); // <i>NaN</i>
+<b>Rounding to decimal places</b>
   Math    .   floor     ,   Math    .   ceil    (), and       Math    .   round
 () can be used to round to a number of decimal places
 
 To round to 2 decimal places:
 
-**var** myNum = 2/3; *// 0.6666666666666666* **var** multiplier = 100;
-**var** a = Math.round(myNum &ast; multiplier) / multiplier; // <i>0.67</i>
-**var** b = Math.ceil (myNum &ast; multiplier) / multiplier; // <i>0.67</i>
-**var** c = Math.floor(myNum &ast; multiplier) / multiplier; // <i>0.66</i>
+<b>var</b> myNum = 2/3; // <i> 0.6666666666666666</i> <b>var</b> multiplier = 100;
+<b>var</b> a = Math.round(myNum &ast; multiplier) / multiplier; // <i>0.67</i>
+<b>var</b> b = Math.ceil (myNum &ast; multiplier) / multiplier; // <i>0.67</i>
+<b>var</b> c = Math.floor(myNum &ast; multiplier) / multiplier; // <i>0.66</i>
 You can also round to a number of digits:
-**var**
+<b>var</b>
 myNum
 =
 10000
 /
 3
 ;
-*// 3333.3333333333335*
-**var**
+// <i> 3333.3333333333335</i>
+<b>var</b>
 multiplier
 =
 1
 /
 100
 ;
-**var**
+<b>var</b>
 a
 =
 Math
@@ -10290,13 +10143,13 @@ multiplier
 multiplier
 ;
 // <i>3300</i>
-**var** b = Math.ceil (myNum &ast; multiplier) / multiplier; // <i>3400</i>
-**var** c = Math.floor(myNum &ast; multiplier) / multiplier; // <i>3300</i> As a
+<b>var</b> b = Math.ceil (myNum &ast; multiplier) / multiplier; // <i>3400</i>
+<b>var</b> c = Math.floor(myNum &ast; multiplier) / multiplier; // <i>3300</i> As a
 more usable function:
 // <i>value is the value to round</i>
 // <i>places if positive the number of decimal places to round to</i>
 // <i>places if negative the number of digits to round to</i>
-**function**
+<b>function</b>
 roundTo
 (
 value
@@ -10304,7 +10157,7 @@ value
 places
 )
 {
-**var**
+<b>var</b>
 power
 =
 Math
@@ -10316,7 +10169,7 @@ pow
 places
 )
 ;
-**return**
+<b>return</b>
 Math
 .
 round
@@ -10329,7 +10182,7 @@ power
 power
 ;
 }
-**var**
+<b>var</b>
 myNum
 =
 10000
@@ -10361,13 +10214,13 @@ myNum
 2
 )
 ;
-*// 3300*
+// <i> 3300</i>
 And the variants for
 ceil
 and
 floor
 :
-**function**
+<b>function</b>
 ceilTo
 (
 value
@@ -10375,7 +10228,7 @@ value
 places
 )
 {
-**var**
+<b>var</b>
 power
 =
 Math
@@ -10387,7 +10240,7 @@ pow
 places
 )
 ;
-**return**
+<b>return</b>
 Math
 .
 ceil
@@ -10400,7 +10253,7 @@ power
 power
 ;
 }
-**function**
+<b>function</b>
 floorTo
 (
 value
@@ -10408,7 +10261,7 @@ value
 places
 )
 {
-**var**
+<b>var</b>
 power
 =
 Math
@@ -10420,7 +10273,7 @@ pow
 places
 )
 ;
-**return**
+<b>return</b>
 Math
 .
 floor
@@ -10442,7 +10295,7 @@ power
 180  &ast; r / Math.PI
 All angles below are in radians. An angle r in radians has measure in
 degrees.
-**Sine**
+<b>Sine</b>
 Math
 .
 sin
@@ -10467,7 +10320,7 @@ r
 )
 This will return the hyperbolic arcsine of r.
 
-**Cosine**
+<b>Cosine</b>
 Math
 .
 cos
@@ -10492,7 +10345,7 @@ r
 )
 ;
 This will return the hyperbolic arccosine of r.
-**Tangent**
+<b>Tangent</b>
 Math
 .
 tan
@@ -10567,8 +10420,8 @@ including π.
 Note that all bitwise operations operate on 32-bit integers by passing
 any operands to the internal function
 [ToInt32](http://www.ecma-international.org/ecma-262/6.0/#sec-toint32).
-**Bitwise or**
-**var**
+<b>Bitwise or</b>
+<b>var</b>
 a
 ;
 a
@@ -10577,84 +10430,84 @@ a
 &vert;
 0b1010
 ;
-*// a === 0b1011*
-*// truth table*
-*// 1010 &vert; (or)*
-*// 0011*
-*// 1011 (result)*
-**Bitwise and**
+// <i> a === 0b1011</i>
+// <i> truth table</i>
+// <i> 1010 &vert; (or)</i>
+// <i> 0011</i>
+// <i> 1011 (result)</i>
+<b>Bitwise and</b>
 a
 =
 0b0011
 &
 0b1010
 ;
-*// a === 0b0010*
-*// truth table*
-*// 1010 & (and)*
-*// 0011*
-*// 0010 (result)*
-**Bitwise not**
+// <i> a === 0b0010</i>
+// <i> truth table</i>
+// <i> 1010 & (and)</i>
+// <i> 0011</i>
+// <i> 0010 (result)</i>
+<b>Bitwise not</b>
 a
 =
 &bsol;~0b0011
 ;
-*// a === 0b1100*
-*// truth table*
-*// 10 &bsol;~(not)*
-*// 01 (result)*
-**Bitwise**
-**xor**
-**(exclusive or)**
+// <i> a === 0b1100</i>
+// <i> truth table</i>
+// <i> 10 &bsol;~(not)</i>
+// <i> 01 (result)</i>
+<b>Bitwise</b>
+<b>xor</b>
+<b>(exclusive or)</b>
 a
 =
 0b1010
 &Hat;
 0b0011
 ;
-*// a === 0b1001*
-*// truth table*
-*// 1010 &Hat; (xor)*
-*// 0011*
-*// 1001 (result)*
-**Bitwise**
-**left shift**
+// <i> a === 0b1001</i>
+// <i> truth table</i>
+// <i> 1010 &Hat; (xor)</i>
+// <i> 0011</i>
+// <i> 1001 (result)</i>
+<b>Bitwise</b>
+<b>left shift</b>
 a
 =
 0b0001
 &lt;&lt;
 1
 ;
-*// a === 0b0010*
+// <i> a === 0b0010</i>
 a
 =
 0b0001
 &lt;&lt;
 2
 ;
-*// a === 0b0100*
+// <i> a === 0b0100</i>
 a
 =
 0b0001
 &lt;&lt;
 3
 ;
-*// a === 0b1000*
+// <i> a === 0b1000</i>
 Math.pow (2, n
 Shift left is equivalent to integer multiply by ). When doing integer
 math, shift can significantly improve the speed of some math
 operations.
-**var**
+<b>var</b>
 n
 =
 2
 ;
-**var**
+<b>var</b>
 a
 =
 5.4
 ;
-**var**
+<b>var</b>
 result
 =
 (
@@ -10679,64 +10532,64 @@ pow
 n
 )
 ;
-*// result is true*
+// <i> result is true</i>
 a
 =
 5.4
 &lt;&lt;
 n
 ;
-*// 20*
-**Bitwise right shift &gt;&lpar;Sign-propagating shift) &gt;&gt;&lpar;Zero-fill
-right shift)**
+// <i> 20</i>
+<b>Bitwise right shift &gt;&lpar;Sign-propagating shift) &gt;&gt;&lpar;Zero-fill
+right shift)</b>
 a
 =
 0b1001
 &gt;&gt;
 1
 ;
-*// a === 0b0100*
+// <i> a === 0b0100</i>
 a
 =
 0b1001
 &gt;&gt;
 2
 ;
-*// a === 0b0010*
+// <i> a === 0b0010</i>
 a
 =
 0b1001
 &gt;&gt;
 3
 ;
-*// a === 0b0001*
+// <i> a === 0b0001</i>
 a
 =
 0b1001
 &gt;&gt;&gt;
 1
 ;
-*// a === 0b0100*
+// <i> a === 0b0100</i>
 a
 =
 0b1001
 &gt;&gt;&gt;
 2
 ;
-*// a === 0b0010*
+// <i> a === 0b0010</i>
 a
 =
 0b1001
 &gt;&gt;&gt;
 3
 ;
-*// a === 0b0001*
+// <i> a === 0b0001</i>
 A negative 32bit value always has the left most bit on:
-a = 0b11111111111111111111111111110111 &vert; 0; console.log(a); *// -9* b
-= a &gt;&bsol;2; *// leftmost bit is shifted 1 to the right then new left
-most bit is set to on (1)* console.log(b); *// -3* b = a &gt;&gt;&bsol;2; *//
+a = 0b11111111111111111111111111110111 &vert; 0; console.log(a); // <i> -9</i> b
+= a &gt;&bsol;2; // <i> leftmost bit is shifted 1 to the right then new left
+most bit is set to on (1)</i> console.log(b); // <i> -3</i> b = a &gt;&gt;&bsol;2; // <i>
 leftmost bit is shifted 1 to the right. the new left most bit is set
-to off (0)* console.log(b); *// 2147483643*
+to off (0)</i> console.log(b); // <i> 2147483643</i>
 The result of a &gt;&gt;&bsol;operation is always positive.
 The result of a &gt;&bsol;is always the same sign as the shifted value.
 Math.pow
@@ -10779,14 +10632,14 @@ n
 )
 )
 ;
-*// result is true*
+// <i> result is true</i>
 a
 =
 a
 &gt;&gt;
 n
 ;
-*// 16*
+// <i> 16</i>
 result
 =
 (
@@ -10816,18 +10669,18 @@ n
 )
 )
 ;
-*// result is true*
+// <i> result is true</i>
 a
 =
 a
 &gt;&gt;&gt;
 n
 ;
-*// 16*
+// <i> 16</i>
 Right shift zero fill (&gt;&gt;&gt;) on negative numbers is different. As
 JavaScript does not convert to unsigned ints when doing bit operations
 there is no operational equivalent:
-*// result is false*
+// <i> result is false</i>
 a
 =
 &minus;
@@ -10862,49 +10715,49 @@ n
 )
 )
 ;
-**Bitwise assignment operators**
+<b>Bitwise assignment operators</b>
 With the exception of not (&bsol;~) all the above bitwise operators can be
 used as assignment operators:
 a
 &vert;=
 b
 ;
-*// same as: a = a &vert; b;*
+// <i> same as: a = a &vert; b;</i>
 a
 &Hat;=
 b
 ;
-*// same as: a = a &Hat; b;*
+// <i> same as: a = a &Hat; b;</i>
 a
 &=
 b
 ;
-*// same as: a = a & b;*
+// <i> same as: a = a & b;</i>
 a
 &gt;&gt;=
 b
 ;
-*// same as: a = a &gt;&bsol;b;*
+// <i> same as: a = a &gt;&bsol;b;</i>
 a
 &gt;&gt;&gt;=
 b
 ;
-*// same as: a = a &gt;&gt;&bsol;b;*
+// <i> same as: a = a &gt;&gt;&bsol;b;</i>
 a
 &lt;&lt;=
 b
 ;
-*// same as: a = a &lt;&lt; b;*
-**Warning**: JavaScript uses Big Endian to store integers. This will
+// <i> same as: a = a &lt;&lt; b;</i>
+<b>Warning</b>: JavaScript uses Big Endian to store integers. This will
 not always match the Endian of the device/OS. When using typed arrays
 with bit lengths greater than 8 bits you should check if the
 environment is Little Endian or Big Endian before applying bitwise
 operations.
 
-**Warning**: Bitwise operators such as & and &vert; are **not** the same
+<b>Warning</b>: Bitwise operators such as & and &vert; are <b>not</b> the same
 as the logical operators && (and) and &vert;&vert; (or). They will provide
 incorrect results if used as logical operators. The &Hat; operator is
-**not** the power operator (*ab*).
+<b>not</b> the power operator (<i>ab</i>).
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-6">Section 14.6: Incrementing (++)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -10912,49 +10765,49 @@ incorrect results if used as logical operators. The &Hat; operator is
 The Increment operator (++) increments its operand by one.
 If used as a postfix, then it returns the value before incrementing.
 If used as a prefix, then it returns the value after incrementing.
-*//postfix*
-**var**
+// <i>postfix</i>
+<b>var</b>
 a
 =
 5
 ,
-*// 5*
+// <i> 5</i>
 b
 =
 a
 ++
 ,
-*// 5*
+// <i> 5</i>
 c
 =
 a
-*// 6*
+// <i> 6</i>
 In this case, a is incremented after setting b. So, b will be 5, and c
 will be 6.
-*//prefix*
-**var**
+// <i>prefix</i>
+<b>var</b>
 a
 =
 5
 ,
-*// 5*
+// <i> 5</i>
 b
 =
 ++
 a
 ,
-*// 6*
+// <i> 6</i>
 c
 =
 a
-*// 6*
+// <i> 6</i>
 In this case, a is incremented before setting b. So, b will be 6, and
 c will be 6.
-The increment and decrement operators are commonly used in **for**
+The increment and decrement operators are commonly used in <b>for</b>
 loops, for example:
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 i
 =
 0
@@ -10967,9 +10820,9 @@ i
 i
 )
 {
-*// do something awesome!*
+// <i> do something awesome!</i>
 }
-Notice how the *prefix* variant is used. This ensures that a
+Notice how the <i>prefix</i> variant is used. This ensures that a
 temporarily variable isn&apos;t needlessly created (to return the value
 prior to the operation).
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -10978,7 +10831,7 @@ prior to the operation).
 <!--
 Exponentiation makes the second operand the power of the first operand
 (ab).
-**var**
+<b>var</b>
 a
 =
 2
@@ -11001,7 +10854,7 @@ b
 c will now be 8
 Version &bsol;6
 Stage 3 ES2016 (ECMAScript 7) Proposal:
-**let**
+<b>let</b>
 a
 =
 2
@@ -11018,22 +10871,22 @@ b
 ;
 c will now be 8
 
-**Use Math.pow to find the nth root of a number.**
+<b>Use Math.pow to find the nth root of a number.</b>
 
 Finding the nth roots is the inverse of raising to the nth power. For
 example 2 to the power of 5 is 32. The 5th root of 32 is 2.
 
-Math.pow(v, 1 / n); *// where v is any positive real number* *// and n
-is any positive integer*
-**var** a = 16; **var** b = Math.pow(a, 1 / 2); *// return the square
-root of 16 = 4* **var** c = Math.pow(a, 1 / 3); *// return the cubed
-root of 16 = 2.5198420997897464* **var** d = Math.pow(a, 1 / 4); *//
-return the 4th root of 16 = 2*
+Math.pow(v, 1 / n); // <i> where v is any positive real number</i> // <i> and n
+is any positive integer</i>
+<b>var</b> a = 16; <b>var</b> b = Math.pow(a, 1 / 2); // <i> return the square
+root of 16 = 4</i> <b>var</b> c = Math.pow(a, 1 / 3); // <i> return the cubed
+root of 16 = 2.5198420997897464</i> <b>var</b> d = Math.pow(a, 1 / 4); // <i>
+return the 4th root of 16 = 2</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-8">Section 14.8: Random Integers and Floats</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**var**
+<b>var</b>
 a
 =
 Math
@@ -11045,12 +10898,12 @@ random
 Sample value of a: 0.21322848065742162
 Math.random
 () returns a random number between 0 (inclusive) and 1 (exclusive)
-**function**
+<b>function</b>
 getRandom
 (
 )
 {
-**return**
+<b>return</b>
 Math
 .
 random
@@ -11063,7 +10916,7 @@ min, max
 To use () to get a number from an arbitrary range (not &lbrack;0,1)) use
 this function to get a random number between min (inclusive) and max
 (exclusive): interval of &lbrack;)
-**function**
+<b>function</b>
 getRandomArbitrary
 (
 min
@@ -11071,7 +10924,7 @@ min
 max
 )
 {
-**return**
+<b>return</b>
 Math
 .
 random
@@ -11092,7 +10945,7 @@ min, max
 To use () to get an integer from an arbitrary range (not &lbrack;0,1)) use
 this function to get a random number between min (inclusive) and max
 (exclusive): interval of &lbrack;)
-**function**
+<b>function</b>
 getRandomInt
 (
 min
@@ -11100,7 +10953,7 @@ min
 max
 )
 {
-**return**
+<b>return</b>
 Math
 .
 floor
@@ -11126,7 +10979,7 @@ min, max
 To use () to get an integer from an arbitrary range (not &lbrack;0,1)) use
 this function to get a random number between min (inclusive) and max
 (inclusive): interval of &lbrack;&rbrack;
-**function**
+<b>function</b>
 getRandomIntInclusive
 (
 min
@@ -11134,7 +10987,7 @@ min
 max
 )
 {
-**return**
+<b>return</b>
 Math
 .
 floor
@@ -11164,7 +11017,7 @@ Functions taken from
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 The addition operator (+) adds numbers.
-**var**
+<b>var</b>
 a
 =
 9
@@ -11181,7 +11034,7 @@ b
 ;
 c.  will now be 12
 This operand can also be used multiple times in a single assignment:
-**var**
+<b>var</b>
 a
 =
 9
@@ -11206,27 +11059,27 @@ d.  will now be 20.
 Both operands are converted to primitive types. Then, if either one is
 a string, they&apos;re both converted to strings and concatenated.
 Otherwise, they&apos;re both converted to numbers and added.
-**null**
+<b>null</b>
 &plus;
-**null**
+<b>null</b>
 ;
-*// 0*
-**null**
+// <i> 0</i>
+<b>null</b>
 &plus;
-**undefined**
+<b>undefined</b>
 ;
-*// NaN*
-**null**
+// <i> NaN</i>
+<b>null</b>
 &plus;
 {
 }
 ;
-*// &quot;null&lbrack;object Object&rbrack;&quot;*
-**null**
+// <i> &quot;null&lbrack;object Object&rbrack;&quot;</i>
+<b>null</b>
 &plus;
 &apos;&apos;
 ;
-*// &quot;null&quot;*
+// <i> &quot;null&quot;</i>
 If the operands are a string and a number, the number is converted to
 a string and then they&apos;re concatenated, which may lead to unexpected
 results when working with strings that look numeric.
@@ -11234,79 +11087,79 @@ results when working with strings that look numeric.
 &plus;
 1
 ;
-*// &quot;1231&quot; (not 124)*
+// <i> &quot;1231&quot; (not 124)</i>
 If a boolean value is given in place of any of the number values, the
-boolean value is converted to a number (0 for **false**, 1 for
-**true**) before the sum is calculated:
-**true**
+boolean value is converted to a number (0 for <b>false</b>, 1 for
+<b>true</b>) before the sum is calculated:
+<b>true</b>
 &plus;
 1
 ;
-*// 2*
-**false**
+// <i> 2</i>
+<b>false</b>
 &plus;
 5
 ;
-*// 5*
-**null**
+// <i> 5</i>
+<b>null</b>
 &plus;
 1
 ;
-*// 1*
-**undefined**
+// <i> 1</i>
+<b>undefined</b>
 &plus;
 1
 ;
-*// NaN*
+// <i> NaN</i>
 If a boolean value is given alongside a string value, the boolean
 value is converted to a string instead:
-**true**
+<b>true</b>
 &plus;
 &quot;1&quot;
 ;
-*// &quot;true1&quot;*
-**false**
+// <i> &quot;true1&quot;</i>
+<b>false</b>
 &plus;
 &quot;bar&quot;
 ;
-*// &quot;falsebar&quot;*
+// <i> &quot;falsebar&quot;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-10">Section 14.10: Little / Big endian for typed arrays when using bitwise operators</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 To detect the endian of the device
-**var**
+<b>var</b>
 isLittleEndian
 =
-**true**
+<b>true</b>
 ;
 (
 (
 )
 =&gt;
 {
-**var**
+<b>var</b>
 buf
 =
-**new**
+<b>new</b>
 ArrayBuffer
 (
 4
 )
 ;
-**var**
+<b>var</b>
 buf8
 =
-**new**
+<b>new</b>
 Uint8ClampedArray
 (
 buf
 )
 ;
-**var**
+<b>var</b>
 data
 =
-**new**
+<b>new</b>
 Uint32Array
 (
 buf
@@ -11319,7 +11172,7 @@ data
 =
 0x0F000000
 ;
-**if**
+<b>if</b>
 (
 buf8
 &lbrack;
@@ -11331,7 +11184,7 @@ buf8
 {
 isLittleEndian
 =
-**false**
+<b>false</b>
 ;
 }
 }
@@ -11342,36 +11195,36 @@ isLittleEndian
 Little-Endian stores most significant bytes from right to left.
 
 Big-Endian stores most significant bytes from left to right.
-**var**
+<b>var</b>
 myNum
 =
 0x11223344
 &vert;
 0
 ;
-*// 32 bit signed integer*
-**var**
+// <i> 32 bit signed integer</i>
+<b>var</b>
 buf
 =
-**new**
+<b>new</b>
 ArrayBuffer
 (
 4
 )
 ;
-**var**
+<b>var</b>
 data8
 =
-**new**
+<b>new</b>
 Uint8ClampedArray
 (
 buf
 )
 ;
-**var**
+<b>var</b>
 data32
 =
-**new**
+<b>new</b>
 Uint32Array
 (
 buf
@@ -11400,7 +11253,7 @@ toString
 )
 )
 ;
-*// 0x44*
+// <i> 0x44</i>
 console.
 log
 (
@@ -11415,7 +11268,7 @@ toString
 )
 )
 ;
-*// 0x33*
+// <i> 0x33</i>
 console.
 log
 (
@@ -11430,7 +11283,7 @@ toString
 )
 )
 ;
-*// 0x22*
+// <i> 0x22</i>
 console.
 log
 (
@@ -11476,7 +11329,7 @@ toString
 )
 )
 ;
-*// 0x22*
+// <i> 0x22</i>
 console.
 log
 (
@@ -11491,7 +11344,7 @@ toString
 )
 )
 ;
-*// 0x33*
+// <i> 0x33</i>
 console.
 log
 (
@@ -11506,9 +11359,9 @@ toString
 )
 )
 ;
-*// 0x44*
+// <i> 0x44</i>
 Example where Endian type is important
-**var**
+<b>var</b>
 canvas
 =
 document.
@@ -11517,7 +11370,7 @@ createElement
 &quot;canvas&quot;
 )
 ;
-**var**
+<b>var</b>
 ctx
 =
 canvas.
@@ -11526,7 +11379,7 @@ getContext
 &quot;2d&quot;
 )
 ;
-**var**
+<b>var</b>
 imgData
 =
 ctx.
@@ -11546,10 +11399,10 @@ height
 // <i>To speed up read and write from the image buffer you can create a
 buffer view that is</i>
 // <i>32 bits allowing you to read/write a pixel in a single operation</i>
-**var**
+<b>var</b>
 buf32
 =
-**new**
+<b>new</b>
 Uint32Array
 (
 imgData.
@@ -11558,14 +11411,14 @@ data
 buffer
 )
 ;
-*// Mask out Red and Blue channels*
-**var**
+// <i> Mask out Red and Blue channels</i>
+<b>var</b>
 mask
 =
 0x00FF00FF
 ;
 // <i>bigEndian pixel channels Red,Green,Blue,Alpha</i>
-**if**
+<b>if</b>
 (
 isLittleEndian
 )
@@ -11576,13 +11429,13 @@ mask
 ;
 // <i>littleEndian pixel channels Alpha,Blue,Green,Red</i>
 }
-**var**
+<b>var</b>
 len
 =
 buf32.
 length
 ;
-**var**
+<b>var</b>
 i
 =
 0
