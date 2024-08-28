@@ -5975,151 +5975,52 @@ was originally posted:</p>
 <ul>
   <li><a href="https://stackoverflow.com/questions/3010840/loop-through-an-array-in-javascript/35707349#35707349">
     Loop through an array in JavaScript</li>
-<ul>
+</ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-7">Section 12.7: Destructuring an array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 6</h5>
-An array can be destructured when being assigned to a new variable.
-<b>const</b>
-triangle
-=
-&lbrack;
-3
-,
-4
-,
-5
-&rbrack;
-;
-<b>const</b>
-&lbrack;
-length
-,
-height
-,
-hypotenuse
-&rbrack;
-=
-triangle
-;
-length
-===
-3
-;
-// <i>→ true</i>
-height
-===
-4
-;
-// <i>→ true</i>
-hypotneuse
-===
-5
-;
-// <i>→ true</i>
-Elements can be skipped
-<b>const</b>
-&lbrack;
-,
-b
-,,
-c
-&rbrack;
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-;
-console.
-log
-(
-b
-,
-c
-)
-;
-// <i>→ 2, 4 </i>
-Rest operator can be used too
-<b>const</b>
-&lbrack;
-b
-,
-c
-,
-&hellip;
-xs
-&rbrack;
-=
-&lbrack;
-2
-,
-3
-,
-4
-,
-5
-&rbrack;
-;
-console.
-log
-(
-b
-,
-c
-,
-xs
-)
-;
-// <i>→ 2, 3, &lbrack;4, 5&rbrack;</i>
-An array can also be destructured if it&apos;s an argument to a function.
-<b>function</b>
-area
-(
-&lbrack;
-length
-,
-height
-&rbrack;
-)
-{
-<b>return</b>
-(
-length
-&ast;
-height
-)
-/
-2
-;
+<p>An array can be destructured when being assigned to a new variable.</p>
+
+<pre>
+<b>const</b> triangle = &lbrack;3, 4, 5&rbrack;;
+<b>const</b> &lbrack;length, height, hypotenuse&rbrack; = triangle;
+
+length === 3;     // <i>→ true</i>
+height === 4;     // <i>→ true</i>
+hypotneuse === 5; // <i>→ true</i>
+</pre>
+
+<p>Elements can be skipped</p>
+
+<pre>
+<b>const</b> &lbrack;,b,,c&rbrack; = &lbrack;1, 2, 3, 4&rbrack;;
+
+console.log(b, c);  // <i>→ 2, 4 </i>
+</pre>
+
+<p>Rest operator can be used too</p>
+
+<pre>
+<b>const</b> &lbrack;b, c, &hellip;xs&rbrack; = &lbrack;2, 3, 4, 5&rbrack;;
+console.log(b, c, xs);  // <i>→ 2, 3, &lbrack;4, 5&rbrack;</i>
+</pre>
+
+<p>An array can also be destructured if it&apos;s an argument to a function.</p>
+
+<pre>
+<b>function</b> area(&lbrack;length, height&rbrack;) {
+  <b>return</b> (length &ast; height) / 2;
 }
-<b>const</b>
-triangle
-=
-&lbrack;
-3
-,
-4
-,
-5
-&rbrack;
-;
-area
-(
-triangle
-)
-;
-// <i> → 6</i>
-Notice the third argument is not named in the function because it&apos;s
-not needed.
-Learn more about destructuring syntax.
+
+<b>const</b> triangle = &lbrack;3, 4, 5&rbrack;;
+
+area(triangle);  // <i> → 6</i>
+</pre>
+<!-- page 93 -->
+<p><i>Notice the third argument is not named in the function because it&apos;s not needed.</i></p>
+
+<p>Learn more about destructuring syntax.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-8">Section 12.8: Removing duplicate elements</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
