@@ -5905,62 +5905,21 @@ Array.prototype.every</a>, which iterates until we return <b>false</b>:</p>
 
 <p>Equivalent in any JavaScript version:</p>
 
-<b>var</b>
-arr
-=
-&lbrack;
-2
-,
-4
-,
-7
-,
-9
-&rbrack;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-arr.
-length
-&&
-(
-arr
-&lbrack;
-i
-&rbrack;
-&percnt;
-2
-!==
-0
-)
-;
-i
-++
-)
-{
-*// iterate until an odd number is*
-*found*
-console.
-log
-(
-arr
-&lbrack;
-i
-&rbrack;
-)
-;
+<pre>
+<b>var</b> arr = &lbrack;2, 4, 7, 9&rbrack;
+<b>for</b> (<b>var</b> i = 0; i &lt; arr.length && (arr&lbrack;i&rbrack; &percnt; 2 !== 0); i++) { // <i>iterate until an odd number is</i>
+<i>found</i>
+console.log(arr&lbrack;i&rbrack;);
 }
-<b>Array</b> <b>.</b> <b>prototype</b> <b>.</b> <b>some</b>
-[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)   [some](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)
-iterates until we return <b>true</b>: Version ≥ 5
-*// &lbrack;&rbrack;.some stops once it finds a false result*
-*// thus, this iteration will stop on value 7 (since 7 % 2 !== 0)*
+</pre>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some">
+<b>Array.prototype.some</b></a> iterates until we return <b>true</b>.</p>
+
+<h5>Version ≥ 5</h5>
+
+// <i>&lbrack;&rbrack;.some stops once it finds a false result</i>
+// <i>thus, this iteration will stop on value 7 (since 7 % 2 !== 0)</i>
 &lbrack;
 2
 ,
@@ -5993,7 +5952,7 @@ value
 ===
 7
 ;
-*// iterate until we find value 7*
+// <i>iterate until we find value 7</i>
 }
 )
 ;
@@ -6157,23 +6116,17 @@ length
 ===
 3
 ;
-*//*
-→
-*true*
+// <i>→ true</i>
 height
 ===
 4
 ;
-*//*
-→
-*true*
+// <i>→ true</i>
 hypotneuse
 ===
 5
 ;
-*//*
-→
-*true*
+// <i>→ true</i>
 Elements can be skipped
 <b>const</b>
 &lbrack;
@@ -6201,9 +6154,7 @@ b
 c
 )
 ;
-*//*
-→
-*2, 4*
+// <i>→ 2, 4 </i>
 Rest operator can be used too
 <b>const</b>
 &lbrack;
@@ -6235,9 +6186,7 @@ c
 xs
 )
 ;
-*//*
-→
-*2, 3, &lbrack;4, 5&rbrack;*
+// <i>→ 2, 3, &lbrack;4, 5&rbrack;</i>
 An array can also be destructured if it&apos;s an argument to a function.
 <b>function</b>
 area
@@ -6275,11 +6224,9 @@ area
 triangle
 )
 ;
-*//*
-→
-*6*
-*Notice the third argument is not named in the function because it&apos;s
-not needed.*
+// <i> → 6</i>
+Notice the third argument is not named in the function because it&apos;s
+not needed.
 Learn more about destructuring syntax.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-8">Section 12.8: Removing duplicate elements</h3>
@@ -6297,7 +6244,7 @@ Version ≥ 5.1 <b>var</b> uniqueArray = &lbrack;&apos;a&apos;, 1, &apos;a&apos;
 1&rbrack;.filter(<b>function</b>(value, index, self) { <b>return</b>
 self.indexOf(value) === index;
 
-}); *// returns &lbrack;&apos;a&apos;, 1, 2, &apos;1&apos;&rbrack;*
+}); // <i>returns &lbrack;&apos;a&apos;, 1, 2, &apos;1&apos;&rbrack;</i>
 
 If your environment supports ES6, you can also use the
 [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
@@ -6394,11 +6341,11 @@ isA1
 isA2
 )
 {
-*// is one an array and the other not?*
+// <i>is one an array and the other not?</i>
 <b>return</b>
 <b>false</b>
 ;
-*// yes then can not be the same*
+// <i>yes then can not be the same</i>
 }
 <b>if</b>
 (
@@ -6410,13 +6357,13 @@ isA2
 )
 )
 {
-*// Are both not arrays*
+// <i>Are both not arrays</i>
 <b>return</b>
 array1
 ===
 array2
 ;
-*// return strict equality*
+// <i>return strict equality</i>
 }
 <b>if</b>
 (
@@ -6427,12 +6374,12 @@ array2.
 length
 )
 {
-*// if lengths differ then can not be the same*
+// <i>if lengths differ then can not be the same</i>
 <b>return</b>
 <b>false</b>
 ;
 }
-*// iterate arrays and compare them*
+// <i>iterate arrays and compare them</i>
 <b>for</b>
 (
 i
@@ -6466,7 +6413,7 @@ i
 )
 )
 {
-*// Do items compare recursively*
+// <i>Do items compare recursively</i>
 <b>return</b>
 <b>false</b>
 ;
@@ -6475,7 +6422,7 @@ i
 <b>return</b>
 <b>true</b>
 ;
-*// must be equal*
+// <i>must be equal</i>
 }
 <b>WARNING:</b> Using the above function is dangerous and should be
 wrapped in a <b>try</b> <b>catch</b> if you suspect there is a chance the
@@ -6509,7 +6456,7 @@ a
 b
 )
 ;
-*// throws RangeError: Maximum call stack size exceeded*
+// <i>throws RangeError: Maximum call stack size exceeded</i>
 <b>Note:</b>
 The function uses the strict equality operator
 ===
@@ -6572,7 +6519,7 @@ Array
 reverse
 will reverse the array
 )
-*in place*
+in place
 . Instead of
 returning a reversed copy, it will return the same array, reversed.
 <b>var</b>
@@ -6600,14 +6547,14 @@ log
 arr2
 )
 ;
-*// &lbrack;33, 22, 11&rbrack;*
+// <i>&lbrack;33, 22, 11&rbrack;</i>
 console.
 log
 (
 arr1
 )
 ;
-*// &lbrack;33, 22, 11&rbrack;*
+// <i>&lbrack;33, 22, 11&rbrack;</i>
 You can also reverse an array &apos;deeply&apos; by:
 <b>function</b>
 deepReverse
@@ -6683,7 +6630,7 @@ arr
 ;
 Results in:
 arr
-*// -&amp;lbrack;&lbrack;&lbrack;&apos;c&apos;,&apos;b&apos;,&apos;a&apos;&rbrack;, 3, 2, 1&rbrack;, 3, 2, 1&rbrack;*
+// <i>-&amp;lbrack;&lbrack;&lbrack;&apos;c&apos;,&apos;b&apos;,&apos;a&apos;&rbrack;, 3, 2, 1&rbrack;, 3, 2, 1&rbrack;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-11">Section 12.11: Shallow cloning an array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -6758,7 +6705,7 @@ clone3
 &hellip;
 arrayToClone
 &rbrack;
-*// the shortest way*
+// <i>the shortest way</i>
 Version ≤ 5.1
 arrayToClone
 =
@@ -6835,7 +6782,7 @@ concat
 array2
 )
 ;
-*// returns a new array*
+// <i>returns a new array</i>
 <h5>Version ≥ 6</h5>
 <b>var</b>
 array3
@@ -7260,8 +7207,8 @@ arr
 &rbrack;
 &rbrack;
 ;
-*// &lbrack;1, 2, 3, 4, 5, 6&rbrack;*
-*// in ES &lt; 6, the operations above are equivalent to*
+// <i>&lbrack;1, 2, 3, 4, 5, 6&rbrack;</i>
+// <i>in ES &lt; 6, the operations above are equivalent to</i>
 arr
 =
 &lbrack;
@@ -7286,7 +7233,7 @@ The spread operator also acts upon strings, separating each individual
 character into a new string element. Therefore, using an array
 function for converting these into integers, the array created above
 is equivalent to the one below: <b>let</b> arr = &lbrack;1, 2, 3,
-&hellip;&lbrack;&hellip;&quot;456&quot;&rbrack;.map(x=&gt;parseInt(x))&rbrack;; *// &lbrack;1, 2, 3, 4, 5, 6&rbrack;*
+&hellip;&lbrack;&hellip;&quot;456&quot;&rbrack;.map(x=&gt;parseInt(x))&rbrack;; // <i>&lbrack;1, 2, 3, 4, 5, 6&rbrack;</i>
 
 Or, using a single string, this could be simplified to:
 <b>let</b>
@@ -7307,7 +7254,7 @@ x
 )
 )
 ;
-*// &lbrack;1, 2, 3, 4, 5, 6&rbrack;*
+// <i>&lbrack;1, 2, 3, 4, 5, 6&rbrack;</i>
 If the mapping is not performed then:
 <b>let</b>
 arr
@@ -7317,7 +7264,7 @@ arr
 &quot;123456&quot;
 &rbrack;
 ;
-*// &lbrack;&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;&rbrack;*
+// <i>&lbrack;&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;&rbrack;</i>
 The spread operator can also be used to spread arguments into a
 function:
 
@@ -7349,7 +7296,7 @@ myFunction
 args
 )
 ;
-*// in ES &lt; 6, this would be equivalent to:*
+// <i>in ES &lt; 6, this would be equivalent to:</i>
 myFunction.
 apply
 (
@@ -7363,8 +7310,8 @@ args
 The rest operator does the opposite of the spread operator by
 coalescing several elements into a single one
 
-&lbrack;a, b, &hellip;rest&rbrack; = &lbrack;1, 2, 3, 4, 5, 6&rbrack;; *// rest is assigned &lbrack;3, 4,
-5, 6&rbrack;* Collect arguments of a function:
+&lbrack;a, b, &hellip;rest&rbrack; = &lbrack;1, 2, 3, 4, 5, 6&rbrack;; // <i>rest is assigned &lbrack;3, 4,
+5, 6&rbrack;</i> Collect arguments of a function:
 
 <b>function</b>
 myFunction
@@ -7401,7 +7348,7 @@ myFunction
 6
 )
 ;
-*// rest is &lbrack;2, 3, 4, 5, 6&rbrack;*
+// <i>rest is &lbrack;2, 3, 4, 5, 6&rbrack;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-15">Section 12.15: Filtering values</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -7550,7 +7497,7 @@ filter
 startsWithLetterA
 )
 ;
-*//&lbrack;&quot;a&quot;, &quot;and&quot;, &quot;also&quot;, &quot;a&quot;, &quot;and&quot;, &quot;array&quot;, &quot;as&quot;&rbrack;*
+// <i>&lbrack;&quot;a&quot;, &quot;and&quot;, &quot;also&quot;, &quot;a&quot;, &quot;and&quot;, &quot;array&quot;, &quot;as&quot;&rbrack;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-16">Section 12.16: Searching an Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -7588,7 +7535,7 @@ name
 &quot;bob&quot;
 )
 ;
-*// Or, more verbose*
+// <i>Or, more verbose</i>
 <b>let</b>
 bob
 =
@@ -7641,7 +7588,7 @@ name
 {
 <b>break</b>
 ;
-*// we found bob*
+// <i>we found bob</i>
 }
 }
 <b>FindIndex</b>
@@ -7697,7 +7644,7 @@ value
 3
 )
 ;
-*// 2*
+// <i>2</i>
 <b>var</b>
 index
 =
@@ -7712,7 +7659,7 @@ value
 12
 )
 ;
-*// -1*
+// <i>-1</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-17">Section 12.17: Convert a String to an Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -7734,13 +7681,14 @@ the Unicode lower range characters, which covers most English and most
 European languages. For languages that require 3 and 4 byte Unicode
 characters, ) will separate them.
 <b>var</b> strArray = &quot;StackOverflow&quot;.split(&quot;&quot;);
-*// strArray = &lbrack;&quot;S&quot;, &quot;t&quot;, &quot;a&quot;, &quot;c&quot;, &quot;k&quot;, &quot;O&quot;, &quot;v&quot;,
-&quot;e&quot;, &quot;r&quot;, &quot;f&quot;, &quot;l&quot;, &quot;o&quot;, &quot;w&quot;&rbrack;*
+// <i>strArray = &lbrack;&quot;S&quot;, &quot;t&quot;, &quot;a&quot;, &quot;c&quot;, &quot;k&quot;, &quot;O&quot;, &quot;v&quot;,
+&quot;e&quot;, &quot;r&quot;, &quot;f&quot;, &quot;l&quot;, &quot;o&quot;, &quot;w&quot;&rbrack;</i>
+
 <h5>Version ≥ 6</h5>
 Using the spread operator (&hellip;), to convert a string into an array.
 <b>var</b> strArray = &lbrack;&hellip;&quot;sky is blue&quot;&rbrack;;
-*// strArray = &lbrack;&quot;s&quot;, &quot;k&quot;, &quot;y&quot;, &quot; &quot;, &quot;i&quot;, &quot;s&quot;, &quot; &quot;,
-&quot;b&quot;, &quot;l&quot;, &quot;u&quot;, &quot;e&quot;&rbrack;*
+// <i>strArray = &lbrack;&quot;s&quot;, &quot;k&quot;, &quot;y&quot;, &quot; &quot;, &quot;i&quot;, &quot;s&quot;, &quot; &quot;,
+&quot;b&quot;, &quot;l&quot;, &quot;u&quot;, &quot;e&quot;&rbrack;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-18">Section 12.18: Removing items from an array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -7908,7 +7856,7 @@ array.
 length
 )
 ;
-*// 5*
+// <i>5</i>
 <b>delete</b>
 array
 &lbrack;
@@ -7921,7 +7869,7 @@ log
 array
 )
 ;
-*// &lbrack;1, 2, undefined, 4, 5&rbrack;*
+// <i>&lbrack;1, 2, undefined, 4, 5&rbrack;</i>
 console.
 log
 (
@@ -7929,7 +7877,7 @@ array.
 length
 )
 ;
-*// 5*
+// <i>5</i>
 <b>Array.prototype.length</b>
 
 Assigning value to length of array changes the length to given value.
@@ -7960,7 +7908,7 @@ log
 array
 )
 ;
-*// &lbrack;1, 2&rbrack;*
+// <i>&lbrack;1, 2&rbrack;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-19">Section 12.19: Removing all elements</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -8003,7 +7951,7 @@ addListener
 arr
 )
 {
-*// arr is closed over*
+// <i>arr is closed over</i>
 <b>var</b>
 b
 =
@@ -8030,10 +7978,10 @@ addEventListener
 e
 )
 {
-*// this functions reference keeps*
-*// the closure current while the*
-*// event is active*
-*// do something but does not need arr*
+// <i>this functions reference keeps</i>
+// <i>the closure current while the</i>
+// <i>event is active</i>
+// <i>do something but does not need arr</i>
 }
 )
 ;
@@ -8061,27 +8009,27 @@ addListener
 arr
 )
 ;
-*// the array is passed to the function*
+// <i>the array is passed to the function</i>
 arr
 =
 &lbrack;
 &rbrack;
 ;
-*// only removes the reference, the original array remains*
+// <i>only removes the reference, the original array remains</i>
 array.
 push
 (
 &quot;some large data&quot;
 )
 ;
-*// more memory allocated*
+// <i>more memory allocated</i>
 i
 &bsol;
 ;
 }
-*// there are now 100 arrays closed over, each referencing a different
-array*
-*// no a single item has been deleted*
+// <i>there are now 100 arrays closed over, each referencing a different
+array</i>
+// <i>no a single item has been deleted</i>
 To prevent the risk of a memory leak use the one of the following 2
 methods to empty the array in the above example&apos;s while loop.
 
@@ -8102,12 +8050,11 @@ Similar to method 2 but returns a new array containing the removed
 items. If you do not need the items this method is inefficient as the
 new array is still created only to be immediately dereferenced.
 
-arr.splice(0); *// should not use if you don&apos;t want the removed
-items*
+arr.splice(0); // <i>should not use if you don&apos;t want the removed items</i>
 
-*// only use this method if you do the following* <b>var</b> keepArr =
-arr.splice(0); *// empties the array and creates a new array
-containing the* *// removed items*
+// <i>only use this method if you do the following</i> <b>var</b> keepArr =
+arr.splice(0); // <i>empties the array and creates a new array
+containing the</i> // <i>removed items</i>
 
 [Related
 question](http://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript).
@@ -8117,7 +8064,7 @@ question](http://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-
 <!--
 Math                 .     min             .     apply
 Math . max . apply
-If your array or array-like object is *numeric*, that is, if all its
+If your array or array-like object is <i>numeric</i>, that is, if all its
 elements are numbers, then you can use or by passing <b>null</b> as the
 first argument, and your array as the second.
 <b>var</b>
@@ -8144,7 +8091,7 @@ apply
 myArray
 )
 ;
-*// 1*
+// <i>1</i>
 Math
 .
 max
@@ -8156,7 +8103,7 @@ apply
 myArray
 )
 ;
-*// 4*
+// <i>4</i>
 <h5>Version ≥ 6</h5>
 In ES6 you can use the &hellip; operator to spread an array and take the
 minimum or maximum element.
@@ -8188,7 +8135,7 @@ max
 myArray
 )
 ;
-*// 99*
+// <i>99</i>
 <b>var</b>
 minValue
 =
@@ -8200,7 +8147,7 @@ min
 myArray
 )
 ;
-*// 1*
+// <i>1</i>
 The following example uses a
 <b>for</b>
 loop:
@@ -8288,7 +8235,7 @@ b
 }
 )
 ;
-*// 1*
+// <i>1</i>
 myArray.
 reduce
 (
@@ -8312,7 +8259,7 @@ b
 }
 )
 ;
-*// 4*
+// <i>4</i>
 <h5>Version ≥ 6</h5>
 or using arrow functions:
 myArray.
@@ -8334,7 +8281,7 @@ b
 )
 )
 ;
-*// 1*
+// <i>1</i>
 myArray.
 reduce
 (
@@ -8354,10 +8301,10 @@ b
 )
 )
 ;
-*// 4*
+// <i>4</i>
 <h5>Version ≥ 5.1</h5>
-To generalize the reduce version we&apos;d have to pass in an *initial
-value* to cover the empty list case:
+To generalize the reduce version we&apos;d have to pass in an </i>initial
+value</i> to cover the empty list case:
 <b>function</b>
 myMax
 (
@@ -8401,14 +8348,14 @@ myMax
 &rbrack;
 )
 ;
-*// 5*
+// <i>5</i>
 myMax
 (
 &lbrack;
 &rbrack;
 )
 ;
-*// -Infinity*
+// <i>-Infinity</i>
 Math
 .
 max
@@ -8421,7 +8368,7 @@ apply
 &rbrack;
 )
 ;
-*// -Infinity*
+// <i>-Infinity</i>
 For the details on how to properly use reduce see Reducing values.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-21">Section 12.21: Standard array initialization</h3>
@@ -8571,9 +8518,9 @@ join
 )
 )
 ;
-*// &quot;Hello world&quot;*
-console.log(&lbrack;1, 800, 555, 1234&rbrack;.join(&quot;-&quot;)); *//
-&quot;1-800-555-1234&quot;*
+// <i>&quot;Hello world&quot;</i>
+console.log(&lbrack;1, 800, 555, 1234&rbrack;.join(&quot;-&quot;)); // 
+<i>&quot;1-800-555-1234&quot;</i>
 As you can see in the second line, items that are not strings will be
 converted first.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -8625,7 +8572,7 @@ i
 )
 ;
 }
-*// &lbrack;1, 2, 4, 5, 3&rbrack;*
+// <i>&lbrack;1, 2, 4, 5, 3&rbrack;</i>
 splice
 The () method can also be used to add elements to an array. In this
 example, we will insert the numbers 6, 7, and 8 to the end of the
@@ -8667,7 +8614,7 @@ i
 8
 )
 ;
-*//&lbrack;1, 2, 4, 5, 3, 6, 7, 8&rbrack;*
+// <i>&lbrack;1, 2, 4, 5, 3, 6, 7, 8&rbrack;</i>
 splice
 The first argument of the () method is the index at which to
 remove/insert elements. The second argument is the number of elements
@@ -8723,11 +8670,12 @@ result
 &quot;c&quot;
 <b>Note</b>: [This method is not supported in Internet
 Explorer.](http://kangax.github.io/compat-table/es6/#test-Array.prototype_methods_Array.prototype.entries)
-[*Array*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [*.*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [*<b>prototype</b>*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [*.*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [*entries*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)
-*Portions of this content from by [Mozilla
+[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)
+[<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [<i>entries</i>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)
+</i>Portions of this content from by [Mozilla
 Contributors](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries$history)
 licensed under [CC-by-SA
-2.5](http://creativecommons.org/licenses/by-sa/2.5/)*
+2.5](http://creativecommons.org/licenses/by-sa/2.5/)</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-25">Section 12.25: Remove value from array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -8830,7 +8778,7 @@ arrL1
 )
 )
 ;
-*// &lbrack;1, 2, 3, 4&rbrack;*
+// <i>&lbrack;1, 2, 3, 4&rbrack;</i>
 <h5>Version ≥ 5</h5>
 In ES5, we can achieve that by
 [.apply()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply):
@@ -8879,7 +8827,7 @@ arrL1
 )
 )
 ;
-*// &lbrack;1, 2, 3, 4&rbrack;*
+// <i>&lbrack;1, 2, 3, 4&rbrack;</i>
 <b>Higher Dimension Arrays</b>
 Given a deeply nested array like so
 <b>var</b>
@@ -9171,7 +9119,7 @@ value
 }
 )
 ;
-*// Result: false*
+// <i>Result: false</i>
 &lbrack;
 <b>false</b>
 ,
@@ -9191,7 +9139,7 @@ value
 }
 )
 ;
-*// Result: true*
+// <i>Result: true</i>
 &lbrack;
 <b>true</b>
 ,
@@ -9211,7 +9159,7 @@ value
 }
 )
 ;
-*// Result: true*
+// <i>Result: true</i>
 And examples for
 .
 every
@@ -9234,7 +9182,7 @@ value
 }
 )
 ;
-*// Result: false*
+// <i>Result: false</i>
 &lbrack;
 <b>false</b>
 ,
@@ -9254,7 +9202,7 @@ value
 }
 )
 ;
-*// Result: false*
+// <i>Result: false</i>
 &lbrack;
 <b>true</b>
 ,
@@ -9274,7 +9222,656 @@ value
 }
 )
 ;
-*// Result: true*
+// <i>Result: true</i>
 
 <!-- thru 12.29 -->
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-30">Section 12.30: Checking if an object is an Array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Array . isArray ( obj
+
+) returns <b>true</b> if the object is an Array, otherwise </b>false</b>.
+Array
+.
+isArray
+(
+&lbrack;
+&rbrack;
+)
+// <i> true</i>
+Array
+.
+isArray
+(
+&lbrack;
+1
+,
+2
+,
+3
+&rbrack;
+)
+// <i> true</i>
+Array
+.
+isArray
+(
+{
+}
+)
+// <i> false</i>
+Array
+.
+isArray
+(
+1
+)
+// <i> false</i>
+In most cases you can <b>instanceof</b> to check if an object is an Array.
+&lbrack;
+&rbrack;
+<b>instanceof</b>
+Array
+;
+// <i> true</i>
+{
+}
+<b>instanceof</b>
+Array
+;
+// <i> false</i>
+Array . isArray
+has the an advantage over using a <b>instanceof</b> check in that it will
+still return <b>true</b> even if the
+
+prototype of the array has been changed and will return <b>false</b> if a
+non-arrays prototype was changed to the Array prototype.
+<b>var</b>
+arr
+=
+&lbrack;
+&rbrack;
+;
+Object
+.
+setPrototypeOf
+(
+arr
+,
+<b>null</b>
+)
+;
+Array
+.
+isArray
+(
+arr
+)
+;
+// <i> true</i>
+arr
+<b>instanceof</b>
+Array
+;
+// <i> false</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-31">Section 12.31: Insert an item into an array at a specific index</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+[Array.<b>prototype</b>.splice](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
+Simple item insertion can be done with method:
+arr.splice
+(
+index
+,
+0
+,
+item
+)
+;
+More advanced variant with multiple arguments and chaining support:
+*/&ast; Syntax:*
+*array.insert(index, value1, value2, &hellip;, valueN) &ast;/*
+Array
+.
+<b>prototype</b>
+.
+insert
+=
+<b>function</b>
+(
+index
+)
+{
+<b>this</b>
+.
+splice
+.
+apply
+(
+<b>this</b>
+,
+&lbrack;
+index
+,
+0
+&rbrack;
+.
+concat
+(
+Array
+.
+<b>prototype</b>
+.
+slice
+.
+call
+(
+arguments
+,
+1
+)
+)
+)
+;
+<b>return</b>
+<b>this</b>
+;
+}
+;
+&lbrack;
+&quot;a&quot;
+,
+&quot;b&quot;
+,
+&quot;c&quot;
+,
+&quot;d&quot;
+&rbrack;
+.
+insert
+(
+2
+,
+&quot;X&quot;
+,
+&quot;Y&quot;
+,
+&quot;Z&quot;
+)
+.
+slice
+(
+1
+,
+6
+)
+;
+// <i> &lbrack;&quot;b&quot;, &quot;X&quot;, &quot;Y&quot;, &quot;Z&quot;, &quot;c&quot;&rbrack;</i>
+And with array-type arguments merging and chaining support:
+*/&ast; Syntax:*
+*array.insert(index, value1, value2, &hellip;, valueN) &ast;/*
+Array
+.
+<b>prototype</b>
+.
+insert
+=
+<b>function</b>
+(
+index
+)
+{
+index
+=
+Math
+.
+min
+(
+index
+,
+<b>this</b>
+.
+length
+)
+;
+arguments.
+length
+&gt;
+1
+&&
+<b>this</b>
+.
+splice
+.
+apply
+(
+<b>this</b>
+,
+&lbrack;
+index
+,
+0
+&rbrack;
+.
+concat
+(
+&lbrack;
+&rbrack;
+.
+pop
+.
+call
+(
+arguments
+)
+)
+)
+&&
+<b>this</b>
+.
+insert
+.
+apply
+(
+<b>this</b>
+,
+arguments
+)
+;
+<b>return</b>
+<b>this</b>
+;
+}
+;
+&lbrack;
+&quot;a&quot;
+,
+&quot;b&quot;
+,
+&quot;c&quot;
+,
+&quot;d&quot;
+&rbrack;
+.
+insert
+(
+2
+,
+&quot;V&quot;
+,
+&lbrack;
+&quot;W&quot;
+,
+&quot;X&quot;
+,
+&quot;Y&quot;
+&rbrack;
+,
+&quot;Z&quot;
+)
+.
+join
+(
+&quot;-&quot;
+)
+;
+// <i> &quot;a-b-V-W-X-Y-Z-c-d&quot;</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-32">Section 12.32: Sorting multidimensional array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Given the following array
+<b>var</b>
+array
+=
+&lbrack;
+&lbrack;
+&quot;key1&quot;
+,
+10
+&rbrack;
+,
+&lbrack;
+&quot;key2&quot;
+,
+3
+&rbrack;
+,
+&lbrack;
+&quot;key3&quot;
+,
+40
+&rbrack;
+,
+&lbrack;
+&quot;key4&quot;
+,
+20
+&rbrack;
+&rbrack;
+;
+You can sort it sort it by number(second index)
+array.
+sort
+(
+<b>function</b>
+(
+a
+,
+b
+)
+{
+<b>return</b>
+a
+&lbrack;
+1
+&rbrack;
+&minus;
+b
+&lbrack;
+1
+&rbrack;
+;
+}
+)
+
+<h5>Version ≥ 6</h5>
+array.
+sort
+(
+(
+a
+,
+b
+)
+=&gt;
+a
+&lbrack;
+1
+&rbrack;
+&minus;
+b
+&lbrack;
+1
+&rbrack;
+)
+;
+This will output
+&lbrack;
+&lbrack;
+&quot;key2&quot;
+,
+3
+&rbrack;
+,
+&lbrack;
+&quot;key1&quot;
+,
+10
+&rbrack;
+,
+&lbrack;
+&quot;key4&quot;
+,
+20
+&rbrack;
+,
+&lbrack;
+&quot;key3&quot;
+,
+40
+&rbrack;
+&rbrack;
+Be aware that the sort method operates on the array <i>in place</i>. It
+changes the array. Most other array methods return a new array,
+leaving the original one intact. This is especially important to note
+if you use a functional programming style and expect functions to not
+have side-effects.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-33">Section 12.33: Test all array items for equality</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+every
+The . method tests if all array elements pass a provided predicate
+test.
+
+To test all objects for equality, you can use the following code
+snippets.
+
+&lbrack;1, 2, 1&rbrack;.every(<b>function</b>(item, i, list) { <b>return</b> item ===
+list&lbrack;0&rbrack;; }); // <i> false</i>
+
+&lbrack;1, 1, 1&rbrack;.every(<b>function</b>(item, i, list) { <b>return</b> item ===
+list&lbrack;0&rbrack;; }); // <i> true</i>
+
+<h5>Version ≥ 6</h5>
+&lbrack;
+1
+,
+1
+,
+1
+&rbrack;
+.
+every
+(
+(
+item
+,
+i
+,
+list
+)
+=&gt;
+item
+===
+list
+&lbrack;
+0
+&rbrack;
+)
+;
+// <i> true</i>
+The following code snippets test for property equality
+<b>let</b>
+data
+=
+&lbrack;
+{
+name
+:
+&quot;alice&quot;
+,
+id
+:
+111
+}
+,
+{
+name
+:
+&quot;alice&quot;
+,
+id
+:
+222
+}
+&rbrack;
+;
+data.
+every
+(
+<b>function</b>
+(
+item
+,
+i
+,
+list
+)
+{
+<b>return</b>
+item
+===
+list
+&lbrack;
+0
+&rbrack;
+;
+}
+)
+;
+// <i> false</i>
+data.
+every
+(
+<b>function</b>
+(
+item
+,
+i
+,
+list
+)
+{
+<b>return</b>
+item.
+name
+===
+list
+&lbrack;
+0
+&rbrack;
+.
+name
+;
+}
+)
+;
+// <i> true</i>
+
+<h5>Version ≥ 6</h5>
+
+data.
+every
+(
+(
+item
+,
+i
+,
+list
+)
+=&gt;
+item.
+name
+===
+list
+&lbrack;
+0
+&rbrack;
+.
+name
+)
+;
+// <i> true</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-23">Section 12.34: Copy part of an Array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The slice() method returns a copy of a portion of an array.
+  arr.slice                     (&lbrack;    begin            &lbrack;,    end
+It takes two parameters, &rbrack;&rbrack;) :
+<b>begin</b>
+Zero-based index which is the beginning of extraction.
+<b>end</b>
+Zero-based index which is the end of extraction, slicing up to this
+index but it&apos;s not included.
+end = arr.length &plus; end
+If the end is a negative number,.
+
+<b>Example 1</b>
+// <i> Let&apos;s say we have this Array of Alphabets</i>
+<b>var</b>
+arr
+=
+&lbrack;
+&quot;a&quot;
+,
+&quot;b&quot;
+,
+&quot;c&quot;
+,
+&quot;d&quot;
+&hellip;
+&rbrack;
+;
+// <i> I want an Array of the first two Alphabets</i>
+<b>var</b>
+newArr
+=
+arr.
+slice
+(
+0
+,
+2
+)
+;
+// <i> newArr === &lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;</i>
+<b>Example 2</b>
+// <i> Let&apos;s say we have this Array of Numbers</i>
+// <i> and I don&apos;t know it&apos;s end</i>
+<b>var</b>
+arr
+=
+&lbrack;
+0
+,
+1
+,
+2
+,
+3
+,
+4
+,
+5
+,
+6
+,
+7
+,
+8
+,
+9
+&hellip;
+&rbrack;
+;
+// <i> I want to slice this Array starting from</i>
+// <i> number 5 to its end</i>
+<b>var</b>
+newArr
+=
+arr.
+slice
+(
+4
+)
+;
+// <i>newArr === &lbrack;5, 6, 7, 8, 9&hellip;&rbrack;</i>
+<h2 id="ch13">Chapter 13: Objects</h2>
+<b>for</b> <b>in</b>
+<b>Property Description</b> value The value to assign to the property.
+writable Whether the value of the property can be changed or not.
+enumerable Whether the property will be enumerated in loops or not.
+configurable Whether it will be possible to redefine the property
+descriptor or not. <b>get</b> A function to be called that will return
+the value of the property. <b>set</b> A function to be called when the
+property is assigned a value.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-1">Section 13.1: Shallow cloning</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
