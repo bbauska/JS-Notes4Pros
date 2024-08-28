@@ -10139,6 +10139,1777 @@ obj
 **Note:**
 For browser support, please refer to this
 [link](http://kangax.github.io/compat-table/es2016plus/#test-Object.values)
+<h2 id="ch14">Chapter 14: Arithmetic (Math)</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-1">Section 14.1: Constants</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+**Constants Description Approximate**
+Math
+.E Base of natural logarithm *e* 2.718
+Math .LN10
+Natural logarithm of 10 2.302
+Math .LN2
+Natural logarithm of 2 0.693
+Math.LOG10E
+Base 10 logarithm of *e* 0.434
+Math.LOG2E
+Base 2 logarithm of *e* 1.442
+Math.PI
+Pi: the ratio of circle circumference to
+3.14 diameter (π)
+Math.SQRT1_2
+Square root of 1/2 0.707
+Math. SQRT2
+Square root of 2 1.414
+Difference between one and the smallest
+Number.EPSILON
+value greater than one representable as
+2.2204460492503130808472633361816E-16 a Number
+n
+Largest integer n such that n and + 1
+Number.MAX_SAFE_INTEGER
+are both exactly representable as a 2&Hat;53 - 1 Number
+Number.MAX_VALUE
+Largest positive finite value of Number 1.79E+308
+n
+Smallest integer n such that n and - 1
+Number.MIN_SAFE_INTEGER
+are both exactly representable as a -(2&Hat;53 - 1) Number
+Number.MIN_VALUE
+Smallest positive value for Number 5E-324
+Number.NEGATIVE_INFINITY
+Value of negative infinity (-∞)
+Number.POSITIVE_INFINITY
+Value of positive infinity (∞)
+**Infinity** Value of positive infinity (∞)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-2">Section 14.2: Remainder / Modulus (%)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The remainder / modulus operator (%) returns the remainder after
+(integer) division.
+console.log
+(
+42
+&percnt;
+10
+)
+;
+// <i>2</i>
+console.log
+(
+42
+&percnt;
+&minus;
+10
+)
+;
+// <i>2</i>
+console.
+log
+(
+&minus;
+42
+&percnt;
+10
+)
+;
+// <i>-2</i>
+console.
+log
+(
+&minus;
+42
+&percnt;
+&minus;
+10
+)
+;
+// <i>-2</i>
+console.log
+(
+&minus;
+40
+&percnt;
+10
+)
+;
+// <i>-0</i>
+console.log
+(
+40
+&percnt;
+10
+)
+;
+// <i>0</i>
+This operator returns the remainder left over when one operand is
+divided by a second operand. When the first operand is a negative
+value, the return value will always be negative, and vice versa for
+positive values.
+10
+42
+In the example above, 10 can be subtracted four times from 42 before
+there is not enough left to subtract again without it changing sign.
+The remainder is thus: - 4 &ast;= 2.
 
-<!-- thru 13.23 -->
+The remainder operator may be useful for the following problems:
+1.  Test if an integer is (not) divisible by another number:
+x
+&percnt;
+4
+==
+0
+// <i>true if x is divisible by 4</i>
+x
+&percnt;
+2
+==
+0
+// <i>true if x is even number</i>
+x
+&percnt;
+2
+!=
+0
+// <i>true if x is odd number</i>
+=== -0, this also works for x &lt;=
+Since 0-0.
+n
+2.  Implement cyclic increment/decrement of value within &lbrack;0,) interval.
+Suppose that we need to increment integer value from 0 to (but not
+including) n, so the next value after n-1 become
 
+0&period; This can be done by such pseudocode:
+**var**
+n
+=
+&hellip;
+;
+// <i>given n</i>
+**var**
+i
+=
+0
+;
+**function**
+inc
+(
+)
+{
+i
+=
+(
+i
+&plus;
+1
+)
+&percnt;
+n
+;
+}
+while
+(
+**true**
+)
+{
+inc
+(
+)
+;
+// <i>update something with i</i>
+}
+Now generalize the above problem and suppose that we need to allow to
+both increment and decrement that value from 0 to (not including) n,
+so the next value after n-1 become 0 and the previous value before 0
+become n-1.
+**var**
+n
+=
+&hellip;
+;
+// <i>given n</i>
+**var**
+i
+=
+0
+;
+**function**
+delta
+(
+d
+)
+{
+// <i>d - any signed integer</i>
+i
+=
+(
+i
+&plus;
+d
+&plus;
+n
+)
+&percnt;
+n
+;
+// <i>we add n to (i+d) to ensure the sum is positive</i>
+}
+delta
+Now we can call () function passing any integer, both positive and
+negative, as delta parameter.
+**Using modulus to obtain the fractional part of a number**
+**var**
+myNum
+=
+10
+/
+4
+;
+*// 2.5*
+**var**
+fraction
+=
+myNum
+&percnt;
+1
+;
+// <i>0.5</i>
+myNum
+=
+&minus;
+20
+/
+7
+;
+// <i>-2.857142857142857</i>
+fraction
+=
+myNum
+&percnt;
+1
+;
+// <i>-0.857142857142857</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-3">Section 14.3: Rounding</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+**Rounding**
+Math.round
+() will round the value to the closest integer using *half round up*
+to break ties.
+**var**
+a
+=
+Math
+.
+round
+(
+2.3
+)
+;
+// <i>a is now 2</i>
+**var**
+b
+=
+Math
+.
+round
+(
+2.7
+)
+;
+// <i>b is now 3</i>
+**var**
+c
+=
+Math
+.
+round
+(
+2.5
+)
+;
+// <i>c is now 3</i>
+But
+**var**
+c
+=
+Math
+.
+round
+(
+&minus;
+2.7
+)
+;
+// <i>c is now -3</i>
+**var**
+c
+=
+Math
+.
+round
+(
+&minus;
+2.5
+)
+;
+// <i>c is now -2</i>
+2.5
+Note how - is rounded to -2. This is because half-way values are
+always rounded up, that is they&apos;re rounded to the integer with the
+next higher value.
+
+**Rounding up**
+Math.ceil
+() will round the value up.
+**var**
+a
+=
+Math
+.
+ceil
+(
+2.3
+)
+;
+// <i>a is now 3</i>
+**var**
+b
+=
+Math
+.
+ceil
+(
+2.7
+)
+;
+// <i>b is now 3</i>
+ceiling a negative number will round towards zero
+**var**
+c
+=
+Math
+.
+ceil
+(
+&minus;
+1.1
+)
+;
+// <i>c is now 1</i>
+**Rounding down**
+Math.floor
+() will round the value down.
+**var**
+a
+=
+Math
+.
+floor
+(
+2.3
+)
+;
+// <i>a is now 2</i>
+**var**
+b
+=
+Math
+.
+floor
+(
+2.7
+)
+;
+// <i>b is now 2</i>
+flooring a negative number will round it away from zero.
+**var**
+c
+=
+Math
+.
+floor
+(
+&minus;
+1.1
+)
+;
+// <i>c is now -1</i>
+**Truncating**
+2147483649
+**Caveat**: using bitwise operators (except &gt;&gt;&gt;) only applies to
+numbers between - and 2147483648.
+
+2.3 &vert; 0; // <i>2 (floor)</i> -2.3 &vert; 0; // <i>-2 (ceil)</i> **NaN** &vert; 0; // <i>0</i>
+<h5>Version ≥ 6</h5>
+Math.trunc
+()
+Math.trunc(2.3); // <i>2 (floor)</i> Math.trunc(-2.3); // <i>-2 (ceil)</i>
+Math.trunc(2147483648.1); // <i>2147483648 (floor)</i>
+Math.trunc(-2147483649.1); // <i>-2147483649 (ceil)</i>
+Math.trunc(**NaN**); // <i>NaN</i>
+**Rounding to decimal places**
+  Math    .   floor     ,   Math    .   ceil    (), and       Math    .   round
+() can be used to round to a number of decimal places
+
+To round to 2 decimal places:
+
+**var** myNum = 2/3; *// 0.6666666666666666* **var** multiplier = 100;
+**var** a = Math.round(myNum &ast; multiplier) / multiplier; // <i>0.67</i>
+**var** b = Math.ceil (myNum &ast; multiplier) / multiplier; // <i>0.67</i>
+**var** c = Math.floor(myNum &ast; multiplier) / multiplier; // <i>0.66</i>
+You can also round to a number of digits:
+**var**
+myNum
+=
+10000
+/
+3
+;
+*// 3333.3333333333335*
+**var**
+multiplier
+=
+1
+/
+100
+;
+**var**
+a
+=
+Math
+.
+round
+(
+myNum
+&ast;
+multiplier
+)
+/
+multiplier
+;
+// <i>3300</i>
+**var** b = Math.ceil (myNum &ast; multiplier) / multiplier; // <i>3400</i>
+**var** c = Math.floor(myNum &ast; multiplier) / multiplier; // <i>3300</i> As a
+more usable function:
+// <i>value is the value to round</i>
+// <i>places if positive the number of decimal places to round to</i>
+// <i>places if negative the number of digits to round to</i>
+**function**
+roundTo
+(
+value
+,
+places
+)
+{
+**var**
+power
+=
+Math
+.
+pow
+(
+10
+,
+places
+)
+;
+**return**
+Math
+.
+round
+(
+value
+&ast;
+power
+)
+/
+power
+;
+}
+**var**
+myNum
+=
+10000
+/
+3
+;
+// <i>3333.3333333333335</i>
+roundTo
+(
+myNum
+,
+2
+)
+;
+// <i>3333.33</i>
+roundTo
+(
+myNum
+,
+0
+)
+;
+// <i>3333</i>
+roundTo
+(
+myNum
+,
+&minus;
+2
+)
+;
+*// 3300*
+And the variants for
+ceil
+and
+floor
+:
+**function**
+ceilTo
+(
+value
+,
+places
+)
+{
+**var**
+power
+=
+Math
+.
+pow
+(
+10
+,
+places
+)
+;
+**return**
+Math
+.
+ceil
+(
+value
+&ast;
+power
+)
+/
+power
+;
+}
+**function**
+floorTo
+(
+value
+,
+places
+)
+{
+**var**
+power
+=
+Math
+.
+pow
+(
+10
+,
+places
+)
+;
+**return**
+Math
+.
+floor
+(
+value
+&ast;
+power
+)
+/
+power
+;
+}
+
+<!-- thru 14.3 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-4">Section 14.4: Trigonometry</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+180  &ast; r / Math.PI
+All angles below are in radians. An angle r in radians has measure in
+degrees.
+**Sine**
+Math
+.
+sin
+(
+r
+)
+;
+This will return the sine of r, a value between -1 and 1.
+Math
+.
+asin
+(
+r
+)
+;
+This will return the arcsine (the reverse of the sine) of r.
+Math
+.
+asinh
+(
+r
+)
+This will return the hyperbolic arcsine of r.
+
+**Cosine**
+Math
+.
+cos
+(
+r
+)
+;
+This will return the cosine of r, a value between -1 and 1
+Math
+.
+acos
+(
+r
+)
+;
+This will return the arccosine (the reverse of the cosine) of r.
+Math
+.
+acosh
+(
+r
+)
+;
+This will return the hyperbolic arccosine of r.
+**Tangent**
+Math
+.
+tan
+(
+r
+)
+;
+This will return the tangent of
+r
+.
+Math
+.
+atan
+(
+r
+)
+;
+This will return the arctangent (the reverse of the tangent) of
+r
+. Note that it will return an angle in radians between
+&minus;
+π
+/
+2
+and
+π
+/
+2
+.
+Math
+.
+atanh
+(
+r
+)
+;
+This will return the hyperbolic arctangent of
+r
+.
+Math
+.
+atan2
+(
+x
+,
+y
+)
+;
+This will return the value of an angle from
+(
+0
+,
+0
+)
+to
+(
+x
+,
+y
+)
+in radians. It will return a value between
+&minus;
+π
+and
+π
+, not
+including π.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-5">Section 14.5: Bitwise operators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Note that all bitwise operations operate on 32-bit integers by passing
+any operands to the internal function
+[ToInt32](http://www.ecma-international.org/ecma-262/6.0/#sec-toint32).
+**Bitwise or**
+**var**
+a
+;
+a
+=
+0b0011
+&vert;
+0b1010
+;
+*// a === 0b1011*
+*// truth table*
+*// 1010 &vert; (or)*
+*// 0011*
+*// 1011 (result)*
+**Bitwise and**
+a
+=
+0b0011
+&
+0b1010
+;
+*// a === 0b0010*
+*// truth table*
+*// 1010 & (and)*
+*// 0011*
+*// 0010 (result)*
+**Bitwise not**
+a
+=
+&bsol;~0b0011
+;
+*// a === 0b1100*
+*// truth table*
+*// 10 &bsol;~(not)*
+*// 01 (result)*
+**Bitwise**
+**xor**
+**(exclusive or)**
+a
+=
+0b1010
+&Hat;
+0b0011
+;
+*// a === 0b1001*
+*// truth table*
+*// 1010 &Hat; (xor)*
+*// 0011*
+*// 1001 (result)*
+**Bitwise**
+**left shift**
+a
+=
+0b0001
+&lt;&lt;
+1
+;
+*// a === 0b0010*
+a
+=
+0b0001
+&lt;&lt;
+2
+;
+*// a === 0b0100*
+a
+=
+0b0001
+&lt;&lt;
+3
+;
+*// a === 0b1000*
+Math.pow (2, n
+Shift left is equivalent to integer multiply by ). When doing integer
+math, shift can significantly improve the speed of some math
+operations.
+**var**
+n
+=
+2
+;
+**var**
+a
+=
+5.4
+;
+**var**
+result
+=
+(
+a
+&lt;&lt;
+n
+)
+===
+Math
+.
+floor
+(
+a
+)
+&ast;
+Math
+.
+pow
+(
+2
+,
+n
+)
+;
+*// result is true*
+a
+=
+5.4
+&lt;&lt;
+n
+;
+*// 20*
+**Bitwise right shift &gt;&lpar;Sign-propagating shift) &gt;&gt;&lpar;Zero-fill
+right shift)**
+a
+=
+0b1001
+&gt;&gt;
+1
+;
+*// a === 0b0100*
+a
+=
+0b1001
+&gt;&gt;
+2
+;
+*// a === 0b0010*
+a
+=
+0b1001
+&gt;&gt;
+3
+;
+*// a === 0b0001*
+a
+=
+0b1001
+&gt;&gt;&gt;
+1
+;
+*// a === 0b0100*
+a
+=
+0b1001
+&gt;&gt;&gt;
+2
+;
+*// a === 0b0010*
+a
+=
+0b1001
+&gt;&gt;&gt;
+3
+;
+*// a === 0b0001*
+A negative 32bit value always has the left most bit on:
+a = 0b11111111111111111111111111110111 &vert; 0; console.log(a); *// -9* b
+= a &gt;&bsol;2; *// leftmost bit is shifted 1 to the right then new left
+most bit is set to on (1)* console.log(b); *// -3* b = a &gt;&gt;&bsol;2; *//
+leftmost bit is shifted 1 to the right. the new left most bit is set
+to off (0)* console.log(b); *// 2147483643*
+The result of a &gt;&gt;&bsol;operation is always positive.
+The result of a &gt;&bsol;is always the same sign as the shifted value.
+Math.pow
+Right shift on positive numbers is the equivalent of dividing by the
+(2,n) and flooring the result:
+a
+=
+256.67
+;
+n
+=
+4
+;
+result
+=
+(
+a
+&gt;&gt;
+n
+)
+===
+Math
+.
+floor
+(
+Math
+.
+floor
+(
+a
+)
+/
+Math
+.
+pow
+(
+2
+,
+n
+)
+)
+;
+*// result is true*
+a
+=
+a
+&gt;&gt;
+n
+;
+*// 16*
+result
+=
+(
+a
+&gt;&gt;&gt;
+n
+)
+===
+Math
+.
+floor
+(
+Math
+.
+floor
+(
+a
+)
+/
+Math
+.
+pow
+(
+2
+,
+n
+)
+)
+;
+*// result is true*
+a
+=
+a
+&gt;&gt;&gt;
+n
+;
+*// 16*
+Right shift zero fill (&gt;&gt;&gt;) on negative numbers is different. As
+JavaScript does not convert to unsigned ints when doing bit operations
+there is no operational equivalent:
+*// result is false*
+a
+=
+&minus;
+256.67
+;
+result
+=
+(
+a
+&gt;&gt;&gt;
+n
+)
+===
+Math
+.
+floor
+(
+Math
+.
+floor
+(
+a
+)
+/
+Math
+.
+pow
+(
+2
+,
+n
+)
+)
+;
+**Bitwise assignment operators**
+With the exception of not (&bsol;~) all the above bitwise operators can be
+used as assignment operators:
+a
+&vert;=
+b
+;
+*// same as: a = a &vert; b;*
+a
+&Hat;=
+b
+;
+*// same as: a = a &Hat; b;*
+a
+&=
+b
+;
+*// same as: a = a & b;*
+a
+&gt;&gt;=
+b
+;
+*// same as: a = a &gt;&bsol;b;*
+a
+&gt;&gt;&gt;=
+b
+;
+*// same as: a = a &gt;&gt;&bsol;b;*
+a
+&lt;&lt;=
+b
+;
+*// same as: a = a &lt;&lt; b;*
+**Warning**: JavaScript uses Big Endian to store integers. This will
+not always match the Endian of the device/OS. When using typed arrays
+with bit lengths greater than 8 bits you should check if the
+environment is Little Endian or Big Endian before applying bitwise
+operations.
+
+**Warning**: Bitwise operators such as & and &vert; are **not** the same
+as the logical operators && (and) and &vert;&vert; (or). They will provide
+incorrect results if used as logical operators. The &Hat; operator is
+**not** the power operator (*ab*).
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-6">Section 14.6: Incrementing (++)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The Increment operator (++) increments its operand by one.
+If used as a postfix, then it returns the value before incrementing.
+If used as a prefix, then it returns the value after incrementing.
+*//postfix*
+**var**
+a
+=
+5
+,
+*// 5*
+b
+=
+a
+++
+,
+*// 5*
+c
+=
+a
+*// 6*
+In this case, a is incremented after setting b. So, b will be 5, and c
+will be 6.
+*//prefix*
+**var**
+a
+=
+5
+,
+*// 5*
+b
+=
+++
+a
+,
+*// 6*
+c
+=
+a
+*// 6*
+In this case, a is incremented before setting b. So, b will be 6, and
+c will be 6.
+The increment and decrement operators are commonly used in **for**
+loops, for example:
+**for**
+(
+**var**
+i
+=
+0
+;
+i
+&lt;
+42
+;
+++
+i
+)
+{
+*// do something awesome!*
+}
+Notice how the *prefix* variant is used. This ensures that a
+temporarily variable isn&apos;t needlessly created (to return the value
+prior to the operation).
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-7">Section 14.7: Exponentiation (Math.pow() or &ast;&ast;)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Exponentiation makes the second operand the power of the first operand
+(ab).
+**var**
+a
+=
+2
+,
+b
+=
+3
+,
+c
+=
+Math
+.
+pow
+(
+a
+,
+b
+)
+;
+c will now be 8
+Version &bsol;6
+Stage 3 ES2016 (ECMAScript 7) Proposal:
+**let**
+a
+=
+2
+,
+b
+=
+3
+,
+c
+=
+a
+&ast;&ast;
+b
+;
+c will now be 8
+
+**Use Math.pow to find the nth root of a number.**
+
+Finding the nth roots is the inverse of raising to the nth power. For
+example 2 to the power of 5 is 32. The 5th root of 32 is 2.
+
+Math.pow(v, 1 / n); *// where v is any positive real number* *// and n
+is any positive integer*
+**var** a = 16; **var** b = Math.pow(a, 1 / 2); *// return the square
+root of 16 = 4* **var** c = Math.pow(a, 1 / 3); *// return the cubed
+root of 16 = 2.5198420997897464* **var** d = Math.pow(a, 1 / 4); *//
+return the 4th root of 16 = 2*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-8">Section 14.8: Random Integers and Floats</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+**var**
+a
+=
+Math
+.
+random
+(
+)
+;
+Sample value of a: 0.21322848065742162
+Math.random
+() returns a random number between 0 (inclusive) and 1 (exclusive)
+**function**
+getRandom
+(
+)
+{
+**return**
+Math
+.
+random
+(
+)
+;
+}
+Math.random
+min, max
+To use () to get a number from an arbitrary range (not &lbrack;0,1)) use
+this function to get a random number between min (inclusive) and max
+(exclusive): interval of &lbrack;)
+**function**
+getRandomArbitrary
+(
+min
+,
+max
+)
+{
+**return**
+Math
+.
+random
+(
+)
+&ast;
+(
+max
+&minus;
+min
+)
+&plus;
+min
+;
+}
+Math.random
+min, max
+To use () to get an integer from an arbitrary range (not &lbrack;0,1)) use
+this function to get a random number between min (inclusive) and max
+(exclusive): interval of &lbrack;)
+**function**
+getRandomInt
+(
+min
+,
+max
+)
+{
+**return**
+Math
+.
+floor
+(
+Math
+.
+random
+(
+)
+&ast;
+(
+max
+&minus;
+min
+)
+)
+&plus;
+min
+;
+}
+Math.random
+min, max
+To use () to get an integer from an arbitrary range (not &lbrack;0,1)) use
+this function to get a random number between min (inclusive) and max
+(inclusive): interval of &lbrack;&rbrack;
+**function**
+getRandomIntInclusive
+(
+min
+,
+max
+)
+{
+**return**
+Math
+.
+floor
+(
+Math
+.
+random
+(
+)
+&ast;
+(
+max
+&minus;
+min
+&plus;
+1
+)
+)
+&plus;
+min
+;
+}
+Functions taken from
+<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-9">Section 14.9: Addition (+)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The addition operator (+) adds numbers.
+**var**
+a
+=
+9
+,
+b
+=
+3
+,
+c
+=
+a
+&plus;
+b
+;
+c.  will now be 12
+This operand can also be used multiple times in a single assignment:
+**var**
+a
+=
+9
+,
+b
+=
+3
+,
+c
+=
+8
+,
+d
+=
+a
+&plus;
+b
+&plus;
+c
+;
+d.  will now be 20.
+Both operands are converted to primitive types. Then, if either one is
+a string, they&apos;re both converted to strings and concatenated.
+Otherwise, they&apos;re both converted to numbers and added.
+**null**
+&plus;
+**null**
+;
+*// 0*
+**null**
+&plus;
+**undefined**
+;
+*// NaN*
+**null**
+&plus;
+{
+}
+;
+*// &quot;null&lbrack;object Object&rbrack;&quot;*
+**null**
+&plus;
+&apos;&apos;
+;
+*// &quot;null&quot;*
+If the operands are a string and a number, the number is converted to
+a string and then they&apos;re concatenated, which may lead to unexpected
+results when working with strings that look numeric.
+&quot;123&quot;
+&plus;
+1
+;
+*// &quot;1231&quot; (not 124)*
+If a boolean value is given in place of any of the number values, the
+boolean value is converted to a number (0 for **false**, 1 for
+**true**) before the sum is calculated:
+**true**
+&plus;
+1
+;
+*// 2*
+**false**
+&plus;
+5
+;
+*// 5*
+**null**
+&plus;
+1
+;
+*// 1*
+**undefined**
+&plus;
+1
+;
+*// NaN*
+If a boolean value is given alongside a string value, the boolean
+value is converted to a string instead:
+**true**
+&plus;
+&quot;1&quot;
+;
+*// &quot;true1&quot;*
+**false**
+&plus;
+&quot;bar&quot;
+;
+*// &quot;falsebar&quot;*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-10">Section 14.10: Little / Big endian for typed arrays when using bitwise operators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+To detect the endian of the device
+**var**
+isLittleEndian
+=
+**true**
+;
+(
+(
+)
+=&gt;
+{
+**var**
+buf
+=
+**new**
+ArrayBuffer
+(
+4
+)
+;
+**var**
+buf8
+=
+**new**
+Uint8ClampedArray
+(
+buf
+)
+;
+**var**
+data
+=
+**new**
+Uint32Array
+(
+buf
+)
+;
+data
+&lbrack;
+0
+&rbrack;
+=
+0x0F000000
+;
+**if**
+(
+buf8
+&lbrack;
+0
+&rbrack;
+===
+0x0f
+)
+{
+isLittleEndian
+=
+**false**
+;
+}
+}
+)
+(
+)
+;
+Little-Endian stores most significant bytes from right to left.
+
+Big-Endian stores most significant bytes from left to right.
+**var**
+myNum
+=
+0x11223344
+&vert;
+0
+;
+*// 32 bit signed integer*
+**var**
+buf
+=
+**new**
+ArrayBuffer
+(
+4
+)
+;
+**var**
+data8
+=
+**new**
+Uint8ClampedArray
+(
+buf
+)
+;
+**var**
+data32
+=
+**new**
+Uint32Array
+(
+buf
+)
+;
+data32
+&lbrack;
+0
+&rbrack;
+=
+myNum
+;
+// <i>store number in 32Bit array</i>
+If the system uses Little-Endian, then the 8bit byte values will be
+console.
+log
+(
+data8
+&lbrack;
+0
+&rbrack;
+.
+toString
+(
+16
+)
+)
+;
+*// 0x44*
+console.
+log
+(
+data8
+&lbrack;
+1
+&rbrack;
+.
+toString
+(
+16
+)
+)
+;
+*// 0x33*
+console.
+log
+(
+data8
+&lbrack;
+2
+&rbrack;
+.
+toString
+(
+16
+)
+)
+;
+*// 0x22*
+console.
+log
+(
+data8
+&lbrack;
+3
+&rbrack;
+.
+toString
+(
+16
+)
+)
+;
+// <i>0x11</i>
+If the system uses Big-Endian, then the 8bit byte values will be
+console.
+log
+(
+data8
+&lbrack;
+0
+&rbrack;
+.
+toString
+(
+16
+)
+)
+;
+// <i>0x11</i>
+console.
+log
+(
+data8
+&lbrack;
+1
+&rbrack;
+.
+toString
+(
+16
+)
+)
+;
+*// 0x22*
+console.
+log
+(
+data8
+&lbrack;
+2
+&rbrack;
+.
+toString
+(
+16
+)
+)
+;
+*// 0x33*
+console.
+log
+(
+data8
+&lbrack;
+3
+&rbrack;
+.
+toString
+(
+16
+)
+)
+;
+*// 0x44*
+Example where Endian type is important
+**var**
+canvas
+=
+document.
+createElement
+(
+&quot;canvas&quot;
+)
+;
+**var**
+ctx
+=
+canvas.
+getContext
+(
+&quot;2d&quot;
+)
+;
+**var**
+imgData
+=
+ctx.
+getImageData
+(
+0
+,
+0
+,
+canvas.
+width
+,
+canvas.
+height
+)
+;
+// <i>To speed up read and write from the image buffer you can create a
+buffer view that is</i>
+// <i>32 bits allowing you to read/write a pixel in a single operation</i>
+**var**
+buf32
+=
+**new**
+Uint32Array
+(
+imgData.
+data
+.
+buffer
+)
+;
+*// Mask out Red and Blue channels*
+**var**
+mask
+=
+0x00FF00FF
+;
+// <i>bigEndian pixel channels Red,Green,Blue,Alpha</i>
+**if**
+(
+isLittleEndian
+)
+{
+mask
+=
+0xFF00FF00
+;
+// <i>littleEndian pixel channels Alpha,Blue,Green,Red</i>
+}
+**var**
+len
+=
+buf32.
+length
+;
+**var**
+i
+=
+0
+;
+while
+(
+i
+&lt;
+len
+)
+{
+// <i>Mask all pixels</i>
+buf32
+&lbrack;
+i
+&rbrack;
+&=
+mask
+;
+// <i>Mask out Red and Blue</i>
+}
+ctx.
+putImageData
+(
+imgData
+)
+;
+<!-- thru 14.10 -->
