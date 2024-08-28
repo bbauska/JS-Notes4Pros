@@ -6809,734 +6809,234 @@ with length 23.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-22">Section 12.22: Joining array elements in a string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<p>
 To join all of an array&apos;s elements into a string, you can use the
-join method:
-console.
-log
-(
-&lbrack;
-&quot;Hello&quot;
-,
-&quot; &quot;
-,
-&quot;world&quot;
-&rbrack;
-.
-join
-(
-&quot;&quot;
-)
-)
-;
-// <i>&quot;Hello world&quot;</i>
-console.log(&lbrack;1, 800, 555, 1234&rbrack;.join(&quot;-&quot;)); // 
-<i>&quot;1-800-555-1234&quot;</i>
-As you can see in the second line, items that are not strings will be
+join method:</p>
+<pre>
+console.log(&lbrack;&quot;Hello&quot;, &quot; &quot;, &quot;world&quot;&rbrack;.join(&quot;&quot;));  // <i>&quot;Hello world&quot;</i>
+console.log(&lbrack;1, 800, 555, 1234&rbrack;.join(&quot;-&quot;)); // <i>&quot;1-800-555-1234&quot;</i>
+</pre>
+<!-- page 105 -->
+<p>As you can see in the second line, items that are not strings will be
 converted first.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-23">Section 12.23: Removing/Adding elements using splice()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-splice
-The ()method can be used to remove elements from an array. In this
-example, we remove the first 3 from the array.
-<b>var</b>
-values
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-,
-3
-&rbrack;
-;
-<b>var</b>
-i
-=
-values.
-indexOf
-(
-3
-)
-;
-<b>if</b>
-(
-i
-&gt;=
-0
-)
-{
-values.
-splice
-(
-i
-,
-1
-)
-;
+<p>The splice() method can be used to remove elements from an array. In this example, we 
+remove the first 3 from the array.</p>
+<pre>
+<b>var</b> values = &lbrack;1, 2, 3, 4, 5, 3&rbrack;;
+<b>var</b> i = values.indexOf(3);
+<b>if</b> (i &gt;= 0) {
+  values.splice(i, 1);
 }
 // <i>&lbrack;1, 2, 4, 5, 3&rbrack;</i>
-splice
-The () method can also be used to add elements to an array. In this
-example, we will insert the numbers 6, 7, and 8 to the end of the
-array.
-<b>var</b>
-values
-=
-&lbrack;
-1
-,
-2
-,
-4
-,
-5
-,
-3
-&rbrack;
-;
-<b>var</b>
-i
-=
-values.
-length
-&plus;
-1
-;
-values.
-splice
-(
-i
-,
-0
-,
-6
-,
-7
-,
-8
-)
-;
+</pre>
+
+<p>The splice() method can also be used to add elements to an array. In this
+example, we will insert the numbers 6, 7, and 8 to the end of the array.</p>
+<pre>
+<b>var</b> values = &lbrack;1, 2, 4, 5, 3&rbrack;;
+<b>var</b> i = values.length &plus; 1;
+values.splice(i, 0, 6, 7, 8);
 // <i>&lbrack;1, 2, 4, 5, 3, 6, 7, 8&rbrack;</i>
-splice
-The first argument of the () method is the index at which to
+</pre>
+<p>The first argument of the () method is the index at which to
 remove/insert elements. The second argument is the number of elements
 to remove. The third argument and onwards are the values to insert
-into the array.
+into the array.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-24">Section 12.24: The entries() method</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-entries
-The () method returns a new Array Iterator object that contains the
-key/value pairs for each index in the array. Version ≥ 6
-<b>var</b>
-letters
-=
-&lbrack;
-&apos;a&apos;
-,
-&apos;b&apos;
-,
-&apos;c&apos;
-&rbrack;
-;
-<b>for</b>
-(
-<b>const</b>
-&lbrack;
-index
-,
-element
-&rbrack;
-of letters.
-entries
-(
-)
-)
-{
-console.
-log
-(
-index
-,
-element
-)
-;
+<p>The entries() method returns a new Array Iterator object that contains the
+key/value pairs for each index in the array.</p>
+
+<h5>Version ≥ 6</h5>
+<pre>
+<b>var</b> letters = &lbrack;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&rbrack;;
+
+<b>for</b> (<b>const</b>&lbrack;index, element&rbrack; of letters.entries()) {
+  console.log(index, element);
 }
-result
-0
-&quot;a&quot;
-1
-&quot;b&quot;
-2
-&quot;c&quot;
-<b>Note</b>: [This method is not supported in Internet
-Explorer.](http://kangax.github.io/compat-table/es6/#test-Array.prototype_methods_Array.prototype.entries)
+</pre>
+<p>result</p>
+<pre>
+0 &quot;a&quot;
+1 &quot;b&quot;
+2 &quot;c&quot;
+</pre>
+<p><b>Note</b>: <a href="http://kangax.github.io/compat-table/es6/#test-Array.prototype_methods_Array.prototype.entries">
+This method is not supported in Internet Explorer</a>.</p>
+
 [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)
 [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)   [<i>entries</i>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)
-</i>Portions of this content from by [Mozilla
-Contributors](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries$history)
-licensed under [CC-by-SA
-2.5](http://creativecommons.org/licenses/by-sa/2.5/)</i>
+
+<p></i>Portions of this content from by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries$history">
+Mozilla Contributors</a> licensed by <a href="http://creativecommons.org/licenses/by-sa/2.5/">CC-by-SA 2.5</a></i></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-25">Section 12.25: Remove value from array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-When you need to remove a specific value from an array, you can use
+<p>When you need to remove a specific value from an array, you can use
 the following one-liner to create a copy array without the given
-value:
-array.
-filter
-(
-<b>function</b>
-(
-val
-)
-{
-<b>return</b>
-val
-!==
-to_remove
-;
-}
-)
-;
-Or if you want to change the array itself without creating a copy (for
+value:</p>
+<pre>
+array.filter(<b>function</b>(val) { <b>return</b> val !== to_remove; });
+</pre>
+<!-- page 106 -->
+<p>Or if you want to change the array itself without creating a copy (for
 example if you write a function that get an array as a function and
-manipulates it) you can use this snippet: while(index =
-array.indexOf(3) !== -1) { array.splice(index, 1); } And if you need
-to remove just the first value found, remove the while loop:
-<b>var</b>
-index
-=
-array.
-indexOf
-(
-to_remove
-)
-;
-<b>if</b>
-(
-index
-!==
-&minus;
-1
-)
-{
-array.
-splice
-(
-index
-,
-1
-)
-;
-}
+manipulates it) you can use this snippet:</p>
+<pre>
+while(index = array.indexOf(3) !== -1) { array.splice(index, 1); } 
+</pre>
+<p>And if you need to remove just the first value found, remove the while loop:</p>
+<pre>
+<b>var</b> index = array.indexOf(to_remove);
+<b>if</b>(index !== &minus;1) { array.splice(index, 1); }
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-26">Section 12.26: Flattening Arrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>2 Dimensional arrays</b> Version ≥ 6
-In ES6, we can flatten the array by the spread operator
-[&hellip;](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator):
-<b>function</b>
-flattenES6
-(
-arr
-)
-{
-<b>return</b>
-&lbrack;
-&rbrack;
-.
-concat
-(
-&hellip;
-arr
-)
-;
+<p><b>2 Dimensional arrays</b></p>
+<h5>Version ≥ 6</h5>
+<p>In ES6, we can flatten the array by the spread operator
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">&hellip;</a>:</p>
+<pre>
+<b>function</b> flattenES6(arr) {
+  <b>return</b> &lbrack;&rbrack;.concat(&hellip;arr);
 }
-<b>var</b>
-arrL1
-=
-&lbrack;
-1
-,
-2
-,
-&lbrack;
-3
-,
-4
-&rbrack;
-&rbrack;
-;
-console.
-log
-(
-flattenES6
-(
-arrL1
-)
-)
-;
-// <i>&lbrack;1, 2, 3, 4&rbrack;</i>
+
+<b>var</b> arrL1 = &lbrack;1, 2, &lbrack;3, 4&rbrack;&rbrack;;
+console.log(flattenES6(arrL1));  // <i>&lbrack;1, 2, 3, 4&rbrack;</i>
+</pre>
 <h5>Version ≥ 5</h5>
-In ES5, we can achieve that by
-[.apply()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply):
-<b>function</b>
-flatten
-(
-arr
-)
-{
-<b>return</b>
-&lbrack;
-&rbrack;
-.
-concat
-.
-apply
-(
-&lbrack;
-&rbrack;
-,
-arr
-)
-;
+<p>In ES5, we can achieve that by
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">.apply()</a>:</p>
+
+<pre>
+<b>function</b></p> flatten(arr) {
+  <b>return</b> &lbrack;&rbrack;.concat.apply(&lbrack;&rbrack;, arr);
 }
-<b>var</b>
-arrL1
-=
-&lbrack;
-1
-,
-2
-,
-&lbrack;
-3
-,
-4
-&rbrack;
-&rbrack;
-;
-console.
-log
-(
-flatten
-(
-arrL1
-)
-)
-;
-// <i>&lbrack;1, 2, 3, 4&rbrack;</i>
-<b>Higher Dimension Arrays</b>
-Given a deeply nested array like so
-<b>var</b>
-deeplyNested
-=
-&lbrack;
-4
-,
-&lbrack;
-5
-,
-6
-,
-&lbrack;
-7
-,
-8
-&rbrack;
-,
-9
-&rbrack;
-&rbrack;
-;
-It can be flattened with this magic
-console.
-log
-(
-String
-(
-deeplyNested
-)
-.
-split
-(
-&apos;,&apos;
-)
-.
-map
-(
-Number
-)
-;
-&bsol;#
-=&gt;
-&lbrack;
-4
-,
-5
-,
-6
-,
-7
-,
-8
-,
-9
-&rbrack;
-Or
-<b>const</b>
-flatten
-=
-deeplyNested.
-toString
-(
-)
-.
-split
-(
-&apos;,&apos;
-)
-.
-map
-(
-Number
-)
-console.
-log
-(
-flatten
-)
-;
-&bsol;#
-=&gt;
-&lbrack;
-4
-,
-5
-,
-6
-,
-7
-,
-8
-,
-9
-&rbrack;
-Both of the above methods only work when the array is made up
+<b>var</b> arrL1 = &lbrack;1, 2, &lbrack;3, 4&rbrack;&rbrack;;
+console.log(flatten(arrL1));  // <i>&lbrack;1, 2, 3, 4&rbrack;</i>
+</pre>
+<p><b>Higher Dimension Arrays</b></p>
+<p>Given a deeply nested array like so</p>
+<pre>
+<b>var</b> deeplyNested = &lbrack;4, &lbrack;5, 6, &lbrack;7, 8&rbrack;, 9&rbrack;&rbrack;;
+</pre>
+<p>It can be flattened with this magic</p>
+<pre>
+console.log(String(deeplyNested).split(&apos;,&apos;).map(Number);
+&bsol;#=&gt; &lbrack;4, 5, 6, 7, 8, 9&rbrack;
+</pre>
+
+<p>Or</p>
+
+<pre>
+<b>const</b> flatten = deeplyNested.toString().split(&apos;,&apos;).map(Number)
+console.log(flatten);
+&bsol;#=&gt; &lbrack;4, 5, 6, 7, 8, 9&rbrack;
+</pre>
+
+<p>Both of the above methods only work when the array is made up
 exclusively of numbers. A multi-dimensional array of objects cannot be
-flattened by this method.
+flattened by this method.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-27">Section 12.27: Append / Prepend items to Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Unshift</b>
-.unshift
-Use to add one or more items in the beginning of an array.
-For example:
-<b>var</b>
-array
-=
-&lbrack;
-3
-,
-4
-,
-5
-,
-6
-&rbrack;
-;
-array.
-unshift
-(
-1
-,
-2
-)
-;
-array results in:
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-,
-6
-&rbrack;
-<b>Push</b>
-.push
-Further is used to add items after the last currently existent item.
-For example:
-<b>var</b>
-array
-=
-&lbrack;
-1
-,
-2
-,
-3
-&rbrack;
-;
-array.
-push
-(
-4
-,
-5
-,
-6
-)
-;
-array results in:
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-,
-6
-&rbrack;
-Both methods return the new array length.
+<!-- page 107 -->
+<p><b>Unshift</b></p>
+
+<p>Use .unshift to add one or more items in the beginning of an array.</p>
+<p>For example:</p>
+<pre>
+<b>var</b> array = &lbrack;3, 4, 5, 6&rbrack;;
+array.unshift(1, 2);
+</pre>
+<p>array results in:</p>
+<pre>
+&lbrack;1, 2, 3, 4, 5, 6&rbrack;
+</pre>
+<p><b>Push</b></p>
+
+<p>Further is used to add items after the last currently existent item.</p>
+<p>For example:</p>
+<pre>
+<b>var</b> array = &lbrack;1, 2, 3&rbrack;;
+array.push(4, 5, 6);
+</pre>
+<p>array results in:</p>
+<pre>
+&lbrack;1, 2, 3, 4, 5, 6&rbrack;
+</pre>
+<p>Both methods return the new array length.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-28">Section 12.28: Object keys and values to array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>var</b>
-object
-=
-{
-key1
-:
-10
-,
-key2
-:
-3
-,
-key3
-:
-40
-,
-key4
-:
-20
+<pre>
+<b>var</b> object = {
+  key1: 10,
+  key2: 3,
+  key3: 40,
+  key4: 20
+};
+</b>var</b> array = &lbrack;&rbrack;;
+<b>for</b> (</b>var</b> people <b>in</b> object) {
+  array.push(&lbrack;people, object&lbrack;people&rbrack;&rbrack;);
 }
-;
-</b>var</b>
-array
-=
+</pre>
+<p>Now array is</p>
+<pre>
 &lbrack;
+  &lbrack;&quot;key1&quot;, 10&rbrack;,
+  &lbrack;&quot;key2&quot;, 3&rbrack;,
+  &lbrack;&quot;key3&quot;, 40&rbrack;,
+  &lbrack;&quot;key4&quot;, 20&rbrack;
 &rbrack;
-;
-<b>for</b>
-(
-</b>var</b>
-people
-<b>in</b>
-object
-)
-{
-array.
-push
-(
-&lbrack;
-people
-,
-object
-&lbrack;
-people
-&rbrack;
-&rbrack;
-)
-;
-}
-Now array is
-&lbrack;
-&lbrack;
-&quot;key1&quot;
-,
-10
-&rbrack;
-,
-&lbrack;
-&quot;key2&quot;
-,
-3
-&rbrack;
-,
-&lbrack;
-&quot;key3&quot;
-,
-40
-&rbrack;
-,
-&lbrack;
-&quot;key4&quot;
-,
-20
-&rbrack;
-&rbrack;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-29">Section 12.29: Logical connective of values</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 5.1</h5>
-some  and . every
-. allow a logical connective of Array values.
-some   combines the return values with OR, .every
-While . combines them with AND.
-some
-Examples for .
-&lbrack;
-<b>false</b>
-,
-<b>false</b>
-&rbrack;
-.
-some
-(
-<b>function</b>
-(
-value
-)
-{
-<b>return</b>
-value
-;
-}
-)
-;
-// <i>Result: false</i>
-&lbrack;
-<b>false</b>
-,
-<b>true</b>
-&rbrack;
-.
-some
-(
-<b>function</b>
-(
-value
-)
-{
-<b>return</b>
-value
-;
-}
-)
-;
-// <i>Result: true</i>
-&lbrack;
-<b>true</b>
-,
-<b>true</b>
-&rbrack;
-.
-some
-(
-<b>function</b>
-(
-value
-)
-{
-<b>return</b>
-value
-;
-}
-)
-;
-// <i>Result: true</i>
-And examples for
-.
-every
-&lbrack;
-<b>false</b>
-,
-<b>false</b>
-&rbrack;
-.
-every
-(
-<b>function</b>
-(
-value
-)
-{
-<b>return</b>
-value
-;
-}
-)
-;
-// <i>Result: false</i>
-&lbrack;
-<b>false</b>
-,
-<b>true</b>
-&rbrack;
-.
-every
-(
-<b>function</b>
-(
-value
-)
-{
-<b>return</b>
-value
-;
-}
-)
-;
-// <i>Result: false</i>
-&lbrack;
-<b>true</b>
-,
-<b>true</b>
-&rbrack;
-.
-every
-(
-<b>function</b>
-(
-value
-)
-{
-<b>return</b>
-value
-;
-}
-)
-;
-// <i>Result: true</i>
+<p>some  and . every . allow a logical connective of Array values.</p>
 
+<p>While .some combines the return values with OR, .every combines them with AND.</p>
+
+<p>Examples for .some</p>
+<pre
+&lbrack;<b>false</b>, <b>false</b>&rbrack;.some(<b>function</b>(value) {
+  <b>return</b> value;
+});
+// <i>Result: false</i>
+
+&lbrack;<b>false</b>, <b>true</b>&rbrack;.some(<b>function</b>(value) {
+  <b>return</b> value;
+});
+// <i>Result: true</i>
+&lbrack; <b>true</b>, <b>true</b>&rbrack;.some(<b>function</b>(value) {
+  <b>return</b> value;
+});
+// <i>Result: true</i>
+</pre>
+
+<p>And examples for .every</p>
+
+<pre>
+&lbrack;<b>false</b>, <b>false</b>&rbrack;.every(<b>function</b>(value) {
+  <b>return</b> value;
+});
+// <i>Result: false</i>
+&lbrack; <b>false</b>, <b>true</b>&rbrack;.every(<b>function</b>(value) {
+  <b>return</b> value;
+});
+// <i>Result: false</i>
+&lbrack; <b>true</b>, <b>true</b>&rbrack;.every(<b>function</b>(value) {
+  <b>return</b> value;
+});
+// <i>Result: true</i>
+</pre>
 <!-- thru 12.29 -->
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-30">Section 12.30: Checking if an object is an Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
