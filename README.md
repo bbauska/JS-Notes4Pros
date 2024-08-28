@@ -7143,7 +7143,7 @@ have side-effects.</p>
 <pre>
 &lbrack;1, 2, 1&rbrack;.every(<b>function</b>(item, i, list) { <b>return</b> item === list&lbrack;0&rbrack;; }); // <i> false</i>
 &lbrack;1, 1, 1&rbrack;.every(<b>function</b>(item, i, list) { <b>return</b> item === list&lbrack;0&rbrack;; }); // <i> true</i>
-<pre>
+</pre>
 <h5>Version ≥ 6</h5>
 <pre>
 &lbrack;1, 1, 1&rbrack;.every((item, i, list) =&gt; item === list&lbrack;0&rbrack;); // <i> true</i>
@@ -7163,7 +7163,7 @@ data.every(<b>function</b>(item, i, list) { <b>return</b> item.name === list&lbr
 data.every((item, i, list) =&gt; item.name === list&lbrack;0&rbrack;.name);  // <i> true</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<h3 id="ch12-23">Section 12.34: Copy part of an Array</h3>
+<h3 id="ch12-34">Section 12.34: Copy part of an Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The slice() method returns a copy of a portion of an array.</p>
 It takes two parameters, arr.slice(&lbrack;begin&lbrack;, end&rbrack;&rbrack;):</p>
