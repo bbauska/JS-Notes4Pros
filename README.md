@@ -5848,7 +5848,7 @@ Array.prototype.keys()</a> method can be used to iterate over indices like this:
 forEach(...)</a> method is an option in ES 5 and above. It is supported by all modern browsers, as well as 
 Internet Explorer 9 and later.</p>
 
-method is an option in ES 5 and above. 
+<p>method is an option in ES 5 and above.</p>
 
 <h5>Version ≥ 5</h5>
 
@@ -5918,172 +5918,64 @@ console.log(arr&lbrack;i&rbrack;);
 
 <h5>Version ≥ 5</h5>
 
+<pre>
 // <i>&lbrack;&rbrack;.some stops once it finds a false result</i>
 // <i>thus, this iteration will stop on value 7 (since 7 % 2 !== 0)</i>
-&lbrack;
-2
-,
-4
-,
-7
-,
-9
-&rbrack;
-.
-some
-(
-<b>function</b>
-(
-value
-,
-index
-,
-arr
-)
-{
-console.
-log
-(
-value
-)
-;
-<b>return</b>
-value
-===
-7
-;
-// <i>iterate until we find value 7</i>
+&lbrack;2, 4, 7, 9&rbrack;.some(<b>function</b>(value, index, arr) {
+  console.log(value);
+  <b>return</b> value === 7;  // <i>iterate until we find value 7</i>
+});
+</pre>
+
+<p>Equivalent in any JavaScript version:</p>
+
+<pre>
+<b>var</b> arr = &lbrack;2, 4, 7, 9&rbrack;;
+<b>for</b> (<b>var</b> i = 0; i &lt; arr.length && arr&lbrack;i&rbrack; !== 7; i++) {
+  console.log(arr&lbrack;i&rbrack;);
 }
-)
-;
-Equivalent in any JavaScript version:
-<b>var</b>
-arr
-=
-&lbrack;
-2
-,
-4
-,
-7
-,
-9
-&rbrack;
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-arr.
-length
-&&
-arr
-&lbrack;
-i
-&rbrack;
-!==
-7
-;
-i
-++
-)
-{
-console.
-log
-(
-arr
-&lbrack;
-i
-&rbrack;
-)
-;
-}
-<b>Libraries</b>
-Finally, many utility libraries also have their own foreach variation.
-Three of the most popular ones are these:
-[<b>jQuery.each</b>](http://api.jquery.com/jquery.each/)
-[<b>()</b>](http://api.jquery.com/jquery.each/), in
-[<b>jQuery</b>](https://jquery.com/):
-&dollar;.
-each
-(
-myArray
-,
-<b>function</b>
-(
-key
-,
-value
-)
-{
-console.
-log
-(
-value
-)
-;
-}
-)
-;
-[<b>&lowbar;.each</b>](http://underscorejs.org/#each)
-[<b>()</b>](http://underscorejs.org/#each), in
-[<b>Underscore.js</b>](http://underscorejs.org/):
-&lowbar;.
-each
-(
-myArray
-,
-<b>function</b>
-(
-value
-,
-key
-,
-myArray
-)
-{
-console.
-log
-(
-value
-)
-;
-}
-)
-;
-[<b>&lowbar;.forEach</b>](https://lodash.com/docs#forEach)
-[<b>()</b>](https://lodash.com/docs#forEach), in
-[<b>Lodash.js</b>](https://lodash.com/):
-&lowbar;.
-forEach
-(
-myArray
-,
-<b>function</b>
-(
-value
-,
-key
-)
-{
-console.
-log
-(
-value
-)
-;
-}
-)
-;
-See also the following question on SO, where much of this information
-was originally posted:
-[Loop through an array in
-JavaScript](https://stackoverflow.com/questions/3010840/loop-through-an-array-in-javascript/35707349#35707349)
+</pre>
+
+<!-- page 92 -->
+<p><b>Libraries</b><p>
+
+<p>Finally, many utility libraries also have their own foreach variation.
+Three of the most popular ones are these:</p>
+
+<p><a href="http://api.jquery.com/jquery.each/"><b>jQuery.each</b>()</a>, in 
+<a href="https://jquery.com/"><b>jQuery:</b></a></p>
+
+<pre>
+&dollar;.each(myArray, <b>function</b>(key, value) {
+  console.log(value);
+});
+</pre>
+
+<p><a href="http://underscorejs.org/#each"><b>_.each()</b>, in <a href="http://underscorejs.org/">
+<b>Underscore.js</b></a>:</p>
+
+<pre>
+&lowbar;.each(myArray, <b>function</b>(value, key, myArray) {
+  console.log(value);
+});
+</pre>
+
+<p><a href="http://lodashjs.com/docs#forEach"><b>_.forEach()</b>, in <a href="https://lodash.com/">
+<b>Lodash.js</b></a>:</p>
+
+<pre>
+&lowbar;.forEach(myArray, <b>function</b>(value, key) {
+  console.log(value);
+});
+</pre>
+
+<p>See also the following question on SO, where much of this information 
+was originally posted:</p>
+
+<ul>
+  <li><a href="https://stackoverflow.com/questions/3010840/loop-through-an-array-in-javascript/35707349#35707349">
+    Loop through an array in JavaScript</li>
+<ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-7">Section 12.7: Destructuring an array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
