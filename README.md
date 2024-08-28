@@ -6185,7 +6185,6 @@ clone2 = &lbrack;&rbrack;.slice.call(arrayToClone);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-12">Section 12.12: Concatenating Arrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p><b>Two Arrays</b></p>
 
 <pre>
@@ -6238,773 +6237,249 @@ clone2 = &lbrack;&rbrack;.slice.call(arrayToClone);
 
 <p><b>Without Copying the First Array</b></p>
 
-<b>var</b>
-longArray
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-,
-6
-,
-7
-,
-8
-&rbrack;
-,
-shortArray
-=
-&lbrack;
-9
-,
-10
-&rbrack;
-;
+<pre>
+<b>var</b> longArray = &lbrack;1, 2, 3, 4, 5, 6, 7, 8&rbrack;,
+  shortArray = &lbrack;9, 10&rbrack;;
+</pre>
+
 <h5>Version ≥ 3</h5>
 
-Function.<b>prototype</b>.apply
-
-Provide the elements of shortArray as parameters to push using
-longArray.
-push
-.
-apply
-(
-longArray
-,
-shortArray
-)
-;
+<p>Provide the elements of shortArray as parameters to push using Function.<b>prototype</b>.apply</p>
+<pre>
+longArray.push.apply(longArray, shortArray);
+</pre>
 <h5>Version ≥ 6</h5>
-Use the spread operator to pass the elements of shortArray as separate
-arguments to push
-longArray.
-push
-(
-&hellip;
-shortArray
-)
-The value of longArray is now:
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-,
-6
-,
-7
-,
-8
-,
-9
-,
-10
-&rbrack;
-Note that if the second array is too long (&gt;100,000 entries), you may
-get a stack overflow error (because of how apply works). To be safe,
-you can iterate instead:
-shortArray.
-forEach
-(
-<b>function</b>
-(
-elem
-)
-{
-longArray.
-push
-(
-elem
-)
-;
-}
-)
-;
-<b>Array and non-array values</b>
-<b>var</b>
-array
-=
-&lbrack;
-&quot;a&quot;
-,
-&quot;b&quot;
-&rbrack;
-;
+<p>Use the spread operator to pass the elements of shortArray as separate arguments to push</p>
+<pre>
+longArray.push(&hellip;shortArray)
+</pre>
+<p>The value of longArray is now:</p>
+<pre>
+&lbrack;1, 2, 3, 4, 5, 6, 7, 8, 9, 10&rbrack;
+</pre>
+<p>Note that if the second array is too long (&gt;100,000 entries), you may get a stack overflow error 
+(because of how apply works). To be safe, you can iterate instead:</p>
+<pre>
+shortArray.forEach(<b>function</b> (elem) {
+  longArray.push(elem);
+});
+</pre>
+<p><b>Array and non-array values</b></p>
+<pre>
+<b>var</b> array = &lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;;
+</pre>
 <h5>Version ≥ 3</h5>
-<b>var</b>
-arrConc
-=
-array.
-concat
-(
-&quot;c&quot;
-,
-&quot;d&quot;
-)
-;
-
+<pre>
+<b>var</b> arrConc = array.concat(&quot;c&quot;, &quot;d&quot;);
+</pre>
 <h5>Version ≥ 6</h5>
+<pre>
+<b>var</b> arrConc = &lbrack;&hellip;array, &quot;c&quot;, &quot;d&quot;&rbrack;
+</pre>
+<p>Results in a new Array:</p>
+<pre>
+&lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;&rbrack;
+</pre>
+<p>You can also mix arrays with non-arrays</p>
+<!-- page 97 -->
+<pre>
+<b>var</b> arr1 = &lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;;
+<b>var</b> arr2 = &lbrack;&quot;e&quot;, &quot;f&quot;&rbrack;;
 
-<b>var</b>
-arrConc
-=
-&lbrack;
-&hellip;
-array
-,
-&quot;c&quot;
-,
-&quot;d&quot;
-&rbrack;
-Results in a new Array:
-&lbrack;
-&quot;a&quot;
-,
-&quot;b&quot;
-,
-&quot;c&quot;
-,
-&quot;d&quot;
-&rbrack;
-You can also mix arrays with non-arrays
-<b>var</b>
-arr1
-=
-&lbrack;
-&quot;a&quot;
-,
-&quot;b&quot;
-&rbrack;
-;
-<b>var</b>
-arr2
-=
-&lbrack;
-&quot;e&quot;
-,
-&quot;f&quot;
-&rbrack;
-;
-<b>var</b>
-arrConc
-=
-arr1.
-concat
-(
-&quot;c&quot;
-,
-&quot;d&quot;
-,
-arr2
-)
-;
-Results in a new Array:
-&lbrack;
-&quot;a&quot;
-,
-&quot;b&quot;
-,
-&quot;c&quot;
-,
-&quot;d&quot;
-,
-&quot;e&quot;
-,
-&quot;f&quot;
-&rbrack;
+<b>var</b> arrConc = arr1.concat(&quot;c&quot;, &quot;d&quot;, arr2);
+</pre>
+<p>Results in a new Array:</p>
+<pre>
+&lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;&rbrack;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-13">Section 12.13: Merge two array as key value pair</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-When we have two separate array and we want to make key value pair
-from that two array, we can use array&apos;s reduce function like below:
-<b>var</b>
-columns
-=
-&lbrack;
-&quot;Date&quot;
-,
-&quot;Number&quot;
-,
-&quot;Size&quot;
-,
-&quot;Location&quot;
-,
-&quot;Age&quot;
-&rbrack;
-;
-<b>var</b>
-rows
-=
-&lbrack;
-&quot;2001&quot;
-,
-&quot;5&quot;
-,
-&quot;Big&quot;
-,
-&quot;Sydney&quot;
-,
-&quot;25&quot;
-&rbrack;
-;
-<b>var</b>
-result
-=
-rows.
-reduce
-(
-<b>function</b>
-(
-result
-,
-field
-,
-index
-)
+<p>When we have two separate array and we want to make key value pair
+from that two array, we can use array&apos;s reduce function like below:</p>
+<pre>
+<b>var</b> columns = &lbrack;&quot;Date&quot;, &quot;Number&quot;, &quot;Size&quot;, &quot;Location&quot;, &quot;Age&quot;&rbrack;;
+<b>var</b> rows = &lbrack;&quot;2001&quot;, &quot;5&quot;, &quot;Big&quot;, &quot;Sydney&quot;, &quot;25&quot;&rbrack;;
+<b>var</b> result = rows.reduce(<b>function</b>(result, field, index) {
+  result&lbrack;columns&lbrack;index&rbrack;&rbrack; = field;
+  <b>return</b> result;
+}, {})
+
+console.log(result);
+</pre>
+
+<p>Output:</p>
+<pre>
 {
-result
-&lbrack;
-columns
-&lbrack;
-index
-&rbrack;
-&rbrack;
-=
-field
-;
-<b>return</b>
-result
-;
+  Date: &quot;2001&quot;,
+  Number: &quot;5&quot;,
+  Size: &quot;Big&quot;,
+  Location: &quot;Sydney&quot;,
+  Age: &quot;25&quot;
 }
-,
-{
-}
-)
-console.
-log
-(
-result
-)
-;
-Output:
-{
-Date
-:
-&quot;2001&quot;
-,
-Number
-:
-&quot;5&quot;
-,
-Size
-:
-&quot;Big&quot;
-,
-Location
-:
-&quot;Sydney&quot;
-,
-Age
-:
-&quot;25&quot;
-}
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-14">Section 12.14: Array spread / rest</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-<b>Spread operator</b>
+<p><b>Spread operator</b></p>
 
 <h5>Version ≥ 6</h5>
 
-With ES6, you can use spreads to separate individual elements into a
-comma-separated syntax:
-<b>let</b>
-arr
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-&hellip;
-&lbrack;
-4
-,
-5
-,
-6
-&rbrack;
-&rbrack;
-;
-// <i>&lbrack;1, 2, 3, 4, 5, 6&rbrack;</i>
+<p>With ES6, you can use spreads to separate individual elements into a comma-separated syntax:</p>
+<pre>
+<b>let</b> arr = &lbrack;1, 2, 3, &hellip;&lbrack;4, 5, 6&rbrack;&rbrack;; // <i>&lbrack;1, 2, 3, 4, 5, 6&rbrack;</i>
+
 // <i>in ES &lt; 6, the operations above are equivalent to</i>
-arr
-=
-&lbrack;
-1
-,
-2
-,
-3
-&rbrack;
-;
-arr.
-push
-(
-4
-,
-5
-,
-6
-)
-;
-The spread operator also acts upon strings, separating each individual
+arr = &lbrack;1, 2, 3&rbrack;;
+arr.push(4, 5, 6);
+</pre>
+
+<p>The spread operator also acts upon strings, separating each individual
 character into a new string element. Therefore, using an array
 function for converting these into integers, the array created above
-is equivalent to the one below: <b>let</b> arr = &lbrack;1, 2, 3,
-&hellip;&lbrack;&hellip;&quot;456&quot;&rbrack;.map(x=&gt;parseInt(x))&rbrack;; // <i>&lbrack;1, 2, 3, 4, 5, 6&rbrack;</i>
+is equivalent to the one below:</p>
 
-Or, using a single string, this could be simplified to:
-<b>let</b>
-arr
-=
-&lbrack;
-&hellip;
-&quot;123456&quot;
-&rbrack;
-.
-map
-(
-x
-=&gt;
-parseInt
-(
-x
-)
-)
-;
-// <i>&lbrack;1, 2, 3, 4, 5, 6&rbrack;</i>
-If the mapping is not performed then:
-<b>let</b>
-arr
-=
-&lbrack;
-&hellip;
-&quot;123456&quot;
-&rbrack;
-;
-// <i>&lbrack;&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;&rbrack;</i>
-The spread operator can also be used to spread arguments into a
-function:
+<pre>
+<b>let</b> arr = &lbrack;1, 2, 3, &hellip;&lbrack;&hellip;&quot;456&quot;&rbrack;.map(x=&gt;parseInt(x))&rbrack;; // <i>&lbrack;1, 2, 3, 4, 5, 6&rbrack;</i>
+</pre>
 
-<b>function</b>
-myFunction
-(
-a
-,
-b
-,
-c
-)
-{
-}
-<b>let</b>
-args
-=
-&lbrack;
-0
-,
-1
-,
-2
-&rbrack;
-;
-myFunction
-(
-&hellip;
-args
-)
-;
+<p>Or, using a single string, this could be simplified to:</p>
+<pre>
+<b>let</b> arr = &lbrack;&hellip;&quot;123456&quot;&rbrack;.map(x=&gt;parseInt(x)); // <i>&lbrack;1, 2, 3, 4, 5, 6&rbrack;</i>
+</pre>
+<!-- page 98 -->
+<p>If the mapping is not performed then:</p>
+<pre>
+<b>let</b> arr = &lbrack;&hellip;&quot;123456&quot;&rbrack;;  // <i>&lbrack;&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;&rbrack;</i>
+
+<p>The spread operator can also be used to spread arguments into a function:</p>
+<pre>
+<b>function</b> myFunction(a, b, c) { }
+<b>let</b> args = &lbrack;0, 1, 2&rbrack;;
+
+myFunction(&hellip;args);
+
 // <i>in ES &lt; 6, this would be equivalent to:</i>
-myFunction.
-apply
-(
-<b>null</b>
-,
-args
-)
-;
-<b>Rest operator</b>
+myFunction.apply(<b>null</b>, args);
+</pre>
+<p><b>Rest operator</b></p>
 
-The rest operator does the opposite of the spread operator by
-coalescing several elements into a single one
+<p>The rest operator does the opposite of the spread operator by coalescing several elements 
+into a single one</p>
+<pre>
+&lbrack;a, b, &hellip;rest&rbrack; = &lbrack;1, 2, 3, 4, 5, 6&rbrack;; // <i>rest is assigned &lbrack;3, 4, 5, 6&rbrack;</i> Collect arguments of a function:
+</pre>
+<b>function</b> myFunction(a, b, &hellip;rest) { console.log(rest); }
 
-&lbrack;a, b, &hellip;rest&rbrack; = &lbrack;1, 2, 3, 4, 5, 6&rbrack;; // <i>rest is assigned &lbrack;3, 4,
-5, 6&rbrack;</i> Collect arguments of a function:
-
-<b>function</b>
-myFunction
-(
-a
-,
-b
-,
-&hellip;
-rest
-)
-{
-console.
-log
-(
-rest
-)
-;
-}
-myFunction
-(
-0
-,
-1
-,
-2
-,
-3
-,
-4
-,
-5
-,
-6
-)
-;
-// <i>rest is &lbrack;2, 3, 4, 5, 6&rbrack;</i>
+myFunction(0, 1, 2, 3, 4, 5, 6);  // <i>rest is &lbrack;2, 3, 4, 5, 6&rbrack;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-15">Section 12.15: Filtering values</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-filter
-The () method creates an array filled with all array elements that
-pass a test provided as a function.
+<p>The filter() method creates an array filled with all array elements that pass a test provided 
+as a function.</p>
 
 <h5>Version ≥ 5.1</h5>
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-&rbrack;
-.
-filter
-(
-<b>function</b>
-(
-value
-,
-index
-,
-arr
-)
-{
-<b>return</b>
-value
-&gt;
-2
-;
-}
-)
-;
-Version ≥ 6
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-&rbrack;
-.
-
-filter
-(
-value
-=&gt;
-value
-&gt;
-2
-)
-;
-Results in a new array:
+<pre>
+&lbrack;1, 2, 3, 4, 5&rbrack;.filter(<b>function</b>(value, index, arr) {
+  <b>return</b> value &gt; 2;
+});
+</pre>
+<h5>Version ≥ 6</h5>
+<pre>
+&lbrack;1, 2, 3, 4, 5&rbrack;.filter(value =&gt; value &gt; 2);
+</pre>
+<p>Results in a new array:</p>
+<pre>
 &lbrack;3, 4, 5&rbrack;
-<b>Filter falsy values</b>
-Version ≥ 5.1 <b>var</b> filtered = &lbrack; 0, <b>undefined</b>, {}, <b>null</b>,
-&apos;&apos;, <b>true</b>, 5&rbrack;.filter(Boolean);
-Since Boolean is a native JavaScript function/constructor that takes
-&lbrack;one optional parameter&rbrack; and the filter method also takes a function
-and passes it the current array item as parameter, you could read it
-like the following:
-Boolean
-1. (0) returns false
-  Boolean                       (    <b>undefined</b>
-2. ) returns false
-Boolean
-3. ({}) returns <b>true</b> which means push it to the returned array
-Boolean ( <b>null</b>
-4.  returns false
-Boolean ( &apos;&apos;
-5.  returns false
-Boolean ( <b>true</b>
-6.  returns <b>true</b> which means push it to the returned array
-Boolean
-7. (5) returns <b>true</b> which means push it to the returned array
-so the overall process will result
-<b>true</b>
-&lbrack; {},, 5 &rbrack;
-<b>Another simple example</b>
-This example utilises the same concept of passing a function that
-takes one argument Version ≥ 5.1
-<b>function</b>
-startsWithLetterA
-(
-str
-)
-{
-<b>if</b>
-(
-str
-&&
-str
-&lbrack;
-0
-&rbrack;
-.
-toLowerCase
-(
-)
-==
-&apos;a&apos;
-)
-{
-<b>return</b>
-<b>true</b>
+</pre>
+<p><b>Filter falsy values</b></p>
+<h5>Version ≥ 5.1</h5>
+<pre>
+<b>var</b> filtered = &lbrack; 0, <b>undefined</b>, {}, <b>null</b>, &apos;&apos;, <b>true</b>, 5&rbrack;.filter(Boolean);
+</pre>
+<p>Since Boolean is a native JavaScript function/constructor that takes &lbrack;one optional 
+parameter&rbrack; and the filter method also takes a function and passes it the current array 
+item as parameter, you could read it like the following:</p>
+
+<ol>
+  <li>Boolean (0) returns false</li>
+  <li>Boolean(<b>undefined</b>) returns false
+  <li>Boolean({}) returns <b>true</b> which means push it to the returned array</li>
+  <li>Boolean (<b>null</b> returns false</li>
+  <li>Boolean (&apos;&apos;) returns false</li>
+  <li>Boolean (<b>true</b> returns <b>true</b> which means push it to the returned array</li>
+  <li>Boolean (5) returns <b>true</b> which means push it to the returned array</li>
+</ol>
+<!-- page 99 -->
+<p>so the overall process will result</p>
+<pre>
+&lbrack; {}, <b>true</b>, 5 &rbrack;
+</pre>
+<p><b>Another simple example</b></p>
+<p>This example utilises the same concept of passing a function that takes one argument</p>
+<h5>Version ≥ 5.1</h5>
+<pre>
+<b>function</b> startsWithLetterA(str) {
+  <b>if</b>(str && str&lbrack;0&rbrack;.toLowerCase() == &apos;a&apos;) {
+    <b>return</b> <b>true</b>
+  }
+  <b>return</b> <b>false</b>;
 }
-<b>return</b>
-<b>false</b>
-;
-}
-<b>var</b>
-str
-=
-&apos;Since Boolean is a native javascript function/constructor that takes
-&lbrack;one
-optional parameter&rbrack; and the filter method also takes a function and
-passes it the current array
-item as a parameter, you could read it like the following&apos;
-;
-<b>var</b>
-strArray
-=
-str.
-split
-(
-&quot; &quot;
-)
-;
-<b>var</b>
-wordsStartsWithA
-=
-strArray.
-filter
-(
-startsWithLetterA
-)
-;
+
+<b>var</b> str = &apos;Since Boolean is a native javascript function/constructor that takes &lbrack;one
+optional parameter&rbrack; and the filter method also takes a function and passes it the current array
+item as a parameter, you could read it like the following&apos;;
+<b>var</b> strArray = str.split(&quot; &quot;);
+<b>var</b> wordsStartsWithA = strArray.filter(startsWithLetterA);
 // <i>&lbrack;&quot;a&quot;, &quot;and&quot;, &quot;also&quot;, &quot;a&quot;, &quot;and&quot;, &quot;array&quot;, &quot;as&quot;&rbrack;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-16">Section 12.16: Searching an Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The recommended way (Since ES5) is to use
-[Array.prototype.find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find):
-<b>let</b>
-people
-=
-&lbrack;
-{
-name
-:
-&quot;bob&quot;
-}
-,
-{
-name
-:
-&quot;john&quot;
-}
-&rbrack;
-;
-<b>let</b>
-bob
-=
-people.
-find
-(
-person
-=&gt;
-person.
-name
-===
-&quot;bob&quot;
-)
-;
+<p>The recommended way (Since ES5) is to use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">Array.prototype.find</a>:</p>
+
+<pre>
+<b>let</b> people = &lbrack;
+  { name: &quot;bob&quot; },
+  { name: &quot;john&quot;}
+&rbrack;;
+
+<b>let</b> bob = people.find(person =&gt; person.name === &quot;bob&quot;);
+
 // <i>Or, more verbose</i>
-<b>let</b>
-bob
-=
-people.
-find
-(
-<b>function</b>
-(
-person
-)
-{
-<b>return</b>
-person.
-name
-===
-&quot;bob&quot;
-;
+<b>let</b> bob = people.find(<b>function</b>(person) {
+  <b>return</b> person.name === &quot;bob&quot;;
+});
+</pre>
+
+<p>In any version of JavaScript, a standard <b>for</b> loop can be used as well:</p>
+<pre>
+<b>for</b> (<b>var</b> i = 0; i &lt; people.length; i++) {
+  <b>if</b> (people&lbrack;i&rbrack;.name === &quot;bob&quot;) {
+    <b>break</b>;  // <i>we found bob</i>
+  }
 }
-)
-;
-In any version of JavaScript, a standard <b>for</b> loop can be used as
-well:
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-people.
-length
-;
-i
-++
-)
-{
-<b>if</b>
-(
-people
-&lbrack;
-i
-&rbrack;
-.
-name
-===
-&quot;bob&quot;
-)
-{
-<b>break</b>
-;
-// <i>we found bob</i>
-}
-}
-<b>FindIndex</b>
-The
-[findIndex()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
-method returns an index in the array, if an element in the array
-satisfies the provided testing function. Otherwise -1 is returned.
-array
-=
-&lbrack;
-{
-value
-:
-1
-}
-,
-{
-value
-:
-2
-}
-,
-{
-value
-:
-3
-}
-,
-{
-value
-:
-4
-}
-,
-{
-value
-:
-5
-}
-&rbrack;
-;
-<b>var</b>
-index
-=
-array.
-findIndex
-(
-item
-=&gt;
-item.
-value
-===
-3
-)
-;
-// <i>2</i>
-<b>var</b>
-index
-=
-array.
-findIndex
-(
-item
-=&gt;
-item.
-value
-===
-12
-)
-;
-// <i>-1</i>
+</pre>
+<p><b>FindIndex</b></p>
+
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex">
+findIndex()</a> method returns an index in the array, if an element in the array satisfies 
+the provided testing function. Otherwise -1 is returned.</p>
+<pre>
+array = &lbrack;
+  { value: 1 },
+  { value: 2 },
+  { value: 3 },
+  { value: 4 },
+  { value: 5 }
+&rbrack;;
+<b>var</b> index = array.findIndex(item =&gt; item.value === 3);  // <i>2</i>
+<b>var</b> index = array.findIndex(item =&gt; item.value === 12); // <i>-1</i>
+</pre>
+<!-- page 100 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-17">Section 12.17: Convert a String to an Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -9220,3 +8695,960 @@ property is assigned a value.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-1">Section 13.1: Shallow cloning</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version ≥ 6</h5>
+Object . assign
+ES6&apos;s () function can be used to copy all of the **enumerable**
+properties from an existing Object instance to a new one.
+**const**
+existing
+=
+{
+a
+:
+1
+,
+b
+:
+2
+,
+c
+:
+3
+}
+;
+**const**
+clone
+=
+Object
+.
+assign
+(
+{
+}
+,
+existing
+)
+;
+This includes Symbol properties in addition to String ones.
+
+[Object rest/spread
+destructuring](https://github.com/tc39/proposal-object-rest-spread)
+which is currently a stage 3 proposal provides an even simpler way to
+create shallow clones of Object instances:
+
+**const**
+existing
+=
+{
+a
+:
+1
+,
+b
+:
+2
+,
+c
+:
+3
+}
+;
+**const**
+{
+&hellip;
+clone
+}
+=
+existing
+;
+hasOwnProperty
+If you need to support older versions of JavaScript, the
+most-compatible way to clone an Object is by manually iterating over
+its properties and filtering out inherited ones using .().
+**var**
+existing
+=
+{
+a
+:
+1
+,
+b
+:
+2
+,
+c
+:
+3
+}
+;
+**var**
+clone
+=
+{
+}
+;
+**for**
+(
+**var**
+prop
+**in**
+existing
+)
+{
+**if**
+(
+existing.
+hasOwnProperty
+(
+prop
+)
+)
+{
+clone
+&lbrack;
+prop
+&rbrack;
+=
+existing
+&lbrack;
+prop
+&rbrack;
+;
+}
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-2">Section 13.2: Object.freeze</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version ≥ 5</h5>
+Object.freeze
+
+makes an object immutable by preventing the addition of new properties,
+the removal of existing
+
+properties, and the modification of the enumerability,
+configurability, and writability of existing properties. It also
+prevents the value of existing properties from being changed. However,
+it does not work recursively which means that child objects are not
+automatically frozen and are subject to change.
+
+The operations following the freeze will fail silently unless the code
+is running in strict mode. If the code is in strict
+mode, a
+TypeError
+will be thrown.
+**var**
+obj
+=
+{
+foo
+:
+&apos;foo&apos;
+,
+bar
+:
+&lbrack;
+1
+,
+2
+,
+3
+&rbrack;
+,
+baz
+:
+{
+foo
+:
+&apos;nested-foo&apos;
+}
+}
+;
+Object
+.
+freeze
+(
+obj
+)
+;
+*// Cannot add new properties*
+obj.
+newProperty
+=
+**true**
+;
+*// Cannot modify existing values or their descriptors*
+obj.
+foo
+=
+&apos;not foo&apos;
+;
+Object
+.
+defineProperty
+(
+obj
+,
+&apos;foo&apos;
+,
+{
+writable
+:
+**true**
+}
+)
+;
+*// Cannot delete existing properties*
+**delete**
+obj.
+foo
+;
+*// Nested objects are not frozen*
+obj.
+bar
+.
+push
+(
+4
+)
+;
+obj.
+baz
+.
+foo
+=
+&apos;new foo&apos;
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-3">Section 13.3: Object cloning</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+When you want a complete copy of an object (i.e. the object properties
+and the values inside those properties, etc&hellip;), that is called
+**deep cloning**.
+
+<h5>Version ≥ 5.1</h5>
+JSON.parse
+If an object can be serialized to JSON, then you can create a deep
+clone of it with a combination of and
+JSON.stringify
+:
+**var**
+existing
+=
+{
+a
+:
+1
+,
+b
+:
+{
+c
+:
+2
+}
+}
+;
+**var**
+copy
+=
+JSON.
+parse
+(
+JSON.
+stringify
+(
+existing
+)
+)
+;
+existing.
+b
+.
+c
+=
+3
+;
+// <i>copy.b.c will not change</i>
+JSON.stringify   will convert Date objects to ISO-format string     JSON.parse
+ representations, but 
+Note that will not convert the string back into a Date.
+
+There is no built-in function in JavaScript for creating deep clones,
+and it is not possible in general to create deep clones for every
+object for many reasons. For example,
+
+objects can have non-enumerable and hidden properties which cannot be
+detected. object getters and setters cannot be copied. objects can
+have a cyclic structure. function properties can depend on state in a
+hidden scope.
+
+Assuming that you have a &quot;nice&quot; object whose properties only contain
+primitive values, dates, arrays, or other &quot;nice&quot; objects, then the
+following function can be used for making deep clones. It is a
+recursive function that can detect objects with a cyclic structure and
+will throw an error in such cases.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image026.png"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:7.48in;" />
+<!-- ![](./images/image026.png){width="7.486805555555556in" height="7.639583333333333in"} -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-4">Section 13.4: Object properties iteration</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+You can access each property that belongs to an object with this loop
+**for**
+(
+**var**
+property
+**in**
+object
+)
+{
+*// always check if an object has a property*
+**if**
+(
+object.
+hasOwnProperty
+(
+property
+)
+)
+{
+*// do stuff*
+}
+}
+You should include the additional check for hasOwnProperty because an
+object may have properties that are inherited from the object&apos;s base
+class. Not performing this check can raise errors.
+<h5>Version ≥ 5</h5>
+Object.keys
+Array.map or Array.forEach
+You can also use function which return an Array containing all
+properties of an object and then you can loop through this array with
+function.
+**var**
+obj
+=
+{
+0
+:
+&apos;a&apos;
+,
+1
+:
+&apos;b&apos;
+,
+2
+:
+&apos;c&apos;
+}
+;
+Object
+.
+keys
+(
+obj
+)
+.
+map
+(
+**function**
+(
+key
+)
+{
+console.
+log
+(
+key
+)
+;
+}
+)
+;
+// <i>outputs: 0, 1, 2</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-35">Section 13.5: Object.assign</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The
+[Object.assign()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+method is used to copy the values of all enumerable own properties
+from one or more source objects to a target object. It will return the
+target object.
+
+Use it to assign values to an existing object:
+**var**
+user
+=
+{
+firstName
+:
+&quot;John&quot;
+}
+;
+Object
+.
+assign
+(
+user
+,
+{
+lastName
+:
+&quot;Doe&quot;
+,
+age
+:
+39
+}
+)
+;
+console.
+log
+(
+user
+)
+;
+*// Logs: {firstName: &quot;John&quot;, lastName: &quot;Doe&quot;, age: 39}*
+Or to create a shallow copy of an object:
+**var**
+obj
+=
+Object
+.
+assign
+(
+{
+}
+,
+user
+)
+;
+console.
+log
+(
+obj
+)
+;
+// <i>Logs: {firstName: &quot;John&quot;, lastName: &quot;Doe&quot;, age: 39}</i>
+
+Or merge many properties from multiple objects to one:
+**var**
+obj1
+=
+{
+a
+:
+1
+}
+;
+**var**
+obj2
+=
+{
+b
+:
+2
+}
+;
+**var**
+obj3
+=
+{
+c
+:
+3
+}
+;
+**var**
+obj
+=
+Object
+.
+assign
+(
+obj1
+,
+obj2
+,
+obj3
+)
+;
+console.
+log
+(
+obj
+)
+;
+*// Logs: { a: 1, b: 2, c: 3 }*
+console.
+log
+(
+obj1
+)
+;
+*// Logs: { a: 1, b: 2, c: 3 }, target object itself is changed*
+Primitives will be wrapped, null and undefined will be ignored:
+**var**
+var_1
+=
+&apos;abc&apos;
+;
+**var**
+var_2
+=
+**true**
+;
+**var**
+var_3
+=
+10
+;
+**var**
+var_4
+=
+Symbol
+(
+&apos;foo&apos;
+)
+;
+**var**
+obj
+=
+Object
+.
+assign
+(
+{
+}
+,
+var_1
+,
+**null**
+,
+var_2
+,
+**undefined**
+,
+var_3
+,
+var_4
+)
+;
+console.
+log
+(
+obj
+)
+;
+*// Logs: { &quot;0&quot;: &quot;a&quot;, &quot;1&quot;: &quot;b&quot;, &quot;2&quot;: &quot;c&quot; }*
+Note, only string wrappers can have own enumerable properties
+Use it as reducer: (merges an array to an object)
+**return** users.reduce((result, user) =&bsol;Object.assign({},
+{&lbrack;user.id&rbrack;: user})
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch12-36">Section 13.6: Object rest/spread (&hellip;)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version &bsol;7</h5>
+Object       .   assign       ({},     obj1       ,   &hellip;     ,   objn
+
+Object spreading is just syntactic sugar for );
+
+It is done with the &hellip; operator:
+**let**
+obj
+=
+{
+a
+:
+1
+}
+;
+**let**
+obj2
+=
+{
+&hellip;
+obj
+,
+b
+:
+2
+,
+c
+:
+3
+}
+;
+console.
+log
+(
+obj2
+)
+;
+*// { a: 1, b: 2, c: 3 };*
+Object . assign
+As it does **shallow** merging, not deep merging.
+**let**
+obj3
+=
+{
+&hellip;
+obj
+,
+b
+:
+{
+c
+:
+2
+}
+}
+;
+console.
+log
+(
+obj3
+)
+;
+*// { a: 1, b: { c: 2 } };*
+**NOTE**: [This
+specification](https://github.com/sebmarkbage/ecmascript-rest-spread)
+is currently in [stage
+3](http://www.2ality.com/2015/11/tc39-process.html)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-7">Section 13.7: Object.defineProperty</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version ≥ 5</h5>
+
+It allows us to define a property in an existing object using a
+property descriptor.
+**var**
+obj
+=
+{
+}
+;
+Object
+.
+defineProperty
+(
+obj
+,
+&apos;foo&apos;
+,
+{
+value
+:
+&apos;foo&apos;
+}
+)
+;
+console.
+log
+(
+obj.
+foo
+)
+;
+Console output
+foo
+Object               .   defineProperty
+can be called with the following options:
+Object.defineProperty(obj, &apos;nameOfTheProperty&apos;, { value:
+valueOfTheProperty, writable: **true**, *// if false, the property is
+read-only* configurable : **true**, *// true means the property can be
+changed later* enumerable : **true** *// true means property can be
+enumerated such as in a for..in loop* });
+  Object             .   defineProperties
+
+allows you to define multiple properties at a time.
+**var**
+obj
+=
+{
+}
+;
+Object
+.
+defineProperties
+(
+obj
+,
+{
+property1
+:
+{
+value
+:
+**true**
+,
+writable
+:
+**true**
+}
+,
+property2
+:
+{
+value
+:
+&apos;Hello&apos;
+,
+writable
+:
+**false**
+}
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-8">Section 13.8: Accesor properties (get and set)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version ≥ 5</h5>
+
+Treat a property as a combination of two functions, one to get the
+value from it, and another one to set the value in it.
+
+The **get** property of the property descriptor is a function that
+will be called to retrieve the value from the property.
+
+The **set** property is also a function, it will be called when the
+property has been assigned a value, and the new value will be passed
+as an argument.
+
+You cannot assign a value or writable to a descriptor that has **get**
+or **set**
+
+**var**
+person
+=
+{
+name
+:
+&quot;John&quot;
+,
+surname
+:
+&quot;Doe&quot;
+}
+;
+Object
+.
+defineProperty
+(
+person
+,
+&apos;fullName&apos;
+,
+{
+**get**
+:
+**function**
+(
+)
+{
+**return**
+**this**
+.
+name
+&plus;
+&quot; &quot;
+&plus;
+**this**
+.
+surname
+;
+}
+,
+**set**
+:
+**function**
+(
+value
+)
+{
+&lbrack;
+**this**
+.
+name
+,
+**this**
+.
+surname
+&rbrack;
+=
+value.
+split
+(
+&quot; &quot;
+)
+;
+}
+}
+)
+;
+console.
+log
+(
+person.
+fullName
+)
+;
+*// -&amp;quot;John Doe&quot;*
+person.
+surname
+=
+&quot;Hill&quot;
+;
+console.
+log
+(
+person.
+fullName
+)
+;
+*// -&amp;quot;John Hill&quot;*
+person.
+fullName
+=
+&quot;Mary Jones&quot;
+;
+console.
+log
+(
+person.
+name
+)
+*// -&amp;quot;Mary&quot;*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-9">Section 13.9: Dynamic / variable property names</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Sometimes the property name needs to be stored into a variable. In
+this example, we ask the user what word needs to be looked up, and
+then provide the result from an object I&apos;ve named dictionary.
+**var**
+dictionary
+=
+{
+lettuce
+:
+&apos;a veggie&apos;
+,
+banana
+:
+&apos;a fruit&apos;
+,
+tomato
+:
+&apos;it depends on who you ask&apos;
+,
+apple
+:
+&apos;a fruit&apos;
+,
+Apple
+:
+&apos;Steve Jobs rocks!&apos;
+*// properties are case-sensitive*
+}
+**var**
+word
+=
+prompt
+(
+&apos;What word would you like to look up today?&apos;
+)
+**var**
+definition
+=
+dictionary
+&lbrack;
+word
+&rbrack;
+alert
+(
+word
+&plus;
+&apos;
+**&bsol;&bsol;n**
+**&bsol;&bsol;n**
+&apos;
+&plus;
+definition
+)
+Note how we are using &lbrack;&rbrack; bracket notation to look at the variable
+named word; if we were to use the traditional . notation, then it
+would take the value literally, hence:
+
+console.log(dictionary.word) *// doesn&apos;t work because word is taken
+literally and dictionary has no field named &grave;word&grave;*
+console.log(dictionary.apple) *// it works! because apple is taken
+literally*
+console.log(dictionary&lbrack;word&rbrack;) *// it works! because word is a
+variable, and the user perfectly typed in one of the words from our
+dictionary when prompted*
+console.log(dictionary&lbrack;apple&rbrack;) *// error! apple is not defined (as a
+variable)*
+You could also write literal values with &lbrack;&rbrack; notation by replacing
+the variable word with a string &apos;apple&apos;. See &lbrack;Properties with
+special characters or reserved words&rbrack; example.
+
+You can also set dynamic properties with the bracket syntax:
+**var**
+property
+=
+&quot;test&quot;
+;
+**var**
+obj
+=
+{
+&lbrack;
+property
+&rbrack;
+=
+1
+;
+}
+;
+console.
+log
+(
+obj.
+test
+)
+;
+*//1*
+It does the same as:
+**var**
+property
+=
+&quot;test&quot;
+;
+**var**
+obj
+=
+{
+}
+;
+obj
+&lbrack;
+property
+&rbrack;
+=
+1
+;
+
