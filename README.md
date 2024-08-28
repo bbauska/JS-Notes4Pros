@@ -7235,129 +7235,36 @@ it&apos;s not included.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-1">Section 13.1: Shallow cloning</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 6</h5>
-ES6&apos;s Object.assign() function can be used to copy all of the <b>enumerable</b> properties 
+<p>ES6&apos;s Object.assign() function can be used to copy all of the <b>enumerable</b> properties 
 from an existing Object instance to a new one.</p>
 <pre>
-<b>const</b>
-existing
-=
-{
-a
-:
-1
-,
-b
-:
-2
-,
-c
-:
-3
-}
-;
-<b>const</b>
-clone
-=
-Object
-.
-assign
-(
-{
-}
-,
-existing
-)
-;
-This includes Symbol properties in addition to String ones.
+<b>const</b> existing = { a: 1, b: 2, c: 3 };
 
-[Object rest/spread
-destructuring](https://github.com/tc39/proposal-object-rest-spread)
-which is currently a stage 3 proposal provides an even simpler way to
-create shallow clones of Object instances:
+<b>const</b> clone = Object.assign({}, existing);
+</pre>
+<p>This includes Symbol properties in addition to String ones.</p>
 
-<b>const</b>
-existing
-=
-{
-a
-:
-1
-,
-b
-:
-2
-,
-c
-:
-3
+<p><a href="https://github.com/tc39/proposal-object-rest-spread">
+Object rest/spread destructuring</a> which is currently a stage 3 proposal provides an 
+even simpler way to create shallow clones of Object instances:</p>
+<pre>
+<b>const</b> existing = { a: 1, b: 2, c: 3 };
+<b>const</b> { &hellip;clone } = existing;
+</pre>
+<p>If you need to support older versions of JavaScript, the most-compatible way to clone an 
+Object is by manually iterating over its properties and filtering out inherited ones using 
+.hasOwnProperty().</p>
+<pre>
+<b>var</b> existing = { a: 1, b: 2, c: 3 };
+
+<b>var</b> clone = {};
+<b>for</b> (<b>var</b> prop <b>in</b> existing) {
+  <b>if</b> (existing.hasOwnProperty(prop)) {
+    clone&lbrack;prop&rbrack; = existing&lbrack;prop&rbrack;;
+  }
 }
-;
-<b>const</b>
-{
-&hellip;
-clone
-}
-=
-existing
-;
-hasOwnProperty
-If you need to support older versions of JavaScript, the
-most-compatible way to clone an Object is by manually iterating over
-its properties and filtering out inherited ones using .().
-<b>var</b>
-existing
-=
-{
-a
-:
-1
-,
-b
-:
-2
-,
-c
-:
-3
-}
-;
-<b>var</b>
-clone
-=
-{
-}
-;
-<b>for</b>
-(
-<b>var</b>
-prop
-<b>in</b>
-existing
-)
-{
-<b>if</b>
-(
-existing.
-hasOwnProperty
-(
-prop
-)
-)
-{
-clone
-&lbrack;
-prop
-&rbrack;
-=
-existing
-&lbrack;
-prop
-&rbrack;
-;
-}
-}
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-2">Section 13.2: Object.freeze</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
