@@ -4898,15 +4898,15 @@ executed (which would be skipped if the condition were <b>true</b>). An example:
 <ul>
   <li>If any one condition evaluated to <b>true</b>, no other condition in that chain of 
     blocks will be evaluated, and all corresponding blocks (including the <b>else</b> 
-	block) will not be executed.</li>
+    block) will not be executed.</li>
   <li>The number of <b>else</b> <b>if</b> parts is practically unlimited. The last example 
     above only contains one, but you can have as many as you like.</li>
   <li>The <i>condition</i> inside an if statement can be anything that can be coerced to 
     a boolean value, see the topic on boolean logic for more details;</li>
   <li>The if-else-<b>if</b> ladder exits at the first success. That is, in the example above,
     if the value of i is 0.5 then the first branch is executed. If the conditions overlap, 
-	the first criteria occurring in the flow of execution is executed. The other condition, 
-	which could also be true is ignored.</li>
+    the first criteria occurring in the flow of execution is executed. The other condition, 
+    which could also be true is ignored.</li>
   <li>If you have only one statement, the braces around that statement are technically 
     optional, e.g this is fine:<br/><br/>
 <pre>
@@ -6321,9 +6321,7 @@ console.log(result);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-14">Section 12.14: Array spread / rest</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p><b>Spread operator</b></p>
-
 <h5>Version ≥ 6</h5>
 
 <p>With ES6, you can use spreads to separate individual elements into a comma-separated syntax:</p>
@@ -6350,10 +6348,13 @@ is equivalent to the one below:</p>
 </pre>
 <!-- page 98 -->
 <p>If the mapping is not performed then:</p>
+
 <pre>
 <b>let</b> arr = &lbrack;&hellip;&quot;123456&quot;&rbrack;;  // <i>&lbrack;&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;&rbrack;</i>
+</pre>
 
 <p>The spread operator can also be used to spread arguments into a function:</p>
+
 <pre>
 <b>function</b> myFunction(a, b, c) { }
 <b>let</b> args = &lbrack;0, 1, 2&rbrack;;
@@ -6363,13 +6364,19 @@ myFunction(&hellip;args);
 // <i>in ES &lt; 6, this would be equivalent to:</i>
 myFunction.apply(<b>null</b>, args);
 </pre>
+
 <p><b>Rest operator</b></p>
 
 <p>The rest operator does the opposite of the spread operator by coalescing several elements 
 into a single one</p>
+
 <pre>
 &lbrack;a, b, &hellip;rest&rbrack; = &lbrack;1, 2, 3, 4, 5, 6&rbrack;; // <i>rest is assigned &lbrack;3, 4, 5, 6&rbrack;</i> Collect arguments of a function:
 </pre>
+
+<p>Collect arguments of a function:</p>
+
+<pre>
 <b>function</b> myFunction(a, b, &hellip;rest) { console.log(rest); }
 
 myFunction(0, 1, 2, 3, 4, 5, 6);  // <i>rest is &lbrack;2, 3, 4, 5, 6&rbrack;</i>
@@ -6377,7 +6384,6 @@ myFunction(0, 1, 2, 3, 4, 5, 6);  // <i>rest is &lbrack;2, 3, 4, 5, 6&rbrack;</i
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-15">Section 12.15: Filtering values</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>The filter() method creates an array filled with all array elements that pass a test provided 
 as a function.</p>
 
@@ -6391,15 +6397,21 @@ as a function.</p>
 <pre>
 &lbrack;1, 2, 3, 4, 5&rbrack;.filter(value =&gt; value &gt; 2);
 </pre>
+
 <p>Results in a new array:</p>
+
 <pre>
 &lbrack;3, 4, 5&rbrack;
 </pre>
+
 <p><b>Filter falsy values</b></p>
+
 <h5>Version ≥ 5.1</h5>
+
 <pre>
 <b>var</b> filtered = &lbrack; 0, <b>undefined</b>, {}, <b>null</b>, &apos;&apos;, <b>true</b>, 5&rbrack;.filter(Boolean);
 </pre>
+
 <p>Since Boolean is a native JavaScript function/constructor that takes &lbrack;one optional 
 parameter&rbrack; and the filter method also takes a function and passes it the current array 
 item as parameter, you could read it like the following:</p>
@@ -6414,13 +6426,18 @@ item as parameter, you could read it like the following:</p>
   <li>Boolean (5) returns <b>true</b> which means push it to the returned array</li>
 </ol>
 <!-- page 99 -->
+
 <p>so the overall process will result</p>
+
 <pre>
 &lbrack; {}, <b>true</b>, 5 &rbrack;
 </pre>
+
 <p><b>Another simple example</b></p>
 <p>This example utilises the same concept of passing a function that takes one argument</p>
+
 <h5>Version ≥ 5.1</h5>
+
 <pre>
 <b>function</b> startsWithLetterA(str) {
   <b>if</b>(str && str&lbrack;0&rbrack;.toLowerCase() == &apos;a&apos;) {
@@ -6456,6 +6473,7 @@ item as a parameter, you could read it like the following&apos;;
 </pre>
 
 <p>In any version of JavaScript, a standard <b>for</b> loop can be used as well:</p>
+
 <pre>
 <b>for</b> (<b>var</b> i = 0; i &lt; people.length; i++) {
   <b>if</b> (people&lbrack;i&rbrack;.name === &quot;bob&quot;) {
@@ -6463,6 +6481,7 @@ item as a parameter, you could read it like the following&apos;;
   }
 }
 </pre>
+
 <p><b>FindIndex</b></p>
 
 <p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex">
@@ -6483,838 +6502,310 @@ array = &lbrack;
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-17">Section 12.17: Convert a String to an Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-split   () method splits a string into an array of substrings. By    split
-          default .                                                    
-split ( &quot; &quot;
+<p>The .split() will break the string into substrings on spaces (&quot; &quot;), which
+is equivalent to calling .split(" "). </p>
 
-The .() will break the string into substrings on spaces (&quot; &quot;), which
-is equivalent to calling .). 
-split
-The parameter passed to .() specifies the character, or the regular
-expression, to use for splitting the string.
-split
-slice ( &quot;&quot;
-To split a string into an array call . with an empty string (&quot;&quot;).
+<p>The parameter passed to .split() specifies the character, or the regular
+expression, to use for splitting the string.</p>
+
+<p>To split a string into an array call .split with an empty string (&quot;&quot;).
 <b>Important Note:</b> This only works if all of your characters fit in
 the Unicode lower range characters, which covers most English and most
 European languages. For languages that require 3 and 4 byte Unicode
-characters, ) will separate them.
+characters, ) will separate them.</p>
+
+<pre>
 <b>var</b> strArray = &quot;StackOverflow&quot;.split(&quot;&quot;);
-// <i>strArray = &lbrack;&quot;S&quot;, &quot;t&quot;, &quot;a&quot;, &quot;c&quot;, &quot;k&quot;, &quot;O&quot;, &quot;v&quot;,
-&quot;e&quot;, &quot;r&quot;, &quot;f&quot;, &quot;l&quot;, &quot;o&quot;, &quot;w&quot;&rbrack;</i>
+// <i>strArray = &lbrack;&quot;S&quot;, &quot;t&quot;, &quot;a&quot;, &quot;c&quot;, &quot;k&quot;, &quot;O&quot;, &quot;v&quot;, &quot;e&quot;, &quot;r&quot;, &quot;f&quot;, &quot;l&quot;, &quot;o&quot;, &quot;w&quot;&rbrack;</i>
+</pre>
 
 <h5>Version ≥ 6</h5>
-Using the spread operator (&hellip;), to convert a string into an array.
+
+<p>Using the spread operator (&hellip;), to convert a string into an array.</p>
+
+<pre>
 <b>var</b> strArray = &lbrack;&hellip;&quot;sky is blue&quot;&rbrack;;
-// <i>strArray = &lbrack;&quot;s&quot;, &quot;k&quot;, &quot;y&quot;, &quot; &quot;, &quot;i&quot;, &quot;s&quot;, &quot; &quot;,
-&quot;b&quot;, &quot;l&quot;, &quot;u&quot;, &quot;e&quot;&rbrack;</i>
+// <i>strArray = &lbrack;&quot;s&quot;, &quot;k&quot;, &quot;y&quot;, &quot; &quot;, &quot;i&quot;, &quot;s&quot;, &quot; &quot;, &quot;b&quot;, &quot;l&quot;, &quot;u&quot;, &quot;e&quot;&rbrack;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-18">Section 12.18: Removing items from an array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Shift</b>
-shift
-Use . to remove the first item of an array.
-For example:
-<b>var</b>
-array
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-;
-array.
-shift
-(
-)
-;
-array results in:
-&lbrack;
-2
-,
-3
-,
-4
-&rbrack;
-<b>Pop</b>
-pop
-Further . is used to remove the last item from an array.
-For example:
-<b>var</b>
-array
-=
-&lbrack;
-1
-,
-2
-,
-3
-&rbrack;
-;
-array.
-pop
-(
-)
-;
-array results in:
-&lbrack;
-1
-,
-2
-&rbrack;
-Both methods return the removed item;
-<b>Splice</b>
-splice() to remove a series of elements from an array. .splice
-Use .() accepts two parameters, the starting
-splice
-index, and an optional number of elements to delete. If the second
-parameter is left out .() will remove all elements from the starting
-index through the end of the array.
-For example:
-<b>var</b>
-array
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-;
-array.
-splice
-(
-1
-,
-2
-)
-;
-leaves array containing:
-&lbrack;
-1
-,
-4
-&rbrack;
-array.splice
+<p><b>Shift</b></p>
 
-The return of () is a new array containing the removed elements. For
-the example above, the return would be:
-&lbrack;
-2
-,
-3
-&rbrack;
-Thus, omitting the second parameter effectively splits the array into
-two arrays, with the original ending before the index specified:
-<b>var</b>
-array
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-;
-array.
-splice
-(
-2
-)
-;
-&hellip;leaves
-array
-containing
-&lbrack;
-1
-,
-2
-&rbrack;
-and returns
-&lbrack;
-3
-,
-4
-&rbrack;
-.
-<b>Delete</b>
+<p>Use .shift to remove the first item of an array.</p>
 
-Use <b>delete</b> to remove item from array without changing the length
-of array:
-<b>var</b>
-array
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-&rbrack;
-;
-console.
-log
-(
-array.
-length
-)
-;
-// <i>5</i>
-<b>delete</b>
-array
-&lbrack;
-2
-&rbrack;
-;
-console.
-log
-(
-array
-)
-;
-// <i>&lbrack;1, 2, undefined, 4, 5&rbrack;</i>
-console.
-log
-(
-array.
-length
-)
-;
-// <i>5</i>
-<b>Array.prototype.length</b>
+<p>For example:</p>
 
-Assigning value to length of array changes the length to given value.
+<pre>
+<b>var</b> array = &lbrack;1, 2, 3, 4&rbrack;;
+array.shift();
+</pre>
+
+<p>array results in:</p>
+<pre>
+&lbrack;2, 3, 4&rbrack;
+</pre>
+
+<p><b>Pop</b></p>
+
+<p>Further .pop is used to remove the last item from an array.</p>
+
+<p>For example:</p>
+<pre>
+<b>var</b> array = &lbrack;1, 2, 3&rbrack;;
+array.pop();
+</pre>
+<p>array results in:</p>
+<pre>
+&lbrack;1, 2&rbrack;
+</pre>
+<p>Both methods return the removed item;</p>
+<p><b>Splice</b></p>
+<!-- page 101 -->
+
+<p>Use .splice() to remove a series of elements from an array..splice() accepts two 
+parameters, the starting splice index, and an optional number of elements to delete. If 
+the second parameter is left out .splice() will remove all elements from the starting
+index through the end of the array.</p>
+
+<p>For example:</p>
+<pre>
+<b>var</b> array = &lbrack;1, 2, 3, 4&rbrack;;
+array.splice(1, 2);
+</pre>
+<p>leaves array containing:</p>
+<pre>
+&lbrack;1, 4&rbrack;
+</pre>
+
+<p>The return of array.splice() is a new array containing the removed elements. For
+the example above, the return would be:</p>
+<pre>
+&lbrack;2, 3&rbrack;
+</pre>
+<p>Thus, omitting the second parameter effectively splits the array into
+two arrays, with the original ending before the index specified:</p>
+<pre>
+<b>var</b> array = &lbrack;1, 2, 3, 4&rbrack;;
+array.splice(2);
+</pre>
+<p>&hellip;leaves array containing &lbrack;1, 2&rbrack; and returns &lbrack;3, 4&rbrack;.</p>
+
+<p><b>Delete</b></p>
+
+<p>Use <b>delete</b> to remove item from array without changing the length of array:</p>
+<pre>
+<b>var</b> array = &lbrack;1, 2, 3, 4, 5&rbrack;;
+console.log(array.length);  // <i>5</i>
+<b>delete</b> array&lbrack;2&rbrack;;
+console.log(array);  // <i>&lbrack;1, 2, undefined, 4, 5&rbrack;</i>
+console.log(array.length);  // <i>5</i>
+</pre>
+<p><b>Array.prototype.length</b></p>
+
+<p>Assigning value to length of array changes the length to given value.
 If new value is less than array length items will be removed from the
-end of value.
-array
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-&rbrack;
-;
-array.
-length
-=
-2
-;
-console.
-log
-(
-array
-)
-;
-// <i>&lbrack;1, 2&rbrack;</i>
+end of value.</p>
+<pre>
+array = &lbrack;1, 2, 3, 4, 5&rbrack;;
+array.length = 2;
+console.log(array);  // <i>&lbrack;1, 2&rbrack;</i>
+var arr = &lbrack;1, 2, 3, 4&rbrack;;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-19">Section 12.19: Removing all elements</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>var</b>
-arr
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-;
-<b>Method 1</b>
-Creates a new array and overwrites the existing array reference with a
-new one.
-arr
-=
-&lbrack;
-&rbrack;
-;
-Care must be taken as this does not remove any items from the original
+<p><b>Method 1</b></p>
+<p>Creates a new array and overwrites the existing array reference with a new one.</p>
+<pre>
+arr = &lbrack;&rbrack;;
+</pre>
+<!-- page 102 -->
+<p>Care must be taken as this does not remove any items from the original
 array. The array may have been closed over when passed to a function.
 The array will remain in memory for the life of the function though
-you may not be aware of this. This is a common source of memory leaks.
+you may not be aware of this. This is a common source of memory leaks.</p>
 
-Example of a memory leak resulting from bad array clearing:
-<b>var</b>
-count
-=
-0
-;
-<b>function</b>
-addListener
-(
-arr
-)
-{
-// <i>arr is closed over</i>
-<b>var</b>
-b
-=
-document.
-body
-.
-querySelector
-(
-&quot;#foo&quot;
-&plus;
-(
-count
-++
-)
-)
-;
-b&period;
-addEventListener
-(
-&quot;click&quot;
-,
-<b>function</b>
-(
-e
-)
-{
-// <i>this functions reference keeps</i>
-// <i>the closure current while the</i>
-// <i>event is active</i>
-// <i>do something but does not need arr</i>
+<p>Example of a memory leak resulting from bad array clearing:</p>
+
+<pre>
+<b>var</b> count = 0;
+
+<b>function</b> addListener(arr) { // <i>arr is closed over</i>
+  <b>var</b> b = document.body.querySelector(&quot;#foo&quot; &plus; (count++));
+  b&period;addEventListener(&quot;click&quot;, <b>function</b>(e) { // <i>this functions reference keeps</i>
+    // <i>the closure current while the</i>
+    // <i>event is active</i>
+    // <i>do something but does not need arr</i>
+  });
 }
-)
-;
+
+arr = &lbrack;&quot;big data&quot;&rbrack;;
+<b>var</b> i = 100;
+while (i &gt; 0) {
+  addListener(arr);  // <i>the array is passed to the function</i>
+  arr = &lbrack;&rbrack;;  // <i>only removes the reference, the original array remains</i>
+  array.push(&quot;some large data&quot;);  // <i>more memory allocated</i>
+  i&bsol;;
 }
-arr
-=
-&lbrack;
-&quot;big data&quot;
-&rbrack;
-;
-<b>var</b>
-i
-=
-100
-;
-while
-(
-i
-&gt;
-0
-)
-{
-addListener
-(
-arr
-)
-;
-// <i>the array is passed to the function</i>
-arr
-=
-&lbrack;
-&rbrack;
-;
-// <i>only removes the reference, the original array remains</i>
-array.
-push
-(
-&quot;some large data&quot;
-)
-;
-// <i>more memory allocated</i>
-i
-&bsol;
-;
-}
-// <i>there are now 100 arrays closed over, each referencing a different
-array</i>
+// <i>there are now 100 arrays closed over, each referencing a different array</i>
 // <i>no a single item has been deleted</i>
-To prevent the risk of a memory leak use the one of the following 2
-methods to empty the array in the above example&apos;s while loop.
+</pre>
 
-<b>Method 2</b>
+<p>To prevent the risk of a memory leak use the one of the following 2
+methods to empty the array in the above example&apos;s while loop.</p>
 
-Setting the length property deletes all array element from the new
+<p><b>Method 2</b></p>
+
+<p>Setting the length property deletes all array element from the new
 array length to the old array length. It is the most efficient way to
 remove and dereference all items in the array. Keeps the reference to
-the original array
-arr.
-length
-=
-0
-;
-<b>Method 3</b>
+the original array</p>
 
-Similar to method 2 but returns a new array containing the removed
+<pre>
+arr.length = 0;
+</pre>
+
+<p><b>Method 3</b></p>
+
+<p>Similar to method 2 but returns a new array containing the removed
 items. If you do not need the items this method is inefficient as the
-new array is still created only to be immediately dereferenced.
+new array is still created only to be immediately dereferenced.</p>
 
+<pre>
 arr.splice(0); // <i>should not use if you don&apos;t want the removed items</i>
+// <i>only use this method if you do the following</i>
+<b>var</b> keepArr = arr.splice(0); // <i>empties the array and creates a new array containing the</i> 
+                                    // <i>removed items</i>
+</pre>
 
-// <i>only use this method if you do the following</i> <b>var</b> keepArr =
-arr.splice(0); // <i>empties the array and creates a new array
-containing the</i> // <i>removed items</i>
-
-[Related
-question](http://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript).
+<p><a href="http://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript">Related question</a>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-20">Section 12.20: Finding the minimum or maximum element</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Math                 .     min             .     apply
-Math . max . apply
-If your array or array-like object is <i>numeric</i>, that is, if all its
-elements are numbers, then you can use or by passing <b>null</b> as the
-first argument, and your array as the second.
-<b>var</b>
-myArray
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-;
-Math
-.
-min
-.
-apply
-(
-<b>null</b>
-,
-myArray
-)
-;
-// <i>1</i>
-Math
-.
-max
-.
-apply
-(
-<b>null</b>
-,
-myArray
-)
-;
-// <i>4</i>
+<p>If your array or array-like object is <i>numeric</i>, that is, if all its elements are 
+numbers, then you can use Math.min.apply or Math.max.apply by passing <b>null</b> as the
+first argument, and your array as the second.</p>
+<pre>
+<b>var</b> myArray =&lbrack;1, 2, 3, 4&rbrack;;
+Math.min.apply(<b>null</b>, myArray);  // <i>1</i>
+Math.max.apply(<b>null</b>, myArray);  // <i>4</i>
+</pre>
+<!-- page 103 -->
 <h5>Version ≥ 6</h5>
-In ES6 you can use the &hellip; operator to spread an array and take the
-minimum or maximum element.
-<b>var</b>
-myArray
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-99
-,
-20
-&rbrack;
-;
-<b>var</b>
-maxValue
-=
-Math
-.
-max
-(
-&hellip;
-myArray
-)
-;
-// <i>99</i>
-<b>var</b>
-minValue
-=
-Math
-.
-min
-(
-&hellip;
-myArray
-)
-;
-// <i>1</i>
-The following example uses a
-<b>for</b>
-loop:
-<b>var</b>
-maxValue
-=
-myArray
-&lbrack;
-0
-&rbrack;
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-1
-;
-i
-&lt;
-myArray.
-length
-;
-i
-++
-)
-{
-<b>var</b>
-currentValue
-=
-myArray
-&lbrack;
-i
-&rbrack;
-;
-<b>if</b>
-(
-currentValue
-&gt;
-maxValue
-)
-{
-maxValue
-=
-currentValue
-;
+<p>In ES6 you can use the &hellip; operator to spread an array and take the
+minimum or maximum element.</p>
+<pre>
+<b>var</b> myArray = &lbrack;1, 2, 3, 4, 99, 20&rbrack;;
+<b>var</b> maxValue = Math.max(&hellip;myArray);  // <i>99</i>
+<b>var</b> minValue = Math.min(&hellip;myArray);  // <i>1</i>
+</pre>
+<p>The following example uses a <b>for</b> loop:</p>
+<pre>
+<b>var</b> maxValue = myArray&lbrack;0&rbrack;;
+<b>for</b> (<b>var</b> i = 1; i &lt; myArray.length; i++) {
+  <b>var</b> currentValue = myArray&lbrack;i&rbrack;;
+  <b>if</b> (currentValue &gt; maxValue) {
+    maxValue = currentValue;
+  }
 }
-}
+</pre>
 <h5>Version ≥ 5.1</h5>
-Array . <b>prototype</b> . reduce
-The following example uses () to find the minimum or maximum:
-<b>var</b>
-myArray
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-;
-myArray.
-reduce
-(
-<b>function</b>
-(
-a
-,
-b
-)
-{
-<b>return</b>
-Math
-.
-min
-(
-a
-,
-b
-)
-;
-}
-)
-;
-// <i>1</i>
-myArray.
-reduce
-(
-<b>function</b>
-(
-a
-,
-b
-)
-{
-<b>return</b>
-Math
-.
-max
-(
-a
-,
-b
-)
-;
-}
-)
-;
+<p>The following example uses Array.<b>prototype</b>.reduce() to find the minimum or maximum:</p>
+<pre>
+<b>var</b> myArray = &lbrack;1, 2, 3, 4&rbrack;;
+
+myArray.reduce(<b>function</b>(a, b) {
+  <b>return</b> Math.min(a, b);
+});  // <i>1</i>
+
+myArray.reduce(<b>function</b>(a, b) {
+  <b>return</b> Math.max(a, b);
+});
 // <i>4</i>
+</pre>
+
 <h5>Version ≥ 6</h5>
-or using arrow functions:
-myArray.
-reduce
-(
-(
-a
-,
-b
-)
-=&gt;
-Math
-.
-min
-(
-a
-,
-b
-)
-)
-;
-// <i>1</i>
-myArray.
-reduce
-(
-(
-a
-,
-b
-)
-=&gt;
-Math
-.
-max
-(
-a
-,
-b
-)
-)
-;
-// <i>4</i>
+<p>or using arrow functions:</p>
+<pre>
+myArray.reduce((a, b) =&gt; Math.min(a, b));  // <i>1</i>
+myArray.reduce((a, b) =&gt; Math.max(a, b));  // <i>4</i>
+</pre>
 <h5>Version ≥ 5.1</h5>
-To generalize the reduce version we&apos;d have to pass in an </i>initial
-value</i> to cover the empty list case:
-<b>function</b>
-myMax
-(
-array
-)
-{
-<b>return</b>
-array.
-reduce
-(
-<b>function</b>
-(
-maxSoFar
-,
-element
-)
-{
-<b>return</b>
-Math
-.
-max
-(
-maxSoFar
-,
-element
-)
-;
+
+<p>To generalize the reduce version we&apos;d have to pass in an </i>initial value</i> to cover the empty list case:</p>
+<pre>
+<b>function</b> myMax(array) {
+  <b>return</b> array.reduce(<b>function</b>(maxSoFar, element) {
+    <b>return</b> Math.max(maxSoFar, element);
+  }, &minus;<b>Infinity</b>);
 }
-,
-&minus;
-<b>Infinity</b>
-)
-;
-}
-myMax
-(
-&lbrack;
-3
-,
-5
-&rbrack;
-)
-;
-// <i>5</i>
-myMax
-(
-&lbrack;
-&rbrack;
-)
-;
-// <i>-Infinity</i>
-Math
-.
-max
-.
-apply
-(
-<b>null</b>
-,
-&lbrack;
-&rbrack;
-)
-;
-// <i>-Infinity</i>
-For the details on how to properly use reduce see Reducing values.
+
+myMax(&lbrack;3, 5&rbrack;);     // <i>5</i>
+myMax(&lbrack;&rbrack;);         // <i>-Infinity</i>
+Math.max.apply(<b>null</b>, &lbrack;&rbrack;);  // <i>-Infinity</i>
+</pre>
+
+<p>For the details on how to properly use reduce see Reducing values.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-21">Section 12.21: Standard array initialization</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-There are many ways to create arrays. The most common are to use array
-literals, or the Array constructor:
-<b>var</b>
-arr
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-;
-<b>var</b>
-arr2
-=
-<b>new</b>
-Array
-(
-1
-,
-2
-,
-3
-,
-4
-)
-;
-If the Array constructor is used with no arguments, an empty array is
-created.
-<b>var</b>
-arr3
-=
-<b>new</b>
-Array
-(
-)
-;
-results in:
-&lbrack;
-&rbrack;
-Note that if it&apos;s used with exactly one argument and that argument is
+<p>There are many ways to create arrays. The most common are to use array
+literals, or the Array constructor:</p>
+<!-- page 104 -->
+<pre>
+<b>var</b> arr = &lbrack;1, 2, 3, 4&rbrack;;
+<b>var</b> arr2 = <b>new</b> Array(1, 2, 3, 4);
+</pre>
+<p>If the Array constructor is used with no arguments, an empty array is created.</p>
+<pre>
+<b>var</b> arr3 = <b>new</b> Array();
+</pre>
+<p>results in:</p>
+<pre>
+&lbrack;&rbrack;
+</pre>
+<p>Note that if it&apos;s used with exactly one argument and that argument is
 a number, an array of that length with all <b>undefined</b> values will
-be created instead:
-<b>var</b>
-arr4
-=
-<b>new</b>
-Array
-(
-4
-)
-;
-results in:
-&lbrack;
-<b>undefined</b>
-,
-<b>undefined</b>
-,
-<b>undefined</b>
-,
-<b>undefined</b>
-&rbrack;
-That does not apply if the single argument is non-numeric:
-<b>var</b>
-arr5
-=
-<b>new</b>
-Array
-(
-&quot;foo&quot;
-)
-;
-results in:
+be created instead:</p>
+<pre>
+<b>var</b> arr4 = <b>new</b> Array(4);
+</pre>
+<p>results in:</p>
+<pre>
+&lbrack;<b>undefined</b>, <b>undefined</b>, <b>undefined</b>, <b>undefined</b>&rbrack;
+</pre>
+<p>That does not apply if the single argument is non-numeric:</p>
+<pre>
+<b>var</b> arr5 = <b>new</b> Array(&quot;foo&quot;);
+</pre>
+<p>results in:</p>
+<pre>
 &lbrack;&quot;foo&quot;&rbrack;
-Version ≥ 6
-Array . of
-Similar to an array literal, can be used to create a new Array
-instance given a number of arguments:
-Array
-.
-of
-(
-21
-,
-&quot;Hello&quot;
-,
-&quot;World&quot;
-)
-;
-results in:
-&lbrack;
-21
-,
-&quot;Hello&quot;
-,
-&quot;World&quot;
-&rbrack;
-Array . of ( 23
-23
-In contrast to the Array constructor, creating an array with a single
-number such as ) will create a new array &lbrack;&rbrack;, rather than an Array
-with length 23.
-Array.from
-The other way to create and initialize an array would be
-<b>var</b> newArray = Array.from({ length: 5 }, (&lowbar;, index) =&gt;
-Math.pow(index, 4));
-will result:
-&lbrack;
-0
-,
-1
-,
-16
-,
-81
-,
-256
-&rbrack;
+</pre>
+<h5>Version ≥ 6</h5>
+<p>Similar to an array literal, Array.of can be used to create a new Array
+instance given a number of arguments:</p>
+<pre>
+Array.of(21, &quot;Hello&quot;, &quot;World&quot;);
+</pre>
+<p>results in:</p>
+<pre>
+&lbrack;21, &quot;Hello&quot;, &quot;World&quot;&rbrack;
+</pre>
+<p>In contrast to the Array constructor, creating an array with a single
+number such as Array.of(21) will create a new array &lbrack;&rbrack;, rather than an Array
+with length 23.</p>
+
+<p>The other way to create and initialize an array would be Array.from</p>
+<pre>
+<b>var</b> newArray = Array.from({ length: 5 }, (&lowbar;, index) =&gt; Math.pow(index, 4));
+</pre>
+
+<p>will result:</p>
+<pre>
+&lbrack;0, 1, 16, 81, 256&rbrack;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-22">Section 12.22: Joining array elements in a string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -9139,7 +8630,6 @@ obj
 )
 ;
 // <i>Logs: {firstName: &quot;John&quot;, lastName: &quot;Doe&quot;, age: 39}</i>
-
 Or merge many properties from multiple objects to one:
 **var**
 obj1
@@ -9651,4 +9141,1504 @@ property
 =
 1
 ;
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-10">Section 13.10: Arrays are Objects</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+form.elements
+**Disclaimer:** Creating array-like objects is not recommend. However,
+it is helpful to understand how they work, especially when working
+with DOM. This will explain why regular array operations don&apos;t work
+on DOM objects returned from many DOM document functions. (i.e.
+querySelectorAll, ) Supposing we created the following object which
+has some properties you would expect to see in an Array.
+**var**
+anObject
+=
+{
+foo
+:
+&apos;bar&apos;
+,
+length
+:
+&apos;interesting&apos;
+,
+&apos;0&apos;
+:
+&apos;zero!&apos;
+,
+&apos;1&apos;
+:
+&apos;one!&apos;
+}
+;
+Then we&apos;ll create an array.
+**var**
+anArray
+=
+&lbrack;
+&apos;zero.&apos;
+,
+&apos;one.&apos;
+&rbrack;
+;
+Now, notice how we can inspect both the object, and the array in the
+same way.
+
+console.log(anArray&lbrack;0&rbrack;, anObject&lbrack;0&rbrack;); *// outputs: zero. zero!*
+console.log(anArray&lbrack;1&rbrack;, anObject&lbrack;1&rbrack;); *// outputs: one. one!*
+
+console.log(anArray.length, anObject.length); *// outputs: 2
+interesting*
+
+console.log(anArray.foo, anObject.foo); *// outputs: undefined bar*
+
+Since anArray is actually an object, just like anObject, we can even
+add custom wordy properties to anArray
+
+**Disclaimer:**
+Arrays with custom properties are not usually recommended as they can be
+confusing, but it
+can be useful in advanced cases where you need the optimized functions
+of an Array. (i.e. jQuery objects)
+anArray.
+foo
+=
+&apos;it works!&apos;
+;
+console.
+log
+(
+anArray.
+foo
+)
+;
+We can even make anObject to be an array-like object by adding a
+length.
+anObject.
+length
+=
+2
+;
+Then you can use the C-style **for** loop to iterate over anObject
+just as if it were an Array. See Array Iteration
+  Array                   .    **prototype**
+Note that anObject is only an **array-like** object. (also known as a
+List) It is not a true Array. This is important, because functions
+like push and forEach (or any convenience function found in ) will not
+work by default on array-like objects.
+form.elements
+Many of the DOM document functions will return a List (i.e.
+querySelectorAll, ) which is similar to the array-like anObject we
+created above. See Converting Array-like Objects to Arrays
+
+console.log(**typeof** anArray == &apos;object&apos;, **typeof** anObject ==
+&apos;object&apos;); *// outputs: true true* console.log(anArray
+**instanceof** Object, anObject **instanceof** Object); *// outputs:
+true true* console.log(anArray **instanceof** Array, anObject
+**instanceof** Array); *// outputs: true false*
+console.log(Array.isArray(anArray), Array.isArray(anObject)); *//
+outputs: true false*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-11">Section 13.11: Object.seal</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version ≥ 5</h5>
+Object. seal
+prevents the addition or removal of properties from an object. Once an
+object has been sealed its
+Object . freeze
+
+property descriptors can&apos;t be converted to another type. Unlike it
+does allow properties to be edited.
+
+Attempts to do this operations on a sealed object will fail silently
+**var**
+obj
+=
+{
+foo
+:
+&apos;foo&apos;
+,
+bar
+:
+**function**
+(
+)
+{
+**return**
+&apos;bar&apos;
+;
+}
+}
+;
+Object
+.
+seal
+(
+obj
+)
+obj.
+newFoo
+=
+&apos;newFoo&apos;
+;
+obj.
+bar
+=
+**function**
+(
+)
+{
+**return**
+&apos;foo&apos;
+}
+;
+obj.
+newFoo
+;
+*// undefined*
+obj.
+bar
+(
+)
+;
+*// &apos;foo&apos;*
+*// Can&apos;t make foo an accessor property*
+Object
+.
+defineProperty
+(
+obj
+,
+&apos;foo&apos;
+,
+{
+**get**
+:
+**function**
+(
+)
+{
+**return**
+&apos;newFoo&apos;
+;
+}
+}
+)
+;
+*// TypeError*
+*// But you can make it read only*
+Object
+.
+defineProperty
+(
+obj
+,
+&apos;foo&apos;
+,
+{
+writable
+:
+**false**
+}
+)
+;
+*// TypeError*
+obj.
+foo
+=
+&apos;newFoo&apos;
+;
+obj.
+foo
+;
+*// &apos;foo&apos;;*
+In strict mode these operations will throw a
+TypeError
+(
+**function**
+(
+)
+{
+&apos;use strict&apos;
+;
+**var**
+obj
+=
+{
+foo
+:
+&apos;foo&apos;
+}
+;
+Object
+.
+seal
+(
+obj
+)
+;
+obj.
+newFoo
+=
+&apos;newFoo&apos;
+;
+*// TypeError*
+}
+(
+)
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-12">Section 13.12: Convert object&apos;s values to array</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Given this object:
+**var**
+obj
+=
+{
+a
+:
+&quot;hello&quot;
+,
+b
+:
+&quot;this is&quot;
+,
+c
+:
+&quot;javascript!&quot;
+,
+}
+;
+You can convert its values to an array by doing:
+**var**
+array
+=
+Object
+.
+keys
+(
+obj
+)
+.
+map
+(
+**function**
+(
+key
+)
+{
+**return**
+obj
+&lbrack;
+key
+&rbrack;
+;
+}
+)
+;
+console.
+log
+(
+array
+)
+;
+*// &lbrack;&quot;hello&quot;, &quot;this is&quot;, &quot;javascript!&quot;&rbrack;*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-13">Section 13.13: Retrieving properties from an object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+***Characteristics of properties :***
+
+Properties that can be retrieved from an *object* could have the
+following characteristics,
+
+Enumerable Non - Enumerable own
+
+While creating the properties using
+[*Object.defineProperty(ies)*](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty),
+we could set its characteristics except *&quot;own&quot;*.
+
+Properties which are available in the direct level not in the
+*prototype* level (&lowbar;&lowbar;proto&lowbar;&lowbar;) of an object are called as *own*
+properties.
+Object  . defindProperty ( ies
+
+And the properties that are added into an object without using ) will
+don&apos;t have its enumerable characteristic. That means it be considered
+as true.
+
+***Purpose of enumerability :***
+
+The main purpose of setting enumerable characteristics to a property
+is to make the particular property&apos;s availability when retrieving it
+from its object, by using different programmatical methods. Those
+different methods will be discussed deeply below.
+***Methods of retrieving properties :***
+Properties from an object could be retrieved by the following methods,
+[**for**..**in**](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in)
+1&period; loop
+
+This loop is very useful in retrieving enumerable properties from an
+object. Additionally this loop will retrieve enumerable own properties
+as well as it will do the same retrieval by traversing through the
+prototype chain until it sees the prototype as null.
+*//Ex 1 : Simple data*
+**var**
+x
+=
+{
+a
+:
+10
+,
+b
+:
+3
+}
+,
+props
+=
+&lbrack;
+&rbrack;
+;
+**for**
+(
+prop
+**in**
+x
+)
+{
+props.
+push
+(
+prop
+)
+;
+}
+console.
+log
+(
+props
+)
+;
+*//&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;*
+*//Ex 2 : Data with enumerable properties in prototype chain*
+**var**
+x
+=
+{
+a
+:
+10
+,
+&lowbar;&lowbar;proto&lowbar;&lowbar;
+:
+{
+b
+:
+10
+}
+}
+,
+props
+=
+&lbrack;
+&rbrack;
+;
+**for**
+(
+prop
+**in**
+x
+)
+{
+props.
+push
+(
+prop
+)
+;
+}
+console.
+log
+(
+props
+)
+;
+*//&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;*
+*//Ex 3 : Data with non enumerable properties*
+**var**
+x
+=
+{
+a
+:
+10
+}
+,
+props
+=
+&lbrack;
+&rbrack;
+;
+Object
+.
+defineProperty
+(
+x
+,
+&quot;b&quot;
+,
+{
+value
+:
+5
+,
+enumerable
+:
+**false**
+}
+)
+;
+**for**
+(
+prop
+**in**
+x
+)
+{
+props.
+push
+(
+prop
+)
+;
+}
+console.
+log
+(
+props
+)
+;
+*//&lbrack;&quot;a&quot;&rbrack;*
+[Object](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)   [.](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)   [keys](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
+2.[()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
+function
+[**for**..**in**](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in)
+[Object](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [.](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [**prototype**](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [.](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [hasOwnProperty](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)
+
+This function was unveiled as a part of ECMAScript 5. It is used to
+retrieve enumerable own properties from an object. Prior to its
+release people used to retrieve own properties from an object by
+combining loop and
+[()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)
+function.
+*//Ex 1 : Simple data*
+**var**
+x
+=
+{
+a
+:
+10
+,
+b
+:
+3
+}
+,
+props
+;
+props
+=
+Object
+.
+keys
+(
+x
+)
+;
+console.
+log
+(
+props
+)
+;
+*//&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;*
+*//Ex 2 : Data with enumerable properties in prototype chain*
+**var**
+x
+=
+{
+a
+:
+10
+,
+&lowbar;&lowbar;proto&lowbar;&lowbar;
+:
+{
+b
+:
+10
+}
+}
+,
+props
+;
+props
+=
+Object
+.
+keys
+(
+x
+)
+;
+console.
+log
+(
+props
+)
+;
+*//&lbrack;&quot;a&quot;&rbrack;*
+*//Ex 3 : Data with non enumerable properties*
+**var**
+x
+=
+{
+a
+:
+10
+}
+,
+props
+;
+Object
+.
+defineProperty
+(
+x
+,
+&quot;b&quot;
+,
+{
+value
+:
+5
+,
+enumerable
+:
+**false**
+}
+)
+;
+props
+=
+Object
+.
+keys
+(
+x
+)
+;
+console.
+log
+(
+props
+)
+;
+// <i>&lbrack;&quot;a&quot;&rbrack;</i>
+[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames)   [getOwnProperties](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames)
+3.[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames)
+function
+This function will retrieve both enumerable and non enumerable, own
+properties from an object. It was also released as a part of
+ECMAScript 5.
+// <i>Ex 1 : Simple data</i>
+**var**
+x
+=
+{
+a
+:
+10
+,
+b
+:
+3
+}
+,
+props
+;
+props
+=
+Object
+.
+getOwnPropertyNames
+(
+x
+)
+;
+console.
+log
+(
+props
+)
+;
+*//&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;*
+*//Ex 2 : Data with enumerable properties in prototype chain*
+**var**
+x
+=
+{
+a
+:
+10
+,
+&lowbar;&lowbar;proto&lowbar;&lowbar;
+:
+{
+b
+:
+10
+}
+}
+,
+props
+;
+props
+=
+Object
+.
+getOwnPropertyNames
+(
+x
+)
+;
+console.
+log
+(
+props
+)
+;
+*//&lbrack;&quot;a&quot;&rbrack;*
+*//Ex 3 : Data with non enumerable properties*
+**var**
+x
+=
+{
+a
+:
+10
+}
+,
+props
+;
+Object
+.
+defineProperty
+(
+x
+,
+&quot;b&quot;
+,
+{
+value
+:
+5
+,
+enumerable
+:
+**false**
+}
+)
+;
+props
+=
+Object
+.
+getOwnPropertyNames
+(
+x
+)
+;
+console.
+log
+(
+props
+)
+;
+*//&lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;*
+***Miscellaneous :***
+A technique for retrieving all (own, enumerable, non enumerable, all
+prototype level) properties from an object is given below,
+**function**
+getAllProperties
+(
+obj
+,
+props
+=
+&lbrack;
+&rbrack;
+)
+{
+**return**
+obj
+==
+**null**
+?
+props
+:
+getAllProperties
+(
+Object
+.
+getPrototypeOf
+(
+obj
+)
+,
+props.
+concat
+(
+Object
+.
+getOwnPropertyNames
+(
+obj
+)
+)
+)
+;
+}
+**var**
+x
+=
+{
+a
+:
+10
+,
+&lowbar;&lowbar;proto&lowbar;&lowbar;
+:
+{
+b
+:
+5
+,
+c
+:
+15
+}
+}
+;
+*//adding a non enumerable property to first level prototype*
+Object
+.
+defineProperty
+(
+x&period;
+&lowbar;&lowbar;proto&lowbar;&lowbar;
+,
+&quot;d&quot;
+,
+{
+value
+:
+20
+,
+enumerable
+:
+**false**
+}
+)
+;
+console.
+log
+(
+getAllProperties
+(
+x
+)
+)
+;
+&lbrack;
+&quot;a&quot;
+,
+&quot;b&quot;
+,
+&quot;c&quot;
+,
+&quot;d&quot;
+,
+&quot;&hellip;other default core props&hellip;&quot;
+&rbrack;
+And this will be supported by the browsers which supports ECMAScript
+5.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-14">Section 13.14: Read-Only property</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version ≥ 5</h5>
+Using property descriptors we can make a property read only, and any
+attempt to change its value will fail silently, the value will not be
+changed and no error will be thrown.
+
+The writable property in a property descriptor indicates whether that
+property can be changed or not.
+**var**
+a
+=
+{
+}
+;
+Object
+.
+defineProperty
+(
+a
+,
+&apos;foo&apos;
+,
+{
+value
+:
+&apos;original&apos;
+,
+writable
+:
+**false**
+}
+)
+;
+a&period;
+foo
+=
+&apos;new&apos;
+;
+console.
+log
+(
+a&period;
+foo
+)
+;
+Console output
+original
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-15">Section 13.15: Non enumerable property</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h5>Version ≥ 5</h5>
+**for**            (    &hellip; **in** &hellip;
+
+We can avoid a property from showing up in ) loops
+
+The enumerable property of the property descriptor tells whether that
+property will be enumerated while looping through the object&apos;s
+properties.
+**var**
+obj
+=
+{
+}
+;
+Object
+.
+defineProperty
+(
+obj
+,
+&quot;foo&quot;
+,
+{
+value
+:
+&apos;show&apos;
+,
+enumerable
+:
+**true**
+}
+)
+;
+Object
+.
+defineProperty
+(
+obj
+,
+&quot;bar&quot;
+,
+{
+value
+:
+&apos;hide&apos;
+,
+enumerable
+:
+**false**
+}
+)
+;
+**for**
+(
+**var**
+prop
+**in**
+obj
+)
+{
+console.
+log
+(
+obj
+&lbrack;
+prop
+&rbrack;
+)
+;
+}
+Console output
+show
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-16">Section 13.16: Lock property description</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version ≥ 5</h5>
+
+A property&apos;s descriptor can be locked so no changes can be made to
+it. It will still be possible to use the property normally, assigning
+and retrieving the value from it, but any attempt to redefine it will
+throw an exception.
+
+The configurable property of the property descriptor is used to
+disallow any further changes on the descriptor.
+**var**
+obj
+=
+{
+}
+;
+// <i>Define &apos;foo&apos; as read only and lock it</i>
+Object
+.
+defineProperty
+(
+obj
+,
+&quot;foo&quot;
+,
+{
+value
+:
+&quot;original value&quot;
+,
+writable
+:
+**false**
+,
+configurable
+:
+**false**
+}
+)
+;
+Object
+.
+defineProperty
+(
+obj
+,
+&quot;foo&quot;
+,
+{
+writable
+:
+**true**
+}
+)
+;
+This error will be thrown:
+TypeError: Cannot redefine property: foo
+And the property will still be read only.
+obj.
+foo
+=
+&quot;new value&quot;
+;
+console.
+log
+(
+foo
+)
+;
+Console output
+original value
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-17">Section 13.17: Object.getOwnPropertyDescriptor</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Get the description of a specific property in an object.
+**var**
+sampleObject
+=
+{
+hello
+:
+&apos;world&apos;
+}
+;
+Object
+.
+getOwnPropertyDescriptor
+(
+sampleObject
+,
+&apos;hello&apos;
+)
+;
+// <i> Object {value: &quot;world&quot;, writable: true, enumerable: true,
+configurable: true}</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-18">Section 13.18: Descriptors and Named Properties</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+object.propertyName
+
+Properties are members of an object. Each named property is a pair of
+(name, descriptor). The name is a string that allows access (using the
+dot notation or the square brackets notation
+
+object  &lbrack; &apos;propertyName&apos;
+&rbrack;). The descriptor is a record of fields defining the bevahiour of the
+property when it is
+
+accessed (what happens to the property and what is the value returned
+from accessing it). By and large, a property associates a name to a
+behavior (we can think of the behavior as a black box).
+
+There are two types of named properties:
+1.  *data property*: the property&apos;s name is associated with a value.
+
+2.  *accessor property*: the property&apos;s name is associated with one or
+    two accessor functions.
+Demonstration:
+obj.propertyName1 = 5; // <i>translates behind the scenes into</i>
+// <i>either assigning 5 to the value field&ast; if it is a data property</i>
+// <i>or calling the set function with the parameter 5 if accessor property</i>
+// <i>&ast;actually whether an assignment would take place in the case of a data property</i>
+// <i>also depends on the presence and value of the writable field - on that later on</i>
+
+The property&apos;s type is determined by its descriptor&apos;s fields, and a
+property cannot be of both types.
+**Data descriptors** -
+Required fields: value or writable or both Optional
+fields:configurable,enumerable
+Sample:
+{
+value
+:
+10
+,
+writable
+:
+**true**
+;
+}
+**Accessor descriptors** -
+Required fields: **get** or **set** or both
+Optional fields: configurable, enumerable
+Sample:
+{
+**get**
+:
+**function**
+(
+)
+{
+**return**
+10
+;
+}
+,
+enumerable
+:
+**true**
+}
+**meaning of fields and their defaults** configurable,enumerable and
+writable:
+These keys all default to **false**. configurable is **true** if and
+only if the type of this property descriptor may be changed and if the
+property may be deleted from the corresponding object.
+enumerable is **true** if and only if this property shows up during
+enumeration of the properties on the corresponding object.
+writable is **true** if and only if the value associated with the
+property may be changed with an assignment operator.
+**get** and **set**:
+These keys default to **undefined**. **get** is a function which
+serves as a getter for the property, or **undefined** if there is no
+getter. The function return will be used as the value of the property.
+**set** is a function which serves as a setter for the property, or
+**undefined** if there is no setter. The function will receive as only
+argument the new value being assigned to the property.
+value:
+This key defaults to **undefined**.
+The value associated with the property. Can be any valid JavaScript
+value (number, object, function, etc).
+Example:
+**var** obj = {propertyName1: 1}; *//the pair is actually
+(&apos;propertyName1&apos;, {value:1,* *// writable:true,*
+// <i>enumerable:true,</i>
+// <i>configurable:true})</i>
+Object.defineProperty(obj, &apos;propertyName2&apos;,
+{**get**: **function**() { console.log(&apos;this will be logged &apos; +
+&apos;every time propertyName2 is accessed to get its value&apos;); },
+**set**: **function**() { console.log(&apos;and this will be logged &apos; +
+&apos;every time propertyName2**&amp;amp;apos;**s value is tried to be set&apos;)
+
+// <i>will be treated like it has enumerable:false, configurable:false</i>
+
+}});
+
+// <i>propertyName1 is the name of obj&apos;s data property //and
+propertyName2 is the name of its accessor property</i>
+
+obj.propertyName1 = 3; console.log(obj.propertyName1); // <i>3</i>
+
+obj.propertyName2 = 3; // <i>and this will be logged every time
+propertyName2&apos;s value is tried to be set</i>
+console.log(obj.propertyName2); // <i>this will be logged every time
+propertyName2 is accessed to get its value</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-19">Section 13.19: Object.keys</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version ≥ 5</h5>
+Object
+.
+keys
+(
+obj
+)
+returns an array of a given object&apos;s keys.
+**var**
+obj
+=
+{
+a
+:
+&quot;hello&quot;
+,
+b
+:
+&quot;this is&quot;
+,
+c
+:
+&quot;javascript!&quot;
+}
+;
+**var**
+keys
+=
+Object
+.
+keys
+(
+obj
+)
+;
+console.
+log
+(
+keys
+)
+;
+*// &lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&rbrack;*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-20">Section 13.20: Properties with special characters or reserved words</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+myObject.property
+
+While object property notation is usually written as , this will only
+allow characters that are normally found in [JavaScript variable
+names](http://stackoverflow.com/questions/1661197/what-characters-are-valid-for-javascript-variable-names),
+which is mainly letters, numbers and underscore (&lowbar;).
+
+If you need special characters, such as space, ☺, or user-provided
+content, this is possible using &lbrack;&rbrack; bracket notation.
+myObject
+&lbrack;
+&apos;special property
+☺
+&apos;
+&rbrack;
+=
+&apos;it works!&apos;
+console.
+log
+(
+myObject
+&lbrack;
+&apos;special property
+☺
+&apos;
+&rbrack;
+)
+**All-digit properties:**
+In addition to special characters, property names that are all-digits
+will require bracket notation. However, in this case the property need
+not be written as a string.
+myObject&lbrack;123&rbrack; = &apos;hi!&apos; *// number 123 is automatically converted to
+a string* console.log(myObject&lbrack;&apos;123&apos;&rbrack;) *// notice how using string
+123 produced the same result* console.log(myObject&lbrack;&apos;12&apos; + &apos;3&apos;&rbrack;)
+*// string concatenation* console.log(myObject&lbrack;120 + 3&rbrack;) *//
+arithmetic, still resulting in 123 and producing the same result*
+console.log(myObject&lbrack;123.0&rbrack;) *// this works too because 123.0
+evaluates to 123* console.log(myObject&lbrack;&apos;123.0&apos;&rbrack;) *// this does NOT
+work, because &apos;123&apos; != &apos;123.0&apos;*
+However, leading zeros are not recommended as that is interpreted as
+Octal notation. (TODO, we should produce and link to an example
+describing octal, hexadecimal and exponent notation)
+See also: &lbrack;Arrays are Objects&rbrack; example.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-21">Section 13.21: Creating an Iterable object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version ≥ 6</h5>
+**var**
+myIterableObject
+=
+{
+}
+;
+// <i>An Iterable object must define a method located at the Symbol.iterator key:</i>
+myIterableObject
+&lbrack;
+Symbol.
+iterator
+&rbrack;
+=
+**function**
+(
+)
+{
+// <i>The iterator should return an Iterator object</i>
+**return**
+{
+// <i>The Iterator object must implement a method, next()</i>
+next
+:
+**function**
+(
+)
+{
+// <i>next must itself return an IteratorResult object</i>
+**if**
+(
+!
+**this**
+.
+iterated
+)
+{
+**this**
+.
+iterated
+=
+**true**
+;
+// <i>The IteratorResult object has two properties</i>
+**return**
+{
+// <i>whether the iteration is complete, and</i>
+done
+:
+**false**
+,
+// <i>the value of the current iteration</i>
+value
+:
+&apos;One&apos;
+}
+;
+}
+**return**
+{
+// <i>When iteration is complete, just the done property is needed</i>
+done
+:
+**true**
+}
+;
+}
+,
+iterated
+:
+**false**
+}
+;
+}
+;
+**for**
+(
+**var**
+c of myIterableObject
+)
+{
+console.
+log
+(
+c
+)
+;
+}
+Console output
+One
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-22">Section 13.22: Iterating over Object entries - Object.entries()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version ≥ 8</h5>
+[Object](https://github.com/tc39/proposal-object-values-entries)
+[.](https://github.com/tc39/proposal-object-values-entries)
+[entries](https://github.com/tc39/proposal-object-values-entries)
+
+The [proposed
+()](https://github.com/tc39/proposal-object-values-entries) method
+returns an array of key/value pairs for the given object. It does not
+return
+Array . **prototype**. entries   (), but the Array returned Object .entries
+by
+an iterator like () can be iterated regardless.
+**const**
+obj
+=
+{
+one
+:
+1
+,
+two
+:
+2
+,
+three
+:
+3
+}
+;
+Object
+.
+entries
+(
+obj
+)
+;
+Results in:
+&lbrack;
+&lbrack;
+&quot;one&quot;
+,
+1
+&rbrack;
+,
+&lbrack;
+&quot;two&quot;
+,
+2
+&rbrack;
+,
+&lbrack;
+&quot;three&quot;
+,
+3
+&rbrack;
+&rbrack;
+It is an useful way of iterating over the key/value pairs of an object:
+**for**
+(
+**const**
+&lbrack;
+key
+,
+value
+&rbrack;
+of
+Object
+.
+entries
+(
+obj
+)
+)
+{
+console.
+log
+(
+key
+)
+;
+*// &quot;one&quot;, &quot;two&quot; and &quot;three&quot;*
+console.
+log
+(
+value
+)
+;
+// <i>1, 2 and 3</i>
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch13-23">Section 13.23: Object.values()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h5>Version ≥ 8</h5>
+
+Object.values
+The () method returns an array of a given object&apos;s own enumerable
+property values, in the same order as that provided by a for&hellip;in
+loop (the difference being that a for-in loop enumerates properties in
+the prototype chain as well).
+**var**
+obj
+=
+{
+0
+:
+&apos;a&apos;
+,
+1
+:
+&apos;b&apos;
+,
+2
+:
+&apos;c&apos;
+}
+;
+console.
+log
+(
+Object
+.
+values
+(
+obj
+)
+)
+;
+*// &lbrack;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&rbrack;*
+**Note:**
+For browser support, please refer to this
+[link](http://kangax.github.io/compat-table/es2016plus/#test-Object.values)
+
+<!-- thru 13.23 -->
 
