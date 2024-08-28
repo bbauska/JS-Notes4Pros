@@ -7268,106 +7268,42 @@ Object is by manually iterating over its properties and filtering out inherited 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-2">Section 13.2: Object.freeze</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 5</h5>
-Object.freeze
+<p>Object.freeze makes an object immutable by preventing the addition of new properties,
+the removal of existing properties, and the modification of the enumerability, configurability, 
+and writability of existing properties. It also prevents the value of existing properties from 
+being changed. However, it does not work recursively which means that child objects are not
+automatically frozen and are subject to change.</p>
+<!-- page 113 -->
+<p>The operations following the freeze will fail silently unless the code
+is running in strict mode. If the code is in strict mode, a TypeError will be thrown.</p>
+<pre>
+<b>var</b> obj = {
+  foo: &apos;foo&apos;,
+  bar: &lbrack;1, 2, 3&rbrack;,
+  baz: {
+    foo: &apos;nested-foo&apos;
+  }
+};
 
-makes an object immutable by preventing the addition of new properties,
-the removal of existing
+Object.freeze(obj);
 
-properties, and the modification of the enumerability,
-configurability, and writability of existing properties. It also
-prevents the value of existing properties from being changed. However,
-it does not work recursively which means that child objects are not
-automatically frozen and are subject to change.
-
-The operations following the freeze will fail silently unless the code
-is running in strict mode. If the code is in strict
-mode, a
-TypeError
-will be thrown.
-<b>var</b>
-obj
-=
-{
-foo
-:
-&apos;foo&apos;
-,
-bar
-:
-&lbrack;
-1
-,
-2
-,
-3
-&rbrack;
-,
-baz
-:
-{
-foo
-:
-&apos;nested-foo&apos;
-}
-}
-;
-Object
-.
-freeze
-(
-obj
-)
-;
 <i>// Cannot add new properties</i>
-obj.
-newProperty
-=
-<b>true</b>
-;
+obj.newProperty = <b>true</b>;
+
 <i>// Cannot modify existing values or their descriptors</i>
-obj.
-foo
-=
-&apos;not foo&apos;
-;
-Object
-.
-defineProperty
-(
-obj
-,
-&apos;foo&apos;
-,
-{
-writable
-:
-<b>true</b>
-}
-)
-;
+obj.foo = &apos;not foo&apos;;
+Object.defineProperty(obj, &apos;foo&apos;, {
+  writable: <b>true</b>
+});
+
 <i>// Cannot delete existing properties</i>
-<b>delete</b>
-obj.
-foo
-;
+<b>delete</b> obj.foo;
+
 <i>// Nested objects are not frozen</i>
-obj.
-bar
-.
-push
-(
-4
-)
-;
-obj.
-baz
-.
-foo
-=
-&apos;new foo&apos;
-;
+obj.bar.push(4);
+obj.baz.foo = &apos;new foo&apos;;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-3">Section 13.3: Object cloning</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
