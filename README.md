@@ -6024,668 +6024,220 @@ area(triangle);  // <i> → 6</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-8">Section 12.8: Removing duplicate elements</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [<b>prototype</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)   [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
-From ES5.1 onwards, you can use the native method to loop through an
-array and leave only entries that pass a given callback function.
+<p>From ES5.1 onwards, you can use the native method <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"><b>Array.prototype.filter</b></a> to loop through an
+array and leave only entries that pass a given callback function.</p>
 
-In the following example, our callback checks if the given value
+<p>In the following example, our callback checks if the given value
 occurs in the array. If it does, it is a duplicate and will not be
-copied to the resulting array.
+copied to the resulting array.</p>
 
-Version ≥ 5.1 <b>var</b> uniqueArray = &lbrack;&apos;a&apos;, 1, &apos;a&apos;, 2, &apos;1&apos;,
-1&rbrack;.filter(<b>function</b>(value, index, self) { <b>return</b>
-self.indexOf(value) === index;
+<h5>Version ≥ 5.1</h5>
 
+<pre>
+<b>var</b> uniqueArray = &lbrack;&apos;a&apos;, 1, &apos;a&apos;, 2, &apos;1&apos;, 1&rbrack;.filter(<b>function</b>(value, index, self) { 
+  <b>return</b> self.indexOf(value) === index;
 }); // <i>returns &lbrack;&apos;a&apos;, 1, 2, &apos;1&apos;&rbrack;</i>
+</pre>
 
-If your environment supports ES6, you can also use the
-[Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set)
-object. This object lets you store unique values of any type, whether
-primitive values or object references:
+<p>If your environment supports ES6, you can also use the
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">
+Set</a> object. This object lets you store unique values of any type, whether
+primitive values or object references:</p>
 
 <h5>Version ≥ 6</h5>
-<b>var</b>
-uniqueArray
-=
-&lbrack;
-&hellip;
-<b>new</b>
-Set
-(
-&lbrack;
-&apos;a&apos;
-,
-1
-,
-&apos;a&apos;
-,
-2
-,
-&apos;1&apos;
-,
-1
-&rbrack;
-)
-&rbrack;
-;
+
+<pre>
+<b>var</b> uniqueArray = &lbrack;&hellip; <b>new</b> Set(&lbrack;&apos;a&apos;, 1, &apos;a&apos;, 2, &apos;1&apos;, 1&rbrack;)&rbrack;;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-9">Section 12.9: Array comparison</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-For simple array comparison you can use JSON stringify and compare the
-output strings:
-JSON.
-stringify
-(
-array1
-)
-===
-JSON.
-stringify
-(
-array2
-)
+<p>For simple array comparison you can use JSON stringify and compare the output strings:</p>
+<pre>
+JSON.stringify(array1) === JSON.stringify(array2)
+</pre>
+<blockquote>
 <b>Note:</b>
-that this will only work if both objects are JSON serializable and do
-not contain cyclic references. It
-may throw
-TypeError
-:
-Converting circular structure to JSON
-You can use a recursive function to compare arrays.
-<b>function</b>
-compareArrays
-(
-array1
-,
-array2
-)
-{
-<b>var</b>
-i
-,
-isA1
-,
-isA2
-;
-isA1
-=
-Array
-.
-isArray
-(
-array1
-)
-;
-isA2
-=
-Array
-.
-isArray
-(
-array2
-)
-;
-<b>if</b>
-(
-isA1
-!==
-isA2
-)
-{
-// <i>is one an array and the other not?</i>
-<b>return</b>
-<b>false</b>
-;
-// <i>yes then can not be the same</i>
+that this will only work if both objects are JSON serializable and do not contain cyclic 
+references. It may throw TypeError: Converting circular structure to JSON
+</blockquote>
+<p>You can use a recursive function to compare arrays.</p>
+<pre>
+<b>function</b> compareArrays(array1, array2) {
+  <b>var</b> i, isA1, isA2;
+  isA1 = Array.isArray(array1);
+  isA2 = Array.isArray(array2);
+  
+  <b>if</b> (isA1 !== isA2) {  // <i>is one an array and the other not?</i>
+    <b>return</b> <b>false</b>;  // <i>yes then can not be the same</i>
+  }
+  <b>if</b> (!(isA1 && isA2)) {  // <i>Are both not arrays</i>
+    <b>return</b> array1 === array2;  // <i>return strict equality</i>
+  }
+  <b>if</b>(array1.length !== array2.length) {  // <i>if lengths differ then can not be the same</i>
+    <b>return</b> <b>false</b>;
+  }
+  // <i>iterate arrays and compare them</i>
+  <b>for</b> (i = 0; i &lt; array1.length; i += 1) {
+    <b>if</b> (!compareArrays(array1&lbrack;i&rbrack;, array2&lbrack;i&rbrack;)) {  // <i>Do items compare recursively</i>
+      <b>return</b> <b>false</b>;
+    }
+  }
+  <b>return</b> <b>true</b>;  // <i>must be equal</i>
 }
-<b>if</b>
-(
-!
-(
-isA1
-&&
-isA2
-)
-)
-{
-// <i>Are both not arrays</i>
-<b>return</b>
-array1
-===
-array2
-;
-// <i>return strict equality</i>
-}
-<b>if</b>
-(
-array1.
-length
-!==
-array2.
-length
-)
-{
-// <i>if lengths differ then can not be the same</i>
-<b>return</b>
-<b>false</b>
-;
-}
-// <i>iterate arrays and compare them</i>
-<b>for</b>
-(
-i
-=
-0
-;
-i
-&lt;
-array1.
-length
-;
-i
-+=
-1
-)
-{
-<b>if</b>
-(
-!
-compareArrays
-(
-array1
-&lbrack;
-i
-&rbrack;
-,
-array2
-&lbrack;
-i
-&rbrack;
-)
-)
-{
-// <i>Do items compare recursively</i>
-<b>return</b>
-<b>false</b>
-;
-}
-}
-<b>return</b>
-<b>true</b>
-;
-// <i>must be equal</i>
-}
-<b>WARNING:</b> Using the above function is dangerous and should be
+</pre>
+<!-- page 94 -->
+<p><b>WARNING:</b> Using the above function is dangerous and should be
 wrapped in a <b>try</b> <b>catch</b> if you suspect there is a chance the
 array has cyclic references (a reference to an array that contains a
-reference to itself)
-a
-=
-&lbrack;
-0
-&rbrack;
-;
-a
-&lbrack;
-1
-&rbrack;
-=
-a
-;
-b
-=
-&lbrack;
-0
-,
-a
-&rbrack;
-;
-compareArrays
-(
-a
-,
-b
-)
-;
-// <i>throws RangeError: Maximum call stack size exceeded</i>
-<b>Note:</b>
-The function uses the strict equality operator
-===
-to compare non array items
-{
-a
-:
-0
-}
-===
-{
-a
-:
-0
-}
-is
-<b>false</b>
+reference to itself)</p>
+<pre>
+a = &lbrack;0&rbrack;;
+a&lbrack;1&rbrack; = a;
+b = &lbrack;0, a&rbrack;;
+compareArrays(a, b);  // <i>throws RangeError: Maximum call stack size exceeded</i>
+</pre>
+
+<blockquote>
+<b>Note:</b> The function uses the strict equality operator === to compare non array items 
+{a: 0} === {a: 0} is <b>false</b>
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-10">Section 12.10: Reversing arrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-reverse
-. is used to reverse the order of items inside an array.
-reverse
-Example for .:
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-.
-reverse
-(
-)
-;
-Results in:
-&lbrack;
-4
-,
-3
-,
-2
-,
-1
-&rbrack;
-<b>Note</b>
-:
-Please note that
-.
-reverse
-(
-Array
-.
-<b>prototype</b>
-.
-reverse
-will reverse the array
-)
-in place
-. Instead of
-returning a reversed copy, it will return the same array, reversed.
-<b>var</b>
-arr1
-=
-&lbrack;
-11
-,
-22
-,
-33
-&rbrack;
-;
-<b>var</b>
-arr2
-=
-arr1.
-reverse
-(
-)
-;
-console.
-log
-(
-arr2
-)
-;
-// <i>&lbrack;33, 22, 11&rbrack;</i>
-console.
-log
-(
-arr1
-)
-;
-// <i>&lbrack;33, 22, 11&rbrack;</i>
-You can also reverse an array &apos;deeply&apos; by:
-<b>function</b>
-deepReverse
-(
-arr
-)
-{
-arr.
-reverse
-(
-)
-.
-forEach
-(
-elem
-=&gt;
-{
-<b>if</b>
-(
-Array
-.
-isArray
-(
-elem
-)
-)
-{
-deepReverse
-(
-elem
-)
-;
+<p>.reverse . is used to reverse the order of items inside an array.</p>
+
+<p>Example for .reverse:</p>
+<pre>
+&lbrack;1, 2, 3, 4&rbrack;.reverse();
+</pre>
+<p>Results in:</p>
+<pre>
+&lbrack;4, 3, 2, 1&rbrack;
+</pre>
+<blockquote>
+<b>Note</b>: Please note that .reverse(Array.<b>prototype</b>.reverse) will reverse the 
+array <i>in place</i>. Instead of returning a reversed copy, it will return the same array, 
+reversed.
+<pre>
+<b>var</b> arr1 = &lbrack;11, 22, 33&rbrack;;
+<b>var</b> arr2 = arr1.reverse();
+console.log(arr2);  // <i>&lbrack;33, 22, 11&rbrack;</i>
+console.log(arr1);  // <i>&lbrack;33, 22, 11&rbrack;</i>
+</pre>
+<p>You can also reverse an array &apos;deeply&apos; by:</p>
+<pre>
+<b>function</b> deepReverse(arr) {
+  arr.reverse().forEach(elem =&gt; {
+    <b>if</b>(Array.isArray(elem)) {
+      deepReverse(elem);
+    }
+  });
+  <b>return</b> arr;
 }
-}
-)
-;
-<b>return</b>
-arr
-;
-}
-Example for deepReverse:
-<b>var</b>
-arr
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-&lbrack;
-1
-,
-2
-,
-3
-,
-&lbrack;
-&apos;a&apos;
-,
-&apos;b&apos;
-,
-&apos;c&apos;
-&rbrack;
-&rbrack;
-&rbrack;
-;
-deepReverse
-(
-arr
-)
-;
-Results in:
-arr
-// <i>-&amp;lbrack;&lbrack;&lbrack;&apos;c&apos;,&apos;b&apos;,&apos;a&apos;&rbrack;, 3, 2, 1&rbrack;, 3, 2, 1&rbrack;</i>
+</pre>
+<p>Example for deepReverse:</p>
+<pre>
+<b>var</b> arr = &lbrack;1, 2, 3, &lbrack;1, 2, 3, &lbrack;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&rbrack;&rbrack;&rbrack;;
+deepReverse(arr);
+</pre>
+<!-- page ~95 -->
+<p>Results in:</p>
+<pre>
+arr // <i>-&amp;lbrack;&lbrack;&lbrack;&apos;c&apos;,&apos;b&apos;,&apos;a&apos;&rbrack;, 3, 2, 1&rbrack;, 3, 2, 1&rbrack;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-11">Section 12.11: Shallow cloning an array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Sometimes, you need to work with an array while ensuring you don&apos;t
+<p>Sometimes, you need to work with an array while ensuring you don&apos;t
 modify the original. Instead of a clone method, arrays have a slice
 method that lets you perform a shallow copy of any part of an array.
 Keep in mind that this only clones the first level. This works well
-with primitive types, like numbers and strings, but not objects.
+with primitive types, like numbers and strings, but not objects.</p>
 
-To shallow-clone an array (i.e. have a new array instance but with the
-same elements), you can use the following one-liner:
+<p>To shallow-clone an array (i.e. have a new array instance but with the
+same elements), you can use the following one-liner:</p>
+<pre>
+<b>var</b> clone = arrayToClone.slice();
+</pre>
 
-<b>var</b>
-clone
-=
-arrayToClone.
-slice
-(
-)
-;
-Array.<b>prototype</b>.slice
+<p>This calls the built-in JavaScript Array.<b>prototype</b>.slice method. If you 
+pass arguments to slice, you can get more complicated behaviors that create shallow 
+clones of only part of an array, but for our purposes just calling slice() will create a 
+shallow copy of the entire array.</p>
 
-This calls the built-in JavaScript method. If you pass arguments to
-slice, you can get more
-
-slice
-complicated behaviors that create shallow clones of only part of an
-array, but for our purposes just calling () will create a shallow copy
-of the entire array.
-
-All method used to convert array like objects to array are applicable
-to clone an array:
+<p>All method used to convert array like objects to array are applicable
+to clone an array:</p>
 
 <h5>Version ≥ 6</h5>
-arrayToClone
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-&rbrack;
-;
-clone1
-=
-Array
-.
-from
-(
-arrayToClone
-)
-;
-clone2
-=
-Array
-.
-of
-(
-&hellip;
-arrayToClone
-)
-;
-clone3
-=
-&lbrack;
-&hellip;
-arrayToClone
-&rbrack;
-// <i>the shortest way</i>
-Version ≤ 5.1
-arrayToClone
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-&rbrack;
-;
-clone1
-=
-Array
-.
-<b>prototype</b>
-.
-slice
-.
-call
-(
-arrayToClone
-)
-;
-clone2
-=
-&lbrack;
-&rbrack;
-.
-slice
-.
-call
-(
-arrayToClone
-)
-;
+<pre>
+arrayToClone = &lbrack;1, 2, 3, 4, 5&rbrack;;
+clone1 = Array.from(arrayToClone);
+clone2 = Array.of(&hellip;arrayToClone);
+clone3 = &lbrack;&hellip;arrayToClone&rbrack;  // <i>the shortest way</i>
+</pre>
+<h5>Version ≤ 5.1</h5>
+<pre>
+arrayToClone = &lbrack; 1, 2, 3, 4, 5&rbrack;;
+clone1 = Array.<b>prototype</b>.slice.call(arrayToClone);
+clone2 = &lbrack;&rbrack;.slice.call(arrayToClone);
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-12">Section 12.12: Concatenating Arrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-<b>Two Arrays</b>
-<b>var</b>
-array1
-=
-&lbrack;
-1
-,
-2
-&rbrack;
-;
-<b>var</b>
-array2
-=
-&lbrack;
-3
-,
-4
-,
-5
-&rbrack;
-;
+<p><b>Two Arrays</b></p>
+
+<pre>
+<b>var</b> array1 = &lbrack;1, 2&rbrack;;
+<b>var</b> array2 = &lbrack;3, 4, 5&rbrack;;
+</pre>
 
 <h5>Version ≥ 3</h5>
-<b>var</b>
-array3
-=
-array1.
-concat
-(
-array2
-)
-;
-// <i>returns a new array</i>
+<pre>
+<b>var</b> array3 = array1.concat(array2);  // <i>returns a new array</i>
+</pre>
 <h5>Version ≥ 6</h5>
-<b>var</b>
-array3
-=
-&lbrack;
-&hellip;
-array1
-,
-&hellip;
-array2
-&rbrack;
-Results in a new Array:
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-&rbrack;
-<b>Multiple Arrays</b>
-<b>var</b>
-array1
-=
-&lbrack;
-&quot;a&quot;
-,
-&quot;b&quot;
-&rbrack;
-,
-array2
-=
-&lbrack;
-&quot;c&quot;
-,
-&quot;d&quot;
-&rbrack;
-,
-array3
-=
-&lbrack;
-&quot;e&quot;
-,
-&quot;f&quot;
-&rbrack;
-,
-array4
-=
-&lbrack;
-&quot;g&quot;
-,
-&quot;h&quot;
-&rbrack;
-;
+<pre>
+<b>var</b> array3 = &lbrack;&hellip;array1, &hellip;array2&rbrack;
+</pre>
+
+<p>Results in a new Array:</p>
+
+<pre>
+&lbrack;1, 2, 3, 4, 5&rbrack;
+</pre>
+
+<p><b>Multiple Arrays</b></p>
+
+<pre>
+<b>var</b> array1 = &lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;,
+    array2 = &lbrack;&quot;c&quot;, &quot;d&quot;&rbrack;,
+    array3 = &lbrack;&quot;e&quot;, &quot;f&quot;&rbrack;,
+    array4 = &lbrack;&quot;g&quot;, &quot;h&quot;&rbrack;;
+</pre>
+<!-- page 96 -->
 <h5>Version ≥ 3</h5>
-array.concat
-Provide more Array arguments to ()
-<b>var</b>
-arrConc
-=
-array1.
-concat
-(
-array2
-,
-array3
-,
-array4
-)
-;
+<p>Provide more Array arguments to array.concat().</p>
+
+<pre>
+<b>var</b> arrConc = array1.concat(array2, array3, array4);
+</pre>
 <h5>Version ≥ 6</h5>
-Provide more arguments to &lbrack;&rbrack;
-<b>var</b>
-arrConc
-=
-&lbrack;
-&hellip;
-array1
-,
-&hellip;
-array2
-,
-&hellip;
-array3
-,
-&hellip;
-array4
-&rbrack;
-Results in a new Array:
-&lbrack;
-&quot;a&quot;
-,
-&quot;b&quot;
-,
-&quot;c&quot;
-,
-&quot;d&quot;
-,
-&quot;e&quot;
-,
-&quot;f&quot;
-,
-&quot;g&quot;
-,
-&quot;h&quot;
-&rbrack;
-<b>Without Copying the First Array</b>
+<p>Provide more arguments to &lbrack;&rbrack;</p>
+
+<pre>
+<b>var</b> arrConc = &lbrack;&hellip;array1, &hellip;array2, &hellip;array3, &hellip;array4&rbrack;
+</pre>
+
+<p>Results in a new Array:</p>
+
+<pre>
+&lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;&rbrack;
+</pre>
+
+<p><b>Without Copying the First Array</b></p>
+
 <b>var</b>
 longArray
 =
