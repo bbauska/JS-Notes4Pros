@@ -7419,6 +7419,7 @@ console.log(obj);  // <i> Logs: { &quot;0&quot;: &quot;a&quot;, &quot;1&quot;: &
 <blockquote>
 Note, only string wrappers can have own enumerable properties
 </blockquote>
+<!-- page 116 -->
 <p>Use it as reducer: (merges an array to an object)</p>
 <pre>
 <b>return</b> users.reduce((result, user) =&bsol;Object.assign({}, {&lbrack;user.id&rbrack;: user})
@@ -7426,74 +7427,21 @@ Note, only string wrappers can have own enumerable properties
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-36">Section 13.6: Object rest/spread (&hellip;)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<h5>Version &bsol;7</h5>
-Object       .   assign       ({},     obj1       ,   &hellip;     ,   objn
-
-Object spreading is just syntactic sugar for );
-
-It is done with the &hellip; operator:
-<b>let</b>
-obj
-=
-{
-a
-:
-1
-}
-;
-<b>let</b>
-obj2
-=
-{
-&hellip;
-obj
-,
-b
-:
-2
-,
-c
-:
-3
-}
-;
-console.
-log
-(
-obj2
-)
-;
-// <i> { a: 1, b: 2, c: 3 };</i>
-Object . assign
-As it does <b>shallow</b> merging, not deep merging.
-<b>let</b>
-obj3
-=
-{
-&hellip;
-obj
-,
-b
-:
-{
-c
-:
-2
-}
-}
-;
-console.
-log
-(
-obj3
-)
-;
-// <i> { a: 1, b: { c: 2 } };</i>
-<b>NOTE</b>: [This
-specification](https://github.com/sebmarkbage/ecmascript-rest-spread)
-is currently in [stage
-3](http://www.2ality.com/2015/11/tc39-process.html)
+<h5>Version &gt; 7</h5>
+<p>Object spreading is just syntactic sugar for Object.assign({}, obj1, &hellip, objn);</p>
+<p>It is done with the &hellip; operator:</p>
+<pre>
+<b>let</b> obj = { a: 1 };
+<b>let</b> obj2 = { &hellip;obj, b: 2, c:3 };
+console.log(obj2);  // <i> { a: 1, b: 2, c: 3 };</i>
+</pre>
+<p>As Object.assign it does <b>shallow</b> merging, not deep merging.</p>
+<pre>
+<b>let</b> obj3 = { &hellip;obj, b: { c: 2 } };
+console.log(obj3);  // <i> { a: 1, b: { c: 2 } };</i>
+</pre>
+<p><b>NOTE</b>: <a href="https://github.com/sebmarkbage/ecmascript-rest-spread">
+This specification</a> is currently in <a href="http://www.2ality.com/2015/11/tc39-process.html">stage 3</a></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-7">Section 13.7: Object.defineProperty</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -7530,56 +7478,33 @@ obj.
 foo
 )
 ;
-Console output
+<p>Console output</p>
+<blockquote>
 foo
-Object  .defineProperty
-can be called with the following options:
-Object.defineProperty(obj, &apos;nameOfTheProperty&apos;, { value:
-valueOfTheProperty, writable: <b>true</b>, // <i> if false, the property is
-read-only</i> configurable : <b>true</b>, // <i> true means the property can be
-changed later</i> enumerable : <b>true</b> // <i> true means property can be
-enumerated such as in a for..in loop</i> });
-Object .defineProperties
-allows you to define multiple properties at a time.
-<b>var</b>
-obj
-=
-{
-}
-;
-Object
-.
-defineProperties
-(
-obj
-,
-{
-property1
-:
-{
-value
-:
-<b>true</b>
-,
-writable
-:
-<b>true</b>
-}
-,
-property2
-:
-{
-value
-:
-&apos;Hello&apos;
-,
-writable
-:
-<b>false</b>
-}
-}
-)
-;
+</blockquote>
+<p>Object.defineProperty can be called with the following options:</p>
+<pre>
+Object.defineProperty(obj, &apos;nameOfTheProperty&apos;, { 
+  value: valueOfTheProperty, 
+  writable: <b>true</b>, // <i> if false, the property is read-only</i>
+  configurable : <b>true</b>, // <i> true means the property can be changed later</i>
+  enumerable : <b>true</b> // <i> true means property can be enumerated such as in a for..in loop</i>
+ });
+</pre>
+<p>Object.defineProperties allows you to define multiple properties at a time.</p>
+<!-- page 117 -->
+<b>var</b> obj = {};
+Object.defineProperties(obj, {
+  property1: {
+    value: <b>true</b>,
+    writable: <b>true</b>
+  },
+  property2: {
+    value: &apos;Hello&apos;,
+    writable: <b>false</b>
+  }
+});
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-8">Section 13.8: Accesor properties (get and set)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
