@@ -7445,39 +7445,14 @@ This specification</a> is currently in <a href="http://www.2ality.com/2015/11/tc
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-7">Section 13.7: Object.defineProperty</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 5</h5>
 
-It allows us to define a property in an existing object using a
-property descriptor.
-<b>var</b>
-obj
-=
-{
-}
-;
-Object
-.
-defineProperty
-(
-obj
-,
-&apos;foo&apos;
-,
-{
-value
-:
-&apos;foo&apos;
-}
-)
-;
-console.
-log
-(
-obj.
-foo
-)
-;
+<p>It allows us to define a property in an existing object using a property descriptor.</p>
+<pre>
+<b>var</b> obj = { };
+Object.defineProperty(obj, &apos;foo&apos;, { value: &apos;foo&apos; });
+console.log(obj.foo);
+</pre>
 <p>Console output</p>
 <blockquote>
 foo
@@ -7508,342 +7483,155 @@ Object.defineProperties(obj, {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-8">Section 13.8: Accesor properties (get and set)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 5</h5>
-
-Treat a property as a combination of two functions, one to get the
-value from it, and another one to set the value in it.
-
-The <b>get</b> property of the property descriptor is a function that
-will be called to retrieve the value from the property.
-
-The <b>set</b> property is also a function, it will be called when the
+<p>Treat a property as a combination of two functions, one to get the
+value from it, and another one to set the value in it.</p>
+<p>The <b>get</b> property of the property descriptor is a function that
+will be called to retrieve the value from the property.</p>
+<p>The <b>set</b> property is also a function, it will be called when the
 property has been assigned a value, and the new value will be passed
-as an argument.
+as an argument.</p>
+<p>You cannot assign a value or writable to a descriptor that has <b>get</b>
+or <b>set</b></p>
+<pre>
+<b>var</b> person = { name: &quot;John&quot;, surname: &quot;Doe&quot;};
+Object.defineProperty(person, &apos;fullName&apos;, {
+  <b>get</b>: <b>function</b>() {
+    <b>return</b> <b>this</b>.name &plus; &quot; &quot; &plus; <b>this</b>.surname;
+  },
+  <b>set</b>: <b>function</b> (value) {
+    &lbrack;<b>this</b>.name, <b>this</b>.surname&rbrack; = value.split(&quot; &quot;);
+  }
+});
 
-You cannot assign a value or writable to a descriptor that has <b>get</b>
-or <b>set</b>
+console.log(person.fullName);  // <i> -&amp;quot;John Doe&quot;</i>
 
-<b>var</b>
-person
-=
-{
-name
-:
-&quot;John&quot;
-,
-surname
-:
-&quot;Doe&quot;
-}
-;
-Object
-.
-defineProperty
-(
-person
-,
-&apos;fullName&apos;
-,
-{
-<b>get</b>
-:
-<b>function</b>
-(
-)
-{
-<b>return</b>
-<b>this</b>
-.
-name
-&plus;
-&quot; &quot;
-&plus;
-<b>this</b>
-.
-surname
-;
-}
-,
-<b>set</b>
-:
-<b>function</b>
-(
-value
-)
-{
-&lbrack;
-<b>this</b>
-.
-name
-,
-<b>this</b>
-.
-surname
-&rbrack;
-=
-value.
-split
-(
-&quot; &quot;
-)
-;
-}
-}
-)
-;
-console.
-log
-(
-person.
-fullName
-)
-;
-// <i> -&amp;quot;John Doe&quot;</i>
-person.
-surname
-=
-&quot;Hill&quot;
-;
-console.
-log
-(
-person.
-fullName
-)
-;
-// <i> -&amp;quot;John Hill&quot;</i>
+person.surname = &quot;Hill&quot;;
+console.log(person.fullName);  // <i> -&amp;quot;John Hill&quot;</i>
+
 person.
 fullName
 =
 &quot;Mary Jones&quot;
 ;
-console.
-log
-(
-person.
-name
-)
-// <i> -&amp;quot;Mary&quot;</i>
+console.log(person.name)  // <i> -&amp;quot;Mary&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-9">Section 13.9: Dynamic / variable property names</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Sometimes the property name needs to be stored into a variable. In
+<p>Sometimes the property name needs to be stored into a variable. In
 this example, we ask the user what word needs to be looked up, and
-then provide the result from an object I&apos;ve named dictionary.
-<b>var</b>
-dictionary
-=
-{
-lettuce
-:
-&apos;a veggie&apos;
-,
-banana
-:
-&apos;a fruit&apos;
-,
-tomato
-:
-&apos;it depends on who you ask&apos;
-,
-apple
-:
-&apos;a fruit&apos;
-,
-Apple
-:
-&apos;Steve Jobs rocks!&apos;
-// <i> properties are case-sensitive</i>
+then provide the result from an object I&apos;ve named dictionary.</p>
+<pre>
+<b>var</b> dictionary = {
+  lettuce: &apos;a veggie&apos;,
+  banana: &apos;a fruit&apos;,
+  tomato: &apos;it depends on who you ask&apos;,
+  apple: &apos;a fruit&apos;,
+  Apple: &apos;Steve Jobs rocks!&apos;  // <i> properties are case-sensitive</i>
 }
-<b>var</b>
-word
-=
-prompt
-(
-&apos;What word would you like to look up today?&apos;
-)
-<b>var</b>
-definition
-=
-dictionary
-&lbrack;
-word
-&rbrack;
-alert
-(
-word
-&plus;
-&apos;
-<b>&bsol;&bsol;n</b>
-<b>&bsol;&bsol;n</b>
-&apos;
-&plus;
-definition
-)
-Note how we are using &lbrack;&rbrack; bracket notation to look at the variable
+<b>var</b> word = prompt(&apos;What word would you like to look up today?&apos;)
+<b>var</b> definition = dictionary&lbrack;word&rbrack;
+alert(word &plus; &apos; <b>&bsol;&bsol;n</b> <b>&bsol;&bsol;n</b>&apos; &plus; definition)
+</pre>
+<!-- page 118 -->
+<p>Note how we are using &lbrack;&rbrack; bracket notation to look at the variable
 named word; if we were to use the traditional . notation, then it
-would take the value literally, hence:
+would take the value literally, hence:</p>
 
-console.log(dictionary.word) // <i> doesn&apos;t work because word is taken
-literally and dictionary has no field named &grave;word&grave;</i>
-console.log(dictionary.apple) // <i> it works! because apple is taken
-literally</i>
-console.log(dictionary&lbrack;word&rbrack;) // <i> it works! because word is a
-variable, and the user perfectly typed in one of the words from our
-dictionary when prompted</i>
-console.log(dictionary&lbrack;apple&rbrack;) // <i> error! apple is not defined (as a
-variable)</i>
-You could also write literal values with &lbrack;&rbrack; notation by replacing
+<pre>
+console.log(dictionary.word) // <i> doesn&apos;t work because word is taken literally and dictionary has no 
+field named &grave;word&grave;</i>
+console.log(dictionary.apple) // <i> it works! because apple is taken literally</i>
+
+console.log(dictionary&lbrack;word&rbrack;) // <i> it works! because word is a variable, and the user perfectly typed 
+in one of the words from our dictionary when prompted</i>
+console.log(dictionary&lbrack;apple&rbrack;) // <i> error! apple is not defined (as a variable)</i>
+</pre>
+<p>You could also write literal values with &lbrack;&rbrack; notation by replacing
 the variable word with a string &apos;apple&apos;. See &lbrack;Properties with
-special characters or reserved words&rbrack; example.
-
-You can also set dynamic properties with the bracket syntax:
-<b>var</b>
-property
-=
-&quot;test&quot;
-;
-<b>var</b>
-obj
-=
-{
-&lbrack;
-property
-&rbrack;
-=
-1
-;
-}
-;
-console.
-log
-(
-obj.
-test
-)
-;
-// <i>1</i>
-It does the same as:
-<b>var</b>
-property
-=
-&quot;test&quot;
-;
-<b>var</b>
-obj
-=
-{
-}
-;
-obj
-&lbrack;
-property
-&rbrack;
-=
-1
-;
-
+special characters or reserved words&rbrack; example.</p>
+<p>You can also set dynamic properties with the bracket syntax:</p>
+<pre>
+<b>var</b> property=&quot;test&quot;;
+<b>var</b> obj={
+  &lbrack;property&rbrack;=1;
+};
+console.log(obj.test);  // <i>1</i>
+</pre>
+<p>It does the same as:</p>
+<pre>
+<b>var</b> property=&quot;test&quot;;
+<b>var</b> obj={};
+obj&lbrack;property&rbrack;=1;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-10">Section 13.10: Arrays are Objects</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-form.elements
+<blockquote>
 <b>Disclaimer:</b> Creating array-like objects is not recommend. However,
 it is helpful to understand how they work, especially when working
 with DOM. This will explain why regular array operations don&apos;t work
 on DOM objects returned from many DOM document functions. (i.e.
-querySelectorAll, ) Supposing we created the following object which
-has some properties you would expect to see in an Array.
-<b>var</b>
-anObject
-=
-{
-foo
-:
-&apos;bar&apos;
-,
-length
-:
-&apos;interesting&apos;
-,
-&apos;0&apos;
-:
-&apos;zero!&apos;
-,
-&apos;1&apos;
-:
-&apos;one!&apos;
-}
-;
-Then we&apos;ll create an array.
-<b>var</b>
-anArray
-=
-&lbrack;
-&apos;zero.&apos;
-,
-&apos;one.&apos;
-&rbrack;
-;
-Now, notice how we can inspect both the object, and the array in the
-same way.
-
+querySelectorAll, form.elements)
+</blockquote>
+<p>Supposing we created the following object which has some properties you would expect 
+to see in an Array.</p>
+<pre>
+<b>var</b> anObject = {
+  foo: &apos;bar&apos;,
+  length: &apos;interesting&apos;,
+  &apos;0&apos;: &apos;zero!&apos;,
+  &apos;1&apos;: &apos;one!&apos;
+};
+</pre>
+<p>Then we&apos;ll create an array.</p>
+<pre>
+<b>var</b> anArray = &lbrack;&apos;zero.&apos;, &apos;one.&apos;&rbrack;;
+</pre>
+<p>Now, notice how we can inspect both the object, and the array in the same way.</p>
+<pre>
 console.log(anArray&lbrack;0&rbrack;, anObject&lbrack;0&rbrack;); // <i> outputs: zero. zero!</i>
 console.log(anArray&lbrack;1&rbrack;, anObject&lbrack;1&rbrack;); // <i> outputs: one. one!</i>
 
-console.log(anArray.length, anObject.length); // <i> outputs: 2
-interesting</i>
+console.log(anArray.length, anObject.length); // <i> outputs: 2 interesting</i>
 
 console.log(anArray.foo, anObject.foo); // <i> outputs: undefined bar</i>
-
-Since anArray is actually an object, just like anObject, we can even
-add custom wordy properties to anArray
-
+</pre>
+<!-- page 119 -->
+<p>Since anArray is actually an object, just like anObject, we can even
+add custom wordy properties to anArray</p>
+<blockquote>
 <b>Disclaimer:</b>
-Arrays with custom properties are not usually recommended as they can be
-confusing, but it
-can be useful in advanced cases where you need the optimized functions
-of an Array. (i.e. jQuery objects)
-anArray.
-foo
-=
-&apos;it works!&apos;
-;
-console.
-log
-(
-anArray.
-foo
-)
-;
-We can even make anObject to be an array-like object by adding a
-length.
-anObject.
-length
-=
-2
-;
-Then you can use the C-style <b>for</b> loop to iterate over anObject
-just as if it were an Array. See Array Iteration
-  Array                   .    <b>prototype</b>
-Note that anObject is only an <b>array-like</b> object. (also known as a
-List) It is not a true Array. This is important, because functions
-like push and forEach (or any convenience function found in ) will not
-work by default on array-like objects.
-form.elements
-Many of the DOM document functions will return a List (i.e.
-querySelectorAll, ) which is similar to the array-like anObject we
-created above. See Converting Array-like Objects to Arrays
+Arrays with custom properties are not usually recommended as they can be confusing, but 
+it can be useful in advanced cases where you need the optimized functions of an Array. 
+(i.e. jQuery objects)
+</blockquote>
+<pre>
+anArray.foo = &apos;it works!&apos;;
+console.log(anArray.foo);
+</pre>
+<p>We can even make anObject to be an array-like object by adding a length.</p>
+<pre>
+anObject.length = 2;
+</pre>
+<p>Then you can use the C-style <b>for</b> loop to iterate over anObject
+just as if it were an Array. See Array Iteration</p>
 
-console.log(<b>typeof</b> anArray == &apos;object&apos;, <b>typeof</b> anObject ==
-&apos;object&apos;); // <i> outputs: true true</i> console.log(anArray
-<b>instanceof</b> Object, anObject <b>instanceof</b> Object); // <i> outputs:
-true true</i> console.log(anArray <b>instanceof</b> Array, anObject
-<b>instanceof</b> Array); // <i> outputs: true false</i>
-console.log(Array.isArray(anArray), Array.isArray(anObject)); // <i>
-outputs: true false</i>
+<p>Note that anObject is only an <b>array-like</b> object. (also known as a List) It is 
+not a true Array. This is important, because functions like push and forEach (or any 
+convenience function found in Array.prototype) will not work by default on array-like 
+objects.</p>
+
+<p>Many of the DOM document functions will return a List (i.e. querySelectorAll,form.element) 
+which is similar to the array-like anObject we created above. See Converting Array-like 
+Objects to Arrays</p>
+<pre>
+console.log(<b>typeof</b> anArray == &apos;object&apos;, <b>typeof</b> anObject == &apos;object&apos;); // <i> outputs: true true</i>
+console.log(anArray <b>instanceof</b> Object, anObject <b>instanceof</b> Object); // <i> outputs: true true</i>
+console.log(anArray <b>instanceof</b> Array, anObject <b>instanceof</b> Array); // <i> outputs: true false</i>
+console.log(Array.isArray(anArray), Array.isArray(anObject)); // <i>outputs: true false</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-11">Section 13.11: Object.seal</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
