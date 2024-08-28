@@ -7983,10 +7983,11 @@ following function can be used for making deep clones. It is a
 recursive function that can detect objects with a cyclic structure and
 will throw an error in such cases.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 26. function deepClone(obj) (xxx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
   <img src="./images/image026.png"
-  title=" "
-  alt="."
+  title="function deepClone (obj)"
+  alt="function deepClone (obj)."
   style="border: 2px solid #000000; width:7.48in;" />
 <!-- ![](./images/image026.png){width="7.486805555555556in" height="7.639583333333333in"} -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
