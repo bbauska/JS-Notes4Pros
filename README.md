@@ -7288,92 +7288,55 @@ is running in strict mode. If the code is in strict mode, a TypeError will be th
 
 Object.freeze(obj);
 
-<i>// Cannot add new properties</i>
+// <i>Cannot add new properties</i>
 obj.newProperty = <b>true</b>;
 
-<i>// Cannot modify existing values or their descriptors</i>
+// <i>Cannot modify existing values or their descriptors</i>
 obj.foo = &apos;not foo&apos;;
 Object.defineProperty(obj, &apos;foo&apos;, {
   writable: <b>true</b>
 });
 
-<i>// Cannot delete existing properties</i>
+// <i>Cannot delete existing properties</i>
 <b>delete</b> obj.foo;
 
-<i>// Nested objects are not frozen</i>
+// <i>Nested objects are not frozen</i>
 obj.bar.push(4);
 obj.baz.foo = &apos;new foo&apos;;
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-3">Section 13.3: Object cloning</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-When you want a complete copy of an object (i.e. the object properties
+<p>When you want a complete copy of an object (i.e. the object properties
 and the values inside those properties, etc&hellip;), that is called
-<b>deep cloning</b>.
+<b>deep cloning</b>.</p>
 
 <h5>Version ≥ 5.1</h5>
-JSON.parse
-If an object can be serialized to JSON, then you can create a deep
-clone of it with a combination of and
-JSON.stringify
-:
-<b>var</b>
-existing
-=
-{
-a
-:
-1
-,
-b
-:
-{
-c
-:
-2
-}
-}
-;
-<b>var</b>
-copy
-=
-JSON.
-parse
-(
-JSON.
-stringify
-(
-existing
-)
-)
-;
-existing.
-b
-.
-c
-=
-3
-;
-// <i>copy.b.c will not change</i>
-JSON.stringify   will convert Date objects to ISO-format string     JSON.parse
- representations, but 
-Note that will not convert the string back into a Date.
+<p>If an object can be serialized to JSON, then you can create a deep clone of it with a 
+combination of JSON.parse and JSON.stringify:</p>
+<pre>
+<b>var</b> existing = { a: 1, b: { c: 2 } };
+<b>var</b> copy = JSON.parse(JSON.stringify(existing));
+existing.b.c = 3;  // <i>copy.b.c will not change</i>
+</pre>
+<p>Note that JSON.stringify will convert Date objects to ISO-format string JSON.parse
+will not convert the string back into a Date.</p>
 
-There is no built-in function in JavaScript for creating deep clones,
+<p>There is no built-in function in JavaScript for creating deep clones,
 and it is not possible in general to create deep clones for every
-object for many reasons. For example,
-
-objects can have non-enumerable and hidden properties which cannot be
-detected. object getters and setters cannot be copied. objects can
-have a cyclic structure. function properties can depend on state in a
-hidden scope.
-
-Assuming that you have a &quot;nice&quot; object whose properties only contain
+object for many reasons. For example,</p>
+<ul>
+  <li>objects can have non-enumerable and hidden properties which cannot be detected.</li>
+  <li>object getters and setters cannot be copied.</li>
+  <li>objects can have a cyclic structure.</li>
+  <li>function properties can depend on state in a hidden scope.</li>
+</ul>
+<p>Assuming that you have a &quot;nice&quot; object whose properties only contain
 primitive values, dates, arrays, or other &quot;nice&quot; objects, then the
 following function can be used for making deep clones. It is a
 recursive function that can detect objects with a cyclic structure and
-will throw an error in such cases.
+will throw an error in such cases.</p>
+<!-- page 114 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 26. function deepClone(obj) (xxx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
@@ -7385,258 +7348,81 @@ will throw an error in such cases.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-4">Section 13.4: Object properties iteration</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-You can access each property that belongs to an object with this loop
-<b>for</b>
-(
-<b>var</b>
-property
-<b>in</b>
-object
-)
-{
-<i>// always check if an object has a property</i>
-<b>if</b>
-(
-object.
-hasOwnProperty
-(
-property
-)
-)
-{
-<i>// do stuff</i>
+<p>You can access each property that belongs to an object with this loop</p>
+<pre>
+<b>for</b> (<b>var</b> property <b>in</b> object) {
+  <i>// always check if an object has a property</i>
+  <b>if</b> (object.hasOwnProperty(property)) {
+    <i>// do stuff</i>
+  }
 }
-}
-You should include the additional check for hasOwnProperty because an
+</pre>
+<p>You should include the additional check for hasOwnProperty because an
 object may have properties that are inherited from the object&apos;s base
-class. Not performing this check can raise errors.
+class. Not performing this check can raise errors.</p>
 <h5>Version ≥ 5</h5>
-Object.keys
-Array.map or Array.forEach
-You can also use function which return an Array containing all
-properties of an object and then you can loop through this array with
-function.
-<b>var</b>
-obj
-=
-{
-0
-:
-&apos;a&apos;
-,
-1
-:
-&apos;b&apos;
-,
-2
-:
-&apos;c&apos;
-}
-;
-Object
-.
-keys
-(
-obj
-)
-.
-map
-(
-<b>function</b>
-(
-key
-)
-{
-console.
-log
-(
-key
-)
-;
-}
-)
-;
+<!-- page 115 -->
+<p>You can also use function which return an Array containing all properties of an object 
+and then you can loop through this array with function.</p>
+<pre>
+<b>var</b> obj = {0: &apos;a&apos;, 1: &apos;b&apos;, 2: &apos;c&apos; };
+
+Object.keys(obj).map(<b>function</b>(key) {
+  console.log(key);
+});
 // <i>outputs: 0, 1, 2</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-35">Section 13.5: Object.assign</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The
-[Object.assign()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
-method is used to copy the values of all enumerable own properties
-from one or more source objects to a target object. It will return the
-target object.
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">
+Object.assign()</a> method is used to copy the values of all enumerable own properties from 
+one or more source objects to a target object. It will return the target object.</p>
 
-Use it to assign values to an existing object:
-<b>var</b>
-user
-=
-{
-firstName
-:
-&quot;John&quot;
-}
-;
-Object
-.
-assign
-(
-user
-,
-{
-lastName
-:
-&quot;Doe&quot;
-,
-age
-:
-39
-}
-)
-;
-console.
-log
-(
-user
-)
-;
-<i>// Logs: {firstName: &quot;John&quot;, lastName: &quot;Doe&quot;, age: 39}</i>
-Or to create a shallow copy of an object:
-<b>var</b>
-obj
-=
-Object
-.
-assign
-(
-{
-}
-,
-user
-)
-;
-console.
-log
-(
-obj
-)
-;
-// <i>Logs: {firstName: &quot;John&quot;, lastName: &quot;Doe&quot;, age: 39}</i>
-Or merge many properties from multiple objects to one:
-<b>var</b>
-obj1
-=
-{
-a
-:
-1
-}
-;
-<b>var</b>
-obj2
-=
-{
-b
-:
-2
-}
-;
-<b>var</b>
-obj3
-=
-{
-c
-:
-3
-}
-;
-<b>var</b>
-obj
-=
-Object
-.
-assign
-(
-obj1
-,
-obj2
-,
-obj3
-)
-;
-console.
-log
-(
-obj
-)
-;
-//<i> Logs: { a: 1, b: 2, c: 3 }</i>
-console.
-log
-(
-obj1
-)
-;
-// <i>Logs: { a: 1, b: 2, c: 3 }, target object itself is changed</i>
-Primitives will be wrapped, null and undefined will be ignored:
-<b>var</b>
-var_1
-=
-&apos;abc&apos;
-;
-<b>var</b>
-var_2
-=
-<b>true</b>
-;
-<b>var</b>
-var_3
-=
-10
-;
-<b>var</b>
-var_4
-=
-Symbol
-(
-&apos;foo&apos;
-)
-;
-<b>var</b>
-obj
-=
-Object
-.
-assign
-(
-{
-}
-,
-var_1
-,
-<b>null</b>
-,
-var_2
-,
-<b>undefined</b>
-,
-var_3
-,
-var_4
-)
-;
-console.
-log
-(
-obj
-)
-;
-// <i> Logs: { &quot;0&quot;: &quot;a&quot;, &quot;1&quot;: &quot;b&quot;, &quot;2&quot;: &quot;c&quot; }</i>
+<p>Use it to assign values to an existing object:</p>
+<pre>
+<b>var</b> user = {
+  firstName: &quot;John&quot;
+};
+Object.assign(user, {lastName: &quot;Doe&quot;, age:39});
+console.log(user);  <i>// Logs: {firstName: &quot;John&quot;, lastName: &quot;Doe&quot;, age: 39}</i>
+</pre>
+<p>Or to create a shallow copy of an object:</p>
+<pre>
+<b>var</b> obj = Object.assign({}, user);
+console.log(obj);  // <i>Logs: {firstName: &quot;John&quot;, lastName: &quot;Doe&quot;, age: 39}</i>
+</pre>
+<p>Or merge many properties from multiple objects to one:</p>
+<pre>
+<b>var</b> obj1 = {
+  a: 1
+};
+<b>var</b> obj2 = {
+  b: 2
+};
+<b>var</b> obj3 = {
+  c: 3
+};
+<b>var</b> obj = Object.assign(obj1, obj2, obj3);
+console.log(obj);  //<i> Logs: { a: 1, b: 2, c: 3 }</i>
+console.log(obj1);  // <i>Logs: { a: 1, b: 2, c: 3 }, target object itself is changed</i>
+</pre>
+<p>Primitives will be wrapped, null and undefined will be ignored:</p>
+<pre>
+<b>var</b> var_1 = &apos;abc&apos;;
+<b>var</b> var_2 = <b>true</b>;
+<b>var</b> var_3 = 10;
+<b>var</b> var_4 = Symbol(&apos;foo&apos;);
+<b>var</b> obj = Object.assign({}, var_1, <b>null</b>, var_2, <b>undefined</b>, var_3, var_4);
+console.log(obj);  // <i> Logs: { &quot;0&quot;: &quot;a&quot;, &quot;1&quot;: &quot;b&quot;, &quot;2&quot;: &quot;c&quot; }</i>
+</pre>
+<blockquote>
 Note, only string wrappers can have own enumerable properties
-Use it as reducer: (merges an array to an object)
-<b>return</b> users.reduce((result, user) =&bsol;Object.assign({},
-{&lbrack;user.id&rbrack;: user})
+</blockquote>
+<p>Use it as reducer: (merges an array to an object)</p>
+<pre>
+<b>return</b> users.reduce((result, user) =&bsol;Object.assign({}, {&lbrack;user.id&rbrack;: user})
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-36">Section 13.6: Object rest/spread (&hellip;)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
