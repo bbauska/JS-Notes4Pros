@@ -8484,7 +8484,7 @@ return a value between &minus;π and π, not including π.</p>
 Note that all bitwise operations operate on 32-bit integers by passing
 any operands to the internal function
 [ToInt32](http://www.ecma-international.org/ecma-262/6.0/#sec-toint32).
-<b>Bitwise or</b>
+<p><b>Bitwise or</b></p>
 <b>var</b>
 a
 ;
@@ -8499,7 +8499,7 @@ a
 // <i> 1010 &vert; (or)</i>
 // <i> 0011</i>
 // <i> 1011 (result)</i>
-<b>Bitwise and</b>
+<p><b>Bitwise and</b></p>
 a
 =
 0b0011
@@ -8511,239 +8511,79 @@ a
 // <i> 1010 & (and)</i>
 // <i> 0011</i>
 // <i> 0010 (result)</i>
-<b>Bitwise not</b>
-a
-=
-&bsol;~0b0011
-;
-// <i> a === 0b1100</i>
+<p><b>Bitwise not</b></p>
+<pre>
+a = &bsol;~0b0011;  // <i> a === 0b1100</i>
 // <i> truth table</i>
 // <i> 10 &bsol;~(not)</i>
 // <i> 01 (result)</i>
-<b>Bitwise</b>
-<b>xor</b>
-<b>(exclusive or)</b>
-a
-=
-0b1010
-&Hat;
-0b0011
-;
-// <i> a === 0b1001</i>
+</pre>
+<p><b>Bitwise xor (exclusive or)</b></p>
+<pre>
+a = 0b1010 &Hat; 0b0011;  // <i> a === 0b1001</i>
 // <i> truth table</i>
 // <i> 1010 &Hat; (xor)</i>
 // <i> 0011</i>
 // <i> 1001 (result)</i>
-<b>Bitwise</b>
-<b>left shift</b>
-a
-=
-0b0001
-&lt;&lt;
-1
-;
-// <i> a === 0b0010</i>
-a
-=
-0b0001
-&lt;&lt;
-2
-;
-// <i> a === 0b0100</i>
-a
-=
-0b0001
-&lt;&lt;
-3
-;
-// <i> a === 0b1000</i>
-Math.pow (2, n
-Shift left is equivalent to integer multiply by ). When doing integer
-math, shift can significantly improve the speed of some math
-operations.
-<b>var</b>
-n
-=
-2
-;
-<b>var</b>
-a
-=
-5.4
-;
-<b>var</b>
-result
-=
-(
-a
-&lt;&lt;
-n
-)
-===
-Math
-.
-floor
-(
-a
-)
-&ast;
-Math
-.
-pow
-(
-2
-,
-n
-)
-;
+</pre>
+<p><b>Bitwise left shift</b></p>
+<pre>
+a = 0b0001 &lt;&lt; 1;  // <i> a === 0b0010</i>
+a = 0b0001 &lt;&lt; 2;  // <i> a === 0b0100</i>
+a = 0b0001 &lt;&lt; 3;  // <i> a === 0b1000</i>
+</pre>
+<!-- page 134 -->
+
+<p>Shift left is equivalent to integer multiply by Math.pow (2, n). When doing integer
+math, shift can significantly improve the speed of some math operations.</p>
+<pre>
+<b>var</b> n = 2;
+<b>var</b> a = 5.4;
+<b>var</b> result = (a &lt;&lt; n) === Math.floor(a) &ast; Math.pow(2, n);
 // <i> result is true</i>
-a
-=
-5.4
-&lt;&lt;
-n
-;
-// <i> 20</i>
-<b>Bitwise right shift &gt;&lpar;Sign-propagating shift) &gt;&gt;&lpar;Zero-fill
-right shift)</b>
-a
-=
-0b1001
-&gt;&gt;
-1
-;
-// <i> a === 0b0100</i>
-a
-=
-0b1001
-&gt;&gt;
-2
-;
-// <i> a === 0b0010</i>
-a
-=
-0b1001
-&gt;&gt;
-3
-;
-// <i> a === 0b0001</i>
-a
-=
-0b1001
-&gt;&gt;&gt;
-1
-;
-// <i> a === 0b0100</i>
-a
-=
-0b1001
-&gt;&gt;&gt;
-2
-;
-// <i> a === 0b0010</i>
-a
-=
-0b1001
-&gt;&gt;&gt;
-3
-;
-// <i> a === 0b0001</i>
-A negative 32bit value always has the left most bit on:
-a = 0b11111111111111111111111111110111 &vert; 0; console.log(a); // <i> -9</i> b
-= a &gt;&bsol;2; // <i> leftmost bit is shifted 1 to the right then new left
-most bit is set to on (1)</i> console.log(b); // <i> -3</i> b = a &gt;&gt;&bsol;2; // <i>
-leftmost bit is shifted 1 to the right. the new left most bit is set
-to off (0)</i> console.log(b); // <i> 2147483643</i>
-The result of a &gt;&gt;&bsol;operation is always positive.
-The result of a &gt;&bsol;is always the same sign as the shifted value.
-Math.pow
-Right shift on positive numbers is the equivalent of dividing by the
-(2,n) and flooring the result:
-a
-=
-256.67
-;
-n
-=
-4
-;
-result
-=
-(
-a
-&gt;&gt;
-n
-)
-===
-Math
-.
-floor
-(
-Math
-.
-floor
-(
-a
-)
-/
-Math
-.
-pow
-(
-2
-,
-n
-)
-)
-;
+a = 5.4 &lt;&lt; n;  // <i> 20</i>
+</pre>
+<p><b>Bitwise right shift &gt;&lpar;Sign-propagating shift) &gt;&gt;&lpar;Zero-fill
+right shift)</b></p>
+<pre>
+a = 0b1001 &gt;&gt; 1;  // <i> a === 0b0100</i>
+a = 0b1001 &gt;&gt; 2;  // <i> a === 0b0010</i>
+a = 0b1001 &gt;&gt; 3;  // <i> a === 0b0001</i>
+
+a = 0b1001 &gt;&gt;&gt; 1;  // <i> a === 0b0100</i>
+a = 0b1001 &gt;&gt;&gt; 2;  // <i> a === 0b0010</i>
+a = 0b1001 &gt;&gt;&gt; 3;  // <i> a === 0b0001</i>
+</pre>
+<p>A negative 32bit value always has the left most bit on:</p>
+<pre>
+a = 0b11111111111111111111111111110111 &vert; 0;
+console.log(a); // <i> -9</i>
+b = a &gt;&bsol;2; // <i> leftmost bit is shifted 1 to the right then new left most bit is set to on (1)</i>
+console.log(b); // <i> -3</i>
+b = a &gt;&gt;&bsol;2; // <i>leftmost bit is shifted 1 to the right. the new left most bit is set to off (0)</i>
+console.log(b); // <i> 2147483643</i>
+</pre>
+<p>The result of a &gt;&gt;&bsol;operation is always positive.</p>
+<p>The result of a &gt;&bsol;is always the same sign as the shifted value.</p>
+
+<p>Right shift on positive numbers is the equivalent of dividing by the Math.pow(2,n) 
+and flooring the result:</p>
+<pre>
+a = 256.67;
+n = 4;
+result = (a &gt;&gt; n) === Math.floor( Math.floor(a) / Math.pow(2, n) );
 // <i> result is true</i>
-a
-=
-a
-&gt;&gt;
-n
-;
-// <i> 16</i>
-result
-=
-(
-a
-&gt;&gt;&gt;
-n
-)
-===
-Math
-.
-floor
-(
-Math
-.
-floor
-(
-a
-)
-/
-Math
-.
-pow
-(
-2
-,
-n
-)
-)
-;
+a = a &gt;&gt; n;  // <i> 16</i>
+
+result = (a &gt;&gt;&gt; n) === Math.floor( Math.floor(a) / Math.pow(2, n) );
 // <i> result is true</i>
-a
-=
-a
-&gt;&gt;&gt;
-n
-;
-// <i> 16</i>
-Right shift zero fill (&gt;&gt;&gt;) on negative numbers is different. As
+a = a &gt;&gt;&gt; n;  // <i> 16</i>
+</pre>
+
+<p>Right shift zero fill (&gt;&gt;&gt;) on negative numbers is different. As
 JavaScript does not convert to unsigned ints when doing bit operations
-there is no operational equivalent:
+there is no operational equivalent:</p>
+<pre>
 // <i> result is false</i>
 a
 =
@@ -8779,9 +8619,11 @@ n
 )
 )
 ;
-<b>Bitwise assignment operators</b>
-With the exception of not (&bsol;~) all the above bitwise operators can be
-used as assignment operators:
+</pre>
+<p><b>Bitwise assignment operators</b></p>
+<p>With the exception of not (&bsol;~) all the above bitwise operators can be
+used as assignment operators:</p>
+
 a
 &vert;=
 b
