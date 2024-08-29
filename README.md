@@ -7754,10 +7754,12 @@ console.log(props);  // <i>&lbrack;&quot;a&quot;&rbrack;</i>
 <b>var</b> x = { a : 10 , b : 3} , props;
 props = Object.keys(x);
 console.log(props);  // <i>&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;</i>
+
 // <i>Ex 2 : Data with enumerable properties in prototype chain</i>
 <b>var</b> x = { a : 10 , &lowbar;&lowbar;proto&lowbar;&lowbar; : { b : 10}} , props;
 props = Object.keys(x);
 console.log(props);  // <i>&lbrack;&quot;a&quot;&rbrack;</i>
+
 // <i>Ex 3 : Data with non enumerable properties</i>
 <b>var</b> x = { a : 10 } , props;
 Object.defineProperty(x, &quot;b&quot;, {value : 5, enumerable : <b>false</b>});
@@ -7781,6 +7783,7 @@ console.log(props);  // <i>&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;</i>
 <b>var</b> x = { a : 10 , &lowbar;&lowbar;proto&lowbar;&lowbar; : { b : 10}} , props;
 props = Object.getOwnPropertyNames(x);
 console.log(props);  // <i>&lbrack;&quot;a&quot;&rbrack;</i>
+
 // <i>Ex 3 : Data with non enumerable properties</i>
 <b>var</b> x = { a : 10 } , props;
 Object.defineProperty(x, &quot;b&quot;, {value : 5, enumerable : <b>false</b>});
@@ -7808,231 +7811,100 @@ Object.defineProperty(x&period;&lowbar;&lowbar;proto&lowbar;&lowbar;, &quot;d&qu
 console.log(getAllProperties(x)); &lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;&hellip;other default core props&hellip;&quot;&rbrack;
 </pre>
 <p>And this will be supported by the browsers which supports ECMAScript 5.</p>
+<!-- page 123 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-14">Section 13.14: Read-Only property</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 5</h5>
-Using property descriptors we can make a property read only, and any
+<p>Using property descriptors we can make a property read only, and any
 attempt to change its value will fail silently, the value will not be
-changed and no error will be thrown.
+changed and no error will be thrown.</p>
 
-The writable property in a property descriptor indicates whether that
-property can be changed or not.
-<b>var</b>
-a
-=
-{
-}
-;
-Object
-.
-defineProperty
-(
-a
-,
-&apos;foo&apos;
-,
-{
-value
-:
-&apos;original&apos;
-,
-writable
-:
-<b>false</b>
-}
-)
-;
-a&period;
-foo
-=
-&apos;new&apos;
-;
-console.
-log
-(
-a&period;
-foo
-)
-;
-Console output
+<p>The writable property in a property descriptor indicates whether that property can be 
+changed or not.</p>
+<pre>
+<b>var</b> a =  { };
+Object.defineProperty(a, &apos;foo&apos;, { value: &apos;original&apos;, writable: <b>false</b>});
+
+a&period;foo = &apos;new&apos;;
+console.log(a&period;foo);
+</pre>
+<p>Console output</p>
+<blockquote>
 original
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-15">Section 13.15: Non enumerable property</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 5</h5>
-<b>for</b>            (    &hellip; <b>in</b> &hellip;
+<p>We can avoid a property from showing up in for (... in ...) loops.</p>
 
-We can avoid a property from showing up in ) loops
+<p>The enumerable property of the property descriptor tells whether that property will be 
+enumerated while looping through the object&apos;s properties.</p>
+<pre>
+<b>var</b> obj = { };
 
-The enumerable property of the property descriptor tells whether that
-property will be enumerated while looping through the object&apos;s
-properties.
-<b>var</b>
-obj
-=
-{
+Object.defineProperty(obj, &quot;foo&quot;, { value: &apos;show&apos;, enumerable: <b>true</b>});
+Object.defineProperty(obj, &quot;bar&quot;, { value: &apos;hide&apos;, enumerable: <b>false</b>});
+
+<b>for</b> (<b>var</b> prop <b>in</b> obj) {
+  console.log(obj&lbrack;prop&rbrack;);
 }
-;
-Object
-.
-defineProperty
-(
-obj
-,
-&quot;foo&quot;
-,
-{
-value
-:
-&apos;show&apos;
-,
-enumerable
-:
-<b>true</b>
-}
-)
-;
-Object
-.
-defineProperty
-(
-obj
-,
-&quot;bar&quot;
-,
-{
-value
-:
-&apos;hide&apos;
-,
-enumerable
-:
-<b>false</b>
-}
-)
-;
-<b>for</b>
-(
-<b>var</b>
-prop
-<b>in</b>
-obj
-)
-{
-console.
-log
-(
-obj
-&lbrack;
-prop
-&rbrack;
-)
-;
-}
-Console output
+</pre>
+<p>Console output</p>
+<blockquote>
 show
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-16">Section 13.16: Lock property description</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 5</h5>
 
-A property&apos;s descriptor can be locked so no changes can be made to
+<p>A property&apos;s descriptor can be locked so no changes can be made to
 it. It will still be possible to use the property normally, assigning
 and retrieving the value from it, but any attempt to redefine it will
-throw an exception.
+throw an exception.</p>
 
-The configurable property of the property descriptor is used to
-disallow any further changes on the descriptor.
-<b>var</b>
-obj
-=
-{
-}
-;
+<p>The configurable property of the property descriptor is used to disallow any further 
+changes on the descriptor.</p>
+<!-- page 124 -->
+<pre>
+<b>var</b> obj = {};
+
 // <i>Define &apos;foo&apos; as read only and lock it</i>
-Object
-.
-defineProperty
-(
-obj
-,
-&quot;foo&quot;
-,
-{
-value
-:
-&quot;original value&quot;
-,
-writable
-:
-<b>false</b>
-,
-configurable
-:
-<b>false</b>
-}
-)
-;
-Object
-.
-defineProperty
-(
-obj
-,
-&quot;foo&quot;
-,
-{
-writable
-:
-<b>true</b>
-}
-)
-;
-This error will be thrown:
+Object.defineProperty(obj, &quot;foo&quot;, {
+  value: &quot;original value&quot;,
+  writable: <b>false</b>,
+  configurable: <b>false</b>
+});
+Object.defineProperty(obj, &quot;foo&quot;, {writable: <b>true</b>});
+</pre>
+
+<p>This error will be thrown:</p>
+<blockquote>
 TypeError: Cannot redefine property: foo
-And the property will still be read only.
-obj.
-foo
-=
-&quot;new value&quot;
-;
-console.
-log
-(
-foo
-)
-;
-Console output
+</blockquote>
+<p>And the property will still be read only.</p>
+<pre>
+obj.foo = &quot;new value&quot;;
+console.log(foo);
+</pre>
+<p>Console output</p>
+<blockquote>
 original value
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-17">Section 13.17: Object.getOwnPropertyDescriptor</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Get the description of a specific property in an object.
-<b>var</b>
-sampleObject
-=
-{
-hello
-:
-&apos;world&apos;
-}
-;
-Object
-.
-getOwnPropertyDescriptor
-(
-sampleObject
-,
-&apos;hello&apos;
-)
-;
-// <i> Object {value: &quot;world&quot;, writable: true, enumerable: true,
-configurable: true}</i>
+<p>Get the description of a specific property in an object.</p>
+<pre>
+<b>var</b> sampleObject = {
+  hello: &apos;world&apos;
+};
+
+Object.getOwnPropertyDescriptor(sampleObject, &apos;hello&apos;);
+// <i> Object {value: &quot;world&quot;, writable: true, enumerable: true, configurable: true}</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-18">Section 13.18: Descriptors and Named Properties</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
