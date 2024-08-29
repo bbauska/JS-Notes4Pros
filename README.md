@@ -8480,40 +8480,29 @@ return a value between &minus;π and π, not including π.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-5">Section 14.5: Bitwise operators</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Note that all bitwise operations operate on 32-bit integers by passing
-any operands to the internal function
-[ToInt32](http://www.ecma-international.org/ecma-262/6.0/#sec-toint32).
+<p>Note that all bitwise operations operate on 32-bit integers by passing
+any operands to the internal function <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-toint32">
+ToInt32</a>.
 <p><b>Bitwise or</b></p>
-<b>var</b>
-a
-;
-a
-=
-0b0011
-&vert;
-0b1010
-;
-// <i> a === 0b1011</i>
+<pre>
+<b>var</b> a;
+a = 0b0011 &vert; 0b1010;  // <i> a === 0b1011</i>
 // <i> truth table</i>
 // <i> 1010 &vert; (or)</i>
 // <i> 0011</i>
 // <i> 1011 (result)</i>
+</pre>
 <p><b>Bitwise and</b></p>
-a
-=
-0b0011
-&
-0b1010
-;
-// <i> a === 0b0010</i>
+<pre>
+a = 0b0011 &amp; 0b1010;  // <i> a === 0b0010</i>
 // <i> truth table</i>
 // <i> 1010 & (and)</i>
 // <i> 0011</i>
 // <i> 0010 (result)</i>
+</pre>
 <p><b>Bitwise not</b></p>
 <pre>
-a = &bsol;~0b0011;  // <i> a === 0b1100</i>
+a = &bsol;0b0011;  // <i> a === 0b1100</i>
 // <i> truth table</i>
 // <i> 10 &bsol;~(not)</i>
 // <i> 01 (result)</i>
@@ -8584,340 +8573,135 @@ a = a &gt;&gt;&gt; n;  // <i> 16</i>
 JavaScript does not convert to unsigned ints when doing bit operations
 there is no operational equivalent:</p>
 <pre>
+a = &minus;256.67;
+result = (a &gt;&gt;&gt; n) === Math.floor( Math.floor(a) / Math.pow(2, n) );
 // <i> result is false</i>
-a
-=
-&minus;
-256.67
-;
-result
-=
-(
-a
-&gt;&gt;&gt;
-n
-)
-===
-Math
-.
-floor
-(
-Math
-.
-floor
-(
-a
-)
-/
-Math
-.
-pow
-(
-2
-,
-n
-)
-)
-;
 </pre>
 <p><b>Bitwise assignment operators</b></p>
 <p>With the exception of not (&bsol;~) all the above bitwise operators can be
 used as assignment operators:</p>
+<pre>
+a &vert;= b;  // <i> same as: a = a &vert; b;</i>
+a &Hat;= b;   // <i> same as: a = a &Hat; b;</i>
+a &= b;       // <i> same as: a = a & b;</i>
+a &gt;&gt;= b; // <i> same as: a = a &gt;&bsol;b;</i>
+a &gt;&gt;&gt;= b; // <i> same as: a = a &gt;&gt;&bsol;b;</i>
+a &lt;&lt;= b;     // <i> same as: a = a &lt;&lt; b;</i>
+<!-- page 135 -->
 
-a
-&vert;=
-b
-;
-// <i> same as: a = a &vert; b;</i>
-a
-&Hat;=
-b
-;
-// <i> same as: a = a &Hat; b;</i>
-a
-&=
-b
-;
-// <i> same as: a = a & b;</i>
-a
-&gt;&gt;=
-b
-;
-// <i> same as: a = a &gt;&bsol;b;</i>
-a
-&gt;&gt;&gt;=
-b
-;
-// <i> same as: a = a &gt;&gt;&bsol;b;</i>
-a
-&lt;&lt;=
-b
-;
-// <i> same as: a = a &lt;&lt; b;</i>
-<b>Warning</b>: JavaScript uses Big Endian to store integers. This will
+<p><b>Warning</b>: JavaScript uses Big Endian to store integers. This will
 not always match the Endian of the device/OS. When using typed arrays
 with bit lengths greater than 8 bits you should check if the
 environment is Little Endian or Big Endian before applying bitwise
-operations.
+operations.</p>
 
-<b>Warning</b>: Bitwise operators such as & and &vert; are <b>not</b> the same
+<p><b>Warning</b>: Bitwise operators such as & and &vert; are <b>not</b> the same
 as the logical operators && (and) and &vert;&vert; (or). They will provide
 incorrect results if used as logical operators. The &Hat; operator is
-<b>not</b> the power operator (<i>ab</i>).
+<b>not</b> the power operator (<i>ab</i>).</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-6">Section 14.6: Incrementing (++)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The Increment operator (++) increments its operand by one.
-If used as a postfix, then it returns the value before incrementing.
-If used as a prefix, then it returns the value after incrementing.
+<p>The Increment operator (++) increments its operand by one.</p>
+<ul>
+  <li>If used as a postfix, then it returns the value before incrementing.</li>
+  <li>If used as a prefix, then it returns the value after incrementing.</li>
+</ul>
+<pre>
 // <i>postfix</i>
-<b>var</b>
-a
-=
-5
-,
-// <i> 5</i>
-b
-=
-a
-++
-,
-// <i> 5</i>
-c
-=
-a
-// <i> 6</i>
-In this case, a is incremented after setting b. So, b will be 5, and c
-will be 6.
+<b>var</b> a = 5,  // <i> 5</i>
+    b = a ++,      // <i> 5</i>
+    c = a          // <i> 6</i>
+</pre>
+<p>In this case, a is incremented after setting b. So, b will be 5, and c will be 6.</p>
+<pre>
 // <i>prefix</i>
-<b>var</b>
-a
-=
-5
-,
-// <i> 5</i>
-b
-=
-++
-a
-,
-// <i> 6</i>
-c
-=
-a
-// <i> 6</i>
-In this case, a is incremented before setting b. So, b will be 6, and
-c will be 6.
-The increment and decrement operators are commonly used in <b>for</b>
-loops, for example:
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-42
-;
-++
-i
-)
+<b>var</b> a = 5,  // <i> 5</i>
+    b = ++a,       // <i> 6</i>
+    c = a          // <i> 6</i>
+</pre>
+<p>In this case, a is incremented before setting b. So, b will be 6, and 
+c will be 6.</p>
+<p>The increment and decrement operators are commonly used in <b>for</b> loops, for example:</p>
+<pre>
+<b>for</b> (<b>var</b> i = 0; i &lt; 42; ++i)
 {
-// <i> do something awesome!</i>
+  // <i>do something awesome!</i>
 }
-Notice how the <i>prefix</i> variant is used. This ensures that a
+</pre>
+<p>Notice how the <i>prefix</i> variant is used. This ensures that a
 temporarily variable isn&apos;t needlessly created (to return the value
-prior to the operation).
+prior to the operation).</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-7">Section 14.7: Exponentiation (Math.pow() or &ast;&ast;)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Exponentiation makes the second operand the power of the first operand
-(ab).
-<b>var</b>
-a
-=
-2
-,
-b
-=
-3
-,
-c
-=
-Math
-.
-pow
-(
-a
-,
-b
-)
-;
-c will now be 8
-Version &bsol;6
-Stage 3 ES2016 (ECMAScript 7) Proposal:
-<b>let</b>
-a
-=
-2
-,
-b
-=
-3
-,
-c
-=
-a
-&ast;&ast;
-b
-;
-c will now be 8
+<p>Exponentiation makes the second operand the power of the first operand (ab).</p>
+<pre>
+<b>var</b> a = 2,
+    b = 3,
+    c = Math.pow(a, b);
+</pre>
+<p>c will now be 8</p>
 
-<b>Use Math.pow to find the nth root of a number.</b>
-
-Finding the nth roots is the inverse of raising to the nth power. For
-example 2 to the power of 5 is 32. The 5th root of 32 is 2.
-
-Math.pow(v, 1 / n); // <i> where v is any positive real number</i> // <i> and n
-is any positive integer</i>
-<b>var</b> a = 16; <b>var</b> b = Math.pow(a, 1 / 2); // <i> return the square
-root of 16 = 4</i> <b>var</b> c = Math.pow(a, 1 / 3); // <i> return the cubed
-root of 16 = 2.5198420997897464</i> <b>var</b> d = Math.pow(a, 1 / 4); // <i>
-return the 4th root of 16 = 2</i>
+<h5>Version &bsol;6</h5>
+<p>Stage 3 ES2016 (ECMAScript 7) Proposal:</p>
+<pre>
+<b>let</b> a = 2,
+    b = 3,
+    c = a &ast;&ast; b;
+</pre>
+<!-- page 136 -->
+<p>c will now be 8</p>
+<p><b>Use Math.pow to find the nth root of a number.</b></p>
+<p>Finding the nth roots is the inverse of raising to the nth power. For
+example 2 to the power of 5 is 32. The 5th root of 32 is 2.</p>
+<pre>
+Math.pow(v, 1 / n); // <i> where v is any positive real number</i> 
+                    // <i> and n is any positive integer</i>
+<b>var</b> a = 16;
+<b>var</b> b = Math.pow(a, 1 / 2); // <i>return the square root of 16 = 4</i>
+<b>var</b> c = Math.pow(a, 1 / 3); // <i>return the cubed root of 16 = 2.5198420997897464</i>
+<b>var</b> d = Math.pow(a, 1 / 4); // <i>return the 4th root of 16 = 2</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-8">Section 14.8: Random Integers and Floats</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>var</b>
-a
-=
-Math
-.
-random
-(
-)
-;
-Sample value of a: 0.21322848065742162
-Math.random
-() returns a random number between 0 (inclusive) and 1 (exclusive)
-<b>function</b>
-getRandom
-(
-)
-{
-<b>return</b>
-Math
-.
-random
-(
-)
-;
+<pre>
+<b>var</b> a = Math.random();
+</pre>
+<p>Sample value of a: 0.21322848065742162</p>
+<p>Math.random() returns a random number between 0 (inclusive) and 1 (exclusive)</p>
+<pre>
+<b>function</b> getRandom() {
+  <b>return</b> Math.random();
 }
-Math.random
-min, max
-To use () to get a number from an arbitrary range (not &lbrack;0,1)) use
-this function to get a random number between min (inclusive) and max
-(exclusive): interval of &lbrack;)
-<b>function</b>
-getRandomArbitrary
-(
-min
-,
-max
-)
-{
-<b>return</b>
-Math
-.
-random
-(
-)
-&ast;
-(
-max
-&minus;
-min
-)
-&plus;
-min
-;
+</pre>
+<p>To use Math.random() to get a number from an arbitrary range (not &lbrack;0,1)) use
+this function to get a random number between min (inclusive) and max (exclusive): interval of &lbrack;)</p>
+<pre>
+<b>function</b> getRandomArbitrary(min, max) {
+  <b>return</b> Math.random() &ast; (max &minus; min) &plus; min;
 }
-Math.random
-min, max
-To use () to get an integer from an arbitrary range (not &lbrack;0,1)) use
-this function to get a random number between min (inclusive) and max
-(exclusive): interval of &lbrack;)
-<b>function</b>
-getRandomInt
-(
-min
-,
-max
-)
-{
-<b>return</b>
-Math
-.
-floor
-(
-Math
-.
-random
-(
-)
-&ast;
-(
-max
-&minus;
-min
-)
-)
-&plus;
-min
-;
+<pre>
+<p>To use Math.random() to get an integer from an arbitrary range (not &lbrack;0,1)) use
+this function to get a random number between min (inclusive) and max(exclusive): interval 
+of &lbrack;)</p>
+<pre>
+<b>function</b> getRandomInt(min, max) {
+  <b>return</b> Math.floor(Math.random() &ast; (max &minus; min)) &plus; min;
 }
-Math.random
-min, max
-To use () to get an integer from an arbitrary range (not &lbrack;0,1)) use
-this function to get a random number between min (inclusive) and max
-(inclusive): interval of &lbrack;&rbrack;
-<b>function</b>
-getRandomIntInclusive
-(
-min
-,
-max
-)
-{
-<b>return</b>
-Math
-.
-floor
-(
-Math
-.
-random
-(
-)
-&ast;
-(
-max
-&minus;
-min
-&plus;
-1
-)
-)
-&plus;
-min
-;
+<pre>
+<p>To use Math.random() to get an integer from an arbitrary range (not &lbrack;0,1)) use
+this function to get a random number between min (inclusive) and max (inclusive): 
+interval of &lbrack;&rbrack;</p>
+<pre>
+<b>function</b> getRandomIntInclusive(min, max) {
+  <b>return</b> Math.floor(Math.random() &ast; (max &minus; min &plus; 1)) &plus; min;
 }
-Functions taken from
-<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random>
+</pre>
+<p>Functions taken from 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random">
+Mozilla Global Objects: Math.random</a>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-9">Section 14.9: Addition (+)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
