@@ -7509,11 +7509,7 @@ console.log(person.fullName);  // <i> -&amp;quot;John Doe&quot;</i>
 person.surname = &quot;Hill&quot;;
 console.log(person.fullName);  // <i> -&amp;quot;John Hill&quot;</i>
 
-person.
-fullName
-=
-&quot;Mary Jones&quot;
-;
+person.fullName = &quot;Mary Jones&quot;;
 console.log(person.name)  // <i> -&amp;quot;Mary&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
