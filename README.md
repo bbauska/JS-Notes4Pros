@@ -9293,13 +9293,12 @@ reassign to x such that x = x &minus; 1.
 </blockquote>
 <pre>
 <b>const</b> x = 1;
-console.log(x&bsol;)  // <i>TypeError: Assignment to constant variable.</i>
-console.log(&bsol;x)  // <i>TypeError: Assignment to constant variable.</i>
-console.log(&bsol;3)  // <i>ReferenceError: Invalid left-hand size expression in prefix operation.</i>
-console.log(3&bsol;)  // <i>ReferenceError: Invalid left-hand side expression in postfix operation.</i>
+console.log(x&minus;)  // <i>TypeError: Assignment to constant variable.</i>
+console.log(&minus;x)  // <i>TypeError: Assignment to constant variable.</i>
+console.log(&minus;3)  // <i>ReferenceError: Invalid left-hand size expression in prefix operation.</i>
+console.log(3&minus;)  // <i>ReferenceError: Invalid left-hand side expression in postfix operation.</i>
 </pre>
 <!-- thru chapter 14 & section 14.25 -->
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch15">Chapter 15: Bitwise operators</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
