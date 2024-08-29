@@ -8587,6 +8587,7 @@ a &= b;       // <i> same as: a = a & b;</i>
 a &gt;&gt;= b; // <i> same as: a = a &gt;&bsol;b;</i>
 a &gt;&gt;&gt;= b; // <i> same as: a = a &gt;&gt;&bsol;b;</i>
 a &lt;&lt;= b;     // <i> same as: a = a &lt;&lt; b;</i>
+</pre>
 <!-- page 135 -->
 
 <p><b>Warning</b>: JavaScript uses Big Endian to store integers. This will
