@@ -8359,7 +8359,7 @@ up, that is they&apos;re rounded to the integer with the next higher value.</p>
 <p>flooring a negative number will round it away from zero.</p>
 <pre>
 <b>var</b> c = Math.floor(&minus;1.1);  // <i>c is now -1</i>
-<pre>
+</pre>
 <p><b>Truncating</b></p>
 
 <p><b>Caveat</b>: using bitwise operators (except &gt;&gt;&gt;) only applies to
