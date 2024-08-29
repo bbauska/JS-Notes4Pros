@@ -9300,4 +9300,889 @@ console.log(3&bsol;)  // <i>ReferenceError: Invalid left-hand side expression in
 </pre>
 <!-- thru chapter 14 & section 14.25 -->
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch15">Chapter 15: Bitwise operators</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch15-1">Section 15.1: Bitwise operators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Bitwise operators perform operations on bit values of data. These
+operators convert operands to signed 32-bit integers in [two&apos;s
+complement](http://stackoverflow.com/questions/1049722/what-is-2s-complement).
+**Conversion to 32-bit integers**
+Numbers with more than 32 bits discard their most significant bits.
+For example, the following integer with more than 32 bits is converted
+to a 32-bit integer:
+Before
+:
+10100110111110100000000010000011110001000001
+After
+:
+10100000000010000011110001000001
+**Two&apos;s Complement**
+In normal binary we find the binary value by adding the 1&apos;s based on
+their position as powers of 2 - The rightmost bit being 2&Hat;0 to the
+leftmost bit being 2&Hat;n-1 where n is the number of bits. For example,
+using 4 bits:
 
+*// Normal Binary*
+*// 8 4 2 1*
+0
+1
+1
+0
+=&gt;
+0
+&plus;
+4
+&plus;
+2
+&plus;
+0
+=&gt;
+6
+Two complement&apos;s format means that the number&apos;s negative counterpart
+(6 vs -6) is all the bits for a number inverted, plus one. The
+inverted bits of 6 would be:
+*// Normal binary*
+0
+1
+1
+0
+*// One&apos;s complement (all bits inverted)*
+1
+0
+0
+1
+=&gt;
+&minus;
+8
+&plus;
+0
+&plus;
+0
+&plus;
+1
+=&gt;
+&minus;
+7
+*// Two&apos;s complement (add 1 to one&apos;s complement)*
+1
+0
+1
+0
+=&gt;
+&minus;
+8
+&plus;
+0
+&plus;
+2
+&plus;
+0
+=&gt;
+&minus;
+6
+*Note:* Adding more 1&apos;s to the left of a binary number does not
+change its value in two&apos;s compliment. The value 1010 and
+1111111111010 are both -6.
+**Bitwise AND**
+a & b
+The bitwise AND operation returns the binary value with a 1 where both
+binary operands have 1&apos;s in a specific position, and 0 in all other
+positions. For example:
+13
+&
+7
+=&gt;
+5
+*// 13: 0..01101*
+*// 7: 0..00111*
+*//&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&ast;
+*// 5: 0..00101 (0 + 0 + 4 + 0 + 1)*
+**Real world example: Number&apos;s Parity Check**
+
+Instead of this &quot;masterpiece&quot; (unfortunately too often seen in many
+real code parts):
+**function**
+isEven
+(
+n
+)
+{
+**return**
+n
+&percnt;
+2
+==
+0
+;
+}
+**function**
+isOdd
+(
+n
+)
+{
+**if**
+(
+isEven
+(
+n
+)
+)
+{
+**return**
+**false**
+;
+}
+**else**
+{
+**return**
+**true**
+;
+}
+}
+You can check the (integer) number&apos;s parity in much more effective
+and simple manner:
+**if**
+(
+n
+&
+1
+)
+{
+console.
+log
+(
+&quot;ODD!&quot;
+)
+;
+}
+**else**
+{
+console.
+log
+(
+&quot;EVEN!&quot;
+)
+;
+}
+**Bitwise OR**
+a &vert; b
+The bitwise OR operation returns the binary value with a 1 where
+either operands or both operands have 1&apos;s in a specific position, and
+0 when both values have 0 in a position. For example:
+13
+&vert;
+7
+=&gt;
+15
+*// 13: 0..01101*
+*// 7: 0..00111*
+*//&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&ast;
+*// 15: 0..01111 (0 + 8 + 4 + 2 + 1)*
+**Bitwise NOT**
+
+The bitwise NOT operation &bsol;~a *flips* the bits of the given value a.
+This means all the 1&apos;s will become 0&apos;s and all the 0&apos;s will become
+1&apos;s.
+&bsol;~13 =&minus;14
+// 13: 0..01101
+//&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&bsol;
+//-14: 1..10010 (-16 + 0 + 0 + 2 + 0)
+**Bitwise XOR**
+a  &Hat; b
+
+The bitwise XOR (*exclusive or*) operation places a 1 only if the two
+bits are different. Exclusive or means *either one or the other, but
+not both*.
+13
+&Hat;
+7
+=&gt;
+10
+*// 13: 0..01101*
+*// 7: 0..00111*
+*//&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&ast;
+*// 10: 0..01010 (0 + 8 + 0 + 2 + 0)*
+**Real world example: swapping two integer values without additional
+memory allocation**
+**var**
+a
+=
+11
+,
+b
+=
+22
+;
+a
+=
+a
+&Hat;
+b
+;
+b
+=
+a
+&Hat;
+b
+;
+a
+=
+a
+&Hat;
+b
+;
+console.
+log
+(
+&quot;a = &quot;
+&plus;
+a
+&plus;
+&quot;; b = &quot;
+&plus;
+b
+)
+;
+*// a is now 22 and b is now 11*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch15-2">Section 15.2: Shift Operators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Bitwise shifting can be thought as &quot;moving&quot; the bits either left or
+right, and hence changing the value of the data operated on.
+**Left Shift**
+value ) &lt;&lt; ( shift amount ) will shift the bits to the shift amount
+left by (
+The left shift operator () bits; the new bits coming in from the right
+will be 0&apos;s:
+5
+&lt;&lt;
+2
+=&gt;
+20
+*// 5: 0..000101*
+*// 20: 0..010100 &lt;= adds two 0&apos;s to the right*
+**Right Shift (*Sign-propagating*)**
+value ) &gt;&bsol;  ( shift amount
+The right shift operator () is also known as the &quot;Sign-propagating
+right shift&quot; because it
+
+keeps the sign of the initial operand. The right shift operator shifts
+the value the specified shift amount of bits to the right. Excess bits
+shifted off the right are discarded. The new bits coming in from the
+left will be based on the sign of the initial operand. If the
+left-most bit was 1 then the new bits will all be 1 and vice-versa for
+0&apos;s.
+20
+&gt;&gt;
+2
+=&gt;
+5
+*// 20: 0..010100*
+*// 5: 0..000101 &lt;= added two 0&apos;s from the left and chopped off 00
+from the right*
+&minus;
+5
+&gt;&gt;
+3
+=&gt;
+&minus;
+1
+*// -5: 1..111011*
+*// -2: 1..111111 &lt;= added three 1&apos;s from the left and chopped off 011
+from the right*
+**Right Shift (*Zero fill*)**
+value ) &gt;&gt;&bsol; ( shift amount
+
+The zero-fill right shift operator () will move the bits to the right,
+and the new bits will
+
+be 0&apos;s. The 0&apos;s are shifted in from the left, and excess bits to the
+right are shifted off and discarded. This means it can make negative
+numbers into positive ones.
+&minus;
+30
+&gt;&gt;&gt;
+2
+=&gt;
+1073741816
+*// -30: 111..1100010*
+*//1073741816: 001..1111000*
+Zero-fill right shift and sign-propagating right shift yield the same
+result for non negative numbers.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch16">Chapter 16: Constructor functions</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch16-1">Section 16.1: Declaring a constructor function</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Constructor functions are functions designed to construct a new
+object. Within a constructor function, the keyword **this** refers to
+a newly created object which values can be assigned to. Constructor
+functions &quot;return&quot; this new object automatically.
+**function**
+Cat
+(
+name
+)
+{
+**this**
+.
+name
+=
+name
+;
+**this**
+.
+sound
+=
+&quot;Meow&quot;
+;
+}
+Constructor functions are invoked using the **new** keyword:
+**let**
+cat
+=
+**new**
+Cat
+(
+&quot;Tom&quot;
+)
+;
+cat.
+sound
+;
+*// Returns &quot;Meow&quot;*
+Constructor functions also have a **prototype** property which points
+to an object whose properties are automatically inherited by all
+objects created with that constructor:
+Cat.
+**prototype**
+.
+speak
+=
+**function**
+(
+)
+{
+console.
+log
+(
+**this**
+.
+sound
+)
+;
+}
+cat.
+speak
+(
+)
+;
+*// Outputs &quot;Meow&quot; to the console*
+Objects created by constructor functions also have a special property
+on their prototype called constructor, which points to the function
+used to create them:
+cat.
+constructor
+*// Returns the &grave;Cat&grave; function*
+Objects created by constructor functions are also considered to be
+&quot;instances&quot; of the constructor function by the **instanceof**
+operator:
+cat
+**instanceof**
+Cat
+*// Returns &quot;true&quot;*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch17">Chapter 17: Declarations and Assignments</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch17-1">Section 17.1: Modifying constants</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Declaring a variable **const** only prevents its value from being
+*replaced* by a new value. **const** does not put any restrictions on
+the internal state of an object. The following example shows that a
+value of a property of a **const** object can be changed, and even new
+properties can be added, because the object that is assigned to person
+is modified, but not *replaced*.
+**const**
+person
+=
+{
+name
+:
+&quot;John&quot;
+}
+;
+console.
+log
+(
+&apos;The name of the person is&apos;
+,
+person.
+name
+)
+;
+person.
+name
+=
+&quot;Steve&quot;
+;
+console.
+log
+(
+&apos;The name of the person is&apos;
+,
+person.
+name
+)
+;
+person.
+surname
+=
+&quot;Fox&quot;
+;
+console.
+
+log
+
+(
+
+&apos;The name of the person is&apos;
+,
+person.
+name
+,
+&apos;and the surname is&apos;
+,
+person.
+surname
+)
+;
+**Result:**
+The name of the person is John
+The name of the person is Steve
+The name of the person is Steve and the surname is Fox
+person.name
+person.surname
+In this example we&apos;ve created constant object called person and
+we&apos;ve reassigned property and created new property.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch17-2">Section 17.2: Declaring and initializing constants</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+You can initialize a constant by using the **const** keyword.
+**const**
+foo
+=
+100
+;
+**const**
+bar
+=
+**false**
+;
+**const**
+person
+=
+{
+name
+:
+&quot;John&quot;
+}
+;
+**const**
+fun
+=
+**function**
+(
+)
+=
+{
+*/&ast; &hellip; &ast;/*
+}
+;
+**const**
+arrowFun
+=
+(
+)
+=&gt;
+*/&ast; &hellip; &ast;/*
+;
+**Important**
+You must declare and initialize a constant in the same statement.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch17-3">Section 17.3: Declaration</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+There are four principle ways to declare a variable in JavaScript:
+using the **var**, **let** or **const** keywords, or without a keyword
+at all (&quot;bare&quot; declaration). The method used determines the
+resulting scope of the variable, or reassignability in the case of
+**const**.
+The
+**var**
+keyword creates a function-scope variable.
+The
+**let**
+keyword creates a block-scope variable.
+The
+**const**
+keyword creates a block-scope variable that cannot be reassigned.
+A bare declaration creates a global variable.
+**var**
+a
+=
+&apos;foo&apos;
+;
+*// Function-scope*
+**let**
+b
+=
+&apos;foo&apos;
+;
+*// Block-scope*
+**const**
+c
+=
+&apos;foo&apos;
+;
+*// Block-scope & immutable reference*
+Keep in mind that you can&apos;t declare constants without initializing
+them at the same time. **const** foo; *// &quot;Uncaught SyntaxError:
+Missing initializer in const declaration&quot;*
+(An example of keyword-less variable declaration is not included above
+for technical reasons. Continue reading to see an example.)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch17-4">Section 17.4: Undefined</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Declared variable without a value will have the value **undefined**
+**var**
+a
+;
+console.
+log
+(
+a
+)
+;
+*// logs: undefined*
+Trying to retrieve the value of undeclared variables results in a
+ReferenceError. However, both the type of undeclared and unitialized
+variables is &quot;undefined&quot;:
+**var**
+a
+;
+console.
+log
+(
+**typeof**
+a
+===
+&quot;undefined&quot;
+)
+;
+*// logs: true*
+console.
+log
+(
+**typeof**
+variableDoesNotExist
+===
+&quot;undefined&quot;
+)
+;
+*// logs: true*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch17-5">Section 17.5: Data Types</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+JavaScript variables can hold many data types: numbers, strings,
+arrays, objects and more:
+*// Number*
+**var**
+length
+=
+16
+;
+*// String*
+**var**
+message
+=
+&quot;Hello, World!&quot;
+;
+*// Array*
+**var**
+carNames
+=
+&lbrack;
+&apos;Chevrolet&apos;
+,
+&apos;Nissan&apos;
+,
+&apos;BMW&apos;
+&rbrack;
+;
+*// Object*
+**var**
+person
+=
+{
+firstName
+:
+&quot;John&quot;
+,
+lastName
+:
+&quot;Doe&quot;
+}
+;
+JavaScript has dynamic types. This means that the same variable can be
+used as different types:
+**var**
+a
+;
+*// a is undefined*
+**var**
+a
+=
+5
+;
+*// a is a Number*
+**var**
+a
+=
+&quot;John&quot;
+;
+*// a is a String*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch17-6">Section 17.6: Mathematic operations and assignment</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+**Increment by**
+**var**
+a
+=
+9
+,
+b
+=
+3
+;
+b
++=
+a
+;
+b will now be 12
+
+This is functionally the same as
+b
+=
+b
+&plus;
+a
+;
+**Decrement by**
+**var**
+a
+=
+9
+,
+b
+=
+3
+;
+b
+-=
+a
+;
+b
+will now be 6
+This is functionally the same as
+b
+=
+b
+&minus;
+a
+;
+**Multiply by**
+**var**
+a
+=
+5
+,
+b
+=
+3
+;
+b
+&ast;=
+a
+;
+b
+will now be 15
+This is functionally the same as
+b
+=
+b
+&ast;
+a
+;
+**Divide by**
+**var**
+a
+=
+3
+,
+b
+=
+15
+;
+b
+/=
+a
+;
+b
+will now be 5
+This is functionally the same as
+b
+=
+b
+/
+a
+;
+<h5>Version ≥ 7</h5>
+**Raised to the power of**
+**var**
+a
+=
+3
+,
+b
+=
+15
+;
+b
+&ast;&ast;=
+a
+;
+b will now be 3375
+This is functionally the same as
+b
+=
+b
+&ast;&ast;
+a
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch17-7">Section 17.7: Assignment</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+To assign a value to a previously declared variable, use the
+assignment operator, =:
+a
+=
+6
+;
+b
+=
+&quot;Foo&quot;
+;
+As an alternative to independent declaration and assignment, it is
+possible to perform both steps in one statement:
+**var**
+a
+=
+6
+;
+**let**
+b
+=
+&quot;Foo&quot;
+;
+It is in this syntax that global variables may be declared without a
+keyword; if one were to declare a bare variable without an assignment
+immediately afterword, the interpreter would not be able to
+differentiate global declarations a; from references to variables a;.
+c
+=
+5
+;
+c
+=
+&quot;Now the value is a String.&quot;
+;
+myNewGlobal
+;
+*// ReferenceError*
+Note, however, that the above syntax is generally discouraged and is
+not strict-mode compliant. This is to avoid the scenario in which a
+programmer inadvertently drops a **let** or **var** keyword from their
+statement, accidentally creating a variable in the global namespace
+without realizing it. This can pollute the global namespace and
+conflict with libraries and the proper functioning of a script.
+Therefore global variables should be declared and initialized using
+the **var** keyword in the context of the window object, instead, so
+that the intent is explicitly stated.
+
+Additionally, variables may be declared several at a time by
+separating each declaration (and optional value assignment) with a
+comma. Using this syntax, the var and let keywords need only be used
+once at the beginning of each statement.
+
+globalA
+=
+&quot;1&quot;
+,
+globalB
+=
+&quot;2&quot;
+;
+**let**
+x
+,
+y
+=
+5
+;
+**var**
+person
+=
+&apos;John Doe&apos;
+,
+foo
+,
+age
+=
+14
+,
+date
+=
+**new**
+Date
+(
+)
+;
+Notice in the preceding code snippet that the order in which declaration
+and assignment expressions occur (
+**var**
+a
+,
+b
+,
+c
+=
+2
+,
+d
+;
+)
+does not matter. You may freely intermix the two.
+Function declaration effectively creates variables, as well.
+<!-- thru chapter 17 -->
