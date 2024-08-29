@@ -7635,155 +7635,42 @@ console.log(Array.isArray(anArray), Array.isArray(anObject)); // <i>outputs: tru
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-11">Section 13.11: Object.seal</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 5</h5>
-Object. seal
-prevents the addition or removal of properties from an object. Once an
-object has been sealed its
-Object . freeze
 
-property descriptors can&apos;t be converted to another type. Unlike it
-does allow properties to be edited.
+<p>Object.seal prevents the addition or removal of properties from an object. Once an 
+object has been sealed its Object.freeze property descriptors can&apos;t be converted 
+to another type. Unlike it does allow properties to be edited.</p>
+<p>Attempts to do this operations on a sealed object will fail silently</p>
+<pre>
+<b>var</b> obj = { foo: &apos;foo&apos;, bar: <b>function</b> () { <b>return</b> &apos;bar&apos;; } };
 
-Attempts to do this operations on a sealed object will fail silently
-<b>var</b>
-obj
-=
-{
-foo
-:
-&apos;foo&apos;
-,
-bar
-:
-<b>function</b>
-(
-)
-{
-<b>return</b>
-&apos;bar&apos;
-;
-}
-}
-;
-Object
-.
-seal
-(
-obj
-)
-obj.
-newFoo
-=
-&apos;newFoo&apos;
-;
-obj.
-bar
-=
-<b>function</b>
-(
-)
-{
-<b>return</b>
-&apos;foo&apos;
-}
-;
-obj.
-newFoo
-;
-// <i> undefined</i>
-obj.
-bar
-(
-)
-;
-// <i> &apos;foo&apos;</i>
+Object.seal(obj)
+
+obj.newFoo = &apos;newFoo&apos;;
+obj.bar = <b>function</b> () { <b>return</b> &apos;foo&apos; };
+obj.newFoo; // <i> undefined</i>
+obj.bar();  // <i> &apos;foo&apos;</i>
 // <i> Can&apos;t make foo an accessor property</i>
-Object
-.
-defineProperty
-(
-obj
-,
-&apos;foo&apos;
-,
-{
-<b>get</b>
-:
-<b>function</b>
-(
-)
-{
-<b>return</b>
-&apos;newFoo&apos;
-;
-}
-}
-)
-;
-// <i> TypeError</i>
+Object.defineProperty(obj, &apos;foo&apos;, {
+  <b>get</b>: <b>function</b> () { <b>return</b> &apos;newFoo&apos;; }
+});  // <i> TypeError</i>
 // <i> But you can make it read only</i>
-Object
-.
-defineProperty
-(
-obj
-,
-&apos;foo&apos;
-,
-{
-writable
-:
-<b>false</b>
-}
-)
-;
-// <i> TypeError</i>
-obj.
-foo
-=
-&apos;newFoo&apos;
-;
-obj.
-foo
-;
-// <i> &apos;foo&apos;;</i>
-In strict mode these operations will throw a
-TypeError
-(
-<b>function</b>
-(
-)
-{
-&apos;use strict&apos;
-;
-<b>var</b>
-obj
-=
-{
-foo
-:
-&apos;foo&apos;
-}
-;
-Object
-.
-seal
-(
-obj
-)
-;
-obj.
-newFoo
-=
-&apos;newFoo&apos;
-;
-// <i> TypeError</i>
-}
-(
-)
-)
-;
+Object.defineProperty(obj, &apos;foo&apos;, {
+  writable: <b>false</b>
+});  // <i> TypeError</i>
+obj.foo = &apos;newFoo&apos;;
+obj.foo;  // <i> &apos;foo&apos;;</i>
+</pre>
+<!-- page 120 -->
+<p>In strict mode these operations will throw a TypeError</p>
+<pre>
+(<b>function</b> () {
+  &apos;use strict&apos;;
+  <b>var</b> obj = { foo: &apos;foo&apos; };
+  Object.seal(obj);
+  obj.newFoo = &apos;newFoo&apos;;  // <i> TypeError</i>
+}());
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-12">Section 13.12: Convert object&apos;s values to array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
