@@ -9110,476 +9110,77 @@ Math.PI(- 180 within the range of ?? to 180 deg)</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-21">Section 14.21: Sin & Cos to create a vector given direction & distance</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-If you have a vector in polar form (direction & distance) you will
+<p>If you have a vector in polar form (direction & distance) you will
 want to convert it to a cartesian vector with a x and y component. For
 reference the screen coordinate system has directions as 0 deg points
 from left to right, 90 (PI/2) point down the screen, and so on in a
-clock wise direction.
-<b>var</b>
-dir
-=
-1.4536
-;
-// <i> direction in radians</i>
-<b>var</b>
-dist
-=
-200
-;
-// <i> distance</i>
-<b>var</b>
-vec
-=
-{
-}
-;
-vec.
-x
-=
-Math
-.
-cos
-(
-dir
-)
-&ast;
-dist
-;
-// <i> get the x component</i>
-vec.
-y
-=
-Math
-.
-sin
-(
-dir
-)
-&ast;
-dist
-;
-// <i> get the y component</i>
-You can also ignore the distance to create a normalised (1 unit long)
-vector in the direction of dir
-<b>var</b>
-dir
-=
-1.4536
-;
-// <i> direction in radians</i>
-<b>var</b>
-vec
-=
-{
-}
-;
-vec.
-x
-=
-Math
-.
-cos
-(
-dir
-)
-;
-// <i> get the x component</i>
-vec.
-y
-=
-Math
-.
-sin
-(
-dir
-)
-;
-// <i> get the y component</i>
-If your coordinate system has y as up then you need to switch cos and
+clock wise direction.</p>
+<pre>
+<b>var</b> dir = 1.4536; // <i> direction in radians</i>
+<b>var</b> dist = 200;  // <i> distance</i>
+<b>var</b> vec = {};
+vec.x = Math.cos(dir) &ast; dist;  // <i> get the x component</i>
+vec.y = Math.sin(dir) &ast; dist;  // <i> get the y component</i>
+</pre>
+<p>You can also ignore the distance to create a normalised (1 unit long)
+vector in the direction of dir</p>
+<pre>
+<b>var</b> dir = 1.4536;  // <i> direction in radians</i>
+<b>var</b> vec = {};
+vec.x = Math.cos(dir); // <i> get the x component</i>
+vec.y = Math.sin(dir); // <i> get the y component</i>
+</pre>
+<p>If your coordinate system has y as up then you need to switch cos and
 sin. In this case a positive direction is in a counterclockwise
-direction from the x axis.
-// <i> get the directional vector where y points up</i>
-<b>var</b>
-dir
-=
-1.4536
-;
-// <i> direction in radians</i>
-<b>var</b>
-vec
-=
-{
-}
-;
-vec.
-x
-=
-Math
-.
-sin
-(
-dir
-)
-;
-// <i> get the x component</i>
-vec.
-y
-=
-Math
-.
-cos
-(
-dir
-)
-;
-// <i> get the y component</i>
+direction from the x axis.</p>
+<pre>
+// <i>get the directional vector where y points up</i>
+<b>var</b> dir = 1.4536;  // <i> direction in radians</i>
+<b>var</b> vec = {};
+vec.x = Math.sin(dir);  // <i> get the x component</i>
+vec.y = Math.cos(dir);  // <i> get the y component</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-22">Section 14.22: Math.hypot</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-To find the distance between two points we use pythagoras to get the
+<p>To find the distance between two points we use pythagoras to get the
 square root of the sum of the square of the component of the vector
-between them.
-<b>var</b>
-v1
-=
-{
-x
-:
-10
-,
-y
-:
-5
-}
-;
-<b>var</b>
-v2
-=
-{
-x
-:
-20
-,
-y
-:
-10
-}
-;
-<b>var</b>
-x
-=
-v2.
-x
-&minus;
-v1.
-x
-;
-<b>var</b>
-y
-=
-v2.
-y
-&minus;
-v1.
-y
-;
-<b>var</b>
-distance
-=
-Math
-.
-sqrt
-(
-x
-&ast;
-x
-&plus;
-y
-&ast;
-y
-)
-;
-// <i> 11.180339887498949</i>
-Math.hypot
-With ECMAScript 6 came which does the same thing
-<b>var</b>
-v1
-=
-{
-x
-:
-10
-,
-y
-:
-5
-}
-;
-<b>var</b>
-v2
-=
-{
-x
-:
-20
-,
-y
-:
-10
-}
-;
-<b>var</b>
-x
-=
-v2.
-x
-&minus;
-v1.
-x
-;
-<b>var</b>
-y
-=
-v2.
-y
-&minus;
-v1.
-y
-;
-<b>var</b>
-distance
-=
-Math
-.
-hypot
-(
-x
-,
-y
-)
-;
-// <i> 11.180339887498949</i>
-Now you don&apos;t have to hold the interim vars to stop the code becoming
-a mess of variables
-<b>var</b>
-v1
-=
-{
-x
-:
-10
-,
-y
-:
-5
-}
-;
-<b>var</b>
-v2
-=
-{
-x
-:
-20
-,
-y
-:
-10
-}
-;
-<b>var</b>
-distance
-=
-Math
-.
-hypot
-(
-v2.
-x
-&minus;
-v1.
-x
-,
-v2.
-y
-&minus;
-v1.
-y
-)
-;
-// <i> 11.180339887498949</i>
-Math.hypot
-can take any number of dimensions
+between them.</p>
+<pre>
+<b>var</b> v1 = {x : 10, y : 5};
+<b>var</b> v2 = {x : 20, y : 10};
+<b>var</b> x = v2.x &minus; v1.x;
+<b>var</b> y = v2.y &minus; v1.y;
+<b>var</b> distance = Math.sqrt(x &ast; x &plus; y &ast; y); // <i> 11.180339887498949</i>
+</pre>
+<p>With ECMAScript 6 came Math.hypot which does the same thing</p>
+<pre>
+<b>var</b> v1 = {x : 10, y : 5};
+<b>var</b> v2 = {x : 20, y : 10};
+<b>var</b> x = v2.x &minus; v1.x;
+<b>var</b> y = v2.y &minus; v1.y;
+<b>var</b> distance = Math.hypot(x, y);  // <i> 11.180339887498949</i>
+</pre>
+<p>Now you don&apos;t have to hold the interim vars to stop the code becoming
+a mess of variables</p>
+<pre>
+<b>var</b> v1 = {x : 10, y : 5};
+<b>var</b> v2 = {x : 20, y : 10};
+<b>var</b> distance = Math.hypot(v2.x &minus; v1.x, v2.y &minus; v1.y);  // <i> 11.180339887498949</i>
+</pre>
+<p>Math.hypot can take any number of dimensions</p>
+<pre>
 // <i> find distance in 3D</i>
-<b>var</b>
-v1
-=
-{
-x
-:
-10
-,
-y
-:
-5
-,
-z
-:
-7
-}
-;
-<b>var</b>
-v2
-=
-{
-x
-:
-20
-,
-y
-:
-10
-,
-z
-:
-16
-}
-;
-<b>var</b>
-dist
-=
-Math
-.
-hypot
-(
-v2.
-x
-&minus;
-v1.
-x
-,
-v2.
-y
-&minus;
-v1.
-y
-,
-v2.
-z
-&minus;
-v1.
-z
-)
-;
-// <i> 14.352700094407325</i>
+<b>var</b> v1 = {x : 10, y : 5, z : 7};
+<b>var</b> v2 = {x : 20, y : 10, z : 16};
+<b>var</b> dist = Math.hypot(v2.x &minus; v1.x, v2.y &minus; v1.y, v2.z &minus; v1.z);  // <i> 14.352700094407325</i>
+
 // <i> find length of 11th dimensional vector</i>
-<b>var</b>
-v
-=
-&lbrack;
-1
-,
-3
-,
-2
-,
-6
-,
-1
-,
-7
-,
-3
-,
-7
-,
-5
-,
-3
-,
-1
-&rbrack;
-;
-<b>var</b>
-i
-=
-0
-;
-dist
-=
-Math
-.
-hypot
-(
-v
-&lbrack;
-i
-++
-&rbrack;
-,
-v
-&lbrack;
-i
-++
-&rbrack;
-,
-v
-&lbrack;
-i
-++
-&rbrack;
-,
-v
-&lbrack;
-i
-++
-&rbrack;
-,
-v
-&lbrack;
-i
-++
-&rbrack;
-,
-v
-&lbrack;
-i
-++
-&rbrack;
-,
-v
-&lbrack;
-i
-++
-&rbrack;
-,
-v
-&lbrack;
-i
-++
-&rbrack;
-,
-v
-&lbrack;
-i
-++
-&rbrack;
-,
-v
-&lbrack;
-i
-++
-&rbrack;
-,
-v
-&lbrack;
-i
-++
-&rbrack;
-)
-;
+<b>var</b> v = &lbrack;1,3,2,6,1,7,3,7,5,3,1&rbrack;;
+<b>var</b> i = 0;
+dist = Math.hypot(v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;);
+</pre>
+<!-- page 145 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-23">Section 14.23: Periodic functions using Math.sin</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
