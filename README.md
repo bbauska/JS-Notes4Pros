@@ -8904,733 +8904,208 @@ console.log(&quot;You get a &quot;+rewards&lbrack;simulateEvent(likelihoods)&rbr
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-13">Section 14.13: Subtraction (-)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The subtraction operator (-) subtracts numbers.
-<b>var</b>
-a
-=
-9
-;
-<b>var</b>
-b
-=
-3
-;
-<b>var</b>
-c
-=
-a
-&minus;
-b
-;
-c will now be 6
-
-If a string or boolean is provided in place of a number value, it gets
+<p>The subtraction operator (-) subtracts numbers.</p>
+<pre>
+<b>var</b> a = 9;
+<b>var</b> b = 3;
+<b>var</b> c = a &minus; b;
+</pre>
+<p>c will now be 6</p>
+<p>If a string or boolean is provided in place of a number value, it gets
 converted to a number before the difference is calculated (0 for
-<b>false</b>, 1 for <b>true</b>):
-&quot;5&quot;
-&minus;
-1
-;
-// <i> 4</i>
-7
-&minus;
-&quot;3&quot;
-;
-// <i> 4</i>
-&quot;5&quot;
-&minus;
-<b>true</b>
-;
-// <i> 4</i>
-If the string value cannot be converted into a Number, the result will
-be <b>NaN</b>:
-&quot;foo&quot;
-&minus;
-1
-;
-// <i> NaN</i>
-100
-&minus;
-&quot;bar&quot;
-;
-// <i> NaN</i>
+<b>false</b>, 1 for <b>true</b>):</p>
+<pre>
+&quot;5&quot; &minus;1;  // <i> 4</i>
+7 &minus; &quot;3&quot;; // <i> 4</i>
+&quot;5&quot; &minus; <b>true</b>; // <i> 4</i>
+</pre>
+<p>If the string value cannot be converted into a Number, the result will
+be <b>NaN</b>:</p>
+<pre>
+&quot;foo&quot; &minus;1;  // <i> NaN</i>
+100 &minus; &quot;bar&quot;; // <i> NaN</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-14">Section 14.14: Multiplication (&ast;)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The multiplication operator (&ast;) perform arithmetic multiplication on
-numbers (literals or variables).
-console.
-log
-(
-3
-&ast;
-5
-)
-;
-// <i> 15</i>
-console.
-log
-(
-&minus;
-3
-&ast;
-5
-)
-;
-// <i> -15</i>
-console.
-log
-(
-3
-&ast;
-&minus;
-5
-)
-;
-// <i> -15</i>
-console.
-log
-(
-&minus;
-3
-&ast;
-&minus;
-5
-)
-;
-// <i> 15</i>
+<p>The multiplication operator (&ast;) perform arithmetic multiplication on
+numbers (literals or variables).</p>
+<pre>
+console.log( 3 &ast;  5); // <i> 15</i>
+console.log(&minus; 3 &ast;  5); // <i> -15</i>
+console.log( 3 &ast; &minus;5); // <i> -15</i>
+console.log(&minus; 3 &ast; &minus;5); // <i> 15</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-15">Section 14.15: Getting maximum and minimum</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Math.max
-The () function returns the largest of zero or more numbers.
-Math.max( 4, 12 );
-// <i> 12</i>
-Math
-.
-max
-(
-&minus;
-1
-,
-&minus;
-15
-)
-;
-// <i> -1</i>
-Math.min
-The () function returns the smallest of zero or more numbers.
+The Math.max() function returns the largest of zero or more numbers.</p>
+<pre>
+Math.max( 4, 12 );  // <i> 12</i>
+Math.max(&minus;1, &minus;15); // <i> -1</i>
+<pre>
+
+<p>The Math.min() function returns the smallest of zero or more numbers.</p>
+<pre>
 Math.min( 4, 12 ); // <i>4</i>
-Math
-.
-min
-(
-&minus;
-1
-,
-&minus;
-15
-)
-;
-// <i> -15</i>
-<b>Getting maximum and minimum from an array:</b>
-<b>var</b>
-arr
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-,
-6
-,
-7
-,
-8
-,
-9
-&rbrack;
-,
-max
-=
-Math
-.
-max
-.
-apply
-(
-Math
-,
-arr
-)
-,
-min
-=
-Math
-.
-min
-.
-apply
-(
-Math
-,
-arr
-)
-;
-console.
-log
-(
-max
-)
-;
-// <i> Logs: 9</i>
-console.
-log
-(
-min
-)
-;
-// <i> Logs: 1</i>
-ECMAScript 6 [spread
-operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator),
-getting the maximum and minimum of an array:
-<b>var</b>
-arr
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-,
-6
-,
-7
-,
-8
-,
-9
-&rbrack;
-,
-max
-=
-Math
-.
-max
-(
-&hellip;
-arr
-)
-,
-min
-=
-Math
-.
-min
-(
-&hellip;
-arr
-)
-;
-console.
-log
-(
-max
-)
-;
-// <i> Logs: 9</i>
-console.
-log
-(
-min
-)
-;
-// <i> Logs: 1</i>
+Math.min(&minus;1, &minus;15); // <i> -15</i>
+</pre>
+<!-- page 140 -->
+<p><b>Getting maximum and minimum from an array:</b></p>
+<pre>
+<b>var</b> arr = &lbrack;1, 2, 3, 4, 5, 6, 7, 8, 9&rbrack;,
+max = Math.max.apply(Math, arr),
+min = Math.min.apply(Math, arr);
+console.log(max);  // <i> Logs: 9</i>
+console.log(min);  // <i> Logs: 1</i>
+</pre>
+<p>ECMAScript 6 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">
+spread operator</a>, getting the maximum and minimum of an array:</p>
+<pre>
+<b>var</b> arr = &lbrack;1, 2, 3, 4, 5, 6, 7, 8, 9&rbrack;,
+  max = Math.max(&hellip;arr),
+  min = Math.min(&hellip;arr);
+console.log(max); // <i> Logs: 9</i>
+console.log(min); // <i> Logs: 1</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-16">Section 14.16: Restrict Number to Min/Max Range</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-If you need to clamp a number to keep it inside a specific range
-boundary
-<b>function</b>
-clamp
-(
-min
-,
-max
-,
-val
-)
-{
-<b>return</b>
-Math
-.
-min
-(
-Math
-.
-max
-(
-min
-,
-&plus;
-val
-)
-,
-max
-)
-;
+<p>If you need to clamp a number to keep it inside a specific range boundary</p>
+<pre>
+<b>function</b> clamp(min, max, val) {
+  <b>return</b> Math.min(Math.max(min, &plus;val), max);
 }
-console.
-log
-(
-clamp
-(
-&minus;
-10
-,
-10
-,
-&quot;4.30&quot;
-)
-)
-;
-// <i> 4.3</i>
-console.
-log
-(
-clamp
-(
-&minus;
-10
-,
-10
-,
-&minus;
-8
-)
-)
-;
-// <i> -8</i>
-console.
-log
-(
-clamp
-(
-&minus;
-10
-,
-10
-,
-12
-)
-)
-;
-// <i> 10</i>
-console.
-log
-(
-clamp
-(
-&minus;
-10
-,
-10
-,
-&minus;
-15
-)
-)
-;
-// <i> -10</i>
-[Use-case example (jsFiddle)](https://jsfiddle.net/RokoCB/8drqL3vo/)
+
+console.log(clamp(&minus;10, 10, &quot;4.30&quot;));  // <i> 4.3</i>
+console.log(clamp(&minus;10, 10, &minus;8));  // <i> -8</i>
+console.log(clamp(&minus;10, 10, 12));  // <i> 10</i>
+console.log(clamp(&minus;10, 10, &minus;15)); // <i> -10</i>
+</pre>
+<p><a href="https://jsfiddle.net/RokoCB/8drqL3vo/">Use-case example (jsFiddle)</a></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-17">Section 14.17: Ceiling and Floor</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>ceil()</b>
-ceil()
-The method rounds a number </i>upwards</i> to the nearest integer, and
-returns the result.
+<p><b>ceil()</b></p>
+<p>The ceil() method rounds a number </i>upwards</i> to the nearest integer, and
+returns the result.</p>
 
-<b>Syntax:</b>
-Math
-.
-ceil
-(
-n
-)
-;
-<b>Example:</b>
-console.
-log
-(
-Math
-.
-ceil
-(
-0.60
-)
-)
-;
-// <i> 1</i>
-console.
-log
-(
-Math
-.
-ceil
-(
-0.40
-)
-)
-;
-// <i> 1</i>
-console.
-log
-(
-Math
-.
-ceil
-(
-5.1
-)
-)
-;
-// <i> 6</i>
-console.
-log
-(
-Math
-.
-ceil
-(
-&minus;
-5.1
-)
-)
-;
-// <i> -5</i>
-console.
-log
-(
-Math
-.
-ceil
-(
-&minus;
-5.9
-)
-)
-;
-// <i> -5</i>
-<b>floor</b>
-<b>(</b>
-<b>)</b>
-floor()
-The method rounds a number </i>downwards</i> to the nearest integer, and
-returns the result.
-<b>Syntax:</b>
-Math
-.
-floor
-(
-n
-)
-;
-<b>Example:</b>
-console.
-log
-(
-Math
-.
-ceil
-(
-0.60
-)
-)
-;
-// <i> 0</i>
-console.
-log
-(
-Math
-.
-ceil
-(
-0.40
-)
-)
-;
-// <i> 0</i>
-console.
-log
-(
-Math
-.
-ceil
-(
-5.1
-)
-)
-;
-// <i> 5</i>
-console.
-log
-(
-Math
-.
-ceil
-(
-&minus;
-5.1
-)
-)
-;
-// <i> -6</i>
-console.
-log
-(
-Math
-.
-ceil
-(
-&minus;
-5.9
-)
-)
-;
-// <i> -6</i>
+<p><b>Syntax:</b></p>
+<pre>
+Math.ceil(n);
+</pre>
+<p><b>Example:</b></p>
+<pre>
+console.log(Math.ceil(0.60)); // <i> 1</i>
+console.log(Math.ceil(0.40)); // <i> 1</i>
+console.log(Math.ceil(5.1));  // <i> 6</i>
+console.log(Math.ceil(&minus;5.1)); // <i> -5</i>
+console.log(Math.ceil(&minus;5.9)); // <i> -5</i>
+</pre>
+<p>The floor() method rounds a number </i>downwards</i> to the nearest integer, and
+returns the result.</p>
+<p><b>Syntax:</b></p>
+<!-- page 142 -->
+<pre>
+Math.floor(n);
+</pre>
+<p><b>Example:</b></p>
+<pre>
+console.log(Math.ceil(0.60)); // <i> 0</i>
+console.log(Math.ceil(0.40)); // <i> 0</i>
+console.log(Math.ceil(5.1));  // <i> 5</i>
+console.log(Math.ceil(&minus;5.1)); // <i> -6</i>
+console.log(Math.ceil(&minus;5.9)); // <i> -6</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-18">Section 14.18: Getting roots of a number</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Square Root</b>
-Math.sqrt
-Use () to find the square root of a number
-Math
-.
-sqrt
-(
-16
-)
-&bsol;#
-=&gt;
-4
-<b>Cube Root</b>
-Math.cbrt
-To find the cube root of a number, use the () function
+<p><b>Square Root</b></p>
+<p>Use Math.sqrt() to find the square root of a number</p>
+<pre>
+Math.sqrt(16)  &bsol;#=&gt; 4
+</pre>
+<p><b>Cube Root</b></p>
+<p>To find the cube root of a number, use the Math.cbrt() function</p>
 <h5>Version ≥ 6</h5>
+<pre>
 Math.cbrt(27) #=&bsol;3
-<b>Finding nth-roots</b>
-Math.pow
-To find the nth-root, use the () function and pass in a fractional
-exponent.
-Math
-.
-pow
-(
-64
-,
-1
-/
-6
-)
-&bsol;#
-=&gt;
-2
+</pre>
+<p><b>Finding nth-roots</b></p>
+<p>To find the nth-root, use the Math.pow() function and pass in a fractional exponent.</p>
+<pre>
+Math.pow(64, 1/6) &bsol;#=&gt; 2
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-19">Section 14.19: Random with gaussian distribution</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Math.random
-The () function should give random numbers that have a standard
+<p>The Math.random() function should give random numbers that have a standard
 deviation approaching 0. When picking from a deck of card, or
-simulating a dice roll this is what we want.
+simulating a dice roll this is what we want.</p>
 
-But in most situations this is unrealistic. In the real world the
+<p>But in most situations this is unrealistic. In the real world the
 randomness tends to gather around an common normal value. If plotted
-on a graph you get the classical bell curve or gaussian distribution.
-Math.random
-To do this with the () function is relatively simple.
+on a graph you get the classical bell curve or gaussian distribution.</p>
 
-<b>var</b> randNum = (Math.random() + Math.random()) / 2; <b>var</b> randNum
-= (Math.random() + Math.random() + Math.random()) / 3;
-
-<b>var</b> randNum = (Math.random() + Math.random() + Math.random() +
-Math.random()) / 4;
-
-Adding a random value to the last increases the variance of the random
+<p>To do this with the Math.random() function is relatively simple.</p>
+<pre>
+<b>var</b> randNum = (Math.random() + Math.random()) / 2;
+<b>var</b> randNum = (Math.random() + Math.random() + Math.random()) / 3;
+<b>var</b> randNum = (Math.random() + Math.random() + Math.random() + Math.random()) / 4;
+</pre>
+<p>Adding a random value to the last increases the variance of the random
 numbers. Dividing by the number of times you add normalises the result
-to a range of 01
+to a range of 0-1</p>
 
-As adding more than a few randoms is messy a simple function will
-allow you to select a variance you want.
+<p>As adding more than a few randoms is messy a simple function will
+allow you to select a variance you want.</p>
+<pre>
 // <i> v is the number of times random is summed and should be over &gt;= 1</i>
 // <i> return a random number between 0-1 exclusive</i>
-<b>function</b>
-randomG
-(
-v
-)
-{
-<b>var</b>
-r
-=
-0
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-v
-;
-i
-&gt;
-0
-;
-i
-&bsol;
-)
-{
-r
-+=
-Math
-.
-random
-(
-)
-;
+<b>function</b> randomG(v) {
+  <b>var</b> r = 0;
+  <b>for</b> (<b>var</b> i = v; i &gt; 0; i&bsol;) {
+    r += Math.random();
+  }
+  <b>return</b> r / v;
 }
-<b>return</b>
-r
-/
-v
-;
-}
-The image shows the distribution of random values for different values
-of v. The top left is standard single
-Math.random() call the bottom right is Math.random () summed 8 times. This is from 5,000,000 samples using Chrome
+</pre>
+https://i.stack.imgur.com/Six4L.png
 
-<h5>This method is most efficient at v&lt;5</h5>
+<p>The image shows the distribution of random values for different values of v. The top 
+left is standard single Math.random() call the bottom right is Math.random () summed 8 
+times. This is from 5,000,000 samples using Chrome</p>
+
+<p>This method is most efficient at v&lt;5</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-20">Section 14.20: Math.atan2 to find direction</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-If you are working with vectors or lines you will at some stage want
+<p>If you are working with vectors or lines you will at some stage want
 to get the direction of a vector, or line. Or the direction from a
-point to another point.
-Math.atan( yComponent, xComponent ) return the angle in radius    Math.PI to Math.PI 
-(- 180 within the range of ?? to 180 deg)
-<b>Direction of a vector</b>
-<b>var</b>
-vec
-=
-{
-x
-:
-4
-,
-y
-:
-3
-}
-;
-<b>var</b>
-dir
-=
-Math
-.
-atan2
-(
-vec.
-y
-,
-vec.
-x
-)
-;
-// <i> 0.6435011087932844</i>
-<b>Direction of a line</b>
-<b>var</b>
-line
-=
-{
-p1
-:
-{
-x
-:
-100
-,
-y
-:
-128
-}
-,
-p2
-:
-{
-x
-:
-320
-,
-y
-:
-256
-}
+point to another point.</p>
+<p>Math.atan( yComponent, xComponent ) return the angle in radius Math.PI to 
+Math.PI(- 180 within the range of ?? to 180 deg)</p>
+
+<p><b>Direction of a vector</b></p>
+<pre>
+<b>var</b> vec = {x : 4, y : 3};
+<b>var</b> dir = Math.atan2(vec.y, vec.x); // <i> 0.6435011087932844</i>
+<p><b>Direction of a line</b></p>
+<pre>
+<b>var</b> line = {
+  p1 : { x : 100, y : 128},
+  p2 : { x : 320, y : 256}
 }
 // <i> get the direction from p1 to p2</i>
-<b>var</b>
-dir
-=
-Math
-.
-atan2
-(
-line.
-p2
-.
-y
-&minus;
-line.
-p1
-.
-y
-,
-line.
-p2
-.
-x
-&minus;
-line.
-p1
-.
-x
-)
-;
-// <i>0.5269432271894297</i>
-<b>Direction from a point to another point</b>
-<b>var</b> point1 = { x: 123, y : 294}; <b>var</b> point2 = { x: 354, y :
-284};
+<b>var</b> dir = Math.atan2(line.p2.y &minus; line.p1.y, line.p2.x &minus; line.p1.x);  // <i>0.5269432271894297</i>
+</pre>
+<p><b>Direction from a point to another point</b></p>
+<pre>
+<b>var</b> point1 = { x: 123, y : 294};
+<b>var</b> point2 = { x: 354, y : 284};
 // <i>get the direction from point1 to point2</i>
-<b>var</b> dir = Math.atan2(point2.y - point1.y, point2.x - point1.x);
-// <i>-0.04326303140726714</i>
+<b>var</b> dir = Math.atan2(point2.y - point1.y, point2.x - point1.x); // <i>-0.04326303140726714</i>
+</pre>
 <!-- thru 14.20 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-21">Section 14.21: Sin & Cos to create a vector given direction & distance</h3>
