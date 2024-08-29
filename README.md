@@ -8943,7 +8943,7 @@ console.log(&minus; 3 &ast; &minus;5); // <i> 15</i>
 <pre>
 Math.max( 4, 12 );  // <i> 12</i>
 Math.max(&minus;1, &minus;15); // <i> -1</i>
-<pre>
+</pre>
 <p>The Math.min() function returns the smallest of zero or more numbers.</p>
 <pre>
 Math.min( 4, 12 ); // <i>4</i>
