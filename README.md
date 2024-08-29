@@ -9188,273 +9188,116 @@ dist = Math.hypot(v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-23">Section 14.23: Periodic functions using Math.sin</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Math.sin and Math.cos
-are cyclic with a period of 2&ast;PI radians (360 deg) they output a wave
-with an amplitude of 2 in the range -1 to 1.
+<p>Math.sin and Math.cos are cyclic with a period of 2&ast;PI radians (360 deg) they output a wave
+with an amplitude of 2 in the range -1 to 1.</p>
 
-Graph of sine and cosine function: *(courtesy Wikipedia)*
+<p>Graph of sine and cosine function: <i>(courtesy Wikipedia)</i></p>
 ![](./images/image028.png){width="6.252083333333333in"
 height="3.990972222222222in"}
 
-They are both very handy for many types of periodic calculations, from
+<p>They are both very handy for many types of periodic calculations, from
 creating sound waves, to animations, and even encoding and decoding
-image data
+image data</p>
 
-This example shows how to create a simple sin wave with control over
-period/frequency, phase, amplitude, and offset.
+<p>This example shows how to create a simple sin wave with control over
+period/frequency, phase, amplitude, and offset.</p>
 
-The unit of time being used is seconds.
-
-The most simple form with control over frequency only.
+<p>The unit of time being used is seconds.<br/>
+The most simple form with control over frequency only.</p>
+<pre>
 // <i>time is the time in seconds when you want to get a sample</i>
 // <i>Frequency represents the number of oscillations per second</i>
-<b>function</b>
-oscillator
-(
-time
-,
-frequency
-)
-{
-<b>return</b>
-Math
-.
-sin
-(
-time
-&ast;
-2
-&ast;
-Math
-.
-PI
-&ast;
-frequency
-)
-;
+<b>function</b> oscillator(time, frequency) {
+<b>return</b> Math.sin(time &ast; 2 &ast; Math.PI &ast; frequency);
 }
-In almost all cases you will want to make some changes to the value
-returned. The common terms for modifications
-
-Phase: The offset in terms of frequency from the start of the
-oscillations. It is a value in the range of 0 to 1 where the value 0.5
-move the wave forward in time by half its frequency. A value of 0 or 1
-makes no change. Amplitude: The distance from the lowest value and
-highest value during one cycle. An amplitude of 1 has a range of 2.
-The lowest point (trough) -1 to the highest (peak) 1. For a wave with
-frequency 1 the peak is at
-
-0.25 seconds, and trough at 0.75.
-
-Offset: moves the whole wave up or down.
-
-To include all these in the function:
-
-<b>function</b> oscillator(time, frequency = 1, amplitude = 1, phase = 0,
-offset = 0){ <b>var</b> t = time &ast; frequency &ast; Math.PI &ast; 2; // <i>get phase at time</i>
-t
-+=
-phase
-&ast;
-Math
-.
-PI
-&ast;
-2
-;
-// <i>add the phase offset</i>
-<b>var</b>
-v
-=
-Math
-.
-sin
-(
-t
-)
-;
-// <i>get the value at the calculated position in the cycle</i>
-v
-&ast;=
-amplitude
-;
-// <i>set the amplitude</i>
-v
-+=
-offset
-;
-// <i>add the offset</i>
-<b>return</b>
-v
-;
+</pre>
+<p>In almost all cases you will want to make some changes to the value
+returned. The common terms for modifications</p>
+<ul>
+  <li>Phase: The offset in terms of frequency from the start of the oscillations. It is a 
+    value in the range of 0 to 1 where the value 0.5 move the wave forward in time by half 
+	its frequency. A value of 0 or 1 makes no change.</li>
+  <li>Amplitude: The distance from the lowest value and highest value during one cycle. 
+    An amplitude of 1 has a range of 2. The lowest point (trough) -1 to the highest 
+	(peak) 1. For a wave with frequency 1 the peak is at 0.25 seconds, and trough at 
+	0.75.</li>
+  <li>Offset: moves the whole wave up or down.</li>
+</ul>
+<p>To include all these in the function:</p>
+<!-- page 146 -->
+<pre>
+<b>function</b> oscillator(time, frequency = 1, amplitude = 1, phase = 0, offset = 0) {
+  <b>var</b> t = time &ast; frequency &ast; Math.PI &ast; 2; // <i>get phase at time</i>
+  t += phase &ast; Math.PI &ast; 2;  // <i>add the phase offset</i>
+  <b>var</b> v = Math.sin(t);  // <i>get the value at the calculated position in the cycle</i>
+  v &ast;= amplitude;  // <i>set the amplitude</i>
+  v += offset;  // <i>add the offset</i>
+  <b>return</b> v;
 }
-Or in a more compact (and slightly quicker form):
-
-<b>function</b> oscillator(time, frequency = 1, amplitude = 1, phase = 0,
-offset = 0){ <b>return</b> Math.sin(time &ast; frequency &ast; Math.PI &ast; 2 +
-phase &ast; Math.PI &ast; 2) &ast; amplitude + offset; }
-
-All the arguments apart from time are optional
+</pre>
+<p>Or in a more compact (and slightly quicker form):</p>
+<pre>
+<b>function</b> oscillator(time, frequency = 1, amplitude = 1, phase = 0, offset = 0) { 
+  <b>return</b> Math.sin(time &ast; frequency &ast; Math.PI &ast; 2 + phase &ast; Math.PI &ast; 2) &ast; amplitude + offset; 
+  }
+</pre>
+<p>All the arguments apart from time are optional</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-24">Section 14.24: Division (/)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The division operator (/) perform arithmetic division on numbers
-(literals or variables).
-console.
-log
-(
-15
-/
-3
-)
-;
-// <i>5</i>
-console.
-log
-(
-15
-/
-4
-)
-;
-// <i>3.75</i>
+<p>The division operator (/) perform arithmetic division on numbers (literals or variables).</p>
+<pre>
+console.log(15 / 3);  // <i>5</i>
+console.log(15 / 4);  // <i>3.75</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-25">Section 14.25: Decrementing (&rpar;</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The decrement operator (&rpar; decrements numbers by one.
-If used as a postfix to
-n
-, the operator returns the current
-n
-and
-*then*
-assigns the decremented the value.
-If used as a prefix to
-n
-, the operator assigns the decremented
-n
-and
-*then*
-returns the changed value.
-<b>var</b>
-a
-=
-5
-,
-// <i>5</i>
-b
-=
-a
-&bsol;
-,
-// <i>5</i>
-c
-=
-a
-// <i>4</i>
-In this case, b is set to the initial value of a. So, b will be 5, and
-c will be 4.
-<b>var</b>
-a
-=
-5
-,
-// <i>5</i>
-b
-=
-&bsol;
-a
-,
-// <i>4</i>
-c
-=
-a
-// <i>4</i>
-In this case, b is set to the new value of a. So, b will be 4, and c
-will be 4.
-
-<b>Common Uses</b>
-
-The decrement and increment operators are commonly used in <b>for</b>
-loops, for example:
-<b>for</b>
-(
-<b>var</b>
-i
-=
-42
-;
-i
-&gt;
-0
-;
-&bsol;
-i
-)
-{
-console.
-log
-(
-i
-)
+<p>The decrement operator (&rpar; decrements numbers by one.</p>
+<ul>
+  <li>If used as a postfix to n, the operator returns the current n and <i>then</i> assigns 
+    the decremented the value.</li>
+  <li>If used as a prefix to n, the operator assigns the decremented n and <i>then</i> returns 
+    the changed value.</li>
+</ul>
+<pre>
+<b>var</b> a = 5,  // <i>5</i>
+    b = a&bsol;,   // <i>5</i>
+    c = a          // <i>4</i>
+</pre>
+<p>In this case, b is set to the initial value of a. So, b will be 5, and c will be 4.</p>
+<pre>
+<b>var</b> a = 5, // <i>5</i>
+    b = &bsol;a,  // <i>4</i>
+    c = a         // <i>4</i>
+</pre>
+<p>In this case, b is set to the new value of a. So, b will be 4, and c will be 4.</p>
+<p><b>Common Uses</b></p>
+<p>The decrement and increment operators are commonly used in <b>for</b> loops, for example:</p>
+<pre>
+<b>for</b> (<b>var</b> i = 42; i &gt; 0; &bsol;i) {
+  console.log (i)
 }
-Notice how the *prefix* variant is used. This ensures that a
-temporarily variable isn&apos;t needlessly created (to return the value
-prior to the operation).
+</pre>
+<p>Notice how the *prefix* variant is used. This ensures that a temporarily variable isn&apos;t 
+needlessly created (to return the value prior to the operation).</p>
+<!-- page 147 -->
+<blockquote>
+<b>Note:</b> Neither &bsol; nor ++ are like normal mathematical operators, but rather they are 
+very concise operators for <i>assignment</i>. Notwithstanding the return value, both
 
-<b>Note:</b> Neither &bsol; nor ++ are like normal mathematical operators,
-but rather they are very concise operators for *assignment*.
-Notwithstanding the return value, both
 x&bsol;
 and
-&bsol;
-x
-reassign to
-x
-such that
-x
-=
-x
-&minus;
-1
-.
-<b>const</b>
-x
-=
-1
-;
-console.
-log
-(
-x
-&bsol;
-)
-// <i>TypeError: Assignment to constant variable.</i>
-console.
-log
-(
-&bsol;
-x
-)
-// <i>TypeError: Assignment to constant variable.</i>
-console.
-log
-(
-&bsol;
-3
-)
-// <i>ReferenceError: Invalid left-hand size expression in prefix
-operation.</i>
-console.log
-(
-3
-&bsol;
-)
-// <i>ReferenceError: Invalid left-hand side expression in postfix
-operation.</i>
+&bsol;x
+reassign to x such that x = x &minus; 1.
+</blockquote>
+<pre>
+<b>const</b> x = 1;
+console.log(x&bsol;)  // <i>TypeError: Assignment to constant variable.</i>
+console.log(&bsol;x)  // <i>TypeError: Assignment to constant variable.</i>
+console.log(&bsol;3)  // <i>ReferenceError: Invalid left-hand size expression in prefix operation.</i>
+console.log(3&bsol;)  // <i>ReferenceError: Invalid left-hand side expression in postfix operation.</i>
+</pre>
 <!-- thru chapter 14 & section 14.25 -->
 
 
