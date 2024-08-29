@@ -2330,6 +2330,7 @@ detailed description.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-2">Section 19.2: Currying</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 
 [Currying](https://en.wikipedia.org/wiki/Currying) is the
 transformation of a function of n arity or arguments into a sequence
@@ -2514,6 +2515,7 @@ cannot use ()(3)(5).
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-3">Section 19.3: Immediately Invoked Function Expressions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 
 Sometimes you don&apos;t want to have your function accessible/stored as a
 variable. You can create an Immediately Invoked Function Expression
@@ -2788,7 +2790,7 @@ log
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-4">Section 19.4: Named Functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
+<!--
 Functions can either be named or unnamed (anonymous functions):
 
 **var**
@@ -3608,96 +3610,56 @@ name
 ;
 
 *// outputs &apos;bar&apos;*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-5">Section 19.5: Binding &grave;this&grave; and arguments</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-Version ≥ 5.1
+<!--
+<h5>Version ≥ 5.1</h5>
 
 When you take a reference to a method (a property which is a function)
 in JavaScript, it usually doesn&apos;t remember the object it was
 originally attached to. If the method needs to refer to that object as
 **this** it won&apos;t be able to, and calling it will probably cause a
 crash.
-
-  
-  bind
-  
-
-  
+bind
 
 You can use the .() method on a function to create a wrapper that
 includes the value of **this** and any number of leading arguments.
 
 **var**
-
 monitor
-
 =
-
 {
-
 threshold
-
 :
-
 5
-
 ,
-
 check
-
 :
-
 **function**
-
 (
-
 value
-
 )
-
 {
-
 **if**
-
 (
-
 value
-
 &gt;
-
 **this**
-
 .
-
 threshold
-
 )
-
 {
-
 **this**
-
 .
-
 display
-
 (
-
 &quot;Value is too high!&quot;
-
 )
-
 ;
-
 }
-
 }
-
 ,
-
 display
 
 (
@@ -4263,11 +4225,11 @@ console
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-6">Section 19.6: Functions with an Unknown Number of Arguments (variadic functions)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
+<!--
 To create a function which accepts an undetermined number of
 arguments, there are two methods depending on your environment.
 
-Version ≤ 5
+<h5>Version ≤ 5</h5>
 
 Whenever a function is called, it has an Array-like
 [arguments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments)
@@ -4276,51 +4238,28 @@ function. Indexing into or iterating over this will give access to the
 arguments, for example
 
 **function**
-
 logSomeThings
-
 (
-
 )
-
 {
-
 **for**
-
 (
-
 **var**
-
 i
-
 =
-
 0
-
 ;
-
 i
-
 &lt;
-
 arguments.
-
 length
-
 ;
-
 ++
-
 i
-
 )
-
 {
-
 console.
-
 log
-
 (
 
 arguments
@@ -4610,90 +4549,56 @@ generateNumbers
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-7">Section 19.7: Anonymous Function</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
+<!--
 **Defining an Anonymous Function**
->
 When a function is defined, you often give it a name and then invoke
 it using that name, like so:
-
 foo
-
 (
-
 )
-
 ;
-
 **function**
-
 foo
-
 (
-
 )
-
 {
-
 *// &hellip;*
-
 }
-
 When you define a function this way, the JavaScript runtime stores
 your function in memory and then creates a reference to that function,
 using the name you&apos;ve assigned it. That name is then accessible
 within the current scope. This can be a very convenient way to create
 a function, but JavaScript does not require you to assign a name to a
 function. The following is also perfectly legal:
-
 **function**
-
 (
-
 )
-
 {
-
 *// &hellip;*
-
 }
-
 When a function is defined without a name, it&apos;s known as an anonymous
 function. The function is stored in memory, but the runtime doesn&apos;t
 automatically create a reference to it for you. At first glance, it
 may appear as if such a thing would have no use, but there are several
 scenarios where anonymous functions are very convenient.
->
+
 **Assigning an Anonymous Function to a Variable**
->
+
 A very common use of anonymous functions is to assign them to a
 variable:
-
 **var**
-
 foo
-
 =
-
 **function**
-
 (
-
 )
-
 {
-
 */&ast;&hellip;&ast;/*
-
 }
-
 ;
-
 foo
-
 (
-
 )
-
 ;
 
 This use of anonymous functions is covered in more detail in Functions
@@ -4712,108 +4617,61 @@ each element of an array, then build a new array by applying a
 transform function to each element.
 
 **var**
-
 nums
-
 =
-
 &lbrack;
-
 0
-
 ,
-
 1
-
 ,
-
 2
-
 &rbrack;
-
 ;
-
 **var**
-
 doubledNums
-
 =
-
 nums.
-
 map
-
 (
-
 **function**
-
 (
-
 element
-
 )
-
 {
-
 **return**
-
 element
-
 &ast;
-
 2
-
 ;
-
 }
-
 )
-
 ;
-
 *// &lbrack;0,2,4&rbrack;*
-
 It would be tedious, sloppy and unnecessary to create a named
 function, which would clutter your scope with a function only needed
 in this one place and break the natural flow and reading of your code
 (a colleague would have to leave this code to find your function to
 understand what&apos;s going on).
->
+
 **Returning an Anonymous Function From Another Function**
->
+
 Sometimes it&apos;s useful to return a function as the result of another
 function. For example:
-
 **var**
-
 hash
-
 =
-
 getHashFunction
-
 (
-
 &apos;sha1&apos;
-
 )
-
 ;
-
 **var**
-
 hashValue
-
 =
-
 hash
-
 (
-
 &apos;Secret Value&apos;
-
 )
-
 ;
 
 **function**
@@ -5426,7 +5284,7 @@ variable)*
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-8">Section 19.8: Default parameters</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
+<!--
 Before ECMAScript 2015 (ES6), a parameter&apos;s default value could be
 assigned in the following way:
 
@@ -5764,33 +5622,19 @@ add
 2
 
 ,
-
 7
-
 )
-
 ;
-
 *// 18, 18*
-
 add
-
 (
-
 1
-
 ,
-
 2
-
 ,
-
 5
-
 )
-
 ;
-
 *// 8, 10*
 
 add
@@ -5827,13 +5671,9 @@ array
 =
 
 &lbrack;
-
 1
-
 &rbrack;
-
 ;
-
 *// meaningless: this will be overshadowed in the function&apos;s scope*
 
 **function**
@@ -5923,120 +5763,68 @@ add
 ;
 
 *// &lbrack;5, 6&rbrack;*
-
 **arguments value and length when lacking parameters in invocation**
->
 The arguments array object only retains the parameters whose values
 are not default, i.e. those that are explicitly provided when the
 function is invoked:
-
-Version ≥ 6
-
+<h5>Version ≥ 6</h5>
 **function**
-
 foo
-
 (
-
 a
-
 =
-
 1
-
 ,
-
 b
-
 =
-
 a
-
 &plus;
-
 1
-
 )
-
 {
-
 console.
-
 info
-
 (
-
 arguments.
-
 length
-
 ,
-
 arguments
-
 )
-
 ;
-
 console.
-
 log
-
 (
-
 a
-
 ,
-
 b
-
 )
-
 ;
 
 }
 
 foo
-
 (
-
 )
-
 ;
-
 *// info: 0 &gt;&amp;lbrack;&rbrack; &vert; log: 1, 2*
-
 foo
-
 (
-
 4
-
 )
-
 ;
-
 *// info: 1 &gt;&amp;lbrack;4&rbrack; &vert; log: 4, 5*
-
 foo
-
 (
-
 5
-
 ,
-
 6
-
 )
-
 ;
-
 *// info: 2 &gt;&amp;lbrack;5, 6&rbrack; &vert; log: 5, 6*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-9">Section 19.9: Call and apply</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 Functions have two built-in methods that allow the programmer to
 supply arguments and the **this** variable differently: call and
 apply.
@@ -6121,201 +5909,105 @@ b
 obj.
 
 **set**
-
 (
-
 3
-
 ,
-
 7
-
 )
-
 ;
-
 *// normal syntax*
-
 obj.
-
 **set**
-
 .
-
-call
-
+all
 (
-
 obj
-
 ,
-
 3
-
 ,
-
 7
-
 )
-
 ;
-
 *// equivalent to the above*
-
 obj.
-
 **set**
-
 .
-
 apply
-
 (
-
 obj
-
 ,
-
 &lbrack;
-
 3
-
 ,
-
 7
-
 &rbrack;
-
 )
-
 ;
-
 *// equivalent to the above; note that an array is used*
-
 console.
-
 log
-
 (
-
 obj
-
 )
-
 ;
-
 *// prints { a: 3, b: 5 }*
-
 **let**
-
 myObj
-
 =
-
 {
-
 }
-
 ;
-
 myObj.
-
 **set**
-
 (
-
 5
-
 ,
-
 4
-
 )
-
 ;
-
 *// fails; myObj has no &grave;set&grave; property*
-
 obj.**set**.call(myObj, 5, 4); *// success; &grave;this&grave; in set() is
 re-routed to myObj instead of obj* obj.**set**.apply(myObj, &lbrack;5, 4&rbrack;);
 *// same as above; note the array*
->
+
 console.log(myObj); *// prints { a: 3, b: 5 }*
 
-Version ≥ 5
-
-  
-  **bind**   **()** in addition to          call     () and        apply
-  - -  - -
-
-  
-
+<h5>Version ≥ 5</h5>
+**bind**   **()** in addition to call() and apply
 ECMAScript 5 introduced another method called () to explicitly set
 **this** value of the function to specific object.
-
-  
-  bind
-  
-
-  
-
+bind
 It behaves quite differently than the other two. The first argument to
 () is the **this** value for the new function. All other arguments
 represent named parameters that should be permanently set in the new
 function.
 
 **function**
-
 showName
-
 (
-
 label
-
 )
-
 {
-
 console.
-
 log
-
 (
-
 label
-
 &plus;
-
 &quot;:&quot;
-
 &plus;
-
 **this**
-
 .
-
 name
-
 )
-
 ;
-
 }
-
 **var**
-
 student1
-
 =
-
 {
-
 name
-
 :
-
 &quot;Ravi&quot;
-
 }
 
 ;
@@ -6434,7 +6126,7 @@ sayName
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-10">Section 19.10: Partial Application</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
+<!--
 Similar to currying, partial application is used to reduce the number
 of arguments passed to a function. Unlike currying, the number need
 not go down by one.
@@ -6596,6 +6288,7 @@ parameters of a function.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-11">Section 19.11: Passing arguments by reference or value</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 In JavaScript all arguments are passed by value. When a function
 assigns a new value to an argument variable, that change will not be
 visible to the caller:
@@ -6996,6 +6689,7 @@ a
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-12">Section 19.12: Function Arguments, &quot;arguments&quot; object, rest and spread parameters</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 Functions can take inputs in form of variables that can be used and
 assigned inside their own scope. The following function takes two
 numeric values and returns their sum:
@@ -7307,7 +7001,7 @@ nums
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-13">Section 19.13: Function Composition</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
+<!--
 Composing multiple functions into one is a functional programming
 common practice;
 
@@ -7421,56 +7115,35 @@ x
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-14">Section 19.14: Get the name of a function object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-Version ≥ 6 **ES6**:
-
+<!--
+<h5>Version ≥ 6 <b>ES6</b>:</h5>
 myFunction.
-
 name
-
 [Explanation on
 MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name).
 As of 2015 works in Node.js and all major browsers except IE.
 
-Version ≥ 5
-
+<h5>Version ≥ 5</h5>
 **ES5**:
->
+
 If you have a reference to the function, you can do:
-
 **function**
-
 functionName
-
 (
-
 func
-
 )
-
 {
-
 *// Match:*
-
 *// - &Hat; the beginning of the string*
-
 *// - function the word &apos;function&apos;*
-
 *// - &bsol;&bsol;s+ at least some white space*
-
 *// - (&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+) capture one or more valid JavaScript identifier
 characters*
-
 *// - &amp;lpar; followed by an opening brace*
-
 *//*
-
 **var**
-
 result
-
 =
-
 */&Hat;function&bsol;&bsol;s+(&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+)&amp;lpar;/*
 
 .
@@ -7512,7 +7185,7 @@ result
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-15">Section 19.15: Recursive Function</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
+<!--
 A recursive function is simply a function, that would call itself.
 
 **function**
@@ -7692,6 +7365,7 @@ each call to be returned back up the call stack.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-16">Section 19.16: Using the Return Statement</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 The return statement can be a useful way to create output for a
 function. The return statement is especially useful if you do not know
 in which context the function will be used yet.
@@ -7941,414 +7615,216 @@ age
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-17">Section 19.17: Functions as a variable</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 A normal function declaration looks like this:
-
 **function**
-
 foo
-
 (
-
 )
-
 {
-
 }
-
 A function defined like this is accessible from anywhere within its
 context by its name. But sometimes it can be useful to treat function
 references like object references. For example, you can assign an
 object to a variable based on some set of conditions and then later
 retrieve a property from one or the other object:
-
 **var**
-
 name
-
 =
-
 &apos;Cameron&apos;
-
 ;
-
 **var**
-
 spouse
-
 ;
-
 **if**
-
 (
-
 name
-
 ===
-
 &apos;Taylor&apos;
-
 )
-
 spouse
-
 =
-
 {
-
 name
-
 :
-
 &apos;Jordan&apos;
-
 }
-
 ;
-
 **else**
-
 **if**
-
 (
-
 name
-
 ===
-
 &apos;Cameron&apos;
-
 )
-
 spouse
-
 =
-
 {
-
 name
-
 :
-
 &apos;Casey&apos;
-
 }
-
 ;
-
 **var**
-
 spouseName
-
 =
-
 spouse.
-
 name
-
 ;
-
 In JavaScript, you can do the same thing with functions:
-
 *// Example 1*
-
 **var**
-
 hashAlgorithm
-
 =
-
 &apos;sha1&apos;
-
 ;
-
 **var**
-
 hash
-
 ;
-
 **if**
-
 (
-
 hashAlgorithm
-
 ===
-
 &apos;sha1&apos;
-
 )
-
 hash
-
 =
-
 **function**
-
 (
-
 value
-
 )
-
 {
-
 */&ast;&hellip;&ast;/*
-
 }
-
 ;
-
 **else**
-
 **if**
-
 (
-
 hashAlgorithm
-
 ===
-
 &apos;md5&apos;
-
 )
-
 hash
-
 =
-
 **function**
-
 (
-
 value
-
 )
-
 {
-
 */&ast;&hellip;&ast;/*
-
 }
-
 ;
-
 hash
-
 (
-
 &apos;Fred&apos;
-
 )
-
 ;
-
 In the example above, hash is a normal variable. It is assigned a
 reference to a function, after which the function it references can be
 invoked using parentheses, just like a normal function declaration.
->
+
 The example above references anonymous functions&hellip; functions that do
 not have their own name. You can also use variables to refer to named
 functions. The example above could be rewritten like so:
-
 *// Example 2*
-
 **var**
-
 hashAlgorithm
-
 =
-
 &apos;sha1&apos;
-
 ;
-
 **var**
-
 hash
-
 ;
-
 **if**
-
 (
-
 hashAlgorithm
-
 ===
-
 &apos;sha1&apos;
-
 )
-
 hash
-
 =
-
 sha1Hash
-
 ;
-
 **else**
-
 **if**
-
 (
-
 hashAlgorithm
-
 ===
-
 &apos;md5&apos;
-
 )
-
 hash
-
 =
-
 md5Hash
-
 ;
-
 hash
-
 (
-
 &apos;Fred&apos;
-
 )
-
 ;
-
 **function**
-
 md5Hash
-
 (
-
 value
-
 )
-
 {
-
 *// &hellip;*
-
 }
-
 **function**
-
 sha1Hash
-
 (
-
 value
-
 )
-
 {
-
 *// &hellip;*
-
 }
-
 Or, you can assign function references from object properties:
-
 *// Example 3*
-
 **var**
-
 hashAlgorithms
-
 =
-
 {
-
 sha1
-
 :
-
 **function**
-
 (
-
 value
-
 )
-
 {
-
 */&ast;&ast;/*
-
 }
-
 ,
-
 md5
-
 :
-
 **function**
-
 (
-
 value
-
 )
-
 {
-
 */&ast;&ast;/*
-
 }
-
 }
-
 ;
-
 **var**
-
 hashAlgorithm
-
 =
-
 &apos;sha1&apos;
-
 ;
-
 **var**
-
 hash
-
 ;
-
 **if**
-
 (
-
 hashAlgorithm
-
 ===
-
 &apos;sha1&apos;
-
 )
-
 hash
-
 =
-
 hashAlgorithms.
-
 sha1
-
 ;
-
 **else**
-
 **if**
-
 (
 
 hashAlgorithm
@@ -8652,396 +8128,208 @@ functionVariable
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch20-1">Section 20.1: Higher-Order Functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 In general, functions that operate on other functions, either by
 taking them as arguments or by returning them (or both), are called
 higher-order functions.
-
 A higher-order function is a function that can take another function
 as an argument. You are using higher-order functions when passing
 callbacks.
-
 **function**
-
 iAmCallbackFunction
-
-(
-
 )
-
 {
-
 console.
-
 log
-
 (
-
 &quot;callback has been invoked&quot;
-
 )
-
 ;
-
 }
-
 **function**
-
 iAmJustFunction
-
 (
-
 callbackFn
-
 )
-
 {
-
 *// do some stuff &hellip;*
-
 *// invoke the callback function.*
-
 callbackFn
-
 (
-
 )
-
 ;
-
 }
-
 *// invoke your higher-order function with a callback function.*
-
 iAmJustFunction
-
 (
-
 iAmCallbackFunction
-
 )
-
 ;
-
 A higher-order function is also a function that returns another
 function as its result.
-
 **function**
-
 iAmJustFunction
-
 (
-
 )
-
 {
-
 *// do some stuff &hellip;*
-
 *// return a function.*
-
 **return**
-
 **function**
-
 iAmReturnedFunction
-
 (
-
 )
-
 {
-
 console.
-
 log
-
 (
-
 &quot;returned function has been invoked&quot;
-
 )
-
 ;
-
 }
-
 }
-
 *// invoke your higher-order function and its returned function.*
-
 iAmJustFunction
-
 (
-
 )
-
 (
-
 )
-
 ;
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch20-2">Section 20.2: Identity Monad</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 This is an example of an implementation of the identity monad in
 JavaScript, and could serve as a starting point to create other
 monads.
-
 Based on the [conference by Douglas Crockford on monads and
 gonads](https://www.youtube.com/watch?v=b0EF0VTs9Dc)
-
 Using this approach reusing your functions will be easier because of
 the flexibility this monad provides, and composition nightmares:
-
 f
-
 (
-
 g
-
 (
-
 h
-
 (
-
 i
-
 (
-
 j
-
 (
-
 k
-
 (
-
 value
-
 )
-
 ,
-
 j1
-
 )
-
 ,
-
 i2
-
 )
-
 ,
-
 h1
-
 ,
-
 h2
-
 )
-
 ,
-
 g1
-
 ,
-
 g2
-
 )
-
 ,
-
 f1
-
 ,
-
 f2
-
 )
-
 readable, nice and clean:
-
 identityMonad
-
 (
-
 value
-
 )
-
 .
-
 bind
-
 (
-
 k
-
 )
-
 .
-
 bind
-
 (
-
 j
-
 ,
-
 j1
-
 ,
-
 j2
-
 )
-
 .
-
 bind
-
 (
-
 i
-
 ,
-
 i2
-
 )
-
 .bind(h, h1, h2)
->
 .bind(g, g1, g2)
->
 .bind(f, f1, f2);
-
 **function**
-
 identityMonad
-
 (
-
 value
-
 )
-
 {
-
 **var**
-
 monad
-
 =
-
 Object
-
 .
-
 create
-
 (
-
 **null**
-
 )
-
 ;
-
 *// func should return a monad*
-
 monad.
-
 bind
-
 =
-
 **function**
-
 (
-
 func
-
 ,
-
 &hellip;
-
 args
-
 )
-
 {
-
 **return**
-
 func
-
 (
-
 value
-
 ,
-
 &hellip;
-
 args
-
 )
-
 ;
-
 }
-
 ;
-
 *// whatever func does, we get our monad back*
-
 monad.
-
 call
-
 =
-
 **function**
-
 (
-
 func
-
 ,
-
 &hellip;
-
 args
-
 )
-
 {
-
 func
-
 (
-
 value
-
 ,
-
 &hellip;
-
 args
-
 )
-
 ;
-
 **return**
-
 identityMonad
 
 (
@@ -9588,466 +8876,244 @@ multiply
 ,
 
 1239
-
 )
-
 .
-
 bind
-
 (
-
 divideMonad
-
 ,
-
 20
-
 ,
-
 54
-
 ,
-
 2
-
 )
-
 .
-
 apply
-
 (
-
 Math
-
 .
-
 round
-
 )
-
 .
-
 call
-
 (
-
 log
-
 )
-
 ;
-
 *// Logs 29*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch20-3">Section 20.3: Pure Functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
+<!--
 A basic principle of functional programming is that it **avoids
 changing** the application state (statelessness) and variables outside
 its scope (immutability).
-
 Pure functions are functions that:
-
 with a given input, always return the same output they do not rely on
 any variable outside their scope
-
 they do not modify the state of the application (**no side effects**)
-
 Let&apos;s take a look at some examples:
-
 Pure functions must not change any variable outside their scope
-
 **Impure function**
-
 **let**
-
 obj
-
 =
-
 {
-
 a
-
 :
-
 0
-
 }
-
 **const**
-
 impure
-
 =
-
 (
-
 input
-
 )
-
 =&gt;
-
 {
-
 *// Modifies input.a*
-
 input.
-
 a
-
 =
-
 input.
-
 a
-
 &plus;
-
 1
-
 ;
-
 **return**
-
 input.
-
 a
-
 ;
-
 }
-
 **let**
-
 b
-
 =
-
 impure
-
 (
-
 obj
-
 )
-
 console.
-
 log
-
 (
-
 obj
-
 )
-
 *// Logs { &quot;a&quot;: 1 }*
-
 console.
-
 log
-
 (
-
 b
-
 )
-
 *// Logs 1*
-
-  
-  obj.
-  
-
-  
+obj.
 
 The function changed the a value that is outside its scope.
->
+
 **Pure function**
-
 **let**
-
 obj
-
 =
-
 {
-
 a
-
 :
-
 0
-
 }
-
 **const**
-
 pure
-
 =
-
 (
-
 input
-
 )
-
 =&gt;
-
 {
-
 *// Does not modify obj*
-
 **let**
-
 output
-
 =
-
 input.
-
 a
-
 &plus;
-
 1
-
 ;
-
 **return**
-
 output
-
 ;
-
 }
-
 **let** b = pure(obj) console.log(obj) *// Logs { &quot;a&quot;: 0 }*
 console.log(b) *// Logs 1*
->
 The function did not change the object obj values
-
 Pure functions must not rely on variables outside their scope
-
 **Impure function**
-
 **let**
-
 a
-
 =
-
 1
-
 ;
-
 **let**
-
 impure
-
 =
-
 (
-
 input
-
 )
-
 =&gt;
-
 {
-
 *// Multiply with variable outside function scope*
-
 **let**
-
 output
-
 =
-
 input
-
 &ast;
-
 a
-
 ;
-
 **return**
-
 output
-
 ;
-
 }
-
 console.
-
 log
-
 (
-
 impure
-
 (
-
 2
-
 )
-
 )
-
 *// Logs 2*
-
 a
-
 ++
-
 ;
-
 *// a becomes equal to 2*
-
 console.
-
 log
-
 (
-
 impure
-
 (
-
 2
-
 )
-
 )
-
 *// Logs 4*
-
 This **impure** function rely on variable a that is defined outside
 its scope. So, if a is modified, impure&apos;s function result will be
 different.
->
+
 **Pure function**
-
 **let**
-
 pure
-
 =
-
 (
-
 input
-
 )
-
 =&gt;
-
 {
-
 **let**
-
 a
-
 =
-
 1
-
 ;
-
 *// Multiply with variable inside function scope*
-
 **let**
-
 output
-
 =
-
 input
-
 &ast;
-
 a
-
 ;
-
 **return**
-
 output
-
 ;
-
 }
-
 console.
-
 log
-
 (
-
 pure
-
 (
-
 2
-
 )
-
 )
-
 *// Logs 2*
-
 The pure&apos;s function result **does not rely** on any variable outside
 its scope.
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch20-4">Section 20.4: Accepting Functions as Arguments</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
+<!--
 **function**
-
 transform
-
 (
-
 fn
-
 ,
-
 arr
-
 )
-
 {
-
 **let**
-
 result
-
 =
-
 &lbrack;
-
 &rbrack;
-
 ;
-
 **for**
-
 (
-
 **let**
-
 el of arr
-
 )
 
 {
@@ -10202,35 +9268,21 @@ constructor as well)
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch21-1">Section 21.1: Creation and initialising Prototype</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
+<!--
 **var**
-
 Human
-
 =
-
 **function**
-
 (
-
 )
-
 {
-
 **this**
-
 .
-
 canWalk
-
 =
-
 **true**
-
 ;
-
 **this**
-
 .
 
 canSpeak
@@ -10260,523 +9312,266 @@ greet
 **function**
 
 (
-
 )
-
 {
-
 **if**
-
 (
-
 **this**
-
 .
-
 canSpeak
-
 )
-
 {
-
 *// checks whether this prototype has instance of speak*
-
 **this**
-
 .
-
 name
-
 =
-
 &quot;Steve&quot;
-
 console.
-
 log
-
 (
-
 &apos;Hi, I am &apos;
-
 &plus;
-
 **this**
-
 .
-
 name
-
 )
-
 ;
-
 }
-
 **else**
-
 {
-
 console.
-
 log
-
 (
-
 &apos;Sorry i can not speak&apos;
-
 )
-
 ;
-
 }
-
 }
-
 ;
-
 The prototype can be instantiated like this
-
 obj
-
 =
-
 Object
-
 .
-
 create
-
 (
-
 Person.
-
 **prototype**
-
 )
-
 ;
-
 ob.
-
 greet
-
 (
-
 )
-
 ;
-
 We can pass value for the constructor and make the boolean true and
 false based on the requirement.
->
+
 Detailed Explanation
-
 **var**
-
 Human
-
 =
-
 **function**
-
 (
-
 )
-
 {
-
 **this**
-
 .
-
 canSpeak
-
 =
-
 **true**
-
 ;
-
 }
-
 ;
-
 *// Basic greet function which will greet based on the canSpeak flag*
-
 Human.
-
 **prototype**
-
 .
-
 greet
-
 =
-
 **function**
-
 (
-
 )
-
 {
-
 **if**
-
 (
-
 **this**
-
 .
-
 canSpeak
-
 )
-
 {
-
 console.
-
 log
-
 (
-
 &apos;Hi, I am &apos;
-
 &plus;
-
 **this**
-
 .
-
 name
-
 )
-
 ;
-
 }
-
 }
-
 ;
-
 **var**
-
 Student
-
 =
-
 **function**
-
 (
-
 name
-
 ,
-
 title
-
 )
-
 {
-
 Human.
-
 call
-
 (
-
 **this**
-
 )
-
 ;
-
 *// Instantiating the Human object and getting the memebers of the
 class*
-
 **this**
-
 .
-
 name
-
 =
-
 name
-
 ;
-
 *// inheriting the name from the human class*
-
 **this**
-
 .
-
 title
-
 =
-
 title
-
 ;
-
 *// getting the title from the called function*
-
 }
-
 ;
-
 Student.
-
 **prototype**
-
 =
-
 Object
-
 .
-
 create
-
 (
-
 Human.
-
 **prototype**
-
 )
-
 ;
-
 Student.
-
 **prototype**
-
 .
-
 constructor
-
 =
-
 Student
-
 ;
-
 Student.
-
 **prototype**
-
 .
-
 greet
-
 =
-
 **function**
-
 (
-
 )
-
 {
-
 **if**
-
 (
-
 **this**
-
 .
-
 canSpeak
-
 )
-
 {
-
 console.
-
 log
-
 (
-
 &apos;Hi, I am &apos;
-
 &plus;
-
 **this**
-
 .
-
 name
-
 &plus;
-
 &apos;, the &apos;
-
 &plus;
-
 **this**
-
 .
-
 title
-
 )
-
 ;
-
 }
-
 }
-
 ;
-
 **var**
-
 Customer
-
 =
-
 **function**
-
 (
-
 name
-
 )
-
 {
-
 Human.
-
 call
-
 (
-
 **this**
-
 )
-
 ;
-
 *// inheriting from the base class*
-
 **this**
-
 .
-
 name
-
 =
-
 name
-
 ;
-
 }
-
 ;
-
 Customer.
-
 **prototype**
-
 =
-
 Object
-
 .
-
 create
-
 (
-
 Human.
-
 **prototype**
-
 )
-
 ;
-
 *// creating the object*
-
 Customer.
-
 **prototype**
-
 .
-
 constructor
-
 =
-
 Customer
-
 ;
-
 **var**
-
 bill
-
 =
-
 **new**
-
 Student
-
 (
-
 &apos;Billy&apos;
-
 ,
-
 &apos;Teacher&apos;
-
 )
-
 ;
-
 **var**
-
 carter
-
 =
-
 **new**
-
 Customer
-
 (
-
 &apos;Carter&apos;
-
 )
-
 ;
-
 **var**
-
 andy
-
 =
-
 **new**
-
 Student
-
 (
-
 &apos;Andy&apos;
-
 ,
-
 &apos;Bill&apos;
-
 )
 
 ;
@@ -10850,6 +9645,7 @@ greet
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-1">Section 22.1: Class Constructor</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 
 The fundamental part of most classes is its constructor, which sets up
 each instance&apos;s initial state and handles any parameters that were
@@ -10920,6 +9716,7 @@ methods.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-2">Section 22.2: Class Inheritance</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 
 Inheritance works just like it does in other object-oriented
 languages: methods defined on the superclass are accessible in the
@@ -11075,6 +9872,7 @@ log
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-3">Section 22.3: Static Methods</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 
 Static methods and properties are defined on *the class/constructor
 itself*, not on instance objects. These are specified in a class
@@ -11251,6 +10049,7 @@ myStaticProperty
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-4">Section 22.4: Getters and Setters</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 
 Getters and setters allow you to define custom behaviour for reading
 and writing a given property on your class. To the user, they appear
@@ -11596,6 +10395,7 @@ prop
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-5">Section 22.5: Private Members</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 
 JavaScript does not technically support private members as a language
 feature. Privacy - [described by Douglas
@@ -11906,6 +10706,7 @@ closure.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-6">Section 22.6: Methods</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 
 Methods can be defined in classes to perform a function and optionally
 return a result. They can receive arguments from the caller.
@@ -12005,6 +10806,7 @@ doSomething
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-7">Section 22.7: Dynamic Method Names</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 There is also the ability to evaluate expressions when naming methods
 similar to how you can access an objects&apos; properties with &lbrack;&rbrack;. This
 can be useful for having dynamic property names, however is often used
@@ -12212,50 +11014,30 @@ add
 4
 
 ,
-
 5
-
 )
-
 ;
-
 *// 9*
-
 MazdaMPV
-
 &lbrack;
-
 3
-
 &rbrack;
-
 (
-
 )
-
 ;
-
 *// &quot;three&quot;*
-
 MazdaMPV
-
 &lbrack;
-
 METADATA
-
 &rbrack;
-
 (
-
 )
-
 ;
-
 *// { make: &quot;Mazda&quot;, model: &quot;MPV&quot; }*
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-8">Section 22.8: Managing Private Data with Classes</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
 One of the most common obstacles using classes is finding the proper
 approach to handle private states. There are 4 common solutions for
 handling private states:
