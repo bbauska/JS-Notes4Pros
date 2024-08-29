@@ -9068,12 +9068,12 @@ allow you to select a variance you want.</p>
 }
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~ xx.  (xxx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 27.  (xxx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
-  <img src="https://i.stack.imgur.com/Six4L.png"
+  <img src="/images/image027.png"
   title=""
   alt="."
-  style="border: 2px solid #000000; width:3.48in;" />
+  style="border: 2px solid #000000; width:2.5in;" />
 
 <p>The image shows the distribution of random values for different values of v. The top 
 left is standard single Math.random() call the bottom right is Math.random () summed 8 
