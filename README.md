@@ -8703,464 +8703,126 @@ interval of &lbrack;&rbrack;</p>
 <p>Functions taken from 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random">
 Mozilla Global Objects: Math.random</a>.</p>
+<!-- page 137 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-9">Section 14.9: Addition (+)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 The addition operator (+) adds numbers.
-<b>var</b>
-a
-=
-9
-,
-b
-=
-3
-,
-c
-=
-a
-&plus;
-b
-;
-c.  will now be 12
-This operand can also be used multiple times in a single assignment:
-<b>var</b>
-a
-=
-9
-,
-b
-=
-3
-,
-c
-=
-8
-,
-d
-=
-a
-&plus;
-b
-&plus;
-c
-;
-d.  will now be 20.
-Both operands are converted to primitive types. Then, if either one is
+<pre>
+<b>var</b> a = 9,
+    b = 3,
+    c = a &plus; b;
+</pre>
+<b>c will now be 12</p>
+
+<p>This operand can also be used multiple times in a single assignment:</p>
+<pre>
+<b>var</b> a = 9,
+    b = 3,
+    c = 8,
+    d = a &plus; b &plus; c;
+</pre>
+<p>d will now be 20.</p>
+
+<p>Both operands are converted to primitive types. Then, if either one is
 a string, they&apos;re both converted to strings and concatenated.
-Otherwise, they&apos;re both converted to numbers and added.
-<b>null</b>
-&plus;
-<b>null</b>
-;
-// <i> 0</i>
-<b>null</b>
-&plus;
-<b>undefined</b>
-;
-// <i> NaN</i>
-<b>null</b>
-&plus;
-{
-}
-;
-// <i> &quot;null&lbrack;object Object&rbrack;&quot;</i>
-<b>null</b>
-&plus;
-&apos;&apos;
-;
-// <i> &quot;null&quot;</i>
-If the operands are a string and a number, the number is converted to
+Otherwise, they&apos;re both converted to numbers and added.</p>
+<pre>
+<b>null</b> &plus; <b>null</b>;    // <i> 0</i>
+<b>null</b> &plus; <b>undefined</b>; // <i> NaN</i>
+<b>null</b> &plus; {};               // <i> &quot;null&lbrack;object Object&rbrack;&quot;</i>
+<b>null</b> &plus; &apos;&apos;;      // <i> &quot;null&quot;</i>
+</pre>
+<p>If the operands are a string and a number, the number is converted to
 a string and then they&apos;re concatenated, which may lead to unexpected
-results when working with strings that look numeric.
-&quot;123&quot;
-&plus;
-1
-;
-// <i> &quot;1231&quot; (not 124)</i>
-If a boolean value is given in place of any of the number values, the
+results when working with strings that look numeric.</p>
+<pre>
+&quot;123&quot; &plus; 1;  // <i> &quot;1231&quot; (not 124)</i>
+</pre>
+<p>If a boolean value is given in place of any of the number values, the
 boolean value is converted to a number (0 for <b>false</b>, 1 for
-<b>true</b>) before the sum is calculated:
-<b>true</b>
-&plus;
-1
-;
-// <i> 2</i>
-<b>false</b>
-&plus;
-5
-;
-// <i> 5</i>
-<b>null</b>
-&plus;
-1
-;
-// <i> 1</i>
-<b>undefined</b>
-&plus;
-1
-;
-// <i> NaN</i>
-If a boolean value is given alongside a string value, the boolean
-value is converted to a string instead:
-<b>true</b>
-&plus;
-&quot;1&quot;
-;
-// <i> &quot;true1&quot;</i>
-<b>false</b>
-&plus;
-&quot;bar&quot;
-;
-// <i> &quot;falsebar&quot;</i>
+<b>true</b>) before the sum is calculated:</p>
+<pre>
+<b>true</b> &plus; 1;  // <i> 2</i>
+<b>false</b> &plus; 5;  // <i> 5</i>
+<b>null</b> &plus; 1;  // <i> 1</i>
+<b>undefined</b> &plus; 1;  // <i> NaN</i>
+</pre>
+<p>If a boolean value is given alongside a string value, the boolean
+value is converted to a string instead:</p>
+<pre>
+<b>true</b> &plus; &quot;1&quot;;  // <i> &quot;true1&quot;</i>
+<b>false</b> &plus; &quot;bar&quot;;  // <i> &quot;falsebar&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-10">Section 14.10: Little / Big endian for typed arrays when using bitwise operators</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-To detect the endian of the device
-<b>var</b>
-isLittleEndian
-=
-<b>true</b>
-;
-(
-(
-)
-=&gt;
-{
-<b>var</b>
-buf
-=
-<b>new</b>
-ArrayBuffer
-(
-4
-)
-;
-<b>var</b>
-buf8
-=
-<b>new</b>
-Uint8ClampedArray
-(
-buf
-)
-;
-<b>var</b>
-data
-=
-<b>new</b>
-Uint32Array
-(
-buf
-)
-;
-data
-&lbrack;
-0
-&rbrack;
-=
-0x0F000000
-;
-<b>if</b>
-(
-buf8
-&lbrack;
-0
-&rbrack;
-===
-0x0f
-)
-{
-isLittleEndian
-=
-<b>false</b>
-;
-}
-}
-)
-(
-)
-;
-Little-Endian stores most significant bytes from right to left.
-
-Big-Endian stores most significant bytes from left to right.
-<b>var</b>
-myNum
-=
-0x11223344
-&vert;
-0
-;
-// <i> 32 bit signed integer</i>
-<b>var</b>
-buf
-=
-<b>new</b>
-ArrayBuffer
-(
-4
-)
-;
-<b>var</b>
-data8
-=
-<b>new</b>
-Uint8ClampedArray
-(
-buf
-)
-;
-<b>var</b>
-data32
-=
-<b>new</b>
-Uint32Array
-(
-buf
-)
-;
-data32
-&lbrack;
-0
-&rbrack;
-=
-myNum
-;
-// <i>store number in 32Bit array</i>
-If the system uses Little-Endian, then the 8bit byte values will be
-console.
-log
-(
-data8
-&lbrack;
-0
-&rbrack;
-.
-toString
-(
-16
-)
-)
-;
-// <i> 0x44</i>
-console.
-log
-(
-data8
-&lbrack;
-1
-&rbrack;
-.
-toString
-(
-16
-)
-)
-;
-// <i> 0x33</i>
-console.
-log
-(
-data8
-&lbrack;
-2
-&rbrack;
-.
-toString
-(
-16
-)
-)
-;
-// <i> 0x22</i>
-console.
-log
-(
-data8
-&lbrack;
-3
-&rbrack;
-.
-toString
-(
-16
-)
-)
-;
-// <i>0x11</i>
-If the system uses Big-Endian, then the 8bit byte values will be
-console.
-log
-(
-data8
-&lbrack;
-0
-&rbrack;
-.
-toString
-(
-16
-)
-)
-;
-// <i>0x11</i>
-console.
-log
-(
-data8
-&lbrack;
-1
-&rbrack;
-.
-toString
-(
-16
-)
-)
-;
-// <i> 0x22</i>
-console.
-log
-(
-data8
-&lbrack;
-2
-&rbrack;
-.
-toString
-(
-16
-)
-)
-;
-// <i> 0x33</i>
-console.
-log
-(
-data8
-&lbrack;
-3
-&rbrack;
-.
-toString
-(
-16
-)
-)
-;
-// <i> 0x44</i>
-Example where Endian type is important
-<b>var</b>
-canvas
-=
-document.
-createElement
-(
-&quot;canvas&quot;
-)
-;
-<b>var</b>
-ctx
-=
-canvas.
-getContext
-(
-&quot;2d&quot;
-)
-;
-<b>var</b>
-imgData
-=
-ctx.
-getImageData
-(
-0
-,
-0
-,
-canvas.
-width
-,
-canvas.
-height
-)
-;
-// <i>To speed up read and write from the image buffer you can create a
-buffer view that is</i>
+<p>To detect the endian of the device</p>
+<pre>
+<b>var</b> isLittleEndian = <b>true</b>;
+(()=&gt;{
+  <b>var</b> buf = <b>new</b> ArrayBuffer(4);
+  <b>var</b> buf8 = <b>new</b> Uint8ClampedArray(buf);
+  <b>var</b> data = <b>new</b> Uint32Array(buf);
+  data&lbrack;0&rbrack; = 0x0F000000;
+  <b>if</b> (buf8&lbrack;0&rbrack; === 0x0f){
+    isLittleEndian = <b>false</b>;
+  }
+})();
+</pre>
+<!-- page 138 -->
+<p>Little-Endian stores most significant bytes from right to left.</p>
+<p>Big-Endian stores most significant bytes from left to right.</p>
+<pre>
+<b>var</b> myNum = 0x11223344 &vert; 0;  // <i> 32 bit signed integer</i>
+<b>var</b> buf = <b>new</b> ArrayBuffer(4);
+<b>var</b> data8 = <b>new</b> Uint8ClampedArray(buf);
+<b>var</b> data32 = <b>new</b> Uint32Array(buf);
+data32&lbrack;0&rbrack; = myNum; // <i>store number in 32Bit array</i>
+</pre>
+<p>If the system uses Little-Endian, then the 8bit byte values will be console.</p>
+<pre>
+console.log(data8&lbrack;0&rbrack;.toString(16));  // <i> 0x44</i>
+console.log(data8&lbrack;1&rbrack;.toString(16));  // <i> 0x33</i>
+console.log(data8&lbrack;2&rbrack;.toString(16));  // <i> 0x22</i>
+console.log(data8&lbrack;3&rbrack;.toString(16));  // <i>0x11</i>
+</pre>
+<p>If the system uses Big-Endian, then the 8bit byte values will be console.</p>
+<pre>
+console.log(data8&lbrack;0&rbrack;.toString(16));  // <i>0x11</i>
+console.log(data8&lbrack;1&rbrack;.toString(16));  // <i> 0x22</i>
+console.log(data8&lbrack;2&rbrack;.toString(16));  // <i> 0x33</i>
+console.log(data8&lbrack;3&rbrack;.toString(16));  // <i> 0x44</i>
+</pre>
+<p>Example where Endian type is important</p>
+<pre>
+<b>var</b> canvas = document.createElement(&quot;canvas&quot;);
+<b>var</b> ctx = canvas.getContext(&quot;2d&quot;);
+<b>var</b> imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+// <i>To speed up read and write from the image buffer you can create a buffer view that is</i>
 // <i>32 bits allowing you to read/write a pixel in a single operation</i>
-<b>var</b>
-buf32
-=
-<b>new</b>
-Uint32Array
-(
-imgData.
-data
-.
-buffer
-)
-;
+<b>var</b> buf32 = <b>new</b> Uint32Array(imgData.data.buffer);
 // <i> Mask out Red and Blue channels</i>
-<b>var</b>
-mask
-=
-0x00FF00FF
-;
-// <i>bigEndian pixel channels Red,Green,Blue,Alpha</i>
-<b>if</b>
-(
-isLittleEndian
-)
-{
-mask
-=
-0xFF00FF00
-;
-// <i>littleEndian pixel channels Alpha,Blue,Green,Red</i>
+<b>var</b> mask = 0x00FF00FF;  // <i>bigEndian pixel channels Red,Green,Blue,Alpha</i>
+<b>if</b> (isLittleEndian) {
+  mask = 0xFF00FF00;  // <i>littleEndian pixel channels Alpha,Blue,Green,Red</i>
 }
-<b>var</b>
-len
-=
-buf32.
-length
-;
-<b>var</b>
-i
-=
-0
-;
-while
-(
-i
-&lt;
-len
-)
-{
-// <i>Mask all pixels</i>
-buf32
-&lbrack;
-i
-&rbrack;
-&=
-mask
-;
-// <i>Mask out Red and Blue</i>
+<b>var</b> len = buf32.length;
+<b>var</b> i = 0;
+while(i &lt; len) { // <i>Mask all pixels</i>
+  buf32&lbrack;i&rbrack; &= mask;  // <i>Mask out Red and Blue</i>
 }
-ctx.
-putImageData
-(
-imgData
-)
-;
+ctx.putImageData(imgData);
+</pre>
 <!-- thru 14.10 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-11">Section 14.11: Get Random Between Two Numbers</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Returns a random integer between min and max:
-**function**
+<p>Returns a random integer between min and max:</p>
+<pre>
+<b>function</b>
 randomBetween
 (
 min
@@ -9168,7 +8830,7 @@ min
 max
 )
 {
-**return**
+<b>return<b>
 Math
 .
 floor
@@ -9192,7 +8854,7 @@ min
 ;
 }
 Examples:
-*// randomBetween(0, 10);*
+// <i> randomBetween(0, 10);*
 Math
 .
 floor
@@ -9206,7 +8868,7 @@ random
 11
 )
 ;
-*// randomBetween(1, 10);*
+// <i> randomBetween(1, 10);*
 Math
 .
 floor
@@ -9222,7 +8884,7 @@ random
 &plus;
 1
 ;
-*// randomBetween(5, 20);*
+// <i> randomBetween(5, 20);*
 Math
 .
 floor
@@ -9238,7 +8900,7 @@ random
 &plus;
 5
 ;
-*// randomBetween(-10, -2);*
+// <i> randomBetween(-10, -2);*
 Math
 .
 floor
@@ -9263,13 +8925,13 @@ maybe with different probabilities, but you may find yourself in a
 situation that calls for many possible outcomes with different
 probabilities. Let&apos;s imagine you want to simulate an event that has
 six equally probable outcomes. This is quite simple.
-**function**
+<b>function</b>
 simulateEvent
 (
 numEvents
 )
 {
-**var**
+<b>var</b>
 event
 =
 Math
@@ -9285,11 +8947,11 @@ random
 )
 )
 ;
-**return**
+<b>return</b>
 event
 ;
 }
-*// simulate fair die*
+// <i> simulate fair die</i>
 console.
 log
 (
@@ -9305,19 +8967,19 @@ simulateEvent
 )
 )
 ;
-*// Rolled a 2*
+// <i> Rolled a 2</i>
 However, you may not want equally probable outcomes. Say you had a
 list of three outcomes represented as an array of probabilities in
 percents or multiples of likelihood. Such an example might be a
 weighted die. You could rewrite the previous function to simulate such
 an event.
-**function**
+<b>function</b>
 simulateEvent
 (
 chances
 )
 {
-**var**
+<b>var</b>
 sum
 =
 0
@@ -9325,7 +8987,7 @@ sum
 chances.
 forEach
 (
-**function**
+<b>function</b>
 (
 chance
 )
@@ -9337,7 +8999,7 @@ chance
 }
 )
 ;
-**var**
+<b>var</b>
 rand
 =
 Math
@@ -9346,14 +9008,14 @@ random
 (
 )
 ;
-**var**
+<b>var</b>
 chance
 =
 0
 ;
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 i
 =
 0
@@ -9376,27 +9038,27 @@ i
 /
 sum
 ;
-**if**
+<b>if</b>
 (
 rand
 &lt;
 chance
 )
 {
-**return**
+<b>return</b>
 i
 ;
 }
 }
-*// should never be reached unless sum of probabilities is less than 1*
-*// due to all being zero or some being negative probabilities*
-**return**
+// <i> should never be reached unless sum of probabilities is less than 1</i>
+// <i> due to all being zero or some being negative probabilities</i>
+<b>return</b>
 &minus;
 1
 ;
 }
-*// simulate weighted dice where 6 is twice as likely as any other face*
-*// using multiples of likelihood*
+// <i> simulate weighted dice where 6 is twice as likely as any other face</i>
+// <i> using multiples of likelihood</i>
 console.
 log
 (
@@ -9424,8 +9086,8 @@ simulateEvent
 )
 )
 ;
-*// Rolled a 1*
-*// using probabilities*
+// <i> Rolled a 1</i>
+// <i> using probabilities</i>
 console.
 log
 (
@@ -9465,39 +9127,39 @@ simulateEvent
 )
 )
 ;
-*// Rolled a 6*
+// <i> Rolled a 6</i>
 As you probably noticed, these functions return an index, so you could
 have more descriptive outcomes stored in an array. Here&apos;s an example.
 
-**var** rewards = &lbrack;&quot;gold coin&quot;,&quot;silver coin&quot;,&quot;diamond&quot;,&quot;god
-sword&quot;&rbrack;; **var** likelihoods = &lbrack;5,9,1,0&rbrack;;
+<b>var</b> rewards = &lbrack;&quot;gold coin&quot;,&quot;silver coin&quot;,&quot;diamond&quot;,&quot;god
+sword&quot;&rbrack;; <b>var</b> likelihoods = &lbrack;5,9,1,0&rbrack;;
 
-*// least likely to get a god sword (0/15 = 0%, never),*
+// <i> least likely to get a god sword (0/15 = 0%, never),</i>
 
-*// most likely to get a silver coin (9/15 = 60%, more than half the
-time)*
+// <i> most likely to get a silver coin (9/15 = 60%, more than half the
+time)</i>
 
-*// simulate event, log reward*
+// <i> simulate event, log reward</i>
 
-console.log(&quot;You get a &quot;+rewards&lbrack;simulateEvent(likelihoods)&rbrack;); *//
-You get a silver coin*
+console.log(&quot;You get a &quot;+rewards&lbrack;simulateEvent(likelihoods)&rbrack;); // <i>
+You get a silver coin</i>
 <!-- thru 14.12 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-13">Section 14.13: Subtraction (-)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 The subtraction operator (-) subtracts numbers.
-**var**
+<b>var</b>
 a
 =
 9
 ;
-**var**
+<b>var</b>
 b
 =
 3
 ;
-**var**
+<b>var</b>
 c
 =
 a
@@ -9508,34 +9170,34 @@ c will now be 6
 
 If a string or boolean is provided in place of a number value, it gets
 converted to a number before the difference is calculated (0 for
-**false**, 1 for **true**):
+<b>false</b>, 1 for <b>true</b>):
 &quot;5&quot;
 &minus;
 1
 ;
-*// 4*
+// <i> 4</i>
 7
 &minus;
 &quot;3&quot;
 ;
-*// 4*
+// <i> 4</i>
 &quot;5&quot;
 &minus;
-**true**
+<b>true</b>
 ;
-*// 4*
+// <i> 4</i>
 If the string value cannot be converted into a Number, the result will
-be **NaN**:
+be <b>NaN</b>:
 &quot;foo&quot;
 &minus;
 1
 ;
-*// NaN*
+// <i> NaN</i>
 100
 &minus;
 &quot;bar&quot;
 ;
-*// NaN*
+// <i> NaN</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-14">Section 14.14: Multiplication (&ast;)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -9550,7 +9212,7 @@ log
 5
 )
 ;
-*// 15*
+// <i> 15</i>
 console.
 log
 (
@@ -9560,7 +9222,7 @@ log
 5
 )
 ;
-*// -15*
+// <i> -15</i>
 console.
 log
 (
@@ -9570,7 +9232,7 @@ log
 5
 )
 ;
-*// -15*
+// <i> -15</i>
 console.
 log
 (
@@ -9581,7 +9243,7 @@ log
 5
 )
 ;
-*// 15*
+// <i> 15</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-15">Section 14.15: Getting maximum and minimum</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -9589,7 +9251,7 @@ log
 Math.max
 The () function returns the largest of zero or more numbers.
 Math.max( 4, 12 );
-*// 12*
+// <i> 12</i>
 Math
 .
 max
@@ -9601,7 +9263,7 @@ max
 15
 )
 ;
-*// -1*
+// <i> -1</i>
 Math.min
 The () function returns the smallest of zero or more numbers.
 Math.min( 4, 12 ); // <i>4</i>
@@ -9616,9 +9278,9 @@ min
 15
 )
 ;
-*// -15*
-**Getting maximum and minimum from an array:**
-**var**
+// <i> -15</i>
+<b>Getting maximum and minimum from an array:</b>
+<b>var</b>
 arr
 =
 &lbrack;
@@ -9673,18 +9335,18 @@ log
 max
 )
 ;
-*// Logs: 9*
+// <i> Logs: 9</i>
 console.
 log
 (
 min
 )
 ;
-*// Logs: 1*
+// <i> Logs: 1</i>
 ECMAScript 6 [spread
 operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator),
 getting the maximum and minimum of an array:
-**var**
+<b>var</b>
 arr
 =
 &lbrack;
@@ -9733,21 +9395,21 @@ log
 max
 )
 ;
-*// Logs: 9*
+// <i> Logs: 9</i>
 console.
 log
 (
 min
 )
 ;
-*// Logs: 1*
+// <i> Logs: 1</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-16">Section 14.16: Restrict Number to Min/Max Range</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 If you need to clamp a number to keep it inside a specific range
 boundary
-**function**
+<b>function</b>
 clamp
 (
 min
@@ -9757,7 +9419,7 @@ max
 val
 )
 {
-**return**
+<b>return</b>
 Math
 .
 min
@@ -9790,7 +9452,7 @@ clamp
 )
 )
 ;
-*// 4.3*
+// <i> 4.3</i>
 console.
 log
 (
@@ -9806,7 +9468,7 @@ clamp
 )
 )
 ;
-*// -8*
+// <i> -8</i>
 console.
 log
 (
@@ -9821,7 +9483,7 @@ clamp
 )
 )
 ;
-*// 10*
+// <i> 10</i>
 console.
 log
 (
@@ -9837,18 +9499,18 @@ clamp
 )
 )
 ;
-*// -10*
+// <i> -10</i>
 [Use-case example (jsFiddle)](https://jsfiddle.net/RokoCB/8drqL3vo/)
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-17">Section 14.17: Ceiling and Floor</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**ceil()**
+<b>ceil()</b>
 ceil()
-The method rounds a number *upwards* to the nearest integer, and
+The method rounds a number </i>upwards</i> to the nearest integer, and
 returns the result.
 
-**Syntax:**
+<b>Syntax:</b>
 Math
 .
 ceil
@@ -9856,7 +9518,7 @@ ceil
 n
 )
 ;
-**Example:**
+<b>Example:</b>
 console.
 log
 (
@@ -9868,7 +9530,7 @@ ceil
 )
 )
 ;
-*// 1*
+// <i> 1</i>
 console.
 log
 (
@@ -9880,7 +9542,7 @@ ceil
 )
 )
 ;
-*// 1*
+// <i> 1</i>
 console.
 log
 (
@@ -9892,7 +9554,7 @@ ceil
 )
 )
 ;
-*// 6*
+// <i> 6</i>
 console.
 log
 (
@@ -9905,7 +9567,7 @@ ceil
 )
 )
 ;
-*// -5*
+// <i> -5</i>
 console.
 log
 (
@@ -9918,14 +9580,14 @@ ceil
 )
 )
 ;
-*// -5*
-**floor**
-**(**
-**)**
+// <i> -5</i>
+<b>floor</b>
+<b>(</b>
+<b>)</b>
 floor()
-The method rounds a number *downwards* to the nearest integer, and
+The method rounds a number </i>downwards</i> to the nearest integer, and
 returns the result.
-**Syntax:**
+<b>Syntax:</b>
 Math
 .
 floor
@@ -9933,7 +9595,7 @@ floor
 n
 )
 ;
-**Example:**
+<b>Example:</b>
 console.
 log
 (
@@ -9945,7 +9607,7 @@ ceil
 )
 )
 ;
-*// 0*
+// <i> 0</i>
 console.
 log
 (
@@ -9957,7 +9619,7 @@ ceil
 )
 )
 ;
-*// 0*
+// <i> 0</i>
 console.
 log
 (
@@ -9969,7 +9631,7 @@ ceil
 )
 )
 ;
-*// 5*
+// <i> 5</i>
 console.
 log
 (
@@ -9982,7 +9644,7 @@ ceil
 )
 )
 ;
-*// -6*
+// <i> -6</i>
 console.
 log
 (
@@ -9995,12 +9657,12 @@ ceil
 )
 )
 ;
-*// -6*
+// <i> -6</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-18">Section 14.18: Getting roots of a number</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**Square Root**
+<b>Square Root</b>
 Math.sqrt
 Use () to find the square root of a number
 Math
@@ -10012,12 +9674,12 @@ sqrt
 &bsol;#
 =&gt;
 4
-**Cube Root**
+<b>Cube Root</b>
 Math.cbrt
 To find the cube root of a number, use the () function
 <h5>Version ≥ 6</h5>
 Math.cbrt(27) #=&bsol;3
-**Finding nth-roots**
+<b>Finding nth-roots</b>
 Math.pow
 To find the nth-root, use the () function and pass in a fractional
 exponent.
@@ -10049,10 +9711,10 @@ on a graph you get the classical bell curve or gaussian distribution.
 Math.random
 To do this with the () function is relatively simple.
 
-**var** randNum = (Math.random() + Math.random()) / 2; **var** randNum
+<b>var</b> randNum = (Math.random() + Math.random()) / 2; <b>var</b> randNum
 = (Math.random() + Math.random() + Math.random()) / 3;
 
-**var** randNum = (Math.random() + Math.random() + Math.random() +
+<b>var</b> randNum = (Math.random() + Math.random() + Math.random() +
 Math.random()) / 4;
 
 Adding a random value to the last increases the variance of the random
@@ -10061,22 +9723,22 @@ to a range of 01
 
 As adding more than a few randoms is messy a simple function will
 allow you to select a variance you want.
-*// v is the number of times random is summed and should be over &gt;= 1*
-*// return a random number between 0-1 exclusive*
-**function**
+// <i> v is the number of times random is summed and should be over &gt;= 1</i>
+// <i> return a random number between 0-1 exclusive</i>
+<b>function</b>
 randomG
 (
 v
 )
 {
-**var**
+<b>var</b>
 r
 =
 0
 ;
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 i
 =
 v
@@ -10098,7 +9760,7 @@ random
 )
 ;
 }
-**return**
+<b>return</b>
 r
 /
 v
@@ -10118,8 +9780,8 @@ to get the direction of a vector, or line. Or the direction from a
 point to another point.
 Math.atan( yComponent, xComponent ) return the angle in radius    Math.PI to Math.PI 
 (- 180 within the range of ?? to 180 deg)
-**Direction of a vector**
-**var**
+<b>Direction of a vector</b>
+<b>var</b>
 vec
 =
 {
@@ -10132,7 +9794,7 @@ y
 3
 }
 ;
-**var**
+<b>var</b>
 dir
 =
 Math
@@ -10146,9 +9808,9 @@ vec.
 x
 )
 ;
-*// 0.6435011087932844*
-**Direction of a line**
-**var**
+// <i> 0.6435011087932844</i>
+<b>Direction of a line</b>
+<b>var</b>
 line
 =
 {
@@ -10176,8 +9838,8 @@ y
 256
 }
 }
-*// get the direction from p1 to p2*
-**var**
+// <i> get the direction from p1 to p2</i>
+<b>var</b>
 dir
 =
 Math
@@ -10206,11 +9868,11 @@ x
 )
 ;
 // <i>0.5269432271894297</i>
-**Direction from a point to another point**
-**var** point1 = { x: 123, y : 294}; **var** point2 = { x: 354, y :
+<b>Direction from a point to another point</b>
+<b>var</b> point1 = { x: 123, y : 294}; <b>var</b> point2 = { x: 354, y :
 284};
 // <i>get the direction from point1 to point2</i>
-**var** dir = Math.atan2(point2.y - point1.y, point2.x - point1.x);
+<b>var</b> dir = Math.atan2(point2.y - point1.y, point2.x - point1.x);
 // <i>-0.04326303140726714</i>
 <!-- thru 14.20 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -10222,19 +9884,19 @@ want to convert it to a cartesian vector with a x and y component. For
 reference the screen coordinate system has directions as 0 deg points
 from left to right, 90 (PI/2) point down the screen, and so on in a
 clock wise direction.
-**var**
+<b>var</b>
 dir
 =
 1.4536
 ;
-*// direction in radians*
-**var**
+// <i> direction in radians</i>
+<b>var</b>
 dist
 =
 200
 ;
-*// distance*
-**var**
+// <i> distance</i>
+<b>var</b>
 vec
 =
 {
@@ -10252,7 +9914,7 @@ dir
 &ast;
 dist
 ;
-*// get the x component*
+// <i> get the x component</i>
 vec.
 y
 =
@@ -10265,16 +9927,16 @@ dir
 &ast;
 dist
 ;
-*// get the y component*
+// <i> get the y component</i>
 You can also ignore the distance to create a normalised (1 unit long)
 vector in the direction of dir
-**var**
+<b>var</b>
 dir
 =
 1.4536
 ;
-*// direction in radians*
-**var**
+// <i> direction in radians</i>
+<b>var</b>
 vec
 =
 {
@@ -10290,7 +9952,7 @@ cos
 dir
 )
 ;
-*// get the x component*
+// <i> get the x component</i>
 vec.
 y
 =
@@ -10301,18 +9963,18 @@ sin
 dir
 )
 ;
-*// get the y component*
+// <i> get the y component</i>
 If your coordinate system has y as up then you need to switch cos and
 sin. In this case a positive direction is in a counterclockwise
 direction from the x axis.
-*// get the directional vector where y points up*
-**var**
+// <i> get the directional vector where y points up</i>
+<b>var</b>
 dir
 =
 1.4536
 ;
-*// direction in radians*
-**var**
+// <i> direction in radians</i>
+<b>var</b>
 vec
 =
 {
@@ -10328,7 +9990,7 @@ sin
 dir
 )
 ;
-*// get the x component*
+// <i> get the x component</i>
 vec.
 y
 =
@@ -10339,7 +10001,7 @@ cos
 dir
 )
 ;
-*// get the y component*
+// <i> get the y component</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-22">Section 14.22: Math.hypot</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -10347,7 +10009,7 @@ dir
 To find the distance between two points we use pythagoras to get the
 square root of the sum of the square of the component of the vector
 between them.
-**var**
+<b>var</b>
 v1
 =
 {
@@ -10360,7 +10022,7 @@ y
 5
 }
 ;
-**var**
+<b>var</b>
 v2
 =
 {
@@ -10373,7 +10035,7 @@ y
 10
 }
 ;
-**var**
+<b>var</b>
 x
 =
 v2.
@@ -10382,7 +10044,7 @@ x
 v1.
 x
 ;
-**var**
+<b>var</b>
 y
 =
 v2.
@@ -10391,7 +10053,7 @@ y
 v1.
 y
 ;
-**var**
+<b>var</b>
 distance
 =
 Math
@@ -10407,10 +10069,10 @@ y
 y
 )
 ;
-*// 11.180339887498949*
+// <i> 11.180339887498949</i>
 Math.hypot
 With ECMAScript 6 came which does the same thing
-**var**
+<b>var</b>
 v1
 =
 {
@@ -10423,7 +10085,7 @@ y
 5
 }
 ;
-**var**
+<b>var</b>
 v2
 =
 {
@@ -10436,7 +10098,7 @@ y
 10
 }
 ;
-**var**
+<b>var</b>
 x
 =
 v2.
@@ -10445,7 +10107,7 @@ x
 v1.
 x
 ;
-**var**
+<b>var</b>
 y
 =
 v2.
@@ -10454,7 +10116,7 @@ y
 v1.
 y
 ;
-**var**
+<b>var</b>
 distance
 =
 Math
@@ -10466,10 +10128,10 @@ x
 y
 )
 ;
-*// 11.180339887498949*
+// <i> 11.180339887498949</i>
 Now you don&apos;t have to hold the interim vars to stop the code becoming
 a mess of variables
-**var**
+<b>var</b>
 v1
 =
 {
@@ -10482,7 +10144,7 @@ y
 5
 }
 ;
-**var**
+<b>var</b>
 v2
 =
 {
@@ -10495,7 +10157,7 @@ y
 10
 }
 ;
-**var**
+<b>var</b>
 distance
 =
 Math
@@ -10515,11 +10177,11 @@ v1.
 y
 )
 ;
-*// 11.180339887498949*
+// <i> 11.180339887498949</i>
 Math.hypot
 can take any number of dimensions
-*// find distance in 3D*
-**var**
+// <i> find distance in 3D</i>
+<b>var</b>
 v1
 =
 {
@@ -10536,7 +10198,7 @@ z
 7
 }
 ;
-**var**
+<b>var</b>
 v2
 =
 {
@@ -10553,7 +10215,7 @@ z
 16
 }
 ;
-**var**
+<b>var</b>
 dist
 =
 Math
@@ -10579,9 +10241,9 @@ v1.
 z
 )
 ;
-*// 14.352700094407325*
-*// find length of 11th dimensional vector*
-**var**
+// <i> 14.352700094407325</i>
+// <i> find length of 11th dimensional vector</i>
+<b>var</b>
 v
 =
 &lbrack;
@@ -10608,7 +10270,7 @@ v
 1
 &rbrack;
 ;
-**var**
+<b>var</b>
 i
 =
 0
@@ -10708,9 +10370,9 @@ period/frequency, phase, amplitude, and offset.
 The unit of time being used is seconds.
 
 The most simple form with control over frequency only.
-*// time is the time in seconds when you want to get a sample*
-*// Frequency represents the number of oscillations per second*
-**function**
+// <i> time is the time in seconds when you want to get a sample</i>
+// <i> Frequency represents the number of oscillations per second</i>
+<b>function</b>
 oscillator
 (
 time
@@ -10718,7 +10380,7 @@ time
 frequency
 )
 {
-**return**
+<b>return</b>
 Math
 .
 sin
@@ -10752,9 +10414,9 @@ Offset: moves the whole wave up or down.
 
 To include all these in the function:
 
-**function** oscillator(time, frequency = 1, amplitude = 1, phase = 0,
-offset = 0){ **var** t = time &ast; frequency &ast; Math.PI &ast; 2; *// get
-phase at time*
+<b>function</b> oscillator(time, frequency = 1, amplitude = 1, phase = 0,
+offset = 0){ <b>var</b> t = time &ast; frequency &ast; Math.PI &ast; 2; // <i> get
+phase at time</i>
 t
 +=
 phase
@@ -10765,8 +10427,8 @@ PI
 &ast;
 2
 ;
-*// add the phase offset*
-**var**
+// <i> add the phase offset</i>
+<b>var</b>
 v
 =
 Math
@@ -10776,25 +10438,25 @@ sin
 t
 )
 ;
-*// get the value at the calculated position in the cycle*
+// <i> get the value at the calculated position in the cycle</i>
 v
 &ast;=
 amplitude
 ;
-*// set the amplitude*
+// <i> set the amplitude</i>
 v
 +=
 offset
 ;
-*// add the offset*
-**return**
+// <i> add the offset</i>
+<b>return</b>
 v
 ;
 }
 Or in a more compact (and slightly quicker form):
 
-**function** oscillator(time, frequency = 1, amplitude = 1, phase = 0,
-offset = 0){ **return** Math.sin(time &ast; frequency &ast; Math.PI &ast; 2 +
+<b>function</b> oscillator(time, frequency = 1, amplitude = 1, phase = 0,
+offset = 0){ <b>return</b> Math.sin(time &ast; frequency &ast; Math.PI &ast; 2 +
 phase &ast; Math.PI &ast; 2) &ast; amplitude + offset; }
 
 All the arguments apart from time are optional
@@ -10812,7 +10474,7 @@ log
 3
 )
 ;
-*// 5*
+// <i> 5</i>
 console.
 log
 (
@@ -10821,7 +10483,7 @@ log
 4
 )
 ;
-*// 3.75*
+// <i> 3.75</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-25">Section 14.25: Decrementing (&rpar;</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -10841,50 +10503,50 @@ n
 and
 *then*
 returns the changed value.
-**var**
+<b>var</b>
 a
 =
 5
 ,
-*// 5*
+// <i> 5</i>
 b
 =
 a
 &bsol;
 ,
-*// 5*
+// <i> 5</i>
 c
 =
 a
-*// 4*
+// <i> 4</i>
 In this case, b is set to the initial value of a. So, b will be 5, and
 c will be 4.
-**var**
+<b>var</b>
 a
 =
 5
 ,
-*// 5*
+// <i> 5</i>
 b
 =
 &bsol;
 a
 ,
-*// 4*
+// <i> 4</i>
 c
 =
 a
-*// 4*
+// <i> 4</i>
 In this case, b is set to the new value of a. So, b will be 4, and c
 will be 4.
 
-**Common Uses**
+<b>Common Uses</b>
 
-The decrement and increment operators are commonly used in **for**
+The decrement and increment operators are commonly used in <b>for</b>
 loops, for example:
-**for**
+<b>for</b>
 (
-**var**
+<b>var</b>
 i
 =
 42
@@ -10907,7 +10569,7 @@ Notice how the *prefix* variant is used. This ensures that a
 temporarily variable isn&apos;t needlessly created (to return the value
 prior to the operation).
 
-**Note:** Neither &bsol; nor ++ are like normal mathematical operators,
+<b>Note:</b> Neither &bsol; nor ++ are like normal mathematical operators,
 but rather they are very concise operators for *assignment*.
 Notwithstanding the return value, both
 x&bsol;
@@ -10923,7 +10585,7 @@ x
 &minus;
 1
 .
-**const**
+<b>const</b>
 x
 =
 1
@@ -10934,29 +10596,29 @@ log
 x
 &bsol;
 )
-*// TypeError: Assignment to constant variable.*
+// <i> TypeError: Assignment to constant variable.</i>
 console.
 log
 (
 &bsol;
 x
 )
-*// TypeError: Assignment to constant variable.*
+// <i> TypeError: Assignment to constant variable.</i>
 console.
 log
 (
 &bsol;
 3
 )
-*// ReferenceError: Invalid left-hand size expression in prefix
-operation.*
+// <i> ReferenceError: Invalid left-hand size expression in prefix
+operation.</i>
 console.log
 (
 3
 &bsol;
 )
-*// ReferenceError: Invalid left-hand side expression in postfix
-operation.*
+// <i> ReferenceError: Invalid left-hand side expression in postfix
+operation.</i>
 <!-- thru chapter 14 & section 14.25 -->
 
 
