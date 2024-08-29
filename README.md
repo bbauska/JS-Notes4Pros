@@ -8683,7 +8683,7 @@ this function to get a random number between min (inclusive) and max (exclusive)
 <b>function</b> getRandomArbitrary(min, max) {
   <b>return</b> Math.random() &ast; (max &minus; min) &plus; min;
 }
-<pre>
+</pre>
 <p>To use Math.random() to get an integer from an arbitrary range (not &lbrack;0,1)) use
 this function to get a random number between min (inclusive) and max(exclusive): interval 
 of &lbrack;)</p>
@@ -8691,7 +8691,7 @@ of &lbrack;)</p>
 <b>function</b> getRandomInt(min, max) {
   <b>return</b> Math.floor(Math.random() &ast; (max &minus; min)) &plus; min;
 }
-<pre>
+</pre>
 <p>To use Math.random() to get an integer from an arbitrary range (not &lbrack;0,1)) use
 this function to get a random number between min (inclusive) and max (inclusive): 
 interval of &lbrack;&rbrack;</p>
