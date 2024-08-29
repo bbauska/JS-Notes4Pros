@@ -8816,333 +8816,90 @@ while(i &lt; len) { // <i>Mask all pixels</i>
 }
 ctx.putImageData(imgData);
 </pre>
-<!-- thru 14.10 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-11">Section 14.11: Get Random Between Two Numbers</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Returns a random integer between min and max:</p>
 <pre>
-<b>function</b>
-randomBetween
-(
-min
-,
-max
-)
-{
-<b>return<b>
-Math
-.
-floor
-(
-Math
-.
-random
-(
-)
-&ast;
-(
-max
-&minus;
-min
-&plus;
-1
-)
-&plus;
-min
-)
-;
+<b>function</b> randomBetween(min, max) {
+  <b>return<b> Math.floor(Math.random() &ast; (max &minus; min &plus; 1) &plus; min);
 }
-Examples:
-// <i> randomBetween(0, 10);*
-Math
-.
-floor
-(
-Math
-.
-random
-(
-)
-&ast;
-11
-)
-;
-// <i> randomBetween(1, 10);*
-Math
-.
-floor
-(
-Math
-.
-random
-(
-)
-&ast;
-10
-)
-&plus;
-1
-;
-// <i> randomBetween(5, 20);*
-Math
-.
-floor
-(
-Math
-.
-random
-(
-)
-&ast;
-16
-)
-&plus;
-5
-;
-// <i> randomBetween(-10, -2);*
-Math
-.
-floor
-(
-Math
-.
-random
-(
-)
-&ast;
-9
-)
-&minus;
-10
-;
+</pre>
+<!-- page 139 -->
+<p>Examples:</p>
+<pre>
+// <i> randomBetween(0, 10);</i>
+Math.floor(Math.random() &ast; 11);
+
+// <i> randomBetween(1, 10);</i>
+Math.floor(Math.random() &ast; 10) &plus; 1;
+
+// <i> randomBetween(5, 20);</i>
+Math.floor(Math.random() &ast; 16) &plus; 5;
+
+// <i> randomBetween(-10, -2);</i>
+Math.floor(Math.random() &ast; 9) &minus; 10;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-12">Section 14.12: Simulating events with different probabilities</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Sometimes you may only need to simulate an event with two outcomes,
+<p>Sometimes you may only need to simulate an event with two outcomes,
 maybe with different probabilities, but you may find yourself in a
 situation that calls for many possible outcomes with different
 probabilities. Let&apos;s imagine you want to simulate an event that has
-six equally probable outcomes. This is quite simple.
-<b>function</b>
-simulateEvent
-(
-numEvents
-)
-{
-<b>var</b>
-event
-=
-Math
-.
-floor
-(
-numEvents
-&ast;
-Math
-.
-random
-(
-)
-)
-;
-<b>return</b>
-event
-;
+six equally probable outcomes. This is quite simple.</p>
+<pre>
+<b>function</b> simulateEvent(numEvents) {
+  <b>var</b> event = Math.floor(numEvents &ast; Math.random());
+  <b>return</b> event;
 }
 // <i> simulate fair die</i>
-console.
-log
-(
-&quot;Rolled a &quot;
-&plus;
-(
-simulateEvent
-(
-6
-)
-&plus;
-1
-)
-)
-;
-// <i> Rolled a 2</i>
-However, you may not want equally probable outcomes. Say you had a
+console.log(&quot;Rolled a &quot; &plus; (simulateEvent(6)&plus;1));  // <i> Rolled a 2</i>
+</pre>
+<p>However, you may not want equally probable outcomes. Say you had a
 list of three outcomes represented as an array of probabilities in
 percents or multiples of likelihood. Such an example might be a
 weighted die. You could rewrite the previous function to simulate such
-an event.
-<b>function</b>
-simulateEvent
-(
-chances
-)
-{
-<b>var</b>
-sum
-=
-0
-;
-chances.
-forEach
-(
-<b>function</b>
-(
-chance
-)
-{
-sum
-+=
-chance
-;
+an event.</p>
+<pre>
+<b>function</b> simulateEvent(chances) {
+  <b>var</b> sum = 0;
+  chances.forEach(<b>function</b>(chance) {
+    sum+=chance;
+  });
+  <b>var</b> rand = Math.random();
+  <b>var</b> chance = 0;
+  <b>for</b> (<b>var</b> i=0; i &lt; chances.length; i++) {
+    chance += chances&lbrack;i&rbrack; / sum;
+    <b>if</b> (rand&lt;chance) {
+      <b>return</b> i;
+    }
+  }
+  // <i> should never be reached unless sum of probabilities is less than 1</i>
+  // <i> due to all being zero or some being negative probabilities</i>
+  <b>return</b> &minus;1;
 }
-)
-;
-<b>var</b>
-rand
-=
-Math
-.
-random
-(
-)
-;
-<b>var</b>
-chance
-=
-0
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-chances.
-length
-;
-i
-++
-)
-{
-chance
-+=
-chances
-&lbrack;
-i
-&rbrack;
-/
-sum
-;
-<b>if</b>
-(
-rand
-&lt;
-chance
-)
-{
-<b>return</b>
-i
-;
-}
-}
-// <i> should never be reached unless sum of probabilities is less than 1</i>
-// <i> due to all being zero or some being negative probabilities</i>
-<b>return</b>
-&minus;
-1
-;
-}
+
 // <i> simulate weighted dice where 6 is twice as likely as any other face</i>
 // <i> using multiples of likelihood</i>
-console.
-log
-(
-&quot;Rolled a &quot;
-&plus;
-(
-simulateEvent
-(
-&lbrack;
-1
-,
-1
-,
-1
-,
-1
-,
-1
-,
-2
-&rbrack;
-)
-&plus;
-1
-)
-)
-;
-// <i> Rolled a 1</i>
+console.log(&quot;Rolled a &quot; &plus; (simulateEvent(&lbrack;1,1,1,1,1,2&rbrack;)&plus;1));  // <i> Rolled a 1</i>
+
 // <i> using probabilities</i>
-console.
-log
-(
-&quot;Rolled a &quot;
-&plus;
-(
-simulateEvent
-(
-&lbrack;
-1
-/
-7
-,
-1
-/
-7
-,
-1
-/
-7
-,
-1
-/
-7
-,
-1
-/
-7
-,
-2
-/
-7
-&rbrack;
-)
-&plus;
-1
-)
-)
-;
-// <i> Rolled a 6</i>
-As you probably noticed, these functions return an index, so you could
-have more descriptive outcomes stored in an array. Here&apos;s an example.
+console.log(&quot;Rolled a &quot;&plus;(simulateEvent(&lbrack;1/7,1/7,1/7,1/7,1/7,2/7&rbrack;) &plus; 1)); // <i> Rolled a 6</i>
+</pre>
+<!-- page 140 -->
+<p>As you probably noticed, these functions return an index, so you could
+have more descriptive outcomes stored in an array. Here&apos;s an example.</p>
 
-<b>var</b> rewards = &lbrack;&quot;gold coin&quot;,&quot;silver coin&quot;,&quot;diamond&quot;,&quot;god
-sword&quot;&rbrack;; <b>var</b> likelihoods = &lbrack;5,9,1,0&rbrack;;
-
+<pre>
+<b>var</b> rewards = &lbrack;&quot;gold coin&quot;,&quot;silver coin&quot;,&quot;diamond&quot;,&quot;god sword&quot;&rbrack;; 
+<b>var</b> likelihoods = &lbrack;5,9,1,0&rbrack;;
 // <i> least likely to get a god sword (0/15 = 0%, never),</i>
-
-// <i> most likely to get a silver coin (9/15 = 60%, more than half the
-time)</i>
+// <i> most likely to get a silver coin (9/15 = 60%, more than half the time)</i>
 
 // <i> simulate event, log reward</i>
-
-console.log(&quot;You get a &quot;+rewards&lbrack;simulateEvent(likelihoods)&rbrack;); // <i>
-You get a silver coin</i>
+console.log(&quot;You get a &quot;+rewards&lbrack;simulateEvent(likelihoods)&rbrack;); // <i>You get a silver coin</i>
+</pre>
 <!-- thru 14.12 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-13">Section 14.13: Subtraction (-)</h3>
