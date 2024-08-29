@@ -8273,7 +8273,7 @@ there is not enough left to subtract again without it changing sign.
 The remainder is thus:42 - 4 &ast; 10 = 2.</p>
 
 <p>The remainder operator may be useful for the following problems:</p>
-<ol>
+<ol start="1">
   <li>Test if an integer is (not) divisible by another number:<br/>
   <pre>
   x &percnt; 4 == 0  // <i>true if x is divisible by 4</i>
@@ -8323,474 +8323,160 @@ fraction = myNum &percnt; 1;        // <i>-0.857142857142857</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-3">Section 14.3: Rounding</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Rounding</b>
-Math.round
-() will round the value to the closest integer using <i>half round up</i>
-to break ties.
-<b>var</b>
-a
-=
-Math
-.
-round
-(
-2.3
-)
-;
-// <i>a is now 2</i>
-<b>var</b>
-b
-=
-Math
-.
-round
-(
-2.7
-)
-;
-// <i>b is now 3</i>
-<b>var</b>
-c
-=
-Math
-.
-round
-(
-2.5
-)
-;
-// <i>c is now 3</i>
-But
-<b>var</b>
-c
-=
-Math
-.
-round
-(
-&minus;
-2.7
-)
-;
-// <i>c is now -3</i>
-<b>var</b>
-c
-=
-Math
-.
-round
-(
-&minus;
-2.5
-)
-;
-// <i>c is now -2</i>
-2.5
-Note how - is rounded to -2. This is because half-way values are
-always rounded up, that is they&apos;re rounded to the integer with the
-next higher value.
+<p><b>Rounding</b></p>
+<p>Math.round() will round the value to the closest integer using <i>half round up</i>
+to break ties.</p>
+<pre>
+<b>var</b> a = Math.round(2.3);  // <i>a is now 2</i>
+<b>var</b> b = Math.round(2.7);  // <i>b is now 3</i>
+<b>var</b> c = Math.round(2.5);  // <i>c is now 3</i>
+</pre>
+<p>But</p>
+<pre>
+<b>var</b> c = Math.round(&minus;2.7);  // <i>c is now -3</i>
+<b>var</b> c = Math.round(&minus;2.5);  // <i>c is now -2</i>
+</pre>
+<p>Note how -2.5 is rounded to -2. This is because half-way values are always rounded 
+up, that is they&apos;re rounded to the integer with the next higher value.</p>
+<!-- page 131 -->
 
-<b>Rounding up</b>
-Math.ceil
-() will round the value up.
-<b>var</b>
-a
-=
-Math
-.
-ceil
-(
-2.3
-)
-;
-// <i>a is now 3</i>
-<b>var</b>
-b
-=
-Math
-.
-ceil
-(
-2.7
-)
-;
-// <i>b is now 3</i>
-ceiling a negative number will round towards zero
-<b>var</b>
-c
-=
-Math
-.
-ceil
-(
-&minus;
-1.1
-)
-;
-// <i>c is now 1</i>
-<b>Rounding down</b>
-Math.floor
-() will round the value down.
-<b>var</b>
-a
-=
-Math
-.
-floor
-(
-2.3
-)
-;
-// <i>a is now 2</i>
-<b>var</b>
-b
-=
-Math
-.
-floor
-(
-2.7
-)
-;
-// <i>b is now 2</i>
-flooring a negative number will round it away from zero.
-<b>var</b>
-c
-=
-Math
-.
-floor
-(
-&minus;
-1.1
-)
-;
-// <i>c is now -1</i>
-<b>Truncating</b>
-2147483649
-<b>Caveat</b>: using bitwise operators (except &gt;&gt;&gt;) only applies to
-numbers between - and 2147483648.
+<p><b>Rounding up</b></p>
+<p>Math.ceil() will round the value up.</p>
+<pre>
+<b>var</b> a = Math.ceil(2.3);  // <i>a is now 3</i>
+<b>var</b> b = Math.ceil(2.7);  // <i>b is now 3</i>
+</pre>
+<p>ceiling a negative number will round towards zero</p>
+<pre>
+<b>var</b> c = Math.ceil(&minus;1.1);  // <i>c is now 1</i>
+</pre>
+<p><b>Rounding down</b></p>
+<p>Math.floor() will round the value down.</p>
+<pre>
+<b>var</b> a = Math.floor(2.3);  // <i>a is now 2</i>
+<b>var</b> b = Math.floor(2.7);  // <i>b is now 2</i>
+</pre>
+<p>flooring a negative number will round it away from zero.</p>
+<pre>
+<b>var</b> c = Math.floor(&minus;1.1);  // <i>c is now -1</i>
+<pre>
+<p><b>Truncating</b></p>
 
-2.3 &vert; 0; // <i>2 (floor)</i> -2.3 &vert; 0; // <i>-2 (ceil)</i> <b>NaN</b> &vert; 0; // <i>0</i>
+<p><b>Caveat</b>: using bitwise operators (except &gt;&gt;&gt;) only applies to
+numbers between &minus;2147483649 and 2147483648.</p>
+
+<pre>
+ 2.3 &vert; 0;                      // <i>2 (floor)</i>
+-2.3 &vert; 0;                      // <i> -2 (ceil)</i>
+<b>NaN</b> &vert; 0;                // <i>0</i>
+</pre>
 <h5>Version ≥ 6</h5>
-Math.trunc
-()
-Math.trunc(2.3); // <i>2 (floor)</i> Math.trunc(-2.3); // <i>-2 (ceil)</i>
-Math.trunc(2147483648.1); // <i>2147483648 (floor)</i>
+
+<p>Math.trunc()</p>
+<pre>
+Math.trunc(2.3);           // <i>2 (floor)</i>
+Math.trunc(-2.3);          // <i>-2 (ceil)</i>
+Math.trunc(2147483648.1);  // <i>2147483648 (floor)</i>
 Math.trunc(-2147483649.1); // <i>-2147483649 (ceil)</i>
-Math.trunc(<b>NaN</b>); // <i>NaN</i>
-<b>Rounding to decimal places</b>
-  Math    .   floor     ,   Math    .   ceil    (), and       Math    .   round
-() can be used to round to a number of decimal places
+Math.trunc(<b>NaN</b>);    // <i>NaN</i>
+</pre>
+<p><b>Rounding to decimal places</b></p>
+<p>Math.floor, Math.ceil(), and Math.round() () can be used to round to a number of 
+decimal places</p>
 
-To round to 2 decimal places:
-
-<b>var</b> myNum = 2/3; // <i> 0.6666666666666666</i> <b>var</b> multiplier = 100;
+<p>To round to 2 decimal places:</p>
+<pre>
+<b>var</b> myNum = 2/3;    // <i> 0.6666666666666666</i>
+<b>var</b> multiplier = 100;
 <b>var</b> a = Math.round(myNum &ast; multiplier) / multiplier; // <i>0.67</i>
 <b>var</b> b = Math.ceil (myNum &ast; multiplier) / multiplier; // <i>0.67</i>
 <b>var</b> c = Math.floor(myNum &ast; multiplier) / multiplier; // <i>0.66</i>
-You can also round to a number of digits:
-<b>var</b>
-myNum
-=
-10000
-/
-3
-;
-// <i> 3333.3333333333335</i>
-<b>var</b>
-multiplier
-=
-1
-/
-100
-;
-<b>var</b>
-a
-=
-Math
-.
-round
-(
-myNum
-&ast;
-multiplier
-)
-/
-multiplier
-;
-// <i>3300</i>
+</pre>
+<p>You can also round to a number of digits:</p>
+<pre>
+<b>var</b> myNum = 10000/3;  // <i> 3333.3333333333335</i>
+<b>var</b> multiplier = 1/100;
+<b>var</b> a = Math.round(myNum &ast; multiplier) / multiplier; // <i>3300</i>
 <b>var</b> b = Math.ceil (myNum &ast; multiplier) / multiplier; // <i>3400</i>
-<b>var</b> c = Math.floor(myNum &ast; multiplier) / multiplier; // <i>3300</i> As a
-more usable function:
+<b>var</b> c = Math.floor(myNum &ast; multiplier) / multiplier; // <i>3300</i>
+</pre>
+<!-- page 132 -->
+<p>As a more usable function:</p>
+<pre>
 // <i>value is the value to round</i>
 // <i>places if positive the number of decimal places to round to</i>
 // <i>places if negative the number of digits to round to</i>
-<b>function</b>
-roundTo
-(
-value
-,
-places
-)
-{
-<b>var</b>
-power
-=
-Math
-.
-pow
-(
-10
-,
-places
-)
-;
-<b>return</b>
-Math
-.
-round
-(
-value
-&ast;
-power
-)
-/
-power
-;
+<b>function</b> roundTo(value, places) {
+  <b>var</b> power = Math.pow(10, places);
+  <b>return</b> Math.round(value &ast; power) / power;
 }
-<b>var</b>
-myNum
-=
-10000
-/
-3
-;
-// <i>3333.3333333333335</i>
-roundTo
-(
-myNum
-,
-2
-)
-;
-// <i>3333.33</i>
-roundTo
-(
-myNum
-,
-0
-)
-;
-// <i>3333</i>
-roundTo
-(
-myNum
-,
-&minus;
-2
-)
-;
-// <i> 3300</i>
-And the variants for
-ceil
-and
-floor
-:
-<b>function</b>
-ceilTo
-(
-value
-,
-places
-)
-{
-<b>var</b>
-power
-=
-Math
-.
-pow
-(
-10
-,
-places
-)
-;
-<b>return</b>
-Math
-.
-ceil
-(
-value
-&ast;
-power
-)
-/
-power
-;
+<b>var</b> myNum = 10000/3;  // <i>3333.3333333333335</i>
+roundTo(myNum, 2);  // <i>3333.33</i>
+roundTo(myNum, 0);  // <i>3333</i>
+roundTo(myNum, &minus;2);  // <i> 3300</i>
+</pre>
+<p>And the variants for ceil and floor:</p>
+<pre>
+<b>function</b> ceilTo(value, places) {
+  <b>var</b> power = Math.pow(10, places);
+  <b>return</b> Math.ceil(value &ast; power) / power;
 }
-<b>function</b>
-floorTo
-(
-value
-,
-places
-)
-{
-<b>var</b>
-power
-=
-Math
-.
-pow
-(
-10
-,
-places
-)
-;
-<b>return</b>
-Math
-.
-floor
-(
-value
-&ast;
-power
-)
-/
-power
-;
+<b>function</b> floorTo(value, places) {
+  <b>var</b> power = Math.pow(10, places);
+  <b>return</b> Math.floor(value &ast; power) / power;
 }
-
-<!-- thru 14.3 -->
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-4">Section 14.4: Trigonometry</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-180  &ast; r / Math.PI
-All angles below are in radians. An angle r in radians has measure in
-degrees.
-<b>Sine</b>
-Math
-.
-sin
-(
-r
-)
-;
-This will return the sine of r, a value between -1 and 1.
-Math
-.
-asin
-(
-r
-)
-;
-This will return the arcsine (the reverse of the sine) of r.
-Math
-.
-asinh
-(
-r
-)
-This will return the hyperbolic arcsine of r.
-
-<b>Cosine</b>
-Math
-.
-cos
-(
-r
-)
-;
-This will return the cosine of r, a value between -1 and 1
-Math
-.
-acos
-(
-r
-)
-;
-This will return the arccosine (the reverse of the cosine) of r.
-Math
-.
-acosh
-(
-r
-)
-;
-This will return the hyperbolic arccosine of r.
-<b>Tangent</b>
-Math
-.
-tan
-(
-r
-)
-;
-This will return the tangent of
-r
-.
-Math
-.
-atan
-(
-r
-)
-;
-This will return the arctangent (the reverse of the tangent) of
-r
-. Note that it will return an angle in radians between
-&minus;
-π
-/
-2
-and
-π
-/
-2
-.
-Math
-.
-atanh
-(
-r
-)
-;
-This will return the hyperbolic arctangent of
-r
-.
-Math
-.
-atan2
-(
-x
-,
-y
-)
-;
-This will return the value of an angle from
-(
-0
-,
-0
-)
-to
-(
-x
-,
-y
-)
-in radians. It will return a value between
-&minus;
-π
-and
-π
-, not
-including π.
+<p>All angles below are in radians. An angle r in radians has measure 180 &ast; r / Math.PI 
+in degrees.</p>
+<p><b>Sine</b></p>
+<pre>
+Math.sin(r);
+</pre>
+<p>This will return the sine of r, a value between -1 and 1.</p>
+<pre>
+Math.asin(r);
+</pre>
+<p>This will return the arcsine (the reverse of the sine) of r.</p>
+<pre>
+Math.asinh(r);
+</pre>
+<p>This will return the hyperbolic arcsine of r.</p>
+<p><b>Cosine</b></p>
+<pre>
+Math.cos(r);
+</pre>
+<p>This will return the cosine of r, a value between -1 and 1</p>
+<pre>
+Math.acos(r);
+</pre>
+<p>This will return the arccosine (the reverse of the cosine) of r.</p>
+<pre>
+Math.acosh(r);
+</pre>
+<!-- page 133 -->
+<p>This will return the hyperbolic arccosine of r.</p>
+<p><b>Tangent</b></p>
+<pre>
+Math.tan(r);
+</pre>
+<p>This will return the tangent of r.</p>
+<pre>
+Math.atan(r);
+</pre>
+<p>This will return the arctangent (the reverse of the tangent) of r. Note that it will 
+return an angle in radians between &minus;π/2 and π/2.</p>
+<pre>
+Math.atanh(r);
+</pre>
+<p>This will return the hyperbolic arctangent of r.</p>
+<pre>
+Math.atan2(x, y);
+</pre>
+<p>This will return the value of an angle from (0, 0) to (x, y) in radians. It will 
+return a value between &minus;π and π, not including π.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-5">Section 14.5: Bitwise operators</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -9842,3 +9528,1807 @@ imgData
 )
 ;
 <!-- thru 14.10 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-11">Section 14.11: Get Random Between Two Numbers</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Returns a random integer between min and max:
+**function**
+randomBetween
+(
+min
+,
+max
+)
+{
+**return**
+Math
+.
+floor
+(
+Math
+.
+random
+(
+)
+&ast;
+(
+max
+&minus;
+min
+&plus;
+1
+)
+&plus;
+min
+)
+;
+}
+Examples:
+*// randomBetween(0, 10);*
+Math
+.
+floor
+(
+Math
+.
+random
+(
+)
+&ast;
+11
+)
+;
+*// randomBetween(1, 10);*
+Math
+.
+floor
+(
+Math
+.
+random
+(
+)
+&ast;
+10
+)
+&plus;
+1
+;
+*// randomBetween(5, 20);*
+Math
+.
+floor
+(
+Math
+.
+random
+(
+)
+&ast;
+16
+)
+&plus;
+5
+;
+*// randomBetween(-10, -2);*
+Math
+.
+floor
+(
+Math
+.
+random
+(
+)
+&ast;
+9
+)
+&minus;
+10
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-12">Section 14.12: Simulating events with different probabilities</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Sometimes you may only need to simulate an event with two outcomes,
+maybe with different probabilities, but you may find yourself in a
+situation that calls for many possible outcomes with different
+probabilities. Let&apos;s imagine you want to simulate an event that has
+six equally probable outcomes. This is quite simple.
+**function**
+simulateEvent
+(
+numEvents
+)
+{
+**var**
+event
+=
+Math
+.
+floor
+(
+numEvents
+&ast;
+Math
+.
+random
+(
+)
+)
+;
+**return**
+event
+;
+}
+*// simulate fair die*
+console.
+log
+(
+&quot;Rolled a &quot;
+&plus;
+(
+simulateEvent
+(
+6
+)
+&plus;
+1
+)
+)
+;
+*// Rolled a 2*
+However, you may not want equally probable outcomes. Say you had a
+list of three outcomes represented as an array of probabilities in
+percents or multiples of likelihood. Such an example might be a
+weighted die. You could rewrite the previous function to simulate such
+an event.
+**function**
+simulateEvent
+(
+chances
+)
+{
+**var**
+sum
+=
+0
+;
+chances.
+forEach
+(
+**function**
+(
+chance
+)
+{
+sum
++=
+chance
+;
+}
+)
+;
+**var**
+rand
+=
+Math
+.
+random
+(
+)
+;
+**var**
+chance
+=
+0
+;
+**for**
+(
+**var**
+i
+=
+0
+;
+i
+&lt;
+chances.
+length
+;
+i
+++
+)
+{
+chance
++=
+chances
+&lbrack;
+i
+&rbrack;
+/
+sum
+;
+**if**
+(
+rand
+&lt;
+chance
+)
+{
+**return**
+i
+;
+}
+}
+*// should never be reached unless sum of probabilities is less than 1*
+*// due to all being zero or some being negative probabilities*
+**return**
+&minus;
+1
+;
+}
+*// simulate weighted dice where 6 is twice as likely as any other face*
+*// using multiples of likelihood*
+console.
+log
+(
+&quot;Rolled a &quot;
+&plus;
+(
+simulateEvent
+(
+&lbrack;
+1
+,
+1
+,
+1
+,
+1
+,
+1
+,
+2
+&rbrack;
+)
+&plus;
+1
+)
+)
+;
+*// Rolled a 1*
+*// using probabilities*
+console.
+log
+(
+&quot;Rolled a &quot;
+&plus;
+(
+simulateEvent
+(
+&lbrack;
+1
+/
+7
+,
+1
+/
+7
+,
+1
+/
+7
+,
+1
+/
+7
+,
+1
+/
+7
+,
+2
+/
+7
+&rbrack;
+)
+&plus;
+1
+)
+)
+;
+*// Rolled a 6*
+As you probably noticed, these functions return an index, so you could
+have more descriptive outcomes stored in an array. Here&apos;s an example.
+
+**var** rewards = &lbrack;&quot;gold coin&quot;,&quot;silver coin&quot;,&quot;diamond&quot;,&quot;god
+sword&quot;&rbrack;; **var** likelihoods = &lbrack;5,9,1,0&rbrack;;
+
+*// least likely to get a god sword (0/15 = 0%, never),*
+
+*// most likely to get a silver coin (9/15 = 60%, more than half the
+time)*
+
+*// simulate event, log reward*
+
+console.log(&quot;You get a &quot;+rewards&lbrack;simulateEvent(likelihoods)&rbrack;); *//
+You get a silver coin*
+<!-- thru 14.12 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-13">Section 14.13: Subtraction (-)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The subtraction operator (-) subtracts numbers.
+**var**
+a
+=
+9
+;
+**var**
+b
+=
+3
+;
+**var**
+c
+=
+a
+&minus;
+b
+;
+c will now be 6
+
+If a string or boolean is provided in place of a number value, it gets
+converted to a number before the difference is calculated (0 for
+**false**, 1 for **true**):
+&quot;5&quot;
+&minus;
+1
+;
+*// 4*
+7
+&minus;
+&quot;3&quot;
+;
+*// 4*
+&quot;5&quot;
+&minus;
+**true**
+;
+*// 4*
+If the string value cannot be converted into a Number, the result will
+be **NaN**:
+&quot;foo&quot;
+&minus;
+1
+;
+*// NaN*
+100
+&minus;
+&quot;bar&quot;
+;
+*// NaN*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-14">Section 14.14: Multiplication (&ast;)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The multiplication operator (&ast;) perform arithmetic multiplication on
+numbers (literals or variables).
+console.
+log
+(
+3
+&ast;
+5
+)
+;
+*// 15*
+console.
+log
+(
+&minus;
+3
+&ast;
+5
+)
+;
+*// -15*
+console.
+log
+(
+3
+&ast;
+&minus;
+5
+)
+;
+*// -15*
+console.
+log
+(
+&minus;
+3
+&ast;
+&minus;
+5
+)
+;
+*// 15*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-15">Section 14.15: Getting maximum and minimum</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Math.max
+The () function returns the largest of zero or more numbers.
+Math.max( 4, 12 );
+*// 12*
+Math
+.
+max
+(
+&minus;
+1
+,
+&minus;
+15
+)
+;
+*// -1*
+Math.min
+The () function returns the smallest of zero or more numbers.
+Math.min( 4, 12 ); // <i>4</i>
+Math
+.
+min
+(
+&minus;
+1
+,
+&minus;
+15
+)
+;
+*// -15*
+**Getting maximum and minimum from an array:**
+**var**
+arr
+=
+&lbrack;
+1
+,
+2
+,
+3
+,
+4
+,
+5
+,
+6
+,
+7
+,
+8
+,
+9
+&rbrack;
+,
+max
+=
+Math
+.
+max
+.
+apply
+(
+Math
+,
+arr
+)
+,
+min
+=
+Math
+.
+min
+.
+apply
+(
+Math
+,
+arr
+)
+;
+console.
+log
+(
+max
+)
+;
+*// Logs: 9*
+console.
+log
+(
+min
+)
+;
+*// Logs: 1*
+ECMAScript 6 [spread
+operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator),
+getting the maximum and minimum of an array:
+**var**
+arr
+=
+&lbrack;
+1
+,
+2
+,
+3
+,
+4
+,
+5
+,
+6
+,
+7
+,
+8
+,
+9
+&rbrack;
+,
+max
+=
+Math
+.
+max
+(
+&hellip;
+arr
+)
+,
+min
+=
+Math
+.
+min
+(
+&hellip;
+arr
+)
+;
+console.
+log
+(
+max
+)
+;
+*// Logs: 9*
+console.
+log
+(
+min
+)
+;
+*// Logs: 1*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-16">Section 14.16: Restrict Number to Min/Max Range</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+If you need to clamp a number to keep it inside a specific range
+boundary
+**function**
+clamp
+(
+min
+,
+max
+,
+val
+)
+{
+**return**
+Math
+.
+min
+(
+Math
+.
+max
+(
+min
+,
+&plus;
+val
+)
+,
+max
+)
+;
+}
+console.
+log
+(
+clamp
+(
+&minus;
+10
+,
+10
+,
+&quot;4.30&quot;
+)
+)
+;
+*// 4.3*
+console.
+log
+(
+clamp
+(
+&minus;
+10
+,
+10
+,
+&minus;
+8
+)
+)
+;
+*// -8*
+console.
+log
+(
+clamp
+(
+&minus;
+10
+,
+10
+,
+12
+)
+)
+;
+*// 10*
+console.
+log
+(
+clamp
+(
+&minus;
+10
+,
+10
+,
+&minus;
+15
+)
+)
+;
+*// -10*
+[Use-case example (jsFiddle)](https://jsfiddle.net/RokoCB/8drqL3vo/)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-17">Section 14.17: Ceiling and Floor</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+**ceil()**
+ceil()
+The method rounds a number *upwards* to the nearest integer, and
+returns the result.
+
+**Syntax:**
+Math
+.
+ceil
+(
+n
+)
+;
+**Example:**
+console.
+log
+(
+Math
+.
+ceil
+(
+0.60
+)
+)
+;
+*// 1*
+console.
+log
+(
+Math
+.
+ceil
+(
+0.40
+)
+)
+;
+*// 1*
+console.
+log
+(
+Math
+.
+ceil
+(
+5.1
+)
+)
+;
+*// 6*
+console.
+log
+(
+Math
+.
+ceil
+(
+&minus;
+5.1
+)
+)
+;
+*// -5*
+console.
+log
+(
+Math
+.
+ceil
+(
+&minus;
+5.9
+)
+)
+;
+*// -5*
+**floor**
+**(**
+**)**
+floor()
+The method rounds a number *downwards* to the nearest integer, and
+returns the result.
+**Syntax:**
+Math
+.
+floor
+(
+n
+)
+;
+**Example:**
+console.
+log
+(
+Math
+.
+ceil
+(
+0.60
+)
+)
+;
+*// 0*
+console.
+log
+(
+Math
+.
+ceil
+(
+0.40
+)
+)
+;
+*// 0*
+console.
+log
+(
+Math
+.
+ceil
+(
+5.1
+)
+)
+;
+*// 5*
+console.
+log
+(
+Math
+.
+ceil
+(
+&minus;
+5.1
+)
+)
+;
+*// -6*
+console.
+log
+(
+Math
+.
+ceil
+(
+&minus;
+5.9
+)
+)
+;
+*// -6*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-18">Section 14.18: Getting roots of a number</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+**Square Root**
+Math.sqrt
+Use () to find the square root of a number
+Math
+.
+sqrt
+(
+16
+)
+&bsol;#
+=&gt;
+4
+**Cube Root**
+Math.cbrt
+To find the cube root of a number, use the () function
+<h5>Version ≥ 6</h5>
+Math.cbrt(27) #=&bsol;3
+**Finding nth-roots**
+Math.pow
+To find the nth-root, use the () function and pass in a fractional
+exponent.
+Math
+.
+pow
+(
+64
+,
+1
+/
+6
+)
+&bsol;#
+=&gt;
+2
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-19">Section 14.19: Random with gaussian distribution</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Math.random
+The () function should give random numbers that have a standard
+deviation approaching 0. When picking from a deck of card, or
+simulating a dice roll this is what we want.
+
+But in most situations this is unrealistic. In the real world the
+randomness tends to gather around an common normal value. If plotted
+on a graph you get the classical bell curve or gaussian distribution.
+Math.random
+To do this with the () function is relatively simple.
+
+**var** randNum = (Math.random() + Math.random()) / 2; **var** randNum
+= (Math.random() + Math.random() + Math.random()) / 3;
+
+**var** randNum = (Math.random() + Math.random() + Math.random() +
+Math.random()) / 4;
+
+Adding a random value to the last increases the variance of the random
+numbers. Dividing by the number of times you add normalises the result
+to a range of 01
+
+As adding more than a few randoms is messy a simple function will
+allow you to select a variance you want.
+*// v is the number of times random is summed and should be over &gt;= 1*
+*// return a random number between 0-1 exclusive*
+**function**
+randomG
+(
+v
+)
+{
+**var**
+r
+=
+0
+;
+**for**
+(
+**var**
+i
+=
+v
+;
+i
+&gt;
+0
+;
+i
+&bsol;
+)
+{
+r
++=
+Math
+.
+random
+(
+)
+;
+}
+**return**
+r
+/
+v
+;
+}
+The image shows the distribution of random values for different values
+of v. The top left is standard single
+Math.random() call the bottom right is Math.random () summed 8 times. This is from 5,000,000 samples using Chrome
+
+<h5>This method is most efficient at v&lt;5</h5>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-20">Section 14.20: Math.atan2 to find direction</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+If you are working with vectors or lines you will at some stage want
+to get the direction of a vector, or line. Or the direction from a
+point to another point.
+Math.atan( yComponent, xComponent ) return the angle in radius    Math.PI to Math.PI 
+(- 180 within the range of ?? to 180 deg)
+**Direction of a vector**
+**var**
+vec
+=
+{
+x
+:
+4
+,
+y
+:
+3
+}
+;
+**var**
+dir
+=
+Math
+.
+atan2
+(
+vec.
+y
+,
+vec.
+x
+)
+;
+*// 0.6435011087932844*
+**Direction of a line**
+**var**
+line
+=
+{
+p1
+:
+{
+x
+:
+100
+,
+y
+:
+128
+}
+,
+p2
+:
+{
+x
+:
+320
+,
+y
+:
+256
+}
+}
+*// get the direction from p1 to p2*
+**var**
+dir
+=
+Math
+.
+atan2
+(
+line.
+p2
+.
+y
+&minus;
+line.
+p1
+.
+y
+,
+line.
+p2
+.
+x
+&minus;
+line.
+p1
+.
+x
+)
+;
+// <i>0.5269432271894297</i>
+**Direction from a point to another point**
+**var** point1 = { x: 123, y : 294}; **var** point2 = { x: 354, y :
+284};
+// <i>get the direction from point1 to point2</i>
+**var** dir = Math.atan2(point2.y - point1.y, point2.x - point1.x);
+// <i>-0.04326303140726714</i>
+<!-- thru 14.20 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-21">Section 14.21: Sin & Cos to create a vector given direction & distance</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+If you have a vector in polar form (direction & distance) you will
+want to convert it to a cartesian vector with a x and y component. For
+reference the screen coordinate system has directions as 0 deg points
+from left to right, 90 (PI/2) point down the screen, and so on in a
+clock wise direction.
+**var**
+dir
+=
+1.4536
+;
+*// direction in radians*
+**var**
+dist
+=
+200
+;
+*// distance*
+**var**
+vec
+=
+{
+}
+;
+vec.
+x
+=
+Math
+.
+cos
+(
+dir
+)
+&ast;
+dist
+;
+*// get the x component*
+vec.
+y
+=
+Math
+.
+sin
+(
+dir
+)
+&ast;
+dist
+;
+*// get the y component*
+You can also ignore the distance to create a normalised (1 unit long)
+vector in the direction of dir
+**var**
+dir
+=
+1.4536
+;
+*// direction in radians*
+**var**
+vec
+=
+{
+}
+;
+vec.
+x
+=
+Math
+.
+cos
+(
+dir
+)
+;
+*// get the x component*
+vec.
+y
+=
+Math
+.
+sin
+(
+dir
+)
+;
+*// get the y component*
+If your coordinate system has y as up then you need to switch cos and
+sin. In this case a positive direction is in a counterclockwise
+direction from the x axis.
+*// get the directional vector where y points up*
+**var**
+dir
+=
+1.4536
+;
+*// direction in radians*
+**var**
+vec
+=
+{
+}
+;
+vec.
+x
+=
+Math
+.
+sin
+(
+dir
+)
+;
+*// get the x component*
+vec.
+y
+=
+Math
+.
+cos
+(
+dir
+)
+;
+*// get the y component*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-22">Section 14.22: Math.hypot</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+To find the distance between two points we use pythagoras to get the
+square root of the sum of the square of the component of the vector
+between them.
+**var**
+v1
+=
+{
+x
+:
+10
+,
+y
+:
+5
+}
+;
+**var**
+v2
+=
+{
+x
+:
+20
+,
+y
+:
+10
+}
+;
+**var**
+x
+=
+v2.
+x
+&minus;
+v1.
+x
+;
+**var**
+y
+=
+v2.
+y
+&minus;
+v1.
+y
+;
+**var**
+distance
+=
+Math
+.
+sqrt
+(
+x
+&ast;
+x
+&plus;
+y
+&ast;
+y
+)
+;
+*// 11.180339887498949*
+Math.hypot
+With ECMAScript 6 came which does the same thing
+**var**
+v1
+=
+{
+x
+:
+10
+,
+y
+:
+5
+}
+;
+**var**
+v2
+=
+{
+x
+:
+20
+,
+y
+:
+10
+}
+;
+**var**
+x
+=
+v2.
+x
+&minus;
+v1.
+x
+;
+**var**
+y
+=
+v2.
+y
+&minus;
+v1.
+y
+;
+**var**
+distance
+=
+Math
+.
+hypot
+(
+x
+,
+y
+)
+;
+*// 11.180339887498949*
+Now you don&apos;t have to hold the interim vars to stop the code becoming
+a mess of variables
+**var**
+v1
+=
+{
+x
+:
+10
+,
+y
+:
+5
+}
+;
+**var**
+v2
+=
+{
+x
+:
+20
+,
+y
+:
+10
+}
+;
+**var**
+distance
+=
+Math
+.
+hypot
+(
+v2.
+x
+&minus;
+v1.
+x
+,
+v2.
+y
+&minus;
+v1.
+y
+)
+;
+*// 11.180339887498949*
+Math.hypot
+can take any number of dimensions
+*// find distance in 3D*
+**var**
+v1
+=
+{
+x
+:
+10
+,
+y
+:
+5
+,
+z
+:
+7
+}
+;
+**var**
+v2
+=
+{
+x
+:
+20
+,
+y
+:
+10
+,
+z
+:
+16
+}
+;
+**var**
+dist
+=
+Math
+.
+hypot
+(
+v2.
+x
+&minus;
+v1.
+x
+,
+v2.
+y
+&minus;
+v1.
+y
+,
+v2.
+z
+&minus;
+v1.
+z
+)
+;
+*// 14.352700094407325*
+*// find length of 11th dimensional vector*
+**var**
+v
+=
+&lbrack;
+1
+,
+3
+,
+2
+,
+6
+,
+1
+,
+7
+,
+3
+,
+7
+,
+5
+,
+3
+,
+1
+&rbrack;
+;
+**var**
+i
+=
+0
+;
+dist
+=
+Math
+.
+hypot
+(
+v
+&lbrack;
+i
+++
+&rbrack;
+,
+v
+&lbrack;
+i
+++
+&rbrack;
+,
+v
+&lbrack;
+i
+++
+&rbrack;
+,
+v
+&lbrack;
+i
+++
+&rbrack;
+,
+v
+&lbrack;
+i
+++
+&rbrack;
+,
+v
+&lbrack;
+i
+++
+&rbrack;
+,
+v
+&lbrack;
+i
+++
+&rbrack;
+,
+v
+&lbrack;
+i
+++
+&rbrack;
+,
+v
+&lbrack;
+i
+++
+&rbrack;
+,
+v
+&lbrack;
+i
+++
+&rbrack;
+,
+v
+&lbrack;
+i
+++
+&rbrack;
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-23">Section 14.23: Periodic functions using Math.sin</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Math.sin and Math.cos
+are cyclic with a period of 2&ast;PI radians (360 deg) they output a wave
+with an amplitude of 2 in the range -1 to 1.
+
+Graph of sine and cosine function: *(courtesy Wikipedia)*
+![](./images/image028.png){width="6.252083333333333in"
+height="3.990972222222222in"}
+
+They are both very handy for many types of periodic calculations, from
+creating sound waves, to animations, and even encoding and decoding
+image data
+
+This example shows how to create a simple sin wave with control over
+period/frequency, phase, amplitude, and offset.
+
+The unit of time being used is seconds.
+
+The most simple form with control over frequency only.
+*// time is the time in seconds when you want to get a sample*
+*// Frequency represents the number of oscillations per second*
+**function**
+oscillator
+(
+time
+,
+frequency
+)
+{
+**return**
+Math
+.
+sin
+(
+time
+&ast;
+2
+&ast;
+Math
+.
+PI
+&ast;
+frequency
+)
+;
+}
+In almost all cases you will want to make some changes to the value
+returned. The common terms for modifications
+
+Phase: The offset in terms of frequency from the start of the
+oscillations. It is a value in the range of 0 to 1 where the value 0.5
+move the wave forward in time by half its frequency. A value of 0 or 1
+makes no change. Amplitude: The distance from the lowest value and
+highest value during one cycle. An amplitude of 1 has a range of 2.
+The lowest point (trough) -1 to the highest (peak) 1. For a wave with
+frequency 1 the peak is at
+
+0.25 seconds, and trough at 0.75.
+
+Offset: moves the whole wave up or down.
+
+To include all these in the function:
+
+**function** oscillator(time, frequency = 1, amplitude = 1, phase = 0,
+offset = 0){ **var** t = time &ast; frequency &ast; Math.PI &ast; 2; *// get
+phase at time*
+t
++=
+phase
+&ast;
+Math
+.
+PI
+&ast;
+2
+;
+*// add the phase offset*
+**var**
+v
+=
+Math
+.
+sin
+(
+t
+)
+;
+*// get the value at the calculated position in the cycle*
+v
+&ast;=
+amplitude
+;
+*// set the amplitude*
+v
++=
+offset
+;
+*// add the offset*
+**return**
+v
+;
+}
+Or in a more compact (and slightly quicker form):
+
+**function** oscillator(time, frequency = 1, amplitude = 1, phase = 0,
+offset = 0){ **return** Math.sin(time &ast; frequency &ast; Math.PI &ast; 2 +
+phase &ast; Math.PI &ast; 2) &ast; amplitude + offset; }
+
+All the arguments apart from time are optional
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-24">Section 14.24: Division (/)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The division operator (/) perform arithmetic division on numbers
+(literals or variables).
+console.
+log
+(
+15
+/
+3
+)
+;
+*// 5*
+console.
+log
+(
+15
+/
+4
+)
+;
+*// 3.75*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch14-25">Section 14.25: Decrementing (&rpar;</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The decrement operator (&rpar; decrements numbers by one.
+If used as a postfix to
+n
+, the operator returns the current
+n
+and
+*then*
+assigns the decremented the value.
+If used as a prefix to
+n
+, the operator assigns the decremented
+n
+and
+*then*
+returns the changed value.
+**var**
+a
+=
+5
+,
+*// 5*
+b
+=
+a
+&bsol;
+,
+*// 5*
+c
+=
+a
+*// 4*
+In this case, b is set to the initial value of a. So, b will be 5, and
+c will be 4.
+**var**
+a
+=
+5
+,
+*// 5*
+b
+=
+&bsol;
+a
+,
+*// 4*
+c
+=
+a
+*// 4*
+In this case, b is set to the new value of a. So, b will be 4, and c
+will be 4.
+
+**Common Uses**
+
+The decrement and increment operators are commonly used in **for**
+loops, for example:
+**for**
+(
+**var**
+i
+=
+42
+;
+i
+&gt;
+0
+;
+&bsol;
+i
+)
+{
+console.
+log
+(
+i
+)
+}
+Notice how the *prefix* variant is used. This ensures that a
+temporarily variable isn&apos;t needlessly created (to return the value
+prior to the operation).
+
+**Note:** Neither &bsol; nor ++ are like normal mathematical operators,
+but rather they are very concise operators for *assignment*.
+Notwithstanding the return value, both
+x&bsol;
+and
+&bsol;
+x
+reassign to
+x
+such that
+x
+=
+x
+&minus;
+1
+.
+**const**
+x
+=
+1
+;
+console.
+log
+(
+x
+&bsol;
+)
+*// TypeError: Assignment to constant variable.*
+console.
+log
+(
+&bsol;
+x
+)
+*// TypeError: Assignment to constant variable.*
+console.
+log
+(
+&bsol;
+3
+)
+*// ReferenceError: Invalid left-hand size expression in prefix
+operation.*
+console.log
+(
+3
+&bsol;
+)
+*// ReferenceError: Invalid left-hand side expression in postfix
+operation.*
+<!-- thru chapter 14 -->
+
