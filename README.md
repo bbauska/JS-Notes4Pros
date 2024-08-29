@@ -8017,370 +8017,240 @@ console.log(obj.propertyName2); // <i>this will be logged every time propertyNam
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-19">Section 13.19: Object.keys</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 5</h5>
-Object
-.
-keys
-(
-obj
-)
-returns an array of a given object&apos;s keys.
-<b>var</b>
-obj
-=
-{
-a
-:
-&quot;hello&quot;
-,
-b
-:
-&quot;this is&quot;
-,
-c
-:
-&quot;javascript!&quot;
-}
-;
-<b>var</b>
-keys
-=
-Object
-.
-keys
-(
-obj
-)
-;
-console.
-log
-(
-keys
-)
-;
-// <i> &lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&rbrack;</i>
+<p>Object.keys(obj) returns an array of a given object&apos;s keys.</p>
+<pre>
+<b>var</b> obj = {
+  a: &quot;hello&quot;,
+  b: &quot;this is&quot;,
+  c: &quot;javascript!&quot;
+};
+<b>var</b> keys = Object.keys(obj);
+console.log(keys);  // <i> &lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&rbrack;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-20">Section 13.20: Properties with special characters or reserved words</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-myObject.property
+<p>While object property notation is usually written as , this will only allow characters 
+that are normally found in 
+<a href="http://stackoverflow.com/questions/1661197/what-characters-are-valid-for-javascript-variable-names">
+JavaScript variable names</a>, which is mainly letters, numbers and underscore (&lowbar;).</p>
 
-While object property notation is usually written as , this will only
-allow characters that are normally found in [JavaScript variable
-names](http://stackoverflow.com/questions/1661197/what-characters-are-valid-for-javascript-variable-names),
-which is mainly letters, numbers and underscore (&lowbar;).
-
-If you need special characters, such as space, ☺, or user-provided
-content, this is possible using &lbrack;&rbrack; bracket notation.
-myObject
-&lbrack;
-&apos;special property
-☺
-&apos;
-&rbrack;
-=
-&apos;it works!&apos;
-console.
-log
-(
-myObject
-&lbrack;
-&apos;special property
-☺
-&apos;
-&rbrack;
-)
-<b>All-digit properties:</b>
-In addition to special characters, property names that are all-digits
+<p>If you need special characters, such as space, ☺, or user-provided content, this is 
+possible using &lbrack;&rbrack; bracket notation.</p>
+<pre>
+myObject&lbrack;&apos;special property ☺&apos;&rbrack; = &apos;it works!&apos;
+console.log(myObject&lbrack;&apos;special property ☺&apos;&rbrack;)
+</pre>
+<p><b>All-digit properties:</b></p>
+<p>In addition to special characters, property names that are all-digits
 will require bracket notation. However, in this case the property need
-not be written as a string.
-myObject&lbrack;123&rbrack; = &apos;hi!&apos; // <i> number 123 is automatically converted to
-a string</i> console.log(myObject&lbrack;&apos;123&apos;&rbrack;) // <i> notice how using string
-123 produced the same result</i> console.log(myObject&lbrack;&apos;12&apos; + &apos;3&apos;&rbrack;)
-// <i> string concatenation</i> console.log(myObject&lbrack;120 + 3&rbrack;) // <i>
-arithmetic, still resulting in 123 and producing the same result</i>
-console.log(myObject&lbrack;123.0&rbrack;) // <i> this works too because 123.0
-evaluates to 123</i> console.log(myObject&lbrack;&apos;123.0&apos;&rbrack;) // <i> this does NOT
-work, because &apos;123&apos; != &apos;123.0&apos;</i>
-However, leading zeros are not recommended as that is interpreted as
+not be written as a string.</p>
+<!-- page 127 -->
+<pre>
+myObject&lbrack;123&rbrack; = &apos;hi!&apos; // <i> number 123 is automatically converted to a string</i>
+console.log(myObject&lbrack;&apos;123&apos;&rbrack;) // <i> notice how using string 123 produced the same result</i>
+console.log(myObject&lbrack;&apos;12&apos; + &apos;3&apos;&rbrack;) // <i> string concatenation</i>
+console.log(myObject&lbrack;120 + 3&rbrack;) // <i>arithmetic, still resulting in 123 and producing the same result</i>
+console.log(myObject&lbrack;123.0&rbrack;) // <i> this works too because 123.0 evaluates to 123</i>
+console.log(myObject&lbrack;&apos;123.0&apos;&rbrack;) // <i> this does NOT work, because &apos;123&apos; != &apos;123.0&apos;</i>
+</pre>
+<p>However, leading zeros are not recommended as that is interpreted as
 Octal notation. (TODO, we should produce and link to an example
-describing octal, hexadecimal and exponent notation)
-See also: &lbrack;Arrays are Objects&rbrack; example.
+describing octal, hexadecimal and exponent notation)</p>
+<p>See also: &lbrack;Arrays are Objects&rbrack; example.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-21">Section 13.21: Creating an Iterable object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 6</h5>
+<pre>
 <b>var</b>
-myIterableObject
-=
-{
-}
-;
+myIterableObject = {};
 // <i>An Iterable object must define a method located at the Symbol.iterator key:</i>
-myIterableObject
-&lbrack;
-Symbol.
-iterator
-&rbrack;
-=
-<b>function</b>
-(
-)
-{
+myIterableObject&lbrack;Symbol.iterator&rbrack; = <b>function</b> () {
 // <i>The iterator should return an Iterator object</i>
-<b>return</b>
-{
-// <i>The Iterator object must implement a method, next()</i>
-next
-:
-<b>function</b>
-(
-)
-{
-// <i>next must itself return an IteratorResult object</i>
-<b>if</b>
-(
-!
-<b>this</b>
-.
-iterated
-)
-{
-<b>this</b>
-.
-iterated
-=
-<b>true</b>
-;
-// <i>The IteratorResult object has two properties</i>
-<b>return</b>
-{
-// <i>whether the iteration is complete, and</i>
-done
-:
-<b>false</b>
-,
-// <i>the value of the current iteration</i>
-value
-:
-&apos;One&apos;
+  <b>return</b> {
+    // <i>The Iterator object must implement a method, next()</i>
+    next: <b>function</b> () {
+      // <i>next must itself return an IteratorResult object</i>
+      <b>if</b>(!<b>this</b>.iterated) {
+        <b>this</b>.iterated = <b>true</b>;
+        // <i>The IteratorResult object has two properties</i>
+        <b>return</b> {
+          // <i>whether the iteration is complete, and</i>
+          done: <b>false</b>,
+          // <i>the value of the current iteration</i>
+          value: &apos;One&apos;
+        };
+      }
+      <b>return</b> {
+        // <i>When iteration is complete, just the done property is needed</i>
+        done: <b>true</b>
+      };
+    },
+    iterated: <b>false</b>
+  };
+};
+
+<b>for</b> (<b>var</b> c of myIterableObject) {
+  console.log(c);
 }
-;
-}
-<b>return</b>
-{
-// <i>When iteration is complete, just the done property is needed</i>
-done
-:
-<b>true</b>
-}
-;
-}
-,
-iterated
-:
-<b>false</b>
-}
-;
-}
-;
-<b>for</b>
-(
-<b>var</b>
-c of myIterableObject
-)
-{
-console.
-log
-(
-c
-)
-;
-}
-Console output
+</pre>
+<p>Console output</p>
+<blockquote>
 One
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-22">Section 13.22: Iterating over Object entries - Object.entries()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 8</h5>
-[Object](https://github.com/tc39/proposal-object-values-entries)
-[.](https://github.com/tc39/proposal-object-values-entries)
-[entries](https://github.com/tc39/proposal-object-values-entries)
 
-The [proposed
-()](https://github.com/tc39/proposal-object-values-entries) method
-returns an array of key/value pairs for the given object. It does not
-return
-Array . <b>prototype</b>. entries   (), but the Array returned Object .entries
-by
-an iterator like () can be iterated regardless.
-<b>const</b>
-obj
-=
-{
-one
-:
-1
-,
-two
-:
-2
-,
-three
-:
-3
+<p>The <a href="https://github.com/tc39/proposal-object-values-entries">
+proposed Object.entries()</a> method returns an array of key/value pairs for the given 
+object. It does not return an iterator like Array.<b>prototype</b>.entries(), but the 
+Array returned Object.entries() can be iterated regardless</p>
+<!-- page 128 -->
+<pre>
+<b>const</b> obj = {
+  one: 1,
+  two: 2,
+  three: 3
+};
+Object.entries(obj);
+</pre>
+<p>Results in:</p>
+<pre>
+&lbrack;
+  &lbrack;&quot;one&quot;, 1&rbrack;,
+  &lbrack;&quot;two&quot;, 2&rbrack;,
+  &lbrack;&quot;three&quot;, 3&rbrack;
+&rbrack;
+</pre>
+<p>It is an useful way of iterating over the key/value pairs of an object:</p>
+<pre>
+<b>for</b> (<b>const</b> &lbrack;key, value &rbrack; of Object.entries(obj)) {
+  console.log(key);  // <i> &quot;one&quot;, &quot;two&quot; and &quot;three&quot;</i>
+  console.log(value);  // <i>1, 2 and 3</i>
 }
-;
-Object
-.
-entries
-(
-obj
-)
-;
-Results in:
-&lbrack;
-&lbrack;
-&quot;one&quot;
-,
-1
-&rbrack;
-,
-&lbrack;
-&quot;two&quot;
-,
-2
-&rbrack;
-,
-&lbrack;
-&quot;three&quot;
-,
-3
-&rbrack;
-&rbrack;
-It is an useful way of iterating over the key/value pairs of an object:
-<b>for</b>
-(
-<b>const</b>
-&lbrack;
-key
-,
-value
-&rbrack;
-of
-Object
-.
-entries
-(
-obj
-)
-)
-{
-console.
-log
-(
-key
-)
-;
-// <i> &quot;one&quot;, &quot;two&quot; and &quot;three&quot;</i>
-console.
-log
-(
-value
-)
-;
-// <i>1, 2 and 3</i>
-}
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-23">Section 13.23: Object.values()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 8</h5>
-
-Object.values
-The () method returns an array of a given object&apos;s own enumerable
+<p>The Object.values() method returns an array of a given object&apos;s own enumerable
 property values, in the same order as that provided by a for&hellip;in
 loop (the difference being that a for-in loop enumerates properties in
-the prototype chain as well).
-<b>var</b>
-obj
-=
-{
-0
-:
-&apos;a&apos;
-,
-1
-:
-&apos;b&apos;
-,
-2
-:
-&apos;c&apos;
-}
-;
-console.
-log
-(
-Object
-.
-values
-(
-obj
-)
-)
-;
-// <i> &lbrack;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&rbrack;</i>
-<b>Note:</b>
-For browser support, please refer to this
-[link](http://kangax.github.io/compat-table/es2016plus/#test-Object.values)
+the prototype chain as well).</p>
+<pre>
+<b>var</b> obj = { 0: &apos;a&apos;, 1: &apos;b&apos;, 2: &apos;c&apos; };
+console.log(Object.values(obj));  // <i> &lbrack;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&rbrack;</i>
+</pre>
+<p><b>Note:</b></p>
+<p>For browser support, please refer to this <a href="http://kangax.github.io/compat-table/es2016plus/#test-Object.values">
+link</a></p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch14">Chapter 14: Arithmetic (Math)</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-1">Section 14.1: Constants</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-<b>Constants Description Approximate</b>
-Math
-.E Base of natural logarithm <i>e</i> 2.718
-Math .LN10
-Natural logarithm of 10 2.302
-Math .LN2
-Natural logarithm of 2 0.693
-Math.LOG10E
-Base 10 logarithm of <i>e</i> 0.434
-Math.LOG2E
-Base 2 logarithm of <i>e</i> 1.442
-Math.PI
-Pi: the ratio of circle circumference to
-3.14 diameter (π)
-Math.SQRT1_2
-Square root of 1/2 0.707
-Math. SQRT2
-Square root of 2 1.414
-Difference between one and the smallest
-Number.EPSILON
-value greater than one representable as
-2.2204460492503130808472633361816E-16 a Number
-n
-Largest integer n such that n and + 1
-Number.MAX_SAFE_INTEGER
-are both exactly representable as a 2&Hat;53 - 1 Number
-Number.MAX_VALUE
-Largest positive finite value of Number 1.79E+308
-n
-Smallest integer n such that n and - 1
-Number.MIN_SAFE_INTEGER
-are both exactly representable as a -(2&Hat;53 - 1) Number
-Number.MIN_VALUE
-Smallest positive value for Number 5E-324
-Number.NEGATIVE_INFINITY
-Value of negative infinity (-∞)
-Number.POSITIVE_INFINITY
-Value of positive infinity (∞)
-<b>Infinity</b> Value of positive infinity (∞)
+<table>
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Constants</b></th>
+      <th><b>Description</b></th>
+      <th><b>Approximate</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Math.E</td>
+      <td>Base of natural logarithm <i>e</i></td>
+      <td>2.718</td>
+    </tr>
+    <tr>
+      <td>Math.LN10</td>
+      <td>Natural logarithm of 10</td>
+      <td>2.302</td>
+    </tr>
+    <tr>
+      <td>Math.LN2</td>
+      <td>Natural logarithm of 2</td>
+      <td>0.693</td>
+    </tr>
+    <tr>
+      <td>Math.Log10E</td>
+      <td>Base 10 logarithm of <i>e</i></td>
+      <td>0.434</td>
+    </tr>
+    <tr>
+      <td>Math.LOG2E</td>
+      <td>Base 2 logarithm of <i>e</i></td>
+      <td>1.442</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Pi: the ratio of circle circumference to diameter (π)</td>
+      <td>3.14</td>
+    </tr>
+    <tr>
+      <td>Math.SQRT1_2</td>
+      <td>Square root of 1/2</td>
+      <td>0.707</td>
+    </tr>
+    <tr>
+      <td>Math.SQRT2</td>
+      <td>Square root of 2</td>
+      <td>1.414</td>
+    </tr>
+    <tr>
+      <td>Number.EPSILON</td>
+      <td>Difference between one and the smallest value greater than one represntable as a Number</td>
+      <td>2.2204460492503130808472633361816E-16</td>
+    </tr>
+    <tr>
+      <td>Number.MAX_SAFE_INTEGER</td>
+      <td>Largest interger n such that n and n + 1 are both exactly representable as a Number</td>
+      <td>2&Hat;53 - 1</td>
+    </tr>
+    <tr>
+      <td>Number.MAX_VALUE</td>
+      <td>Largest possitive infinite value of Number</td>
+      <td>1.79E+308</td>
+    </tr>
+    <tr>
+      <td>Number.MIN_SAFE_INTEGER</td>
+      <td>Smallest integer n such that n and n - 1 are both exactly representable as a Number</td>
+      <td>-(2&Hat;53 - 1)</td>
+    </tr>
+    <tr>
+      <td>Number.MIN_VALUE</td>
+      <td>Smallest positive value for Number</td>
+      <td>5E-324</td>
+    </tr>
+    <tr>
+      <td>Number.NEGATIVE_INFINITY</td>
+      <td>Value of negative infinity (-∞)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Number.NEGATIVE_INFINITY</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Number.POSITIVE_INFINITY</td>
+      <td>Value of positive infinity (∞)</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><b>Infinity</td>
+      <td>Value of positive infinity (∞)</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-2">Section 14.2: Remainder / Modulus (%)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
