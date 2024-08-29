@@ -7908,113 +7908,112 @@ Object.getOwnPropertyDescriptor(sampleObject, &apos;hello&apos;);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-18">Section 13.18: Descriptors and Named Properties</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-object.propertyName
+<p>Properties are members of an object. Each named property is a pair of (name, 
+descriptor). The name is a string that allows access (using the dot notation or 
+the square brackets notation object  &lbrack; &apos;propertyName&apos; &rbrack;). 
+The descriptor is a record of fields defining the behavior of the property when it is
+accessed (what happens to the property and what is the value returned from accessing 
+it). By and large, a property associates a name to a behavior (we can think of the 
+behavior as a black box).</p>
 
-Properties are members of an object. Each named property is a pair of
-(name, descriptor). The name is a string that allows access (using the
-dot notation or the square brackets notation
-
-object  &lbrack; &apos;propertyName&apos;
-&rbrack;). The descriptor is a record of fields defining the bevahiour of the
-property when it is
-
-accessed (what happens to the property and what is the value returned
-from accessing it). By and large, a property associates a name to a
-behavior (we can think of the behavior as a black box).
-
-There are two types of named properties:
-1.  <i>data property</i>: the property&apos;s name is associated with a value.
-
-2.  <i>accessor property</i>: the property&apos;s name is associated with one or
-    two accessor functions.
-Demonstration:
+<p>There are two types of named properties:</p>
+<ol>
+  <li><i>data property</i>: the property&apos;s name is associated with a value.</li>
+  <li><i>accessor property</i>: the property&apos;s name is associated with one or
+    two accessor functions.</li>
+</ol>
+<p>Demonstration:</p>
+<pre>
 obj.propertyName1 = 5; // <i>translates behind the scenes into</i>
-// <i>either assigning 5 to the value field&ast; if it is a data property</i>
-// <i>or calling the set function with the parameter 5 if accessor property</i>
-// <i>&ast;actually whether an assignment would take place in the case of a data property</i>
-// <i>also depends on the presence and value of the writable field - on that later on</i>
+                       // <i>either assigning 5 to the value field&ast; if it is a data property</i>
+                       // <i>or calling the set function with the parameter 5 if accessor property</i>
+                       // <i>&ast;actually whether an assignment would take place in the case of a data property</i>
+                       // <i>also depends on the presence and value of the writable field - on that later on</i>
+</pre>
+<!-- page 125 -->
+<p>The property&apos;s type is determined by its descriptor&apos;s fields, and a
+property cannot be of both types.</p>
 
-The property&apos;s type is determined by its descriptor&apos;s fields, and a
-property cannot be of both types.
-<b>Data descriptors</b> -
-Required fields: value or writable or both Optional
-fields:configurable,enumerable
-Sample:
+<p><b>Data descriptors</b>-</p>
+<ul>
+  <li>Required fields: value or writable or both</li>
+  <li>Optional fields:configurable,enumerable</li>
+</ul>
+<p>Sample:</p>
+<pre>
 {
-value
-:
-10
-,
-writable
-:
-<b>true</b>
-;
+  value: 10,
+  ritable: <b>true</b>;
 }
-<b>Accessor descriptors</b> -
-Required fields: <b>get</b> or <b>set</b> or both
-Optional fields: configurable, enumerable
-Sample:
+</pre>
+<p><b>Accessor descriptors</b>-</p>
+<ul>
+  <li>Required fields: <b>get</b> or <b>set</b> or both</li>
+  <li>Optional fields: configurable, enumerable</li>
+</ul>
+<p>Sample:</p>
+<pre>
 {
-<b>get</b>
-:
-<b>function</b>
-(
-)
-{
-<b>return</b>
-10
-;
+  <b>get</b>: <b>function</b>() {
+    <b>return</b> 10;
+  },
+  enumerable: <b>true</b>
 }
-,
-enumerable
-:
-<b>true</b>
-}
-<b>meaning of fields and their defaults</b> configurable,enumerable and
-writable:
-These keys all default to <b>false</b>. configurable is <b>true</b> if and
-only if the type of this property descriptor may be changed and if the
-property may be deleted from the corresponding object.
-enumerable is <b>true</b> if and only if this property shows up during
-enumeration of the properties on the corresponding object.
-writable is <b>true</b> if and only if the value associated with the
-property may be changed with an assignment operator.
-<b>get</b> and <b>set</b>:
-These keys default to <b>undefined</b>. <b>get</b> is a function which
-serves as a getter for the property, or <b>undefined</b> if there is no
-getter. The function return will be used as the value of the property.
-<b>set</b> is a function which serves as a setter for the property, or
-<b>undefined</b> if there is no setter. The function will receive as only
-argument the new value being assigned to the property.
-value:
-This key defaults to <b>undefined</b>.
-The value associated with the property. Can be any valid JavaScript
-value (number, object, function, etc).
-Example:
-<b>var</b> obj = {propertyName1: 1}; // <i>the pair is actually
-(&apos;propertyName1&apos;, {value:1,</i> // <i> writable:true,</i>
-// <i>enumerable:true,</i>
-// <i>configurable:true})</i>
-Object.defineProperty(obj, &apos;propertyName2&apos;,
-{<b>get</b>: <b>function</b>() { console.log(&apos;this will be logged &apos; +
-&apos;every time propertyName2 is accessed to get its value&apos;); },
-<b>set</b>: <b>function</b>() { console.log(&apos;and this will be logged &apos; +
+</pre>
+<p><b>meaning of fields and their defaults</b></p>
+<p>configurable,enumerable and writable:</p>
+<ul>
+  <li>These keys all default to <b>false</b>.</li>
+  <li>configurable is <b>true</b> if and only if the type of this property descriptor may 
+    be changed and if the property may be deleted from the corresponding object.</li>
+  <li>enumerable is <b>true</b> if and only if this property shows up during enumeration 
+    of the properties on the corresponding object.</li>
+  <li>writable is <b>true</b> if and only if the value associated with the property may 
+    be changed with an assignment operator.</li>
+</ul>
+<p><b>get</b> and <b>set</b>:</p>
+<ul>
+  <li>These keys default to <b>undefined</b>.
+  <li><b>get</b> is a function which serves as a getter for the property, or <b>undefined</b> 
+    if there is no getter. The function return will be used as the value of the property.</li>
+  <li><b>set</b> is a function which serves as a setter for the property, or <b>undefined</b> 
+    if there is no setter. The function will receive as only argument the new value being 
+	assigned to the property.</li>
+
+<p>value:</p>
+<ul>
+  <li>This key defaults to <b>undefined</b>.</li>
+  <li>The value associated with the property. Can be any valid JavaScript value (number, 
+    object, function, etc).</li>
+</ul>
+
+<p>Example:</p>
+<!-- page 126 -->
+<pre>
+<b>var</b> obj = {propertyName1: 1}; // <i>the pair is actually (&apos;propertyName1&apos;, {value:1,</i>
+                                     // <i> writable:true,</i>
+                                     // <i>enumerable:true,</i>
+                                     // <i>configurable:true})</i>
+Object.defineProperty(obj, &apos;propertyName2&apos;, {<b>get</b>: <b>function</b>() { 
+console.log(&apos;this will be logged &apos; +
+&apos;every time propertyName2 is accessed to get its value&apos;); 
+},
+<b>set</b>: <b>function</b>() {
+console.log(&apos;and this will be logged &apos; +
 &apos;every time propertyName2<b>&amp;amp;apos;</b>s value is tried to be set&apos;)
-
 // <i>will be treated like it has enumerable:false, configurable:false</i>
-
 }});
+// <i>propertyName1 is the name of obj&apos;s data property</i>
+// <i>and propertyName2 is the name of its accessor property</i>
 
-// <i>propertyName1 is the name of obj&apos;s data property //and
-propertyName2 is the name of its accessor property</i>
 
-obj.propertyName1 = 3; console.log(obj.propertyName1); // <i>3</i>
+obj.propertyName1 = 3;
+console.log(obj.propertyName1); // <i>3</i>
 
-obj.propertyName2 = 3; // <i>and this will be logged every time
-propertyName2&apos;s value is tried to be set</i>
-console.log(obj.propertyName2); // <i>this will be logged every time
-propertyName2 is accessed to get its value</i>
+obj.propertyName2 = 3; // <i>and this will be logged every time propertyName2&apos;s value is tried to be set</i>
+console.log(obj.propertyName2); // <i>this will be logged every time propertyName2 is accessed to get</i>
+<i>its value</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-19">Section 13.19: Object.keys</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
