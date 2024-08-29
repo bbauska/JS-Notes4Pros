@@ -9262,33 +9262,33 @@ console.log(15 / 4);  // <i>3.75</i>
 </ul>
 <pre>
 <b>var</b> a = 5,  // <i>5</i>
-    b = a&bsol;,   // <i>5</i>
+    b = a&minus;&minus;,   // <i>5</i>
     c = a          // <i>4</i>
 </pre>
 <p>In this case, b is set to the initial value of a. So, b will be 5, and c will be 4.</p>
 <pre>
 <b>var</b> a = 5, // <i>5</i>
-    b = &bsol;a,  // <i>4</i>
+    b = &minus;&minus;a,  // <i>4</i>
     c = a         // <i>4</i>
 </pre>
 <p>In this case, b is set to the new value of a. So, b will be 4, and c will be 4.</p>
 <p><b>Common Uses</b></p>
 <p>The decrement and increment operators are commonly used in <b>for</b> loops, for example:</p>
 <pre>
-<b>for</b> (<b>var</b> i = 42; i &gt; 0; &bsol;i) {
+<b>for</b> (<b>var</b> i = 42; i &gt; 0; &minus;i) {
   console.log (i)
 }
 </pre>
-<p>Notice how the *prefix* variant is used. This ensures that a temporarily variable isn&apos;t 
+<p>Notice how the <i>prefix</i> variant is used. This ensures that a temporarily variable isn&apos;t 
 needlessly created (to return the value prior to the operation).</p>
 <!-- page 147 -->
 <blockquote>
-<b>Note:</b> Neither &bsol; nor ++ are like normal mathematical operators, but rather they are 
+<b>Note:</b> Neither &minus;&minus; nor ++ are like normal mathematical operators, but rather they are 
 very concise operators for <i>assignment</i>. Notwithstanding the return value, both
 
-x&bsol;
+x&minus;&minus;
 and
-&bsol;x
+&minus;&minus;x
 reassign to x such that x = x &minus; 1.
 </blockquote>
 <pre>
@@ -9308,7 +9308,7 @@ console.log(3&minus;)  // <i>ReferenceError: Invalid left-hand side expression i
 Bitwise operators perform operations on bit values of data. These
 operators convert operands to signed 32-bit integers in [two&apos;s
 complement](http://stackoverflow.com/questions/1049722/what-is-2s-complement).
-**Conversion to 32-bit integers**
+<b>Conversion to 32-bit integers</b>
 Numbers with more than 32 bits discard their most significant bits.
 For example, the following integer with more than 32 bits is converted
 to a 32-bit integer:
@@ -9318,7 +9318,7 @@ Before
 After
 :
 10100000000010000011110001000001
-**Two&apos;s Complement**
+<b>Two&apos;s Complement</b>
 In normal binary we find the binary value by adding the 1&apos;s based on
 their position as powers of 2 - The rightmost bit being 2&Hat;0 to the
 leftmost bit being 2&Hat;n-1 where n is the number of bits. For example,
@@ -9385,7 +9385,7 @@ inverted bits of 6 would be:
 *Note:* Adding more 1&apos;s to the left of a binary number does not
 change its value in two&apos;s compliment. The value 1010 and
 1111111111010 are both -6.
-**Bitwise AND**
+<b>Bitwise AND</b>
 a & b
 The bitwise AND operation returns the binary value with a 1 where both
 binary operands have 1&apos;s in a specific position, and 0 in all other
@@ -9399,17 +9399,17 @@ positions. For example:
 *// 7: 0..00111*
 *//&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&ast;
 *// 5: 0..00101 (0 + 0 + 4 + 0 + 1)*
-**Real world example: Number&apos;s Parity Check**
+<b>Real world example: Number&apos;s Parity Check</b>
 
 Instead of this &quot;masterpiece&quot; (unfortunately too often seen in many
 real code parts):
-**function**
+<b>function</b>
 isEven
 (
 n
 )
 {
-**return**
+<b>return</b>
 n
 &percnt;
 2
@@ -9417,13 +9417,13 @@ n
 0
 ;
 }
-**function**
+<b>function</b>
 isOdd
 (
 n
 )
 {
-**if**
+<b>if</b>
 (
 isEven
 (
@@ -9431,20 +9431,20 @@ n
 )
 )
 {
-**return**
-**false**
+<b>return</b>
+<b>false</b>
 ;
 }
-**else**
+<b>else</b>
 {
-**return**
-**true**
+<b>return</b>
+<b>true</b>
 ;
 }
 }
 You can check the (integer) number&apos;s parity in much more effective
 and simple manner:
-**if**
+<b>if</b>
 (
 n
 &
@@ -9458,7 +9458,7 @@ log
 )
 ;
 }
-**else**
+<b>else</b>
 {
 console.
 log
@@ -9467,7 +9467,7 @@ log
 )
 ;
 }
-**Bitwise OR**
+<b>Bitwise OR</b>
 a &vert; b
 The bitwise OR operation returns the binary value with a 1 where
 either operands or both operands have 1&apos;s in a specific position, and
@@ -9481,7 +9481,7 @@ either operands or both operands have 1&apos;s in a specific position, and
 *// 7: 0..00111*
 *//&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&ast;
 *// 15: 0..01111 (0 + 8 + 4 + 2 + 1)*
-**Bitwise NOT**
+<b>Bitwise NOT</b>
 
 The bitwise NOT operation &bsol;~a *flips* the bits of the given value a.
 This means all the 1&apos;s will become 0&apos;s and all the 0&apos;s will become
@@ -9490,7 +9490,7 @@ This means all the 1&apos;s will become 0&apos;s and all the 0&apos;s will becom
 // 13: 0..01101
 //&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&bsol;
 //-14: 1..10010 (-16 + 0 + 0 + 2 + 0)
-**Bitwise XOR**
+<b>Bitwise XOR</b>
 a  &Hat; b
 
 The bitwise XOR (*exclusive or*) operation places a 1 only if the two
@@ -9505,9 +9505,9 @@ not both*.
 *// 7: 0..00111*
 *//&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&ast;
 *// 10: 0..01010 (0 + 8 + 0 + 2 + 0)*
-**Real world example: swapping two integer values without additional
-memory allocation**
-**var**
+<b>Real world example: swapping two integer values without additional
+memory allocation</b>
+<b>var</b>
 a
 =
 11
@@ -9553,7 +9553,7 @@ b
 <!--
 Bitwise shifting can be thought as &quot;moving&quot; the bits either left or
 right, and hence changing the value of the data operated on.
-**Left Shift**
+<b>Left Shift</b>
 value ) &lt;&lt; ( shift amount ) will shift the bits to the shift amount
 left by (
 The left shift operator () bits; the new bits coming in from the right
@@ -9565,7 +9565,7 @@ will be 0&apos;s:
 20
 *// 5: 0..000101*
 *// 20: 0..010100 &lt;= adds two 0&apos;s to the right*
-**Right Shift (*Sign-propagating*)**
+<b>Right Shift (*Sign-propagating*)</b>
 value ) &gt;&bsol;  ( shift amount
 The right shift operator () is also known as the &quot;Sign-propagating
 right shift&quot; because it
@@ -9594,7 +9594,7 @@ from the right*
 *// -5: 1..111011*
 *// -2: 1..111111 &lt;= added three 1&apos;s from the left and chopped off 011
 from the right*
-**Right Shift (*Zero fill*)**
+<b>Right Shift (*Zero fill*)</b>
 value ) &gt;&gt;&bsol; ( shift amount
 
 The zero-fill right shift operator () will move the bits to the right,
@@ -9620,22 +9620,22 @@ result for non negative numbers.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 Constructor functions are functions designed to construct a new
-object. Within a constructor function, the keyword **this** refers to
+object. Within a constructor function, the keyword <b>this</b> refers to
 a newly created object which values can be assigned to. Constructor
 functions &quot;return&quot; this new object automatically.
-**function**
+<b>function</b>
 Cat
 (
 name
 )
 {
-**this**
+<b>this</b>
 .
 name
 =
 name
 ;
-**this**
+<b>this</b>
 .
 sound
 =
