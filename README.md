@@ -8713,7 +8713,7 @@ Mozilla Global Objects: Math.random</a>.</p>
     b = 3,
     c = a &plus; b;
 </pre>
-<b>c will now be 12</p>
+<p>c will now be 12</p>
 
 <p>This operand can also be used multiple times in a single assignment:</p>
 <pre>
