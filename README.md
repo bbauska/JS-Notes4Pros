@@ -9089,6 +9089,7 @@ Math.PI(- 180 within the range of ?? to 180 deg)</p>
 <pre>
 <b>var</b> vec = {x : 4, y : 3};
 <b>var</b> dir = Math.atan2(vec.y, vec.x); // <i> 0.6435011087932844</i>
+</pre>
 <p><b>Direction of a line</b></p>
 <pre>
 <b>var</b> line = {
