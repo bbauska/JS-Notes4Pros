@@ -8822,7 +8822,7 @@ ctx.putImageData(imgData);
 <p>Returns a random integer between min and max:</p>
 <pre>
 <b>function</b> randomBetween(min, max) {
-  <b>return<b> Math.floor(Math.random() &ast; (max &minus; min &plus; 1) &plus; min);
+  <b>return</b> Math.floor(Math.random() &ast; (max &minus; min &plus; 1) &plus; min);
 }
 </pre>
 <!-- page 139 -->
