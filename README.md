@@ -5052,13 +5052,13 @@ and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/G
 
 domList.indexOf(desiredOption);  // <i>Error! indexOf is not defined.</i>
 domList.forEach(<b>function</b>() {
-  arguments.map(/&ast; <i> Stuff here &ast;/)</i>) // <i>Error! map is not defined.</i>
+  arguments.map(/&ast; <i>Stuff here &ast;/)</i>) // <i>Error! map is not defined.</i>
 }); // <i>Error! forEach is not defined.</i>
 
 <b>function</b> func() {
   console.log(arguments);
 }
-func (1, 2, 3); // <i> → &lbrack;1, 2, 3&rbrack;</i>
+func (1, 2, 3); // <i>→ &lbrack;1, 2, 3&rbrack;</i>
 </pre>
 
 <p><b>Convert Array-like Objects to Arrays in ES6</b></p>
@@ -5297,7 +5297,7 @@ a list, as the following example demonstrates:</p>
 
 // <i>Usage:</i>
 map(&lbrack;1, 2, 3&rbrack;, <b>function</b>(n) {<b>return</b> n &ast; n;});
-// <i> → &lbrack;1, 4, 9&rbrack;</i>
+// <i>→ &lbrack;1, 4, 9&rbrack;</i>
 </pre>
 
 <p>Note that this is for illustration (of the initial value parameter)
@@ -5317,7 +5317,7 @@ Here is an example leveraging this to find the min value:</p>
 arr.reduce(<b>function</b>(a, b) {
   <b>return</b> a &lt; b ? a : b
 }, <b>Infinity</b>);
-// <i> → -10</i>
+// <i>→ -10</i>
 </pre>
 
 <h5>Version ≥ 6</h5>
@@ -5337,7 +5337,7 @@ arr.reduce((prev, number) =&gt; {
   }
   <b>return</b> prev;
 }, &lbrack;&rbrack;);
-// <i> → &lbrack;1, 2, 5, 9&rbrack;</i>
+// <i>→ &lbrack;1, 2, 5, 9&rbrack;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-3">Section 12.3: Mapping values</h3>
@@ -5380,7 +5380,7 @@ execution environment, the default value of <b>this</b> might vary:</p>
 
 <pre>
 &lbrack;&apos;one&apos;, &apos;two&apos;&rbrack;.map(<b>function</b>(value, index, arr) {
-  console.log(<b>this</b>);  // <i> window (the default value in browsers)</i>
+  console.log(<b>this</b>);  // <i>window (the default value in browsers)</i>
   <b>return</b> value.length;
 });
 </pre>
@@ -5418,7 +5418,7 @@ the elements of the original array that pass the test provided.</p>
 <h5>Version ≥ 6</h5>
 
 <pre>
-<b>let</b> odd = numbers.filter(n =&bsol;n % 2 !== 0); // <i> can be shortened to (n =&bsol;n % 2)</i>
+<b>let</b> odd = numbers.filter(n =&bsol;n % 2 !== 0); // <i>can be shortened to (n =&bsol;n % 2)</i>
 </pre>
 
 <p>odd would contain the following array: &lbrack;5, 43&rbrack;.</p>
@@ -6015,7 +6015,7 @@ console.log(b, c, xs);  // <i>→ 2, 3, &lbrack;4, 5&rbrack;</i>
 
 <b>const</b> triangle = &lbrack;3, 4, 5&rbrack;;
 
-area(triangle);  // <i> → 6</i>
+area(triangle);  // <i>→ 6</i>
 </pre>
 <!-- page 93 -->
 <p><i>Notice the third argument is not named in the function because it&apos;s not needed.</i></p>
@@ -7039,15 +7039,15 @@ array.push(4, 5, 6);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Array.isArray (obj) returns <b>true</b> if the object is an Array, otherwise </b>false</b>.</p>
 <pre>
-Array.isArray(&lbrack;&rbrack;)       // <i> true</i>
-Array.isArray(&lbrack;1,2,3&rbrack;)  // <i> true</i>
-Array.isArray({})                     // <i> false</i>
-Array.isArray(1)                      // <i> false</i>
+Array.isArray(&lbrack;&rbrack;)       // <i>true</i>
+Array.isArray(&lbrack;1,2,3&rbrack;)  // <i>true</i>
+Array.isArray({})                     // <i>false</i>
+Array.isArray(1)                      // <i>false</i>
 </pre>
 <p>In most cases you can <b>instanceof</b> to check if an object is an Array.</p>
 <pre>
-&lbrack;&rbrack; <b>instanceof</b> Array;  // <i> true</i>
-{} <b>instanceof</b> Array;                // <i> false</i>
+&lbrack;&rbrack; <b>instanceof</b> Array;  // <i>true</i>
+{} <b>instanceof</b> Array;                // <i>false</i>
 </pre>
 <p>Array.isArray has the an advantage over using a <b>instanceof</b> check in that it will
 still return <b>true</b> even if the prototype of the array has been changed and will return 
@@ -7056,8 +7056,8 @@ still return <b>true</b> even if the prototype of the array has been changed and
 <pre>
 <b>var</b> arr = &lbrack;&rbrack;;
 Object.setPrototypeOf(arr, <b>null</b>);
-Array.isArray(arr);  // <i> true</i>
-arr <b>instanceof</b> Array;  // <i> false</i>
+Array.isArray(arr);  // <i>true</i>
+arr <b>instanceof</b> Array;  // <i>false</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-31">Section 12.31: Insert an item into an array at a specific index</h3>
@@ -7079,7 +7079,7 @@ Array.<b>prototype</b>.insert = <b>function</b>(index) {
   <b>return</b> <b>this</b>;
 };
 
-&lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;&rbrack;.insert(2, &quot;X&quot;, &quot;Y&quot;, &quot;Z&quot;).slice(1, 6);  // <i> &lbrack;&quot;b&quot;, &quot;X&quot;, &quot;Y&quot;, &quot;Z&quot;, &quot;c&quot;&rbrack;</i>
+&lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;&rbrack;.insert(2, &quot;X&quot;, &quot;Y&quot;, &quot;Z&quot;).slice(1, 6);  // <i>&lbrack;&quot;b&quot;, &quot;X&quot;, &quot;Y&quot;, &quot;Z&quot;, &quot;c&quot;&rbrack;</i>
 </pre>
 <p>And with array-type arguments merging and chaining support:</p>
 <pre>
@@ -7094,7 +7094,7 @@ Array.<b>prototype</b>.insert = <b>function</b>(index) {
   <b>return</b> <b>this</b>;
 };
 
-&lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;&rbrack;.insert(2, &quot;V&quot;, &lbrack;&quot;W&quot;, &quot;X&quot;, &quot;Y&quot;rbrack;, &quot;Z&quot;).join(&quot;-&quot;); // <i> &quot;a-b-V-W-X-Y-Z-c-d&quot;</i>
+&lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;&rbrack;.insert(2, &quot;V&quot;, &lbrack;&quot;W&quot;, &quot;X&quot;, &quot;Y&quot;rbrack;, &quot;Z&quot;).join(&quot;-&quot;); // <i>&quot;a-b-V-W-X-Y-Z-c-d&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-32">Section 12.32: Sorting multidimensional array</h3>
@@ -7141,12 +7141,12 @@ have side-effects.</p>
 
 <p>To test all objects for equality, you can use the following code snippets.</p>
 <pre>
-&lbrack;1, 2, 1&rbrack;.every(<b>function</b>(item, i, list) { <b>return</b> item === list&lbrack;0&rbrack;; }); // <i> false</i>
-&lbrack;1, 1, 1&rbrack;.every(<b>function</b>(item, i, list) { <b>return</b> item === list&lbrack;0&rbrack;; }); // <i> true</i>
+&lbrack;1, 2, 1&rbrack;.every(<b>function</b>(item, i, list) { <b>return</b> item === list&lbrack;0&rbrack;; }); // <i>false</i>
+&lbrack;1, 1, 1&rbrack;.every(<b>function</b>(item, i, list) { <b>return</b> item === list&lbrack;0&rbrack;; }); // <i>true</i>
 </pre>
 <h5>Version ≥ 6</h5>
 <pre>
-&lbrack;1, 1, 1&rbrack;.every((item, i, list) =&gt; item === list&lbrack;0&rbrack;); // <i> true</i>
+&lbrack;1, 1, 1&rbrack;.every((item, i, list) =&gt; item === list&lbrack;0&rbrack;); // <i>true</i>
 </pre>
 <p>The following code snippets test for property equality</p>
 <pre>
@@ -7155,12 +7155,12 @@ have side-effects.</p>
   { name: &quot;alice&quot;, id: 222 }
 &rbrack;;
 
-data.every(<b>function</b>(item, i, list) { <b>return</b> item === list&lbrack;0&rbrack;; }); // <i> false</i>
-data.every(<b>function</b>(item, i, list) { <b>return</b> item.name === list&lbrack;0&rbrack;.name; }); // <i> true</i>
+data.every(<b>function</b>(item, i, list) { <b>return</b> item === list&lbrack;0&rbrack;; }); // <i>false</i>
+data.every(<b>function</b>(item, i, list) { <b>return</b> item.name === list&lbrack;0&rbrack;.name; }); // <i>true</i>
 </pre>
 <h5>Version ≥ 6</h5>
 <pre>
-data.every((item, i, list) =&gt; item.name === list&lbrack;0&rbrack;.name);  // <i> true</i>
+data.every((item, i, list) =&gt; item.name === list&lbrack;0&rbrack;.name);  // <i>true</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-34">Section 12.34: Copy part of an Array</h3>
@@ -7177,20 +7177,20 @@ it&apos;s not included.</p>
 <p><b>Example 1</b></p>
 <!-- page 111 -->
 <pre>
-// <i> Let&apos;s say we have this Array of Alphabets</i>
+// <i>Let&apos;s say we have this Array of Alphabets</i>
 <b>var</b> arr = &lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;&hellip;&rbrack;;
 
-// <i> I want an Array of the first two Alphabets</i>
-<b>var</b> newArr = arr.slice(0, 2);  // <i> newArr === &lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;</i>
+// <i>I want an Array of the first two Alphabets</i>
+<b>var</b> newArr = arr.slice(0, 2);  // <i>newArr === &lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;</i>
 </pre>
 <p><b>Example 2</b></p>
 <pre>
-// <i> Let&apos;s say we have this Array of Numbers</i>
-// <i> and I don&apos;t know it&apos;s end</i>
+// <i>Let&apos;s say we have this Array of Numbers</i>
+// <i>and I don&apos;t know it&apos;s end</i>
 <b>var</b> arr =&lbrack;0, 1, 2, 3, 4, 5, 6, 7, 8, 9&hellip;&rbrack;;
 
-// <i> I want to slice this Array starting from</i>
-// <i> number 5 to its end</i>
+// <i>I want to slice this Array starting from</i>
+// <i>number 5 to its end</i>
 <b>var</b> newArr = arr.slice(4);  // <i>newArr === &lbrack;5, 6, 7, 8, 9&hellip;&rbrack;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -7404,7 +7404,7 @@ console.log(obj);  // <i>Logs: {firstName: &quot;John&quot;, lastName: &quot;Doe
   c: 3
 };
 <b>var</b> obj = Object.assign(obj1, obj2, obj3);
-console.log(obj);  //<i> Logs: { a: 1, b: 2, c: 3 }</i>
+console.log(obj);  //<i>Logs: { a: 1, b: 2, c: 3 }</i>
 console.log(obj1);  // <i>Logs: { a: 1, b: 2, c: 3 }, target object itself is changed</i>
 </pre>
 <p>Primitives will be wrapped, null and undefined will be ignored:</p>
@@ -7414,7 +7414,7 @@ console.log(obj1);  // <i>Logs: { a: 1, b: 2, c: 3 }, target object itself is ch
 <b>var</b> var_3 = 10;
 <b>var</b> var_4 = Symbol(&apos;foo&apos;);
 <b>var</b> obj = Object.assign({}, var_1, <b>null</b>, var_2, <b>undefined</b>, var_3, var_4);
-console.log(obj);  // <i> Logs: { &quot;0&quot;: &quot;a&quot;, &quot;1&quot;: &quot;b&quot;, &quot;2&quot;: &quot;c&quot; }</i>
+console.log(obj);  // <i>Logs: { &quot;0&quot;: &quot;a&quot;, &quot;1&quot;: &quot;b&quot;, &quot;2&quot;: &quot;c&quot; }</i>
 </pre>
 <blockquote>
 Note, only string wrappers can have own enumerable properties
@@ -7433,12 +7433,12 @@ Note, only string wrappers can have own enumerable properties
 <pre>
 <b>let</b> obj = { a: 1 };
 <b>let</b> obj2 = { &hellip;obj, b: 2, c:3 };
-console.log(obj2);  // <i> { a: 1, b: 2, c: 3 };</i>
+console.log(obj2);  // <i>{ a: 1, b: 2, c: 3 };</i>
 </pre>
 <p>As Object.assign it does <b>shallow</b> merging, not deep merging.</p>
 <pre>
 <b>let</b> obj3 = { &hellip;obj, b: { c: 2 } };
-console.log(obj3);  // <i> { a: 1, b: { c: 2 } };</i>
+console.log(obj3);  // <i>{ a: 1, b: { c: 2 } };</i>
 </pre>
 <p><b>NOTE</b>: <a href="https://github.com/sebmarkbage/ecmascript-rest-spread">
 This specification</a> is currently in <a href="http://www.2ality.com/2015/11/tc39-process.html">stage 3</a></p>
@@ -7461,9 +7461,9 @@ foo
 <pre>
 Object.defineProperty(obj, &apos;nameOfTheProperty&apos;, { 
   value: valueOfTheProperty, 
-  writable: <b>true</b>, // <i> if false, the property is read-only</i>
-  configurable : <b>true</b>, // <i> true means the property can be changed later</i>
-  enumerable : <b>true</b> // <i> true means property can be enumerated such as in a for..in loop</i>
+  writable: <b>true</b>, // <i>if false, the property is read-only</i>
+  configurable : <b>true</b>, // <i>true means the property can be changed later</i>
+  enumerable : <b>true</b> // <i>true means property can be enumerated such as in a for..in loop</i>
  });
 </pre>
 <p>Object.defineProperties allows you to define multiple properties at a time.</p>
@@ -7504,13 +7504,13 @@ Object.defineProperty(person, &apos;fullName&apos;, {
   }
 });
 
-console.log(person.fullName);  // <i> -&amp;quot;John Doe&quot;</i>
+console.log(person.fullName);  // <i>-&amp;quot;John Doe&quot;</i>
 
 person.surname = &quot;Hill&quot;;
-console.log(person.fullName);  // <i> -&amp;quot;John Hill&quot;</i>
+console.log(person.fullName);  // <i>-&amp;quot;John Hill&quot;</i>
 
 person.fullName = &quot;Mary Jones&quot;;
-console.log(person.name)  // <i> -&amp;quot;Mary&quot;</i>
+console.log(person.name)  // <i>-&amp;quot;Mary&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-9">Section 13.9: Dynamic / variable property names</h3>
@@ -7524,7 +7524,7 @@ then provide the result from an object I&apos;ve named dictionary.</p>
   banana: &apos;a fruit&apos;,
   tomato: &apos;it depends on who you ask&apos;,
   apple: &apos;a fruit&apos;,
-  Apple: &apos;Steve Jobs rocks!&apos;  // <i> properties are case-sensitive</i>
+  Apple: &apos;Steve Jobs rocks!&apos;  // <i>properties are case-sensitive</i>
 }
 <b>var</b> word = prompt(&apos;What word would you like to look up today?&apos;)
 <b>var</b> definition = dictionary&lbrack;word&rbrack;
@@ -7536,13 +7536,13 @@ named word; if we were to use the traditional . notation, then it
 would take the value literally, hence:</p>
 
 <pre>
-console.log(dictionary.word) // <i> doesn&apos;t work because word is taken literally and dictionary has no 
+console.log(dictionary.word) // <i>doesn&apos;t work because word is taken literally and dictionary has no 
 field named &grave;word&grave;</i>
-console.log(dictionary.apple) // <i> it works! because apple is taken literally</i>
+console.log(dictionary.apple) // <i>it works! because apple is taken literally</i>
 
-console.log(dictionary&lbrack;word&rbrack;) // <i> it works! because word is a variable, and the user perfectly typed 
+console.log(dictionary&lbrack;word&rbrack;) // <i>it works! because word is a variable, and the user perfectly typed 
 in one of the words from our dictionary when prompted</i>
-console.log(dictionary&lbrack;apple&rbrack;) // <i> error! apple is not defined (as a variable)</i>
+console.log(dictionary&lbrack;apple&rbrack;) // <i>error! apple is not defined (as a variable)</i>
 </pre>
 <p>You could also write literal values with &lbrack;&rbrack; notation by replacing
 the variable word with a string &apos;apple&apos;. See &lbrack;Properties with
@@ -7587,12 +7587,12 @@ to see in an Array.</p>
 </pre>
 <p>Now, notice how we can inspect both the object, and the array in the same way.</p>
 <pre>
-console.log(anArray&lbrack;0&rbrack;, anObject&lbrack;0&rbrack;); // <i> outputs: zero. zero!</i>
-console.log(anArray&lbrack;1&rbrack;, anObject&lbrack;1&rbrack;); // <i> outputs: one. one!</i>
+console.log(anArray&lbrack;0&rbrack;, anObject&lbrack;0&rbrack;); // <i>outputs: zero. zero!</i>
+console.log(anArray&lbrack;1&rbrack;, anObject&lbrack;1&rbrack;); // <i>outputs: one. one!</i>
 
-console.log(anArray.length, anObject.length); // <i> outputs: 2 interesting</i>
+console.log(anArray.length, anObject.length); // <i>outputs: 2 interesting</i>
 
-console.log(anArray.foo, anObject.foo); // <i> outputs: undefined bar</i>
+console.log(anArray.foo, anObject.foo); // <i>outputs: undefined bar</i>
 </pre>
 <!-- page 119 -->
 <p>Since anArray is actually an object, just like anObject, we can even
@@ -7623,9 +7623,9 @@ objects.</p>
 which is similar to the array-like anObject we created above. See Converting Array-like 
 Objects to Arrays</p>
 <pre>
-console.log(<b>typeof</b> anArray == &apos;object&apos;, <b>typeof</b> anObject == &apos;object&apos;); // <i> outputs: true true</i>
-console.log(anArray <b>instanceof</b> Object, anObject <b>instanceof</b> Object); // <i> outputs: true true</i>
-console.log(anArray <b>instanceof</b> Array, anObject <b>instanceof</b> Array); // <i> outputs: true false</i>
+console.log(<b>typeof</b> anArray == &apos;object&apos;, <b>typeof</b> anObject == &apos;object&apos;); // <i>outputs: true true</i>
+console.log(anArray <b>instanceof</b> Object, anObject <b>instanceof</b> Object); // <i>outputs: true true</i>
+console.log(anArray <b>instanceof</b> Array, anObject <b>instanceof</b> Array); // <i>outputs: true false</i>
 console.log(Array.isArray(anArray), Array.isArray(anObject)); // <i>outputs: true false</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -7644,18 +7644,18 @@ Object.seal(obj)
 
 obj.newFoo = &apos;newFoo&apos;;
 obj.bar = <b>function</b> () { <b>return</b> &apos;foo&apos; };
-obj.newFoo; // <i> undefined</i>
-obj.bar();  // <i> &apos;foo&apos;</i>
-// <i> Can&apos;t make foo an accessor property</i>
+obj.newFoo; // <i>undefined</i>
+obj.bar();  // <i>&apos;foo&apos;</i>
+// <i>Can&apos;t make foo an accessor property</i>
 Object.defineProperty(obj, &apos;foo&apos;, {
   <b>get</b>: <b>function</b> () { <b>return</b> &apos;newFoo&apos;; }
-});  // <i> TypeError</i>
-// <i> But you can make it read only</i>
+});  // <i>TypeError</i>
+// <i>But you can make it read only</i>
 Object.defineProperty(obj, &apos;foo&apos;, {
   writable: <b>false</b>
-});  // <i> TypeError</i>
+});  // <i>TypeError</i>
 obj.foo = &apos;newFoo&apos;;
-obj.foo;  // <i> &apos;foo&apos;;</i>
+obj.foo;  // <i>&apos;foo&apos;;</i>
 </pre>
 <!-- page 120 -->
 <p>In strict mode these operations will throw a TypeError</p>
@@ -7664,7 +7664,7 @@ obj.foo;  // <i> &apos;foo&apos;;</i>
   &apos;use strict&apos;;
   <b>var</b> obj = { foo: &apos;foo&apos; };
   Object.seal(obj);
-  obj.newFoo = &apos;newFoo&apos;;  // <i> TypeError</i>
+  obj.newFoo = &apos;newFoo&apos;;  // <i>TypeError</i>
 }());
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -7684,7 +7684,7 @@ obj.foo;  // <i> &apos;foo&apos;;</i>
   .map(<b>function</b>(key) {
     <b>return</b> obj&lbrack;key&rbrack;;
 });
-console.log(array);  // <i> &lbrack;&quot;hello&quot;, &quot;this is&quot;, &quot;javascript!&quot;&rbrack;</i>
+console.log(array);  // <i>&lbrack;&quot;hello&quot;, &quot;this is&quot;, &quot;javascript!&quot;&rbrack;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-13">Section 13.13: Retrieving properties from an object</h3>
@@ -7903,7 +7903,7 @@ original value
 };
 
 Object.getOwnPropertyDescriptor(sampleObject, &apos;hello&apos;);
-// <i> Object {value: &quot;world&quot;, writable: true, enumerable: true, configurable: true}</i>
+// <i>Object {value: &quot;world&quot;, writable: true, enumerable: true, configurable: true}</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-18">Section 13.18: Descriptors and Named Properties</h3>
@@ -7991,7 +7991,7 @@ property cannot be of both types.</p>
 <!-- page 126 -->
 <pre>
 <b>var</b> obj = {propertyName1: 1}; // <i>the pair is actually (&apos;propertyName1&apos;, {value:1,</i>
-                                     // <i> writable:true,</i>
+                                     // <i>writable:true,</i>
                                      // <i>enumerable:true,</i>
                                      // <i>configurable:true})</i>
 Object.defineProperty(obj, &apos;propertyName2&apos;, {<b>get</b>: <b>function</b>() { 
@@ -8026,7 +8026,7 @@ console.log(obj.propertyName2); // <i>this will be logged every time propertyNam
   c: &quot;javascript!&quot;
 };
 <b>var</b> keys = Object.keys(obj);
-console.log(keys);  // <i> &lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&rbrack;</i>
+console.log(keys);  // <i>&lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&rbrack;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-20">Section 13.20: Properties with special characters or reserved words</h3>
@@ -8048,12 +8048,12 @@ will require bracket notation. However, in this case the property need
 not be written as a string.</p>
 <!-- page 127 -->
 <pre>
-myObject&lbrack;123&rbrack; = &apos;hi!&apos; // <i> number 123 is automatically converted to a string</i>
-console.log(myObject&lbrack;&apos;123&apos;&rbrack;) // <i> notice how using string 123 produced the same result</i>
-console.log(myObject&lbrack;&apos;12&apos; + &apos;3&apos;&rbrack;) // <i> string concatenation</i>
+myObject&lbrack;123&rbrack; = &apos;hi!&apos; // <i>number 123 is automatically converted to a string</i>
+console.log(myObject&lbrack;&apos;123&apos;&rbrack;) // <i>notice how using string 123 produced the same result</i>
+console.log(myObject&lbrack;&apos;12&apos; + &apos;3&apos;&rbrack;) // <i>string concatenation</i>
 console.log(myObject&lbrack;120 + 3&rbrack;) // <i>arithmetic, still resulting in 123 and producing the same result</i>
-console.log(myObject&lbrack;123.0&rbrack;) // <i> this works too because 123.0 evaluates to 123</i>
-console.log(myObject&lbrack;&apos;123.0&apos;&rbrack;) // <i> this does NOT work, because &apos;123&apos; != &apos;123.0&apos;</i>
+console.log(myObject&lbrack;123.0&rbrack;) // <i>this works too because 123.0 evaluates to 123</i>
+console.log(myObject&lbrack;&apos;123.0&apos;&rbrack;) // <i>this does NOT work, because &apos;123&apos; != &apos;123.0&apos;</i>
 </pre>
 <p>However, leading zeros are not recommended as that is interpreted as
 Octal notation. (TODO, we should produce and link to an example
@@ -8129,7 +8129,7 @@ Object.entries(obj);
 <p>It is an useful way of iterating over the key/value pairs of an object:</p>
 <pre>
 <b>for</b> (<b>const</b> &lbrack;key, value &rbrack; of Object.entries(obj)) {
-  console.log(key);  // <i> &quot;one&quot;, &quot;two&quot; and &quot;three&quot;</i>
+  console.log(key);  // <i>&quot;one&quot;, &quot;two&quot; and &quot;three&quot;</i>
   console.log(value);  // <i>1, 2 and 3</i>
 }
 </pre>
@@ -8143,7 +8143,7 @@ loop (the difference being that a for-in loop enumerates properties in
 the prototype chain as well).</p>
 <pre>
 <b>var</b> obj = { 0: &apos;a&apos;, 1: &apos;b&apos;, 2: &apos;c&apos; };
-console.log(Object.values(obj));  // <i> &lbrack;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&rbrack;</i>
+console.log(Object.values(obj));  // <i>&lbrack;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&rbrack;</i>
 </pre>
 <p><b>Note:</b></p>
 <p>For browser support, please refer to this <a href="http://kangax.github.io/compat-table/es2016plus/#test-Object.values">
@@ -8315,7 +8315,7 @@ as delta parameter.</p>
 
 <p><b>Using modulus to obtain the fractional part of a number</b></p>
 <pre>
-<b>var</b> myNum = 10 / 4;       // <i> 2.5</i>
+<b>var</b> myNum = 10 / 4;       // <i>2.5</i>
 <b>var</b> fraction = myNum &percnt; 1; // <i>0.5</i>
 myNum = &minus;20 / 7;              // <i>-2.857142857142857</i>
 fraction = myNum &percnt; 1;        // <i>-0.857142857142857</i>
@@ -8367,7 +8367,7 @@ numbers between &minus;2147483649 and 2147483648.</p>
 
 <pre>
  2.3 &vert; 0;                      // <i>2 (floor)</i>
--2.3 &vert; 0;                      // <i> -2 (ceil)</i>
+-2.3 &vert; 0;                      // <i>-2 (ceil)</i>
 <b>NaN</b> &vert; 0;                // <i>0</i>
 </pre>
 <h5>Version ≥ 6</h5>
@@ -8386,7 +8386,7 @@ decimal places</p>
 
 <p>To round to 2 decimal places:</p>
 <pre>
-<b>var</b> myNum = 2/3;    // <i> 0.6666666666666666</i>
+<b>var</b> myNum = 2/3;    // <i>0.6666666666666666</i>
 <b>var</b> multiplier = 100;
 <b>var</b> a = Math.round(myNum &ast; multiplier) / multiplier; // <i>0.67</i>
 <b>var</b> b = Math.ceil (myNum &ast; multiplier) / multiplier; // <i>0.67</i>
@@ -8394,7 +8394,7 @@ decimal places</p>
 </pre>
 <p>You can also round to a number of digits:</p>
 <pre>
-<b>var</b> myNum = 10000/3;  // <i> 3333.3333333333335</i>
+<b>var</b> myNum = 10000/3;  // <i>3333.3333333333335</i>
 <b>var</b> multiplier = 1/100;
 <b>var</b> a = Math.round(myNum &ast; multiplier) / multiplier; // <i>3300</i>
 <b>var</b> b = Math.ceil (myNum &ast; multiplier) / multiplier; // <i>3400</i>
@@ -8413,7 +8413,7 @@ decimal places</p>
 <b>var</b> myNum = 10000/3;  // <i>3333.3333333333335</i>
 roundTo(myNum, 2);  // <i>3333.33</i>
 roundTo(myNum, 0);  // <i>3333</i>
-roundTo(myNum, &minus;2);  // <i> 3300</i>
+roundTo(myNum, &minus;2);  // <i>3300</i>
 </pre>
 <p>And the variants for ceil and floor:</p>
 <pre>
@@ -8486,40 +8486,40 @@ ToInt32</a>.
 <p><b>Bitwise or</b></p>
 <pre>
 <b>var</b> a;
-a = 0b0011 &vert; 0b1010;  // <i> a === 0b1011</i>
-// <i> truth table</i>
-// <i> 1010 &vert; (or)</i>
-// <i> 0011</i>
-// <i> 1011 (result)</i>
+a = 0b0011 &vert; 0b1010;  // <i>a === 0b1011</i>
+// <i>truth table</i>
+// <i>1010 &vert; (or)</i>
+// <i>0011</i>
+// <i>1011 (result)</i>
 </pre>
 <p><b>Bitwise and</b></p>
 <pre>
-a = 0b0011 &amp; 0b1010;  // <i> a === 0b0010</i>
-// <i> truth table</i>
-// <i> 1010 & (and)</i>
-// <i> 0011</i>
-// <i> 0010 (result)</i>
+a = 0b0011 &amp; 0b1010;  // <i>a === 0b0010</i>
+// <i>truth table</i>
+// <i>1010 & (and)</i>
+// <i>0011</i>
+// <i>0010 (result)</i>
 </pre>
 <p><b>Bitwise not</b></p>
 <pre>
-a = &bsol;0b0011;  // <i> a === 0b1100</i>
-// <i> truth table</i>
-// <i> 10 &bsol;~(not)</i>
-// <i> 01 (result)</i>
+a = &bsol;0b0011;  // <i>a === 0b1100</i>
+// <i>truth table</i>
+// <i>10 &bsol;~(not)</i>
+// <i>01 (result)</i>
 </pre>
 <p><b>Bitwise xor (exclusive or)</b></p>
 <pre>
-a = 0b1010 &Hat; 0b0011;  // <i> a === 0b1001</i>
-// <i> truth table</i>
-// <i> 1010 &Hat; (xor)</i>
-// <i> 0011</i>
-// <i> 1001 (result)</i>
+a = 0b1010 &Hat; 0b0011;  // <i>a === 0b1001</i>
+// <i>truth table</i>
+// <i>1010 &Hat; (xor)</i>
+// <i>0011</i>
+// <i>1001 (result)</i>
 </pre>
 <p><b>Bitwise left shift</b></p>
 <pre>
-a = 0b0001 &lt;&lt; 1;  // <i> a === 0b0010</i>
-a = 0b0001 &lt;&lt; 2;  // <i> a === 0b0100</i>
-a = 0b0001 &lt;&lt; 3;  // <i> a === 0b1000</i>
+a = 0b0001 &lt;&lt; 1;  // <i>a === 0b0010</i>
+a = 0b0001 &lt;&lt; 2;  // <i>a === 0b0100</i>
+a = 0b0001 &lt;&lt; 3;  // <i>a === 0b1000</i>
 </pre>
 <!-- page 134 -->
 
@@ -8529,28 +8529,28 @@ math, shift can significantly improve the speed of some math operations.</p>
 <b>var</b> n = 2;
 <b>var</b> a = 5.4;
 <b>var</b> result = (a &lt;&lt; n) === Math.floor(a) &ast; Math.pow(2, n);
-// <i> result is true</i>
-a = 5.4 &lt;&lt; n;  // <i> 20</i>
+// <i>result is true</i>
+a = 5.4 &lt;&lt; n;  // <i>20</i>
 </pre>
 <p><b>Bitwise right shift &gt;&lpar;Sign-propagating shift) &gt;&gt;&lpar;Zero-fill
 right shift)</b></p>
 <pre>
-a = 0b1001 &gt;&gt; 1;  // <i> a === 0b0100</i>
-a = 0b1001 &gt;&gt; 2;  // <i> a === 0b0010</i>
-a = 0b1001 &gt;&gt; 3;  // <i> a === 0b0001</i>
+a = 0b1001 &gt;&gt; 1;  // <i>a === 0b0100</i>
+a = 0b1001 &gt;&gt; 2;  // <i>a === 0b0010</i>
+a = 0b1001 &gt;&gt; 3;  // <i>a === 0b0001</i>
 
-a = 0b1001 &gt;&gt;&gt; 1;  // <i> a === 0b0100</i>
-a = 0b1001 &gt;&gt;&gt; 2;  // <i> a === 0b0010</i>
-a = 0b1001 &gt;&gt;&gt; 3;  // <i> a === 0b0001</i>
+a = 0b1001 &gt;&gt;&gt; 1;  // <i>a === 0b0100</i>
+a = 0b1001 &gt;&gt;&gt; 2;  // <i>a === 0b0010</i>
+a = 0b1001 &gt;&gt;&gt; 3;  // <i>a === 0b0001</i>
 </pre>
 <p>A negative 32bit value always has the left most bit on:</p>
 <pre>
 a = 0b11111111111111111111111111110111 &vert; 0;
-console.log(a); // <i> -9</i>
-b = a &gt;&bsol;2; // <i> leftmost bit is shifted 1 to the right then new left most bit is set to on (1)</i>
-console.log(b); // <i> -3</i>
+console.log(a); // <i>-9</i>
+b = a &gt;&bsol;2; // <i>leftmost bit is shifted 1 to the right then new left most bit is set to on (1)</i>
+console.log(b); // <i>-3</i>
 b = a &gt;&gt;&bsol;2; // <i>leftmost bit is shifted 1 to the right. the new left most bit is set to off (0)</i>
-console.log(b); // <i> 2147483643</i>
+console.log(b); // <i>2147483643</i>
 </pre>
 <p>The result of a &gt;&gt;&bsol;operation is always positive.</p>
 <p>The result of a &gt;&bsol;is always the same sign as the shifted value.</p>
@@ -8561,12 +8561,12 @@ and flooring the result:</p>
 a = 256.67;
 n = 4;
 result = (a &gt;&gt; n) === Math.floor( Math.floor(a) / Math.pow(2, n) );
-// <i> result is true</i>
-a = a &gt;&gt; n;  // <i> 16</i>
+// <i>result is true</i>
+a = a &gt;&gt; n;  // <i>16</i>
 
 result = (a &gt;&gt;&gt; n) === Math.floor( Math.floor(a) / Math.pow(2, n) );
-// <i> result is true</i>
-a = a &gt;&gt;&gt; n;  // <i> 16</i>
+// <i>result is true</i>
+a = a &gt;&gt;&gt; n;  // <i>16</i>
 </pre>
 
 <p>Right shift zero fill (&gt;&gt;&gt;) on negative numbers is different. As
@@ -8575,18 +8575,18 @@ there is no operational equivalent:</p>
 <pre>
 a = &minus;256.67;
 result = (a &gt;&gt;&gt; n) === Math.floor( Math.floor(a) / Math.pow(2, n) );
-// <i> result is false</i>
+// <i>result is false</i>
 </pre>
 <p><b>Bitwise assignment operators</b></p>
 <p>With the exception of not (&bsol;~) all the above bitwise operators can be
 used as assignment operators:</p>
 <pre>
-a &vert;= b;  // <i> same as: a = a &vert; b;</i>
-a &Hat;= b;   // <i> same as: a = a &Hat; b;</i>
-a &= b;       // <i> same as: a = a & b;</i>
-a &gt;&gt;= b; // <i> same as: a = a &gt;&bsol;b;</i>
-a &gt;&gt;&gt;= b; // <i> same as: a = a &gt;&gt;&bsol;b;</i>
-a &lt;&lt;= b;     // <i> same as: a = a &lt;&lt; b;</i>
+a &vert;= b;  // <i>same as: a = a &vert; b;</i>
+a &Hat;= b;   // <i>same as: a = a &Hat; b;</i>
+a &= b;       // <i>same as: a = a & b;</i>
+a &gt;&gt;= b; // <i>same as: a = a &gt;&bsol;b;</i>
+a &gt;&gt;&gt;= b; // <i>same as: a = a &gt;&gt;&bsol;b;</i>
+a &lt;&lt;= b;     // <i>same as: a = a &lt;&lt; b;</i>
 </pre>
 <!-- page 135 -->
 
@@ -8610,16 +8610,16 @@ incorrect results if used as logical operators. The &Hat; operator is
 </ul>
 <pre>
 // <i>postfix</i>
-<b>var</b> a = 5,  // <i> 5</i>
-    b = a ++,      // <i> 5</i>
-    c = a          // <i> 6</i>
+<b>var</b> a = 5,  // <i>5</i>
+    b = a ++,      // <i>5</i>
+    c = a          // <i>6</i>
 </pre>
 <p>In this case, a is incremented after setting b. So, b will be 5, and c will be 6.</p>
 <pre>
 // <i>prefix</i>
-<b>var</b> a = 5,  // <i> 5</i>
-    b = ++a,       // <i> 6</i>
-    c = a          // <i> 6</i>
+<b>var</b> a = 5,  // <i>5</i>
+    b = ++a,       // <i>6</i>
+    c = a          // <i>6</i>
 </pre>
 <p>In this case, a is incremented before setting b. So, b will be 6, and 
 c will be 6.</p>
@@ -8657,8 +8657,8 @@ prior to the operation).</p>
 <p>Finding the nth roots is the inverse of raising to the nth power. For
 example 2 to the power of 5 is 32. The 5th root of 32 is 2.</p>
 <pre>
-Math.pow(v, 1 / n); // <i> where v is any positive real number</i> 
-                    // <i> and n is any positive integer</i>
+Math.pow(v, 1 / n); // <i>where v is any positive real number</i> 
+                    // <i>and n is any positive integer</i>
 <b>var</b> a = 16;
 <b>var</b> b = Math.pow(a, 1 / 2); // <i>return the square root of 16 = 4</i>
 <b>var</b> c = Math.pow(a, 1 / 3); // <i>return the cubed root of 16 = 2.5198420997897464</i>
@@ -8728,31 +8728,31 @@ Mozilla Global Objects: Math.random</a>.</p>
 a string, they&apos;re both converted to strings and concatenated.
 Otherwise, they&apos;re both converted to numbers and added.</p>
 <pre>
-<b>null</b> &plus; <b>null</b>;    // <i> 0</i>
-<b>null</b> &plus; <b>undefined</b>; // <i> NaN</i>
-<b>null</b> &plus; {};               // <i> &quot;null&lbrack;object Object&rbrack;&quot;</i>
-<b>null</b> &plus; &apos;&apos;;      // <i> &quot;null&quot;</i>
+<b>null</b> &plus; <b>null</b>;    // <i>0</i>
+<b>null</b> &plus; <b>undefined</b>; // <i>NaN</i>
+<b>null</b> &plus; {};               // <i>&quot;null&lbrack;object Object&rbrack;&quot;</i>
+<b>null</b> &plus; &apos;&apos;;      // <i>&quot;null&quot;</i>
 </pre>
 <p>If the operands are a string and a number, the number is converted to
 a string and then they&apos;re concatenated, which may lead to unexpected
 results when working with strings that look numeric.</p>
 <pre>
-&quot;123&quot; &plus; 1;  // <i> &quot;1231&quot; (not 124)</i>
+&quot;123&quot; &plus; 1;  // <i>&quot;1231&quot; (not 124)</i>
 </pre>
 <p>If a boolean value is given in place of any of the number values, the
 boolean value is converted to a number (0 for <b>false</b>, 1 for
 <b>true</b>) before the sum is calculated:</p>
 <pre>
-<b>true</b> &plus; 1;  // <i> 2</i>
-<b>false</b> &plus; 5;  // <i> 5</i>
-<b>null</b> &plus; 1;  // <i> 1</i>
-<b>undefined</b> &plus; 1;  // <i> NaN</i>
+<b>true</b> &plus; 1;  // <i>2</i>
+<b>false</b> &plus; 5;  // <i>5</i>
+<b>null</b> &plus; 1;  // <i>1</i>
+<b>undefined</b> &plus; 1;  // <i>NaN</i>
 </pre>
 <p>If a boolean value is given alongside a string value, the boolean
 value is converted to a string instead:</p>
 <pre>
-<b>true</b> &plus; &quot;1&quot;;  // <i> &quot;true1&quot;</i>
-<b>false</b> &plus; &quot;bar&quot;;  // <i> &quot;falsebar&quot;</i>
+<b>true</b> &plus; &quot;1&quot;;  // <i>&quot;true1&quot;</i>
+<b>false</b> &plus; &quot;bar&quot;;  // <i>&quot;falsebar&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-10">Section 14.10: Little / Big endian for typed arrays when using bitwise operators</h3>
@@ -8774,7 +8774,7 @@ value is converted to a string instead:</p>
 <p>Little-Endian stores most significant bytes from right to left.</p>
 <p>Big-Endian stores most significant bytes from left to right.</p>
 <pre>
-<b>var</b> myNum = 0x11223344 &vert; 0;  // <i> 32 bit signed integer</i>
+<b>var</b> myNum = 0x11223344 &vert; 0;  // <i>32 bit signed integer</i>
 <b>var</b> buf = <b>new</b> ArrayBuffer(4);
 <b>var</b> data8 = <b>new</b> Uint8ClampedArray(buf);
 <b>var</b> data32 = <b>new</b> Uint32Array(buf);
@@ -8782,17 +8782,17 @@ data32&lbrack;0&rbrack; = myNum; // <i>store number in 32Bit array</i>
 </pre>
 <p>If the system uses Little-Endian, then the 8bit byte values will be console.</p>
 <pre>
-console.log(data8&lbrack;0&rbrack;.toString(16));  // <i> 0x44</i>
-console.log(data8&lbrack;1&rbrack;.toString(16));  // <i> 0x33</i>
-console.log(data8&lbrack;2&rbrack;.toString(16));  // <i> 0x22</i>
+console.log(data8&lbrack;0&rbrack;.toString(16));  // <i>0x44</i>
+console.log(data8&lbrack;1&rbrack;.toString(16));  // <i>0x33</i>
+console.log(data8&lbrack;2&rbrack;.toString(16));  // <i>0x22</i>
 console.log(data8&lbrack;3&rbrack;.toString(16));  // <i>0x11</i>
 </pre>
 <p>If the system uses Big-Endian, then the 8bit byte values will be console.</p>
 <pre>
 console.log(data8&lbrack;0&rbrack;.toString(16));  // <i>0x11</i>
-console.log(data8&lbrack;1&rbrack;.toString(16));  // <i> 0x22</i>
-console.log(data8&lbrack;2&rbrack;.toString(16));  // <i> 0x33</i>
-console.log(data8&lbrack;3&rbrack;.toString(16));  // <i> 0x44</i>
+console.log(data8&lbrack;1&rbrack;.toString(16));  // <i>0x22</i>
+console.log(data8&lbrack;2&rbrack;.toString(16));  // <i>0x33</i>
+console.log(data8&lbrack;3&rbrack;.toString(16));  // <i>0x44</i>
 </pre>
 <p>Example where Endian type is important</p>
 <pre>
@@ -8802,7 +8802,7 @@ console.log(data8&lbrack;3&rbrack;.toString(16));  // <i> 0x44</i>
 // <i>To speed up read and write from the image buffer you can create a buffer view that is</i>
 // <i>32 bits allowing you to read/write a pixel in a single operation</i>
 <b>var</b> buf32 = <b>new</b> Uint32Array(imgData.data.buffer);
-// <i> Mask out Red and Blue channels</i>
+// <i>Mask out Red and Blue channels</i>
 <b>var</b> mask = 0x00FF00FF;  // <i>bigEndian pixel channels Red,Green,Blue,Alpha</i>
 <b>if</b> (isLittleEndian) {
   mask = 0xFF00FF00;  // <i>littleEndian pixel channels Alpha,Blue,Green,Red</i>
@@ -8826,16 +8826,16 @@ ctx.putImageData(imgData);
 <!-- page 139 -->
 <p>Examples:</p>
 <pre>
-// <i> randomBetween(0, 10);</i>
+// <i>randomBetween(0, 10);</i>
 Math.floor(Math.random() &ast; 11);
 
-// <i> randomBetween(1, 10);</i>
+// <i>randomBetween(1, 10);</i>
 Math.floor(Math.random() &ast; 10) &plus; 1;
 
-// <i> randomBetween(5, 20);</i>
+// <i>randomBetween(5, 20);</i>
 Math.floor(Math.random() &ast; 16) &plus; 5;
 
-// <i> randomBetween(-10, -2);</i>
+// <i>randomBetween(-10, -2);</i>
 Math.floor(Math.random() &ast; 9) &minus; 10;
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -8851,8 +8851,8 @@ six equally probable outcomes. This is quite simple.</p>
   <b>var</b> event = Math.floor(numEvents &ast; Math.random());
   <b>return</b> event;
 }
-// <i> simulate fair die</i>
-console.log(&quot;Rolled a &quot; &plus; (simulateEvent(6)&plus;1));  // <i> Rolled a 2</i>
+// <i>simulate fair die</i>
+console.log(&quot;Rolled a &quot; &plus; (simulateEvent(6)&plus;1));  // <i>Rolled a 2</i>
 </pre>
 <p>However, you may not want equally probable outcomes. Say you had a
 list of three outcomes represented as an array of probabilities in
@@ -8873,17 +8873,17 @@ an event.</p>
       <b>return</b> i;
     }
   }
-  // <i> should never be reached unless sum of probabilities is less than 1</i>
-  // <i> due to all being zero or some being negative probabilities</i>
+  // <i>should never be reached unless sum of probabilities is less than 1</i>
+  // <i>due to all being zero or some being negative probabilities</i>
   <b>return</b> &minus;1;
 }
 
-// <i> simulate weighted dice where 6 is twice as likely as any other face</i>
-// <i> using multiples of likelihood</i>
-console.log(&quot;Rolled a &quot; &plus; (simulateEvent(&lbrack;1,1,1,1,1,2&rbrack;)&plus;1));  // <i> Rolled a 1</i>
+// <i>simulate weighted dice where 6 is twice as likely as any other face</i>
+// <i>using multiples of likelihood</i>
+console.log(&quot;Rolled a &quot; &plus; (simulateEvent(&lbrack;1,1,1,1,1,2&rbrack;)&plus;1));  // <i>Rolled a 1</i>
 
-// <i> using probabilities</i>
-console.log(&quot;Rolled a &quot;&plus;(simulateEvent(&lbrack;1/7,1/7,1/7,1/7,1/7,2/7&rbrack;) &plus; 1)); // <i> Rolled a 6</i>
+// <i>using probabilities</i>
+console.log(&quot;Rolled a &quot;&plus;(simulateEvent(&lbrack;1/7,1/7,1/7,1/7,1/7,2/7&rbrack;) &plus; 1)); // <i>Rolled a 6</i>
 </pre>
 <!-- page 140 -->
 <p>As you probably noticed, these functions return an index, so you could
@@ -8892,10 +8892,10 @@ have more descriptive outcomes stored in an array. Here&apos;s an example.</p>
 <pre>
 <b>var</b> rewards = &lbrack;&quot;gold coin&quot;,&quot;silver coin&quot;,&quot;diamond&quot;,&quot;god sword&quot;&rbrack;; 
 <b>var</b> likelihoods = &lbrack;5,9,1,0&rbrack;;
-// <i> least likely to get a god sword (0/15 = 0%, never),</i>
-// <i> most likely to get a silver coin (9/15 = 60%, more than half the time)</i>
+// <i>least likely to get a god sword (0/15 = 0%, never),</i>
+// <i>most likely to get a silver coin (9/15 = 60%, more than half the time)</i>
 
-// <i> simulate event, log reward</i>
+// <i>simulate event, log reward</i>
 console.log(&quot;You get a &quot;+rewards&lbrack;simulateEvent(likelihoods)&rbrack;); // <i>You get a silver coin</i>
 </pre>
 <!-- thru 14.12 -->
@@ -8913,15 +8913,15 @@ console.log(&quot;You get a &quot;+rewards&lbrack;simulateEvent(likelihoods)&rbr
 converted to a number before the difference is calculated (0 for
 <b>false</b>, 1 for <b>true</b>):</p>
 <pre>
-&quot;5&quot; &minus;1;  // <i> 4</i>
-7 &minus; &quot;3&quot;; // <i> 4</i>
-&quot;5&quot; &minus; <b>true</b>; // <i> 4</i>
+&quot;5&quot; &minus;1;  // <i>4</i>
+7 &minus; &quot;3&quot;; // <i>4</i>
+&quot;5&quot; &minus; <b>true</b>; // <i>4</i>
 </pre>
 <p>If the string value cannot be converted into a Number, the result will
 be <b>NaN</b>:</p>
 <pre>
-&quot;foo&quot; &minus;1;  // <i> NaN</i>
-100 &minus; &quot;bar&quot;; // <i> NaN</i>
+&quot;foo&quot; &minus;1;  // <i>NaN</i>
+100 &minus; &quot;bar&quot;; // <i>NaN</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-14">Section 14.14: Multiplication (&ast;)</h3>
@@ -8929,23 +8929,23 @@ be <b>NaN</b>:</p>
 <p>The multiplication operator (&ast;) perform arithmetic multiplication on
 numbers (literals or variables).</p>
 <pre>
-console.log( 3 &ast;  5); // <i> 15</i>
-console.log(&minus; 3 &ast;  5); // <i> -15</i>
-console.log( 3 &ast; &minus;5); // <i> -15</i>
-console.log(&minus; 3 &ast; &minus;5); // <i> 15</i>
+console.log( 3 &ast;  5); // <i>15</i>
+console.log(&minus; 3 &ast;  5); // <i>-15</i>
+console.log( 3 &ast; &minus;5); // <i>-15</i>
+console.log(&minus; 3 &ast; &minus;5); // <i>15</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-15">Section 14.15: Getting maximum and minimum</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The Math.max() function returns the largest of zero or more numbers.</p>
 <pre>
-Math.max( 4, 12 );  // <i> 12</i>
-Math.max(&minus;1, &minus;15); // <i> -1</i>
+Math.max( 4, 12 );  // <i>12</i>
+Math.max(&minus;1, &minus;15); // <i>-1</i>
 </pre>
 <p>The Math.min() function returns the smallest of zero or more numbers.</p>
 <pre>
 Math.min( 4, 12 ); // <i>4</i>
-Math.min(&minus;1, &minus;15); // <i> -15</i>
+Math.min(&minus;1, &minus;15); // <i>-15</i>
 </pre>
 <!-- page 140 -->
 <p><b>Getting maximum and minimum from an array:</b></p>
@@ -8953,8 +8953,8 @@ Math.min(&minus;1, &minus;15); // <i> -15</i>
 <b>var</b> arr = &lbrack;1, 2, 3, 4, 5, 6, 7, 8, 9&rbrack;,
 max = Math.max.apply(Math, arr),
 min = Math.min.apply(Math, arr);
-console.log(max);  // <i> Logs: 9</i>
-console.log(min);  // <i> Logs: 1</i>
+console.log(max);  // <i>Logs: 9</i>
+console.log(min);  // <i>Logs: 1</i>
 </pre>
 <p>ECMAScript 6 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">
 spread operator</a>, getting the maximum and minimum of an array:</p>
@@ -8962,8 +8962,8 @@ spread operator</a>, getting the maximum and minimum of an array:</p>
 <b>var</b> arr = &lbrack;1, 2, 3, 4, 5, 6, 7, 8, 9&rbrack;,
   max = Math.max(&hellip;arr),
   min = Math.min(&hellip;arr);
-console.log(max); // <i> Logs: 9</i>
-console.log(min); // <i> Logs: 1</i>
+console.log(max); // <i>Logs: 9</i>
+console.log(min); // <i>Logs: 1</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-16">Section 14.16: Restrict Number to Min/Max Range</h3>
@@ -8974,10 +8974,10 @@ console.log(min); // <i> Logs: 1</i>
   <b>return</b> Math.min(Math.max(min, &plus;val), max);
 }
 
-console.log(clamp(&minus;10, 10, &quot;4.30&quot;));  // <i> 4.3</i>
-console.log(clamp(&minus;10, 10, &minus;8));  // <i> -8</i>
-console.log(clamp(&minus;10, 10, 12));  // <i> 10</i>
-console.log(clamp(&minus;10, 10, &minus;15)); // <i> -10</i>
+console.log(clamp(&minus;10, 10, &quot;4.30&quot;));  // <i>4.3</i>
+console.log(clamp(&minus;10, 10, &minus;8));  // <i>-8</i>
+console.log(clamp(&minus;10, 10, 12));  // <i>10</i>
+console.log(clamp(&minus;10, 10, &minus;15)); // <i>-10</i>
 </pre>
 <p><a href="https://jsfiddle.net/RokoCB/8drqL3vo/">Use-case example (jsFiddle)</a></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -8993,11 +8993,11 @@ Math.ceil(n);
 </pre>
 <p><b>Example:</b></p>
 <pre>
-console.log(Math.ceil(0.60)); // <i> 1</i>
-console.log(Math.ceil(0.40)); // <i> 1</i>
-console.log(Math.ceil(5.1));  // <i> 6</i>
-console.log(Math.ceil(&minus;5.1)); // <i> -5</i>
-console.log(Math.ceil(&minus;5.9)); // <i> -5</i>
+console.log(Math.ceil(0.60)); // <i>1</i>
+console.log(Math.ceil(0.40)); // <i>1</i>
+console.log(Math.ceil(5.1));  // <i>6</i>
+console.log(Math.ceil(&minus;5.1)); // <i>-5</i>
+console.log(Math.ceil(&minus;5.9)); // <i>-5</i>
 </pre>
 <p>The floor() method rounds a number </i>downwards</i> to the nearest integer, and
 returns the result.</p>
@@ -9008,11 +9008,11 @@ Math.floor(n);
 </pre>
 <p><b>Example:</b></p>
 <pre>
-console.log(Math.ceil(0.60)); // <i> 0</i>
-console.log(Math.ceil(0.40)); // <i> 0</i>
-console.log(Math.ceil(5.1));  // <i> 5</i>
-console.log(Math.ceil(&minus;5.1)); // <i> -6</i>
-console.log(Math.ceil(&minus;5.9)); // <i> -6</i>
+console.log(Math.ceil(0.60)); // <i>0</i>
+console.log(Math.ceil(0.40)); // <i>0</i>
+console.log(Math.ceil(5.1));  // <i>5</i>
+console.log(Math.ceil(&minus;5.1)); // <i>-6</i>
+console.log(Math.ceil(&minus;5.9)); // <i>-6</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-18">Section 14.18: Getting roots of a number</h3>
@@ -9057,8 +9057,8 @@ to a range of 0-1</p>
 <p>As adding more than a few randoms is messy a simple function will
 allow you to select a variance you want.</p>
 <pre>
-// <i> v is the number of times random is summed and should be over &gt;= 1</i>
-// <i> return a random number between 0-1 exclusive</i>
+// <i>v is the number of times random is summed and should be over &gt;= 1</i>
+// <i>return a random number between 0-1 exclusive</i>
 <b>function</b> randomG(v) {
   <b>var</b> r = 0;
   <b>for</b> (<b>var</b> i = v; i &gt; 0; i&bsol;) {
@@ -9092,7 +9092,7 @@ Math.PI(- 180 within the range of ?? to 180 deg)</p>
 <p><b>Direction of a vector</b></p>
 <pre>
 <b>var</b> vec = {x : 4, y : 3};
-<b>var</b> dir = Math.atan2(vec.y, vec.x); // <i> 0.6435011087932844</i>
+<b>var</b> dir = Math.atan2(vec.y, vec.x); // <i>0.6435011087932844</i>
 </pre>
 <p><b>Direction of a line</b></p>
 <pre>
@@ -9100,7 +9100,7 @@ Math.PI(- 180 within the range of ?? to 180 deg)</p>
   p1 : { x : 100, y : 128},
   p2 : { x : 320, y : 256}
 }
-// <i> get the direction from p1 to p2</i>
+// <i>get the direction from p1 to p2</i>
 <b>var</b> dir = Math.atan2(line.p2.y &minus; line.p1.y, line.p2.x &minus; line.p1.x);  // <i>0.5269432271894297</i>
 </pre>
 <p><b>Direction from a point to another point</b></p>
@@ -9120,29 +9120,29 @@ reference the screen coordinate system has directions as 0 deg points
 from left to right, 90 (PI/2) point down the screen, and so on in a
 clock wise direction.</p>
 <pre>
-<b>var</b> dir = 1.4536; // <i> direction in radians</i>
-<b>var</b> dist = 200;  // <i> distance</i>
+<b>var</b> dir = 1.4536; // <i>direction in radians</i>
+<b>var</b> dist = 200;  // <i>distance</i>
 <b>var</b> vec = {};
-vec.x = Math.cos(dir) &ast; dist;  // <i> get the x component</i>
-vec.y = Math.sin(dir) &ast; dist;  // <i> get the y component</i>
+vec.x = Math.cos(dir) &ast; dist;  // <i>get the x component</i>
+vec.y = Math.sin(dir) &ast; dist;  // <i>get the y component</i>
 </pre>
 <p>You can also ignore the distance to create a normalised (1 unit long)
 vector in the direction of dir</p>
 <pre>
-<b>var</b> dir = 1.4536;  // <i> direction in radians</i>
+<b>var</b> dir = 1.4536;  // <i>direction in radians</i>
 <b>var</b> vec = {};
-vec.x = Math.cos(dir); // <i> get the x component</i>
-vec.y = Math.sin(dir); // <i> get the y component</i>
+vec.x = Math.cos(dir); // <i>get the x component</i>
+vec.y = Math.sin(dir); // <i>get the y component</i>
 </pre>
 <p>If your coordinate system has y as up then you need to switch cos and
 sin. In this case a positive direction is in a counterclockwise
 direction from the x axis.</p>
 <pre>
 // <i>get the directional vector where y points up</i>
-<b>var</b> dir = 1.4536;  // <i> direction in radians</i>
+<b>var</b> dir = 1.4536;  // <i>direction in radians</i>
 <b>var</b> vec = {};
-vec.x = Math.sin(dir);  // <i> get the x component</i>
-vec.y = Math.cos(dir);  // <i> get the y component</i>
+vec.x = Math.sin(dir);  // <i>get the x component</i>
+vec.y = Math.cos(dir);  // <i>get the y component</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-22">Section 14.22: Math.hypot</h3>
@@ -9155,7 +9155,7 @@ between them.</p>
 <b>var</b> v2 = {x : 20, y : 10};
 <b>var</b> x = v2.x &minus; v1.x;
 <b>var</b> y = v2.y &minus; v1.y;
-<b>var</b> distance = Math.sqrt(x &ast; x &plus; y &ast; y); // <i> 11.180339887498949</i>
+<b>var</b> distance = Math.sqrt(x &ast; x &plus; y &ast; y); // <i>11.180339887498949</i>
 </pre>
 <p>With ECMAScript 6 came Math.hypot which does the same thing</p>
 <pre>
@@ -9163,23 +9163,23 @@ between them.</p>
 <b>var</b> v2 = {x : 20, y : 10};
 <b>var</b> x = v2.x &minus; v1.x;
 <b>var</b> y = v2.y &minus; v1.y;
-<b>var</b> distance = Math.hypot(x, y);  // <i> 11.180339887498949</i>
+<b>var</b> distance = Math.hypot(x, y);  // <i>11.180339887498949</i>
 </pre>
 <p>Now you don&apos;t have to hold the interim vars to stop the code becoming
 a mess of variables</p>
 <pre>
 <b>var</b> v1 = {x : 10, y : 5};
 <b>var</b> v2 = {x : 20, y : 10};
-<b>var</b> distance = Math.hypot(v2.x &minus; v1.x, v2.y &minus; v1.y);  // <i> 11.180339887498949</i>
+<b>var</b> distance = Math.hypot(v2.x &minus; v1.x, v2.y &minus; v1.y);  // <i>11.180339887498949</i>
 </pre>
 <p>Math.hypot can take any number of dimensions</p>
 <pre>
-// <i> find distance in 3D</i>
+// <i>find distance in 3D</i>
 <b>var</b> v1 = {x : 10, y : 5, z : 7};
 <b>var</b> v2 = {x : 20, y : 10, z : 16};
-<b>var</b> dist = Math.hypot(v2.x &minus; v1.x, v2.y &minus; v1.y, v2.z &minus; v1.z);  // <i> 14.352700094407325</i>
+<b>var</b> dist = Math.hypot(v2.x &minus; v1.x, v2.y &minus; v1.y, v2.z &minus; v1.z);  // <i>14.352700094407325</i>
 
-// <i> find length of 11th dimensional vector</i>
+// <i>find length of 11th dimensional vector</i>
 <b>var</b> v = &lbrack;1,3,2,6,1,7,3,7,5,3,1&rbrack;;
 <b>var</b> i = 0;
 dist = Math.hypot(v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;);
@@ -9207,8 +9207,8 @@ period/frequency, phase, amplitude, and offset.
 The unit of time being used is seconds.
 
 The most simple form with control over frequency only.
-// <i> time is the time in seconds when you want to get a sample</i>
-// <i> Frequency represents the number of oscillations per second</i>
+// <i>time is the time in seconds when you want to get a sample</i>
+// <i>Frequency represents the number of oscillations per second</i>
 <b>function</b>
 oscillator
 (
@@ -9252,8 +9252,7 @@ Offset: moves the whole wave up or down.
 To include all these in the function:
 
 <b>function</b> oscillator(time, frequency = 1, amplitude = 1, phase = 0,
-offset = 0){ <b>var</b> t = time &ast; frequency &ast; Math.PI &ast; 2; // <i> get
-phase at time</i>
+offset = 0){ <b>var</b> t = time &ast; frequency &ast; Math.PI &ast; 2; // <i>get phase at time</i>
 t
 +=
 phase
@@ -9264,7 +9263,7 @@ PI
 &ast;
 2
 ;
-// <i> add the phase offset</i>
+// <i>add the phase offset</i>
 <b>var</b>
 v
 =
@@ -9275,17 +9274,17 @@ sin
 t
 )
 ;
-// <i> get the value at the calculated position in the cycle</i>
+// <i>get the value at the calculated position in the cycle</i>
 v
 &ast;=
 amplitude
 ;
-// <i> set the amplitude</i>
+// <i>set the amplitude</i>
 v
 +=
 offset
 ;
-// <i> add the offset</i>
+// <i>add the offset</i>
 <b>return</b>
 v
 ;
@@ -9311,7 +9310,7 @@ log
 3
 )
 ;
-// <i> 5</i>
+// <i>5</i>
 console.
 log
 (
@@ -9320,7 +9319,7 @@ log
 4
 )
 ;
-// <i> 3.75</i>
+// <i>3.75</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-25">Section 14.25: Decrementing (&rpar;</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -9345,17 +9344,17 @@ a
 =
 5
 ,
-// <i> 5</i>
+// <i>5</i>
 b
 =
 a
 &bsol;
 ,
-// <i> 5</i>
+// <i>5</i>
 c
 =
 a
-// <i> 4</i>
+// <i>4</i>
 In this case, b is set to the initial value of a. So, b will be 5, and
 c will be 4.
 <b>var</b>
@@ -9363,17 +9362,17 @@ a
 =
 5
 ,
-// <i> 5</i>
+// <i>5</i>
 b
 =
 &bsol;
 a
 ,
-// <i> 4</i>
+// <i>4</i>
 c
 =
 a
-// <i> 4</i>
+// <i>4</i>
 In this case, b is set to the new value of a. So, b will be 4, and c
 will be 4.
 
@@ -9433,28 +9432,28 @@ log
 x
 &bsol;
 )
-// <i> TypeError: Assignment to constant variable.</i>
+// <i>TypeError: Assignment to constant variable.</i>
 console.
 log
 (
 &bsol;
 x
 )
-// <i> TypeError: Assignment to constant variable.</i>
+// <i>TypeError: Assignment to constant variable.</i>
 console.
 log
 (
 &bsol;
 3
 )
-// <i> ReferenceError: Invalid left-hand size expression in prefix
+// <i>ReferenceError: Invalid left-hand size expression in prefix
 operation.</i>
 console.log
 (
 3
 &bsol;
 )
-// <i> ReferenceError: Invalid left-hand side expression in postfix
+// <i>ReferenceError: Invalid left-hand side expression in postfix
 operation.</i>
 <!-- thru chapter 14 & section 14.25 -->
 
