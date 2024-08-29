@@ -8707,8 +8707,7 @@ Mozilla Global Objects: Math.random</a>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-9">Section 14.9: Addition (+)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The addition operator (+) adds numbers.
+<p>The addition operator (+) adds numbers.</p>
 <pre>
 <b>var</b> a = 9,
     b = 3,
@@ -8758,7 +8757,6 @@ value is converted to a string instead:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-10">Section 14.10: Little / Big endian for typed arrays when using bitwise operators</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>To detect the endian of the device</p>
 <pre>
 <b>var</b> isLittleEndian = <b>true</b>;
@@ -9069,7 +9067,13 @@ allow you to select a variance you want.</p>
   <b>return</b> r / v;
 }
 </pre>
-https://i.stack.imgur.com/Six4L.png
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~ xx.  (xxx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="https://i.stack.imgur.com/Six4L.png"
+  title=""
+  alt="."
+  style="border: 2px solid #000000; width:3.48in;" />
 
 <p>The image shows the distribution of random values for different values of v. The top 
 left is standard single Math.random() call the bottom right is Math.random () summed 8 
