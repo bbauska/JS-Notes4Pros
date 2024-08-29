@@ -9192,8 +9192,14 @@ dist = Math.hypot(v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;,v&lbrack;i++&rbrack;
 with an amplitude of 2 in the range -1 to 1.</p>
 
 <p>Graph of sine and cosine function: <i>(courtesy Wikipedia)</i></p>
-![](./images/image028.png){width="6.252083333333333in"
-height="3.990972222222222in"}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 28.  (xxx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="/images/image028.png"
+  title=""
+  alt="."
+  style="border: 2px solid #000000; width:6.25in;" />
+<!-- ![](./images/image028.png){width="6.252083333333333in" height="3.990972222222222in"} -->
 
 <p>They are both very handy for many types of periodic calculations, from
 creating sound waves, to animations, and even encoding and decoding
@@ -9205,10 +9211,10 @@ period/frequency, phase, amplitude, and offset.</p>
 <p>The unit of time being used is seconds.<br/>
 The most simple form with control over frequency only.</p>
 <pre>
-// <i>time is the time in seconds when you want to get a sample</i>
+// <i>Time is the time in seconds when you want to get a sample</i>
 // <i>Frequency represents the number of oscillations per second</i>
 <b>function</b> oscillator(time, frequency) {
-<b>return</b> Math.sin(time &ast; 2 &ast; Math.PI &ast; frequency);
+  <b>return</b> Math.sin(time &ast; 2 &ast; Math.PI &ast; frequency);
 }
 </pre>
 <p>In almost all cases you will want to make some changes to the value
@@ -9223,6 +9229,7 @@ returned. The common terms for modifications</p>
 	0.75.</li>
   <li>Offset: moves the whole wave up or down.</li>
 </ul>
+
 <p>To include all these in the function:</p>
 <!-- page 146 -->
 <pre>
@@ -9261,15 +9268,15 @@ console.log(15 / 4);  // <i>3.75</i>
     the changed value.</li>
 </ul>
 <pre>
-<b>var</b> a = 5,  // <i>5</i>
+<b>var</b> a = 5,     // <i>5</i>
     b = a&minus;&minus;,   // <i>5</i>
-    c = a          // <i>4</i>
+    c = a      // <i>4</i>
 </pre>
 <p>In this case, b is set to the initial value of a. So, b will be 5, and c will be 4.</p>
 <pre>
-<b>var</b> a = 5, // <i>5</i>
+<b>var</b> a = 5,     // <i>5</i>
     b = &minus;&minus;a,  // <i>4</i>
-    c = a         // <i>4</i>
+    c = a     // <i>4</i>
 </pre>
 <p>In this case, b is set to the new value of a. So, b will be 4, and c will be 4.</p>
 <p><b>Common Uses</b></p>
