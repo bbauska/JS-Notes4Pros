@@ -8253,211 +8253,73 @@ link</a></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-2">Section 14.2: Remainder / Modulus (%)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The remainder / modulus operator (%) returns the remainder after
-(integer) division.
-console.log
-(
-42
-&percnt;
-10
-)
-;
-// <i>2</i>
-console.log
-(
-42
-&percnt;
-&minus;
-10
-)
-;
-// <i>2</i>
-console.
-log
-(
-&minus;
-42
-&percnt;
-10
-)
-;
-// <i>-2</i>
-console.
-log
-(
-&minus;
-42
-&percnt;
-&minus;
-10
-)
-;
-// <i>-2</i>
-console.log
-(
-&minus;
-40
-&percnt;
-10
-)
-;
-// <i>-0</i>
-console.log
-(
-40
-&percnt;
-10
-)
-;
-// <i>0</i>
-This operator returns the remainder left over when one operand is
+<p>The remainder / modulus operator (%) returns the remainder after
+(integer) division.</p>
+<pre>
+console.log( 42 &percnt;  10); // <i>2</i>
+console.log( 42 &percnt; &minus;10); // <i>2</i>
+console.log(&minus;42 &percnt;  10); // <i>-2</i>
+console.log(&minus;42 &percnt; &minus;10); // <i>-2</i>
+console.log(&minus; 40 &percnt;  10); // <i>-0</i>
+console.log( 40 &percnt;  10); // <i>0</i>
+</pre>
+<p>This operator returns the remainder left over when one operand is
 divided by a second operand. When the first operand is a negative
 value, the return value will always be negative, and vice versa for
-positive values.
-10
-42
-In the example above, 10 can be subtracted four times from 42 before
+positive values.</p>
+
+<p>In the example above, 10 can be subtracted four times from 42 before
 there is not enough left to subtract again without it changing sign.
-The remainder is thus: - 4 &ast;= 2.
+The remainder is thus:42 - 4 &ast; 10 = 2.</p>
 
-The remainder operator may be useful for the following problems:
-1.  Test if an integer is (not) divisible by another number:
-x
-&percnt;
-4
-==
-0
-// <i>true if x is divisible by 4</i>
-x
-&percnt;
-2
-==
-0
-// <i>true if x is even number</i>
-x
-&percnt;
-2
-!=
-0
-// <i>true if x is odd number</i>
-=== -0, this also works for x &lt;=
-Since 0-0.
-n
-2.  Implement cyclic increment/decrement of value within &lbrack;0,) interval.
-Suppose that we need to increment integer value from 0 to (but not
-including) n, so the next value after n-1 become
-
-0&period; This can be done by such pseudocode:
-<b>var</b>
-n
-=
-&hellip;
-;
-// <i>given n</i>
-<b>var</b>
-i
-=
-0
-;
-<b>function</b>
-inc
-(
-)
-{
-i
-=
-(
-i
-&plus;
-1
-)
-&percnt;
-n
-;
+<p>The remainder operator may be useful for the following problems:</p>
+<ol>
+  <li>Test if an integer is (not) divisible by another number:<br/>
+  <pre>
+  x &percnt; 4 == 0  // <i>true if x is divisible by 4</i>
+  x &percnt; 2 == 0  // <i>true if x is even number</i>
+  x &percnt; 2 != 0  // <i>true if x is odd number</i>
+  </pre>
+  <p>Since 0 === -0, this also works for x &lt;= -0.</p>
+  </li>
+  <li>Implement cyclic increment/decrement of value within &lbrack;0,) interval.</li>
+</ol>
+<!-- page 130 -->
+<p>Suppose that we need to increment integer value from 0 to (but not including) n, 
+so the next value after n-1 become 0&period; This can be done by such pseudocode:</p>
+<pre>
+<b>var</b> n = &hellip;;  // <i>given n</i>
+<b>var</b> i = 0;
+<b>function</b> inc() {
+  i = (i &plus; 1) &percnt; n;
 }
-while
-(
-<b>true</b>
-)
-{
-inc
-(
-)
-;
-// <i>update something with i</i>
+while(<b>true</b>) {
+  inc();
+  // <i>update something with i</i>
 }
-Now generalize the above problem and suppose that we need to allow to
+</pre>
+<p>Now generalize the above problem and suppose that we need to allow to
 both increment and decrement that value from 0 to (not including) n,
 so the next value after n-1 become 0 and the previous value before 0
-become n-1.
-<b>var</b>
-n
-=
-&hellip;
-;
-// <i>given n</i>
-<b>var</b>
-i
-=
-0
-;
-<b>function</b>
-delta
-(
-d
-)
-{
-// <i>d - any signed integer</i>
-i
-=
-(
-i
-&plus;
-d
-&plus;
-n
-)
-&percnt;
-n
-;
-// <i>we add n to (i+d) to ensure the sum is positive</i>
+become n-1.</p>
+<pre>
+<b>var</b> n = &hellip;;  // <i>given n</i>
+<b>var</b> i = 0;
+<b>function</b> delta(d) { // <i>d - any signed integer</i>
+  i = (i &plus; d &plus; n) &percnt; n;  // <i>we add n to (i+d) to ensure the sum is positive</i>
 }
-delta
-Now we can call () function passing any integer, both positive and
-negative, as delta parameter.
-<b>Using modulus to obtain the fractional part of a number</b>
-<b>var</b>
-myNum
-=
-10
-/
-4
-;
-// <i> 2.5</i>
-<b>var</b>
-fraction
-=
-myNum
-&percnt;
-1
-;
-// <i>0.5</i>
-myNum
-=
-&minus;
-20
-/
-7
-;
-// <i>-2.857142857142857</i>
-fraction
-=
-myNum
-&percnt;
-1
-;
-// <i>-0.857142857142857</i>
+</pre>
+
+<p>Now we can call delta() function passing any integer, both positive and negative, 
+as delta parameter.</p>
+
+<p><b>Using modulus to obtain the fractional part of a number</b></p>
+<pre>
+<b>var</b> myNum = 10 / 4;       // <i> 2.5</i>
+<b>var</b> fraction = myNum &percnt; 1; // <i>0.5</i>
+myNum = &minus;20 / 7;              // <i>-2.857142857142857</i>
+fraction = myNum &percnt; 1;        // <i>-0.857142857142857</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-3">Section 14.3: Rounding</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
