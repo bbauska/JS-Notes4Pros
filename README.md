@@ -3578,11 +3578,11 @@ expect.</p>
 &quot;&quot; == &quot;0&quot;;     // <i>false B</i>
 <b>false</b> == 0;    // <i>true</i>
 <b>false</b> == &quot;0&quot;;  // <i>true</i>
-&quot;&quot; != 0;      // <i>false A</i>
-0 != &quot;0&quot;;     // <i>false A</i>
-&quot;&quot; != &quot;0&quot;;    // <i>true B</i>
-<b>false</b> != 0;   // <i>false</i>
-<b>false</b> != &quot;0&quot;; // <i>false</i>
+&quot;&quot; != 0;       // <i>false A</i>
+0 != &quot;0&quot;;      // <i>false A</i>
+&quot;&quot; != &quot;0&quot;;     // <i>true B</i>
+<b>false</b> != 0;    // <i>false</i>
+<b>false</b> != &quot;0&quot;;  // <i>false</i>
 </pre>
 
 <p>The results start to make sense if you consider how JavaScript
@@ -3658,23 +3658,23 @@ with itself. Because, <b>NaN</b> is supposed to denote the result of a nonsensic
 and as such, it isn't equal to the result of any other nonsensical computations.</p>
 
 <pre>
-(1 &ast; &quot;two&quot;) === <b>NaN</b> // <i>false</i>
+(1 &ast; &quot;two&quot;) === <b>NaN</b>   // <i>false</i>
 
-<b>NaN</b> === 0;                        // <i>false</i>
-<b>NaN</b> === <b>NaN</b>;               // <i>false</i>
-Number.<b>NaN</b> === <b>NaN</b>; // <i>false</i>
+<b>NaN</b> === 0;                    // <i>false</i>
+<b>NaN</b> === <b>NaN</b>;           // <i>false</i>
+Number.<b>NaN</b> === <b>NaN</b>;  // <i>false</i>
 
-<b>NaN</b> &lt; 0;                // <i>false</i>
-<b>NaN</b> &gt; 0;                // <i>false</i>
-<b>NaN</b> &gt; 0;                // <i>false</i>
-<b>NaN</b> &gt;= <b>NaN</b>;      // <i>false</i>
-<b>NaN</b> &gt;= &apos;two&apos;; // <i>false</i>
+<b>NaN</b> &lt; 0;              // <i>false</i>
+<b>NaN</b> &gt; 0;              // <i>false</i>
+<b>NaN</b> &gt; 0;              // <i>false</i>
+<b>NaN</b> &gt;= <b>NaN</b>;       // <i>false</i>
+<b>NaN</b> &gt;= &apos;two&apos;;    // <i>false</i>
 </pre>
 
 <p>Non-equal comparisons will always return <b>true</b>:</p>
 
 <pre>
-<b>NaN</b> !== 0;    // <i>true</i>
+<b>NaN</b> !== 0;   // <i>true</i>
 <b>NaN</b> !== <b>NaN</b>; // <i>true</i>
 </pre>
 
@@ -3685,18 +3685,18 @@ Number.<b>NaN</b> === <b>NaN</b>; // <i>false</i>
 <p>You can test a value or expression for <b>NaN</b> by using the function Number.isNaN():</p>
 
 <pre>
-Number.isNaN(<b>NaN</b>);      // <i>true</i>
+Number.isNaN(<b>NaN</b>);        // <i>true</i>
 Number.isNaN(0 / 0);      // <i>true</i>
 Number.isNaN(&apos;str&apos; &minus; 12); // <i>true</i>
 
-Number.isNaN(24);          // <i>false</i>
+Number.isNaN(24);         // <i>false</i>
 Number.isNaN(&apos;24&apos;);      // <i>false</i>
-Number.isNaN(1 / 0);       // <i>false</i>
-Number.isNaN(<b>Infinity</b>);   // <i>false</i>
+Number.isNaN(1 / 0);     // <i>false</i>
+Number.isNaN(<b>Infinity</b>);  // <i>false</i>
 
-Number.isNaN(&apos;str&apos;); // <i>false</i>
+Number.isNaN(&apos;str&apos;);    // <i>false</i>
 Number.isNaN(<b>undefined</b>); // <i>false</i>
-Number.isNaN({});          // <i>false</i>
+Number.isNaN({});        // <i>false</i>
 </pre>
 
 <!-- page 62 -->
@@ -3720,17 +3720,17 @@ Number.isNaN = Number.isNaN &vert;&vert; <b>function</b>(value) {
 also for any value or expression that cannot be coerced into a number:</p>
 
 <pre>
-isNaN (<b>NaN</b>);     // <i>true</i>
-isNaN(0/0);        // <i>true</i>
+isNaN (<b>NaN</b>);       // <i>true</i>
+isNaN(0/0);       // <i>true</i>
 isNaN(&apos;str&apos;&minus; 12); // <i>true</i>
 
-isNaN(24);          // <i>false</i>
+isNaN(24);         // <i>false</i>
 isNaN(&apos;24&apos;);      // <i>false</i>
 isNaN(<b>Infinity</b>);  // <i>false</i>
 
 isNaN(&apos;str&apos;);     // <i>true</i>
 isNaN(<b>undefined</b>); // <i>true</i>
-isNaN({});          // <i>true</i>
+isNaN({});        // <i>true</i>
 </pre>
 
 <p>ECMAScript defines a "sameness" algorithm called SameValue which, since ECMAScript 6, can 
@@ -3741,7 +3741,7 @@ be invoked with Object.is. Unlike the == and === comparison, using Object.is() w
 Object.is(<b>NaN, NaN</b>)      // <i>true</i>
 Object.is(+0, 0)         // <i>false</i>
 
-<b>NaN</b> === <b>NaN</b>            // <i>false</i>
+<b>NaN</b> === <b>NaN</b>              // <i>false</i>
 +0 === 0                 // <i>true</i>
 </pre>
 <h5>Version &lt; 6</h5>
@@ -3926,7 +3926,7 @@ envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue // <i>select
 <p>null</b> and <b>undefined</b> share abstract equality == but not strict equality ===,</p>
 
 <pre>
-<b>null</b> == <b>undefined</b> // <i>true</i>
+<b>null</b> == <b>undefined</b>  // <i>true</i>
 <b>null</b> === <b>undefined</b> // <i>false</i>
 </pre>
 
@@ -4020,17 +4020,17 @@ comparison is performed as follows:
 <b>Examples:</b>
 
 <pre>
-1 == 1;                                 // <i>true</i>
-1 == <b>true</b>;                       // <i>true (operand converted to number: true =&bsol;1)</i>
-1 == &apos;1&apos;;                     // <i>true (operand converted to number: &apos;1&apos; =&bsol;1 )</i>
-1 == &apos;1.00&apos;;                  // <i>true</i>
-1 == &apos;1.00000000001&apos;;         // <i>false</i>
+1 == 1;                      // <i>true</i>
+1 == <b>true</b>;                  // <i>true (operand converted to number: true =&bsol;1)</i>
+1 == &apos;1&apos;;                   // <i>true (operand converted to number: &apos;1&apos; =&bsol;1 )</i>
+1 == &apos;1.00&apos;;                // <i>true</i>
+1 == &apos;1.00000000001&apos;;       // <i>false</i>
 1 == &apos;1.00000000000000001&apos;; // <i>true (true due to precision loss)</i>
-<b>null</b> == <b>undefined</b>;       // <i>true (spec #2)</i>
-1 == 2;                                 // <i>false</i> 
-0 == <b>false</b>;                      // <i>true</i>
-0 == <b>undefined</b>;                  // <i>false</i>
-0 == &quot;&quot;;                      // <i>true</i>
+<b>null</b> == <b>undefined</b>;         // <i>true (spec #2)</i>
+1 == 2;                          // <i>false</i> 
+0 == <b>false</b>;                 // <i>true</i>
+0 == <b>undefined</b>;             // <i>false</i>
+0 == &quot;&quot;;                  // <i>true</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-6">Section 10.6: Logic Operators with Booleans</h3>
@@ -4093,10 +4093,10 @@ x = 5;                  // <i>changes typeof x to a number</i>
 strings:</p>
 
 <pre>
-<b>var</b> x = 5 + 7; // <i>x.valueOf() is 12, typeof x is a number</i>
+<b>var</b> x = 5 + 7;   // <i>x.valueOf() is 12, typeof x is a number</i>
 <b>var</b> x = 5 + &quot;7&quot;; // <i>x.valueOf() is 57, typeof x is a string</i>
 <b>var</b> x = &quot;5&quot; + 7; // <i>x.valueOf() is 57, typeof x is a string</i>
-<b>var</b> x = 5 - 7; // <i>x.valueOf() is -2, typeof x is a number</i>
+<b>var</b> x = 5 - 7;   // <i>x.valueOf() is -2, typeof x is a number</i>
 <b>var</b> x = 5 - &quot;7&quot;; // <i>x.valueOf() is -2, typeof x is a number</i>
 <b>var</b> x = &quot;5&quot; - 7; // <i>x.valueOf() is -2, typeof x is a number</i>
 <b>var</b> x = 5 - &quot;x&quot;; // <i>x.valueOf() is NaN, typeof x is a number</i>
@@ -8644,7 +8644,7 @@ prior to the operation).</p>
 </pre>
 <p>c will now be 8</p>
 
-<h5>Version &bsol;6</h5>
+<h5>Version &gt; 6</h5>
 <p>Stage 3 ES2016 (ECMAScript 7) Proposal:</p>
 <pre>
 <b>let</b> a = 2,
@@ -8728,10 +8728,10 @@ Mozilla Global Objects: Math.random</a>.</p>
 a string, they&apos;re both converted to strings and concatenated.
 Otherwise, they&apos;re both converted to numbers and added.</p>
 <pre>
-<b>null</b> &plus; <b>null</b>;    // <i>0</i>
+<b>null</b> &plus; <b>null</b>;      // <i>0</i>
 <b>null</b> &plus; <b>undefined</b>; // <i>NaN</i>
-<b>null</b> &plus; {};               // <i>&quot;null&lbrack;object Object&rbrack;&quot;</i>
-<b>null</b> &plus; &apos;&apos;;      // <i>&quot;null&quot;</i>
+<b>null</b> &plus; {};          // <i>&quot;null&lbrack;object Object&rbrack;&quot;</i>
+<b>null</b> &plus; &apos;&apos;;       // <i>&quot;null&quot;</i>
 </pre>
 <p>If the operands are a string and a number, the number is converted to
 a string and then they&apos;re concatenated, which may lead to unexpected
@@ -8743,15 +8743,15 @@ results when working with strings that look numeric.</p>
 boolean value is converted to a number (0 for <b>false</b>, 1 for
 <b>true</b>) before the sum is calculated:</p>
 <pre>
-<b>true</b> &plus; 1;  // <i>2</i>
-<b>false</b> &plus; 5;  // <i>5</i>
-<b>null</b> &plus; 1;  // <i>1</i>
+<b>true</b> &plus; 1;       // <i>2</i>
+<b>false</b> &plus; 5;      // <i>5</i>
+<b>null</b> &plus; 1;       // <i>1</i>
 <b>undefined</b> &plus; 1;  // <i>NaN</i>
 </pre>
 <p>If a boolean value is given alongside a string value, the boolean
 value is converted to a string instead:</p>
 <pre>
-<b>true</b> &plus; &quot;1&quot;;  // <i>&quot;true1&quot;</i>
+<b>true</b> &plus; &quot;1&quot;;     // <i>&quot;true1&quot;</i>
 <b>false</b> &plus; &quot;bar&quot;;  // <i>&quot;falsebar&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -8920,7 +8920,7 @@ converted to a number before the difference is calculated (0 for
 <p>If the string value cannot be converted into a Number, the result will
 be <b>NaN</b>:</p>
 <pre>
-&quot;foo&quot; &minus;1;  // <i>NaN</i>
+&quot;foo&quot; &minus;1;    // <i>NaN</i>
 100 &minus; &quot;bar&quot;; // <i>NaN</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -8929,9 +8929,9 @@ be <b>NaN</b>:</p>
 <p>The multiplication operator (&ast;) perform arithmetic multiplication on
 numbers (literals or variables).</p>
 <pre>
-console.log( 3 &ast;  5); // <i>15</i>
+console.log( 3 &ast;  5);  // <i>15</i>
 console.log(&minus; 3 &ast;  5); // <i>-15</i>
-console.log( 3 &ast; &minus;5); // <i>-15</i>
+console.log( 3 &ast; &minus;5);  // <i>-15</i>
 console.log(&minus; 3 &ast; &minus;5); // <i>15</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -8939,12 +8939,12 @@ console.log(&minus; 3 &ast; &minus;5); // <i>15</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The Math.max() function returns the largest of zero or more numbers.</p>
 <pre>
-Math.max( 4, 12 );  // <i>12</i>
+Math.max( 4, 12 ); // <i>12</i>
 Math.max(&minus;1, &minus;15); // <i>-1</i>
 </pre>
 <p>The Math.min() function returns the smallest of zero or more numbers.</p>
 <pre>
-Math.min( 4, 12 ); // <i>4</i>
+Math.min( 4, 12 );  // <i>4</i>
 Math.min(&minus;1, &minus;15); // <i>-15</i>
 </pre>
 <!-- page 140 -->
@@ -8974,10 +8974,10 @@ console.log(min); // <i>Logs: 1</i>
   <b>return</b> Math.min(Math.max(min, &plus;val), max);
 }
 
-console.log(clamp(&minus;10, 10, &quot;4.30&quot;));  // <i>4.3</i>
-console.log(clamp(&minus;10, 10, &minus;8));  // <i>-8</i>
-console.log(clamp(&minus;10, 10, 12));  // <i>10</i>
-console.log(clamp(&minus;10, 10, &minus;15)); // <i>-10</i>
+console.log(clamp(&minus;10, 10, &quot;4.30&quot;)); // <i>4.3</i>
+console.log(clamp(&minus;10, 10, &minus;8));     // <i>-8</i>
+console.log(clamp(&minus;10, 10, 12));     // <i>10</i>
+console.log(clamp(&minus;10, 10, &minus;15));    // <i>-10</i>
 </pre>
 <p><a href="https://jsfiddle.net/RokoCB/8drqL3vo/">Use-case example (jsFiddle)</a></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -8993,9 +8993,9 @@ Math.ceil(n);
 </pre>
 <p><b>Example:</b></p>
 <pre>
-console.log(Math.ceil(0.60)); // <i>1</i>
-console.log(Math.ceil(0.40)); // <i>1</i>
-console.log(Math.ceil(5.1));  // <i>6</i>
+console.log(Math.ceil(0.60)); // <i> 1</i>
+console.log(Math.ceil(0.40)); // <i> 1</i>
+console.log(Math.ceil(5.1));  // <i> 6</i>
 console.log(Math.ceil(&minus;5.1)); // <i>-5</i>
 console.log(Math.ceil(&minus;5.9)); // <i>-5</i>
 </pre>
@@ -9008,9 +9008,9 @@ Math.floor(n);
 </pre>
 <p><b>Example:</b></p>
 <pre>
-console.log(Math.ceil(0.60)); // <i>0</i>
-console.log(Math.ceil(0.40)); // <i>0</i>
-console.log(Math.ceil(5.1));  // <i>5</i>
+console.log(Math.ceil(0.60)); // <i> 0</i>
+console.log(Math.ceil(0.40)); // <i> 0</i>
+console.log(Math.ceil(5.1));  // <i> 5</i>
 console.log(Math.ceil(&minus;5.1)); // <i>-6</i>
 console.log(Math.ceil(&minus;5.9)); // <i>-6</i>
 </pre>
@@ -9020,18 +9020,18 @@ console.log(Math.ceil(&minus;5.9)); // <i>-6</i>
 <p><b>Square Root</b></p>
 <p>Use Math.sqrt() to find the square root of a number</p>
 <pre>
-Math.sqrt(16)  &bsol;#=&gt; 4
+Math.sqrt(16)  #=&gt; 4
 </pre>
 <p><b>Cube Root</b></p>
 <p>To find the cube root of a number, use the Math.cbrt() function</p>
 <h5>Version ≥ 6</h5>
 <pre>
-Math.cbrt(27) #=&bsol;3
+Math.cbrt(27) #=&gt; 3
 </pre>
 <p><b>Finding nth-roots</b></p>
 <p>To find the nth-root, use the Math.pow() function and pass in a fractional exponent.</p>
 <pre>
-Math.pow(64, 1/6) &bsol;#=&gt; 2
+Math.pow(64, 1/6) #=&gt; 2
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch14-19">Section 14.19: Random with gaussian distribution</h3>
@@ -9061,7 +9061,7 @@ allow you to select a variance you want.</p>
 // <i>return a random number between 0-1 exclusive</i>
 <b>function</b> randomG(v) {
   <b>var</b> r = 0;
-  <b>for</b> (<b>var</b> i = v; i &gt; 0; i&bsol;) {
+  <b>for</b> (<b>var</b> i = v; i &gt; 0; i&minus;&minus) {
     r += Math.random();
   }
   <b>return</b> r / v;
@@ -9275,8 +9275,8 @@ console.log(15 / 4);  // <i>3.75</i>
 <p>In this case, b is set to the initial value of a. So, b will be 5, and c will be 4.</p>
 <pre>
 <b>var</b> a = 5,     // <i>5</i>
-    b = &minus;&minus;a,  // <i>4</i>
-    c = a     // <i>4</i>
+    b = &minus;&minus;a,   // <i>4</i>
+    c = a      // <i>4</i>
 </pre>
 <p>In this case, b is set to the new value of a. So, b will be 4, and c will be 4.</p>
 <p><b>Common Uses</b></p>
