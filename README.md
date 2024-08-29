@@ -7670,593 +7670,144 @@ obj.foo;  // <i> &apos;foo&apos;;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-12">Section 13.12: Convert object&apos;s values to array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Given this object:
-<b>var</b>
-obj
-=
-{
-a
-:
-&quot;hello&quot;
-,
-b
-:
-&quot;this is&quot;
-,
-c
-:
-&quot;javascript!&quot;
-,
-}
-;
-You can convert its values to an array by doing:
-<b>var</b>
-array
-=
-Object
-.
-keys
-(
-obj
-)
-.
-map
-(
-<b>function</b>
-(
-key
-)
-{
-<b>return</b>
-obj
-&lbrack;
-key
-&rbrack;
-;
-}
-)
-;
-console.
-log
-(
-array
-)
-;
-// <i> &lbrack;&quot;hello&quot;, &quot;this is&quot;, &quot;javascript!&quot;&rbrack;</i>
+<p>Given this object:</p>
+<pre>
+<b>var</b> obj = {
+  a: &quot;hello&quot;,
+  b: &quot;this is&quot;,
+  c: &quot;javascript!&quot;,
+};
+</pre>
+<p>You can convert its values to an array by doing:</p>
+<pre>
+<b>var</b> array = Object.keys(obj)
+  .map(<b>function</b>(key) {
+    <b>return</b> obj&lbrack;key&rbrack;;
+});
+console.log(array);  // <i> &lbrack;&quot;hello&quot;, &quot;this is&quot;, &quot;javascript!&quot;&rbrack;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-13">Section 13.13: Retrieving properties from an object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<i><b>Characteristics of properties :</b></i>
+<p><i><b>Characteristics of properties :</b></i></p>
 
-Properties that can be retrieved from an <i>object</i> could have the
-following characteristics,
+<p>Properties that can be retrieved from an <i>object</i> could have the following characteristics,</p>
+<ul>
+  <li>Enumerable</li>
+  <li>Non - Enumerable</li>
+  <li>own</li>
+</ul>
 
-Enumerable Non - Enumerable own
+<p>While creating the properties using 
+<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"><i>Object.defineProperty(ies)</i></a>),
+we could set its characteristics except <i>&quot;own&quot;</i>. Properties which are available 
+in the direct level not in the <i>prototype</i> level (&lowbar;&lowbar;proto&lowbar;&lowbar;) 
+of an object are called as <i>own</i> properties.</p>
 
-While creating the properties using
-[<i>Object.defineProperty(ies)</i>](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty),
-we could set its characteristics except <i>&quot;own&quot;</i>.
+<p>And the properties that are added into an object without using Object.defindProperty(ies) 
+will don&apos;t have its enumerable characteristic. That means it be considered as true.</p>
 
-Properties which are available in the direct level not in the
-<i>prototype</i> level (&lowbar;&lowbar;proto&lowbar;&lowbar;) of an object are called as <i>own</i>
-properties.
-Object  . defindProperty ( ies
+<p><i><b>Purpose of enumerability:</b></i></p>
 
-And the properties that are added into an object without using ) will
-don&apos;t have its enumerable characteristic. That means it be considered
-as true.
-
-<i><b>Purpose of enumerability :</b></i>
-
-The main purpose of setting enumerable characteristics to a property
+<p>The main purpose of setting enumerable characteristics to a property
 is to make the particular property&apos;s availability when retrieving it
 from its object, by using different programmatical methods. Those
-different methods will be discussed deeply below.
-<i><b>Methods of retrieving properties :</b></i>
-Properties from an object could be retrieved by the following methods,
-[<b>for</b>..<b>in</b>](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in)
-1&period; loop
+different methods will be discussed deeply below.</p>
+<!-- page 121 -->
+<p><i><b>Methods of retrieving properties:</b></i></p>
+<p>Properties from an object could be retrieved by the following methods,</p>
 
-This loop is very useful in retrieving enumerable properties from an
-object. Additionally this loop will retrieve enumerable own properties
-as well as it will do the same retrieval by traversing through the
-prototype chain until it sees the prototype as null.
+<ol>
+  <li><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in"><b>for</b>..<b>in</b></a> loop<br/>
+  <p>This loop is very useful in retrieving enumerable properties from an object. 
+  Additionally this loop will retrieve enumerable own properties as well as it will do the 
+  same retrieval by traversing through the prototype chain until it sees the prototype as null.</p>
+<pre>
 // <i>Ex 1 : Simple data</i>
-<b>var</b>
-x
-=
-{
-a
-:
-10
-,
-b
-:
-3
+<b>var</b> x = { a : 10 , b : 3}, props = &lbrack;&rbrack;;
+<b>for</b> (prop <b>in</b> x){
+  props.push(prop);
 }
-,
-props
-=
-&lbrack;
-&rbrack;
-;
-<b>for</b>
-(
-prop
-<b>in</b>
-x
-)
-{
-props.
-push
-(
-prop
-)
-;
-}
-console.
-log
-(
-props
-)
-;
-// <i>&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;</i>
+console.log(props);  // <i>&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;</i>
 // <i>Ex 2 : Data with enumerable properties in prototype chain</i>
-<b>var</b>
-x
-=
-{
-a
-:
-10
-,
-&lowbar;&lowbar;proto&lowbar;&lowbar;
-:
-{
-b
-:
-10
+<b>var</b> x = {a : 10, &lowbar;&lowbar;proto&lowbar;&lowbar; : { b : 10}} , props = &lbrack;&rbrack;;
+<b>for</b> (prop <b>in</b> x){
+  props.push(prop);
 }
-}
-,
-props
-=
-&lbrack;
-&rbrack;
-;
-<b>for</b>
-(
-prop
-<b>in</b>
-x
-)
-{
-props.
-push
-(
-prop
-)
-;
-}
-console.
-log
-(
-props
-)
-;
-// <i>&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;</i>
+console.log(props);  // <i>&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;</i>
 // <i>Ex 3 : Data with non enumerable properties</i>
-<b>var</b>
-x
-=
-{
-a
-:
-10
+<b>var</b> x = { a : 10 } , props = &lbrack;&rbrack;;
+Object.defineProperty(x, &quot;b&quot;, {value : 5, enumerable: <b>false</b>});
+<b>for</b> (prop <b>in</b> x) {
+  props.push(prop);
 }
-,
-props
-=
-&lbrack;
-&rbrack;
-;
-Object
-.
-defineProperty
-(
-x
-,
-&quot;b&quot;
-,
-{
-value
-:
-5
-,
-enumerable
-:
-<b>false</b>
-}
-)
-;
-<b>for</b>
-(
-prop
-<b>in</b>
-x
-)
-{
-props.
-push
-(
-prop
-)
-;
-}
-console.
-log
-(
-props
-)
-;
-// <i>&lbrack;&quot;a&quot;&rbrack;</i>
-[Object](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)   [.](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)   [keys](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
-2.[()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
-function
-[<b>for</b>..<b>in</b>](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in)
-[Object](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [.](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [<b>prototype</b>](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [.](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)   [hasOwnProperty](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)
+console.log(props);  // <i>&lbrack;&quot;a&quot;&rbrack;</i>
+</pre></li>
+  <li><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys">Object.keys()</a> function<br/>
+  <p>This function was unveiled as a part of ECMAScript 5. It is used to retrieve enumerable own properties from an object. 
+  Prior to its release people used to retrieve own properties from an object by combining 
+  <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in">for..in</a> loop and 
+  <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty">
+  Object.prototype.hasOwnProperty()</a> function.</p>
+<pre>
+// <i>Ex 1 : Simple data</i>
+<b>var</b> x = { a : 10 , b : 3} , props;
+props = Object.keys(x);
+console.log(props);  // <i>&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;</i>
+// <i>Ex 2 : Data with enumerable properties in prototype chain</i>
+<b>var</b> x = { a : 10 , &lowbar;&lowbar;proto&lowbar;&lowbar; : { b : 10}} , props;
+props = Object.keys(x);
+console.log(props);  // <i>&lbrack;&quot;a&quot;&rbrack;</i>
+// <i>Ex 3 : Data with non enumerable properties</i>
+<b>var</b> x = { a : 10 } , props;
+Object.defineProperty(x, &quot;b&quot;, {value : 5, enumerable : <b>false</b>});
+props = Object.keys(x);
+console.log(props);  // <i>&lbrack;&quot;a&quot;&rbrack;</i>
+</pre>
+</li>
+<!-- page 122 -->
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames">
+    Object.getOwnProperties()</a> function<br/>
 
-This function was unveiled as a part of ECMAScript 5. It is used to
-retrieve enumerable own properties from an object. Prior to its
-release people used to retrieve own properties from an object by
-combining loop and
-[()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)
-function.
+  <p>This function will retrieve both enumerable and non enumerable, own properties from an 
+  object. It was also released as a part of ECMAScript 5.</p>
+<pre>
 // <i>Ex 1 : Simple data</i>
-<b>var</b>
-x
-=
-{
-a
-:
-10
-,
-b
-:
-3
-}
-,
-props
-;
-props
-=
-Object
-.
-keys
-(
-x
-)
-;
-console.
-log
-(
-props
-)
-;
-// <i>&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;</i>
+<b>var</b> x = { a : 10 , b : 3} , props;
+props = Object.getOwnPropertyNames(x);
+console.log(props);  // <i>&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;</i>
+
 // <i>Ex 2 : Data with enumerable properties in prototype chain</i>
-<b>var</b>
-x
-=
-{
-a
-:
-10
-,
-&lowbar;&lowbar;proto&lowbar;&lowbar;
-:
-{
-b
-:
-10
-}
-}
-,
-props
-;
-props
-=
-Object
-.
-keys
-(
-x
-)
-;
-console.
-log
-(
-props
-)
-;
-// <i>&lbrack;&quot;a&quot;&rbrack;</i>
+<b>var</b> x = { a : 10 , &lowbar;&lowbar;proto&lowbar;&lowbar; : { b : 10}} , props;
+props = Object.getOwnPropertyNames(x);
+console.log(props);  // <i>&lbrack;&quot;a&quot;&rbrack;</i>
 // <i>Ex 3 : Data with non enumerable properties</i>
-<b>var</b>
-x
-=
-{
-a
-:
-10
+<b>var</b> x = { a : 10 } , props;
+Object.defineProperty(x, &quot;b&quot;, {value : 5, enumerable : <b>false</b>});
+props = Object.getOwnPropertyNames(x);
+console.log(props);  // <i>&lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;</i>
+</pre>
+</li>
+</ol>
+
+<p><i><b>Miscellaneous :</b></i></p>
+<p>A technique for retrieving all (own, enumerable, non enumerable, all prototype level) 
+properties from an object is given below,</p>
+
+<pre>
+<b>function</b> getAllProperties(obj, props = &lbrack;&rbrack;){
+  <b>return</b> obj == <b>null</b> ? props:
+    getAllProperties(Object.getPrototypeOf(obj),
+      props.concat(Object.getOwnPropertyNames(obj)));
 }
-,
-props
-;
-Object
-.
-defineProperty
-(
-x
-,
-&quot;b&quot;
-,
-{
-value
-:
-5
-,
-enumerable
-:
-<b>false</b>
-}
-)
-;
-props
-=
-Object
-.
-keys
-(
-x
-)
-;
-console.
-log
-(
-props
-)
-;
-// <i>&lbrack;&quot;a&quot;&rbrack;</i>
-[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames)   [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames)   [getOwnProperties](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames)
-3.[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames)
-function
-This function will retrieve both enumerable and non enumerable, own
-properties from an object. It was also released as a part of
-ECMAScript 5.
-// <i>Ex 1 : Simple data</i>
-<b>var</b>
-x
-=
-{
-a
-:
-10
-,
-b
-:
-3
-}
-,
-props
-;
-props
-=
-Object
-.
-getOwnPropertyNames
-(
-x
-)
-;
-console.
-log
-(
-props
-)
-;
-// <i>&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;</i>
-// <i>Ex 2 : Data with enumerable properties in prototype chain</i>
-<b>var</b>
-x
-=
-{
-a
-:
-10
-,
-&lowbar;&lowbar;proto&lowbar;&lowbar;
-:
-{
-b
-:
-10
-}
-}
-,
-props
-;
-props
-=
-Object
-.
-getOwnPropertyNames
-(
-x
-)
-;
-console.
-log
-(
-props
-)
-;
-// <i>&lbrack;&quot;a&quot;&rbrack;</i>
-// <i>Ex 3 : Data with non enumerable properties</i>
-<b>var</b>
-x
-=
-{
-a
-:
-10
-}
-,
-props
-;
-Object
-.
-defineProperty
-(
-x
-,
-&quot;b&quot;
-,
-{
-value
-:
-5
-,
-enumerable
-:
-<b>false</b>
-}
-)
-;
-props
-=
-Object
-.
-getOwnPropertyNames
-(
-x
-)
-;
-console.
-log
-(
-props
-)
-;
-// <i>&lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;</i>
-<i><b>Miscellaneous :</b></i>
-A technique for retrieving all (own, enumerable, non enumerable, all
-prototype level) properties from an object is given below,
-<b>function</b>
-getAllProperties
-(
-obj
-,
-props
-=
-&lbrack;
-&rbrack;
-)
-{
-<b>return</b>
-obj
-==
-<b>null</b>
-?
-props
-:
-getAllProperties
-(
-Object
-.
-getPrototypeOf
-(
-obj
-)
-,
-props.
-concat
-(
-Object
-.
-getOwnPropertyNames
-(
-obj
-)
-)
-)
-;
-}
-<b>var</b>
-x
-=
-{
-a
-:
-10
-,
-&lowbar;&lowbar;proto&lowbar;&lowbar;
-:
-{
-b
-:
-5
-,
-c
-:
-15
-}
-}
-;
+
+<b>var</b> x = {a:10, &lowbar;&lowbar;proto&lowbar;&lowbar; : { b : 5, c : 15 }};
+
 // <i>adding a non enumerable property to first level prototype</i>
-Object
-.
-defineProperty
-(
-x&period;
-&lowbar;&lowbar;proto&lowbar;&lowbar;
-,
-&quot;d&quot;
-,
-{
-value
-:
-20
-,
-enumerable
-:
-<b>false</b>
-}
-)
-;
-console.
-log
-(
-getAllProperties
-(
-x
-)
-)
-;
-&lbrack;
-&quot;a&quot;
-,
-&quot;b&quot;
-,
-&quot;c&quot;
-,
-&quot;d&quot;
-,
-&quot;&hellip;other default core props&hellip;&quot;
-&rbrack;
-And this will be supported by the browsers which supports ECMAScript
-5.
+Object.defineProperty(x&period;&lowbar;&lowbar;proto&lowbar;&lowbar;, &quot;d&quot;, {value : 20, enumerable : <b>false</b>});
+console.log(getAllProperties(x)); &lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;&hellip;other default core props&hellip;&quot;&rbrack;
+</pre>
+<p>And this will be supported by the browsers which supports ECMAScript 5.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-14">Section 13.14: Read-Only property</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
