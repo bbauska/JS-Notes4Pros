@@ -10517,189 +10517,59 @@ one 2 3 &lbrack;4&rbrack; Object {5: 5}
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-6">Section 19.6: Functions with an Unknown Number of Arguments (variadic functions)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-To create a function which accepts an undetermined number of
-arguments, there are two methods depending on your environment.
-
+<p>To create a function which accepts an undetermined number of
+arguments, there are two methods depending on your environment.</p>
 <h5>Version ≤ 5</h5>
-
-Whenever a function is called, it has an Array-like
-[arguments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments)
-object in its scope, containing all the arguments passed to the
-function. Indexing into or iterating over this will give access to the
-arguments, for example
-
-<b>function</b>
-logSomeThings
-(
-)
-{
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-arguments.
-length
-;
-++
-i
-)
-{
-console.
-log
-(
-
-arguments
-&lbrack;
-i
-&rbrack;
-)
-;
+<p>Whenever a function is called, it has an Array-like
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments">
+arguments</a> object in its scope, containing all the arguments passed to the function. 
+Indexing into or iterating over this will give access to the arguments, for example</p>
+<pre>
+<b>function</b> logSomeThings() {
+  <b>for</b> (<b>var</b> i = 0; i &lt; arguments.length; ++i) {
+    console.log(arguments&lbrack;i&rbrack;);
+  }
 }
-}
-logSomeThings
-(
-&apos;hello&apos;
-,
-&apos;world&apos;
-)
-;
+logSomeThings(&apos;hello&apos;, &apos;world&apos;);
 // <i> logs &quot;hello&quot;</i>
 // <i> logs &quot;world&quot;</i>
-Note that you can convert arguments to an actual Array if need-be;
-see: Converting Array-like Objects to Arrays
-Version ≥ 6
-From ES6, the function can be declared with its last parameter using
-the [rest
-operator](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/rest_parameters)
-(&hellip;). This creates an Array which holds the arguments from that
-point onwards
-<b>function</b>
-personLogsSomeThings
-(
-person
-,
-&hellip;
-msg
-)
-{
-msg.
-forEach
-(
-arg
-=&gt;
-{
-console.
-log
-(
-person
-,
-&apos;says&apos;
-,
-arg
-)
-;
+</pre>
+<p>Note that you can convert arguments to an actual Array if need-be; see: Converting Array-like Objects to Arrays</p>
+<h5>Version ≥ 6</h5>
+<p>From ES6, the function can be declared with its last parameter using the 
+<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/rest_parameters">
+rest operator</a> (&hellip;). This creates an Array which holds the arguments from that point onwards</p>
+<pre>
+<b>function</b> personLogsSomeThings(person, &hellip;msg) {
+  msg.forEach(arg =&gt; {
+    console.log(person, &apos;says&apos;, arg);
+  });
 }
-)
-;
-}
-personLogsSomeThings
-(
-&apos;John&apos;
-,
-&apos;hello&apos;
-,
-&apos;world&apos;
-)
-;
+personLogsSomeThings(&apos;John&apos;, &apos;hello&apos;, &apos;world&apos;);
 // <i> logs &quot;John says hello&quot;</i>
 // <i> logs &quot;John says world&quot;</i>
-Functions can also be called with similar way, the [spread
-syntax](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_operator)
-<b>const</b>
-logArguments
-=
-(
-&hellip;
-args
-)
-=&gt;
-console.
-log
-(
-args
-)
-<b>const</b>
-list
-=
-&lbrack;
-1
-,
-2
-,
-3
-&rbrack;
-logArguments
-(
-&apos;a&apos;
-,
-&apos;b&apos;
-,
-&apos;c&apos;
-,
-&hellip;
-list
-)
+</pre>
+<p>Functions can also be called with similar way, the 
+<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_operator">
+spread syntax</a></p>
+<pre>
+<b>const</b> logArguments = (&hellip;args) =&gt; console.log(args)
+<b>const</b> list = &lbrack;1, 2, 3&rbrack;
+logArguments(&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &hellip;list)
 // <i> output: Array &lbrack; &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, 1, 2, 3 &rbrack;</i>
-This syntax can be used to insert arbitrary number of arguments to any
-position, and can be used with any iterable(apply accepts only
-array-like objects).
-<b>const</b>
-logArguments
-=
-(
-&hellip;
-args
-)
-=&gt;
-console.
-log
-(
-args
-)
-<b>function</b>
-&ast;
-generateNumbers
-(
-)
-{
-yield
-6
-yield
-5
-yield
-4
+</pre>
+<p>This syntax can be used to insert arbitrary number of arguments to any
+position, and can be used with any iterable(apply accepts only array-like objects).</p>
+<pre>
+<b>const</b> logArguments = (&hellip;args) =&gt; console.log(args)
+<b>function</b> &ast;generateNumbers() {
+  yield 6
+  yield 5
+  yield 4
 }
-logArguments
-(
-&apos;a&apos;
-,
-&hellip;
-generateNumbers
-(
-)
-,
-&hellip;
-&apos;pqr&apos;
-,
-&apos;b&apos;
-)
+logArguments(&apos;a&apos;, &hellip;generateNumbers(), &hellip;&apos;pqr&apos;, &apos;b&apos;)
 // <i> output: Array &lbrack; &quot;a&quot;, 6, 5, 4, &quot;p&quot;, &quot;q&quot;, &quot;r&quot;, &quot;b&quot; &rbrack;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-7">Section 19.7: Anonymous Function</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
