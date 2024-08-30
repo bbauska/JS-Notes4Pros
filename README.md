@@ -9454,7 +9454,7 @@ left-most bit was 1 then the new bits will all be 1 and vice-versa for 0&apos;s.
 &minus;5 &gt;&gt; 3 =&gt; &minus;1
 // <i>-5: 1..111011</i>
 // <i>-2: 1..111111 &lt;= added three 1&apos;s from the left and chopped off 011 from the right</i>
-<pre>
+</pre>
 <p><b>Right Shift (<i>Zero fill</i>)</b></p>
 
 <p>The zero-fill right shift operator (value) &gt;&gt;&gt; (shift amount) will move the bits to the right,
@@ -9491,118 +9491,56 @@ cat.sound;  // <i>Returns &quot;Meow&quot;</i>
 <p>Constructor functions also have a <b>prototype</b> property which points
 to an object whose properties are automatically inherited by all
 objects created with that constructor:</p>
-
-Cat.
-<b>prototype</b>
-.
-speak
-=
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-<b>this</b>
-.
-sound
-)
-;
+<pre>
+Cat.<b>prototype</b>.speak = <b>function</b>() {
+  console.log(<b>this</b>.sound);
 }
-cat.
-speak
-(
-)
-;
-// <i>Outputs &quot;Meow&quot; to the console</i>
-Objects created by constructor functions also have a special property
+
+cat.speak();  // <i>Outputs &quot;Meow&quot; to the console</i>
+</pre>
+<p>Objects created by constructor functions also have a special property
 on their prototype called constructor, which points to the function
-used to create them:
-cat.
-constructor
-// <i>Returns the &grave;Cat&grave; function</i>
-Objects created by constructor functions are also considered to be
+used to create them:</p>
+<pre>
+cat.constructor  // <i>Returns the &grave;Cat&grave; function</i>
+</pre>
+<p>Objects created by constructor functions are also considered to be
 &quot;instances&quot; of the constructor function by the <b>instanceof</b>
-operator:
-cat
-<b>instanceof</b>
-Cat
-// <i>Returns &quot;true&quot;</i>
+operator:</p>
+<pre>
+cat <b>instanceof</b> Cat  // <i>Returns &quot;true&quot;</i>
+</pre>
+<!-- page 152 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch17">Chapter 17: Declarations and Assignments</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch17-1">Section 17.1: Modifying constants</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 Declaring a variable <b>const</b> only prevents its value from being
 <i>replaced</i> by a new value. <b>const</b> does not put any restrictions on
 the internal state of an object. The following example shows that a
 value of a property of a <b>const</b> object can be changed, and even new
 properties can be added, because the object that is assigned to person
-is modified, but not <i>replaced</i>.
-<b>const</b>
-person
-=
-{
-name
-:
-&quot;John&quot;
-}
-;
-console.
-log
-(
-&apos;The name of the person is&apos;
-,
-person.
-name
-)
-;
-person.
-name
-=
-&quot;Steve&quot;
-;
-console.
-log
-(
-&apos;The name of the person is&apos;
-,
-person.
-name
-)
-;
-person.
-surname
-=
-&quot;Fox&quot;
-;
-console.
+is modified, but not <i>replaced</i>.</p>
+<pre>
+<b>const</b> person = {
+  name: &quot;John&quot;
+};
 
-log
-
-(
-
-&apos;The name of the person is&apos;
-,
-person.
-name
-,
-&apos;and the surname is&apos;
-,
-person.
-surname
-)
-;
-<b>Result:</b>
+console.log(&apos;The name of the person is&apos;, person.name);
+person.name = &quot;Steve&quot;;
+console.log(&apos;The name of the person is&apos;, person.name);
+person.surname = &quot;Fox&quot;;
+console.log(&apos;The name of the person is&apos;, person.name, &apos;and the surname is&apos;, person.surname);
+</pre>
+<p><b>Result:</b></p>
+<pre>
 The name of the person is John
 The name of the person is Steve
 The name of the person is Steve and the surname is Fox
-person.name
-person.surname
-In this example we&apos;ve created constant object called person and
-we&apos;ve reassigned property and created new property.
+</pre>
+<p>In this example we&apos;ve created constant object called person and
+we&apos;ve reassigned property and created new property.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch17-2">Section 17.2: Declaring and initializing constants</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
