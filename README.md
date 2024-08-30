@@ -10065,19 +10065,19 @@ the label referenced position</p>
 </pre>
 <!-- page 162 -->
 <blockquote>
-<i><b>i=0 j=0 skips rest of j values</b></i>
-1 0
-<i><b>i=1 j=1 skips rest of j values</b></i>
-2 0
-2 1 <i><b>i=2 j=2 skips rest of j values</b></i>
-3 0
-3 1
-3 2
-<i><b>i=3 j=3 skips rest of j values</b></i>
-4 0
-4 1
-4 2
-4 3
+<i><b>i=0 j=0 skips rest of j values</b></i><br/>
+1 0<br/>
+<i><b>i=1 j=1 skips rest of j values</b></i><br/>
+2 0<br/>
+2 1 <i><b>i=2 j=2 skips rest of j values</b></i><br/>
+3 0<br/>
+3 1<br/>
+3 2<br/>
+<i><b>i=3 j=3 skips rest of j values</b></i><br/>
+4 0<br/>
+4 1<br/>
+4 2<br/>
+4 3<br/>
 <i><b>i=4 j=4 does not log and loops are done</b></i>
 </blockquote>
 <!-- page 163 -->
@@ -10100,8 +10100,9 @@ defined inside the scope.</p>
 <pre>
 <b>function</b> foo() {
   <b>var</b> a = &apos;hello&apos;;
-  console.log(a);  // <i>=&amp;apos;hello&apos;</i>
+  console.log(a);  // <i>=&gt; &apos;hello&apos;</i>
 }
+
 console.log(a);    // <i>reference error</i>
 </pre>
 <p>Nested functions are possible in JavaScript and the same rules apply.</p>
@@ -10111,14 +10112,14 @@ console.log(a);    // <i>reference error</i>
 
   <b>function</b> bar() {
     <b>var</b> b = &apos;world&apos;;
-    console.log(a);  // <i> =&amp;apos;hello&apos;</i>
-    console.log(b);  // <i> =&amp;apos;world&apos;</i>
+    console.log(a);  // <i>=&amp;apos;hello&apos;</i>
+    console.log(b);  // <i>=&amp;apos;world&apos;</i>
   }
-  console.log(a);  // <i> =&amp;apos;hello&apos;</i>
-  console.log(b);  // <i> reference error</i>
+  console.log(a);   // <i>=&amp;apos;hello&apos;</i>
+  console.log(b);   // <i>reference error</i>
 }
-console.log(a);  // <i> reference error</i>
-console.log(b);  // <i> reference error</i>
+console.log(a);  // <i>reference error</i>
+console.log(b);  // <i>reference error</i>
 </pre>
 <p>When JavaScript tries to resolve a reference or variable, it starts
 looking for it in the current scope. If it cannot find that
@@ -10133,10 +10134,10 @@ reference, a reference error will be thrown.</p>
   <b>function</b>bar () {
     <b>var</b> c = &apos;!!&apos;;
 
-    console.log(a);  // <i> =&amp;apos;hello&apos;</i>
-    console.log(b);  // <i> =&amp;apos;world&apos;</i>
-    console.log(c);  // <i> =&amp;apos;!!&apos;</i>
-    console.log(d);  // <i> reference error</i>
+    console.log(a);  // <i>=&amp;apos;hello&apos;</i>
+    console.log(b);  // <i>=&amp;apos;world&apos;</i>
+    console.log(c);  // <i>=&amp;apos;!!&apos;</i>
+    console.log(d);  // <i>reference error</i>
   }
 }
 </pre>
@@ -10144,11 +10145,11 @@ reference, a reference error will be thrown.</p>
 over a similarly named reference in the outer scope since it gets seen first.</p>
 <pre>
 <b>var</b> a = &apos;hello&apos;;
-
+<br/>
 <b>function</b> foo() {
   <b>var</b> a = &apos;world&apos;;
   <b>function</b> bar() {
-    console.log(a);  // <i> =&amp;apos;world&apos;</i>
+    console.log(a);  // <i>=&amp;apos;world&apos;</i>
   }
 }
 </pre>
@@ -10160,14 +10161,14 @@ function will create a new scope and with that a new variable.</p>
 <pre>
 <b>function</b> foo () {
   <b>const</b> a = <b>true</b>;
-  
+<br/>
   <b>function</b> bar() {
     <b>const</b> a = <b>false</b>;  // <i>different variable</i>
-    console.log(a);                 // <i>false</i>
+    console.log(a);   // <i>false</i>
   }
-  <b>const</b> a = <b>false</b>;    // <i>SyntaxError</i>
-  a = <b>false</b>;                 // <i>TypeError</i>
-  console.log(a);                   // <i>true</i>
+  <b>const</b> a = <b>false</b>;  // <i>SyntaxError</i>
+  a = <b>false</b>;           // <i>TypeError</i>
+  console.log(a);       // <i>true</i>
 }
 </pre>
 <p>However, functions are not the only blocks that create a scope (if you
