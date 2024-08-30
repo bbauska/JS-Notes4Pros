@@ -10106,7 +10106,6 @@ console.log(a);    // <i>reference error</i>
 <pre>
 <b>function</b> foo() {
   <b>var</b> a = &apos;hello&apos;;
-
   <b>function</b> bar() {
     <b>var</b> b = &apos;world&apos;;
     console.log(a);  // <i>=&gt; &apos;hello&apos;</i>
@@ -11914,7 +11913,7 @@ callback = <b>function</b>
 The default parameters&apos; values are not restricted to numbers, strings
 or simple objects. A function can also be set as the default value
 (){}:
-Version ≥ 6
+<h5>Version ≥ 6</h5>
 <b>function</b>
 foo
 (
