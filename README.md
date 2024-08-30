@@ -9779,6 +9779,7 @@ and assignment expressions occur (var a, b, c = 2, d:) does not matter. You may 
 98
 </blockquote>
 <p><b>Decremented loop</b></p>
+<pre>
 <b>for</b> (<b>var</b> i = 100; i &gt;=0; i&bsol;) {
   console.log(i);
 }
@@ -9839,7 +9840,6 @@ a b c
 <pre>
 <b>const</b> names = &lbrack;&apos;bob&apos;, &apos;alejandro&apos;, &apos;zandra&apos;, &apos;anna&apos;, &apos;bob&apos;&rbrack;;
 <b>const</b> uniqueNames = <b>new</b> Set(names);
-
 <b>for</b> (<b>let</b> name of uniqueNames) {
   console.log(name);
 }
@@ -9858,7 +9858,6 @@ similarly to arrays and sets, except the iteration variable stores both a key an
 <b>const</b> map = <b>new</b> Map()
   .<b>set</b>(&apos;abc&apos;, 1)
   .<b>set</b>(&apos;def&apos;, 2)
-  
 <b>for</b> (<b>const</b> iteration of map) {
   console.log(iteration)  //<i>will log &lbrack;&apos;abc&apos;, 1&rbrack; and then &lbrack;&apos;def&apos;, 2&rbrack;</i>
 }
@@ -9868,13 +9867,12 @@ similarly to arrays and sets, except the iteration variable stores both a key an
 <b>const</b> map = <b>new</b> Map()
   .<b>set</b>(&apos;abc&apos;, 1)
   .<b>set</b>(&apos;def&apos;, 2)
-
 <b>for</b> (<b>const</b> &lbrack;key, value&rbrack; of map) {
   console.log(key &plus; &apos; is mapped to &apos; &plus; value)
 }
 <i>/&ast;Logs:</i>
-  &nbsp;&nbsp;&nbsp;   <i>abc is mapped to 1</i>
-  &nbsp;&nbsp;&nbsp;   <i>def is mapped to 2</i>
+  <i>abc is mapped to 1</i>
+  <i>def is mapped to 2</i>
 <i>&ast;/</i>
 </pre>
 <p><b>Objects</b></p>
@@ -9883,7 +9881,6 @@ possible to iterate over an object's properties by switching to a
 for&hellip;in loop, or using Object.keys():</p>
 <pre>
 <b>const</b> someObject = { name: &apos;Mike&apos; };
-
 <b>for</b> (<b>let</b> key of Object.keys(someObject)) {
   console.log(key &plus; &quot;: &quot; &plus; someObject&lbrack;key&rbrack;);
 }
