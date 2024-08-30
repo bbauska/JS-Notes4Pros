@@ -9787,10 +9787,10 @@ and assignment expressions occur (var a, b, c = 2, d:) does not matter. You may 
 <!-- page 157 -->
 <p>Expected output:</p>
 <blockquote>
-100
-99
-98
-&hellip;
+100<br/>
+99<br/>
+98<br/>
+&hellip;<br/>
 0
 </blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -9805,8 +9805,8 @@ and assignment expressions occur (var a, b, c = 2, d:) does not matter. You may 
 </pre>
 <p>Expected output:</p>
 <blockquote>
-0
-1
+0<br/>
+1<br/>
 2
 </blockquote>
 <p>The advantages from the for&hellip;of loop are:</p>
@@ -9847,9 +9847,9 @@ a b c
 </pre>
 <p>Expected output:</p>
 <blockquote>
-bob
-alejandro
-zandra
+bob<br/>
+alejandro<br/>
+zandra<br/>
 anna
 </blockquote>
 <p><b>Maps</b></p>
@@ -9873,10 +9873,10 @@ similarly to arrays and sets, except the iteration variable stores both a key an
 <b>for</b> (<b>const</b> &lbrack;key, value&rbrack; of map) {
   console.log(key &plus; &apos; is mapped to &apos; &plus; value)
 }
-/<i>&ast; Logs:</i>
-   <i>abc is mapped to 1</i>
-   <i>def is mapped to 2</i>
-<i>&ast;/
+<i>/&ast;Logs:</i>
+  &nbsp;&nbsp;&nbsp;   <i>abc is mapped to 1</i>
+  &nbsp;&nbsp;&nbsp;   <i>def is mapped to 2</i>
+<i>&ast;/</i>
 </pre>
 <p><b>Objects</b></p>
 <p>for&hellip;of loops <i>do not</i> work directly on plain Objects; but, it is
