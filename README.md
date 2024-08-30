@@ -9925,7 +9925,6 @@ object.c, baz
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch18-4">Section 18.4: &quot;while&quot; Loops</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p><b>Standard While Loop</b></p>
 <p>A standard while loop will execute until the condition given is false:</p>
 <pre>
@@ -9953,10 +9952,10 @@ while (i &gt; 0) {
 <!-- page 160 -->
 <p>Expected output:</p>
 <blockquote>
-100
-99
-98
-&hellip;
+100<br/>
+99<br/>
+98<br/>
+&hellip;<br/>
 1
 </blockquote>
 <p><b>Do&hellip;while Loop</b></p>
@@ -10013,7 +10012,6 @@ while (i &lt; 3) {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch18-6">Section 18.6: Break specific nested loops</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>We can name our loops and break the specific one when necessary.</p>
 <pre>
 outerloop:
@@ -10112,10 +10110,10 @@ console.log(a);    // <i>reference error</i>
 
   <b>function</b> bar() {
     <b>var</b> b = &apos;world&apos;;
-    console.log(a);  // <i>=&amp;apos;hello&apos;</i>
-    console.log(b);  // <i>=&amp;apos;world&apos;</i>
+    console.log(a);  // <i>=&gt; &apos;hello&apos;</i>
+    console.log(b);  // <i>=&gt; &apos;world&apos;</i>
   }
-  console.log(a);   // <i>=&amp;apos;hello&apos;</i>
+  console.log(a);   // <i>=&gt; &apos;hello&apos;</i>
   console.log(b);   // <i>reference error</i>
 }
 console.log(a);  // <i>reference error</i>
@@ -10134,9 +10132,9 @@ reference, a reference error will be thrown.</p>
   <b>function</b>bar () {
     <b>var</b> c = &apos;!!&apos;;
 
-    console.log(a);  // <i>=&amp;apos;hello&apos;</i>
-    console.log(b);  // <i>=&amp;apos;world&apos;</i>
-    console.log(c);  // <i>=&amp;apos;!!&apos;</i>
+    console.log(a);  // <i>=&gt; &apos;hello&apos;</i>
+    console.log(b);  // <i>=&gt; &apos;world&apos;</i>
+    console.log(c);  // <i>=&gt; &apos;!!&apos;</i>
     console.log(d);  // <i>reference error</i>
   }
 }
@@ -10149,7 +10147,7 @@ over a similarly named reference in the outer scope since it gets seen first.</p
 <b>function</b> foo() {
   <b>var</b> a = &apos;world&apos;;
   <b>function</b> bar() {
-    console.log(a);  // <i>=&amp;apos;world&apos;</i>
+    console.log(a);  // <i>=&gt; &apos;world&apos;</i>
   }
 }
 </pre>
