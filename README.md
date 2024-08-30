@@ -10168,1008 +10168,353 @@ detailed description.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-2">Section 19.2: Currying</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-[Currying](https://en.wikipedia.org/wiki/Currying) is the
+<a href="https://en.wikipedia.org/wiki/Currying">Currying</a> is the
 transformation of a function of n arity or arguments into a sequence
-of n functions taking only one argument.
-Use cases: When the values of some arguments are available before
+of n functions taking only one argument.</p>
+<p>Use cases: When the values of some arguments are available before
 others, you can use currying to decompose a function into a series of
 functions that complete the work in stages, as each value arrives.
-This can be useful:
-When the value of an argument almost never changes (e.g., a conversion
-factor), but you need to maintain the flexibility of setting that
-value (rather than hard-coding it as a constant).
-
-When the result of a curried function is useful before the other
-curried functions have run. To validate the arrival of the functions
-in a specific sequence.
-
-For example, the volume of a rectangular prism can be explained by a
-function of three factors: length (l), width (w), and height (h):
-<b>var</b>
-prism
-=
-<b>function</b>
-(
-l
-,
-w
-,
-h
-)
-{
-<b>return</b>
-l
-&ast;
-w
-&ast;
-h
-;
+This can be useful:</p>
+<ul>
+  <li>When the value of an argument almost never changes (e.g., a conversion factor), but 
+    you need to maintain the flexibility of setting that value (rather than hard-coding it 
+	as a constant).</li>
+  <li>When the result of a curried function is useful before the other curried functions 
+    have run.</li>
+  <li>To validate the arrival of the functions in a specific sequence.</li>
+</ul>
+<p>For example, the volume of a rectangular prism can be explained by a
+function of three factors: length (l), width (w), and height (h):</p>
+<pre>
+<b>var</b> prism = <b>function</b>(l, w, h) {
+  <b>return</b> l &ast; w &ast; h;
+  }
+</pre>
+<p>A curried version of this function would look like:</p>
+<pre>
+<b>function</b> prism(l) {
+  <b>return</b> <b>function</b>(w) {
+    <b>return</b> <b>function</b>(h) {
+      <b>return</b> l &ast; w &ast; h;
+    }
+  }
 }
-A curried version of this function would look like:
-<b>function</b>
-prism
-(
-l
-)
-{
-<b>return</b>
-<b>function</b>
-(
-w
-)
-{
-<b>return</b>
-<b>function</b>
-(
-h
-)
-{
-<b>return</b>
-l
-&ast;
-w
-&ast;
-h
-;
-}
-}
-}
-Version ≥ 6
+</pre>
+<h5>Version ≥ 6</h5>
+<pre>
 // <i> alternatively, with concise ECMAScript 6+ syntax:</i>
-<b>var</b>
-prism
-=
-l
-=&gt;
-w
-=&gt;
-h
-=&gt;
-l
-&ast;
-w
-&ast;
-h
-;
-prism
-You can call these sequence of functions with (2)(3)(5), which should
-evaluate to 30.
-<b>var</b> a = prism
-prism
-Without some extra machinery (like with libraries), currying is of
+<b>var</b> prism = l =&gt; w =&gt; h =&gt; l &ast; w &ast; h;
+</pre>
+<p>You can call these sequence of functions with (2)(3)(5), which should
+evaluate to 30.</p>
+<p>Without some extra machinery (like with libraries), currying is of
 limited syntactical flexibility in JavaScript (ES 5/6) due to the lack
 of placeholder values; thus, while you can use (2)(3) to create a
-[partially applied
-function](https://en.wikipedia.org/wiki/Partial_application), you
-cannot use ()(3)(5).
+<a href="https://en.wikipedia.org/wiki/Partial_application">partially applied function</a>
+, you cannot use ()(3)(5).</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-3">Section 19.3: Immediately Invoked Function Expressions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Sometimes you don&apos;t want to have your function accessible/stored as a
+<p>Sometimes you don&apos;t want to have your function accessible/stored as a
 variable. You can create an Immediately Invoked Function Expression
 (IIFE for short). These are essentially <i>self-executing anonymous
 functions</i>. They have access to the surrounding scope, but the
 function itself and any internal variables will be inaccessible from
 outside. An important thing to note about IIFE is that even if you
 name your function, IIFE are not hoisted like standard functions are
-and cannot be called by the function name they are declared with.
-(
-<b>function</b>
-(
-)
-{
-alert
-(
-&quot;I&apos;ve run - but can&apos;t be run again because I&apos;m immediately invoked
-at runtime,
-leaving behind only the result I generate&quot;
-)
-;
-}
-(
-)
-)
-;
-This is another way to write IIFE. Notice that the closing parenthesis
+and cannot be called by the function name they are declared with.</p>
+<pre>
+(<b>function</b>() {
+  alert(&quot;I&apos;ve run - but can&apos;t be run again because I&apos;m immediately invoked at runtime,
+  leaving behind only the result I generate&quot;);
+}());
+</pre>
+<p>This is another way to write IIFE. Notice that the closing parenthesis
 before the semicolon was moved and placed right after the closing
-curly bracket:
-(
-<b>function</b>
-(
-)
-{
-alert
-(
-&quot;This is IIFE too.&quot;
-)
-;
-}
-)
-(
-)
-;
-You can easily pass parameters into an IIFE:
-(
-<b>function</b>
-(
-message
-)
-{
-alert
-(
-message
-)
-;
-}
-(
-&quot;Hello World!&quot;
-)
-)
-;
-Additionally, you can return values to the surrounding scope:
-<b>var</b>
-example
-=
-(
-<b>function</b>
-(
-)
-{
-<b>return</b>
-42
-;
-}
-(
-)
-)
-;
-console.
-log
-(
-example
-)
-;
-// <i> =&bsol;42</i>
-If required it is possible to name an IIFE. While less often seen,
+curly bracket:</p>
+<pre>
+(<b>function</b>() {
+  alert(&quot;This is IIFE too.&quot;);
+})();
+</pre>
+<p>You can easily pass parameters into an IIFE:</p>
+<pre>
+(<b>function</b>(message) {
+  alert(message);
+}(&quot;Hello World!&quot;));
+</pre>
+<p>Additionally, you can return values to the surrounding scope:</p>
+<pre>
+<b>var</b> example = (<b>function</b>() {
+  <b>return</b> 42;
+}());
+console.log(example); // <i> =&bsol;42</i>
+</pre>
+<p>If required it is possible to name an IIFE. While less often seen,
 this pattern has several advantages, such as providing a reference
 which can be used for a recursion and can make debugging simpler as
-the name is included in the callstack.
-(
-<b>function</b>
-namedIIFE
-(
-)
-{
-<b>throw</b>
-error
-;
-// <i> We can now see the error thrown in &apos;namedIIFE()&apos;</i>
-}
-(
-)
-)
-;
-While wrapping a function in parenthesis is the most common way to
+the name is included in the callstack.</p>
+<!-- page 166 -->
+<pre>
+(<b>function</b> namedIIFE() {
+  <b>throw</b> error; // <i> We can now see the error thrown in &apos;namedIIFE()&apos;</i>
+}());
+</pre>
+<p>While wrapping a function in parenthesis is the most common way to
 denote to the JavaScript parser to expect an expression, in places
 where an expression is already expected, the notation can be made more
-concise:
-<b>var</b>
-a
-=
-<b>function</b>
-(
-)
-{
-<b>return</b>
-42
-}
-(
-)
-;
-console.
-log
-(
-a
-)
-// <i> =&bsol;42</i>
-Arrow version of immediately invoked function:
-Version ≥ 6
-(
-(
-)
-=&gt;
-console.
-log
-(
-&quot;Hello!&quot;
-)
-)
-(
-)
-;
-// <i> =&bsol;Hello!</i>
+concise:</p>
+<pre>
+<b>var</b> a = <b>function</b>() { <b>return</b> 42 }();
+console.log(a)  // <i> =&bsol;42</i>
+</pre>
+<p>Arrow version of immediately invoked function:</p>
+<h5>Version ≥ 6</h5>
+<pre>
+(() =&gt; console.log(&quot;Hello!&quot;))(); // <i> =&bsol;Hello!</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-4">Section 19.4: Named Functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Functions can either be named or unnamed (anonymous functions):
-<b>var</b>
-namedSum
-=
-<b>function</b>
-sum
-(
-a
-,
-b
-)
-{
-// <i> named</i>
-<b>return</b>
-a
-&plus;
-b
-;
+<p>Functions can either be named or unnamed (anonymous functions):</p>
+<pre>
+<b>var</b> namedSum = <b>function</b> sum (a, b) { // <i>named</i>
+  <b>return</b> a &plus; b;
 }
-<b>var</b>
-anonSum
-=
-<b>function</b>
-(
-a
-,
-b
-)
-{
-// <i> anonymous</i>
-<b>return</b>
-a
-&plus;
-b
-;
+<b>var</b> anonSum = <b>function</b> (a, b) {  // <i>anonymous</i>
+  <b>return</b> a &plus; b;
 }
-namedSum
-(
-1
-,
-3
-)
-;
-anonSum
-(
-1
-,
-3
-)
-;
+namedSum(1, 3);
+anonSum(1, 3);
+</pre>
+<blockquote>
 4
 4
-But their names are private to their own scope:
-<b>var</b>
-sumTwoNumbers
-=
-<b>function</b>
-sum
-(
-a
-,
-b
-)
-{
-<b>return</b>
-a
-&plus;
-b
-;
+</blockquote>
+<p>But their names are private to their own scope:</p>
+<pre>
+<b>var</b> sumTwoNumbers = <b>function</b> sum (a, b) {
+  <b>return</b> a &plus; b;
 }
-sum
-(
-1
-,
-3
-)
-;
+sum(1, 3);
+</pre>
+<blockquote>
 Uncaught ReferenceError: sum is not defined
-Named functions differ from the anonymous functions in multiple
-scenarios:
-
-When you are debugging, the name of the function will appear in the
-error/stack trace
-
-Named functions are hoisted while anonymous functions are not
-
-Named functions and anonymous functions behave differently when
-handling recursion
-
-Depending on ECMAScript version, named and anonymous functions may
-treat the function name property differently
-
-<b>Named functions are hoisted</b>
-
-When using an anonymous function, the function can only be called
+</blockquote>
+<p>Named functions differ from the anonymous functions in multiple scenarios:</p>
+<ul>
+  <li>When you are debugging, the name of the function will appear in the error/stack trace</li>
+  <li>Named functions are hoisted while anonymous functions are not</li>
+  <li>Named functions and anonymous functions behave differently when handling recursion</li>
+  <li>Depending on ECMAScript version, named and anonymous functions may treat the function 
+    name property differently</li>
+</ul>
+<p><b>Named functions are hoisted</b></p>
+<!-- page 167 -->
+<p>When using an anonymous function, the function can only be called
 after the line of declaration, whereas a named function can be called
-before declaration. Consider
-foo
-(
-)
-;
-<b>var</b>
-foo
-=
-<b>function</b>
-(
-)
-{
-// <i> using an anonymous function</i>
-console.
-log
-(
-&apos;bar&apos;
-)
-;
+before declaration. Consider</p>
+<pre>
+foo();
+<b>var</b> foo = <b>function</b> () {  // <i> using an anonymous function</i>
+  console.log(&apos;bar&apos;);
 }
+</pre>
+<blockquote>
 Uncaught TypeError: foo is not a function
-foo
-(
-)
-;
-<b>function</b>
-foo
-(
-)
-{
-// <i> using a named function</i>
-console.
-log
-(
-&apos;bar&apos;
-)
-;
+</blockquote>
+<pre>
+foo();
+<b>function</b> foo () { // <i> using a named function</i>
+console.log(&apos;bar&apos;);
 }
+</pre>
+<blockquote>
 bar
-<b>Named Functions in a recursive scenario</b>
-A recursive function can be defined as:
-<b>var</b>
-say
-=
-<b>function</b>
-(
-times
-)
-{
-<b>if</b>
-(
-times
-&gt;
-0
-)
-{
-console.
-log
-(
-&apos;Hello!&apos;
-)
-;
-say
-(
-times
-&minus;
-1
-)
-;
-}
+</blockquote>
+<p><b>Named Functions in a recursive scenario</b></p>
+<p>A recursive function can be defined as:</p>
+<pre>
+<b>var</b> say = <b>function</b> (times) {
+  <b>if</b> (times &gt; 0) {
+    console.log(&apos;Hello!&apos;);
+    say (times &minus; 1);
+  }
 }
 // <i>you could call &apos;say&apos; directly,</i>
 // <i>but this way just illustrates the example</i>
-<b>var</b>
-sayHelloTimes
-=
-say
-;
-sayHelloTimes
-(
-2
-)
-;
+<b>var</b> sayHelloTimes = say;
+sayHelloTimes(2);
+</pre>
+<blockquote>
 Hello!
 Hello!
-What if somewhere in your code the original function binding gets
-redefined?
-<b>var</b>
-say
-=
-<b>function</b>
-(
-times
-)
-{
-<b>if</b>
-(
-times
-&gt;
-0
-)
-{
-console.
-log
-(
-&apos;Hello!&apos;
-)
-;
-say
-(
-times
-&minus;
-1
-)
-;
+</blockquote>
+<p>What if somewhere in your code the original function binding gets redefined?</p>
+<pre>
+<b>var</b> say = <b>function</b> (times) {
+  <b>if</b> (times &gt; 0) {
+    console.log(&apos;Hello!&apos;);
+    say(times &minus; 1);
+  }
 }
-}
-<b>var</b>
-sayHelloTimes
-=
-say
-;
-say
-=
-&quot;oops&quot;
-;
-sayHelloTimes
-(
-2
-)
-;
+<b>var</b> sayHelloTimes = say;
+say = &quot;oops&quot;;
+sayHelloTimes(2);
+</pre>
+<!-- page 168 -->
+<blockquote>
 Hello!
-
 Uncaught TypeError: say is not a function
-This can be solved using a named function
+</blockquote>
+<p>This can be solved using a named function</p>
+<pre>
 // <i> The outer variable can even have the same name as the function</i>
 // <i> as they are contained in different scopes</i>
-<b>var</b>
-say
-=
-<b>function</b>
-say
-(
-times
-)
-{
-<b>if</b>
-(
-times
-&gt;
-0
-)
-{
-console.
-log
-(
-&apos;Hello!&apos;
-)
-;
-// <i> this time, &apos;say&apos; doesn&apos;t use the outer variable</i>
-// <i> it uses the named function</i>
-say
-(
-times
-&minus;
-1
-)
-;
+<b>var</b> say = <b>function</b> say (times) {
+  <b>if</b> (times &gt; 0) {
+    console.log(&apos;Hello!&apos;);
+    // <i> this time, &apos;say&apos; doesn&apos;t use the outer variable</i>
+    // <i> it uses the named function</i>
+    say (times &minus; 1);
+  }
 }
-}
-<b>var</b>
-sayHelloTimes
-=
-say
-;
-say
-=
-&quot;oops&quot;
-;
-sayHelloTimes
-(
-2
-)
-;
+<b>var</b> sayHelloTimes = say;
+say = &quot;oops&quot;;
+sayHelloTimes(2);
+</pre>
+<blockquote>
 Hello!
 Hello!
-And as bonus, the named function can&apos;t be set to <b>undefined</b>, even
-from inside:
-<b>var</b>
-say
-=
-<b>function</b>
-say
-(
-times
-)
-{
-// <i> this does nothing</i>
-say
-=
-<b>undefined</b>
-;
-<b>if</b>
-(
-times
-&gt;
-0
-)
-{
-console.
-log
-(
-&apos;Hello!&apos;
-)
-;
-// <i> this time, &apos;say&apos; doesn&apos;t use the outer variable</i>
-// <i> it&apos;s using the named function</i>
-say
-(
-times
-&minus;
-1
-)
-;
+</blockquote>
+<p>And as bonus, the named function can&apos;t be set to <b>undefined</b>, even from inside:</p>
+<pre>
+<b>var</b> say = <b>function</b> say (times) {
+  // <i> this does nothing</i>
+  say = <b>undefined</b>;
+  <b>if</b> (times &gt; 0) {
+    console.log(&apos;Hello!&apos;);
+    // <i> this time, &apos;say&apos; doesn&apos;t use the outer variable</i>
+    // <i> it&apos;s using the named function</i>
+    say(times &minus; 1);
+  }
 }
-}
-<b>var</b>
-sayHelloTimes
-=
-say
-;
-say
-=
-&quot;oops&quot;
-;
-sayHelloTimes
-(
-2
-)
-;
+<b>var</b> sayHelloTimes = say;
+say = &quot;oops&quot;;
+sayHelloTimes(2);
+</pre>
+<blockquote>
 Hello!
 Hello!
-<b>The name property of functions</b>
-
-Before ES6, named functions had their name properties set to their
+</blockquote>
+<p><b>The name property of functions</b></p>
+<p>Before ES6, named functions had their name properties set to their
 function names, and anonymous functions had their name properties set
-to the empty string.
-Version ≤ 5
-<b>var</b>
-foo
-=
-<b>function</b>
-(
-)
-{
-}
-console.
-log
-(
-foo.
-name
-)
-;
-// <i> outputs &apos;&apos;</i>
-<b>function</b>
-foo
-(
-)
-{
-}
-console.
-log
-(
-foo.
-name
-)
-;
-// <i> outputs &apos;foo&apos;</i>
-Post ES6, named and unnamed functions both set their name properties:
-Version ≥ 6
-<b>var</b>
-foo
-=
-<b>function</b>
-(
-)
-{
-}
-console.
-log
-(
-foo.
-name
-)
-;
-// <i> outputs &apos;foo&apos;</i>
-<b>function</b>
-foo
-(
-)
-{
-}
-console.
-log
-(
-foo.
-name
-)
-;
-// <i> outputs &apos;foo&apos;</i>
-<b>var</b>
-foo
-=
-<b>function</b>
-bar
-(
-)
-{
-}
-console.
-log
-(
-foo.
-name
-)
-;
-// <i> outputs &apos;bar&apos;</i>
+to the empty string.</p>
+<!-- page 169 -->
+<h5>Version ≤ 5</h5>
+<pre>
+<b>var</b> foo = <b>function</b> () {}
+console.log(foo.name);  // <i> outputs &apos;&apos;</i>
+<b>function</b> foo () {}
+console.log(foo.name);  // <i> outputs &apos;foo&apos;</i>
+</pre>
+<p>Post ES6, named and unnamed functions both set their name properties:</p>
+<h5>Version ≥ 6</h5>
+<pre>
+<b>var</b> foo = <b>function</b> () {}
+console.log(foo.name);  // <i> outputs &apos;foo&apos;</i>
+<b>function</b>foo () {}
+console.log(foo.name);  // <i> outputs &apos;foo&apos;</i>
+<b>var</b> foo = <b>function</b> bar () {}
+console.log(foo.name);  // <i> outputs &apos;bar&apos;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-5">Section 19.5: Binding &grave;this&grave; and arguments</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 5.1</h5>
-When you take a reference to a method (a property which is a function)
+<p>When you take a reference to a method (a property which is a function)
 in JavaScript, it usually doesn&apos;t remember the object it was
 originally attached to. If the method needs to refer to that object as
 <b>this</b> it won&apos;t be able to, and calling it will probably cause a
-crash.
-bind
-
-You can use the .() method on a function to create a wrapper that
-includes the value of <b>this</b> and any number of leading arguments.
-<b>var</b>
-monitor
-=
-{
-threshold
-:
-5
-,
-check
-:
-<b>function</b>
-(
-value
-)
-{
-<b>if</b>
-(
-value
-&gt;
-<b>this</b>
-.
-threshold
-)
-{
-<b>this</b>
-.
-display
-(
-&quot;Value is too high!&quot;
-)
-;
-}
-}
-,
-display
-(
-message
-)
-{
-alert
-(
-message
-)
-;
-}
-}
-;
-monitor.
-check
-(
-7
-)
-;
-// <i> The value of &grave;this&grave; is implied by the method call syntax.</i>
-<b>var</b>
-badCheck
-=
-monitor.
-check
-;
-badCheck
-(
-15
-)
-;
-// <i> The value of &grave;this&grave; is window object and this.threshold is
-undefined, so value &gt;</i>
+crash.</p>
+<p>You can use the .bind() method on a function to create a wrapper that 
+includes the value of <b>this</b> and any number of leading arguments.</p>
+<pre>
+<b>var</b> monitor = {
+  threshold: 5,
+  check: <b>function</b>(value) {
+    <b>if</b> (value &gt; <b>this</b>.threshold) {
+      <b>this</b>.display(&quot;Value is too high!&quot;);
+    }
+  },
+  display(message) {
+    alert(message);
+  }
+};
+monitor.check(7);  // <i> The value of &grave;this&grave; is implied by the method call syntax.</i>
+<b>var</b> badCheck = monitor.check;
+badCheck(15);  // <i> The value of &grave;this&grave; is window object and this.threshold is undefined, so value &gt;</i>
 <i>this.threshold is false</i>
-<b>var</b>
-check
-=
-monitor.
-check
-.
-bind
-(
-monitor
-)
-;
-check
-(
-15
-)
-;
+<b>var</b> check = monitor.check.bind(monitor);
+check(15);
 // <i>This value of &grave;this&grave; was explicitly bound, the function works.<i>
 <b>var</b>
-check8
-=
-monitor.
-check
-.
-bind
-(
-monitor
-,
-8
-)
-;
-check8
-(
-)
-;
-// <i> We also bound the argument to &grave;8&grave; here. It can&apos;t be
-re-specified.</i>
-call
-When not in strict mode, a function uses the global object (window in
-the browser) as <b>this</b>, unless the function is called as a method,
-bound, or called with the method . syntax.
-window.
-x
-=
-12
-;
-<b>function</b>
-example
-(
-)
-{
-<b>return</b>
-<b>this</b>
-.
-x
-;
+check8 = monitor.check.bind(monitor, 8);
+check8();  // <i> We also bound the argument to &grave;8&grave; here. It can&apos;t be re-specified.</i>
+</pre>
+<p>When not in strict mode, a function uses the global object (window in the browser) as 
+<b>this</b>, unless the function is called as a method, bound, or called with the method 
+.call syntax.</p>
+<!-- page 170 -->
+<pre>
+window.x = 12;
+<b>function</b> example() {
+  <b>return</b> <b>this</b>.x;
 }
-console.
-log
-(
-example
-(
-)
-)
-;
-// <i> 12</i>
-In strict mode
-<b>this</b>
-is
-<b>undefined</b>
-by default
-window.
-x
-=
-12
-;
-<b>function</b>
-example
-(
-)
-{
-&quot;use strict&quot;
-;
-<b>return</b>
-<b>this</b>
-.
-x
-;
+console.log(example());  // <i> 12</i>
+</pre>
+<p>In strict mode <b>this</b> is <b>undefined</b> by default</p>
+<pre>
+window.x = 12;
+<b>function</b> example() {
+  &quot;use strict&quot;;
+  <b>return</b> <b>this</b>.x;
 }
-console.
-log
-(
-example
-(
-)
-)
-;
-// <i> Uncaught TypeError: Cannot read property &apos;x&apos; of undefined(</i>
-...
-)
+console.log(example());  // <i> Uncaught TypeError: Cannot read property &apos;x&apos; of undefined(</i>...)
+</pre>
 <h5>Version ≥ 7</h5>
-<b>Bind Operator</b>
-
-The double colon <b>bind operator</b> can be used as a shortened syntax
-for the concept explained above:
-<b>var</b>
-log
-=
-console.
-log
-.
-bind
-(
-console
-)
-;
-// <i> long version</i>
-<b>const</b>
-log
-=
-::
-console.
-log
-;
-// <i> short version</i>
-foo.
-bar
-.
-call
-(
-foo
-)
-;
-// <i> long version</i>
-foo
-::
-bar
-(
-)
-;
-// <i> short version</i>
-foo.
-bar
-.
-call
-(
-foo
-,
-arg1
-,
-arg2
-,
-arg3
-)
-;
-// <i> long version</i>
-foo
-::
-bar
-(
-arg1
-,
-arg2
-,
-arg3
-)
-;
-// <i> short version</i>
-foo.
-bar
-.
-apply
-(
-foo
-,
-args
-)
-;
-// <i> long version</i>
-foo
-::
-bar
-(
-&hellip;
-args
-)
-;
-// <i> short version</i>
-This syntax allows you to write normally, without worrying about
-binding <b>this</b> everywhere.
-<b>Binding console functions to variables var</b> log =
-console.log.bind(console); <b>Usage:</b>
-log
-(
-&apos;one&apos;
-,
-&apos;2&apos;
-,
-3
-,
-&lbrack;
-4
-&rbrack;
-,
-{
-5
-:
-5
-}
-)
-;
-<b>Output:</b>
-one
-2
-3
-&lbrack;
-4
-&rbrack;
-Object
-{
-5
-:
-5
-}
-<b>Why would you do that?</b>
-
-One use case can be when you have custom logger and you want to decide
-on runtime which one to use.
-<b>var</b>
-logger
-=
-require
-(
-&apos;appLogger&apos;
-)
-;
-<b>var</b>
-log
-=
-logToServer
-?
-logger.
-log
-:
-console.
-log
-.
-bind
-(
-console
-)
-;
+<p><b>Bind Operator</b></p>
+<p>The double colon <b>bind operator</b> can be used as a shortened syntax for the concept explained above:</p>
+<pre>
+<b>var</b> log = console.log.bind(console);  // <i> long version</i>
+<b>const</b> log = ::console.log;  // <i> short version</i>
+foo.bar.call(foo);  // <i> long version</i>
+foo::bar();  // <i> short version</i>
+foo.bar.call(foo, arg1, arg2, arg3);  // <i> long version</i>
+foo::bar(arg1, arg2, arg3);  // <i> short version</i>
+foo.bar.apply(foo, args);  // <i> long version</i>
+foo::bar(&hellip;args);  // <i> short version</i>
+</pre>
+<p>This syntax allows you to write normally, without worrying about binding <b>this</b> everywhere.</p>
+<p><b>Binding console functions to variables var</b></p>
+<pre>
+var log = console.log.bind(console);
+</pre>
+<p><b>Usage:</b></p>
+<pre>
+log(&apos;one&apos;, &apos;2&apos;, 3, &lbrack;4&rbrack;, {5: 5});
+</pre>
+<p><b>Output:</b></p>
+<pre>
+one 2 3 &lbrack;4&rbrack; Object {5: 5}
+</pre>
+<p><b>Why would you do that?</b></p>
+<p>One use case can be when you have custom logger and you want to decide on runtime which one to use.</p>
+<pre>
+<b>var</b> logger = require(&apos;appLogger&apos;);
+<b>var</b> log = logToServer ? logger.log : console.log.bind(console);
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-6">Section 19.6: Functions with an Unknown Number of Arguments (variadic functions)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
