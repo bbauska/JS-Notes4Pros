@@ -1398,7 +1398,7 @@ console.log(&lbrack;'string'&rbrack;, 1, obj, window);</pre>
 
 <p>The log method will display the following in the debugging console:</p>
 
-<pre>&lbrack;'string'&rbrack; 1 Object { test: 1 } Window { /&ast; <i>truncated</i> </i>/ }</pre>
+<pre>&lbrack;'string'&rbrack; 1 Object { test: 1 } Window { /&ast; <i>truncated</i> &ast;/ }</pre>
 
 <p>Beside plain strings, console.log() can handle other types, like arrays, objects, dates, functions, etc.:</p>
 
@@ -1926,17 +1926,17 @@ it. This even works with primitives.</p>
 <pre>
 //<i>Whereas instanceof also catches instances of subclasses,</i>
 //<i>using obj.constructor does not</i>
-console.log(&lbrack;&rbrack; <b>instanceof</b> Object, &lbrack;&rbrack; <b>instanceof</b> Array)            //<i>true true</i>
-console.log(&lbrack;&rbrack;.constructor === Object, &lbrack;&rbrack;.constructor === Array) //<i>false true</i>
+console.log(&lbrack;&rbrack; <b>instanceof</b> Object, &lbrack;&rbrack; <b>instanceof</b> Array)            // <i>true true</i>
+console.log(&lbrack;&rbrack;.constructor === Object, &lbrack;&rbrack;.constructor === Array) // <i>false true</i>
 
 <b>function</b> isNumber(value) {
-  //<i>null.constructor and undefined.constructor throw an error when accessed</i>
+  // <i>null.constructor and undefined.constructor throw an error when accessed</i>
   <b>if</b> (value === <b>null</b> &vert;&vert; value === <b>undefined</b>)
   <b>return</b> <b>false</b> <b>return</b> value.constructor === Number 
 }
-console.log(isNumber(<b>null</b>), isNumber(<b>undefined</b>))                   //<i>false false</i>
-console.log(isNumber(&apos;abc&apos;), isNumber(&lbrack;&rbrack;), isNumber(() =&gt; 1))     //<i>false false false</i>
-console.log(isNumber(0), isNumber(Number(&apos;10.1&apos;)), isNumber(<b>NaN</b>)) //<i>true true true</i>
+console.log(isNumber(<b>null</b>), isNumber(<b>undefined</b>))                   // <i>false false</i>
+console.log(isNumber(&apos;abc&apos;), isNumber(&lbrack;&rbrack;), isNumber(() =&gt; 1))     // <i>false false false</i>
+console.log(isNumber(0), isNumber(Number(&apos;10.1&apos;)), isNumber(<b>NaN</b>)) // <i>true true true</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch6-3">Section 6.3: Getting object type by constructor name</h3>
@@ -2042,7 +2042,7 @@ Double quotes &quot;Hello&quot; and (from ES2015, ES6) in Template Literals
 <p>Strings also can be created by using String.fromCharCode method.</p>
 
 <pre>
-String.fromCharCode(104,101,108,108,111)  //<i>&quot;hello&quot;</i>
+String.fromCharCode(104,101,108,108,111)  // <i>&quot;hello&quot;</i>
 </pre>
 
 <p>Creating a String object using <b>new</b> keyword is allowed, but is not recommended as 
@@ -2050,8 +2050,8 @@ it behaves like Objects unlike primitive strings.</p>
 
 <pre>
 <b>var</b> objectString = <b>new</b> String(&quot;Yes, I am a String object&quot;);
-<b>typeof</b> objectString; //<i>&quot;object&quot;</i>
-<b>typeof</b> objectString.valueOf(); //<i>&quot;string&quot;</i>
+<b>typeof</b> objectString; // <i>&quot;object&quot;</i>
+<b>typeof</b> objectString.valueOf(); // <i>&quot;string&quot;</i>
 </pre>
 
 <p><b>Concatenating Strings</b></p>
@@ -2102,7 +2102,7 @@ console.log(greet); // <i>&quot;Hello World!&quot;</i>
 <p>You can use String.raw to get backslashes to be in the string without modification.</p>
 
 <pre>
-&grave;a&bsol;&bsol;b&grave; // </i>= a&bsol;b</i>
+&grave;a&bsol;&bsol;b&grave; // <i>= a&bsol;b</i>
 String.raw&grave;a&bsol;&bsol;b&grave;  // <i>= a&bsol;&bsol;b</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2127,7 +2127,7 @@ logical &quot;next&quot; character instead of the original one it was combined
 with.</p>
 
 <pre>
-&apos;?????.&apos;.split(&apos;&apos;).reverse().join(&apos;&apos;);  //<i>fails</i>
+&apos;?????.&apos;.split(&apos;&apos;).reverse().join(&apos;&apos;);  // <i>fails</i>
 </pre>
 
 <p>While the method will work fine for most languages, a truly accurate, encoding respecting 
@@ -2451,8 +2451,8 @@ as this method supports other datatypes as well just like <b>typeof</b>.</p>
 <pre>
 <b>var</b> pString = &quot;Primitive String&quot;;
 <b>var</b> oString = <b>new</b> String(&quot;Object Form of String&quot;);
-Object.<b>prototype</b>.toString.call(pString);  //<i>&quot;&lbrack;object String&rbrack;&quot;</i>
-Object.<b>prototype</b>.toString.call(oString);  //<i>&quot;&lbrack;object String&rbrack;&quot;</i>
+Object.<b>prototype</b>.toString.call(pString);  // <i>&quot;&lbrack;object String&rbrack;&quot;</i>
+Object.<b>prototype</b>.toString.call(oString);  // <i>&quot;&lbrack;object String&rbrack;&quot;</i>
 </pre>
 
 <p>A more robust solution is to not <i>detect</i> a string at all, rather only check for what 
@@ -8993,9 +8993,9 @@ Math.ceil(n);
 </pre>
 <p><b>Example:</b></p>
 <pre>
-console.log(Math.ceil(0.60)); // <i> 1</i>
-console.log(Math.ceil(0.40)); // <i> 1</i>
-console.log(Math.ceil(5.1));  // <i> 6</i>
+console.log(Math.ceil(0.60)); // <i>1</i>
+console.log(Math.ceil(0.40)); // <i>1</i>
+console.log(Math.ceil(5.1));  // <i>6</i>
 console.log(Math.ceil(&minus;5.1)); // <i>-5</i>
 console.log(Math.ceil(&minus;5.9)); // <i>-5</i>
 </pre>
@@ -9008,9 +9008,9 @@ Math.floor(n);
 </pre>
 <p><b>Example:</b></p>
 <pre>
-console.log(Math.ceil(0.60)); // <i> 0</i>
-console.log(Math.ceil(0.40)); // <i> 0</i>
-console.log(Math.ceil(5.1));  // <i> 5</i>
+console.log(Math.ceil(0.60)); // <i>0</i>
+console.log(Math.ceil(0.40)); // <i>0</i>
+console.log(Math.ceil(5.1));  // <i>5</i>
 console.log(Math.ceil(&minus;5.1)); // <i>-6</i>
 console.log(Math.ceil(&minus;5.9)); // <i>-6</i>
 </pre>
@@ -10202,7 +10202,7 @@ function of three factors: length (l), width (w), and height (h):</p>
 </pre>
 <h5>Version ≥ 6</h5>
 <pre>
-// <i> alternatively, with concise ECMAScript 6+ syntax:</i>
+// <i>alternatively, with concise ECMAScript 6+ syntax:</i>
 <b>var</b> prism = l =&gt; w =&gt; h =&gt; l &ast; w &ast; h;
 </pre>
 <p>You can call these sequence of functions with (2)(3)(5), which should
@@ -10248,7 +10248,7 @@ curly bracket:</p>
 <b>var</b> example = (<b>function</b>() {
   <b>return</b> 42;
 }());
-console.log(example); // <i> =&bsol;42</i>
+console.log(example); // <i>=&bsol;42</i>
 </pre>
 <p>If required it is possible to name an IIFE. While less often seen,
 this pattern has several advantages, such as providing a reference
@@ -10257,7 +10257,7 @@ the name is included in the callstack.</p>
 <!-- page 166 -->
 <pre>
 (<b>function</b> namedIIFE() {
-  <b>throw</b> error; // <i> We can now see the error thrown in &apos;namedIIFE()&apos;</i>
+  <b>throw</b> error; // <i>We can now see the error thrown in &apos;namedIIFE()&apos;</i>
 }());
 </pre>
 <p>While wrapping a function in parenthesis is the most common way to
@@ -10266,12 +10266,12 @@ where an expression is already expected, the notation can be made more
 concise:</p>
 <pre>
 <b>var</b> a = <b>function</b>() { <b>return</b> 42 }();
-console.log(a)  // <i> =&bsol;42</i>
+console.log(a)  // <i>=&bsol;42</i>
 </pre>
 <p>Arrow version of immediately invoked function:</p>
 <h5>Version ≥ 6</h5>
 <pre>
-(() =&gt; console.log(&quot;Hello!&quot;))(); // <i> =&bsol;Hello!</i>
+(() =&gt; console.log(&quot;Hello!&quot;))(); // <i>=&bsol;Hello!</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-4">Section 19.4: Named Functions</h3>
@@ -10316,7 +10316,7 @@ after the line of declaration, whereas a named function can be called
 before declaration. Consider</p>
 <pre>
 foo();
-<b>var</b> foo = <b>function</b> () {  // <i> using an anonymous function</i>
+<b>var</b> foo = <b>function</b> () {  // <i>using an anonymous function</i>
   console.log(&apos;bar&apos;);
 }
 </pre>
@@ -10325,7 +10325,7 @@ Uncaught TypeError: foo is not a function
 </blockquote>
 <pre>
 foo();
-<b>function</b> foo () { // <i> using a named function</i>
+<b>function</b> foo () { // <i>using a named function</i>
 console.log(&apos;bar&apos;);
 }
 </pre>
@@ -10369,13 +10369,13 @@ Uncaught TypeError: say is not a function
 </blockquote>
 <p>This can be solved using a named function</p>
 <pre>
-// <i> The outer variable can even have the same name as the function</i>
-// <i> as they are contained in different scopes</i>
+// <i>The outer variable can even have the same name as the function</i>
+// <i>as they are contained in different scopes</i>
 <b>var</b> say = <b>function</b> say (times) {
   <b>if</b> (times &gt; 0) {
     console.log(&apos;Hello!&apos;);
-    // <i> this time, &apos;say&apos; doesn&apos;t use the outer variable</i>
-    // <i> it uses the named function</i>
+    // <i>this time, &apos;say&apos; doesn&apos;t use the outer variable</i>
+    // <i>it uses the named function</i>
     say (times &minus; 1);
   }
 }
@@ -10390,12 +10390,12 @@ Hello!
 <p>And as bonus, the named function can&apos;t be set to <b>undefined</b>, even from inside:</p>
 <pre>
 <b>var</b> say = <b>function</b> say (times) {
-  // <i> this does nothing</i>
+  // <i>this does nothing</i>
   say = <b>undefined</b>;
   <b>if</b> (times &gt; 0) {
     console.log(&apos;Hello!&apos;);
-    // <i> this time, &apos;say&apos; doesn&apos;t use the outer variable</i>
-    // <i> it&apos;s using the named function</i>
+    // <i>this time, &apos;say&apos; doesn&apos;t use the outer variable</i>
+    // <i>it&apos;s using the named function</i>
     say(times &minus; 1);
   }
 }
@@ -10415,19 +10415,19 @@ to the empty string.</p>
 <h5>Version ≤ 5</h5>
 <pre>
 <b>var</b> foo = <b>function</b> () {}
-console.log(foo.name);  // <i> outputs &apos;&apos;</i>
+console.log(foo.name);  // <i>outputs &apos;&apos;</i>
 <b>function</b> foo () {}
-console.log(foo.name);  // <i> outputs &apos;foo&apos;</i>
+console.log(foo.name);  // <i>outputs &apos;foo&apos;</i>
 </pre>
 <p>Post ES6, named and unnamed functions both set their name properties:</p>
 <h5>Version ≥ 6</h5>
 <pre>
 <b>var</b> foo = <b>function</b> () {}
-console.log(foo.name);  // <i> outputs &apos;foo&apos;</i>
+console.log(foo.name);  // <i>outputs &apos;foo&apos;</i>
 <b>function</b>foo () {}
-console.log(foo.name);  // <i> outputs &apos;foo&apos;</i>
+console.log(foo.name);  // <i>outputs &apos;foo&apos;</i>
 <b>var</b> foo = <b>function</b> bar () {}
-console.log(foo.name);  // <i> outputs &apos;bar&apos;</i>
+console.log(foo.name);  // <i>outputs &apos;bar&apos;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-5">Section 19.5: Binding &grave;this&grave; and arguments</h3>
@@ -10531,8 +10531,8 @@ Indexing into or iterating over this will give access to the arguments, for exam
   }
 }
 logSomeThings(&apos;hello&apos;, &apos;world&apos;);
-// <i> logs &quot;hello&quot;</i>
-// <i> logs &quot;world&quot;</i>
+// <i>logs &quot;hello&quot;</i>
+// <i>logs &quot;world&quot;</i>
 </pre>
 <p>Note that you can convert arguments to an actual Array if need-be; see: Converting Array-like Objects to Arrays</p>
 <h5>Version ≥ 6</h5>
@@ -10546,8 +10546,8 @@ rest operator</a> (&hellip;). This creates an Array which holds the arguments fr
   });
 }
 personLogsSomeThings(&apos;John&apos;, &apos;hello&apos;, &apos;world&apos;);
-// <i> logs &quot;John says hello&quot;</i>
-// <i> logs &quot;John says world&quot;</i>
+// <i>logs &quot;John says hello&quot;</i>
+// <i>logs &quot;John says world&quot;</i>
 </pre>
 <p>Functions can also be called with similar way, the 
 <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_operator">
@@ -10556,7 +10556,7 @@ spread syntax</a></p>
 <b>const</b> logArguments = (&hellip;args) =&gt; console.log(args)
 <b>const</b> list = &lbrack;1, 2, 3&rbrack;
 logArguments(&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &hellip;list)
-// <i> output: Array &lbrack; &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, 1, 2, 3 &rbrack;</i>
+// <i>output: Array &lbrack; &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, 1, 2, 3 &rbrack;</i>
 </pre>
 <p>This syntax can be used to insert arbitrary number of arguments to any
 position, and can be used with any iterable(apply accepts only array-like objects).</p>
@@ -10568,7 +10568,7 @@ position, and can be used with any iterable(apply accepts only array-like object
   yield 4
 }
 logArguments(&apos;a&apos;, &hellip;generateNumbers(), &hellip;&apos;pqr&apos;, &apos;b&apos;)
-// <i> output: Array &lbrack; &quot;a&quot;, 6, 5, 4, &quot;p&quot;, &quot;q&quot;, &quot;r&quot;, &quot;b&quot; &rbrack;</i>
+// <i>output: Array &lbrack; &quot;a&quot;, 6, 5, 4, &quot;p&quot;, &quot;q&quot;, &quot;r&quot;, &quot;b&quot; &rbrack;</i>
 </pre>
 <!-- page 172 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -10580,7 +10580,7 @@ it using that name, like so:</p>
 <pre>
 foo();
 <b>function</b> foo() {
-  // <i> &hellip;</i>
+  // <i>&hellip;</i>
 }
 </pre>
 <p>When you define a function this way, the JavaScript runtime stores
@@ -10620,7 +10620,7 @@ map function allows you to iterate over each element of an array, then build
 a new array by applying a transform function to each element.</p>
 <pre>
 <b>var</b> nums = &lbrack;0, 1, 2&rbrack;;
-<b>var</b> doubledNums = nums.map( <b>function</b>(element){ <b>return</b> element &ast; 2; }); // <i> &lbrack;0,2,4&rbrack;</i>
+<b>var</b> doubledNums = nums.map( <b>function</b>(element){ <b>return</b> element &ast; 2; }); // <i>&lbrack;0,2,4&rbrack;</i>
 </pre>
 <p>It would be tedious, sloppy and unnecessary to create a named
 function, which would clutter your scope with a function only needed
@@ -10636,8 +10636,8 @@ function. For example:</p>
 <b>var</b> hash = getHashFunction( &apos;sha1&apos; );
 <b>var</b> hashValue = hash( &apos;Secret Value&apos; );
 <b>function</b> getHashFunction( algorithm ) {
-  <b>if</b> ( algorithm === &apos;sha1&apos; ) <b>return</b> <b>function</b>( value ){ /&ast;&hellip;&ast;/ };
-  <b>else</b> <b>if</b> ( algorithm === &apos;md5&apos; ) <b>return</b> <b>function</b>( value ){ /&ast;&hellip;&ast;/ };
+  <b>if</b> ( algorithm === &apos;sha1&apos; ) <b>return function</b>( value ){ /&ast;&hellip;&ast;/ };
+  <b>else if</b> ( algorithm === &apos;md5&apos; ) <b>return function</b>( value ){ /&ast;&hellip;&ast;/ };
 }
 </pre>
 <p><b>Immediately Invoking an Anonymous Function</b></p>
@@ -10684,22 +10684,22 @@ ideal solution:</p>
 <pre>
 <b>var</b> foo = <b>function</b>(callAgain) {
   console.log( &apos;Whassup?&apos; );
-  // <i> Less than ideal&hellip; we&apos;re dependent on a variable reference&hellip;</i>
+  // <i>Less than ideal&hellip; we&apos;re dependent on a variable reference&hellip;</i>
   <b>if</b> (callAgain === <b>true</b>) foo(<b>false</b>);
 };
 foo(<b>true</b>);
-// <i> Console Output:</i>
-// <i> Whassup?</i>
-// <i> Whassup?</i>
-// <i> Assign bar to the original function, and assign foo to another function.</i>
+// <i>Console Output:</i>
+// <i>Whassup?</i>
+// <i>Whassup?</i>
+// <i>Assign bar to the original function, and assign foo to another function.</i>
 <b>var</b> bar = foo;
 foo = <b>function</b>() {
   console.log(&apos;Bad.&apos;)
 };
 bar(<b>true</b>);
-// <i> Console Output:</i>
-// <i> Whassup?</i>
-// <i> Bad.</i>
+// <i>Console Output:</i>
+// <i>Whassup?</i>
+// <i>Bad.</i>
 </pre>
 <!-- page 174 -->
 <p>The intent here was for the anonymous function to recursively call
@@ -10710,14 +10710,14 @@ giving it a private name, like so:</p>
 <pre>
 <b>var</b> foo = <b>function</b> myself(callAgain) {
   console.log( &apos;Whassup?&apos; );
-  // <i> Less than ideal&hellip; we&apos;re dependent on a variable reference&hellip;</i>
+  // <i>Less than ideal&hellip; we&apos;re dependent on a variable reference&hellip;</i>
   <b>if</b> (callAgain === <b>true</b>) myself(<b>false</b>);
 };
 foo(<b>true</b>);
-// <i> Console Output:</i>
-// <i> Whassup?</i>
-// <i> Whassup?</i>
-// <i> Assign bar to the original function, and assign foo to another function.</i>
+// <i>Console Output:</i>
+// <i>Whassup?</i>
+// <i>Whassup?</i>
+// <i>Assign bar to the original function, and assign foo to another function.</i>
 <b>var</b> bar = foo;
 foo = <b>function</b>() {
   console.log(&apos;Bad.&apos;)
@@ -10765,9 +10765,9 @@ depicted above is no longer necessary:</p>
 <b>function</b> printMsg(msg=&apos;Default value for msg.&apos;) {
   console.log(msg);
 }
-printMsg();  // <i> -&amp;quot;Default value for msg.&quot;</i>
-printMsg(<b>undefined</b>);  // <i> -&amp;quot;Default value for msg.&quot;</i>
-printMsg(&apos;Now my msg in different!&apos;); // <i> -&amp;quot;Now my msg in different!&quot;</i>
+printMsg();  // <i>-&amp;quot;Default value for msg.&quot;</i>
+printMsg(<b>undefined</b>);  // <i>-&amp;quot;Default value for msg.&quot;</i>
+printMsg(&apos;Now my msg in different!&apos;); // <i>-&amp;quot;Now my msg in different!&quot;</i>
 </pre>
 <p>This also shows that if a parameter is missing when the function is
 invoked, its value is kept as <b>undefined</b>, as it can be confirmed by
@@ -10775,10 +10775,10 @@ explicitly providing it in the following example (using an arrow function):</p>
 <h5>Version ≥ 6</h5>
 <pre>
 <b>let</b> param_check = (p = &apos;str&apos;) =&gt; console.log(p &plus; &apos; is of type: &apos; &plus; <b>typeof</b> p);
-param_check();  // <i> -&amp;quot;str is of type: string&quot;</i>
-param_check(<b>undefined</b>);  // <i> -&amp;quot;str is of type: string&quot;</i>
-param_check(1);  // <i> -&amp;quot;1 is of type: number&quot;</i>
-param_check(<b>this</b>);  // <i> -&amp;quot;&lbrack;object Window&rbrack; is of type: object&quot;</i>
+param_check();  // <i>-&amp;quot;str is of type: string&quot;</i>
+param_check(<b>undefined</b>);  // <i>-&amp;quot;str is of type: string&quot;</i>
+param_check(1);  // <i>-&amp;quot;1 is of type: number&quot;</i>
+param_check(<b>this</b>);  // <i>-&amp;quot;&lbrack;object Window&rbrack; is of type: object&quot;</i>
 </pre>
 <p><b>Functions/variables as default values and reusing parameters</b></p>
 <p>The default parameters&apos; values are not restricted to numbers, strings
@@ -10791,7 +10791,7 @@ or simple objects. A function can also be set as the default value callback = fu
 foo(<b>function</b>() {
   console.log(&apos;custom&apos;);
 });
-// <i> custom</i>
+// <i>custom</i>
 foo();
 // <i>default</i>
 </pre>
@@ -10826,9 +10826,9 @@ add(1, 2, 5, 10);       // <i>8, 20</i>
   array.push(value);
   <b>return</b> array;
 }
-add(5);     // <i> &lbrack;5&rbrack;</i>
-add(6);     // <i> &lbrack;6&rbrack;, not &lbrack;5, 6&rbrack;</i>
-add(6, add(5));  // <i> &lbrack;5, 6&rbrack;</i>
+add(5);     // <i>&lbrack;5&rbrack;</i>
+add(6);     // <i>&lbrack;6&rbrack;, not &lbrack;5, 6&rbrack;</i>
+add(6, add(5));  // <i>&lbrack;5, 6&rbrack;</i>
 </pre>
 <p><b>arguments value and length when lacking parameters in invocation</b></p>
 <p>The arguments array object only retains the parameters whose values
@@ -10840,9 +10840,9 @@ function is invoked:</p>
   console.info(arguments.length, arguments);
   console.log(a, b);
 }
-foo();  // <i> info: 0 &gt;&amp;lbrack;&rbrack; &vert; log: 1, 2</i>
-foo(4);  // <i> info: 1 &gt;&amp;lbrack;4&rbrack; &vert; log: 4, 5</i>
-foo(5, 6);  // <i> info: 2 &gt;&amp;lbrack;5, 6&rbrack; &vert; log: 5, 6</i>
+foo();  // <i>info: 0 &gt;&amp;lbrack;&rbrack; &vert; log: 1, 2</i>
+foo(4);  // <i>info: 1 &gt;&amp;lbrack;4&rbrack; &vert; log: 4, 5</i>
+foo(5, 6);  // <i>info: 2 &gt;&amp;lbrack;5, 6&rbrack; &vert; log: 5, 6</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-9">Section 19.9: Call and apply</h3>
@@ -10901,7 +10901,7 @@ obj.
 7
 )
 ;
-// <i> normal syntax</i>
+// <i>normal syntax</i>
 obj.
 <b>set</b>
 .
@@ -10914,7 +10914,7 @@ obj
 7
 )
 ;
-// <i> equivalent to the above</i>
+// <i>equivalent to the above</i>
 obj.
 <b>set</b>
 .
@@ -10929,14 +10929,14 @@ obj
 &rbrack;
 )
 ;
-// <i> equivalent to the above; note that an array is used</i>
+// <i>equivalent to the above; note that an array is used</i>
 console.
 log
 (
 obj
 )
 ;
-// <i> prints { a: 3, b: 5 }</i>
+// <i>prints { a: 3, b: 5 }</i>
 <b>let</b>
 myObj
 =
@@ -10952,11 +10952,11 @@ myObj.
 )
 ;
 // <i>fails; myObj has no &grave;set&grave; property</i>
-obj.<b>set</b>.call(myObj, 5, 4); // <i> success; &grave;this&grave; in set() is
+obj.<b>set</b>.call(myObj, 5, 4); // <i>success; &grave;this&grave; in set() is
 re-routed to myObj instead of obj</i> obj.<b>set</b>.apply(myObj, &lbrack;5, 4&rbrack;);
 // <i>same as above; note the array</i>
 
-console.log(myObj); // <i> prints { a: 3, b: 5 }</i>
+console.log(myObj); // <i>prints { a: 3, b: 5 }</i>
 
 <h5>Version ≥ 5</h5>
 <b>bind</b>   <b>()</b> in addition to call() and apply
@@ -11005,7 +11005,7 @@ name
 &quot;Vinod&quot;
 }
 ;
-// <i> create a function just for student1</i>
+// <i>create a function just for student1</i>
 <b>var</b>
 showNameStudent1
 =
@@ -11020,8 +11020,8 @@ showNameStudent1
 &quot;student1&quot;
 )
 ;
-// <i> outputs &quot;student1:Ravi&quot;</i>
-// <i> create a function just for student2</i>
+// <i>outputs &quot;student1:Ravi&quot;</i>
+// <i>create a function just for student2</i>
 <b>var</b>
 showNameStudent2
 =
@@ -11037,9 +11037,8 @@ showNameStudent2
 (
 )
 ;
-// <i> outputs &quot;student2:Vinod&quot;</i>
-// <i> attaching a method to an object doesn&apos;t change &grave;this&grave; value of
-that method.</i>
+// <i>outputs &quot;student2:Vinod&quot;</i>
+// <i>attaching a method to an object doesn&apos;t change &grave;this&grave; value of that method.</i>
 student2.
 sayName
 =
@@ -11051,7 +11050,7 @@ sayName
 &quot;student2&quot;
 )
 ;
-// <i> outputs &quot;student2:Ravi&quot;</i>
+// <i>outputs &quot;student2:Ravi&quot;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-10">Section 19.10: Partial Application</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -11134,7 +11133,7 @@ multiplyTwoThenAddTen
 10
 )
 ;
-// <i> 30</i>
+// <i>30</i>
 The &quot;application&quot; part of partial application simply means fixing
 parameters of a function.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -11167,7 +11166,7 @@ a
 5
 }
 ;
-// <i> Note the assignment is to the parameter variable itself</i>
+// <i>Note the assignment is to the parameter variable itself</i>
 }
 myfunc
 (
@@ -11181,8 +11180,8 @@ obj.
 a
 )
 ;
-// <i> 2</i>
-However, changes made to (nested) properties </i>of</i> such arguments, will
+// <i>2</i>
+However, changes made to (nested) properties <i>of</i> such arguments, will
 be visible to the caller:
 <b>var</b>
 obj
@@ -11204,7 +11203,7 @@ a
 =
 5
 ;
-// <i> assignment to a property of the argument</i>
+// <i>assignment to a property of the argument</i>
 }
 myfunc
 (
@@ -11218,8 +11217,8 @@ obj.
 a
 )
 ;
-// <i> 5</i>
-This can be seen as a </i>call by reference</i>: although a function cannot
+// <i>5</i>
+This can be seen as a <i>call by reference</i>: although a function cannot
 change the caller&apos;s object by assigning a new value to it, it could
 <i>mutate</i> the caller&apos;s object.
 
@@ -11240,7 +11239,7 @@ arg
 +=
 &apos; hello&apos;
 ;
-// <i> assignment to the parameter variable itself</i>
+// <i>assignment to the parameter variable itself</i>
 }
 myfunc
 (
@@ -11253,7 +11252,7 @@ log
 s
 )
 ;
-// <i> &apos;say&apos;</i>
+// <i>&apos;say&apos;</i>
 When a function wants to mutate an object passed as argument, but does
 not want to actually mutate the caller&apos;s object, the argument
 variable should be reassigned:
@@ -11289,7 +11288,7 @@ assign
 arg
 )
 ;
-// <i> assignment to argument variable, shallow copy</i>
+// <i>assignment to argument variable, shallow copy</i>
 arg.
 a
 =
@@ -11308,7 +11307,7 @@ obj.
 a
 )
 ;
-// <i> 2</i>
+// <i>2</i>
 As an alternative to in-place mutation of an argument, functions can
 create a new value, based on the argument, and return it. The caller
 can then assign it, even to the original variable that was passed as
@@ -11345,7 +11344,7 @@ obj.
 a
 )
 ;
-// <i> 3</i>
+// <i>3</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-12">Section 19.12: Function Arguments, &quot;arguments&quot; object, rest and spread parameters</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -11379,7 +11378,7 @@ addition
 )
 )
 ;
-// <i> -&bsol;5</i>
+// <i>-&bsol;5</i>
 <b>arguments</b>
 <b>object</b>
 The arguments object contains all the function&apos;s parameters that
@@ -11405,7 +11404,7 @@ arguments
 (
 )
 ;
-// <i> -&bsol;object</i>
+// <i>-&bsol;object</i>
 <b>Rest parameters:</b>
 <b>function</b>
 <b>(</b>
@@ -11419,7 +11418,7 @@ parameters transforms the variable to its right into a single object
 containing all the remaining parameters provided after the declared
 ones. This allows the function to be invoked with an unlimited number
 of arguments, which will become part of this variable:
-// <i> -&bsol;object: 123</i>
+// <i>-&bsol;object: 123</i>
 (
 </b>function</b>
 (
@@ -11509,7 +11508,7 @@ nums
 )
 )
 ;
-// <i> -&bsol;a b c 42</i>
+// <i>-&bsol;a b c 42</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-13">Section 19.13: Function Composition</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -11523,7 +11522,7 @@ snapping pieces of a track together)&hellip;
 you start out with some single responsibility functions:
 <h5>Version ≥ 6</h5>
 <pre>
-<b>const</b> capitalize = x =&bsol;x.replace(*/&Hat;&bsol;&bsol;w/</i>, m =&gt; m.toUpperCase());
+<b>const</b> capitalize = x =&bsol;x.replace(*/&Hat;&bsol;&bsol;w/, m =&gt; m.toUpperCase());
 <b>const</b> sign = x =&bsol;x + &apos;,<b>&bsol;n</b>made with love&apos;;
 </pre>
 <p>and easily create a transformation track:</p>
@@ -11588,13 +11587,12 @@ functionName
 func
 )
 {
-// <i> Match:</i>
-// <i> - &Hat; the beginning of the string</i>
-// <i> - function the word &apos;function&apos;</i>
-// <i> - &bsol;&bsol;s+ at least some white space</i>
-// <i> - (&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+) capture one or more valid JavaScript identifier
-characters</i>
-// <i> - &amp;lpar; followed by an opening brace</i>
+// <i>Match:</i>
+// <i>- &Hat; the beginning of the string</i>
+// <i>- function the word &apos;function&apos;</i>
+// <i>- &bsol;&bsol;s+ at least some white space</i>
+// <i>- (&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+) capture one or more valid JavaScript identifier characters</i>
+// <i>- &amp;lpar; followed by an opening brace</i>
 // <i></i>
 <b>var</b>
 result
@@ -11662,7 +11660,7 @@ countEvenNumbers
 arr
 )
 {
-// <i> Sentinel value. Recursion stops on empty array.</i>
+// <i>Sentinel value. Recursion stops on empty array.</i>
 <b>if</b>
 (
 arr.
@@ -11675,8 +11673,8 @@ length
 0
 ;
 }
-// <i> The shift() method removes the first element from an array</i>
-// <i> and returns that element. This method changes the length of the array.</i>
+// <i>The shift() method removes the first element from an array</i>
+// <i>and returns that element. This method changes the length of the array.</i>
 <b>var</b>
 value
 =
@@ -11685,9 +11683,9 @@ shift
 (
 )
 ;
-// <i> &grave;value % 2 === 0&grave; tests if the number is even or odd</i>
-// <i> If it&apos;s even we add one to the result of counting the remainder of</i>
-// <i> the array. If it&apos;s odd, we add zero to it.</i>
+// <i>&grave;value % 2 === 0&grave; tests if the number is even or odd</i>
+// <i>If it&apos;s even we add one to the result of counting the remainder of</i>
+// <i>the array. If it&apos;s odd, we add zero to it.</i>
 <b>return</b>
 (
 (
@@ -11910,7 +11908,7 @@ spouse.
 name
 ;
 In JavaScript, you can do the same thing with functions:
-// <i> Example 1</i>
+// <i>Example 1</i>
 <b>var</b>
 hashAlgorithm
 =
@@ -11949,7 +11947,7 @@ hash
 value
 )
 {
-// <i>&ast;&hellip;&ast;/</i>
+// <i>&ast;&hellip;&ast;</i>
 }
 ;
 hash
@@ -11964,7 +11962,7 @@ invoked using parentheses, just like a normal function declaration.
 The example above references anonymous functions&hellip; functions that do
 not have their own name. You can also use variables to refer to named
 functions. The example above could be rewritten like so:
-// <i> Example 2</i>
+// <i>Example 2</i>
 <b>var</b>
 hashAlgorithm
 =
@@ -12005,7 +12003,7 @@ md5Hash
 value
 )
 {
-// <i> &hellip;</i>
+// <i>&hellip;</i>
 }
 <b>function</b>
 sha1Hash
@@ -12013,10 +12011,10 @@ sha1Hash
 value
 )
 {
-// <i> &hellip;</i>
+// <i>&hellip;</i>
 }
 Or, you can assign function references from object properties:
-// <i> Example 3</i>
+// <i>Example 3</i>
 <b>var</b>
 hashAlgorithms
 =
@@ -12028,7 +12026,7 @@ sha1
 value
 )
 {
-</i>/&ast;&ast;/</i>
+<i>/&ast;&ast;/</i>
 }
 ,
 md5
@@ -12038,7 +12036,7 @@ md5
 value
 )
 {
-</i>/&ast;&ast;/</i>
+<i>/&ast;&ast;/</i>
 }
 }
 ;
@@ -12084,7 +12082,7 @@ another by omitting the parentheses. This can result in an
 easy-to-make mistake: attempting to assign the return value of a
 function to another variable, but accidentally assigning the reference
 to the function.
-// <i> Example 4</i>
+// <i>Example 4</i>
 <b>var</b>
 a
 =
@@ -12095,7 +12093,7 @@ b
 =
 a
 ;
-// <i> b is now a reference to getValue.</i>
+// <i>b is now a reference to getValue.</i>
 <b>var</b>
 c
 =
@@ -12103,7 +12101,7 @@ b
 (
 )
 ;
-// <i> b is invoked, so c now holds the value returned by getValue (41)</i>
+// <i>b is invoked, so c now holds the value returned by getValue (41)</i>
 <b>function</b> getValue(){ <b>return</b> 41; }
 
 A reference to a function is like any other value. As you&apos;ve seen, a
@@ -12113,9 +12111,9 @@ can pass around references to functions like any other value,
 including passing a reference to a function as the return value of
 another function. For example:
 
-// <i> Example 5</i>
-// <i> getHashingFunction returns a function, which is assigned</i>
-// <i> to hash for later use:</i>
+// <i>Example 5</i>
+// <i>getHashingFunction returns a function, which is assigned</i>
+// <i>to hash for later use:</i>
 <b>var</b>
 hash
 =
@@ -12124,7 +12122,7 @@ getHashingFunction
 &apos;sha1&apos;
 )
 ;
-// <i> &hellip;</i>
+// <i>&hellip;</i>
 hash
 (
 &apos;Fred&apos;
