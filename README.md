@@ -9544,354 +9544,171 @@ we&apos;ve reassigned property and created new property.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch17-2">Section 17.2: Declaring and initializing constants</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-You can initialize a constant by using the <b>const</b> keyword.
-<b>const</b>
-foo
-=
-100
-;
-<b>const</b>
-bar
-=
-<b>false</b>
-;
-<b>const</b>
-person
-=
-{
-name
-:
-&quot;John&quot;
-}
-;
-<b>const</b>
-fun
-=
-<b>function</b>
-(
-)
-=
-{
-/&ast; &hellip; &ast;/
-}
-;
-<b>const</b>
-arrowFun
-=
-(
-)
-=&gt;
-/&ast; &hellip; &ast;/
-;
-<b>Important</b>
-You must declare and initialize a constant in the same statement.
+<p>You can initialize a constant by using the <b>const</b> keyword.</p>
+<pre>
+<b>const</b> foo = 100;
+<b>const</b> bar = <b>false</b>;
+<b>const</b> person = { name: &quot;John&quot; };
+<b>const</b> fun = <b>function</b> () = { /&ast; &hellip; &ast;/};
+<b>const</b> arrowFun = () =&gt; /&ast; &hellip; &ast;/;
+/pre>
+<p><b>Important</b></p>
+<p>You must declare and initialize a constant in the same statement.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch17-3">Section 17.3: Declaration</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-There are four principle ways to declare a variable in JavaScript:
+<p>There are four principle ways to declare a variable in JavaScript:
 using the <b>var</b>, <b>let</b> or <b>const</b> keywords, or without a keyword
 at all (&quot;bare&quot; declaration). The method used determines the
 resulting scope of the variable, or reassignability in the case of
-<b>const</b>.
-The
-<b>var</b>
-keyword creates a function-scope variable.
-The
-<b>let</b>
-keyword creates a block-scope variable.
-The
-<b>const</b>
-keyword creates a block-scope variable that cannot be reassigned.
-A bare declaration creates a global variable.
-<b>var</b>
-a
-=
-&apos;foo&apos;
-;
-// <i>Function-scope</i>
-<b>let</b>
-b
-=
-&apos;foo&apos;
-;
-// <i>Block-scope</i>
-<b>const</b>
-c
-=
-&apos;foo&apos;
-;
-// <i>Block-scope & immutable reference</i>
-Keep in mind that you can&apos;t declare constants without initializing
-them at the same time. <b>const</b> foo; // <i>&quot;Uncaught SyntaxError:
-Missing initializer in const declaration&quot;</i>
-(An example of keyword-less variable declaration is not included above
-for technical reasons. Continue reading to see an example.)
+<b>const</b>.</p>
+<ul>
+  <li>The <b>var</b> keyword creates a function-scope variable.</li>
+  <li>The <b>let</b> keyword creates a block-scope variable.</li>
+  <li>The <b>const</b> keyword creates a block-scope variable that cannot be reassigned.</li>
+  <li>A bare declaration creates a global variable.</li>
+</ul>
+<!-- page 153 -->
+<pre>
+<b>var</b> a = &apos;foo&apos;;  // <i>Function-scope</i>
+<b>let</b> b = &apos;foo&apos;;  // <i>Block-scope</i>
+<b>const</b> c = &apos;foo&apos;; // <i>Block-scope & immutable reference</i>
+</pre>
+<p>Keep in mind that you can&apos;t declare constants without initializing
+them at the same time.</p>
+<pre>
+<b>const</b> foo; // <i>&quot;Uncaught SyntaxError: Missing initializer in const declaration&quot;</i>
+</pre>
+<p>(An example of keyword-less variable declaration is not included above
+for technical reasons. Continue reading to see an example.)</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch17-4">Section 17.4: Undefined</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Declared variable without a value will have the value <b>undefined</b>
-<b>var</b>
-a
-;
-console.
-log
-(
-a
-)
-;
-// <i>logs: undefined</i>
-Trying to retrieve the value of undeclared variables results in a
+<p>Declared variable without a value will have the value <b>undefined</b></p>
+<pre>
+<b>var</b> a;
+console.log(a);  // <i>logs: undefined</i>
+</pre>
+<p>Trying to retrieve the value of undeclared variables results in a
 ReferenceError. However, both the type of undeclared and unitialized
-variables is &quot;undefined&quot;:
-<b>var</b>
-a
-;
-console.
-log
-(
-<b>typeof</b>
-a
-===
-&quot;undefined&quot;
-)
-;
-// <i>logs: true</i>
-console.
-log
-(
-<b>typeof</b>
-variableDoesNotExist
-===
-&quot;undefined&quot;
-)
-;
-// <i>logs: true</i>
+variables is &quot;undefined&quot;:</p>
+<pre>
+<b>var</b> a;
+console.log(<b>typeof</b> a === &quot;undefined&quot;);  // <i>logs: true</i>
+console.log(<b>typeof</b> variableDoesNotExist === &quot;undefined&quot;); // <i>logs: true</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch17-5">Section 17.5: Data Types</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-JavaScript variables can hold many data types: numbers, strings,
-arrays, objects and more:
+<p>JavaScript variables can hold many data types: numbers, strings,
+arrays, objects and more:</p>
+<pre>
 // <i>Number</i>
-<b>var</b>
-length
-=
-16
-;
+<b>var</b> length = 16;
+
 // <i>String</i>
-<b>var</b>
-message
-=
-&quot;Hello, World!&quot;
-;
+<b>var</b> message = &quot;Hello, World!&quot;;
+
 // <i>Array</i>
-<b>var</b>
-carNames
-=
-&lbrack;
-&apos;Chevrolet&apos;
-,
-&apos;Nissan&apos;
-,
-&apos;BMW&apos;
-&rbrack;
-;
+<b>var</b> carNames = &lbrack;&apos;Chevrolet&apos;, &apos;Nissan&apos;, &apos;BMW&apos;&rbrack;;
+
 // <i>Object</i>
-<b>var</b>
-person
-=
-{
-firstName
-:
-&quot;John&quot;
-,
-lastName
-:
-&quot;Doe&quot;
-}
-;
-JavaScript has dynamic types. This means that the same variable can be
-used as different types:
-<b>var</b>
-a
-;
-// <i>a is undefined</i>
-<b>var</b>
-a
-=
-5
-;
-// <i>a is a Number</i>
-<b>var</b>
-a
-=
-&quot;John&quot;
-;
-// <i>a is a String</i>
+<b>var</b> person = {
+  firstName: &quot;John&quot;,
+  lastName: &quot;Doe&quot;
+};
+</pre>
+<p>JavaScript has dynamic types. This means that the same variable can be
+used as different types:</p>
+<pre>
+<b>var</b> a;                     // <i>a is undefined</i>
+<b>var</b> a = 5;                 // <i>a is a Number</i>
+<b>var</b> a = &quot;John&quot;;  // <i>a is a String</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch17-6">Section 17.6: Mathematic operations and assignment</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Increment by</b>
-<b>var</b>
-a
-=
-9
-,
-b
-=
-3
-;
-b
-+=
-a
-;
-b will now be 12
-
-This is functionally the same as
-b
-=
-b
-&plus;
-a
-;
-<b>Decrement by</b>
-<b>var</b>
-a
-=
-9
-,
-b
-=
-3
-;
-b
--=
-a
-;
-b
-will now be 6
-This is functionally the same as
-b
-=
-b
-&minus;
-a
-;
-<b>Multiply by</b>
-<b>var</b>
-a
-=
-5
-,
-b
-=
-3
-;
-b
-&ast;=
-a
-;
-b
-will now be 15
-This is functionally the same as
-b
-=
-b
-&ast;
-a
-;
-<b>Divide by</b>
-</b>var</b>
-a
-=
-3
-,
-b
-=
-15
-;
-b
-/=
-a
-;
-b
-will now be 5
-This is functionally the same as
-b
-=
-b
-/
-a
-;
+<p><b>Increment by</b></p>
+<pre>
+<b>var</b> a = 9,
+b = 3;
+b += a;
+</pre>
+<p>b will now be 12</p>
+<p>This is functionally the same as</p>
+<pre>
+b = b &plus; a;
+</pre>
+<p><b>Decrement by</b></p>
+<pre>
+<b>var</b> a = 9,
+b = 3;
+b -= a;
+</pre>
+<p>b will now be 6</p>
+<p>This is functionally the same as</p>
+<pre>
+b = b &minus; a;
+</pre>
+<p><b>Multiply by</b></p>
+<pre>
+<b>var</b> a = 5,
+b = 3;
+b &ast;= a;
+</pre>
+<p>b will now be 15</p>
+<p>This is functionally the same as</p>
+<pre>
+b = b &ast; a;
+</pre>
+<p><b>Divide by</b></p>
+<pre>
+</b>var</b> a = 3,
+b = 15;
+b /= a;
+</pre>
+<p>b will now be 5</p>
+<p>This is functionally the same as</p>
+<pre>
+b = b / a;
+</pre>
 <h5>Version ≥ 7</h5>
-<b>Raised to the power of</b>
-<b>var</b>
-a
-=
-3
-,
-b
-=
-15
-;
-b
-&ast;&ast;=
-a
-;
-b will now be 3375
-This is functionally the same as
-b
-=
-b
-&ast;&ast;
-a
-;
+<p><b>Raised to the power of</b></p>
+<pre>
+<b>var</b> a = 3,
+b = 15;
+b &ast;&ast;= a;
+</pre>
+<p>b will now be 3375</p>
+<p>This is functionally the same as</p>
+<pre>
+b = b &ast;&ast; a;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch17-7">Section 17.7: Assignment</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-To assign a value to a previously declared variable, use the
-assignment operator, =:
-a
-=
-6
-;
-b
-=
-&quot;Foo&quot;
-;
-As an alternative to independent declaration and assignment, it is
-possible to perform both steps in one statement:
-<b>var</b>
-a
-=
-6
-;
-<b>let</b>
-b
-=
-&quot;Foo&quot;
-;
-It is in this syntax that global variables may be declared without a
+<p>To assign a value to a previously declared variable, use the
+assignment operator, =:</p>
+<pre>
+a = 6;
+b = &quot;Foo&quot;;
+</pre>
+<p>As an alternative to independent declaration and assignment, it is
+possible to perform both steps in one statement:</p>
+<pre>
+<b>var</b> a = 6;
+<b>let</b> b = &quot;Foo&quot;;
+</pre>
+<p>It is in this syntax that global variables may be declared without a
 keyword; if one were to declare a bare variable without an assignment
 immediately afterword, the interpreter would not be able to
-differentiate global declarations a; from references to variables a;.
-c
-=
-5
-;
-c
-=
-&quot;Now the value is a String.&quot;
-;
-myNewGlobal
-;
-// <i>ReferenceError</i>
-Note, however, that the above syntax is generally discouraged and is
+differentiate global declarations a; from references to variables a;.</p>
+<pre>
+c = 5;
+c = &quot;Now the value is a String.&quot;;
+myNewGlobal;  // <i>ReferenceError</i>
+</pre>
+<p>Note, however, that the above syntax is generally discouraged and is
 not strict-mode compliant. This is to avoid the scenario in which a
 programmer inadvertently drops a <b>let</b> or <b>var</b> keyword from their
 statement, accidentally creating a variable in the global namespace
@@ -9899,60 +9716,879 @@ without realizing it. This can pollute the global namespace and
 conflict with libraries and the proper functioning of a script.
 Therefore global variables should be declared and initialized using
 the <b>var</b> keyword in the context of the window object, instead, so
-that the intent is explicitly stated.
-
-Additionally, variables may be declared several at a time by
+that the intent is explicitly stated.</p>
+<p>Additionally, variables may be declared several at a time by
 separating each declaration (and optional value assignment) with a
 comma. Using this syntax, the var and let keywords need only be used
-once at the beginning of each statement.
-
-globalA
-=
-&quot;1&quot;
-,
-globalB
-=
-&quot;2&quot;
-;
-<b>let</b>
-x
-,
-y
-=
-5
-;
+once at the beginning of each statement.</p>
+<pre>
+globalA = &quot;1&quot;, globalB = &quot;2&quot;;
+<b>let</b> x, y = 5;
+<b>var</b> person = &apos;John Doe&apos;,
+   foo,
+   age = 14,
+   date = <b>new</b> Date();
+</pre>
+<p>Notice in the preceding code snippet that the order in which declaration
+and assignment expressions occur (var a, b, c = 2, d:) does not matter. You may freely intermix the two.</p>
+<p>Function declaration effectively creates variables, as well.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch18">Chapter 18: Loops</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-1">Section 18.1: Standard &quot;for&quot; loops</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>Standard usage</b>
+<b>for</b>
+(
 <b>var</b>
-person
+i
 =
-&apos;John Doe&apos;
-,
-foo
-,
-age
+0
+;
+i
+&lt;
+100
+;
+i
+++
+)
+{
+console.
+log
+(
+i
+)
+;
+}
+Expected output:
+0
+1
+&hellip;
+99
+<b>Multiple declarations</b>
+
+Commonly used to cache the length of an array.
+<b>var</b>
+array
 =
-14
+&lbrack;
+&apos;a&apos;
 ,
-date
+&apos;b&apos;
+,
+&apos;c&apos;
+&rbrack;
+;
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+array.
+length
+;
+i
+++
+)
+{
+console.
+log
+(
+array
+&lbrack;
+i
+&rbrack;
+)
+;
+}
+Expected output:
+&apos;a&apos;
+&apos;b&apos;
+&apos;c&apos;
+<b>Changing the increment</b>
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+100
+;
+i
++=
+2
+/&ast; Can also be: i = i + 2 &ast;/
+)
+{
+console.
+log
+(
+i
+)
+;
+}
+Expected output:
+0
+2
+4
+&hellip;
+98
+<b>Decremented loop</b>
+<b>for</b>
+(
+<b>var</b>
+i
+=
+100
+;
+i
+&gt;=
+0
+;
+i
+&bsol;
+)
+{
+console.
+log
+(
+i
+)
+;
+}
+Expected output:
+100
+99
+98
+&hellip;
+0
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-2">Section 18.2: &quot;for &hellip; of&quot; loop</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version ≥ 6</h5>
+<b>const</b>
+iterable
+=
+&lbrack;
+0
+,
+1
+,
+2
+&rbrack;
+;
+<b>for</b>
+(
+<b>let</b>
+i of iterable
+)
+{
+console.
+log
+(
+i
+)
+;
+}
+Expected output:
+>
+0
+>
+1
+>
+2
+>
+The advantages from the for&hellip;of loop are:
+forEach
+This is the most concise, direct syntax yet for looping through array
+elements
+
+It avoids all the pitfalls of for&hellip;in Unlike (), it works with
+break, continue, and return
+
+<b>Support of for&hellip;of in other collections Strings</b> for&hellip;of will
+treat a string as a sequence of Unicode characters:
+<b>const</b>
+string
+=
+&quot;abc&quot;
+;
+<b>for</b>
+(
+<b>let</b>
+chr of string
+)
+{
+console.
+log
+(
+chr
+)
+;
+}
+Expected output:
+a b c
+<b>Sets</b> for&hellip;of works on Set objects.
+
+<b>Note</b>:
+Set
+A Set object will eliminate duplicates.
+
+Please [check this
+reference](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Set#Browser_compatibility)
+for () browser support.
+<b>const</b>
+names
+=
+&lbrack;
+&apos;bob&apos;
+,
+&apos;alejandro&apos;
+,
+&apos;zandra&apos;
+,
+&apos;anna&apos;
+,
+&apos;bob&apos;
+&rbrack;
+;
+<b>const</b>
+uniqueNames
 =
 <b>new</b>
-Date
+Set
+(
+names
+)
+;
+<b>for</b>
+(
+<b>let</b>
+name of uniqueNames
+)
+{
+console.
+log
+(
+name
+)
+;
+}
+Expected output:
+>
+bob
+>
+alejandro zandra anna
+>
+<b>Maps</b>
+>
+You can also use for&hellip;of loops to iterate over Maps. This works
+similarly to arrays and sets, except the iteration variable stores
+both a key and a value.
+<b>const</b>
+map
+=
+<b>new</b>
+Map
+(
+)
+.
+<b>set</b>
+(
+&apos;abc&apos;
+,
+1
+)
+.
+<b>set</b>
+(
+&apos;def&apos;
+,
+2
+)
+<b>for</b>
+(
+<b>const</b>
+iteration of map
+)
+{
+console.
+log
+(
+iteration
+)
+//<i>will log &lbrack;&apos;abc&apos;, 1&rbrack; and then &lbrack;&apos;def&apos;, 2&rbrack;</i>
+}
+You can use destructuring assignment to capture the key and the value
+separately:
+<b>const</b>
+map
+=
+<b>new</b>
+Map
+(
+)
+.
+<b>set</b>
+(
+&apos;abc&apos;
+,
+1
+)
+.
+<b>set</b>
+(
+&apos;def&apos;
+,
+2
+)
+<b>for</b>
+(
+<b>const</b>
+&lbrack;
+key
+,
+value
+&rbrack;
+of map
+)
+{
+console.
+log
+(
+key
+&plus;
+&apos; is mapped to &apos;
+&plus;
+value
+)
+}
+/<i>&ast;Logs:</i>
+<i>abc is mapped to 1</i>
+<i>def is mapped to 2</i>
+<i>&ast;/
+<b>Objects</b>
+Object.keys
+for&hellip;of loops <i>do not</i> work directly on plain Objects; but, it is
+possible to iterate over an object's properties by switching to a
+for&hellip;in loop, or using ():
+<b>const</b>
+someObject
+=
+{
+name
+:
+&apos;Mike&apos;
+}
+;
+<b>for</b>
+(
+<b>let</b>
+key of
+Object
+.
+keys
+(
+someObject
+)
+)
+{
+console.
+log
+(
+key
+&plus;
+&quot;: &quot;
+&plus;
+someObject
+&lbrack;
+key
+&rbrack;
+)
+;
+}
+Expected output:
+name: Mike
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-3">Section 18.3: &quot;for &hellip; in&quot; loop</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>Warning</b>
+for&hellip;in is intended for iterating over object keys, not array indexes.
+[Using it to loop through an array i]
+[s](http://stackoverflow.com/questions/500504/why-is-using-for-in-with-array-iteration-such-a-bad-idea)
+[generally discourage]
+[d](http://stackoverflow.com/questions/500504/why-is-using-for-in-with-array-iteration-such-a-bad-idea)
+. It also includes properties from the prototype, so it may be necessary
+to check if
+the key is within the object using
+hasOwnProperty
+. If any attributes in the object are defined by the
+defineProperty
+/
+s
+definePropertie
+method and set the param
+enumerable
+:
+<b>false</b>
+, those attributes will
+be inaccessible.
+<b>var</b>
+object
+=
+{
+&quot;a&quot;
+:
+&quot;foo&quot;
+,
+&quot;b&quot;
+:
+&quot;bar&quot;
+,
+&quot;c&quot;
+:
+&quot;baz&quot;
+}
+;
+// <i>&grave;a&grave; is inaccessible</i>
+Object
+.
+defineProperty
+(
+object
+,
+&apos;a&apos;
+,
+{
+enumerable
+:
+<b>false</b>
+,
+}
+)
+;
+<b>for</b>
+(
+<b>var</b>
+key
+<b>in</b>
+object
+)
+{
+<b>if</b>
+(
+object.
+hasOwnProperty
+(
+key
+)
+)
+{
+console.
+log
+(
+&apos;object.&apos;
+&plus;
+key
+&plus;
+&apos;, &apos;
+&plus;
+object
+&lbrack;
+key
+&rbrack;
+)
+;
+}
+}
+Expected output:
+object.b, bar object.c, baz
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-4">Section 18.4: &quot;while&quot; Loops</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>Standard While Loop</b>
+A standard while loop will execute until the condition given is false:
+<b>var</b>
+i
+=
+0
+;
+while
+(
+i
+&lt;
+100
+)
+{
+console.
+log
+(
+i
+)
+;
+i
+++
+;
+}
+Expected output:
+0
+1
+&hellip;
+99
+<b>Decremented loop</b>
+<b>var</b>
+i
+=
+100
+;
+while
+(
+i
+&gt;
+0
+)
+{
+console.
+log
+(
+i
+)
+;
+i
+&bsol;
+;
+/&ast; equivalent to i=i-1 &ast;/
+}
+Expected output:
+>
+100
+>
+99
+>
+98
+>
+&hellip;
+>
+1
+>
+<b>Do&hellip;while Loop</b>
+>
+A do&hellip;while loop will always execute at least once, regardless of
+whether the condition is true or false:
+
+<b>var</b>
+i
+=
+101
+;
+<b>do</b>
+{
+console.
+log
+(
+i
+)
+;
+}
+while
+(
+i
+&lt;
+100
+)
+;
+Expected output:
+101
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-5">Section 18.5: &quot;continue&quot; a loop</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>Continuing a &quot;for&quot; Loop</b>
+++
+When you put the <b>continue</b> keyword in a for loop, execution jumps
+to the update expression (i in the example):
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+3
+;
+i
+++
+)
+{
+<b>if</b>
+(
+i
+===
+1
+)
+{
+<b>continue</b>
+;
+}
+console.
+log
+(
+i
+)
+;
+}
+Expected output:
+>
+0
+>
+2
+<b>Continuing a While Loop</b>
+When you
+<b>continue</b>
+in a while loop, execution jumps to the condition (
+i
+&lt;
+3
+in the example):
+<b>var</b>
+i
+=
+0
+;
+while
+(
+i
+&lt;
+3
+)
+{
+<b>if</b>
+(
+i
+===
+1
+)
+{
+i
+=
+2
+;
+<b>continue</b>
+;
+}
+console.
+log
+(
+i
+)
+;
+i
+++
+;
+}
+Expected output:
+>
+0
+>
+2
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-6">Section 18.6: Break specific nested loops</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+We can name our loops and break the specific one when necessary.
+outerloop
+:
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+3
+;
+i
+++
+)
+{
+innerloop
+:
+<b>for</b>
+(
+<b>var</b>
+j
+=
+0
+;
+j
+&lt;
+3
+;
+j
+++
+)
+{
+console.
+log
+(
+i
+)
+;
+console.
+log
+(
+j
+)
+;
+<b>if</b>
+(
+j
+==
+1
+)
+{
+<b>break</b>
+outerloop
+;
+}
+}
+}
+Output:
+0
+0
+0
+1
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-7">Section 18.7: &quot;do &hellip; while&quot; loop</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>var</b>
+availableName
+;
+<b>do</b>
+{
+availableName
+
+getRandomName
 (
 )
 ;
-Notice in the preceding code snippet that the order in which declaration
-and assignment expressions occur (
-<b>var</b>
-a
-,
-b
-,
-c
-=
-2
-,
-d
-;
+}
+while
+(
+isNameUsed
+(
+name
 )
-does not matter. You may freely intermix the two.
-Function declaration effectively creates variables, as well.
-<!-- thru chapter 17 -->
+)
+;
+<b>do</b> while
+A loop is guaranteed to run at least once as it&apos;s condition is only
+checked at the end of an iteration. A traditional while loop may run
+zero or more times as its condition is checked at the beginning of an
+iteration.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch18-8">Section 18.8: Break and continue labels</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Break and continue statements can be followed by an optional label
+which works like some kind of a goto statement, resumes execution from
+the label referenced position
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+5
+;
+i
+++
+)
+{
+nextLoop2Iteration
+:
+<b>for</b>
+(
+<b>var</b>
+j
+=
+0
+;
+j
+&lt;
+5
+;
+j
+++
+)
+{
+<b>if</b>
+(
+i
+==
+j
+)
+<b>break</b>
+nextLoop2Iteration
+;
+console.
+log
+(
+i
+,
+j
+)
+;
+}
+}
+<i><b>i=0 j=0 skips rest of j values</b></i>
+1
+0
+<i><b>i=1 j=1 skips rest of j values</b></i>
+2
+0
+2
+1
+<i><b>i=2 j=2 skips rest of j values</b></i>
+0
+3
+1
+3
+3
+2
+<i><b>i=3 j=3 skips rest of j values</b></i>
+4
+0
+4
+1
+4
+2
+4
+3
+<i><b>i=4 j=4 does not log and loops are done</b></i>
+<h2 id="ch19">Chapter 19: Functions</h2>
+Functions in JavaScript provide organized, reusable code to perform a
+set of actions. Functions simplify the coding process, prevent
+redundant logic, and make code easier to follow. This topic describes
+the declaration and utilization of functions, arguments, parameters,
+return statements and scope in JavaScript.
+
