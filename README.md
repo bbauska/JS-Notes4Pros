@@ -10752,9 +10752,9 @@ anonymous functions as callback parameters:</p>
 assigned in the following way:</p>
 <pre>
 <b>function</b> printMsg(msg) {
-msg = <b>typeof</b> msg !== &apos;undefined&apos; ? // <i> if a value was provided<i>
-  msg :                                            // <i> then, use that value in the reassignment<i>
-  &apos;Default value for msg.&apos;;              // <i> else, assign a default value<i>
+msg = <b>typeof</b> msg !== &apos;undefined&apos; ? // <i>if a value was provided</i>
+  msg :                                            // <i>then, use that value in the reassignment</i>
+  &apos;Default value for msg.&apos;;              // <i>else, assign a default value</i>
 console.log(msg); 
 }
 </pre>
@@ -10765,9 +10765,9 @@ depicted above is no longer necessary:</p>
 <b>function</b> printMsg(msg=&apos;Default value for msg.&apos;) {
   console.log(msg);
 }
-printMsg();  // <i> -&amp;quot;Default value for msg.&quot;<i>
-printMsg(<b>undefined</b>);  // <i> -&amp;quot;Default value for msg.&quot;<i>
-printMsg(&apos;Now my msg in different!&apos;); // <i> -&amp;quot;Now my msg in different!&quot;<i>
+printMsg();  // <i> -&amp;quot;Default value for msg.&quot;</i>
+printMsg(<b>undefined</b>);  // <i> -&amp;quot;Default value for msg.&quot;</i>
+printMsg(&apos;Now my msg in different!&apos;); // <i> -&amp;quot;Now my msg in different!&quot;</i>
 </pre>
 <p>This also shows that if a parameter is missing when the function is
 invoked, its value is kept as <b>undefined</b>, as it can be confirmed by
@@ -10775,10 +10775,10 @@ explicitly providing it in the following example (using an arrow function):</p>
 <h5>Version ≥ 6</h5>
 <pre>
 <b>let</b> param_check = (p = &apos;str&apos;) =&gt; console.log(p &plus; &apos; is of type: &apos; &plus; <b>typeof</b> p);
-param_check();  // <i> -&amp;quot;str is of type: string&quot;<i>
-param_check(<b>undefined</b>);  // <i> -&amp;quot;str is of type: string&quot;<i>
-param_check(1);  // <i> -&amp;quot;1 is of type: number&quot;<i>
-param_check(<b>this</b>);  // <i> -&amp;quot;&lbrack;object Window&rbrack; is of type: object&quot;<i>
+param_check();  // <i> -&amp;quot;str is of type: string&quot;</i>
+param_check(<b>undefined</b>);  // <i> -&amp;quot;str is of type: string&quot;</i>
+param_check(1);  // <i> -&amp;quot;1 is of type: number&quot;</i>
+param_check(<b>this</b>);  // <i> -&amp;quot;&lbrack;object Window&rbrack; is of type: object&quot;</i>
 </pre>
 <p><b>Functions/variables as default values and reusing parameters</b></p>
 <p>The default parameters&apos; values are not restricted to numbers, strings
@@ -10791,9 +10791,9 @@ or simple objects. A function can also be set as the default value callback = fu
 foo(<b>function</b>() {
   console.log(&apos;custom&apos;);
 });
-// <i> custom<i>
+// <i> custom</i>
 foo();
-// <i>default<i>
+// <i>default</i>
 </pre>
 <p>There are certain characteristics of the operations that can be
 performed through default values:</p>
