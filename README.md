@@ -10100,7 +10100,6 @@ defined inside the scope.</p>
   <b>var</b> a = &apos;hello&apos;;
   console.log(a);  // <i>=&gt; &apos;hello&apos;</i>
 }
-
 console.log(a);    // <i>reference error</i>
 </pre>
 <p>Nested functions are possible in JavaScript and the same rules apply.</p>
@@ -10142,7 +10141,6 @@ reference, a reference error will be thrown.</p>
 over a similarly named reference in the outer scope since it gets seen first.</p>
 <pre>
 <b>var</b> a = &apos;hello&apos;;
-
 <b>function</b> foo() {
   <b>var</b> a = &apos;world&apos;;
   <b>function</b> bar() {
@@ -10158,12 +10156,11 @@ function will create a new scope and with that a new variable.</p>
 <pre>
 <b>function</b> foo () {
   <b>const</b> a = <b>true</b>;
-
   <b>function</b> bar() {
     <b>const</b> a = <b>false</b>;  // <i>different variable</i>
     console.log(a);   // <i>false</i>
   }
-  <b>const</b> a = <b>false</b>;   // <i>SyntaxError</i>
+  <b>const</b> a = <b>false</b>;  // <i>SyntaxError</i>
   a = <b>false</b>;        // <i>TypeError</i>
   console.log(a);   // <i>true</i>
 }
