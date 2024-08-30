@@ -9760,8 +9760,8 @@ and assignment expressions occur (var a, b, c = 2, d:) does not matter. You may 
 </pre>
 <p>Expected output:</p>
 <blockquote>
-&apos;a&apos;
-&apos;b&apos;
+&apos;a&apos;<br/>
+&apos;b&apos;<br/>
 &apos;c&apos;
 </blockquote>
 <p><b>Changing the increment</b></p>
@@ -9772,10 +9772,10 @@ and assignment expressions occur (var a, b, c = 2, d:) does not matter. You may 
 </pre>
 <p>Expected output:</p>
 <blockquote>
-0
-2
-4
-&hellip;
+0<br/>
+2<br/>
+4<br/>
+&hellip;<br/>
 98
 </blockquote>
 <p><b>Decremented loop</b></p>
@@ -9936,9 +9936,9 @@ while (i &lt; 100) {
 </pre>
 <p>Expected output:</p>
 <blockquote>
-0
-1
-&hellip;
+0<br/>
+1<br/>
+&hellip;<br/>
 99
 </blockquote>
 <p><b>Decremented loop</b></p>
@@ -9987,7 +9987,7 @@ to the update expression (i in the example):</p>
 </pre>
 <p>Expected output:</p>
 <blockquote>
-0
+0<br/>
 2
 </blockquote>
 <p><b>Continuing a While Loop</b></p>
@@ -10006,7 +10006,7 @@ while (i &lt; 3) {
 </pre>
 <p>Expected output:</p>
 <blockquote>
-0
+0<br/>
 2
 </blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -10028,9 +10028,9 @@ outerloop:
 </pre>
 <p>Output:</p>
 <pre>
-0
-0
-0
+0<br/>
+0<br/>
+0<br/>
 1
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -10113,8 +10113,8 @@ console.log(a);    // <i>reference error</i>
     console.log(a);  // <i>=&gt; &apos;hello&apos;</i>
     console.log(b);  // <i>=&gt; &apos;world&apos;</i>
   }
-  console.log(a);   // <i>=&gt; &apos;hello&apos;</i>
-  console.log(b);   // <i>reference error</i>
+  console.log(a);  // <i>=&gt; &apos;hello&apos;</i>
+  console.log(b);  // <i>reference error</i>
 }
 console.log(a);  // <i>reference error</i>
 console.log(b);  // <i>reference error</i>
@@ -10131,7 +10131,6 @@ reference, a reference error will be thrown.</p>
   <b>var</b> b = &apos;world&apos;;
   <b>function</b>bar () {
     <b>var</b> c = &apos;!!&apos;;
-
     console.log(a);  // <i>=&gt; &apos;hello&apos;</i>
     console.log(b);  // <i>=&gt; &apos;world&apos;</i>
     console.log(c);  // <i>=&gt; &apos;!!&apos;</i>
@@ -10143,7 +10142,7 @@ reference, a reference error will be thrown.</p>
 over a similarly named reference in the outer scope since it gets seen first.</p>
 <pre>
 <b>var</b> a = &apos;hello&apos;;
-<br/>
+
 <b>function</b> foo() {
   <b>var</b> a = &apos;world&apos;;
   <b>function</b> bar() {
@@ -10159,14 +10158,14 @@ function will create a new scope and with that a new variable.</p>
 <pre>
 <b>function</b> foo () {
   <b>const</b> a = <b>true</b>;
-<br/>
+
   <b>function</b> bar() {
     <b>const</b> a = <b>false</b>;  // <i>different variable</i>
     console.log(a);   // <i>false</i>
   }
-  <b>const</b> a = <b>false</b>;  // <i>SyntaxError</i>
-  a = <b>false</b>;           // <i>TypeError</i>
-  console.log(a);       // <i>true</i>
+  <b>const</b> a = <b>false</b>;   // <i>SyntaxError</i>
+  a = <b>false</b>;        // <i>TypeError</i>
+  console.log(a);   // <i>true</i>
 }
 </pre>
 <p>However, functions are not the only blocks that create a scope (if you
