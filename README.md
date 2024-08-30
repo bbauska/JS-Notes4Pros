@@ -9737,673 +9737,281 @@ and assignment expressions occur (var a, b, c = 2, d:) does not matter. You may 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch18-1">Section 18.1: Standard &quot;for&quot; loops</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Standard usage</b>
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-100
-;
-i
-++
-)
-{
-console.
-log
-(
-i
-)
-;
+<p><b>Standard usage</b></p>
+<pre>
+<b>for</b> (<b>var</b> i = 0; i &lt; 100; i++) {
+  console.log(i);
 }
-Expected output:
-0
-1
-&hellip;
+</pre>
+<p>Expected output:</p>
+<blockquote>
+0<br/>
+1<br/>
+&hellip;<br/>
 99
-<b>Multiple declarations</b>
-
-Commonly used to cache the length of an array.
-<b>var</b>
-array
-=
-&lbrack;
-&apos;a&apos;
-,
-&apos;b&apos;
-,
-&apos;c&apos;
-&rbrack;
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-array.
-length
-;
-i
-++
-)
-{
-console.
-log
-(
-array
-&lbrack;
-i
-&rbrack;
-)
-;
+</blockquote>
+<p><b>Multiple declarations</b></p>
+<p>Commonly used to cache the length of an array.</p>
+<pre>
+<b>var</b> array = &lbrack;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&rbrack;;
+<b>for</b> (<b>var</b> i = 0; i &lt; array.length; i++) {
+  console.log(array&lbrack;i&rbrack;);
 }
-Expected output:
+</pre>
+<p>Expected output:</p>
+<pre>
+<blockquote>
 &apos;a&apos;
 &apos;b&apos;
 &apos;c&apos;
-<b>Changing the increment</b>
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-100
-;
-i
-+=
-2
-/&ast; Can also be: i = i + 2 &ast;/
-)
-{
-console.
-log
-(
-i
-)
-;
+</blockquote>
+<p><b>Changing the increment</b></p>
+<pre>
+<b>for</b> (<b>var</b> i = 0; i &lt; 100; i += 2 /&ast; Can also be: i = i + 2 &ast;/ ) {
+  console.log(i);
 }
-Expected output:
+</pre>
+<p>Expected output:</p>
+<blockquote>
 0
 2
 4
 &hellip;
 98
-<b>Decremented loop</b>
-<b>for</b>
-(
-<b>var</b>
-i
-=
-100
-;
-i
-&gt;=
-0
-;
-i
-&bsol;
-)
-{
-console.
-log
-(
-i
-)
-;
+</blockquote>
+<p><b>Decremented loop</b></p>
+<b>for</b> (<b>var</b> i = 100; i &gt;=0; i&bsol;) {
+  console.log(i);
 }
-Expected output:
+</pre>
+<!-- page 157 -->
+<p>Expected output:</p>
+<blockquote>
 100
 99
 98
 &hellip;
 0
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch18-2">Section 18.2: &quot;for &hellip; of&quot; loop</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 6</h5>
-<b>const</b>
-iterable
-=
-&lbrack;
-0
-,
-1
-,
-2
-&rbrack;
-;
-<b>for</b>
-(
-<b>let</b>
-i of iterable
-)
-{
-console.
-log
-(
-i
-)
-;
+<pre>
+<b>const</b> iterable = &lbrack;0, 1, 2&rbrack;;
+<b>for</b> (<b>let</b> i of iterable) {
+  console.log(i);
 }
-Expected output:
->
+</pre>
+<p>Expected output:</p>
+<blockquote>
 0
->
 1
->
 2
->
-The advantages from the for&hellip;of loop are:
-forEach
-This is the most concise, direct syntax yet for looping through array
-elements
-
-It avoids all the pitfalls of for&hellip;in Unlike (), it works with
-break, continue, and return
-
-<b>Support of for&hellip;of in other collections Strings</b> for&hellip;of will
-treat a string as a sequence of Unicode characters:
-<b>const</b>
-string
-=
-&quot;abc&quot;
-;
-<b>for</b>
-(
-<b>let</b>
-chr of string
-)
-{
-console.
-log
-(
-chr
-)
-;
+</blockquote>
+<p>The advantages from the for&hellip;of loop are:</p>
+<ul>
+  <li>This is the most concise, direct syntax yet for looping through array elements</li>
+  <li>It avoids all the pitfalls of for&hellip;in</li>
+  <li>nlike (), it works with break, continue, and return</li>
+</ul>
+<p><b>Support of for&hellip;of in other collections</b></p>
+<p><b>Strings</b></p>
+<p>for&hellip;of will treat a string as a sequence of Unicode characters:</p>
+<pre>
+<b>const</b> string = &quot;abc&quot;;
+<b>for</b> (<b>let</b> chr of string) {
+  console.log(chr);
 }
-Expected output:
+</pre>
+<p>Expected output:</p>
+<blockquote>
 a b c
-<b>Sets</b> for&hellip;of works on Set objects.
+</blockquote>
+<p><b>Sets</b></p>
+<p>for&hellip;of works on Set objects.</p>
+<p><b>Note</b>:</p>
+<ul>
+  <li>A Set object will eliminate duplicates.</li>
+  <li>Please <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Set#Browser_compatibility">check this reference</a>
+    for () browser support.</li>
+</ul>
+<!-- page 158 -->
+<pre>
+<b>const</b> names = &lbrack;&apos;bob&apos;, &apos;alejandro&apos;, &apos;zandra&apos;, &apos;anna&apos;, &apos;bob&apos;&rbrack;;
+<b>const</b> uniqueNames = <b>new</b> Set(names);
 
-<b>Note</b>:
-Set
-A Set object will eliminate duplicates.
-
-Please [check this
-reference](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Set#Browser_compatibility)
-for () browser support.
-<b>const</b>
-names
-=
-&lbrack;
-&apos;bob&apos;
-,
-&apos;alejandro&apos;
-,
-&apos;zandra&apos;
-,
-&apos;anna&apos;
-,
-&apos;bob&apos;
-&rbrack;
-;
-<b>const</b>
-uniqueNames
-=
-<b>new</b>
-Set
-(
-names
-)
-;
-<b>for</b>
-(
-<b>let</b>
-name of uniqueNames
-)
-{
-console.
-log
-(
-name
-)
-;
+<b>for</b> (<b>let</b> name of uniqueNames) {
+  console.log(name);
 }
-Expected output:
->
+</pre>
+<p>Expected output:</p>
+<blockquote>
 bob
->
-alejandro zandra anna
->
-<b>Maps</b>
->
-You can also use for&hellip;of loops to iterate over Maps. This works
-similarly to arrays and sets, except the iteration variable stores
-both a key and a value.
-<b>const</b>
-map
-=
-<b>new</b>
-Map
-(
-)
-.
-<b>set</b>
-(
-&apos;abc&apos;
-,
-1
-)
-.
-<b>set</b>
-(
-&apos;def&apos;
-,
-2
-)
-<b>for</b>
-(
-<b>const</b>
-iteration of map
-)
-{
-console.
-log
-(
-iteration
-)
-//<i>will log &lbrack;&apos;abc&apos;, 1&rbrack; and then &lbrack;&apos;def&apos;, 2&rbrack;</i>
+alejandro
+zandra
+anna
+</blockquote>
+<p><b>Maps</b></p>
+<p>You can also use for&hellip;of loops to iterate over Maps. This works
+similarly to arrays and sets, except the iteration variable stores both a key and a value.</p>
+<pre>
+<b>const</b> map = <b>new</b> Map()
+  .<b>set</b>(&apos;abc&apos;, 1)
+  .<b>set</b>(&apos;def&apos;, 2)
+  
+<b>for</b> (<b>const</b> iteration of map) {
+  console.log(iteration)  //<i>will log &lbrack;&apos;abc&apos;, 1&rbrack; and then &lbrack;&apos;def&apos;, 2&rbrack;</i>
 }
-You can use destructuring assignment to capture the key and the value
-separately:
-<b>const</b>
-map
-=
-<b>new</b>
-Map
-(
-)
-.
-<b>set</b>
-(
-&apos;abc&apos;
-,
-1
-)
-.
-<b>set</b>
-(
-&apos;def&apos;
-,
-2
-)
-<b>for</b>
-(
-<b>const</b>
-&lbrack;
-key
-,
-value
-&rbrack;
-of map
-)
-{
-console.
-log
-(
-key
-&plus;
-&apos; is mapped to &apos;
-&plus;
-value
-)
+</pre>
+<p>You can use destructuring assignment to capture the key and the value separately:</p>
+<pre>
+<b>const</b> map = <b>new</b> Map()
+  .<b>set</b>(&apos;abc&apos;, 1)
+  .<b>set</b>(&apos;def&apos;, 2)
+
+<b>for</b> (<b>const</b> &lbrack;key, value&rbrack; of map) {
+  console.log(key &plus; &apos; is mapped to &apos; &plus; value)
 }
-/<i>&ast;Logs:</i>
-<i>abc is mapped to 1</i>
-<i>def is mapped to 2</i>
+/<i>&ast; Logs:</i>
+   <i>abc is mapped to 1</i>
+   <i>def is mapped to 2</i>
 <i>&ast;/
-<b>Objects</b>
-Object.keys
-for&hellip;of loops <i>do not</i> work directly on plain Objects; but, it is
+</pre>
+<p><b>Objects</b></p>
+<p>for&hellip;of loops <i>do not</i> work directly on plain Objects; but, it is
 possible to iterate over an object's properties by switching to a
-for&hellip;in loop, or using ():
-<b>const</b>
-someObject
-=
-{
-name
-:
-&apos;Mike&apos;
+for&hellip;in loop, or using Object.keys():</p>
+<pre>
+<b>const</b> someObject = { name: &apos;Mike&apos; };
+
+<b>for</b> (<b>let</b> key of Object.keys(someObject)) {
+  console.log(key &plus; &quot;: &quot; &plus; someObject&lbrack;key&rbrack;);
 }
-;
-<b>for</b>
-(
-<b>let</b>
-key of
-Object
-.
-keys
-(
-someObject
-)
-)
-{
-console.
-log
-(
-key
-&plus;
-&quot;: &quot;
-&plus;
-someObject
-&lbrack;
-key
-&rbrack;
-)
-;
-}
-Expected output:
+</pre>
+<p>Expected output:</p>
+<blockquote>
 name: Mike
+</blockquote>
+<!-- page 159 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch18-3">Section 18.3: &quot;for &hellip; in&quot; loop</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<blockquote>
 <b>Warning</b>
 for&hellip;in is intended for iterating over object keys, not array indexes.
-[Using it to loop through an array i]
-[s](http://stackoverflow.com/questions/500504/why-is-using-for-in-with-array-iteration-such-a-bad-idea)
-[generally discourage]
-[d](http://stackoverflow.com/questions/500504/why-is-using-for-in-with-array-iteration-such-a-bad-idea)
-. It also includes properties from the prototype, so it may be necessary
-to check if
-the key is within the object using
-hasOwnProperty
-. If any attributes in the object are defined by the
-defineProperty
-/
-s
-definePropertie
-method and set the param
-enumerable
-:
-<b>false</b>
-, those attributes will
-be inaccessible.
-<b>var</b>
-object
-=
-{
-&quot;a&quot;
-:
-&quot;foo&quot;
-,
-&quot;b&quot;
-:
-&quot;bar&quot;
-,
-&quot;c&quot;
-:
-&quot;baz&quot;
-}
-;
+<a href="http://stackoverflow.com/questions/500504/why-is-using-for-in-with-array-iteration-such-a-bad-idea">
+Using it to loop through an array is generally discouraged</a>. It also includes properties 
+from the prototype, so it may be necessary to check if the key is within the object using
+hasOwnProperty/defineProperties method and set the param enumerable: false, those attributes
+will be inaccessible.
+</blockquote>
+<pre>
+var object = {&quot;a&quot;:&quot;foo&quot;, &quot;b&quot:&quot;bar&quot;, &quot;c&quot:&quot;baz&quot;);
 // <i>&grave;a&grave; is inaccessible</i>
-Object
-.
-defineProperty
-(
-object
-,
-&apos;a&apos;
-,
-{
-enumerable
-:
-<b>false</b>
-,
+Object.defineProperty(object, &apos;a&apos;, {
+  enumerable: <b>false</b>,
+});
+<b>for</b> (<b>var</b> key <b>in</b> object) {
+  <b>if</b>(object.hasOwnProperty(key)) {
+    console.log(&apos;object.&apos; &plus; key &plus; &apos;, &apos; &plus; object&lbrack;key&rbrack;);
+  }
 }
-)
-;
-<b>for</b>
-(
-<b>var</b>
-key
-<b>in</b>
-object
-)
-{
-<b>if</b>
-(
-object.
-hasOwnProperty
-(
-key
-)
-)
-{
-console.
-log
-(
-&apos;object.&apos;
-&plus;
-key
-&plus;
-&apos;, &apos;
-&plus;
-object
-&lbrack;
-key
-&rbrack;
-)
-;
-}
-}
-Expected output:
-object.b, bar object.c, baz
+</pre>
+<p>Expected output:</p>
+<blockquote>
+object.b, bar 
+object.c, baz
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch18-4">Section 18.4: &quot;while&quot; Loops</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-<b>Standard While Loop</b>
-A standard while loop will execute until the condition given is false:
-<b>var</b>
-i
-=
-0
-;
-while
-(
-i
-&lt;
-100
-)
-{
-console.
-log
-(
-i
-)
-;
-i
-++
-;
+<p><b>Standard While Loop</b></p>
+<p>A standard while loop will execute until the condition given is false:</p>
+<pre>
+<b>var</b> i = 0;
+while (i &lt; 100) {
+  console.log(i);
+  i++;
 }
-Expected output:
+</pre>
+<p>Expected output:</p>
+<blockquote>
 0
 1
 &hellip;
 99
-<b>Decremented loop</b>
-<b>var</b>
-i
-=
-100
-;
-while
-(
-i
-&gt;
-0
-)
-{
-console.
-log
-(
-i
-)
-;
-i
-&bsol;
-;
-/&ast; equivalent to i=i-1 &ast;/
+</blockquote>
+<p><b>Decremented loop</b></p>
+<pre>
+<b>var</b> i = 100;
+while (i &gt; 0) {
+  console.log(i);
+  i&bsol;; /&ast; equivalent to i=i-1 &ast;/
 }
-Expected output:
->
+</pre>
+<!-- page 160 -->
+<p>Expected output:</p>
+<blockquote>
 100
->
 99
->
 98
->
 &hellip;
->
 1
->
-<b>Do&hellip;while Loop</b>
->
-A do&hellip;while loop will always execute at least once, regardless of
-whether the condition is true or false:
-
-<b>var</b>
-i
-=
+</blockquote>
+<p><b>Do&hellip;while Loop</b></p>
+<p>A do&hellip;while loop will always execute at least once, regardless of
+whether the condition is true or false:</p>
+<pre>
+<b>var</b> i = 101;
+<b>do</b> {
+  console.log(i);
+} while (i &lt; 100);
+</pre>
+<p>Expected output:</p>
+<blockquote>
 101
-;
-<b>do</b>
-{
-console.
-log
-(
-i
-)
-;
-}
-while
-(
-i
-&lt;
-100
-)
-;
-Expected output:
-101
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch18-5">Section 18.5: &quot;continue&quot; a loop</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-<b>Continuing a &quot;for&quot; Loop</b>
-++
-When you put the <b>continue</b> keyword in a for loop, execution jumps
-to the update expression (i in the example):
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-3
-;
-i
-++
-)
-{
-<b>if</b>
-(
-i
-===
-1
-)
-{
-<b>continue</b>
-;
+<p><b>Continuing a &quot;for&quot; Loop</b></p>
+<p>When you put the <b>continue</b> keyword in a for loop, execution jumps
+to the update expression (i in the example):</p>
+<pre>
+<b>for</b> (<b>var</b> i = 0; i &lt; 3; i++) {
+  <b>if</b> (i === 1) {
+    <b>continue</b>;
+  }
+  console.log(i);
 }
-console.
-log
-(
-i
-)
-;
-}
-Expected output:
->
+</pre>
+<p>Expected output:</p>
+<blockquote>
 0
->
 2
-<b>Continuing a While Loop</b>
-When you
-<b>continue</b>
-in a while loop, execution jumps to the condition (
-i
-&lt;
-3
-in the example):
-<b>var</b>
-i
-=
-0
-;
-while
-(
-i
-&lt;
-3
-)
-{
-<b>if</b>
-(
-i
-===
-1
-)
-{
-i
-=
-2
-;
-<b>continue</b>
-;
+</blockquote>
+<p><b>Continuing a While Loop</b></p>
+<p>When you <b>continue</b> in a while loop, execution jumps to the condition (i &lt; 3 
+in the example):</p>
+<pre>
+<b>var</b> i = 0;
+while (i &lt; 3) {
+  <b>if</b> (i ===1) {
+    i = 2;
+    <b>continue</b>;
+  }
+  console.log(i);
+  i++;
 }
-console.
-log
-(
-i
-)
-;
-i
-++
-;
-}
-Expected output:
->
+</pre>
+<p>Expected output:</p>
+<blockquote>
 0
->
 2
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch18-6">Section 18.6: Break specific nested loops</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
