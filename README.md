@@ -9759,7 +9759,6 @@ and assignment expressions occur (var a, b, c = 2, d:) does not matter. You may 
 }
 </pre>
 <p>Expected output:</p>
-<pre>
 <blockquote>
 &apos;a&apos;
 &apos;b&apos;
@@ -10945,7 +10944,7 @@ check
 15
 )
 ;
-// <i> This value of &grave;this&grave; was explicitly bound, the function works.<i>
+// <i>This value of &grave;this&grave; was explicitly bound, the function works.<i>
 <b>var</b>
 check8
 =
@@ -11028,7 +11027,7 @@ example
 // <i> Uncaught TypeError: Cannot read property &apos;x&apos; of undefined(</i>
 ...
 )
-Version ≥ 7
+<h5>Version ≥ 7</h5>
 <b>Bind Operator</b>
 
 The double colon <b>bind operator</b> can be used as a shortened syntax
@@ -11413,7 +11412,7 @@ foo
 (
 )
 {
-*/&ast;&hellip;&ast;/*
+/&ast;&hellip;&ast;/
 }
 ;
 foo
@@ -11511,7 +11510,7 @@ algorithm
 value
 )
 {
-*/&ast;&hellip;&ast;/*
+/&ast;&hellip;&ast;/
 }
 ;
 <b>else</b>
@@ -11527,7 +11526,7 @@ algorithm
 value
 )
 {
-*/&ast;&hellip;&ast;/*
+/&ast;&hellip;&ast;/
 }
 ;
 }
@@ -12167,20 +12166,20 @@ b
 ,
 <b>set</b>
 :
-**function**
+<b>function</b>
 (
 a
 ,
 b
 )
 {
-**this**
+<b>this</b>
 .
 a
 =
 a
 ;
-**this**
+<b>this</b>
 .
 b
 =
@@ -12190,7 +12189,7 @@ b
 }
 ;
 obj.
-**set**
+<b>set</b>
 (
 3
 ,
@@ -12199,7 +12198,7 @@ obj.
 ;
 // <i> normal syntax</i>
 obj.
-**set**
+<b>set</b>
 .
 all
 (
@@ -12212,7 +12211,7 @@ obj
 ;
 // <i> equivalent to the above</i>
 obj.
-**set**
+<b>set</b>
 .
 apply
 (
@@ -12233,38 +12232,38 @@ obj
 )
 ;
 // <i> prints { a: 3, b: 5 }</i>
-**let**
+<b>let</b>
 myObj
 =
 {
 }
 ;
 myObj.
-**set**
+<b>set</b>
 (
 5
 ,
 4
 )
 ;
-// <i> fails; myObj has no &grave;set&grave; property</i>
-obj.**set**.call(myObj, 5, 4); // <i> success; &grave;this&grave; in set() is
-re-routed to myObj instead of obj* obj.**set**.apply(myObj, &lbrack;5, 4&rbrack;);
-// <i> same as above; note the array</i>
+// <i>fails; myObj has no &grave;set&grave; property</i>
+obj.<b>set</b>.call(myObj, 5, 4); // <i> success; &grave;this&grave; in set() is
+re-routed to myObj instead of obj</i> obj.<b>set</b>.apply(myObj, &lbrack;5, 4&rbrack;);
+// <i>same as above; note the array</i>
 
 console.log(myObj); // <i> prints { a: 3, b: 5 }</i>
 
 <h5>Version ≥ 5</h5>
-**bind**   **()** in addition to call() and apply
+<b>bind</b>   <b>()</b> in addition to call() and apply
 ECMAScript 5 introduced another method called () to explicitly set
-**this** value of the function to specific object.
+<b>this</b> value of the function to specific object.
 bind
 It behaves quite differently than the other two. The first argument to
-() is the **this** value for the new function. All other arguments
+() is the <b>this</b> value for the new function. All other arguments
 represent named parameters that should be permanently set in the new
 function.
 
-**function**
+<b>function</b>
 showName
 (
 label
@@ -12277,13 +12276,13 @@ label
 &plus;
 &quot;:&quot;
 &plus;
-**this**
+<b>this</b>
 .
 name
 )
 ;
 }
-**var**
+<b>var</b>
 student1
 =
 {
@@ -12292,7 +12291,7 @@ name
 &quot;Ravi&quot;
 }
 ;
-**var**
+<b>var</b>
 student2
 =
 {
@@ -12302,7 +12301,7 @@ name
 }
 ;
 // <i> create a function just for student1</i>
-**var**
+<b>var</b>
 showNameStudent1
 =
 showName.
@@ -12318,7 +12317,7 @@ showNameStudent1
 ;
 // <i> outputs &quot;student1:Ravi&quot;</i>
 // <i> create a function just for student2</i>
-**var**
+<b>var</b>
 showNameStudent2
 =
 showName.
@@ -12357,7 +12356,7 @@ of arguments passed to a function. Unlike currying, the number need
 not go down by one.
 Example:
 This function &hellip;
-**function**
+<b>function</b>
 multiplyThenAdd
 (
 a
@@ -12367,7 +12366,7 @@ b
 c
 )
 {
-**return**
+<b>return</b>
 a
 &ast;
 b
@@ -12377,7 +12376,7 @@ c
 }
 &hellip; can be used to create another function that will always multiply
 by 2 and then add 10 to the passed value;
-**function**
+<b>function</b>
 reversedMultiplyThenAdd
 (
 c
@@ -12387,7 +12386,7 @@ b
 a
 )
 {
-**return**
+<b>return</b>
 a
 &ast;
 b
@@ -12395,7 +12394,7 @@ b
 c
 ;
 }
-**function**
+<b>function</b>
 factory
 (
 b
@@ -12403,11 +12402,11 @@ b
 c
 )
 {
-**return**
+<b>return</b>
 reversedMultiplyThenAdd.
 bind
 (
-**null**
+<b>null</b>
 ,
 c
 ,
@@ -12415,7 +12414,7 @@ b
 )
 ;
 }
-**var**
+<b>var</b>
 multiplyTwoThenAddTen
 =
 factory
@@ -12440,7 +12439,7 @@ parameters of a function.
 In JavaScript all arguments are passed by value. When a function
 assigns a new value to an argument variable, that change will not be
 visible to the caller:
-**var**
+<b>var</b>
 obj
 =
 {
@@ -12449,7 +12448,7 @@ a
 2
 }
 ;
-**function**
+<b>function</b>
 myfunc
 (
 arg
@@ -12478,9 +12477,9 @@ a
 )
 ;
 // <i> 2</i>
-However, changes made to (nested) properties *of* such arguments, will
+However, changes made to (nested) properties </i>of</i> such arguments, will
 be visible to the caller:
-**var**
+<b>var</b>
 obj
 =
 {
@@ -12489,7 +12488,7 @@ a
 2
 }
 ;
-**function**
+<b>function</b>
 myfunc
 (
 arg
@@ -12515,18 +12514,18 @@ a
 )
 ;
 // <i> 5</i>
-This can be seen as a *call by reference*: although a function cannot
+This can be seen as a </i>call by reference</i>: although a function cannot
 change the caller&apos;s object by assigning a new value to it, it could
-*mutate* the caller&apos;s object.
+<i>mutate</i> the caller&apos;s object.
 
 As primitive valued arguments, like numbers or strings, are immutable,
 there is no way for a function to mutate them:
-**var**
+<b>var</b>
 s
 =
 &apos;say&apos;
 ;
-**function**
+<b>function</b>
 myfunc
 (
 arg
@@ -12567,7 +12566,7 @@ b
 3
 }
 ;
-**function**
+<b>function</b>
 myfunc
 (
 arg
@@ -12609,12 +12608,12 @@ As an alternative to in-place mutation of an argument, functions can
 create a new value, based on the argument, and return it. The caller
 can then assign it, even to the original variable that was passed as
 argument:
-**var**
+<b>var</b>
 a
 =
 2
 ;
-**function**
+<b>function</b>
 myfunc
 (
 arg
@@ -12623,7 +12622,7 @@ arg
 arg
 ++
 ;
-**return**
+<b>return</b>
 arg
 ;
 }
@@ -12650,7 +12649,7 @@ Functions can take inputs in form of variables that can be used and
 assigned inside their own scope. The following function takes two
 numeric values and returns their sum:
 
-**function**
+<b>function</b>
 addition
 (
 argument1
@@ -12658,7 +12657,7 @@ argument1
 argument2
 )
 {
-**return**
+<b>return</b>
 argument1
 &plus;
 argument2
@@ -12676,24 +12675,24 @@ addition
 )
 ;
 // <i> -&bsol;5</i>
-**arguments**
-**object**
+<b>arguments</b>
+<b>object</b>
 The arguments object contains all the function&apos;s parameters that
 contain a non-default value. It can also be used even if the
 parameters are not explicitly declared:
 
-(**function**() { console.log(arguments) })(0,&apos;str&apos;, &lbrack;2,{3}&rbrack;) // <i>
+(<b>function</b>() { console.log(arguments) })(0,&apos;str&apos;, &lbrack;2,{3}&rbrack;) // <i>
 -&amp;lbrack;0, &quot;str&quot;, Array&lbrack;2&rbrack;&rbrack;</i> Although when printing arguments the
 output resembles an Array, it is in fact an object:
 (
-**function**
+<b>function</b>
 (
 )
 {
 console.
 log
 (
-**typeof**
+<b>typeof</b>
 arguments
 )
 }
@@ -12702,14 +12701,14 @@ arguments
 )
 ;
 // <i> -&bsol;object</i>
-**Rest parameters:**
-**function**
-**(**
-**&hellip;**
-**parm**
-**)**
-**{**
-**}**
+<b>Rest parameters:</b>
+<b>function</b>
+<b>(</b>
+<b>&hellip;</b>
+<b>parm</b>
+<b>)</b>
+<b>{</b>
+<b>}</b>
 In ES6, the &hellip; syntax when used in the declaration of a function&apos;s
 parameters transforms the variable to its right into a single object
 containing all the remaining parameters provided after the declared
@@ -12717,7 +12716,7 @@ ones. This allows the function to be invoked with an unlimited number
 of arguments, which will become part of this variable:
 // <i> -&bsol;object: 123</i>
 (
-**function**
+</b>function</b>
 (
 a
 ,
@@ -12728,7 +12727,7 @@ b
 console.
 log
 (
-**typeof**
+<b>typeof</b>
 b
 &plus;
 &apos;: &apos;
@@ -12768,12 +12767,12 @@ i
 }
 )
 ;
-**function_name** **(**   **&hellip;varb**
-**Spread parameters: );**
+</b>function_name</b> <b>(</b>   </b>&hellip;varb</b>
+<b>Spread parameters: );</b>
 In ES6, the &hellip; syntax can also be used when invoking a function by
 placing an object/variable to its right. This allows that object&apos;s
 elements to be passed into that function as a single object:
-**let**
+</b>let</b>
 nums
 =
 &lbrack;
@@ -12819,7 +12818,7 @@ snapping pieces of a track together)&hellip;
 you start out with some single responsibility functions:
 <h5>Version ≥ 6</h5>
 <pre>
-<b>const</b> capitalize = x =&bsol;x.replace(*/&Hat;&bsol;&bsol;w/*, m =&gt; m.toUpperCase());
+<b>const</b> capitalize = x =&bsol;x.replace(*/&Hat;&bsol;&bsol;w/</i>, m =&gt; m.toUpperCase());
 <b>const</b> sign = x =&bsol;x + &apos;,<b>&bsol;n</b>made with love&apos;;
 </pre>
 <p>and easily create a transformation track:</p>
@@ -12895,7 +12894,7 @@ characters</i>
 <b>var</b>
 result
 =
-*/&Hat;function&bsol;&bsol;s+(&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+)&amp;lpar;/*
+/ <i>&Hat;function&bsol;&bsol;s+(&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+)&amp;lpar;/</i>
 .
 exec
 (
@@ -13044,7 +13043,7 @@ firstChar
 )
 )
 ;
-*Console output will be:*
+<i>Console output will be:</i>
 &gt;
 H
 <b>The return statement ends the function</b>
@@ -13228,7 +13227,7 @@ hash
 value
 )
 {
-*/&ast;&hellip;&ast;/*
+<i>/&ast;&hellip;&ast;/</i>
 }
 ;
 <b>else</b>
@@ -13426,14 +13425,14 @@ hash
 &apos;Fred&apos;
 )
 ;
-*// return the function corresponding to the given algorithmName*
+// <i>return the function corresponding to the given algorithmName</i>
 <b>function</b>
 getHashingFunction
 (
 algorithmName
 )
 {
-*// return a reference to an anonymous function*
+// <i>return a reference to an anonymous function</i>
 <b>if</b>
 (
 algorithmName
@@ -13446,10 +13445,10 @@ algorithmName
 value
 )
 {
-*/&ast;&ast;/*
+<i>/&ast;&ast;/</i>
 }
 ;
-*// return a reference to a declared function*
+// <i>return a reference to a declared function</i>
 <b>else</b>
 <b>if</b>
 (
@@ -13467,14 +13466,14 @@ md5Hash
 value
 )
 {
-*// &hellip;*
+// <i>&hellip;</i>
 }
 
 You don&apos;t need to assign a function reference to a variable in order
 to invoke it. This example, building off example 5, will call
 getHashingFunction and then immediately invoke the returned function
 and pass its return value to hashedValue.
-*// Example 6*
+// <i>Example 6</i>
 <b>var</b>
 hashedValue
 =
@@ -13501,12 +13500,12 @@ hoistedFunction
 (
 )
 ;
-*// works, because the function is &quot;hoisted&quot; to the top of its scope*
+// <i>works, because the function is &quot;hoisted&quot; to the top of its scope</i>
 functionVariable
 (
 )
 ;
-*// error: undefined is not a function.*
+// <i>error: undefined is not a function.</i>
 <b>function</b>
 hoistedFunction
 (
