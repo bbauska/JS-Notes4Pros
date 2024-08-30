@@ -9976,7 +9976,6 @@ whether the condition is true or false:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch18-5">Section 18.5: &quot;continue&quot; a loop</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p><b>Continuing a &quot;for&quot; Loop</b></p>
 <p>When you put the <b>continue</b> keyword in a for loop, execution jumps
 to the update expression (i in the example):</p>
@@ -10016,187 +10015,3510 @@ while (i &lt; 3) {
 <h3 id="ch18-6">Section 18.6: Break specific nested loops</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-We can name our loops and break the specific one when necessary.
-outerloop
-:
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-3
-;
-i
-++
-)
-{
-innerloop
-:
-<b>for</b>
-(
-<b>var</b>
-j
-=
-0
-;
-j
-&lt;
-3
-;
-j
-++
-)
-{
-console.
-log
-(
-i
-)
-;
-console.
-log
-(
-j
-)
-;
-<b>if</b>
-(
-j
-==
-1
-)
-{
-<b>break</b>
-outerloop
-;
+<p>We can name our loops and break the specific one when necessary.</p>
+<pre>
+outerloop:
+<b>for</b> (<b>var</b> i = 0;i&lt;3;i++) {
+  innerloop:
+  <b>for</b> (<b>var</b> j = 0; j &lt; 3; j++) {
+    console.log(i);
+    console.log(j);
+    <b>if</b> (j == 1) {
+      <b>break</b> outerloop;
+    }
+  }
 }
-}
-}
-Output:
+</pre>
+<p>Output:</p>
+<pre>
 0
 0
 0
 1
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch18-7">Section 18.7: &quot;do &hellip; while&quot; loop</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>var</b>
-availableName
-;
-<b>do</b>
-{
-availableName
-
-getRandomName
-(
-)
-;
-}
-while
-(
-isNameUsed
-(
-name
-)
-)
-;
-<b>do</b> while
-A loop is guaranteed to run at least once as it&apos;s condition is only
-checked at the end of an iteration. A traditional while loop may run
+<pre>
+<b>var</b> availableName;
+<b>do</b> {
+  availableName = getRandomName();
+} while (isNameUsed(name));
+</pre>
+<p>A <b>do</b> while loop is guaranteed to run at least once as it&apos;s condition 
+is only checked at the end of an iteration. A traditional while loop may run
 zero or more times as its condition is checked at the beginning of an
-iteration.
+iteration.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch18-8">Section 18.8: Break and continue labels</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Break and continue statements can be followed by an optional label
+<p>Break and continue statements can be followed by an optional label
 which works like some kind of a goto statement, resumes execution from
-the label referenced position
-<b>for</b>
-(
+the label referenced position</p>
+<pre>
+<b>for</b>(<b>var</b> i = 0; i &lt; 5; i++) {
+  nextLoop2Iteration:
+  <b>for</b>(<b>var</b> j = 0; j &lt; 5; j++) {
+    <b>if</b>(i == j) <b>break</b> nextLoop2Iteration;
+    console.log(i, j);
+  }
+}
+</pre>
+<!-- page 162 -->
+<blockquote>
+<i><b>i=0 j=0 skips rest of j values</b></i>
+1 0
+<i><b>i=1 j=1 skips rest of j values</b></i>
+2 0
+2 1 <i><b>i=2 j=2 skips rest of j values</b></i>
+3 0
+3 1
+3 2
+<i><b>i=3 j=3 skips rest of j values</b></i>
+4 0
+4 1
+4 2
+4 3
+<i><b>i=4 j=4 does not log and loops are done</b></i>
+</blockquote>
+<!-- page 163 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch19">Chapter 19: Functions</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Functions in JavaScript provide organized, reusable code to perform a
+set of actions. Functions simplify the coding process, prevent
+redundant logic, and make code easier to follow. This topic describes
+the declaration and utilization of functions, arguments, parameters,
+return statements and scope in JavaScript.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-1">Section 19.1: Function Scoping</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>When you define a function, it creates a <i>scope</i>.</p>
+
+<p>Everything defined within the function is not accessible by code
+outside the function. Only code within this scope can see the entities
+defined inside the scope.</p>
+<pre>
+<b>function</b> foo() {
+  <b>var</b> a = &apos;hello&apos;;
+  console.log(a);  // <i>=&amp;apos;hello&apos;</i>
+}
+console.log(a);    // <i>reference error</i>
+</pre>
+<p>Nested functions are possible in JavaScript and the same rules apply.</p>
+<pre>
+<b>function</b> foo() {
+  <b>var</b> a = &apos;hello&apos;;
+
+  <b>function</b> bar() {
+    <b>var</b> b = &apos;world&apos;;
+    console.log(a);  // <i> =&amp;apos;hello&apos;</i>
+    console.log(b);  // <i> =&amp;apos;world&apos;</i>
+  }
+  console.log(a);  // <i> =&amp;apos;hello&apos;</i>
+  console.log(b);  // <i> reference error</i>
+}
+console.log(a);  // <i> reference error</i>
+console.log(b);  // <i> reference error</i>
+</pre>
+<p>When JavaScript tries to resolve a reference or variable, it starts
+looking for it in the current scope. If it cannot find that
+declaration in the current scope, it climbs up one scope to look for
+it. This process repeats until the declaration has been found. If the
+JavaScript parser reaches the global scope and still cannot find the
+reference, a reference error will be thrown.</p>
+<pre>
+<b>var</b> a = &apos;hello&apos;;
+<b>function</b> foo() {
+  <b>var</b> b = &apos;world&apos;;
+  <b>function</b>bar () {
+    <b>var</b> c = &apos;!!&apos;;
+
+    console.log(a);  // <i> =&amp;apos;hello&apos;</i>
+    console.log(b);  // <i> =&amp;apos;world&apos;</i>
+    console.log(c);  // <i> =&amp;apos;!!&apos;</i>
+    console.log(d);  // <i> reference error</i>
+  }
+}
+</pre>
+<p>This climbing behavior can also mean that one reference may &quot;shadow&quot;
+over a similarly named reference in the outer scope since it gets seen first.</p>
+<pre>
+<b>var</b> a = &apos;hello&apos;;
+
+<b>function</b> foo() {
+  <b>var</b> a = &apos;world&apos;;
+  <b>function</b> bar() {
+    console.log(a);  // <i> =&amp;apos;world&apos;</i>
+  }
+}
+</pre>
+<h5>Version ≥ 6</h5>
+<p>The way JavaScript resolves scoping also applies to the <b>const</b>
+keyword. Declaring a variable with the <b>const</b> keyword implies that
+you are not allowed to reassign the value, but declaring it in a
+function will create a new scope and with that a new variable.</p>
+<pre>
+<b>function</b> foo () {
+  <b>const</b> a = <b>true</b>;
+  
+  <b>function</b> bar() {
+    <b>const</b> a = <b>false</b>;  // <i>different variable</i>
+    console.log(a);                 // <i>false</i>
+  }
+  <b>const</b> a = <b>false</b>;    // <i>SyntaxError</i>
+  a = <b>false</b>;                 // <i>TypeError</i>
+  console.log(a);                   // <i>true</i>
+}
+</pre>
+<p>However, functions are not the only blocks that create a scope (if you
+are using <b>let</b> or <b>const</b>). <b>let</b> and <b>const</b> declarations
+have a scope of the nearest block statement. See here for a more
+detailed description.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-2">Section 19.2: Currying</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+[Currying](https://en.wikipedia.org/wiki/Currying) is the
+transformation of a function of n arity or arguments into a sequence
+of n functions taking only one argument.
+Use cases: When the values of some arguments are available before
+others, you can use currying to decompose a function into a series of
+functions that complete the work in stages, as each value arrives.
+This can be useful:
+When the value of an argument almost never changes (e.g., a conversion
+factor), but you need to maintain the flexibility of setting that
+value (rather than hard-coding it as a constant).
+
+When the result of a curried function is useful before the other
+curried functions have run. To validate the arrival of the functions
+in a specific sequence.
+
+For example, the volume of a rectangular prism can be explained by a
+function of three factors: length (l), width (w), and height (h):
 <b>var</b>
-i
+prism
 =
-0
-;
-i
-&lt;
-5
-;
-i
-++
+<b>function</b>
+(
+l
+,
+w
+,
+h
 )
 {
-nextLoop2Iteration
-:
-<b>for</b>
+<b>return</b>
+l
+&ast;
+w
+&ast;
+h
+;
+}
+A curried version of this function would look like:
+<b>function</b>
+prism
 (
-<b>var</b>
-j
-=
-0
-;
-j
-&lt;
-5
-;
-j
-++
+l
 )
 {
-<b>if</b>
+<b>return</b>
+<b>function</b>
 (
-i
-==
-j
+w
 )
-<b>break</b>
-nextLoop2Iteration
+{
+<b>return</b>
+<b>function</b>
+(
+h
+)
+{
+<b>return</b>
+l
+&ast;
+w
+&ast;
+h
+;
+}
+}
+}
+Version ≥ 6
+// <i> alternatively, with concise ECMAScript 6+ syntax:</i>
+<b>var</b>
+prism
+=
+l
+=&gt;
+w
+=&gt;
+h
+=&gt;
+l
+&ast;
+w
+&ast;
+h
+;
+prism
+You can call these sequence of functions with (2)(3)(5), which should
+evaluate to 30.
+<b>var</b> a = prism
+prism
+Without some extra machinery (like with libraries), currying is of
+limited syntactical flexibility in JavaScript (ES 5/6) due to the lack
+of placeholder values; thus, while you can use (2)(3) to create a
+[partially applied
+function](https://en.wikipedia.org/wiki/Partial_application), you
+cannot use ()(3)(5).
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-3">Section 19.3: Immediately Invoked Function Expressions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Sometimes you don&apos;t want to have your function accessible/stored as a
+variable. You can create an Immediately Invoked Function Expression
+(IIFE for short). These are essentially <i>self-executing anonymous
+functions</i>. They have access to the surrounding scope, but the
+function itself and any internal variables will be inaccessible from
+outside. An important thing to note about IIFE is that even if you
+name your function, IIFE are not hoisted like standard functions are
+and cannot be called by the function name they are declared with.
+(
+<b>function</b>
+(
+)
+{
+alert
+(
+&quot;I&apos;ve run - but can&apos;t be run again because I&apos;m immediately invoked
+at runtime,
+leaving behind only the result I generate&quot;
+)
+;
+}
+(
+)
+)
+;
+This is another way to write IIFE. Notice that the closing parenthesis
+before the semicolon was moved and placed right after the closing
+curly bracket:
+(
+<b>function</b>
+(
+)
+{
+alert
+(
+&quot;This is IIFE too.&quot;
+)
+;
+}
+)
+(
+)
+;
+You can easily pass parameters into an IIFE:
+(
+<b>function</b>
+(
+message
+)
+{
+alert
+(
+message
+)
+;
+}
+(
+&quot;Hello World!&quot;
+)
+)
+;
+Additionally, you can return values to the surrounding scope:
+<b>var</b>
+example
+=
+(
+<b>function</b>
+(
+)
+{
+<b>return</b>
+42
+;
+}
+(
+)
+)
 ;
 console.
 log
 (
-i
+example
+)
+;
+// <i> =&bsol;42</i>
+If required it is possible to name an IIFE. While less often seen,
+this pattern has several advantages, such as providing a reference
+which can be used for a recursion and can make debugging simpler as
+the name is included in the callstack.
+(
+<b>function</b>
+namedIIFE
+(
+)
+{
+<b>throw</b>
+error
+;
+// <i> We can now see the error thrown in &apos;namedIIFE()&apos;</i>
+}
+(
+)
+)
+;
+While wrapping a function in parenthesis is the most common way to
+denote to the JavaScript parser to expect an expression, in places
+where an expression is already expected, the notation can be made more
+concise:
+<b>var</b>
+a
+=
+<b>function</b>
+(
+)
+{
+<b>return</b>
+42
+}
+(
+)
+;
+console.
+log
+(
+a
+)
+// <i> =&bsol;42</i>
+Arrow version of immediately invoked function:
+Version ≥ 6
+(
+(
+)
+=&gt;
+console.
+log
+(
+&quot;Hello!&quot;
+)
+)
+(
+)
+;
+// <i> =&bsol;Hello!</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-4">Section 19.4: Named Functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Functions can either be named or unnamed (anonymous functions):
+<b>var</b>
+namedSum
+=
+<b>function</b>
+sum
+(
+a
 ,
-j
+b
+)
+{
+// <i> named</i>
+<b>return</b>
+a
+&plus;
+b
+;
+}
+<b>var</b>
+anonSum
+=
+<b>function</b>
+(
+a
+,
+b
+)
+{
+// <i> anonymous</i>
+<b>return</b>
+a
+&plus;
+b
+;
+}
+namedSum
+(
+1
+,
+3
+)
+;
+anonSum
+(
+1
+,
+3
+)
+;
+4
+4
+But their names are private to their own scope:
+<b>var</b>
+sumTwoNumbers
+=
+<b>function</b>
+sum
+(
+a
+,
+b
+)
+{
+<b>return</b>
+a
+&plus;
+b
+;
+}
+sum
+(
+1
+,
+3
+)
+;
+Uncaught ReferenceError: sum is not defined
+Named functions differ from the anonymous functions in multiple
+scenarios:
+
+When you are debugging, the name of the function will appear in the
+error/stack trace
+
+Named functions are hoisted while anonymous functions are not
+
+Named functions and anonymous functions behave differently when
+handling recursion
+
+Depending on ECMAScript version, named and anonymous functions may
+treat the function name property differently
+
+<b>Named functions are hoisted</b>
+
+When using an anonymous function, the function can only be called
+after the line of declaration, whereas a named function can be called
+before declaration. Consider
+foo
+(
+)
+;
+<b>var</b>
+foo
+=
+<b>function</b>
+(
+)
+{
+// <i> using an anonymous function</i>
+console.
+log
+(
+&apos;bar&apos;
+)
+;
+}
+Uncaught TypeError: foo is not a function
+foo
+(
+)
+;
+<b>function</b>
+foo
+(
+)
+{
+// <i> using a named function</i>
+console.
+log
+(
+&apos;bar&apos;
+)
+;
+}
+bar
+<b>Named Functions in a recursive scenario</b>
+A recursive function can be defined as:
+<b>var</b>
+say
+=
+<b>function</b>
+(
+times
+)
+{
+<b>if</b>
+(
+times
+&gt;
+0
+)
+{
+console.
+log
+(
+&apos;Hello!&apos;
+)
+;
+say
+(
+times
+&minus;
+1
 )
 ;
 }
 }
-<i><b>i=0 j=0 skips rest of j values</b></i>
-1
-0
-<i><b>i=1 j=1 skips rest of j values</b></i>
+// <i>you could call &apos;say&apos; directly,</i>
+// <i>but this way just illustrates the example</i>
+<b>var</b>
+sayHelloTimes
+=
+say
+;
+sayHelloTimes
+(
 2
+)
+;
+Hello!
+Hello!
+What if somewhere in your code the original function binding gets
+redefined?
+<b>var</b>
+say
+=
+<b>function</b>
+(
+times
+)
+{
+<b>if</b>
+(
+times
+&gt;
 0
-2
+)
+{
+console.
+log
+(
+&apos;Hello!&apos;
+)
+;
+say
+(
+times
+&minus;
 1
-<i><b>i=2 j=2 skips rest of j values</b></i>
-0
-3
-1
-3
-3
+)
+;
+}
+}
+<b>var</b>
+sayHelloTimes
+=
+say
+;
+say
+=
+&quot;oops&quot;
+;
+sayHelloTimes
+(
 2
-<i><b>i=3 j=3 skips rest of j values</b></i>
-4
-0
-4
-1
-4
-2
-4
-3
-<i><b>i=4 j=4 does not log and loops are done</b></i>
-<h2 id="ch19">Chapter 19: Functions</h2>
-Functions in JavaScript provide organized, reusable code to perform a
-set of actions. Functions simplify the coding process, prevent
-redundant logic, and make code easier to follow. This topic describes
-the declaration and utilization of functions, arguments, parameters,
-return statements and scope in JavaScript.
+)
+;
+Hello!
 
+Uncaught TypeError: say is not a function
+This can be solved using a named function
+// <i> The outer variable can even have the same name as the function</i>
+// <i> as they are contained in different scopes</i>
+<b>var</b>
+say
+=
+<b>function</b>
+say
+(
+times
+)
+{
+<b>if</b>
+(
+times
+&gt;
+0
+)
+{
+console.
+log
+(
+&apos;Hello!&apos;
+)
+;
+// <i> this time, &apos;say&apos; doesn&apos;t use the outer variable</i>
+// <i> it uses the named function</i>
+say
+(
+times
+&minus;
+1
+)
+;
+}
+}
+<b>var</b>
+sayHelloTimes
+=
+say
+;
+say
+=
+&quot;oops&quot;
+;
+sayHelloTimes
+(
+2
+)
+;
+Hello!
+Hello!
+And as bonus, the named function can&apos;t be set to <b>undefined</b>, even
+from inside:
+<b>var</b>
+say
+=
+<b>function</b>
+say
+(
+times
+)
+{
+// <i> this does nothing</i>
+say
+=
+<b>undefined</b>
+;
+<b>if</b>
+(
+times
+&gt;
+0
+)
+{
+console.
+log
+(
+&apos;Hello!&apos;
+)
+;
+// <i> this time, &apos;say&apos; doesn&apos;t use the outer variable</i>
+// <i> it&apos;s using the named function</i>
+say
+(
+times
+&minus;
+1
+)
+;
+}
+}
+<b>var</b>
+sayHelloTimes
+=
+say
+;
+say
+=
+&quot;oops&quot;
+;
+sayHelloTimes
+(
+2
+)
+;
+Hello!
+Hello!
+<b>The name property of functions</b>
+
+Before ES6, named functions had their name properties set to their
+function names, and anonymous functions had their name properties set
+to the empty string.
+Version ≤ 5
+<b>var</b>
+foo
+=
+<b>function</b>
+(
+)
+{
+}
+console.
+log
+(
+foo.
+name
+)
+;
+// <i> outputs &apos;&apos;</i>
+<b>function</b>
+foo
+(
+)
+{
+}
+console.
+log
+(
+foo.
+name
+)
+;
+// <i> outputs &apos;foo&apos;</i>
+Post ES6, named and unnamed functions both set their name properties:
+Version ≥ 6
+<b>var</b>
+foo
+=
+<b>function</b>
+(
+)
+{
+}
+console.
+log
+(
+foo.
+name
+)
+;
+// <i> outputs &apos;foo&apos;</i>
+<b>function</b>
+foo
+(
+)
+{
+}
+console.
+log
+(
+foo.
+name
+)
+;
+// <i> outputs &apos;foo&apos;</i>
+<b>var</b>
+foo
+=
+<b>function</b>
+bar
+(
+)
+{
+}
+console.
+log
+(
+foo.
+name
+)
+;
+// <i> outputs &apos;bar&apos;</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-5">Section 19.5: Binding &grave;this&grave; and arguments</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version ≥ 5.1</h5>
+When you take a reference to a method (a property which is a function)
+in JavaScript, it usually doesn&apos;t remember the object it was
+originally attached to. If the method needs to refer to that object as
+<b>this</b> it won&apos;t be able to, and calling it will probably cause a
+crash.
+bind
+
+You can use the .() method on a function to create a wrapper that
+includes the value of <b>this</b> and any number of leading arguments.
+<b>var</b>
+monitor
+=
+{
+threshold
+:
+5
+,
+check
+:
+<b>function</b>
+(
+value
+)
+{
+<b>if</b>
+(
+value
+&gt;
+<b>this</b>
+.
+threshold
+)
+{
+<b>this</b>
+.
+display
+(
+&quot;Value is too high!&quot;
+)
+;
+}
+}
+,
+display
+(
+message
+)
+{
+alert
+(
+message
+)
+;
+}
+}
+;
+monitor.
+check
+(
+7
+)
+;
+// <i> The value of &grave;this&grave; is implied by the method call syntax.</i>
+<b>var</b>
+badCheck
+=
+monitor.
+check
+;
+badCheck
+(
+15
+)
+;
+// <i> The value of &grave;this&grave; is window object and this.threshold is
+undefined, so value &gt;</i>
+<i>this.threshold is false</i>
+<b>var</b>
+check
+=
+monitor.
+check
+.
+bind
+(
+monitor
+)
+;
+check
+(
+15
+)
+;
+// <i> This value of &grave;this&grave; was explicitly bound, the function works.<i>
+<b>var</b>
+check8
+=
+monitor.
+check
+.
+bind
+(
+monitor
+,
+8
+)
+;
+check8
+(
+)
+;
+// <i> We also bound the argument to &grave;8&grave; here. It can&apos;t be
+re-specified.</i>
+call
+When not in strict mode, a function uses the global object (window in
+the browser) as <b>this</b>, unless the function is called as a method,
+bound, or called with the method . syntax.
+window.
+x
+=
+12
+;
+<b>function</b>
+example
+(
+)
+{
+<b>return</b>
+<b>this</b>
+.
+x
+;
+}
+console.
+log
+(
+example
+(
+)
+)
+;
+// <i> 12</i>
+In strict mode
+<b>this</b>
+is
+<b>undefined</b>
+by default
+window.
+x
+=
+12
+;
+<b>function</b>
+example
+(
+)
+{
+&quot;use strict&quot;
+;
+<b>return</b>
+<b>this</b>
+.
+x
+;
+}
+console.
+log
+(
+example
+(
+)
+)
+;
+// <i> Uncaught TypeError: Cannot read property &apos;x&apos; of undefined(</i>
+...
+)
+Version ≥ 7
+<b>Bind Operator</b>
+
+The double colon <b>bind operator</b> can be used as a shortened syntax
+for the concept explained above:
+<b>var</b>
+log
+=
+console.
+log
+.
+bind
+(
+console
+)
+;
+// <i> long version</i>
+<b>const</b>
+log
+=
+::
+console.
+log
+;
+// <i> short version</i>
+foo.
+bar
+.
+call
+(
+foo
+)
+;
+// <i> long version</i>
+foo
+::
+bar
+(
+)
+;
+// <i> short version</i>
+foo.
+bar
+.
+call
+(
+foo
+,
+arg1
+,
+arg2
+,
+arg3
+)
+;
+// <i> long version</i>
+foo
+::
+bar
+(
+arg1
+,
+arg2
+,
+arg3
+)
+;
+// <i> short version</i>
+foo.
+bar
+.
+apply
+(
+foo
+,
+args
+)
+;
+// <i> long version</i>
+foo
+::
+bar
+(
+&hellip;
+args
+)
+;
+// <i> short version</i>
+This syntax allows you to write normally, without worrying about
+binding <b>this</b> everywhere.
+<b>Binding console functions to variables var</b> log =
+console.log.bind(console); <b>Usage:</b>
+log
+(
+&apos;one&apos;
+,
+&apos;2&apos;
+,
+3
+,
+&lbrack;
+4
+&rbrack;
+,
+{
+5
+:
+5
+}
+)
+;
+<b>Output:</b>
+one
+2
+3
+&lbrack;
+4
+&rbrack;
+Object
+{
+5
+:
+5
+}
+<b>Why would you do that?</b>
+
+One use case can be when you have custom logger and you want to decide
+on runtime which one to use.
+<b>var</b>
+logger
+=
+require
+(
+&apos;appLogger&apos;
+)
+;
+<b>var</b>
+log
+=
+logToServer
+?
+logger.
+log
+:
+console.
+log
+.
+bind
+(
+console
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-6">Section 19.6: Functions with an Unknown Number of Arguments (variadic functions)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+To create a function which accepts an undetermined number of
+arguments, there are two methods depending on your environment.
+
+<h5>Version ≤ 5</h5>
+
+Whenever a function is called, it has an Array-like
+[arguments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments)
+object in its scope, containing all the arguments passed to the
+function. Indexing into or iterating over this will give access to the
+arguments, for example
+
+<b>function</b>
+logSomeThings
+(
+)
+{
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+arguments.
+length
+;
+++
+i
+)
+{
+console.
+log
+(
+
+arguments
+&lbrack;
+i
+&rbrack;
+)
+;
+}
+}
+logSomeThings
+(
+&apos;hello&apos;
+,
+&apos;world&apos;
+)
+;
+// <i> logs &quot;hello&quot;</i>
+// <i> logs &quot;world&quot;</i>
+Note that you can convert arguments to an actual Array if need-be;
+see: Converting Array-like Objects to Arrays
+Version ≥ 6
+From ES6, the function can be declared with its last parameter using
+the [rest
+operator](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/rest_parameters)
+(&hellip;). This creates an Array which holds the arguments from that
+point onwards
+<b>function</b>
+personLogsSomeThings
+(
+person
+,
+&hellip;
+msg
+)
+{
+msg.
+forEach
+(
+arg
+=&gt;
+{
+console.
+log
+(
+person
+,
+&apos;says&apos;
+,
+arg
+)
+;
+}
+)
+;
+}
+personLogsSomeThings
+(
+&apos;John&apos;
+,
+&apos;hello&apos;
+,
+&apos;world&apos;
+)
+;
+// <i> logs &quot;John says hello&quot;</i>
+// <i> logs &quot;John says world&quot;</i>
+Functions can also be called with similar way, the [spread
+syntax](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_operator)
+<b>const</b>
+logArguments
+=
+(
+&hellip;
+args
+)
+=&gt;
+console.
+log
+(
+args
+)
+<b>const</b>
+list
+=
+&lbrack;
+1
+,
+2
+,
+3
+&rbrack;
+logArguments
+(
+&apos;a&apos;
+,
+&apos;b&apos;
+,
+&apos;c&apos;
+,
+&hellip;
+list
+)
+// <i> output: Array &lbrack; &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, 1, 2, 3 &rbrack;</i>
+This syntax can be used to insert arbitrary number of arguments to any
+position, and can be used with any iterable(apply accepts only
+array-like objects).
+<b>const</b>
+logArguments
+=
+(
+&hellip;
+args
+)
+=&gt;
+console.
+log
+(
+args
+)
+<b>function</b>
+&ast;
+generateNumbers
+(
+)
+{
+yield
+6
+yield
+5
+yield
+4
+}
+logArguments
+(
+&apos;a&apos;
+,
+&hellip;
+generateNumbers
+(
+)
+,
+&hellip;
+&apos;pqr&apos;
+,
+&apos;b&apos;
+)
+// <i> output: Array &lbrack; &quot;a&quot;, 6, 5, 4, &quot;p&quot;, &quot;q&quot;, &quot;r&quot;, &quot;b&quot; &rbrack;</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-7">Section 19.7: Anonymous Function</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>Defining an Anonymous Function</b>
+When a function is defined, you often give it a name and then invoke
+it using that name, like so:
+foo
+(
+)
+;
+<b>function</b>
+foo
+(
+)
+{
+// <i> &hellip;</i>
+}
+When you define a function this way, the JavaScript runtime stores
+your function in memory and then creates a reference to that function,
+using the name you&apos;ve assigned it. That name is then accessible
+within the current scope. This can be a very convenient way to create
+a function, but JavaScript does not require you to assign a name to a
+function. The following is also perfectly legal:
+<b>function</b>
+(
+)
+{
+// <i> &hellip;</i>
+}
+When a function is defined without a name, it&apos;s known as an anonymous
+function. The function is stored in memory, but the runtime doesn&apos;t
+automatically create a reference to it for you. At first glance, it
+may appear as if such a thing would have no use, but there are several
+scenarios where anonymous functions are very convenient.
+
+<b>Assigning an Anonymous Function to a Variable</b>
+
+A very common use of anonymous functions is to assign them to a
+variable:
+<b>var</b>
+foo
+=
+<b>function</b>
+(
+)
+{
+*/&ast;&hellip;&ast;/*
+}
+;
+foo
+(
+)
+;
+
+This use of anonymous functions is covered in more detail in Functions
+as a variable
+
+<b>Supplying an Anonymous Function as a Parameter to Another Function</b>
+
+Some functions may accept a reference to a function as a parameter.
+These are sometimes referred to as
+
+&quot;dependency injections&quot; or &quot;callbacks&quot;, because it allows the
+function your calling to &quot;call back&quot; to your code, giving you an
+opportunity to change the way the called function behaves. For
+example, the Array object&apos;s map function allows you to iterate over
+each element of an array, then build a new array by applying a
+transform function to each element.
+
+<b>var</b>
+nums
+=
+&lbrack;
+0
+,
+1
+,
+2
+&rbrack;
+;
+<b>var</b>
+doubledNums
+=
+nums.
+map
+(
+<b>function</b>
+(
+element
+)
+{
+<b>return</b>
+element
+&ast;
+2
+;
+}
+)
+;
+// <i> &lbrack;0,2,4&rbrack;</i>
+It would be tedious, sloppy and unnecessary to create a named
+function, which would clutter your scope with a function only needed
+in this one place and break the natural flow and reading of your code
+(a colleague would have to leave this code to find your function to
+understand what&apos;s going on).
+
+<b>Returning an Anonymous Function From Another Function</b>
+
+Sometimes it&apos;s useful to return a function as the result of another
+function. For example:
+<b>var</b>
+hash
+=
+getHashFunction
+(
+&apos;sha1&apos;
+)
+;
+<b>var</b>
+hashValue
+=
+hash
+(
+&apos;Secret Value&apos;
+)
+;
+<b>function</b>
+getHashFunction
+(
+algorithm
+)
+{
+<b>if</b>
+(
+algorithm
+===
+&apos;sha1&apos;
+)
+<b>return</b>
+<b>function</b>
+(
+value
+)
+{
+*/&ast;&hellip;&ast;/*
+}
+;
+<b>else</b>
+<b>if</b>
+(
+algorithm
+===
+&apos;md5&apos;
+)
+<b>return</b>
+<b>function</b>
+(
+value
+)
+{
+*/&ast;&hellip;&ast;/*
+}
+;
+}
+<b>Immediately Invoking an Anonymous Function</b>
+<b>&lt;script</b>
+Unlike many other languages, scoping in JavaScript is function-level,
+not block-level. (See Function Scoping ). In some cases, however,
+it&apos;s necessary to create a new scope. For example, it&apos;s common to
+create a new scope when adding code via a <b>&gt;</b> tag, rather than
+allowing variable names to be defined in the global scope (which runs
+the risk of other scripts colliding with your variable names). A
+common method to handle this situation is to define a new anonymous
+function and then immediately invoke it, safely hiding you variables
+within the scope of the anonymous function and without making your
+code accessible to third-parties via a leaked function name. For
+example:
+&lt;!&bsol;
+My Script
+&bsol;
+<b>&gt;</b>
+<b>&lt;</b>
+<b>script</b>
+<b>&gt;</b>
+function initialize
+(
+)
+{
+// foo is safely hidden within initialize, but&hellip;
+var foo =
+&apos;&apos;
+;
+}
+// &hellip;my initialize function is now accessible from global scope.
+// There is a risk someone could call it again, probably by accident.
+initialize
+(
+)
+;
+<b>&lt;</b>
+<b>/script</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>script</b>
+<b>&gt;</b>
+// Using an anonymous function, and then immediately
+// invoking it, hides my foo variable and guarantees
+// no one else can call it a second time.
+(
+function
+(
+)
+{
+var foo =
+&apos;&apos;
+;
+}
+(
+)
+)
+// &lt;&minus;&bsol; the parentheses invokes the function immediately
+<b>&lt;</b>
+<b>/script</b>
+<b>&gt;</b>
+<b>Self-Referential Anonymous Functions</b>
+
+Sometimes it&apos;s useful for an anonymous function to be able to refer
+to itself. For example, the function may need to recursively call
+itself or add properties to itself. If the function is anonymous,
+though, this can be very difficult as it requires knowledge of the
+variable that the function has been assigned to. This is the less than
+ideal solution:
+
+<b>var</b>
+foo
+=
+<b>function</b>
+(
+callAgain
+)
+{
+console.
+log
+(
+&apos;Whassup?&apos;
+)
+;
+// <i> Less than ideal&hellip; we&apos;re dependent on a variable reference&hellip;</i>
+<b>if</b>
+(
+callAgain
+===
+<b>true</b>
+)
+foo
+(
+<b>false</b>
+)
+;
+}
+;
+foo
+(
+<b>true</b>
+)
+;
+// <i> Console Output:</i>
+// <i> Whassup?</i>
+// <i> Whassup?</i>
+// <i> Assign bar to the original function, and assign foo to another
+function.</i>
+<b>var</b>
+bar
+=
+foo
+;
+foo
+=
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+&apos;Bad.&apos;
+)
+}
+;
+bar
+(
+<b>true</b>
+)
+;
+// <i> Console Output:</i>
+// <i> Whassup?</i>
+// <i> Bad.</i>
+The intent here was for the anonymous function to recursively call
+itself, but when the value of foo changes, you end up with a
+potentially difficult to trace bug.
+
+Instead, we can give the anonymous function a reference to itself by
+giving it a private name, like so:
+<b>var</b>
+foo
+=
+<b>function</b>
+myself
+(
+callAgain
+)
+{
+console.
+log
+(
+&apos;Whassup?&apos;
+)
+;
+// <i> Less than ideal&hellip; we&apos;re dependent on a variable reference&hellip;</i>
+<b>if</b>
+(
+callAgain
+===
+<b>true</b>
+)
+myself
+(
+<b>false</b>
+)
+;
+}
+;
+foo
+(
+<b>true</b>
+)
+;
+// <i> Console Output:</i>
+// <i> Whassup?</i>
+// <i> Whassup?</i>
+// <i> Assign bar to the original function, and assign foo to another
+function.</i>
+<b>var</b>
+bar
+=
+foo
+;
+foo
+=
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+&apos;Bad.&apos;
+)
+}
+;
+bar
+(
+<b>true</b>
+)
+;
+// <i>Console Output:</i>
+// <i>Whassup?</i>
+// <i>Whassup?</i>
+Note that the function name is scoped to itself. The name has not
+eaked into the outer scope:
+myself
+(
+<b>false</b>
+)
+;
+// <i>ReferenceError: myself is not defined</i>
+This technique is especially useful when dealing with recursive
+anonymous functions as callback parameters:
+Version ≥ 5
+// <i>Calculate the Fibonacci value for each number in an array:</i>
+<b>var</b>
+fib
+=
+<b>false</b>
+,
+result
+=
+&lbrack;
+1
+,
+2
+,
+3
+,
+4
+,
+5
+,
+6
+,
+7
+,
+8
+&rbrack;
+.
+map
+(
+<b>function</b>
+fib
+(
+n
+)
+{
+<b>return</b>
+(
+n
+&lt;=
+2
+)
+?
+1
+:
+fib
+(
+n
+&minus;
+1
+)
+&plus;
+fib
+(
+n
+&minus;
+2
+)
+;
+}
+)
+;
+// <i>result = &lbrack;1, 1, 2, 3, 5, 8, 13, 21&rbrack;</i>
+// <i>fib = false (the anonymous function name did not overwrite our fib
+variable)</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-8">Section 19.8: Default parameters</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Before ECMAScript 2015 (ES6), a parameter&apos;s default value could be
+assigned in the following way:
+<b>function</b>
+printMsg
+(
+msg
+)
+{
+msg = <b>typeof</b> msg !== &apos;undefined&apos; ? // <i> if a value was provided<i>
+msg : // <i> then, use that value in the reassignment<i>
+
+&apos;Default value for msg.&apos;; // <i> else, assign a default value<i>
+console.log(msg); }
+
+ES6 provided a new syntax where the condition and reassignment
+depicted above is no longer necessary:
+
+Version ≥ 6
+
+<b>function</b>
+printMsg
+(
+msg
+=
+&apos;Default value for msg.&apos;
+)
+{
+console.
+log
+(
+msg
+)
+;
+}
+printMsg
+(
+)
+;
+// <i> -&amp;quot;Default value for msg.&quot;<i>
+printMsg
+(
+<b>undefined</b>
+)
+;
+// <i> -&amp;quot;Default value for msg.&quot;<i>
+printMsg
+(
+&apos;Now my msg in different!&apos;
+)
+;
+// <i> -&amp;quot;Now my msg in different!&quot;<i>
+
+This also shows that if a parameter is missing when the function is
+invoked, its value is kept as <b>undefined</b>, as it can be confirmed by
+explicitly providing it in the following example (using an arrow
+function):
+
+Version ≥ 6
+<b>let</b>
+param_check
+=
+(
+p
+=
+&apos;str&apos;
+)
+=&gt;
+console.
+log
+(
+p
+&plus;
+&apos; is of type: &apos;
+&plus;
+<b>typeof</b>
+p
+)
+;
+param_check
+(
+)
+;
+// <i> -&amp;quot;str is of type: string&quot;<i>
+param_check
+(
+<b>undefined</b>
+)
+;
+// <i> -&amp;quot;str is of type: string&quot;<i>
+param_check
+(
+1
+)
+;
+// <i> -&amp;quot;1 is of type: number&quot;<i>
+param_check
+(
+<b>this</b>
+)
+;
+// <i> -&amp;quot;&lbrack;object Window&rbrack; is of type: object&quot;<i>
+<b>Functions/variables as default values and reusing parameters</b>
+callback = <b>function</b>
+
+The default parameters&apos; values are not restricted to numbers, strings
+or simple objects. A function can also be set as the default value
+(){}:
+Version ≥ 6
+<b>function</b>
+foo
+(
+callback
+=
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+&apos;default&apos;
+)
+;
+}
+)
+{
+callback
+(
+)
+;
+}
+foo
+(
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+&apos;custom&apos;
+)
+;
+}
+)
+;
+// <i> custom<i>
+foo
+(
+)
+;
+// <i>default<i>
+
+There are certain characteristics of the operations that can be
+performed through default values:
+
+A previously declared parameter can be reused as a default value for
+the upcoming parameters&apos; values.
+
+Inline operations are allowed when assigning a default value to a
+parameter.
+
+Variables existing in the same scope of the function being declared
+can be used in its default values. Functions can be invoked in order
+to provide their return value into a default value.
+
+Version ≥ 6 <b>let</b> zero = 0; <b>function</b> multiply(x) { <b>return</b> x &ast;
+2;}
+<b>function</b> add(a = 1 + zero, b = a, c = b + a, d = multiply(c)) {
+console.log((a + b + c), d);
+}
+add
+(
+1
+)
+;
+// <i> 4, 4</i>
+add
+(
+3
+)
+;
+// <i> 12, 12</i>
+add
+(
+2
+,
+7
+)
+;
+// <i> 18, 18</i>
+add
+(
+1
+,
+2
+,
+5
+)
+;
+// <i> 8, 10</i>
+add
+(
+1
+,
+2
+,
+5
+,
+10
+)
+;
+// <i> 8, 20</i>
+<b>Reusing the function&apos;s return value in a new invocation&apos;s default
+value:</b> 
+<h5>Version ≥ 6</h5>
+<b>let</b>
+array
+=
+&lbrack;
+1
+&rbrack;
+;
+// <i> meaningless: this will be overshadowed in the function&apos;s scope</i>
+
+<b>function</b>
+add
+(
+value
+,
+array
+=
+&lbrack;
+&rbrack;
+)
+{
+array.
+push
+(
+value
+)
+;
+<b>return</b>
+array
+;
+}
+add
+(
+5
+)
+;
+// <i> &lbrack;5&rbrack;</i>
+add
+(
+6
+)
+;
+// <i> &lbrack;6&rbrack;, not &lbrack;5, 6&rbrack;</i>
+add
+(
+6
+,
+add
+(
+5
+)
+)
+;
+// <i> &lbrack;5, 6&rbrack;</i>
+<b>arguments value and length when lacking parameters in invocation</b>
+The arguments array object only retains the parameters whose values
+are not default, i.e. those that are explicitly provided when the
+function is invoked:
+<h5>Version ≥ 6</h5>
+<b>function</b>
+foo
+(
+a
+=
+1
+,
+b
+=
+a
+&plus;
+1
+)
+{
+console.
+info
+(
+arguments.
+length
+,
+arguments
+)
+;
+console.
+log
+(
+a
+,
+b
+)
+;
+
+}
+
+foo
+(
+)
+;
+// <i> info: 0 &gt;&amp;lbrack;&rbrack; &vert; log: 1, 2</i>
+foo
+(
+4
+)
+;
+// <i> info: 1 &gt;&amp;lbrack;4&rbrack; &vert; log: 4, 5</i>
+foo
+(
+5
+,
+6
+)
+;
+// <i> info: 2 &gt;&amp;lbrack;5, 6&rbrack; &vert; log: 5, 6</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-9">Section 19.9: Call and apply</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Functions have two built-in methods that allow the programmer to
+supply arguments and the <b>this</b> variable differently: call and
+apply.
+
+This is useful, because functions that operate on one object (the
+object that they are a property of) can be repurposed to operate on
+another, compatible object. Additionally, arguments can be given in
+one shot as arrays, similar to the spread (&hellip;) operator in ES6.
+
+<b>let</b>
+obj
+=
+{
+a
+:
+1
+,
+b
+:
+2
+,
+<b>set</b>
+:
+**function**
+(
+a
+,
+b
+)
+{
+**this**
+.
+a
+=
+a
+;
+**this**
+.
+b
+=
+b
+;
+}
+}
+;
+obj.
+**set**
+(
+3
+,
+7
+)
+;
+// <i> normal syntax</i>
+obj.
+**set**
+.
+all
+(
+obj
+,
+3
+,
+7
+)
+;
+// <i> equivalent to the above</i>
+obj.
+**set**
+.
+apply
+(
+obj
+,
+&lbrack;
+3
+,
+7
+&rbrack;
+)
+;
+// <i> equivalent to the above; note that an array is used</i>
+console.
+log
+(
+obj
+)
+;
+// <i> prints { a: 3, b: 5 }</i>
+**let**
+myObj
+=
+{
+}
+;
+myObj.
+**set**
+(
+5
+,
+4
+)
+;
+// <i> fails; myObj has no &grave;set&grave; property</i>
+obj.**set**.call(myObj, 5, 4); // <i> success; &grave;this&grave; in set() is
+re-routed to myObj instead of obj* obj.**set**.apply(myObj, &lbrack;5, 4&rbrack;);
+// <i> same as above; note the array</i>
+
+console.log(myObj); // <i> prints { a: 3, b: 5 }</i>
+
+<h5>Version ≥ 5</h5>
+**bind**   **()** in addition to call() and apply
+ECMAScript 5 introduced another method called () to explicitly set
+**this** value of the function to specific object.
+bind
+It behaves quite differently than the other two. The first argument to
+() is the **this** value for the new function. All other arguments
+represent named parameters that should be permanently set in the new
+function.
+
+**function**
+showName
+(
+label
+)
+{
+console.
+log
+(
+label
+&plus;
+&quot;:&quot;
+&plus;
+**this**
+.
+name
+)
+;
+}
+**var**
+student1
+=
+{
+name
+:
+&quot;Ravi&quot;
+}
+;
+**var**
+student2
+=
+{
+name
+:
+&quot;Vinod&quot;
+}
+;
+// <i> create a function just for student1</i>
+**var**
+showNameStudent1
+=
+showName.
+bind
+(
+student1
+)
+;
+showNameStudent1
+(
+&quot;student1&quot;
+)
+;
+// <i> outputs &quot;student1:Ravi&quot;</i>
+// <i> create a function just for student2</i>
+**var**
+showNameStudent2
+=
+showName.
+bind
+(
+student2
+,
+&quot;student2&quot;
+)
+;
+showNameStudent2
+(
+)
+;
+// <i> outputs &quot;student2:Vinod&quot;</i>
+// <i> attaching a method to an object doesn&apos;t change &grave;this&grave; value of
+that method.</i>
+student2.
+sayName
+=
+showNameStudent1
+;
+student2.
+sayName
+(
+&quot;student2&quot;
+)
+;
+// <i> outputs &quot;student2:Ravi&quot;</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-10">Section 19.10: Partial Application</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Similar to currying, partial application is used to reduce the number
+of arguments passed to a function. Unlike currying, the number need
+not go down by one.
+Example:
+This function &hellip;
+**function**
+multiplyThenAdd
+(
+a
+,
+b
+,
+c
+)
+{
+**return**
+a
+&ast;
+b
+&plus;
+c
+;
+}
+&hellip; can be used to create another function that will always multiply
+by 2 and then add 10 to the passed value;
+**function**
+reversedMultiplyThenAdd
+(
+c
+,
+b
+,
+a
+)
+{
+**return**
+a
+&ast;
+b
+&plus;
+c
+;
+}
+**function**
+factory
+(
+b
+,
+c
+)
+{
+**return**
+reversedMultiplyThenAdd.
+bind
+(
+**null**
+,
+c
+,
+b
+)
+;
+}
+**var**
+multiplyTwoThenAddTen
+=
+factory
+(
+2
+,
+10
+)
+;
+multiplyTwoThenAddTen
+(
+10
+)
+;
+// <i> 30</i>
+The &quot;application&quot; part of partial application simply means fixing
+parameters of a function.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-11">Section 19.11: Passing arguments by reference or value</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+In JavaScript all arguments are passed by value. When a function
+assigns a new value to an argument variable, that change will not be
+visible to the caller:
+**var**
+obj
+=
+{
+a
+:
+2
+}
+;
+**function**
+myfunc
+(
+arg
+)
+{
+arg
+=
+{
+a
+:
+5
+}
+;
+// <i> Note the assignment is to the parameter variable itself</i>
+}
+myfunc
+(
+obj
+)
+;
+console.
+log
+(
+obj.
+a
+)
+;
+// <i> 2</i>
+However, changes made to (nested) properties *of* such arguments, will
+be visible to the caller:
+**var**
+obj
+=
+{
+a
+:
+2
+}
+;
+**function**
+myfunc
+(
+arg
+)
+{
+arg.
+a
+=
+5
+;
+// <i> assignment to a property of the argument</i>
+}
+myfunc
+(
+obj
+)
+;
+console.
+log
+(
+obj.
+a
+)
+;
+// <i> 5</i>
+This can be seen as a *call by reference*: although a function cannot
+change the caller&apos;s object by assigning a new value to it, it could
+*mutate* the caller&apos;s object.
+
+As primitive valued arguments, like numbers or strings, are immutable,
+there is no way for a function to mutate them:
+**var**
+s
+=
+&apos;say&apos;
+;
+**function**
+myfunc
+(
+arg
+)
+{
+arg
++=
+&apos; hello&apos;
+;
+// <i> assignment to the parameter variable itself</i>
+}
+myfunc
+(
+s
+)
+;
+console.
+log
+(
+s
+)
+;
+// <i> &apos;say&apos;</i>
+When a function wants to mutate an object passed as argument, but does
+not want to actually mutate the caller&apos;s object, the argument
+variable should be reassigned:
+<h5>Version ≥ 6</h5>
+<b>var</b>
+obj
+=
+{
+a
+:
+2
+,
+b
+:
+3
+}
+;
+**function**
+myfunc
+(
+arg
+)
+{
+arg
+=
+Object
+.
+assign
+(
+{
+}
+,
+arg
+)
+;
+// <i> assignment to argument variable, shallow copy</i>
+arg.
+a
+=
+5
+;
+}
+myfunc
+(
+obj
+)
+;
+console.
+log
+(
+obj.
+a
+)
+;
+// <i> 2</i>
+As an alternative to in-place mutation of an argument, functions can
+create a new value, based on the argument, and return it. The caller
+can then assign it, even to the original variable that was passed as
+argument:
+**var**
+a
+=
+2
+;
+**function**
+myfunc
+(
+arg
+)
+{
+arg
+++
+;
+**return**
+arg
+;
+}
+a
+=
+myfunc
+(
+a
+)
+;
+console.
+log
+(
+obj.
+a
+)
+;
+// <i> 3</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-12">Section 19.12: Function Arguments, &quot;arguments&quot; object, rest and spread parameters</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Functions can take inputs in form of variables that can be used and
+assigned inside their own scope. The following function takes two
+numeric values and returns their sum:
+
+**function**
+addition
+(
+argument1
+,
+argument2
+)
+{
+**return**
+argument1
+&plus;
+argument2
+;
+}
+console.
+log
+(
+addition
+(
+2
+,
+3
+)
+)
+;
+// <i> -&bsol;5</i>
+**arguments**
+**object**
+The arguments object contains all the function&apos;s parameters that
+contain a non-default value. It can also be used even if the
+parameters are not explicitly declared:
+
+(**function**() { console.log(arguments) })(0,&apos;str&apos;, &lbrack;2,{3}&rbrack;) // <i>
+-&amp;lbrack;0, &quot;str&quot;, Array&lbrack;2&rbrack;&rbrack;</i> Although when printing arguments the
+output resembles an Array, it is in fact an object:
+(
+**function**
+(
+)
+{
+console.
+log
+(
+**typeof**
+arguments
+)
+}
+)
+(
+)
+;
+// <i> -&bsol;object</i>
+**Rest parameters:**
+**function**
+**(**
+**&hellip;**
+**parm**
+**)**
+**{**
+**}**
+In ES6, the &hellip; syntax when used in the declaration of a function&apos;s
+parameters transforms the variable to its right into a single object
+containing all the remaining parameters provided after the declared
+ones. This allows the function to be invoked with an unlimited number
+of arguments, which will become part of this variable:
+// <i> -&bsol;object: 123</i>
+(
+**function**
+(
+a
+,
+&hellip;
+b
+)
+{
+console.
+log
+(
+**typeof**
+b
+&plus;
+&apos;: &apos;
+&plus;
+b
+&lbrack;
+0
+&rbrack;
+&plus;
+b
+&lbrack;
+1
+&rbrack;
+&plus;
+b
+&lbrack;
+2
+&rbrack;
+)
+}
+)
+(
+0
+,
+1
+,
+&apos;2&apos;
+,
+&lbrack;
+3
+&rbrack;
+,
+{
+i
+:
+4
+}
+)
+;
+**function_name** **(**   **&hellip;varb**
+**Spread parameters: );**
+In ES6, the &hellip; syntax can also be used when invoking a function by
+placing an object/variable to its right. This allows that object&apos;s
+elements to be passed into that function as a single object:
+**let**
+nums
+=
+&lbrack;
+2
+,
+42
+,-
+1
+&rbrack;
+;
+console.
+log
+(
+&hellip;
+&lbrack;
+&apos;a&apos;
+,
+&apos;b&apos;
+,
+&apos;c&apos;
+&rbrack;
+,
+Math
+.
+max
+(
+&hellip;
+nums
+)
+)
+;
+// <i> -&bsol;a b c 42</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-13">Section 19.13: Function Composition</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Composing multiple functions into one is a functional programming
+common practice;
+
+composition makes a pipeline through which our data will transit and
+get modified simply working on the functioncomposition (just like
+snapping pieces of a track together)&hellip;
+you start out with some single responsibility functions:
+<h5>Version ≥ 6</h5>
+<pre>
+<b>const</b> capitalize = x =&bsol;x.replace(*/&Hat;&bsol;&bsol;w/*, m =&gt; m.toUpperCase());
+<b>const</b> sign = x =&bsol;x + &apos;,<b>&bsol;n</b>made with love&apos;;
+</pre>
+<p>and easily create a transformation track:</p>
+<h5>Version ≥ 6</h5>
+<b>const</b> formatText = compose(capitalize, sign);
+formatText(&apos;this is an example&apos;)
+// <i>This is an example,</i>
+// <i>made with love</i>
+N.B. Composition is achieved through a utility function usually called
+compose as in our example.
+
+Implementation of compose are present in many JavaScript utility
+libraries ([lodash](https://lodash.com/docs#flow),
+[rambda](http://ramdajs.com/), etc.) but you can also start out with a
+simple implementation such as:
+Version ≥ 6
+<b>const</b>
+compose
+=
+(
+&hellip;
+funs
+)
+=&gt;
+x
+=&gt;
+funs.
+reduce
+(
+(
+ac
+,
+f
+)
+=&gt;
+f
+(
+ac
+)
+,
+x
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-14">Section 19.14: Get the name of a function object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version ≥ 6 <b>ES6</b>:</h5>
+myFunction.
+name
+[Explanation on
+MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name).
+As of 2015 works in Node.js and all major browsers except IE.
+
+<h5>Version ≥ 5</h5>
+<b>ES5</b>:
+
+If you have a reference to the function, you can do:
+<b>function</b>
+functionName
+(
+func
+)
+{
+// <i> Match:</i>
+// <i> - &Hat; the beginning of the string</i>
+// <i> - function the word &apos;function&apos;</i>
+// <i> - &bsol;&bsol;s+ at least some white space</i>
+// <i> - (&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+) capture one or more valid JavaScript identifier
+characters</i>
+// <i> - &amp;lpar; followed by an opening brace</i>
+// <i></i>
+<b>var</b>
+result
+=
+*/&Hat;function&bsol;&bsol;s+(&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+)&amp;lpar;/*
+.
+exec
+(
+func.
+toString
+(
+)
+)
+<b>return</b>
+result
+?
+result
+&lbrack;
+1
+&rbrack;
+:
+&apos;&apos;
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-15">Section 19.15: Recursive Function</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+A recursive function is simply a function, that would call itself.
+<b>function</b>
+factorial
+(
+n
+)
+{
+<b>if</b>
+(
+n
+&lt;=
+1
+)
+{
+<b>return</b>
+1
+;
+}
+<b>return</b>
+n
+&ast;
+factorial
+(
+n
+&minus;
+1
+)
+;
+}
+The above function shows a basic example of how to perform a recursive
+function to return a factorial.
+
+Another example, would be to retrieve the sum of even numbers in an
+array.
+<b>function</b>
+countEvenNumbers
+(
+arr
+)
+{
+// <i> Sentinel value. Recursion stops on empty array.</i>
+<b>if</b>
+(
+arr.
+length
+&lt;
+1
+)
+{
+<b>return</b>
+0
+;
+}
+// <i> The shift() method removes the first element from an array</i>
+// <i> and returns that element. This method changes the length of the array.</i>
+<b>var</b>
+value
+=
+arr.
+shift
+(
+)
+;
+// <i> &grave;value % 2 === 0&grave; tests if the number is even or odd</i>
+// <i> If it&apos;s even we add one to the result of counting the remainder of</i>
+// <i> the array. If it&apos;s odd, we add zero to it.</i>
+<b>return</b>
+(
+(
+value
+&percnt;
+2
+===
+0
+)
+?
+1
+:
+0
+)
+&plus;
+countEvens
+(
+arr
+)
+;
+}
+It is important that such functions make some sort of sentinel value
+check to avoid infinite loops. In the first example above, when n is
+less than or equal to 1, the recursion stops, allowing the result of
+each call to be returned back up the call stack.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-16">Section 19.16: Using the Return Statement</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The return statement can be a useful way to create output for a
+function. The return statement is especially useful if you do not know
+in which context the function will be used yet.
+// <i>An example function that will take a string as input and return</i>
+// <i>the first character of the string.</i>
+<b>function</b>
+firstChar
+(
+stringIn
+)
+{
+<b>return</b>
+stringIn.
+charAt
+(
+0
+)
+;
+}
+Now to use this function, you need to put it in place of a variable
+somewhere else in your code:
+<b>Using the function result as an argument for another function:</b>
+console.
+log
+(
+firstChar
+(
+&quot;Hello world&quot;
+)
+)
+;
+*Console output will be:*
+&gt;
+H
+<b>The return statement ends the function</b>
+
+If we modify the function in the beginning, we can demonstrate that
+the return statement ends the function.
+<b>function</b>
+firstChar
+(
+stringIn
+)
+{
+console.
+log
+(
+&quot;The first action of the first char function&quot;
+)
+;
+<b>return</b>
+stringIn.
+charAt
+(
+0
+)
+;
+console.
+log
+(
+&quot;The last action of the first char function&quot;
+)
+;
+}
+Running this function like so will look like this:
+console.
+log
+(
+firstChar
+(
+&quot;JS&quot;
+)
+)
+;
+<i>Console output:</i>
+&gt;
+The first action of the first
+char
+<b>function</b>
+&gt;
+J
+It will not print the message after the return statement, as the
+function has now been ended.
+
+<b>Return statement spanning multiple lines:</b>
+
+In JavaScript, you can normally split up a line of code into many
+lines for readability purposes or organization. This is valid
+JavaScript:
+<b>var</b>
+name
+=
+&quot;bob&quot;
+,
+age
+=
+18
+;
+When JavaScript sees an incomplete statement like <b>var</b> it looks to
+the next line to complete itself. However, if you make the same
+mistake with the <b>return</b> statement, you will not get what you
+expected.
+<b>return</b>
+&quot;Hi, my name is &quot;
+&plus;
+name
+&plus;
+&quot;. &quot;
+&plus;
+&quot;I&apos;m &quot;
+&plus;
+age
+&plus;
+&quot; years old.&quot;
+;
+This code will return <b>undefined</b> because <b>return</b> by itself is a
+complete statement in JavaScript, so it will not look to the next line
+to complete itself. If you need to split up a <b>return</b> statement
+into multiple lines, put a value next to return before you split it
+up, like so.
+<b>return</b>
+&quot;Hi, my name is &quot;
+&plus;
+name
+&plus;
+&quot;. &quot;
+&plus;
+&quot;I&apos;m &quot;
+&plus;
+age
+&plus;
+&quot; years old.&quot;
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch19-17">Section 19.17: Functions as a variable</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+A normal function declaration looks like this:
+<b>function</b>
+foo
+(
+)
+{
+}
+A function defined like this is accessible from anywhere within its
+context by its name. But sometimes it can be useful to treat function
+references like object references. For example, you can assign an
+object to a variable based on some set of conditions and then later
+retrieve a property from one or the other object:
+<b>var</b>
+name
+=
+&apos;Cameron&apos;
+;
+<b>var</b>
+spouse
+;
+<b>if</b>
+(
+name
+===
+&apos;Taylor&apos;
+)
+spouse
+=
+{
+name
+:
+&apos;Jordan&apos;
+}
+;
+<b>else</b>
+<b>if</b>
+(
+name
+===
+&apos;Cameron&apos;
+)
+spouse
+=
+{
+name
+:
+&apos;Casey&apos;
+}
+;
+<b>var</b>
+spouseName
+=
+spouse.
+name
+;
+In JavaScript, you can do the same thing with functions:
+// <i> Example 1</i>
+<b>var</b>
+hashAlgorithm
+=
+&apos;sha1&apos;
+;
+<b>var</b>
+hash
+;
+<b>if</b>
+(
+hashAlgorithm
+===
+&apos;sha1&apos;
+)
+hash
+=
+<b>function</b>
+(
+value
+)
+{
+*/&ast;&hellip;&ast;/*
+}
+;
+<b>else</b>
+<b>if</b>
+(
+hashAlgorithm
+===
+&apos;md5&apos;
+)
+hash
+=
+<b>function</b>
+(
+value
+)
+{
+// <i>&ast;&hellip;&ast;/</i>
+}
+;
+hash
+(
+&apos;Fred&apos;
+)
+;
+In the example above, hash is a normal variable. It is assigned a
+reference to a function, after which the function it references can be
+invoked using parentheses, just like a normal function declaration.
+
+The example above references anonymous functions&hellip; functions that do
+not have their own name. You can also use variables to refer to named
+functions. The example above could be rewritten like so:
+// <i> Example 2</i>
+<b>var</b>
+hashAlgorithm
+=
+&apos;sha1&apos;
+;
+<b>var</b>
+hash
+;
+<b>if</b>
+(
+hashAlgorithm
+===
+&apos;sha1&apos;
+)
+hash
+=
+sha1Hash
+;
+<b>else</b>
+<b>if</b>
+(
+hashAlgorithm
+===
+&apos;md5&apos;
+)
+hash
+=
+md5Hash
+;
+hash
+(
+&apos;Fred&apos;
+)
+;
+<b>function</b>
+md5Hash
+(
+value
+)
+{
+// <i> &hellip;</i>
+}
+<b>function</b>
+sha1Hash
+(
+value
+)
+{
+// <i> &hellip;</i>
+}
+Or, you can assign function references from object properties:
+// <i> Example 3</i>
+<b>var</b>
+hashAlgorithms
+=
+{
+sha1
+:
+<b>function</b>
+(
+value
+)
+{
+</i>/&ast;&ast;/</i>
+}
+,
+md5
+:
+<b>function</b>
+(
+value
+)
+{
+</i>/&ast;&ast;/</i>
+}
+}
+;
+<b>var</b>
+hashAlgorithm
+=
+&apos;sha1&apos;
+;
+<b>var</b>
+hash
+;
+<b>if</b>
+(
+hashAlgorithm
+===
+&apos;sha1&apos;
+)
+hash
+=
+hashAlgorithms.
+sha1
+;
+<b>else</b>
+<b>if</b>
+(
+
+hashAlgorithm
+===
+&apos;md5&apos;
+)
+hash
+=
+hashAlgorithms.
+md5
+;
+hash
+(
+&apos;Fred&apos;
+)
+;
+You can assign the reference to a function held by one variable to
+another by omitting the parentheses. This can result in an
+easy-to-make mistake: attempting to assign the return value of a
+function to another variable, but accidentally assigning the reference
+to the function.
+// <i> Example 4</i>
+<b>var</b>
+a
+=
+getValue
+;
+<b>var</b>
+b
+=
+a
+;
+// <i> b is now a reference to getValue.</i>
+<b>var</b>
+c
+=
+b
+(
+)
+;
+// <i> b is invoked, so c now holds the value returned by getValue (41)</i>
+<b>function</b> getValue(){ <b>return</b> 41; }
+
+A reference to a function is like any other value. As you&apos;ve seen, a
+reference can be assigned to a variable, and that variable&apos;s
+reference value can be subsequently assigned to other variables. You
+can pass around references to functions like any other value,
+including passing a reference to a function as the return value of
+another function. For example:
+
+// <i> Example 5</i>
+// <i> getHashingFunction returns a function, which is assigned</i>
+// <i> to hash for later use:</i>
+<b>var</b>
+hash
+=
+getHashingFunction
+(
+&apos;sha1&apos;
+)
+;
+// <i> &hellip;</i>
+hash
+(
+&apos;Fred&apos;
+)
+;
+*// return the function corresponding to the given algorithmName*
+<b>function</b>
+getHashingFunction
+(
+algorithmName
+)
+{
+*// return a reference to an anonymous function*
+<b>if</b>
+(
+algorithmName
+===
+&apos;sha1&apos;
+)
+<b>return</b>
+<b>function</b>
+(
+value
+)
+{
+*/&ast;&ast;/*
+}
+;
+*// return a reference to a declared function*
+<b>else</b>
+<b>if</b>
+(
+algorithmName
+===
+&apos;md5&apos;
+)
+<b>return</b>
+md5
+;
+}
+<b>function</b>
+md5Hash
+(
+value
+)
+{
+*// &hellip;*
+}
+
+You don&apos;t need to assign a function reference to a variable in order
+to invoke it. This example, building off example 5, will call
+getHashingFunction and then immediately invoke the returned function
+and pass its return value to hashedValue.
+*// Example 6*
+<b>var</b>
+hashedValue
+=
+getHashingFunction
+(
+&apos;sha1&apos;
+)
+(
+&apos;Fred&apos;
+)
+;
+<b>A Note on Hoisting</b>
+Keep in mind that, unlike normal function declarations, variables that
+reference functions are not &quot;hoisted&quot;. In example 2, the md5Hash and
+sha1Hash functions are defined at the bottom of the script, but are
+available everywhere immediately. No matter where you define a
+function, the interpreter &quot;hoists&quot; it to the top of its scope,
+making it immediately available. This is <b>not</b> the case for variable
+definitions, so code like the following will break:
+<b>var</b>
+functionVariable
+;
+hoistedFunction
+(
+)
+;
+*// works, because the function is &quot;hoisted&quot; to the top of its scope*
+functionVariable
+(
+)
+;
+*// error: undefined is not a function.*
+<b>function</b>
+hoistedFunction
+(
+)
+{
+}
+functionVariable
+=
+<b>function</b>
+(
+)
+{
+}
+;
+<!-- thru chapter 19 -->
