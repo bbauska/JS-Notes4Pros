@@ -9551,7 +9551,7 @@ we&apos;ve reassigned property and created new property.</p>
 <b>const</b> person = { name: &quot;John&quot; };
 <b>const</b> fun = <b>function</b> () = { /&ast; &hellip; &ast;/};
 <b>const</b> arrowFun = () =&gt; /&ast; &hellip; &ast;/;
-/pre>
+</pre>
 <p><b>Important</b></p>
 <p>You must declare and initialize a constant in the same statement.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
