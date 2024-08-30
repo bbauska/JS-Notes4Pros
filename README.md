@@ -10452,16 +10452,15 @@ includes the value of <b>this</b> and any number of leading arguments.</p>
     alert(message);
   }
 };
-monitor.check(7);  // <i> The value of &grave;this&grave; is implied by the method call syntax.</i>
+monitor.check(7);  // <i>The value of &grave;this&grave; is implied by the method call syntax.</i>
 <b>var</b> badCheck = monitor.check;
-badCheck(15);  // <i> The value of &grave;this&grave; is window object and this.threshold is undefined, so value &gt;</i>
+badCheck(15);  // <i>The value of &grave;this&grave; is window object and this.threshold is undefined, so value &gt;</i>
 <i>this.threshold is false</i>
 <b>var</b> check = monitor.check.bind(monitor);
 check(15);
 // <i>This value of &grave;this&grave; was explicitly bound, the function works.<i>
-<b>var</b>
-check8 = monitor.check.bind(monitor, 8);
-check8();  // <i> We also bound the argument to &grave;8&grave; here. It can&apos;t be re-specified.</i>
+<b>var</b> check8 = monitor.check.bind(monitor, 8);
+check8();  // <i>We also bound the argument to &grave;8&grave; here. It can&apos;t be re-specified.</i>
 </pre>
 <p>When not in strict mode, a function uses the global object (window in the browser) as 
 <b>this</b>, unless the function is called as a method, bound, or called with the method 
@@ -10472,7 +10471,7 @@ window.x = 12;
 <b>function</b> example() {
   <b>return</b> <b>this</b>.x;
 }
-console.log(example());  // <i> 12</i>
+console.log(example());  // <i>12</i>
 </pre>
 <p>In strict mode <b>this</b> is <b>undefined</b> by default</p>
 <pre>
@@ -10487,14 +10486,14 @@ console.log(example());  // <i> Uncaught TypeError: Cannot read property &apos;x
 <p><b>Bind Operator</b></p>
 <p>The double colon <b>bind operator</b> can be used as a shortened syntax for the concept explained above:</p>
 <pre>
-<b>var</b> log = console.log.bind(console);  // <i> long version</i>
-<b>const</b> log = ::console.log;  // <i> short version</i>
-foo.bar.call(foo);  // <i> long version</i>
-foo::bar();  // <i> short version</i>
-foo.bar.call(foo, arg1, arg2, arg3);  // <i> long version</i>
-foo::bar(arg1, arg2, arg3);  // <i> short version</i>
-foo.bar.apply(foo, args);  // <i> long version</i>
-foo::bar(&hellip;args);  // <i> short version</i>
+<b>var</b> log = console.log.bind(console);  // <i>long version</i>
+<b>const</b> log = ::console.log;  // <i>short version</i>
+foo.bar.call(foo);  // <i>long version</i>
+foo::bar();  // <i>short version</i>
+foo.bar.call(foo, arg1, arg2, arg3);  // <i>long version</i>
+foo::bar(arg1, arg2, arg3);  // <i>short version</i>
+foo.bar.apply(foo, args);  // <i>long version</i>
+foo::bar(&hellip;args);  // <i>short version</i>
 </pre>
 <p>This syntax allows you to write normally, without worrying about binding <b>this</b> everywhere.</p>
 <p><b>Binding console functions to variables var</b></p>
