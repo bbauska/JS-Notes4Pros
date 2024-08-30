@@ -10458,7 +10458,7 @@ badCheck(15);  // <i>The value of &grave;this&grave; is window object and this.t
 <i>this.threshold is false</i>
 <b>var</b> check = monitor.check.bind(monitor);
 check(15);
-// <i>This value of &grave;this&grave; was explicitly bound, the function works.<i>
+// <i>This value of &grave;this&grave; was explicitly bound, the function works.</i>
 <b>var</b> check8 = monitor.check.bind(monitor, 8);
 check8();  // <i>We also bound the argument to &grave;8&grave; here. It can&apos;t be re-specified.</i>
 </pre>
@@ -10480,7 +10480,7 @@ window.x = 12;
   &quot;use strict&quot;;
   <b>return</b> <b>this</b>.x;
 }
-console.log(example());  // <i> Uncaught TypeError: Cannot read property &apos;x&apos; of undefined(</i>...)
+console.log(example());  // <i>Uncaught TypeError: Cannot read property &apos;x&apos; of undefined(</i>...)
 </pre>
 <h5>Version ≥ 7</h5>
 <p><b>Bind Operator</b></p>
@@ -10570,174 +10570,78 @@ position, and can be used with any iterable(apply accepts only array-like object
 logArguments(&apos;a&apos;, &hellip;generateNumbers(), &hellip;&apos;pqr&apos;, &apos;b&apos;)
 // <i> output: Array &lbrack; &quot;a&quot;, 6, 5, 4, &quot;p&quot;, &quot;q&quot;, &quot;r&quot;, &quot;b&quot; &rbrack;</i>
 </pre>
+<!-- page 172 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-7">Section 19.7: Anonymous Function</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Defining an Anonymous Function</b>
-When a function is defined, you often give it a name and then invoke
-it using that name, like so:
-foo
-(
-)
-;
-<b>function</b>
-foo
-(
-)
-{
-// <i> &hellip;</i>
+<p><b>Defining an Anonymous Function</b></p>
+<p>When a function is defined, you often give it a name and then invoke
+it using that name, like so:</p>
+<pre>
+foo();
+<b>function</b> foo() {
+  // <i> &hellip;</i>
 }
-When you define a function this way, the JavaScript runtime stores
+</pre>
+<p>When you define a function this way, the JavaScript runtime stores
 your function in memory and then creates a reference to that function,
 using the name you&apos;ve assigned it. That name is then accessible
 within the current scope. This can be a very convenient way to create
 a function, but JavaScript does not require you to assign a name to a
-function. The following is also perfectly legal:
-<b>function</b>
-(
-)
-{
-// <i> &hellip;</i>
+function. The following is also perfectly legal:</p>
+<pre>
+<b>function</b>() {
+  // <i>&hellip;</i>
 }
-When a function is defined without a name, it&apos;s known as an anonymous
+</pre>
+<p>When a function is defined without a name, it&apos;s known as an anonymous
 function. The function is stored in memory, but the runtime doesn&apos;t
 automatically create a reference to it for you. At first glance, it
 may appear as if such a thing would have no use, but there are several
-scenarios where anonymous functions are very convenient.
+scenarios where anonymous functions are very convenient.</p>
 
-<b>Assigning an Anonymous Function to a Variable</b>
+<p><b>Assigning an Anonymous Function to a Variable</b></p>
+<p>A very common use of anonymous functions is to assign them to a
+variable:</p>
+<pre>
+<b>var</b> foo = <b>function</b>(){ /&ast;&hellip;&ast;/ };
+foo();
+</pre>
+<p>This use of anonymous functions is covered in more detail in Functions
+as a variable</p>
 
-A very common use of anonymous functions is to assign them to a
-variable:
-<b>var</b>
-foo
-=
-<b>function</b>
-(
-)
-{
-/&ast;&hellip;&ast;/
-}
-;
-foo
-(
-)
-;
-
-This use of anonymous functions is covered in more detail in Functions
-as a variable
-
-<b>Supplying an Anonymous Function as a Parameter to Another Function</b>
-
-Some functions may accept a reference to a function as a parameter.
-These are sometimes referred to as
-
-&quot;dependency injections&quot; or &quot;callbacks&quot;, because it allows the
-function your calling to &quot;call back&quot; to your code, giving you an
-opportunity to change the way the called function behaves. For
-example, the Array object&apos;s map function allows you to iterate over
-each element of an array, then build a new array by applying a
-transform function to each element.
-
-<b>var</b>
-nums
-=
-&lbrack;
-0
-,
-1
-,
-2
-&rbrack;
-;
-<b>var</b>
-doubledNums
-=
-nums.
-map
-(
-<b>function</b>
-(
-element
-)
-{
-<b>return</b>
-element
-&ast;
-2
-;
-}
-)
-;
-// <i> &lbrack;0,2,4&rbrack;</i>
-It would be tedious, sloppy and unnecessary to create a named
+<p><b>Supplying an Anonymous Function as a Parameter to Another Function</b></p>
+<p>Some functions may accept a reference to a function as a parameter.
+These are sometimes referred to as &quot;dependency injections&quot; or 
+&quot;callbacks&quot;, because it allows the function your calling to 
+&quot;call back&quot; to your code, giving you an opportunity to change 
+the way the called function behaves. For example, the Array object&apos;s 
+map function allows you to iterate over each element of an array, then build 
+a new array by applying a transform function to each element.</p>
+<pre>
+<b>var</b> nums = &lbrack;0, 1, 2&rbrack;;
+<b>var</b> doubledNums = nums.map( <b>function</b>(element){ <b>return</b> element &ast; 2; }); // <i> &lbrack;0,2,4&rbrack;</i>
+</pre>
+<p>It would be tedious, sloppy and unnecessary to create a named
 function, which would clutter your scope with a function only needed
 in this one place and break the natural flow and reading of your code
 (a colleague would have to leave this code to find your function to
-understand what&apos;s going on).
+understand what&apos;s going on).</p>
 
-<b>Returning an Anonymous Function From Another Function</b>
-
-Sometimes it&apos;s useful to return a function as the result of another
-function. For example:
-<b>var</b>
-hash
-=
-getHashFunction
-(
-&apos;sha1&apos;
-)
-;
-<b>var</b>
-hashValue
-=
-hash
-(
-&apos;Secret Value&apos;
-)
-;
-<b>function</b>
-getHashFunction
-(
-algorithm
-)
-{
-<b>if</b>
-(
-algorithm
-===
-&apos;sha1&apos;
-)
-<b>return</b>
-<b>function</b>
-(
-value
-)
-{
-/&ast;&hellip;&ast;/
+<p><b>Returning an Anonymous Function From Another Function</b></p>
+<p>Sometimes it&apos;s useful to return a function as the result of another
+function. For example:</p>
+<!-- page 173 -->
+<pre>
+<b>var</b> hash = getHashFunction( &apos;sha1&apos; );
+<b>var</b> hashValue = hash( &apos;Secret Value&apos; );
+<b>function</b> getHashFunction( algorithm ) {
+  <b>if</b> ( algorithm === &apos;sha1&apos; ) <b>return</b> <b>function</b>( value ){ /&ast;&hellip;&ast;/ };
+  <b>else</b> <b>if</b> ( algorithm === &apos;md5&apos; ) <b>return</b> <b>function</b>( value ){ /&ast;&hellip;&ast;/ };
 }
-;
-<b>else</b>
-<b>if</b>
-(
-algorithm
-===
-&apos;md5&apos;
-)
-<b>return</b>
-<b>function</b>
-(
-value
-)
-{
-/&ast;&hellip;&ast;/
-}
-;
-}
-<b>Immediately Invoking an Anonymous Function</b>
-<b>&lt;script</b>
-Unlike many other languages, scoping in JavaScript is function-level,
+</pre>
+<p><b>Immediately Invoking an Anonymous Function</b></p>
+<p>Unlike many other languages, scoping in JavaScript is function-level,
 not block-level. (See Function Scoping ). In some cases, however,
 it&apos;s necessary to create a new scope. For example, it&apos;s common to
 create a new scope when adding code via a <b>&gt;</b> tag, rather than
@@ -10747,603 +10651,199 @@ common method to handle this situation is to define a new anonymous
 function and then immediately invoke it, safely hiding you variables
 within the scope of the anonymous function and without making your
 code accessible to third-parties via a leaked function name. For
-example:
-&lt;!&bsol;
-My Script
-&bsol;
-<b>&gt;</b>
-<b>&lt;</b>
-<b>script</b>
-<b>&gt;</b>
-function initialize
-(
-)
-{
-// foo is safely hidden within initialize, but&hellip;
-var foo =
-&apos;&apos;
-;
+example:</p>
+<pre>
+&lt;!&minus;&minus; My Script &minus;&minus;&gt;
+<b>&lt;script&gt;</b>
+function initialize() {
+  // foo is safely hidden within initialize, but&hellip;
+  var foo = &apos;&apos;;
 }
 // &hellip;my initialize function is now accessible from global scope.
 // There is a risk someone could call it again, probably by accident.
-initialize
-(
-)
-;
-<b>&lt;</b>
-<b>/script</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>script</b>
-<b>&gt;</b>
+initialize();
+<b>&lt;/script&gt;</b>
+
+<b>&lt;script&gt;</b>
 // Using an anonymous function, and then immediately
 // invoking it, hides my foo variable and guarantees
 // no one else can call it a second time.
-(
-function
-(
-)
-{
-var foo =
-&apos;&apos;
-;
-}
-(
-)
-)
-// &lt;&minus;&bsol; the parentheses invokes the function immediately
-<b>&lt;</b>
-<b>/script</b>
-<b>&gt;</b>
-<b>Self-Referential Anonymous Functions</b>
+(function() {
+  var foo = &apos;&apos;;
+}()) // &lt;&minus;&minus; the parentheses invokes the function immediately
+<b>&lt;/script&gt;</b>
+</pre>
+<p><b>Self-Referential Anonymous Functions</b></p>
 
-Sometimes it&apos;s useful for an anonymous function to be able to refer
+<p>Sometimes it&apos;s useful for an anonymous function to be able to refer
 to itself. For example, the function may need to recursively call
 itself or add properties to itself. If the function is anonymous,
 though, this can be very difficult as it requires knowledge of the
 variable that the function has been assigned to. This is the less than
-ideal solution:
-
-<b>var</b>
-foo
-=
-<b>function</b>
-(
-callAgain
-)
-{
-console.
-log
-(
-&apos;Whassup?&apos;
-)
-;
-// <i> Less than ideal&hellip; we&apos;re dependent on a variable reference&hellip;</i>
-<b>if</b>
-(
-callAgain
-===
-<b>true</b>
-)
-foo
-(
-<b>false</b>
-)
-;
-}
-;
-foo
-(
-<b>true</b>
-)
-;
+ideal solution:</p>
+<pre>
+<b>var</b> foo = <b>function</b>(callAgain) {
+  console.log( &apos;Whassup?&apos; );
+  // <i> Less than ideal&hellip; we&apos;re dependent on a variable reference&hellip;</i>
+  <b>if</b> (callAgain === <b>true</b>) foo(<b>false</b>);
+};
+foo(<b>true</b>);
 // <i> Console Output:</i>
 // <i> Whassup?</i>
 // <i> Whassup?</i>
-// <i> Assign bar to the original function, and assign foo to another
-function.</i>
-<b>var</b>
-bar
-=
-foo
-;
-foo
-=
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-&apos;Bad.&apos;
-)
-}
-;
-bar
-(
-<b>true</b>
-)
-;
+// <i> Assign bar to the original function, and assign foo to another function.</i>
+<b>var</b> bar = foo;
+foo = <b>function</b>() {
+  console.log(&apos;Bad.&apos;)
+};
+bar(<b>true</b>);
 // <i> Console Output:</i>
 // <i> Whassup?</i>
 // <i> Bad.</i>
-The intent here was for the anonymous function to recursively call
+</pre>
+<!-- page 174 -->
+<p>The intent here was for the anonymous function to recursively call
 itself, but when the value of foo changes, you end up with a
-potentially difficult to trace bug.
-
-Instead, we can give the anonymous function a reference to itself by
-giving it a private name, like so:
-<b>var</b>
-foo
-=
-<b>function</b>
-myself
-(
-callAgain
-)
-{
-console.
-log
-(
-&apos;Whassup?&apos;
-)
-;
-// <i> Less than ideal&hellip; we&apos;re dependent on a variable reference&hellip;</i>
-<b>if</b>
-(
-callAgain
-===
-<b>true</b>
-)
-myself
-(
-<b>false</b>
-)
-;
-}
-;
-foo
-(
-<b>true</b>
-)
-;
+potentially difficult to trace bug.</p>
+<p>Instead, we can give the anonymous function a reference to itself by
+giving it a private name, like so:</p>
+<pre>
+<b>var</b> foo = <b>function</b> myself(callAgain) {
+  console.log( &apos;Whassup?&apos; );
+  // <i> Less than ideal&hellip; we&apos;re dependent on a variable reference&hellip;</i>
+  <b>if</b> (callAgain === <b>true</b>) myself(<b>false</b>);
+};
+foo(<b>true</b>);
 // <i> Console Output:</i>
 // <i> Whassup?</i>
 // <i> Whassup?</i>
-// <i> Assign bar to the original function, and assign foo to another
-function.</i>
-<b>var</b>
-bar
-=
-foo
-;
-foo
-=
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-&apos;Bad.&apos;
-)
-}
-;
-bar
-(
-<b>true</b>
-)
-;
+// <i> Assign bar to the original function, and assign foo to another function.</i>
+<b>var</b> bar = foo;
+foo = <b>function</b>() {
+  console.log(&apos;Bad.&apos;)
+};
+bar(<b>true</b>);
 // <i>Console Output:</i>
 // <i>Whassup?</i>
 // <i>Whassup?</i>
-Note that the function name is scoped to itself. The name has not
-eaked into the outer scope:
-myself
-(
-<b>false</b>
-)
-;
-// <i>ReferenceError: myself is not defined</i>
-This technique is especially useful when dealing with recursive
-anonymous functions as callback parameters:
-Version ≥ 5
+</pre>
+<p>Note that the function name is scoped to itself. The name has not
+eaked into the outer scope:</p>
+<pre>
+myself(<b>false</b>); // <i>ReferenceError: myself is not defined</i>
+</pre>
+<p>This technique is especially useful when dealing with recursive
+anonymous functions as callback parameters:</p>
+<h5>Version ≥ 5</h5>
+<pre>
 // <i>Calculate the Fibonacci value for each number in an array:</i>
-<b>var</b>
-fib
-=
-<b>false</b>
-,
-result
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-,
-6
-,
-7
-,
-8
-&rbrack;
-.
-map
-(
-<b>function</b>
-fib
-(
-n
-)
-{
-<b>return</b>
-(
-n
-&lt;=
-2
-)
-?
-1
-:
-fib
-(
-n
-&minus;
-1
-)
-&plus;
-fib
-(
-n
-&minus;
-2
-)
-;
-}
-)
-;
+<b>var</b> fib = <b>false</b>,
+  result = &lbrack;1,2,3,4,5,6,7,8&rbrack;.map(
+    <b>function</b> fib(n) {
+      <b>return</b>( n &lt;= 2 ) ? 1 : fib( n &minus; 1 ) &plus; fib( n &minus; 2 );
+  });
 // <i>result = &lbrack;1, 1, 2, 3, 5, 8, 13, 21&rbrack;</i>
-// <i>fib = false (the anonymous function name did not overwrite our fib
-variable)</i>
+// <i>fib = false (the anonymous function name did not overwrite our fib variable)</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-8">Section 19.8: Default parameters</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Before ECMAScript 2015 (ES6), a parameter&apos;s default value could be
-assigned in the following way:
-<b>function</b>
-printMsg
-(
-msg
-)
-{
+<p>Before ECMAScript 2015 (ES6), a parameter&apos;s default value could be
+assigned in the following way:</p>
+<pre>
+<b>function</b> printMsg(msg) {
 msg = <b>typeof</b> msg !== &apos;undefined&apos; ? // <i> if a value was provided<i>
-msg : // <i> then, use that value in the reassignment<i>
-
-&apos;Default value for msg.&apos;; // <i> else, assign a default value<i>
-console.log(msg); }
-
-ES6 provided a new syntax where the condition and reassignment
-depicted above is no longer necessary:
-
-Version ≥ 6
-
-<b>function</b>
-printMsg
-(
-msg
-=
-&apos;Default value for msg.&apos;
-)
-{
-console.
-log
-(
-msg
-)
-;
+  msg :                                            // <i> then, use that value in the reassignment<i>
+  &apos;Default value for msg.&apos;;              // <i> else, assign a default value<i>
+console.log(msg); 
 }
-printMsg
-(
-)
-;
-// <i> -&amp;quot;Default value for msg.&quot;<i>
-printMsg
-(
-<b>undefined</b>
-)
-;
-// <i> -&amp;quot;Default value for msg.&quot;<i>
-printMsg
-(
-&apos;Now my msg in different!&apos;
-)
-;
-// <i> -&amp;quot;Now my msg in different!&quot;<i>
-
-This also shows that if a parameter is missing when the function is
+</pre>
+<p>ES6 provided a new syntax where the condition and reassignment
+depicted above is no longer necessary:</p>
+<h5>Version ≥ 6</h5>
+<pre>
+<b>function</b> printMsg(msg=&apos;Default value for msg.&apos;) {
+  console.log(msg);
+}
+printMsg();  // <i> -&amp;quot;Default value for msg.&quot;<i>
+printMsg(<b>undefined</b>);  // <i> -&amp;quot;Default value for msg.&quot;<i>
+printMsg(&apos;Now my msg in different!&apos;); // <i> -&amp;quot;Now my msg in different!&quot;<i>
+</pre>
+<p>This also shows that if a parameter is missing when the function is
 invoked, its value is kept as <b>undefined</b>, as it can be confirmed by
-explicitly providing it in the following example (using an arrow
-function):
-
-Version ≥ 6
-<b>let</b>
-param_check
-=
-(
-p
-=
-&apos;str&apos;
-)
-=&gt;
-console.
-log
-(
-p
-&plus;
-&apos; is of type: &apos;
-&plus;
-<b>typeof</b>
-p
-)
-;
-param_check
-(
-)
-;
-// <i> -&amp;quot;str is of type: string&quot;<i>
-param_check
-(
-<b>undefined</b>
-)
-;
-// <i> -&amp;quot;str is of type: string&quot;<i>
-param_check
-(
-1
-)
-;
-// <i> -&amp;quot;1 is of type: number&quot;<i>
-param_check
-(
-<b>this</b>
-)
-;
-// <i> -&amp;quot;&lbrack;object Window&rbrack; is of type: object&quot;<i>
-<b>Functions/variables as default values and reusing parameters</b>
-callback = <b>function</b>
-
-The default parameters&apos; values are not restricted to numbers, strings
-or simple objects. A function can also be set as the default value
-(){}:
+explicitly providing it in the following example (using an arrow function):</p>
 <h5>Version ≥ 6</h5>
-<b>function</b>
-foo
-(
-callback
-=
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-&apos;default&apos;
-)
-;
+<pre>
+<b>let</b> param_check = (p = &apos;str&apos;) =&gt; console.log(p &plus; &apos; is of type: &apos; &plus; <b>typeof</b> p);
+param_check();  // <i> -&amp;quot;str is of type: string&quot;<i>
+param_check(<b>undefined</b>);  // <i> -&amp;quot;str is of type: string&quot;<i>
+param_check(1);  // <i> -&amp;quot;1 is of type: number&quot;<i>
+param_check(<b>this</b>);  // <i> -&amp;quot;&lbrack;object Window&rbrack; is of type: object&quot;<i>
+</pre>
+<p><b>Functions/variables as default values and reusing parameters</b></p>
+<p>The default parameters&apos; values are not restricted to numbers, strings
+or simple objects. A function can also be set as the default value callback = function(){}:</p>
+<h5>Version ≥ 6</h5>
+<pre>
+<b>function</b> foo(callback = <b>function</b>(){ console.log(&apos;default&apos;); }) {
+  callback();
 }
-)
-{
-callback
-(
-)
-;
-}
-foo
-(
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-&apos;custom&apos;
-)
-;
-}
-)
-;
+foo(<b>function</b>() {
+  console.log(&apos;custom&apos;);
+});
 // <i> custom<i>
-foo
-(
-)
-;
+foo();
 // <i>default<i>
-
-There are certain characteristics of the operations that can be
-performed through default values:
-
-A previously declared parameter can be reused as a default value for
-the upcoming parameters&apos; values.
-
-Inline operations are allowed when assigning a default value to a
-parameter.
-
-Variables existing in the same scope of the function being declared
-can be used in its default values. Functions can be invoked in order
-to provide their return value into a default value.
-
-Version ≥ 6 <b>let</b> zero = 0; <b>function</b> multiply(x) { <b>return</b> x &ast;
-2;}
+</pre>
+<p>There are certain characteristics of the operations that can be
+performed through default values:</p>
+<ul>
+  <li>A previously declared parameter can be reused as a default value for
+    the upcoming parameters&apos; values.</p>
+  <li>Inline operations are allowed when assigning a default value to a parameter.</li>
+  <li>Variables existing in the same scope of the function being declared can be 
+    used in its default values.</li>
+  <li>Functions can be invoked in order to provide their return value into a default value.</li>
+<ul>
+<h5>Version ≥ 6</h5>
+<pre>
+<b>let</b> zero = 0; 
+<b>function</b> multiply(x) { <b>return</b> x &ast; 2;}
 <b>function</b> add(a = 1 + zero, b = a, c = b + a, d = multiply(c)) {
-console.log((a + b + c), d);
+  console.log((a + b + c), d);
 }
-add
-(
-1
-)
-;
-// <i> 4, 4</i>
-add
-(
-3
-)
-;
-// <i> 12, 12</i>
-add
-(
-2
-,
-7
-)
-;
-// <i> 18, 18</i>
-add
-(
-1
-,
-2
-,
-5
-)
-;
-// <i> 8, 10</i>
-add
-(
-1
-,
-2
-,
-5
-,
-10
-)
-;
-// <i> 8, 20</i>
-<b>Reusing the function&apos;s return value in a new invocation&apos;s default
-value:</b> 
+add(1);                 // <i>4, 4</i>
+add(3);                 // <i>12, 12</i>
+add(2, 7);              // <i>18, 18</i>
+add(1, 2, 5);           // <i>8, 10</i>
+add(1, 2, 5, 10);       // <i>8, 20</i>
+</pre>
+<p><b>Reusing the function&apos;s return value in a new invocation&apos;s default value:</b></p>
 <h5>Version ≥ 6</h5>
-<b>let</b>
-array
-=
-&lbrack;
-1
-&rbrack;
-;
-// <i> meaningless: this will be overshadowed in the function&apos;s scope</i>
-
-<b>function</b>
-add
-(
-value
-,
-array
-=
-&lbrack;
-&rbrack;
-)
-{
-array.
-push
-(
-value
-)
-;
-<b>return</b>
-array
-;
+<pre>
+<b>let</b> array = &lbrack;1&rbrack;;  // <i>meaningless: this will be overshadowed in the function&apos;s scope</i>
+<b>function</b> add(value, array = &lbrack;&rbrack;) {
+  array.push(value);
+  <b>return</b> array;
 }
-add
-(
-5
-)
-;
-// <i> &lbrack;5&rbrack;</i>
-add
-(
-6
-)
-;
-// <i> &lbrack;6&rbrack;, not &lbrack;5, 6&rbrack;</i>
-add
-(
-6
-,
-add
-(
-5
-)
-)
-;
-// <i> &lbrack;5, 6&rbrack;</i>
-<b>arguments value and length when lacking parameters in invocation</b>
-The arguments array object only retains the parameters whose values
+add(5);     // <i> &lbrack;5&rbrack;</i>
+add(6);     // <i> &lbrack;6&rbrack;, not &lbrack;5, 6&rbrack;</i>
+add(6, add(5));  // <i> &lbrack;5, 6&rbrack;</i>
+</pre>
+<p><b>arguments value and length when lacking parameters in invocation</b></p>
+<p>The arguments array object only retains the parameters whose values
 are not default, i.e. those that are explicitly provided when the
-function is invoked:
+function is invoked:</p>
 <h5>Version ≥ 6</h5>
-<b>function</b>
-foo
-(
-a
-=
-1
-,
-b
-=
-a
-&plus;
-1
-)
-{
-console.
-info
-(
-arguments.
-length
-,
-arguments
-)
-;
-console.
-log
-(
-a
-,
-b
-)
-;
-
+<pre>
+<b>function</b> foo(a = 1, b = a &plus; 1) {
+  console.info(arguments.length, arguments);
+  console.log(a, b);
 }
-
-foo
-(
-)
-;
-// <i> info: 0 &gt;&amp;lbrack;&rbrack; &vert; log: 1, 2</i>
-foo
-(
-4
-)
-;
-// <i> info: 1 &gt;&amp;lbrack;4&rbrack; &vert; log: 4, 5</i>
-foo
-(
-5
-,
-6
-)
-;
-// <i> info: 2 &gt;&amp;lbrack;5, 6&rbrack; &vert; log: 5, 6</i>
+foo();  // <i> info: 0 &gt;&amp;lbrack;&rbrack; &vert; log: 1, 2</i>
+foo(4);  // <i> info: 1 &gt;&amp;lbrack;4&rbrack; &vert; log: 4, 5</i>
+foo(5, 6);  // <i> info: 2 &gt;&amp;lbrack;5, 6&rbrack; &vert; log: 5, 6</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-9">Section 19.9: Call and apply</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
