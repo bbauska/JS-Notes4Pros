@@ -7978,7 +7978,7 @@ property cannot be of both types.</p>
     if there is no getter. The function return will be used as the value of the property.</li>
   <li><b>set</b> is a function which serves as a setter for the property, or <b>undefined</b> 
     if there is no setter. The function will receive as only argument the new value being 
-	assigned to the property.</li>
+    assigned to the property.</li>
 
 <p>value:</p>
 <ul>
@@ -9222,11 +9222,11 @@ returned. The common terms for modifications</p>
 <ul>
   <li>Phase: The offset in terms of frequency from the start of the oscillations. It is a 
     value in the range of 0 to 1 where the value 0.5 move the wave forward in time by half 
-	its frequency. A value of 0 or 1 makes no change.</li>
+    its frequency. A value of 0 or 1 makes no change.</li>
   <li>Amplitude: The distance from the lowest value and highest value during one cycle. 
     An amplitude of 1 has a range of 2. The lowest point (trough) -1 to the highest 
-	(peak) 1. For a wave with frequency 1 the peak is at 0.25 seconds, and trough at 
-	0.75.</li>
+    (peak) 1. For a wave with frequency 1 the peak is at 0.25 seconds, and trough at 
+    0.75.</li>
   <li>Offset: moves the whole wave up or down.</li>
 </ul>
 
@@ -9311,374 +9311,200 @@ console.log(3&minus;)  // <i>ReferenceError: Invalid left-hand side expression i
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch15-1">Section 15.1: Bitwise operators</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Bitwise operators perform operations on bit values of data. These
-operators convert operands to signed 32-bit integers in [two&apos;s
-complement](http://stackoverflow.com/questions/1049722/what-is-2s-complement).
-<b>Conversion to 32-bit integers</b>
-Numbers with more than 32 bits discard their most significant bits.
+<p>Bitwise operators perform operations on bit values of data. These
+operators convert operands to signed 32-bit integers in <a href="http://stackoverflow.com/questions/1049722/what-is-2s-complement">two&apos;s
+complement</a>.</p>
+<p><b>Conversion to 32-bit integers</b></p>
+<p>Numbers with more than 32 bits discard their most significant bits.
 For example, the following integer with more than 32 bits is converted
-to a 32-bit integer:
-Before
-:
-10100110111110100000000010000011110001000001
-After
-:
-10100000000010000011110001000001
-<b>Two&apos;s Complement</b>
-In normal binary we find the binary value by adding the 1&apos;s based on
+to a 32-bit integer:</p>
+<pre>
+Before: 10100110111110100000000010000011110001000001
+After: 10100000000010000011110001000001
+</pre>
+<p><b>Two&apos;s Complement</b></p>
+<p>In normal binary we find the binary value by adding the 1&apos;s based on
 their position as powers of 2 - The rightmost bit being 2&Hat;0 to the
 leftmost bit being 2&Hat;n-1 where n is the number of bits. For example,
-using 4 bits:
-
-*// Normal Binary*
-*// 8 4 2 1*
-0
-1
-1
-0
-=&gt;
-0
-&plus;
-4
-&plus;
-2
-&plus;
-0
-=&gt;
-6
-Two complement&apos;s format means that the number&apos;s negative counterpart
+using 4 bits:</p>
+<pre>
+// <i>Normal Binary</i>
+// <i>8 4 2 1</i>
+   0 1 1 0 =&gt; 0 &plus; 4 &plus; 2 &plus; 0 =&gt; 6
+</pre>
+<p>>Two complement&apos;s format means that the number&apos;s negative counterpart
 (6 vs -6) is all the bits for a number inverted, plus one. The
-inverted bits of 6 would be:
-*// Normal binary*
-0
-1
-1
-0
-*// One&apos;s complement (all bits inverted)*
-1
-0
-0
-1
-=&gt;
-&minus;
-8
-&plus;
-0
-&plus;
-0
-&plus;
-1
-=&gt;
-&minus;
-7
-*// Two&apos;s complement (add 1 to one&apos;s complement)*
-1
-0
-1
-0
-=&gt;
-&minus;
-8
-&plus;
-0
-&plus;
-2
-&plus;
-0
-=&gt;
-&minus;
-6
-*Note:* Adding more 1&apos;s to the left of a binary number does not
+inverted bits of 6 would be:</p>
+<pre>
+// <i>Normal binary</i>
+   0 1 1 0
+// <i>One&apos;s complement (all bits inverted)</i>
+   1 0 0 1 =&gt; &minus;8 &plus; 0 &plus; 0 &plus; 1 =&gt; &minus;7
+// <i>Two&apos;s complement (add 1 to one&apos;s complement)</i>
+   1 0 1 0 =&gt; &minus;8 &plus; 0 &plus; 2 &plus; 0 =&gt; &minus;6
+</pre>
+<p><i>Note:</i> Adding more 1&apos;s to the left of a binary number does not
 change its value in two&apos;s compliment. The value 1010 and
-1111111111010 are both -6.
-<b>Bitwise AND</b>
-a & b
-The bitwise AND operation returns the binary value with a 1 where both
+1111111111010 are both -6.</p>
+
+<p><b>Bitwise AND</b></p>
+<p>The bitwise AND operation a &amp; b returns the binary value with a 1 where both
 binary operands have 1&apos;s in a specific position, and 0 in all other
-positions. For example:
-13
-&
-7
-=&gt;
-5
-*// 13: 0..01101*
-*// 7: 0..00111*
-*//&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&ast;
-*// 5: 0..00101 (0 + 0 + 4 + 0 + 1)*
-<b>Real world example: Number&apos;s Parity Check</b>
-
-Instead of this &quot;masterpiece&quot; (unfortunately too often seen in many
-real code parts):
-<b>function</b>
-isEven
-(
-n
-)
-{
-<b>return</b>
-n
-&percnt;
-2
-==
-0
-;
+positions. For example:</p>
+<pre>
+13 & 7 =&gt; 5
+// <i>13: 0..01101</i>
+// <i>7: 0..00111</i>
+//<i>&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&ast;</i>
+// <i>5: 0..00101 (0 + 0 + 4 + 0 + 1)</i>
+</pre>
+<p><b>Real world example: Number&apos;s Parity Check</b></p>
+<p>Instead of this &quot;masterpiece&quot; (unfortunately too often seen in many
+real code parts):</p>
+<!-- page 149 -->
+<pre>
+<b>function</b> isEven (n) {
+  <b>return</b> n &percnt; 2 == 0;
 }
-<b>function</b>
-isOdd
-(
-n
-)
-{
-<b>if</b>
-(
-isEven
-(
-n
-)
-)
-{
-<b>return</b>
-<b>false</b>
-;
+<b>function</b> isOdd(n) {
+  <b>if</b> (isEven(n)) {
+    <b>return</b> <b>false</b>;
+  } <b>else</b> {
+    <b>return</b> <b>true</b>;
+  }
 }
-<b>else</b>
-{
-<b>return</b>
-<b>true</b>
-;
+</pre>
+<p>You can check the (integer) number&apos;s parity in much more effective
+and simple manner:</p>
+<pre>
+<b>if</b> (n & 1) {
+  console.log(&quot;ODD!&quot;);
+} <b>else</b> {
+  console.log(&quot;EVEN!&quot;);
 }
-}
-You can check the (integer) number&apos;s parity in much more effective
-and simple manner:
-<b>if</b>
-(
-n
-&
-1
-)
-{
-console.
-log
-(
-&quot;ODD!&quot;
-)
-;
-}
-<b>else</b>
-{
-console.
-log
-(
-&quot;EVEN!&quot;
-)
-;
-}
-<b>Bitwise OR</b>
-a &vert; b
-The bitwise OR operation returns the binary value with a 1 where
+</pre>
+<p><b>Bitwise OR</b></p>
+<p>The bitwise OR operation returns the binary value with a 1 where
 either operands or both operands have 1&apos;s in a specific position, and
-0 when both values have 0 in a position. For example:
-13
-&vert;
-7
-=&gt;
-15
-*// 13: 0..01101*
-*// 7: 0..00111*
-*//&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&ast;
-*// 15: 0..01111 (0 + 8 + 4 + 2 + 1)*
-<b>Bitwise NOT</b>
+0 when both values have 0 in a position. For example:</p>
+<pre>
+13 &vert; 7 =&gt; 15
+// <i>13: 0..01101</i>
+// <i>7: 0..00111</i>
+// <i>&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&ast;
+// <i>15: 0..01111 (0 + 8 + 4 + 2 + 1)</i>
+</pre>
+<p><b>Bitwise NOT</b></p>
 
-The bitwise NOT operation &bsol;~a *flips* the bits of the given value a.
+<p>The bitwise NOT operation &bsol;~a <i>flips</i> the bits of the given value a.
 This means all the 1&apos;s will become 0&apos;s and all the 0&apos;s will become
-1&apos;s.
-&bsol;~13 =&minus;14
-// 13: 0..01101
-//&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&bsol;
+1&apos;s.</p>
+<pre>
+~13 =&gt; 14
+// 13: 0..01101</i>
+//&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&bsol;</i>
 //-14: 1..10010 (-16 + 0 + 0 + 2 + 0)
-<b>Bitwise XOR</b>
-a  &Hat; b
-
-The bitwise XOR (*exclusive or*) operation places a 1 only if the two
-bits are different. Exclusive or means *either one or the other, but
-not both*.
-13
-&Hat;
-7
-=&gt;
-10
-*// 13: 0..01101*
-*// 7: 0..00111*
-*//&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&ast;
-*// 10: 0..01010 (0 + 8 + 0 + 2 + 0)*
-<b>Real world example: swapping two integer values without additional
-memory allocation</b>
-<b>var</b>
-a
-=
-11
-,
-b
-=
-22
-;
-a
-=
-a
-&Hat;
-b
-;
-b
-=
-a
-&Hat;
-b
-;
-a
-=
-a
-&Hat;
-b
-;
-console.
-log
-(
-&quot;a = &quot;
-&plus;
-a
-&plus;
-&quot;; b = &quot;
-&plus;
-b
-)
-;
-*// a is now 22 and b is now 11*
+</pre>
+<p><b>Bitwise XOR</b></p>
+<p>The bitwise XOR (<i>exclusive or</i>) operation a &Hat; b places a 1 only if the two
+bits are different. Exclusive or means <i>either one or the other, but
+not both</i>.</p>
+<pre>
+13 &Hat; 7 =&gt; 10
+// <i>13: 0..01101</i>
+// <i>7: 0..00111</i>
+//<i>&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&ast;</i>
+// <i>10: 0..01010 (0 + 8 + 0 + 2 + 0)</i>
+</pre>
+<p><b>Real world example: swapping two integer values without additional memory allocation</b></p>
+<pre>
+<b>var</b> a = 11, b = 22;
+a = a &Hat; b;
+b = a &Hat; b;
+a = a &Hat; b;
+console.log(&quot;a = &quot; &plus; a &plus; &quot;; b = &quot; &plus; b); // <i>a is now 22 and b is now 11</i>
+</pre>
+<!-- page 150 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch15-2">Section 15.2: Shift Operators</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Bitwise shifting can be thought as &quot;moving&quot; the bits either left or
-right, and hence changing the value of the data operated on.
-<b>Left Shift</b>
-value ) &lt;&lt; ( shift amount ) will shift the bits to the shift amount
-left by (
-The left shift operator () bits; the new bits coming in from the right
-will be 0&apos;s:
-5
-&lt;&lt;
-2
-=&gt;
-20
-*// 5: 0..000101*
-*// 20: 0..010100 &lt;= adds two 0&apos;s to the right*
-<b>Right Shift (*Sign-propagating*)</b>
-value ) &gt;&bsol;  ( shift amount
-The right shift operator () is also known as the &quot;Sign-propagating
-right shift&quot; because it
+<p>Bitwise shifting can be thought as &quot;moving&quot; the bits either left or
+right, and hence changing the value of the data operated on.</p>
+<p><b>Left Shift</b></p>
+<p>The left shift operator (value) &lt;&lt; (shift amount) will shift the bits to the left
+by (shift amount) bits; the new bits coming in from the right will be 0&apos;s:</p>
+<pre>
+5 &lt;&lt; 2 =&gt; 20
+// <i>5: 0..000101</i>
+// <i>20: 0..010100 &lt;= adds two 0&apos;s to the right</i>
+</pre>
+<p><b>Right Shift (<i>Sign-propagating</i>)</b></p>
 
-keeps the sign of the initial operand. The right shift operator shifts
-the value the specified shift amount of bits to the right. Excess bits
-shifted off the right are discarded. The new bits coming in from the
-left will be based on the sign of the initial operand. If the
-left-most bit was 1 then the new bits will all be 1 and vice-versa for
-0&apos;s.
-20
-&gt;&gt;
-2
-=&gt;
-5
-*// 20: 0..010100*
-*// 5: 0..000101 &lt;= added two 0&apos;s from the left and chopped off 00
-from the right*
-&minus;
-5
-&gt;&gt;
-3
-=&gt;
-&minus;
-1
-*// -5: 1..111011*
-*// -2: 1..111111 &lt;= added three 1&apos;s from the left and chopped off 011
-from the right*
-<b>Right Shift (*Zero fill*)</b>
-value ) &gt;&gt;&bsol; ( shift amount
+<p>The right shift operator (value) &gt;&gt; (shift amount) is also known as the 
+&quot;Sign-propagating right shift&quot; because it keeps the sign of the initial 
+operand. The right shift operator shifts the value the specified shift amount of 
+bits to the right. Excess bits shifted off the right are discarded. The new bits 
+coming in from the left will be based on the sign of the initial operand. If the
+left-most bit was 1 then the new bits will all be 1 and vice-versa for 0&apos;s.</p>
+<pre>
+20 &gt;&gt; 2 =&gt; 5
+// <i>20: 0..010100</i>
+// <i>5: 0..000101 &lt;= added two 0&apos;s from the left and chopped off 00 from the right</i>
 
-The zero-fill right shift operator () will move the bits to the right,
-and the new bits will
+&minus;5 &gt;&gt; 3 =&gt; &minus;1
+// <i>-5: 1..111011</i>
+// <i>-2: 1..111111 &lt;= added three 1&apos;s from the left and chopped off 011 from the right</i>
+<pre>
+<p><b>Right Shift (<i>Zero fill</i>)</b></p>
 
-be 0&apos;s. The 0&apos;s are shifted in from the left, and excess bits to the
-right are shifted off and discarded. This means it can make negative
-numbers into positive ones.
-&minus;
-30
-&gt;&gt;&gt;
-2
-=&gt;
-1073741816
-*// -30: 111..1100010*
-*//1073741816: 001..1111000*
-Zero-fill right shift and sign-propagating right shift yield the same
-result for non negative numbers.
+<p>The zero-fill right shift operator (value) &gt;&gt;&gt; (shift amount) will move the bits to the right,
+and the new bits will be 0&apos;s. The 0&apos;s are shifted in from the left, and excess bits to the
+right are shifted off and discarded. This means it can make negative numbers into positive ones.</p>
+<pre>
+&minus;30 &gt;&gt;&gt; 2 =&gt; 1073741816
+// <i>-30: 111..1100010</i>
+// <i>1073741816: 001..1111000</i>
+</pre>
+<p>Zero-fill right shift and sign-propagating right shift yield the same
+result for non negative numbers.</p>
+<!-- page 151 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch16">Chapter 16: Constructor functions</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch16-1">Section 16.1: Declaring a constructor function</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Constructor functions are functions designed to construct a new
+<p>Constructor functions are functions designed to construct a new
 object. Within a constructor function, the keyword <b>this</b> refers to
 a newly created object which values can be assigned to. Constructor
-functions &quot;return&quot; this new object automatically.
-<b>function</b>
-Cat
-(
-name
-)
-{
-<b>this</b>
-.
-name
-=
-name
-;
-<b>this</b>
-.
-sound
-=
-&quot;Meow&quot;
-;
+functions &quot;return&quot; this new object automatically.</p>
+<pre>
+<b>function</b> Cat(name) {
+  <b>this</b>.name = name;
+  <b>this</b>.sound = &quot;Meow&quot;;
 }
-Constructor functions are invoked using the **new** keyword:
-**let**
-cat
-=
-**new**
-Cat
-(
-&quot;Tom&quot;
-)
-;
-cat.
-sound
-;
-*// Returns &quot;Meow&quot;*
-Constructor functions also have a **prototype** property which points
+</pre>
+<p>Constructor functions are invoked using the <b>new</b> keyword:</p>
+<pre>
+<b>let</b> cat = <b>new</b>Cat(&quot;Tom&quot;);
+cat.sound;  // <i>Returns &quot;Meow&quot;</i>
+</pre>
+<p>Constructor functions also have a <b>prototype</b> property which points
 to an object whose properties are automatically inherited by all
-objects created with that constructor:
+objects created with that constructor:</p>
+
 Cat.
-**prototype**
+<b>prototype</b>
 .
 speak
 =
-**function**
+<b>function</b>
 (
 )
 {
 console.
 log
 (
-**this**
+<b>this</b>
 .
 sound
 )
@@ -9689,33 +9515,33 @@ speak
 (
 )
 ;
-*// Outputs &quot;Meow&quot; to the console*
+// <i>Outputs &quot;Meow&quot; to the console</i>
 Objects created by constructor functions also have a special property
 on their prototype called constructor, which points to the function
 used to create them:
 cat.
 constructor
-*// Returns the &grave;Cat&grave; function*
+// <i>Returns the &grave;Cat&grave; function</i>
 Objects created by constructor functions are also considered to be
-&quot;instances&quot; of the constructor function by the **instanceof**
+&quot;instances&quot; of the constructor function by the <b>instanceof</b>
 operator:
 cat
-**instanceof**
+<b>instanceof</b>
 Cat
-*// Returns &quot;true&quot;*
+// <i>Returns &quot;true&quot;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch17">Chapter 17: Declarations and Assignments</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch17-1">Section 17.1: Modifying constants</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-Declaring a variable **const** only prevents its value from being
-*replaced* by a new value. **const** does not put any restrictions on
+Declaring a variable <b>const</b> only prevents its value from being
+<i>replaced</i> by a new value. <b>const</b> does not put any restrictions on
 the internal state of an object. The following example shows that a
-value of a property of a **const** object can be changed, and even new
+value of a property of a <b>const</b> object can be changed, and even new
 properties can be added, because the object that is assigned to person
-is modified, but not *replaced*.
-**const**
+is modified, but not <i>replaced</i>.
+<b>const</b>
 person
 =
 {
@@ -9769,7 +9595,7 @@ person.
 surname
 )
 ;
-**Result:**
+<b>Result:</b>
 The name of the person is John
 The name of the person is Steve
 The name of the person is Steve and the surname is Fox
@@ -9781,18 +9607,18 @@ we&apos;ve reassigned property and created new property.
 <h3 id="ch17-2">Section 17.2: Declaring and initializing constants</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-You can initialize a constant by using the **const** keyword.
-**const**
+You can initialize a constant by using the <b>const</b> keyword.
+<b>const</b>
 foo
 =
 100
 ;
-**const**
+<b>const</b>
 bar
 =
-**false**
+<b>false</b>
 ;
-**const**
+<b>const</b>
 person
 =
 {
@@ -9801,75 +9627,75 @@ name
 &quot;John&quot;
 }
 ;
-**const**
+<b>const</b>
 fun
 =
-**function**
+<b>function</b>
 (
 )
 =
 {
-*/&ast; &hellip; &ast;/*
+/&ast; &hellip; &ast;/
 }
 ;
-**const**
+<b>const</b>
 arrowFun
 =
 (
 )
 =&gt;
-*/&ast; &hellip; &ast;/*
+/&ast; &hellip; &ast;/
 ;
-**Important**
+<b>Important</b>
 You must declare and initialize a constant in the same statement.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch17-3">Section 17.3: Declaration</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 There are four principle ways to declare a variable in JavaScript:
-using the **var**, **let** or **const** keywords, or without a keyword
+using the <b>var</b>, <b>let</b> or <b>const</b> keywords, or without a keyword
 at all (&quot;bare&quot; declaration). The method used determines the
 resulting scope of the variable, or reassignability in the case of
-**const**.
+<b>const</b>.
 The
-**var**
+<b>var</b>
 keyword creates a function-scope variable.
 The
-**let**
+<b>let</b>
 keyword creates a block-scope variable.
 The
-**const**
+<b>const</b>
 keyword creates a block-scope variable that cannot be reassigned.
 A bare declaration creates a global variable.
-**var**
+<b>var</b>
 a
 =
 &apos;foo&apos;
 ;
-*// Function-scope*
-**let**
+// <i>Function-scope</i>
+<b>let</b>
 b
 =
 &apos;foo&apos;
 ;
-*// Block-scope*
-**const**
+// <i>Block-scope</i>
+<b>const</b>
 c
 =
 &apos;foo&apos;
 ;
-*// Block-scope & immutable reference*
+// <i>Block-scope & immutable reference</i>
 Keep in mind that you can&apos;t declare constants without initializing
-them at the same time. **const** foo; *// &quot;Uncaught SyntaxError:
-Missing initializer in const declaration&quot;*
+them at the same time. <b>const</b> foo; // <i>&quot;Uncaught SyntaxError:
+Missing initializer in const declaration&quot;</i>
 (An example of keyword-less variable declaration is not included above
 for technical reasons. Continue reading to see an example.)
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch17-4">Section 17.4: Undefined</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-Declared variable without a value will have the value **undefined**
-**var**
+Declared variable without a value will have the value <b>undefined</b>
+<b>var</b>
 a
 ;
 console.
@@ -9878,53 +9704,53 @@ log
 a
 )
 ;
-*// logs: undefined*
+// <i>logs: undefined</i>
 Trying to retrieve the value of undeclared variables results in a
 ReferenceError. However, both the type of undeclared and unitialized
 variables is &quot;undefined&quot;:
-**var**
+<b>var</b>
 a
 ;
 console.
 log
 (
-**typeof**
+<b>typeof</b>
 a
 ===
 &quot;undefined&quot;
 )
 ;
-*// logs: true*
+// <i>logs: true</i>
 console.
 log
 (
-**typeof**
+<b>typeof</b>
 variableDoesNotExist
 ===
 &quot;undefined&quot;
 )
 ;
-*// logs: true*
+// <i>logs: true</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch17-5">Section 17.5: Data Types</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 JavaScript variables can hold many data types: numbers, strings,
 arrays, objects and more:
-*// Number*
-**var**
+// <i>Number</i>
+<b>var</b>
 length
 =
 16
 ;
-*// String*
-**var**
+// <i>String</i>
+<b>var</b>
 message
 =
 &quot;Hello, World!&quot;
 ;
-*// Array*
-**var**
+// <i>Array</i>
+<b>var</b>
 carNames
 =
 &lbrack;
@@ -9935,8 +9761,8 @@ carNames
 &apos;BMW&apos;
 &rbrack;
 ;
-*// Object*
-**var**
+// <i>Object</i>
+<b>var</b>
 person
 =
 {
@@ -9951,28 +9777,28 @@ lastName
 ;
 JavaScript has dynamic types. This means that the same variable can be
 used as different types:
-**var**
+<b>var</b>
 a
 ;
-*// a is undefined*
-**var**
+// <i>a is undefined</i>
+<b>var</b>
 a
 =
 5
 ;
-*// a is a Number*
-**var**
+// <i>a is a Number</i>
+<b>var</b>
 a
 =
 &quot;John&quot;
 ;
-*// a is a String*
+// <i>a is a String</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch17-6">Section 17.6: Mathematic operations and assignment</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**Increment by**
-**var**
+<b>Increment by</b>
+<b>var</b>
 a
 =
 9
@@ -9994,8 +9820,8 @@ b
 &plus;
 a
 ;
-**Decrement by**
-**var**
+<b>Decrement by</b>
+<b>var</b>
 a
 =
 9
@@ -10017,8 +9843,8 @@ b
 &minus;
 a
 ;
-**Multiply by**
-**var**
+<b>Multiply by</b>
+<b>var</b>
 a
 =
 5
@@ -10040,8 +9866,8 @@ b
 &ast;
 a
 ;
-**Divide by**
-**var**
+<b>Divide by</b>
+</b>var</b>
 a
 =
 3
@@ -10064,8 +9890,8 @@ b
 a
 ;
 <h5>Version ≥ 7</h5>
-**Raised to the power of**
-**var**
+<b>Raised to the power of</b>
+<b>var</b>
 a
 =
 3
@@ -10102,12 +9928,12 @@ b
 ;
 As an alternative to independent declaration and assignment, it is
 possible to perform both steps in one statement:
-**var**
+<b>var</b>
 a
 =
 6
 ;
-**let**
+<b>let</b>
 b
 =
 &quot;Foo&quot;
@@ -10126,15 +9952,15 @@ c
 ;
 myNewGlobal
 ;
-*// ReferenceError*
+// <i>ReferenceError</i>
 Note, however, that the above syntax is generally discouraged and is
 not strict-mode compliant. This is to avoid the scenario in which a
-programmer inadvertently drops a **let** or **var** keyword from their
+programmer inadvertently drops a <b>let</b> or <b>var</b> keyword from their
 statement, accidentally creating a variable in the global namespace
 without realizing it. This can pollute the global namespace and
 conflict with libraries and the proper functioning of a script.
 Therefore global variables should be declared and initialized using
-the **var** keyword in the context of the window object, instead, so
+the <b>var</b> keyword in the context of the window object, instead, so
 that the intent is explicitly stated.
 
 Additionally, variables may be declared several at a time by
@@ -10150,14 +9976,14 @@ globalB
 =
 &quot;2&quot;
 ;
-**let**
+<b>let</b>
 x
 ,
 y
 =
 5
 ;
-**var**
+<b>var</b>
 person
 =
 &apos;John Doe&apos;
@@ -10170,14 +9996,14 @@ age
 ,
 date
 =
-**new**
+<b>new</b>
 Date
 (
 )
 ;
 Notice in the preceding code snippet that the order in which declaration
 and assignment expressions occur (
-**var**
+<b>var</b>
 a
 ,
 b
