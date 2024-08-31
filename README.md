@@ -10999,274 +10999,114 @@ console.log(obj.a);  // <i>3</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-12">Section 19.12: Function Arguments, &quot;arguments&quot; object, rest and spread parameters</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Functions can take inputs in form of variables that can be used and
+<p>Functions can take inputs in form of variables that can be used and
 assigned inside their own scope. The following function takes two
-numeric values and returns their sum:
-
-<b>function</b>
-addition
-(
-argument1
-,
-argument2
-)
-{
-<b>return</b>
-argument1
-&plus;
-argument2
-;
+numeric values and returns their sum:</p>
+<pre>
+<b>function</b> addition (argument1, argument2) {
+  <b>return</b> argument1 &plus; argument2;
 }
-console.
-log
-(
-addition
-(
-2
-,
-3
-)
-)
-;
-// <i>-&bsol;5</i>
-<b>arguments</b>
-<b>object</b>
-The arguments object contains all the function&apos;s parameters that
+console.log(addition(2, 3));  // <i>-&gt; 5</i>
+</pre>
+<p><b>arguments object</b><p>
+
+<p>The arguments object contains all the function&apos;s parameters that
 contain a non-default value. It can also be used even if the
-parameters are not explicitly declared:
-
-(<b>function</b>() { console.log(arguments) })(0,&apos;str&apos;, &lbrack;2,{3}&rbrack;) // <i>
--&amp;lbrack;0, &quot;str&quot;, Array&lbrack;2&rbrack;&rbrack;</i> Although when printing arguments the
-output resembles an Array, it is in fact an object:
-(
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-<b>typeof</b>
-arguments
-)
-}
-)
-(
-)
-;
-// <i>-&bsol;object</i>
-<b>Rest parameters:</b>
-<b>function</b>
-<b>(</b>
-<b>&hellip;</b>
-<b>parm</b>
-<b>)</b>
-<b>{</b>
-<b>}</b>
-In ES6, the &hellip; syntax when used in the declaration of a function&apos;s
+parameters are not explicitly declared:</p>
+<pre>
+(<b>function</b>() { console.log(arguments) })(0,&apos;str&apos;, &lbrack;2,{3}&rbrack;) // <i>-&amp;lbrack;0, &quot;str&quot;, Array&lbrack;2&rbrack;&rbrack;</i>
+</pre>
+<p>Although when printing arguments the output resembles an Array, it is in fact an object:</p>
+<pre>
+(<b>function</b>() { console.log(<b>typeof</b>arguments) })();  // <i>-&bsol;object</i>
+</pre>
+<p><b>Rest parameters: function ( &hellip; parm) {}</b></p>
+<p>In ES6, the&hellip;syntax when used in the declaration of a function&apos;s
 parameters transforms the variable to its right into a single object
 containing all the remaining parameters provided after the declared
 ones. This allows the function to be invoked with an unlimited number
-of arguments, which will become part of this variable:
-// <i>-&bsol;object: 123</i>
-(
-</b>function</b>
-(
-a
-,
-&hellip;
-b
-)
-{
-console.
-log
-(
-<b>typeof</b>
-b
-&plus;
-&apos;: &apos;
-&plus;
-b
-&lbrack;
-0
-&rbrack;
-&plus;
-b
-&lbrack;
-1
-&rbrack;
-&plus;
-b
-&lbrack;
-2
-&rbrack;
-)
-}
-)
-(
-0
-,
-1
-,
-&apos;2&apos;
-,
-&lbrack;
-3
-&rbrack;
-,
-{
-i
-:
-4
-}
-)
-;
-</b>function_name</b> <b>(</b>   </b>&hellip;varb</b>
-<b>Spread parameters: );</b>
-In ES6, the &hellip; syntax can also be used when invoking a function by
+of arguments, which will become part of this variable:</p>
+<pre>
+(</b>function</b>(a, &hellip;b){console.log(<b>typeof</b> b&plus;&apos;: &apos; &plus;b&lbrack;0&rbrack;&plus;b&lbrack;1&rbrack;&plus;b&lbrack;2&rbrack;) })(0, 1, &apos;2&apos;, &lbrack;3&rbrack;,{i:4});
+// <i>&minus&gt; object: 123</i>
+</pre>
+
+<p><b>Spread parameters: function_name(&hellip;varb);</b></p>
+
+<p>In ES6, the &hellip; syntax can also be used when invoking a function by
 placing an object/variable to its right. This allows that object&apos;s
 elements to be passed into that function as a single object:
-</b>let</b>
-nums
-=
-&lbrack;
-2
-,
-42
-,-
-1
-&rbrack;
-;
-console.
-log
-(
-&hellip;
-&lbrack;
-&apos;a&apos;
-,
-&apos;b&apos;
-,
-&apos;c&apos;
-&rbrack;
-,
-Math
-.
-max
-(
-&hellip;
-nums
-)
-)
-;
-// <i>-&bsol;a b c 42</i>
+<pre>
+</b>let</b> nums = lbrack;2, 42, -1&rbrack;;
+console.log(&hellip;&lbrack;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&rbrack;, Math.max(&hellip;nums)); // <i>-&gt;a b c 42</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-13">Section 19.13: Function Composition</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-Composing multiple functions into one is a functional programming
-common practice;
+<p>Composing multiple functions into one is a functional programming common practice;</p>
 
-composition makes a pipeline through which our data will transit and
-get modified simply working on the functioncomposition (just like
-snapping pieces of a track together)&hellip;
-you start out with some single responsibility functions:
+<p>composition makes a pipeline through which our data will transit and get modified 
+simply working on the functioncomposition (just like snapping pieces of a track together)&hellip;</p>
+
+<p>you start out with some single responsibility functions:</p>
+
 <h5>Version ≥ 6</h5>
+
 <pre>
 <b>const</b> capitalize = x =&bsol;x.replace(*/&Hat;&bsol;&bsol;w/, m =&gt; m.toUpperCase());
 <b>const</b> sign = x =&bsol;x + &apos;,<b>&bsol;n</b>made with love&apos;;
 </pre>
+<!-- page 180 -->
 <p>and easily create a transformation track:</p>
 <h5>Version ≥ 6</h5>
+<pre>
 <b>const</b> formatText = compose(capitalize, sign);
 formatText(&apos;this is an example&apos;)
 // <i>This is an example,</i>
 // <i>made with love</i>
-N.B. Composition is achieved through a utility function usually called
-compose as in our example.
+</pre>
+<p>N.B. Composition is achieved through a utility function usually called compose 
+as in our example.</p>
 
-Implementation of compose are present in many JavaScript utility
-libraries ([lodash](https://lodash.com/docs#flow),
-[rambda](http://ramdajs.com/), etc.) but you can also start out with a
-simple implementation such as:
-Version ≥ 6
-<b>const</b>
-compose
-=
-(
-&hellip;
-funs
-)
-=&gt;
-x
-=&gt;
-funs.
-reduce
-(
-(
-ac
-,
-f
-)
-=&gt;
-f
-(
-ac
-)
-,
-x
-)
-;
+<p>Implementation of compose are present in many JavaScript utility libraries 
+(<a href="https://lodash.com/docs#flow">lodash</a>, <a href="http://ramdajs.com/">
+rambda</a>http://ramdajs.com/ etc.) but you can also start out with a
+simple implementation such as:</p>
+<h5>Version ≥ 6</h5>
+<pre>
+<b>const</b> compose = (&hellip;funs) =&gt;
+  x =&gt;
+  funs.reduce((ac, f) =&gt; f(ac), x);
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-14">Section 19.14: Get the name of a function object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<h5>Version ≥ 6 <b>ES6</b>:</h5>
-myFunction.
-name
-[Explanation on
-MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name).
-As of 2015 works in Node.js and all major browsers except IE.
-
+<h5>Version ≥ 6</h5>
+<p><b>ES6</b>:</h5>
+<pre>
+myFunction.name
+</pre>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name">Explanation on MDN</a>.
+As of 2015 works in Node.js and all major browsers except IE.</p>
 <h5>Version ≥ 5</h5>
-<b>ES5</b>:
+<p><b>ES5</b>:</p>
 
-If you have a reference to the function, you can do:
-<b>function</b>
-functionName
-(
-func
-)
+<p>If you have a reference to the function, you can do:</p>
+<pre>
+<b>function</b> functionName( func )
 {
-// <i>Match:</i>
-// <i>- &Hat; the beginning of the string</i>
-// <i>- function the word &apos;function&apos;</i>
-// <i>- &bsol;&bsol;s+ at least some white space</i>
-// <i>- (&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+) capture one or more valid JavaScript identifier characters</i>
-// <i>- &amp;lpar; followed by an opening brace</i>
-// <i></i>
-<b>var</b>
-result
-=
-/ <i>&Hat;function&bsol;&bsol;s+(&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+)&amp;lpar;/</i>
-.
-exec
-(
-func.
-toString
-(
-)
-)
-<b>return</b>
-result
-?
-result
-&lbrack;
-1
-&rbrack;
-:
-&apos;&apos;
+  // <i>Match:</i>
+  // <i> - &Hat;           the beginning of the string</i>
+  // <i> - function        the word &apos;function&apos;</i>
+  // <i> - &bsol;s+        at least some white space</i>
+  // <i> - (&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+) capture one or more valid JavaScript identifier characters</i>
+  // <i> - &amp;lpar;      followed by an opening brace</i>
+  // 
+<b>var</b> result = / <i>&Hat;function&bsol;&bsol;s+(&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+)&amp;lpar;/</i>.exec( func.toString() )
+  <b>return</b> result ? result &lbrack;1&rbrack; : &apos;&apos;
 }
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-15">Section 19.15: Recursive Function</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
