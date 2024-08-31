@@ -11288,6 +11288,7 @@ to the function.</p>
   <b>return</b> 41;
 }
 </pre>
+<!-- page 184 -->
 <p>A reference to a function is like any other value. As you&apos;ve seen, a
 reference can be assigned to a variable, and that variable&apos;s
 reference value can be subsequently assigned to other variables. You
@@ -11334,1178 +11335,319 @@ functionVariable();  // <i>error: undefined is not a function.</i>
 <b>function</b> hoistedFunction(){}
 functionVariable = <b>function</b>(){};
 </pre>
+<!-- page 185 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch20">Chapter 20: Functional JavaScript</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch20-1">Section 20.1: Higher-Order Functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-In general, functions that operate on other functions, either by
+<p>In general, functions that operate on other functions, either by
 taking them as arguments or by returning them (or both), are called
-higher-order functions.
-A higher-order function is a function that can take another function
+higher-order functions.</p>
+<p>A higher-order function is a function that can take another function
 as an argument. You are using higher-order functions when passing
-callbacks.
-<b>function</b>
-iAmCallbackFunction
-)
-{
-console.
-log
-(
-&quot;callback has been invoked&quot;
-)
-;
+callbacks.</p>
+<pre>
+<b>function</b> iAmCallbackFunction() {
+  console.log(&quot;callback has been invoked&quot;);
 }
-<b>function</b>
-iAmJustFunction
-(
-callbackFn
-)
-{
-*// do some stuff &hellip;*
-*// invoke the callback function.*
-callbackFn
-(
-)
-;
+<b>function</b> iAmJustFunction(callbackFn) {
+  // <i>do some stuff &hellip;</i>
+  // <i>invoke the callback function.</i>
+  callbackFn();
 }
-*// invoke your higher-order function with a callback function.*
-iAmJustFunction
-(
-iAmCallbackFunction
-)
-;
-A higher-order function is also a function that returns another
-function as its result.
-<b>function</b>
-iAmJustFunction
-(
-)
-{
-*// do some stuff &hellip;*
-*// return a function.*
-<b>return</b>
-<b>function</b>
-iAmReturnedFunction
-(
-)
-{
-console.
-log
-(
-&quot;returned function has been invoked&quot;
-)
-;
+// <i>invoke your higher-order function with a callback function.</i>
+iAmJustFunction(iAmCallbackFunction);
+</pre>
+<p>A higher-order function is also a function that returns another function as its result.</p>
+<pre>
+<b>function</b> iAmJustFunction() {
+  // <i>do some stuff &hellip;</i>
+  // <i>return a function.</i>
+  <b>return</b> <b>function</b> iAmReturnedFunction() {
+    console.log(&quot;returned function has been invoked&quot;);
+  }
 }
-}
-*// invoke your higher-order function and its returned function.*
-iAmJustFunction
-(
-)
-(
-)
-;
+// <i>invoke your higher-order function and its returned function.</i>
+iAmJustFunction()();
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch20-2">Section 20.2: Identity Monad</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-This is an example of an implementation of the identity monad in
+<p>This is an example of an implementation of the identity monad in
 JavaScript, and could serve as a starting point to create other
-monads.
-Based on the [conference by Douglas Crockford on monads and
-gonads](https://www.youtube.com/watch?v=b0EF0VTs9Dc)
-Using this approach reusing your functions will be easier because of
-the flexibility this monad provides, and composition nightmares:
-f
-(
-g
-(
-h
-(
-i
-(
-j
-(
-k
-(
-value
-)
-,
-j1
-)
-,
-i2
-)
-,
-h1
-,
-h2
-)
-,
-g1
-,
-g2
-)
-,
-f1
-,
-f2
-)
-readable, nice and clean:
-identityMonad
-(
-value
-)
-.
-bind
-(
-k
-)
-.
-bind
-(
-j
-,
-j1
-,
-j2
-)
-.
-bind
-(
-i
-,
-i2
-)
-.bind(h, h1, h2)
-.bind(g, g1, g2)
-.bind(f, f1, f2);
-<b>function</b>
-identityMonad
-(
-value
-)
-{
-<b>var</b>
-monad
-=
-Object
-.
-create
-(
-<b>null</b>
-)
-;
-*// func should return a monad*
-monad.
-bind
-=
-<b>function</b>
-(
-func
-,
-&hellip;
-args
-)
-{
-<b>return</b>
-func
-(
-value
-,
-&hellip;
-args
-)
-;
-}
-;
-*// whatever func does, we get our monad back*
-monad.
-call
-=
-<b>function</b>
-(
-func
-,
-&hellip;
-args
-)
-{
-func
-(
-value
-,
-&hellip;
-args
-)
-;
-<b>return</b>
-identityMonad
-(
-value
-)
-;
-}
-;
-*// func doesn&apos;t have to know anything about monads*
-monad.
-apply
-=
-<b>function</b>
-(
-func
-,
-&hellip;
-args
-)
-{
-<b>return</b>
-identityMonad
-(
-func
-(
-value
-,
-&hellip;
-args
-)
-)
-;
-}
-;
-*// Get the value wrapped in this monad*
-monad.
-value
-=
-<b>function</b>
-(
-)
-{
-<b>return</b>
-value
-;
-}
-;
-<b>return</b>
-monad
-;
-}
-;
-It works with primitive values
-<b>var</b>
-value
-=
-&apos;foo&apos;
-,
-f
-=
-x
-=&gt;
-x
-&plus;
-&apos; changed&apos;
-,
-g
-=
-x
-=&gt;
-x
-&plus;
-&apos; again&apos;
-;
-identityMonad
-(
-value
-)
-.
-apply
-(
-f
-)
-.
-apply
-(
-g
-)
-.
-bind
-(
-alert
-)
-;
-*// Alerts &apos;foo changed again&apos;*
-And also with objects
-<b>var</b>
-value
-=
-{
-foo
-:
-&apos;foo&apos;
-}
-,
-f
-=
-x
-=&gt;
-identityMonad
-(
-Object
-.
-assign
-(
-x
-,
-{
-foo
-:
-&apos;bar&apos;
-}
-)
-)
-,
-g
-=
-x
-=&gt;
-Object
-.
-assign
-(
-x
-,
-{
-bar
-:
-&apos;foo&apos;
-}
-)
-,
-h
-=
-x
-=&gt;
-console.
-log
-(
-&apos;foo: &apos;
-&plus;
-x&period;
-foo
-&plus;
-&apos;, bar: &apos;
-&plus;
-x&period;
-bar
-)
-;
-identityMonad
-(
-value
-)
-.
-bind
-(
-f
-)
-.
-apply
-(
-g
-)
-.
-bind
-(
-h
-)
-;
-*// Logs &apos;foo: bar, bar: foo&apos;*
-Let&apos;s try everything:
-
+monads.</p>
+<p>Based on the <a href="https://www.youtube.com/watch?v=b0EF0VTs9Dc">
+conference by Douglas Crockford on monads and gonads</a></p>
+<p>Using this approach reusing your functions will be easier because of
+the flexibility this monad provides, and composition nightmares:</p>
+<pre>
+f(g(h(i(j(k(value), j1), i2), h1, h2), g1, g2), f1, f2)
+</pre>
+<p>readable, nice and clean:</p>
+<pre>
+identityMonad(value)
+  .bind(k)
+  .bind(j, j1, j2)
+  .bind(i, i2)
+  .bind(h, h1, h2)
+  .bind(g, g1, g2)
+  .bind(f, f1, f2);
+</pre>
+<pre>
+<b>function</b> identityMonad(value) {
+  <b>var</b> monad = Object.create(<b>null</b>);
+  // <i>func should return a monad</i>
+  monad.bind = <b>function</b> (func, &hellip;args) {
+    <b>return</b> func(value, &hellip;args);
+};
+  // <i>whatever func does, we get our monad back</i>
+  monad.call = <b>function</b>(func, &hellip;args) {
+    func(value, &hellip;args);
+    <b>return</b> identityMonad(value);
+  };
+  // <i>func doesn&apos;t have to know anything about monads</i>
+  monad.apply = <b>function</b>(func, &hellip;args) {
+    <b>return</b> identityMonad(func(value, &hellip;args));
+  };
+  // <i>Get the value wrapped in this monad</i>
+  monad.value = <b>function</b> () {
+    <b>return</b> value;
+  };
+  <b>return</b> monad;
+};
+</pre>
+<p>It works with primitive values</p>
+<pre>
+<b>var</b> value = &apos;foo&apos;,
+  f = x =&gt; x &plus; &apos; changed&apos;,
+  g = x =&gt; x &plus; &apos; again&apos;;
+identityMonad(value)
+  .apply(f)
+  .apply(g)
+  .bind(alert);  // <i>Alerts &apos;foo changed again&apos;</i>
+</pre>
+<p>And also with objects</p>
+<pre>
+<b>var</b> value = { foo: &apos;foo&apos; },
+  f = x =&gt; identityMonad(Object.assign(x, { foo: &apos;bar&apos;})),
+  g = x =&gt; Object.assign(x, { bar: &apos;foo&apos;}),
+  h = x =&gt; console.log(&apos;foo: &apos; &plus; x&period;foo &plus; &apos;, bar: &apos; &plus; x&period;bar);
+identityMonad(value)
+  .bind(f)
+  .apply(g)
+  .bind(h);  // <i>Logs &apos;foo: bar, bar: foo&apos;</i>
+</pre>
+<p>Let&apos;s try everything:</p>
+<!-- page 187 -->
+<pre>
 <b>var</b> add = (x, &hellip;args) =&bsol;x + args.reduce((r, n) =&bsol;r + n, 0),
-multiply = (x, &hellip;args) =&bsol;x &ast; args.reduce((r, n) =&bsol;r &ast; n, 1),
-
-divideMonad
-=
-(
-x
-,
-&hellip;
-args
-)
-=&gt;
-identityMonad
-(
-x
-/
-multiply
-(
-&hellip;
-args
-)
-)
-,
-log
-=
-x
-=&gt;
-console.
-log
-(
-x
-)
-,
-substract
-=
-(
-x
-,
-&hellip;
-args
-)
-=&gt;
-x
-&minus;
-add
-(
-&hellip;
-args
-)
-;
-identityMonad
-(
-100
-)
-.
-apply
-(
-add
-,
-10
-,
-29
-,
-13
-)
-.
-apply
-(
-multiply
-,
-2
-)
-.
-bind
-(
-divideMonad
-,
-2
-)
-.
-apply
-(
-substract
-,
-67
-,
-34
-)
-.
-apply
-(
-multiply
-,
-1239
-)
-.
-bind
-(
-divideMonad
-,
-20
-,
-54
-,
-2
-)
-.
-apply
-(
-Math
-.
-round
-)
-.
-call
-(
-log
-)
-;
-*// Logs 29*
+  multiply = (x, &hellip;args) =&bsol;x &ast; args.reduce((r, n) =&bsol;r &ast; n, 1),
+  divideMonad = (x, &hellip;args) =&gt; identityMonad(x / multiply(&hellip;args)),
+  log = x =&gt; console.log(x),
+  substract = (x, &hellip;args) =&gt; x &minus; add(&hellip;args);
+identityMonad(100)
+  .apply(add, 10, 29, 13)
+  .apply(multiply, 2)
+  .bind(divideMonad, 2)
+  .apply(substract, 67, 34)
+  .apply(multiply, 1239)
+  .bind(divideMonad, 20, 54, 2)
+  .apply(Math.round)
+  .call(log);  // <i>Logs 29</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch20-3">Section 20.3: Pure Functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-A basic principle of functional programming is that it <b>avoids
+<p>A basic principle of functional programming is that it <b>avoids
 changing</b> the application state (statelessness) and variables outside
-its scope (immutability).
-Pure functions are functions that:
-with a given input, always return the same output they do not rely on
-any variable outside their scope
-they do not modify the state of the application (<b>no side effects</b>)
-Let&apos;s take a look at some examples:
+its scope (immutability).</p>
+<p>Pure functions are functions that:</p>
+<ul>
+  <li>with a given input, always return the same output</li>
+  <i>they do not rely on any variable outside their scope</li>
+  <li>they do not modify the state of the application (<b>no side effects</b>)</li>
+</ul>
+<p>Let&apos;s take a look at some examples:</p>
+<blockquote>
 Pure functions must not change any variable outside their scope
-<b>Impure function</b>
-<b>let</b>
-obj
-=
-{
-a
-:
-0
+</blockquote>
+<p><b>Impure function</b></p>
+<pre>
+<b>let</b> obj = { a: 0 }
+<b>const</b> impure = (input) =&gt; {
+  // <i>Modifies input.a</i>
+  input.a = input.a &plus; 1;
+  <b>return</b> input.a;
 }
-<b>const</b>
-impure
-=
-(
-input
-)
-=&gt;
-{
-*// Modifies input.a*
-input.
-a
-=
-input.
-a
-&plus;
-1
-;
-<b>return</b>
-input.
-a
-;
+<b>let</b> b = impure(obj)
+console.log(obj)  // <i>Logs { &quot;a&quot;: 1 }</i>
+console.log(b)    // <i>Logs 1</i>
+</pre>
+<p>The function changed the obj.a value that is outside its scope.</p>
+<p><b>Pure function</b></p>
+<pre>
+<b>let</b> obj = { a: 0 }
+<b>const</b> pure = (input) =&gt; {
+  // <i>Does not modify obj</i>
+  <b>let</b> output = input.a &plus; 1;
+  <b>return</b> output;
 }
-<b>let</b>
-b
-=
-impure
-(
-obj
-)
-console.
-log
-(
-obj
-)
-*// Logs { &quot;a&quot;: 1 }*
-console.
-log
-(
-b
-)
-*// Logs 1*
-obj.
-
-The function changed the a value that is outside its scope.
-
-<b>Pure function</b>
-<b>let</b>
-obj
-=
-{
-a
-:
-0
-}
-<b>const</b>
-pure
-=
-(
-input
-)
-=&gt;
-{
-*// Does not modify obj*
-<b>let</b>
-output
-=
-input.
-a
-&plus;
-1
-;
-<b>return</b>
-output
-;
-}
-<b>let</b> b = pure(obj) console.log(obj) *// Logs { &quot;a&quot;: 0 }*
-console.log(b) *// Logs 1*
-The function did not change the object obj values
+<b>let</b> b = pure(obj) console.log(obj) // <i>Logs { &quot;a&quot;: 0 }</i>
+console.log(b) // <i>Logs 1</i>
+</pre>
+<!-- page 188 -->
+<p>The function did not change the object obj values</p>
+<blockquote>
 Pure functions must not rely on variables outside their scope
-<b>Impure function</b>
-<b>let</b>
-a
-=
-1
-;
-<b>let</b>
-impure
-=
-(
-input
-)
-=&gt;
-{
-*// Multiply with variable outside function scope*
-<b>let</b>
-output
-=
-input
-&ast;
-a
-;
-<b>return</b>
-output
-;
+</blockquote>
+<p><b>Impure function</b></p>
+<pre>
+<b>let</b> a = 1;
+<b>let</b> impure = (input) =&gt; {
+  // <i>Multiply with variable outside function scope</i>
+  <b>let</b> output = input &ast; a;
+  <b>return</b> output;
 }
-console.
-log
-(
-impure
-(
-2
-)
-)
-*// Logs 2*
-a
-++
-;
-*// a becomes equal to 2*
-console.
-log
-(
-impure
-(
-2
-)
-)
-*// Logs 4*
-This <b>impure</b> function rely on variable a that is defined outside
+console.log(impure(2))  // <i>Logs 2</i>
+a++; // <i>a becomes equal to 2</i>
+console.log(impure(2))  // <i>Logs 4</i>
+</pre>
+<p>This <b>impure</b> function rely on variable a that is defined outside
 its scope. So, if a is modified, impure&apos;s function result will be
-different.
-
-<b>Pure function</b>
-<b>let</b>
-pure
-=
-(
-input
-)
-=&gt;
-{
-<b>let</b>
-a
-=
-1
-;
-*// Multiply with variable inside function scope*
-<b>let</b>
-output
-=
-input
-&ast;
-a
-;
-<b>return</b>
-output
-;
+different.</p>
+<p><b>Pure function</b></p>
+<pre>
+<b>let</b> pure = (input) =&gt; {
+  <b>let</b> a = 1;
+  // <i>Multiply with variable inside function scope</i>
+  <b>let</b> output = input &ast; a;
+  <b>return</b> output;
 }
-console.
-log
-(
-pure
-(
-2
-)
-)
-*// Logs 2*
-The pure&apos;s function result <b>does not rely</b> on any variable outside
-its scope.
+console.log(pure(2))  // <i>Logs 2</i>
+</pre>
+<p>The pure&apos;s function result <b>does not rely</b> on any variable outside its scope.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch20-4">Section 20.4: Accepting Functions as Arguments</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>function</b>
-transform
-(
-fn
-,
-arr
-)
-{
-<b>let</b>
-result
-=
-&lbrack;
-&rbrack;
-;
-<b>for</b>
-(
-<b>let</b>
-el of arr
-)
-{
-result.
-push
-(
-fn
-(
-el
-)
-)
-;
-*// We push the result of the transformed item to result*
+<b>function</b> transform(fn, arr) {
+  <b>let</b> result = &lbrack;&rbrack;;
+  <b>for</b> (<b>let</b> el of arr) {
+    result.push(fn(el));  // <i>We push the result of the transformed item to result</i>
+  }
+  <b>return</b> result;
 }
-<b>return</b>
-result
-;
-}
-console.
-log
-(
-transform
-(
-x
-=&gt;
-x
-&ast;
-2
-,
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-)
-)
-;
-*// &lbrack;2, 4, 6, 8&rbrack;*
-As you can see, our transform function accepts two parameters, a
+console.log(transform(x=&gt; x &ast; 2, &lbrack;1,2,3,4&rbrack;));  // <i>&lbrack;2, 4, 6, 8&rbrack;</i>
+</pre>
+<p>As you can see, our transform function accepts two parameters, a
 function and a collection. It will then iterate the collection, and
-push values onto the result, calling fn on each of them.
-Array . <b>prototype</b> . map
-Looks familiar? This is very similar to how () works!
-console.
-log
-(
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-.
-map
-(
-x
-=&gt;
-x
-&ast;
-2
-)
-)
-;
-*// &lbrack;2, 4, 6, 8&rbrack;*
+push values onto the result, calling fn on each of them.</p>
+
+<p>Looks familiar? This is very similar to how Array.prototype.map() works!</p>
+<!-- page 189 -->
+<pre>
+console.log(&lbrack;1, 2, 3, 4&rbrack;.map(x =&gt; x &ast; 2));  // <i>&lbrack;2, 4, 6, 8&rbrack;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch21">Chapter 21: Prototypes, objects</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-In the conventional JS there are no class instead we have prototypes.
+<p>In the conventional JS there are no class instead we have prototypes.
 Like the class, prototype inherits the properties including the
 methods and the variables declared in the class. We can create the new
 instance of the object whenever it is necessary by,
 Object.create(PrototypeName); (we can give the value for the
-constructor as well)
+constructor as well)</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch21-1">Section 21.1: Creation and initialising Prototype</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>var</b>
-Human
-=
-<b>function</b>
-(
-)
-{
-<b>this</b>
-.
-canWalk
-=
-<b>true</b>
-;
-<b>this</b>
-.
-canSpeak
-=
-<b>true</b>
-;
-*//*
-}
-;
-Person.
-<b>prototype</b>
-.
-greet
-=
-<b>function</b>
-(
-)
-{
-<b>if</b>
-(
-<b>this</b>
-.
-canSpeak
-)
-{
-*// checks whether this prototype has instance of speak*
-<b>this</b>
-.
-name
-=
-&quot;Steve&quot;
-console.
-log
-(
-&apos;Hi, I am &apos;
-&plus;
-<b>this</b>
-.
-name
-)
-;
-}
-<b>else</b>
-{
-console.
-log
-(
-&apos;Sorry i can not speak&apos;
-)
-;
-}
-}
-;
-The prototype can be instantiated like this
-obj
-=
-Object
-.
-create
-(
-Person.
-<b>prototype</b>
-)
-;
-ob.
-greet
-(
-)
-;
-We can pass value for the constructor and make the boolean true and
-false based on the requirement.
+<b>var</b> Human = <b>function</b>() {
+  <b>this</b>.canWalk = <b>true</b>;
+  <b>this</b>.canSpeak = <b>true</b>;  <i>//</i>
+};
+Person.<b>prototype</b>.greet = <b>function</b>() {
+  <b>if</b> (<b>this</b>.canSpeak) { // <i>checks whether this prototype has instance of speak</i>
+  <b>this</b>.name = &quot;Steve&quot;
+  console.log(&apos;Hi, I am &apos; &plus; <b>this</b>.name);
+  } <b>else</b> {
+  console.log(&apos;Sorry i can not speak&apos;);
+  }
+};
+</pre>
+<p>The prototype can be instantiated like this</p>
+<pre>
+obj = Object.create(Person.<b>prototype</b>);
+ob.greet();
+</pre>
+<p>We can pass value for the constructor and make the boolean true and false 
+based on the requirement.</p>
 
-Detailed Explanation
-<b>var</b>
-Human
-=
-<b>function</b>
-(
-)
-{
-<b>this</b>
-.
-canSpeak
-=
-<b>true</b>
-;
-}
-;
-*// Basic greet function which will greet based on the canSpeak flag*
-Human.
-<b>prototype</b>
-.
-greet
-=
-<b>function</b>
-(
-)
-{
-<b>if</b>
-(
-<b>this</b>
-.
-canSpeak
-)
-{
-console.
-log
-(
-&apos;Hi, I am &apos;
-&plus;
-<b>this</b>
-.
-name
-)
-;
-}
-}
-;
-<b>var</b>
-Student
-=
-<b>function</b>
-(
-name
-,
-title
-)
-{
-Human.
-call
-(
-<b>this</b>
-)
-;
-*// Instantiating the Human object and getting the memebers of the
-class*
-<b>this</b>
-.
-name
-=
-name
-;
-*// inheriting the name from the human class*
-<b>this</b>
-.
-title
-=
-title
-;
-*// getting the title from the called function*
-}
-;
-Student.
-<b>prototype</b>
-=
-Object
-.
-create
-(
-Human.
-<b>prototype</b>
-)
-;
-Student.
-<b>prototype</b>
-.
-constructor
-=
-Student
-;
-Student.
-<b>prototype</b>
-.
-greet
-=
-<b>function</b>
-(
-)
-{
-<b>if</b>
-(
-<b>this</b>
-.
-canSpeak
-)
-{
-console.
-log
-(
-&apos;Hi, I am &apos;
-&plus;
-<b>this</b>
-.
-name
-&plus;
-&apos;, the &apos;
-&plus;
-<b>this</b>
-.
-title
-)
-;
-}
-}
-;
-<b>var</b>
-Customer
-=
-<b>function</b>
-(
-name
-)
-{
-Human.
-call
-(
-<b>this</b>
-)
-;
-*// inheriting from the base class*
-<b>this</b>
-.
-name
-=
-name
-;
-}
-;
-Customer.
-<b>prototype</b>
-=
-Object
-.
-create
-(
-Human.
-<b>prototype</b>
-)
-;
-*// creating the object*
-Customer.
-<b>prototype</b>
-.
-constructor
-=
-Customer
-;
-<b>var</b>
-bill
-=
-<b>new</b>
-Student
-(
-&apos;Billy&apos;
-,
-&apos;Teacher&apos;
-)
-;
-<b>var</b>
-carter
-=
-<b>new</b>
-Customer
-(
-&apos;Carter&apos;
-)
-;
-<b>var</b>
-andy
-=
-<b>new</b>
-Student
-(
-&apos;Andy&apos;
-,
-&apos;Bill&apos;
-)
-;
-<b>var</b>
-virat
-=
-<b>new</b>
-Customer
-(
-&apos;Virat&apos;
-)
-;
-bill.
-greet
-(
-)
-;
-*// Hi, I am Bob, the Teacher*
-carter.
-greet
-(
-)
-;
-*// Hi, I am Carter*
-andy.
-greet
-(
-)
-;
-*// Hi, I am Andy, the Bill*
-virat.
-greet
-(
-)
-;
+<p>Detailed Explanation</p>
+<pre>
+<b>var</b> Human = <b>function</b>() {
+  <b>this</b>.canSpeak = <b>true</b>;
+};
+// <i>Basic greet function which will greet based on the canSpeak flag</i>
+Human.<b>prototype</b>.greet = <b>function</b>() {
+  <b>if</b> (<b>this</b>.canSpeak) {
+    console.log(&apos;Hi, I am &apos; &plus; <b>this</b>.name);
+  }
+};
+<b>var</b> Student = <b>function</b>(name, title) {
+  Human.call(<b>this</b>);  // <i>Instantiating the Human object and getting the memebers of the class</i>
+  <b>this</b>.name = name;  // <i>inheriting the name from the human class</i>
+  <b>this</b>.title = title;  // <i>getting the title from the called function</i>
+};
+Student.<b>prototype</b> = Object.create(Human.<b>prototype</b>);
+Student.<b>prototype</b>.constructor = Student;
+Student.<b>prototype</b>.greet = <b>function</b>() {
+  <b>if</b> (<b>this</b>.canSpeak) {
+    console.log(&apos;Hi, I am &apos; &plus; <b>this</b>.name &plus; &apos;, the &apos; &plus; <b>this</b>.title);
+  }
+};
+<b>var</b> Customer = <b>function</b>(name) {
+  Human.call(<b>this</b>);  // <i>inheriting from the base class</i>
+  <b>this</b>.name = name;
+};
+Customer.<b>prototype</b> = Object.create(Human.<b>prototype</b>);  // <i>creating the object</i>
+Customer.<b>prototype</b>.constructor = Customer;
+<b>var</b> bill = <b>new</b> Student(&apos;Billy&apos;, &apos;Teacher&apos;);
+<b>var</b> carter = <b>new</b> Customer(&apos;Carter&apos;);
+<b>var</b> andy = <b>new</b> Student(&apos;Andy&apos;, &apos;Bill&apos;);
+<b>var</b> virat = <b>new</b> Customer(&apos;Virat&apos;);
+bill.greet();
+// <i>Hi, I am Bob, the Teacher</i>
+carter.greet();
+// <i>Hi, I am Carter</i>
+andy.greet();
+// <i>Hi, I am Andy, the Bill</i>
+virat.greet();
+</pre>
+<!-- page 192 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch22">Chapter 22: Classes</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-1">Section 22.1: Class Constructor</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The fundamental part of most classes is its constructor, which sets up
+<p>The fundamental part of most classes is its constructor, which sets up
 each instance&apos;s initial state and handles any parameters that were
-passed when calling <b>new</b>.
-
-It&apos;s defined in a class block as though you&apos;re defining a method
-named constructor, though it&apos;s actually handled as a special case.
-class
-MyClass
-{
-constructor
-(
-option
-)
-{
-console.
-log
-(
-&grave;Creating instance using &dollar;
-{
-option
+passed when calling <b>new</b>.</p>
+<p>It&apos;s defined in a class block as though you&apos;re defining a method
+named constructor, though it&apos;s actually handled as a special case.</p>
+<pre>
+class MyClass {
+  constructor(option) {
+    console.log(&grave;Creating instance using &dollar; {option} option.&grave;);
+    <b>this</b>.option = option;
+  }
 }
-option.&grave;
-)
-;
-<b>this</b>
-.
-option
-=
-option
-;
-}
-}
-Example usage: <b>const</b> foo = <b>new</b> MyClass(&apos;speedy&apos;); *// logs:
-&quot;Creating instance using speedy option&quot;*
-
-A small thing to note is that a class constructor cannot be made
+</pre>
+<p>Example usage:</p>
+<pre>
+<b>const</b> foo = <b>new</b> MyClass(&apos;speedy&apos;); // <i>logs: &quot;Creating instance using speedy option&quot;</i>
+</pre>
+<p>A small thing to note is that a class constructor cannot be made
 static via the <b>static</b> keyword, as described below for other
-methods.
+methods.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-2">Section 22.2: Class Inheritance</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -12585,13 +11727,13 @@ log
 (
 )
 ;
-*// logs: &quot;Hello subclass&quot;*
+// <i>logs: &quot;Hello subclass&quot;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-3">Section 22.3: Static Methods</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-Static methods and properties are defined on *the class/constructor
-itself*, not on instance objects. These are specified in a class
+Static methods and properties are defined on <i>the class/constructor
+itself</i>, not on instance objects. These are specified in a class
 definition by using the <b>static</b> keyword.
 
 class
@@ -12626,7 +11768,7 @@ myStaticMethod
 )
 )
 ;
-*// logs: &quot;Hello&quot;*
+// <i>logs: &quot;Hello&quot;</i>
 console.
 log
 (
@@ -12634,7 +11776,7 @@ MyClass.
 myStaticProperty
 )
 ;
-*// logs: &quot;Goodbye&quot;*
+// <i>logs: &quot;Goodbye&quot;</i>
 We can see that static properties are not defined on object instances:
 <b>const</b>
 myClassInstance
@@ -12651,8 +11793,8 @@ myClassInstance.
 myStaticProperty
 )
 ;
-*// logs: undefined*
-However, they *are* defined on subclasses:
+// <i>logs: undefined</i>
+However, they <i>are</i> defined on subclasses:
 class
 MySubClass
 extends
@@ -12669,7 +11811,7 @@ myStaticMethod
 )
 )
 ;
-*// logs: &quot;Hello&quot;*
+// <i>logs: &quot;Hello&quot;</i>
 console.
 log
 (
@@ -12677,7 +11819,7 @@ MySubClass.
 myStaticProperty
 )
 ;
-*// logs: &quot;Goodbye&quot;*
+// <i>logs: &quot;Goodbye&quot;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-4">Section 22.4: Getters and Setters</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -12800,7 +11942,7 @@ name
 
 ;
 
-*// logs: &quot;Bob&quot;*
+// <i>logs: &quot;Bob&quot;</i>
 
 console.
 
@@ -12816,7 +11958,7 @@ names&lowbar;
 
 ;
 
-*// logs: &lbrack;&quot;Joe&quot;, &quot;Bob&quot;&rbrack;*
+// <i>logs: &lbrack;&quot;Joe&quot;, &quot;Bob&quot;&rbrack;</i>
 
 If you only define a setter, attempting to access the property will
 always return <b>undefined</b>.
@@ -12877,7 +12019,7 @@ prop
 
 ;
 
-*// logs: &quot;setting&quot;, 10*
+// <i>logs: &quot;setting&quot;, 10</i>
 
 console.
 
@@ -12893,7 +12035,7 @@ prop
 
 ;
 
-*// logs: undefined*
+// <i>logs: undefined</i>
 
 If you only define a getter, attempting to assign the property will
 have no effect.
@@ -12956,7 +12098,7 @@ prop
 
 ;
 
-*// logs: 5*
+// <i>logs: 5</i>
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-5">Section 22.5: Private Members</h3>
@@ -12987,7 +12129,7 @@ constructor
 
 {
 
-*// - does generate a closure with each instantiation.*
+// <i>- does generate a closure with each instantiation.</i>
 
 <b>const</b>
 
@@ -13001,7 +12143,7 @@ list
 
 ;
 
-*// - local state (&quot;private member&quot;).*
+// <i>- local state (&quot;private member&quot;).</i>
 
 <b>this</b>
 
@@ -13021,9 +12163,8 @@ type
 
 {
 
-*// - privileged public method*
-
-*// accessing the local state*
+// <i>- privileged public method</i>
+// <i>accessing the local state</i>
 
 list.
 
@@ -13037,7 +12178,7 @@ type
 
 ;
 
-*// &quot;writing&quot; alike.*
+// <i>&quot;writing&quot; alike.</i>
 
 <b>return</b>
 
@@ -13065,9 +12206,8 @@ dequeue
 
 {
 
-*// - privileged public method*
-
-*// accessing the local state*
+// <i>- privileged public method</i>
+// <i>accessing the local state</i>
 
 <b>return</b>
 
@@ -13081,7 +12221,7 @@ shift
 
 ;
 
-*// &quot;reading / writing&quot; alike.*
+// <i>&quot;reading / writing&quot; alike.</i>
 
 }
 
@@ -13119,7 +12259,7 @@ enqueue
 
 ;
 
-*// &hellip; first in &hellip;*
+// <i>&hellip; first in &hellip;</i>
 
 q&period;
 
@@ -13169,7 +12309,7 @@ dequeue
 
 ;
 
-*// 9 &hellip; first out.*
+// <i>9 &hellip; first out.</i>
 
 console.
 
@@ -13189,7 +12329,7 @@ dequeue
 
 ;
 
-*// 8*
+// <i>8</i>
 
 console.
 
@@ -13209,7 +12349,7 @@ dequeue
 
 ;
 
-*// 7*
+// <i>7</i>
 
 console.
 
@@ -13223,7 +12363,7 @@ q
 
 ;
 
-*// {}*
+// <i>{}</i>
 
 console.
 
