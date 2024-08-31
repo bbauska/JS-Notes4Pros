@@ -11766,349 +11766,105 @@ console.log(classInstance.prop);  // <i>logs: 5</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-5">Section 22.5: Private Members</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-JavaScript does not technically support private members as a language
-feature. Privacy - [described by Douglas
-Crockford](http://javascript.crockford.com/private.html) - gets
-emulated instead via closures (preserved function scope) that will be
-generated each with every instantiation call of a constructor
-function.
+<p>JavaScript does not technically support private members as a language
+feature. Privacy - <a href="http://javascript.crockford.com/private.html">described by Douglas
+Crockford</a> - gets emulated instead via closures (preserved function scope) that will be
+generated each with every instantiation call of a constructor function.</p>
 
-The Queue example demonstrates how, with constructor functions, local
-state can be preserved and made accessible too via privileged methods.
-class
-Queue
-{
-constructor
-(
-)
-{
-// <i>- does generate a closure with each instantiation.</i>
-<b>const</b>
-list
-=
-&lbrack;
-&rbrack;
-;
-// <i>- local state (&quot;private member&quot;).</i>
-<b>this</b>
-.
-enqueue
-=
-<b>function</b>
-(
-type
-)
-{
-// <i>- privileged public method</i>
-// <i>accessing the local state</i>
-list.
-push
-(
-type
-)
-;
-// <i>&quot;writing&quot; alike.</i>
-<b>return</b>
-type
-;
+<p>The Queue example demonstrates how, with constructor functions, local
+state can be preserved and made accessible too via privileged methods.</p>
+<pre>
+class Queue {
+  constructor () {                // <i>- does generate a closure with each instantiation.</i>
+    <b>const</b> list = &lbrack;&rbrack;;   // <i>- local state (&quot;private member&quot;).</i>
+    <b>this</b>.enqueue = <b>function</b> (type) {  // <i>- privileged public method</i>
+                                                  // <i>accessing the local state</i>
+      list.push(type);                              // <i>&quot;writing&quot; alike.</i>
+      <b>return</b> type;
+    };
+    <b>this</b>.dequeue = <b>function</b> () {      // <i>- privileged public method</i>
+                                                  // <i>accessing the local state</i>
+      <b>return</b> list.shift ();                  // <i>&quot;reading / writing&quot; alike.</i>
+    };
+  }
 }
-;
-<b>this</b>
-.
-dequeue
-=
-<b>function</b>
-(
-)
-{
-// <i>- privileged public method</i>
-// <i>accessing the local state</i>
-<b>return</b>
-list.
-shift
-(
-)
-;
-// <i>&quot;reading / writing&quot; alike.</i>
-}
-;
-}
-}
-<b>var</b>
-q
-=
-<b>new</b>
-Queue
-;
-*//*
-*//*
-q&period;
-enqueue
-(
-9
-)
-;
-// <i>&hellip; first in &hellip;</i>
-q&period;
-enqueue
-(
-8
-)
-;
-*//*
-q&period;
-enqueue
-(
-7
-)
-;
-*//*
-*//*
-console.
-log
-(
-q&period;
-dequeue
-(
-)
-)
-;
-// <i>9 &hellip; first out.</i>
-console.
-log
-(
-q&period;
-dequeue
-(
-)
-)
-;
-// <i>8</i>
-console.
-log
-(
-q&period;
-dequeue
-(
-)
-)
-;
-// <i>7</i>
-console.
-log
-(
-q
-)
-;
-// <i>{}</i>
-console.
-log
-(
-Object
-.
-keys
-(
-q
-)
-)
-;
-*// &lbrack;&quot;enqueue&quot;,&quot;dequeue&quot;&rbrack;*
-With every instantiation of a Queue type the constructor generates a
-closure.
-Object.keys
-Thus both of a Queue type&apos;s own methods enqueue and dequeue (see (q))
-still do have access to list that continues to *live* in its enclosing
-scope that, at construction time, has been preserved.
-
-Making use of this pattern - emulating private members via privileged
+<b>var</b> q = <b>new</b> Queue;      // <i></i>
+                                      // <i></i>
+  q&period;enqueue(9);                // <i>&hellip; first in &hellip;</i>
+  q&period;enqueue(8);                // <i></i>
+  q&period;enqueue(7);                // <i></i>
+                                      // <i></i>
+  console.log(q&period;dequeue());    // <i>9 &hellip; first out.</i>
+  console.log(q&period;dequeue());    // <i>8</i>
+  console.log(q&period;dequeue());    // <i>7</i>
+  console.log(q);                     // <i>{}</i>
+  console.log(Object.keys(q));        // <i> &lbrack;&quot;enqueue&quot;,&quot;dequeue&quot;&rbrack;</i>
+</pre>
+<p>With every instantiation of a Queue type the constructor generates a closure.</p>
+<p>Thus both of a Queue type&apos;s own methods enqueue and dequeue (see Object.kes(q))
+still do have access to list that continues to <i>live</i> in its enclosing
+scope that, at construction time, has been preserved.</p>
+<p>Making use of this pattern - emulating private members via privileged
 public methods - one should keep in mind that, with every instance,
-additional memory will be consumed for every *own property* method
+additional memory will be consumed for every <i>own property</i> method
 (for it is code that can&apos;t be shared/reused). The same is true for
 the amount/size of state that is going to be stored within such a
-closure.
+closure.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-6">Section 22.6: Methods</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Methods can be defined in classes to perform a function and optionally
-return a result. They can receive arguments from the caller.
-class
-Something
-{
-constructor
-(
-data
-)
-{
-<b>this</b>
-.
-data
-=
-data
+<p>Methods can be defined in classes to perform a function and optionally
+return a result. They can receive arguments from the caller.</p>
+<pre>
+class Something {
+  constructor(data) {
+    <b>this</b>.data = data
+  }
+  doSomething(text) {
+    <b>return</b> {
+      data: <b>this</b>.data,
+      text
+    }
+  }
 }
-doSomething
-(
-text
-)
-{
-<b>return</b>
-{
-data
-:
-<b>this</b>
-.
-data
-,
-text
-}
-}
-}
-<b>var</b>
-s
-=
-<b>new</b>
-Something
-(
-{
-}
-)
-s&period;
-doSomething
-(
-&quot;hi&quot;
-)
-*// returns: { data: {}, text: &quot;hi&quot; }*
+<b>var</b> s = <b>new</b> Something({})
+s&period;doSomething(&quot;hi&quot;) // <i>returns: { data: {}, text: &quot;hi&quot; }</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-7">Section 22.7: Dynamic Method Names</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-There is also the ability to evaluate expressions when naming methods
+<p>There is also the ability to evaluate expressions when naming methods
 similar to how you can access an objects&apos; properties with &lbrack;&rbrack;. This
 can be useful for having dynamic property names, however is often used
-in conjunction with Symbols.
-<b>let</b>
-METADATA
-=
-Symbol
-(
-&apos;metadata&apos;
-)
-;
-class
-Car
-{
-constructor
-(
-make
-,
-model
-)
-{
-<b>this</b>
-.
-make
-=
-make
-;
-<b>this</b>
-.
-model
-=
-model
-;
+in conjunction with Symbols.</p>
+<pre>
+<b>let</b> METADATA = Symbol(&apos;metadata&apos;);
+class Car {
+  constructor(make, model) {
+  <b>this</b>.make = make;
+  <b>this</b>.model = model;
+// <i> example using symbols</i>
+&lbrack;METADATA&rbrack;() {
+  <b>return</b> {
+    make:  <b>this</b>.make,
+    model: <b>this</b>.model
+  };
 }
-*// example using symbols*
-&lbrack;
-METADATA
-&rbrack;
-(
-)
-{
-<b>return</b>
-{
-make
-:
-<b>this</b>
-.
-make
-,
-model
-:
-<b>this</b>
-.
-model
+// <i> you can also use any javascript expression</i>
+// <i> this one is just a string, and could also be defined with simply add()</i>
+&lbrack;&quot;add&quot;&rbrack;(a, b) {
+<b>return</b> a &plus; b;
 }
-;
+// <i> this one is dynamically evaluated</i>
+&lbrack; 1 &plus; 2&rbrack;() {
+  <b>return</b> &quot;three&quot;;
+  }
 }
-*// you can also use any javascript expression*
-*// this one is just a string, and could also be defined with simply
-add()*
-&lbrack;
-&quot;add&quot;
-&rbrack;
-(
-a
-,
-b
-)
-{
-<b>return</b>
-a
-&plus;
-b
-;
-}
-*// this one is dynamically evaluated*
-&lbrack;
-1
-&plus;
-2
-&rbrack;
-(
-)
-{
-<b>return</b>
-&quot;three&quot;
-;
-}
-}
-<b>let</b>
-MazdaMPV
-=
-<b>new</b>
-Car
-(
-&quot;Mazda&quot;
-,
-&quot;MPV&quot;
-)
-;
-MazdaMPV.
-add
-(
-4
-,
-5
-)
-;
-*// 9*
-MazdaMPV
-&lbrack;
-3
-&rbrack;
-(
-)
-;
-*// &quot;three&quot;*
-MazdaMPV
-&lbrack;
-METADATA
-&rbrack;
-(
-)
-;
-*// { make: &quot;Mazda&quot;, model: &quot;MPV&quot; }*
+<b>let</b> MazdaMPV = <b>new</b> Car(&quot;Mazda&quot;, &quot;MPV&quot;);
+MazdaMPV.add(4, 5); // <i> 9</i>
+MazdaMPV&lbrack;3&rbrack;();  // <i> &quot;three&quot;</i>
+MazdaMPV&lbrack;METADATA&rbrack;();  // <i> { make: &quot;Mazda&quot;, model: &quot;MPV&quot; }</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-8">Section 22.8: Managing Private Data with Classes</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -12138,8 +11894,8 @@ Symbol
 &apos;topSecret&apos;
 )
 ;
-*// our private key; will only be accessible on the scope of*
-*the module file*
+// <i> our private key; will only be accessible on the scope of</i>
+<i>the module file</i>
 export
 class
 SecretAgent
@@ -12156,7 +11912,7 @@ topSecret
 =
 secret
 ;
-*// we have access to the symbol key (closure)*
+// <i> we have access to the symbol key (closure)</i>
 <b>this</b>
 .
 coverStory
@@ -12179,7 +11935,7 @@ topSecret
 &rbrack;
 )
 ;
-*// we have access to topSecret*
+// <i> we have access to topSecret</i>
 }
 ;
 }
@@ -12192,13 +11948,13 @@ SecretAgent
 }
 from
 &apos;SecretAgent.js&apos;
-**const** agent = **new** SecretAgent(&apos;steal all the ice cream&apos;);
-*// ok let&apos;s try to get the secret out of him!*
+<b>const</b> agent = </b>new</b> SecretAgent(&apos;steal all the ice cream&apos;);
+// <i> ok let&apos;s try to get the secret out of him!*
 
-Object.keys(agent); *// &lbrack;&apos;coverStory&apos;&rbrack; only cover story is public,
+Object.keys(agent); // <i> &lbrack;&apos;coverStory&apos;&rbrack; only cover story is public,
 our secret is kept.*
 
-agent&lbrack;Symbol(&apos;topSecret&apos;)&rbrack;; *// undefined, as we said, symbols are
+agent&lbrack;Symbol(&apos;topSecret&apos;)&rbrack;; // <i> undefined, as we said, symbols are
 always unique, so only the original symbol will help us to get the
 data.*
 Object.getOwnPropertySymbols
@@ -12206,11 +11962,11 @@ Object.getOwnPropertySymbols
 But it&apos;s not 100% private; let&apos;s break that agent down! We can use
 the method to get the object symbols.
 
-**const** secretKeys = Object.getOwnPropertySymbols(agent);
-agent&lbrack;secretKeys&lbrack;0&rbrack;&rbrack; *// &apos;steal all the ice cream&apos; , we got the
+<b>const</b> secretKeys = Object.getOwnPropertySymbols(agent);
+agent&lbrack;secretKeys&lbrack;0&rbrack;&rbrack; // <i> &apos;steal all the ice cream&apos; , we got the
 secret.*
 
-**Using WeakMaps**
+<b>Using WeakMaps</b>
 
 WeakMap is a new type of object that have been added for es6.
 
@@ -12236,15 +11992,15 @@ Thus only inside the class will we have access to the WeakMap
 collection.
 
 Let&apos;s give our agent a try, with WeakMap:
-**const**
+<b>const</b>
 topSecret
 =
-**new**
+<b>new</b>
 WeakMap
 (
 )
 ;
-*// will hold all private data of all instances.*
+// <i> will hold all private data of all instances.*
 export
 class
 SecretAgent
@@ -12255,22 +12011,22 @@ secret
 )
 {
 topSecret.
-**set**
+<b>set</b>
 (
-**this**
+<b>this</b>
 ,
 secret
 )
 ;
-*// we use this, as the key, to set it on our instance private*
+// <i> we use this, as the key, to set it on our instance private*
 *data*
-**this**
+<b>this</b>
 .
 coverStory
 =
 &apos;just a simple gardner&apos;
 ;
-**this**
+<b>this</b>
 .
 doMission
 =
@@ -12281,13 +12037,13 @@ doMission
 figureWhatToDo
 (
 topSecret.
-**get**
+<b>get</b>
 (
-**this**
+<b>this</b>
 )
 )
 ;
-*// we have access to topSecret*
+// <i> we have access to topSecret*
 }
 ;
 }
@@ -12296,11 +12052,11 @@ Because the const topSecret is defined inside our module closure, and
 since we didn&apos;t bind it to our instance properties, this approach is
 totally private, and we can&apos;t reach the agent topSecret.
 
-**Define all methods inside the constructor**
+<b>Define all methods inside the constructor</b>
 
 The idea here is simply to define all our methods and members inside
 the constructor and use the closure to access private members without
-assigning them to **this**.
+assigning them to <b>this</b>.
 export
 class
 SecretAgent
@@ -12310,18 +12066,18 @@ constructor
 secret
 )
 {
-**const**
+<b>const</b>
 topSecret
 =
 secret
 ;
-**this**
+<b>this</b>
 .
 coverStory
 =
 &apos;just a simple gardner&apos;
 ;
-**this**
+<b>this</b>
 .
 doMission
 =
@@ -12334,7 +12090,7 @@ figureWhatToDo
 topSecret
 )
 ;
-*// we have access to topSecret*
+// <i> we have access to topSecret*
 }
 ;
 }
@@ -12342,7 +12098,7 @@ topSecret
 In this example as well the data is 100% private and can&apos;t be reached
 outside the class, so our agent is safe.
 
-**Using naming conventions**
+<b>Using naming conventions</b>
 
 We will decide that any property who is private will be prefixed with
 &lowbar;.
@@ -12357,19 +12113,19 @@ constructor
 secret
 )
 {
-**this**
+<b>this</b>
 .&lowbar;topSecret
 =
 secret
 ;
-*// it private by convention*
-**this**
+// <i> it private by convention*
+<b>this</b>
 .
 coverStory
 =
 &apos;just a simple gardner&apos;
 ;
-**this**
+<b>this</b>
 .
 doMission
 =
@@ -12393,17 +12149,17 @@ this_topSecret
 ClassDeclaration&apos;s Name is bound in different ways in different
 scopes -
 
-1.  The scope in which the class is defined - **let** binding
+1.  The scope in which the class is defined - <b>let</b> binding
 class
 
-2.  The scope of the class itself - within { and } in {} - **const**
+2.  The scope of the class itself - within { and } in {} - <b>const</b>
     binding
 class
 Foo
 {
-*// Foo inside this block is a const binding*
+// <i> Foo inside this block is a const binding*
 }
-*// Foo here is a let binding*
+// <i> Foo here is a let binding*
 For example,
 class
 A
@@ -12414,47 +12170,47 @@ foo
 {
 A
 =
-**null**
+<b>null</b>
 ;
-*// will throw at runtime as A inside the class is a &grave;const&grave; binding*
+// <i> will throw at runtime as A inside the class is a &grave;const&grave; binding*
 }
 }
 A
 =
-**null**
+<b>null</b>
 ;
-*// will NOT throw as A here is a &grave;let&grave; binding*
+// <i> will NOT throw as A here is a &grave;let&grave; binding*
 This is not the same for a Function -
-**function**
+<b>function</b>
 A
 (
 )
 {
 A
 =
-**null**
+<b>null</b>
 ;
-*// works*
+// <i> works*
 }
 A.
-**prototype**
+<b>prototype</b>
 .
 foo
 =
-**function**
+<b>function</b>
 foo
 (
 )
 {
 A
 =
-**null**
+<b>null</b>
 ;
-*// works*
+// <i> works*
 }
 A
 =
-**null**
+<b>null</b>
 ;
-*// works*
+// <i> works*
 
