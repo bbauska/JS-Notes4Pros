@@ -11651,353 +11651,118 @@ methods.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-2">Section 22.2: Class Inheritance</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-
-Inheritance works just like it does in other object-oriented
+<p>Inheritance works just like it does in other object-oriented
 languages: methods defined on the superclass are accessible in the
-extending subclass.
-super
-If the subclass declares its own constructor then it must invoke the
-parents constructor via () before it can access <b>this</b>.
-class
-SuperClass
-{
-constructor
-(
-)
-{
-<b>this</b>
-.
-logger
-=
-console.
-log
-;
+extending subclass.</p>
+<p>If the subclass declares its own constructor then it must invoke the
+parents constructor via () before it can access <b>this</b>.</p>
+<pre>
+class SuperClass {
+  constructor() {
+    <b>this</b>.logger = console.log;
+  }
+  log() {
+    <b>this</b>.logger(&grave;Hello &dollar;{<b>this</b>.name}&grave;);
+  }
 }
-log
-(
-)
-{
-<b>this</b>
-.
-logger
-(
-&grave;Hello &dollar;
-{
-<b>this</b>
-.
-name
+class SubClass extends SuperClass {
+  constructor() {
+    super();
+    <b>this</b>.name = &apos;subclass&apos;;
+  }
 }
-&grave;
-)
-;
-}
-}
-class
-SubClass
-extends
-SuperClass
-{
-constructor
-(
-)
-{
-super
-(
-)
-;
-<b>this</b>
-.
-name
-=
-&apos;subclass&apos;
-;
-}
-}
-<b>const</b>
-subClass
-=
-<b>new</b>
-SubClass
-(
-)
-;
-subClass.
-log
-(
-)
-;
-// <i>logs: &quot;Hello subclass&quot;</i>
+<b>const</b> subClass = <b>new</b> SubClass();
+subClass.log();  // <i>logs: &quot;Hello subclass&quot;</i>
+</pre>
+<!-- page 193 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-3">Section 22.3: Static Methods</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Static methods and properties are defined on <i>the class/constructor
+<p>Static methods and properties are defined on <i>the class/constructor
 itself</i>, not on instance objects. These are specified in a class
-definition by using the <b>static</b> keyword.
-
-class
-MyClass
-{
-<b>static</b>
-myStaticMethod
-(
-)
-{
-<b>return</b>
-&apos;Hello&apos;
-;
+definition by using the <b>static</b> keyword.</p>
+<pre>
+class MyClass {
+  <b>static</b> myStaticMethod() {
+    <b>return</b> &apos;Hello&apos;;
+  }
+  <b>static</b> <b>get</b> myStaticProperty() {
+    <b>return</b> &apos;Goodbye&apos;;
+  }
 }
-<b>static</b>
-<b>get</b>
-myStaticProperty
-(
-)
-{
-<b>return</b>
-&apos;Goodbye&apos;
-;
-}
-}
-console.
-log
-(
-MyClass.
-myStaticMethod
-(
-)
-)
-;
-// <i>logs: &quot;Hello&quot;</i>
-console.
-log
-(
-MyClass.
-myStaticProperty
-)
-;
-// <i>logs: &quot;Goodbye&quot;</i>
-We can see that static properties are not defined on object instances:
-<b>const</b>
-myClassInstance
-=
-<b>new</b>
-MyClass
-(
-)
-;
-console.
-log
-(
-myClassInstance.
-myStaticProperty
-)
-;
-// <i>logs: undefined</i>
-However, they <i>are</i> defined on subclasses:
-class
-MySubClass
-extends
-MyClass
-{
-}
-;
-console.
-log
-(
-MySubClass.
-myStaticMethod
-(
-)
-)
-;
-// <i>logs: &quot;Hello&quot;</i>
-console.
-log
-(
-MySubClass.
-myStaticProperty
-)
-;
-// <i>logs: &quot;Goodbye&quot;</i>
+console.log(MyClass.myStaticMethod());  // <i>logs: &quot;Hello&quot;</i>
+console.log(MyClass.myStaticProperty);  // <i>logs: &quot;Goodbye&quot;</i>
+</pre>
+<p>We can see that static properties are not defined on object instances:</p>
+<pre>
+<b>const</b> myClassInstance = <b>new</b> MyClass();
+console.log(myClassInstance.myStaticProperty);  // <i>logs: undefined</i>
+</pre>
+<p>However, they <i>are</i> defined on subclasses:</p>
+<pre>
+class MySubClass extends MyClass {};
+console.log(MySubClass.myStaticMethod());  // <i>logs: &quot;Hello&quot;</i>
+console.log(MySubClass.myStaticProperty);  // <i>logs: &quot;Goodbye&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-4">Section 22.4: Getters and Setters</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Getters and setters allow you to define custom behaviour for reading
+<p>Getters and setters allow you to define custom behaviour for reading
 and writing a given property on your class. To the user, they appear
 the same as any typical property. However, internally a custom
 function you provide is used to determine the value when the property
 is accessed (the getter), and to perform any necessary changes when
-the property is assigned (the setter).
+the property is assigned (the setter).</p>
 
-In a class definition, a getter is written like a no-argument method
+<p>In a class definition, a getter is written like a no-argument method
 prefixed by the <b>get</b> keyword. A setter is similar, except that it
 accepts one argument (the new value being assigned) and the <b>set</b>
-keyword is used instead.
-name
-names&lowbar;
-Here&apos;s an example class which provides a getter and setter for its .
+keyword is used instead.</p>
+
+<p>Here&apos;s an example class which provides a getter and setter for its .
 property. Each time it&apos;s assigned, we&apos;ll record the new name in an
 internal . array. Each time it&apos;s accessed, we&apos;ll return the latest
-name.
-class
-MyClass
-{
-constructor
-(
-)
-{
-<b>this</b>
-.
-names&lowbar;
-=
-&lbrack;
-&rbrack;
-;
+name.</p>
+<pre>
+class MyClass {
+  constructor() {
+    <b>this</b>.names&lowbar; = &lbrack;&rbrack;;
+  }
+  <b>set</b> name(value) {
+    <b>this</b>.names&lowbar;.push(value);
+  }
+  <b>get</b> name() {
+    <b>return</b> <b>this</b>.names&lowbar;&lbrack;<b>this</b>.names&lowbar;.length &minus; 1&rbrack;;
+  }
 }
-<b>set</b>
-name
-(
-value
-)
-{
-<b>this</b>
-.
-names&lowbar;
-.
-push
-(
-value
-)
-;
+<b>const</b> myClassInstance = <b>new</b> MyClass();
+myClassInstance.name = &apos;Joe&apos;;
+myClassInstance.name = &apos;Bob&apos;;
+console.log(myClassInstance.name);  // <i>logs: &quot;Bob&quot;</i>
+console.log(myClassInstance.names&lowbar;);  // <i>logs: &lbrack;&quot;Joe&quot;, &quot;Bob&quot;&rbrack;</i>
+</pre>
+<p>If you only define a setter, attempting to access the property will always 
+return <b>undefined</b>.</p>
+<pre>
+<b>const</b> classInstance = <b>new</b> class {
+  <b>set</b> prop(value) {
+    console.log(&apos;setting&apos;, value);
+  }
+};
+classInstance.prop = 10;  // <i>logs: &quot;setting&quot;, 10</i>
+console.log(classInstance.prop);  // <i>logs: undefined</i>
+</pre>
+<p>If you only define a getter, attempting to assign the property will
+have no effect.</p>
+<pre>
+<b>const</b> classInstance = <b>new</b> class {
+  <b>get</b> prop() {
+    <b>return</b> 5;
 }
-<b>get</b>
-name
-(
-)
-{
-<b>return</b>
-<b>this</b>
-.
-names&lowbar;
-&lbrack;
-<b>this</b>
-.
-names&lowbar;
-.
-length
-&minus;
-1
-&rbrack;
-;
-}
-}
-<b>const</b>
-myClassInstance
-=
-<b>new</b>
-MyClass
-(
-)
-;
-myClassInstance.
-name
-=
-&apos;Joe&apos;
-;
-myClassInstance.
-name
-=
-&apos;Bob&apos;
-;
-console.
-log
-(
-myClassInstance.
-name
-)
-;
-// <i>logs: &quot;Bob&quot;</i>
-console.
-log
-(
-myClassInstance.
-names&lowbar;
-)
-;
-// <i>logs: &lbrack;&quot;Joe&quot;, &quot;Bob&quot;&rbrack;</i>
-If you only define a setter, attempting to access the property will
-always return <b>undefined</b>.
-<b>const</b>
-classInstance
-=
-<b>new</b>
-class
-{
-<b>set</b>
-prop
-(
-value
-)
-{
-console.
-log
-(
-&apos;setting&apos;
-,
-value
-)
-;
-}
-}
-;
-classInstance.
-prop
-=
-10
-;
-// <i>logs: &quot;setting&quot;, 10</i>
-console.
-log
-(
-classInstance.
-prop
-)
-;
-// <i>logs: undefined</i>
-If you only define a getter, attempting to assign the property will
-have no effect.
-<b>const</b>
-classInstance
-=
-<b>new</b>
-class
-{
-<b>get</b>
-prop
-(
-)
-{
-<b>return</b>
-5
-;
-}
-}
-;
-classInstance.
-prop
-=
-10
-;
-console.
-log
-(
-classInstance.
-prop
-)
-;
-// <i>logs: 5</i>
+};
+classInstance.prop = 10;
+console.log(classInstance.prop);  // <i>logs: 5</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-5">Section 22.5: Private Members</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
