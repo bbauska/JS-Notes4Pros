@@ -11465,7 +11465,7 @@ its scope (immutability).</p>
 <p>Pure functions are functions that:</p>
 <ul>
   <li>with a given input, always return the same output</li>
-  <i>they do not rely on any variable outside their scope</li>
+  <li>they do not rely on any variable outside their scope</li>
   <li>they do not modify the state of the application (<b>no side effects</b>)</li>
 </ul>
 <p>Let&apos;s take a look at some examples:</p>
