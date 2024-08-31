@@ -10804,7 +10804,7 @@ performed through default values:</p>
   <li>Variables existing in the same scope of the function being declared can be 
     used in its default values.</li>
   <li>Functions can be invoked in order to provide their return value into a default value.</li>
-<ul>
+</ul>
 <h5>Version ≥ 6</h5>
 <pre>
 <b>let</b> zero = 0; 
