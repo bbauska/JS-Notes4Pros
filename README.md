@@ -11868,349 +11868,375 @@ MazdaMPV&lbrack;METADATA&rbrack;();  // <i> { make: &quot;Mazda&quot;, model: &q
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-8">Section 22.8: Managing Private Data with Classes</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-One of the most common obstacles using classes is finding the proper
+<p>One of the most common obstacles using classes is finding the proper
 approach to handle private states. There are 4 common solutions for
-handling private states:
+handling private states:</p>
 
-<b>Using Symbols</b>
+<p><b>Using Symbols</b></p>
 
-Symbols are new primitive type introduced on in ES2015, as defined at
-[MDN](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol)
-
+<p>Symbols are new primitive type introduced on in ES2015, as defined at
+<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol">MDN</a></p>
+<blockquote>
 A symbol is a unique and immutable data type that may be used as an
 identifier for object properties.
-
-When using symbol as a property key, it is not enumerable.
-<b>for</b> <b>var</b> <b>in</b> or Object.keys
-As such, they won&apos;t be revealed using .
-
-Thus we can use symbols to store private data.
-<b>const</b>
-topSecret
-=
-Symbol
-(
-&apos;topSecret&apos;
-)
-;
-// <i> our private key; will only be accessible on the scope of</i>
+</blockquote>
+<p>When using symbol as a property key, it is not enumerable.</p>
+<p>As such, they won&apos;t be revealed using far var in or Object.keys.</p>
+<p>Thus we can use symbols to store private data.</p>
+<pre>
+<b>const</b> topSecret = Symbol(&apos;topSecret&apos;);  // <i> our private key; will only be accessible on the scope of</i>
 <i>the module file</i>
-export
-class
-SecretAgent
-{
-constructor
-(
-secret
-)
-{
-<b>this</b>
-&lbrack;
-topSecret
-&rbrack;
-=
-secret
-;
-// <i> we have access to the symbol key (closure)</i>
-<b>this</b>
-.
-coverStory
-=
-&apos;just a simple gardner&apos;
-;
-<b>this</b>
-.
-doMission
-=
-(
-)
-=&gt;
-{
-figureWhatToDo
-(
-topSecret
-&lbrack;
-topSecret
-&rbrack;
-)
-;
-// <i> we have access to topSecret</i>
+export class SecretAgent {
+  constructor(secret) {
+    <b>this</b>&lbrack;topSecret&rbrack; = secret;  // <i> we have access to the symbol key (closure)</i>
+    <b>this</b>.coverStory = &apos;just a simple gardner&apos;;
+    <b>this</b>.doMission = () =&gt; {
+      figureWhatToDo(topSecret&lbrack;topSecret&rbrack;);  // <i> we have access to topSecret</i>
+    };
+  }
 }
-;
-}
-}
-Because symbols are unique, we must have reference to the original
-symbol to access the private property.
-import
-{
-SecretAgent
-}
-from
-&apos;SecretAgent.js&apos;
+</pre>
+<p>Because symbols are unique, we must have reference to the original
+symbol to access the private property.</p>
+<!-- page 197 -->
+<pre>
+import {SecretAgent} from &apos;SecretAgent.js&apos;
 <b>const</b> agent = </b>new</b> SecretAgent(&apos;steal all the ice cream&apos;);
-// <i> ok let&apos;s try to get the secret out of him!*
-
-Object.keys(agent); // <i> &lbrack;&apos;coverStory&apos;&rbrack; only cover story is public,
-our secret is kept.*
-
-agent&lbrack;Symbol(&apos;topSecret&apos;)&rbrack;; // <i> undefined, as we said, symbols are
-always unique, so only the original symbol will help us to get the
-data.*
-Object.getOwnPropertySymbols
-
-But it&apos;s not 100% private; let&apos;s break that agent down! We can use
-the method to get the object symbols.
-
+// <i> ok let&apos;s try to get the secret out of him!</i>
+Object.keys(agent); // <i> &lbrack;&apos;coverStory&apos;&rbrack; only cover story is public, our secret is kept.</i>
+agent&lbrack;Symbol(&apos;topSecret&apos;)&rbrack;; // <i> undefined, as we said, symbols are always unique, so only the 
+original symbol will help us to get the data.</i>
+</pre>
+<p>But it&apos;s not 100% private; let&apos;s break that agent down! We can use
+the method to get the object symbols.</p>
+<pre>
 <b>const</b> secretKeys = Object.getOwnPropertySymbols(agent);
-agent&lbrack;secretKeys&lbrack;0&rbrack;&rbrack; // <i> &apos;steal all the ice cream&apos; , we got the
-secret.*
+agent&lbrack;secretKeys&lbrack;0&rbrack;&rbrack; // <i> &apos;steal all the ice cream&apos; , we got the secret.</i>
+</pre>
+<p><b>Using WeakMaps</b></p>
 
-<b>Using WeakMaps</b>
+<p>WeakMap is a new type of object that have been added for es6.</p>
 
-WeakMap is a new type of object that have been added for es6.
-
-As defined on
-[MDN](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbolhttps:/developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
-
+<p>As defined on <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbolhttps:/developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">MDN</a></p>
+<blockquote>
 The WeakMap object is a collection of key/value pairs in which the
 keys are weakly referenced. The keys must be objects and the values
 can be arbitrary values.
+</blockquote>
 
-Another important feature of WeakMap is, as defined on
-[MDN](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap).
-
+<p>Another important feature of WeakMap is, as defined on <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">MDN</a>.</p>
+<blockquote>
 The key in a WeakMap is held weakly. What this means is that, if there
 are no other strong references to the key, the entire entry will be
 removed from the WeakMap by the garbage collector.
-
-The idea is to use the WeakMap, as a static map for the whole class,
+</blockquote>
+<p>The idea is to use the WeakMap, as a static map for the whole class,
 to hold each instance as key and keep the private data as a value for
-that instance key.
+that instance key.</p>
 
-Thus only inside the class will we have access to the WeakMap
-collection.
+<p>Thus only inside the class will we have access to the WeakMap collection.</p>
 
-Let&apos;s give our agent a try, with WeakMap:
-<b>const</b>
-topSecret
-=
-<b>new</b>
-WeakMap
-(
-)
-;
-// <i> will hold all private data of all instances.*
-export
-class
-SecretAgent
-{
-constructor
-(
-secret
-)
-{
-topSecret.
-<b>set</b>
-(
-<b>this</b>
-,
-secret
-)
-;
-// <i> we use this, as the key, to set it on our instance private*
-*data*
-<b>this</b>
-.
-coverStory
-=
-&apos;just a simple gardner&apos;
-;
-<b>this</b>
-.
-doMission
-=
-(
-)
-=&gt;
-{
-figureWhatToDo
-(
-topSecret.
-<b>get</b>
-(
-<b>this</b>
-)
-)
-;
-// <i> we have access to topSecret*
+<p>Let&apos;s give our agent a try, with WeakMap:</p>
+<pre>
+<b>const</b> topSecret = <b>new</b> WeakMap();  // <i> will hold all private data of all instances.</i>
+export class SecretAgent {
+  constructor(secret) {
+    topSecret.<b>set</b>(<b>this</b>, secret);  // <i> we use this, as the key, to set it on our instance private</i>
+<i>data</i>
+    <b>this</b>.coverStory = &apos;just a simple gardner&apos;;
+    <b>this</b>.doMission = () =&gt; {
+      figureWhatToDo(topSecret.<b>get</b>(<b>this</b>));   // <i> we have access to topSecret</i>
+    };
+  }
 }
-;
-}
-}
-Because the const topSecret is defined inside our module closure, and
+</pre>
+<p>Because the const topSecret is defined inside our module closure, and
 since we didn&apos;t bind it to our instance properties, this approach is
-totally private, and we can&apos;t reach the agent topSecret.
+totally private, and we can&apos;t reach the agent topSecret.</p>
 
-<b>Define all methods inside the constructor</b>
+<p><b>Define all methods inside the constructor</b></p>
 
-The idea here is simply to define all our methods and members inside
+<p>The idea here is simply to define all our methods and members inside
 the constructor and use the closure to access private members without
-assigning them to <b>this</b>.
-export
-class
-SecretAgent
-{
-constructor
-(
-secret
-)
-{
-<b>const</b>
-topSecret
-=
-secret
-;
-<b>this</b>
-.
-coverStory
-=
-&apos;just a simple gardner&apos;
-;
-<b>this</b>
-.
-doMission
-=
-(
-)
-=&gt;
-{
-figureWhatToDo
-(
-topSecret
-)
-;
-// <i> we have access to topSecret*
+assigning them to <b>this</b>.</p>
+<!-- page 198 -->
+<pre>
+export class SecretAgent {
+  constructor(secret) {
+    <b>const</b> topSecret = secret;
+    <b>this</b>.coverStory = &apos;just a simple gardner&apos;;
+    <b>this</b>.doMission = () =&gt; {
+      figureWhatToDo(topSecret);  // <i> we have access to topSecret</i>
+    };
+  }
 }
-;
+</pre>
+<p>In this example as well the data is 100% private and can&apos;t be reached
+outside the class, so our agent is safe.</p>
+<p><b>Using naming conventions</b></p>
+<p>We will decide that any property who is private will be prefixed with &lowbar;.</p>
+<p>Note that for this approach the data isn&apos;t really private.</p>
+<pre>
+export class SecretAgent {
+  constructor(secret) {
+    <b>this</b>.&lowbar;topSecret = secret;  // <i> it private by convention</i>
+    <b>this</b>.coverStory = &apos;just a simple gardner&apos;;
+    <b>this</b>.doMission = () =&gt; {
+      figureWhatToDo(this_topSecret);
+    };
+  }
 }
-}
-In this example as well the data is 100% private and can&apos;t be reached
-outside the class, so our agent is safe.
-
-<b>Using naming conventions</b>
-
-We will decide that any property who is private will be prefixed with
-&lowbar;.
-
-Note that for this approach the data isn&apos;t really private.
-export
-class
-SecretAgent
-{
-constructor
-(
-secret
-)
-{
-<b>this</b>
-.&lowbar;topSecret
-=
-secret
-;
-// <i> it private by convention*
-<b>this</b>
-.
-coverStory
-=
-&apos;just a simple gardner&apos;
-;
-<b>this</b>
-.
-doMission
-=
-(
-)
-=&gt;
-{
-figureWhatToDo
-(
-this_topSecret
-)
-;
-}
-;
-}
-}
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-9">Section 22.9: Class Name binding</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>ClassDeclaration&apos;s Name is bound in different ways in different scopes -</p>
+<ol>
+  <li>The scope in which the class is defined - <b>let</b> binding</li>
+  <li>The scope of the class itself - within { and } in class {} - <b>const</b> binding</li>
+</ol>
+<pre>
+class Foo {
+  // <i> Foo inside this block is a const binding</i>
+}
+// <i> Foo here is a let binding</i>
+</pre>
+<p>For example,</p>
+<pre>
+class A {
+  foo() {
+    A = <b>null</b>;  // <i> will throw at runtime as A inside the class is a &grave;const&grave; binding</i>
+  }
+}
+A = <b>null</b>;  // <i> will NOT throw as A here is a &grave;let&grave; binding</i>
+</pre>
+<p>This is not the same for a Function -</p>
+<pre>
+<b>function</b> A() {
+  A = <b>null</b>;  // <i> works</i>
+}
+A.<b>prototype</b>.foo = <b>function</b> foo() {
+  A = <b>null</b>;  // <i> works</i>
+}
+A = <b>null</b>;  // <i> works</i>
+</pre>
+<!-- page 199 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch23">Chapter 23: Namespacing</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch23-1">Section 23.1: Namespace by direct assignment</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+// <i>Before: antipattern 3 global variables</i>
+  <b>var</b> setActivePage = <b>function</b> () {};
+  <b>var</b> getPage = <b>function</b>() {};
+  <b>var</b> redirectPage = <b>function</b>() {};
+// <i>After: just 1 global variable, no function collision and more meaningful function names</i>
+  <b>var</b> NavigationNs = NavigationNs &vert;&vert; {};
+  NavigationNs.active = <b>function</b>() {}
+  NavigationNs.pagination = <b>function</b>() {}
+  NavigationNs.redirection = <b>function</b>() {}
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch23-2">Section 23.2: Nested Namespaces</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>When multiple modules are involved, avoid proliferating global names
+by creating a single global namespace. From there, any sub-modules can
+be added to the global namespace. (Further nesting will slow down
+performance and add unnecessary complexity.) Longer names can be used
+if name clashes are an issue:</p>
+<pre>
+<b>var</b> NavigationNs = NavigationNs &vert;&vert; {};
+  NavigationNs.active = {};
+  NavigationNs.pagination = {};
+  NavigationNs.redirection = {};
+  // <i> The second level start here.</i>
+  Navigational.pagination.jquery = <b>function</b>();
+  Navigational.pagination.angular = <b>function</b>();
+  Navigational.pagination.ember = <b>function</b>();
+</pre>
+<!-- page 200 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch24">Chapter 24: Context (this)</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch24-1">Section 24.1: this with simple objects</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+<b>var</b> person = {
+  name: &apos;John Doe&apos;,
+  age: 42,
+  gender: &apos;male&apos;,
+  bio: <b>function</b>() {
+    console.log(&apos;My name is &apos; &plus; <b>this</b>.name);
+  }
+};
+person.bio();  // <i> logs &quot;My name is John Doe&quot;</i>
+<b>var</b> bio = person.bio;
+bio();  // <i> logs &quot;My name is undefined&quot;</i>
+</pre>
+<p>In the above code, person.bio makes use of the context(this). When the function is called
+as person.bio(), the context gets passed automatically, and so it correctly logs &quot;My name
+is John Doe&quot;. When assigning the function to a variable though, it
+loses its context.</p>
+<p>In non-strict mode, the default context is the global object (window).
+In strict mode it is <b>undefined</b>.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch24-2">Section 24.2: Saving this for use in nested functions / objects</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>One common pitfall is to try and use <b>this</b> in a nested function or
+an object, where the context has been lost.</p>
+<pre>
+document.getElementById(&apos;myAJAXButton&apos;).onclick = <b>function</b>() {
+  makeAJAXRequest(<b>function</b>(result) {
+    <b>if</b> (result) {  // <i> success</i>
+      <b>this</b>.className = &apos;success&apos;;
+    }
+  })
+}
+</pre>
+<p>Here the context (<b>this</b>) is lost in the inner callback function. To
+correct this, you can save the value of <b>this</b> in a variable:</p>
+<pre>
+document.getElementById(&apos;myAJAXButton&apos;).onclick = <b>function</b>() {
+  <b>var</b> self = <b>this</b>;
+  makeAJAXRequest(<b>function</b>(result) {
+    <b>if</b> (result) {  // <i> success</i>
+      self.className = &apos;success&apos;;
+    }
+  })
+}
+</pre>
+<h5>Version ≥ 6</h5>
+<p>ES6 introduced arrow functions which include lexical <b>this</b> binding.
+The above example could be written like this:</p>
+<pre>
+document.getElementById(&apos;myAJAXButton&apos;).onclick = <b>function</b>() {
+  makeAJAXRequest(result =&gt; {
+    <b>if</b> (result) {  // <i> success</i>
+      <b>this</b>.className = &apos;success&apos;;
+    }
+  })
+}
+</pre>
+<!-- page 201 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch24-3">Section 24.3: Binding function context</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h5>Version ≥ 5.1</h5>
+<p>Every function has a bind method, which will create a wrapped function
+that will call it with the correct context. See here for more information.</p>
+<pre>
+<b>var</b> monitor = {
+  threshold: 5,
+  check: <b>function</b>(value) {
+    <b>if</b> (value &gt; <b>this</b>.threshold) {
+      <b>this</b>.display(&quot;Value is too high!&quot;);
+    }
+  },
+  display(message) {
+    alert(message);
+  }
+};
+monitor.check(7);  // <i> The value of &grave;this&grave; is implied by the method call syntax.</i>
+<b>var</b> badCheck = monitor.check;
+badCheck(15);  // <i> The value of &grave;this&grave; is window object and this.threshold is undefined, so value &gt;</i>
+<i>this.threshold is false</i>
+<b>var</b> check = monitor.check.bind(monitor);
+check(15);  // <i> This value of &grave;this&grave; was explicitly bound, the function works.</i>
+<b>var</b> check8 = monitor.check.bind(monitor, 8);
+check8();  // <i> We also bound the argument to &grave;8&grave; here. It can&apos;t be re-specified.</i>
+</pre>
+<p><b>Hard binding</b></p>
+<ul>
+  <li>The object of <i>hard binding</i> is to &quot;hard&quot; link a reference to <b>this</b>.</li>
+  <li> Advantage: It&apos;s useful when you want to protect particular objects from being lost.</li>
+  <li>Example:</li>
+</ul>
+<pre>
+<b>function</b> Person() {
+  console.log(&quot;I&apos;m &quot; &plus; <b>this</b>.name);
+}
+<b>var</b> person0 = {name: &quot;Stackoverflow&quot;}
+<b>var</b> person1 = {name: &quot;John&quot;};
+<b>var</b> person2 = {name: &quot;Doe&quot;};
+<b>var</b> person3 = {name: &quot;Ala Eddine JEBALI&quot;};
+<b>var</b> origin = Person;
+Person = <b>function</b>() {
+  origin.call(person0);
+}
+Person();
+// <i>outputs: I&apos;m Stackoverflow</i>
+Person.call(person1);
+// <i>outputs: I&apos;m Stackoverflow</i>
+Person.apply(person2);
+// <i>outputs: I&apos;m Stackoverflow</i>
+Person.call(person3);
+// <i>outputs: I&apos;m Stackoverflow</i>
+</pre>
+<ul>
+  <li>So, as you can remark in the example above, whatever object you pass to <i>Person</i>, 
+  it&apos;ll always use <i>person() object</i> <b>it&apos;s hard binded.</b></li>
+</ul>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch24-4">Section 24.4: this in constructor functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-ClassDeclaration&apos;s Name is bound in different ways in different
-scopes -
-
-1.  The scope in which the class is defined - <b>let</b> binding
-class
-
-2.  The scope of the class itself - within { and } in {} - <b>const</b>
-    binding
-class
-Foo
-{
-// <i> Foo inside this block is a const binding*
-}
-// <i> Foo here is a let binding*
-For example,
-class
-A
-{
-foo
-(
-)
-{
-A
-=
-<b>null</b>
-;
-// <i> will throw at runtime as A inside the class is a &grave;const&grave; binding*
-}
-}
-A
-=
-<b>null</b>
-;
-// <i> will NOT throw as A here is a &grave;let&grave; binding*
-This is not the same for a Function -
+When using a function as a constructor, it has a special <b>this</b>
+binding, which refers to the newly created object:
 <b>function</b>
-A
+Cat
 (
+name
 )
 {
-A
-=
-<b>null</b>
-;
-// <i> works*
-}
-A.
-<b>prototype</b>
+<b>this</b>
 .
-foo
+name
 =
-<b>function</b>
-foo
-(
-)
-{
-A
-=
-<b>null</b>
+name
 ;
-// <i> works*
+<b>this</b>
+.
+sound
+=
+&quot;Meow&quot;
+;
 }
-A
+<b>var</b>
+cat
 =
-<b>null</b>
+<b>new</b>
+Cat
+(
+&quot;Tom&quot;
+)
 ;
-// <i> works*
+// <i> is a Cat object</i>
+cat.
+sound
+;
+// <i> Returns &quot;Meow&quot;</i>
+<b>var</b>
+cat2
+=
+Cat
+(
+&quot;Tom&quot;
+)
+;
+// <i> is undefined &bsol; function got executed in global context</i>
+window.
+name
+;
+// <i> &quot;Tom&quot;</i>
+cat2.
+name
+;
+// <i> error! cannot access property of undefined</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch25">Chapter 25: Setters and Getters</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Setters and getters are object properties that call a function when
+they are set/gotten.
 
