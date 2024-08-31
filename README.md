@@ -12137,4 +12137,2091 @@ methods and the variables declared in the class. We can create the new
 instance of the object whenever it is necessary by,
 Object.create(PrototypeName); (we can give the value for the
 constructor as well)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch21-1">Section 21.1: Creation and initialising Prototype</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>var</b>
+Human
+=
+<b>function</b>
+(
+)
+{
+<b>this</b>
+.
+canWalk
+=
+<b>true</b>
+;
+<b>this</b>
+.
+canSpeak
+=
+<b>true</b>
+;
+*//*
+}
+;
+Person.
+<b>prototype</b>
+.
+greet
+=
+<b>function</b>
+(
+)
+{
+<b>if</b>
+(
+<b>this</b>
+.
+canSpeak
+)
+{
+*// checks whether this prototype has instance of speak*
+<b>this</b>
+.
+name
+=
+&quot;Steve&quot;
+console.
+log
+(
+&apos;Hi, I am &apos;
+&plus;
+<b>this</b>
+.
+name
+)
+;
+}
+<b>else</b>
+{
+console.
+log
+(
+&apos;Sorry i can not speak&apos;
+)
+;
+}
+}
+;
+The prototype can be instantiated like this
+obj
+=
+Object
+.
+create
+(
+Person.
+<b>prototype</b>
+)
+;
+ob.
+greet
+(
+)
+;
+We can pass value for the constructor and make the boolean true and
+false based on the requirement.
+
+Detailed Explanation
+<b>var</b>
+Human
+=
+<b>function</b>
+(
+)
+{
+<b>this</b>
+.
+canSpeak
+=
+<b>true</b>
+;
+}
+;
+*// Basic greet function which will greet based on the canSpeak flag*
+Human.
+<b>prototype</b>
+.
+greet
+=
+<b>function</b>
+(
+)
+{
+<b>if</b>
+(
+<b>this</b>
+.
+canSpeak
+)
+{
+console.
+log
+(
+&apos;Hi, I am &apos;
+&plus;
+<b>this</b>
+.
+name
+)
+;
+}
+}
+;
+<b>var</b>
+Student
+=
+<b>function</b>
+(
+name
+,
+title
+)
+{
+Human.
+call
+(
+<b>this</b>
+)
+;
+*// Instantiating the Human object and getting the memebers of the
+class*
+<b>this</b>
+.
+name
+=
+name
+;
+*// inheriting the name from the human class*
+<b>this</b>
+.
+title
+=
+title
+;
+*// getting the title from the called function*
+}
+;
+Student.
+<b>prototype</b>
+=
+Object
+.
+create
+(
+Human.
+<b>prototype</b>
+)
+;
+Student.
+<b>prototype</b>
+.
+constructor
+=
+Student
+;
+Student.
+<b>prototype</b>
+.
+greet
+=
+<b>function</b>
+(
+)
+{
+<b>if</b>
+(
+<b>this</b>
+.
+canSpeak
+)
+{
+console.
+log
+(
+&apos;Hi, I am &apos;
+&plus;
+<b>this</b>
+.
+name
+&plus;
+&apos;, the &apos;
+&plus;
+<b>this</b>
+.
+title
+)
+;
+}
+}
+;
+<b>var</b>
+Customer
+=
+<b>function</b>
+(
+name
+)
+{
+Human.
+call
+(
+<b>this</b>
+)
+;
+*// inheriting from the base class*
+<b>this</b>
+.
+name
+=
+name
+;
+}
+;
+Customer.
+<b>prototype</b>
+=
+Object
+.
+create
+(
+Human.
+<b>prototype</b>
+)
+;
+*// creating the object*
+Customer.
+<b>prototype</b>
+.
+constructor
+=
+Customer
+;
+<b>var</b>
+bill
+=
+<b>new</b>
+Student
+(
+&apos;Billy&apos;
+,
+&apos;Teacher&apos;
+)
+;
+<b>var</b>
+carter
+=
+<b>new</b>
+Customer
+(
+&apos;Carter&apos;
+)
+;
+<b>var</b>
+andy
+=
+<b>new</b>
+Student
+(
+&apos;Andy&apos;
+,
+&apos;Bill&apos;
+)
+;
+<b>var</b>
+virat
+=
+<b>new</b>
+Customer
+(
+&apos;Virat&apos;
+)
+;
+bill.
+greet
+(
+)
+;
+*// Hi, I am Bob, the Teacher*
+carter.
+greet
+(
+)
+;
+*// Hi, I am Carter*
+andy.
+greet
+(
+)
+;
+*// Hi, I am Andy, the Bill*
+virat.
+greet
+(
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch22">Chapter 22: Classes</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-1">Section 22.1: Class Constructor</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The fundamental part of most classes is its constructor, which sets up
+each instance&apos;s initial state and handles any parameters that were
+passed when calling <b>new</b>.
+
+It&apos;s defined in a class block as though you&apos;re defining a method
+named constructor, though it&apos;s actually handled as a special case.
+class
+MyClass
+{
+constructor
+(
+option
+)
+{
+console.
+log
+(
+&grave;Creating instance using &dollar;
+{
+option
+}
+option.&grave;
+)
+;
+<b>this</b>
+.
+option
+=
+option
+;
+}
+}
+Example usage: <b>const</b> foo = <b>new</b> MyClass(&apos;speedy&apos;); *// logs:
+&quot;Creating instance using speedy option&quot;*
+
+A small thing to note is that a class constructor cannot be made
+static via the <b>static</b> keyword, as described below for other
+methods.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-2">Section 22.2: Class Inheritance</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+
+Inheritance works just like it does in other object-oriented
+languages: methods defined on the superclass are accessible in the
+extending subclass.
+super
+If the subclass declares its own constructor then it must invoke the
+parents constructor via () before it can access <b>this</b>.
+class
+SuperClass
+{
+constructor
+(
+)
+{
+<b>this</b>
+.
+logger
+=
+console.
+log
+;
+}
+log
+(
+)
+{
+<b>this</b>
+.
+logger
+(
+&grave;Hello &dollar;
+{
+<b>this</b>
+.
+name
+}
+&grave;
+)
+;
+}
+}
+class
+SubClass
+extends
+SuperClass
+{
+constructor
+(
+)
+{
+super
+(
+)
+;
+<b>this</b>
+.
+name
+=
+&apos;subclass&apos;
+;
+}
+}
+<b>const</b>
+subClass
+=
+<b>new</b>
+SubClass
+(
+)
+;
+subClass.
+log
+(
+)
+;
+*// logs: &quot;Hello subclass&quot;*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-3">Section 22.3: Static Methods</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Static methods and properties are defined on *the class/constructor
+itself*, not on instance objects. These are specified in a class
+definition by using the <b>static</b> keyword.
+
+class
+MyClass
+{
+<b>static</b>
+myStaticMethod
+(
+)
+{
+<b>return</b>
+&apos;Hello&apos;
+;
+}
+<b>static</b>
+<b>get</b>
+myStaticProperty
+(
+)
+{
+<b>return</b>
+&apos;Goodbye&apos;
+;
+}
+}
+console.
+log
+(
+MyClass.
+myStaticMethod
+(
+)
+)
+;
+*// logs: &quot;Hello&quot;*
+console.
+log
+(
+MyClass.
+myStaticProperty
+)
+;
+*// logs: &quot;Goodbye&quot;*
+We can see that static properties are not defined on object instances:
+<b>const</b>
+myClassInstance
+=
+<b>new</b>
+MyClass
+(
+)
+;
+console.
+log
+(
+myClassInstance.
+myStaticProperty
+)
+;
+*// logs: undefined*
+However, they *are* defined on subclasses:
+class
+MySubClass
+extends
+MyClass
+{
+}
+;
+console.
+log
+(
+MySubClass.
+myStaticMethod
+(
+)
+)
+;
+*// logs: &quot;Hello&quot;*
+console.
+log
+(
+MySubClass.
+myStaticProperty
+)
+;
+*// logs: &quot;Goodbye&quot;*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-4">Section 22.4: Getters and Setters</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+
+Getters and setters allow you to define custom behaviour for reading
+and writing a given property on your class. To the user, they appear
+the same as any typical property. However, internally a custom
+function you provide is used to determine the value when the property
+is accessed (the getter), and to perform any necessary changes when
+the property is assigned (the setter).
+
+In a class definition, a getter is written like a no-argument method
+prefixed by the <b>get</b> keyword. A setter is similar, except that it
+accepts one argument (the new value being assigned) and the <b>set</b>
+keyword is used instead.
+name
+names&lowbar;
+Here&apos;s an example class which provides a getter and setter for its .
+property. Each time it&apos;s assigned, we&apos;ll record the new name in an
+internal . array. Each time it&apos;s accessed, we&apos;ll return the latest
+name.
+class
+MyClass
+{
+constructor
+(
+)
+{
+<b>this</b>
+.
+names&lowbar;
+=
+&lbrack;
+&rbrack;
+;
+}
+<b>set</b>
+name
+(
+value
+)
+{
+<b>this</b>
+.
+names&lowbar;
+.
+push
+(
+value
+)
+;
+}
+<b>get</b>
+name
+(
+)
+{
+<b>return</b>
+<b>this</b>
+.
+names&lowbar;
+&lbrack;
+<b>this</b>
+.
+names&lowbar;
+.
+length
+&minus;
+1
+&rbrack;
+;
+}
+}
+<b>const</b>
+myClassInstance
+=
+
+<b>new</b>
+
+MyClass
+
+(
+
+)
+
+;
+
+myClassInstance.
+
+name
+
+=
+
+&apos;Joe&apos;
+
+;
+
+myClassInstance.
+
+name
+
+=
+
+&apos;Bob&apos;
+
+;
+
+console.
+
+log
+
+(
+
+myClassInstance.
+
+name
+
+)
+
+;
+
+*// logs: &quot;Bob&quot;*
+
+console.
+
+log
+
+(
+
+myClassInstance.
+
+names&lowbar;
+
+)
+
+;
+
+*// logs: &lbrack;&quot;Joe&quot;, &quot;Bob&quot;&rbrack;*
+
+If you only define a setter, attempting to access the property will
+always return <b>undefined</b>.
+
+<b>const</b>
+
+classInstance
+
+=
+
+<b>new</b>
+
+class
+
+{
+
+<b>set</b>
+
+prop
+
+(
+
+value
+
+)
+
+{
+
+console.
+
+log
+
+(
+
+&apos;setting&apos;
+
+,
+
+value
+
+)
+
+;
+
+}
+
+}
+
+;
+
+classInstance.
+
+prop
+
+=
+
+10
+
+;
+
+*// logs: &quot;setting&quot;, 10*
+
+console.
+
+log
+
+(
+
+classInstance.
+
+prop
+
+)
+
+;
+
+*// logs: undefined*
+
+If you only define a getter, attempting to assign the property will
+have no effect.
+
+<b>const</b>
+
+classInstance
+
+=
+
+<b>new</b>
+
+class
+
+{
+
+<b>get</b>
+
+prop
+
+(
+
+)
+
+{
+
+<b>return</b>
+
+5
+
+;
+
+}
+
+}
+
+;
+
+classInstance.
+
+prop
+
+=
+
+10
+
+;
+
+console.
+
+log
+
+(
+
+classInstance.
+
+prop
+
+)
+
+;
+
+*// logs: 5*
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-5">Section 22.5: Private Members</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+
+JavaScript does not technically support private members as a language
+feature. Privacy - [described by Douglas
+Crockford](http://javascript.crockford.com/private.html) - gets
+emulated instead via closures (preserved function scope) that will be
+generated each with every instantiation call of a constructor
+function.
+>
+The Queue example demonstrates how, with constructor functions, local
+state can be preserved and made accessible too via privileged methods.
+
+class
+
+Queue
+
+{
+
+constructor
+
+(
+
+)
+
+{
+
+*// - does generate a closure with each instantiation.*
+
+<b>const</b>
+
+list
+
+=
+
+&lbrack;
+
+&rbrack;
+
+;
+
+*// - local state (&quot;private member&quot;).*
+
+<b>this</b>
+
+.
+
+enqueue
+
+=
+
+<b>function</b>
+
+(
+
+type
+
+)
+
+{
+
+*// - privileged public method*
+
+*// accessing the local state*
+
+list.
+
+push
+
+(
+
+type
+
+)
+
+;
+
+*// &quot;writing&quot; alike.*
+
+<b>return</b>
+
+type
+
+;
+
+}
+
+;
+
+<b>this</b>
+
+.
+
+dequeue
+
+=
+
+<b>function</b>
+
+(
+
+)
+
+{
+
+*// - privileged public method*
+
+*// accessing the local state*
+
+<b>return</b>
+
+list.
+
+shift
+
+(
+
+)
+
+;
+
+*// &quot;reading / writing&quot; alike.*
+
+}
+
+;
+
+}
+
+}
+
+<b>var</b>
+
+q
+
+=
+
+<b>new</b>
+
+Queue
+
+;
+
+*//*
+
+*//*
+
+q&period;
+
+enqueue
+
+(
+
+9
+
+)
+
+;
+
+*// &hellip; first in &hellip;*
+
+q&period;
+
+enqueue
+
+(
+
+8
+
+)
+
+;
+
+*//*
+
+q&period;
+
+enqueue
+
+(
+
+7
+
+)
+
+;
+
+*//*
+
+*//*
+
+console.
+
+log
+
+(
+
+q&period;
+
+dequeue
+
+(
+
+)
+
+)
+
+;
+
+*// 9 &hellip; first out.*
+
+console.
+
+log
+
+(
+
+q&period;
+
+dequeue
+
+(
+
+)
+
+)
+
+;
+
+*// 8*
+
+console.
+
+log
+
+(
+
+q&period;
+
+dequeue
+
+(
+
+)
+
+)
+
+;
+
+*// 7*
+
+console.
+
+log
+
+(
+
+q
+
+)
+
+;
+
+*// {}*
+
+console.
+
+log
+
+(
+
+Object
+
+.
+
+keys
+
+(
+
+q
+
+)
+
+)
+
+;
+
+*// &lbrack;&quot;enqueue&quot;,&quot;dequeue&quot;&rbrack;*
+
+With every instantiation of a Queue type the constructor generates a
+closure.
+
+  
+  Object                                 .      keys
+    
+
+  
+
+Thus both of a Queue type&apos;s own methods enqueue and dequeue (see (q))
+still do have access to list that continues to *live* in its enclosing
+scope that, at construction time, has been preserved.
+>
+Making use of this pattern - emulating private members via privileged
+public methods - one should keep in mind that, with every instance,
+additional memory will be consumed for every *own property* method
+(for it is code that can&apos;t be shared/reused). The same is true for
+the amount/size of state that is going to be stored within such a
+closure.
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-6">Section 22.6: Methods</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+
+Methods can be defined in classes to perform a function and optionally
+return a result. They can receive arguments from the caller.
+
+class
+
+Something
+
+{
+
+constructor
+
+(
+
+data
+
+)
+
+{
+
+<b>this</b>
+
+.
+
+data
+
+=
+
+data
+
+}
+
+doSomething
+
+(
+
+text
+
+)
+
+{
+
+<b>return</b>
+
+{
+
+data
+
+:
+
+<b>this</b>
+
+.
+
+data
+
+,
+
+text
+
+}
+
+}
+
+}
+
+<b>var</b>
+
+s
+
+=
+
+<b>new</b>
+
+Something
+
+(
+
+{
+
+}
+
+)
+
+s&period;
+
+doSomething
+
+(
+
+&quot;hi&quot;
+
+)
+
+*// returns: { data: {}, text: &quot;hi&quot; }*
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-7">Section 22.7: Dynamic Method Names</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+There is also the ability to evaluate expressions when naming methods
+similar to how you can access an objects&apos; properties with &lbrack;&rbrack;. This
+can be useful for having dynamic property names, however is often used
+in conjunction with Symbols.
+
+<b>let</b>
+
+METADATA
+
+=
+
+Symbol
+
+(
+
+&apos;metadata&apos;
+
+)
+
+;
+
+class
+
+Car
+
+{
+
+constructor
+
+(
+
+make
+
+,
+
+model
+
+)
+
+{
+
+<b>this</b>
+
+.
+
+make
+
+=
+
+make
+
+;
+
+<b>this</b>
+
+.
+
+model
+
+=
+
+model
+
+;
+
+}
+
+*// example using symbols*
+
+&lbrack;
+
+METADATA
+
+&rbrack;
+
+(
+
+)
+
+{
+
+<b>return</b>
+
+{
+
+make
+
+:
+
+<b>this</b>
+
+.
+
+make
+
+,
+
+model
+
+:
+
+<b>this</b>
+
+.
+
+model
+
+}
+
+;
+
+}
+
+*// you can also use any javascript expression*
+
+*// this one is just a string, and could also be defined with simply
+add()*
+
+&lbrack;
+
+&quot;add&quot;
+
+&rbrack;
+
+(
+
+a
+
+,
+
+b
+
+)
+
+{
+
+<b>return</b>
+
+a
+
+&plus;
+
+b
+
+;
+
+}
+
+*// this one is dynamically evaluated*
+
+&lbrack;
+
+1
+
+&plus;
+
+2
+
+&rbrack;
+
+(
+
+)
+
+{
+
+<b>return</b>
+
+&quot;three&quot;
+
+;
+
+}
+
+}
+
+<b>let</b>
+
+MazdaMPV
+
+=
+
+<b>new</b>
+
+Car
+
+(
+
+&quot;Mazda&quot;
+
+,
+
+&quot;MPV&quot;
+
+)
+
+;
+
+MazdaMPV.
+
+add
+
+(
+
+4
+
+,
+5
+)
+;
+*// 9*
+MazdaMPV
+&lbrack;
+3
+&rbrack;
+(
+)
+;
+*// &quot;three&quot;*
+MazdaMPV
+&lbrack;
+METADATA
+&rbrack;
+(
+)
+;
+*// { make: &quot;Mazda&quot;, model: &quot;MPV&quot; }*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-8">Section 22.8: Managing Private Data with Classes</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+One of the most common obstacles using classes is finding the proper
+approach to handle private states. There are 4 common solutions for
+handling private states:
+
+<b>Using Symbols</b>
+
+Symbols are new primitive type introduced on in ES2015, as defined at
+[MDN](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol)
+
+A symbol is a unique and immutable data type that may be used as an
+identifier for object properties.
+
+When using symbol as a property key, it is not enumerable.
+
+  -
+  <b>for</b> <b>var</b> <b>in</b>        or       Object            .   keys
+      
+
+  -
+
+As such, they won&apos;t be revealed using .
+>
+Thus we can use symbols to store private data.
+
+<b>const</b>
+
+topSecret
+
+=
+
+Symbol
+
+(
+
+&apos;topSecret&apos;
+
+)
+
+;
+
+*// our private key; will only be accessible on the scope of*
+
+*the module file*
+
+export
+
+class
+
+SecretAgent
+
+{
+
+constructor
+
+(
+
+secret
+
+)
+
+{
+
+<b>this</b>
+
+&lbrack;
+
+topSecret
+
+&rbrack;
+
+=
+
+secret
+
+;
+
+*// we have access to the symbol key (closure)*
+
+<b>this</b>
+
+.
+
+coverStory
+
+=
+
+&apos;just a simple gardner&apos;
+
+;
+
+<b>this</b>
+
+.
+
+doMission
+
+=
+
+(
+
+)
+
+=&gt;
+
+{
+
+figureWhatToDo
+
+(
+
+topSecret
+
+&lbrack;
+
+topSecret
+
+&rbrack;
+
+)
+
+;
+
+*// we have access to topSecret*
+
+}
+
+;
+
+}
+
+}
+
+Because symbols are unique, we must have reference to the original
+symbol to access the private property.
+
+import
+
+{
+
+SecretAgent
+
+}
+
+from
+
+&apos;SecretAgent.js&apos;
+
+**const** agent = **new** SecretAgent(&apos;steal all the ice cream&apos;);
+*// ok let&apos;s try to get the secret out of him!*
+>
+Object.keys(agent); *// &lbrack;&apos;coverStory&apos;&rbrack; only cover story is public,
+our secret is kept.*
+>
+agent&lbrack;Symbol(&apos;topSecret&apos;)&rbrack;; *// undefined, as we said, symbols are
+always unique, so only the original symbol will help us to get the
+data.*
+
+  
+  Object          .   getOwnPropertySymbols
+    -
+
+  
+
+But it&apos;s not 100% private; let&apos;s break that agent down! We can use
+the method to get the object symbols.
+>
+**const** secretKeys = Object.getOwnPropertySymbols(agent);
+agent&lbrack;secretKeys&lbrack;0&rbrack;&rbrack; *// &apos;steal all the ice cream&apos; , we got the
+secret.*
+>
+**Using WeakMaps**
+>
+WeakMap is a new type of object that have been added for es6.
+>
+As defined on
+[MDN](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbolhttps:/developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
+>
+The WeakMap object is a collection of key/value pairs in which the
+keys are weakly referenced. The keys must be objects and the values
+can be arbitrary values.
+>
+Another important feature of WeakMap is, as defined on
+[MDN](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap).
+>
+The key in a WeakMap is held weakly. What this means is that, if there
+are no other strong references to the key, the entire entry will be
+removed from the WeakMap by the garbage collector.
+>
+The idea is to use the WeakMap, as a static map for the whole class,
+to hold each instance as key and keep the private data as a value for
+that instance key.
+>
+Thus only inside the class will we have access to the WeakMap
+collection.
+>
+Let&apos;s give our agent a try, with WeakMap:
+
+**const**
+
+topSecret
+
+=
+
+**new**
+
+WeakMap
+
+(
+
+)
+
+;
+
+*// will hold all private data of all instances.*
+
+export
+
+class
+
+SecretAgent
+
+{
+
+constructor
+
+(
+
+secret
+
+)
+
+{
+
+topSecret.
+
+**set**
+
+(
+
+**this**
+
+,
+
+secret
+
+)
+
+;
+
+*// we use this, as the key, to set it on our instance private*
+
+*data*
+
+**this**
+
+.
+
+coverStory
+
+=
+
+&apos;just a simple gardner&apos;
+
+;
+
+**this**
+
+.
+
+doMission
+
+=
+
+(
+
+)
+
+=&gt;
+
+{
+
+figureWhatToDo
+
+(
+
+topSecret.
+
+**get**
+
+(
+
+**this**
+
+)
+
+)
+
+;
+
+*// we have access to topSecret*
+
+}
+
+;
+
+}
+
+}
+
+Because the const topSecret is defined inside our module closure, and
+since we didn&apos;t bind it to our instance properties, this approach is
+totally private, and we can&apos;t reach the agent topSecret.
+>
+**Define all methods inside the constructor**
+>
+The idea here is simply to define all our methods and members inside
+the constructor and use the closure to access private members without
+assigning them to **this**.
+
+export
+
+class
+
+SecretAgent
+
+{
+
+constructor
+
+(
+
+secret
+
+)
+
+{
+
+**const**
+
+topSecret
+
+=
+
+secret
+
+;
+
+**this**
+
+.
+
+coverStory
+
+=
+
+&apos;just a simple gardner&apos;
+
+;
+
+**this**
+
+.
+
+doMission
+
+=
+
+(
+
+)
+
+=&gt;
+
+{
+
+figureWhatToDo
+
+(
+
+topSecret
+
+)
+
+;
+
+*// we have access to topSecret*
+
+}
+
+;
+
+}
+
+}
+
+In this example as well the data is 100% private and can&apos;t be reached
+outside the class, so our agent is safe.
+>
+**Using naming conventions**
+>
+We will decide that any property who is private will be prefixed with
+&lowbar;.
+>
+Note that for this approach the data isn&apos;t really private.
+
+export
+
+class
+
+SecretAgent
+
+{
+
+constructor
+
+(
+
+secret
+
+)
+
+{
+
+**this**
+
+.&lowbar;topSecret
+
+=
+
+secret
+
+;
+
+*// it private by convention*
+
+**this**
+
+.
+
+coverStory
+
+=
+
+&apos;just a simple gardner&apos;
+
+;
+
+**this**
+
+.
+
+doMission
+
+=
+
+(
+
+)
+
+=&gt;
+
+{
+
+figureWhatToDo
+
+(
+
+this_topSecret
+
+)
+
+;
+
+}
+
+;
+
+}
+
+}
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch22-9">Section 22.9: Class Name binding</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+
+ClassDeclaration&apos;s Name is bound in different ways in different
+scopes -
+
+1.  The scope in which the class is defined - **let** binding
+
+  
+  class
+  
+
+  
+
+2.  The scope of the class itself - within { and } in {} - **const**
+    binding
+
+class
+
+Foo
+
+{
+
+*// Foo inside this block is a const binding*
+
+}
+
+*// Foo here is a let binding*
+
+For example,
+
+class
+
+A
+
+{
+
+foo
+
+(
+
+)
+
+{
+
+A
+
+=
+
+**null**
+
+;
+
+*// will throw at runtime as A inside the class is a &grave;const&grave; binding*
+
+}
+
+}
+
+A
+
+=
+
+**null**
+
+;
+
+*// will NOT throw as A here is a &grave;let&grave; binding*
+
+This is not the same for a Function -
+
+**function**
+
+A
+
+(
+
+)
+
+{
+
+A
+
+=
+
+**null**
+
+;
+
+*// works*
+
+}
+
+A.
+
+**prototype**
+
+.
+
+foo
+
+=
+
+**function**
+
+foo
+
+(
+
+)
+
+{
+
+A
+
+=
+
+**null**
+
+;
+
+*// works*
+
+}
+
+A
+
+=
+
+**null**
+
+;
+
+*// works*
+
 
