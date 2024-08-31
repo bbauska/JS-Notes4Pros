@@ -12239,4 +12239,497 @@ name
 <!--
 Setters and getters are object properties that call a function when
 they are set/gotten.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch25-1">Section 25.1: Defining a Setter/Getter Using Object.defineProperty</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>var</b>
+setValue
+;
+<b>var</b>
+obj
+=
+{
+}
+;
+Object
+.
+defineProperty
+(
+obj
+,
+&quot;objProperty&quot;
+,
+{
+<b>get</b>
+:
+<b>function</b>
+(
+)
+{
+<b>return</b>
+&quot;a value&quot;
+;
+}
+,
+<b>set</b>
+:
+<b>function</b>
+(
+value
+)
+{
+setValue
+=
+value
+;
+}
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch25-2">Section 25.2: Defining an Setter/Getter in a Newly Created Object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+JavaScript allows us to define getters and setters in the object
+literal syntax. Here&apos;s an example:
+<b>var</b>
+date
+=
+{
+year
+:
+&apos;2017&apos;
+,
+month
+:
+&apos;02&apos;
+,
+day
+:
+&apos;27&apos;
+,
+<b>get</b>
+date
+(
+)
+{
+// <i> Get the date in YYYY-MM-DD format</i>
+<b>return</b>
+&grave;&dollar;
+{
+<b>this</b>
+.
+year
+}
+&minus;
+&dollar;
+{
+<b>this</b>
+.
+month
+}
+&minus;
+&dollar;
+{
+<b>this</b>
+.
+day
+}
+&grave;
+}
+,
+<b>set</b>
+date
+(
+dateString
+)
+{
+// <i> Set the date from a YYYY-MM-DD formatted string</i>
+<b>var</b>
+dateRegExp
+=
+/&ast;(&bsol;&bsol;d{4})-(&bsol;&bsol;d{2})-(&bsol;&bsol;d{2})&ast;/
+;
+// <i> Check that the string is correctly formatted</i>
+<b>if</b>
+(
+dateRegExp.
+test
+(
+dateString
+)
+)
+{
+<b>var</b>
+parsedDate
+=
+dateRegExp.
+exec
+(
+dateString
+)
+;
+<b>this</b>
+.
+year
+=
+parsedDate
+&lbrack;
+1
+&rbrack;
+;
+<b>this</b>
+.
+month
+=
+parsedDate
+&lbrack;
+2
+&rbrack;
+;
+<b>this</b>
+.
+day
+=
+parsedDate
+&lbrack;
+3
+&rbrack;
+;
+}
+<b>else</b>
+{
+<b>throw</b>
+<b>new</b>
+Error
+(
+&apos;Date string must be in YYYY-MM-DD format&apos;
+)
+;
+}
+}
+}
+;
+date.date   property would return the 2017-02-27 . Setting date.date =
+value &apos;2018-01-02
+Accessing the would call
+date.year = &apos;2018&apos; , date.month = &apos;01&apos;
+the setter function, which would then parse the string and set , and
+date.day = &apos;02&apos;
+. Trying to pass an incorrectly formatted string (such as &quot;hello&quot;)
+would throw an error.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch25-3">Section 25.3: Defining getters and setters in ES6 class</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+class
+Person
+{
+constructor
+(
+firstname
+,
+lastname
+)
+{
+<b>this</b>
+.&lowbar;firstname
+=
+firstname
+;
+<b>this</b>
+.&lowbar;lastname
+=
+lastname
+;
+}
+<b>get</b>
+firstname
+(
+)
+{
+<b>return</b>
+<b>this</b>
+.&lowbar;firstname
+;
+}
+<b>set</b>
+firstname
+(
+name
+)
+{
+<b>this</b>
+.&lowbar;firstname
+=
+name
+;
+}
+<b>get</b>
+lastname
+(
+)
+{
+<b>return</b>
+<b>this</b>
+.&lowbar;lastname
+;
+}
+<b>set</b>
+lastname
+(
+name
+)
+{
+<b>this</b>
+.&lowbar;lastname
+=
+name
+;
+}
+}
+<b>let</b>
+person
+=
+<b>new</b>
+Person
+(
+&apos;John&apos;
+,
+&apos;Doe&apos;
+)
+;
+console.
+log
+(
+person.
+firstname
+,
+person.
+lastname
+)
+;
+// <i> John Doe</i>
+person.
+firstname
+=
+&apos;Foo&apos;
+;
+person.
+lastname
+=
+&apos;Bar&apos;
+;
+console.
+log
+(
+person.
+firstname
+,
+person.
+lastname
+)
+;
+// <i> Foo Bar</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch26">Chapter 26: Events</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch26-1">Section 26.1: Page, DOM and Browser loading</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+This is an example to explain the variations of load events.
+1.  <b>onload event</b>
+<b>&lt;</b>
+<b>body</b>
+onload
+=
+&quot;someFunction()&quot;
+<b>&gt;</b>
+<b>&lt;</b>
+<b>img</b>
+src
+=
+&quot;image1&quot;
+<b>/&gt;</b>
+<b>&lt;</b>
+<b>img</b>
+src
+=
+&quot;image2&quot;
+<b>/&gt;</b>
+<b>&lt;</b>
+<b>/body</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>script</b>
+<b>&gt;</b>
+function someFunction() {
+console.log(&quot;Hi! I am loaded&quot;);
+}
+<b>&lt;</b>
+<b>/script</b>
+<b>&gt;</b>
+In this case, the message is logged once <i>all the contents of the page
+including the images and stylesheets(if any)</i> are completely loaded.
+2.  <b>DOMContentLoaded event</b>
+document.
+addEventListener
+(
+&quot;DOMContentLoaded&quot;
+,
+<b>function</b>
+(
+event
+)
+{
+console.
+log
+(
+&quot;Hello! I am loaded&quot;
+)
+;
+}
+)
+;
+In the above code, the message is logged only after the DOM/document
+is loaded (<i>ie:once the DOM is constructed</i>).
+3.  <b>Self-invoking anonymous function</b>
+(
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+&quot;Hi I am an anonymous function! I am loaded&quot;
+)
+;
+}
+)
+(
+)
+;
+Here, the message gets logged as soon as the browser interprets the
+anonymous function. It means, this function can get executed even
+before the DOM is loaded.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch27">Chapter 27: Inheritance</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch27-1">Section 27.1: Standard function prototype</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Start by defining a Foo function that we&apos;ll use as a constructor.
+<b>function</b>
+Foo
+(
+)
+{
+}
+Foo.<b>prototype</b>
+By editing , we can define properties and methods that will be shared
+by all instances of Foo.
+Foo.
+<b>prototype</b>
+.
+bar
+=
+<b>function</b>
+(
+)
+{
+<b>return</b>
+&apos;I am bar&apos;
+;
+}
+;
+We can then create an instance using the <b>new</b> keyword, and call the method.
+<b>var</b>
+foo
+=
+<b>new</b>
+Foo
+(
+)
+;
+console.
+log
+(
+foo.
+bar
+(
+)
+)
+;
+// <i> logs &grave;I am bar&grave;</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch27-2">Section 27.2: Difference between Object.key and Object.prototype.key</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+
+Unlike in languages like Python, static properties of the constructor
+function are <i>not</i> inherited to instances. Instances only inherit from
+their prototype, which inherits from the parent type&apos;s prototype.
+Static properties are never inherited.
+
+<b>function</b>
+Foo
+(
+)
+{
+}
+;
+Foo.
+style
+=
+&apos;bold&apos;
+;
+<b>var</b>
+foo
+=
+<b>new</b>
+Foo
+(
+)
+;
+console.
+log
+(
+Foo.
+style
+)
+;
+// <i> &apos;bold&apos;</i>
+console.
+log
+(
+foo.
+style
+)
+;
+// <i> undefined</i>
+Foo.
+<b>prototype</b>
+.
+style
+=
+&apos;italic&apos;
+;
+console.
+log
+(
+Foo.
+style
+)
+;
+// <i> &apos;bold&apos;</i>
+console.
+log
+(
+foo.
+style
+)
+;
+// <i>&apos;italic&apos;</i>
 
