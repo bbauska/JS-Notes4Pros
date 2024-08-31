@@ -10847,504 +10847,155 @@ foo(5, 6);  // <i>info: 2 &gt;&amp;lbrack;5, 6&rbrack; &vert; log: 5, 6</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-9">Section 19.9: Call and apply</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Functions have two built-in methods that allow the programmer to
+<p>Functions have two built-in methods that allow the programmer to
 supply arguments and the <b>this</b> variable differently: call and
-apply.
+apply.</p>
 
-This is useful, because functions that operate on one object (the
+<p>This is useful, because functions that operate on one object (the
 object that they are a property of) can be repurposed to operate on
 another, compatible object. Additionally, arguments can be given in
-one shot as arrays, similar to the spread (&hellip;) operator in ES6.
-
-<b>let</b>
-obj
-=
-{
-a
-:
-1
-,
-b
-:
-2
-,
-<b>set</b>
-:
-<b>function</b>
-(
-a
-,
-b
-)
-{
-<b>this</b>
-.
-a
-=
-a
-;
-<b>this</b>
-.
-b
-=
-b
-;
-}
-}
-;
-obj.
-<b>set</b>
-(
-3
-,
-7
-)
-;
-// <i>normal syntax</i>
-obj.
-<b>set</b>
-.
-all
-(
-obj
-,
-3
-,
-7
-)
-;
-// <i>equivalent to the above</i>
-obj.
-<b>set</b>
-.
-apply
-(
-obj
-,
-&lbrack;
-3
-,
-7
-&rbrack;
-)
-;
-// <i>equivalent to the above; note that an array is used</i>
-console.
-log
-(
-obj
-)
-;
-// <i>prints { a: 3, b: 5 }</i>
-<b>let</b>
-myObj
-=
-{
-}
-;
-myObj.
-<b>set</b>
-(
-5
-,
-4
-)
-;
-// <i>fails; myObj has no &grave;set&grave; property</i>
-obj.<b>set</b>.call(myObj, 5, 4); // <i>success; &grave;this&grave; in set() is
-re-routed to myObj instead of obj</i> obj.<b>set</b>.apply(myObj, &lbrack;5, 4&rbrack;);
-// <i>same as above; note the array</i>
+one shot as arrays, similar to the spread (&hellip;) operator in ES6.</p>
+<pre>
+<b>let</b> obj = {
+  a: 1,
+  b: 2,
+  <b>set</b>: <b>function</b> (a, b) {
+    <b>this</b>.a = a;
+    <b>this</b>.b = b;
+  }
+};
+obj.<b>set</b>(3, 7);  // <i>normal syntax</i>
+obj.<b>set</b>.call(obj, 3, 7);  // <i>equivalent to the above</i>
+obj.<b>set</b>.apply(obj, &lbrack;3, 7&rbrack;); // <i>equivalent to the above; note that an array is used</i>
+console.log(obj);  // <i>prints { a: 3, b: 5 }</i>
+<b>let</b> myObj = {};
+myObj.<b>set</b>(5, 4);  // <i>fails; myObj has no &grave;set&grave; property</i>
+obj.<b>set</b>.call(myObj, 5, 4); // <i>success; &grave;this&grave; in set() is re-routed to myObj instead of obj</i>
+obj.<b>set</b>.apply(myObj, &lbrack;5, 4&rbrack;); // <i>same as above; note the array</i>
 
 console.log(myObj); // <i>prints { a: 3, b: 5 }</i>
-
+</pre>
 <h5>Version ≥ 5</h5>
-<b>bind</b>   <b>()</b> in addition to call() and apply
-ECMAScript 5 introduced another method called () to explicitly set
-<b>this</b> value of the function to specific object.
-bind
-It behaves quite differently than the other two. The first argument to
-() is the <b>this</b> value for the new function. All other arguments
-represent named parameters that should be permanently set in the new
-function.
 
-<b>function</b>
-showName
-(
-label
-)
-{
-console.
-log
-(
-label
-&plus;
-&quot;:&quot;
-&plus;
-<b>this</b>
-.
-name
-)
-;
+<b>bind</b>   <b>()</b> in addition to call() and apply
+
+ECMAScript 5 introduced another method called bind() in addition to call() and apply() set 
+<b>this</b> value of the function to specific object.</p>
+
+<p>It behaves quite differently than the other two. The first argument to
+bind() is the <b>this</b> value for the new function. All other arguments
+represent named parameters that should be permanently set in the new function.</p>
+<pre>
+<b>function</b> showName(label) {
+  console.log(label &plus; &quot;:&quot; &plus; <b>this</b>.name);
 }
-<b>var</b>
-student1
-=
-{
-name
-:
-&quot;Ravi&quot;
-}
-;
-<b>var</b>
-student2
-=
-{
-name
-:
-&quot;Vinod&quot;
-}
-;
+<b>var</b> student1 = {
+  name: &quot;Ravi&quot;
+};
+<b>var</b> student2 = {
+  name: &quot;Vinod&quot;
+};
 // <i>create a function just for student1</i>
-<b>var</b>
-showNameStudent1
-=
-showName.
-bind
-(
-student1
-)
-;
-showNameStudent1
-(
-&quot;student1&quot;
-)
-;
-// <i>outputs &quot;student1:Ravi&quot;</i>
+<b>var</b> showNameStudent1 = showName.bind(student1);
+showNameStudent1(&quot;student1&quot;);  // <i>outputs &quot;student1:Ravi&quot;</i>
 // <i>create a function just for student2</i>
-<b>var</b>
-showNameStudent2
-=
-showName.
-bind
-(
-student2
-,
-&quot;student2&quot;
-)
-;
-showNameStudent2
-(
-)
-;
-// <i>outputs &quot;student2:Vinod&quot;</i>
+<b>var</b> showNameStudent2 = showName.bind(student2, &quot;student2&quot;);
+showNameStudent2();  // <i>outputs &quot;student2:Vinod&quot;</i>
 // <i>attaching a method to an object doesn&apos;t change &grave;this&grave; value of that method.</i>
-student2.
-sayName
-=
-showNameStudent1
-;
-student2.
-sayName
-(
-&quot;student2&quot;
-)
-;
-// <i>outputs &quot;student2:Ravi&quot;</i>
+student2.sayName = showNameStudent1;
+student2.sayName(&quot;student2&quot;);  // <i>outputs &quot;student2:Ravi&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-10">Section 19.10: Partial Application</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Similar to currying, partial application is used to reduce the number
-of arguments passed to a function. Unlike currying, the number need
-not go down by one.
-Example:
-This function &hellip;
-<b>function</b>
-multiplyThenAdd
-(
-a
-,
-b
-,
-c
-)
-{
-<b>return</b>
-a
-&ast;
-b
-&plus;
-c
-;
+<p>Similar to currying, partial application is used to reduce the number of arguments 
+passed to a function. Unlike currying, the number need not go down by one.</p>
+<p>Example:</p>
+<p>This function &hellip;</p>
+<pre>
+<b>function</b> multiplyThenAdd(a, b, c) {
+  <b>return</b> a &ast; b &plus; c;
 }
-&hellip; can be used to create another function that will always multiply
-by 2 and then add 10 to the passed value;
-<b>function</b>
-reversedMultiplyThenAdd
-(
-c
-,
-b
-,
-a
-)
-{
-<b>return</b>
-a
-&ast;
-b
-&plus;
-c
-;
+</pre>
+<p>&hellip; can be used to create another function that will always multiply
+by 2 and then add 10 to the passed value;</p>
+<pre>
+<b>function</b> reversedMultiplyThenAdd(c, b, a) {
+  <b>return</b> a &ast; b &plus; c;
 }
-<b>function</b>
-factory
-(
-b
-,
-c
-)
-{
-<b>return</b>
-reversedMultiplyThenAdd.
-bind
-(
-<b>null</b>
-,
-c
-,
-b
-)
-;
+<b>function</b> factory(b, c) {
+  <b>return</b> reversedMultiplyThenAdd.bind(<b>null</b>, c, b);
 }
-<b>var</b>
-multiplyTwoThenAddTen
-=
-factory
-(
-2
-,
-10
-)
-;
-multiplyTwoThenAddTen
-(
-10
-)
-;
-// <i>30</i>
-The &quot;application&quot; part of partial application simply means fixing
-parameters of a function.
+<b>var</b> multiplyTwoThenAddTen = factory(2, 10);
+multiplyTwoThenAddTen(10);  // <i>30</i>
+</pre>
+<!-- page 178 -->
+<p>The &quot;application&quot; part of partial application simply means fixing
+parameters of a function.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-11">Section 19.11: Passing arguments by reference or value</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-In JavaScript all arguments are passed by value. When a function
+<p>In JavaScript all arguments are passed by value. When a function
 assigns a new value to an argument variable, that change will not be
-visible to the caller:
-<b>var</b>
-obj
-=
-{
-a
-:
-2
+visible to the caller:</p>
+<pre>
+<b>var</b> obj = {a: 2};
+<b>function</b> yfunc(arg) {
+  arg = {a: 5};  // <i>Note the assignment is to the parameter variable itself</i>
 }
-;
-<b>function</b>
-myfunc
-(
-arg
-)
-{
-arg
-=
-{
-a
-:
-5
+myfunc(obj);
+console.log(obj.a); // <i>2</i>
+</pre>
+<p>However, changes made to (nested) properties <i>of</i> such arguments, will
+be visible to the caller:</p>
+<pre>
+<b>var</b> obj = {a: 2};
+<b>function</b> myfunc(arg) {
+  arg.a = 5;  // <i>assignment to a property of the argument</i>
 }
-;
-// <i>Note the assignment is to the parameter variable itself</i>
-}
-myfunc
-(
-obj
-)
-;
-console.
-log
-(
-obj.
-a
-)
-;
-// <i>2</i>
-However, changes made to (nested) properties <i>of</i> such arguments, will
-be visible to the caller:
-<b>var</b>
-obj
-=
-{
-a
-:
-2
-}
-;
-<b>function</b>
-myfunc
-(
-arg
-)
-{
-arg.
-a
-=
-5
-;
-// <i>assignment to a property of the argument</i>
-}
-myfunc
-(
-obj
-)
-;
-console.
-log
-(
-obj.
-a
-)
-;
-// <i>5</i>
-This can be seen as a <i>call by reference</i>: although a function cannot
+myfunc(obj);
+console.log(obj.a);  // <i>5</i>
+</pre>
+<p>This can be seen as a <i>call by reference</i>: although a function cannot
 change the caller&apos;s object by assigning a new value to it, it could
-<i>mutate</i> the caller&apos;s object.
-
-As primitive valued arguments, like numbers or strings, are immutable,
-there is no way for a function to mutate them:
-<b>var</b>
-s
-=
-&apos;say&apos;
-;
-<b>function</b>
-myfunc
-(
-arg
-)
-{
-arg
-+=
-&apos; hello&apos;
-;
-// <i>assignment to the parameter variable itself</i>
+<i>mutate</i> the caller&apos;s object.</p>
+<p>As primitive valued arguments, like numbers or strings, are immutable,
+there is no way for a function to mutate them:</p>
+<pre>
+<b>var</b> s = &apos;say&apos;;
+<b>function</b> myfunc(arg) {
+  arg += &apos; hello&apos;; // <i>assignment to the parameter variable itself</i>
 }
-myfunc
-(
-s
-)
-;
-console.
-log
-(
-s
-)
-;
-// <i>&apos;say&apos;</i>
-When a function wants to mutate an object passed as argument, but does
+myfunc(s);
+console.log(s);  // <i>&apos;say&apos;</i>
+</pre>
+<p>When a function wants to mutate an object passed as argument, but does
 not want to actually mutate the caller&apos;s object, the argument
-variable should be reassigned:
+variable should be reassigned:</p>
 <h5>Version ≥ 6</h5>
-<b>var</b>
-obj
-=
-{
-a
-:
-2
-,
-b
-:
-3
+<pre>
+<b>var</b> obj = {a: 2, b: 3};
+<b>function</b> myfunc(arg) {
+  arg = Object.assign({}, arg);  // <i>assignment to argument variable, shallow copy</i>
+  arg.a = 5;
 }
-;
-<b>function</b>
-myfunc
-(
-arg
-)
-{
-arg
-=
-Object
-.
-assign
-(
-{
-}
-,
-arg
-)
-;
-// <i>assignment to argument variable, shallow copy</i>
-arg.
-a
-=
-5
-;
-}
-myfunc
-(
-obj
-)
-;
-console.
-log
-(
-obj.
-a
-)
-;
-// <i>2</i>
-As an alternative to in-place mutation of an argument, functions can
+myfunc(obj);
+console.log(obj.a);  // <i>2</i>
+</pre>
+<p>As an alternative to in-place mutation of an argument, functions can
 create a new value, based on the argument, and return it. The caller
 can then assign it, even to the original variable that was passed as
-argument:
-<b>var</b>
-a
-=
-2
-;
-<b>function</b>
-myfunc
-(
-arg
-)
-{
-arg
-++
-;
-<b>return</b>
-arg
-;
+argument:</p>
+<!-- page 179 -->
+<pre>
+<b>var</b> a = 2;
+<b>function</b> myfunc(arg) {
+  arg ++;
+  <b>return</b> arg;
 }
-a
-=
-myfunc
-(
-a
-)
-;
-console.
-log
-(
-obj.
-a
-)
-;
-// <i>3</i>
+a = myfunc(a);
+console.log(obj.a);  // <i>3</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-12">Section 19.12: Function Arguments, &quot;arguments&quot; object, rest and spread parameters</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
