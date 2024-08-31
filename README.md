@@ -11110,608 +11110,1031 @@ As of 2015 works in Node.js and all major browsers except IE.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-15">Section 19.15: Recursive Function</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-A recursive function is simply a function, that would call itself.
-<b>function</b>
-factorial
-(
-n
-)
-{
-<b>if</b>
-(
-n
-&lt;=
-1
-)
-{
-<b>return</b>
-1
-;
+<p>A recursive function is simply a function, that would call itself.</p>
+<!-- page 181 -->
+<pre>
+<b>function</b> factorial (n) {
+  <b>if</b> (n &lt;= 1) {
+    <b>return</b> 1;
 }
-<b>return</b>
-n
-&ast;
-factorial
-(
-n
-&minus;
-1
-)
-;
+<b>return</b> n &ast; factorial(n &minus; 1);
 }
-The above function shows a basic example of how to perform a recursive
-function to return a factorial.
+</pre>
+<p>The above function shows a basic example of how to perform a recursive function 
+to return a factorial.</p>
 
-Another example, would be to retrieve the sum of even numbers in an
-array.
-<b>function</b>
-countEvenNumbers
-(
-arr
-)
-{
-// <i>Sentinel value. Recursion stops on empty array.</i>
-<b>if</b>
-(
-arr.
-length
-&lt;
-1
-)
-{
-<b>return</b>
-0
-;
+<p>Another example, would be to retrieve the sum of even numbers in an array.</p>
+<pre>
+<b>function</b> countEvenNumbers (arr) {
+  // <i>Sentinel value. Recursion stops on empty array.</i>
+  <b>if</b> (arr.length &lt; 1) {
+    <b>return</b> 0;
+  }
+  // <i>The shift() method removes the first element from an array</i>
+  // <i>and returns that element. This method changes the length of the array.</i>
+  <b>var</b> value = arr.shift();
+  // <i>&grave;value % 2 === 0&grave; tests if the number is even or odd</i>
+  // <i>If it&apos;s even we add one to the result of counting the remainder of</i>
+  // <i>the array. If it&apos;s odd, we add zero to it.</i>
+<b>return</b> ((value &percnt; 2 === 0) ? 1 : 0) &plus; countEvens(arr);
 }
-// <i>The shift() method removes the first element from an array</i>
-// <i>and returns that element. This method changes the length of the array.</i>
-<b>var</b>
-value
-=
-arr.
-shift
-(
-)
-;
-// <i>&grave;value % 2 === 0&grave; tests if the number is even or odd</i>
-// <i>If it&apos;s even we add one to the result of counting the remainder of</i>
-// <i>the array. If it&apos;s odd, we add zero to it.</i>
-<b>return</b>
-(
-(
-value
-&percnt;
-2
-===
-0
-)
-?
-1
-:
-0
-)
-&plus;
-countEvens
-(
-arr
-)
-;
-}
-It is important that such functions make some sort of sentinel value
+</pre>
+<p>It is important that such functions make some sort of sentinel value
 check to avoid infinite loops. In the first example above, when n is
 less than or equal to 1, the recursion stops, allowing the result of
-each call to be returned back up the call stack.
+each call to be returned back up the call stack.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-16">Section 19.16: Using the Return Statement</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-The return statement can be a useful way to create output for a
+<p>The return statement can be a useful way to create output for a
 function. The return statement is especially useful if you do not know
-in which context the function will be used yet.
+in which context the function will be used yet.</p>
+<pre>
 // <i>An example function that will take a string as input and return</i>
 // <i>the first character of the string.</i>
-<b>function</b>
-firstChar
-(
-stringIn
-)
-{
-<b>return</b>
-stringIn.
-charAt
-(
-0
-)
-;
+<b>function</b> firstChar (stringIn) {
+  <b>return</b> stringIn.charAt(0);
 }
-Now to use this function, you need to put it in place of a variable
-somewhere else in your code:
-<b>Using the function result as an argument for another function:</b>
-console.
-log
-(
-firstChar
-(
-&quot;Hello world&quot;
-)
-)
-;
-<i>Console output will be:</i>
-&gt;
-H
-<b>The return statement ends the function</b>
-
-If we modify the function in the beginning, we can demonstrate that
-the return statement ends the function.
-<b>function</b>
-firstChar
-(
-stringIn
-)
-{
-console.
-log
-(
-&quot;The first action of the first char function&quot;
-)
-;
-<b>return</b>
-stringIn.
-charAt
-(
-0
-)
-;
-console.
-log
-(
-&quot;The last action of the first char function&quot;
-)
-;
+</pre>
+<p>Now to use this function, you need to put it in place of a variable
+somewhere else in your code:</p>
+<p><b>Using the function result as an argument for another function:</b></p>
+<pre>
+console.log(firstChar(&quot;Hello world&quot;));
+</pre>
+<p><i>Console output will be:</i></p>
+<pre>
+&gt; H
+</pre>
+<p><b>The return statement ends the function</b></p>
+<p>If we modify the function in the beginning, we can demonstrate that the return 
+statement ends the function.</p>
+<!-- page 182 -->
+<pre>
+<b>function</b> firstChar (stringIn){
+  console.log(&quot;The first action of the first char function&quot;);
+  <b>return</b> stringIn.charAt(0);
+  console.log(&quot;The last action of the first char function&quot;);
 }
-Running this function like so will look like this:
-console.
-log
-(
-firstChar
-(
-&quot;JS&quot;
-)
-)
-;
-<i>Console output:</i>
-&gt;
-The first action of the first
-char
-<b>function</b>
-&gt;
-J
-It will not print the message after the return statement, as the
-function has now been ended.
-
-<b>Return statement spanning multiple lines:</b>
-
-In JavaScript, you can normally split up a line of code into many
-lines for readability purposes or organization. This is valid
-JavaScript:
+</pre>
+<p>Running this function like so will look like this:</p>
+<pre>
+console.log(firstChar(&quot;JS&quot;));
+</pre>
+<p><i>Console output:</i></p>
+<pre>
+&gt; The first action of the first char <b>function</b>
+&gt; J
+</pre>
+<p>It will not print the message after the return statement, as the function has now been ended.</p>
+<p><b>Return statement spanning multiple lines:</b></p>
+<p>In JavaScript, you can normally split up a line of code into many lines for readability 
+purposes or organization. This is valid JavaScript:</p>
+<pre>
 <b>var</b>
-name
-=
-&quot;bob&quot;
-,
-age
-=
-18
-;
-When JavaScript sees an incomplete statement like <b>var</b> it looks to
-the next line to complete itself. However, if you make the same
-mistake with the <b>return</b> statement, you will not get what you
-expected.
+  name = &quot;bob&quot;,
+  age = 18;
+</pre>
+<p>When JavaScript sees an incomplete statement like <b>var</b> it looks to the next line to 
+complete itself. However, if you make the same mistake with the <b>return</b> statement, you 
+will not get what you expected.</p>
+<pre>
 <b>return</b>
-&quot;Hi, my name is &quot;
-&plus;
-name
-&plus;
-&quot;. &quot;
-&plus;
-&quot;I&apos;m &quot;
-&plus;
-age
-&plus;
-&quot; years old.&quot;
-;
-This code will return <b>undefined</b> because <b>return</b> by itself is a
+  &quot;Hi, my name is &quot; &plus; name &plus; &quot;. &quot; &plus;
+  &quot;I&apos;m &quot; &plus; age &plus; &quot; years old.&quot;;
+</pre>
+<p>This code will return <b>undefined</b> because <b>return</b> by itself is a
 complete statement in JavaScript, so it will not look to the next line
 to complete itself. If you need to split up a <b>return</b> statement
 into multiple lines, put a value next to return before you split it
-up, like so.
-<b>return</b>
-&quot;Hi, my name is &quot;
-&plus;
-name
-&plus;
-&quot;. &quot;
-&plus;
-&quot;I&apos;m &quot;
-&plus;
-age
-&plus;
-&quot; years old.&quot;
-;
+up, like so.</p>
+<pre>
+<b>return</b> &quot;Hi, my name is &quot; &plus; name &plus; &quot;. &quot; &plus;
+  &quot;I&apos;m &quot; &plus; age &plus; &quot; years old.&quot;;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-17">Section 19.17: Functions as a variable</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-A normal function declaration looks like this:
-<b>function</b>
-foo
-(
-)
-{
+<p>A normal function declaration looks like this:</p>
+<pre>
+<b>function</b> foo() {
 }
-A function defined like this is accessible from anywhere within its
+</pre>
+<p>A function defined like this is accessible from anywhere within its
 context by its name. But sometimes it can be useful to treat function
 references like object references. For example, you can assign an
 object to a variable based on some set of conditions and then later
-retrieve a property from one or the other object:
-<b>var</b>
-name
-=
-&apos;Cameron&apos;
-;
-<b>var</b>
-spouse
-;
-<b>if</b>
-(
-name
-===
-&apos;Taylor&apos;
-)
-spouse
-=
-{
-name
-:
-&apos;Jordan&apos;
-}
-;
-<b>else</b>
-<b>if</b>
-(
-name
-===
-&apos;Cameron&apos;
-)
-spouse
-=
-{
-name
-:
-&apos;Casey&apos;
-}
-;
-<b>var</b>
-spouseName
-=
-spouse.
-name
-;
-In JavaScript, you can do the same thing with functions:
+retrieve a property from one or the other object:</p>
+<pre>
+<b>var</b> name = &apos;Cameron&apos;;
+<b>var</b> spouse;
+<b>if</b> ( name === &apos;Taylor&apos; ) spouse = { name: &apos;Jordan&apos; };
+<b>else if</b> ( name === &apos;Cameron&apos; ) spouse = { name: &apos;Casey&apos; };
+<b>var</b> spouseName = spouse.name;
+</pre>
+<!-- page 183 -->
+<p>In JavaScript, you can do the same thing with functions:</p>
+<pre>
 // <i>Example 1</i>
-<b>var</b>
-hashAlgorithm
-=
-&apos;sha1&apos;
-;
-<b>var</b>
-hash
-;
-<b>if</b>
-(
-hashAlgorithm
-===
-&apos;sha1&apos;
-)
-hash
-=
-<b>function</b>
-(
-value
-)
-{
-<i>/&ast;&hellip;&ast;/</i>
-}
-;
-<b>else</b>
-<b>if</b>
-(
-hashAlgorithm
-===
-&apos;md5&apos;
-)
-hash
-=
-<b>function</b>
-(
-value
-)
-{
-// <i>&ast;&hellip;&ast;</i>
-}
-;
-hash
-(
-&apos;Fred&apos;
-)
-;
-In the example above, hash is a normal variable. It is assigned a
+<b>var</b> hashAlgorithm = &apos;sha1&apos;;
+<b>var</b> hash;
+<b>if</b> ( hashAlgorithm === &apos;sha1&apos; ) hash = <b>function</b>(value) { <i>/&ast;&hellip;&ast;/</i> };
+<b>else if</b> ( hashAlgorithm === &apos;md5&apos; ) hash = md5Hash;
+hash(&apos;Fred&apos;);
+</pre>
+<p>In the example above, hash is a normal variable. It is assigned a
 reference to a function, after which the function it references can be
-invoked using parentheses, just like a normal function declaration.
-
-The example above references anonymous functions&hellip; functions that do
+invoked using parentheses, just like a normal function declaration.</p>
+<p>The example above references anonymous functions&hellip; functions that do
 not have their own name. You can also use variables to refer to named
-functions. The example above could be rewritten like so:
+functions. The example above could be rewritten like so:</p>
+<pre>
 // <i>Example 2</i>
-<b>var</b>
-hashAlgorithm
-=
-&apos;sha1&apos;
-;
-<b>var</b>
-hash
-;
-<b>if</b>
-(
-hashAlgorithm
-===
-&apos;sha1&apos;
-)
-hash
-=
-sha1Hash
-;
-<b>else</b>
-<b>if</b>
-(
-hashAlgorithm
-===
-&apos;md5&apos;
-)
-hash
-=
-md5Hash
-;
-hash
-(
-&apos;Fred&apos;
-)
-;
-<b>function</b>
-md5Hash
-(
-value
-)
-{
-// <i>&hellip;</i>
-}
-<b>function</b>
-sha1Hash
-(
-value
-)
-{
-// <i>&hellip;</i>
-}
-Or, you can assign function references from object properties:
-// <i>Example 3</i>
-<b>var</b>
-hashAlgorithms
-=
-{
-sha1
-:
-<b>function</b>
-(
-value
-)
-{
-<i>/&ast;&ast;/</i>
-}
-,
-md5
-:
-<b>function</b>
-(
-value
-)
-{
-<i>/&ast;&ast;/</i>
-}
-}
-;
-<b>var</b>
-hashAlgorithm
-=
-&apos;sha1&apos;
-;
-<b>var</b>
-hash
-;
-<b>if</b>
-(
-hashAlgorithm
-===
-&apos;sha1&apos;
-)
-hash
-=
-hashAlgorithms.
-sha1
-;
-<b>else</b>
-<b>if</b>
-(
+var hashAlgorithm = &apos;ha1&apos;;
+var hash;
 
-hashAlgorithm
-===
-&apos;md5&apos;
-)
-hash
-=
-hashAlgorithms.
-md5
-;
-hash
-(
-&apos;Fred&apos;
-)
-;
-You can assign the reference to a function held by one variable to
+
+<b>function</b> md5Hash(value) {
+  // ...
+}
+<b>function</b> sha1Hash(value) {
+  // ...
+}
+</pre>
+<p>Or, you can assign function references from object properties:</p>
+<pre>
+// <i>Example 3</i>
+<b>var</b> hashAlgorithms = {
+  sha1: <b>function</b>(value){ <i>/&ast;&ast;/</i> },
+  md5: <b>function</b>(value) { <i>/&ast;&ast;/</i> }
+};
+<b>var</b> hashAlgorithm = &apos;sha1&apos;;
+<b>var</b> hash;
+<b>if</b> ( hashAlgorithm === &apos;sha1&apos; ) hash = hashAlgorithms.sha1;
+<b>else</b> <b>if</b> (  hashAlgorithm === &apos;md5&apos; ) hash = hashAlgorithms.md5;
+hash(&apos;Fred&apos;);
+</pre>
+<p>You can assign the reference to a function held by one variable to
 another by omitting the parentheses. This can result in an
 easy-to-make mistake: attempting to assign the return value of a
 function to another variable, but accidentally assigning the reference
-to the function.
+to the function.</p>
+<!-- page 184 -->
+<pre>
 // <i>Example 4</i>
-<b>var</b>
-a
-=
-getValue
-;
-<b>var</b>
-b
-=
-a
-;
-// <i>b is now a reference to getValue.</i>
-<b>var</b>
-c
-=
-b
-(
-)
-;
-// <i>b is invoked, so c now holds the value returned by getValue (41)</i>
-<b>function</b> getValue(){ <b>return</b> 41; }
-
-A reference to a function is like any other value. As you&apos;ve seen, a
+<b>var</b> a = getValue;
+<b>var</b> b = a;  // <i>b is now a reference to getValue.</i>
+<b>var</b> c = b(); // <i>b is invoked, so c now holds the value returned by getValue (41)</i>
+<b>function</b> getValue(){
+  <b>return</b> 41;
+}
+</pre>
+<p>A reference to a function is like any other value. As you&apos;ve seen, a
 reference can be assigned to a variable, and that variable&apos;s
 reference value can be subsequently assigned to other variables. You
 can pass around references to functions like any other value,
 including passing a reference to a function as the return value of
-another function. For example:
-
+another function. For example:</p>
+<pre>
 // <i>Example 5</i>
 // <i>getHashingFunction returns a function, which is assigned</i>
 // <i>to hash for later use:</i>
-<b>var</b>
-hash
-=
-getHashingFunction
-(
-&apos;sha1&apos;
-)
-;
+<b>var</b> hash = getHashingFunction( &apos;sha1&apos; );
 // <i>&hellip;</i>
-hash
-(
-&apos;Fred&apos;
-)
-;
+hash(&apos;Fred&apos;);
 // <i>return the function corresponding to the given algorithmName</i>
-<b>function</b>
-getHashingFunction
-(
-algorithmName
-)
-{
-// <i>return a reference to an anonymous function</i>
-<b>if</b>
-(
-algorithmName
-===
-&apos;sha1&apos;
-)
-<b>return</b>
-<b>function</b>
-(
-value
-)
-{
-<i>/&ast;&ast;/</i>
-}
-;
+<b>function</b> getHashingFunction( algorithmName ) {
+  // <i>return a reference to an anonymous function</i>
+<b>if</b> (algorithmName === &apos;sha1&apos; ) <b>return</b> <b>function</b>(value){ <i>/&ast;&ast;/</i> };
 // <i>return a reference to a declared function</i>
-<b>else</b>
-<b>if</b>
-(
-algorithmName
-===
-&apos;md5&apos;
-)
-<b>return</b>
-md5
-;
+<b>else if</b> (algorithmName === &apos;md5&apos;) <b>return</b> md5;
 }
-<b>function</b>
-md5Hash
-(
-value
-)
-{
-// <i>&hellip;</i>
+<b>function</b> md5Hash(value) {
+  // <i>&hellip;</i>
 }
-
-You don&apos;t need to assign a function reference to a variable in order
-to invoke it. This example, building off example 5, will call
-getHashingFunction and then immediately invoke the returned function
-and pass its return value to hashedValue.
+</pre>
+<p>You don&apos;t need to assign a function reference to a variable in order to invoke it. 
+This example, building off example 5, will call getHashingFunction and then immediately 
+invoke the returned function and pass its return value to hashedValue.</p>
+<pre>
 // <i>Example 6</i>
-<b>var</b>
-hashedValue
-=
-getHashingFunction
-(
-&apos;sha1&apos;
-)
-(
-&apos;Fred&apos;
-)
-;
-<b>A Note on Hoisting</b>
-Keep in mind that, unlike normal function declarations, variables that
+<b>var</b> hashedValue = getHashingFunction( &apos;sha1&apos; )( &apos;Fred&apos; );
+</pre>
+<p><b>A Note on Hoisting</b></p>
+<p>Keep in mind that, unlike normal function declarations, variables that
 reference functions are not &quot;hoisted&quot;. In example 2, the md5Hash and
 sha1Hash functions are defined at the bottom of the script, but are
 available everywhere immediately. No matter where you define a
 function, the interpreter &quot;hoists&quot; it to the top of its scope,
 making it immediately available. This is <b>not</b> the case for variable
-definitions, so code like the following will break:
-<b>var</b>
-functionVariable
-;
-hoistedFunction
-(
-)
-;
-// <i>works, because the function is &quot;hoisted&quot; to the top of its scope</i>
-functionVariable
-(
-)
-;
-// <i>error: undefined is not a function.</i>
+definitions, so code like the following will break:</p>
+<pre>
+<b>var</b> functionVariable;
+hoistedFunction();  // <i>works, because the function is &quot;hoisted&quot; to the top of its scope</i>
+functionVariable();  // <i>error: undefined is not a function.</i>
+<b>function</b> hoistedFunction(){}
+functionVariable = <b>function</b>(){};
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch20">Chapter 20: Functional JavaScript</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch20-1">Section 20.1: Higher-Order Functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+In general, functions that operate on other functions, either by
+taking them as arguments or by returning them (or both), are called
+higher-order functions.
+A higher-order function is a function that can take another function
+as an argument. You are using higher-order functions when passing
+callbacks.
 <b>function</b>
-hoistedFunction
+iAmCallbackFunction
+)
+{
+console.
+log
+(
+&quot;callback has been invoked&quot;
+)
+;
+}
+<b>function</b>
+iAmJustFunction
+(
+callbackFn
+)
+{
+*// do some stuff &hellip;*
+*// invoke the callback function.*
+callbackFn
+(
+)
+;
+}
+*// invoke your higher-order function with a callback function.*
+iAmJustFunction
+(
+iAmCallbackFunction
+)
+;
+A higher-order function is also a function that returns another
+function as its result.
+<b>function</b>
+iAmJustFunction
 (
 )
 {
+*// do some stuff &hellip;*
+*// return a function.*
+<b>return</b>
+<b>function</b>
+iAmReturnedFunction
+(
+)
+{
+console.
+log
+(
+&quot;returned function has been invoked&quot;
+)
+;
 }
-functionVariable
+}
+*// invoke your higher-order function and its returned function.*
+iAmJustFunction
+(
+)
+(
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch20-2">Section 20.2: Identity Monad</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+This is an example of an implementation of the identity monad in
+JavaScript, and could serve as a starting point to create other
+monads.
+Based on the [conference by Douglas Crockford on monads and
+gonads](https://www.youtube.com/watch?v=b0EF0VTs9Dc)
+Using this approach reusing your functions will be easier because of
+the flexibility this monad provides, and composition nightmares:
+f
+(
+g
+(
+h
+(
+i
+(
+j
+(
+k
+(
+value
+)
+,
+j1
+)
+,
+i2
+)
+,
+h1
+,
+h2
+)
+,
+g1
+,
+g2
+)
+,
+f1
+,
+f2
+)
+readable, nice and clean:
+identityMonad
+(
+value
+)
+.
+bind
+(
+k
+)
+.
+bind
+(
+j
+,
+j1
+,
+j2
+)
+.
+bind
+(
+i
+,
+i2
+)
+.bind(h, h1, h2)
+.bind(g, g1, g2)
+.bind(f, f1, f2);
+<b>function</b>
+identityMonad
+(
+value
+)
+{
+<b>var</b>
+monad
+=
+Object
+.
+create
+(
+<b>null</b>
+)
+;
+*// func should return a monad*
+monad.
+bind
+=
+<b>function</b>
+(
+func
+,
+&hellip;
+args
+)
+{
+<b>return</b>
+func
+(
+value
+,
+&hellip;
+args
+)
+;
+}
+;
+*// whatever func does, we get our monad back*
+monad.
+call
+=
+<b>function</b>
+(
+func
+,
+&hellip;
+args
+)
+{
+func
+(
+value
+,
+&hellip;
+args
+)
+;
+<b>return</b>
+identityMonad
+(
+value
+)
+;
+}
+;
+*// func doesn&apos;t have to know anything about monads*
+monad.
+apply
+=
+<b>function</b>
+(
+func
+,
+&hellip;
+args
+)
+{
+<b>return</b>
+identityMonad
+(
+func
+(
+value
+,
+&hellip;
+args
+)
+)
+;
+}
+;
+*// Get the value wrapped in this monad*
+monad.
+value
 =
 <b>function</b>
 (
 )
 {
+<b>return</b>
+value
+;
 }
 ;
-<!-- thru chapter 19 -->
+<b>return</b>
+monad
+;
+}
+;
+It works with primitive values
+<b>var</b>
+value
+=
+&apos;foo&apos;
+,
+f
+=
+x
+=&gt;
+x
+&plus;
+&apos; changed&apos;
+,
+g
+=
+x
+=&gt;
+x
+&plus;
+&apos; again&apos;
+;
+identityMonad
+(
+value
+)
+.
+apply
+(
+f
+)
+.
+apply
+(
+g
+)
+.
+bind
+(
+alert
+)
+;
+*// Alerts &apos;foo changed again&apos;*
+And also with objects
+<b>var</b>
+value
+=
+{
+foo
+:
+&apos;foo&apos;
+}
+,
+f
+=
+x
+=&gt;
+identityMonad
+(
+Object
+.
+assign
+(
+x
+,
+{
+foo
+:
+&apos;bar&apos;
+}
+)
+)
+,
+g
+=
+x
+=&gt;
+Object
+.
+assign
+(
+x
+,
+{
+bar
+:
+&apos;foo&apos;
+}
+)
+,
+h
+=
+x
+=&gt;
+console.
+log
+(
+&apos;foo: &apos;
+&plus;
+x&period;
+foo
+&plus;
+&apos;, bar: &apos;
+&plus;
+x&period;
+bar
+)
+;
+identityMonad
+(
+value
+)
+.
+bind
+(
+f
+)
+.
+apply
+(
+g
+)
+.
+bind
+(
+h
+)
+;
+*// Logs &apos;foo: bar, bar: foo&apos;*
+Let&apos;s try everything:
+
+<b>var</b> add = (x, &hellip;args) =&bsol;x + args.reduce((r, n) =&bsol;r + n, 0),
+multiply = (x, &hellip;args) =&bsol;x &ast; args.reduce((r, n) =&bsol;r &ast; n, 1),
+
+divideMonad
+=
+(
+x
+,
+&hellip;
+args
+)
+=&gt;
+identityMonad
+(
+x
+/
+multiply
+(
+&hellip;
+args
+)
+)
+,
+log
+=
+x
+=&gt;
+console.
+log
+(
+x
+)
+,
+substract
+=
+(
+x
+,
+&hellip;
+args
+)
+=&gt;
+x
+&minus;
+add
+(
+&hellip;
+args
+)
+;
+identityMonad
+(
+100
+)
+.
+apply
+(
+add
+,
+10
+,
+29
+,
+13
+)
+.
+apply
+(
+multiply
+,
+2
+)
+.
+bind
+(
+divideMonad
+,
+2
+)
+.
+apply
+(
+substract
+,
+67
+,
+34
+)
+.
+apply
+(
+multiply
+,
+1239
+)
+.
+bind
+(
+divideMonad
+,
+20
+,
+54
+,
+2
+)
+.
+apply
+(
+Math
+.
+round
+)
+.
+call
+(
+log
+)
+;
+*// Logs 29*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch20-3">Section 20.3: Pure Functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+A basic principle of functional programming is that it <b>avoids
+changing</b> the application state (statelessness) and variables outside
+its scope (immutability).
+Pure functions are functions that:
+with a given input, always return the same output they do not rely on
+any variable outside their scope
+they do not modify the state of the application (<b>no side effects</b>)
+Let&apos;s take a look at some examples:
+Pure functions must not change any variable outside their scope
+<b>Impure function</b>
+<b>let</b>
+obj
+=
+{
+a
+:
+0
+}
+<b>const</b>
+impure
+=
+(
+input
+)
+=&gt;
+{
+*// Modifies input.a*
+input.
+a
+=
+input.
+a
+&plus;
+1
+;
+<b>return</b>
+input.
+a
+;
+}
+<b>let</b>
+b
+=
+impure
+(
+obj
+)
+console.
+log
+(
+obj
+)
+*// Logs { &quot;a&quot;: 1 }*
+console.
+log
+(
+b
+)
+*// Logs 1*
+obj.
+
+The function changed the a value that is outside its scope.
+
+<b>Pure function</b>
+<b>let</b>
+obj
+=
+{
+a
+:
+0
+}
+<b>const</b>
+pure
+=
+(
+input
+)
+=&gt;
+{
+*// Does not modify obj*
+<b>let</b>
+output
+=
+input.
+a
+&plus;
+1
+;
+<b>return</b>
+output
+;
+}
+<b>let</b> b = pure(obj) console.log(obj) *// Logs { &quot;a&quot;: 0 }*
+console.log(b) *// Logs 1*
+The function did not change the object obj values
+Pure functions must not rely on variables outside their scope
+<b>Impure function</b>
+<b>let</b>
+a
+=
+1
+;
+<b>let</b>
+impure
+=
+(
+input
+)
+=&gt;
+{
+*// Multiply with variable outside function scope*
+<b>let</b>
+output
+=
+input
+&ast;
+a
+;
+<b>return</b>
+output
+;
+}
+console.
+log
+(
+impure
+(
+2
+)
+)
+*// Logs 2*
+a
+++
+;
+*// a becomes equal to 2*
+console.
+log
+(
+impure
+(
+2
+)
+)
+*// Logs 4*
+This <b>impure</b> function rely on variable a that is defined outside
+its scope. So, if a is modified, impure&apos;s function result will be
+different.
+
+<b>Pure function</b>
+<b>let</b>
+pure
+=
+(
+input
+)
+=&gt;
+{
+<b>let</b>
+a
+=
+1
+;
+*// Multiply with variable inside function scope*
+<b>let</b>
+output
+=
+input
+&ast;
+a
+;
+<b>return</b>
+output
+;
+}
+console.
+log
+(
+pure
+(
+2
+)
+)
+*// Logs 2*
+The pure&apos;s function result <b>does not rely</b> on any variable outside
+its scope.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch20-4">Section 20.4: Accepting Functions as Arguments</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>function</b>
+transform
+(
+fn
+,
+arr
+)
+{
+<b>let</b>
+result
+=
+&lbrack;
+&rbrack;
+;
+<b>for</b>
+(
+<b>let</b>
+el of arr
+)
+{
+result.
+push
+(
+fn
+(
+el
+)
+)
+;
+*// We push the result of the transformed item to result*
+}
+<b>return</b>
+result
+;
+}
+console.
+log
+(
+transform
+(
+x
+=&gt;
+x
+&ast;
+2
+,
+&lbrack;
+1
+,
+2
+,
+3
+,
+4
+&rbrack;
+)
+)
+;
+*// &lbrack;2, 4, 6, 8&rbrack;*
+As you can see, our transform function accepts two parameters, a
+function and a collection. It will then iterate the collection, and
+push values onto the result, calling fn on each of them.
+Array . <b>prototype</b> . map
+Looks familiar? This is very similar to how () works!
+console.
+log
+(
+&lbrack;
+1
+,
+2
+,
+3
+,
+4
+&rbrack;
+.
+map
+(
+x
+=&gt;
+x
+&ast;
+2
+)
+)
+;
+*// &lbrack;2, 4, 6, 8&rbrack;*
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch21">Chapter 21: Prototypes, objects</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+In the conventional JS there are no class instead we have prototypes.
+Like the class, prototype inherits the properties including the
+methods and the variables declared in the class. We can create the new
+instance of the object whenever it is necessary by,
+Object.create(PrototypeName); (we can give the value for the
+constructor as well)
+
