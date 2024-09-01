@@ -12173,6 +12173,7 @@ Person.apply(person2);
 Person.call(person3);
 // <i>outputs: I&apos;m Stackoverflow</i>
 </pre>
+<!-- page 202 -->
 <ul>
   <li>So, as you can remark in the example above, whatever object you pass to <i>Person</i>, 
   it&apos;ll always use <i>person() object</i> <b>it&apos;s hard binded.</b></li>
@@ -12180,113 +12181,39 @@ Person.call(person3);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch24-4">Section 24.4: this in constructor functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-When using a function as a constructor, it has a special <b>this</b>
-binding, which refers to the newly created object:
-<b>function</b>
-Cat
-(
-name
-)
-{
-<b>this</b>
-.
-name
-=
-name
-;
-<b>this</b>
-.
-sound
-=
-&quot;Meow&quot;
-;
+<p>When using a function as a constructor, it has a special <b>this</b>
+binding, which refers to the newly created object:</p>
+<pre>
+<b>function</b> Cat(name) {
+  <b>this</b>.name = name;
+  <b>this</b>.sound = &quot;Meow&quot;;
 }
-<b>var</b>
-cat
-=
-<b>new</b>
-Cat
-(
-&quot;Tom&quot;
-)
-;
-// <i> is a Cat object</i>
-cat.
-sound
-;
-// <i> Returns &quot;Meow&quot;</i>
-<b>var</b>
-cat2
-=
-Cat
-(
-&quot;Tom&quot;
-)
-;
-// <i> is undefined &bsol; function got executed in global context</i>
-window.
-name
-;
-// <i> &quot;Tom&quot;</i>
-cat2.
-name
-;
-// <i> error! cannot access property of undefined</i>
+<b>var</b> cat = <b>new</b> Cat(&quot;Tom&quot;);  // <i> is a Cat object</i>
+cat.sound;  // <i> Returns &quot;Meow&quot;</i>
+<b>var</b> cat2 = Cat(&quot;Tom&quot;);  // <i> is undefined &bsol; function got executed in global context</i>
+window.name;  // <i> &quot;Tom&quot;</i>
+cat2.name;  // <i> error! cannot access property of undefined</i>
+</pre>
+<!-- page 203 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch25">Chapter 25: Setters and Getters</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Setters and getters are object properties that call a function when
-they are set/gotten.
+<p>Setters and getters are object properties that call a function when they are set/gotten.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch25-1">Section 25.1: Defining a Setter/Getter Using Object.defineProperty</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>var</b>
-setValue
-;
-<b>var</b>
-obj
-=
-{
-}
-;
-Object
-.
-defineProperty
-(
-obj
-,
-&quot;objProperty&quot;
-,
-{
-<b>get</b>
-:
-<b>function</b>
-(
-)
-{
-<b>return</b>
-&quot;a value&quot;
-;
-}
-,
-<b>set</b>
-:
-<b>function</b>
-(
-value
-)
-{
-setValue
-=
-value
-;
-}
-}
-)
-;
+<pre>
+<b>var</b> setValue;
+<b>var</b> obj = {};
+Object.defineProperty(obj, &quot;objProperty&quot;, {
+  <b>get</b>: <b>function</b>() {
+    <b>return</b> &quot;a value&quot;;
+  },
+  <b>set</b>: <b>function</b>(value) {
+    setValue = value;
+  }
+});
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch25-2">Section 25.2: Defining an Setter/Getter in a Newly Created Object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
