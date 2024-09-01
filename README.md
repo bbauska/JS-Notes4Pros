@@ -12660,3 +12660,1863 @@ style
 ;
 // <i>&apos;italic&apos;</i>
 
+<!-- thru 27.2 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch27-2">Section 27.2: Difference between Object.key and Object.prototype.key</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+
+Unlike in languages like Python, static properties of the constructor
+function are <i>not</i> inherited to instances. Instances only inherit from
+their prototype, which inherits from the parent type&apos;s prototype.
+Static properties are never inherited.
+
+<b>function</b>
+Foo
+(
+)
+{
+}
+;
+Foo.
+style
+=
+&apos;bold&apos;
+;
+<b>var</b>
+foo
+=
+<b>new</b>
+Foo
+(
+)
+;
+console.
+log
+(
+Foo.
+style
+)
+;
+// <i> &apos;bold&apos;</i>
+console.
+log
+(
+foo.
+style
+)
+;
+// <i> undefined</i>
+Foo.
+<b>prototype</b>
+.
+style
+=
+&apos;italic&apos;
+;
+console.
+log
+(
+Foo.
+style
+)
+;
+// <i> &apos;bold&apos;</i>
+console.
+log
+(
+foo.
+style
+)
+;
+// <i>&apos;italic&apos;</i>
+
+<!--
+Suppose we have a plain object called <b>prototype</b>: <b>var</b>
+<b>prototype</b> = { foo: &apos;foo&apos;, bar: <b>function</b> () { <b>return</b>
+<b>this</b>.foo; } };
+
+Now we want another object called obj that inherits from
+<b>prototype</b>, which is the same as saying that <b>prototype</b> is the
+prototype of obj
+<b>var</b>
+obj
+=
+Object
+.
+create
+(
+<b>prototype</b>
+)
+;
+Now all the properties and methods from <b>prototype</b> will be
+available to obj
+console.
+log
+(
+obj.
+foo
+)
+;
+console.
+log
+(
+obj.
+bar
+(
+)
+)
+;
+Console output
+&quot;foo&quot;
+&quot;foo&quot;
+Prototypal inheritance is made through object references internally
+and objects are completely mutable. This means any change you make on
+a prototype will immediately affect every other object that prototype
+is prototype of.
+<b>prototype</b>
+.
+foo
+=
+&quot;bar&quot;
+;
+console.
+log
+(
+obj.
+foo
+)
+;
+Console output
+&quot;bar&quot;
+Object.<b>prototype</b>
+is the prototype of every object, so it&apos;s strongly recommended you
+don&apos;t mess with it, especially
+if you use any third party library, but we can play with it a little
+bit.
+Object
+.
+<b>prototype</b>
+.
+breakingLibraries
+=
+&apos;foo&apos;
+;
+console.
+log
+(
+obj.
+breakingLibraries
+)
+;
+console.
+log
+(
+<b>prototype</b>
+.
+breakingLibraries
+)
+;
+Console output
+&quot;foo&quot;
+&quot;foo&quot;
+<b>Fun fact</b> I&apos;ve used the browser console to make these examples and
+broken this page by adding that breakingLibraries property.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch27-4">Section 27.4: Pseudo-classical inheritance</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+It&apos;s an emulation of classical inheritance using prototypical
+inheritance which shows how powerful prototypes are. It was made to
+make the language more attractive to programmers coming from other
+languages.
+<h5>Version &lt; 6</h5>
+<b>IMPORTANT NOTE</b>: Since ES6 it doesn&apos;t make sense to use
+pseudo-classical inheritance since the language simulates conventional
+classes. If you&apos;re not using ES6, [you
+should](http://www.2ality.com/2015/08/getting-started-es6.html). If
+you still want to use the classical inheritance pattern and you&apos;re in
+a ECMAScript 5 or lower environment, then pseudo-classical is your
+best bet.
+A &quot;class&quot; is just a function that is made to be called with the
+<b>new</b> operand and it&apos;s used as a constructor.
+<b>function</b>
+Foo
+(
+id
+,
+name
+)
+{
+<b>this</b>
+.
+id
+=
+id
+;
+<b>this</b>
+.
+name
+=
+name
+;
+}
+<b>var</b>
+foo
+=
+<b>new</b>
+Foo
+(
+1
+,
+&apos;foo&apos;
+)
+;
+console.
+log
+(
+foo.
+id
+)
+;
+Console output
+1
+foo is an instance of Foo. The JavaScript coding convention says if a
+function begins with a capital letter case it can be called as a
+constructor (with the <b>new</b> operand).
+
+To add properties or methods to the &quot;class&quot; you have to add them to
+its prototype, which can be found in the <b>prototype</b> property of the
+constructor.
+Foo.
+<b>prototype</b>
+.
+bar
+=
+&apos;bar&apos;
+;
+console.
+log
+(
+foo.
+bar
+)
+;
+Console output
+bar
+Foo.<b>prototype</b>
+In fact what Foo is doing as a &quot;constructor&quot; is just creating
+objects with as it&apos;s prototype.
+You can find a reference to its constructor on every object
+console.
+log
+(
+foo.
+constructor
+)
+;
+function Foo(id, name) { &hellip;
+console.
+log
+(
+{
+}
+.
+constructor
+)
+;
+function Object() { &lbrack;native code&rbrack; }
+And also check if an object is an instance of a given class with the
+<b>instanceof</b> operator
+console.
+log
+(
+foo
+<b>instanceof</b>
+Foo
+)
+;
+true
+console.
+log
+(
+foo
+<b>instanceof</b>
+Object
+)
+;
+true
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch27-5">Section 27.5: Setting an Object&apos;s prototype</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version ≥ 5</h5>
+Object.create
+With ES5+, the function can be used to create an Object with any other
+Object as it&apos;s prototype.
+<b>const</b>
+anyObj
+=
+{
+hello
+(
+)
+{
+console.
+log
+(
+&grave;
+<b>this</b>
+.
+foo
+is &dollar;
+{
+<b>this</b>
+.
+foo
+}
+&grave;
+)
+;
+}
+,
+}
+;
+<b>let</b>
+objWithProto
+=
+Object
+.
+create
+(
+anyObj
+)
+;
+objWithProto.
+foo
+=
+&apos;bar&apos;
+;
+objWithProto.
+hello
+(
+)
+;
+*// &quot;this.foo is bar&quot;*
+Object . <b>prototype</b>
+To explicitly create an Object without a prototype, use <b>null</b> as
+the prototype. This means the Object will not inherit from either and
+is useful for Objects used for existence checking dictionaries, e.g.
+<b>let</b>
+objInheritingObject
+=
+{
+}
+;
+<b>let</b>
+objInheritingNull
+=
+Object
+.
+create
+(
+<b>null</b>
+)
+;
+&apos;toString&apos;
+<b>in</b>
+objInheritingObject
+;
+*// true*
+&apos;toString&apos;
+<b>in</b>
+objInheritingNull
+;
+*// false*
+<h5>Version ≥ 6</h5>
+Object . setPrototypeOf
+From ES6, the prototype of an existing Object can be changed using ,
+for example
+<b>let</b>
+obj
+=
+Object
+.
+create
+(
+{
+foo
+:
+&apos;foo&apos;
+}
+)
+;
+obj
+=
+Object
+.
+setPrototypeOf
+(
+obj
+,
+{
+bar
+:
+&apos;bar&apos;
+}
+)
+;
+obj.
+foo
+;
+*// undefined*
+obj.
+bar
+;
+*// &quot;bar&quot;*
+This can be done almost anywhere, including on a <b>this</b> object or in
+a constructor.
+<b>Note:</b> This process is very slow in current browsers and should be
+used sparingly, try to create the Object with the desired prototype
+instead.
+<h5>Version &lt; 5</h5>
+Before ES5, the only way to create an Object with a manually defined
+prototype was to construct it with <b>new</b>, for example
+<b>var</b>
+proto
+=
+{
+fizz
+:
+&apos;buzz&apos;
+}
+;
+<b>function</b>
+ConstructMyObj
+(
+)
+{
+}
+ConstructMyObj.
+<b>prototype</b>
+=
+proto
+;
+<b>var</b>
+objWithProto
+=
+<b>new</b>
+ConstructMyObj
+(
+)
+;
+objWithProto.
+fizz
+;
+*// &quot;buzz&quot;*
+Object . create
+This behaviour is close enough to that it is possible to write a
+polyfill.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch28">Chapter 28: Method Chaining</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch28-1">Section 28.1: Chainable object design and chaining</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Chaining and Chainable is a design methodology used to design object
+behaviors so that calls to object functions return references to self,
+or another object, providing access to additional function calls
+allowing the calling statement to chain together many calls without
+the need to reference the variable holding the object/s.
+<b>return</b> <b>this</b>
+Objects that can be chained are said to be chainable. If you call an
+object chainable, you should ensure that all returned objects /
+primitives are of the correct type. It only takes one time for your
+chainable object to not return the correct reference (easy to forget
+to add ) and the person using your API will lose trust and avoid
+chaining. Chainable objects should be all or nothing (not a chainable
+object even if parts are). An object should not be called chainable if
+only some of its functions are.
+<b>Object designed to be chainable</b>
+<b>function</b>
+Vec
+(
+x
+=
+0
+,
+y
+=
+0
+)
+{
+<b>this</b>
+.
+x
+=
+x
+;
+<b>this</b>
+.
+y
+=
+y
+;
+*// the new keyword implicitly implies the return type*
+*// as this and thus is chainable by default.*
+}
+Vec.
+<b>prototype</b>
+=
+{
+add
+:
+<b>function</b>
+(
+vec
+)
+{
+<b>this</b>
+.
+x
++=
+vec.
+x
+;
+<b>this</b>
+.
+y
++=
+vec.
+y
+;
+<b>return</b>
+<b>this</b>
+;
+*// return reference to self to allow chaining of function calls*
+}
+,
+scale
+:
+<b>function</b>
+(
+val
+)
+{
+<b>this</b>
+.
+x
+&ast;=
+val
+;
+<b>this</b>
+.
+y
+&ast;=
+val
+;
+<b>return</b>
+<b>this</b>
+;
+*// return reference to self to allow chaining of function calls*
+}
+,
+log
+:
+<b>function</b>
+(
+val
+)
+{
+console.
+log
+(
+<b>this</b>
+.
+x
+&plus;
+&apos; : &apos;
+&plus;
+<b>this</b>
+.
+y
+)
+;
+<b>return</b>
+<b>this</b>
+;
+}
+,
+clone
+:
+<b>function</b>
+(
+)
+{
+<b>return</b>
+<b>new</b>
+Vec
+(
+<b>this</b>
+.
+x
+,
+<b>this</b>
+.
+y
+)
+;
+}
+}
+<b>Chaining example</b>
+<b>var</b>
+vec
+=
+<b>new</b>
+Vec
+(
+)
+;
+vec.
+add
+(
+{
+x
+:
+10
+,
+y
+:
+10
+}
+)
+.
+add
+(
+{
+x
+:
+10
+,
+y
+:
+10
+}
+)
+.
+log
+(
+)
+*// console output &quot;20 : 20&quot;*
+.
+add
+(
+{
+x
+:
+10
+,
+y
+:
+10
+}
+)
+.
+scale
+(
+1
+/
+30
+)
+.
+log
+(
+)
+*// console output &quot;1 : 1&quot;*
+.
+clone
+(
+)
+*// returns a new instance of the object*
+.
+scale
+(
+2
+)
+*// from which you can continue chaining*
+.
+log
+(
+)
+<b>Don&apos;t create ambiguity in the return type</b>
+clone
+toString
+Not all function calls return a useful chainable type, nor do they
+always return a reference to self. This is where common sense use of
+naming is important. In the above example the function call .() is
+unambiguous. Other examples are .() implies a string is returned.
+An example of an ambiguous function name in a chainable object.
+*// line object represents a line*
+line.
+rotate
+(
+1
+)
+.
+vec
+(
+)
+;
+*// ambiguous you don&apos;t need to be looking up docs while writing.*
+line.
+rotate
+(
+1
+)
+.
+asVec
+(
+)
+*// unambiguous implies the return type is the line as a vec (vector)*
+.
+add
+(
+{
+x
+:
+10
+,
+y
+:
+10
+)
+*// toVec is just as good as long as the programmer can use the naming*
+*// to infer the return type*
+<b>Syntax convention</b>
+There is no formal usage syntax when chaining. The convention is to
+either chain the calls on a single line if short or to chain on the
+new line indented one tab from the referenced object with the dot on
+the new line. Use of the semicolon is optional but does help by
+clearly denoting the end of the chain.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image029.png"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:7.486in;" />
+<!--
+<b>A bad syntax</b>
+vec *// new line before the first function call*
+.scale() *// can make it unclear what the intention is*
+.log();
+vec. *// the dot on the end of the line* scale(2). *// is very
+difficult to see in a mass of code* scale(1/2); *// and will likely
+frustrate as can easily be missed* *// when trying to locate bugs*
+<b>Left hand side of assignment</b>
+When you assign the results of a chain the last returning call or
+object reference is assigned.
+<b>var</b> vec2 = vec.scale(2) .add(x:1,y:10)
+.clone(); *// the last returned result is assigned*
+*// vec2 is a clone of vec after the scale and add*
+In the above example vec2 is assigned the value returned from the last
+call in the chain. In this case, that would be a copy of vec after the
+scale and add.
+<b>Summary</b>
+The advantage of changing is clearer more maintainable code. Some
+people prefer it and will make chainable a requirement when selecting
+an API. There is also a performance benefit as it allows you to avoid
+having to create variables to hold interim results. With the last word
+being that chainable objects can be used in a conventional way as well
+so you don&apos;t enforce chaining by making an object chainable.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch28-2">Section 28.2: Method Chaining</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Method chaining is a programming strategy that simplifies your code
+and beautifies it. Method chaining is done by ensuring that each
+method on an object returns the entire object, instead of returning a
+single element of that object. For example:
+<b>function</b>
+Door
+(
+)
+{
+<b>this</b>
+.
+height
+=
+&apos;&apos;
+;
+<b>this</b>
+.
+width
+=
+&apos;&apos;
+;
+<b>this</b>
+.
+status
+=
+&apos;closed&apos;
+;
+}
+Door.
+<b>prototype</b>
+.
+open
+=
+<b>function</b>
+(
+)
+{
+<b>this</b>
+.
+status
+=
+&apos;opened&apos;
+;
+<b>return</b>
+<b>this</b>
+;
+}
+Door.
+<b>prototype</b>
+.
+close
+=
+<b>function</b>
+(
+)
+{
+<b>this</b>
+.
+status
+=
+&apos;closed&apos;
+;
+<b>return</b>
+<b>this</b>
+;
+}
+Door.
+<b>prototype</b>
+.
+setParams
+=
+<b>function</b>
+(
+width
+,
+height
+)
+{
+<b>this</b>
+.
+width
+=
+width
+;
+<b>this</b>
+.
+height
+=
+height
+;
+<b>return</b>
+<b>this</b>
+;
+}
+Door.
+<b>prototype</b>
+.
+doorStatus
+=
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+&apos;The&apos;
+,
+<b>this</b>
+.
+width
+,
+&apos;x&apos;
+,
+<b>this</b>
+.
+height
+,
+&apos;Door is&apos;
+,
+<b>this</b>
+.
+status
+)
+;
+<b>return</b>
+<b>this</b>
+;
+}
+<b>var</b>
+smallDoor
+=
+<b>new</b>
+Door
+(
+)
+;
+smallDoor.
+setParams
+(
+20
+,
+100
+)
+.
+open
+(
+)
+.
+doorStatus
+(
+)
+.
+close
+(
+)
+.
+doorStatus
+(
+)
+;
+Door.<b>prototype</b>
+Note that each method in returns <b>this</b>, which refers to the entire
+instance of that Door object.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch29">Chapter 29: Callbacks</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch29-1">Section 29.1: Simple Callback Usage Examples</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Callbacks offer a way to extend the functionality of a function (or
+method) *<b>without changing</b>* its code. This approach is often used
+in modules (libraries / plugins), the code of which is not supposed to
+be changed.
+Suppose we have written the following function, calculating the sum of
+a given array of values:
+<b>function</b>
+foo
+(
+array
+)
+{
+<b>var</b>
+sum
+=
+0
+;
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+array.
+length
+;
+i
+++
+)
+{
+sum
++=
+array
+&lbrack;
+i
+&rbrack;
+;
+}
+<b>return</b>
+sum
+;
+}
+alert
+Now suppose that we want to do something with each value of the array,
+e.g. display it using (). We could make the appropriate changes in the
+code of foo, like this:
+<b>function</b>
+foo
+(
+array
+)
+{
+<b>var</b>
+sum
+=
+0
+;
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+array.
+length
+;
+i
+++
+)
+{
+alert
+(
+array
+&lbrack;
+i
+&rbrack;
+)
+;
+sum
++=
+array
+&lbrack;
+i
+&rbrack;
+;
+}
+<b>return</b>
+sum
+;
+}
+console.log instead of alert
+But what if we decide to use ()? Obviously changing the code of foo,
+whenever we
+decide to do something else with each value, is not a good idea. It is
+much better to have the option to change our mind without changing the
+code of foo. That&apos;s exactly the use case for callbacks. We only have
+to slightly change foo&apos;s signature and body:
+<b>function</b>
+foo
+(
+array
+,
+callback
+)
+{
+<b>var</b>
+sum
+=
+0
+;
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+array.
+length
+;
+i
+++
+)
+{
+callback
+(
+array
+&lbrack;
+i
+&rbrack;
+)
+;
+sum
++=
+array
+&lbrack;
+i
+&rbrack;
+;
+}
+<b>return</b>
+sum
+;
+}
+And now we are able to change the behaviour of foo just by changing
+its parameters:
+<b>var</b>
+array
+=
+&lbrack;
+&rbrack;
+;
+foo
+(
+array
+,
+alert
+)
+;
+foo
+(
+array
+,
+<b>function</b>
+(
+x
+)
+{
+console.
+log
+(
+x
+)
+;
+}
+)
+;
+<b>Examples with Asynchronous Functions</b>
+&dollar;.getJSON
+In jQuery, the () method to fetch JSON data is asynchronous.
+Therefore, passing code in a callback makes sure that the code is
+called *after* the JSON is fetched.
+&dollar;.getJSON
+() syntax:
+&dollar;.
+getJSON
+(
+url
+,
+dataObject
+,
+successCallback
+)
+;
+&dollar;.getJSON
+Example of () code:
+&dollar;.
+getJSON
+(
+&quot;foo.json&quot;
+,
+{
+}
+,
+<b>function</b>
+(
+data
+)
+{
+*// data handling code*
+}
+)
+;
+&dollar;.getJSON
+The following would *not* work, because the data-handling code would
+likely be called *before* the data is actually received, because the
+function takes an unspecified length of time and does not hold up the
+call stack as it waits for the JSON.
+&dollar;.
+getJSON
+(
+&quot;foo.json&quot;
+,
+{
+}
+)
+;
+*// data handling code*
+animate
+Another example of an asynchronous function is jQuery&apos;s () function.
+Because it takes a specified time to run the animation, sometimes it
+is desirable to run some code directly following the animation.
+animate
+.() syntax:
+jQueryElement.
+animate
+(
+properties
+,
+duration
+,
+callback
+)
+;
+For example, to create a fading-out animation after which the element
+completely disappears, the following code can be run. Note the use of
+the callback.
+elem.
+animate
+(
+{
+opacity
+:
+0
+}
+,
+5000
+,
+<b>function</b>
+(
+)
+{
+elem.
+hide
+(
+)
+;
+}
+)
+;
+This allows the element to be hidden right after the function has
+finished execution. This differs from:
+elem.
+animate
+(
+{
+opacity
+:
+0
+}
+,
+5000
+)
+;
+elem.
+hide
+(
+)
+;
+animate
+because the latter does not wait for () (an asynchronous function) to
+complete, and therefore the element is hidden right away, producing an
+undesirable effect.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch29-2">Section 29.2: Continuation (synchronous and asynchronous)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Callbacks can be used to provide code to be executed after a method
+has completed:
+*/&ast;&ast;*
+*&ast; &bsol;@arg {Function} then continuation callback*
+*&ast;/*
+<b>function</b>
+doSomething
+(
+then
+)
+{
+console.
+log
+(
+&apos;Doing something&apos;
+)
+;
+then
+(
+)
+;
+}
+*// Do something, then execute callback to log &apos;done&apos;*
+doSomething
+(
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+&apos;Done&apos;
+)
+;
+}
+)
+;
+console.
+log
+(
+&apos;Doing something else&apos;
+)
+;
+*// Outputs:*
+*// &quot;Doing something&quot;*
+*// &quot;Done&quot;*
+*// &quot;Doing something else&quot;*
+doSomething   () method above executes synchronously with the doSomething
+callback - execution blocks until
+The () returns, ensuring that the callback is executed before the
+interpreter moves on.
+Callbacks can also be used to execute code asynchronously:
+doSomethingAsync
+(
+then
+)
+{
+setTimeout
+(
+then
+,
+1000
+)
+;
+console.
+log
+(
+&apos;Doing something asynchronously&apos;
+)
+;
+}
+doSomethingAsync
+(
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+&apos;Done&apos;
+)
+;
+}
+)
+;
+console.
+log
+(
+&apos;Doing something else&apos;
+)
+;
+*// Outputs:*
+*// &quot;Doing something asynchronously&quot;*
+*// &quot;Doing something else&quot;*
+*// &quot;Done&quot;*
+doSomething
+The then callbacks are considered continuations of the () methods.
+Providing a callback as the last instruction in a function is called a
+[tail-call](https://en.wikipedia.org/wiki/Tail_call), which is
+[optimized by ES2015
+interpreters](http://www.2ality.com/2015/06/tail-call-optimization.html).
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch29-3">Section 29.3: What is a callback?</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+This is a normal function call:
+console.
+log
+(
+&quot;Hello World!&quot;
+)
+;
+When you call a normal function, it does its job and then returns
+control back to the caller.
+However, sometimes a function needs to return control back to the
+caller in order to do its job:
+&lbrack;
+1
+,
+2
+,
+3
+&rbrack;
+.
+map
+(
+<b>function</b>
+double
+(
+x
+)
+{
+<b>return</b>
+2
+&ast;
+x
+;
+}
+)
+;
+In the above example, the function double is a callback for the
+function map because:
+1.  The function double is given to the function map by the caller.
+
+2.  The function map needs to call the function double zero or more
+    times in order to do its job.
+Thus, the function map is essentially returning control back to the
+caller every time it calls the function double. Hence, the name
+"callback".
+Functions may accept more than one callback:
+promise.
+then
+(
+<b>function</b>
+onFulfilled
+(
+value
+)
+{
+console.
+log
+(
+&quot;Fulfilled with value &quot;
+&plus;
+value
+)
+;
+}
+,
+<b>function</b>
+onRejected
+(
+reason
+)
+{
+console.
+log
+(
+&quot;Rejected with reason &quot;
+&plus;
+reason
+)
+;
+}
+)
+;
+Here then function then accepts two callback functions, onFulfilled
+and onRejected. Furthermore, only one of these two callback functions
+is actually called.
+What&apos;s more interesting is that the function then returns before
+either of the callbacks are called. Hence, a callback function may be
+called even after the original function has returned.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch29-4">Section 29.4: Callbacks and &grave;this&grave;</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Often when using a callback you want access to a specific context.
+<b>function</b>
+SomeClass
+(
+msg
+,
+elem
+)
+{
+<b>this</b>
+.
+msg
+=
+msg
+;
+elem.
+addEventListener
+(
+&apos;click&apos;
+,
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+<b>this</b>
+.
+msg
+)
+;
+*// &lt;= will fail because &quot;this&quot; is undefined*
+}
+)
+;
+}
+<b>var</b>
+s
+=
+<b>new</b>
+SomeClass
+(
+&quot;hello&quot;
+,
+someElement
+)
+;
+<b>Solutions</b> Use bind
+bind effectively generates a new function that sets <b>this</b> to
+whatever was passed to bind then calls the original function.
+<b>function</b>
+SomeClass
+(
+msg
+,
+elem
+)
+{
+<b>this</b>
+.
+msg
+=
+msg
+;
+elem.
+addEventListener
+(
+&apos;click&apos;
+,
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+<b>this</b>
+.
+msg
+)
+;
+}
+.
+bind
+(
+<b>this</b>
+)
+)
+;
+*// &lt;=- bind the function to &grave;this&grave;*
+}
+Use arrow functions
+Arrow functions automatically bind the current <b>this</b> context.
+<b>function</b>
+SomeClass
+(
+msg
+,
+elem
+)
+{
+<b>this</b>
+.
+msg
+=
+msg
+;
+elem.
+addEventListener
+(
+&apos;click&apos;
+,
+(
+)
+=&gt;
+{
+*// &lt;=- arrow function binds &grave;this&grave;*
+console.
+log
+(
+<b>this</b>
+.
+msg
+)
+;
+}
+)
+;
+}
+Often you&apos;d like to call a member function, ideally passing any
+arguments that were passed to the event on to the function.
+<b>Solutions:</b>
+Use bind
+<b>function</b>
+SomeClass
+(
+msg
+,
+elem
+)
+{
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image031.png"
+  title=" "
+  alt="."
+  style="border: 2px solid #000000; width:7.197in;" />
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch29-5">Section 29.5: Callback using Arrow function</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>Using arrow function as callback function can reduce lines of
+code.</b>
+The default syntax for arrow function is
+(
+)
+=&gt;
+{
+}
+This can be used as callbacks
+For example if we want to print all elements in an array &lbrack;1,2,3,4,5&rbrack;
+without arrow function, the code will look like this
+&lbrack;
+1
+,
+2
+,
+3
+,
+4
+,
+5
+&rbrack;
+.
+forEach
+(
+<b>function</b>
+(
+x
+)
+{
+console.
+log
+(
+x
+)
+;
+}
+With arrow function, it can be reduced to
+&lbrack;
+1
+,
+2
+,
+3
+,
+4
+,
+5
+&rbrack;
+.
+forEach
+(
+x
+=&gt;
+console.
+log
+(
+x
+)
+)
+;
+<b>function</b>   (x){   console.log    (x)} is reduced to x   =&gt;console.log
+Here the callback function (x)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch29-6">Section 29.6: Error handling and control-flow branching</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Callbacks are often used to provide error handling. This is a form of
+control flow branching, where some instructions are executed only when
+an error occurs:
+<b>const</b>
+expected
+=
+<b>true</b>
+;
+<b>function</b>
+compare
+(
+actual
+,
+success
+,
+failure
+)
+{
+<b>if</b>
+(
+actual
+===
+expected
+)
+{
+success
+(
+)
+;
+}
+<b>else</b>
+{
+failure
+(
+)
+;
+}
+}
+<b>function</b>
+onSuccess
+(
+)
+{
+console.
+log
+(
+&apos;Value was expected&apos;
+)
+;
+}
+<b>function</b>
+onFailure
+(
+)
+{
+console.
+log
+(
+&apos;Value was unexpected/exceptional&apos;
+)
+;
+}
+compare
+(
+<b>true</b>
+,
+onSuccess
+,
+onFailure
+)
+;
+compare
+(
+<b>false</b>
+,
+onSuccess
+,
+onFailure
+)
+;
+*// Outputs:*
+*// &quot;Value was expected&quot;*
+*// &quot;Value was unexpected/exceptional&quot;*
+compare
+Code execution in () above has two possible branches: success when the
+expected and actual values are the same, and error when they are
+different. This is especially useful when control flow should branch
+after some asynchronous instruction:
+<b>function</b>
+compareAsync
+(
+actual
+,
+success
+,
+failure
+)
+{
+setTimeout
+(
+<b>function</b>
+(
+)
+{
+compare
+(
+actual
+,
+success
+,
+failure
+)
+}
+,
+1000
+)
+;
+}
+compareAsync
+(
+<b>true</b>
+,
+onSuccess
+,
+onFailure
+)
+;
+compareAsync
+(
+<b>false</b>
+,
+onSuccess
+,
+onFailure
+)
+;
+console.
+log
+(
+&apos;Doing something else&apos;
+)
+;
+*// Outputs:*
+*// &quot;Doing something else&quot;*
+*// &quot;Value was expected&quot;*
+*// &quot;Value was unexpected/exceptional&quot;*
+compare
+It should be noted, multiple callbacks do not have to be mutually
+exclusive  both methods could be called. Similarly, the () could be
+written with callbacks that are optional (by using a
+[noop](https://en.wikipedia.org/wiki/NOP) as the default value - see
+[Null Object
+pattern](https://en.wikipedia.org/wiki/Null_Object_pattern)).
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch30">Chapter 30: Intervals and Timeouts</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch30-1">Section 30.1: Recursive setTimeout</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+To repeat a function indefinitely, setTimeout can be called
+recursively:
+<b>function</b>
+repeatingFunc
+(
+)
+{
+console.
+log
+(
+&quot;It&apos;s been 5 seconds. Execute the function again.&quot;
+)
+;
+setTimeout
+(
+repeatingFunc
+,
+5000
+)
+;
+}
+setTimeout
+(
+repeatingFunc
+,
+5000
+)
+;
+Unlike setInterval, this ensures that the function will execute even
+if the function&apos;s running time is longer than the specified delay.
+However, it does not guarantee a regular interval between function
+executions. This behaviour also varies because an exception before the
+recursive call to setTimeout will prevent it from repeating again,
+while setInterval would repeat indefinitely regardless of exceptions.
+
+
+
