@@ -12362,117 +12362,56 @@ console.log(foo.style);  // <i>&apos;italic&apos;</i>
 </pre>
 <!-- thru 27.2 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<h3 id="ch27-2">Section 27.2: Difference between Object.key and Object.prototype.key</h3>
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>Unlike in languages like Python, static properties of the constructor
-function are <i>not</i> inherited to instances. Instances only inherit from
-their prototype, which inherits from the parent type&apos;s prototype.
-Static properties are never inherited.</p>
-<pre>
-<b>function</b> Foo() {};
-Foo.style = &apos;bold&apos;;
-<b>var</b> foo = <b>new</b> Foo();
-console.log(Foo.style);  // <i> &apos;bold&apos;</i>
-console.log(foo.style);  // <i> undefined</i>
-Foo.<b>prototype</b>.style = &apos;italic&apos;;
-console.log(Foo.style);  // <i> &apos;bold&apos;</i>
-console.log(foo.style);  // <i>&apos;italic&apos;</i>
-</pre>
-<!--
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch27-3">Section 27.3: Prototypal inheritance</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Suppose we have a plain object called <b>prototype</b>:</p>
-
-<b>var</b> <b>prototype</b> = { foo: &apos;foo&apos;, bar: <b>function</b> () { <b>return</b>
-<b>this</b>.foo; } };
-
-Now we want another object called obj that inherits from
+<pre>
+<b>var prototype</b> = { foo: &apos;foo&apos;, bar: <b>function</b> () { <b>return this</b>.foo; } };
+</pre>
+<p>Now we want another object called obj that inherits from
 <b>prototype</b>, which is the same as saying that <b>prototype</b> is the
-prototype of obj
-<b>var</b>
-obj
-=
-Object
-.
-create
-(
-<b>prototype</b>
-)
-;
-Now all the properties and methods from <b>prototype</b> will be
-available to obj
-console.
-log
-(
-obj.
-foo
-)
-;
-console.
-log
-(
-obj.
-bar
-(
-)
-)
-;
-Console output
+prototype of obj</p>
+<pre>
+<b>var</b> obj = Object.create(<b>prototype</b>);
+</pre>
+<p>Now all the properties and methods from <b>prototype</b> will be available to obj</p>
+<!-- page 207 -->
+<pre>
+console.log(obj.foo);
+console.log(obj.bar());
+</pre>
+<p>Console output</p>
+<pre>
 &quot;foo&quot;
 &quot;foo&quot;
-Prototypal inheritance is made through object references internally
+</pre>
+<p>Prototypal inheritance is made through object references internally
 and objects are completely mutable. This means any change you make on
 a prototype will immediately affect every other object that prototype
-is prototype of.
-<b>prototype</b>
-.
-foo
-=
+is prototype of.</p>
+<pre>
+<b>prototype</b>.foo = &quot;bar&quot;;
+console.log(obj.foo);
+</pre>
+<p>Console output</p>
+<pre>
 &quot;bar&quot;
-;
-console.
-log
-(
-obj.
-foo
-)
-;
-Console output
-&quot;bar&quot;
-Object.<b>prototype</b>
-is the prototype of every object, so it&apos;s strongly recommended you
-don&apos;t mess with it, especially
-if you use any third party library, but we can play with it a little
-bit.
-Object
-.
-<b>prototype</b>
-.
-breakingLibraries
-=
-&apos;foo&apos;
-;
-console.
-log
-(
-obj.
-breakingLibraries
-)
-;
-console.
-log
-(
-<b>prototype</b>
-.
-breakingLibraries
-)
-;
-Console output
+</pre>
+<p>Object.<b>prototype</b> is the prototype of every object, so it&apos;s strongly 
+recommended you don&apos;t mess with it, especially if you use any third party library, 
+but we can play with it a little bit.</p>
+<pre>
+Object.<b>prototype</b>.breakingLibraries = &apos;foo&apos;;
+console.log(obj.breakingLibraries);
+console.log(<b>prototype</b>.breakingLibraries);
+</pre>
+<p>Console output</p>
+<pre>
 &quot;foo&quot;
 &quot;foo&quot;
-<b>Fun fact</b> I&apos;ve used the browser console to make these examples and
-broken this page by adding that breakingLibraries property.
+</pre>
+<p><b>Fun fact</b> I&apos;ve used the browser console to make these examples and
+broken this page by adding that breakingLibraries property.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch27-4">Section 27.4: Pseudo-classical inheritance</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
