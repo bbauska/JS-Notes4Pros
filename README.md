@@ -12986,7 +12986,8 @@ without arrow function, the code will look like this &lbrack;</p>
 <pre>
 &lbrack;1,2,3,4,5&rbrack;.forEach(x =&gt; console.log(x));
 </pre>
-<p>Here the callback function <b>function(x){console.log(x)) is reduced to x=&gt;console.log(x)</p>
+<p>Here the callback function <b>function(x){console.log(x))</b> is reduced to 
+<b>x=&gt;console.log(x)</b>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch29-6">Section 29.6: Error handling and control-flow branching</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
