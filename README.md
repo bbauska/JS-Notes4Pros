@@ -13260,16 +13260,16 @@ with a string)</p>
 <p>Use when you know the regular expression will not change, and you know
 what the expression is before runtime.</p>
 <pre>
-<b>var</b> re = */.&ast;/*;
+<b>var</b> re = <i>/.&ast;/</i>;
 </pre>
 <p>With flags:</p>
 <pre>
-<b>var</b> re = */.&ast;/gmi*;
+<b>var</b> re = <i>/.&ast;/gmi</i>;
 </pre>
 <p>With a backslash: (this should not be escaped because the regex is
 specified in a literal)</p>
 <pre>
-<b>var</b> re = */&bsol;&bsol;w&ast;/*;
+<b>var</b> re = <i>/&bsol;&bsol;w&ast;/</i>;
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch31-2">Section 31.2: RegExp Flags</h3>
@@ -13313,7 +13313,7 @@ or more lowercase letters. Since the pattern matches the string,
 <p>RegExp.<b>prototype</b> . exec (string) returns an array of captures, or <b>null</b> if there was no match.
 </p>
 <pre>
-<b>var</b> re = */(&lbrack;0-9&rbrack;+)&lbrack;a-z&rbrack;+/*;
+<b>var</b> re = <i>/(&lbrack;0-9&rbrack;+)&lbrack;a-z&rbrack;+/</i>;
 <b>var</b> match = re.exec(&quot;foo123bar&quot;);
 </pre>
 <p>match.index is 3, the (zero-based) location of the match.</p>
@@ -13346,8 +13346,8 @@ expressions as arguments.</p>
   <li>&quot;string&quot;.search(&hellip;</li>
 <ul>
 <p><b>Match with RegExp</b></p>
-console.log(&quot;string&quot;.match(*/&lbrack;i-n&rbrack;+/*));
-console.log(&quot;string&quot;.match(*/(r)&lbrack;i-n&rbrack;+/*));
+console.log(&quot;string&quot;.match(<i>/&lbrack;i-n&rbrack;+/</i>));
+console.log(&quot;string&quot;.match(<i>/(r)&lbrack;i-n&rbrack;+/</i>));
 </pre>
 <p>Expected output</p>
 <blockquote>
@@ -13356,7 +13356,7 @@ Array &lbrack;&quot;rin&quot;, &quot;r&quot;&rbrack;
 </blockquote>
 <p><b>Replace with RegExp</b></p>
 <pre>
-console.log(&quot;string&quot;.replace(*/&lbrack;i-n&rbrack;+/*,&quot;foo&quot;));
+console.log(&quot;string&quot;.replace(<i>/&lbrack;i-n&rbrack;+/</i>,&quot;foo&quot;));
 </pre>
 <p>Expected output</p>
 <blockquote>
@@ -13364,7 +13364,7 @@ strfoog
 </blockquote>
 <p><b>Split with RegExp</b></p>
 <pre>
-console.log(&quot;stringstring&quot;.split(*/&lbrack;i-n&rbrack;+/*));
+console.log(&quot;stringstring&quot;.split(<i>/&lbrack;i-n&rbrack;+/</i>));
 </pre>
 <p>Expected output</p>
 <blockquote>
@@ -13373,8 +13373,8 @@ Array &lbrack;&quot;str&quot;, &quot;gstr&quot;, &quot;g&quot;&rbrack;
 <p><b>Search with RegExp</b></p>
 <p>search.() returns the index at which a match is found or -1.</p>
 <pre>
-console.log(&quot;string&quot;.search(*/&lbrack;i-n&rbrack;+/*));
-console.log(&quot;string&quot;.search(*/&lbrack;o-q&rbrack;+/*));
+console.log(&quot;string&quot;.search(<i>/&lbrack;i-n&rbrack;+/</i>));
+console.log(&quot;string&quot;.search(<i>/&lbrack;o-q&rbrack;+/</i>));
 </pre>
 <p>Expected output</p>
 <blockquote>
@@ -13408,7 +13408,7 @@ removed. Capturing it is the solution as it means the matched letter
 can be preserved.</p>
 <pre>
 <b>let</b> str = &quot;aa+b+cc+1+2&quot;,
-  re = */(&lbrack;a-z&rbrack;)&amp;plus;/g*;
+  re = <i>/(&lbrack;a-z&rbrack;)&amp;plus;/g</i>;
 // <i> String replacement</i>
 str.replace(re, &apos;&dollar;1 &apos;);  // <i> &quot;aa b cc 1+2&quot;</i>
 // <i> Function replacement</i>
@@ -13433,7 +13433,7 @@ the form (), a negative look-ahead (where the expression match only
 happens if the look-ahead pattern did not match) has the form (?!pattern)</p>
 <pre>
 <b>let</b> str = &quot;aa+b+cc+1+2&quot;,
-  re = */&amp;plus;(?=&lbrack;a-z&rbrack;)/g*;
+  re = <i>/&amp;plus;(?=&lbrack;a-z&rbrack;)/g</i>;
 str.replace(re, &apos; &apos;);  // <i> &quot;aa b cc+1+2&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -13448,7 +13448,7 @@ logic.
 .
 replace
 (
-*/Some/g*
+<i>/Some/g</i>
 ,
 (
 match
@@ -13497,7 +13497,7 @@ surname
 .
 replace
 (
-*/(?:{(.+?)})/g*
+<i>/(?:{(.+?)})/g</i>
 ,
 x
 =&gt;
@@ -13586,7 +13586,7 @@ here the regex you write :
 <b>var</b>
 re
 =
-*/&lt;a&lbrack;&Hat;&gt;&rbrack;&ast;href=&quot;https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;&quot;&lbrack;&Hat;&gt;&rbrack;&ast;&gt;&lbrack;&Hat;&lt;&rbrack;&ast;&lt;&bsol;&bsol;/a&gt;/g*
+<i>/&lt;a&lbrack;&Hat;&gt;&rbrack;&ast;href=&quot;https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;&quot;&lbrack;&Hat;&gt;&rbrack;&ast;&gt;&lbrack;&Hat;&lt;&rbrack;&ast;&lt;&bsol;&bsol;/a&gt;/g</i>
 ;
 But now, imagine you want the href and the anchor of each link. And
 you want it together. You can simply add a new regex in for each match
@@ -13594,7 +13594,7 @@ you want it together. You can simply add a new regex in for each match
 <b>var</b>
 re
 =
-*/&lt;a&lbrack;&Hat;&gt;&rbrack;&ast;href=&quot;(https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;)&quot;&lbrack;&Hat;&gt;&rbrack;&ast;&gt;(&lbrack;&Hat;&lt;&rbrack;&ast;)&lt;&bsol;&bsol;/a&gt;/g*
+<i>/&lt;a&lbrack;&Hat;&gt;&rbrack;&ast;href=&quot;(https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;)&quot;&lbrack;&Hat;&gt;&rbrack;&ast;&gt;(&lbrack;&Hat;&lt;&rbrack;&ast;)&lt;&bsol;&bsol;/a&gt;/g</i>
 ;
 <b>var</b>
 str
@@ -13748,3 +13748,792 @@ href
 To go further :
 Nested parenthesis
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch32">Chapter 32: Cookies</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch32-1">Section 32.1: Test if cookies are enabled</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+navigator.cookieEnabled
+If you want to make sure cookies are enabled before using them, you
+can use :
+<b>if</b>
+(
+navigator.
+cookieEnabled
+===
+<b>false</b>
+)
+{
+alert
+(
+&quot;Error: cookies not enabled!&quot;
+)
+;
+}
+navigator.cookieEnabled
+Note that on older browsers may not exist and be undefined. In those
+cases you won&apos;t detect that cookies are not enabled.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch32-2">Section 32.2: Adding and Setting Cookies</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The following variables set up the below example:
+<b>var</b> COOKIE_NAME = &quot;Example Cookie&quot;; */&ast; The cookie&apos;s name.
+&ast;/* <b>var</b> COOKIE_VALUE = &quot;Hello, world!&quot;; */&ast; The cookie&apos;s
+value. &ast;/* <b>var</b> COOKIE_PATH = &quot;/foo/bar&quot;; */&ast; The cookie&apos;s
+path. &ast;/* <b>var</b> COOKIE_EXPIRES; */&ast; The cookie&apos;s expiration date
+(config&apos;d below). &ast;/*
+*/&ast; Set the cookie expiration to 1 minute in future (60000ms = 1
+minute). &ast;/* COOKIE_EXPIRES = (<b>new</b> Date(Date.now() +
+60000)).toUTCString();
+document.cookie += COOKIE_NAME + &quot;=&quot; + COOKIE_VALUE
+&plus; &quot;; expires=&quot; + COOKIE_EXPIRES
+&plus; &quot;; path=&quot; + COOKIE_PATH;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch32-3">Section 32.3: Reading cookies</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>var</b>
+name
+=
+name
+&plus;
+&quot;=&quot;
+,
+cookie_array
+=
+document.
+cookie
+.
+split
+(
+&apos;;&apos;
+)
+,
+cookie_value
+;
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+cookie_array.
+length
+;
+i
+++
+)
+{
+<b>var</b>
+cookie
+=
+cookie_array
+&lbrack;
+i
+&rbrack;
+;
+while
+(
+cookie.
+charAt
+(
+0
+)
+==
+&apos; &apos;
+)
+cookie
+=
+cookie.
+substring
+(
+1
+,
+cookie.
+length
+)
+;
+<b>if</b>
+(
+cookie.
+indexOf
+(
+name
+)
+==
+0
+)
+cookie_value
+=
+cookie.
+substring
+(
+name.
+length
+,
+cookie.
+length
+)
+;
+}
+This will set cookie_value to the value of the cookie, if it exists.
+If the cookie is not set, it will set cookie_value to
+<b>null</b>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch32-4">Section 32.4: Removing cookies</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>var</b>
+expiry
+=
+<b>new</b>
+Date
+(
+)
+;
+expiry.
+setTime
+(
+expiry.
+getTime
+(
+)
+&minus;
+3600
+)
+;
+document.
+cookie
+=
+name
+&plus;
+&quot;=; expires=&quot;
+&plus;
+expiry.
+toGMTString
+(
+)
+&plus;
+&quot;; path=/&quot;
+This will remove the cookie with a given name.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch33">Chapter 33: Web Storage</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<b>Parameter Description</b> <i>name</i> The key/name of the item <i>value</i> The
+value of the item
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-1">Section 33.1: Using localStorage</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The localStorage object provides persistent (but not permanent - see
+limits below) key-value storage of strings. Any changes are
+immediately visible in all other windows/frames from the same origin.
+The stored values persistent indefinitely unless the user clears saved
+data or configures an expiration limit. localStorage uses a map-like
+interface for getting and setting values.
+localStorage.
+setItem
+(
+&apos;name&apos;
+,
+&quot;John Smith&quot;
+)
+;
+console.
+log
+(
+localStorage.
+getItem
+(
+&apos;name&apos;
+)
+)
+;
+// <i> &quot;John Smith&quot;</i>
+localStorage.
+removeItem
+(
+&apos;name&apos;
+)
+;
+console.
+log
+(
+localStorage.
+getItem
+(
+&apos;name&apos;
+)
+)
+;
+// <i> null</i>
+If you want to store simple structured data, you can use JSON to
+serialize it to and from strings for storage.
+
+<b>var</b> players = &lbrack;{name: &quot;Tyler&quot;, score: 22}, {name: &quot;Ryan&quot;,
+score: 41}&rbrack;; localStorage.setItem(&apos;players&apos;,
+JSON.stringify(players));
+
+console.log(JSON.parse(localStorage.getItem(&apos;players&apos;)));
+// <i> &lbrack; Object { name: &quot;Tyler&quot;, score: 22 }, Object { name: &quot;Ryan&quot;,
+score: 41 } &rbrack;</i> <b>localStorage limits in browsers</b>
+Mobile browsers:
+<b>Browser Google Chrome Android Browser Firefox iOS Safari</b>
+| Version           | 40             | 4.3     | 34     | |
+| Space available     | 10MB             | 2MB       | 10MB   | 5 |
+Desktop browsers:
+<b>Browser Google Chrome Opera Firefox Safari Internet Explorer</b>
+Version 40 27 34 6-8 9-11
+Space available 10MB 10MB 10MB 5MB 10MB
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-2">Section 33.2: Simpler way of handling Storage</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+localStorage, sessionStorage are JavaScript <b>Objects</b> and you can
+treat them as such.
+getItem  (), . setItem
+Instead of using Storage Methods like .(), etc... here&apos;s a simpler
+alternative:
+// <i> Set</i>
+localStorage.
+greet
+=
+&quot;Hi!&quot;
+;
+// <i> Same as: window.localStorage.setItem(&quot;greet&quot;, &quot;Hi!&quot;);</i>
+// <i> Get</i>
+localStorage.
+greet
+;
+// <i> Same as: window.localStorage.getItem(&quot;greet&quot;);</i>
+// <i> Remove item</i>
+<b>delete</b>
+localStorage.
+greet
+;
+// <i> Same as: window.localStorage.removeItem(&quot;greet&quot;);</i>
+// <i> Clear storage</i>
+localStorage.
+clear
+(
+)
+;
+<b>Example:</b>
+// <i> Store values (Strings, Numbers)</i>
+localStorage.
+hello
+=
+&quot;Hello&quot;
+;
+localStorage.
+year
+=
+2017
+;
+// <i> Store complex data (Objects, Arrays)</i>
+<b>var</b>
+user
+=
+{
+name
+:
+&quot;John&quot;
+,
+surname
+:
+&quot;Doe&quot;
+,
+books
+:
+&lbrack;
+&quot;A&quot;
+,
+&quot;B&quot;
+&rbrack;
+}
+;
+localStorage.
+user
+=
+JSON.
+stringify
+(
+user
+)
+;
+// <i> Important: Numbers are stored as String</i>
+console.
+log
+(
+<b>typeof</b>
+localStorage.
+year
+)
+;
+// <i> String</i>
+// <i> Retrieve values</i>
+<b>var</b>
+someYear
+=
+localStorage.
+year
+;
+// <i> &quot;2017&quot;</i>
+// <i> Retrieve complex data</i>
+<b>var</b>
+userData
+=
+JSON.
+parse
+(
+localStorage.
+user
+)
+;
+<b>var</b>
+userName
+=
+userData.
+name
+;
+// <i> &quot;John&quot;</i>
+// <i> Remove specific data</i>
+<b>delete</b>
+localStorage.
+year
+;
+// <i> Clear (delete) all stored data</i>
+localStorage.
+clear
+(
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-3">Section 33.3: Storage events</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Whenever a value in set in localStorage, a storage event will be
+dispatched on all other windows from the same origin. This can be used
+to synchronize state between different pages without reloading or
+communicating with a server. For example, we can reflect the value of
+an input element as paragraph text in another window: First Window
+<b>var</b>
+input
+=
+document.
+createElement
+(
+&apos;input&apos;
+)
+;
+document.
+body
+.
+appendChild
+(
+nput
+)
+;
+input.
+value
+=
+localStorage.
+getItem
+(
+&apos;user-value&apos;
+)
+;
+input.
+oninput
+=
+<b>function</b>
+(
+event
+)
+{
+localStorage.
+setItem
+(
+&apos;user-value&apos;
+,
+input.
+value
+)
+;
+}
+;
+Second Window
+<b>var</b>
+output
+=
+document.
+createElement
+(
+&apos;p&apos;
+)
+;
+document.
+body
+.
+appendChild
+(
+output
+)
+;
+output.
+textContent
+=
+localStorage.
+getItem
+(
+&apos;user-value&apos;
+)
+;
+window.
+addEventListener
+(
+&apos;storage&apos;
+,
+<b>function</b>
+(
+event
+)
+{
+<b>if</b>
+(
+event.
+key
+===
+&apos;user-value&apos;
+)
+{
+output.
+textContent
+=
+event.
+newValue
+;
+}
+}
+)
+;
+<b>Notes</b>
+Event is not fired or catchable under Chrome, Edge and Safari if
+domain was modified through script.
+First window
+// <i> page url: http://sub.a.com/1.html</i>
+document.
+domain
+=
+&apos;a.com&apos;
+;
+<b>var</b>
+input
+=
+document.
+createElement
+(
+&apos;input&apos;
+)
+;
+document.
+body
+.
+appendChild
+(
+input
+)
+;
+input.
+value
+=
+localStorage.
+getItem
+(
+&apos;user-value&apos;
+)
+;
+input.
+oninput
+=
+<b>function</b>
+(
+event
+)
+{
+localStorage.
+setItem
+(
+&apos;user-value&apos;
+,
+input.
+value
+)
+;
+}
+;
+Second Window
+// <i> page url: http://sub.a.com/2.html</i>
+document.
+domain
+=
+&apos;a.com&apos;
+;
+<b>var</b>
+output
+=
+document.
+createElement
+(
+&apos;p&apos;
+)
+;
+document.
+body
+.
+appendChild
+(
+output
+)
+;
+// <i> Listener will never called under Chrome(53), Edge and Safari(10.0).</i>
+window.
+addEventListener
+(
+&apos;storage&apos;
+,
+<b>function</b>
+(
+event
+)
+{
+<b>if</b>
+(
+event.
+key
+===
+&apos;user-value&apos;
+)
+{
+output.
+textContent
+=
+event.
+newValue
+;
+}
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-4">Section 33.4: sessionStorage</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The sessionStorage object implements the same Storage interface as
+localStorage. However, instead of being shared with all pages from the
+same origin, sessionStorage data is stored separately for every
+window/tab. Stored data persists between pages <i>in that window/tab</i>
+for as long as it&apos;s open, but is visible nowhere else.
+<b>var</b>
+audio
+=
+document.
+querySelector
+(
+&apos;audio&apos;
+)
+;
+// <i> Maintain the volume if the user clicks a link then navigates back here.</i>
+audio.
+volume
+=
+Number
+(
+sessionStorage.
+getItem
+(
+&apos;volume&apos;
+)
+&vert;&vert;
+1.0
+)
+;
+audio.
+onvolumechange
+=
+<b>function</b>
+(
+event
+)
+{
+sessionStorage.
+setItem
+(
+&apos;volume&apos;
+,
+audio.
+volume
+)
+;
+}
+;
+Save data to sessionStorage
+sessionStorage.
+setItem
+(
+&apos;key&apos;
+,
+&apos;value&apos;
+)
+;
+Get saved data from sessionStorage
+<b>var</b>
+data
+=
+sessionStorage.
+getItem
+(
+&apos;key&apos;
+)
+;
+Remove saved data from sessionStorage
+sessionStorage.
+removeItem
+(
+&apos;key&apos;
+)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-5">Section 33.5: localStorage length</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+localStorage.length
+property returns an integer number indicating the number of elements in
+the localStorage
+Example:
+Set Items
+localStorage.
+setItem
+(
+&apos;StackOverflow&apos;
+,
+&apos;Documentation&apos;
+)
+;
+localStorage.
+setItem
+(
+&apos;font&apos;
+,
+&apos;Helvetica&apos;
+)
+;
+localStorage.
+setItem
+(
+&apos;image&apos;
+,
+&apos;sprite.svg&apos;
+)
+;
+Get length
+localStorage.
+length
+;
+// <i> 3</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-6">Section 33.6: Error conditions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Most browsers, when configured to block cookies, will also block
+localStorage. Attempts to use it will result in an exception. Do not
+forget to manage these cases.
+<b>var</b>
+video
+=
+document.
+querySelector
+(
+&apos;video&apos;
+)
+<b>try</b>
+{
+video.
+volume
+=
+localStorage.
+getItem
+(
+&apos;volume&apos;
+)
+}
+<b>catch</b>
+(
+error
+)
+{
+alert
+(
+&apos;If you
+<b>&bsol;&amp;apos;</b>
+d like your volume saved, turn on cookies&apos;
+)
+}
+video.
+play
+(
+)
+If error were not handled, program would stop functioning properly.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-7">Section 33.7: Clearing storage</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+To clear the storage, simply run
+localStorage.
+clear
+(
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch33-8">Section 33.8: Remove Storage Item</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+To remove a specific item from the browser Storage (the opposite of
+setItem) use removeItem
+localStorage.
+removeItem
+(
+&quot;greet&quot;
+)
+;
+<b>Example:</b>
+localStorage.
+setItem
+(
+&quot;greet&quot;
+,
+&quot;hi&quot;
+)
+;
+localStorage.
+removeItem
+(
+&quot;greet&quot;
+)
+;
+console.
+log
+(
+localStorage.
+getItem
+(
+&quot;greet&quot;
+)
+)
+;
+// <i> null</i>
+(Same applies for sessionStorage)
