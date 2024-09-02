@@ -13337,228 +13337,105 @@ found &apos;a&apos;, next exec starts at index &apos;8&apos;
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch31-5">Section 31.5: Using RegExp With Strings</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The String object has the following methods that accept regular
-expressions as arguments.
-&quot;string&quot;
-.
-match
-(
-&hellip;
-&quot;string&quot;
-.
-replace
-(
-&hellip;
-&quot;string&quot;
-.
-split
-(
-&hellip;
-&quot;string&quot;
-.
-search
-(
-&hellip;
-<b>Match with RegExp</b>
-console.
-log
-(
-&quot;string&quot;
-.
-match
-(
-*/&lbrack;i-n&rbrack;+/*
-)
-)
-;
-console.
-log
-(
-&quot;string&quot;
-.
-match
-(
-*/(r)&lbrack;i-n&rbrack;+/*
-)
-)
-;
-Expected output
+<p>The String object has the following methods that accept regular
+expressions as arguments.</p>
+<ul>
+  <li>&quot;string&quot;.match(&hellip;</li>
+  <li>&quot;string&quot;.replace(&hellip;</li>
+  <li>&quot;string&quot;.split(&hellip;</li>
+  <li>&quot;string&quot;.search(&hellip;</li>
+<ul>
+<p><b>Match with RegExp</b></p>
+console.log(&quot;string&quot;.match(*/&lbrack;i-n&rbrack;+/*));
+console.log(&quot;string&quot;.match(*/(r)&lbrack;i-n&rbrack;+/*));
+</pre>
+<p>Expected output</p>
+<blockquote>
 Array &lbrack;&quot;in&quot;&rbrack;
 Array &lbrack;&quot;rin&quot;, &quot;r&quot;&rbrack;
-<b>Replace with RegExp</b>
-console.
-log
-(
-&quot;string&quot;
-.
-replace
-(
-*/&lbrack;i-n&rbrack;+/*
-,
-&quot;foo&quot;
-)
-)
-;
-Expected output
+</blockquote>
+<p><b>Replace with RegExp</b></p>
+<pre>
+console.log(&quot;string&quot;.replace(*/&lbrack;i-n&rbrack;+/*,&quot;foo&quot;));
+</pre>
+<p>Expected output</p>
+<blockquote>
 strfoog
-<b>Split with RegExp</b>
-console.
-log
-(
-&quot;stringstring&quot;
-.
-split
-(
-*/&lbrack;i-n&rbrack;+/*
-)
-)
-;
-Expected output
+</blockquote>
+<p><b>Split with RegExp</b></p>
+<pre>
+console.log(&quot;stringstring&quot;.split(*/&lbrack;i-n&rbrack;+/*));
+</pre>
+<p>Expected output</p>
+<blockquote>
 Array &lbrack;&quot;str&quot;, &quot;gstr&quot;, &quot;g&quot;&rbrack;
-<b>Search with RegExp</b>
-search
-.() returns the index at which a match is found or -1.
-console.
-log
-(
-&quot;string&quot;
-.
-search
-(
-*/&lbrack;i-n&rbrack;+/*
-)
-)
-;
-console.
-log
-(
-&quot;string&quot;
-.
-search
-(
-*/&lbrack;o-q&rbrack;+/*
-)
-)
-;
-Expected output
-3
+</blockquote>
+<p><b>Search with RegExp</b></p>
+<p>search.() returns the index at which a match is found or -1.</p>
+<pre>
+console.log(&quot;string&quot;.search(*/&lbrack;i-n&rbrack;+/*));
+console.log(&quot;string&quot;.search(*/&lbrack;o-q&rbrack;+/*));
+</pre>
+<p>Expected output</p>
+<blockquote>
+3<br/>
 -1
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch31-6">Section 31.6: RegExp Groups</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-JavaScript supports several types of group in its Regular Expressions,
-*capture groups*, *non-capture groups* and *lookaheads*. Currently,
-there is no *look-behind* support.
-<b>Capture</b>
-pattern
-Sometimes the desired match relies on its context. This means a simple
-*RegExp* will over-find the piece of the *String* that is of interest,
-so the solution is to write a capture group (). The captured data can
-then be referenced as&hellip;
-str.match
-str.match         discards captures, use                  re.exec
-String replacement &quot;&dollar;n&quot; where n is the *n th* capture group
-(starting from 1) The *n th* argument in a callback function
-If the *RegExp* is not flagged g, the *n+1 th* item in a returned
-*Array*
-If the *RegExp* is flagged g, instead
-Say there is a *String* where all + signs need to be replaced with a
+<p>JavaScript supports several types of group in its Regular Expressions,
+<i>capture groups</i>, <i>non-capture groups</i> and <i>lookaheads</i>. Currently,
+there is no <i>look-behind</i> support.</p>
+<p><b>Capture</b></p>
+<p>Sometimes the desired match relies on its context. This means a simple
+<i>RegExp</i> will over-find the piece of the <i>String</i> that is of interest,
+so the solution is to write a capture group (pattern). The captured data can
+then be referenced as&hellip;</p>
+<!-- page 225 -->
+<ul>
+  <li>String replacement &quot;&dollar;n&quot; where n is the <i>n th</i> capture group
+(starting from 1)</li>
+  <li>The <i>n th</o> argument in a callback function</li>
+  <li>If the <i>RegExp</i> is not flagged g, the <i>n+1 th</i> item in a returned
+    <i>Array</i></li>
+  <li>If the <i>RegExp</i> is flagged g, str.match discards capters, use re.exec instead</li>
+</ul>
+<p>Say there is a <i>String</i> where all + signs need to be replaced with a
 space, but only if they follow a letter character. This means a simple
 match would include that letter character and it would also be
 removed. Capturing it is the solution as it means the matched letter
-can be preserved.
-<b>let</b>
-str
-=
-&quot;aa+b+cc+1+2&quot;
-,
-re
-=
-*/(&lbrack;a-z&rbrack;)&amp;plus;/g*
-;
+can be preserved.</p>
+<pre>
+<b>let</b> str = &quot;aa+b+cc+1+2&quot;,
+  re = */(&lbrack;a-z&rbrack;)&amp;plus;/g*;
 // <i> String replacement</i>
-str.
-replace
-(
-re
-,
-&apos;&dollar;1 &apos;
-)
-;
-// <i> &quot;aa b cc 1+2&quot;</i>
+str.replace(re, &apos;&dollar;1 &apos;);  // <i> &quot;aa b cc 1+2&quot;</i>
 // <i> Function replacement</i>
-str.
-replace
-(
-re
-,
-(
-m
-,
-&dollar;1
-)
-=&gt;
-&dollar;1
-&plus;
-&apos; &apos;
-)
-;
-// <i> &quot;aa b cc 1+2&quot;</i>
-<b>Non-Capture</b>
-?:pattern
-Using the form (), these work in a similar way to capture groups,
-except they do not store the contents of the group after the match.
-
-They can be particularly useful if other data is being captured which
+str.replace(re, (m, &dollar;1) =&gt; &dollar;1 &plus; &apos; &apos;);  // <i> &quot;aa b cc 1+2&quot;</i>
+</pre>
+<p><b>Non-Capture</b></p>
+<p>Using the form (?:pattern), these work in a similar way to capture groups,
+except they do not store the contents of the group after the match.</p>
+<p>They can be particularly useful if other data is being captured which
 you don&apos;t want to move the indices of, but need to do some advanced
-pattern matching such as an OR
-<b>let</b>
-str
-=
-&quot;aa+b+cc+1+2&quot;
-,
-re
-=
-*/(?:&bsol;&bsol;b&vert;c)(&lbrack;a-z&rbrack;)&amp;plus;/g*
-;
-str.
-replace
-(
-re
-,
-&apos;&dollar;1 &apos;
-)
-;
-// <i> &quot;aa+b c 1+2&quot;</i>
-<b>Look-Ahead</b>
-?=pattern
-If the desired match relies on something which follows it, rather than
+pattern matching such as an OR</p>
+<pre>
+<b>let</b> str = &quot;aa+b+cc+1+2&quot;,
+  re = <i>/(?:&bsol;&bsol;b&vert;c)(&lbrack;a-z&rbrack;)&amp;plus;/g</i>;
+str.replace(re, &apos;&dollar;1 &apos;); // <i> &quot;aa+b c 1+2&quot;</i>
+</pre>
+<p><b>Look-Ahead</b></p>
+<p>If the desired match relies on something which follows it, rather than
 matching that and capturing it, it is possible to use a look-ahead to
 test for it but not include it in the match. A positive look-ahead has
 the form (), a negative look-ahead (where the expression match only
-happens if the look-ahead pattern did not match) has the
-?!pattern
-form ()
-<b>let</b>
-str
-=
-&quot;aa+b+cc+1+2&quot;
-,
-re
-=
-*/&amp;plus;(?=&lbrack;a-z&rbrack;)/g*
-;
-str.
-replace
-(
-re
-,
-&apos; &apos;
-)
-;
-// <i> &quot;aa b cc+1+2&quot;</i>
+happens if the look-ahead pattern did not match) has the form (?!pattern)</p>
+<pre>
+<b>let</b> str = &quot;aa+b+cc+1+2&quot;,
+  re = */&amp;plus;(?=&lbrack;a-z&rbrack;)/g*;
+str.replace(re, &apos; &apos;);  // <i> &quot;aa b cc+1+2&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch31-7">Section 31.7: Replacing string match with a callback function</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
