@@ -12523,6 +12523,7 @@ Object.<b>setPrototypeOf</b>, for example</p>
 obj = Object.setPrototypeOf(obj, {bar: &apos;bar&apos;});
 obj.foo;  // <i>undefined</i>
 obj.bar;  // <i>&quot;bar&quot;</i>
+</pre>
 <p>This can be done almost anywhere, including on a <b>this</b> object or in
 a constructor.</p>
 <p><b>Note:</b> This process is very slow in current browsers and should be
