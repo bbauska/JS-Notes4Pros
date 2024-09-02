@@ -12991,200 +12991,414 @@ without arrow function, the code will look like this &lbrack;</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch29-6">Section 29.6: Error handling and control-flow branching</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Callbacks are often used to provide error handling. This is a form of
+<p>Callbacks are often used to provide error handling. This is a form of
 control flow branching, where some instructions are executed only when
-an error occurs:
-<b>const</b>
-expected
-=
-<b>true</b>
-;
-<b>function</b>
-compare
-(
-actual
-,
-success
-,
-failure
-)
-{
-<b>if</b>
-(
-actual
-===
-expected
-)
-{
-success
-(
-)
-;
+an error occurs:</p>
+<pre>
+<b>const</b> expected = <b>true</b>;
+<b>function</b> compare(actual, success, failure) {
+  <b>if</b> (actual === expected) {
+    success();
+  } <b>else</b> {
+    failure();
+  }
 }
-<b>else</b>
-{
-failure
-(
-)
-;
+<b>function</b> onSuccess() {
+  console.log(&apos;Value was expected&apos;);
 }
+<b>function</b> onFailure() {
+  console.log(&apos;Value was unexpected/exceptional&apos;);
 }
-<b>function</b>
-onSuccess
-(
-)
-{
-console.
-log
-(
-&apos;Value was expected&apos;
-)
-;
+compare(<b>true</b>, onSuccess, onFailure);
+compare(<b>false</b>, onSuccess, onFailure);
+// <i>Outputs:</i>
+// <i>  &quot;Value was expected&quot;</i>
+// <i>  &quot;Value was unexpected/exceptional&quot;</i>
+</pre>
+<p>Code execution in <b>compare</b>() above has two possible branches: success 
+when the expected and actual values are the same, and error when they are different. 
+This is especially useful when control flow should branch after some asynchronous 
+instruction:</p>
+<pre>
+<b>function</b> compareAsync(actual, success, failure) {
+  setTimeout(<b>function</b> () {
+    compare(actual, success, failure)
+  }, 1000);
 }
-<b>function</b>
-onFailure
-(
-)
-{
-console.
-log
-(
-&apos;Value was unexpected/exceptional&apos;
-)
-;
-}
-compare
-(
-<b>true</b>
-,
-onSuccess
-,
-onFailure
-)
-;
-compare
-(
-<b>false</b>
-,
-onSuccess
-,
-onFailure
-)
-;
-// <i> Outputs:</i>
-// <i> &quot;Value was expected&quot;</i>
-// <i> &quot;Value was unexpected/exceptional&quot;</i>
-compare
-Code execution in () above has two possible branches: success when the
-expected and actual values are the same, and error when they are
-different. This is especially useful when control flow should branch
-after some asynchronous instruction:
-<b>function</b>
-compareAsync
-(
-actual
-,
-success
-,
-failure
-)
-{
-setTimeout
-(
-<b>function</b>
-(
-)
-{
-compare
-(
-actual
-,
-success
-,
-failure
-)
-}
-,
-1000
-)
-;
-}
-compareAsync
-(
-<b>true</b>
-,
-onSuccess
-,
-onFailure
-)
-;
-compareAsync
-(
-<b>false</b>
-,
-onSuccess
-,
-onFailure
-)
-;
-console.
-log
-(
-&apos;Doing something else&apos;
-)
-;
-// <i> Outputs:</i>
-// <i> &quot;Doing something else&quot;</i>
-// <i> &quot;Value was expected&quot;</i>
-// <i> &quot;Value was unexpected/exceptional&quot;</i>
-compare
-It should be noted, multiple callbacks do not have to be mutually
-exclusive  both methods could be called. Similarly, the () could be
-written with callbacks that are optional (by using a
-[noop](https://en.wikipedia.org/wiki/NOP) as the default value - see
-[Null Object
-pattern](https://en.wikipedia.org/wiki/Null_Object_pattern)).
+compareAsync(<b>true</b>, onSuccess, onFailure);
+compareAsync(<b>false</b>, onSuccess, onFailure);
+console.log(&apos;Doing something else&apos;);
+// <i>Outputs:</i>
+// <i>  &quot;Doing something else&quot;</i>
+// <i>  &quot;Value was expected&quot;</i>
+// <i>  &quot;Value was unexpected/exceptional&quot;</i>
+</pre>
+<p>It should be noted, multiple callbacks do not have to be mutually
+exclusive - both methods could be called. Similarly, the <b>compare</b>() 
+could be written with callbacks that are optional (by using a 
+<a href="https://en.wikipedia.org/wiki/NOP">noop</a> as the default value - see 
+<a href="https://en.wikipedia.org/wiki/Null_Object_pattern">
+Null Object pattern</a>).</p>
+<!-- page 219 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch30">Chapter 30: Intervals and Timeouts</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch30-1">Section 30.1: Recursive setTimeout</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>To repeat a function indefinitely, <b>setTimeout</b> can be called
+recursively:</p>
+<pre>
+<b>function</b> repeatingFunc() {
+  console.log(&quot;It&apos;s been 5 seconds. Execute the function again.&quot;);
+  setTimeout(repeatingFunc, 5000);
+}
+setTimeout(repeatingFunc, 5000);
+</pre>
+<p>Unlike <b>setInterval</b>, this ensures that the function will execute even
+if the function&apos;s running time is longer than the specified delay.
+However, it does not guarantee a regular interval between function
+executions. This behaviour also varies because an exception before the
+recursive call to <b>setTimeout</b> will prevent it from repeating again,
+while <b>setInterval</b> would repeat indefinitely regardless of exceptions.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch30-2">Section 30.2: Intervals</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-To repeat a function indefinitely, setTimeout can be called
-recursively:
 <b>function</b>
-repeatingFunc
+waitFunc
 (
 )
 {
 console.
 log
 (
-&quot;It&apos;s been 5 seconds. Execute the function again.&quot;
+&quot;This will be logged every 5 seconds&quot;
+)
+;
+}
+window.
+setInterval
+(
+waitFunc
+,
+5000
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch30-3">Section 30.3: Intervals</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>Standard</b>
+You don&apos;t need to create the variable, but it&apos;s a good practice as
+you can use that variable with clearInterval to stop the currently
+running interval.
+<b>var</b> int = setInterval(&quot;doSomething()&quot;, 5000 ); */&ast; 5 seconds
+&ast;/*
+<b>var</b> int = setInterval(doSomething, 5000 ); */&ast; same thing, no
+quotes, no parens &ast;/*
+If you need to pass parameters to the doSomething function, you can
+pass them as additional parameters beyond the first two to
+setInterval.
+<b>Without overlapping</b>
+setInterval, as above, will run every 5 seconds (or whatever you set
+it to) no matter what. Even if the function doSomething takes long
+than 5 seconds to run. That can create issues. If you just want to
+make sure there is that pause in between runnings of doSomething, you
+can do this:
+(
+<b>function</b>
+(
+)
+{
+doSomething
+(
 )
 ;
 setTimeout
 (
-repeatingFunc
+arguments.
+callee
 ,
 5000
 )
 ;
 }
-setTimeout
+)
 (
-repeatingFunc
+)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch30-4">Section 30.4: Removing intervals</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+window.setInterval
+() returns an IntervalID, which can be used to stop that interval from
+continuing to run. To
+window.setInterval () in a variable and call clearInterval
+do this, store the return value of () with that variable as the only
+argument:
+<b>function</b>
+waitFunc
+(
+)
+{
+console.
+log
+(
+&quot;This will be logged every 5 seconds&quot;
+)
+;
+}
+<b>var</b>
+interval
+=
+window.
+setInterval
+(
+waitFunc
 ,
 5000
 )
 ;
-Unlike setInterval, this ensures that the function will execute even
-if the function&apos;s running time is longer than the specified delay.
-However, it does not guarantee a regular interval between function
-executions. This behaviour also varies because an exception before the
-recursive call to setTimeout will prevent it from repeating again,
-while setInterval would repeat indefinitely regardless of exceptions.
-
-
-
+window.
+setTimeout
+(
+<b>function</b>
+(
+)
+{
+clearInterval
+(
+interval
+)
+;
+}
+,
+32000
+)
+;
+This will be logged every  5   seconds
+This will log every 5 seconds, but will stop it after 32 seconds. So
+it will log the message 6 times.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch30-5">Section 30.5: Removing timeouts</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+window.setTimout
+() returns a TimeoutID, which can be used to stop that timeout from
+running. To do this, store
+window.setTimeout () in a variable and call clearTimeout
+the return value of () with that variable as the only argument:
+<b>function</b>
+waitFunc
+(
+)
+{
+console.
+log
+(
+&quot;This will not be logged after 5 seconds&quot;
+)
+;
+}
+<b>function</b>
+stopFunc
+(
+)
+{
+clearTimeout
+(
+timeout
+)
+;
+}
+<b>var</b>
+timeout
+=
+window.
+setTimeout
+(
+waitFunc
+,
+5000
+)
+;
+window.
+setTimeout
+(
+stopFunc
+,
+3000
+)
+;
+This will not log the message because the timer is stopped after 3
+seconds.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch30-6">Section 30.6: setTimeout, order of operations, clearTimeout</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>setTimeout</b>
+Executes a function, after waiting a specified number of milliseconds.
+used to delay the execution of a function.
+setTimeout ( <b>function</b>, milliseconds) or window.setTimeout(<b>function</b>, milliseconds
+<b>Syntax :</b> )
+<b>Example :</b> This example outputs &quot;hello&quot; to the console after 1
+second. The second parameter is in milliseconds, so 1000 = 1 sec, 250
+= 0.25 sec, etc.
+setTimeout
+(
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+&apos;hello&apos;
+)
+;
+}
+,
+1000
+)
+;
+<b>Problems with setTimeout</b> if you&apos;re using the setTimeout method in
+a for loop <b>:</b>
+<b>for</b>
+(
+i
+=
+0
+;
+i
+&lt;
+3
+;
+++
+i
+)
+{
+setTimeout
+(
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+i
+)
+;
+}
+,
+500
+)
+;
+}
+three
+This will output the value 3 times, which is not correct.
+Workaround of this problem :
+<b>for</b>
+(
+i
+=
+0
+;
+i
+&lt;
+3
+;
+++
+i
+)
+{
+setTimeout
+(
+<b>function</b>
+(
+j
+)
+{
+console.
+log
+(
+i
+)
+;
+}
+(
+i
+)
+,
+1000
+)
+;
+}
+It will output the value 0,1,2. Here, we're passing the i into the
+function as a parameter(j).
+<b>Order of operations</b>
+Additionally though, due to the fact that JavaScript is single
+threaded and uses a global event loop, setTimeout can be used to add
+an item to the end of the execution queue by calling setTimeout with
+zero delay. For example:
+setTimeout
+(
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+&apos;world&apos;
+)
+;
+}
+,
+0
+)
+;
+console.
+log
+(
+&apos;hello&apos;
+)
+;
+Will actually output:
+hello
+world
+setTimeout
+Also, zero milliseconds here does not mean the function inside the
+setTimeout will execute immediately. It will take slightly more than
+that depending upon the items to be executed remaining in the
+execution queue. This one is just pushed to the end of the queue.
+<b>Cancelling a timeout clearTimeout() :</b> stops the execution of the
+function specified in () <b>Syntax :</b> clearTimeout(timeoutVariable) or
+window.clearTimeout(timeoutVariable)
+<b>Example :</b>
+<b>var</b>
+timeout
+=
+setTimeout
+(
+**function**
+(
+)
+{
+console.
+log
+(
+&apos;hello&apos;
+)
+;
+}
+,
+1000
+)
+;
+clearTimeout
+(
+timeout
+)
+;
+*// The timeout will no longer be executed*
