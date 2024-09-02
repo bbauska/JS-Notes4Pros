@@ -12757,11 +12757,10 @@ foo(array, <b>function</b>(x) {
 Therefore, passing code in a callback makes sure that the code is called </i>after</i> 
 the JSON is fetched.</p>
 <!-- page 214 -->
+<p>&dollar;.getJSON () syntax:</p>
 <pre>
-&dollar;.getJSON () syntax:
 &dollar;.getJSON( url, dataObject, successCallback);
 </pre>
-<p>
 <p>Example of <b>&dollar;.getJSON</b>() code:</p>
 <pre>
 &dollar;.getJSON(&quot;foo.json&quot;, {}, <b>function</b>(data) {
@@ -12779,9 +12778,8 @@ not hold up the call stack as it waits for the JSON.</p>
 <p>Another example of an asynchronous function is jQuery&apos;s <b>animate</b>() 
 function. Because it takes a specified time to run the animation, sometimes it
 is desirable to run some code directly following the animation.</p>
+<p><b>.animate</b>() syntax:</p>
 <pre>
-<p><b>animate</b>.() syntax:</p>
-</pre>
 jQueryElement.animate( properties, duration, callback );
 </pre>
 <p>For example, to create a fading-out animation after which the element
@@ -12869,6 +12867,7 @@ function <b>map</b> because:</p>
   <li>The function <b>map</b> needs to call the function <b>double</b> zero 
     or more times in order to do its job.</li>
 </ol>
+
 <p>Thus, the function <b>map</b> is essentially returning control back to the
 caller every time it calls the function double. Hence, the name "callback".</p>
 <p>Functions may accept more than one callback:</p>
