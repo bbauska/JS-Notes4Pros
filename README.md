@@ -13610,7 +13610,6 @@ console.log(JSON.parse(localStorage.getItem(&apos;players&apos;)));
 <p><b>localStorage limits in browsers</b></p>
 <p>Mobile browsers:</p>
 <table border="1" style="width:200px">
-<b>Browser Google Chrome Android Browser Firefox iOS Safari</b>
   <thead>
     <tr>
       <th><b>Browser</b></th>
@@ -13866,7 +13865,6 @@ item.setAttribute(&quot;data-dial-code&quot;, &quot;33&quot;);
 <h2 id="ch35">Chapter 35: JSON</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <table border="1" style="width:200px">
-<b>Browser Google Chrome Android Browser Firefox iOS Safari</b>
   <thead>
     <tr>
       <th><b>Parameter</b></th>
