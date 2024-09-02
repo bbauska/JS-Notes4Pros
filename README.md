@@ -13538,762 +13538,275 @@ cases you won&apos;t detect that cookies are not enabled.</p>
 <h3 id="ch32-2">Section 32.2: Adding and Setting Cookies</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The following variables set up the below example:</p>
-<!--
-<b>var</b> COOKIE_NAME = &quot;Example Cookie&quot;; */&ast; The cookie&apos;s name.
-&ast;/* <b>var</b> COOKIE_VALUE = &quot;Hello, world!&quot;; */&ast; The cookie&apos;s
-value. &ast;/* <b>var</b> COOKIE_PATH = &quot;/foo/bar&quot;; */&ast; The cookie&apos;s
-path. &ast;/* <b>var</b> COOKIE_EXPIRES; */&ast; The cookie&apos;s expiration date
-(config&apos;d below). &ast;/*
-*/&ast; Set the cookie expiration to 1 minute in future (60000ms = 1
-minute). &ast;/* COOKIE_EXPIRES = (<b>new</b> Date(Date.now() +
-60000)).toUTCString();
-document.cookie += COOKIE_NAME + &quot;=&quot; + COOKIE_VALUE
+<pre>
+<b>var</b> COOKIE_NAME = &quot;Example Cookie&quot;; */&ast; The cookie&apos;s name. &ast;/* 
+<b>var</b> COOKIE_VALUE = &quot;Hello, world!&quot;; */&ast; The cookie&apos;s value. &ast;/*
+<b>var</b> COOKIE_PATH = &quot;/foo/bar&quot;; */&ast; The cookie&apos;s path. &ast;/* 
+<b>var</b> COOKIE_EXPIRES; */&ast; The cookie&apos;s expiration date (config&apos;d below). &ast;/*
+*/&ast; Set the cookie expiration to 1 minute in future (60000ms = 1 minute). &ast;/*
+COOKIE_EXPIRES = (<b>new</b> Date(Date.now() + 60000)).toUTCString();
+document.cookie += COOKIE_NAME 
++ &quot;=&quot; + COOKIE_VALUE
 &plus; &quot;; expires=&quot; + COOKIE_EXPIRES
 &plus; &quot;; path=&quot; + COOKIE_PATH;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch32-3">Section 32.3: Reading cookies</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>var</b>
-name
-=
-name
-&plus;
-&quot;=&quot;
-,
-cookie_array
-=
-document.
-cookie
-.
-split
-(
-&apos;;&apos;
-)
-,
-cookie_value
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-cookie_array.
-length
-;
-i
-++
-)
-{
-<b>var</b>
-cookie
-=
-cookie_array
-&lbrack;
-i
-&rbrack;
-;
-while
-(
-cookie.
-charAt
-(
-0
-)
-==
-&apos; &apos;
-)
-cookie
-=
-cookie.
-substring
-(
-1
-,
-cookie.
-length
-)
-;
-<b>if</b>
-(
-cookie.
-indexOf
-(
-name
-)
-==
-0
-)
-cookie_value
-=
-cookie.
-substring
-(
-name.
-length
-,
-cookie.
-length
-)
-;
+<pre>
+<b>var</b> name = name &plus; &quot;=&quot;,
+  cookie_array = document.cookie.split(&apos;;&apos;),
+  cookie_value;
+<b>for</b> (<b>var</b>i=0;i&lt;cookie_array.length; i++) {
+  <b>var</b> cookie=cookie_array&lbrack;i&rbrack;;
+  while (cookie.charAt(0) == &apos; &apos;)
+    cookie = cookie.substring(1, cookie.length);
+    <b>if</b> (cookie.indexOf(name) == 0)
+      cookie_value = cookie.substring(name.length, cookie.length);
 }
-This will set cookie_value to the value of the cookie, if it exists.
-If the cookie is not set, it will set cookie_value to
-<b>null</b>
+</pre>
+<p>This will set cookie_value to the value of the cookie, if it exists.
+If the cookie is not set, it will set cookie_value to <b>null</b></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch32-4">Section 32.4: Removing cookies</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>var</b>
-expiry
-=
-<b>new</b>
-Date
-(
-)
-;
-expiry.
-setTime
-(
-expiry.
-getTime
-(
-)
-&minus;
-3600
-)
-;
-document.
-cookie
-=
-name
-&plus;
-&quot;=; expires=&quot;
-&plus;
-expiry.
-toGMTString
-(
-)
-&plus;
-&quot;; path=/&quot;
-This will remove the cookie with a given name.
+<pre>
+<b>var</b> expiry = <b>new</b> Date();
+expiry.setTime(expiry.getTime() &minus; 3600);
+document.cookie = name &plus; &quot;=; expires=&quot; &plus; expiry.toGMTString() &plus; &quot;; path=/&quot;
+</pre>
+<p>This will remove the cookie with a given name.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch33">Chapter 33: Web Storage</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<b>Parameter Description</b> <i>name</i> The key/name of the item <i>value</i> The
-value of the item
+<p><b>Parameter Description</b></p>
+<pre>
+<i>name</i> The key/name of the item 
+<i>value</i> The value of the item
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch33-1">Section 33.1: Using localStorage</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The localStorage object provides persistent (but not permanent - see
+<p>The localStorage object provides persistent (but not permanent - see
 limits below) key-value storage of strings. Any changes are
 immediately visible in all other windows/frames from the same origin.
 The stored values persistent indefinitely unless the user clears saved
 data or configures an expiration limit. localStorage uses a map-like
-interface for getting and setting values.
-localStorage.
-setItem
-(
-&apos;name&apos;
-,
-&quot;John Smith&quot;
-)
-;
-console.
-log
-(
-localStorage.
-getItem
-(
-&apos;name&apos;
-)
-)
-;
-// <i> &quot;John Smith&quot;</i>
-localStorage.
-removeItem
-(
-&apos;name&apos;
-)
-;
-console.
-log
-(
-localStorage.
-getItem
-(
-&apos;name&apos;
-)
-)
-;
-// <i> null</i>
-If you want to store simple structured data, you can use JSON to
-serialize it to and from strings for storage.
+interface for getting and setting values.</p>
 
-<b>var</b> players = &lbrack;{name: &quot;Tyler&quot;, score: 22}, {name: &quot;Ryan&quot;,
-score: 41}&rbrack;; localStorage.setItem(&apos;players&apos;,
-JSON.stringify(players));
+localStorage.setItem(&apos;name&apos;, &quot;John Smith&quot;);
+console.log(localStorage.getItem(&apos;name&apos;)); // <i> &quot;John Smith&quot;</i>
+localStorage.removeItem(&apos;name&apos;);
+console.log(localStorage.getItem(&apos;name&apos;)); // <i> null</i>
+<p>If you want to store simple structured data, you can use JSON to
+serialize it to and from strings for storage.</p>
+<pre>
+<b>var</b> players = &lbrack;{name: &quot;Tyler&quot;, score: 22}, {name: &quot;Ryan&quot;, score: 41}&rbrack;;
+localStorage.setItem(&apos;players&apos;, JSON.stringify(players));
 
 console.log(JSON.parse(localStorage.getItem(&apos;players&apos;)));
-// <i> &lbrack; Object { name: &quot;Tyler&quot;, score: 22 }, Object { name: &quot;Ryan&quot;,
-score: 41 } &rbrack;</i> <b>localStorage limits in browsers</b>
-Mobile browsers:
+// <i> &lbrack; Object { name: &quot;Tyler&quot;, score: 22 }, Object { name: &quot;Ryan&quot;, score: 41 } &rbrack;</i>
+</pre>
+<p><b>localStorage limits in browsers</b></p>
+<p>Mobile browsers:</p>
+<table border="1" style="width:200px">
 <b>Browser Google Chrome Android Browser Firefox iOS Safari</b>
-| Version           | 40             | 4.3     | 34     | |
-| Space available     | 10MB             | 2MB       | 10MB   | 5 |
-Desktop browsers:
-<b>Browser Google Chrome Opera Firefox Safari Internet Explorer</b>
-Version 40 27 34 6-8 9-11
-Space available 10MB 10MB 10MB 5MB 10MB
+  <thead>
+    <tr>
+      <th><b>Browser</b></th>
+      <th><b>Google Chrome</b></th>
+      <th><b>Android Browser</b></th>
+      <th><b>Firefox</b></th>
+      <th><b>iOS Safari</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Version</td>
+      <td>40</td>
+      <td>4.3</td>
+      <td>34</td>
+      <td>6-8</td>
+    </tr>
+    <tr>
+      <td>Space available</td>
+      <td>10MB</td>
+      <td>2MB</td>
+      <td>10MB</td>
+      <td>5MB</td>
+    </tr>
+  </tbody>
+</table>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch33-2">Section 33.2: Simpler way of handling Storage</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-localStorage, sessionStorage are JavaScript <b>Objects</b> and you can
-treat them as such.
-getItem  (), . setItem
-Instead of using Storage Methods like .(), etc... here&apos;s a simpler
-alternative:
+<p>localStorage, sessionStorage are JavaScript <b>Objects</b> and you can treat them as such.
+Instead of using Storage Methods like .getItem(), setItem(), etc... here&apos;s a simpler alternative:</p>
+<pre>
 // <i> Set</i>
-localStorage.
-greet
-=
-&quot;Hi!&quot;
-;
-// <i> Same as: window.localStorage.setItem(&quot;greet&quot;, &quot;Hi!&quot;);</i>
+localStorage.greet = &quot;Hi!&quot;;  // <i>Same as: window.localStorage.setItem(&quot;greet&quot;, &quot;Hi!&quot;);</i>
 // <i> Get</i>
-localStorage.
-greet
-;
-// <i> Same as: window.localStorage.getItem(&quot;greet&quot;);</i>
+localStorage.greet ;                   // <i>Same as: window.localStorage.getItem(&quot;greet&quot;);</i>
 // <i> Remove item</i>
-<b>delete</b>
-localStorage.
-greet
-;
-// <i> Same as: window.localStorage.removeItem(&quot;greet&quot;);</i>
+<b>delete</b> localStorage.greet;      // <i>Same as: window.localStorage.removeItem(&quot;greet&quot;);</i>
 // <i> Clear storage</i>
-localStorage.
-clear
-(
-)
-;
-<b>Example:</b>
-// <i> Store values (Strings, Numbers)</i>
-localStorage.
-hello
-=
-&quot;Hello&quot;
-;
-localStorage.
-year
-=
-2017
-;
+localStorage.clear();
+</pre>
+<p><b>Example:</b></p>
+<pre>
+// <i>Store values (Strings, Numbers)</i>
+localStorage.hello = &quot;Hello&quot;;
+localStorage.year = 2017;
 // <i> Store complex data (Objects, Arrays)</i>
-<b>var</b>
-user
-=
-{
-name
-:
-&quot;John&quot;
-,
-surname
-:
-&quot;Doe&quot;
-,
-books
-:
-&lbrack;
-&quot;A&quot;
-,
-&quot;B&quot;
-&rbrack;
-}
-;
-localStorage.
-user
-=
-JSON.
-stringify
-(
-user
-)
-;
+<b>var</b> user = {name: &quot;John&quot;, surname:&quot;Doe&quot;, books:&lbrack;&quot;A&quot;, &quot;B&quot;&rbrack;};
+localStorage.user = JSON.stringify( user );
 // <i> Important: Numbers are stored as String</i>
-console.
-log
-(
-<b>typeof</b>
-localStorage.
-year
-)
-;
-// <i> String</i>
+console.log( <b>typeof</b> localStorage.year );  // <i> String</i>
 // <i> Retrieve values</i>
-<b>var</b>
-someYear
-=
-localStorage.
-year
-;
-// <i> &quot;2017&quot;</i>
+<b>var</b> someYear = localStorage.year;  // <i> &quot;2017&quot;</i>
 // <i> Retrieve complex data</i>
-<b>var</b>
-userData
-=
-JSON.
-parse
-(
-localStorage.
-user
-)
-;
-<b>var</b>
-userName
-=
-userData.
-name
-;
-// <i> &quot;John&quot;</i>
+<b>var</b> userData = JSON.parse(localStorage.user);
+<b>var</b> userName = userData.name;  // <i> &quot;John&quot;</i>
 // <i> Remove specific data</i>
-<b>delete</b>
-localStorage.
-year
-;
-// <i> Clear (delete) all stored data</i>
-localStorage.
-clear
-(
-)
-;
+<b>delete</b> localStorage.year;  // <i> Clear (delete) all stored data</i>
+localStorage.clear();
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch33-3">Section 33.3: Storage events</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Whenever a value in set in localStorage, a storage event will be
+<p>Whenever a value in set in localStorage, a storage event will be
 dispatched on all other windows from the same origin. This can be used
 to synchronize state between different pages without reloading or
 communicating with a server. For example, we can reflect the value of
-an input element as paragraph text in another window: First Window
-<b>var</b>
-input
-=
-document.
-createElement
-(
-&apos;input&apos;
-)
-;
-document.
-body
-.
-appendChild
-(
-nput
-)
-;
-input.
-value
-=
-localStorage.
-getItem
-(
-&apos;user-value&apos;
-)
-;
-input.
-oninput
-=
-<b>function</b>
-(
-event
-)
-{
-localStorage.
-setItem
-(
-&apos;user-value&apos;
-,
-input.
-value
-)
-;
-}
-;
-Second Window
-<b>var</b>
-output
-=
-document.
-createElement
-(
-&apos;p&apos;
-)
-;
-document.
-body
-.
-appendChild
-(
-output
-)
-;
-output.
-textContent
-=
-localStorage.
-getItem
-(
-&apos;user-value&apos;
-)
-;
-window.
-addEventListener
-(
-&apos;storage&apos;
-,
-<b>function</b>
-(
-event
-)
-{
-<b>if</b>
-(
-event.
-key
-===
-&apos;user-value&apos;
-)
-{
-output.
-textContent
-=
-event.
-newValue
-;
-}
-}
-)
-;
-<b>Notes</b>
-Event is not fired or catchable under Chrome, Edge and Safari if
-domain was modified through script.
-First window
+an input element as paragraph text in another window:</p>
+<p>First Window</p>
+<b>var</b> input = document.createElement(&apos;input&apos;);
+document.body.appendChild(input);
+input.value = localStorage.getItem(&apos;user-value&apos;);
+input.oninput = <b>function</b>(event) {
+  localStorage.setItem(&apos;user-value&apos;, input.value);
+};
+</pre>
+<p>Second Window</p>
+<b>var</b> output = document.createElement(&apos;p&apos;);
+document.body.appendChild(output);
+output.textContent = localStorage.getItem(&apos;user-value&apos;);
+window.addEventListener(&apos;storage&apos;, <b>function</b>(event) {
+  <b>if</b> (event.key === &apos;user-value&apos;) {
+    output.textContent = event.newValue;
+  }
+});
+</pre>
+<p><b>Notes</b><p>
+<!-- page 231 -->
+<p>Event is not fired or catchable under Chrome, Edge and Safari if
+domain was modified through script.</p>
+<p>First window</p>
+<pre>
 // <i> page url: http://sub.a.com/1.html</i>
-document.
-domain
-=
-&apos;a.com&apos;
-;
-<b>var</b>
-input
-=
-document.
-createElement
-(
-&apos;input&apos;
-)
-;
-document.
-body
-.
-appendChild
-(
-input
-)
-;
-input.
-value
-=
-localStorage.
-getItem
-(
-&apos;user-value&apos;
-)
-;
-input.
-oninput
-=
-<b>function</b>
-(
-event
-)
-{
-localStorage.
-setItem
-(
-&apos;user-value&apos;
-,
-input.
-value
-)
-;
-}
-;
-Second Window
+document.domain = &apos;a.com&apos;;
+<b>var</b> input = document.createElement(&apos;input&apos;);
+document.body.appendChild(input);
+input.value = localStorage.getItem(&apos;user-value&apos;);
+input.oninput = <b>function</b>(event) {
+  localStorage.setItem(&apos;user-value&apos;, input.value);
+};
+</pre>
+<p>Second Window</p>
+<pre>
 // <i> page url: http://sub.a.com/2.html</i>
-document.
-domain
-=
-&apos;a.com&apos;
-;
-<b>var</b>
-output
-=
-document.
-createElement
-(
-&apos;p&apos;
-)
-;
-document.
-body
-.
-appendChild
-(
-output
-)
-;
+document.domain = &apos;a.com&apos;;
+<b>var</b> output = document.createElement(&apos;p&apos;);
+document.body.appendChild(output);
 // <i> Listener will never called under Chrome(53), Edge and Safari(10.0).</i>
-window.
-addEventListener
-(
-&apos;storage&apos;
-,
-<b>function</b>
-(
-event
-)
-{
-<b>if</b>
-(
-event.
-key
-===
-&apos;user-value&apos;
-)
-{
-output.
-textContent
-=
-event.
-newValue
-;
-}
-}
-)
-;
+window.addEventListener(&apos;storage&apos;, <b>function</b>(event) {
+  <b>if</b>(event.key === &apos;user-value&apos;) {
+    output.textContent = event.newValue;
+  }
+});
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch33-4">Section 33.4: sessionStorage</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The sessionStorage object implements the same Storage interface as
+<p>The sessionStorage object implements the same Storage interface as
 localStorage. However, instead of being shared with all pages from the
 same origin, sessionStorage data is stored separately for every
 window/tab. Stored data persists between pages <i>in that window/tab</i>
-for as long as it&apos;s open, but is visible nowhere else.
-<b>var</b>
-audio
-=
-document.
-querySelector
-(
-&apos;audio&apos;
-)
-;
+for as long as it&apos;s open, but is visible nowhere else.</p>
+<pre>
+<b>var</b> audio = document.querySelector(&apos;audio&apos;);
 // <i> Maintain the volume if the user clicks a link then navigates back here.</i>
-audio.
-volume
-=
-Number
-(
-sessionStorage.
-getItem
-(
-&apos;volume&apos;
-)
-&vert;&vert;
-1.0
-)
-;
-audio.
-onvolumechange
-=
-<b>function</b>
-(
-event
-)
-{
-sessionStorage.
-setItem
-(
-&apos;volume&apos;
-,
-audio.
-volume
-)
-;
-}
-;
-Save data to sessionStorage
-sessionStorage.
-setItem
-(
-&apos;key&apos;
-,
-&apos;value&apos;
-)
-;
-Get saved data from sessionStorage
-<b>var</b>
-data
-=
-sessionStorage.
-getItem
-(
-&apos;key&apos;
-)
-;
-Remove saved data from sessionStorage
-sessionStorage.
-removeItem
-(
-&apos;key&apos;
-)
+audio.volume = Number(sessionStorage.getItem(&apos;volume&apos;) &vert;&vert; 1.0);
+audio.onvolumechange = <b>function</b>(event) {
+  sessionStorage.setItem(&apos;volume&apos;, audio.volume);
+};
+</pre>
+<p>Save data to sessionStorage</p>
+<pre>
+sessionStorage.setItem(&apos;key&apos;, &apos;value&apos;);
+</pre>
+<p>Get saved data from sessionStorage</p>
+<pre>
+<b>var</b> data = sessionStorage.getItem(&apos;key&apos;);
+</pre>
+<p>Remove saved data from sessionStorage</p>
+<pre>
+sessionStorage.removeItem(&apos;key&apos;)
+</pre>
+<!-- page 232 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch33-5">Section 33.5: localStorage length</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-localStorage.length
-property returns an integer number indicating the number of elements in
-the localStorage
-Example:
-Set Items
-localStorage.
-setItem
-(
-&apos;StackOverflow&apos;
-,
-&apos;Documentation&apos;
-)
-;
-localStorage.
-setItem
-(
-&apos;font&apos;
-,
-&apos;Helvetica&apos;
-)
-;
-localStorage.
-setItem
-(
-&apos;image&apos;
-,
-&apos;sprite.svg&apos;
-)
-;
-Get length
-localStorage.
-length
-;
-// <i> 3</i>
+<p>localStorage.length property returns an integer number indicating the number of elements in
+the localStorage</p>
+<p>Example:</p>
+<p>Set Items</p>
+<pre>
+localStorage.setItem(&apos;StackOverflow&apos;, &apos;Documentation&apos;);
+localStorage.setItem(&apos;font&apos;, &apos;Helvetica&apos;);
+localStorage.setItem(&apos;image&apos;, &apos;sprite.svg&apos;);
+</pre>
+<p>Get length</p>
+<pre>
+localStorage.length; // <i> 3</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch33-6">Section 33.6: Error conditions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Most browsers, when configured to block cookies, will also block
+<p>Most browsers, when configured to block cookies, will also block
 localStorage. Attempts to use it will result in an exception. Do not
-forget to manage these cases.
-<b>var</b>
-video
-=
-document.
-querySelector
-(
-&apos;video&apos;
-)
-<b>try</b>
-{
-video.
-volume
-=
-localStorage.
-getItem
-(
-&apos;volume&apos;
-)
+forget to manage these cases.</p>
+<pre>
+<b>var</b> video = document.querySelector(&apos;video&apos;)
+<b>try</b> {
+  video.volume = localStorage.getItem(&apos;volume&apos;)
+} <b>catch</b> (error) {
+  alert(&apos;If you <b>&bsol;&amp;apos;</b>d like your volume saved, turn on cookies&apos;)
 }
-<b>catch</b>
-(
-error
-)
-{
-alert
-(
-&apos;If you
-<b>&bsol;&amp;apos;</b>
-d like your volume saved, turn on cookies&apos;
-)
-}
-video.
-play
-(
-)
-If error were not handled, program would stop functioning properly.
+video.play()
+</pre>
+<p>If error were not handled, program would stop functioning properly.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch33-7">Section 33.7: Clearing storage</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-To clear the storage, simply run
-localStorage.
-clear
-(
-)
-;
+<p>To clear the storage, simply run</p>
+<pre>
+localStorage.clear();
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch33-8">Section 33.8: Remove Storage Item</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-To remove a specific item from the browser Storage (the opposite of
-setItem) use removeItem
-localStorage.
-removeItem
-(
-&quot;greet&quot;
-)
-;
-<b>Example:</b>
-localStorage.
-setItem
-(
-&quot;greet&quot;
-,
-&quot;hi&quot;
-)
-;
-localStorage.
-removeItem
-(
-&quot;greet&quot;
-)
-;
-console.
-log
-(
-localStorage.
-getItem
-(
-&quot;greet&quot;
-)
-)
-;
-// <i> null</i>
-(Same applies for sessionStorage)
+<p>To remove a specific item from the browser Storage (the opposite of
+setItem) use removeItem</p>
+<pre>
+localStorage.removeItem(&quot;greet&quot;);
+</pre>
+<p><b>Example:</b></p>
+<pre>
+localStorage.setItem(&quot;greet&quot;, &quot;hi&quot;);
+localStorage.removeItem(&quot;greet&quot;);
+console.log(localStorage.getItem(&quot;greet&quot;) ); // <i> null</i>
+</pre>
+<p>(Same applies for sessionStorage)</p>
+
