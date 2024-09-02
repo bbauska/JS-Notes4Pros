@@ -13757,7 +13757,6 @@ sessionStorage.removeItem(&apos;key&apos;)
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch33-5">Section 33.5: localStorage length</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>localStorage.length property returns an integer number indicating the number of elements in
 the localStorage</p>
 <p>Example:</p>
@@ -13809,4 +13808,109 @@ localStorage.removeItem(&quot;greet&quot;);
 console.log(localStorage.getItem(&quot;greet&quot;) ); // <i> null</i>
 </pre>
 <p>(Same applies for sessionStorage)</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch34">Chapter 34: Data attributes</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch34-1">Section 34.1: Accessing data attributes</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p><b>Using the dataset property</b></p>
+<p>The new dataset property allows access (for both reading and writing) to all data attributes 
+on any element.</p>
+<pre>
+<b>&lt;p&gt;</b>Countries:<b>&lt;/p&gt;</b>
+<b>&lt;ul&gt;</b>
+  <b>&lt;li</b> id=&quot;C1&quot; onclick=&quot;showDetails(this)&quot; data-id=&quot;US&quot; data-dial-code=&quot;1&quot;<b>&gt;</b>USA<b>&lt;/li&gt;</b>
+  <b>&lt;li</b> id=&quot;C2&quot; onclick=&quot;showDetails(this)&quot; data-id=&quot;CA&quot; data-dial-code=&quot;1&quot;<b>&gt;</b>Canada<b>&lt;/li&gt;</b>
+  <b>&lt;li</b> id=&quot;C3&quot; onclick=&quot;showDetails(this)&quot; data-id=&quot;FF&quot; data-dial-code=&quot;3&quot;<b>&gt;</b>France<b>&lt;/li&gt;</b>
+<b>&lt;/ul&gt;</b>
+<b>&lt;button</b> type=&quot;button&quot; onclick=&quot;correctDetails()&quot;<b>&gt;</b>Correct Country Details<b>&lt;/button&gt;</b>
+<b>&lt;script&gt;</b>
+function showDetails(item) {
+  var msg = item.innerHTML
+    &plus; &quot;&bsol;&bsol;r&bsol;&bsol;nISO ID: &quot; + item.dataset.id
+    &plus; &quot;&bsol;&bsol;r&bsol;&bsol;nDial Code: &quot; + item.dataset.dialCode;
+  alert(msg);
+}
+function correctDetails(item) {
+  var item = document.getEmementById(&quot;C3&quot;);
+  item.dataset.id = &quot;FR&quot;;
+  item.dataset.dialCode = &quot;33&quot;;
+}
+<b>&lt;/script&gt;</b>
+</pre>
+<p>Note: The dataset property is only supported in modern browsers and
+it&apos;s slightly slower than the getAttribute and setAttribute methods
+which are supported by all browsers.</p>
 
+<p><b>Using the getAttribute & setAttribute methods</b></p>
+<p>If you want to support the older browsers before HTML5, you can use
+the getAttribute and setAttribute methods which are used to access any
+attribute including the data attributes. The two functions in the
+example above can be written this way:</p>
+<b>&lt;script&gt;</b>
+function showDetails(item) {
+  var msg = item.innerHTML
+    &plus; &quot;&bsol;&bsol;r&bsol;&bsol;nISO ID: &quot; + item.getAttribute(&quot;data-id&quot;)
+    &plus; &quot;&bsol;&bsol;r&bsol;&bsol;nDial Code: &quot; + item.getAttribute(&quot;data-dial-code&quot;);
+  alert(msg);
+}
+function correctDetails(item) {
+var item = document.getEmementById(&quot;C3&quot;);
+item.setAttribute(&quot;id&quot;, &quot;FR&quot;);
+item.setAttribute(&quot;data-dial-code&quot;, &quot;33&quot;);
+}
+<b>&lt;/script&gt;</b>
+</pre>
+<!-- page 234 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch35">Chapter 35: JSON</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<table border="1" style="width:200px">
+<b>Browser Google Chrome Android Browser Firefox iOS Safari</b>
+  <thead>
+    <tr>
+      <th><b>Parameter</b></th>
+      <th><b>Details</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>JSON.parse</b></td>
+      <td><b>Parse a JSON string</b></td>
+    </tr>
+    <tr>
+      <td>input(string)</td>
+      <td>JSON string to be parsed.</td>
+    </tr>
+    <tr>
+      <td>reviver(function)</td>
+      <td>Presribes a transformation for the input JSON string.</td>
+    </tr>
+    <tr>
+      <td><b>JSON.stringify</b></td>
+      <td><b>Serialize a serializable value</b></td>
+    </tr>
+    <tr>
+      <td>value(string)</td>
+      <td>Value to be serialized according to the JSON specification.</td>
+    </tr>
+    <tr>
+      <td>replacer(function or String&lbrack;&rbrack; or Number&lbrack;&rbrack;)</td>
+      <td>Selectively includes certain properties of the value object.</td>
+    </tr>
+    <tr>
+      <td>space(String or Number)</td>
+      <td>If a number is provided, then space number of whitespaces will be inserted of readability. If a string is provided, the string(first 10 chars) will be used as whitespace.</td>
+    </tr>
+  </tbody>
+</table>
+<p>JSON (JavaScript Object Notation) is a lightweight data-interchange format. It is easy for humans to read and write
+and easy for machines to parse and generate. It is important to realize that, in JavaScrtip, JSON is a string and not 
+an object.</p>
+
+<p>A basic overview can be found on the <a href="http://json.org/">json.org</a> 
+website which also contains links to implementations of the standard
+in many different programming languages.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch35-1">Section 35.1: JSON versus JavaScript literals</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
