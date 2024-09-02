@@ -12703,725 +12703,292 @@ to the entire instance of that Door object.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch29-1">Section 29.1: Simple Callback Usage Examples</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Callbacks offer a way to extend the functionality of a function (or
+<p>Callbacks offer a way to extend the functionality of a function (or
 method) </i><b>without changing</b></i> its code. This approach is often used
-in modules (libraries / plugins), the code of which is not supposed to
-be changed.
-Suppose we have written the following function, calculating the sum of
-a given array of values:
-<b>function</b>
-foo
-(
-array
-)
-{
-<b>var</b>
-sum
-=
-0
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-array.
-length
-;
-i
-++
-)
-{
-sum
-+=
-array
-&lbrack;
-i
-&rbrack;
-;
+in modules (libraries / plugins), the code of which is not supposed to be changed.</p>
+<p>Suppose we have written the following function, calculating the sum of
+a given array of values:</p>
+<pre>
+<b>function</b> foo(array) {
+  <b>var</b> sum = 0;
+  <b>for</b> (<b>var</b> i = 0; i &lt; array.length; i++) {
+    sum += array&lbrack;i&rbrack;;
+  }
+  <b>return</b> sum;
 }
-<b>return</b>
-sum
-;
+</pre>
+<p>Now suppose that we want to do something with each value of the array,
+e.g. display it using <span id="emphasize">alert()</span>. We could make the 
+appropriate changes in the code of foo, like this:</p>
+<pre>
+<b>function</b> foo(array) {
+  <b>var</b> sum = 0;
+  <b>for</b> (<b>var</b> i = 0; i &lt; array.length; i++) {
+    alert(array&lbrack;i&rbrack;);
+    sum += array&lbrack;i&rbrack;;
+  }
+  <b>return</b> sum;
 }
-alert
-Now suppose that we want to do something with each value of the array,
-e.g. display it using (). We could make the appropriate changes in the
-code of foo, like this:
-<b>function</b>
-foo
-(
-array
-)
-{
-<b>var</b>
-sum
-=
-0
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-array.
-length
-;
-i
-++
-)
-{
-alert
-(
-array
-&lbrack;
-i
-&rbrack;
-)
-;
-sum
-+=
-array
-&lbrack;
-i
-&rbrack;
-;
+</pre>
+<p>But what if we decide to use <span id="emphasize">console.log()</span>? Obviously 
+changing the code of foo, whenever we decide to do something else with each value, 
+is not a good idea. It is much better to have the option to change our mind without 
+changing the code of foo. That&apos;s exactly the use case for callbacks. We only 
+have to slightly change foo&apos;s signature and body:</p>
+<pre>
+<b>function</b> foo(array, callback) {
+  <b>var</b> sum = 0;
+  <b>for</b> (<b>var</b> i = 0; i &lt; array.length; i++) {
+    callback(array&lbrack;i&rbrack;);
+    sum += array&lbrack;i&rbrack;;
+  }
+  <b>return</b> sum;
 }
-<b>return</b>
-sum
-;
-}
-console.log instead of alert
-But what if we decide to use ()? Obviously changing the code of foo,
-whenever we
-decide to do something else with each value, is not a good idea. It is
-much better to have the option to change our mind without changing the
-code of foo. That&apos;s exactly the use case for callbacks. We only have
-to slightly change foo&apos;s signature and body:
-<b>function</b>
-foo
-(
-array
-,
-callback
-)
-{
-<b>var</b>
-sum
-=
-0
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-array.
-length
-;
-i
-++
-)
-{
-callback
-(
-array
-&lbrack;
-i
-&rbrack;
-)
-;
-sum
-+=
-array
-&lbrack;
-i
-&rbrack;
-;
-}
-<b>return</b>
-sum
-;
-}
-And now we are able to change the behaviour of foo just by changing
-its parameters:
-<b>var</b>
-array
-=
-&lbrack;
-&rbrack;
-;
-foo
-(
-array
-,
-alert
-)
-;
-foo
-(
-array
-,
-<b>function</b>
-(
-x
-)
-{
-console.
-log
-(
-x
-)
-;
-}
-)
-;
-<b>Examples with Asynchronous Functions</b>
-&dollar;.getJSON
-In jQuery, the () method to fetch JSON data is asynchronous.
-Therefore, passing code in a callback makes sure that the code is
-called </i>after</i> the JSON is fetched.
-&dollar;.getJSON
-() syntax:
-&dollar;.
-getJSON
-(
-url
-,
-dataObject
-,
-successCallback
-)
-;
-&dollar;.getJSON
-Example of () code:
-&dollar;.
-getJSON
-(
-&quot;foo.json&quot;
-,
-{
-}
-,
-<b>function</b>
-(
-data
-)
-{
+</pre>
+<p>And now we are able to change the behaviour of foo just by changing
+its parameters:</p>
+<pre>
+<b>var</b> array =&lbrack;&rbrack;;
+foo(array, alert);
+foo(array, <b>function</b>(x) {
+  console.log(x);
+});
+</pre>
+<p><b>Examples with Asynchronous Functions</b></p>
+<p>In jQuery, the <b>&dollar;getJSON()</b> method to fetch JSON data is asynchronous.
+Therefore, passing code in a callback makes sure that the code is called </i>after</i> 
+the JSON is fetched.</p>
+<!-- page 214 -->
+<pre>
+&dollar;.getJSON () syntax:
+&dollar;.getJSON( url, dataObject, successCallback);
+</pre>
+<p>
+<p>Example of <b>&dollar;.getJSON</b>() code:</p>
+<pre>
+&dollar;.getJSON(&quot;foo.json&quot;, {}, <b>function</b>(data) {
+  // <i> data handling code</i>
+});
+</pre>
+<p>The following would <i>not</i> work, because the data-handling code would
+likely be called <i>before</i> the data is actually received, because the
+<b>&dollar;.getJSON</b> function takes an unspecified length of time and does 
+not hold up the call stack as it waits for the JSON.</p>
+<pre>
+&dollar;.getJSON(&quot;foo.json&quot;, {});
 // <i> data handling code</i>
-}
-)
-;
-&dollar;.getJSON
-The following would <i>not</i> work, because the data-handling code would
-likely be called *before</i> the data is actually received, because the
-function takes an unspecified length of time and does not hold up the
-call stack as it waits for the JSON.
-&dollar;.
-getJSON
-(
-&quot;foo.json&quot;
-,
-{
-}
-)
-;
-// <i> data handling code</i>
-animate
-Another example of an asynchronous function is jQuery&apos;s () function.
-Because it takes a specified time to run the animation, sometimes it
-is desirable to run some code directly following the animation.
-animate
-.() syntax:
-jQueryElement.
-animate
-(
-properties
-,
-duration
-,
-callback
-)
-;
-For example, to create a fading-out animation after which the element
+</pre>
+<p>Another example of an asynchronous function is jQuery&apos;s <b>animate</b>() 
+function. Because it takes a specified time to run the animation, sometimes it
+is desirable to run some code directly following the animation.</p>
+<pre>
+<p><b>animate</b>.() syntax:</p>
+<pre>
+jQueryElement.animate( properties, duration, callback );
+</pre>
+<p>For example, to create a fading-out animation after which the element
 completely disappears, the following code can be run. Note the use of
-the callback.
-elem.
-animate
-(
-{
-opacity
-:
-0
-}
-,
-5000
-,
-<b>function</b>
-(
-)
-{
-elem.
-hide
-(
-)
-;
-}
-)
-;
-This allows the element to be hidden right after the function has
-finished execution. This differs from:
-elem.
-animate
-(
-{
-opacity
-:
-0
-}
-,
-5000
-)
-;
-elem.
-hide
-(
-)
-;
-animate
-because the latter does not wait for () (an asynchronous function) to
-complete, and therefore the element is hidden right away, producing an
-undesirable effect.
+the callback.</p>
+<pre>
+elem.animate( { opacity: 0 }, 5000, <b>function</b>() {
+  elem.hide();
+});
+</pre>
+<p>This allows the element to be hidden right after the function has
+finished execution. This differs from:</p>
+<pre>
+elem.animate( { opacity: 0 }, 5000 );
+elem.hide();
+</pre>
+<p>because the latter does not wait for <b>animate</b>() (an asynchronous function) to
+complete, and therefore the element is hidden right away, producing an undesirable effect.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch29-2">Section 29.2: Continuation (synchronous and asynchronous)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Callbacks can be used to provide code to be executed after a method
-has completed:
-*/&ast;&ast;*
-*&ast; &bsol;@arg {Function} then continuation callback*
-*&ast;/*
-<b>function</b>
-doSomething
-(
-then
-)
-{
-console.
-log
-(
-&apos;Doing something&apos;
-)
-;
-then
-(
-)
-;
+<p>Callbacks can be used to provide code to be executed after a method
+has completed:</p>
+<pre>
+<i>/&ast;&ast;</i>
+  <i>&ast; &commat;arg {Function} then continuation callback</i>
+  <i>&ast;/</i>
+<b>function</b> doSomething(then) {
+  console.log(&apos;Doing something&apos;);
+  then();
 }
 // <i> Do something, then execute callback to log &apos;done&apos;</i>
-doSomething
-(
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-&apos;Done&apos;
-)
-;
+doSomething(<b>function</b>() {
+  console.log(&apos;Done&apos;);
+  });
+console.log(&apos;Doing something else&apos;);
+// <i>Outputs:</i>
+//   <i>&quot;Doing something&quot;</i>
+//   <i>&quot;Done&quot;</i>
+//   <i>&quot;Doing something else&quot;</i>
+</pre>
+<!-- page 215 -->
+<p>The <b>doSomething</b>() method above executes synchronously with the callback - 
+execution blocks until <b>doSomething</b>() returns, ensuring that the callback is
+executed before the interpreter moves on.</p>
+<p>Callbacks can also be used to execute code asynchronously:</p>
+<pre>
+doSomethingAsync(then) {
+  setTimeout(then, 1000);
+  console.log(&apos;Doing something asynchronously&apos;);
 }
-)
-;
-console.
-log
-(
-&apos;Doing something else&apos;
-)
-;
-// <i> Outputs:</i>
-// <i> &quot;Doing something&quot;</i>
-// <i> &quot;Done&quot;</i>
-// <i> &quot;Doing something else&quot;</i>
-doSomething   () method above executes synchronously with the doSomething
-callback - execution blocks until
-The () returns, ensuring that the callback is executed before the
-interpreter moves on.
-Callbacks can also be used to execute code asynchronously:
-doSomethingAsync
-(
-then
-)
-{
-setTimeout
-(
-then
-,
-1000
-)
-;
-console.
-log
-(
-&apos;Doing something asynchronously&apos;
-)
-;
-}
-doSomethingAsync
-(
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-&apos;Done&apos;
-)
-;
-}
-)
-;
-console.
-log
-(
-&apos;Doing something else&apos;
-)
-;
-// <i> Outputs:</i>
-// <i> &quot;Doing something asynchronously&quot;</i>
-// <i> &quot;Doing something else&quot;</i>
-// <i> &quot;Done&quot;</i>
-doSomething
-The then callbacks are considered continuations of the () methods.
-Providing a callback as the last instruction in a function is called a
-[tail-call](https://en.wikipedia.org/wiki/Tail_call), which is
-[optimized by ES2015
-interpreters](http://www.2ality.com/2015/06/tail-call-optimization.html).
+doSomethingAsync(<b>function</b>() {
+  console.log(&apos;Done&apos;);
+});
+console.log(&apos;Doing something else&apos;);
+// <i>Outputs:</i>
+// <i>  &quot;Doing something asynchronously&quot;</i>
+// <i>  &quot;Doing something else&quot;</i>
+// <i>  &quot;Done&quot;</i>
+</pre>
+<p>The <b>then</b> callbacks are considered continuations of the <b>doSomething</b>() 
+methods. Providing a callback as the last instruction in a function is called a
+<a href="https://en.wikipedia.org/wiki/Tail_call">tail-call</a>, which is 
+<a href="http://www.2ality.com/2015/06/tail-call-optimization.html">
+optimized by ES2015 interpreters</a>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch29-3">Section 29.3: What is a callback?</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-This is a normal function call:
-console.
-log
-(
-&quot;Hello World!&quot;
-)
-;
-When you call a normal function, it does its job and then returns
-control back to the caller.
-However, sometimes a function needs to return control back to the
-caller in order to do its job:
-&lbrack;
-1
-,
-2
-,
-3
-&rbrack;
-.
-map
-(
-<b>function</b>
-double
-(
-x
-)
-{
-<b>return</b>
-2
-&ast;
-x
-;
-}
-)
-;
-In the above example, the function double is a callback for the
-function map because:
-1.  The function double is given to the function map by the caller.
-
-2.  The function map needs to call the function double zero or more
-    times in order to do its job.
-Thus, the function map is essentially returning control back to the
-caller every time it calls the function double. Hence, the name
-"callback".
-Functions may accept more than one callback:
-promise.
-then
-(
-<b>function</b>
-onFulfilled
-(
-value
-)
-{
-console.
-log
-(
-&quot;Fulfilled with value &quot;
-&plus;
-value
-)
-;
-}
-,
-<b>function</b>
-onRejected
-(
-reason
-)
-{
-console.
-log
-(
-&quot;Rejected with reason &quot;
-&plus;
-reason
-)
-;
-}
-)
-;
-Here then function then accepts two callback functions, onFulfilled
-and onRejected. Furthermore, only one of these two callback functions
-is actually called.
-What&apos;s more interesting is that the function then returns before
+<p>This is a normal function call:</p>
+<pre>
+console.log(&quot;Hello World!&quot;);
+</pre>
+<p>When you call a normal function, it does its job and then returns control back to the caller.</p>
+<p>However, sometimes a function needs to return control back to the <i>caller</i> in order 
+to do its job:</p>
+<pre>
+&lbrack;1, 2, 3&rbrack;.map(<b>function</b> double(x) {
+  <b>return</b> 2 &ast; x;
+});
+</pre>
+<p>In the above example, the function <b>double</b> is a callback for the
+function <b>map</b> because:</p>
+<ol start="1">
+  <li>The function <b>double</b> is given to the function map by the caller.</li>
+  <li>The function <b>map</b> needs to call the function <b>double</b> zero 
+    or more times in order to do its job.</li>
+</ol>
+<p>Thus, the function <b>map</b> is essentially returning control back to the
+caller every time it calls the function double. Hence, the name "callback".</p>
+<p>Functions may accept more than one callback:</p>
+<pre>
+promise.then(<b>function</b>onFulfilled(value) {
+  console.log(&quot;Fulfilled with value &quot; &plus; value);
+}, <b>function</b> onRejected(reason) {
+  console.log(&quot;Rejected with reason &quot; &plus; reason);
+});
+</pre>
+<!-- page 216 -->
+<p>Here then function <b>then</b> accepts two callback functions, <b>onFulfilled</b>
+and <b>onRejected<?b>. Furthermore, only one of these two callback functions
+is actually called.</p>
+<p>What&apos;s more interesting is that the function <b>then</b> returns before
 either of the callbacks are called. Hence, a callback function may be
-called even after the original function has returned.
+called even after the original function has returned.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch29-4">Section 29.4: Callbacks and &grave;this&grave;</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Often when using a callback you want access to a specific context.
-<b>function</b>
-SomeClass
-(
-msg
-,
-elem
-)
-{
-<b>this</b>
-.
-msg
-=
-msg
-;
-elem.
-addEventListener
-(
-&apos;click&apos;
-,
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-<b>this</b>
-.
-msg
-)
-;
-// <i> &lt;= will fail because &quot;this&quot; is undefined</i>
+<p>Often when using a callback you want access to a specific context.</p>
+<pre>
+<b>function</b> SomeClass(msg, elem) {
+  <b>this</b>.msg = msg;
+  elem.addEventListener(&apos;click&apos;, <b>function</b>() {
+    console.log(<b>this</b>.msg);  // <i> &lt;= will fail because &quot;this&quot; is undefined</i>
+  });
 }
-)
-;
+<b>var</b> s = <b>new</b> SomeClass(&quot;hello&quot;, someElement);
+</pre>
+<p><b>Solutions</b></p>
+<ul>
+  <li>Use bind<br/>
+  <b>bind</b> effectively generates a new function that sets <b>this</b> to
+whatever was passed to <b>bind</b> then calls the original function.<br/>
+<pre>
+<b>function</b> SomeClass(msg, elem) {
+  <b>this</b>.msg = msg;
+  elem.addEventListener(&apos;click&apos;, <b>function</b>() {
+    console.log(<b>this</b>.msg);
+  } .bind(<b>this</b>));  // <i> &lt;=- bind the function to &grave;this&grave;</i>
 }
-<b>var</b>
-s
-=
-<b>new</b>
-SomeClass
-(
-&quot;hello&quot;
-,
-someElement
-)
-;
-<b>Solutions</b> Use bind
-bind effectively generates a new function that sets <b>this</b> to
-whatever was passed to bind then calls the original function.
-<b>function</b>
-SomeClass
-(
-msg
-,
-elem
-)
-{
-<b>this</b>
-.
-msg
-=
-msg
-;
-elem.
-addEventListener
-(
-&apos;click&apos;
-,
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-<b>this</b>
-.
-msg
-)
-;
+</pre>
+</li>
+  <li>Use arrow functions<br/>
+  Arrow functions automatically bind the current <b>this</b> context.
+<pre>
+<b>function</b> SomeClass(msg, elem) {
+  <b>this</b>.msg = msg;
+  elem.addEventListener(&apos;click&apos;, () =&gt; { // <i>&lt;=- arrow function binds &grave;this&grave;</i>
+    console.log(<b>this</b>.msg);
+  });
 }
-.
-bind
-(
-<b>this</b>
-)
-)
-;
-// <i> &lt;=- bind the function to &grave;this&grave;</i>
-}
-Use arrow functions
-Arrow functions automatically bind the current <b>this</b> context.
-<b>function</b>
-SomeClass
-(
-msg
-,
-elem
-)
-{
-<b>this</b>
-.
-msg
-=
-msg
-;
-elem.
-addEventListener
-(
-&apos;click&apos;
-,
-(
-)
-=&gt;
-{
-// <i> &lt;=- arrow function binds &grave;this&grave;</i>
-console.
-log
-(
-<b>this</b>
-.
-msg
-)
-;
-}
-)
-;
-}
-Often you&apos;d like to call a member function, ideally passing any
-arguments that were passed to the event on to the function.
-<b>Solutions:</b>
-Use bind
-<b>function</b>
-SomeClass
-(
-msg
-,
-elem
-)
-{
+</pre>
+</li>
+<p>Often you&apos;d like to call a member function, ideally passing any
+arguments that were passed to the event on to the function.</p>
+</ul>
+<p><b>Solutions:</b></p>
+<ul>
+  <li>Use bind<br/>
+  <pre>
+  <b>function</b> SomeClass(msg, elem) {
+    <b>this</b>.msg = msg;
+    elem.addEventListener(&apos;click&apos;, this.handleClick.bind(this)));
+  }
+  SomeClass.prototype.handleClick = function(event) {
+    console.log(event.type, this.msg);
+  };
+  </pre>
+  </li>
+  <li>For DOM event listeners in particular you can implement the <a href="">EventListener interface</a>
+  <pre>
+  function SomeClass(msg, elem} {
+    this.msg = msg;
+	elem.addEventListener(&apos;click&apos;, this);
+  }
+  SomeClass.prototype.handleEvent = function(event) {
+    var fn = this&lbrack;event.type&rbrack;;
+	if (fn) {
+	  fn.apply(this, arguments);
+	}
+  };
+  SomeClass.prototype.click = function(event) {
+    console.log(this.msg);
+  };
+  </pre>
+  </li>
+</ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p align="left">
+<!-- <p align="left">
   <img src="./images/image031.png"
   title=" "
   alt="."
   style="border: 2px solid #000000; width:7.197in;" />
+-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch29-5">Section 29.5: Callback using Arrow function</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Using arrow function as callback function can reduce lines of
-code.</b>
-The default syntax for arrow function is
-(
-)
-=&gt;
-{
+<p><b>Using arrow function as callback function can reduce lines of code.</b></p>
+<p>The default syntax for arrow function is</p>
+<pre>
+() =&gt; {}
+</pre>
+<p>This can be used as callbacks</p>
+<p>For example if we want to print all elements in an array &lbrack;1,2,3,4,5&rbrack;
+without arrow function, the code will look like this &lbrack;</p>
+<pre>
+&lbrack;1,2,3,4,5&rbrack;.forEach(<b>function</b>(x) {
+  console.log(x);
 }
-This can be used as callbacks
-For example if we want to print all elements in an array &lbrack;1,2,3,4,5&rbrack;
-without arrow function, the code will look like this
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-&rbrack;
-.
-forEach
-(
-<b>function</b>
-(
-x
-)
-{
-console.
-log
-(
-x
-)
-;
-}
-With arrow function, it can be reduced to
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-&rbrack;
-.
-forEach
-(
-x
-=&gt;
-console.
-log
-(
-x
-)
-)
-;
-<b>function</b>   (x){   console.log    (x)} is reduced to x   =&gt;console.log
-Here the callback function (x)
+</pre>
+<p>With arrow function, it can be reduced to</p>
+<!-- page 218 -->
+<pre>
+&lbrack;1,2,3,4,5&rbrack;.forEach(x =&gt; console.log(x));
+</pre>
+<p>Here the callback function <b>function(x){console.log(x)) is reduced to x=&gt;console.log(x)</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch29-6">Section 29.6: Error handling and control-flow branching</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
