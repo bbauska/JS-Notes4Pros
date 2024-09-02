@@ -13131,7 +13131,6 @@ window.setTimeout(stopFunc, 3000);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch30-6">Section 30.6: setTimeout, order of operations, clearTimeout</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p><b>setTimeout</b></p>
 <ul>
   <li>Executes a function, after waiting a specified number of milliseconds.</li>
@@ -13203,4 +13202,672 @@ execution queue. This one is just pushed to the end of the queue.</p>
 clearTimeout(timeout);  // <i>The timeout will no longer be executed</i>
 </pre>
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch31">Chapter 31: Regular expressions</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th>Flags</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>g</td>
+      <td><b>g</b>lobal. All matches (don't return on the first match).</td>
+    </tr>
+    <tr>
+      <td>m</td>
+      <td><b>m</b>ulti-line. Causes &Hat;&amp;&dollar; to match the begin/end of each line (not only begin/end of string).</td>
+    </tr>
+    <tr>
+      <td>i</td>
+      <td><b>i</b>nsensitive: Case insensitive match (ignores case of &lbrack;a-zA-Z&rbrack;).</td>
+    </tr>
+    <tr>
+      <td>u</td>
+      <td><b>u</b>nicode: Pattern strings are treated as <b>UTF-16</b>. Also causes escape sequences to match
+	  Unicode characters.</td>
+    </tr>
+    <tr>
+      <td>y</td>
+      <td>stick<b>y</b>: matches only from the index indicated by the lastIndex property of this regular expression
+	  in the target string (and does not attempt to match from any later indexes).</td>
+    </tr>
+  </tbody>
+</table>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch31-1">Section 31.1: Creating a RegExp Object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p><b>Standard Creation</b></p>
+<p>It is recommended to use this form only when creating regex from
+dynamic variables.</p>
+<p>Use when the expression may change or the expression is user generated.</p>
+<pre>
+<b>var</b> re = <b>new</b> RegExp(&quot;.&ast;&quot;);
+</pre>
+<p>With flags:</p>
+<pre>
+<b>var</b> re = <b>new</b> RegExp(&quot;.&ast;&quot;, &quot;gmi&quot;);
+</pre>
+<p>With a backslash: (this must be escaped because the regex is specified
+with a string)</p>
+<pre>
+<b>var</b> re = <b>new</b> RegExp(&quot;<b>&bsol;&bsol; &amp;ast;</b>w&ast;&quot;);
+</pre>
+<p><b>Static initialization</b></p>
+<p>Use when you know the regular expression will not change, and you know
+what the expression is before runtime.</p>
+<pre>
+<b>var</b> re = */.&ast;/*;
+</pre>
+<p>With flags:</p>
+<pre>
+<b>var</b> re = */.&ast;/gmi*;
+</pre>
+<p>With a backslash: (this should not be escaped because the regex is
+specified in a literal)</p>
+<pre>
+<b>var</b> re = */&bsol;&bsol;w&ast;/*;
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch31-2">Section 31.2: RegExp Flags</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>There are several flags you can specify to alter the RegEx behaviour. Flags may be 
+appended to the end of a regex literal, such as specifying gi in test/gi, or they may 
+be specified as the second argument to the RegExp constructor, as in 
+<b>new</b> RegExp(&apos;test&apos;, &apos;gi&apos;).</p>
+<ul>
+  <li>g - Global. Finds all matches instead of stopping after the first.</li>
+  <li>i - Ignore case. /&lbrack;a-z&rbrack;/i is equivalent to 
+  /&lbrack;a&bsol;Z&rbrack;/.</li>
+  <li>m - Multiline. &Hat; and &dollar; match the beginning and end of each line
+    respectively treating &bsol;&bsol;n and &bsol;&bsol;r as delimiters instead 
+	of simply the beginning and end of the entire string.</li>
+</ul>
+<h5>Version ≥ 6</h5>
+<ul>
+  <li>u - Unicode. If this flag is not supported you must match specific
+Unicode characters with &bsol;&bsol;uXXXX where XXXX is the character&apos;s value
+in hexadecimal.</li>
+  <li>y - Finds all consecutive/adjacent matches.</li>
+</ul>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch31-3">Section 31.3: Check if string contains pattern using .test()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+<b>var</b> re = <i>/&lbrack;a-z&rbrack;+/</i>;
+<b>if</b> (re.test(&quot;foo&quot;)) {
+  console.log(&quot;Match exists.&quot;);
+}
+</pre>
+<p>The test method performs a search to see if a regular expression
+matches a string. The regular expression &lbrack;a-z&rbrack;+ will search for one
+or more lowercase letters. Since the pattern matches the string,
+"match exists" will be logged to the console.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch31-4">Section 31.4: Matching With .exec()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p><b>Match Using .exec()</b></p>
+<p>RegExp.<b>prototype</b> . exec (string) returns an array of captures, or <b>null</b> if there was no match.
+</p>
+<pre>
+<b>var</b> re = */(&lbrack;0-9&rbrack;+)&lbrack;a-z&rbrack;+/*;
+<b>var</b> match = re.exec(&quot;foo123bar&quot;);
+</pre>
+<p>match.index is 3, the (zero-based) location of the match.</p>
+<p>match&lbrack;0&rbrack; is the full match string.</p>
+<p>match&lbrack;1&rbrack; is the text corresponding to the first captured group.match&lbrack;n&rbrack; 
+ would be the value of the <i>n</i>th captured group.</p>
+<p><b>Loop Through Matches Using .exec()</b></p>
+<pre>
+<b>var</b> re = <i>/a/g</i>;
+<b>var</b> result;
+while ((result = re.exec(&apos;barbatbaz&apos;)) !== <b>null</b>) {
+  console.log(&quot;found &apos;&quot; &plus; result&lbrack;0&rbrack; &plus; &quot;&apos;, next exec starts at index &apos;&quot; &plus; re.lastIndex &plus; &quot;&apos;&quot;);
+}
+</pre>
+<p>Expected output</p>
+<blockquote>
+found &apos;a&apos;, next exec starts at index &apos;2&apos;
+found &apos;a&apos;, next exec starts at index &apos;5&apos;
+found &apos;a&apos;, next exec starts at index &apos;8&apos;
+</blockquote>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch31-5">Section 31.5: Using RegExp With Strings</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The String object has the following methods that accept regular
+expressions as arguments.
+&quot;string&quot;
+.
+match
+(
+&hellip;
+&quot;string&quot;
+.
+replace
+(
+&hellip;
+&quot;string&quot;
+.
+split
+(
+&hellip;
+&quot;string&quot;
+.
+search
+(
+&hellip;
+<b>Match with RegExp</b>
+console.
+log
+(
+&quot;string&quot;
+.
+match
+(
+*/&lbrack;i-n&rbrack;+/*
+)
+)
+;
+console.
+log
+(
+&quot;string&quot;
+.
+match
+(
+*/(r)&lbrack;i-n&rbrack;+/*
+)
+)
+;
+Expected output
+Array &lbrack;&quot;in&quot;&rbrack;
+Array &lbrack;&quot;rin&quot;, &quot;r&quot;&rbrack;
+<b>Replace with RegExp</b>
+console.
+log
+(
+&quot;string&quot;
+.
+replace
+(
+*/&lbrack;i-n&rbrack;+/*
+,
+&quot;foo&quot;
+)
+)
+;
+Expected output
+strfoog
+<b>Split with RegExp</b>
+console.
+log
+(
+&quot;stringstring&quot;
+.
+split
+(
+*/&lbrack;i-n&rbrack;+/*
+)
+)
+;
+Expected output
+Array &lbrack;&quot;str&quot;, &quot;gstr&quot;, &quot;g&quot;&rbrack;
+<b>Search with RegExp</b>
+search
+.() returns the index at which a match is found or -1.
+console.
+log
+(
+&quot;string&quot;
+.
+search
+(
+*/&lbrack;i-n&rbrack;+/*
+)
+)
+;
+console.
+log
+(
+&quot;string&quot;
+.
+search
+(
+*/&lbrack;o-q&rbrack;+/*
+)
+)
+;
+Expected output
+3
+-1
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch31-6">Section 31.6: RegExp Groups</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+JavaScript supports several types of group in its Regular Expressions,
+*capture groups*, *non-capture groups* and *lookaheads*. Currently,
+there is no *look-behind* support.
+<b>Capture</b>
+pattern
+Sometimes the desired match relies on its context. This means a simple
+*RegExp* will over-find the piece of the *String* that is of interest,
+so the solution is to write a capture group (). The captured data can
+then be referenced as&hellip;
+str.match
+str.match         discards captures, use                  re.exec
+String replacement &quot;&dollar;n&quot; where n is the *n th* capture group
+(starting from 1) The *n th* argument in a callback function
+If the *RegExp* is not flagged g, the *n+1 th* item in a returned
+*Array*
+If the *RegExp* is flagged g, instead
+Say there is a *String* where all + signs need to be replaced with a
+space, but only if they follow a letter character. This means a simple
+match would include that letter character and it would also be
+removed. Capturing it is the solution as it means the matched letter
+can be preserved.
+<b>let</b>
+str
+=
+&quot;aa+b+cc+1+2&quot;
+,
+re
+=
+*/(&lbrack;a-z&rbrack;)&amp;plus;/g*
+;
+// <i> String replacement</i>
+str.
+replace
+(
+re
+,
+&apos;&dollar;1 &apos;
+)
+;
+// <i> &quot;aa b cc 1+2&quot;</i>
+// <i> Function replacement</i>
+str.
+replace
+(
+re
+,
+(
+m
+,
+&dollar;1
+)
+=&gt;
+&dollar;1
+&plus;
+&apos; &apos;
+)
+;
+// <i> &quot;aa b cc 1+2&quot;</i>
+<b>Non-Capture</b>
+?:pattern
+Using the form (), these work in a similar way to capture groups,
+except they do not store the contents of the group after the match.
+
+They can be particularly useful if other data is being captured which
+you don&apos;t want to move the indices of, but need to do some advanced
+pattern matching such as an OR
+<b>let</b>
+str
+=
+&quot;aa+b+cc+1+2&quot;
+,
+re
+=
+*/(?:&bsol;&bsol;b&vert;c)(&lbrack;a-z&rbrack;)&amp;plus;/g*
+;
+str.
+replace
+(
+re
+,
+&apos;&dollar;1 &apos;
+)
+;
+// <i> &quot;aa+b c 1+2&quot;</i>
+<b>Look-Ahead</b>
+?=pattern
+If the desired match relies on something which follows it, rather than
+matching that and capturing it, it is possible to use a look-ahead to
+test for it but not include it in the match. A positive look-ahead has
+the form (), a negative look-ahead (where the expression match only
+happens if the look-ahead pattern did not match) has the
+?!pattern
+form ()
+<b>let</b>
+str
+=
+&quot;aa+b+cc+1+2&quot;
+,
+re
+=
+*/&amp;plus;(?=&lbrack;a-z&rbrack;)/g*
+;
+str.
+replace
+(
+re
+,
+&apos; &apos;
+)
+;
+// <i> &quot;aa b cc+1+2&quot;</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch31-7">Section 31.7: Replacing string match with a callback function</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+String#replace
+can have a function as its second argument so you can provide a
+replacement based on some
+logic.
+&quot;Some string Some&quot;
+.
+replace
+(
+*/Some/g*
+,
+(
+match
+,
+startIndex
+,
+wholeString
+)
+=&gt;
+{
+<b>if</b>
+(
+startIndex
+==
+0
+)
+{
+<b>return</b>
+&apos;Start&apos;
+;
+}
+<b>else</b>
+{
+<b>return</b>
+&apos;End&apos;
+;
+}
+}
+)
+;
+// <i> will return Start string End</i>
+One line template library
+<b>let</b>
+data
+=
+{
+name
+:
+&apos;John&apos;
+,
+surname
+:
+&apos;Doe&apos;
+}
+&quot;My name is {surname}, {name} {surname}&quot;
+.
+replace
+(
+*/(?:{(.+?)})/g*
+,
+x
+=&gt;
+data
+&lbrack;
+x&period;
+slice
+(
+1
+,-
+1
+)
+&rbrack;
+)
+;
+// <i> &quot;My name is Doe, John Doe&quot;</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch31-8">Section 31.8: Using Regex.exec() with parentheses regex to extract matches of a string</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Sometimes you doesn&apos;t want to simply replace or remove the string.
+Sometimes you want to extract and process matches. Here an example of
+how you manipulate matches.
+
+What is a match ? When a compatible substring is found for the entire
+regex in the string, the exec command produce a match. A match is an
+array compose by firstly the whole substring that matched and all the
+parenthesis in the match.
+
+Imagine a html string :
+<b>&lt;</b>
+<b>html</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>head</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>/head</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>body</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>h</b>
+<b>1</b>
+<b>&gt;</b>
+Example
+<b>&lt;</b>
+<b>/h</b>
+<b>1</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>p</b>
+<b>&gt;</b>
+Look at this great link :
+<b>&lt;</b>
+<b>a</b>
+href
+=
+&quot;http://goalkicker.com&quot;
+<b>&gt;</b>
+goalkicker
+<b>&lt;</b>
+<b>/a</b>
+<b>&gt;</b>
+http://anotherlinkoutsideatag
+<b>&lt;</b>
+<b>/p</b>
+<b>&gt;</b>
+Copyright
+<b>&lt;</b>
+<b>a</b>
+href
+=
+&quot;https://stackoverflow.com&quot;
+<b>&gt;</b>
+Stackoverflow
+<b>&lt;</b>
+<b>/a</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>/body</b>
+<b>&gt;</b>
+You want to extract and get all the links inside an a tag. At first,
+here the regex you write :
+<b>var</b>
+re
+=
+*/&lt;a&lbrack;&Hat;&gt;&rbrack;&ast;href=&quot;https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;&quot;&lbrack;&Hat;&gt;&rbrack;&ast;&gt;&lbrack;&Hat;&lt;&rbrack;&ast;&lt;&bsol;&bsol;/a&gt;/g*
+;
+But now, imagine you want the href and the anchor of each link. And
+you want it together. You can simply add a new regex in for each match
+<b>OR</b> you can use parentheses :
+<b>var</b>
+re
+=
+*/&lt;a&lbrack;&Hat;&gt;&rbrack;&ast;href=&quot;(https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;)&quot;&lbrack;&Hat;&gt;&rbrack;&ast;&gt;(&lbrack;&Hat;&lt;&rbrack;&ast;)&lt;&bsol;&bsol;/a&gt;/g*
+;
+<b>var</b>
+str
+=
+&apos;&lt;html&gt;
+<b>&bsol;&bsol;n</b>
+&lt;head&gt;&lt;/head&gt;
+<b>&bsol;&bsol;n</b>
+&lt;body&gt;
+<b>&bsol;&bsol;n</b>
+&lt;h1&gt;Example&lt;/h1&gt;
+<b>&bsol;&bsol;n</b>
+&lt;p&gt;Look at this
+great link: &lt;a href=&quot;http://goalkicker.com&quot;&gt;goalkicker&lt;/a&gt;
+http://anotherlinkoutsideatag&lt;/p&gt;
+<b>&bsol;&bsol;n</b>
+<b>&bsol;&bsol;n</b>
+Copyright &lt;a href=&quot;https://stackoverflow.com&quot;&gt;Stackoverflow&lt;/a&gt;
+<b>&bsol;&bsol;n</b>
+&lt;/body&gt;
+<b>&bsol;&amp;apos;</b>
+;
+<b>&bsol;&bsol;n</b>
+&apos;
+;
+<b>var</b>
+m
+;
+<b>var</b>
+links
+=
+&lbrack;
+&rbrack;
+;
+while
+(
+(
+m
+=
+re.
+exec
+(
+str
+)
+)
+!==
+<b>null</b>
+)
+{
+<b>if</b>
+(
+m&period;
+index
+===
+re.
+lastIndex
+)
+{
+re.
+lastIndex
+++
+;
+}
+console.
+log
+(
+m
+&lbrack;
+0
+&rbrack;
+)
+;
+// <i> The all substring</i>
+console.
+log
+(
+m
+&lbrack;
+1
+&rbrack;
+)
+;
+// <i> The href subpart</i>
+console.
+log
+(
+m
+&lbrack;
+2
+&rbrack;
+)
+;
+// <i> The anchor subpart</i>
+links.
+push
+(
+{
+match
+:
+m
+&lbrack;
+0
+&rbrack;
+,
+// <i> the entire match</i>
+href
+:
+m
+&lbrack;
+1
+&rbrack;
+,
+// <i> the first parenthesis =&lpar;https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;)</i>
+anchor
+:
+m
+&lbrack;
+2
+&rbrack;
+,
+// <i> the second one =&lpar;&lbrack;&Hat;&lt;&rbrack;&ast;)</i>
+}
+)
+;
+}
+At the end of the loop, you have an array of link with anchor and href
+and you can use it to write markdown for example :
+links.
+forEach
+(
+<b>function</b>
+(
+link
+)
+{
+console.
+log
+(
+&apos;&lbrack;%s&rbrack;(%s)&apos;
+,
+link.
+anchor
+,
+link.
+href
+)
+;
+}
+)
+;
+To go further :
+Nested parenthesis
 
