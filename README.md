@@ -13062,342 +13062,145 @@ while <b>setInterval</b> would repeat indefinitely regardless of exceptions.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch30-2">Section 30.2: Intervals</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>function</b>
-waitFunc
-(
-)
-{
-console.
-log
-(
-&quot;This will be logged every 5 seconds&quot;
-)
-;
+<pre>
+<b>function</b> waitFunc() {
+  console.log(&quot;This will be logged every 5 seconds&quot;);
 }
-window.
-setInterval
-(
-waitFunc
-,
-5000
-)
-;
+window.setInterval(waitFunc, 5000);
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch30-3">Section 30.3: Intervals</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Standard</b>
-You don&apos;t need to create the variable, but it&apos;s a good practice as
+<p><b>Standard</b></p>
+<p>You don&apos;t need to create the variable, but it&apos;s a good practice as
 you can use that variable with clearInterval to stop the currently
-running interval.
-<b>var</b> int = setInterval(&quot;doSomething()&quot;, 5000 ); */&ast; 5 seconds
-&ast;/*
-<b>var</b> int = setInterval(doSomething, 5000 ); */&ast; same thing, no
-quotes, no parens &ast;/*
-If you need to pass parameters to the doSomething function, you can
+running interval.</p>
+<pre>
+<b>var</b> int = setInterval(&quot;doSomething()&quot;, 5000 ); <i>/&ast; 5 seconds &ast;/</i>
+<b>var</b> int = setInterval(doSomething, 5000 ); <i>/&ast; same thing, no quotes, no parens &ast;/</i>
+</pre>
+<p>If you need to pass parameters to the doSomething function, you can
 pass them as additional parameters beyond the first two to
-setInterval.
-<b>Without overlapping</b>
-setInterval, as above, will run every 5 seconds (or whatever you set
+setInterval.</p>
+<p><b>Without overlapping</b></p>
+<p>setInterval, as above, will run every 5 seconds (or whatever you set
 it to) no matter what. Even if the function doSomething takes long
 than 5 seconds to run. That can create issues. If you just want to
 make sure there is that pause in between runnings of doSomething, you
-can do this:
-(
-<b>function</b>
-(
-)
-{
-doSomething
-(
-)
-;
-setTimeout
-(
-arguments.
-callee
-,
-5000
-)
-;
-}
-)
-(
-)
+can do this:</p>
+<pre>
+(<b>function</b>() {
+  doSomething();
+  setTimeout(arguments.callee, 5000);
+})()
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch30-4">Section 30.4: Removing intervals</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-window.setInterval
-() returns an IntervalID, which can be used to stop that interval from
-continuing to run. To
-window.setInterval () in a variable and call clearInterval
-do this, store the return value of () with that variable as the only
-argument:
-<b>function</b>
-waitFunc
-(
-)
-{
-console.
-log
-(
-&quot;This will be logged every 5 seconds&quot;
-)
-;
+<p>window.setInterval() returns an IntervalID, which can be used to stop that interval from
+continuing to run. To do this, store the return value of window.setInterval() in a variable and 
+call clearInterval() with that variable as the only argument:</p>
+<pre>
+<b>function</b> waitFunc() {
+  console.log(&quot;This will be logged every 5 seconds&quot;);
 }
-<b>var</b>
-interval
-=
-window.
-setInterval
-(
-waitFunc
-,
-5000
-)
-;
-window.
-setTimeout
-(
-<b>function</b>
-(
-)
-{
-clearInterval
-(
-interval
-)
-;
-}
-,
-32000
-)
-;
-This will be logged every  5   seconds
-This will log every 5 seconds, but will stop it after 32 seconds. So
-it will log the message 6 times.
+<b>var</b> interval = window.setInterval(waitFunc, 5000);
+window.setTimeout(<b>function</b>() {
+  clearInterval(interval);
+},32000);
+</pre>
+<p>This will log "This will be logged every 5 seconds" every 5 seconds, but will stop it 
+after 32 seconds.  So it will log  the message 6 times.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch30-5">Section 30.5: Removing timeouts</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-window.setTimout
-() returns a TimeoutID, which can be used to stop that timeout from
-running. To do this, store
-window.setTimeout () in a variable and call clearTimeout
-the return value of () with that variable as the only argument:
-<b>function</b>
-waitFunc
-(
-)
-{
-console.
-log
-(
-&quot;This will not be logged after 5 seconds&quot;
-)
-;
+<p>window.setTimout () returns a TimeoutID, which can be used to stop that timeout from
+running. To do this, store the return value of window.setTimeout() in a variable and call 
+clearTimeout() with that variable as the only argument.</p>
+<pre>
+<b>function</b> waitFunc() {
+  console.log(&quot;This will not be logged after 5 seconds&quot;);
 }
-<b>function</b>
-stopFunc
-(
-)
-{
-clearTimeout
-(
-timeout
-)
-;
+<b>function</b> stopFunc() {
+  clearTimeout(timeout);
 }
-<b>var</b>
-timeout
-=
-window.
-setTimeout
-(
-waitFunc
-,
-5000
-)
-;
-window.
-setTimeout
-(
-stopFunc
-,
-3000
-)
-;
-This will not log the message because the timer is stopped after 3
-seconds.
+<b>var</b> timeout = window.setTimeout(waitFunc, 5000);
+window.setTimeout(stopFunc, 3000);
+</pre>
+<p>This will not log the message because the timer is stopped after 3 seconds.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch30-6">Section 30.6: setTimeout, order of operations, clearTimeout</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-<b>setTimeout</b>
-Executes a function, after waiting a specified number of milliseconds.
-used to delay the execution of a function.
-setTimeout ( <b>function</b>, milliseconds) or window.setTimeout(<b>function</b>, milliseconds
-<b>Syntax :</b> )
-<b>Example :</b> This example outputs &quot;hello&quot; to the console after 1
+<p><b>setTimeout</b></p>
+<ul>
+  <li>Executes a function, after waiting a specified number of milliseconds.</li>
+  <li>Used to delay the execution of a function.
+</ul>
+
+<p><b>Syntax:</b> setTimeout ( <b>function</b>, milliseconds) or 
+window.setTimeout(<b>function</b>, milliseconds)</p>
+
+<p><b>Example :</b> This example outputs &quot;hello&quot; to the console after 1
 second. The second parameter is in milliseconds, so 1000 = 1 sec, 250
-= 0.25 sec, etc.
-setTimeout
-(
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-&apos;hello&apos;
-)
-;
+= 0.25 sec, etc.</p>
+<pre>
+setTimeout(<b>function</b>() {
+  console.log(&apos;hello&apos;);
+}, 1000);
+</pre>
+<p><b>Problems with setTimeout</b></p>
+<p>if you&apos;re using the setTimeout method in a for loop:</p>
+<!-- page 221 -->
+<pre>
+<b>for</b> (i = 0; i &lt; 3; ++i) {
+  setTimeout(<b>function</b>() {
+    console.log(i);
+  }, 500);
 }
-,
-1000
-)
-;
-<b>Problems with setTimeout</b> if you&apos;re using the setTimeout method in
-a for loop <b>:</b>
-<b>for</b>
-(
-i
-=
-0
-;
-i
-&lt;
-3
-;
-++
-i
-)
-{
-setTimeout
-(
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-i
-)
-;
+</pre>
+<p>This will output the value 3 times, which is not correct.</p>
+<p>Workaround of this problem :</p>
+<pre>
+<b>for</b> (i = 0; i &lt; 3; ++i) {
+  setTimeout(<b>function</b>(j) {
+    console.log(i);
+  } (i), 1000);
 }
-,
-500
-)
-;
-}
-three
-This will output the value 3 times, which is not correct.
-Workaround of this problem :
-<b>for</b>
-(
-i
-=
-0
-;
-i
-&lt;
-3
-;
-++
-i
-)
-{
-setTimeout
-(
-<b>function</b>
-(
-j
-)
-{
-console.
-log
-(
-i
-)
-;
-}
-(
-i
-)
-,
-1000
-)
-;
-}
-It will output the value 0,1,2. Here, we're passing the i into the
-function as a parameter(j).
-<b>Order of operations</b>
-Additionally though, due to the fact that JavaScript is single
+</pre>
+<p>It will output the value 0,1,2. Here, we're passing the i into the
+function as a parameter(j).</p>
+<p><b>Order of operations</b></p>
+<p>Additionally though, due to the fact that JavaScript is single
 threaded and uses a global event loop, setTimeout can be used to add
 an item to the end of the execution queue by calling setTimeout with
-zero delay. For example:
-setTimeout
-(
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-&apos;world&apos;
-)
-;
-}
-,
-0
-)
-;
-console.
-log
-(
-&apos;hello&apos;
-)
-;
-Will actually output:
+zero delay. For example:</p>
+<pre>
+setTimeout(<b>function</b>() {
+  console.log(&apos;world&apos;);
+}, 0);
+console.log(&apos;hello&apos;);
+</pre>
+<p>Will actually output:</p>
+<pre>
 hello
 world
-setTimeout
-Also, zero milliseconds here does not mean the function inside the
+</pre>
+<p>Also, zero milliseconds here does not mean the function inside the
 setTimeout will execute immediately. It will take slightly more than
 that depending upon the items to be executed remaining in the
-execution queue. This one is just pushed to the end of the queue.
-<b>Cancelling a timeout clearTimeout() :</b> stops the execution of the
-function specified in () <b>Syntax :</b> clearTimeout(timeoutVariable) or
-window.clearTimeout(timeoutVariable)
-<b>Example :</b>
-<b>var</b>
-timeout
-=
-setTimeout
-(
-**function**
-(
-)
-{
-console.
-log
-(
-&apos;hello&apos;
-)
-;
-}
-,
-1000
-)
-;
-clearTimeout
-(
-timeout
-)
-;
-*// The timeout will no longer be executed*
+execution queue. This one is just pushed to the end of the queue.</p>
+
+<p><b>Cancelling a timeout</b></p>
+<p><b>clearTimeout():</b> stops the execution of the function specified in setTimeout()</p>
+<b>Syntax:</b> clearTimeout(timeoutVariable) or window.clearTimeout(timeoutVariable)</p>
+
+<p><b>Example:</b></p>
+<pre>
+<b>var</b> timeout = setTimeout(<b>function</b>() {
+  console.log(&apos;hello&apos;);
+}, 1000);
+clearTimeout(timeout);  // <i>The timeout will no longer be executed</i>
+</pre>
+
+
