@@ -13846,6 +13846,7 @@ which are supported by all browsers.</p>
 the getAttribute and setAttribute methods which are used to access any
 attribute including the data attributes. The two functions in the
 example above can be written this way:</p>
+<pre>
 <b>&lt;script&gt;</b>
 function showDetails(item) {
   var msg = item.innerHTML
