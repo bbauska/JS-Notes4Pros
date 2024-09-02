@@ -13396,7 +13396,7 @@ then be referenced as&hellip;</p>
 <ul>
   <li>String replacement &quot;&dollar;n&quot; where n is the <i>n th</i> capture group
 (starting from 1)</li>
-  <li>The <i>n th</o> argument in a callback function</li>
+  <li>The <i>n th</i> argument in a callback function</li>
   <li>If the <i>RegExp</i> is not flagged g, the <i>n+1 th</i> item in a returned
     <i>Array</i></li>
   <li>If the <i>RegExp</i> is flagged g, str.match discards capters, use re.exec instead</li>
@@ -13433,352 +13433,112 @@ the form (), a negative look-ahead (where the expression match only
 happens if the look-ahead pattern did not match) has the form (?!pattern)</p>
 <pre>
 <b>let</b> str = &quot;aa+b+cc+1+2&quot;,
-  re = <i>/&amp;plus;(?=&lbrack;a-z&rbrack;)/g</i>;
+  re = <i>/\&plus;(?=&lbrack;a-z&rbrack;)/g</i>;
 str.replace(re, &apos; &apos;);  // <i> &quot;aa b cc+1+2&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch31-7">Section 31.7: Replacing string match with a callback function</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-String#replace
-can have a function as its second argument so you can provide a
-replacement based on some
-logic.
-&quot;Some string Some&quot;
-.
-replace
-(
-<i>/Some/g</i>
-,
-(
-match
-,
-startIndex
-,
-wholeString
-)
-=&gt;
-{
-<b>if</b>
-(
-startIndex
-==
-0
-)
-{
-<b>return</b>
-&apos;Start&apos;
-;
-}
-<b>else</b>
-{
-<b>return</b>
-&apos;End&apos;
-;
-}
-}
-)
-;
+<p>String#replace can have a function as its second argument so you can provide a
+replacement based on some logic.</p>
+<pre>
+&quot;Some string Some&quot;.replace(/Some/g, (match, startIndex, wholeString) =&gt; {
+  <b>if</b>(startIndex == 0) {
+    <b>return</b> &apos;Start&apos;;
+  } <b>else</b> {
+    <b>return</b> &apos;End&apos;;
+  }
+  });
 // <i> will return Start string End</i>
-One line template library
-<b>let</b>
-data
-=
-{
-name
-:
-&apos;John&apos;
-,
-surname
-:
-&apos;Doe&apos;
-}
-&quot;My name is {surname}, {name} {surname}&quot;
-.
-replace
-(
-<i>/(?:{(.+?)})/g</i>
-,
-x
-=&gt;
-data
-&lbrack;
-x&period;
-slice
-(
-1
-,-
-1
-)
-&rbrack;
-)
-;
+</pre>
+<!-- page 226 -->
+<p>One line template library</p>
+<pre>
+<b>let</b> data = {name: &apos;John&apos;, surname: &apos;Doe&apos;}
+&quot;My name is {surname}, {name} {surname}&quot;.replace(<i>/(?:{(.+?)})/g</i>, x =&gt;data&lbrack;x&period;slice(1,-1)&rbrack;);
 // <i> &quot;My name is Doe, John Doe&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch31-8">Section 31.8: Using Regex.exec() with parentheses regex to extract matches of a string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Sometimes you doesn&apos;t want to simply replace or remove the string.
+<p>Sometimes you doesn&apos;t want to simply replace or remove the string.
 Sometimes you want to extract and process matches. Here an example of
-how you manipulate matches.
+how you manipulate matches.</p>
 
-What is a match ? When a compatible substring is found for the entire
+<p>What is a match ? When a compatible substring is found for the entire
 regex in the string, the exec command produce a match. A match is an
 array compose by firstly the whole substring that matched and all the
-parenthesis in the match.
+parenthesis in the match.</p>
 
-Imagine a html string :
-<b>&lt;</b>
-<b>html</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>head</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>/head</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>body</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>h</b>
-<b>1</b>
-<b>&gt;</b>
-Example
-<b>&lt;</b>
-<b>/h</b>
-<b>1</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>p</b>
-<b>&gt;</b>
-Look at this great link :
-<b>&lt;</b>
-<b>a</b>
-href
-=
-&quot;http://goalkicker.com&quot;
-<b>&gt;</b>
-goalkicker
-<b>&lt;</b>
-<b>/a</b>
-<b>&gt;</b>
-http://anotherlinkoutsideatag
-<b>&lt;</b>
-<b>/p</b>
-<b>&gt;</b>
-Copyright
-<b>&lt;</b>
-<b>a</b>
-href
-=
-&quot;https://stackoverflow.com&quot;
-<b>&gt;</b>
-Stackoverflow
-<b>&lt;</b>
-<b>/a</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>/body</b>
-<b>&gt;</b>
-You want to extract and get all the links inside an a tag. At first,
-here the regex you write :
-<b>var</b>
-re
-=
-<i>/&lt;a&lbrack;&Hat;&gt;&rbrack;&ast;href=&quot;https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;&quot;&lbrack;&Hat;&gt;&rbrack;&ast;&gt;&lbrack;&Hat;&lt;&rbrack;&ast;&lt;&bsol;&bsol;/a&gt;/g</i>
-;
-But now, imagine you want the href and the anchor of each link. And
-you want it together. You can simply add a new regex in for each match
-<b>OR</b> you can use parentheses :
-<b>var</b>
-re
-=
-<i>/&lt;a&lbrack;&Hat;&gt;&rbrack;&ast;href=&quot;(https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;)&quot;&lbrack;&Hat;&gt;&rbrack;&ast;&gt;(&lbrack;&Hat;&lt;&rbrack;&ast;)&lt;&bsol;&bsol;/a&gt;/g</i>
-;
-<b>var</b>
-str
-=
-&apos;&lt;html&gt;
-<b>&bsol;&bsol;n</b>
-&lt;head&gt;&lt;/head&gt;
-<b>&bsol;&bsol;n</b>
-&lt;body&gt;
-<b>&bsol;&bsol;n</b>
-&lt;h1&gt;Example&lt;/h1&gt;
-<b>&bsol;&bsol;n</b>
-&lt;p&gt;Look at this
-great link: &lt;a href=&quot;http://goalkicker.com&quot;&gt;goalkicker&lt;/a&gt;
-http://anotherlinkoutsideatag&lt;/p&gt;
-<b>&bsol;&bsol;n</b>
-<b>&bsol;&bsol;n</b>
-Copyright &lt;a href=&quot;https://stackoverflow.com&quot;&gt;Stackoverflow&lt;/a&gt;
-<b>&bsol;&bsol;n</b>
-&lt;/body&gt;
-<b>&bsol;&amp;apos;</b>
-;
-<b>&bsol;&bsol;n</b>
-&apos;
-;
-<b>var</b>
-m
-;
-<b>var</b>
-links
-=
-&lbrack;
-&rbrack;
-;
-while
-(
-(
-m
-=
-re.
-exec
-(
-str
-)
-)
-!==
-<b>null</b>
-)
-{
-<b>if</b>
-(
-m&period;
-index
-===
-re.
-lastIndex
-)
-{
-re.
-lastIndex
-++
-;
+<p>Imagine a html string:</p>
+<pre>
+<b>&lt;html&gt;</b>
+<b>&lt;head&gt;&lt;/head&gt;</b>
+<b>&lt;body&gt;</b>
+  <b>&lt;h1&gt;</b>Example<b>&lt;/h1&gt;</b>
+  <b>&lt;p&gt;</b>Look at this great link : <b>&lt;a</b> href=&quot;http://goalkicker.com&quot;<b>&gt;</b>goalkicker<b>&lt;/a&gt;</b>
+http://anotherlinkoutsideatag<b>&lt;/p&gt;</b>
+Copyright <b>&lt;a</b> href=&quot;https://stackoverflow.com&quot;<b>&gt;</b>Stackoverflow<b>&lt;/a&gt;&lt;</b>
+<b>/body&gt;</b>
+</pre>
+<p>You want to extract and get all the links inside an a tag. At first, here the regex you write:</p>
+<pre>
+<b>var</b> re = <i>/&lt;a&lbrack;&Hat;&gt;&rbrack;&ast;href=&quot;https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;&quot;&lbrack;&Hat;&gt;&rbrack;&ast;&gt;&lbrack;&Hat;&lt;&rbrack;&ast;&lt;&bsol;&bsol;/a&gt;/g</i>;
+</pre>
+<p>But now, imagine you want the href and the anchor of each link. And
+you want it together. You can simply add a new regex in for each match <b>OR</b> you can use parentheses:</p>
+<pre>
+<b>var</b> re = <i>/&lt;a&lbrack;&Hat;&gt;&rbrack;&ast;href=&quot;(https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;)&quot;&lbrack;&Hat;&gt;&rbrack;&ast;&gt;(&lbrack;&Hat;&lt;&rbrack;&ast;)&lt;&bsol;&bsol;/a&gt;/g</i>;
+<b>var</b> str = &apos;&lt;html&gt;<b>&bsol;n</b> &lt;head&gt;&lt;/head&gt;<b>&bsol;&bsol;n</b> &lt;body&gt;<b>&bsol;&bsol;n</b> &lt;h1&gt;Example&lt;/h1&gt;<b>&bsol;&bsol;n</b> &lt;p&gt;Look at this
+great link: &lt;a href=&quot;http://goalkicker.com&quot;&gt;goalkicker&lt;/a&gt; http://anotherlinkoutsideatag&lt;/p&gt;<b>&bsol;&bsol;n</b><b>&bsol;&bsol;n</b>
+  Copyright &lt;a href=&quot;https://stackoverflow.com&quot;&gt;Stackoverflow&lt;/a&gt;<b>&bsol;&bsol;n</b> &lt;/body&gt;<b>&bsol;&amp;apos;</b>;<b>&bsol;&bsol;n</b>&apos;;
+<b>var</b> m;
+<b>var</b> links = &lbrack;&rbrack;;
+while ((m = re.exec(str)) !== <b>null</b>) {
+  <b>if</b> (m&period;index === re.lastIndex) {
+    re.lastIndex++;
+  }
+  console.log(m&lbrack;0&rbrack;); // <i> The all substring</i>
+  console.log(m&lbrack;1&rbrack;); // <i> The href subpart</i>
+  console.log(m&lbrack;2&rbrack;); // <i> The anchor subpart</i>
+  links.push({
+    match : m&lbrack;0&rbrack;,  // <i> the entire match</i>
+    href : m&lbrack;1&rbrack;,   // <i> the first parenthesis =&lpar;https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;)</i>
+    anchor : m&lbrack;2&rbrack;,  // <i> the second one =&lpar;&lbrack;&Hat;&lt;&rbrack;&ast;)</i>
+  });
 }
-console.
-log
-(
-m
-&lbrack;
-0
-&rbrack;
-)
-;
-// <i> The all substring</i>
-console.
-log
-(
-m
-&lbrack;
-1
-&rbrack;
-)
-;
-// <i> The href subpart</i>
-console.
-log
-(
-m
-&lbrack;
-2
-&rbrack;
-)
-;
-// <i> The anchor subpart</i>
-links.
-push
-(
-{
-match
-:
-m
-&lbrack;
-0
-&rbrack;
-,
-// <i> the entire match</i>
-href
-:
-m
-&lbrack;
-1
-&rbrack;
-,
-// <i> the first parenthesis =&lpar;https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;)</i>
-anchor
-:
-m
-&lbrack;
-2
-&rbrack;
-,
-// <i> the second one =&lpar;&lbrack;&Hat;&lt;&rbrack;&ast;)</i>
-}
-)
-;
-}
-At the end of the loop, you have an array of link with anchor and href
-and you can use it to write markdown for example :
-links.
-forEach
-(
-<b>function</b>
-(
-link
-)
-{
-console.
-log
-(
-&apos;&lbrack;%s&rbrack;(%s)&apos;
-,
-link.
-anchor
-,
-link.
-href
-)
-;
-}
-)
-;
-To go further :
-Nested parenthesis
-
+</pre>
+<!-- page 227 -->
+<p>At the end of the loop, you have an array of link with anchor and href
+and you can use it to write markdown for example:</p>
+<pre>
+links.forEach(<b>function</b>(link) {
+  console.log(&apos;&lbrack;%s&rbrack;(%s)&apos;, link.anchor, link.href);
+});
+</pre>
+<p>To go further:</p>
+<ul>
+  <li>Nested parenthesis</li>
+</ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch32">Chapter 32: Cookies</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch32-1">Section 32.1: Test if cookies are enabled</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-navigator.cookieEnabled
-If you want to make sure cookies are enabled before using them, you
-can use :
-<b>if</b>
-(
-navigator.
-cookieEnabled
-===
-<b>false</b>
-)
+<p>If you want to make sure cookies are enabled before using them, you can use navigator.cookieEnabled:</p>
+<pre>
+<b>if</b> (navigator.cookieEnabled === <b>false</b>)
 {
-alert
-(
-&quot;Error: cookies not enabled!&quot;
-)
-;
+  alert(&quot;Error: cookies not enabled!&quot;);
 }
-navigator.cookieEnabled
-Note that on older browsers may not exist and be undefined. In those
-cases you won&apos;t detect that cookies are not enabled.
+</pre>
+<p>Note that on older browsers navigator.cookieEneabled may not exist and be undefined. In those
+cases you won&apos;t detect that cookies are not enabled.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch32-2">Section 32.2: Adding and Setting Cookies</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>The following variables set up the below example:</p>
 <!--
-The following variables set up the below example:
 <b>var</b> COOKIE_NAME = &quot;Example Cookie&quot;; */&ast; The cookie&apos;s name.
 &ast;/* <b>var</b> COOKIE_VALUE = &quot;Hello, world!&quot;; */&ast; The cookie&apos;s
 value. &ast;/* <b>var</b> COOKIE_PATH = &quot;/foo/bar&quot;; */&ast; The cookie&apos;s
