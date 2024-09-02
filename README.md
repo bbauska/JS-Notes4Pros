@@ -1849,7 +1849,7 @@ testing frameworks and that code execution will not break on a failed assertion.
 in JavaScript, however in certain cases it might yield some unexpected
 results &hellip;</p>
 
-<ol>
+<ol type="1" start="1">
   <li><b>Strings</b><br/>
   <b>typeof</b> &quot;String&quot; or
   <b>typeof</b> Date(2011,01,01)
@@ -1951,7 +1951,7 @@ somewhat wast category&hellip;</p>
 is and one way to do it is to use object constructor name to get what flavor of object it 
 actually is: Object.<b>prototype</b>.toString.call(yourObject)</p>
 
-<ol>
+<ol type="1" start="1">
   <li><b>String</b><br/>
     Object.<b>prototype</b>.toString.call(&quot;String&quot;)<br/>
     <blockquote>
@@ -3998,7 +3998,7 @@ Specification for the == operator:</a></p>
 <b>7.2.13 Abstract Equality Comparison</b>
 The comparison x == y, where x and y are values, produces <b>true</b> or <b>false</b>. Such a 
 comparison is performed as follows:
-<ol>
+<ol type="1" start="1">
   <li>If Type(x) is the same as Type(y), then:
     <ul>
       <li><b>a.</b> Return the result of performing Strict Equality Comparison x === y.</li>
@@ -5066,7 +5066,7 @@ func (1, 2, 3); // <i>→ &lbrack;1, 2, 3&rbrack;</i>
 
 <p><b>Convert Array-like Objects to Arrays in ES6</b></p>
 
-<ol>
+<ol type="1" start="1">
   <li>Array.from:</li>
 </ol>
 <h5>Version ≥ 6</h5>
@@ -5666,11 +5666,10 @@ dates.sort(<b>function</b>(a, b) {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-6">Section 12.6: Iteration</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p><b>A traditional for-loop</b></p>
 
 <p>A traditional <b>for</b> loop has three components:</p>
-<ol>
+<ol type="1" start="1">
   <li><b>The initialization:</b> executed before the look block is executed
     the first time</li>
   <li><b>The condition:</b> checks a condition every time before the loop
@@ -6419,7 +6418,7 @@ as a function.</p>
 parameter&rbrack; and the filter method also takes a function and passes it the current array 
 item as parameter, you could read it like the following:</p>
 
-<ol>
+<ol type="1" start="1">
   <li>Boolean (0) returns false</li>
   <li>Boolean(<b>undefined</b>) returns false
   <li>Boolean({}) returns <b>true</b> which means push it to the returned array</li>
@@ -7720,7 +7719,7 @@ different methods will be discussed deeply below.</p>
 <p><i><b>Methods of retrieving properties:</b></i></p>
 <p>Properties from an object could be retrieved by the following methods,</p>
 
-<ol>
+<ol type="1" start="1">
   <li><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in"><b>for</b>..<b>in</b></a> loop<br/>
   <p>This loop is very useful in retrieving enumerable properties from an object. 
   Additionally this loop will retrieve enumerable own properties as well as it will do the 
@@ -7920,7 +7919,7 @@ it). By and large, a property associates a name to a behavior (we can think of t
 behavior as a black box).</p>
 
 <p>There are two types of named properties:</p>
-<ol>
+<ol type="1" start="1">
   <li><i>data property</i>: the property&apos;s name is associated with a value.</li>
   <li><i>accessor property</i>: the property&apos;s name is associated with one or
     two accessor functions.</li>
@@ -8276,7 +8275,7 @@ there is not enough left to subtract again without it changing sign.
 The remainder is thus:42 - 4 &ast; 10 = 2.</p>
 
 <p>The remainder operator may be useful for the following problems:</p>
-<ol start="1">
+<ol type="1" start="1">
   <li>Test if an integer is (not) divisible by another number:<br/>
   <pre>
   x &percnt; 4 == 0  // <i>true if x is divisible by 4</i>
@@ -11994,7 +11993,7 @@ export class SecretAgent {
 <h3 id="ch22-9">Section 22.9: Class Name binding</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>ClassDeclaration&apos;s Name is bound in different ways in different scopes -</p>
-<ol>
+<ol type="1" start="1">
   <li>The scope in which the class is defined - <b>let</b> binding</li>
   <li>The scope of the class itself - within { and } in class {} - <b>const</b> binding</li>
 </ol>
@@ -12286,7 +12285,7 @@ console.log(person.firstname, person.lastname);  // <i> Foo Bar</i>
 <h3 id="ch26-1">Section 26.1: Page, DOM and Browser loading</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>This is an example to explain the variations of load events.</p>
-<ol start = "1">
+<ol type="1" start = "1">
   <li><b>onload event</b></li>
 </ol>
 <pre>
@@ -12302,7 +12301,7 @@ console.log(person.firstname, person.lastname);  // <i> Foo Bar</i>
 </pre>
 <p>In this case, the message is logged once <i>all the contents of the page
 including the images and stylesheets(if any)</i> are completely loaded.</p>
-<ol start = "2">
+<ol type="1" start = "2">
   <li><b>DOMContentLoaded event</b></li>
 </ol>
 <pre>
@@ -12312,7 +12311,7 @@ document.addEventListener(&quot;DOMContentLoaded&quot;, <b>function</b>(event) {
 </pre>
 <p>In the above code, the message is logged only after the DOM/document
 is loaded (<i>ie:once the DOM is constructed</i>).</p>
-<ol start = "3">
+<ol type="1" start = "3">
   <li><b>Self-invoking anonymous function</b></li>
 </ol>
 <pre>
@@ -12865,7 +12864,7 @@ to do its job:</p>
 </pre>
 <p>In the above example, the function <b>double</b> is a callback for the
 function <b>map</b> because:</p>
-<ol start="1">
+<ol type="1" start="1">
   <li>The function <b>double</b> is given to the function map by the caller.</li>
   <li>The function <b>map</b> needs to call the function <b>double</b> zero 
     or more times in order to do its job.</li>
@@ -12882,7 +12881,7 @@ promise.then(<b>function</b>onFulfilled(value) {
 </pre>
 <!-- page 216 -->
 <p>Here then function <b>then</b> accepts two callback functions, <b>onFulfilled</b>
-and <b>onRejected<?b>. Furthermore, only one of these two callback functions
+and <b>onRejected</b>. Furthermore, only one of these two callback functions
 is actually called.</p>
 <p>What&apos;s more interesting is that the function <b>then</b> returns before
 either of the callbacks are called. Hence, a callback function may be
