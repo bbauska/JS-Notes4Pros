@@ -12552,12 +12552,11 @@ behaviors so that calls to object functions return references to self,
 or another object, providing access to additional function calls
 allowing the calling statement to chain together many calls without
 the need to reference the variable holding the objects.</p>
-<b>return</b> <b>this</b>
 <p>Objects that can be chained are said to be chainable. If you call an
 object chainable, you should ensure that all returned objects /
 primitives are of the correct type. It only takes one time for your
 chainable object to not return the correct reference (easy to forget
-to add ) and the person using your API will lose trust and avoid
+to add <b>return this</b>) and the person using your API will lose trust and avoid
 chaining. Chainable objects should be all or nothing (not a chainable
 object even if parts are). An object should not be called chainable if
 only some of its functions are.</p>
@@ -12776,14 +12775,14 @@ likely be called <i>before</i> the data is actually received, because the
 not hold up the call stack as it waits for the JSON.</p>
 <pre>
 &dollar;.getJSON(&quot;foo.json&quot;, {});
-// <i> data handling code</i>
+// <i>data handling code</i>
 </pre>
 <p>Another example of an asynchronous function is jQuery&apos;s <b>animate</b>() 
 function. Because it takes a specified time to run the animation, sometimes it
 is desirable to run some code directly following the animation.</p>
 <pre>
 <p><b>animate</b>.() syntax:</p>
-<pre>
+</pre>
 jQueryElement.animate( properties, duration, callback );
 </pre>
 <p>For example, to create a fading-out animation after which the element
