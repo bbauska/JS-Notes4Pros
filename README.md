@@ -14125,988 +14125,300 @@ JSON.stringify({x: 1, y: 1}, <b>null</b>, &apos;<b>&bsol;&bsol;t</b>&apos;)
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch35-4">Section 35.4: Serializing and restoring class instances</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-You can use a custom toJSON method and reviver function to transmit
+<p>You can use a custom toJSON method and reviver function to transmit
 instances of your own class in JSON. If an object has a toJSON method,
-its result will be serialized instead of the object itself.
+its result will be serialized instead of the object itself.</p>
 <h5>Version &lt; 6</h5>
-<b>function</b>
-Car
-(
-color
-,
-speed
-)
-{
-<b>this</b>
-.
-color
-=
-color
-;
-<b>this</b>
-.
-speed
-=
-speed
-;
+<pre>
+<b>function</b> Car(color, speed) {
+  <b>this</b>.color = color;
+  <b>this</b>.speed = speed;
 }
-Car.
-<b>prototype</b>
-.
-toJSON
-=
-<b>function</b>
-(
-)
-{
-<b>return</b>
-{
-&dollar;type
-:
-&apos;com.example.Car&apos;
-,
-color
-:
-<b>this</b>
-.
-color
-,
-speed
-:
-<b>this</b>
-.
-speed
-}
-;
-}
-;
-Car.
-fromJSON
-=
-<b>function</b>
-(
-data
-)
-{
-<b>return</b>
-<b>new</b>
-Car
-(
-data.
-color
-,
-data.
-speed
-)
-;
-}
-;
+Car.<b>prototype</b>.toJSON = <b>function</b>() {
+  <b>return</b> {
+    &dollar;type: &apos;com.example.Car&apos;,
+    color: <b>this</b>.color,
+    speed: <b>this</b>.speed
+  };
+};
+Car.fromJSON = <b>function</b>(data) {
+  <b>return</b> <b>new</b> Car(data.color, data.speed);
+};
+</pre>
 <h5>Version ≥ 6</h5>
-class
-Car
-{
-constructor
-(
-color
-,
-speed
-)
-{
-<b>this</b>
-.
-color
-=
-color
-;
-<b>this</b>
-.
-speed
-=
-speed
-;
-<b>this</b>
-.
-id&lowbar;
-=
-Math
-.
-random
-(
-)
-;
+<pre>
+class Car {
+  constructor(color, speed) {
+    <b>this</b>.color = color;
+    <b>this</b>.speed = speed;
+    <b>this</b>.id&lowbar; = Math.random();
 }
-toJSON
-(
-)
-{
-<b>return</b>
-{
-&dollar;type
-:
-&apos;com.example.Car&apos;
-,
-color
-:
-<b>this</b>
-.
-color
-,
-speed
-:
-<b>this</b>
-.
-speed
+  toJSON() {
+    <b>return</b> {
+      &dollar;type: &apos;com.example.Car&apos;,
+      color: <b>this</b>.color,
+      speed: <b>this</b>.speed
+	};
 }
-;
+  <b>static</b> fromJSON(data) {
+    <b>return</b> <b>new</b> Car(data.color, data.speed);
+  }
 }
-<b>static</b>
-fromJSON
-(
-data
-)
-{
-<b>return</b>
-<b>new</b>
-Car
-(
-data.
-color
-,
-data.
-speed
-)
-;
-}
-}
-<b>var</b>
-userJson
-=
-JSON.
-stringify
-(
-{
-name
-:
-&quot;John&quot;
-,
-car
-:
-<b>new</b>
-Car
-(
-&apos;red&apos;
-,
-&apos;fast&apos;
-)
-}
-)
-;
-This produces the a string with the following content:
+<b>var</b> userJson = JSON.stringify({
+  name: &quot;John&quot;,
+  car: <b>new</b> Car(&apos;red&apos;, &apos;fast&apos;)
+});
+</pre>
+<p>This produces the a string with the following content:</p>
+<pre>
 {&quot;name&quot;:&quot;John&quot;,&quot;car&quot;:{&quot;&dollar;type&quot;:&quot;com.example.Car&quot;,&quot;color&quot;:&quot;red&quot;,&quot;speed&quot;:&quot;fast&quot;}}
-<b>var</b> userObject = JSON.parse(userJson, <b>function</b> reviver(key,
-value) { <b>return</b> (value && value.&dollar;type === &apos;com.example.Car&apos;) ?
-Car.fromJSON(value) : value; });
-This produces the following object:
+<b>var</b> userObject = JSON.parse(userJson, <b>function</b> reviver(key, value) {
+  <b>return</b> (value && value.&dollar;type === &apos;com.example.Car&apos;) ? Car.fromJSON(value) : value;
+});
+</pre>
+<p>This produces the following object:</p>
+<pre>
 {
-name
-:
-&quot;John&quot;
-,
-car
-:
-Car
-{
-color
-:
-&quot;red&quot;
-,
-speed
-:
-&quot;fast&quot;
-,
-id&lowbar;
-:
-0.19349242527065402
+  name: &quot;John&quot;,
+  car: Car {
+    color: &quot;red&quot;,
+    speed: &quot;fast&quot;,
+    id&lowbar;: 0.19349242527065402
+  }
 }
-}
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch35-5">Section 35.5: Serializing with a replacer function</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-A replacer function can be used to filter or transform values being
-serialized.
-<b>const</b>
-userRecords
-=
-&lbrack;
-{
-name
-:
-&quot;Joe&quot;
-,
-points
-:
-14.9
-,
-level
-:
-31.5
-}
-,
-{
-name
-:
-&quot;Jane&quot;
-,
-points
-:
-35.5
-,
-level
-:
-74.4
-}
-,
-{
-name
-:
-&quot;Jacob&quot;
-,
-points
-:
-18.5
-,
-level
-:
-41.2
-}
-,
-{
-name
-:
-&quot;Jessie&quot;
-,
-points
-:
-15.1
-,
-level
-:
-28.1
-}
-,
-&rbrack;
-;
+<p>A replacer function can be used to filter or transform values being serialized.</p>
+<pre>
+<b>const</b> userRecords = &lbrack;
+  {name: &quot;Joe&quot;, points: 14.9, level: 31.5},
+  {name: &quot;Jane&quot;, points: 35.5, level: 74.4},
+  {name: &quot;Jacob&quot;, points: 18.5, level: 41.2},
+  {name: &quot;Jessie&quot;, points: 15.1, level: 28.1},
+&rbrack;;
 // <i>Remove names and round numbers to integers to anonymize records before sharing</i>
-<b>const</b>
-anonymousReport
-=
-JSON.
-stringify
-(
-userRecords
-,
-(
-key
-,
-value
-)
-=&gt;
-key
-===
-&apos;name&apos;
-?
-<b>undefined</b>
-:
-(
-<b>typeof</b>
-value
-===
-&apos;number&apos;
-?
-Math
-.
-floor
-(
-value
-)
-:
-value
-)
-)
-;
-This produces the following string:
+<b>const</b> anonymousReport = JSON.stringify(userRecords, (key, value) =&gt;
+  key === &apos;name&apos;
+    ? <b>undefined</b>
+    : (<b>typeof</b> value === &apos;number&apos; ? Math.floor(value) : value)
+);
+</pre>
+<p>This produces the following string:</p>
+<pre>
 &apos;&lbrack;{&quot;points&quot;:14,&quot;level&quot;:31},{&quot;points&quot;:35,&quot;level&quot;:74},{&quot;points&quot;:18,&quot;level&quot;:41},{&quot;points&quot;:15,&quot;level&quot;:2
-8}&rbrack;
-&apos;
+8}&rbrack;&apos;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch35-6">Section 35.6: Parsing a simple JSON string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-JSON.parse
-The () method parses a string as JSON and returns a JavaScript
-primitive, array or object:
-<b>const</b> array = JSON.parse(&apos;&lbrack;1, 2, &quot;c&quot;, &quot;d&quot;, {&quot;e&quot;:
-false}&rbrack;&apos;); console.log(array); <i>// logs: &lbrack;1, 2, &quot;c&quot;, &quot;d&quot;, {e:
-false}&rbrack;</i>
+<p>The JSON.parse() method parses a string as JSON and returns a JavaScript primitive, 
+array or object:</p>
+<pre>
+<b>const</b> array = JSON.parse(&apos;&lbrack;1, 2, &quot;c&quot;, &quot;d&quot;, {&quot;e&quot;: false}&rbrack;&apos;);
+console.log(array); <i>// logs: &lbrack;1, 2, &quot;c&quot;, &quot;d&quot;, {e: false}&rbrack;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch35-7">Section 35.7: Cyclic object values</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Not all objects can be converted to a JSON string. When an object has
-cyclic self-references, the conversion will fail. This is typically
-the case for hierarchical data structures where parent and child both
-reference each other:
-<b>const</b>
-world
-=
-{
-name
-:
-&apos;World&apos;
-,
-regions
-:
-&lbrack;
-&rbrack;
-}
-;
-world.
-regions
-.
-push
-(
-{
-name
-:
-&apos;North America&apos;
-,
-parent
-:
-&apos;America&apos;
-}
-)
-;
-console.
-log
-(
-JSON.
-stringify
-(
-world
-)
-)
-;
-// <i>{&quot;name&quot;:&quot;World&quot;,&quot;regions&quot;:&lbrack;{&quot;name&quot;:&quot;North
-America&quot;,&quot;parent&quot;:&quot;America&quot;}&rbrack;}</i>
-world.
-regions
-.
-push
-(
-{
-name
-:
-&apos;Asia&apos;
-,
-parent
-:
-world
-}
-)
-;
-console.
-log
-(
-JSON.
-stringify
-(
-world
-)
-)
-;
+<p>Not all objects can be converted to a JSON string. When an object has cyclic 
+self-references, the conversion will fail.</p>
+<p>This is typically the case for hierarchical data structures where parent and child both
+reference each other:</p>
+<pre>
+<b>const</b> world = {
+  name: &apos;World&apos;,
+  regions: &lbrack;&rbrack;
+};
+world.regions.push({
+  name: &apos;North America&apos;,
+  parent: &apos;America&apos;
+});
+console.log(JSON.stringify(world));
+// <i>{&quot;name&quot;:&quot;World&quot;,&quot;regions&quot;:&lbrack;{&quot;name&quot;:&quot;North America&quot;,&quot;parent&quot;:&quot;America&quot;}&rbrack;}</i>
+world.regions.push({
+  name: &apos;Asia&apos;,
+  parent: world
+});
+console.log(JSON.stringify(world));
 // <i>Uncaught TypeError: Converting circular structure to JSON</i>
-As soon as the process detects a cycle, the exception is raised. If
-there were no cycle detection, the string would be infinitely long.
-
+</pre>
+<p>As soon as the process detects a cycle, the exception is raised. If there were no cycle 
+detection, the string would be infinitely long.</p>
+<!-- page 240 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch36">Chapter 36: AJAX</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-AJAX stands for &quot;Asynchronous JavaScript and XML&quot;. Although the name
-includes XML, JSON is more often used due to its simpler formatting
-and lower redundancy. AJAX allows the user to communicate with
-external resources without reloading the webpage.
+<p>AJAX stands for &quot;Asynchronous JavaScript and XML&quot;. Although the name 
+includes XML, JSON is more often used due to its simpler formatting and lower redundancy. 
+AJAX allows the user to communicate with external resources without reloading the webpage.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch36-1">Section 36.1: Sending and Receiving JSON Data via POST</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 6</h5>
-json
-Fetch request promises initially return Response objects. These will
+<p>Fetch request promises initially return Response objects. These will
 provide response header information, but they don&apos;t directly include
 the response body, which may not have even loaded yet. Methods on the
-Response object such as .() can be used to wait for the response body
-to load, then parse it.
-<b>const</b>
-requestData
-=
-{
-method
-:
-&apos;getUsers&apos;
-}
-;
-<b>const</b>
-usersPromise
-=
-fetch
-(
-&apos;/api&apos;
-,
-{
-method
-:
-&apos;POST&apos;
-,
-body
-:
-JSON.
-stringify
-(
-requestData
-)
-}
-)
-.
-then
-(
-response
-=&gt;
-{
-<b>if</b>
-(
-!
-response.
-ok
-)
-{
-<b>throw</b>
-<b>new</b>
-Error
-(
-&quot;Got non-2XX response from API server.&quot;
-)
-;
-}
-<b>return</b>
-response.
-json
-(
-)
-;
-}
-)
-.
-then
-(
-responseData
-=&gt;
-{
-<b>return</b>
-responseData.
-users
-;
-}
-)
-;
-usersPromise.
-then
-(
-users
-=&gt;
-{
-console.
-log
-(
-&quot;Known users: &quot;
-,
-users
-)
-;
-}
-,
-error
-=&gt;
-{
-console.
-error
-(
-&quot;Failed to fetch users due to error: &quot;
-,
-error
-)
-;
-}
-)
-;
+Response object such as .json() can be used to wait for the response body
+to load, then parse it.</p>
+<pre>
+<b>const</b> requestData = {
+  method: &apos;getUsers&apos;
+};
+<b>const</b> usersPromise = fetch(&apos;/api&apos;, {
+  method: &apos;POST&apos;,
+  body: JSON.stringify(requestData)
+}) .then(response =&gt; {
+  <b>if</b> (!response.ok) {
+    <b>throw</b> <b>new</b> Error(&quot;Got non-2XX response from API server.&quot;);
+  }
+  <b>return</b> response.json();
+}) .then(responseData =&gt; {
+  <b>return</b> responseData.users;
+});
+usersPromise.then(users =&gt; {
+  console.log(&quot;Known users: &quot;, users);
+}, error =&gt; {
+  console.error(&quot;Failed to fetch users due to error: &quot;, error);
+});
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch36-2">Section 36.2: Add an AJAX preloader</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<p>
 Here&apos;s a way to show a GIF preloader while an AJAX call is executing.
-We need to prepare our add and remove preloader functions:
-<b>function</b>
-addPreloader
-(
-)
-{
-// <i>if the preloader doesn&apos;t already exist, add one to the page</i>
-<b>if</b>
-(
-!
-document.
-querySelector
-(
-&apos;#preloader&apos;
-)
-)
-{
-<b>var</b>
-preloaderHTML
-=
-&apos;&lt;img id=&quot;preloader&quot; src=&quot;https://goo.gl/cNhyvX&quot; /&gt;&apos;
-;
-document.
-querySelector
-(
-&apos;body&apos;
-)
-.
-innerHTML
-+=
-preloaderHTML
-;
+We need to prepare our add and remove preloader functions:</p>
+<pre>
+<b>function</b> addPreloader() {
+  // <i>if the preloader doesn&apos;t already exist, add one to the page</i>
+  <b>if</b> (!document.querySelector(&apos;#preloader&apos;)) {
+    <b>var</b> preloaderHTML = &apos;&lt;img id=&quot;preloader&quot; src=&quot;https://goo.gl/cNhyvX&quot; /&gt;&apos;;
+    document.querySelector(&apos;body&apos;).innerHTML += preloaderHTML;
+  }
 }
+<b>function</b> removePreloader() {
+  // <i>select the preloader element</i>
+  <b>var</b> preloader = document.querySelector(&apos;#preloader&apos;);
+  // <i>if it exists, remove it from the page</i>
+  <b>if</b>(preloader) {
+    preloader.remove();
+  }
 }
-<b>function</b>
-removePreloader
-(
-)
-{
-// <i>select the preloader element</i>
-<b>var</b>
-preloader
-=
-document.
-querySelector
-(
-&apos;#preloader&apos;
-)
-;
-// <i>if it exists, remove it from the page</i>
-<b>if</b>
-(
-preloader
-)
-{
-preloader.
-remove
-(
-)
-;
-}
-}
-Now we&apos;re going to look at where to use these functions.
-<b>var</b>
-request
-=
-<b>new</b>
-XMLHttpRequest
-(
-)
-;
-request.readyState ==
-Inside the onreadystatechange function you should have an if statement
-with condition: 4
-&& request.status == 200
-.
-removePreloader
-If <b>true</b>: the request is finished and response is ready that&apos;s
-where we&apos;ll use ().
-addPreloader
-Else if <b>false</b>: the request is still in progress, in this case
-we&apos;ll run the function ()
-xmlhttp.
-onreadystatechange
-=
-<b>function</b>
-(
-)
-{
-<b>if</b>
-(
-request.
-readyState
-==
-4
-&&
-request.
-status
-==
-200
-)
-{
-// <i>the request has come to an end, remove the preloader</i>
-removePreloader
-(
-)
-;
-}
-<b>else</b>
-{
-// <i>the request isn&apos;t finished, add the preloader</i>
-addPreloader
-(
-)
-}
-}
-;
-xmlhttp.
-open
-(
-&apos;GET&apos;
-,
-your_file.
-php
-,
-<b>true</b>
-)
-;
-xmlhttp.
-send
-(
-)
-;
+</pre>
+<!-- page 241 -->
+<p>Now we&apos;re going to look at where to use these functions.</p>
+<pre>
+<b>var</b> request = <b>new</b> XMLHttpRequest();
+</pre>
+<p>Inside the onreadystatechange function you should have an if statement
+with condition: request.readyState == 4<br/>
+&& request.status == 200.</p>
+
+<p>If <b>true</b>: the request is finished and response is ready that&apos;s
+where we&apos;ll use removePreloader().</p>
+
+<p>Else if <b>false</b>: the request is still in progress, in this case
+we&apos;ll run the function addPreloader()</p>
+<pre>
+xmlhttp.onreadystatechange = <b>function</b>() {
+  <b>if</b>(request.readyState == 4 && request.status == 200) {
+    // <i>the request has come to an end, remove the preloader</i>
+    removePreloader();
+  } <b>else</b> {
+    // <i>the request isn&apos;t finished, add the preloader</i>
+    addPreloader()
+  }
+};
+xmlhttp.open(&apos;GET&apos;, your_file.php, <b>true</b>);
+xmlhttp.send();
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch36-3">Section 36.3: Displaying the top JavaScript questions of the month from Stack Overflow&apos;s API</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-We can make an AJAX request to [Stack Exchange&apos;s
-API](http://api.stackexchange.com/docs) to retrieve a list of the top
-JavaScript questions for the month, then present them as a list of
-links. If the request fails or the returns an API error, our promise
-error handling displays the error instead.
+<p>We can make an AJAX request to <a href="http://api.stackexchange.com/docs">Stack 
+Exchange&apos;s API</a> to retrieve a list of the top JavaScript questions for the month, 
+then present them as a list of links. If the request fails or the returns an API error, 
+our promise error handling displays the error instead.</p>
 
 <h5>Version ≥ 6</h5>
-[View live results on
-HyperWeb](http://plume-pine.hyperweb.space/hot-javascript.html).
-<b>const</b>
-url
-=
-&apos;http://api.stackexchange.com/2.2/questions?site=stackoverflow&apos;
-&plus;
-&apos;&tagged=javascript&sort=month&filter=unsafe&key=gik4BOCMC7J9doavgYteRw((&apos;
-;
-fetch
-(
-url
-)
-.
-then
-(
-response
-=&gt;
-response.
-json
-(
-)
-)
-.
-then
-(
-data
-=&gt;
-{
-<b>if</b>
-(
-data.
-error_message
-)
-{
-<b>throw</b>
-<b>new</b>
-Error
-(
-data.
-error_message
-)
-;
-}
-<b>const</b>
-list
-=
-document.
-createElement
-(
-&apos;ol&apos;
-)
-;
-document.
-body
-.
-appendChild
-(
-list
-)
-;
-<b>for</b>
-(
-<b>const</b>
-{
-title
-,
-link
-}
-of data.
-items
-)
-{
-<b>const</b>
-entry
-=
-document.
-createElement
-(
-&apos;li&apos;
-)
-;
-<b>const</b>
-hyperlink
-=
-document.
-createElement
-(
-&apos;a&apos;
-)
-;
-entry.
-appendChild
-(
-hyperlink
-)
-;
-list.
-appendChild
-(
-entry
-)
-;
-hyperlink.
-textContent
-=
-title
-;
-hyperlink.
-href
-=
-link
-;
-}
-}
-)
-.
-then
-(
-<b>null</b>
-,
-error
-=&gt;
-{
-<b>const</b>
-message
-=
-document.
-createElement
-(
-&apos;pre&apos;
-)
-;
-document.
-body
-.
-appendChild
-(
-message
-)
-;
-message.
-style
-.
-color
-=
-&apos;red&apos;
-;
-message.
-textContent
-=
-String
-(
-error
-)
-;
-}
-)
-;
+<a href="http://plume-pine.hyperweb.space/hot-javascript.html">View live results on HyperWeb</a>.
+<pre>
+<b>const</b> url =
+  &apos;http://api.stackexchange.com/2.2/questions?site=stackoverflow&apos; &plus;
+  &apos;&tagged=javascript&sort=month&filter=unsafe&key=gik4BOCMC7J9doavgYteRw((&apos;;
+fetch(url).then(response =&gt; response.json()).then(data =&gt; {
+  <b>if</b>(data.error_message) {
+    <b>throw</b> <b>new</b> Error(data.error_message);
+  }
+  <b>const</b> list = document.createElement(&apos;ol&apos;);
+  document.body.appendChild(list);
+  <b>for</b> (<b>const</b> {title, link} of data.items) {
+    <b>const</b> entry = document.createElement(&apos;li&apos;);
+    <b>const</b> hyperlink = document.createElement(&apos;a&apos;);
+    entry.appendChild(hyperlink);
+    list.appendChild(entry);
+    hyperlink.textContent = title;
+    hyperlink.href = link;
+  }
+}).then(<b>null</b>, error =&gt; {
+  <b>const</b> message = document.createElement(&apos;pre&apos;);
+  document.body.appendChild(message);
+  message.style.color = &apos;red&apos;;
+  message.textContent = String(error);
+});
+</pre>
+<!-- page 242 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch36-4">Section 36.4: Using GET with parameters</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-This function runs an AJAX call using GET allowing us to send
+<p>This function runs an AJAX call using GET allowing us to send
 <b>parameters</b> (object) to a <b>file</b> (string) and launch a
-<b>callback</b> (function) when the request has been ended.
-<b>function</b>
-ajax
-(
-file
-,
-params
-,
-callback
-)
-{
-<b>var</b>
-url
-=
-file
-&plus;
-&apos;?&apos;
-;
-// <i>loop through object and assemble the url</i>
-<b>var</b>
-notFirst
-=
-<b>false</b>
-;
-<b>for</b>
-(
-<b>var</b>
-key
-<b>in</b>
-params
-)
-{
-<b>if</b>
-(
-params.
-hasOwnProperty
-(
-key
-)
-)
-{
-url
-+=
-(
-notFirst
-?
-&apos;&&apos;
-:
-&apos;&apos;
-)
-&plus;
-key
-&plus;
-&quot;=&quot;
-&plus;
-params
-&lbrack;
-key
-&rbrack;
-;
+<b>callback</b> (function) when the request has been ended.</p>
+<pre>
+<b>function</b> ajax(file, params, callback) {
+  <b>var</b> url = file &plus; &apos;?&apos;;
+  // <i>loop through object and assemble the url</i>
+  <b>var</b> notFirst = <b>false</b>;
+  <b>for</b> (<b>var</b> key <b>in</b> params) {
+    <b>if</b> (params.hasOwnProperty(key)) {
+      url += (notFirst ? &apos;&&apos; : &apos;&apos;) &plus; key &plus; &quot;=&quot; &plus; params&lbrack;key&rbrack;;
+    }
+    notFirst = <b>true</b>;
+  }
+  // <i>create a AJAX call with url as parameter</i>
+  <b>var</b> xmlhttp = <b>new</b> XMLHttpRequest();
+  xmlhttp.onreadystatechange = <b>function</b>() {
+    <b>if</b> (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      callback(xmlhttp.responseText);
+    }
+  };
+  xmlhttp.open(&apos;GET&apos;, url, <b>true</b>);
+  xmlhttp.send();
 }
-notFirst
-=
-<b>true</b>
-;
-}
-// <i>create a AJAX call with url as parameter</i>
-<b>var</b>
-xmlhttp
-=
-<b>new</b>
-XMLHttpRequest
-(
-)
-;
-xmlhttp.
-onreadystatechange
-=
-<b>function</b>
-(
-)
-{
-<b>if</b>
-(
-xmlhttp.
-readyState
-==
-4
-&&
-xmlhttp.
-status
-==
-200
-)
-{
-callback
-(
-xmlhttp.
-responseText
-)
-;
-}
-}
-;
-xmlhttp.
-open
-(
-&apos;GET&apos;
-,
-url
-,
-<b>true</b>
-)
-;
-xmlhttp.
-send
-(
-)
-;
-}
-Here&apos;s how we use it:
-ajax(&apos;cars.php&apos;, {type:&quot;Volvo&quot;, model:&quot;300&quot;, color:&quot;purple&quot;},
-<b>function</b>(response) {
-// <i>add here the code to be executed when data comes back to this
-page</i> // <i>for example console.log(response) will show the AJAX
-response in console</i> });
-cars.php
-And the following shows how to retrieve the url parameters in :
-
-<b>if</b>(isset(&dollar;&lowbar;REQUEST&lbrack;&apos;type&apos;&rbrack;, &dollar;&lowbar;REQUEST&lbrack;&apos;model&apos;&rbrack;,
-&dollar;&lowbar;REQUEST&lbrack;&apos;color&apos;&rbrack;)) { // <i>they are set, we can use them !</i>
-
-&dollar;response = &apos;The color of your car is &apos; . &dollar;&lowbar;REQUEST&lbrack;&apos;color&apos;&rbrack;
-. &apos;. &apos;;
-
-&dollar;response .= &apos;It is a &apos; . &dollar;&lowbar;REQUEST&lbrack;&apos;type&apos;&rbrack; . &apos; model &apos; .
-&dollar;&lowbar;REQUEST&lbrack;&apos;model&apos;&rbrack; . &apos;!&apos;; echo &dollar;response; }
-console.log  ( response
-
-If you had ) in callback function the result in console would have
-been:
+</pre>
+<p>Here&apos;s how we use it:</p>
+<pre>
+ajax(&apos;cars.php&apos;, {type:&quot;Volvo&quot;, model:&quot;300&quot;, color:&quot;purple&quot;}, <b>function</b>(response) {
+// <i>add here the code to be executed when data comes back to this page</i>
+// <i>for example console.log(response) will show the AJAX response in console</i>
+});
+</pre>
+<p>And the following shows how to retrieve the url parameters in cars.php:</p>
+<pre>
+<b>if</b>(isset(&dollar;&lowbar;REQUEST&lbrack;&apos;type&apos;&rbrack;, &dollar;&lowbar;REQUEST&lbrack;&apos;model&apos;&rbrack;, &dollar;&lowbar;REQUEST&lbrack;&apos;color&apos;&rbrack;)) { 
+  // <i>they are set, we can use them !</i>
+  &dollar;response = &apos;The color of your car is &apos; . &dollar;&lowbar;REQUEST&lbrack;&apos;color&apos;&rbrack;. &apos;. &apos;;
+  &dollar;response .= &apos;It is a &apos; . &dollar;&lowbar;REQUEST&lbrack;&apos;type&apos;&rbrack; . &apos; model &apos; .
+  &dollar;&lowbar;REQUEST&lbrack;&apos;model&apos;&rbrack; . &apos;!&apos;; 
+  echo &dollar;response;
+  }
+</pre>
+<p>If you had console.log(response) in callback function the result in console would have been:</p>
+<blockquote>
 The color of your car is purple. It is a Volvo model 300!
+</blockquote>
+<!-- page 243 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch36-5">Section 36.5: Check if a file exists via a HEAD request</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
