@@ -960,15 +960,15 @@ JavaScript provides two ways of commenting code lines.</p>
 
 <h4>Multi-line Comment /&ast;&ast;/</h4>
 
-<p>Everything between the opening /* and the closing */ is excluded
+<p>Everything between the opening /&ast; and the closing &ast;/ is excluded
 from execution, even if the opening and closing are on different
 lines.</p>
 
-<pre>/*
+<pre>/&ast;
    <i>Gets the element from Event coordinates.
    Use like:
      var clickedEl = someEl.addEventListener("click", elementAt, false);</i>
-*/
+&ast;/
 <b>function</b> elementAt( event ) {
   <b>return</b> document.elementFromPoint(event.clientX, event.clientY);
 }
@@ -995,9 +995,9 @@ browsers that didn't support it:</p>
 
 <pre><b>script</b> type="text/javascript" language="JavaScript"<b>&gt;</b>
 &lt;!-&dash;
-/* Arbitrary JavaScript code.
+/&ast; Arbitrary JavaScript code.
    Old browsers would treat
-   it as HTML code. */
+   it as HTML code. &ast;/
 // --&gt;
 &lt;/script&gt;</pre>
 
@@ -13539,11 +13539,11 @@ cases you won&apos;t detect that cookies are not enabled.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The following variables set up the below example:</p>
 <pre>
-<b>var</b> COOKIE_NAME = &quot;Example Cookie&quot;; */&ast; The cookie&apos;s name. &ast;/* 
-<b>var</b> COOKIE_VALUE = &quot;Hello, world!&quot;; */&ast; The cookie&apos;s value. &ast;/*
-<b>var</b> COOKIE_PATH = &quot;/foo/bar&quot;; */&ast; The cookie&apos;s path. &ast;/* 
-<b>var</b> COOKIE_EXPIRES; */&ast; The cookie&apos;s expiration date (config&apos;d below). &ast;/*
-*/&ast; Set the cookie expiration to 1 minute in future (60000ms = 1 minute). &ast;/*
+<b>var</b> COOKIE_NAME = &quot;Example Cookie&quot;; <i>/&ast; The cookie&apos;s name. &ast;/</i> 
+<b>var</b> COOKIE_VALUE = &quot;Hello, world!&quot;; <i>/&ast; The cookie&apos;s value. &ast;/</i>
+<b>var</b> COOKIE_PATH = &quot;/foo/bar&quot;; <i>/&ast; The cookie&apos;s path. &ast;/</i> 
+<b>var</b> COOKIE_EXPIRES; <i>/&ast; The cookie&apos;s expiration date (config&apos;d below). &ast;/</i>
+<i>/&ast; Set the cookie expiration to 1 minute in future (60000ms = 1 minute). &ast;/</i>
 COOKIE_EXPIRES = (<b>new</b> Date(Date.now() + 60000)).toUTCString();
 document.cookie += COOKIE_NAME 
 + &quot;=&quot; + COOKIE_VALUE
@@ -13913,3 +13913,911 @@ in many different programming languages.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch35-1">Section 35.1: JSON versus JavaScript literals</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+eval
+JSON stands for &quot;JavaScript Object Notation&quot;, but it&apos;s not
+JavaScript. Think of it as just a <i>data serialization format</i> that
+<i>happens</i> to be directly usable as a JavaScript literal. However, it
+is not advisable to directly run (i.e. through ()) JSON that is
+fetched from an external source. Functionally, JSON isn&apos;t very
+different from XML or YAML  some confusion can be avoided if JSON is
+just imagined as some serialization format that looks very much like
+JavaScript.
+
+Even though the name implies just objects, and even though the
+majority of use cases through some kind of API always happen to be
+objects and arrays, JSON is not for just objects or arrays. The
+following primitive types are supported:
+
+String (e.g. &quot;Hello World!&quot;)
+Number (e.g. 42)
+Boolean (e.g. <b>true</b>)
+The value <b>null</b>
+<b>undefined</b> is not supported in the sense that an undefined property
+will be omitted from JSON upon serialization. Therefore, there is no
+way to deserialize JSON and end up with a property whose value is
+<b>undefined</b>.
+The string &quot;42&quot; is valid JSON. JSON doesn&apos;t always have to have an
+outer envelope of &quot;{&hellip;}&quot; or &quot;&lbrack;&hellip;&rbrack;&quot;.
+While some JSON is also valid JavaScript and some JavaScript is also
+valid JSON, there are some subtle differences between both languages
+and neither language is a subset of the other.
+Take the following JSON string as an example:
+{
+&quot;color&quot;
+:
+&quot;blue&quot;
+}
+This can be directly inserted into JavaScript. It will be
+syntactically valid and will yield the correct value:
+<b>const</b>
+skin
+=
+{
+&quot;color&quot;
+:
+&quot;blue&quot;
+}
+;
+However, we know that &quot;color&quot; is a valid identifier name and the
+quotes around the property name can be omitted:
+<b>const</b>
+skin
+=
+{
+color
+:
+&quot;blue&quot;
+}
+;
+We also know that we can use single quotes instead of double quotes:
+<b>const</b>
+skin
+=
+{
+&apos;color&apos;
+:
+&apos;blue&apos;
+}
+;
+But, if we were to take both of these literals and treat them as JSON,
+<b>neither will be syntactically valid</b> JSON:
+{
+color
+:
+&quot;blue&quot;
+}
+{
+&apos;color&apos;
+:
+&apos;blue&apos;
+}
+JSON strictly requires all property names to be double quoted and
+string values to be double quoted as well.
+
+It&apos;s common for JSON-newcomers to attempt to use code excerpts with
+JavaScript literals as JSON, and scratch their heads about the syntax
+errors they are getting from the JSON parser.
+
+More confusion starts arising when <i>incorrect terminology</i> is applied
+in code or in conversation.
+
+A common anti-pattern is to name variables that hold non-JSON values
+as &quot;json&quot;:
+fetch
+(
+url
+)
+.
+then
+(
+<b>function</b>
+(
+response
+)
+{
+<b>const</b>
+json
+=
+JSON.
+parse
+(
+response.
+data
+)
+;
+// <i> Confusion ensues!</i>
+// <i> We&apos;re done with the notion of &quot;JSON&quot; at this point,</i>
+// <i> but the concept stuck with the variable name.</i>
+}
+)
+;
+response.data
+In the above example, is a JSON string that is returned by some API.
+JSON stops at the HTTP response domain. The variable with the &quot;json&quot;
+misnomer holds just a JavaScript value (could be an object, an array,
+or even a simple number!)
+A less confusing way to write the above is:
+fetch
+(
+url
+)
+.
+then
+(
+<b>function</b>
+(
+response
+)
+{
+<b>const</b>
+value
+=
+JSON.
+parse
+(
+response.
+data
+)
+;
+// <i> We&apos;re done with the notion of &quot;JSON&quot; at this point.</i>
+// <i> You don&apos;t talk about JSON after parsing JSON.</i>
+}
+)
+;
+Developers also tend to throw the phrase &quot;JSON object&quot; around a lot.
+This also leads to confusion. Because as mentioned above, a JSON
+string doesn&apos;t have to hold an object as a value. &quot;JSON string&quot; is
+a better term. Just like &quot;XML string&quot; or &quot;YAML string&quot;. You get a
+string, you parse it, and you end up with a value.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch35-2">Section 35.2: Parsing with a reviver function</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+A reviver function can be used to filter or transform the value being
+parsed.
+<h5>Version ≥ 5.1</h5>
+<b>var</b>
+jsonString
+=
+&apos;&lbrack;{&quot;name&quot;:&quot;John&quot;,&quot;score&quot;:51},{&quot;name&quot;:&quot;Jack&quot;,&quot;score&quot;:17}&rbrack;&apos;
+;
+<b>var</b>
+data
+=
+JSON.
+parse
+(
+jsonString
+,
+<b>function</b>
+reviver
+(
+key
+,
+value
+)
+{
+<b>return</b>
+key
+===
+&apos;name&apos;
+?
+value.
+toUpperCase
+(
+)
+:
+value
+;
+}
+)
+;
+Version ≥ 6
+<b>const</b>
+jsonString
+=
+&apos;&lbrack;{&quot;name&quot;:&quot;John&quot;,&quot;score&quot;:51},{&quot;name&quot;:&quot;Jack&quot;,&quot;score&quot;:17}&rbrack;&apos;
+;
+<b>const</b>
+data
+=
+JSON.
+parse
+(
+jsonString
+,
+(
+key
+,
+value
+)
+=&gt;
+key
+===
+&apos;name&apos;
+?
+value.
+toUpperCase
+(
+)
+:
+value
+)
+;
+This produces the following result:
+&lbrack;
+{
+&apos;name&apos;
+:
+&apos;JOHN&apos;
+,
+&apos;score&apos;
+:
+51
+}
+,
+{
+&apos;name&apos;
+:
+&apos;JACK&apos;
+,
+&apos;score&apos;
+:
+17
+}
+&rbrack;
+This is particularly useful when data must be sent that needs to be
+serialized/encoded when being transmitted with JSON, but one wants to
+access it deserialized/decoded. In the following example, a date was
+encoded to its ISO 8601 representation. We use the reviver function to
+parse this in a JavaScript Date.
+<h5>Version ≥ 5.1</h5>
+<b>var</b>
+jsonString
+=
+&apos;{&quot;date&quot;:&quot;2016-01-04T23:00:00.000Z&quot;}&apos;
+;
+<b>var</b>
+data
+=
+JSON.
+parse
+(
+jsonString
+,
+<b>function</b>
+(
+key
+,
+value
+)
+{
+<b>return</b>
+(
+key
+===
+&apos;date&apos;
+)
+?
+<b>new</b>
+Date
+(
+value
+)
+:
+value
+;
+}
+)
+;
+<h5>Version ≥ 6</h5>
+<b>const</b>
+jsonString
+=
+&apos;{&quot;date&quot;:&quot;2016-01-04T23:00:00.000Z&quot;}&apos;
+;
+<b>const</b>
+data
+=
+JSON.
+parse
+(
+jsonString
+,
+(
+key
+,
+value
+)
+=&gt;
+key
+===
+&apos;date&apos;
+?
+<b>new</b>
+Date
+(
+value
+)
+:
+value
+)
+;
+It is important to make sure the reviver function returns a useful
+value at the end of each iteration. If the reviver function returns
+<b>undefined</b>, no value or the execution falls off towards the end of
+the function, the property is deleted from the object. Otherwise, the
+property is redefined to be the return value.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch35-3">Section 35.3: Serializing a value</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+JSON.stringify
+A JavaScript value can be converted to a JSON string using the
+function.
+JSON.
+stringify
+(
+value
+&lbrack;
+,
+replacer
+&lbrack;
+,
+space
+&rbrack;
+&rbrack;
+)
+1.  value The value to convert to a JSON string.
+<i>/&ast; Boolean &ast;/</i> JSON.stringify(<b>true</b>) <i>// &apos;true&apos;</i>
+<i>/&ast; Number &ast;/</i> JSON.stringify(12) <i>// &apos;12&apos;</i>
+<i>/&ast; String &ast;/</i> JSON.stringify(&apos;foo&apos;) <i>// &apos;&quot;foo&quot;&apos;</i>
+<i>/&ast; Object &ast;/</i> JSON.stringify({}) <i>// &apos;{}&apos;</i>
+JSON.stringify({foo: &apos;baz&apos;}) <i>// &apos;{&quot;foo&quot;: &quot;baz&quot;}&apos;</i>
+<i>/&ast; Array &ast;/</i> JSON.stringify(&lbrack;1, <b>true</b>, &apos;foo&apos;&rbrack;) <i>// &apos;&lbrack;1,
+true, &quot;foo&quot;&rbrack;&apos;</i>
+<i>/&ast; Date &ast;/</i> JSON.stringify(<b>new</b> Date()) <i>//
+&apos;&quot;2016-08-06T17:25:23.588Z&quot;&apos;</i>
+<i>/&ast; Symbol &ast;/</i> JSON.stringify({x:Symbol()}) <i>// &apos;{}&apos;</i>
+2.  replacer A function that alters the behaviour of the stringification
+    process or an array of String and Number objects that serve as a
+    whitelist for filtering the properties of the value object to be
+    included in the JSON string. If this value is null or is not
+    provided, all properties of the object are included in the resulting
+    JSON string.
+// <i> replacer as a function</i>
+<b>function</b>
+replacer
+(
+key
+,
+value
+)
+{
+// <i> Filtering out properties</i>
+<b>if</b>
+(
+<b>typeof</b>
+value
+===
+&quot;string&quot;
+)
+{
+<b>return</b>
+}
+<b>return</b>
+value
+}
+<b>var</b>
+foo
+=
+{
+foundation
+:
+&quot;Mozilla&quot;
+,
+model
+:
+&quot;box&quot;
+,
+week
+:
+45
+,
+transport
+:
+&quot;car&quot;
+,
+month
+:
+7
+}
+JSON.
+stringify
+(
+foo
+,
+replacer
+)
+// <i> -&amp;apos;{&quot;week&quot;: 45, &quot;month&quot;: 7}&apos;</i>
+// <i> replacer as an array</i>
+JSON.
+stringify
+(
+foo
+,
+&lbrack;
+&apos;foundation&apos;
+,
+&apos;week&apos;
+,
+&apos;month&apos;
+&rbrack;
+)
+// <i> -&amp;apos;{&quot;foundation&quot;: &quot;Mozilla&quot;, &quot;week&quot;: 45, &quot;month&quot;: 7}&apos;</i>
+// <i> only the &grave;foundation&grave;, &grave;week&grave;, and &grave;month&grave; properties are
+kept</i>
+3.  space For readability, the number of spaces used for indentation may
+    be specified as the third parameter.
+JSON.
+stringify
+(
+{
+x
+:
+1
+,
+y
+:
+1
+}
+,
+<b>null</b>
+,
+2
+)
+// <i> 2 space characters will be used for indentation</i>
+<i>/&ast; output:</i>
+<i>{</i>
+<i>&apos;x&apos;: 1,</i>
+<i>&apos;y&apos;: 1</i>
+<i>}</i>
+<i>&ast;/</i>
+<b>&bsol;&bsol;t</b>
+Alternatively, a string value can be provided to use for indentation.
+For example, passing &apos;&apos; will cause the tab character to be used for
+indentation.
+JSON.
+stringify
+(
+{
+x
+:
+1
+,
+y
+:
+1
+}
+,
+<b>null</b>
+,
+&apos;
+<b>&bsol;&bsol;t</b>
+&apos;
+)
+<i>/&ast; output:</i>
+<i>{</i>
+<i>&apos;x&apos;: 1,</i>
+<i>&apos;y&apos;: 1</i>
+<i>}</i>
+<i>&ast;/</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch35-4">Section 35.4: Serializing and restoring class instances</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+You can use a custom toJSON method and reviver function to transmit
+instances of your own class in JSON. If an object has a toJSON method,
+its result will be serialized instead of the object itself.
+<h5>Version &lt; 6</h5>
+<b>function</b>
+Car
+(
+color
+,
+speed
+)
+{
+<b>this</b>
+.
+color
+=
+color
+;
+<b>this</b>
+.
+speed
+=
+speed
+;
+}
+Car.
+<b>prototype</b>
+.
+toJSON
+=
+<b>function</b>
+(
+)
+{
+<b>return</b>
+{
+&dollar;type
+:
+&apos;com.example.Car&apos;
+,
+color
+:
+<b>this</b>
+.
+color
+,
+speed
+:
+<b>this</b>
+.
+speed
+}
+;
+}
+;
+Car.
+fromJSON
+=
+<b>function</b>
+(
+data
+)
+{
+<b>return</b>
+<b>new</b>
+Car
+(
+data.
+color
+,
+data.
+speed
+)
+;
+}
+;
+<h5>Version ≥ 6</h5>
+class
+Car
+{
+constructor
+(
+color
+,
+speed
+)
+{
+<b>this</b>
+.
+color
+=
+color
+;
+<b>this</b>
+.
+speed
+=
+speed
+;
+<b>this</b>
+.
+id&lowbar;
+=
+Math
+.
+random
+(
+)
+;
+}
+toJSON
+(
+)
+{
+<b>return</b>
+{
+&dollar;type
+:
+&apos;com.example.Car&apos;
+,
+color
+:
+<b>this</b>
+.
+color
+,
+speed
+:
+<b>this</b>
+.
+speed
+}
+;
+}
+<b>static</b>
+fromJSON
+(
+data
+)
+{
+<b>return</b>
+<b>new</b>
+Car
+(
+data.
+color
+,
+data.
+speed
+)
+;
+}
+}
+<b>var</b>
+userJson
+=
+JSON.
+stringify
+(
+{
+name
+:
+&quot;John&quot;
+,
+car
+:
+<b>new</b>
+Car
+(
+&apos;red&apos;
+,
+&apos;fast&apos;
+)
+}
+)
+;
+This produces the a string with the following content:
+{&quot;name&quot;:&quot;John&quot;,&quot;car&quot;:{&quot;&dollar;type&quot;:&quot;com.example.Car&quot;,&quot;color&quot;:&quot;red&quot;,&quot;speed&quot;:&quot;fast&quot;}}
+<b>var</b> userObject = JSON.parse(userJson, <b>function</b> reviver(key,
+value) { <b>return</b> (value && value.&dollar;type === &apos;com.example.Car&apos;) ?
+Car.fromJSON(value) : value; });
+This produces the following object:
+{
+name
+:
+&quot;John&quot;
+,
+car
+:
+Car
+{
+color
+:
+&quot;red&quot;
+,
+speed
+:
+&quot;fast&quot;
+,
+id&lowbar;
+:
+0.19349242527065402
+}
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch35-5">Section 35.5: Serializing with a replacer function</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+A replacer function can be used to filter or transform values being
+serialized.
+<b>const</b>
+userRecords
+=
+&lbrack;
+{
+name
+:
+&quot;Joe&quot;
+,
+points
+:
+14.9
+,
+level
+:
+31.5
+}
+,
+{
+name
+:
+&quot;Jane&quot;
+,
+points
+:
+35.5
+,
+level
+:
+74.4
+}
+,
+{
+name
+:
+&quot;Jacob&quot;
+,
+points
+:
+18.5
+,
+level
+:
+41.2
+}
+,
+{
+name
+:
+&quot;Jessie&quot;
+,
+points
+:
+15.1
+,
+level
+:
+28.1
+}
+,
+&rbrack;
+;
+// <i> Remove names and round numbers to integers to anonymize records before sharing</i>
+<b>const</b>
+anonymousReport
+=
+JSON.
+stringify
+(
+userRecords
+,
+(
+key
+,
+value
+)
+=&gt;
+key
+===
+&apos;name&apos;
+?
+<b>undefined</b>
+:
+(
+<b>typeof</b>
+value
+===
+&apos;number&apos;
+?
+Math
+.
+floor
+(
+value
+)
+:
+value
+)
+)
+;
+This produces the following string:
+&apos;&lbrack;{&quot;points&quot;:14,&quot;level&quot;:31},{&quot;points&quot;:35,&quot;level&quot;:74},{&quot;points&quot;:18,&quot;level&quot;:41},{&quot;points&quot;:15,&quot;level&quot;:2
+8}&rbrack;
+&apos;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch35-6">Section 35.6: Parsing a simple JSON string</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+JSON.parse
+The () method parses a string as JSON and returns a JavaScript
+primitive, array or object:
+<b>const</b> array = JSON.parse(&apos;&lbrack;1, 2, &quot;c&quot;, &quot;d&quot;, {&quot;e&quot;:
+false}&rbrack;&apos;); console.log(array); <i>// logs: &lbrack;1, 2, &quot;c&quot;, &quot;d&quot;, {e:
+false}&rbrack;</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch35-7">Section 35.7: Cyclic object values</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Not all objects can be converted to a JSON string. When an object has
+cyclic self-references, the conversion will fail. This is typically
+the case for hierarchical data structures where parent and child both
+reference each other:
+<b>const</b>
+world
+=
+{
+name
+:
+&apos;World&apos;
+,
+regions
+:
+&lbrack;
+&rbrack;
+}
+;
+world.
+regions
+.
+push
+(
+{
+name
+:
+&apos;North America&apos;
+,
+parent
+:
+&apos;America&apos;
+}
+)
+;
+console.
+log
+(
+JSON.
+stringify
+(
+world
+)
+)
+;
+// <i> {&quot;name&quot;:&quot;World&quot;,&quot;regions&quot;:&lbrack;{&quot;name&quot;:&quot;North
+America&quot;,&quot;parent&quot;:&quot;America&quot;}&rbrack;}</i>
+world.
+regions
+.
+push
+(
+{
+name
+:
+&apos;Asia&apos;
+,
+parent
+:
+world
+}
+)
+;
+console.
+log
+(
+JSON.
+stringify
+(
+world
+)
+)
+;
+// <i> Uncaught TypeError: Converting circular structure to JSON</i>
+As soon as the process detects a cycle, the exception is raised. If
+there were no cycle detection, the string would be infinitely long.
+
