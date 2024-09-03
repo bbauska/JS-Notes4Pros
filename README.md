@@ -14610,3 +14610,399 @@ console.log(testEnum.One);  // <i>1 will be logged</i>
 }
 </pre>
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch38">Chapter 38: Map</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Iterable</td>
+      <td>Any iterable object (for example an array) containing &lbrack;key, value&rbrack; pairs.</td>
+    </tr>
+    <tr>
+      <td>key</td>
+      <td>The key of an element.</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>The value assigned to the key</td>
+    </tr>
+    <tr>
+      <td>callback</td>
+      <td>Callback function called with three parameters: value, key and the map.</td>
+    </tr>
+    <tr>
+      <td>thisArg</td>
+      <td>Value which will be used as this when executing callback.</td>
+    </tr>
+  </tfoot>
+</table>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch38-1">Section 38.1: Creating a Map</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>A Map is a basic mapping of keys to values. Maps are different from
+objects in that their keys can be anything (primitive values as well
+as objects), not just strings and symbols. Iteration over Maps is also
+always done in the order the items were inserted into the Map, whereas
+the order is undefined when iterating over keys in an object.</p>
+<p>To create a Map, use the Map constructor:</p>
+<pre>
+<b>const</b> map = <b>new</b> Map();
+</pre>
+<p>It has an optional parameter, which can be any iterable object (for
+example an array) which contains arrays of two elements  first is
+the key, the seconds is the value. For example:</p>
+<pre>
+<b>const</b> map = <b>new</b> Map(&lbrack;&lbrack;<b>new</b> Date(), {foo: &quot;bar&quot;}&rbrack;, &lbrack;document.body, &quot;body&quot;&rbrack;&rbrack;);
+// <i>&Hat;key &Hat;value &Hat;key &Hat;value</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch38-2">Section 38.2: Clearing a Map</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>To remove all elements from a Map, use the .clear() method:</p>
+<pre>
+map.clear();
+</pre>
+<p>Example:</p>
+<pre>
+<b>const</b> map = <b>new</b> Map(&lbrack;&lbrack;1, 2&rbrack;, &lbrack;3, 4&rbrack;&rbrack;);
+console.log(map.size);  // <i>2</i>
+map.clear();
+console.log(map.size);  // <i>0</i>
+console.log(map.<b>get</b>(1));  // <i>undefined</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch38-3">Section 38.3: Removing an element from a Map</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>To remove an element from a map use the .delete() method.</p>
+<pre>
+map.<b>delete</b>(key);
+</pre>
+<p>Example:</p>
+<pre>
+<b>const</b> map = <b>new</b> Map(&lbrack;&lbrack;1, 2&rbrack;,&lbrack;3, 4&rbrack;&rbrack;);
+console.log(map.<b>get</b>(3));  // <i>4</i>
+map.<b>delete</b>(3);
+console.log(map.<b>get</b>(3));  // <i>undefined</i>
+</pre>
+<!-- page 248 -->
+<p>This method returns <b>true</b> if the element existed and has been
+removed, otherwise <b>false</b>:</p>
+<pre>
+<b>const</b> map = <b>new</b> Map(&lbrack;&lbrack;1, 2&rbrack;, &lbrack;3, 4&rbrack;&rbrack;);
+console.log(map.<b>delete</b>(1));  // <i>true</i>
+console.log(map.<b>delete</b>(7));  // <i>false</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch38-4">Section 38.4: Checking if a key exists in a Map</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+has
+To check if a key exists in a Map, use the .() method:
+map.
+has
+(
+key
+)
+;
+Example:
+<b>const</b>
+map
+=
+<b>new</b>
+Map
+(
+&lbrack;
+&lbrack;
+1
+,
+2
+&rbrack;
+,
+&lbrack;
+3
+,
+4
+&rbrack;
+&rbrack;
+)
+;
+console.
+log
+(
+map.
+has
+(
+1
+)
+)
+;
+// <i>true</i>
+console.
+log
+(
+map.
+has
+(
+2
+)
+)
+;
+// <i>false</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch38-5">Section 38.5: Iterating Maps</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+keys (), .  values () and .      entries (). . entries
+Map has three methods which returns iterators: .() is the default
+key  ,  value
+Map iterator, and contains &lbrack;&rbrack; pairs.
+<b>const</b>
+map
+=
+</b>new</b>
+Map
+(
+&lbrack;
+&lbrack;
+1
+,
+2
+&rbrack;
+,
+&lbrack;
+3
+,
+4
+&rbrack;
+&rbrack;
+)
+;
+<b>for</b>
+(
+</b>const</b>
+&lbrack;
+key
+,
+value
+&rbrack;
+of map
+)
+{
+console.
+log
+(
+&grave;key
+:
+&dollar;
+{
+key
+}
+,
+value
+:
+&dollar;
+{
+value
+}
+&grave;
+)
+;
+// <i>logs:</i>
+// <i>key: 1, value: 2</i>
+// <i>key: 3, value: 4</i>
+}
+<b>for</b>
+(
+<b>const</b>
+key of map.
+keys
+(
+)
+)
+{
+console.
+log
+(
+key
+)
+;
+// <i>logs 1 and 3</i>
+}
+<b>for</b>
+(
+<b>const</b>
+value of map.
+values
+(
+)
+)
+{
+console.
+log
+(
+value
+)
+;
+// <i>logs 2 and 4</i>
+}
+forEach
+Map also has .() method. The first parameter is a callback function,
+which will be called for each element in the map, and the second
+parameter is the value which will be used as <b>this</b> when executing
+the callback function.
+
+The callback function has three arguments: value, key, and the map
+object.
+<b>const</b>
+map
+=
+<b>new</b>
+Map
+(
+&lbrack;
+&lbrack;
+1
+,
+2
+&rbrack;
+,
+&lbrack;
+3
+,
+4
+&rbrack;
+&rbrack;
+)
+;
+map.
+forEach
+(
+(
+value
+,
+key
+,
+theMap
+)
+=&gt;
+console.
+log
+(
+&grave;key
+:
+&dollar;
+{
+key
+}
+,
+value
+:
+&dollar;
+{
+value
+}
+&grave;
+)
+)
+;
+// <i>logs:</i>
+// <i>key: 1, value: 2</i>
+// <i>key: 3, value: 4</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch38-6">Section 38.6: Getting and setting elements</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>get</b> ( key ) to get value by key and . <b>set</b> ( key , value
+Use .) to assign a value to a key.
+<b>get</b>
+If the element with the specified key doesn&apos;t exist in the map, .()
+returns <b>undefined</b>.
+.<b>set</b>()   method returns the map object, so you can chain .<b>set</b>()
+calls.
+<b>const</b>
+map
+=
+<b>new</b>
+Map
+(
+)
+;
+console.
+log
+(
+map.
+<b>get</b>
+(
+1
+)
+)
+;
+// <i>undefined</i>
+map.
+<b>set</b>
+(
+1
+,
+2
+)
+.
+<b>set</b>
+(
+3
+,
+4
+)
+;
+console.
+log
+(
+map.
+<b>get</b>
+(
+1
+)
+)
+;
+// <i>2</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch38-7">Section 38.7: Getting the number of elements of a Map</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+.size
+To get the numbers of elements of a Map, use the property:
+<b>const</b>
+map
+=
+<b>new</b>
+Map
+(
+&lbrack;
+&lbrack;
+1
+,
+2
+&rbrack;
+,
+&lbrack;
+3
+,
+4
+&rbrack;
+&rbrack;
+)
+;
+console.
+log
+(
+map.
+size
+)
+;
+// <i>2</i>
