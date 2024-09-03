@@ -11098,11 +11098,11 @@ As of 2015 works in Node.js and all major browsers except IE.</p>
 <b>function</b> functionName( func )
 {
   // <i>Match:</i>
-  // <i> - &Hat;           the beginning of the string</i>
-  // <i> - function        the word &apos;function&apos;</i>
-  // <i> - &bsol;s+        at least some white space</i>
-  // <i> - (&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+) capture one or more valid JavaScript identifier characters</i>
-  // <i> - &amp;lpar;      followed by an opening brace</i>
+  // <i>- &Hat;           the beginning of the string</i>
+  // <i>- function        the word &apos;function&apos;</i>
+  // <i>- &bsol;s+        at least some white space</i>
+  // <i>- (&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+) capture one or more valid JavaScript identifier characters</i>
+  // <i>- &amp;lpar;      followed by an opening brace</i>
   // 
 <b>var</b> result = / <i>&Hat;function&bsol;&bsol;s+(&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+)&amp;lpar;/</i>.exec( func.toString() )
   <b>return</b> result ? result &lbrack;1&rbrack; : &apos;&apos;
@@ -11800,7 +11800,7 @@ class Queue {
   console.log(q&period;dequeue());    // <i>8</i>
   console.log(q&period;dequeue());    // <i>7</i>
   console.log(q);                     // <i>{}</i>
-  console.log(Object.keys(q));        // <i> &lbrack;&quot;enqueue&quot;,&quot;dequeue&quot;&rbrack;</i>
+  console.log(Object.keys(q));        // <i>&lbrack;&quot;enqueue&quot;,&quot;dequeue&quot;&rbrack;</i>
 </pre>
 <p>With every instantiation of a Queue type the constructor generates a closure.</p>
 <p>Thus both of a Queue type&apos;s own methods enqueue and dequeue (see Object.kes(q))
@@ -11845,27 +11845,27 @@ class Car {
   constructor(make, model) {
   <b>this</b>.make = make;
   <b>this</b>.model = model;
-// <i> example using symbols</i>
+// <i>example using symbols</i>
 &lbrack;METADATA&rbrack;() {
   <b>return</b> {
     make:  <b>this</b>.make,
     model: <b>this</b>.model
   };
 }
-// <i> you can also use any javascript expression</i>
-// <i> this one is just a string, and could also be defined with simply add()</i>
+// <i>you can also use any javascript expression</i>
+// <i>this one is just a string, and could also be defined with simply add()</i>
 &lbrack;&quot;add&quot;&rbrack;(a, b) {
 <b>return</b> a &plus; b;
 }
-// <i> this one is dynamically evaluated</i>
+// <i>this one is dynamically evaluated</i>
 &lbrack; 1 &plus; 2&rbrack;() {
   <b>return</b> &quot;three&quot;;
   }
 }
 <b>let</b> MazdaMPV = <b>new</b> Car(&quot;Mazda&quot;, &quot;MPV&quot;);
-MazdaMPV.add(4, 5); // <i> 9</i>
-MazdaMPV&lbrack;3&rbrack;();  // <i> &quot;three&quot;</i>
-MazdaMPV&lbrack;METADATA&rbrack;();  // <i> { make: &quot;Mazda&quot;, model: &quot;MPV&quot; }</i>
+MazdaMPV.add(4, 5); // <i>9</i>
+MazdaMPV&lbrack;3&rbrack;();  // <i>&quot;three&quot;</i>
+MazdaMPV&lbrack;METADATA&rbrack;();  // <i>{ make: &quot;Mazda&quot;, model: &quot;MPV&quot; }</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch22-8">Section 22.8: Managing Private Data with Classes</h3>
@@ -11886,14 +11886,14 @@ identifier for object properties.
 <p>As such, they won&apos;t be revealed using far var in or Object.keys.</p>
 <p>Thus we can use symbols to store private data.</p>
 <pre>
-<b>const</b> topSecret = Symbol(&apos;topSecret&apos;);  // <i> our private key; will only be accessible on the scope of</i>
+<b>const</b> topSecret = Symbol(&apos;topSecret&apos;);  // <i>our private key; will only be accessible on the scope of</i>
 <i>the module file</i>
 export class SecretAgent {
   constructor(secret) {
-    <b>this</b>&lbrack;topSecret&rbrack; = secret;  // <i> we have access to the symbol key (closure)</i>
+    <b>this</b>&lbrack;topSecret&rbrack; = secret;  // <i>we have access to the symbol key (closure)</i>
     <b>this</b>.coverStory = &apos;just a simple gardner&apos;;
     <b>this</b>.doMission = () =&gt; {
-      figureWhatToDo(topSecret&lbrack;topSecret&rbrack;);  // <i> we have access to topSecret</i>
+      figureWhatToDo(topSecret&lbrack;topSecret&rbrack;);  // <i>we have access to topSecret</i>
     };
   }
 }
@@ -11904,16 +11904,16 @@ symbol to access the private property.</p>
 <pre>
 import {SecretAgent} from &apos;SecretAgent.js&apos;
 <b>const</b> agent = </b>new</b> SecretAgent(&apos;steal all the ice cream&apos;);
-// <i> ok let&apos;s try to get the secret out of him!</i>
-Object.keys(agent); // <i> &lbrack;&apos;coverStory&apos;&rbrack; only cover story is public, our secret is kept.</i>
-agent&lbrack;Symbol(&apos;topSecret&apos;)&rbrack;; // <i> undefined, as we said, symbols are always unique, so only the 
+// <i>ok let&apos;s try to get the secret out of him!</i>
+Object.keys(agent); // <i>&lbrack;&apos;coverStory&apos;&rbrack; only cover story is public, our secret is kept.</i>
+agent&lbrack;Symbol(&apos;topSecret&apos;)&rbrack;; // <i>undefined, as we said, symbols are always unique, so only the 
 original symbol will help us to get the data.</i>
 </pre>
 <p>But it&apos;s not 100% private; let&apos;s break that agent down! We can use
 the method to get the object symbols.</p>
 <pre>
 <b>const</b> secretKeys = Object.getOwnPropertySymbols(agent);
-agent&lbrack;secretKeys&lbrack;0&rbrack;&rbrack; // <i> &apos;steal all the ice cream&apos; , we got the secret.</i>
+agent&lbrack;secretKeys&lbrack;0&rbrack;&rbrack; // <i>&apos;steal all the ice cream&apos; , we got the secret.</i>
 </pre>
 <p><b>Using WeakMaps</b></p>
 
@@ -11940,14 +11940,14 @@ that instance key.</p>
 
 <p>Let&apos;s give our agent a try, with WeakMap:</p>
 <pre>
-<b>const</b> topSecret = <b>new</b> WeakMap();  // <i> will hold all private data of all instances.</i>
+<b>const</b> topSecret = <b>new</b> WeakMap();  // <i>will hold all private data of all instances.</i>
 export class SecretAgent {
   constructor(secret) {
-    topSecret.<b>set</b>(<b>this</b>, secret);  // <i> we use this, as the key, to set it on our instance private</i>
+    topSecret.<b>set</b>(<b>this</b>, secret);  // <i>we use this, as the key, to set it on our instance private</i>
 <i>data</i>
     <b>this</b>.coverStory = &apos;just a simple gardner&apos;;
     <b>this</b>.doMission = () =&gt; {
-      figureWhatToDo(topSecret.<b>get</b>(<b>this</b>));   // <i> we have access to topSecret</i>
+      figureWhatToDo(topSecret.<b>get</b>(<b>this</b>));   // <i>we have access to topSecret</i>
     };
   }
 }
@@ -11968,7 +11968,7 @@ export class SecretAgent {
     <b>const</b> topSecret = secret;
     <b>this</b>.coverStory = &apos;just a simple gardner&apos;;
     <b>this</b>.doMission = () =&gt; {
-      figureWhatToDo(topSecret);  // <i> we have access to topSecret</i>
+      figureWhatToDo(topSecret);  // <i>we have access to topSecret</i>
     };
   }
 }
@@ -11981,7 +11981,7 @@ outside the class, so our agent is safe.</p>
 <pre>
 export class SecretAgent {
   constructor(secret) {
-    <b>this</b>.&lowbar;topSecret = secret;  // <i> it private by convention</i>
+    <b>this</b>.&lowbar;topSecret = secret;  // <i>it private by convention</i>
     <b>this</b>.coverStory = &apos;just a simple gardner&apos;;
     <b>this</b>.doMission = () =&gt; {
       figureWhatToDo(this_topSecret);
@@ -11999,28 +11999,28 @@ export class SecretAgent {
 </ol>
 <pre>
 class Foo {
-  // <i> Foo inside this block is a const binding</i>
+  // <i>Foo inside this block is a const binding</i>
 }
-// <i> Foo here is a let binding</i>
+// <i>Foo here is a let binding</i>
 </pre>
 <p>For example,</p>
 <pre>
 class A {
   foo() {
-    A = <b>null</b>;  // <i> will throw at runtime as A inside the class is a &grave;const&grave; binding</i>
+    A = <b>null</b>;  // <i>will throw at runtime as A inside the class is a &grave;const&grave; binding</i>
   }
 }
-A = <b>null</b>;  // <i> will NOT throw as A here is a &grave;let&grave; binding</i>
+A = <b>null</b>;  // <i>will NOT throw as A here is a &grave;let&grave; binding</i>
 </pre>
 <p>This is not the same for a Function -</p>
 <pre>
 <b>function</b> A() {
-  A = <b>null</b>;  // <i> works</i>
+  A = <b>null</b>;  // <i>works</i>
 }
 A.<b>prototype</b>.foo = <b>function</b> foo() {
-  A = <b>null</b>;  // <i> works</i>
+  A = <b>null</b>;  // <i>works</i>
 }
-A = <b>null</b>;  // <i> works</i>
+A = <b>null</b>;  // <i>works</i>
 </pre>
 <!-- page 199 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -12052,7 +12052,7 @@ if name clashes are an issue:</p>
   NavigationNs.active = {};
   NavigationNs.pagination = {};
   NavigationNs.redirection = {};
-  // <i> The second level start here.</i>
+  // <i>The second level start here.</i>
   Navigational.pagination.jquery = <b>function</b>();
   Navigational.pagination.angular = <b>function</b>();
   Navigational.pagination.ember = <b>function</b>();
@@ -12072,9 +12072,9 @@ if name clashes are an issue:</p>
     console.log(&apos;My name is &apos; &plus; <b>this</b>.name);
   }
 };
-person.bio();  // <i> logs &quot;My name is John Doe&quot;</i>
+person.bio();  // <i>logs &quot;My name is John Doe&quot;</i>
 <b>var</b> bio = person.bio;
-bio();  // <i> logs &quot;My name is undefined&quot;</i>
+bio();  // <i>logs &quot;My name is undefined&quot;</i>
 </pre>
 <p>In the above code, person.bio makes use of the context(this). When the function is called
 as person.bio(), the context gets passed automatically, and so it correctly logs &quot;My name
@@ -12090,7 +12090,7 @@ an object, where the context has been lost.</p>
 <pre>
 document.getElementById(&apos;myAJAXButton&apos;).onclick = <b>function</b>() {
   makeAJAXRequest(<b>function</b>(result) {
-    <b>if</b> (result) {  // <i> success</i>
+    <b>if</b> (result) {  // <i>success</i>
       <b>this</b>.className = &apos;success&apos;;
     }
   })
@@ -12102,7 +12102,7 @@ correct this, you can save the value of <b>this</b> in a variable:</p>
 document.getElementById(&apos;myAJAXButton&apos;).onclick = <b>function</b>() {
   <b>var</b> self = <b>this</b>;
   makeAJAXRequest(<b>function</b>(result) {
-    <b>if</b> (result) {  // <i> success</i>
+    <b>if</b> (result) {  // <i>success</i>
       self.className = &apos;success&apos;;
     }
   })
@@ -12114,7 +12114,7 @@ The above example could be written like this:</p>
 <pre>
 document.getElementById(&apos;myAJAXButton&apos;).onclick = <b>function</b>() {
   makeAJAXRequest(result =&gt; {
-    <b>if</b> (result) {  // <i> success</i>
+    <b>if</b> (result) {  // <i>success</i>
       <b>this</b>.className = &apos;success&apos;;
     }
   })
@@ -12139,14 +12139,14 @@ that will call it with the correct context. See here for more information.</p>
     alert(message);
   }
 };
-monitor.check(7);  // <i> The value of &grave;this&grave; is implied by the method call syntax.</i>
+monitor.check(7);  // <i>The value of &grave;this&grave; is implied by the method call syntax.</i>
 <b>var</b> badCheck = monitor.check;
-badCheck(15);  // <i> The value of &grave;this&grave; is window object and this.threshold is undefined, so value &gt;</i>
+badCheck(15);  // <i>The value of &grave;this&grave; is window object and this.threshold is undefined, so value &gt;</i>
 <i>this.threshold is false</i>
 <b>var</b> check = monitor.check.bind(monitor);
-check(15);  // <i> This value of &grave;this&grave; was explicitly bound, the function works.</i>
+check(15);  // <i>This value of &grave;this&grave; was explicitly bound, the function works.</i>
 <b>var</b> check8 = monitor.check.bind(monitor, 8);
-check8();  // <i> We also bound the argument to &grave;8&grave; here. It can&apos;t be re-specified.</i>
+check8();  // <i>We also bound the argument to &grave;8&grave; here. It can&apos;t be re-specified.</i>
 </pre>
 <p><b>Hard binding</b></p>
 <ul>
@@ -12190,11 +12190,11 @@ binding, which refers to the newly created object:</p>
   <b>this</b>.name = name;
   <b>this</b>.sound = &quot;Meow&quot;;
 }
-<b>var</b> cat = <b>new</b> Cat(&quot;Tom&quot;);  // <i> is a Cat object</i>
-cat.sound;  // <i> Returns &quot;Meow&quot;</i>
-<b>var</b> cat2 = Cat(&quot;Tom&quot;);  // <i> is undefined &bsol; function got executed in global context</i>
-window.name;  // <i> &quot;Tom&quot;</i>
-cat2.name;  // <i> error! cannot access property of undefined</i>
+<b>var</b> cat = <b>new</b> Cat(&quot;Tom&quot;);  // <i>is a Cat object</i>
+cat.sound;  // <i>Returns &quot;Meow&quot;</i>
+<b>var</b> cat2 = Cat(&quot;Tom&quot;);  // <i>is undefined &bsol; function got executed in global context</i>
+window.name;  // <i>&quot;Tom&quot;</i>
+cat2.name;  // <i>error! cannot access property of undefined</i>
 </pre>
 <!-- page 203 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -12227,13 +12227,13 @@ literal syntax. Here&apos;s an example:</p>
   month: &apos;02&apos;,
   day: &apos;27&apos;,
   <b>get</b> date() {
-    // <i> Get the date in YYYY-MM-DD format</i>
+    // <i>Get the date in YYYY-MM-DD format</i>
     <b>return</b> &grave;&dollar;{<b>this</b>.year}&minus;&dollar;{<b>this</b>.month}&minus;&dollar;{<b>this</b>.day}&grave;
   },
   <b>set</b> date(dateString) {
-    // <i> Set the date from a YYYY-MM-DD formatted string</i>
+    // <i>Set the date from a YYYY-MM-DD formatted string</i>
     <b>var</b> dateRegExp = /&ast;(&bsol;&bsol;d{4})-(&bsol;&bsol;d{2})-(&bsol;&bsol;d{2})&ast;/;
-    // <i> Check that the string is correctly formatted</i>
+    // <i>Check that the string is correctly formatted</i>
     <b>if</b> (dateRegExp.test(dateString)) {
       <b>var</b> parsedDate = dateRegExp.exec(dateString);
       <b>this</b>.year = parsedDate&lbrack;1&rbrack;;
@@ -12273,10 +12273,10 @@ constructor(firstname, lastname) {
   }
 }
 <b>let</b> person = <b>new</b> Person(&apos;John&apos;, &apos;Doe&apos;);
-console.log(person.firstname, person.lastname);  // <i> John Doe</i>
+console.log(person.firstname, person.lastname);  // <i>John Doe</i>
 person.firstname = &apos;Foo&apos;;
 person.lastname = &apos;Bar&apos;;
-console.log(person.firstname, person.lastname);  // <i> Foo Bar</i>
+console.log(person.firstname, person.lastname);  // <i>Foo Bar</i>
 </pre>
 <!-- page 205 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -12343,7 +12343,7 @@ Foo.<b>prototype</b>.bar = <b>function</b>() {
 <p>We can then create an instance using the <b>new</b> keyword, and call the method.</p>
 <pre>
 <b>var</b> foo = <b>new</b> Foo();
-console.log(foo.bar());  // <i> logs &grave;I am bar&grave;</i>
+console.log(foo.bar());  // <i>logs &grave;I am bar&grave;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch27-2">Section 27.2: Difference between Object.key and Object.prototype.key</h3>
@@ -12356,10 +12356,10 @@ Static properties are never inherited.</p>
 <b>function</b> Foo() {};
 Foo.style = &apos;bold&apos;;
 <b>var</b> foo = <b>new</b> Foo();
-console.log(Foo.style);  // <i> &apos;bold&apos;</i>
-console.log(foo.style);  // <i> undefined</i>
+console.log(Foo.style);  // <i>&apos;bold&apos;</i>
+console.log(foo.style);  // <i>undefined</i>
 Foo.<b>prototype</b>.style = &apos;italic&apos;;
-console.log(Foo.style);  // <i> &apos;bold&apos;</i>
+console.log(Foo.style);  // <i>&apos;bold&apos;</i>
 console.log(foo.style);  // <i>&apos;italic&apos;</i>
 </pre>
 <!-- thru 27.2 -->
@@ -12565,19 +12565,19 @@ only some of its functions are.</p>
 <b>function</b> Vec(x = 0,y = 0) {
   <b>this</b>.x = x;
   <b>this</b>.y = y;
-  // <i> the new keyword implicitly implies the return type</i>
-  // <i> as this and thus is chainable by default.</i>
+  // <i>the new keyword implicitly implies the return type</i>
+  // <i>as this and thus is chainable by default.</i>
 }
 Vec.<b>prototype</b> = {
   add : <b>function</b>(vec) {
     <b>this</b>.x += vec.x;
     <b>this</b>.y += vec.y;
-    <b>return</b> <b>this</b>;  // <i> return reference to self to allow chaining of function calls</i>
+    <b>return</b> <b>this</b>;  // <i>return reference to self to allow chaining of function calls</i>
   },
   scale : <b>function</b>(val) {
     <b>this</b>.x &ast;= val;
     <b>this</b>.y &ast;= val;
-    <b>return</b> <b>this</b>; // <i> return reference to self to allow chaining of function calls</i>
+    <b>return</b> <b>this</b>; // <i>return reference to self to allow chaining of function calls</i>
   },
   log : <b>function</b>(val) {
     console.log(<b>this</b>.x &plus; &apos; : &apos; &plus; <b>this</b>.y);
@@ -12593,12 +12593,12 @@ Vec.<b>prototype</b> = {
 <b>var</b> vec = <b>new</b> Vec();
 vec.add({x:10, y:10})
    .add({x:10, y:10})
-   .log()  // <i> console output &quot;20 : 20&quot;</i>
+   .log()  // <i>console output &quot;20 : 20&quot;</i>
    .add({x:10, y:10})
    .scale(1 / 30)
-   .log()              // <i> console output &quot;1 : 1&quot;</i>
-   .clone()            // <i> returns a new instance of the object</i>
-   .scale(2)           // <i> from which you can continue chaining</i>
+   .log()              // <i>console output &quot;1 : 1&quot;</i>
+   .clone()            // <i>returns a new instance of the object</i>
+   .scale(2)           // <i>from which you can continue chaining</i>
    .log()
 </pre>
 <p><b>Don&apos;t create ambiguity in the return type</b></p>
@@ -12609,14 +12609,14 @@ unambiguous. Other examples are .<b>toString</b>() implies a string is returned.
 <!-- page 211 -->
 <p>An example of an ambiguous function name in a chainable object.</p>
 <pre>
-// <i> line object represents a line</i>
+// <i>line object represents a line</i>
 line.rotate(1)
-  .vec();  // <i> ambiguous you don&apos;t need to be looking up docs while writing.</i>
+  .vec();  // <i>ambiguous you don&apos;t need to be looking up docs while writing.</i>
 line.rotate(1)
-  .asVec() // <i> unambiguous implies the return type is the line as a vec (vector)</i>
+  .asVec() // <i>unambiguous implies the return type is the line as a vec (vector)</i>
   .add({x:10, y:10)
-// <i> toVec is just as good as long as the programmer can use the naming</i>
-// <i> to infer the return type</i>
+// <i>toVec is just as good as long as the programmer can use the naming</i>
+// <i>to infer the return type</i>
 </pre>
 <p><b>Syntax convention</b></p>
 <p>There is no formal usage syntax when chaining. The convention is to
@@ -12632,13 +12632,13 @@ clearly denoting the end of the chain.</p>
   style="border: 2px solid #000000; width:7.486in;" />
 <p><b>A bad syntax</b></p>
 <pre>
-vec            // <i> new line before the first function call</i>
-.scale()       // <i> can make it unclear what the intention is</i>
+vec            // <i>new line before the first function call</i>
+.scale()       // <i>can make it unclear what the intention is</i>
 .log();
-vec.           // <i> the dot on the end of the line</i>
-   scale(2).   // <i> is very difficult to see in a mass of code</i>
-   scale(1/2); // <i> and will likely frustrate as can easily be missed</i>
-               // <i> when trying to locate bugs</i>
+vec.           // <i>the dot on the end of the line</i>
+   scale(2).   // <i>is very difficult to see in a mass of code</i>
+   scale(1/2); // <i>and will likely frustrate as can easily be missed</i>
+               // <i>when trying to locate bugs</i>
 </pre>
 <p><b>Left hand side of assignment</b></p>
 <!-- page 212 -->
@@ -12647,8 +12647,8 @@ object reference is assigned.</p>
 <pre>
 <b>var</b> vec2 = vec.scale(2)
   .add(x:1,y:10)
-  .clone(); // <i> the last returned result is assigned</i>
-  // <i> vec2 is a clone of vec after the scale and add</i>
+  .clone(); // <i>the last returned result is assigned</i>
+  // <i>vec2 is a clone of vec after the scale and add</i>
 </pre>
 <p>In the above example vec2 is assigned the value returned from the last
 call in the chain. In this case, that would be a copy of vec after the
@@ -12764,7 +12764,7 @@ the JSON is fetched.</p>
 <p>Example of <b>&dollar;.getJSON</b>() code:</p>
 <pre>
 &dollar;.getJSON(&quot;foo.json&quot;, {}, <b>function</b>(data) {
-  // <i> data handling code</i>
+  // <i>data handling code</i>
 });
 </pre>
 <p>The following would <i>not</i> work, because the data-handling code would
@@ -12811,7 +12811,7 @@ has completed:</p>
   console.log(&apos;Doing something&apos;);
   then();
 }
-// <i> Do something, then execute callback to log &apos;done&apos;</i>
+// <i>Do something, then execute callback to log &apos;done&apos;</i>
 doSomething(<b>function</b>() {
   console.log(&apos;Done&apos;);
   });
@@ -12836,9 +12836,9 @@ doSomethingAsync(<b>function</b>() {
 });
 console.log(&apos;Doing something else&apos;);
 // <i>Outputs:</i>
-// <i>  &quot;Doing something asynchronously&quot;</i>
-// <i>  &quot;Doing something else&quot;</i>
-// <i>  &quot;Done&quot;</i>
+// <i>&quot;Doing something asynchronously&quot;</i>
+// <i>&quot;Doing something else&quot;</i>
+// <i>&quot;Done&quot;</i>
 </pre>
 <p>The <b>then</b> callbacks are considered continuations of the <b>doSomething</b>() 
 methods. Providing a callback as the last instruction in a function is called a
@@ -12893,7 +12893,7 @@ called even after the original function has returned.</p>
 <b>function</b> SomeClass(msg, elem) {
   <b>this</b>.msg = msg;
   elem.addEventListener(&apos;click&apos;, <b>function</b>() {
-    console.log(<b>this</b>.msg);  // <i> &lt;= will fail because &quot;this&quot; is undefined</i>
+    console.log(<b>this</b>.msg);  // <i>&lt;= will fail because &quot;this&quot; is undefined</i>
   });
 }
 <b>var</b> s = <b>new</b> SomeClass(&quot;hello&quot;, someElement);
@@ -12908,7 +12908,7 @@ whatever was passed to <b>bind</b> then calls the original function.<br/>
   <b>this</b>.msg = msg;
   elem.addEventListener(&apos;click&apos;, <b>function</b>() {
     console.log(<b>this</b>.msg);
-  } .bind(<b>this</b>));  // <i> &lt;=- bind the function to &grave;this&grave;</i>
+  } .bind(<b>this</b>));  // <i>&lt;=- bind the function to &grave;this&grave;</i>
 }
 </pre>
 </li>
@@ -13011,8 +13011,8 @@ an error occurs:</p>
 compare(<b>true</b>, onSuccess, onFailure);
 compare(<b>false</b>, onSuccess, onFailure);
 // <i>Outputs:</i>
-// <i>  &quot;Value was expected&quot;</i>
-// <i>  &quot;Value was unexpected/exceptional&quot;</i>
+// <i>&quot;Value was expected&quot;</i>
+// <i>&quot;Value was unexpected/exceptional&quot;</i>
 </pre>
 <p>Code execution in <b>compare</b>() above has two possible branches: success 
 when the expected and actual values are the same, and error when they are different. 
@@ -13028,9 +13028,9 @@ compareAsync(<b>true</b>, onSuccess, onFailure);
 compareAsync(<b>false</b>, onSuccess, onFailure);
 console.log(&apos;Doing something else&apos;);
 // <i>Outputs:</i>
-// <i>  &quot;Doing something else&quot;</i>
-// <i>  &quot;Value was expected&quot;</i>
-// <i>  &quot;Value was unexpected/exceptional&quot;</i>
+// <i>&quot;Doing something else&quot;</i>
+// <i>&quot;Value was expected&quot;</i>
+// <i>&quot;Value was unexpected/exceptional&quot;</i>
 </pre>
 <p>It should be noted, multiple callbacks do not have to be mutually
 exclusive - both methods could be called. Similarly, the <b>compare</b>() 
@@ -13409,10 +13409,10 @@ can be preserved.</p>
 <pre>
 <b>let</b> str = &quot;aa+b+cc+1+2&quot;,
   re = <i>/(&lbrack;a-z&rbrack;)&amp;plus;/g</i>;
-// <i> String replacement</i>
-str.replace(re, &apos;&dollar;1 &apos;);  // <i> &quot;aa b cc 1+2&quot;</i>
-// <i> Function replacement</i>
-str.replace(re, (m, &dollar;1) =&gt; &dollar;1 &plus; &apos; &apos;);  // <i> &quot;aa b cc 1+2&quot;</i>
+// <i>String replacement</i>
+str.replace(re, &apos;&dollar;1 &apos;);  // <i>&quot;aa b cc 1+2&quot;</i>
+// <i>Function replacement</i>
+str.replace(re, (m, &dollar;1) =&gt; &dollar;1 &plus; &apos; &apos;);  // <i>&quot;aa b cc 1+2&quot;</i>
 </pre>
 <p><b>Non-Capture</b></p>
 <p>Using the form (?:pattern), these work in a similar way to capture groups,
@@ -13423,7 +13423,7 @@ pattern matching such as an OR</p>
 <pre>
 <b>let</b> str = &quot;aa+b+cc+1+2&quot;,
   re = <i>/(?:&bsol;&bsol;b&vert;c)(&lbrack;a-z&rbrack;)&amp;plus;/g</i>;
-str.replace(re, &apos;&dollar;1 &apos;); // <i> &quot;aa+b c 1+2&quot;</i>
+str.replace(re, &apos;&dollar;1 &apos;); // <i>&quot;aa+b c 1+2&quot;</i>
 </pre>
 <p><b>Look-Ahead</b></p>
 <p>If the desired match relies on something which follows it, rather than
@@ -13434,7 +13434,7 @@ happens if the look-ahead pattern did not match) has the form (?!pattern)</p>
 <pre>
 <b>let</b> str = &quot;aa+b+cc+1+2&quot;,
   re = <i>/\&plus;(?=&lbrack;a-z&rbrack;)/g</i>;
-str.replace(re, &apos; &apos;);  // <i> &quot;aa b cc+1+2&quot;</i>
+str.replace(re, &apos; &apos;);  // <i>&quot;aa b cc+1+2&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch31-7">Section 31.7: Replacing string match with a callback function</h3>
@@ -13449,14 +13449,14 @@ replacement based on some logic.</p>
     <b>return</b> &apos;End&apos;;
   }
   });
-// <i> will return Start string End</i>
+// <i>will return Start string End</i>
 </pre>
 <!-- page 226 -->
 <p>One line template library</p>
 <pre>
 <b>let</b> data = {name: &apos;John&apos;, surname: &apos;Doe&apos;}
 &quot;My name is {surname}, {name} {surname}&quot;.replace(<i>/(?:{(.+?)})/g</i>, x =&gt;data&lbrack;x&period;slice(1,-1)&rbrack;);
-// <i> &quot;My name is Doe, John Doe&quot;</i>
+// <i>&quot;My name is Doe, John Doe&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch31-8">Section 31.8: Using Regex.exec() with parentheses regex to extract matches of a string</h3>
@@ -13498,13 +13498,13 @@ while ((m = re.exec(str)) !== <b>null</b>) {
   <b>if</b> (m&period;index === re.lastIndex) {
     re.lastIndex++;
   }
-  console.log(m&lbrack;0&rbrack;); // <i> The all substring</i>
-  console.log(m&lbrack;1&rbrack;); // <i> The href subpart</i>
-  console.log(m&lbrack;2&rbrack;); // <i> The anchor subpart</i>
+  console.log(m&lbrack;0&rbrack;); // <i>The all substring</i>
+  console.log(m&lbrack;1&rbrack;); // <i>The href subpart</i>
+  console.log(m&lbrack;2&rbrack;); // <i>The anchor subpart</i>
   links.push({
-    match : m&lbrack;0&rbrack;,  // <i> the entire match</i>
-    href : m&lbrack;1&rbrack;,   // <i> the first parenthesis =&lpar;https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;)</i>
-    anchor : m&lbrack;2&rbrack;,  // <i> the second one =&lpar;&lbrack;&Hat;&lt;&rbrack;&ast;)</i>
+    match : m&lbrack;0&rbrack;,  // <i>the entire match</i>
+    href : m&lbrack;1&rbrack;,   // <i>the first parenthesis =&lpar;https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;)</i>
+    anchor : m&lbrack;2&rbrack;,  // <i>the second one =&lpar;&lbrack;&Hat;&lt;&rbrack;&ast;)</i>
   });
 }
 </pre>
@@ -13595,9 +13595,9 @@ data or configures an expiration limit. localStorage uses a map-like
 interface for getting and setting values.</p>
 
 localStorage.setItem(&apos;name&apos;, &quot;John Smith&quot;);
-console.log(localStorage.getItem(&apos;name&apos;)); // <i> &quot;John Smith&quot;</i>
+console.log(localStorage.getItem(&apos;name&apos;)); // <i>&quot;John Smith&quot;</i>
 localStorage.removeItem(&apos;name&apos;);
-console.log(localStorage.getItem(&apos;name&apos;)); // <i> null</i>
+console.log(localStorage.getItem(&apos;name&apos;)); // <i>null</i>
 <p>If you want to store simple structured data, you can use JSON to
 serialize it to and from strings for storage.</p>
 <pre>
@@ -13605,7 +13605,7 @@ serialize it to and from strings for storage.</p>
 localStorage.setItem(&apos;players&apos;, JSON.stringify(players));
 
 console.log(JSON.parse(localStorage.getItem(&apos;players&apos;)));
-// <i> &lbrack; Object { name: &quot;Tyler&quot;, score: 22 }, Object { name: &quot;Ryan&quot;, score: 41 } &rbrack;</i>
+// <i>&lbrack; Object { name: &quot;Tyler&quot;, score: 22 }, Object { name: &quot;Ryan&quot;, score: 41 } &rbrack;</i>
 </pre>
 <p><b>localStorage limits in browsers</b></p>
 <p>Mobile browsers:</p>
@@ -13642,13 +13642,13 @@ console.log(JSON.parse(localStorage.getItem(&apos;players&apos;)));
 <p>localStorage, sessionStorage are JavaScript <b>Objects</b> and you can treat them as such.
 Instead of using Storage Methods like .getItem(), setItem(), etc... here&apos;s a simpler alternative:</p>
 <pre>
-// <i> Set</i>
+// <i>Set</i>
 localStorage.greet = &quot;Hi!&quot;;  // <i>Same as: window.localStorage.setItem(&quot;greet&quot;, &quot;Hi!&quot;);</i>
-// <i> Get</i>
+// <i>Get</i>
 localStorage.greet ;                   // <i>Same as: window.localStorage.getItem(&quot;greet&quot;);</i>
-// <i> Remove item</i>
+// <i>Remove item</i>
 <b>delete</b> localStorage.greet;      // <i>Same as: window.localStorage.removeItem(&quot;greet&quot;);</i>
-// <i> Clear storage</i>
+// <i>Clear storage</i>
 localStorage.clear();
 </pre>
 <p><b>Example:</b></p>
@@ -13656,18 +13656,18 @@ localStorage.clear();
 // <i>Store values (Strings, Numbers)</i>
 localStorage.hello = &quot;Hello&quot;;
 localStorage.year = 2017;
-// <i> Store complex data (Objects, Arrays)</i>
+// <i>Store complex data (Objects, Arrays)</i>
 <b>var</b> user = {name: &quot;John&quot;, surname:&quot;Doe&quot;, books:&lbrack;&quot;A&quot;, &quot;B&quot;&rbrack;};
 localStorage.user = JSON.stringify( user );
-// <i> Important: Numbers are stored as String</i>
-console.log( <b>typeof</b> localStorage.year );  // <i> String</i>
-// <i> Retrieve values</i>
-<b>var</b> someYear = localStorage.year;  // <i> &quot;2017&quot;</i>
-// <i> Retrieve complex data</i>
+// <i>Important: Numbers are stored as String</i>
+console.log( <b>typeof</b> localStorage.year );  // <i>String</i>
+// <i>Retrieve values</i>
+<b>var</b> someYear = localStorage.year;  // <i>&quot;2017&quot;</i>
+// <i>Retrieve complex data</i>
 <b>var</b> userData = JSON.parse(localStorage.user);
-<b>var</b> userName = userData.name;  // <i> &quot;John&quot;</i>
-// <i> Remove specific data</i>
-<b>delete</b> localStorage.year;  // <i> Clear (delete) all stored data</i>
+<b>var</b> userName = userData.name;  // <i>&quot;John&quot;</i>
+// <i>Remove specific data</i>
+<b>delete</b> localStorage.year;  // <i>Clear (delete) all stored data</i>
 localStorage.clear();
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -13702,7 +13702,7 @@ window.addEventListener(&apos;storage&apos;, <b>function</b>(event) {
 domain was modified through script.</p>
 <p>First window</p>
 <pre>
-// <i> page url: http://sub.a.com/1.html</i>
+// <i>page url: http://sub.a.com/1.html</i>
 document.domain = &apos;a.com&apos;;
 <b>var</b> input = document.createElement(&apos;input&apos;);
 document.body.appendChild(input);
@@ -13713,11 +13713,11 @@ input.oninput = <b>function</b>(event) {
 </pre>
 <p>Second Window</p>
 <pre>
-// <i> page url: http://sub.a.com/2.html</i>
+// <i>page url: http://sub.a.com/2.html</i>
 document.domain = &apos;a.com&apos;;
 <b>var</b> output = document.createElement(&apos;p&apos;);
 document.body.appendChild(output);
-// <i> Listener will never called under Chrome(53), Edge and Safari(10.0).</i>
+// <i>Listener will never called under Chrome(53), Edge and Safari(10.0).</i>
 window.addEventListener(&apos;storage&apos;, <b>function</b>(event) {
   <b>if</b>(event.key === &apos;user-value&apos;) {
     output.textContent = event.newValue;
@@ -13734,7 +13734,7 @@ window/tab. Stored data persists between pages <i>in that window/tab</i>
 for as long as it&apos;s open, but is visible nowhere else.</p>
 <pre>
 <b>var</b> audio = document.querySelector(&apos;audio&apos;);
-// <i> Maintain the volume if the user clicks a link then navigates back here.</i>
+// <i>Maintain the volume if the user clicks a link then navigates back here.</i>
 audio.volume = Number(sessionStorage.getItem(&apos;volume&apos;) &vert;&vert; 1.0);
 audio.onvolumechange = <b>function</b>(event) {
   sessionStorage.setItem(&apos;volume&apos;, audio.volume);
@@ -13767,7 +13767,7 @@ localStorage.setItem(&apos;image&apos;, &apos;sprite.svg&apos;);
 </pre>
 <p>Get length</p>
 <pre>
-localStorage.length; // <i> 3</i>
+localStorage.length; // <i>3</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch33-6">Section 33.6: Error conditions</h3>
@@ -13804,7 +13804,7 @@ localStorage.removeItem(&quot;greet&quot;);
 <pre>
 localStorage.setItem(&quot;greet&quot;, &quot;hi&quot;);
 localStorage.removeItem(&quot;greet&quot;);
-console.log(localStorage.getItem(&quot;greet&quot;) ); // <i> null</i>
+console.log(localStorage.getItem(&quot;greet&quot;) ); // <i>null</i>
 </pre>
 <p>(Same applies for sessionStorage)</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -13981,9 +13981,9 @@ in code or in conversation.</p>
 as &quot;json&quot;:</p>
 <pre>
 fetch(url).then(<b>function</b>(response) {
-  <b>const</b> json = JSON.parse(response.data);  // <i> Confusion ensues!</i>
-// <i> We&apos;re done with the notion of &quot;JSON&quot; at this point,</i>
-// <i> but the concept stuck with the variable name.</i>
+  <b>const</b> json = JSON.parse(response.data);  // <i>Confusion ensues!</i>
+// <i>We&apos;re done with the notion of &quot;JSON&quot; at this point,</i>
+// <i>but the concept stuck with the variable name.</i>
 });
 </pre>
 <p>In the above example, response.data is a JSON string that is returned by some API.
@@ -13994,8 +13994,8 @@ or even a simple number!)</p>
 <pre>
 fetch(url).then(<b>function</b>(response) {
   <b>const</b> value = JSON.parse(response.data);
-  // <i> We&apos;re done with the notion of &quot;JSON&quot; at this point.</i>
-  // <i> You don&apos;t talk about JSON after parsing JSON.</i>
+  // <i>We&apos;re done with the notion of &quot;JSON&quot; at this point.</i>
+  // <i>You don&apos;t talk about JSON after parsing JSON.</i>
 });
 </pre>
 <p>Developers also tend to throw the phrase &quot;JSON object&quot; around a lot.
@@ -14006,346 +14006,122 @@ string, you parse it, and you end up with a value.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch35-2">Section 35.2: Parsing with a reviver function</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-A reviver function can be used to filter or transform the value being
-parsed.
+<p>A reviver function can be used to filter or transform the value being parsed.</p>
 <h5>Version ≥ 5.1</h5>
-<b>var</b>
-jsonString
-=
-&apos;&lbrack;{&quot;name&quot;:&quot;John&quot;,&quot;score&quot;:51},{&quot;name&quot;:&quot;Jack&quot;,&quot;score&quot;:17}&rbrack;&apos;
-;
-<b>var</b>
-data
-=
-JSON.
-parse
-(
-jsonString
-,
-<b>function</b>
-reviver
-(
-key
-,
-value
-)
-{
-<b>return</b>
-key
-===
-&apos;name&apos;
-?
-value.
-toUpperCase
-(
-)
-:
-value
-;
-}
-)
-;
-Version ≥ 6
-<b>const</b>
-jsonString
-=
-&apos;&lbrack;{&quot;name&quot;:&quot;John&quot;,&quot;score&quot;:51},{&quot;name&quot;:&quot;Jack&quot;,&quot;score&quot;:17}&rbrack;&apos;
-;
-<b>const</b>
-data
-=
-JSON.
-parse
-(
-jsonString
-,
-(
-key
-,
-value
-)
-=&gt;
-key
-===
-&apos;name&apos;
-?
-value.
-toUpperCase
-(
-)
-:
-value
-)
-;
-This produces the following result:
+<pre>
+<b>var</b> jsonString = &apos;&lbrack;{&quot;name&quot;:&quot;John&quot;,&quot;score&quot;:51},{&quot;name&quot;:&quot;Jack&quot;,&quot;score&quot;:17}&rbrack;&apos;;
+<b>var</b> data = JSON.parse(jsonString, <b>function</b>reviver(key, value) {
+  <b>return</b> key === &apos;name&apos; ? value.toUpperCase() : value;
+});
+</pre>
+<h5>Version ≥ 6</h5>
+<per>
+<b>const</b> jsonString = &apos;&lbrack;{&quot;name&quot;:&quot;John&quot;,&quot;score&quot;:51},{&quot;name&quot;:&quot;Jack&quot;,&quot;score&quot;:17}&rbrack;&apos;;
+<b>const</b> data = JSON.parse(jsonString, (key, value) =&gt;
+  key === &apos;name&apos; ? value.toUpperCase() : value
+);
+</pre>
+<p>This produces the following result:</p>
+<pre>
 &lbrack;
-{
-&apos;name&apos;
-:
-&apos;JOHN&apos;
-,
-&apos;score&apos;
-:
-51
-}
-,
-{
-&apos;name&apos;
-:
-&apos;JACK&apos;
-,
-&apos;score&apos;
-:
-17
-}
+  {
+    &apos;name&apos; : &apos;JOHN&apos;,
+    &apos;score&apos; : 51
+  },
+  {
+    &apos;name&apos; : &apos;JACK&apos;,
+    &apos;score&apos; : 17
+  }
 &rbrack;
-This is particularly useful when data must be sent that needs to be
+</pre>
+<p>This is particularly useful when data must be sent that needs to be
 serialized/encoded when being transmitted with JSON, but one wants to
 access it deserialized/decoded. In the following example, a date was
 encoded to its ISO 8601 representation. We use the reviver function to
-parse this in a JavaScript Date.
+parse this in a JavaScript Date.</p>
 <h5>Version ≥ 5.1</h5>
-<b>var</b>
-jsonString
-=
-&apos;{&quot;date&quot;:&quot;2016-01-04T23:00:00.000Z&quot;}&apos;
-;
-<b>var</b>
-data
-=
-JSON.
-parse
-(
-jsonString
-,
-<b>function</b>
-(
-key
-,
-value
-)
-{
-<b>return</b>
-(
-key
-===
-&apos;date&apos;
-)
-?
-<b>new</b>
-Date
-(
-value
-)
-:
-value
-;
-}
-)
-;
+<pre>
+<b>var</b> jsonString = &apos;{&quot;date&quot;:&quot;2016-01-04T23:00:00.000Z&quot;}&apos;;
+<b>var</b> data = JSON.parse(jsonString, <b>function</b>(key, value) {
+  <b>return</b> (key === &apos;date&apos;) ? <b>new</b> Date(value) : value;
+});
+</pre>
 <h5>Version ≥ 6</h5>
-<b>const</b>
-jsonString
-=
-&apos;{&quot;date&quot;:&quot;2016-01-04T23:00:00.000Z&quot;}&apos;
-;
-<b>const</b>
-data
-=
-JSON.
-parse
-(
-jsonString
-,
-(
-key
-,
-value
-)
-=&gt;
-key
-===
-&apos;date&apos;
-?
-<b>new</b>
-Date
-(
-value
-)
-:
-value
-)
-;
-It is important to make sure the reviver function returns a useful
+<pre>
+<b>const</b> jsonString = &apos;{&quot;date&quot;:&quot;2016-01-04T23:00:00.000Z&quot;}&apos;;
+<b>const</b> data = JSON.parse(jsonString, (key, value) =&gt;
+  key === &apos;date&apos; ? <b>new</b> Date(value) : value
+);
+</pre>
+<p>It is important to make sure the reviver function returns a useful
 value at the end of each iteration. If the reviver function returns
 <b>undefined</b>, no value or the execution falls off towards the end of
 the function, the property is deleted from the object. Otherwise, the
-property is redefined to be the return value.
+property is redefined to be the return value.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch35-3">Section 35.3: Serializing a value</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-JSON.stringify
-A JavaScript value can be converted to a JSON string using the
-function.
-JSON.
-stringify
-(
-value
-&lbrack;
-,
-replacer
-&lbrack;
-,
-space
-&rbrack;
-&rbrack;
-)
-1.  value The value to convert to a JSON string.
+<p>A JavaScript value can be converted to a JSON string using the
+JSON.stringify function.</p>
+<pre>
+JSON.stringify(value&lbrack;, replacer&lbrack;, space&rbrack;&rbrack;)
+</pre>
+<p>1.  value The value to convert to a JSON string.</p>
+<pre>
 <i>/&ast; Boolean &ast;/</i> JSON.stringify(<b>true</b>) <i>// &apos;true&apos;</i>
 <i>/&ast; Number &ast;/</i> JSON.stringify(12) <i>// &apos;12&apos;</i>
 <i>/&ast; String &ast;/</i> JSON.stringify(&apos;foo&apos;) <i>// &apos;&quot;foo&quot;&apos;</i>
 <i>/&ast; Object &ast;/</i> JSON.stringify({}) <i>// &apos;{}&apos;</i>
-JSON.stringify({foo: &apos;baz&apos;}) <i>// &apos;{&quot;foo&quot;: &quot;baz&quot;}&apos;</i>
-<i>/&ast; Array &ast;/</i> JSON.stringify(&lbrack;1, <b>true</b>, &apos;foo&apos;&rbrack;) <i>// &apos;&lbrack;1,
-true, &quot;foo&quot;&rbrack;&apos;</i>
-<i>/&ast; Date &ast;/</i> JSON.stringify(<b>new</b> Date()) <i>//
-&apos;&quot;2016-08-06T17:25:23.588Z&quot;&apos;</i>
+                            JSON.stringify({foo: &apos;baz&apos;}) <i>// &apos;{&quot;foo&quot;: &quot;baz&quot;}&apos;</i>
+<i>/&ast; Array &ast;/</i> JSON.stringify(&lbrack;1, <b>true</b>, &apos;foo&apos;&rbrack;) <i>// &apos;&lbrack;1, true, &quot;foo&quot;&rbrack;&apos;</i>
+<i>/&ast; Date &ast;/</i> JSON.stringify(<b>new</b> Date()) <i>// &apos;&quot;2016-08-06T17:25:23.588Z&quot;&apos;</i>
 <i>/&ast; Symbol &ast;/</i> JSON.stringify({x:Symbol()}) <i>// &apos;{}&apos;</i>
-2.  replacer A function that alters the behaviour of the stringification
+</pre>
+<!-- page 237 -->
+<p>2.  replacer A function that alters the behaviour of the stringification
     process or an array of String and Number objects that serve as a
     whitelist for filtering the properties of the value object to be
     included in the JSON string. If this value is null or is not
     provided, all properties of the object are included in the resulting
-    JSON string.
-// <i> replacer as a function</i>
-<b>function</b>
-replacer
-(
-key
-,
-value
-)
-{
-// <i> Filtering out properties</i>
-<b>if</b>
-(
-<b>typeof</b>
-value
-===
-&quot;string&quot;
-)
-{
-<b>return</b>
+    JSON string.</p>
+<pre>
+// <i>replacer as a function</i>
+<b>function</b> replacer( key, value) {
+  // <i>Filtering out properties</i>
+  <b>if</b> (<b>typeof</b> value === &quot;string&quot;) {
+    <b>return</b>
+  }
+  <b>return</b> value
 }
-<b>return</b>
-value
-}
-<b>var</b>
-foo
-=
-{
-foundation
-:
-&quot;Mozilla&quot;
-,
-model
-:
-&quot;box&quot;
-,
-week
-:
-45
-,
-transport
-:
-&quot;car&quot;
-,
-month
-:
-7
-}
-JSON.
-stringify
-(
-foo
-,
-replacer
-)
-// <i> -&amp;apos;{&quot;week&quot;: 45, &quot;month&quot;: 7}&apos;</i>
-// <i> replacer as an array</i>
-JSON.
-stringify
-(
-foo
-,
-&lbrack;
-&apos;foundation&apos;
-,
-&apos;week&apos;
-,
-&apos;month&apos;
-&rbrack;
-)
-// <i> -&amp;apos;{&quot;foundation&quot;: &quot;Mozilla&quot;, &quot;week&quot;: 45, &quot;month&quot;: 7}&apos;</i>
-// <i> only the &grave;foundation&grave;, &grave;week&grave;, and &grave;month&grave; properties are
-kept</i>
-3.  space For readability, the number of spaces used for indentation may
-    be specified as the third parameter.
-JSON.
-stringify
-(
-{
-x
-:
-1
-,
-y
-:
-1
-}
-,
-<b>null</b>
-,
-2
-)
-// <i> 2 space characters will be used for indentation</i>
+<b>var</b> foo = { foundation: &quot;Mozilla&quot;, model: &quot;box&quot;, week: 45, transport: &quot;car&quot;, month: 7}
+JSON.stringify(foo, replacer)
+// <i>-&amp;apos;{&quot;week&quot;: 45, &quot;month&quot;: 7}&apos;</i>
+// <i>replacer as an array</i>
+JSON.stringify(foo, &lbrack;&apos;foundation&apos;, &apos;week&apos;, &apos;month&apos;&rbrack;)
+// <i>-&gt; ;apos;{&quot;foundation&quot;: &quot;Mozilla&quot;, &quot;week&quot;: 45, &quot;month&quot;: 7}&apos;</i>
+// <i>only the &grave;foundation&grave;, &grave;week&grave;, and &grave;month&grave; properties are kept</i>
+</pre>
+<p>3.  space For readability, the number of spaces used for indentation may be specified as the third parameter.</p>
+<pre>
+JSON.stringify({x: 1, y: 1}, <b>null</b>, 2)  // <i>2 space characters will be used for indentation</i>
 <i>/&ast; output:</i>
-<i>{</i>
-<i>&apos;x&apos;: 1,</i>
-<i>&apos;y&apos;: 1</i>
-<i>}</i>
+  <i>{</i>
+    <i>&apos;x&apos;: 1,</i>
+    <i>&apos;y&apos;: 1</i>
+  <i>}</i>
 <i>&ast;/</i>
-<b>&bsol;&bsol;t</b>
-Alternatively, a string value can be provided to use for indentation.
-For example, passing &apos;&apos; will cause the tab character to be used for
-indentation.
-JSON.
-stringify
-(
-{
-x
-:
-1
-,
-y
-:
-1
-}
-,
-<b>null</b>
-,
-&apos;
-<b>&bsol;&bsol;t</b>
-&apos;
-)
+</pre>
+<p>Alternatively, a string value can be provided to use for indentation. For example, 
+passing &apos;&apos; will cause the tab character to be used for indentation.</p>
+<pre>
+JSON.stringify({x: 1, y: 1}, <b>null</b>, &apos;<b>&bsol;&bsol;t</b>&apos;)
 <i>/&ast; output:</i>
-<i>{</i>
-<i>&apos;x&apos;: 1,</i>
-<i>&apos;y&apos;: 1</i>
-<i>}</i>
+  <i>{</i>
+    <i>&apos;x&apos;: 1,</i>
+    <i>&apos;y&apos;: 1</i>
+  <i>}</i>
 <i>&ast;/</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch35-4">Section 35.4: Serializing and restoring class instances</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -14622,7 +14398,7 @@ level
 ,
 &rbrack;
 ;
-// <i> Remove names and round numbers to integers to anonymize records before sharing</i>
+// <i>Remove names and round numbers to integers to anonymize records before sharing</i>
 <b>const</b>
 anonymousReport
 =
@@ -14722,7 +14498,7 @@ world
 )
 )
 ;
-// <i> {&quot;name&quot;:&quot;World&quot;,&quot;regions&quot;:&lbrack;{&quot;name&quot;:&quot;North
+// <i>{&quot;name&quot;:&quot;World&quot;,&quot;regions&quot;:&lbrack;{&quot;name&quot;:&quot;North
 America&quot;,&quot;parent&quot;:&quot;America&quot;}&rbrack;}</i>
 world.
 regions
@@ -14750,7 +14526,883 @@ world
 )
 )
 ;
-// <i> Uncaught TypeError: Converting circular structure to JSON</i>
+// <i>Uncaught TypeError: Converting circular structure to JSON</i>
 As soon as the process detects a cycle, the exception is raised. If
 there were no cycle detection, the string would be infinitely long.
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch36">Chapter 36: AJAX</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+AJAX stands for &quot;Asynchronous JavaScript and XML&quot;. Although the name
+includes XML, JSON is more often used due to its simpler formatting
+and lower redundancy. AJAX allows the user to communicate with
+external resources without reloading the webpage.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch36-1">Section 36.1: Sending and Receiving JSON Data via POST</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h5>Version ≥ 6</h5>
+json
+Fetch request promises initially return Response objects. These will
+provide response header information, but they don&apos;t directly include
+the response body, which may not have even loaded yet. Methods on the
+Response object such as .() can be used to wait for the response body
+to load, then parse it.
+<b>const</b>
+
+requestData
+
+=
+
+{
+
+method
+
+:
+
+&apos;getUsers&apos;
+
+}
+
+;
+
+<b>const</b>
+
+usersPromise
+
+=
+
+fetch
+
+(
+
+&apos;/api&apos;
+
+,
+
+{
+
+method
+
+:
+
+&apos;POST&apos;
+
+,
+
+body
+
+:
+
+JSON.
+
+stringify
+
+(
+
+requestData
+
+)
+
+}
+
+)
+
+.
+
+then
+
+(
+
+response
+
+=&gt;
+
+{
+
+<b>if</b>
+
+(
+
+!
+
+response.
+
+ok
+
+)
+
+{
+
+<b>throw</b>
+
+<b>new</b>
+
+Error
+
+(
+
+&quot;Got non-2XX response from API server.&quot;
+
+)
+
+;
+
+}
+
+<b>return</b>
+
+response.
+
+json
+
+(
+
+)
+
+;
+
+}
+
+)
+
+.
+
+then
+
+(
+
+responseData
+
+=&gt;
+
+{
+
+<b>return</b>
+
+responseData.
+
+users
+
+;
+
+}
+
+)
+
+;
+
+usersPromise.
+
+then
+
+(
+
+users
+
+=&gt;
+
+{
+
+console.
+
+log
+
+(
+
+&quot;Known users: &quot;
+
+,
+
+users
+
+)
+
+;
+
+}
+
+,
+
+error
+
+=&gt;
+
+{
+
+console.
+
+error
+
+(
+
+&quot;Failed to fetch users due to error: &quot;
+
+,
+
+error
+
+)
+;
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch36-2">Section 36.2: Add an AJAX preloader</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+Here&apos;s a way to show a GIF preloader while an AJAX call is executing.
+We need to prepare our add and remove preloader functions:
+<b>function</b>
+addPreloader
+(
+)
+{
+// <i>if the preloader doesn&apos;t already exist, add one to the page</i>
+<b>if</b>
+(
+!
+document.
+querySelector
+(
+&apos;#preloader&apos;
+)
+)
+{
+<b>var</b>
+preloaderHTML
+=
+&apos;&lt;img id=&quot;preloader&quot; src=&quot;https://goo.gl/cNhyvX&quot; /&gt;&apos;
+;
+document.
+querySelector
+(
+&apos;body&apos;
+)
+.
+innerHTML
++=
+preloaderHTML
+;
+}
+}
+<b>function</b>
+removePreloader
+(
+)
+{
+// <i>select the preloader element</i>
+<b>var</b>
+preloader
+=
+document.
+querySelector
+(
+&apos;#preloader&apos;
+)
+;
+// <i>if it exists, remove it from the page</i>
+<b>if</b>
+(
+preloader
+)
+{
+preloader.
+remove
+(
+)
+;
+}
+}
+Now we&apos;re going to look at where to use these functions.
+<b>var</b>
+request
+=
+<b>new</b>
+XMLHttpRequest
+(
+)
+;
+request.readyState ==
+Inside the onreadystatechange function you should have an if statement
+with condition: 4
+&& request.status == 200
+.
+removePreloader
+If <b>true</b>: the request is finished and response is ready that&apos;s
+where we&apos;ll use ().
+addPreloader
+Else if <b>false</b>: the request is still in progress, in this case
+we&apos;ll run the function ()
+xmlhttp.
+onreadystatechange
+=
+<b>function</b>
+(
+)
+{
+<b>if</b>
+(
+request.
+readyState
+==
+4
+&&
+request.
+status
+==
+200
+)
+{
+// <i>the request has come to an end, remove the preloader</i>
+removePreloader
+(
+)
+;
+}
+<b>else</b>
+{
+// <i>the request isn&apos;t finished, add the preloader</i>
+addPreloader
+(
+)
+}
+}
+;
+xmlhttp.
+open
+(
+&apos;GET&apos;
+,
+your_file.
+php
+,
+<b>true</b>
+)
+;
+xmlhttp.
+send
+(
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch36-3">Section 36.3: Displaying the top JavaScript questions of the month from Stack Overflow&apos;s API</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+We can make an AJAX request to [Stack Exchange&apos;s
+API](http://api.stackexchange.com/docs) to retrieve a list of the top
+JavaScript questions for the month, then present them as a list of
+links. If the request fails or the returns an API error, our promise
+error handling displays the error instead.
+
+<h5>Version ≥ 6</h5>
+[View live results on
+HyperWeb](http://plume-pine.hyperweb.space/hot-javascript.html).
+<b>const</b>
+url
+=
+&apos;http://api.stackexchange.com/2.2/questions?site=stackoverflow&apos;
+&plus;
+&apos;&tagged=javascript&sort=month&filter=unsafe&key=gik4BOCMC7J9doavgYteRw((&apos;
+;
+fetch
+(
+url
+)
+.
+then
+(
+response
+=&gt;
+response.
+json
+(
+)
+)
+.
+then
+(
+data
+=&gt;
+{
+<b>if</b>
+(
+data.
+error_message
+)
+{
+<b>throw</b>
+<b>new</b>
+Error
+(
+data.
+error_message
+)
+;
+}
+<b>const</b>
+list
+=
+document.
+createElement
+(
+&apos;ol&apos;
+)
+;
+document.
+body
+.
+appendChild
+(
+list
+)
+;
+<b>for</b>
+(
+<b>const</b>
+{
+title
+,
+link
+}
+of data.
+items
+)
+{
+<b>const</b>
+entry
+=
+document.
+createElement
+(
+&apos;li&apos;
+)
+;
+<b>const</b>
+hyperlink
+=
+document.
+createElement
+(
+&apos;a&apos;
+)
+;
+entry.
+appendChild
+(
+hyperlink
+)
+;
+list.
+appendChild
+(
+entry
+)
+;
+hyperlink.
+textContent
+=
+title
+;
+hyperlink.
+href
+=
+link
+;
+}
+}
+)
+.
+then
+(
+<b>null</b>
+,
+error
+=&gt;
+{
+<b>const</b>
+message
+=
+document.
+createElement
+(
+&apos;pre&apos;
+)
+;
+document.
+body
+.
+appendChild
+(
+message
+)
+;
+message.
+style
+.
+color
+=
+&apos;red&apos;
+;
+message.
+textContent
+=
+String
+(
+error
+)
+;
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch36-4">Section 36.4: Using GET with parameters</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+This function runs an AJAX call using GET allowing us to send
+<b>parameters</b> (object) to a <b>file</b> (string) and launch a
+<b>callback</b> (function) when the request has been ended.
+<b>function</b>
+ajax
+(
+file
+,
+params
+,
+callback
+)
+{
+<b>var</b>
+url
+=
+file
+&plus;
+&apos;?&apos;
+;
+// <i>loop through object and assemble the url</i>
+<b>var</b>
+notFirst
+=
+<b>false</b>
+;
+<b>for</b>
+(
+<b>var</b>
+key
+<b>in</b>
+params
+)
+{
+<b>if</b>
+(
+params.
+hasOwnProperty
+(
+key
+)
+)
+{
+url
++=
+(
+notFirst
+?
+&apos;&&apos;
+:
+&apos;&apos;
+)
+&plus;
+key
+&plus;
+&quot;=&quot;
+&plus;
+params
+&lbrack;
+key
+&rbrack;
+;
+}
+notFirst
+=
+<b>true</b>
+;
+}
+// <i>create a AJAX call with url as parameter</i>
+<b>var</b>
+xmlhttp
+=
+<b>new</b>
+XMLHttpRequest
+(
+)
+;
+xmlhttp.
+onreadystatechange
+=
+<b>function</b>
+(
+)
+{
+<b>if</b>
+(
+xmlhttp.
+readyState
+==
+4
+&&
+xmlhttp.
+status
+==
+200
+)
+{
+callback
+(
+xmlhttp.
+responseText
+)
+;
+}
+}
+;
+xmlhttp.
+open
+(
+&apos;GET&apos;
+,
+url
+,
+<b>true</b>
+)
+;
+xmlhttp.
+send
+(
+)
+;
+}
+Here&apos;s how we use it:
+ajax(&apos;cars.php&apos;, {type:&quot;Volvo&quot;, model:&quot;300&quot;, color:&quot;purple&quot;},
+<b>function</b>(response) {
+// <i>add here the code to be executed when data comes back to this
+page</i> // <i>for example console.log(response) will show the AJAX
+response in console</i> });
+cars.php
+And the following shows how to retrieve the url parameters in :
+
+<b>if</b>(isset(&dollar;&lowbar;REQUEST&lbrack;&apos;type&apos;&rbrack;, &dollar;&lowbar;REQUEST&lbrack;&apos;model&apos;&rbrack;,
+&dollar;&lowbar;REQUEST&lbrack;&apos;color&apos;&rbrack;)) { // <i>they are set, we can use them !</i>
+
+&dollar;response = &apos;The color of your car is &apos; . &dollar;&lowbar;REQUEST&lbrack;&apos;color&apos;&rbrack;
+. &apos;. &apos;;
+
+&dollar;response .= &apos;It is a &apos; . &dollar;&lowbar;REQUEST&lbrack;&apos;type&apos;&rbrack; . &apos; model &apos; .
+&dollar;&lowbar;REQUEST&lbrack;&apos;model&apos;&rbrack; . &apos;!&apos;; echo &dollar;response; }
+console.log  ( response
+
+If you had ) in callback function the result in console would have
+been:
+The color of your car is purple. It is a Volvo model 300!
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch36-5">Section 36.5: Check if a file exists via a HEAD request</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+This function executes an AJAX request using the HEAD method allowing
+us to <b>check whether a file exists in the directory</b> given as an
+argument. It also enables us to <b>launch a callback for each case</b>
+(success, failure).
+<b>function</b>
+fileExists
+(
+dir
+,
+successCallback
+,
+errorCallback
+)
+{
+<b>var</b>
+xhttp
+=
+<b>new</b>
+XMLHttpRequest
+;
+<i>/&ast; Check the status code of the request &ast;/</i>
+xhttp.
+onreadystatechange
+=
+<b>function</b>
+(
+)
+{
+<b>return</b>
+(
+xhttp.
+status
+!==
+404
+)
+?
+successCallback
+:
+errorCallback
+;
+}
+;
+<i>/&ast; Open and send the request &ast;/</i>
+xhttp.
+open
+(
+&apos;head&apos;
+,
+dir
+,
+<b>false</b>
+)
+;
+xhttp.
+send
+(
+)
+;
+}
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch36-6">Section 36.6: Using GET and no parameters</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>var</b>
+xhttp
+=
+<b>new</b>
+XMLHttpRequest
+(
+)
+;
+xhttp.
+onreadystatechange
+=
+<b>function</b>
+(
+)
+{
+<b>if</b>
+(
+xhttp.
+readyState
+===
+XMLHttpRequest.
+DONE
+&&
+xhttp.
+status
+===
+200
+)
+{
+// <i>parse the response in xhttp.responseText;</i>
+}
+}
+;
+xhttp.
+open
+(
+&quot;GET&quot;
+,
+&quot;ajax_info.txt&quot;
+,
+<b>true</b>
+)
+;
+xhttp.
+send
+(
+)
+;
+<h5>Version ≥ 6</h5>
+The fetch API is a newer promise-based way to make asynchronous HTTP
+requests.
+fetch
+(
+&apos;/&apos;
+)
+.
+then
+(
+response
+=&gt;
+response.
+text
+(
+)
+)
+.
+then
+(
+text
+=&gt;
+{
+console.
+log
+(
+&quot;The home page is &quot;
+&plus;
+text.
+length
+&plus;
+&quot; characters long.&quot;
+)
+;
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch36-7">Section 36.7: Listening to AJAX events at a global level</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+// <i>Store a reference to the native method</i>
+<b>let</b>
+open
+=
+XMLHttpRequest.
+<b>prototype</b>
+.
+open
+;
+// <i>Overwrite the native method</i>
+XMLHttpRequest.
+<b>prototype</b>
+.
+open
+=
+<b>function</b>
+(
+)
+{
+// <i>Assign an event listener</i>
+<b>this</b>
+.
+addEventListener
+(
+&quot;load&quot;
+,
+event
+=&gt;
+console.
+log
+(
+XHR
+)
+,
+<b>false</b>
+)
+;
+// <i>Call the stored reference to the native method</i>
+open.
+apply
+(
+<b>this</b>
+,
+arguments
+)
+;
+}
+;
