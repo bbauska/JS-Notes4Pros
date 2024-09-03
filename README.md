@@ -14482,15 +14482,15 @@ XMLHttpRequest.<b>prototype</b>.open = <b>function</b>() {
 <p>JavaScript does not directly support enumerators but the functionality
 of an enum can be mimicked.</p>
 <pre>
-// <i> Prevent the enum from being changed*
+// <i> Prevent the enum from being changed</i>
 <b>const</b> TestEnum = Object.freeze({
   One: 1,
   Two: 2,
   Three: 3
 });
-// <i> Define a variable with a value from the enum*
+// <i>Define a variable with a value from the enum</i>
 <b>var</b> x = TestEnum.Two;
-// <i> Prints a value according to the variable&apos;s enum value*
+// <i> Prints a value according to the variable&apos;s enum value</i>
 <b>switch</b>(x) {
   <b>case</b> TestEnum.One:
     console.log(&quot;111&quot;);
@@ -14516,7 +14516,7 @@ use the following code (note that it also works in versions 5.1 and later):</p>
   GRAY: 1,
   BLACK: 2
 }
-// <i> Define a variable with a value from the enum*
+// <i> Define a variable with a value from the enum</i>
 <b>var</b> currentColor = ColorsEnum.GRAY;
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -14529,14 +14529,14 @@ corresponding name from the enum for the value. Here&apos;s an example:</p>
 // <i> Define the enum</i>
 <b>var</b> ColorsEnum = { WHITE: 0, GRAY: 1, BLACK: 2 }
 Object.freeze(ColorsEnum);
-// <i> Define the variable and assign a value*
+// <i> Define the variable and assign a value</i>
 <b>var</b> color = ColorsEnum.BLACK;
 <b>if</b>(color == ColorsEnum.BLACK) {
   console.log(color);  // <i> This will print &quot;2&quot;</i>
   <b>var</b> ce = ColorsEnum;
   <b>for</b> (<b>var</b> name <b>in</b> ce) {
     <b>if</b> (ce&lbrack;name&rbrack; == ce.BLACK)
-      console.log(name);  // <i> This will print &quot;BLACK&quot;*
+      console.log(name);  // <i> This will print &quot;BLACK&quot;</i>
   }
 }
 </pre>
@@ -14586,7 +14586,7 @@ same value by mistake. NOTE:
 Object.freeze browser support</a></p>
 <pre>
 <b>var</b> testEnum = <b>function</b>() {
-  // <i> Initializes the enumerations</i>
+  // <i>Initializes the enumerations</i>
   <b>var</b> enumList = &lbrack;
     &quot;One&quot;,
     &quot;Two&quot;,
@@ -14594,18 +14594,18 @@ Object.freeze browser support</a></p>
   &rbrack;;
   enumObj = {};
   enumList.forEach((item, index) =&gt; enumObj&lbrack;item&rbrack; = index &plus; 1);
-  // <i> Do not allow the object to be changed</i>
+  // <i>Do not allow the object to be changed</i>
   Object.freeze(enumObj);
   <b>return</b> enumObj;
 }();
-console.log(testEnum.One);  // <i> 1 will be logged</i>
+console.log(testEnum.One);  // <i>1 will be logged</i>
 <b>var</b> x = testEnum.Two;
 <b>switch</b>(x) {
   <b>case</b> testEnum.One:
     console.log(&quot;111&quot;);
     <b>break</b>;
   <b>case</b> testEnum.Two:
-    console.log(&quot;222&quot;);  // <i> 222 will be logged</i>
+    console.log(&quot;222&quot;);  // <i>222 will be logged</i>
     <b>break</b>;
 }
 </pre>
