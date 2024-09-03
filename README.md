@@ -14472,5 +14472,141 @@ XMLHttpRequest.<b>prototype</b>.open = <b>function</b>() {
   open.apply(<b>this</b>, arguments);
 };
 </pre>
-<!-- thru 36.7 -->
+<!-- page 244 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch37">Chapter 37: Enumerations</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch37-1">Section 37.1: Enum definition using Object.freeze()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h5>Version ≥ 5.1</h5>
+<p>JavaScript does not directly support enumerators but the functionality
+of an enum can be mimicked.</p>
+<pre>
+// <i> Prevent the enum from being changed*
+<b>const</b> TestEnum = Object.freeze({
+  One: 1,
+  Two: 2,
+  Three: 3
+});
+// <i> Define a variable with a value from the enum*
+<b>var</b> x = TestEnum.Two;
+// <i> Prints a value according to the variable&apos;s enum value*
+<b>switch</b>(x) {
+  <b>case</b> TestEnum.One:
+    console.log(&quot;111&quot;);
+    <b>break</b>;
+  <b>case</b> TestEnum.Two:
+    console.log(&quot;222&quot;);
+}
+</pre>
+<p>The above enumeration definition, can also be written as follows:</p>
+<pre>
+<b>var</b> TestEnum = { One: 1, Two: 2, Three: 3 }
+Object.freeze(TestEnum);
+</pre>
+<p>After that you can define a variable and print like before.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch37-2">Section 37.2: Alternate definition</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>The Object.freeze() method is available since version 5.1. For older versions, you can
+use the following code (note that it also works in versions 5.1 and later):</p>
+<pre>
+<b>var</b> ColorsEnum = {
+  WHITE: 0,
+  GRAY: 1,
+  BLACK: 2
+}
+// <i> Define a variable with a value from the enum*
+<b>var</b> currentColor = ColorsEnum.GRAY;
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch37-3">Section 37.3: Printing an enum variable</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>After defining an enum using any of the above ways and setting a
+variable, you can print both the variable&apos;s value as well as the
+corresponding name from the enum for the value. Here&apos;s an example:</p>
+<pre>
+// <i> Define the enum</i>
+<b>var</b> ColorsEnum = { WHITE: 0, GRAY: 1, BLACK: 2 }
+Object.freeze(ColorsEnum);
+// <i> Define the variable and assign a value*
+<b>var</b> color = ColorsEnum.BLACK;
+<b>if</b>(color == ColorsEnum.BLACK) {
+  console.log(color);  // <i> This will print &quot;2&quot;</i>
+  <b>var</b> ce = ColorsEnum;
+  <b>for</b> (<b>var</b> name <b>in</b> ce) {
+    <b>if</b> (ce&lbrack;name&rbrack; == ce.BLACK)
+      console.log(name);  // <i> This will print &quot;BLACK&quot;*
+  }
+}
+</pre>
+<!-- page 245 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch37-4">Section 37.4: Implementing Enums Using Symbols</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>As ES6 introduced <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol"><b>Symbols</b></a>,
+which are both <b>unique and immutable primitive values</b> that may be used as the 
+key of an Object property, instead of using strings as possible values for an enum, 
+it&apos;s possible to use symbols.</p>
+<pre>
+// <i> Simple symbol</i>
+<b>const</b> newSymbol = Symbol();
+<b>typeof</b> newSymbol === &apos;symbol&apos; // <i> true</i>
+// <i> A symbol with a label</i>
+<b>const</b> anotherSymbol = Symbol(&quot;label&quot;);
+// <i> Each symbol is unique</i>
+<b>const</b> yetAnotherSymbol = Symbol(&quot;label&quot;);
+yetAnotherSymbol === anotherSymbol; // <i> false</i>
+<b>const</b> Regnum_Animale    = Symbol();
+<b>const</b> Regnum_Vegetabile = Symbol();
+<b>const</b> Regnum_Lapideum   = Symbol();
+<b>function</b> describe(kingdom) {
+  <b>switch</b> (kingdom) {
+    <b>case</b> Regnum_Animale:
+      <b>return</b> &quot;Animal kingdom&quot;;
+    <b>case</b> Regnum_Vegetabile:
+      <b>return</b> &quot;Vegetable kingdom&quot;;
+    <b>case</b> Regnum_Lapideum:
+      <b>return</b> &quot;Mineral kingdom&quot;;
+  }
+}
+describe(Regnum_Vegetabile);
+// <i> Vegetable kingdom</i>
+</pre>
+<p>The <a href="http://www.2ality.com/2014/12/es6-symbols.html">Symbols in ECMAScript
+6</a> article covers this new primitive type more in detail.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch37-5">Section 37.5: Automatic Enumeration Value</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h5>Version ≥ 5.1</h5>
+<p>This Example demonstrates how to automatically assign a value to each
+entry in an enum list. This will prevent two enums from having the
+same value by mistake. NOTE: 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze">
+Object.freeze browser support</a></p>
+<pre>
+<b>var</b> testEnum = <b>function</b>() {
+  // <i> Initializes the enumerations</i>
+  <b>var</b> enumList = &lbrack;
+    &quot;One&quot;,
+    &quot;Two&quot;,
+    &quot;Three&quot;
+  &rbrack;;
+  enumObj = {};
+  enumList.forEach((item, index) =&gt; enumObj&lbrack;item&rbrack; = index &plus; 1);
+  // <i> Do not allow the object to be changed</i>
+  Object.freeze(enumObj);
+  <b>return</b> enumObj;
+}();
+console.log(testEnum.One);  // <i> 1 will be logged</i>
+<b>var</b> x = testEnum.Two;
+<b>switch</b>(x) {
+  <b>case</b> testEnum.One:
+    console.log(&quot;111&quot;);
+    <b>break</b>;
+  <b>case</b> testEnum.Two:
+    console.log(&quot;222&quot;);  // <i> 222 will be logged</i>
+    <b>break</b>;
+}
+</pre>
 
