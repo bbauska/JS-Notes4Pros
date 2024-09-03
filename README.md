@@ -14422,206 +14422,55 @@ The color of your car is purple. It is a Volvo model 300!
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch36-5">Section 36.5: Check if a file exists via a HEAD request</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-This function executes an AJAX request using the HEAD method allowing
+<p>This function executes an AJAX request using the HEAD method allowing
 us to <b>check whether a file exists in the directory</b> given as an
 argument. It also enables us to <b>launch a callback for each case</b>
-(success, failure).
-<b>function</b>
-fileExists
-(
-dir
-,
-successCallback
-,
-errorCallback
-)
-{
-<b>var</b>
-xhttp
-=
-<b>new</b>
-XMLHttpRequest
-;
-<i>/&ast; Check the status code of the request &ast;/</i>
-xhttp.
-onreadystatechange
-=
-<b>function</b>
-(
-)
-{
-<b>return</b>
-(
-xhttp.
-status
-!==
-404
-)
-?
-successCallback
-:
-errorCallback
-;
-}
-;
-<i>/&ast; Open and send the request &ast;/</i>
-xhttp.
-open
-(
-&apos;head&apos;
-,
-dir
-,
-<b>false</b>
-)
-;
-xhttp.
-send
-(
-)
-;
-}
-;
+(success, failure).</p>
+<pre>
+<b>function</b> fileExists(dir, successCallback, errorCallback) {
+  <b>var</b> xhttp = <b>new</b> XMLHttpRequest;
+  <i>/&ast; Check the status code of the request &ast;/</i>
+  xhttp.onreadystatechange = <b>function</b>() {
+    <b>return</b> (xhttp.status !== 404) ? successCallback : errorCallback;
+  };
+  <i>/&ast; Open and send the request &ast;/</i>
+  xhttp.open(&apos;head&apos;, dir, <b>false</b>);
+  xhttp.send();
+};
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch36-6">Section 36.6: Using GET and no parameters</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>var</b>
-xhttp
-=
-<b>new</b>
-XMLHttpRequest
-(
-)
-;
-xhttp.
-onreadystatechange
-=
-<b>function</b>
-(
-)
-{
-<b>if</b>
-(
-xhttp.
-readyState
-===
-XMLHttpRequest.
-DONE
-&&
-xhttp.
-status
-===
-200
-)
-{
-// <i>parse the response in xhttp.responseText;</i>
-}
-}
-;
-xhttp.
-open
-(
-&quot;GET&quot;
-,
-&quot;ajax_info.txt&quot;
-,
-<b>true</b>
-)
-;
-xhttp.
-send
-(
-)
-;
+<pre>
+<b>var</b> xhttp = <b>new</b> XMLHttpRequest();
+xhttp.onreadystatechange = <b>function</b>() {
+  <b>if</b> (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
+    // <i>parse the response in xhttp.responseText;</i>
+  }
+};
+xhttp.open(&quot;GET&quot;, &quot;ajax_info.txt&quot;, <b>true</b>);
+xhttp.send();
+</pre>
 <h5>Version ≥ 6</h5>
-The fetch API is a newer promise-based way to make asynchronous HTTP
-requests.
-fetch
-(
-&apos;/&apos;
-)
-.
-then
-(
-response
-=&gt;
-response.
-text
-(
-)
-)
-.
-then
-(
-text
-=&gt;
-{
-console.
-log
-(
-&quot;The home page is &quot;
-&plus;
-text.
-length
-&plus;
-&quot; characters long.&quot;
-)
-;
-}
-)
-;
+<p>The fetch API is a newer promise-based way to make asynchronous HTTP requests.</p>
+<pre>
+fetch(&apos;/&apos;).then(response =&gt; response.text()).then(text =&gt; {
+  console.log(&quot;The home page is &quot; &plus; text.length &plus; &quot; characters long.&quot;);
+});
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch36-7">Section 36.7: Listening to AJAX events at a global level</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<pre>
 // <i>Store a reference to the native method</i>
-<b>let</b>
-open
-=
-XMLHttpRequest.
-<b>prototype</b>
-.
-open
-;
+<b>let</b> open = XMLHttpRequest.<b>prototype</b>.open;
 // <i>Overwrite the native method</i>
-XMLHttpRequest.
-<b>prototype</b>
-.
-open
-=
-<b>function</b>
-(
-)
-{
-// <i>Assign an event listener</i>
-<b>this</b>
-.
-addEventListener
-(
-&quot;load&quot;
-,
-event
-=&gt;
-console.
-log
-(
-XHR
-)
-,
-<b>false</b>
-)
-;
-// <i>Call the stored reference to the native method</i>
-open.
-apply
-(
-<b>this</b>
-,
-arguments
-)
-;
-}
-;
+XMLHttpRequest.<b>prototype</b>.open = <b>function</b>() {
+  // <i>Assign an event listener</i>
+  <b>this</b>.addEventListener(&quot;load&quot;, event =&gt; console.log(XHR), <b>false</b>);
+  // <i>Call the stored reference to the native method</i>
+  open.apply(<b>this</b>, arguments);
+};
+</pre>
 <!-- thru 36.7 -->
+
