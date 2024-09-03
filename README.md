@@ -13913,163 +13913,96 @@ in many different programming languages.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch35-1">Section 35.1: JSON versus JavaScript literals</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-eval
-JSON stands for &quot;JavaScript Object Notation&quot;, but it&apos;s not
+<p>JSON stands for &quot;JavaScript Object Notation&quot;, but it&apos;s not
 JavaScript. Think of it as just a <i>data serialization format</i> that
 <i>happens</i> to be directly usable as a JavaScript literal. However, it
-is not advisable to directly run (i.e. through ()) JSON that is
+is not advisable to directly run (i.e. through eval()) JSON that is
 fetched from an external source. Functionally, JSON isn&apos;t very
 different from XML or YAML  some confusion can be avoided if JSON is
 just imagined as some serialization format that looks very much like
-JavaScript.
+JavaScript.</p>
 
-Even though the name implies just objects, and even though the
+<p>Even though the name implies just objects, and even though the
 majority of use cases through some kind of API always happen to be
 objects and arrays, JSON is not for just objects or arrays. The
-following primitive types are supported:
+following primitive types are supported:</p>
+<ul>
+  <li>String (e.g. &quot;Hello World!&quot;)</li>
+  <li>Number (e.g. 42)</li>
+  <li>Boolean (e.g. <b>true</b>)</li>
+  <li>The value <b>null</b></li>
+</ul>
 
-String (e.g. &quot;Hello World!&quot;)
-Number (e.g. 42)
-Boolean (e.g. <b>true</b>)
-The value <b>null</b>
-<b>undefined</b> is not supported in the sense that an undefined property
+<p><b>undefined</b> is not supported in the sense that an undefined property
 will be omitted from JSON upon serialization. Therefore, there is no
-way to deserialize JSON and end up with a property whose value is
-<b>undefined</b>.
-The string &quot;42&quot; is valid JSON. JSON doesn&apos;t always have to have an
-outer envelope of &quot;{&hellip;}&quot; or &quot;&lbrack;&hellip;&rbrack;&quot;.
-While some JSON is also valid JavaScript and some JavaScript is also
+way to deserialize JSON and end up with a property whose value is <b>undefined</b>.</p>
+
+<p>The string &quot;42&quot; is valid JSON. JSON doesn&apos;t always have to have an
+outer envelope of &quot;{&hellip;}&quot; or &quot;&lbrack;&hellip;&rbrack;&quot;.</p>
+
+<p>While some JSON is also valid JavaScript and some JavaScript is also
 valid JSON, there are some subtle differences between both languages
-and neither language is a subset of the other.
-Take the following JSON string as an example:
-{
-&quot;color&quot;
-:
-&quot;blue&quot;
-}
-This can be directly inserted into JavaScript. It will be
-syntactically valid and will yield the correct value:
-<b>const</b>
-skin
-=
-{
-&quot;color&quot;
-:
-&quot;blue&quot;
-}
-;
-However, we know that &quot;color&quot; is a valid identifier name and the
-quotes around the property name can be omitted:
-<b>const</b>
-skin
-=
-{
-color
-:
-&quot;blue&quot;
-}
-;
-We also know that we can use single quotes instead of double quotes:
-<b>const</b>
-skin
-=
-{
-&apos;color&apos;
-:
-&apos;blue&apos;
-}
-;
-But, if we were to take both of these literals and treat them as JSON,
-<b>neither will be syntactically valid</b> JSON:
-{
-color
-:
-&quot;blue&quot;
-}
-{
-&apos;color&apos;
-:
-&apos;blue&apos;
-}
-JSON strictly requires all property names to be double quoted and
-string values to be double quoted as well.
+and neither language is a subset of the other.</p>
+<p>Take the following JSON string as an example:</p>
+<pre>
+{&quot;color&quot;: &quot;blue&quot;}
+</pre>
+<p>This can be directly inserted into JavaScript. It will be
+syntactically valid and will yield the correct value:</p>
+<pre>
+<b>const</b> skin = {&quot;color&quot;: &quot;blue&quot;};
+</pre>
+<p>However, we know that &quot;color&quot; is a valid identifier name and the
+quotes around the property name can be omitted:</p>
+<pre>
+<b>const</b> skin = {color: &quot;blue&quot;};
+</pre>
+<p>We also know that we can use single quotes instead of double quotes:</p>
+<pre>
+<b>const</b> skin = {&apos;color&apos;: &apos;blue&apos;};
+</pre>
+<p>But, if we were to take both of these literals and treat them as JSON,
+<b>neither will be syntactically valid</b> JSON:</p>
+<pre>
+{color: &quot;blue&quot;}
+{&apos;color&apos;: &apos;blue&apos;}
+</pre>
+<p>JSON strictly requires all property names to be double quoted and
+string values to be double quoted as well.</p>
 
-It&apos;s common for JSON-newcomers to attempt to use code excerpts with
+<p>It&apos;s common for JSON-newcomers to attempt to use code excerpts with
 JavaScript literals as JSON, and scratch their heads about the syntax
-errors they are getting from the JSON parser.
+errors they are getting from the JSON parser.</p>
 
-More confusion starts arising when <i>incorrect terminology</i> is applied
-in code or in conversation.
+<p>More confusion starts arising when <i>incorrect terminology</i> is applied
+in code or in conversation.</p>
 
-A common anti-pattern is to name variables that hold non-JSON values
-as &quot;json&quot;:
-fetch
-(
-url
-)
-.
-then
-(
-<b>function</b>
-(
-response
-)
-{
-<b>const</b>
-json
-=
-JSON.
-parse
-(
-response.
-data
-)
-;
-// <i> Confusion ensues!</i>
+<p>A common anti-pattern is to name variables that hold non-JSON values
+as &quot;json&quot;:</p>
+<pre>
+fetch(url).then(<b>function</b>(response) {
+  <b>const</b> json = JSON.parse(response.data);  // <i> Confusion ensues!</i>
 // <i> We&apos;re done with the notion of &quot;JSON&quot; at this point,</i>
 // <i> but the concept stuck with the variable name.</i>
-}
-)
-;
-response.data
-In the above example, is a JSON string that is returned by some API.
+});
+</pre>
+<p>In the above example, response.data is a JSON string that is returned by some API.
 JSON stops at the HTTP response domain. The variable with the &quot;json&quot;
 misnomer holds just a JavaScript value (could be an object, an array,
-or even a simple number!)
-A less confusing way to write the above is:
-fetch
-(
-url
-)
-.
-then
-(
-<b>function</b>
-(
-response
-)
-{
-<b>const</b>
-value
-=
-JSON.
-parse
-(
-response.
-data
-)
-;
-// <i> We&apos;re done with the notion of &quot;JSON&quot; at this point.</i>
-// <i> You don&apos;t talk about JSON after parsing JSON.</i>
-}
-)
-;
-Developers also tend to throw the phrase &quot;JSON object&quot; around a lot.
+or even a simple number!)</p>
+<p>A less confusing way to write the above is:</p>
+<pre>
+fetch(url).then(<b>function</b>(response) {
+  <b>const</b> value = JSON.parse(response.data);
+  // <i> We&apos;re done with the notion of &quot;JSON&quot; at this point.</i>
+  // <i> You don&apos;t talk about JSON after parsing JSON.</i>
+});
+</pre>
+<p>Developers also tend to throw the phrase &quot;JSON object&quot; around a lot.
 This also leads to confusion. Because as mentioned above, a JSON
 string doesn&apos;t have to hold an object as a value. &quot;JSON string&quot; is
 a better term. Just like &quot;XML string&quot; or &quot;YAML string&quot;. You get a
-string, you parse it, and you end up with a value.
+string, you parse it, and you end up with a value.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch35-2">Section 35.2: Parsing with a reviver function</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
