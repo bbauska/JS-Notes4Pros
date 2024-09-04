@@ -1933,7 +1933,7 @@ console.log(&lbrack;&rbrack; <b>instanceof</b> Object, &lbrack;&rbrack; <b>insta
 console.log(&lbrack;&rbrack;.constructor === Object, &lbrack;&rbrack;.constructor === Array) // <i>false true</i>
 
 <b>function</b> isNumber(value) {
-  // <i>null.constructor and undefined.constructor throw an error when accessed</i>
+  // <i>null.constructor and <b>undefined.constructor</b> throw an error when accessed</i>
   <b>if</b> (value === <b>null</b> &vert;&vert; value === <b>undefined</b>)
   <b>return</b> <b>false</b> <b>return</b> value.constructor === Number 
 }
@@ -14750,7 +14750,7 @@ map.forEach((value, key, theMap) =&gt; console.log(&grave;key: &dollar;{key}, va
 a value to a key.</p>
 <p>If the element with the specified key doesn&apos;t exist in the map, .get()
 returns <b>undefined</b>.</p>
-
+<!-- page 249 -->
 <p>.<b>set</b>() method returns the map object, so you can chain .<b>set</b>() calls.
 <pre>
 <b>const</b> map = <b>new</b> Map();
@@ -14924,12 +14924,11 @@ can not be overridden and therefore their functionality is guaranteed.</p>
 <b>Type Return value</b>
 
 <p>The unusual behavior of document.all with the typeof operator with the <b>typeof</b> operator is from its
-former usage to detect legacy browsers.
+former usage to detect legacy browsers.<br/>
+For more information, see <a href="http://stackoverflow.com/q/40643613/6388243">
+Why is document.all defined but typeof document.all returns &quot;undefined&quot;?</a></p>
 
-For more information, see [Why is document.all defined but typeof
-document.all returns
-&quot;undefined&quot;?](http://stackoverflow.com/q/40643613/6388243)
-
+<!-- page 252 -->
 <p><b>Examples:</b></p>
 <pre>
 // <i>returns &apos;number&apos;</i>
@@ -14973,8 +14972,7 @@ document.all returns
 <p>The <b>delete</b> operator deletes a property from an object.</p>
 <p><b>Syntax:</b></p>
 <pre>
-<b>delete</b> object.property
-
+<b>delete</b> object.property<br/><br/>
 <b>delete</b> object&lbrack;&apos;property&apos;&rbrack;
 </pre>
 <p><b>Returns:</b></p>
@@ -14987,15 +14985,17 @@ document.all returns
   <li><b>false</b> in non-strict mode.</li>
   <li>Throws an error in strict mode</li>
 </ul>
+<br/>
 <p><b>Description</b></p>
 <p>The <b>delete</b> operator does not directly free memory. It can
 indirectly free memory if the operation means all references to the
 property are gone.</p>
+<!-- page 253 -->
 <p><b>delete</b> works on an object&apos;s properties. If a property with the
 same name exists on the object&apos;s prototype chain, the property will
 be inherited from the prototype.</p>
 <p><b>delete</b> does not work on variables or function names.</p>
-<b>Examples:</b>
+<p><b>Examples:</b></p>
 <pre>
 // <i>Deleting a property</i>
 foo = 1;  // <i>a global variable is a property of &grave;window&grave;: &grave;window.foo&grave;</i>
@@ -15047,6 +15047,7 @@ converting something into a number.</p>
 </ul>
 <p>Values that can&apos;t be converted will evaluate to <b>NaN</b>.</p>
 <p><b>Examples:</b></p>
+<!-- page 254 -->
 <pre>
 &plus;42             // <i>42</i>
 &plus;&quot;42&quot; // <i>42</i>
@@ -15093,7 +15094,7 @@ primitive value, by means of writing void 0 or void(0). Note that <b>void</b> is
 operator, not a function, so () is not required.</p>
 <p>Usually the result of a <b>void</b> expression and <b>undefined</b> can be
 used interchangeably.</p>
-<p>However, in older versions of ECMAScript, window.undefined could be assigned any value,
+<p>However, in older versions of ECMAScript, <b>window.undefined</b> could be assigned any value,
 and it is still possible to use <b>undefined</b> as name for function
 parameters variables inside functions, thus disrupting other code that
 relies on the value of <b>undefined</b>.</p>
@@ -15101,8 +15102,8 @@ relies on the value of <b>undefined</b>.</p>
 <p><b>void</b> will always yield the <i>true</i> <b>undefined</b> value though.</p>
 
 <p><b>void</b> 0 is also commonly used in code minification as a shorter way of
-writing <b>undefined</b>.</p> <p>In addition, it&apos;s probably safer as some 
-other code could&apos;ve tampered with window.undefined.
+writing <b>undefined</b>. In addition, it&apos;s probably safer as some 
+other code could&apos;ve tampered with <b>window.undefined</b>.</p>
 <p><b>Examples:</b></p>
 <p>Returning <b>undefined</b>:</p>
 <pre>
@@ -15122,1266 +15123,411 @@ console.log(foo());  // <i>undefined</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch40-6">Section 40.6: The unary negation operator (-)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The unary negation (-) precedes its operand and negates it, after
-trying to convert it to number.
-<b>Syntax:</b>
+<p>The unary negation (-) precedes its operand and negates it, after
+trying to convert it to number.</p>
+<p><b>Syntax:</b></p>
+<pre>
 -expression <b>Returns:</b> a Number.
-<b>Description</b>
-The unary negation (-) can convert the same types / values as the
-unary plus (+) operator can.
-<b>NaN</b>
-Values that can&apos;t be converted will evaluate to <b>NaN</b> (there is no
--).
-<b>Examples:</b>
-&minus;
-42
-// <i>-42</i>
-&minus;
-&quot;42&quot;
-// <i>-42</i>
-&minus;
-<b>true</b>
-// <i>-1</i>
-&minus;
-<b>false</b>
-// <i>-0</i>
-&minus;
-<b>null</b>
-// <i>-0</i>
-&minus;
-<b>undefined</b>
-// <i>NaN</i>
-&minus;
-<b>NaN</b>
-// <i>NaN</i>
-
-&minus;
-&quot;foo&quot;
-// <i>NaN</i>
-&minus;
-{
-}
-// <i>NaN</i>
-&minus;
-<b>function</b>
-(
-)
-{
-}
-// <i>NaN</i>
-Note that attempting to convert an array can result in unexpected
+</pre>
+<p><b>Description</b></p>
+<p>The unary negation(-) can convert the same types / values as the unary plus (+) operator can.</p>
+Values that can&apos;t be converted will evaluate to <b>NaN</b> (there is no -<b>NaN</b>).</p>
+<p><b>Examples:</b></p>
+<pre>
+&minus;42             // <i>-42</i>
+&minus;&quot;42&quot;  // <i>-42</i>
+&minus;<b>true</b>     // <i>-1</i>
+&minus;<b>false</b>    // <i>-0</i>
+&minus;<b>null</b>     // <i>-0</i>
+&minus;<b>undefined</b> // <i>NaN</i>
+&minus;<b>NaN</b>       // <i>NaN</i>
+&minus;&quot;foo&quot;  // <i>NaN</i>
+&minus;{}               // <i>NaN</i>
+&minus;<b>function</b>(){} // <i>NaN</i>
+</pre>
+<p>Note that attempting to convert an array can result in unexpected
 return values. In the background, arrays are first converted to their
-string representations:
-&lbrack;
-&rbrack;
-.
-toString
-(
-)
-===
-&apos;&apos;
-;
-&lbrack;
-1
-&rbrack;
-.
-toString
-(
-)
-===
-&apos;1&apos;
-;
-&lbrack;
-1
-,
-2
-&rbrack;
-.
-toString
-(
-)
-===
-&apos;1,2&apos;
-;
-The operator then attempts to convert those strings to numbers:
-&minus;
-&lbrack;
-&rbrack;
-// <i>-0 ( === -&apos;&apos; )</i>
-&minus;
-&lbrack;
-1
-&rbrack;
-// <i>-1 ( === -&apos;1&apos; )</i>
-&minus;
-&lbrack;
-1
-,
-2
-&rbrack;
-// <i>NaN ( === -&apos;1,2&apos; )</i>
+string representations:</p>
+<pre>
+&lbrack;&rbrack;.toString() === &apos;&apos;;
+&lbrack;1&rbrack;.toString() === &apos;1&apos;;
+&lbrack;1, 2&rbrack;.toString() === &apos;1,2&apos;;
+</pre>
+<p>The operator then attempts to convert those strings to numbers:</p>
+<pre>
+&minus;&lbrack;&rbrack;       // <i>-0 ( === -&apos;&apos; )</i>
+&minus;&lbrack;1&rbrack;      // <i>-1 ( === -&apos;1&apos; )</i>
+&minus;&lbrack;1, 2&rbrack;   // <i>NaN ( === -&apos;1,2&apos; )</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch40-7">Section 40.7: The bitwise NOT operator (~)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The bitwise NOT (&bsol;~) performs a NOT operation on each bit in a value.
-<b>Syntax:</b>
-&bsol;~expression <b>Returns:</b>
-a Number.
-<b>Description</b>
-The truth table for the NOT operation is:
-<b>a NOT a</b>
-0
-1
-1
-0
-1337
-(
-base
-10
-)
-=
-0000010100111001
-(
-base
-2
-)
-&bsol;~
-1337
-(
-base
-10
-)
-=
-1111101011000110
-(
-base
-2
-)
-=
-&minus;
-1338
-(
-base
-10
-)
-A bitwise not on a number results in:
-&minus;
-(
-x
-&plus;
-1
-)
-.
-<b>Examples: value (base 10) value (base 2) return (base 2) return
-(base 10)</b>
-2  00000010   11111100  -3
-1  00000001              11111110                -2
-0  00000000              11111111                -1
--1 11111111              00000000                0
--2 11111110              00000001                1
--3 11111100              00000010                2
+<p>The bitwise NOT (&bsol;~) performs a NOT operation on each bit in a value.</p>
+<p><b>Syntax:</b></p>
+<pre>
+&bsol;~expression
+</pre>
+<p><b>Returns:</b></p>
+<!-- page 256 -->
+<ul>
+  <li>a Number.</li>
+</ul>
+<p><b>Description</b></p>
+<p>The truth table for the NOT operation is:</p>
+<p><b>a NOT a</b></p>
+<pre>
+0 1
+1 0
+</pre>
+1337 (base 10) = 0000010100111001 (base2)
+~1337 (base10) = 1111101011000110 (base2) = &minus;1338 (base 10)
+</pre>
+<p>A bitwise not on a number results in: &minus;(x &plus; 1).</p>
+<p><b>Examples:</b></p>
+<p><b>value (base 10) value (base 2) return (base 2) return (base 10)</b>
+<pre>
+2     00000010   11111100   -3<br/>
+1     00000001   11111110   -2<br/>
+0     00000000   11111111   -1<br/>
+-1    11111111   00000000   0<br/>
+-2    11111110   00000001   1<br/>
+-3    11111100   00000010   2
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch40-8">Section 40.8: The logical NOT operator (!)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-The logical NOT (!) operator performs logical negation on an
-expression.
-<b>Syntax:</b>
-!expression <b>Returns:</b> a Boolean.
-<b>Description</b>
-The logical NOT (!) operator performs logical negation on an
-expression.
-<b>true</b> === <b>false</b>        and !       <b>false</b> === <b>true</b>
-Boolean values simply get inverted: !.
-Non-boolean values get converted to boolean values first, then are
-negated.
-This means that a double logical NOT (!!) can be used to cast any
-value to a boolean:
-!!
-&quot;FooBar&quot;
-===
-<b>true</b>
-!!
-1
-===
-<b>true</b>
-!!
-0
-===
-<b>false</b>
-<b>true</b>
-These are all equal to !:
-!
-&apos;true&apos;
-===
-!
-<b>new</b>
-Boolean
-(
-&apos;true&apos;
-)
-;
-!
-&apos;false&apos;
-===
-!
-<b>new</b>
-Boolean
-(
-&apos;false&apos;
-)
-;
-!
-&apos;FooBar&apos;
-===
-!
-<b>new</b>
-Boolean
-(
-&apos;FooBar&apos;
-)
-;
-!
-&lbrack;
-&rbrack;
-===
-!
-<b>new</b>
-Boolean
-(
-&lbrack;
-&rbrack;
-)
-;
-!
-{
-}
-===
-!
-<b>new</b>
-Boolean
-(
-{
-}
-)
-;
-These are all equal to
-!
-<b>false</b>
-:
-!
-0
-===
-!
-<b>new</b>
-Boolean
-(
-0
-)
-;
-!
-&apos;&apos;
-===
-!
-<b>new</b>
-Boolean
-(
-&apos;&apos;
-)
-;
-!
-<b>NaN</b>
-===
-!
-<b>new</b>
-Boolean
-(
-<b>NaN</b>
-)
-;
-!
-<b>null</b>
-===
-!
-<b>new</b>
-Boolean
-(
-<b>null</b>
-)
-;
-!
-<b>undefined</b>
-===
-!
-<b>new</b>
-Boolean
-(
-<b>undefined</b>
-)
-;
-<b>Examples:</b>
-!
-<b>true</b>
-// <i>false</i>
-!-
-1
-// <i>false</i>
-!
-&quot;-1&quot;
-// <i>false</i>
-!
-42
-// <i>false</i>
-!
-&quot;42&quot;
-// <i>false</i>
-!
-&quot;foo&quot;
-// <i>false</i>
-!
-&quot;true&quot;
-// <i>false</i>
-!
-&quot;false&quot;
-// <i>false</i>
-!
-{
-}
-// <i>false</i>
-!
-&lbrack;
-&rbrack;
-// <i>false</i>
-!
-<b>function</b>
-(
-)
-{
-}
-// <i>false</i>
-!
-<b>false</b>
-// <i>true</i>
-!
-<b>null</b>
-// <i>true</i>
-!
-<b>undefined</b>
-// <i>true</i>
-!
-<b>NaN</b>
-// <i>true</i>
-!
-0
-// <i>true</i>
-!
-&quot;&quot;
-// <i>true</i>
+<p>The logical NOT (!) operator performs logical negation on an expression.</p>
+<p><b>Syntax:</b></p>
+<pre>
+!expression
+</pre>
+<p><b>Returns:</b></p>
+<ul>
+  <li>a Boolean.</li>
+</ul>
+<p><b>Description</b></p>
+<p>The logical NOT(!) operator performs logical negation on an expression.</p>
+<p>Boolean values simply get inverted: !<b>true</b> === <b>false</b> and !<b>false</b> === <b>true</b>.<br/>
+Non-boolean values get converted to boolean values first, then are negated.</p>
+<p>This means that a double logical NOT (!!) can be used to cast any value to a boolean:</p>
+<pre>
+!!&quot;FooBar&quot; === <b>true</b>
+!!1 === <b>true</b>
+!!0 === <b>false</b>
+</pre>
+<p>These are all equal to !<b>true</b>:</p>
+<pre>
+!&apos;true&apos; === !<b>new</b> Boolean(&apos;true&apos;);
+!&apos;false&apos; === !<b>new</b> Boolean(&apos;false&apos;);
+!&apos;FooBar&apos; === !<b>new</b> Boolean(&apos;FooBar&apos;);
+!&lbrack;&rbrack; === !<b>new</b> Boolean(&lbrack;&rbrack;);
+!{} === !<b>new</b> Boolean({});
+</pre>
+<!-- page 257 -->
+<p>These are all equal to !<b>false</b>:</p>
+<pre>
+!0 === !<b>new</b> Boolean(0);
+!&apos;&apos; === !<b>new</b> Boolean(&apos;&apos;);
+!<b>NaN</b> === !<b>new</b> Boolean(<b>NaN</b>);
+!<b>null</b> === !<b>new</b> Boolean(<b>null</b>);
+!<b>undefined</b> === !<b>new</b> Boolean(<b>undefined</b>);
+</pre>
+<p><b>Examples:</b></p>
+<pre>
+!<b>true</b>         // <i>false</i>
+!-1                  // <i>false</i>
+!&quot;-1&quot;      // <i>false</i>
+!42                  // <i>false</i>
+!&quot;42&quot;      // <i>false</i>
+!&quot;foo&quot;     // <i>false</i>
+!&quot;true&quot;    // <i>false</i>
+!&quot;false&quot;   // <i>false</i>
+!{}                  // <i>false</i>
+!&lbrack;&rbrack;    // <i>false</i>
+!<b>function</b>(){} // <i>false</i>
+!<b>false</b>        // <i>true</i>
+!<b>null</b>         // <i>true</i>
+!<b>undefined</b>    // <i>true</i>
+!<b>NaN</b>          // <i>true</i>
+!0                   // <i>true</i>
+!&quot;&quot;        // <i>true</i>
+</pre>
+<!-- page 258 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch41">Chapter 41: Generators</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>function</b>
-Generator functions (defined by the &ast; keyword) run as coroutines,
-generating a series of values as they&apos;re requested through an
-iterator.
+<p>Generator functions (defined by the <b>function</b>&ast; keyword) run as coroutines, 
+generating a series of values as they&apos;re requested through an iterator.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch41-1">Section 41.1: Generator Functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>function</b>
-A <i>generator function</i> is created with a &ast; declaration. When it is
-called, its body is <b>not</b> immediately executed. Instead, it returns
-a <i>generator object</i>, which can be used to &quot;step through&quot; the
-function&apos;s execution.
+<p>A <i>generator function</i> is created with a <b>function</b>&ast; declaration. When it is
+called, its body is <b>not</b> immediately executed. Instead, it returns a <i>generator object</i>, 
+which can be used to &quot;step through&quot; the function&apos;s execution.</p>
 
-A yield expression inside the function body defines a point at which
-execution can suspend and resume.
-<b>function</b>
-&ast;
-nums
-(
-)
-{
-console.
-log
-(
-&apos;starting&apos;
-)
-;
-// <i>A</i>
-yield
-1
-;
-// <i>B</i>
-console.
-log
-(
-&apos;yielded 1&apos;
-)
-;
-// <i>C</i>
-yield
-2
-;
-// <i>D</i>
-console.
-log
-(
-&apos;yielded 2&apos;
-)
-;
-// <i>E</i>
-yield
-3
-;
-// <i>F</i>
-console.
-log
-(
-&apos;yielded 3&apos;
-)
-;
-// <i>G</i>
+<p>A yield expression inside the function body defines a point at which execution can 
+suspend and resume.</p>
+<pre>
+<b>function</b>&ast; nums() {
+  console.log(&apos;starting&apos;);  // <i>A</i>
+  yield 1;                            // <i>B</i>
+  console.log(&apos;yielded 1&apos;); // <i>C</i>
+  yield 2;                            // <i>D</i>
+  console.log(&apos;yielded 2&apos;); // <i>E</i>
+  yield 3;                            // <i>F</i>
+  console.log(&apos;yielded 3&apos;); // <i>G</i>
 }
-<b>var</b>
-generator
-=
-ums
-(
-)
-;
-// <i>Returns the iterator. No code in nums is executed</i>
-generator.
-next
-(
-)
-;
-// <i>Executes lines A,B returning { value: 1, done: false }</i>
+<b>var</b> generator = nums();  // <i>Returns the iterator. No code in nums is executed</i>
+<br/>
+generator.next();  // <i>Executes lines A,B returning { value: 1, done: false }</i>
 // <i>console: &quot;starting&quot;</i>
-generator.
-next
-(
-)
-;
-// <i>Executes lines C,D returning { value: 2, done: false }</i>
+generator.next();  // <i>Executes lines C,D returning { value: 2, done: false }</i>
 // <i>console: &quot;yielded 1&quot;</i>
-generator.
-next
-(
-)
-;
-// <i>Executes lines E,F returning { value: 3, done: false }</i>
+generator.next();  // <i>Executes lines E,F returning { value: 3, done: false }</i>
 // <i>console: &quot;yielded 2&quot;</i>
-generator.
-next
-(
-)
-;
-// <i>Executes line G returning { value: undefined, done: true }</i>
+generator.next();  // <i>Executes line G returning { value: undefined, done: true }</i>
 // <i>console: &quot;yielded 3&quot;</i>
-<b>Early iteration exit</b>
-generator = nums(); generator.next(); // <i>Executes lines A,B returning
-{ value: 1, done: false }</i> generator.next(); // <i>Executes lines C,D
-returning { value: 2, done: false }</i> generator.<b>return</b>(3); // <i>no
-code is executed returns { value: 3, done: true }</i>
+</pre>
+<p><b>Early iteration exit</b></p>
+<pre>
+generator = nums();
+generator.next(); // <i>Executes lines A,B returning { value: 1, done: false }</i> 
+generator.next(); // <i>Executes lines C,D returning { value: 2, done: false }</i>
+generator.<b>return</b>(3); // <i>no code is executed returns { value: 3, done: true }</i>
 // <i>any further calls will return done = true</i>
-generator.next(); // <i>no code executed returns { value: undefined,
-done: true }</i>
-<b>Throwing an error to generator function</b>
-<b>function</b>
-&ast;
-nums
-(
-)
-{
-<b>try</b>
-{
-yield
-1
-;
-// <i>A</i>
-yield
-2
-;
-// <i>B</i>
-yield
-3
-;
-// <i>C</i>
+generator.next(); // <i>no code executed returns { value: undefined, done: true }</i>
+</pre>
+<p><b>Throwing an error to generator function</b></p>
+<pre>
+<b>function</b>&ast; nums() {
+  <b>try</b> {
+    yield 1;           // <i>A</i>
+    yield 2;           // <i>B</i>
+    yield 3;           // <i>C</i>
+  } <b>catch</b> (e) {
+    console.log(e&period;message); // <i>D</i>
+  }
 }
-<b>catch</b>
-(
-e
-)
-{
-console.
-log
-(
-e&period;
-message
-)
-;
-// <i>D</i>
-}
-}
-<b>var</b>
-generator
-=
-nums
-(
-)
-;
-generator.
-next
-(
-)
-;
-// <i>Executes line A returning { value: 1, done: false }</i>
-generator.
-next
-(
-)
-;
-// <i>Executes line B returning { value: 2, done: false }</i>
-generator.
-<b>throw</b>
-(
-<b>new</b>
-Error
-(
-&quot;Error!!&quot;
-)
-)
-;
-// <i>Executes line D returning { value: undefined, done: true}</i>
+<b>var</b> generator = nums();
+generator.next();  // <i>Executes line A returning { value: 1, done: false }</i>
+generator.next();  // <i>Executes line B returning { value: 2, done: false }</i>
+generator.<b>throw</b>(<b>new</b> Error(&quot;Error!!&quot;)); // <i>Executes line D returning { value: undefined, done: true}</i>
 // <i>console: &quot;Error!!&quot;</i>
-generator.
-next
-(
-)
-;
-// <i>no code executed. returns { value: undefined, done: true }</i>
+generator.next();  // <i>no code executed. returns { value: undefined, done: true }</i>
+</pre>
+<!-- page 259 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch41-2">Section 41.2: Sending Values to Generator</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-next()
-It is possible to <i>send</i> a value to the generator by passing it to the
-method.
-<b>function</b>
-&ast;
-summer
-(
-)
-{
-<b>let</b>
-sum
-=
-0
-,
-value
-;
-while
-(
-<b>true</b>
-)
-{
-// <i>receive sent value</i>
-value
-=
-yield
-;
-<b>if</b>
-(
-value
-===
-<b>null</b>
-)
-<b>break</b>
-;
-// <i>aggregate values</i>
-sum
-+=
-value
-;
+<p>It is possible to <i>send</i> a value to the generator by passing it to the next() method.</p>
+<pre>
+<b>function</b>&ast; summer() {
+  <b>let</b> sum = 0, value;
+  while (<b>true</b>) {
+    // <i>receive sent value</i>
+    value = yield;
+    <b>if</b> (value === <b>null</b>) <b>break</b>;
+    // <i>aggregate values</i>
+    sum += value;
+  }
+  <b>return</b> sum;
 }
-<b>return</b>
-sum
-;
-}
-<b>let</b>
-generator
-=
-summer
-(
-)
-;
-// <i>proceed until the first &quot;yield&quot; expression, ignoring the &quot;value&quot;
-argument</i>
-generator.
-next
-(
-)
-;
+<b>let</b> generator = summer();
+// <i>proceed until the first &quot;yield&quot; expression, ignoring the &quot;value&quot; argument</i>
+generator.next();
 // <i>from this point on, the generator aggregates values until we send &quot;null&quot;</i>
-generator.
-next
-(
-1
-)
-;
-generator.
-next
-(
-10
-)
-;
-generator.
-next
-(
-100
-)
-;
+generator.next(1);
+generator.next(10);
+generator.next(100);
 // <i>close the generator and collect the result</i>
-<b>let</b>
-sum
-=
-generator.
-next
-(
-<b>null</b>
-)
-.
-value
-;
-// <i>111</i>
+<b>let</b> sum = generator.next(<b>null</b>).value;  // <i>111</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch41-3">Section 41.3: Delegating to other Generator</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-yield&ast;
-From within a generator function, the control can be delegated to
-another generator function using .
-<b>function</b>
-&ast;
-g1
-(
-)
-{
-yield
-2
-;
-yield
-3
-;
-yield
-4
-;
+<p>From within a generator function, the control can be delegated to
+another generator function using yield&ast;.</p>
+<pre>
+<b>function</b>&ast; g1() {
+  yield 2;
+  yield 3;
+  yield 4;
 }
-<b>function</b>
-&ast;
-g2
-(
-)
-{
-yield
-1
-;
-yield
-&ast;
-g1
-(
-)
-;
-yield
-5
-;
+<b>function</b>&ast; g2() {
+  yield 1;
+  yield&ast; g1();
+  yield 5;
 }
-<b>var</b>
-it
-=
-g2
-(
-)
-;
-console.
-log
-(
-it.
-next
-(
-)
-)
-;
-// <i>1</i>
-console.
-log
-
-(
-it.
-next
-(
-)
-)
-;
-// <i>2</i>
-console.
-log
-(
-it.
-next
-(
-)
-)
-;
-// <i>3</i>
-console.
-log
-(
-it.
-next
-(
-)
-)
-;
-// <i>4</i>
-console.
-log
-(
-it.
-next
-(
-)
-)
-;
-// <i>5</i>
-console.
-log
-(
-it.
-next
-(
-)
-)
-;
-// <i>undefined</i>
+<b>var</b> it = g2();
+console.log(it.next()); // <i>1</i>
+console.log(it.next()); // <i>2</i>
+console.log(it.next()); // <i>3</i>
+console.log(it.next()); // <i>4</i>
+console.log(it.next()); // <i>5</i>
+console.log(it.next()); // <i>undefined</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch41-4">Section 41.4: Iteration</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>for</b>&hellip;of
-A generator is <i>iterable</i>. It can be looped over with a statement, and
-used in other constructs which depend on the iteration protocol.
-<b>function</b>
-&ast;
-range
-(
-n
-)
-{
-<b>for</b>
-(
-<b>let</b>
-i
-=
-0
-;
-i
-&lt;
-n
-;
-++
-i
-)
-{
-ield i
-;
-}
+<p>A generator is <i>iterable</i>. It can be looped over with a <b>for</b>&hellip;of 
+statement, and used in other constructs which depend on the iteration protocol.</p>
+<!-- page 260 -->
+<pre>
+<b>function</b>&ast; range(n) {
+  <b>for</b> (<b>let</b> i = 0; i &lt; n; ++i) {
+    yield i;
+  }
 }
 // <i>looping</i>
-<b>for</b>
-(
-<b>let</b>
-n of range
-(
-10
-)
-)
-{
-// <i>n takes on the values 0, 1, &hellip; 9</i>
+<b>for</b> (<b>let</b> n of range(10)) {
+  // <i>n takes on the values 0, 1, &hellip; 9</i>
 }
 // <i>spread operator</i>
-<b>let</b>
-nums
-=
-&lbrack;
-&hellip;
-range
-(
-3
-)
-&rbrack;
-;
-// <i>&lbrack;0, 1, 2&rbrack;</i>
-<b>let</b>
-max
-=
-Math
-.
-max
-(
-&hellip;
-range
-(
-100
-)
-)
-;
-// <i>99</i>
-<b>function</b>
-Here is another example of use generator to custom iterable object in
-ES6. Here anonymous generator function &ast; used.
-<b>let</b>
-user
-=
-{
-name
-:
-&quot;sam&quot;
-,
-totalReplies
-:
-17
-,
-isBlocked
-:
-<b>false</b>
+<b>let</b> nums = &lbrack;&hellip;range(3)&rbrack;;  // <i>&lbrack;0, 1, 2&rbrack;</i>
+<b>let</b> max = Math.max(&hellip;range(100));  // <i>99</i>
+</pre>
+<p>Here is another example of use generator to custom iterable object in
+ES6. Here anonymous generator function <b>function</b>&ast; used.</p>
+<pre>
+<b>let</b> user = {
+  name: &quot;sam&quot;, totalReplies: 17, isBlocked: <b>false</b>
+};
+user&lbrack;Symbol.iterator&rbrack; = <b>function</b> &ast;() {
+  <b>let</b> properties = Object.keys(<b>this</b>);
+  <b>let</b> count = 0;
+  <b>let</b> isDone = <b>false</b>;
+<b>for</b> (<b>let</b> p of properties) {
+  yield <b>this</b>&lbrack;p&rbrack;;
+}};
+<b>for</b> (<b>let</b> p of user) {
+  console.log( p );
 }
-;
-user
-&lbrack;
-Symbol.
-iterator
-&rbrack;
-=
-<b>function</b>
-&ast;
-(
-)
-{
-<b>let</b>
-properties
-=
-Object
-.
-keys
-(
-<b>this</b>
-)
-;
-<b>let</b>
-count
-=
-0
-;
-<b>let</b>
-isDone
-=
-<b>false</b>
-;
-<b>for</b>
-(
-<b>let</b>
-p of properties
-)
-{
-yield
-<b>this</b>
-&lbrack;
-p
-&rbrack;
-;
-}
-}
-;
-<b>for</b>
-(
-<b>let</b>
-p of user
-)
-{
-console.
-log
-(
-p
-)
-;
-}
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch41-5">Section 41.5: Async flow with generators</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Generators are functions which are able to pause and then resume
+<p>Generators are functions which are able to pause and then resume
 execution. This allows to emulate async functions using external
 libraries, mainly q or co. Basically it allows to write functions that
-wait for async results in order to go on:
-<b>function</b>
-someAsyncResult
-(
-)
-{
-<b>return</b>
-Promise.
-resolve
-(
-&apos;newValue&apos;
-)
+wait for async results in order to go on:</p>
+<pre>
+<b>function</b> someAsyncResult() {
+  <b>return</b> Promise.resolve(&apos;newValue&apos;)
 }
-q&period;
-spawn
-(
-<b>function</b>
-&ast;
-(
-)
-{
-<b>var</b>
-result
-=
-yield someAsyncResult
-(
-)
-console.
-log
-(
-result
-)
-// <i>&apos;newValue&apos;</i>
-}
-)
-This allows to write async code as if it were synchronous. Moreover,
+q&period;spawn(<b>function</b> &ast; () {
+  <b>var</b> result = yield someAsyncResult()
+  console.log(result)  // <i>&apos;newValue&apos;</i>
+})
+</pre>
+<p>This allows to write async code as if it were synchronous. Moreover,
 try and catch work over several async blocks. If the promise is
-rejected, the error is caught by the next catch:
-<b>function</b>
-asyncError
-(
-)
-{
-<b>return</b>
-<b>new</b>
-Promise
-(
-<b>function</b>
-(
-resolve
-,
-reject
-)
-{
-setTimeout
-(
-<b>function</b>
-(
-)
-{
-reject
-(
-<b>new</b>
-Error
-(
-&apos;Something went wrong&apos;
-)
-)
+rejected, the error is caught by the next catch:</p>
+<pre>
+<b>function</b> asyncError() {
+  <b>return</b> <b>new</b> Promise(<b>function</b> (resolve, reject) {
+    setTimeout(<b>function</b> () {
+      reject(<b>new</b> Error(&apos;Something went wrong&apos;))
+    }, 100)
+  })
 }
-,
-100
-)
-}
-)
-}
-q&period;
-spawn
-(
-<b>function</b>
-&ast;
-(
-)
-{
-<b>try</b>
-{
-<b>var</b>
-result
-=
-yield asyncError
-(
-)
-}
-<b>catch</b>
-(
-e
-)
-{
-console.
-error
-(
-e
-)
-// <i>Something went wrong</i>
-}
-}
-)
-Using co would work exactly the same but with
-co
-(
-<b>function</b>
-&ast;
-(
-)
-{
-&hellip;
-}
-)
-instead of
-q&period;
-spawn
+q&period;spawn(<b>function</b> &ast; () {
+  <b>try</b> {
+    <b>var</b> result = yield asyncError()
+  } <b>catch</b> (e) {
+    console. error(e)  // <i>Something went wrong</i>
+  }
+})
+</pre>
+<p>Using co would work exactly the same but with co(<b>function</b> &ast; (){&hellip;}) instead of <b>q&period;spawn</b></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch41-6">Section 41.6: Iterator-Observer interface</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-A generator is a combination of two things - an Iterator and an
-Observer.
-<b>Iterator</b>
-An iterator is something when invoked returns an iterable. An iterable
+<p>A generator is a combination of two things - an Iterator and an Observer.</p>
+<p><b>Iterator</b></p>
+<p>An iterator is something when invoked returns an iterable. An iterable
 is something you can iterate upon. From ES6/ES2015 onwards, all
 collections (Array, Map, Set, WeakMap, WeakSet) conform to the
-Iterable contract.
+Iterable contract.</p>
+<blockquote>
 A generator(iterator) is a producer. In iteration the consumer PULLs the
 value from the producer.
-Example:
-<b>function</b>
-&ast;
-gen
-(
-)
-{
-yield
-5
-;
-yield
-6
-;
+</blockquote>
+<p>Example:</p>
+<pre>
+<b>function</b> &ast;gen() { yield 5; yield 6; }
+<b>let</b> a = gen();
+</pre>
+<p>Whenever you call <b>a.next</b>(), you&apos;re essentially pull-ing value from the
+Iterator and pause the execution at yield. The next time you call <b>a.next</b>(),
+the execution resumes from the previously paused state.</p>
+<p><b>Observer</b></p>
+<p>A generator is also an observer using which you can send some values
+back into the generator.</p>
+<pre>
+<b>function</b> &ast;gen() {
+  document.write(&apos;&lt;br&gt;observer:&apos;, yield1);
 }
-<b>let</b>
-a
-=
-gen
-(
-)
-;
-a.next
-a.next
-Whenever you call (), you&apos;re essentially pull-ing value from the
-Iterator and pause the execution at yield. The next time you call (),
-the execution resumes from the previously paused state.
-<b>Observer</b>
-A generator is also an observer using which you can send some values
-back into the generator.
-<b>function</b>
-&ast;
-gen
-(
-)
-{
-document.
-write
-(
-&apos;&lt;br&gt;observer:&apos;
-,
-yield
-1
-)
-;
+<b>var</b> a = gen();
+<b>var</b> i = a&period;next();
+while (!i&period;done) {
+  document.write(&apos;&lt;br&gt;iterator:&apos;, i&period;value);
+  i = a&period;next(100);
 }
-<b>var</b>
-a
-=
-gen
-(
-)
-;
-<b>var</b>
-i
-
-=
-a&period;
-next
-(
-)
-;
-while
-(
-!
-i&period;
-done
-)
-{
-document.
-write
-(
-&apos;&lt;br&gt;iterator:&apos;
-,
-i&period;
-value
-)
-;
-i
-=
-a&period;
-next
-(
-100
-)
-;
-}
-yield
-a.next
-Here you can see that 1 is used like an expression which evaluates to
+</pre>
+<p>Here you can see that <b>yield 1</b> is used like an expression which evaluates to
 some value. The value it evaluates to is the value sent as an argument
-to the function call.
-i.value
-a.next  ( 100
-So, for the first time will be the first value yielded (1), and when
+to the <b>a.next</b> function call.</p>
+<p>So, for the first time <b>i.value</b> will be the first value yielded (1), and when
 continuing the iteration to the next state, we send a value back to
-the generator using ).
-<b>Doing async with Generators</b>
-Generators are widely used with spawn (from taskJS or co) function,
+the generator using a.next(100).</p>
+<p><b>Doing async with Generators</b></p>
+<p>Generators are widely used with spawn (from taskJS or co) function,
 where the function takes in a generator and allows us to write
 asynchronous code in a synchronous fashion. This does NOT mean that
 async code is converted to sync code / executed synchronously. It
 means that we can write code that looks like sync but internally it is
-still async.
+still async.</p>
+<blockquote>
 Sync is BLOCKING; Async is WAITING. Writing code that blocks is easy.
 When PULLing, value appears in the assignment position. When PUSHing,
 value appears in the argument position of the callback.
-When you use iterators, you PULL the value from the producer. When you
+</blockquote>
+<p>When you use iterators, you PULL the value from the producer. When you
 use callbacks, the producer PUSHes the value to the argument position
-of the callback.
-<b>var</b>
-i
-=
-a&period;
-next
-(
-)
-// <i>PULL</i>
-dosomething
-(
-&hellip;
-,
-v
-=&gt;
-{
-&hellip;
-}
-)
-// <i>PUSH</i>
+of the callback.</p>
+<pre>
+<b>var</b> i = a&period;next()  // <i>PULL</i>
+dosomething(&hellip;, v =&gt; {&hellip;})  // <i>PUSH</i>
 a.next () and in the second, v =&bsol; { &hellip;
-Here, you pull the value from } is the callback and a value is PUSHed
-into the argument position v of the callback function.
-Using this pull-push mechanism, we can write async programming like
-this,
-<b>let</b>
-delay
-=
-t
-=&gt;
-<b>new</b>
-Promise
-(
-r
-=&gt;
-setTimeout
-(
-r
-,
-t
-)
-)
-;
-spawn
-(
-<b>function</b>
-&ast;
-(
-)
-{
-// <i>wait for 100 ms and send 1</i>
-<b>let</b>
-x
-=
-yield delay
-100
-)
-.
-then
-(
-(
-)
-=&gt;
-1
-)
-;
-console.
-log
-(
-x
-)
-;
-// <i>1</i>
-// <i>wait for 100 ms and send 2</i>
-<b>let</b>
-y
-=
-yield delay
-(
-100
-)
-.
-then
-(
-(
-)
-=&gt;
-2
-)
-;
-console.
-log
-(
-y
-)
-;
-// <i>2</i>
-}
-)
-;
-So, looking at the above code, we are writing async code that looks
+</pre>
+<p>Here, you pull the value from } is the callback and a value is PUSHed
+into the argument position v of the callback function.</p>
+<p>Using this pull-push mechanism, we can write async programming like this,</p>
+<pre>
+<b>let</b> delay = t =&gt; <b>new</b> Promise(r =&gt; setTimeout(r, t));
+spawn(<b>function</b>&ast;() {
+  // <i>wait for 100 ms and send 1</i>
+  <b>let</b> x = yield delay(100).then(() =&gt; 1);
+  console.log(x);  // <i>1</i>
+  // <i>wait for 100 ms and send 2</i>
+  <b>let</b> y = yield delay(100).then(() =&gt; 2);
+  console.log(y);  // <i>2</i>
+});
+</pre>
+<p>So, looking at the above code, we are writing async code that looks
 like it&apos;s blocking (the yield statements wait for 100ms and then
 continue execution), but it&apos;s actually waiting. The pause and resume
-property of generator allows us to do this amazing trick.
-<b>How does it work ?</b>
-The spawn function uses yield promise to PULL the promise state from
+property of generator allows us to do this amazing trick.</p>
+<p><b>How does it work ?</b></p>
+<p>The spawn function uses yield promise to PULL the promise state from
 the generator, waits till the promise is resolved, and PUSHes the
-resolved value back to the generator so it can consume it.
-<b>Use it now</b>
-So, with generators and spawn function, you can clean up all your
+resolved value back to the generator so it can consume it.</p>
+<p><b>Use it now</b></p>
+<p>So, with generators and spawn function, you can clean up all your
 async code in NodeJS to look and feel like it&apos;s synchronous. This
-will make debugging easy. Also the code will look neat.
-async&hellip;await
-This feature is coming to future versions of JavaScript - as . But you
-can use them today in
-ES2015/ES6 using the spawn function defined in the libraries - taskjs,
-co, or bluebird
+will make debugging easy. Also the code will look neat.</p>
+<p>This feature is coming to future versions of JavaScript - as async&hellip;await. 
+But you can use them today in ES2015/ES6 using the spawn function defined in the 
+libraries - taskjs, co, or bluebird</p>
+<!-- page 263 -->
