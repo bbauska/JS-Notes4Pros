@@ -15035,6 +15035,7 @@ already.</p>
 <ul>
   <li>a Number.</li>
 </ul>
+<br/>
 <p><b>Description</b></p>
 <p>The unary plus (+) operator is the fastest (and preferred) method of
 converting something into a number.</p>
@@ -15085,6 +15086,7 @@ string representations:</p>
 <ul>
   <li><b>undefined</b></li>
 </ul>
+<br/>
 <p><b>Description</b></p>
 <p>The <b>void</b> operator is often used to obtain the <b>undefined</b>
 primitive value, by means of writing void 0 or void(0). Note that <b>void</b> is an
@@ -15481,7 +15483,7 @@ Boolean
 <h2 id="ch41">Chapter 41: Generators</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**function</b>
+<b>function</b>
 Generator functions (defined by the &ast; keyword) run as coroutines,
 generating a series of values as they&apos;re requested through an
 iterator.
@@ -15489,15 +15491,15 @@ iterator.
 <h3 id="ch41-1">Section 41.1: Generator Functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**function</b>
-A *generator function* is created with a &ast; declaration. When it is
-called, its body is **not</b> immediately executed. Instead, it returns
-a *generator object*, which can be used to &quot;step through&quot; the
+<b>function</b>
+A <i>generator function</i> is created with a &ast; declaration. When it is
+called, its body is <b>not</b> immediately executed. Instead, it returns
+a <i>generator object</i>, which can be used to &quot;step through&quot; the
 function&apos;s execution.
 
 A yield expression inside the function body defines a point at which
 execution can suspend and resume.
-**function</b>
+<b>function</b>
 &ast;
 nums
 (
@@ -15509,108 +15511,108 @@ log
 &apos;starting&apos;
 )
 ;
-// <i>A*
+// <i>A</i>
 yield
 1
 ;
-// <i>B*
+// <i>B</i>
 console.
 log
 (
 &apos;yielded 1&apos;
 )
 ;
-// <i>C*
+// <i>C</i>
 yield
 2
 ;
-// <i>D*
+// <i>D</i>
 console.
 log
 (
 &apos;yielded 2&apos;
 )
 ;
-// <i>E*
+// <i>E</i>
 yield
 3
 ;
-// <i>F*
+// <i>F</i>
 console.
 log
 (
 &apos;yielded 3&apos;
 )
 ;
-// <i>G*
+// <i>G</i>
 }
-**var</b>
+<b>var</b>
 generator
 =
 ums
 (
 )
 ;
-// <i>Returns the iterator. No code in nums is executed*
+// <i>Returns the iterator. No code in nums is executed</i>
 generator.
 next
 (
 )
 ;
-// <i>Executes lines A,B returning { value: 1, done: false }*
-// <i>console: &quot;starting&quot;*
+// <i>Executes lines A,B returning { value: 1, done: false }</i>
+// <i>console: &quot;starting&quot;</i>
 generator.
 next
 (
 )
 ;
-// <i>Executes lines C,D returning { value: 2, done: false }*
-// <i>console: &quot;yielded 1&quot;*
+// <i>Executes lines C,D returning { value: 2, done: false }</i>
+// <i>console: &quot;yielded 1&quot;</i>
 generator.
 next
 (
 )
 ;
-// <i>Executes lines E,F returning { value: 3, done: false }*
-// <i>console: &quot;yielded 2&quot;*
+// <i>Executes lines E,F returning { value: 3, done: false }</i>
+// <i>console: &quot;yielded 2&quot;</i>
 generator.
 next
 (
 )
 ;
-// <i>Executes line G returning { value: undefined, done: true }*
-// <i>console: &quot;yielded 3&quot;*
-**Early iteration exit</b>
+// <i>Executes line G returning { value: undefined, done: true }</i>
+// <i>console: &quot;yielded 3&quot;</i>
+<b>Early iteration exit</b>
 generator = nums(); generator.next(); // <i>Executes lines A,B returning
-{ value: 1, done: false }* generator.next(); // <i>Executes lines C,D
-returning { value: 2, done: false }* generator.**return</b>(3); // <i>no
-code is executed returns { value: 3, done: true }*
-// <i>any further calls will return done = true*
+{ value: 1, done: false }</i> generator.next(); // <i>Executes lines C,D
+returning { value: 2, done: false }</i> generator.<b>return</b>(3); // <i>no
+code is executed returns { value: 3, done: true }</i>
+// <i>any further calls will return done = true</i>
 generator.next(); // <i>no code executed returns { value: undefined,
-done: true }*
-**Throwing an error to generator function</b>
-**function</b>
+done: true }</i>
+<b>Throwing an error to generator function</b>
+<b>function</b>
 &ast;
 nums
 (
 )
 {
-**try</b>
+<b>try</b>
 {
 yield
 1
 ;
-// <i>A*
+// <i>A</i>
 yield
 2
 ;
-// <i>B*
+// <i>B</i>
 yield
 3
 ;
-// <i>C*
+// <i>C</i>
 }
-**catch</b>
+<b>catch</b>
 (
 e
 )
@@ -15622,10 +15624,10 @@ e&period;
 message
 )
 ;
-// <i>D*
+// <i>D</i>
 }
 }
-**var</b>
+<b>var</b>
 generator
 =
 nums
@@ -15637,45 +15639,45 @@ next
 (
 )
 ;
-// <i>Executes line A returning { value: 1, done: false }*
+// <i>Executes line A returning { value: 1, done: false }</i>
 generator.
 next
 (
 )
 ;
-// <i>Executes line B returning { value: 2, done: false }*
+// <i>Executes line B returning { value: 2, done: false }</i>
 generator.
-**throw</b>
+<b>throw</b>
 (
-**new</b>
+<b>new</b>
 Error
 (
 &quot;Error!!&quot;
 )
 )
 ;
-// <i>Executes line D returning { value: undefined, done: true}*
-// <i>console: &quot;Error!!&quot;*
+// <i>Executes line D returning { value: undefined, done: true}</i>
+// <i>console: &quot;Error!!&quot;</i>
 generator.
 next
 (
 )
 ;
-// <i>no code executed. returns { value: undefined, done: true }*
+// <i>no code executed. returns { value: undefined, done: true }</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch41-2">Section 41.2: Sending Values to Generator</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 next()
-It is possible to *send* a value to the generator by passing it to the
+It is possible to <i>send</i> a value to the generator by passing it to the
 method.
-**function</b>
+<b>function</b>
 &ast;
 summer
 (
 )
 {
-**let</b>
+<b>let</b>
 sum
 =
 0
@@ -15684,33 +15686,33 @@ value
 ;
 while
 (
-**true</b>
+<b>true</b>
 )
 {
-// <i>receive sent value*
+// <i>receive sent value</i>
 value
 =
 yield
 ;
-**if</b>
+<b>if</b>
 (
 value
 ===
-**null</b>
+<b>null</b>
 )
-**break</b>
+<b>break</b>
 ;
-// <i>aggregate values*
+// <i>aggregate values</i>
 sum
 +=
 value
 ;
 }
-**return</b>
+<b>return</b>
 sum
 ;
 }
-**let</b>
+<b>let</b>
 generator
 =
 summer
@@ -15718,14 +15720,14 @@ summer
 )
 ;
 // <i>proceed until the first &quot;yield&quot; expression, ignoring the &quot;value&quot;
-argument*
+argument</i>
 generator.
 next
 (
 )
 ;
 // <i>from this point on, the generator aggregates values until we send
-&quot;null&quot;*
+&quot;null&quot;</i>
 generator.
 next
 (
@@ -15744,19 +15746,19 @@ next
 100
 )
 ;
-// <i>close the generator and collect the result*
-**let</b>
+// <i>close the generator and collect the result</i>
+<b>let</b>
 sum
 =
 generator.
 next
 (
-**null</b>
+<b>null</b>
 )
 .
 value
 ;
-// <i>111*
+// <i>111</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch41-3">Section 41.3: Delegating to other Generator</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -15764,7 +15766,7 @@ value
 yield&ast;
 From within a generator function, the control can be delegated to
 another generator function using .
-**function</b>
+<b>function</b>
 &ast;
 g1
 (
@@ -15780,7 +15782,7 @@ yield
 4
 ;
 }
-**function</b>
+<b>function</b>
 &ast;
 g2
 (
@@ -15799,7 +15801,7 @@ yield
 5
 ;
 }
-**var</b>
+<b>var</b>
 it
 =
 g2
@@ -15815,7 +15817,7 @@ next
 )
 )
 ;
-// <i>1*
+// <i>1</i>
 console.
 log
 
@@ -15826,7 +15828,7 @@ next
 )
 )
 ;
-// <i>2*
+// <i>2</i>
 console.
 log
 (
@@ -15836,7 +15838,7 @@ next
 )
 )
 ;
-// <i>3*
+// <i>3</i>
 console.
 log
 (
@@ -15846,7 +15848,7 @@ next
 )
 )
 ;
-// <i>4*
+// <i>4</i>
 console.
 log
 (
@@ -15856,7 +15858,7 @@ next
 )
 )
 ;
-// <i>5*
+// <i>5</i>
 console.
 log
 (
@@ -15866,24 +15868,24 @@ next
 )
 )
 ;
-// <i>undefined*
+// <i>undefined</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch41-4">Section 41.4: Iteration</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-**for</b>&hellip;of
-A generator is *iterable*. It can be looped over with a statement, and
+<b>for</b>&hellip;of
+A generator is <i>iterable</i>. It can be looped over with a statement, and
 used in other constructs which depend on the iteration protocol.
-**function</b>
+<b>function</b>
 &ast;
 range
 (
 n
 )
 {
-**for</b>
+<b>for</b>
 (
-**let</b>
+<b>let</b>
 i
 =
 0
@@ -15900,20 +15902,20 @@ ield i
 ;
 }
 }
-// <i>looping*
-**for</b>
+// <i>looping</i>
+<b>for</b>
 (
-**let</b>
+<b>let</b>
 n of range
 (
 10
 )
 )
 {
-// <i>n takes on the values 0, 1, &hellip; 9*
+// <i>n takes on the values 0, 1, &hellip; 9</i>
 }
-// <i>spread operator*
-**let</b>
+// <i>spread operator</i>
+<b>let</b>
 nums
 =
 &lbrack;
@@ -15924,8 +15926,8 @@ range
 )
 &rbrack;
 ;
-// <i>&lbrack;0, 1, 2&rbrack;*
-**let</b>
+// <i>&lbrack;0, 1, 2&rbrack;</i>
+<b>let</b>
 max
 =
 Math
@@ -15939,11 +15941,11 @@ range
 )
 )
 ;
-// <i>99*
-**function</b>
+// <i>99</i>
+<b>function</b>
 Here is another example of use generator to custom iterable object in
 ES6. Here anonymous generator function &ast; used.
-**let</b>
+<b>let</b>
 user
 =
 {
@@ -15957,7 +15959,7 @@ totalReplies
 ,
 isBlocked
 :
-**false</b>
+<b>false</b>
 }
 ;
 user
@@ -15966,39 +15968,39 @@ Symbol.
 iterator
 &rbrack;
 =
-**function</b>
+<b>function</b>
 &ast;
 (
 )
 {
-**let</b>
+<b>let</b>
 properties
 =
 Object
 .
 keys
 (
-**this</b>
+<b>this</b>
 )
 ;
-**let</b>
+<b>let</b>
 count
 =
 0
 ;
-**let</b>
+<b>let</b>
 isDone
 =
-**false</b>
+<b>false</b>
 ;
-**for</b>
+<b>for</b>
 (
-**let</b>
+<b>let</b>
 p of properties
 )
 {
 yield
-**this</b>
+<b>this</b>
 &lbrack;
 p
 &rbrack;
@@ -16006,9 +16008,9 @@ p
 }
 }
 ;
-**for</b>
+<b>for</b>
 (
-**let</b>
+<b>let</b>
 p of user
 )
 {
@@ -16027,12 +16029,12 @@ Generators are functions which are able to pause and then resume
 execution. This allows to emulate async functions using external
 libraries, mainly q or co. Basically it allows to write functions that
 wait for async results in order to go on:
-**function</b>
+<b>function</b>
 someAsyncResult
 (
 )
 {
-**return</b>
+<b>return</b>
 Promise.
 resolve
 (
@@ -16042,12 +16044,12 @@ resolve
 q&period;
 spawn
 (
-**function</b>
+<b>function</b>
 &ast;
 (
 )
 {
-**var</b>
+<b>var</b>
 result
 =
 yield someAsyncResult
@@ -16058,22 +16060,22 @@ log
 (
 result
 )
-// <i>&apos;newValue&apos;*
+// <i>&apos;newValue&apos;</i>
 }
 )
 This allows to write async code as if it were synchronous. Moreover,
 try and catch work over several async blocks. If the promise is
 rejected, the error is caught by the next catch:
-**function</b>
+<b>function</b>
 asyncError
 (
 )
 {
-**return</b>
-**new</b>
+<b>return</b>
+<b>new</b>
 Promise
 (
-**function</b>
+<b>function</b>
 (
 resolve
 ,
@@ -16082,13 +16084,13 @@ reject
 {
 setTimeout
 (
-**function</b>
+<b>function</b>
 (
 )
 {
 reject
 (
-**new</b>
+<b>new</b>
 Error
 (
 &apos;Something went wrong&apos;
@@ -16104,21 +16106,21 @@ Error
 q&period;
 spawn
 (
-**function</b>
+<b>function</b>
 &ast;
 (
 )
 {
-**try</b>
+<b>try</b>
 {
-**var</b>
+<b>var</b>
 result
 =
 yield asyncError
 (
 )
 }
-**catch</b>
+<b>catch</b>
 (
 e
 )
@@ -16128,14 +16130,14 @@ error
 (
 e
 )
-// <i>Something went wrong*
+// <i>Something went wrong</i>
 }
 }
 )
 Using co would work exactly the same but with
 co
 (
-**function</b>
+<b>function</b>
 &ast;
 (
 )
@@ -16152,7 +16154,7 @@ spawn
 <!--
 A generator is a combination of two things - an Iterator and an
 Observer.
-**Iterator</b>
+<b>Iterator</b>
 An iterator is something when invoked returns an iterable. An iterable
 is something you can iterate upon. From ES6/ES2015 onwards, all
 collections (Array, Map, Set, WeakMap, WeakSet) conform to the
@@ -16160,7 +16162,7 @@ Iterable contract.
 A generator(iterator) is a producer. In iteration the consumer PULLs the
 value from the producer.
 Example:
-**function</b>
+<b>function</b>
 &ast;
 gen
 (
@@ -16173,7 +16175,7 @@ yield
 6
 ;
 }
-**let</b>
+<b>let</b>
 a
 =
 gen
@@ -16185,10 +16187,10 @@ a.next
 Whenever you call (), you&apos;re essentially pull-ing value from the
 Iterator and pause the execution at yield. The next time you call (),
 the execution resumes from the previously paused state.
-**Observer</b>
+<b>Observer</b>
 A generator is also an observer using which you can send some values
 back into the generator.
-**function</b>
+<b>function</b>
 &ast;
 gen
 (
@@ -16204,14 +16206,14 @@ yield
 )
 ;
 }
-**var</b>
+<b>var</b>
 a
 =
 gen
 (
 )
 ;
-**var</b>
+<b>var</b>
 i
 
 =
@@ -16255,7 +16257,7 @@ a.next  ( 100
 So, for the first time will be the first value yielded (1), and when
 continuing the iteration to the next state, we send a value back to
 the generator using ).
-**Doing async with Generators</b>
+<b>Doing async with Generators</b>
 Generators are widely used with spawn (from taskJS or co) function,
 where the function takes in a generator and allows us to write
 asynchronous code in a synchronous fashion. This does NOT mean that
@@ -16268,14 +16270,14 @@ value appears in the argument position of the callback.
 When you use iterators, you PULL the value from the producer. When you
 use callbacks, the producer PUSHes the value to the argument position
 of the callback.
-**var</b>
+<b>var</b>
 i
 =
 a&period;
 next
 (
 )
-// <i>PULL*
+// <i>PULL</i>
 dosomething
 (
 &hellip;
@@ -16286,18 +16288,18 @@ v
 &hellip;
 }
 )
-// <i>PUSH*
+// <i>PUSH</i>
 a.next       () and in the second,                   v =&bsol;     {   &hellip;
 Here, you pull the value from } is the callback and a value is PUSHed
 into the argument position v of the callback function.
 Using this pull-push mechanism, we can write async programming like
 this,
-**let</b>
+<b>let</b>
 delay
 =
 t
 =&gt;
-**new</b>
+<b>new</b>
 Promise
 (
 r
@@ -16312,13 +16314,13 @@ t
 ;
 spawn
 (
-**function</b>
+<b>function</b>
 &ast;
 (
 )
 {
-// <i>wait for 100 ms and send 1*
-**let</b>
+// <i>wait for 100 ms and send 1</i>
+<b>let</b>
 x
 =
 yield delay
@@ -16339,9 +16341,9 @@ log
 x
 )
 ;
-// <i>1*
-// <i>wait for 100 ms and send 2*
-**let</b>
+// <i>1</i>
+// <i>wait for 100 ms and send 2</i>
+<b>let</b>
 y
 =
 yield delay
@@ -16363,7 +16365,7 @@ log
 y
 )
 ;
-// <i>2*
+// <i>2</i>
 }
 )
 ;
@@ -16371,11 +16373,11 @@ So, looking at the above code, we are writing async code that looks
 like it&apos;s blocking (the yield statements wait for 100ms and then
 continue execution), but it&apos;s actually waiting. The pause and resume
 property of generator allows us to do this amazing trick.
-**How does it work ?</b>
+<b>How does it work ?</b>
 The spawn function uses yield promise to PULL the promise state from
 the generator, waits till the promise is resolved, and PUSHes the
 resolved value back to the generator so it can consume it.
-**Use it now</b>
+<b>Use it now</b>
 So, with generators and spawn function, you can clean up all your
 async code in NodeJS to look and feel like it&apos;s synchronous. This
 will make debugging easy. Also the code will look neat.
