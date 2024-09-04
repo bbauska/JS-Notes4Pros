@@ -14702,307 +14702,67 @@ console.log(map.<b>delete</b>(7));  // <i>false</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch38-4">Section 38.4: Checking if a key exists in a Map</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-has
-To check if a key exists in a Map, use the .() method:
-map.
-has
-(
-key
-)
-;
-Example:
-<b>const</b>
-map
-=
-<b>new</b>
-Map
-(
-&lbrack;
-&lbrack;
-1
-,
-2
-&rbrack;
-,
-&lbrack;
-3
-,
-4
-&rbrack;
-&rbrack;
-)
-;
-console.
-log
-(
-map.
-has
-(
-1
-)
-)
-;
-// <i>true</i>
-console.
-log
-(
-map.
-has
-(
-2
-)
-)
-;
-// <i>false</i>
+<p>To check if a key exists in a Map, use the .has() method:</p>
+<pre>
+map.has(key);
+</pre>
+<p>Example:</p>
+<pre>
+<b>const</b> map = <b>new</b> Map(&lbrack;&lbrack;1, 2&rbrack;, &lbrack;3, 4&rbrack;&rbrack;);
+console.log(map.has(1));  // <i>true</i>
+console.log(map.has(2));  // <i>false</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch38-5">Section 38.5: Iterating Maps</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-keys (), .  values () and .      entries (). . entries
-Map has three methods which returns iterators: .() is the default
-key  ,  value
-Map iterator, and contains &lbrack;&rbrack; pairs.
-<b>const</b>
-map
-=
-</b>new</b>
-Map
-(
-&lbrack;
-&lbrack;
-1
-,
-2
-&rbrack;
-,
-&lbrack;
-3
-,
-4
-&rbrack;
-&rbrack;
-)
-;
-<b>for</b>
-(
-</b>const</b>
-&lbrack;
-key
-,
-value
-&rbrack;
-of map
-)
-{
-console.
-log
-(
-&grave;key
-:
-&dollar;
-{
-key
-}
-,
-value
-:
-&dollar;
-{
-value
-}
-&grave;
-)
-;
+<p>Map has three methods which returns iterators: .keys(), .values() and .entries() is the default
+Map iterator, and contains &lbrack;key, value&rbrack; pairs.
+<pre> <b>const</b> map = </b>new</b> Map(&lbrack;&lbrack;1, 2&rbrack;, &lbrack;3, 4&rbrack;&rbrack;);
+<b>for</b> (</b>const</b> &lbrack;key, value&rbrack; of map) {
+  console.log(&grave;key: &dollar;{key}, value: &dollar;{value}&grave;);
 // <i>logs:</i>
 // <i>key: 1, value: 2</i>
 // <i>key: 3, value: 4</i>
 }
-<b>for</b>
-(
-<b>const</b>
-key of map.
-keys
-(
-)
-)
-{
-console.
-log
-(
-key
-)
-;
-// <i>logs 1 and 3</i>
+<b>for</b> (<b>const</b> key of map.keys()) {
+  console.log(key);  // <i>logs 1 and 3</i>
 }
-<b>for</b>
-(
-<b>const</b>
-value of map.
-values
-(
-)
-)
-{
-console.
-log
-(
-value
-)
-;
-// <i>logs 2 and 4</i>
+<b>for</b> (<b>const</b> value of map.values()) {
+  console.log(value);  // <i>logs 2 and 4</i>
 }
-forEach
-Map also has .() method. The first parameter is a callback function,
-which will be called for each element in the map, and the second
-parameter is the value which will be used as <b>this</b> when executing
-the callback function.
+</pre>
+<p>Map also has .forEach() method. The first parameter is a callback function, which will 
+be called for each element in the map, and the second parameter is the value which will 
+be used as <b>this</b> when executing the callback function.</p>
 
-The callback function has three arguments: value, key, and the map
-object.
-<b>const</b>
-map
-=
-<b>new</b>
-Map
-(
-&lbrack;
-&lbrack;
-1
-,
-2
-&rbrack;
-,
-&lbrack;
-3
-,
-4
-&rbrack;
-&rbrack;
-)
-;
-map.
-forEach
-(
-(
-value
-,
-key
-,
-theMap
-)
-=&gt;
-console.
-log
-(
-&grave;key
-:
-&dollar;
-{
-key
-}
-,
-value
-:
-&dollar;
-{
-value
-}
-&grave;
-)
-)
-;
+<p>The callback function has three arguments: value, key, and the map</p>
+<pre>
+<b>const</b> map = <b>new</b> Map(&lbrack;&lbrack;1, 2&rbrack;, &lbrack;3, 4&rbrack;&rbrack;);
+map.forEach((value, key, theMap) =&gt; console.log(&grave;key: &dollar;{key}, value: &dollar;{value}&grave;));
 // <i>logs:</i>
 // <i>key: 1, value: 2</i>
 // <i>key: 3, value: 4</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch38-6">Section 38.6: Getting and setting elements</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>get</b> ( key ) to get value by key and . <b>set</b> ( key , value
-Use .) to assign a value to a key.
-<b>get</b>
-If the element with the specified key doesn&apos;t exist in the map, .()
-returns <b>undefined</b>.
-.<b>set</b>()   method returns the map object, so you can chain .<b>set</b>()
-calls.
-<b>const</b>
-map
-=
-<b>new</b>
-Map
-(
-)
-;
-console.
-log
-(
-map.
-<b>get</b>
-(
-1
-)
-)
-;
-// <i>undefined</i>
-map.
-<b>set</b>
-(
-1
-,
-2
-)
-.
-<b>set</b>
-(
-3
-,
-4
-)
-;
-console.
-log
-(
-map.
-<b>get</b>
-(
-1
-)
-)
-;
-// <i>2</i>
+<p>Use <b>get</b>(key) to get value by key and .<b>set</b>(key, value)  to assign 
+a value to a key.</p>
+<p>If the element with the specified key doesn&apos;t exist in the map, .get()
+returns <b>undefined</b>.</p>
+
+<p>.<b>set</b>() method returns the map object, so you can chain .<b>set</b>() calls.
+<pre>
+<b>const</b> map = <b>new</b> Map();
+console.log(map.<b>get</b>(1));  // <i>undefined</i>
+map.<b>set</b>(1, 2).<b>set</b>(3, 4);
+console.log(map.<b>get</b>(1));  // <i>2</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch38-7">Section 38.7: Getting the number of elements of a Map</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-.size
-To get the numbers of elements of a Map, use the property:
-<b>const</b>
-map
-=
-<b>new</b>
-Map
-(
-&lbrack;
-&lbrack;
-1
-,
-2
-&rbrack;
-,
-&lbrack;
-3
-,
-4
-&rbrack;
-&rbrack;
-)
-;
-console.
-log
-(
-map.
-size
-)
-;
-// <i>2</i>
+<p>To get the numbers of elements of a Map, use the .size property:</p>
+<pre>
+<b>const</b> map = <b>new</b> Map(&lbrack;&lbrack;1, 2&rbrack;, &lbrack;3,4&rbrack;&rbrack;);
+console.log(map.size);  // <i>2</i>
+</pre>
