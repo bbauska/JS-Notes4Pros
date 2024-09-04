@@ -14766,3 +14766,280 @@ console.log(map.<b>get</b>(1));  // <i>2</i>
 <b>const</b> map = <b>new</b> Map(&lbrack;&lbrack;1, 2&rbrack;, &lbrack;3,4&rbrack;&rbrack;);
 console.log(map.size);  // <i>2</i>
 </pre>
+<!-- page 250 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch39">Chapter 39: Timestamps</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch39-1">Section 39.1: High-resolution timestamps</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now">
+performance.now()</a> returns a precise timestamp: The number of milliseconds, 
+including microseconds, since the current web page started to load.</p>
+<p>More generally, it returns the time elapsed since the 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/navigationStart">performanceTiming.navigationStart</a></p>
+
+<pre>
+t = performance.now();
+</pre>
+<p>For example, in a web browser&apos;s main context, performance.now() returns 
+6288.319 if the web page began to load 6288 milliseconds and 319 microseconds ago.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch39-2">Section 39.2: Get Timestamp in Seconds</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>To get the timestamp in seconds=</p>
+<pre>
+Math.floor((<b>new</b> Date().getTime()) / 1000)
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch39-3">Section 39.3: Low-resolution timestamps</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now">Date.now()]()
+returns the number of whole milliseconds that have elapsed since 1 January 1970 00:00:00 UTC.</p>
+<pre>
+t = Date.now();
+</pre>
+<p>For example, Date.now() returns 1461069314 if it was called on 19 April 2016 at
+12:35:14 GMT.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch39-4">Section 39.4: Support for legacy browsers</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<p>In older browsers where Data.now() is unavailable, use 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime">
+(new Date()).getTime()</a> instead:</p>
+<pre>
+t = (<b>new</b> Date()).getTime();
+</pre>
+<p>Or, to provide a Date.now() function for use in older browsers, 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now#Polyfill">
+use this polyfill</a></p>
+<pre>
+<b>if</b> (!Date.now) {
+  Date.now = <b>function</b> now() {
+    <b>return</b> <b>new</b> Date().getTime();
+  };
+}
+</pre>
+<!-- page 251 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch40">Chapter 40: Unary Operators</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-1">Section 40.1: Overview</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Unary operators are operators with only one operand. Unary operators are more 
+efficient than standard JavaScript function calls. Additionally, unary operators 
+can not be overridden and therefore their functionality is guaranteed.</p>
+<p>The following unary operators are available:</p>
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Operator</b></th>
+      <th><b>Operation</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>delete</b></td>
+      <td>The delete operator deletes a property from an object.</td>
+    </tr>
+    <tr>
+      <td><b>void</b></td>
+      <td>The void operator discards an expression's return value.</td>
+    </tr>
+    <tr>
+      <td><b>typeof</b></td>
+      <td>The typeof operator determns the type of a given object.</td>
+    </tr>
+    <tr>
+      <td><b>&plus;</b></td>
+      <td>The unary plus operator converts its operand to Number type.</td>
+    <tr>
+      <td>&minus;</td>
+      <td>The unary negation operator converts its operand to Number, then negates it.</td>
+    </tr>
+    <tr>
+      <td>&tilde;</td>
+      <td>Bitwise NOT operator.</td>
+    <tr>
+      <td>&excl;</td>
+      <td>Logical NOT operator.</td>
+    </tr>
+  </tbody>
+</table>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-2">Section 40.2: The typeof operator</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The <b>typeof</b> operator returns the data type of the unevaluated
+operand as a string.
+<b>Syntax:</b>
+<b>typeof</b>
+operand
+<b>Returns:</b>
+These are the possible return values from <b>typeof</b>:
+<b>Type Return value</b>
+
+Undefined &quot;undefined&quot;
+
+Null &quot;object&quot;
+
+Boolean &quot;boolean&quot;
+
+Number &quot;number&quot;
+
+String &quot;string&quot;
+
+Symbol (ES6) &quot;symbol&quot;
+
+Function object &quot;function&quot;
+document.all
+&quot;undefined&quot;
+Host object (provided by the JS environment) Implementation-dependent
+Any other object &quot;object&quot;
+document.all
+The unusual behavior of with the <b>typeof</b> operator is from its
+former usage to detect legacy browsers.
+
+For more information, see [Why is document.all defined but typeof
+document.all returns
+&quot;undefined&quot;?](http://stackoverflow.com/q/40643613/6388243)
+
+<b>Examples:</b>
+// <i>returns &apos;number&apos;</i>
+<b>typeof</b>
+3.14
+;
+<b>typeof</b>
+<b>Infinity</b>
+;
+<b>typeof</b>
+<b>NaN</b>
+;
+// <i>&quot;Not-a-Number&quot; is a &quot;number&quot;</i>
+// <i>returns &apos;string&apos;</i>
+<b>typeof</b>
+&quot;&quot;
+;
+<b>typeof</b>
+&quot;bla&quot;
+;
+<b>typeof</b>
+(
+<b>typeof</b>
+1
+)
+;
+// <i>typeof always returns a string</i>
+// <i>returns &apos;boolean&apos;</i>
+<b>typeof</b>
+<b>true</b>
+;
+<b>typeof</b>
+<b>false</b>
+;
+// <i>returns &apos;undefined&apos;</i>
+<b>typeof</b>
+<b>undefined</b>
+;
+<b>typeof</b>
+declaredButUndefinedVariable
+;
+<b>typeof</b>
+undeclaredVariable
+;
+<b>typeof</b>
+<b>void</b>
+0
+;
+<b>typeof</b>
+document.
+all
+// <i>see above</i>
+// <i>returns &apos;function&apos;</i>
+<b>typeof</b>
+<b>function</b>
+(
+)
+{
+}
+;
+<b>typeof</b>
+class
+C
+{
+}
+;
+<b>typeof</b>
+Math
+.
+sin
+;
+// <i>returns &apos;object&apos;</i>
+<b>typeof</b>
+{
+<i>/&ast;&lt;&hellip;&gt;&ast;/</i>
+}
+
+<b>typeof</b>
+<b>null</b>
+;
+<b>typeof</b>
+<i>/regex/</i>
+;
+// <i>This is also considered an object</i>
+<b>typeof</b>
+&lbrack;
+1
+,
+2
+,
+4
+&rbrack;
+;
+// <i>use Array.isArray or Object.prototype.toString.call.</i>
+<b>typeof</b>
+<b>new</b>
+Date
+(
+)
+;
+<b>typeof</b>
+<b>new</b>
+RegExp
+(
+)
+;
+<b>typeof</b>
+<b>new</b>
+Boolean
+(
+<b>true</b>
+)
+;
+// <i>Don&apos;t use!</i>
+<b>typeof</b>
+<b>new</b>
+Number
+(
+1
+)
+;
+// <i>Don&apos;t use!</i>
+<b>typeof</b>
+<b>new</b>
+String
+(
+&quot;abc&quot;
+)
+;
+// <i>Don&apos;t use!</i>
+// <i>returns &apos;symbol&apos;</i>
+<b>typeof</b>
+Symbol
+(
+)
+;
+<b>typeof</b>
+Symbol.
+iterator
+;
