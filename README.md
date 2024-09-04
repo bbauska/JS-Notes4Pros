@@ -15222,7 +15222,7 @@ The operator then attempts to convert those strings to numbers:
 &rbrack;
 // <i>NaN ( === -&apos;1,2&apos; )</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<h3 id="ch40-7">Section 40.7: The bitwise NOT operator (&bsol;~)</h3>
+<h3 id="ch40-7">Section 40.7: The bitwise NOT operator (~)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 The bitwise NOT (&bsol;~) performs a NOT operation on each bit in a value.
@@ -15726,8 +15726,7 @@ next
 (
 )
 ;
-// <i>from this point on, the generator aggregates values until we send
-&quot;null&quot;</i>
+// <i>from this point on, the generator aggregates values until we send &quot;null&quot;</i>
 generator.
 next
 (
@@ -16289,7 +16288,7 @@ v
 }
 )
 // <i>PUSH</i>
-a.next       () and in the second,                   v =&bsol;     {   &hellip;
+a.next () and in the second, v =&bsol; { &hellip;
 Here, you pull the value from } is the callback and a value is PUSHed
 into the argument position v of the callback function.
 Using this pull-push mechanism, we can write async programming like
