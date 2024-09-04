@@ -14967,3 +14967,686 @@ document.all returns
 <b>typeof</b> Symbol();
 <b>typeof</b> Symbol.iterator;
 </pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-3">Section 40.3: The delete operator</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The <b>delete</b> operator deletes a property from an object.
+<b>Syntax:</b>
+<b>delete</b>
+object.
+property
+<b>delete</b>
+object
+&lbrack;
+&apos;property&apos;
+&rbrack;
+<b>Returns:</b>
+If deletion is successful, or the property did not exist:
+<b>true</b>
+If the property to be deleted is an own non-configurable property
+(can&apos;t be deleted):
+<b>false</b> in non-strict mode.
+Throws an error in strict mode
+<b>Description</b>
+The <b>delete</b> operator does not directly free memory. It can
+indirectly free memory if the operation means all references to the
+property are gone.
+<b>delete</b> works on an object&apos;s properties. If a property with the
+same name exists on the object&apos;s prototype chain, the property will
+be inherited from the prototype. <b>delete</b> does not work on variables
+or function names.
+<b>Examples:</b>
+// <i>Deleting a property</i>
+foo
+=
+1
+;
+// <i>a global variable is a property of &grave;window&grave;: &grave;window.foo&grave;</i>
+<b>delete</b>
+foo
+;
+// <i>true</i>
+console.
+log
+(
+foo
+)
+;
+// <i>Uncaught ReferenceError: foo is not defined</i>
+// <i>Deleting a variable</i>
+<b>var</b>
+foo
+=
+1
+;
+<b>delete</b>
+foo
+;
+// <i>false</i>
+console.
+log
+(
+foo
+)
+;
+// <i>1 (Not deleted)</i>
+// <i>Deleting a function</i>
+<b>function</b>
+foo
+(
+)
+{
+}
+;
+<b>delete</b>
+foo
+;
+// <i>false</i>
+console.
+log
+(
+foo
+)
+;
+// <i>function foo(){ } (Not deleted)</i>
+// <i>Deleting a property</i>
+<b>var</b>
+foo
+=
+{
+bar
+:
+&quot;42&quot;
+}
+;
+<b>delete</b>
+foo.
+bar
+;
+// <i>true</i>
+console.
+log
+(
+foo
+)
+;
+// <i>Object { } (Deleted bar)</i>
+// <i>Deleting a property that does not exist</i>
+<b>var</b>
+foo
+=
+{
+}
+;
+<b>delete</b>
+foo.
+bar
+;
+// <i>true</i>
+console.
+log
+(
+foo
+)
+;
+// <i>Object { } (No errors, nothing deleted)</i>
+// <i>Deleting a non-configurable property of a predefined object</i>
+<b>delete</b>
+Math
+.
+PI
+;
+// <i>false ()</i>
+console.
+log
+(
+Math
+.
+PI
+)
+;
+// <i>3.141592653589793 (Not deleted)</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-4">Section 40.4: The unary plus operator (+)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The unary plus (+) precedes its operand <i>and evaluates</i> to its
+operand. It attempts to convert the operand to a number, if it isn&apos;t
+already.
+<b>Syntax:</b>
++expression <b>Returns:</b> a Number. <b>Description</b>
+The unary plus (+) operator is the fastest (and preferred) method of
+converting something into a number.
+It can convert:
+string representations of integers (decimal or hexadecimal) and
+floats.
+booleans: <b>true</b>, <b>false</b>.
+<b>null</b>
+Values that can&apos;t be converted will evaluate to <b>NaN</b>.
+<b>Examples:</b>
+&plus;
+42
+// <i>42</i>
+&plus;
+&quot;42&quot;
+// <i>42</i>
+&plus;
+<b>true</b>
+// <i>1</i>
+&plus;
+<b>false</b>
+// <i>0</i>
+&plus;
+<b>null</b>
+// <i>0</i>
+&plus;
+<b>undefined</b>
+// <i>NaN</i>
+&plus;
+<b>NaN</b>
+// <i>NaN</i>
+&plus;
+&quot;foo&quot;
+// <i>NaN</i>
+&plus;
+{
+}
+// <i>NaN</i>
+&plus;
+<b>function</b>
+(
+)
+{
+}
+// <i>NaN</i>
+Note that attempting to convert an array can result in unexpected
+return values. In the background, arrays are first converted to their
+string representations:
+&lbrack;
+&rbrack;
+.
+toString
+(
+)
+===
+&apos;&apos;
+;
+&lbrack;
+1
+&rbrack;
+.
+toString
+(
+)
+===
+&apos;1&apos;
+;
+&lbrack;
+1
+,
+2
+&rbrack;
+.
+toString
+(
+)
+===
+&apos;1,2&apos;
+;
+The operator then attempts to convert those strings to numbers:
+&plus;
+&lbrack;
+&rbrack;
+// <i>0 ( === +&apos;&apos; )</i>
+&plus;
+&lbrack;
+1
+&rbrack;
+// <i>1 ( === +&apos;1&apos; )</i>
+&plus;
+&lbrack;
+1
+,
+2
+&rbrack;
+// <i>NaN ( === +&apos;1,2&apos; )</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-5">Section 40.5: The void operator</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The <b>void</b> operator evaluates the given expression and then returns
+<b>undefined</b>.
+<b>Syntax:</b>
+<b>void</b>
+expression
+<b>Returns:</b>
+<b>undefined Description</b>
+<b>void</b>  0 or <b>void</b>
+The <b>void</b> operator is often used to obtain the <b>undefined</b>
+primitive value, by means of writing (0). Note that <b>void</b> is an
+operator, not a function, so () is not required.
+
+Usually the result of a <b>void</b> expression and <b>undefined</b> can be
+used interchangeably.
+window.<b>undefined</b>
+However, in older versions of ECMAScript, could be assigned any value,
+and it is still possible to use <b>undefined</b> as name for function
+parameters variables inside functions, thus disrupting other code that
+relies on the value of <b>undefined</b>. <b>void</b> will always yield the
+<i>true</i> <b>undefined</b> value though.
+<b>void</b>
+window.<b>undefined</b>
+0 is also commonly used in code minification as a shorter way of
+writing <b>undefined</b>. In addition, it&apos;s probably safer as some other
+code could&apos;ve tampered with .
+<b>Examples:</b>
+Returning
+<b>undefined</b>
+:
+<b>function</b>
+foo
+(
+)
+{
+<b>return</b>
+<b>void</b>
+0
+;
+}
+console.
+log
+(
+foo
+(
+)
+)
+;
+// <i>undefined</i>
+Changing the value of <b>undefined</b> inside a certain scope:
+(
+<b>function</b>
+(
+<b>undefined</b>
+)
+{
+<b>var</b>
+str
+=
+&apos;foo&apos;
+;
+console.
+log
+(
+str
+===
+<b>undefined</b>
+)
+;
+// <i>true</i>
+}
+)
+(
+&apos;foo&apos;
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-6">Section 40.6: The unary negation operator (-)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The unary negation (-) precedes its operand and negates it, after
+trying to convert it to number.
+<b>Syntax:</b>
+-expression <b>Returns:</b> a Number.
+<b>Description</b>
+The unary negation (-) can convert the same types / values as the
+unary plus (+) operator can.
+<b>NaN</b>
+Values that can&apos;t be converted will evaluate to <b>NaN</b> (there is no
+-).
+<b>Examples:</b>
+&minus;
+42
+// <i>-42</i>
+&minus;
+&quot;42&quot;
+// <i>-42</i>
+&minus;
+<b>true</b>
+// <i>-1</i>
+&minus;
+<b>false</b>
+// <i>-0</i>
+&minus;
+<b>null</b>
+// <i>-0</i>
+&minus;
+<b>undefined</b>
+// <i>NaN</i>
+&minus;
+<b>NaN</b>
+// <i>NaN</i>
+
+&minus;
+&quot;foo&quot;
+// <i>NaN</i>
+&minus;
+{
+}
+// <i>NaN</i>
+&minus;
+<b>function</b>
+(
+)
+{
+}
+// <i>NaN</i>
+Note that attempting to convert an array can result in unexpected
+return values. In the background, arrays are first converted to their
+string representations:
+&lbrack;
+&rbrack;
+.
+toString
+(
+)
+===
+&apos;&apos;
+;
+&lbrack;
+1
+&rbrack;
+.
+toString
+(
+)
+===
+&apos;1&apos;
+;
+&lbrack;
+1
+,
+2
+&rbrack;
+.
+toString
+(
+)
+===
+&apos;1,2&apos;
+;
+The operator then attempts to convert those strings to numbers:
+&minus;
+&lbrack;
+&rbrack;
+// <i>-0 ( === -&apos;&apos; )</i>
+&minus;
+&lbrack;
+1
+&rbrack;
+// <i>-1 ( === -&apos;1&apos; )</i>
+&minus;
+&lbrack;
+1
+,
+2
+&rbrack;
+// <i>NaN ( === -&apos;1,2&apos; )</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-7">Section 40.7: The bitwise NOT operator (&bsol;~)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The bitwise NOT (&bsol;~) performs a NOT operation on each bit in a value.
+<b>Syntax:</b>
+&bsol;~expression <b>Returns:</b>
+a Number.
+<b>Description</b>
+The truth table for the NOT operation is:
+<b>a NOT a</b>
+0
+1
+1
+0
+1337
+(
+base
+10
+)
+=
+0000010100111001
+(
+base
+2
+)
+&bsol;~
+1337
+(
+base
+10
+)
+=
+1111101011000110
+(
+base
+2
+)
+=
+&minus;
+1338
+(
+base
+10
+)
+A bitwise not on a number results in:
+&minus;
+(
+x
+&plus;
+1
+)
+.
+<b>Examples: value (base 10) value (base 2) return (base 2) return
+(base 10)</b>
+2  00000010   11111100  -3
+1  00000001              11111110                -2
+0  00000000              11111111                -1
+-1 11111111              00000000                0
+-2 11111110              00000001                1
+-3 11111100              00000010                2
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch40-8">Section 40.8: The logical NOT operator (!)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The logical NOT (!) operator performs logical negation on an
+expression.
+<b>Syntax:</b>
+!expression <b>Returns:</b> a Boolean.
+<b>Description</b>
+The logical NOT (!) operator performs logical negation on an
+expression.
+<b>true</b> === <b>false</b>        and !       <b>false</b> === <b>true</b>
+Boolean values simply get inverted: !.
+Non-boolean values get converted to boolean values first, then are
+negated.
+This means that a double logical NOT (!!) can be used to cast any
+value to a boolean:
+!!
+&quot;FooBar&quot;
+===
+<b>true</b>
+!!
+1
+===
+<b>true</b>
+!!
+0
+===
+<b>false</b>
+<b>true</b>
+These are all equal to !:
+!
+&apos;true&apos;
+===
+!
+<b>new</b>
+Boolean
+(
+&apos;true&apos;
+)
+;
+!
+&apos;false&apos;
+===
+!
+<b>new</b>
+Boolean
+(
+&apos;false&apos;
+)
+;
+!
+&apos;FooBar&apos;
+===
+!
+<b>new</b>
+Boolean
+(
+&apos;FooBar&apos;
+)
+;
+!
+&lbrack;
+&rbrack;
+===
+!
+<b>new</b>
+Boolean
+(
+&lbrack;
+&rbrack;
+)
+;
+!
+{
+}
+===
+!
+<b>new</b>
+Boolean
+(
+{
+}
+)
+;
+These are all equal to
+!
+<b>false</b>
+:
+!
+0
+===
+!
+<b>new</b>
+Boolean
+(
+0
+)
+;
+!
+&apos;&apos;
+===
+!
+<b>new</b>
+Boolean
+(
+&apos;&apos;
+)
+;
+!
+<b>NaN</b>
+===
+!
+<b>new</b>
+Boolean
+(
+<b>NaN</b>
+)
+;
+!
+<b>null</b>
+===
+!
+<b>new</b>
+Boolean
+(
+<b>null</b>
+)
+;
+!
+<b>undefined</b>
+===
+!
+<b>new</b>
+Boolean
+(
+<b>undefined</b>
+)
+;
+<b>Examples:</b>
+!
+<b>true</b>
+// <i>false</i>
+!-
+1
+// <i>false</i>
+!
+&quot;-1&quot;
+// <i>false</i>
+!
+42
+// <i>false</i>
+!
+&quot;42&quot;
+// <i>false</i>
+!
+&quot;foo&quot;
+// <i>false</i>
+!
+&quot;true&quot;
+// <i>false</i>
+!
+&quot;false&quot;
+// <i>false</i>
+!
+{
+}
+// <i>false</i>
+!
+&lbrack;
+&rbrack;
+// <i>false</i>
+!
+<b>function</b>
+(
+)
+{
+}
+// <i>false</i>
+!
+<b>false</b>
+// <i>true</i>
+!
+<b>null</b>
+// <i>true</i>
+!
+<b>undefined</b>
+// <i>true</i>
+!
+<b>NaN</b>
+// <i>true</i>
+!
+0
+// <i>true</i>
+!
+&quot;&quot;
+// <i>true</i>
