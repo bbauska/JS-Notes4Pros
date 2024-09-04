@@ -14869,177 +14869,101 @@ can not be overridden and therefore their functionality is guaranteed.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch40-2">Section 40.2: The typeof operator</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The <b>typeof</b> operator returns the data type of the unevaluated
-operand as a string.
-<b>Syntax:</b>
-<b>typeof</b>
-operand
-<b>Returns:</b>
-These are the possible return values from <b>typeof</b>:
+<p>The <b>typeof</b> operator returns the data type of the unevaluated operand as a string.</p>
+<p><b>Syntax:</b></p>
+<P><b>typeof</b> operand</p>
+<p><b>Returns:</b></p>
+
+<p>These are the possible return values from <b>typeof</b>:</p>
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Type</b></th>
+      <th><b>Return value</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Undefined</td>
+      <td>&quot;undefined&quot;</td>
+    </tr>
+    <tr>
+      <td>Null</td>
+      <td>&quot;object&quot;</td>
+    </tr>
+    <tr>
+      <td>Boolean</td>
+      <td>&quot;boolean&quot;</td>
+    </tr>
+    <tr>
+      <td>Number</td>
+      <td>&quot;number&quot;</td>
+	</tr>
+    <tr>
+      <td>String</td>
+      <td>&quot;string&quot;</td>
+    </tr>
+    <tr>
+      <td>Symbol (ES6)</td>
+      <td>&quot;symbol&quot;</td>
+    </tr>
+    <tr>
+      <td>Function object</td>
+      <td>&quot;function&quot;</td>
+    </tr>
+    <tr>
+      <td>document.all</td>
+      <td>&quot;undefined&quot;</td>
+    </tr>
+    <tr>
+      <td>Any other object</td>
+      <td>&quot;object&quot;</td>
+    </tr>
+  </tbody>
+</table>
 <b>Type Return value</b>
 
-Undefined &quot;undefined&quot;
-
-Null &quot;object&quot;
-
-Boolean &quot;boolean&quot;
-
-Number &quot;number&quot;
-
-String &quot;string&quot;
-
-Symbol (ES6) &quot;symbol&quot;
-
-Function object &quot;function&quot;
-document.all
-&quot;undefined&quot;
-Host object (provided by the JS environment) Implementation-dependent
-Any other object &quot;object&quot;
-document.all
-The unusual behavior of with the <b>typeof</b> operator is from its
+<p>The unusual behavior of document.all with the typeof operator with the <b>typeof</b> operator is from its
 former usage to detect legacy browsers.
 
 For more information, see [Why is document.all defined but typeof
 document.all returns
 &quot;undefined&quot;?](http://stackoverflow.com/q/40643613/6388243)
 
-<b>Examples:</b>
+<p><b>Examples:</b></p>
+<pre>
 // <i>returns &apos;number&apos;</i>
-<b>typeof</b>
-3.14
-;
-<b>typeof</b>
-<b>Infinity</b>
-;
-<b>typeof</b>
-<b>NaN</b>
-;
-// <i>&quot;Not-a-Number&quot; is a &quot;number&quot;</i>
+<b>typeof</b> 3.14;
+<b>typeof</b> <b>Infinity</b>;
+<b>typeof</b> <b>NaN</b>;  // <i>&quot;Not-a-Number&quot; is a &quot;number&quot;</i>
 // <i>returns &apos;string&apos;</i>
-<b>typeof</b>
-&quot;&quot;
-;
-<b>typeof</b>
-&quot;bla&quot;
-;
-<b>typeof</b>
-(
-<b>typeof</b>
-1
-)
-;
-// <i>typeof always returns a string</i>
+<b>typeof</b> &quot;&quot;;
+<b>typeof</b> &quot;bla&quot;;
+<b>typeof</b> (<b>typeof</b> 1); // <i>typeof always returns a string</i>
 // <i>returns &apos;boolean&apos;</i>
-<b>typeof</b>
-<b>true</b>
-;
-<b>typeof</b>
-<b>false</b>
-;
+<b>typeof</b> <b>true</b>;
+<b>typeof</b> <b>false</b>;
 // <i>returns &apos;undefined&apos;</i>
-<b>typeof</b>
-<b>undefined</b>
-;
-<b>typeof</b>
-declaredButUndefinedVariable
-;
-<b>typeof</b>
-undeclaredVariable
-;
-<b>typeof</b>
-<b>void</b>
-0
-;
-<b>typeof</b>
-document.
-all
-// <i>see above</i>
+<b>typeof</b> <b>undefined</b>;
+<b>typeof</b> declaredButUndefinedVariable;
+<b>typeof</b> undeclaredVariable;
+<b>typeof</b> <b>void</b> 0;
+<b>typeof</b> document.all  // <i>see above</i>
 // <i>returns &apos;function&apos;</i>
-<b>typeof</b>
-<b>function</b>
-(
-)
-{
-}
-;
-<b>typeof</b>
-class
-C
-{
-}
-;
-<b>typeof</b>
-Math
-.
-sin
-;
+<b>typeof</b> <b>function</b>(){};
+<b>typeof</b> class C {};
+<b>typeof</b> Math.sin;
 // <i>returns &apos;object&apos;</i>
-<b>typeof</b>
-{
-<i>/&ast;&lt;&hellip;&gt;&ast;/</i>
-}
-
-<b>typeof</b>
-<b>null</b>
-;
-<b>typeof</b>
-<i>/regex/</i>
-;
-// <i>This is also considered an object</i>
-<b>typeof</b>
-&lbrack;
-1
-,
-2
-,
-4
-&rbrack;
-;
-// <i>use Array.isArray or Object.prototype.toString.call.</i>
-<b>typeof</b>
-<b>new</b>
-Date
-(
-)
-;
-<b>typeof</b>
-<b>new</b>
-RegExp
-(
-)
-;
-<b>typeof</b>
-<b>new</b>
-Boolean
-(
-<b>true</b>
-)
-;
-// <i>Don&apos;t use!</i>
-<b>typeof</b>
-<b>new</b>
-Number
-(
-1
-)
-;
-// <i>Don&apos;t use!</i>
-<b>typeof</b>
-<b>new</b>
-String
-(
-&quot;abc&quot;
-)
-;
-// <i>Don&apos;t use!</i>
+<b>typeof</b> { <i>/&ast;&lt;&hellip;&gt;&ast;/</i>};
+<b>typeof</b> <b>null</b>;
+<b>typeof</b> <i>/regex/</i>;  // <i>This is also considered an object</i>
+<b>typeof</b> &lbrack;1, 2, 4&rbrack;; // <i>use Array.isArray or Object.prototype.toString.call.</i>
+<b>typeof</b> <b>new</b> Date();
+<b>typeof</b> <b>new</b> RegExp();
+<b>typeof</b> <b>new</b> Boolean(<b>true</b>);   // <i>Don&apos;t use!</i>
+<b>typeof</b> <b>new</b> Number(1);              // <i>Don&apos;t use!</i>
+<b>typeof</b> <b>new</b>String(&quot;abc&quot;); // <i>Don&apos;t use!</i>
 // <i>returns &apos;symbol&apos;</i>
-<b>typeof</b>
-Symbol
-(
-)
-;
-<b>typeof</b>
-Symbol.
-iterator
-;
+<b>typeof</b> Symbol();
+<b>typeof</b> Symbol.iterator;
+</pre>
