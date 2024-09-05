@@ -15531,3 +15531,2651 @@ will make debugging easy. Also the code will look neat.</p>
 But you can use them today in ES2015/ES6 using the spawn function defined in the 
 libraries - taskjs, co, or bluebird</p>
 <!-- page 263 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch42">Chapter 42: Promises</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-1">Section 42.1: Introduction</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<p>A <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>
+object represents an operation which <i>has produced or will eventually produce</i> a value. 
+Promises provide a robust way to wrap the (possibly pending) result of asynchronous work, 
+mitigating the problem of deeply nested callbacks (known as 
+&quot;<a href="http://callbackhell.com/">callback hell</a>&quot;).</p>
+
+<p><b>States and control flow</b></p>
+<p>A promise can be in one of three states:</p>
+<ul>
+  <li><i>pending</i>  The underlying operation has not yet completed, and the
+promise is <i>pending</i> fulfillment.</li>
+  <li><i>fulfilled</i>  The operation has finished, and the promise is
+<i>fulfilled</i> with a <i>value</i>. This is analogous to returning a value
+from a synchronous function.</li>
+  <li><i>rejected</i>  An error has occurred during the operation, and the
+promise is <i>rejected</i> with a <i>reason</i>. This is analogous to throwing
+an error in a synchronous function.</li>
+</ul>
+<p>A promise is said to be <i>settled</i> (or <i>resolved</i>) when it is either
+fulfilled or rejected. Once a promise is settled, it becomes
+immutable, and its state cannot change. The
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">
+then</a> and
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch">
+<b>catch</b></a> methods of a promise can be used to attach callbacks that execute when
+it is settled. These callbacks are invoked with the fulfillment value
+and rejection reason, respectively.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 32.  (xxx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="/images/image032.jpg"
+  title=""
+  alt="."
+  style="border: 2px solid #000000; width:7.47in;" />
+<!-- {width="7.477777777777778in" height="1.9819444444444445in"} -->
+<p><b>Example</b></p>
+<pre>
+<b>const</b> promise = <b>new</b> Promise((resolve, reject) =&gt;{ 
+  // <i>Perform some work (possibly asynchronous)</i>
+  // <i>&hellip;</i>
+  <b>if</b> (<i>/&ast; Work has successfully finished and produced &quot;value&quot; &ast;/</i>) {
+    resolve(value);
+  } <b>else</b> {
+    // <i>Something went wrong because of &quot;reason&quot;</i>
+    // <i>The reason is traditionally an Error object, although</i>
+    // <i>this is not required or enforced.</i>
+    <b>let</b> reason = <b>new</b> Error(message);
+    reject(reason);
+    // <i>Throwing an error also rejects the promise.</i>
+    <b>throw</b> reason;
+  }
+});
+</pre>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">
+then</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch">
+<b>catch</b></a> methods can be used to attach fulfillment and rejection callbacks:</p>
+<!-- page 264 -->
+<pre>
+promise.then(value =&gt; {
+  // <i>Work has completed successfully,</i>
+  // <i>promise has been fulfilled with &quot;value&quot;</i>
+}).<b>catch</b>(reason =&gt; {
+// <i>Something went wrong,</i>
+// <i>promise has been rejected with &quot;reason&quot;</i>
+});
+</pre>
+<p><b>Note:</b> Calling promise.then( ) and promise.catch(...) on the same promise might 
+result in an Uncaught exception <b>in</b> Promise if an error occurs, either while executing
+the promise or inside one of the callbacks, so the preferred way would be to attach the next 
+listener on the promise returned by the previous then / <b>catch</b>.</p>
+
+<p>Alternatively, both callbacks can be attached in a single call to
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">
+then</a>:</p>
+<pre>
+promise.then(onFulfilled, onRejected);
+</pre>
+<p>Attaching callbacks to a promise that has already been settled will immediately place 
+them in the <a href="http://stackoverflow.com/a/25933985/5931915">
+microtask queue</a>, and they will be invoked &quot;as soon as possible&quot; (i.e. 
+immediately after the currently executing script). It is not necessary to check the 
+state of the promise before attaching callbacks, unlike with many other event-emitting 
+implementations.</p>
+<p><a href="https://jsfiddle.net/SO_AMK/sy8s7a3a/">Live demo</a></p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-2">Section 42.2: Promise chaining</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The
+[the]
+[n](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
+method of a promise returns a new promise.
+<b>const</b>
+promise
+=
+<b>new</b>
+Promise
+(
+resolve
+=&gt;
+setTimeout
+(
+resolve
+,
+5000
+)
+)
+;
+promise
+// <i>5 seconds later</i>
+.
+then
+(
+(
+)
+=&gt;
+2
+)
+// <i>returning a value from a then callback will cause</i>
+// <i>the new promise to resolve with this value</i>
+.
+then
+(
+value
+=&gt;
+{
+<i>/ast; value === 2 &ast;/</i>
+}
+)
+;
+Returning a
+[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+from a
+[then](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
+callback will append it to the promise chain.
+<b>function</b>
+wait
+(
+millis
+)
+{
+<b>return</b>
+<b>new</b>
+Promise
+(
+resolve
+=&gt;
+setTimeout
+(
+resolve
+,
+millis
+)
+)
+;
+}
+<b>const</b>
+p
+=
+wait
+(
+5000
+)
+.
+then
+(
+(
+)
+=&gt;
+wait
+(
+4000
+)
+)
+.
+then
+(
+(
+)
+=&gt;
+wait
+(
+1000
+)
+)
+;
+p&period;
+then
+(
+(
+)
+=&gt;
+{
+<i>/ast; 10 seconds have passed &ast;/</i>
+}
+)
+;
+A
+[<b>catch</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
+allows a rejected promise to recover, similar to how <b>catch</b> in a
+<b>try</b>/<b>catch</b> statement works. Any chained
+[then](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
+after a
+[<b>catch</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
+will execute its resolve handler using the value resolved from the
+[<b>catch</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch).
+<b>const</b> p = <b>new</b> Promise(resolve =&bsol;{<b>throw</b> &apos;oh no&apos;});
+p.<b>catch</b>(() =&amp;apos;oh yes&apos;).then(console.log.bind(console)); // <i>
+outputs &quot;oh yes&quot;</i>
+If there are no
+[<b>catch</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
+or reject handlers in the middle of the chain, a
+[<b>catch</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
+at the end will capture any rejection in the chain:
+p&period;
+<b>catch</b>
+(
+(
+)
+=&gt;
+Promise.
+reject
+(
+&apos;oh yes&apos;
+)
+)
+.
+then
+(
+console.
+log
+.
+bind
+(
+console
+)
+)
+// <i>won&apos;t be called</i>
+.<b>catch</b>(console.error.bind(console)); // <i>outputs &quot;oh yes&quot;</i>
+
+On certain occasions, you may want to &quot;branch&quot; the execution of the
+functions. You can do it by returning different promises from a
+function depending on the condition. Later in the code, you can merge
+all of these branches into one to call other functions on them and/or
+to handle all errors in one place.
+promise
+.
+then
+(
+result
+=&gt;
+{
+<b>if</b>
+(
+result.
+condition
+)
+{
+<b>return</b>
+handlerFn1
+(
+)
+.
+then
+(
+handlerFn2
+)
+;
+}
+<b>else</b>
+<b>if</b>
+(
+result.
+condition2
+)
+{
+<b>return</b>
+handlerFn3
+(
+)
+.
+then
+(
+handlerFn4
+)
+;
+}
+<b>else</b>
+{
+<b>throw</b>
+<b>new</b>
+Error
+(
+&quot;Invalid result&quot;
+)
+;
+}
+}
+)
+.
+then
+(
+handlerFn5
+)
+.
+<b>catch</b>
+(
+err
+=&gt;
+{
+console.
+error
+(
+err
+)
+;
+}
+)
+;
+Thus, the execution order of the functions looks like:
+promise &bsol;&bsol;handlerFn1 -&bsol;handlerFn2 &bsol;&bsol;handlerFn5 &bsol;~&bsol;~&gt;
+.<b>catch</b>()
+&vert; &Hat;
+V &vert;
+-&bsol;handlerFn3 -&bsol;handlerFn4 -&Hat;
+The single <b>catch</b> will get the error on whichever branch it may
+occur.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-3">Section 42.3: Waiting for multiple concurrent promises</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+[Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
+The
+[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
+static method accepts an iterable (e.g. an Array) of promises and
+returns a new promise, which resolves when <b>all</b> promises in the
+iterable have resolved, or rejects if <b>at least one</b> of the promises
+in the iterable have rejected.
+// <i>wait &quot;millis&quot; ms, then resolve with &quot;value&quot;</i>
+<b>function</b>
+resolve
+(
+value
+,
+milliseconds
+)
+{
+<b>return</b>
+<b>new</b>
+Promise
+(
+resolve
+=&gt;
+setTimeout
+(
+(
+)
+=&gt;
+resolve
+(
+value
+)
+,
+milliseconds
+)
+)
+;
+}
+// <i>wait &quot;millis&quot; ms, then reject with &quot;reason&quot;</i>
+<b>function</b>
+reject
+(
+reason
+,
+milliseconds
+)
+{
+<b>return</b>
+<b>new</b>
+Promise
+(
+(
+&lowbar;
+,
+reject
+)
+=&gt;
+setTimeout
+(
+(
+)
+=&gt;
+reject
+(
+reason
+)
+,
+milliseconds
+)
+)
+;
+}
+Promise.
+all
+(
+&lbrack;
+resolve
+(
+1
+,
+5000
+)
+,
+resolve
+(
+2
+,
+6000
+)
+,
+resolve
+(
+3
+,
+7000
+)
+&rbrack;
+)
+.
+then
+(
+values
+=&gt;
+console.
+log
+(
+values
+)
+)
+;
+// <i>outputs &quot;&lbrack;1, 2, 3&rbrack;&quot; after 7 seconds.</i>
+Promise.
+all
+(
+&lbrack;
+resolve
+(
+1
+,
+5000
+)
+,
+reject
+(
+&apos;Error!&apos;
+,
+6000
+)
+,
+resolve
+(
+2
+,
+7000
+)
+&rbrack;
+)
+.
+then
+(
+values
+=&gt;
+console.
+log
+(
+values
+)
+)
+// <i>does not output anything</i>
+.<b>catch</b>(reason =&bsol;console.log(reason)); // <i>outputs &quot;Error!&quot;
+after 6 seconds.</i>
+
+Non-promise values in the iterable are &quot;promisified&quot;.
+Promise.
+all
+(
+&lbrack;
+resolve
+(
+1
+,
+5000
+)
+,
+resolve
+(
+2
+,
+6000
+)
+,
+{
+hello
+:
+3
+}
+&rbrack;
+)
+.
+then
+(
+values
+=&gt;
+console.
+log
+(
+values
+)
+)
+;
+// <i>outputs &quot;&lbrack;1, 2, { hello: 3 }&rbrack;&quot; after 6 seconds</i>
+Destructuring assignment can help to retrieve results from multiple
+romises.
+Promise.
+all
+(
+&lbrack;
+resolve
+(
+1
+,
+5000
+)
+,
+resolve
+(
+2
+,
+6000
+)
+,
+resolve
+(
+3
+,
+7000
+)
+&rbrack;
+)
+.
+then
+(
+(
+&lbrack;
+result1
+,
+result2
+,
+result3
+&rbrack;
+)
+=&gt;
+{
+console.
+log
+(
+result1
+)
+;
+console.
+log
+(
+result2
+)
+;
+console.
+log
+(
+result3
+)
+;
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-4">Section 42.4: Reduce an array to chained promises</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+This design pattern is useful for generating a sequence of
+asynchronous actions from a list of elements.
+There are two variants :
+the &quot;then&quot; reduction, which builds a chain that continues as long as
+the chain experiences success.
+the &quot;catch&quot; reduction, which builds a chain that continues as long
+as the chain experiences error.
+<b>The &quot;then&quot; reduction</b>
+[then](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
+
+This variant of the pattern builds a
+[.()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
+chain, and might be used for chaining animations, or making a sequence
+of dependent HTTP requests.
+&lbrack;
+1
+,
+3
+,
+5
+,
+7
+,
+9
+&rbrack;
+.
+reduce
+(
+(
+seq
+,
+n
+)
+=&gt;
+{
+<b>return</b>
+seq.
+then
+(
+(
+)
+=&gt;
+{
+console.
+log
+(
+n
+)
+;
+<b>return</b>
+<b>new</b>
+Promise
+(
+res
+=&gt;
+setTimeout
+(
+res
+,
+1000
+)
+)
+;
+}
+)
+;
+}
+,
+Promise.
+resolve
+(
+)
+)
+.
+then
+(
+(
+)
+=&gt;
+console.
+log
+(
+&apos;done&apos;
+)
+,
+(
+e
+)
+=&gt;
+console.
+log
+(
+e
+)
+)
+;
+// <i>will log 1, 3, 5, 7, 9, &apos;done&apos; in 1s intervals</i>
+Explanation:
+  [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)   [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)   [Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
+1.  We call
+    [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
+    as an initial value.
+  [then](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
+2.  Every element reduced will add a
+    [.()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
+    to the initial value.
+  [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
+3.[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)&apos;s
+product will be Promise.resolve().then(&hellip;).then(&hellip;).
+  [then](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)   [(](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)   [successHandler](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)   [,](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)   [errorHandler](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
+4&period; We manually append a
+[.)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
+after the reduce, to execute successHandler once all the previous
+steps have resolved. If any step was to fail, then errorHandler would
+execute.
+Promise.all
+Note: The &quot;then&quot; reduction is a sequential counterpart of ().
+<b>The &quot;catch&quot; reduction</b>
+[<b>catch</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
+This variant of the pattern builds a
+[.()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
+chain and might be used for sequentially probing a set of web servers
+for some mirrored resource until a working server is found.
+<b>var</b>
+working_resource
+=
+5
+;
+// <i>one of the values from the source array</i>
+&lbrack;
+1
+,
+3
+,
+5
+,
+7
+,
+9
+&rbrack;
+.
+reduce
+(
+(
+seq
+,
+n
+)
+=&gt;
+{
+<b>return</b>
+seq.
+<b>catch</b>
+(
+(
+)
+=&gt;
+{
+console.
+log
+(
+n
+)
+;
+<b>if</b>
+(
+n
+===
+working_resource
+)
+{
+// <i>5 is working</i>
+<b>return</b>
+<b>new</b>
+Promise
+(
+(
+resolve
+,
+reject
+)
+=&gt;
+setTimeout
+(
+(
+)
+=&gt;
+resolve
+(
+n
+)
+,
+1000
+)
+)
+;
+}
+<b>else</b>
+{
+// <i>all other values are not working</i>
+<b>return</b>
+<b>new</b>
+Promise
+(
+(
+resolve
+,
+reject
+)
+=&gt;
+setTimeout
+(
+reject
+,
+1000
+)
+)
+;
+}
+}
+)
+;
+}
+,
+Promise.
+reject
+(
+)
+)
+.
+then
+(
+(
+n
+)
+=&gt;
+console.
+log
+(
+&apos;success at: &apos;
+&plus;
+n
+)
+,
+(
+)
+=&gt;
+console.
+log
+(
+&apos;total failure&apos;
+)
+)
+;
+// <i>will log 1, 3, 5, &apos;success at 5&apos; at 1s intervals</i>
+Explanation:
+[reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)   [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)   [Promise.reject](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject)
+1.  We call
+    [.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject)
+    as an initial value.
+[<b>catch</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
+
+2.  Every element reduced will add a
+    [.()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
+    to the initial value.
+[reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)   [()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)&apos;s   Promise.reject   ().   <b>catch</b>   (   &hellip;   ).   <b>catch</b>   (   &hellip;
+3.).
+[then](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)   [(](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)   [successHandler](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)   [,](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)   [errorHandler](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
+
+4&period; We manually append
+[.)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
+after the reduce, to execute successHandler once any of the previous
+steps has resolved. If all steps were to fail, then errorHandler would
+execute.
+Promise.any        () (as implemented in             bluebird.js
+Note: The &quot;catch&quot; reduction is a sequential counterpart of , but not
+currently in native ECMAScript).
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-5">Section 42.5: Waiting for the first of multiple concurrent promises</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+[Promise.race](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race)
+The
+[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race)
+static method accepts an iterable of Promises and returns a new
+Promise which resolves or rejects as soon as the <b>first</b> of the
+promises in the iterable has resolved or rejected.
+// <i>wait &quot;milliseconds&quot; milliseconds, then resolve with &quot;value&quot;</i>
+<b>function</b>
+resolve
+(
+value
+,
+milliseconds
+)
+{
+<b>return</b>
+<b>new</b>
+Promise
+(
+resolve
+=&gt;
+setTimeout
+(
+(
+)
+=&gt;
+resolve
+(
+value
+)
+,
+milliseconds
+)
+)
+;
+}
+// <i>wait &quot;milliseconds&quot; milliseconds, then reject with &quot;reason&quot;</i>
+<b>function</b>
+reject
+(
+reason
+,
+milliseconds
+)
+{
+<b>return</b>
+<b>new</b>
+Promise
+(
+(
+&lowbar;
+,
+reject
+)
+=&gt;
+setTimeout
+(
+(
+)
+=&gt;
+reject
+(
+reason
+)
+,
+milliseconds
+)
+)
+;
+}
+Promise.
+race
+(
+&lbrack;
+resolve
+(
+1
+,
+5000
+)
+,
+resolve
+(
+2
+,
+3000
+)
+,
+resolve
+(
+3
+,
+1000
+)
+&rbrack;
+)
+.
+then
+(
+value
+=&gt;
+console.
+log
+(
+value
+)
+)
+;
+// <i>outputs &quot;3&quot; after 1 second.</i>
+Promise.
+race
+(
+&lbrack;
+reject
+(
+<b>new</b>
+Error
+(
+&apos;bad things!&apos;
+)
+,
+1000
+)
+,
+resolve
+(
+2
+,
+2000
+)
+&rbrack;
+)
+.
+then
+(
+value
+=&gt;
+console.
+log
+(
+value
+)
+)
+// <i>does not output anything</i>
+.
+<b>catch</b>
+(
+error
+=&gt;
+console.
+log
+(
+error.
+message
+)
+)
+;
+// <i>outputs &quot;bad things!&quot; after 1 second</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-6">Section 42.6: &quot;Promisifying&quot; functions with callbacks</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Given a function that accepts a Node-style callback,
+fooFn
+(
+options
+,
+<b>function</b>
+callback
+(
+err
+,
+result
+)
+{
+&hellip;
+}
+)
+;
+you can promisify it <i>(convert it to a promise-based function)</i> like
+this:
+<b>function</b>
+promiseFooFn
+(
+options
+)
+{
+<b>return</b>
+<b>new</b>
+Promise
+(
+(
+resolve
+,
+reject
+)
+=&gt;
+fooFn
+(
+options
+,
+(
+err
+,
+result
+)
+=&gt;
+// <i>If there&apos;s an error, reject; otherwise resolve</i>
+err
+?
+reject
+(
+err
+)
+:
+resolve
+(
+result
+)
+)
+)
+;
+}
+This function can then be used as follows:
+promiseFooFn
+(
+options
+)
+.
+then
+(
+result
+=&gt;
+{
+// <i>success!</i>
+}
+)
+.
+<b>catch</b>
+(
+err
+=&gt;
+{
+// <i>error!</i>
+}
+)
+;
+In a more generic way, here&apos;s how to promisify any given
+callback-style function:
+<b>function</b>
+promisify
+(
+func
+)
+{
+<b>return</b>
+<b>function</b>
+(
+&hellip;
+args
+)
+{
+<b>return</b>
+<b>new</b>
+Promise
+(
+(
+resolve
+,
+reject
+)
+=&gt;
+{
+func
+(
+&hellip;
+args
+,
+(
+err
+,
+result
+)
+=&gt;
+err
+?
+reject
+(
+err
+)
+:
+resolve
+(
+result
+)
+)
+;
+}
+)
+;
+}
+}
+This can be used like this:
+<b>const</b>
+fs
+=
+require
+(
+&apos;fs&apos;
+)
+;
+<b>const</b>
+promisedStat
+=
+promisify
+(
+fs.
+stat
+.
+ind
+(
+fs
+)
+)
+;
+promisedStat
+(
+&apos;/foo/bar&apos;
+)
+.
+then
+(
+stat
+=&gt;
+console.
+log
+(
+&apos;STATE&apos;
+,
+stat
+)
+)
+.
+<b>catch</b>
+(
+err
+=&gt;
+console.
+log
+(
+&apos;ERROR&apos;
+,
+err
+)
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-7">Section 42.7: Error Handling</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Errors thrown from promises are handled by the second parameter
+(reject) passed to then or by the handler passed to <b>catch</b>:
+throwErrorAsync
+(
+)
+.
+then
+(
+<b>null</b>
+,
+error
+=&gt;
+{
+<i>/&ast; handle error here &ast;/</i>
+}
+)
+;
+// <i>or</i>
+throwErrorAsync
+(
+)
+.
+<b>catch</b>
+(
+error
+=&gt;
+{
+<i>/&ast; handle error here &ast;/</i>
+}
+)
+;
+<b>Chaining</b>
+If you have a promise chain then an error will cause resolve handlers
+to be skipped:
+throwErrorAsync
+(
+)
+.
+then
+(
+(
+)
+=&gt;
+{
+<i>/&ast; never called &ast;/</i>
+}
+)
+.
+<b>catch</b>
+(
+error
+=&gt;
+{
+<i>/&ast; handle error here &ast;/</i>
+}
+)
+;
+The same applies to your then functions. If a resolve handler throws
+an exception then the next reject handler will be invoked:
+doSomethingAsync
+(
+)
+.
+then
+(
+result
+=&gt;
+{
+throwErrorSync
+(
+)
+;
+}
+)
+.
+then
+(
+(
+)
+=&gt;
+{
+<i>/&ast; never called &ast;/</i>
+}
+)
+.
+<b>catch</b>
+(
+error
+=&gt;
+{
+<i>/&ast; handle error from throwErrorSync() &ast;/</i>
+}
+)
+;
+An error handler returns a new promise, allowing you to continue a
+promise chain. The promise returned by the error handler is resolved
+with the value returned by the handler:
+throwErrorAsync
+(
+)
+.
+<b>catch</b>
+(
+error
+=&gt;
+{
+<i>/&ast; handle error here &ast;/</i>
+;
+<b>return</b>
+result
+;
+}
+)
+.
+then
+(
+result
+=&gt;
+{
+<i>/&ast; handle result here &ast;/</i>
+}
+)
+;
+You can let an error cascade down a promise chain by re-throwing the
+error:
+throwErrorAsync
+(
+)
+.
+<b>catch</b>
+(
+error
+=&gt;
+{
+<i>/&ast; handle error from throwErrorAsync() &ast;/</i>
+<b>throw</b>
+error
+;
+}
+)
+.
+then
+(
+(
+)
+=&gt;
+{
+<i>/&ast; will not be called if there&apos;s an error &ast;/</i>
+}
+)
+.
+<b>catch</b>
+(
+error
+=&gt;
+{
+<i>/&ast; will get called with the same error &ast;/</i>
+}
+)
+;
+It is possible to throw an exception that is not handled by the
+promise by wrapping the <b>throw</b> statement inside a setTimeout
+callback:
+<b>new</b>
+Promise
+(
+(
+resolve
+,
+reject
+)
+=&gt;
+{
+setTimeout
+(
+(
+)
+=&gt;
+{
+<b>throw</b>
+<b>new</b>
+Error
+(
+)
+;
+}
+)
+;
+}
+)
+;
+This works because promises cannot handle exceptions thrown
+asynchronously. <b>Unhandled rejections</b>
+An error will be silently ignored if a promise doesn&apos;t have a
+<b>catch</b> block or reject handler:
+throwErrorAsync
+(
+)
+.
+then
+(
+(
+)
+=&gt;
+{
+<i>/&ast; will not be called &ast;/</i>
+}
+)
+;
+// <i>error silently ignored</i>
+To prevent this, always use a <b>catch</b> block:
+throwErrorAsync
+(
+)
+.
+then
+(
+(
+)
+=&gt;
+{
+<i>/&ast; will not be called &ast;/</i>
+}
+)
+.
+<b>catch</b>
+(
+error
+=&gt;
+{
+<i>/&ast; handle error&ast;/</i>
+}
+)
+;
+// <i>or</i>
+throwErrorAsync
+(
+)
+.
+then
+(
+(
+)
+=&gt;
+{
+<i>/&ast; will not be called &ast;/</i>
+}
+,
+error
+=&gt;
+{
+<i>/&ast; handle error&ast;/</i>
+}
+)
+;
+Alternatively, subscribe to the
+[unhandledrejection](https://developer.mozilla.org/en-US/docs/Web/Events/unhandledrejection)
+event to catch any unhandled rejected promises:
+window.
+addEventListener
+(
+&apos;unhandledrejection&apos;
+,
+event
+=&gt;
+{
+}
+)
+;
+Some promises can handle their rejection later than their creation
+time. The
+[rejectionhandled](https://developer.mozilla.org/en-US/docs/Web/Events/rejectionhandled)
+event gets fired whenever such a promise is handled:
+window.
+addEventListener
+(
+&apos;unhandledrejection&apos;
+,
+event
+=&gt;
+console.
+log
+(
+&apos;unhandled&apos;
+)
+)
+;
+window.
+addEventListener
+(
+&apos;rejectionhandled&apos;
+,
+event
+=&gt;
+console.
+log
+(
+&apos;handled&apos;
+)
+)
+;
+<b>var</b>
+p
+=
+Promise.
+reject
+(
+&apos;test&apos;
+)
+;
+setTimeout
+(
+)
+=&gt;
+p&period;
+<b>catch</b>
+(
+console.
+log
+)
+,
+1000
+)
+;
+// <i>Will print &apos;unhandled&apos;, and after one second &apos;test&apos; and
+&apos;handled&apos;</i>
+event.reason       is the error object and         event.promise
+The event argument contains information about the rejection. is the
+promise object that caused the event.
+In Nodejs the rejectionhandled and unhandledrejection events are
+called
+[rejectionHandled](https://nodejs.org/api/process.html#process_event_rejectionhandled)
+and
+[unhandledRejection](https://nodejs.org/api/process.html#process_event_unhandledrejection)
+on process, respectively, and have a different signature:
+process.on(&apos;rejectionHandled&apos;, (reason, promise) =&bsol;{});
+process.on(&apos;unhandledRejection&apos;, (reason, promise) =&bsol;{});
+The reason argument is the error object and the promise argument is a
+reference to the promise object that caused the event to fire.
+Usage of these unhandledrejection and rejectionhandled events should
+be considered for debugging purposes only. Typically, all promises
+should handle their rejections.
+<b>Note:</b> Currently, only Chrome 49+ and Node.js support
+unhandledrejection and rejectionhandled events.
+<b>Caveats</b>
+<b>Chaining with fulfill and reject</b>
+then ( fulfill , reject
+The ) function (with both parameters not <b>null</b>) has unique and
+complex behavior, and shouldn&apos;t be used unless you know exactly how
+it works.
+The function works as expected if given <b>null</b> for one of the
+inputs:
+// <i>the following calls are equivalent</i>
+promise.
+then
+(
+fulfill
+,
+<b>null</b>
+)
+promise.
+then
+(
+fulfill
+)
+// <i>the following calls are also equivalent</i>
+promise.
+then
+(
+<b>null</b>
+,
+reject
+)
+promise.
+<b>catch</b>
+(
+reject
+)
+However, it adopts unique behavior when both inputs are given:
+// <i>the following calls are not equivalent!</i>
+promise.
+then
+(
+fulfill
+,
+reject
+)
+promise.
+then
+(
+fulfill
+)
+.
+<b>catch</b>
+(
+reject
+)
+// <i>the following calls are not equivalent!</i>
+promise.
+then
+(
+fulfill
+,
+reject
+)
+promise.
+<b>catch</b>
+(
+reject
+)
+.
+then
+(
+fulfill
+)
+then   (   fulfill   ,   reject   ) function looks like it is a then   (   fulfill   ).   <b>catch</b>   (   reject
+shortcut for
+The ), but it is not, and
+will cause problems if used interchangeably. One such problem is that
+the reject handler does not handle errors from the fulfill handler.
+Here is what will happen:
+Promise.resolve() // <i>previous promise is fulfilled</i>
+.then(() =&bsol;{ <b>throw</b> <b>new</b> Error(); }, // <i>error in the fulfill
+handler</i> error =&bsol;{ <i>/&ast; this is not called! &ast;/</i> });
+The above code will result in a rejected promise because the error is
+propagated. Compare it to the following code, which results in a
+fulfilled promise:
+Promise.resolve() // <i>previous promise is fulfilled</i>
+.then(() =&bsol;{ <b>throw</b> <b>new</b> Error(); }) // <i>error in the fulfill
+handler</i>
+.<b>catch</b>(error =&bsol;{ <i>/&ast; handle error &ast;/</i> });
+then   (   fulfill   ,   reject   ) interchangeably     <b>catch</b>   (   reject   ).   then   (   fulfill
+with
+A similar problem exists when using ), except with propagating
+fulfilled promises instead of rejected promises. <b>Synchronously
+throwing from function that should return a promise</b> Imagine a
+function like this:
+<b>function</b>
+foo
+(
+arg
+)
+{
+<b>if</b>
+(
+arg
+===
+&apos;unexepectedValue&apos;
+)
+{
+<b>throw</b>
+<b>new</b>
+Error
+(
+&apos;UnexpectedValue&apos;
+)
+}
+<b>return</b>
+<b>new</b>
+Promise
+(
+resolve
+=&gt;
+setTimeout
+(
+(
+)
+=&gt;
+resolve
+(
+arg
+)
+,
+1000
+)
+)
+}
+If such function is used in the <b>middle</b> of a promise chain, then
+apparently there is no problem:
+makeSomethingAsync
+(
+)
+.
+.
+then
+(
+(
+)
+=&gt;
+foo
+(
+&apos;unexpectedValue&apos;
+)
+)
+.
+<b>catch</b>
+(
+err
+=&gt;
+console.
+log
+(
+err
+)
+)
+// <i>&lt;&bsol; Error: UnexpectedValue will be caught here</i>
+However, if the same function is called outside of a promise chain,
+then the error will not be handled by it and will be thrown to the
+application:
+
+foo(&apos;unexpectedValue&apos;) // <i>&lt;&bsol; error will be thrown, so the
+application will crash</i>
+.then(makeSomethingAsync) // <i>&lt;&bsol; will not run</i>
+.<b>catch</b>(err =&bsol;console.log(err)) // <i>&lt;&bsol; will not catch</i>
+There are 2 possible workarounds:
+<b>Return a rejected promise with the error</b>
+Instead of throwing, do as follows:
+<b>function</b>
+foo
+(
+arg
+)
+{
+<b>if</b>
+(
+arg
+===
+&apos;unexepectedValue&apos;
+)
+{
+<b>return</b>
+Promise.
+reject
+(
+<b>new</b>
+Error
+(
+&apos;UnexpectedValue&apos;
+)
+)
+}
+<b>return</b>
+<b>new</b>
+Promise
+(
+resolve
+=&gt;
+setTimeout
+(
+(
+)
+=&gt;
+resolve
+(
+arg
+)
+,
+1000
+)
+)
+}
+<b>Wrap your function into a promise chain</b>
+Your <b>throw</b> statement will be properly caught when it is already
+inside a promise chain:
+<b>function</b>
+foo
+(
+arg
+)
+{
+<b>return</b>
+Promise.
+resolve
+(
+)
+.
+then
+(
+(
+)
+=&gt;
+{
+<b>if</b>
+(
+arg
+===
+&apos;unexepectedValue&apos;
+)
+{
+<b>throw</b>
+<b>new</b>
+Error
+(
+&apos;UnexpectedValue&apos;
+)
+}
+<b>return</b>
+<b>new</b>
+Promise
+(
+resolve
+=&gt;
+setTimeout
+(
+(
+)
+=&gt;
+resolve
+(
+arg
+)
+,
+1000
+)
+)
+}
+)
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-8">Section 42.8: Reconciling synchronous and asynchronous operations</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+In some cases you may want to wrap a synchronous operation inside a
+promise to prevent repetition in code branches. Take this example:
+<b>if</b>
+(
+result
+)
+{
+// <i>if we already have a result</i>
+processResult
+(
+result
+
+;
+// <i>process it</i>
+}
+<b>else</b>
+{
+fetchResult
+(
+)
+.
+then
+(
+processResult
+)
+;
+}
+The synchronous and asynchronous branches of the above code can be
+reconciled by redundantly wrapping the synchronous operation inside a
+promise:
+<b>var</b>
+fetch
+=
+result
+?
+Promise.
+resolve
+(
+result
+)
+:
+fetchResult
+(
+)
+;
+fetch.
+then
+(
+processResult
+)
+;
+When caching the result of an asynchronous call, it is preferable to
+cache the promise rather than the result itself. This ensures that
+only one asynchronous operation is required to resolve multiple
+parallel requests.
+Care should be taken to invalidate cached values when error conditions
+are encountered.
+// <i>A resource that is not expected to change frequently</i>
+<b>var</b>
+planets
+=
+&apos;http://swapi.co/api/planets/&apos;
+;
+// <i>The cached promise, or null</i>
+<b>var</b>
+cachedPromise
+;
+<b>function</b>
+fetchResult
+(
+)
+{
+<b>if</b>
+(
+!
+cachedPromise
+)
+{
+cachedPromise
+=
+fetch
+(
+planets
+)
+.
+<b>catch</b>
+(
+<b>function</b>
+(
+e
+)
+{
+// <i>Invalidate the current result to retry on the next fetch</i>
+cachedPromise
+=
+<b>null</b>
+;
+// <i>re-raise the error to propagate it to callers</i>
+<b>throw</b>
+e
+;
+}
+)
+;
+}
+<b>return</b>
+cachedPromise
+;
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-9">Section 42.9: Delay function call</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+[setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout)
+The
+[()](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout)
+method calls a function or evaluates an expression after a specified
+number of milliseconds. It is also a trivial way to achieve an
+asynchronous operation.
+In this example calling the wait function resolves the promise after
+the time specified as first argument:
+<b>function</b>
+wait
+(
+ms
+)
+{
+<b>return</b>
+<b>new</b>
+Promise
+(
+resolve
+=&gt;
+setTimeout
+(
+resolve
+,
+ms
+)
+)
+;
+}
+wait
+(
+5000
+)
+.
+then
+(
+(
+)
+=&gt;
+{
+console.
+log
+(
+&apos;5 seconds have passed&hellip;&apos;
+)
+;
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-10">Section 42.10: &quot;Promisifying&quot; values</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+[Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
+The static method can be used to wrap values into promises.
+<b>let</b>
+resolved
+=
+Promise.
+resolve
+(
+2
+)
+;
+resolved.
+then
+(
+value
+=&gt;
+{
+// <i>immediately invoked</i>
+// <i>value === 2</i>
+}
+)
+;
+[Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
+If value is already a promise, simply recasts it.
+<b>let</b>
+one
+=
+<b>new</b>
+Promise
+(
+resolve
+=&gt;
+setTimeout
+(
+(
+)
+=&gt;
+resolve
+(
+2
+)
+,
+1000
+)
+)
+;
+<b>let</b>
+two
+=
+Promise.
+resolve
+(
+one
+)
+;
+two.
+then
+(
+value
+=&gt;
+{
+// <i>1 second has passed</i>
+// <i>value === 2</i>
+}
+)
+;
+[Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
+In fact, value can be any &quot;thenable&quot; (object defining a then method
+that works sufficiently like a spec-compliant promise). This allows to
+convert untrusted 3rd-party objects into trusted 1st-party Promises.
+<b>let</b>
+resolved
+=
+Promise.
+resolve
+(
+{
+then
+(
+onResolved
+)
+{
+onResolved
+(
+2
+)
+;
+}
+}
+)
+;
+resolved.
+then
+(
+value
+=&gt;
+{
+// <i>immediately invoked</i>
+// <i>value === 2</i>
+}
+)
+;
+[Promise.reject](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject)
+The static method returns a promise which immediately rejects with the
+given reason.
+<b>let</b>
+rejected
+=
+Promise.
+reject
+(
+&quot;Oops!&quot;
+)
+;
+rejected.
+<b>catch</b>
+(
+reason
+=&gt;
+{
+// <i>immediately invoked</i>
+// <i>reason === &quot;Oops!&quot;</i>
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-11">Section 42.11: Using ES2017 async/await</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>try</b>                 /       <b>catch</b>
+The same example above, Image loading, can be written using async
+functions. This also allows using the common method for exception
+handling.
+Note: [as of April 2017, the current releases of all browsers but
+Internet Explorer supports async
+functions](http://caniuse.com/#feat=async-functions).
+<b>function</b>
+loadImage
+(
+url
+)
+{
+<b>return</b>
+<b>new</b>
+Promise
+(
+(
+resolve
+,
+reject
+)
+=&gt;
+{
+<b>const</b>
+img
+=
+<b>new</b>
+Image
+(
+)
+;
+img.
+addEventListener
+(
+&apos;load&apos;
+,
+(
+)
+=&gt;
+resolve
+(
+img
+)
+)
+;
+img.
+addEventListener
+(
+&apos;error&apos;
+,
+(
+)
+=&gt;
+{
+reject
+(
+<b>new</b>
+Error
+(
+&grave;Failed to load &dollar;
+{
+url
+}
+&grave;
+)
+)
+;
+}
+)
+;
+img.
+src
+=
+url
+;
+}
+)
+;
+}
+(
+async
+(
+)
+=&gt;
+{
+// <i>load /image.png and append to #image-holder, otherwise throw error</i>
+<b>try</b>
+{
+<b>let</b>
+img
+=
+await loadImage
+(
+&apos;http://example.com/image.png&apos;
+)
+;
+document.
+getElementById
+(
+&apos;image-holder&apos;
+)
+.
+appendChild
+(
+img
+)
+;
+}
+<b>catch</b>
+(
+error
+)
+{
+console.
+error
+(
+error
+)
+;
+}
+}
+)
+(
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-12">Section 42.12: Performing cleanup with finally()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+There is currently a
+[proposal](https://github.com/tc39/proposal-promise-finally) (not yet
+part of the ECMAScript standard) to add a <b>finally</b> callback to
+promises that will be executed regardless of whether the promise is
+fulfilled or rejected. Semantically, this is similar to the
+[<b>finally</b> clause of the <b>try</b>
+block](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch#The_finally_clause).
+You would usually use this functionality for cleanup:
+<b>var</b>
+loadingData
+=
+<b>true</b>
+;
+fetch
+(
+&apos;/data&apos;
+)
+.
+then
+(
+result
+=&gt;
+processData
+(
+result.
+data
+)
+)
+.
+<b>catch</b>
+(
+error
+=&gt;
+console.
+error
+(
+error
+)
+)
+.
+<b>finally</b>
+(
+(
+)
+=&gt;
+{
+loadingData
+=
+<b>false</b>
+;
+}
+)
+;
+It is important to note that the <b>finally</b> callback doesn&apos;t affect
+the state of the promise. It doesn&apos;t matter what value it returns,
+the promise stays in the fulfilled/rejected state that it had before.
+So in the example above the promise
+processData                       (   result.data
+will be resolved with the return value of ) even though the
+<b>finally</b> callback returned <b>undefined</b>.
+With the standardization process still being in progress, your
+promises implementation most likely won&apos;t support <b>finally</b>
+callbacks out of the box. For synchronous callbacks you can add this
+functionality with a polyfill however:
+<b>if</b>
+(
+!
+Promise.
+<b>prototype</b>
+.
+<b>finally</b>
+)
+{
+Promise.
+<b>prototype</b>
+.
+<b>finally</b>
+=
+<b>function</b>
+(
+callback
+)
+{
+<b>return</b>
+<b>this</b>
+.
+then
+(
+result
+=&gt;
+{
+callback
+(
+)
+;
+<b>return</b>
+result
+;
+}
+,
+error
+=&gt;
+{
+callback
+(
+)
+;
+<b>throw</b>
+error
+;
+}
+)
+;
+}
+;
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-13">Section 42.13: forEach with promises</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+It is possible to effectively apply a function (cb) which returns a
+promise to each element of an array, with each element waiting to be
+processed until the previous element is processed.
+<b>function</b>
+promiseForEach
+(
+arr
+,
+cb
+)
+{
+<b>var</b>
+i
+=
+0
+;
+<b>var</b>
+nextPromise
+=
+<b>function</b>
+(
+)
+{
+<b>if</b>
+(
+i
+&gt;=
+arr.
+length
+)
+{
+// <i>Processing finished.</i>
+<b>return</b>
+;
+}
+// <i>Process next function. Wrap in &grave;Promise.resolve&grave; in case</i>
+// <i>the function does not return a promise</i>
+<b>var</b>
+newPromise
+=
+Promise.
+resolve
+(
+cb
+(
+arr
+&lbrack;
+i
+&rbrack;
+,
+i
+)
+)
+;
+i
+++
+;
+// <i>Chain to finish processing.</i>
+<b>return</b>
+newPromise.
+then
+(
+nextPromise
+)
+;
+}
+;
+// <i>Kick off the chain.</i>
+<b>return</b>
+Promise.
+resolve
+(
+)
+.
+then
+(
+nextPromise
+)
+;
+}
+;
+This can be helpful if you need to efficiently process thousands of
+items, one at a time. Using a regular <b>for</b> loop to create the
+promises will create them all at once and take up a significant amount
+of RAM.
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch42-14">Section 42.14: Asynchronous API request</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+This is an example of a simple GET API call wrapped in a promise to
+take advantage of its asynchronous functionality.
+<b>var</b>
+<b>get</b>
+=
+<b>function</b>
+(
+path
+)
+{
+<b>return</b>
+<b>new</b>
+Promise
+(
+<b>function</b>
+(
+resolve
+,
+reject
+)
+{
+<b>let</b>
+request
+=
+<b>new</b>
+XMLHttpRequest
+(
+)
+;
+request.
+open
+(
+&apos;GET&apos;
+,
+path
+)
+;
+request.
+onload
+=
+resolve
+;
+request.
+onerror
+=
+reject
+;
+request.
+send
+(
+)
+;
+}
+)
+;
+}
+;
+More robust error handling can be done using the following
+[onload](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onload)
+and
+[onerror](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onerror)
+functions.
+request.
+onload
+=
+<b>function</b>
+(
+)
+{
+<b>if</b>
+(
+<b>this</b>
+.
+status
+&gt;=
+200
+&&
+<b>this</b>
+.
+status
+&lt;
+300
+)
+{
+<b>if</b>
+(
+request.
+response
+)
+{
+// <i>Assuming a successful call returns JSON</i>
+resolve
+(
+JSON.
+parse
+(
+request.
+response
+)
+)
+;
+}
+<b>else</b>
+{
+resolve
+(
+)
+;
+}
+<b>else</b>
+{
+reject
+(
+{
+&apos;status&apos;
+:
+<b>this</b>
+.
+status
+,
+&apos;message&apos;
+:
+request.
+statusText
+}
+)
+;
+}
+}
+;
+request.
+onerror
+=
+<b>function</b>
+(
+)
+{
+reject
+(
+{
+&apos;status&apos;
+:
+</b>this</b>
+.
+status
+,
+&apos;message&apos;
+:
+request.
+statusText
+}
+)
+;
+}
+;
+<!-- thru chapter 42 section 14 -->
