@@ -15623,246 +15623,79 @@ implementations.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch43-2">Section 42.2: Promise chaining</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The
-[the]
-[n](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
-method of a promise returns a new promise.
-<b>const</b>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">
+then</a> method of a promise returns a new promise.</p>
+<pre>
+<b>const</b> promise = <b>new</b> Promise(resolve =&gt; setTimeout(resolve, 5000));
 promise
-=
-<b>new</b>
-Promise
-(
-resolve
-=&gt;
-setTimeout
-(
-resolve
-,
-5000
-)
-)
-;
-promise
-// <i>5 seconds later</i>
-.
-then
-(
-(
-)
-=&gt;
-2
-)
-// <i>returning a value from a then callback will cause</i>
-// <i>the new promise to resolve with this value</i>
-.
-then
-(
-value
-=&gt;
-{
-<i>/ast; value === 2 &ast;/</i>
+  // <i>5 seconds later</i>
+  .then(() =&gt; 2)
+  // <i>returning a value from a then callback will cause</i>
+  // <i>the new promise to resolve with this value</i>
+  .then(value =&gt; { <i>/ast; value === 2 &ast;/</i> });
+</pre>
+<p>Returning a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">
+Promise</a> from a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">
+then</a> callback will append it to the promise chain.</p>
+<pre>
+<b>function</b> wait(millis) {
+  <b>return</b> <b>new</b> Promise(resolve =&gt; setTimeout(esolve, millis));
 }
-)
-;
-Returning a
-[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-from a
-[then](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
-callback will append it to the promise chain.
-<b>function</b>
-wait
-(
-millis
-)
-{
-<b>return</b>
-<b>new</b>
-Promise
-(
-resolve
-=&gt;
-setTimeout
-(
-resolve
-,
-millis
-)
-)
-;
-}
-<b>const</b>
-p
-=
-wait
-(
-5000
-)
-.
-then
-(
-(
-)
-=&gt;
-wait
-(
-4000
-)
-)
-.
-then
-(
-(
-)
-=&gt;
-wait
-(
-1000
-)
-)
-;
-p&period;
-then
-(
-(
-)
-=&gt;
-{
-<i>/ast; 10 seconds have passed &ast;/</i>
-}
-)
-;
-A
-[<b>catch</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
-allows a rejected promise to recover, similar to how <b>catch</b> in a
-<b>try</b>/<b>catch</b> statement works. Any chained
-[then](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
-after a
-[<b>catch</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
-will execute its resolve handler using the value resolved from the
-[<b>catch</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch).
-<b>const</b> p = <b>new</b> Promise(resolve =&bsol;{<b>throw</b> &apos;oh no&apos;});
-p.<b>catch</b>(() =&amp;apos;oh yes&apos;).then(console.log.bind(console)); // <i>
-outputs &quot;oh yes&quot;</i>
-If there are no
-[<b>catch</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
-or reject handlers in the middle of the chain, a
-[<b>catch</b>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
-at the end will capture any rejection in the chain:
-p&period;
-<b>catch</b>
-(
-(
-)
-=&gt;
-Promise.
-reject
-(
-&apos;oh yes&apos;
-)
-)
-.
-then
-(
-console.
-log
-.
-bind
-(
-console
-)
-)
-// <i>won&apos;t be called</i>
-.<b>catch</b>(console.error.bind(console)); // <i>outputs &quot;oh yes&quot;</i>
+<b>const</b> p = wait(5000).then(() =&gt; wait(4000)).then(() =&gt; wait(1000));
+p&period;then(() =&gt; { <i>/ast; 10 seconds have passed &ast;/</i> });
+</pre>
 
-On certain occasions, you may want to &quot;branch&quot; the execution of the
+<p>A <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch">
+<b>catch</b></a> allows a rejected promise to recover, similar to how <b>catch</b> in a
+<b>try</b>/<b>catch</b> statement works. Any chained <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">
+then</a> after a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch">
+<b>catch</b></a> will execute its resolve handler using the value resolved from the
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch"><b>catch</b></a>.</p>
+<pre>
+<b>const</b> p = <b>new</b> Promise(resolve =&bsol;{<b>throw</b> &apos;oh no&apos;});
+p.<b>catch</b>(() =&amp;apos;oh yes&apos;).then(console.log.bind(console)); // <i>outputs &quot;oh yes&quot;</i>
+</pre>
+<p>If there are no <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch">
+<b>catch</b></a> or reject handlers in the middle of the chain, a
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch"><b>catch</b></a> 
+at the end will capture any rejection in the chain:</p>
+<pre>
+p&period;<b>catch</b>(() =&gt; Promise.reject(&apos;oh yes&apos;))
+  .then(console.log.bind(console))  // <i>won&apos;t be called</i>
+  .<b>catch</b>(console.error.bind(console)); // <i>outputs &quot;oh yes&quot;</i>
+</pre>
+<!-- page 265 -->
+<p>On certain occasions, you may want to &quot;branch&quot; the execution of the
 functions. You can do it by returning different promises from a
 function depending on the condition. Later in the code, you can merge
 all of these branches into one to call other functions on them and/or
-to handle all errors in one place.
+to handle all errors in one place.</p>
+<pre>
 promise
-.
-then
-(
-result
-=&gt;
-{
-<b>if</b>
-(
-result.
-condition
-)
-{
-<b>return</b>
-handlerFn1
-(
-)
-.
-then
-(
-handlerFn2
-)
-;
-}
-<b>else</b>
-<b>if</b>
-(
-result.
-condition2
-)
-{
-<b>return</b>
-handlerFn3
-(
-)
-.
-then
-(
-handlerFn4
-)
-;
-}
-<b>else</b>
-{
-<b>throw</b>
-<b>new</b>
-Error
-(
-&quot;Invalid result&quot;
-)
-;
-}
-}
-)
-.
-then
-(
-handlerFn5
-)
-.
-<b>catch</b>
-(
-err
-=&gt;
-{
-console.
-error
-(
-err
-)
-;
-}
-)
-;
-Thus, the execution order of the functions looks like:
-promise &bsol;&bsol;handlerFn1 -&bsol;handlerFn2 &bsol;&bsol;handlerFn5 &bsol;~&bsol;~&gt;
-.<b>catch</b>()
-&vert; &Hat;
-V &vert;
--&bsol;handlerFn3 -&bsol;handlerFn4 -&Hat;
-The single <b>catch</b> will get the error on whichever branch it may
-occur.
+  .then(result =&gt; {
+    <b>if</b> (result.condition) {
+      <b>return</b> handlerFn1()
+        .then(handlerFn2);
+    } <b>else</b> <b>if</b> (result.condition2) {
+      <b>return</b> handlerFn3()
+	    .then(handlerFn4);
+    } <b>else</b> {
+        <b>throw</b> <b>new</b> Error(&quot;Invalid result&quot;);
+    }
+  })
+  .then(handlerFn5)
+  .<b>catch</b>(err =&gt; {
+    console.error(err);
+  });
+</pre>
+<p>Thus, the execution order of the functions look like:</p>
+<pre>
+promise &dash;&dash;&gt; handlerFn1 &dash;&gt; handlerFn2 &dash;&dash;&gt; &dash;&dash;&gt;handlerFn5 &sim;&sim;&gt; .<b>catch</b>()
+         &vert;                                       &Hat;
+		 V                                            &vert;
+         -&dash;&gt;handlerFn3 &dash;&gt; handlerFn4 &dash;&Hat;
+</pre>
+<p>The single <b>catch</b> will get the error on whichever branch it may occur.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-3">Section 42.3: Waiting for multiple concurrent promises</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
