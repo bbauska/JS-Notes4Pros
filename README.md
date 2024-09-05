@@ -15699,271 +15699,68 @@ promise &dash;&dash;&gt; handlerFn1 &dash;&gt; handlerFn2 &dash;&dash;&gt; handl
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-3">Section 42.3: Waiting for multiple concurrent promises</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-[Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
-The
-[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
-static method accepts an iterable (e.g. an Array) of promises and
+The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all">
+Promise.all()</a> static method accepts an iterable (e.g. an Array) of promises and
 returns a new promise, which resolves when <b>all</b> promises in the
 iterable have resolved, or rejects if <b>at least one</b> of the promises
-in the iterable have rejected.
+in the iterable have rejected.</p>
+<pre>
 // <i>wait &quot;millis&quot; ms, then resolve with &quot;value&quot;</i>
-<b>function</b>
-resolve
-(
-value
-,
-milliseconds
-)
-{
-<b>return</b>
-<b>new</b>
-Promise
-(
-resolve
-=&gt;
-setTimeout
-(
-(
-)
-=&gt;
-resolve
-(
-value
-)
-,
-milliseconds
-)
-)
-;
+<b>function</b> resolve(value, milliseconds) {
+  <b>return</b> <b>new </b>Promise(resolve =&gt; setTimeout(() =&gt; resolve(value), milliseconds));
 }
 // <i>wait &quot;millis&quot; ms, then reject with &quot;reason&quot;</i>
-<b>function</b>
-reject
-(
-reason
-,
-milliseconds
-)
-{
-<b>return</b>
-<b>new</b>
-Promise
-(
-(
-&lowbar;
-,
-reject
-)
-=&gt;
-setTimeout
-(
-(
-)
-=&gt;
-reject
-(
-reason
-)
-,
-milliseconds
-)
-)
-;
+<b>function</b> reject(reason, milliseconds) {
+  <b>return</b> <b>new</b> Promise((&lowbar;, reject) =&gt; setTimeout(() =&gt; reject(reason), milliseconds));
 }
-Promise.
-all
-(
-&lbrack;
-resolve
-(
-1
-,
-5000
-)
-,
-resolve
-(
-2
-,
-6000
-)
-,
-resolve
-(
-3
-,
-7000
-)
-&rbrack;
-)
-.
-then
-(
-values
-=&gt;
-console.
-log
-(
-values
-)
-)
-;
-// <i>outputs &quot;&lbrack;1, 2, 3&rbrack;&quot; after 7 seconds.</i>
-Promise.
-all
-(
-&lbrack;
-resolve
-(
-1
-,
-5000
-)
-,
-reject
-(
-&apos;Error!&apos;
-,
-6000
-)
-,
-resolve
-(
-2
-,
-7000
-)
-&rbrack;
-)
-.
-then
-(
-values
-=&gt;
-console.
-log
-(
-values
-)
-)
-// <i>does not output anything</i>
-.<b>catch</b>(reason =&bsol;console.log(reason)); // <i>outputs &quot;Error!&quot;
-after 6 seconds.</i>
-
-Non-promise values in the iterable are &quot;promisified&quot;.
-Promise.
-all
-(
-&lbrack;
-resolve
-(
-1
-,
-5000
-)
-,
-resolve
-(
-2
-,
-6000
-)
-,
-{
-hello
-:
-3
-}
-&rbrack;
-)
-.
-then
-(
-values
-=&gt;
-console.
-log
-(
-values
-)
-)
-;
-// <i>outputs &quot;&lbrack;1, 2, { hello: 3 }&rbrack;&quot; after 6 seconds</i>
-Destructuring assignment can help to retrieve results from multiple
-romises.
-Promise.
-all
-(
-&lbrack;
-resolve
-(
-1
-,
-5000
-)
-,
-resolve
-(
-2
-,
-6000
-)
-,
-resolve
-(
-3
-,
-7000
-)
-&rbrack;
-)
-.
-then
-(
-(
-&lbrack;
-result1
-,
-result2
-,
-result3
-&rbrack;
-)
-=&gt;
-{
-console.
-log
-(
-result1
-)
-;
-console.
-log
-(
-result2
-)
-;
-console.
-log
-(
-result3
-)
-;
-}
-)
-;
+Promise.all(&lbrack;
+  resolve(1, 5000),
+  resolve(2, 6000),
+  resolve(3, 7000)
+&rbrack;).then (values =&gt; console.log(values));  // <i>outputs &quot;&lbrack;1, 2, 3&rbrack;&quot; after 7 seconds.</i>
+Promise.all(&lbrack;
+  resolve(1, 5000),
+  reject(&apos;Error!&apos;, 6000),
+  resolve(2, 7000)
+&rbrack;).then(values =&gt; console.log(values))  // <i>does not output anything</i>
+.<b>catch</b>(reason =&gt;console.log(reason)); // <i>outputs &quot;Error!&quot; after 6 seconds.</i>
+</pre>
+<!-- page 266 -->
+<p>Non-promise values in the iterable are &quot;promisified&quot;.</p>
+<pre>
+Promise.all(&lbrack;
+  resolve(1, 5000),
+  resolve(2, 6000),
+  { hello: 3 }
+&rbrack;)
+.then(values =&gt; console.log(values));  // <i>outputs &quot;&lbrack;1, 2, { hello: 3 }&rbrack;&quot; after 6 seconds</i>
+</pre>
+<p>Destructuring assignment can help to retrieve results from multiple promises.</p>
+<pre>
+Promise.all(&lbrack;
+  resolve(1, 5000),
+  resolve(2, 6000),
+  resolve(3, 7000)
+&rbrack;)
+.then((&lbrack;result1, result2, result3&rbrack;) =&gt; {
+  console.log(result1);
+  console.log(result2);
+  console.log(result3);
+});
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-4">Section 42.4: Reduce an array to chained promises</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-This design pattern is useful for generating a sequence of
-asynchronous actions from a list of elements.
-There are two variants :
-the &quot;then&quot; reduction, which builds a chain that continues as long as
-the chain experiences success.
-the &quot;catch&quot; reduction, which builds a chain that continues as long
-as the chain experiences error.
+<p>This design pattern is useful for generating a sequence of
+asynchronous actions from a list of elements.</p>
+<p>There are two variants:</p>
+<ul>
+  <li>the &quot;then&quot; reduction, which builds a chain that continues as long as
+    the chain experiences success.</li>
+  <li>the &quot;catch&quot; reduction, which builds a chain that continues as long
+    as the chain experiences error.</li>
+</ul>
 <b>The &quot;then&quot; reduction</b>
 [then](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)
 
