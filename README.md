@@ -15632,7 +15632,7 @@ promise
   .then(() =&gt; 2)
   // <i>returning a value from a then callback will cause</i>
   // <i>the new promise to resolve with this value</i>
-  .then(value =&gt; { <i>/ast; value === 2 &ast;/</i> });
+  .then(value =&gt; { <i>/&ast; value === 2 &ast;/</i> });
 </pre>
 <p>Returning a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">
 Promise</a> from a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">
@@ -15642,7 +15642,7 @@ then</a> callback will append it to the promise chain.</p>
   <b>return</b> <b>new</b> Promise(resolve =&gt; setTimeout(esolve, millis));
 }
 <b>const</b> p = wait(5000).then(() =&gt; wait(4000)).then(() =&gt; wait(1000));
-p&period;then(() =&gt; { <i>/ast; 10 seconds have passed &ast;/</i> });
+p&period;then(() =&gt; { <i>/&ast; 10 seconds have passed &ast;/</i> });
 </pre>
 
 <p>A <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch">
@@ -15652,8 +15652,8 @@ then</a> after a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScrip
 <b>catch</b></a> will execute its resolve handler using the value resolved from the
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch"><b>catch</b></a>.</p>
 <pre>
-<b>const</b> p = <b>new</b> Promise(resolve =&bsol;{<b>throw</b> &apos;oh no&apos;});
-p.<b>catch</b>(() =&amp;apos;oh yes&apos;).then(console.log.bind(console)); // <i>outputs &quot;oh yes&quot;</i>
+<b>const</b> p = <b>new</b> Promise(resolve =&gt; {<b>throw</b> &apos;oh no&apos;});
+p.<b>catch</b>(() =&apos;oh yes&apos;).then(console.log.bind(console)); // <i>outputs &quot;oh yes&quot;</i>
 </pre>
 <p>If there are no <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch">
 <b>catch</b></a> or reject handlers in the middle of the chain, a
