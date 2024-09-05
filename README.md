@@ -15536,7 +15536,6 @@ libraries - taskjs, co, or bluebird</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-1">Section 42.1: Introduction</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>A <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>
 object represents an operation which <i>has produced or will eventually produce</i> a value. 
 Promises provide a robust way to wrap the (possibly pending) result of asynchronous work, 
@@ -15599,8 +15598,8 @@ promise.then(value =&gt; {
   // <i>Work has completed successfully,</i>
   // <i>promise has been fulfilled with &quot;value&quot;</i>
 }).<b>catch</b>(reason =&gt; {
-// <i>Something went wrong,</i>
-// <i>promise has been rejected with &quot;reason&quot;</i>
+  // <i>Something went wrong,</i>
+  // <i>promise has been rejected with &quot;reason&quot;</i>
 });
 </pre>
 <p><b>Note:</b> Calling promise.then( ) and promise.catch(...) on the same promise might 
