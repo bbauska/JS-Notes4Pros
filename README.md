@@ -15825,1280 +15825,390 @@ currently in native ECMAScript).</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-5">Section 42.5: Waiting for the first of multiple concurrent promises</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-[Promise.race](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race)
-The
-[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race)
-static method accepts an iterable of Promises and returns a new
-Promise which resolves or rejects as soon as the <b>first</b> of the
-promises in the iterable has resolved or rejected.
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race">
+Promise.race()</a> static method accepts an iterable of Promises and returns a new Promise 
+which resolves or rejects as soon as the <b>first</b> of the promises in the iterable has 
+resolved or rejected.</p>
+<pre>
 // <i>wait &quot;milliseconds&quot; milliseconds, then resolve with &quot;value&quot;</i>
-<b>function</b>
-resolve
-(
-value
-,
-milliseconds
-)
-{
-<b>return</b>
-<b>new</b>
-Promise
-(
-resolve
-=&gt;
-setTimeout
-(
-(
-)
-=&gt;
-resolve
-(
-value
-)
-,
-milliseconds
-)
-)
-;
+<b>function</b> resolve(value, milliseconds) {
+  <b>return</b> <b>new</b> Promise(resolve =&gt; setTimeout(() =&gt; resolve(value), milliseconds));
 }
 // <i>wait &quot;milliseconds&quot; milliseconds, then reject with &quot;reason&quot;</i>
-<b>function</b>
-reject
-(
-reason
-,
-milliseconds
-)
-{
-<b>return</b>
-<b>new</b>
-Promise
-(
-(
-&lowbar;
-,
-reject
-)
-=&gt;
-setTimeout
-(
-(
-)
-=&gt;
-reject
-(
-reason
-)
-,
-milliseconds
-)
-)
-;
+<b>function</b> reject(reason, milliseconds) {
+  <b>return</b> <b>new</b> Promise((&lowbar;, reject) =&gt; setTimeout(() =&gt; reject(reason), milliseconds));
 }
-Promise.
-race
-(
-&lbrack;
-resolve
-(
-1
-,
-5000
-)
-,
-resolve
-(
-2
-,
-3000
-)
-,
-resolve
-(
-3
-,
-1000
-)
-&rbrack;
-)
-.
-then
-(
-value
-=&gt;
-console.
-log
-(
-value
-)
-)
-;
-// <i>outputs &quot;3&quot; after 1 second.</i>
-Promise.
-race
-(
-&lbrack;
-reject
-(
-<b>new</b>
-Error
-(
-&apos;bad things!&apos;
-)
-,
-1000
-)
-,
-resolve
-(
-2
-,
-2000
-)
-&rbrack;
-)
-.
-then
-(
-value
-=&gt;
-console.
-log
-(
-value
-)
-)
-// <i>does not output anything</i>
-.
-<b>catch</b>
-(
-error
-=&gt;
-console.
-log
-(
-error.
-message
-)
-)
-;
-// <i>outputs &quot;bad things!&quot; after 1 second</i>
+Promise.race(&lbrack;
+  resolve(1, 5000),
+  resolve(2, 3000),
+  resolve(3, 1000)
+&rbrack;)
+.then(value =&gt; console.log(value));  // <i>outputs &quot;3&quot; after 1 second.</i>
+Promise.race(&lbrack;
+  reject(<b>new</b> Error(&apos;bad things!&apos;), 1000),
+  resolve(2, 2000)
+&rbrack;)
+.then(value =&gt; console.log(value)) // <i>does not output anything</i>
+.<b>catch</b>(error =&gt; console.log(error.message)); // <i>outputs &quot;bad things!&quot; after 1 second</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-6">Section 42.6: &quot;Promisifying&quot; functions with callbacks</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Given a function that accepts a Node-style callback,
-fooFn
-(
-options
-,
-<b>function</b>
-callback
-(
-err
-,
-result
-)
-{
-&hellip;
+<p>Given a function that accepts a Node-style callback,</p>
+<pre>
+fooFn(options, <b>function</b> callback(err, result) {&hellip;});
+</pre>
+<p>you can promisify it <i>(convert it to a promise-based function)</i> like this:</p>
+<pre>
+<b>function</b> promiseFooFn(options) {
+  <b>return</b> <b>new</b> Promise((resolve, reject) =&gt;
+    fooFn(options, (err, result) =&gt;
+	  // <i>If there&apos;s an error, reject; otherwise resolve</i>
+      err ? reject(err) : resolve(result)
+    )
+  );
 }
-)
-;
-you can promisify it <i>(convert it to a promise-based function)</i> like
-this:
-<b>function</b>
-promiseFooFn
-(
-options
-)
-{
-<b>return</b>
-<b>new</b>
-Promise
-(
-(
-resolve
-,
-reject
-)
-=&gt;
-fooFn
-(
-options
-,
-(
-err
-,
-result
-)
-=&gt;
-// <i>If there&apos;s an error, reject; otherwise resolve</i>
-err
-?
-reject
-(
-err
-)
-:
-resolve
-(
-result
-)
-)
-)
-;
+</pre>
+<p>This function can then be used as follows:</p>
+<pre>
+promiseFooFn(options).then(result =&gt; {
+  // <i>success!</i>
+}).<b>catch</b>(err =&gt; {
+  // <i>error!</i>
+});
+</pre>
+<p>In a more generic way, here&apos;s how to promisify any given callback-style function:</p>
+<pre>
+<b>function</b> promisify(func) {
+  <b>return</b> <b>function</b>(&hellip;args) {
+    <b>return</b> <b>new</b> Promise((resolve, reject) =&gt; {
+      func(&hellip;args, (err, result) =&gt; err ? reject(err) : resolve(result));
+    });
+  }
 }
-This function can then be used as follows:
-promiseFooFn
-(
-options
-)
-.
-then
-(
-result
-=&gt;
-{
-// <i>success!</i>
-}
-)
-.
-<b>catch</b>
-(
-err
-=&gt;
-{
-// <i>error!</i>
-}
-)
-;
-In a more generic way, here&apos;s how to promisify any given
-callback-style function:
-<b>function</b>
-promisify
-(
-func
-)
-{
-<b>return</b>
-<b>function</b>
-(
-&hellip;
-args
-)
-{
-<b>return</b>
-<b>new</b>
-Promise
-(
-(
-resolve
-,
-reject
-)
-=&gt;
-{
-func
-(
-&hellip;
-args
-,
-(
-err
-,
-result
-)
-=&gt;
-err
-?
-reject
-(
-err
-)
-:
-resolve
-(
-result
-)
-)
-;
-}
-)
-;
-}
-}
-This can be used like this:
-<b>const</b>
-fs
-=
-require
-(
-&apos;fs&apos;
-)
-;
-<b>const</b>
-promisedStat
-=
-promisify
-(
-fs.
-stat
-.
-ind
-(
-fs
-)
-)
-;
-promisedStat
-(
-&apos;/foo/bar&apos;
-)
-.
-then
-(
-stat
-=&gt;
-console.
-log
-(
-&apos;STATE&apos;
-,
-stat
-)
-)
-.
-<b>catch</b>
-(
-err
-=&gt;
-console.
-log
-(
-&apos;ERROR&apos;
-,
-err
-)
-)
-;
+</pre>
+<p>This can be used like this:</p>
+<pre>
+<b>const</b> fs = require(&apos;fs&apos;);
+<b>const</b> promisedStat = promisify(fs.stat.ind(fs));
+promisedStat(&apos;/foo/bar&apos;)
+  .then(stat =&gt; console.log(&apos;STATE&apos;, stat))
+  .<b>catch</b>(err =&gt; console.log(&apos;ERROR&apos;, err));
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-7">Section 42.7: Error Handling</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Errors thrown from promises are handled by the second parameter
-(reject) passed to then or by the handler passed to <b>catch</b>:
-throwErrorAsync
-(
-)
-.
-then
-(
-<b>null</b>
-,
-error
-=&gt;
-{
-<i>/&ast; handle error here &ast;/</i>
-}
-)
-;
+<p>Errors thrown from promises are handled by the second parameter (reject) passed to 
+then or by the handler passed to <b>catch</b>:</p>
+<!-- page 269 -->
+<pre>
+throwErrorAsync()
+  .then(<b>null</b>, error =&gt; { <i>/&ast; handle error here &ast;/</i> });
 // <i>or</i>
-throwErrorAsync
-(
-)
-.
-<b>catch</b>
-(
-error
-=&gt;
-{
-<i>/&ast; handle error here &ast;/</i>
-}
-)
-;
-<b>Chaining</b>
-If you have a promise chain then an error will cause resolve handlers
-to be skipped:
-throwErrorAsync
-(
-)
-.
-then
-(
-(
-)
-=&gt;
-{
-<i>/&ast; never called &ast;/</i>
-}
-)
-.
-<b>catch</b>
-(
-error
-=&gt;
-{
-<i>/&ast; handle error here &ast;/</i>
-}
-)
-;
-The same applies to your then functions. If a resolve handler throws
-an exception then the next reject handler will be invoked:
-doSomethingAsync
-(
-)
-.
-then
-(
-result
-=&gt;
-{
-throwErrorSync
-(
-)
-;
-}
-)
-.
-then
-(
-(
-)
-=&gt;
-{
-<i>/&ast; never called &ast;/</i>
-}
-)
-.
-<b>catch</b>
-(
-error
-=&gt;
-{
-<i>/&ast; handle error from throwErrorSync() &ast;/</i>
-}
-)
-;
-An error handler returns a new promise, allowing you to continue a
+throwErrorAsync()
+  .<b>catch</b>(error =&gt; { <i>/&ast; handle error here &ast;/</i> });
+</pre>
+<p><b>Chaining</b></p>
+<p>If you have a promise chain then an error will cause resolve handlers to be skipped:</p>
+<pre>
+throwErrorAsync()
+  .then(() =&gt; { <i>/&ast; never called &ast;/</i> })
+  .<b>catch</b>(error =&gt; { <i>/&ast; handle error here &ast;/</i> });
+</pre>
+<p>The same applies to your then functions. If a resolve handler throws
+an exception then the next reject handler will be invoked:</p>
+<pre>
+doSomethingAsync()
+  .then(result =&gt; { throwErrorSync(); })
+  .then(() =&gt; { <i>/&ast; never called &ast;/</i> })
+  .<b>catch</b>(error =&gt; { <i>/&ast; handle error from throwErrorSync() &ast;/</i> });
+</pre>
+<p>An error handler returns a new promise, allowing you to continue a
 promise chain. The promise returned by the error handler is resolved
-with the value returned by the handler:
-throwErrorAsync
-(
-)
-.
-<b>catch</b>
-(
-error
-=&gt;
-{
-<i>/&ast; handle error here &ast;/</i>
-;
-<b>return</b>
-result
-;
-}
-)
-.
-then
-(
-result
-=&gt;
-{
-<i>/&ast; handle result here &ast;/</i>
-}
-)
-;
-You can let an error cascade down a promise chain by re-throwing the
-error:
-throwErrorAsync
-(
-)
-.
-<b>catch</b>
-(
-error
-=&gt;
-{
-<i>/&ast; handle error from throwErrorAsync() &ast;/</i>
-<b>throw</b>
-error
-;
-}
-)
-.
-then
-(
-(
-)
-=&gt;
-{
-<i>/&ast; will not be called if there&apos;s an error &ast;/</i>
-}
-)
-.
-<b>catch</b>
-(
-error
-=&gt;
-{
-<i>/&ast; will get called with the same error &ast;/</i>
-}
-)
-;
-It is possible to throw an exception that is not handled by the
-promise by wrapping the <b>throw</b> statement inside a setTimeout
-callback:
-<b>new</b>
-Promise
-(
-(
-resolve
-,
-reject
-)
-=&gt;
-{
-setTimeout
-(
-(
-)
-=&gt;
-{
-<b>throw</b>
-<b>new</b>
-Error
-(
-)
-;
-}
-)
-;
-}
-)
-;
-This works because promises cannot handle exceptions thrown
-asynchronously. <b>Unhandled rejections</b>
-An error will be silently ignored if a promise doesn&apos;t have a
-<b>catch</b> block or reject handler:
-throwErrorAsync
-(
-)
-.
-then
-(
-(
-)
-=&gt;
-{
-<i>/&ast; will not be called &ast;/</i>
-}
-)
-;
+with the value returned by the handler:</p>
+<pre>
+throwErrorAsync()
+  .<b>catch</b>(error =&gt; { <i>/&ast; handle error here &ast;/</i>; <b>return</b>result; })
+  .then(result =&gt; { <i>/&ast; handle result here &ast;/</i> });
+</pre>
+<p>You can let an error cascade down a promise chain by re-throwing the error:</p>
+<pre>
+throwErrorAsync()
+  .<b>catch</b>(error =&gt; {
+    <i>/&ast; handle error from throwErrorAsync() &ast;/</i>
+	<b>throw</b> error;
+  })
+    .then(() =&gt; { <i>/&ast; will not be called if there&apos;s an error &ast;/</i> })
+    .<b>catch</b>(error =&gt; { <i>/&ast; will get called with the same error &ast;/</i> });
+</pre>
+<p>It is possible to throw an exception that is not handled by the promise by wrapping 
+the <b>throw</b> statement inside a setTimeout callback:</p>
+<pre>
+<b>new</b> Promise((resolve, reject) =&gt; {
+  setTimeout(() =&gt; { <b>throw</b> <b>new</b> Error(); });
+});
+</pre>
+<p>This works because promises cannot handle exceptions thrown asynchronously.</p>
+<p><b>Unhandled rejections</b></p>
+<p>An error will be silently ignored if a promise doesn&apos;t have a <b>catch</b> block 
+or reject handler:</p>
+<pre>
+throwErrorAsync()
+  .then(() =&gt; { <i>/&ast; will not be called &ast;/</i> });
 // <i>error silently ignored</i>
-To prevent this, always use a <b>catch</b> block:
-throwErrorAsync
-(
-)
-.
-then
-(
-(
-)
-=&gt;
-{
-<i>/&ast; will not be called &ast;/</i>
-}
-)
-.
-<b>catch</b>
-(
-error
-=&gt;
-{
-<i>/&ast; handle error&ast;/</i>
-}
-)
-;
+</pre>
+<p>To prevent this, always use a <b>catch</b> block:</p>
+<!-- page 270 -->
+<pre>
+throwErrorAsync()
+  .then(() =&gt; { <i>/&ast; will not be called &ast;/</i> })
+  .<b>catch</b>(error =&gt; { <i>/&ast; handle error&ast;/</i> });
 // <i>or</i>
-throwErrorAsync
-(
-)
-.
-then
-(
-(
-)
-=&gt;
-{
-<i>/&ast; will not be called &ast;/</i>
-}
-,
-error
-=&gt;
-{
-<i>/&ast; handle error&ast;/</i>
-}
-)
-;
-Alternatively, subscribe to the
-[unhandledrejection](https://developer.mozilla.org/en-US/docs/Web/Events/unhandledrejection)
-event to catch any unhandled rejected promises:
-window.
-addEventListener
-(
-&apos;unhandledrejection&apos;
-,
-event
-=&gt;
-{
-}
-)
-;
-Some promises can handle their rejection later than their creation
-time. The
-[rejectionhandled](https://developer.mozilla.org/en-US/docs/Web/Events/rejectionhandled)
-event gets fired whenever such a promise is handled:
-window.
-addEventListener
-(
-&apos;unhandledrejection&apos;
-,
-event
-=&gt;
-console.
-log
-(
-&apos;unhandled&apos;
-)
-)
-;
-window.
-addEventListener
-(
-&apos;rejectionhandled&apos;
-,
-event
-=&gt;
-console.
-log
-(
-&apos;handled&apos;
-)
-)
-;
-<b>var</b>
-p
-=
-Promise.
-reject
-(
-&apos;test&apos;
-)
-;
-setTimeout
-(
-)
-=&gt;
-p&period;
-<b>catch</b>
-(
-console.
-log
-)
-,
-1000
-)
-;
-// <i>Will print &apos;unhandled&apos;, and after one second &apos;test&apos; and
-&apos;handled&apos;</i>
-event.reason       is the error object and         event.promise
-The event argument contains information about the rejection. is the
-promise object that caused the event.
-In Nodejs the rejectionhandled and unhandledrejection events are
-called
-[rejectionHandled](https://nodejs.org/api/process.html#process_event_rejectionhandled)
-and
-[unhandledRejection](https://nodejs.org/api/process.html#process_event_unhandledrejection)
-on process, respectively, and have a different signature:
+throwErrorAsync()
+  .then(() =&gt; { <i>/&ast; will not be called &ast;/</i> }, error =&gt; { <i>/&ast; handle error&ast;/</i> });
+</pre>
+<p>Alternatively, subscribe to the <a href="https://developer.mozilla.org/en-US/docs/Web/Events/unhandledrejection">
+unhandledrejection</a> event to catch any unhandled rejected promises:</p>
+<pre>
+window.addEventListener(&apos;unhandledrejection&apos;, event =&gt; {});
+</pre>
+<p>Some promises can handle their rejection later than their creation time. The
+<a href="https://developer.mozilla.org/en-US/docs/Web/Events/rejectionhandled">rejectionhandled</a> 
+event gets fired whenever such a promise is handled:</p>
+<pre>
+window.addEventListener(&apos;unhandledrejection&apos;, event =&gt; console.log(&apos;unhandled&apos;));
+window.addEventListener(&apos;rejectionhandled&apos;, event =&gt; console.log(&apos;handled&apos;));
+<b>var</b> p = Promise.reject(&apos;test&apos;);
+setTimeout() =&gt; p&period;<b>catch</b>(console.log), 1000);
+// <i>Will print &apos;unhandled&apos;, and after one second &apos;test&apos; and &apos;handled&apos;</i>
+</pre>
+<p>The event argument contains information about the rejection.event.reason is the error object 
+and event.promise is the promise object that caused the event.</p>
+
+<p>In Nodejs the rejectionhandled and unhandledrejection events are called 
+<a href="https://nodejs.org/api/process.html#process_event_rejectionhandled">rejectionHandled</a> and
+<a href="https://nodejs.org/api/process.html#process_event_unhandledrejection">unhandledRejection</a>
+on process, respectively, and have a different signature:</p>
+<pre>
 process.on(&apos;rejectionHandled&apos;, (reason, promise) =&bsol;{});
 process.on(&apos;unhandledRejection&apos;, (reason, promise) =&bsol;{});
-The reason argument is the error object and the promise argument is a
-reference to the promise object that caused the event to fire.
-Usage of these unhandledrejection and rejectionhandled events should
+</pre>
+<p>The reason argument is the error object and the promise argument is a
+reference to the promise object that caused the event to fire.</p>
+<p>Usage of these unhandledrejection and rejectionhandled events should
 be considered for debugging purposes only. Typically, all promises
-should handle their rejections.
-<b>Note:</b> Currently, only Chrome 49+ and Node.js support
-unhandledrejection and rejectionhandled events.
-<b>Caveats</b>
-<b>Chaining with fulfill and reject</b>
-then ( fulfill , reject
-The ) function (with both parameters not <b>null</b>) has unique and
-complex behavior, and shouldn&apos;t be used unless you know exactly how
-it works.
-The function works as expected if given <b>null</b> for one of the
-inputs:
-// <i>the following calls are equivalent</i>
-promise.
-then
-(
-fulfill
-,
-<b>null</b>
-)
-promise.
-then
-(
-fulfill
-)
-// <i>the following calls are also equivalent</i>
-promise.
-then
-(
-<b>null</b>
-,
-reject
-)
-promise.
-<b>catch</b>
-(
-reject
-)
-However, it adopts unique behavior when both inputs are given:
-// <i>the following calls are not equivalent!</i>
-promise.
-then
-(
-fulfill
-,
-reject
-)
-promise.
-then
-(
-fulfill
-)
-.
-<b>catch</b>
-(
-reject
-)
-// <i>the following calls are not equivalent!</i>
-promise.
-then
-(
-fulfill
-,
-reject
-)
-promise.
-<b>catch</b>
-(
-reject
-)
-.
-then
-(
-fulfill
-)
-then   (   fulfill   ,   reject   ) function looks like it is a then   (   fulfill   ).   <b>catch</b>   (   reject
-shortcut for
-The ), but it is not, and
-will cause problems if used interchangeably. One such problem is that
-the reject handler does not handle errors from the fulfill handler.
-Here is what will happen:
-Promise.resolve() // <i>previous promise is fulfilled</i>
-.then(() =&bsol;{ <b>throw</b> <b>new</b> Error(); }, // <i>error in the fulfill
-handler</i> error =&bsol;{ <i>/&ast; this is not called! &ast;/</i> });
-The above code will result in a rejected promise because the error is
-propagated. Compare it to the following code, which results in a
-fulfilled promise:
-Promise.resolve() // <i>previous promise is fulfilled</i>
-.then(() =&bsol;{ <b>throw</b> <b>new</b> Error(); }) // <i>error in the fulfill
-handler</i>
-.<b>catch</b>(error =&bsol;{ <i>/&ast; handle error &ast;/</i> });
-then   (   fulfill   ,   reject   ) interchangeably     <b>catch</b>   (   reject   ).   then   (   fulfill
-with
-A similar problem exists when using ), except with propagating
-fulfilled promises instead of rejected promises. <b>Synchronously
-throwing from function that should return a promise</b> Imagine a
-function like this:
-<b>function</b>
-foo
-(
-arg
-)
-{
-<b>if</b>
-(
-arg
-===
-&apos;unexepectedValue&apos;
-)
-{
-<b>throw</b>
-<b>new</b>
-Error
-(
-&apos;UnexpectedValue&apos;
-)
-}
-<b>return</b>
-<b>new</b>
-Promise
-(
-resolve
-=&gt;
-setTimeout
-(
-(
-)
-=&gt;
-resolve
-(
-arg
-)
-,
-1000
-)
-)
-}
-If such function is used in the <b>middle</b> of a promise chain, then
-apparently there is no problem:
-makeSomethingAsync
-(
-)
-.
-.
-then
-(
-(
-)
-=&gt;
-foo
-(
-&apos;unexpectedValue&apos;
-)
-)
-.
-<b>catch</b>
-(
-err
-=&gt;
-console.
-log
-(
-err
-)
-)
-// <i>&lt;&bsol; Error: UnexpectedValue will be caught here</i>
-However, if the same function is called outside of a promise chain,
-then the error will not be handled by it and will be thrown to the
-application:
+should handle their rejections.</p>
+<p><b>Note:</b> Currently, only Chrome 49+ and Node.js support unhandledrejection and rejectionhandled events.</p>
+<p><b>Caveats</b></p>
+<p><b>Chaining with fulfill and reject</b></p>
+<p>The then(fulfill, reject) function (with both parameters not <b>null</b>) has unique and
+complex behavior, and shouldn&apos;t be used unless you know exactly how it works.</p>
 
-foo(&apos;unexpectedValue&apos;) // <i>&lt;&bsol; error will be thrown, so the
-application will crash</i>
-.then(makeSomethingAsync) // <i>&lt;&bsol; will not run</i>
-.<b>catch</b>(err =&bsol;console.log(err)) // <i>&lt;&bsol; will not catch</i>
-There are 2 possible workarounds:
-<b>Return a rejected promise with the error</b>
-Instead of throwing, do as follows:
-<b>function</b>
-foo
-(
-arg
-)
-{
-<b>if</b>
-(
-arg
-===
-&apos;unexepectedValue&apos;
-)
-{
-<b>return</b>
-Promise.
-reject
-(
-<b>new</b>
-Error
-(
-&apos;UnexpectedValue&apos;
-)
-)
+<P>The function works as expected if given <b>null</b> for one of the inputs:</p>
+<pre>
+// <i>the following calls are equivalent</i>
+promise.then(fulfill, <b>null</b>)
+promise.then(fulfill)
+// <i>the following calls are also equivalent</i>
+promise.then(<b>null</b>, reject)
+promise.<b>catch</b>(reject)
+</pre>
+<p>However, it adopts unique behavior when both inputs are given:</p>
+<!-- page 271 -->
+// <i>the following calls are not equivalent!</i>
+promise.then(fulfill, reject)
+promise.then(fulfill).<b>catch</b>(reject)
+// <i>the following calls are not equivalent!</i>
+promise.then(fulfill, reject)
+promise.<b>catch</b>(reject).then(fulfill)
+</pre>
+
+<p>The then(fulfill, reject) function looks like it is shortcut for then(fulfill).<b>catch</b>(reject), 
+but it is not, and will cause problems if used interchangeably. One such problem is that the reject
+handler does not handle errors from the fulfill handler.  Here is what will happen:
+<pre>
+Promise.resolve() // <i>previous promise is fulfilled</i>
+  .then(() =&bsol;{ <b>throw</b> <b>new</b> Error(); }, // <i>error in the fulfill handler</i>
+    error =&bsol;{ <i>/&ast; this is not called! &ast;/</i> });
+</pre>
+<p>The above code will result in a rejected promise because the error is
+propagated. Compare it to the following code, which results in a fulfilled promise:</p>
+<pre>
+Promise.resolve() // <i>previous promise is fulfilled</i>
+  .then(() =&bsol;{ <b>throw</b> <b>new</b> Error(); }) // <i>error in the fulfill handler</i>
+    .<b>catch</b>(error =&bsol;{ <i>/&ast; handle error &ast;/</i> });
+</pre>
+<p>A similar problem exists when using then(fulfill, reject) interchangeably with catch(reject).then(fulfill),
+except with propagating fulfilled promises instead of rejected promises.</p>
+<p><b>Synchronously throwing from function that should return a promise</b></p>
+<p>Imagine a function like this:</p>
+<pre>
+<b>function</b> foo(arg) {
+  <b>if</b> (arg === &apos;unexepectedValue&apos;) {
+    <b>throw</b> <b>new</b> Error(&apos;UnexpectedValue&apos;)
+  }
+  <b>return</b> <b>new</b> Promise(resolve =&gt;
+    setTimeout(() =&gt; resolve(arg), 1000)
+  )
 }
-<b>return</b>
-<b>new</b>
-Promise
-(
-resolve
-=&gt;
-setTimeout
-(
-(
-)
-=&gt;
-resolve
-(
-arg
-)
-,
-1000
-)
-)
+</pre>
+<p>If such function is used in the <b>middle</b> of a promise chain, then 
+apparently there is no problem:</p>
+<pre>
+makeSomethingAsync().
+  .then(() =&gt; foo(&apos;unexpectedValue&apos;))
+  .<b>catch</b>(err =&gt; console.log(err)) // <i>&lt;&bsol; Error: UnexpectedValue will be caught here</i>
+</pre>
+<p>However, if the same function is called outside of a promise chain, then the error will 
+not be handled by it and will be thrown to the application:</p>
+<pre>
+foo(&apos;unexpectedValue&apos;) // <i>&lt;&bsol; error will be thrown, so the application will crash</i>
+  .then(makeSomethingAsync) // <i>&lt;&bsol; will not run</i>
+  .<b>catch</b>(err =&bsol;console.log(err)) // <i>&lt;&bsol; will not catch</i>
+</pre>
+<p>There are 2 possible workarounds:</p>
+<p><b>Return a rejected promise with the error</b></p>
+<!-- page 272 -->
+<p>Instead of throwing, do as follows:</p>
+<pre>
+<b>function</b> foo(arg) {
+  <b>if</b> (arg === &apos;unexepectedValue&apos;) {
+    <b>return</b> Promise.reject(<b>new</b> Error(&apos;UnexpectedValue&apos;))
+  }
+  <b>return</b> <b>new</b> Promise(resolve =&gt;
+    setTimeout(() =&gt; resolve(arg), 1000)
+  )
 }
-<b>Wrap your function into a promise chain</b>
-Your <b>throw</b> statement will be properly caught when it is already
-inside a promise chain:
-<b>function</b>
-foo
-(
-arg
-)
-{
-<b>return</b>
-Promise.
-resolve
-(
-)
-.
-then
-(
-(
-)
-=&gt;
-{
-<b>if</b>
-(
-arg
-===
-&apos;unexepectedValue&apos;
-)
-{
-<b>throw</b>
-<b>new</b>
-Error
-(
-&apos;UnexpectedValue&apos;
-)
+</pre>
+<p><b>Wrap your function into a promise chain</b></p>
+<p>Your <b>throw</b> statement will be properly caught when it is already inside a promise chain:</p>
+<pre>
+<b>function</b> foo(arg) {
+  <b>return</b> Promise.resolve()
+    .then(() =&gt; {
+      <b>if</b> (arg === &apos;unexepectedValue&apos;) {
+        <b>throw</b> <b>new</b> Error(&apos;UnexpectedValue&apos;)
+      }
+      <b>return</b> <b>new</b> Promise(resolve =&gt;
+        setTimeout(() =&gt; resolve(arg), 1000)
+    )
+  })
 }
-<b>return</b>
-<b>new</b>
-Promise
-(
-resolve
-=&gt;
-setTimeout
-(
-(
-)
-=&gt;
-resolve
-(
-arg
-)
-,
-1000
-)
-)
-}
-)
-}
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-8">Section 42.8: Reconciling synchronous and asynchronous operations</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-In some cases you may want to wrap a synchronous operation inside a
-promise to prevent repetition in code branches. Take this example:
-<b>if</b>
-(
-result
-)
-{
-// <i>if we already have a result</i>
-processResult
-(
-result
-
-;
-// <i>process it</i>
+<p>In some cases you may want to wrap a synchronous operation inside a
+promise to prevent repetition in code branches. Take this example:</p>
+<pre>
+<b>if</b> (result) { // <i>if we already have a result</i>
+  processResult(result); // <i>process it</i>
+} <b>else</b> {
+  fetchResult().then(processResult);
 }
-<b>else</b>
-{
-fetchResult
-(
-)
-.
-then
-(
-processResult
-)
-;
-}
-The synchronous and asynchronous branches of the above code can be
+</pre>
+<p>The synchronous and asynchronous branches of the above code can be
 reconciled by redundantly wrapping the synchronous operation inside a
-promise:
-<b>var</b>
-fetch
-=
-result
-?
-Promise.
-resolve
-(
-result
-)
-:
-fetchResult
-(
-)
-;
-fetch.
-then
-(
-processResult
-)
-;
-When caching the result of an asynchronous call, it is preferable to
+promise:</p>
+<pre>
+<b>var</b> fetch = result
+  ? Promise.resolve(result)
+  : fetchResult();
+fetch.then(processResult);
+</pre>
+<p>When caching the result of an asynchronous call, it is preferable to
 cache the promise rather than the result itself. This ensures that
 only one asynchronous operation is required to resolve multiple
-parallel requests.
-Care should be taken to invalidate cached values when error conditions
-are encountered.
+parallel requests.</p>
+<p>Care should be taken to invalidate cached values when error conditions
+are encountered.</p>
+<!-- page 273 -->
+<pre>
 // <i>A resource that is not expected to change frequently</i>
-<b>var</b>
-planets
-=
-&apos;http://swapi.co/api/planets/&apos;
-;
+<b>var</b> planets = &apos;http://swapi.co/api/planets/&apos;;
 // <i>The cached promise, or null</i>
-<b>var</b>
-cachedPromise
-;
-<b>function</b>
-fetchResult
-(
-)
-{
-<b>if</b>
-(
-!
-cachedPromise
-)
-{
-cachedPromise
-=
-fetch
-(
-planets
-)
-.
-<b>catch</b>
-(
-<b>function</b>
-(
-e
-)
-{
-// <i>Invalidate the current result to retry on the next fetch</i>
-cachedPromise
-=
-<b>null</b>
-;
-// <i>re-raise the error to propagate it to callers</i>
-<b>throw</b>
-e
-;
+<b>var</b> cachedPromise;
+<b>function</b> fetchResult() {
+  <b>if</b> (!cachedPromise) {
+    cachedPromise = fetch(planets)
+	  .<b>catch</b>(<b>function</b> (e) {
+        // <i>Invalidate the current result to retry on the next fetch</i>
+        cachedPromise = <b>null</b>;
+        // <i>re-raise the error to propagate it to callers</i>
+        <b>throw</b> e;
+      });
+  }
+  <b>return</b> cachedPromise;
 }
-)
-;
-}
-<b>return</b>
-cachedPromise
-;
-}
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-9">Section 42.9: Delay function call</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-[setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout)
-The
-[()](https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout)
-method calls a function or evaluates an expression after a specified
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout">
+setTimout()</a> method calls a function or evaluates an expression after a specified
 number of milliseconds. It is also a trivial way to achieve an
-asynchronous operation.
-In this example calling the wait function resolves the promise after
-the time specified as first argument:
-<b>function</b>
-wait
-(
-ms
-)
-{
-<b>return</b>
-<b>new</b>
-Promise
-(
-resolve
-=&gt;
-setTimeout
-(
-resolve
-,
-ms
-)
-)
-;
+asynchronous operation.</p>
+
+<p>In this example calling the wait function resolves the promise after
+the time specified as first argument:</p>
+<pre>
+<b>function</b> wait(ms) {
+  <b>return</b> <b>new</b> Promise(resolve =&gt; setTimeout(resolve, ms));
 }
-wait
-(
-5000
-)
-.
-then
-(
-(
-)
-=&gt;
-{
-console.
-log
-(
-&apos;5 seconds have passed&hellip;&apos;
-)
-;
-}
-)
-;
+wait(5000).then(() =&gt; {
+  console.log(&apos;5 seconds have passed&hellip;&apos;);
+});
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-10">Section 42.10: &quot;Promisifying&quot; values</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-[Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
-The static method can be used to wrap values into promises.
-<b>let</b>
-resolved
-=
-Promise.
-resolve
-(
-2
-)
-;
-resolved.
-then
-(
-value
-=&gt;
-{
-// <i>immediately invoked</i>
-// <i>value === 2</i>
-}
-)
-;
-[Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
-If value is already a promise, simply recasts it.
-<b>let</b>
-one
-=
-<b>new</b>
-Promise
-(
-resolve
-=&gt;
-setTimeout
-(
-(
-)
-=&gt;
-resolve
-(
-2
-)
-,
-1000
-)
-)
-;
-<b>let</b>
-two
-=
-Promise.
-resolve
-(
-one
-)
-;
-two.
-then
-(
-value
-=&gt;
-{
-// <i>1 second has passed</i>
-// <i>value === 2</i>
-}
-)
-;
-[Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve)
-In fact, value can be any &quot;thenable&quot; (object defining a then method
-that works sufficiently like a spec-compliant promise). This allows to
-convert untrusted 3rd-party objects into trusted 1st-party Promises.
-<b>let</b>
-resolved
-=
-Promise.
-resolve
-(
-{
-then
-(
-onResolved
-)
-{
-onResolved
-(
-2
-)
-;
-}
-}
-)
-;
-resolved.
-then
-(
-value
-=&gt;
-{
-// <i>immediately invoked</i>
-// <i>value === 2</i>
-}
-)
-;
-[Promise.reject](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject)
-The static method returns a promise which immediately rejects with the
-given reason.
-<b>let</b>
-rejected
-=
-Promise.
-reject
-(
-&quot;Oops!&quot;
-)
-;
-rejected.
-<b>catch</b>
-(
-reason
-=&gt;
-{
-// <i>immediately invoked</i>
-// <i>reason === &quot;Oops!&quot;</i>
-}
-)
-;
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve">
+Promise.resolve</a> The static method can be used to wrap values into promises.</p>
+<pre>
+<b>let</b> resolved = Promise.resolve(2);
+resolved.then(value =&gt; {
+  // <i>immediately invoked</i>
+  // <i>value === 2</i>
+});
+</pre>
+<p>If value is already a promise, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve">
+Promise.resolve</a> simply recasts it.</p>
+<pre> 
+<b>let</b> one = <b>new</b> Promise(resolve =&gt; setTimeout(() =&gt; resolve(2), 1000));
+<b>let</b> two = Promise.resolve(one);
+two.then(value =&gt; {
+  // <i>1 second has passed</i>
+  // <i>value === 2</i>
+});
+</pre>
+
+<p>In fact, value can be any &quot;thenable&quot; (object defining a then method that works 
+sufficiently like a spec-compliant promise). This allows 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve">
+Promise.resolve</a> to convert untrusted 3rd-party objects into trusted 1st-party Promises.</p>
+<pre>
+<b>let</b> resolved = Promise.resolve({
+  then(onResolved) {
+    onResolved(2);
+  }
+});
+resolved.then(value =&gt; {
+  // <i>immediately invoked</i>
+  // <i>value === 2</i>
+});
+</pre>
+<!-- page 274 -->
+
+The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject">
+Promise.reject</a> static method returns a promise which immediately rejects with the
+given reason.</p>
+<pre>
+<b>let</b> rejected = Promise.reject(&quot;Oops!&quot;);
+rejected.<b>catch</b>(reason =&gt; {
+  // <i>immediately invoked</i>
+  // <i>reason === &quot;Oops!&quot;</i>
+});
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-11">Section 42.11: Using ES2017 async/await</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
