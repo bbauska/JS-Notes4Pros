@@ -15692,7 +15692,7 @@ promise
 <pre>
 promise &dash;&dash;&gt; handlerFn1 &dash;&gt; handlerFn2 &dash;&dash;&gt; handlerFn5 &sim;&sim;&gt; .<b>catch</b>()
          &vert;                            &Hat;
- V                                            &vert;
+        V                                   &vert;
          -&dash;&gt;handlerFn3 &dash;&gt; handlerFn4 &dash;&Hat;
 </pre>
 <p>The single <b>catch</b> will get the error on whichever branch it may occur.</p>
