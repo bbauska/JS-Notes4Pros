@@ -15165,7 +15165,7 @@ string representations:</p>
 <p>The bitwise NOT (&bsol;~) performs a NOT operation on each bit in a value.</p>
 <p><b>Syntax:</b></p>
 <pre>
-&bsol;~expression
+~expression
 </pre>
 <p><b>Returns:</b></p>
 <!-- page 256 -->
@@ -15499,7 +15499,6 @@ of the callback.</p>
 <pre>
 <b>var</b> i = a&period;next()  // <i>PULL</i>
 dosomething(&hellip;, v =&gt; {&hellip;})  // <i>PUSH</i>
-a.next () and in the second, v =&bsol; { &hellip;
 </pre>
 <p>Here, you pull the value from } is the callback and a value is PUSHed
 into the argument position v of the callback function.</p>
@@ -15994,8 +15993,8 @@ and event.promise is the promise object that caused the event.</p>
 <a href="https://nodejs.org/api/process.html#process_event_unhandledrejection">unhandledRejection</a>
 on process, respectively, and have a different signature:</p>
 <pre>
-process.on(&apos;rejectionHandled&apos;, (reason, promise) =&bsol;{});
-process.on(&apos;unhandledRejection&apos;, (reason, promise) =&bsol;{});
+process.on(&apos;rejectionHandled&apos;, (reason, promise) =&gt;{});
+process.on(&apos;unhandledRejection&apos;, (reason, promise) =&gt;{});
 </pre>
 <p>The reason argument is the error object and the promise argument is a
 reference to the promise object that caused the event to fire.</p>
@@ -16062,14 +16061,14 @@ apparently there is no problem:</p>
 <pre>
 makeSomethingAsync().
   .then(() =&gt; foo(&apos;unexpectedValue&apos;))
-  .<b>catch</b>(err =&gt; console.log(err)) // <i>&lt;&bsol; Error: UnexpectedValue will be caught here</i>
+  .<b>catch</b>(err =&gt; console.log(err)) // <i>&lt;&dash;&dash; Error: UnexpectedValue will be caught here</i>
 </pre>
 <p>However, if the same function is called outside of a promise chain, then the error will 
 not be handled by it and will be thrown to the application:</p>
 <pre>
-foo(&apos;unexpectedValue&apos;) // <i>&lt;&bsol; error will be thrown, so the application will crash</i>
-  .then(makeSomethingAsync) // <i>&lt;&bsol; will not run</i>
-  .<b>catch</b>(err =&bsol;console.log(err)) // <i>&lt;&bsol; will not catch</i>
+foo(&apos;unexpectedValue&apos;) // <i>&lt;&dash;&dash; error will be thrown, so the application will crash</i>
+  .then(makeSomethingAsync) // <i>&lt;&dash;&dash; will not run</i>
+  .<b>catch</b>(err =&gt; console.log(err)) // <i>&lt;&dash;&dash; will not catch</i>
 </pre>
 <p>There are 2 possible workarounds:</p>
 <p><b>Return a rejected promise with the error</b></p>
@@ -16477,176 +16476,71 @@ mySet.size = 5;
 mySet.size;  // <i>4</i>
 </pre>
 <p>In strict mode it even throws an error:</p>
-TypeError: Cannot <b>set</b> property size of #&lt;Set&bsol;which has only a
-getter
+<pre>
+TypeError: Cannot <b>set</b> property size of #&lt;Set&gt; which has only a getter
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch43-7">Section 43.7: Converting Sets to arrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Array  . <b>prototype</b>
-Sometimes you may need to convert a Set to an array, for example to be
-able to use methods like
-filter(). In order to do so,  Array   .   from   () or destructuring   &minus;   assignment
-use                                                                   
-.:
-<b>var</b>
-mySet
-=
-<b>new</b>
-Set
-(
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-)
-;
+<p>Sometimes you may need to convert a Set to an array, for example to be
+able to use Array.prototype methods like .filter(). In order to do so,  Array.from() or 
+destructuring&minus;assignment:</p>
+<pre>
+<b>var</b> mySet = <b>new</b> Set(&lbrack;1, 2, 3, 4&rbrack;);
 // <i>use Array.from</i>
-<b>const</b>
-myArray
-=
-Array
-.
-from
-(
-mySet
-)
-;
+<b>const</b> myArray = Array.from(mySet);
 // <i>use destructuring-assignment</i>
-<b>const</b>
-myArray
-=
-&lbrack;
-&hellip;
-mySet
-&rbrack;
-;
-Now you can filter the array to contain only even numbers and convert
-it back to Set using Set constructor:
-mySet
-=
-<b>new</b>
-Set
-(
-myArray.
-filter
-(
-x
-=&gt;
-x
-&percnt;
-2
-===
-0
-)
-)
-;
-mySet now contains only even numbers:
-console.
-log
-(
-mySet
-)
-;
-// <i>Set {2, 4}</i>
+<b>const</b> myArray = &lbrack;&hellip;mySet&rbrack;;
+</pre>
+<p>Now you can filter the array to contain only even numbers and convert
+it back to Set using Set constructor:</p>
+<pre>
+mySet = <b>new</b> Set(myArray.filter(x =&gt; x &percnt; 2 === 0));
+</pre>
+<p>mySet now contains only even numbers:</p>
+<!-- page 279 -->
+<pre>
+console.log(mySet);  // <i>Set {2, 4}</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch43-8">Section 43.8: Intersection and difference in Sets</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-There are no build-in methods for intersection and difference in Sets,
+<p>There are no build-in methods for intersection and difference in Sets,
 but you can still achieve that but converting them to arrays,
-filtering, and converting back to Sets:
-
-<b>var</b> set1 = <b>new</b> Set(&lbrack;1, 2, 3, 4&rbrack;), set2 = <b>new</b> Set(&lbrack;3, 4,
-5, 6&rbrack;);
-<b>const</b> intersection = <b>new</b> Set(Array.from(set1).filter(x =&gt;
-set2.has(x)));// <i>Set {3, 4}</i> <b>const</b> difference = <b>new</b>
-Set(Array.from(set1).filter(x =&bsol;!set2.has(x))); // <i>Set {1, 2}</i>
+filtering, and converting back to Sets:</p>
+<pre>
+<b>var</b> set1 = <b>new</b> Set(&lbrack;1, 2, 3, 4&rbrack;),
+    set2 = <b>new</b> Set(&lbrack;3, 4, 5, 6&rbrack;);
+<b>const</b> intersection = <b>new</b> Set(Array.from(set1).filter(x =&gt; set2.has(x)));// <i>Set {3, 4}</i>
+<b>const</b> difference = <b>new</b> Set(Array.from(set1).filter(x =&gt;!set2.has(x))); // <i>Set {1, 2}</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch43-9">Section 43.9: Iterating Sets</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-You can use a simple for-of loop to iterate a Set:
-<b>const</b>
-mySet
-=
-<b>new</b>
-Set
-(
-&lbrack;
-1
-,
-2
-,
-3
-&rbrack;
-)
-;
-<b>for</b>
-(
-<b>const</b>
-value of mySet
-)
-{
-console.
-log
-(
-value
-)
-;
-// <i>logs 1, 2 and 3</i>
+<p>You can use a simple for-of loop to iterate a Set:</p>
+<pre>
+<b>const</b> mySet = <b>new</b> Set(&lbrack;1, 2, 3&rbrack;);
+<b>for</b> (<b>const</b> value of mySet) {
+  console.log(value);  // <i>logs 1, 2 and 3</i>
 }
-When iterating over a set, it will always return values in the order
-they were first added to the set. For example:
-<b>const</b>
-<b>set</b>
-=
-<b>new</b>
-Set
-(
-&lbrack;
-4
-,
-5
-,
-6
-&rbrack;
-)
-<b>set</b>
-.
-add
-(
-10
-)
-<b>set</b>
-.
-add
-(
-5
-)
-// <i>5 already exists in the set</i>
-Array
-.
-from
-(
-<b>set</b>
-)
-// <i>&lbrack;4, 5, 6, 10&rbrack;</i>
-forEach    () method, similar to       Array   .   <b>prototype</b>   .   forEach
-There&apos;s also a .(). It has two parameters, callback, which will be
-executed for each element, and optional thisArg, which will be used as
-<b>this</b> when executing callback.
-Array   .   <b>prototype</b>   .   forEach   () and   Map.<b>prototype</b>   .   forEach
-callback has three arguments. The first two arguments are both the
-current element of Set (for consistency with ()) and the third
-argument is the Set itself.
-mySet.forEach((value, value2, <b>set</b>) =&bsol;console.log(value)); // <i>
-logs 1, 2 and 3</i>
+</pre>
+<p>When iterating over a set, it will always return values in the order
+they were first added to the set. For example:</p>
+<pre>
+<b>const</b> <b>set</b> = <b>new</b> Set(&lbrack;4, 5, 6&rbrack;)
+<b>set</b>.add(10)
+<b>set</b>.add(5)  // <i>5 already exists in the set</i>
+Array.from(<b>set</b>)  // <i>&lbrack;4, 5, 6, 10&rbrack;</i>
+</pre>
+<p>There&apos;s also a .forEach() method, similar to Array.prototype.forEach(). 
+It has two parameters, callback, which will be executed for each element, and 
+optional thisArg, which will be used as <b>this</b> when executing callback.</p>
+<p>callback has three arguments. The first two arguments are both the current 
+element of Set (for consistency with Array.prototype.forEach() and Map.prototype.forEach()) 
+and the third argument is the Set itself.</p>
+<pre>
+mySet.forEach((value, value2, <b>set</b>) =&gt; console.log(value)); // <i>logs 1, 2 and 3</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch44">Chapter 44: Modals - Prompts</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
