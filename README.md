@@ -15787,6 +15787,7 @@ asynchronous actions from a list of elements.</p>
     .then(successHandler, errorHandler)</a> after the reduce, to execute successHandler once all the 
 	previous steps have resolved. If any step was to fail, then errorHandler would execute.</li>
 </ol>
+<br/>
 <p>Note: The &quot;then&quot; reduction is a sequential counterpart of Promise.all().</p>
 
 <p><b>The &quot;catch&quot; reduction</b></p>
@@ -15820,6 +15821,7 @@ resource until a working server is found.</p>
   <li>We manually append <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">.then(successHandler, errorHandler)</a> after the reduce, to execute
     successHandler once any of the previous steps has resolved. If all steps were to fail, then errorHandler would execute.</li>
 </ol>
+<br/>
 <p>Note: The &quot;catch&quot; reduction is a sequential counterpart of , but not
 currently in native ECMAScript).</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -15979,7 +15981,9 @@ event gets fired whenever such a promise is handled:</p>
 window.addEventListener(&apos;unhandledrejection&apos;, event =&gt; console.log(&apos;unhandled&apos;));
 window.addEventListener(&apos;rejectionhandled&apos;, event =&gt; console.log(&apos;handled&apos;));
 <b>var</b> p = Promise.reject(&apos;test&apos;);
+
 setTimeout() =&gt; p&period;<b>catch</b>(console.log), 1000);
+
 // <i>Will print &apos;unhandled&apos;, and after one second &apos;test&apos; and &apos;handled&apos;</i>
 </pre>
 <p>The event argument contains information about the rejection.event.reason is the error object 
@@ -15999,8 +16003,8 @@ reference to the promise object that caused the event to fire.</p>
 be considered for debugging purposes only. Typically, all promises
 should handle their rejections.</p>
 <p><b>Note:</b> Currently, only Chrome 49+ and Node.js support unhandledrejection and rejectionhandled events.</p>
-<p><b>Caveats</b></p>
-<p><b>Chaining with fulfill and reject</b></p>
+<p><b>Caveats</b><br/>
+<b>Chaining with fulfill and reject</b></p>
 <p>The then(fulfill, reject) function (with both parameters not <b>null</b>) has unique and
 complex behavior, and shouldn&apos;t be used unless you know exactly how it works.</p>
 
@@ -16015,6 +16019,7 @@ promise.<b>catch</b>(reject)
 </pre>
 <p>However, it adopts unique behavior when both inputs are given:</p>
 <!-- page 271 -->
+<pre>
 // <i>the following calls are not equivalent!</i>
 promise.then(fulfill, reject)
 promise.then(fulfill).<b>catch</b>(reject)
@@ -16028,15 +16033,15 @@ but it is not, and will cause problems if used interchangeably. One such problem
 handler does not handle errors from the fulfill handler.  Here is what will happen:
 <pre>
 Promise.resolve() // <i>previous promise is fulfilled</i>
-  .then(() =&bsol;{ <b>throw</b> <b>new</b> Error(); }, // <i>error in the fulfill handler</i>
-    error =&bsol;{ <i>/&ast; this is not called! &ast;/</i> });
+  .then(() =&gt;{ <b>throw</b> <b>new</b> Error(); }, // <i>error in the fulfill handler</i>
+    error =&gt;{ <i>/&ast; this is not called! &ast;/</i> });
 </pre>
 <p>The above code will result in a rejected promise because the error is
 propagated. Compare it to the following code, which results in a fulfilled promise:</p>
 <pre>
 Promise.resolve() // <i>previous promise is fulfilled</i>
-  .then(() =&bsol;{ <b>throw</b> <b>new</b> Error(); }) // <i>error in the fulfill handler</i>
-    .<b>catch</b>(error =&bsol;{ <i>/&ast; handle error &ast;/</i> });
+  .then(() =&gt;{ <b>throw</b> <b>new</b> Error(); }) // <i>error in the fulfill handler</i>
+    .<b>catch</b>(error =&gt;{ <i>/&ast; handle error &ast;/</i> });
 </pre>
 <p>A similar problem exists when using then(fulfill, reject) interchangeably with catch(reject).then(fulfill),
 except with propagating fulfilled promises instead of rejected promises.</p>
@@ -16091,8 +16096,8 @@ foo(&apos;unexpectedValue&apos;) // <i>&lt;&bsol; error will be thrown, so the a
       }
       <b>return</b> <b>new</b> Promise(resolve =&gt;
         setTimeout(() =&gt; resolve(arg), 1000)
-    )
-  })
+      )
+    })
 }
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -17676,7 +17681,7 @@ json
 }
 ;
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<h2 id="ch48"># Chapter 48: BOM (Browser Object Model)</h2>
+<h2 id="ch48">Chapter 48: BOM (Browser Object Model)</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch48-1">Section 48.1: Introduction</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
