@@ -17785,12 +17785,12 @@ get_extension(&apos;name.with.many.dots.myext&apos;) // <i>&quot;myext&quot;</i>
 <b>function</b> get_extension(path) {
   <b>var</b> basename = path.split(/&lbrack;&bsol;&bsol;&bsol;&bsol;/&rbrack;/).pop(), // <i>extract file name from full path &hellip;</i>
                                               // <i>(supports &grave;&bsol;&bsol;&grave; and &grave;/&grave; separators)</i>
-  pos = basename.lastIndexOf(&apos;.&apos;);          // <i>get last position of &grave;.&grave;</i>
-  <b>if</b> (basename === &apos;&apos; &vert;&vert; pos &lt; 1         // <i>if file name is empty or &hellip;</i>
-    <b>return</b> &quot;&quot;;                           // <i>&grave;.&grave; not found (-1) or comes first (0)</i>
-<b>return</b> basename.slice(pos &plus; 1);            // <i>extract extension ignoring &grave;.&grave;</i>
+  pos = basename.lastIndexOf(&apos;.&apos;);            // <i>get last position of &grave;.&grave;</i>
+  <b>if</b> (basename === &apos;&apos; &vert;&vert; pos &lt; 1             // <i>if file name is empty or &hellip;</i>
+    <b>return</b> &quot;&quot;;                               // <i>&grave;.&grave; not found (-1) or comes first (0)</i>
+<b>return</b> basename.slice(pos &plus; 1);              // <i>extract extension ignoring &grave;.&grave;</i>
 }
-get_extension(&apos;/path/to/file.ext&apos;);         // <i>&quot;ext&quot;</i>
+get_extension(&apos;/path/to/file.ext&apos;); // <i>&quot;ext&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch52-3">Section 52.3: Set object property given its string name</h3>
