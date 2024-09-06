@@ -17679,7 +17679,7 @@ get_extension(&apos;name.with.many.dots.myext&apos;) // <i>&quot;myext&quot;</i>
 <p>The following solution may extract file extensions from full path:</p>
 <pre>
 <b>function</b> get_extension(path) {
-  <b>var</b> basename = path.split(/&lbrack;&bsol;&bsol;&bsol;&bsol;/&rbrack;/).pop(), // <i>extract file name from full path &hellip;</i>
+  <b>var</b> basename = path.split(/&lbrack;&bsol;&bsol;/&rbrack;/).pop(), // <i>extract file name from full path &hellip;</i>
                                               // <i>(supports &grave;&bsol;&bsol;&grave; and &grave;/&grave; separators)</i>
     pos = basename.lastIndexOf(&apos;.&apos;);          // <i>get last position of &grave;.&grave;</i>
   <b>if</b> (basename === &apos;&apos; &vert;&vert; pos &lt; 1              // <i>if file name is empty or &hellip;</i>
@@ -17699,7 +17699,7 @@ get_extension(&apos;/path/to/file.ext&apos;); // <i>&quot;ext&quot;</i>
     <b>var</b> e = prop.shift();
     assign(obj&lbrack;e&rbrack; =
       Object.<b>prototype</b>.toString.call(obj&lbrack;e&rbrack;) === &apos;&lbrack;object Object&rbrack;&apos;
-	  ? obj&lbrack;e&rbrack;
+      ? obj&lbrack;e&rbrack;
       : {},
       prop,
       value);
@@ -17729,7 +17729,6 @@ this question</a>.</p>
 <p>We&apos;ll assume you know how to 
 <a href="http://www.html5rocks.com/en/tutorials/file/dndfiles/">
 load a file using the File API</a>.</p>
-
 <pre>
 // <i>preliminary code to handle getting local file and finally printing to console</i>
 // <i>the results of our function ArrayBufferToBinary().</i>
@@ -17861,7 +17860,6 @@ create a new view of its data.</p>
 <b>var</b> buffer = <b>new</b> ArrayBuffer(8);
 <b>var</b> byteView = <b>new</b> int8Array(buffer);
 <b>var</b> floatView = <b>new</b> Float64Array(buffer);
-
 console.log(byteView);  // <i>&lbrack;0, 0, 0, 0, 0, 0, 0, 0&rbrack;</i>
 console.log(floatView); // <i>&lbrack;0&rbrack;</i>
 byteView&lbrack;0&rbrack; = 0x01;
@@ -17905,7 +17903,7 @@ ArrayBufferCursor.<b>prototype</b>.next = <b>function</b>(type) {
       <b>var</b> result = <b>this</b>.dataview.getUint16(<b>this</b>.index, <b>true</b>);
       <b>this</b>.index += 2;
       <b>return</b> result;
-    <b>case</b> &apos;Uint16&apos; :
+    <b>case</b> &apos;Int32&apos; :
       <b>var</b> result = <b>this</b>.dataview.getInt32(<b>this</b>.index, <b>true</b>);
       <b>this</b>.index += 4;
       <b>return</b> result;
@@ -17918,7 +17916,7 @@ ArrayBufferCursor.<b>prototype</b>.next = <b>function</b>(type) {
       <b>var</b> result = <b>this</b>.dataview.getFloat32(<b>this</b>.index, <b>true</b>);
       <b>this</b>.index += 4;
       <b>return</b> result;
-	<b>case</b> &apos;Double&apos :
+	<b>case</b> &apos;Double&apos; :
     <b>case</b> &apos;Float64&apos; :
       <b>var</b> result = <b>this</b>.dataview.getFloat64(<b>this</b>.index, <b>true</b>);
       <b>this</b>.index += 8;
@@ -17933,11 +17931,8 @@ ArrayBufferCursor.<b>prototype</b>.next = <b>function</b>(type) {
   <b>return</b> ArrayBufferCursor;
 });
 </pre>
-
 <p>You can then create an iterator like this:</p>
-<pre>
-<b>var</b> cursor = <b>new</b> ArrayBufferCursor(arrayBuffer);
-</pre>
+<pre><b>var</b> cursor = <b>new</b> ArrayBufferCursor(arrayBuffer);</pre>
 <p>You can use the hasNext to check if there&apos;s still items</p>
 <pre>
 <b>for</b>(;cursor.hasNext();) {
@@ -17945,9 +17940,7 @@ ArrayBufferCursor.<b>prototype</b>.next = <b>function</b>(type) {
 }
 </pre>
 <p>You can use the next method to take the next value:</p>
-<pre>
-<b>var</b> nextValue = cursor.next(&apos;Float&apos;);
-</pre>
+<pre><b>var</b> nextValue = cursor.next(&apos;Float&apos;);</pre>
 <p>With such an iterator, writing your own parser to process binary data
 becomes pretty easy.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
