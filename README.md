@@ -17485,10 +17485,10 @@ unchanged.</p>
 <b>function</b> add(a, b) {
   &apos;use strict&apos;;
   console.log(arguments&lbrack;0&rbrack;, arguments&lbrack;1&rbrack;);  // <i>undefined,undefined</i>
-                                                                        // <i>1,undefined</i>
+                                            // <i>1,undefined</i>
   a = 5, b = 10;
   console.log(arguments&lbrack;0&rbrack;, arguments&lbrack;1&rbrack;);  // <i>undefined,undefined</i>
-                                                                        // <i>1, undefined</i>
+                                            // <i>1, undefined</i>
 }
 add();
 // <i>undefined,undefined</i>
