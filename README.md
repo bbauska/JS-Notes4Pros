@@ -17725,8 +17725,8 @@ HTMLElement {
     }
   }
 });
-<b>&lt;initially-hidden</b> for = &quot;2&quot;<b>&gt;</b>Hello<b>&lt;/initially-hidden&gt;</b>
-<b>&lt;initially-hidden</b> for = &quot;5&quot;<b>&gt;</b>World<b>&lt;/initially-hidden&gt;</b>
+<b>&lt;initially-hidden</b> for=&quot;2&quot;<b>&gt;</b>Hello<b>&lt;/initially-hidden&gt;</b>
+<b>&lt;initially-hidden</b> for=&quot;5&quot;<b>&gt;</b>World<b>&lt;/initially-hidden&gt;</b>
 </pre>
 <!-- page 300 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -17744,13 +17744,13 @@ formatted = num.toFixed(2).replace(/&bsol;d(?=(&bsol;d{3})+&bsol;&period;)/g</i>
 number groups &lbrack;0 .. x&rbrack; and different delimiter types:</p>
 <pre>
 <i>/&ast;&ast;</i>
-*&ast; Number.prototype.format(n, x, s, c)</i>
-*&ast;</i>
-*&ast; &commat;@param integer n: length of decimal</i>
-*&ast; &commat;@param integer x: length of whole part</i>
-*&ast; &commat;@param mixed s: sections delimiter</i>
-*&ast; &commat;@param mixed c: decimal delimiter</i>
-*&ast;/</i>
+&ast; Number.prototype.format(n, x, s, c)</i>
+&ast;</i>
+&ast; &commat;param integer n: length of decimal</i>
+&ast; &commat;param integer x: length of whole part</i>
+&ast; &commat;param mixed   s: sections delimiter</i>
+&ast; &commat;param mixed   c: decimal delimiter</i>
+&ast;&ast;/</i>
 Number.<b>prototype</b>.format = <b>function</b>(n, x, s, c) {
   <b>var</b> re = &apos;&bsol;&bsol;d(?=(&bsol;&bsol;d{&apos; &plus; (x &vert;&vert; 3) &plus; &apos;}) &plus; &apos; &plus; (n &gt; 0 ? &apos;&bsol;&bsol;D&apos; : &apos;&dollar;&apos;) &plus; &apos;)&apos;,
     num = <b>this</b>.toFixed(Math.max(0, ~~n));
