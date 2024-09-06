@@ -16541,318 +16541,142 @@ and the third argument is the Set itself.</p>
 <pre>
 mySet.forEach((value, value2, <b>set</b>) =&gt; console.log(value)); // <i>logs 1, 2 and 3</i>
 </pre>
+<!-- page 280 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch44">Chapter 44: Modals - Prompts</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch44-1">Section 44.1: About User Prompts</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-[User
-Prompts](https://www.w3.org/TR/html5/webappapis.html#user-prompts) are
-methods part of the [Web Application
-API](https://www.w3.org/TR/html5/webappapis.html#webappapis) used to
-invoke Browser modals requesting a user action such as confirmation or
-input.
-<b>window.alert(message)</b>
-Show a modal <i>popup</i> with a message to the user. Requires the user to
-click &lbrack;OK&rbrack; to dismiss.
-alert
-(
-&quot;Hello World&quot;
-)
-;
-More information below in &quot;Using alert()&quot;.
+<p><a href="">User Prompts</a> are methods part of the <a href="">Web Application API</a> used to invoke Browser
+modals requesting a user action such as confirmation or input.</p>
+<p><b>window.alert(message)</b></p>
+<p>Show a modal <i>popup</i> with a message to the user.</p>
+<p>Requires the user to click &lbrack;OK&rbrack; to dismiss.</p>
+<pre>
+alert(&quot;Hello World&quot;);
+</pre>
+<p>More information below in &quot;Using alert()&quot;.</p>
+<pre>
 <b>boolean = window.confirm(message)</b>
-Show a modal <i>popup</i> with the provided message.
-
-Provides &lbrack;OK&rbrack; and &lbrack;Cancel&rbrack; buttons which will respond with a
-boolean value <b>true</b> / <b>false</b> respectively.
-confirm
-(
-&quot;Delete this comment?&quot;
-)
-;
-<b>result = window.prompt(message, defaultValue)</b>
-Show a modal <i>popup</i> with the provided message and an input field with
-an optional pre-filled value. Returns as result the user provided
-input value.
-prompt
-(
-&quot;Enter your website address&quot;
-,
-&quot;http://&quot;
-)
-;
-More information below in &quot;Usage of prompt()&quot;.
+</pre>
+<p>Show a modal <i>popup</i> with the provided message.</p>
+<p>Provides &lbrack;OK&rbrack; and &lbrack;Cancel&rbrack; buttons which will respond with a
+boolean value <b>true</b> / <b>false</b> respectively.</p>
+<pre>
+confirm(&quot;Delete this comment?&quot;);
+</pre>
+<p><b>result = window.prompt(message, defaultValue)</b></p>
+<p>Show a modal <i>popup</i> with the provided message and an input field with an 
+optional pre-filled value. Returns as result the user provided input value.</p>
+<pre>
+prompt(&quot;Enter your website address&quot;, &quot;http://&quot;);
+</pre>
+<p>More information below in &quot;Usage of prompt()&quot;.</p>
+<pre>
 <b>window.print()</b>
-Opens a modal with document print options.
-print
-(
-)
-;
+</pre>
+<p>Opens a modal with document print options.</p>
+<pre>
+print();
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch44-2">Section 44.2: Persistent Prompt Modal</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-When using <b>prompt</b> a user can always click <i><b>Cancel</b></i> and no
-value will be returned. To prevent empty values and make it more
-<b>persistent</b>:
-<b>&lt;</b>
-<b>h</b>
-<b>2</b>
-<b>&gt;</b>
-Welcome
-<b>&lt;</b>
-<b>span</b>
-id
-=
-&quot;name&quot;
-<b>&gt;</b>
-<b>&lt;</b>
-<b>/span</b>
-<b>&gt;</b>
-!
-<b>&lt;</b>
-<b>/h</b>
-<b>2</b>
-<b>&gt;</b>
-&lt;
-script
-&gt;
+<p>When using <b>prompt</b> a user can always click <i><b>Cancel</b></i> and no
+value will be returned. To prevent empty values and make it more <b>persistent</b>:</p>
+<pre>
+<b>&lt;h2&gt;</b>Welcome <b>&lt;span</b> id=&quot;name&quot;<b>&gt;&lt;/span&gt;!&lt;/h2&gt;</b>
+&lt;script&gt;
 // <i>Persistent Prompt modal</i>
-<b>var</b>
-userName
-while
-(
-!
-userName
-)
-{
-userName
-=
-prompt
-(
-&quot;Enter your name&quot;
-,
-&quot;&quot;
-)
-;
-<b>if</b>
-(
-!
-userName
-)
-{
-alert
-(
-&quot;Please, we need your name!&quot;
-)
-;
+<b>var</b> userName
+while(!userName) {
+  userName = prompt(&quot;Enter your name&quot;, &quot;&quot;);
+  <b>if</b>(!userName) {
+    alert(&quot;Please, we need your name!&quot;);
+  } <b>else</b> {
+    document.getElementById(&quot;name&quot;).innerHTML = userName;
+  }
 }
-<b>else</b>
-{
-document.
-getElementById
-(
-&quot;name&quot;
-)
-.
-innerHTML
-=
-userName
-;
-}
-}
-&lt;
-/
-script
-&gt;
-[jsFiddle demo](https://jsfiddle.net/RokoCB/2r3ekqzk/1/)
+&lt;/script&gt;
+</pre>
+<!-- page 281 -->
+<a href="https://jsfiddle.net/RokoCB/2r3ekqzk/1/">jsFiddle demo</a>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch44-3">Section 44.3: Confirm to Delete element</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-confirm
-A way to use () is when some UI action does some <i>destructive</i> changes
-to the page and is better accompanied by a <b>notification</b> and a
-<b>user confirmation</b> - like i.e. before deleting a post message:
-<b>&lt;</b>
-<b>div</b>
-id
-=
-&quot;post-102&quot;
-<b>&gt;</b>
-<b>&lt;</b>
-<b>p</b>
-<b>&gt;</b>
-I like Confirm modals.
-<b>&lt;</b>
-<b>/p</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>a</b>
-data-deletepost
-=
-&quot;post-102&quot;
-<b>&gt;</b>
-Delete post
-<b>&lt;</b>
-<b>/a</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>/div</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>div</b>
-id
-=
-&quot;post-103&quot;
-<b>&gt;</b>
-<b>&lt;</b>
-<b>p</b>
-<b>&gt;</b>
-That&apos;s way too cool!
-<b>&lt;</b>
-<b>/p</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>a</b>
-data-deletepost
-=
-&quot;post-103&quot;
-<b>&gt;</b>
-Delete post
-<b>&lt;</b>
-<b>/a</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>/div</b>
-<b>&gt;</b>
+<p>A way to use confirm() is when some UI action does some <i>destructive</i> changes
+to the page and is better accompanied by a <b>notification</b> and a <b>user confirmation</b> 
+- like i.e. before deleting a post message:</p>
+<pre>
+<b>&lt;div</b>id=&quot;post-102&quot;<b>&gt;</b>
+  <b>&lt;p&gt;</b>I like Confirm modals.<b>&lt;/p&gt;</b>
+  <b>&lt;a</b> data-deletepost=&quot;post-102&quot;<b>&gt;</b>Delete post<b>&lt;/a&gt;</b>
+<b>&lt;/div&gt;</b>
+<b>&lt;div</b> id=&quot;post-103&quot;<b>&gt;</b>
+  <b>&lt;p&gt;</b>That&apos;s way too cool!<b>&lt;/p&gt;</b>
+  <b>&lt;a</b>data-deletepost=&quot;post-103&quot;<b>&gt;</b>Delete post<b>&lt;/a&gt;</b>
+<b>&lt;/div&gt;</b>
 // <i>Collect all buttons</i>
-<b>var</b>
-deleteBtn
-=
-document.
-querySelectorAll
-(
-&quot;&lbrack;data-deletepost&rbrack;&quot;
-)
-;
-<b>function</b>
-deleteParentPost
-(
-event
-)
-{
-event.
-preventDefault
-(
-)
-;
-// <i>Prevent page scroll jump on anchor click</i>
-<b>if</b>
-(
-confirm
-(
-&quot;Really Delete this post?&quot;
-)
-)
-{
-<b>var</b>
-post
-=
-document.
-getElementById
-(
-<b>this</b>
-.
-dataset
-.
-deletepost
-)
-;
-post.
-parentNode
-.
-removeChild
-(
-post
-)
-;
-// <i>TODO: remove that post from database</i>
-}
-// <i>else, do nothing</i>
+<b>var</b> deleteBtn = document.querySelectorAll(&quot;&lbrack;data-deletepost&rbrack;&quot;);
+<b>function</b> deleteParentPost(event) {
+  event.preventDefault();  // <i>Prevent page scroll jump on anchor click</i>
+  <b>if</b>(confirm(&quot;Really Delete this post?&quot;)) {
+    <b>var</b> post = document.getElementById( <b>this</b>.dataset.deletepost );
+    post.parentNode.removeChild(post);
+    // <i>TODO: remove that post from database</i>
+  } // <i>else, do nothing</i>
 }
 // <i>Assign click event to buttons</i>
-&lbrack;
-&rbrack;
-.
-forEach
-.
-call
-(
-deleteBtn
-,
-<b>function</b>
-(
-btn
-)
-{
-btn.
-addEventListener
-(
-&quot;click&quot;
-,
-deleteParentPost
-,
-<b>false</b>
-)
-;
-}
-)
-;
-[jsFiddle demo](https://jsfiddle.net/RokoCB/6d652ycL/)
+&lbrack;&rbrack;.forEach.call(deleteBtn, <b>function</b>(btn) {
+  btn.addEventListener(&quot;click&quot;, deleteParentPost, <b>false</b>);
+});
+</pre>
+<p><a href="https://jsfiddle.net/RokoCB/6d652ycL/">jsFiddle demo</a></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch44-4">Section 44.4: Usage of alert()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-alert
-The () method of the window object displays an <i>alert box</i> with a
+<p>The altert() method of the window object displays an <i>alert box</i> with a
 specified message and an OK or Cancel button. The text of that button
-depends on the browser and can&apos;t be modified.
-<b>Syntax</b>
-alert
-(
-&quot;Hello world!&quot;
-)
-;
+depends on the browser and can&apos;t be modified.</p>
+<p><b>Syntax</b></p>
+<pre>
+alert(&quot;Hello world!&quot;);
 // <i>Or, alternatively&hellip;</i>
-window.
-alert
-(
-&quot;Hello world!&quot;
-)
-;
-<b>Produces</b>
-![](./images/image033.jpg){width="4.666666666666667in"
-height="1.5041666666666667in"}
-An <i>alert box</i> is often used if you want to make sure information
-comes through to the user.
-<b>Note:</b> The alert box takes the focus away from the current window,
-and forces the browser to read the message.
-Do not overuse this method, as it prevents the user from accessing
-other parts of the page until the box is closed. Also it stops the
-further code execution, until user clicks OK . (in particular, the
-timers which were set with
-setInterval                    () or         setTimeout
-() don&apos;t tick either). The alert box only works in browsers, and its
-design cannot be
-modified.
-<b>Parameter Description</b>
-Required. Specifies the text to display in the alert box, or an object
-converted into a string and message
-displayed.
-<b>Return value</b> alert function doesn&apos;t return any value
+window.alert(&quot;Hello world!&quot;);
+</pre>
+<p><b>Produces</b></p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~ 33. stackoverflow.com says: Hello world! (282) ~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="/images/image033.jpg"
+  title="stackoverflow.com says Hello world!"
+  alt="stackoverflow.com says Hello world!"
+  style="border: 2px solid #000000; width:4.66in;" />
+<!-- {width="4.666666666666667in" height="1.5041666666666667in"} -->
+<p>An <i>alert box</i> is often used if you want to make sure information comes through 
+to the user.<p>
+<p><b>Note:</b> The alert box takes the focus away from the current window, and forces 
+the browser to read the message. Do not overuse this method, as it prevents the user 
+from accessing other parts of the page until the box is closed. Also it stops the
+further code execution, until user clicks OK. (in particular, the timers which were set 
+with setInterval() or setTimeout() don&apos;t tick either). The alert box only works in 
+browsers, and its design cannot be modified.</p>
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>message</td>
+      <td>Required. Specifies the text to display in the alert box, or an object converted into a string and displayed.</td>
+    </tr>
+  </tbody>
+</table>
+<p><b>Return value</b></p>
+<p>alert function doesn&apos;t return any value</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch44-5">Section 44.5: Usage of prompt()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
