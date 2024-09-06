@@ -16358,4 +16358,2211 @@ request.onerror = <b>function</b>() {
 };
 <!-- page 277 -->
 <!-- thru chapter 42 section 14 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch43">Chapter 43: Set</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<table>
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Parameter</b></th>
+      <th><b>Details</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Iterable</td>
+      <td>If an iterable object is passed, all of its elements will be added to the new Set. null is treated as undefined.</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>The value of the element to add to the Set object.</td>
+    </tr>
+    <tr>
+      <td>callback</td>
+      <td>Function to execute for each element.</td>
+    </tr>
+    <tr>
+      <td>thisArg</td>
+      <td>Optional. Value to use as this when executing callback.</td>
+    </tr>
+  </tbody>
+</table>
+<p>The Set object lets you store unique values of any type, whether
+primitive values or object references.</p>
+<p>Set objects are collections of values. You can iterate through the
+elements of a set in insertion order. A value in the Set may only
+occur <b>ONCE</b>; it is unique in the Set&apos;s collection. Distinct values
+are discriminated using the <i>SameValueZero</i> comparison algorithm.</p>
+<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-set-objects">
+Standard Specification About Set</a></p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-1">Section 43.1: Creating a Set</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>The Set object lets you store unique values of any type, whether
+primitive values or object references.</p>
+<p>You can push items into a set and iterate them similar to a plain
+JavaScript array, but unlike array, you cannot add a value to a Set if
+the value already exist in it.</p>
+<p>To create a new set:</p>
+<pre>
+<b>const</b> mySet = <b>new</b> Set();
+</pre>
+<p>Or you can create a set from any iterable object to give it starting values:</p>
+<pre>
+<b>const</b> arr = &lbrack;1,2,3,4,4,5&rbrack;;
+<b>const</b> mySet = <b>new</b> Set(arr);
+</pre>
+<p>In the example above the set content would be {1, 2, 3, 4, 5}. Note that the 
+value 4 appears only once, unlike in the original array used to create it.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-2">Section 43.2: Adding a value to a Set</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>To add a value to a Set, use the .add() method:</p>
+<pre>
+mySet.add(5);
+</pre>
+<p>If the value already exist in the set it will not be added again, as Sets 
+contain unique values.</p>
 
+<p>Note that the .add() method returns the set itself, so you can chain add
+calls together:</p>
+<pre>
+mySet.add(1).add(2).add(3);
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-3">Section 43.3: Removing value from a set</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>To remove a value from a set, use .delete() method:</p>
+<!-- page 278 -->
+<pre>
+mySet.<b>delete</b>(some_val);
+</pre>
+<p>This function will return <b>true</b> if the value existed in the set and
+was removed, or <b>false</b> otherwise.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-4">Section 43.4: Checking if a value exist in a set</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>To check if a given value exists in a set, use .has() method:</p>
+<pre>
+mySet.has(someVal);
+</pre>
+<p>Will return <b>true</b> if someVal appears in the set, <b>false</b> otherwise.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-5">Section 43.5: Clearing a Set</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>You can remove all the elements in a set using the .clear() method:</p>
+<pre>
+mySet.clear();
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-6">Section 43.6: Getting set length</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>You can get the number of elements inside the set using the .size property</p>
+<pre>
+<b>const</b> mySet = <b>new</b> Set(&lbrack;1, 2, 2, 3&rbrack;);
+mySet.add(4);
+mySet.size;  // <i>4</i>
+</pre>
+<p>This property, unlike Array.prototype.length, is read-only, which means that 
+you can&apos;t change it by assigning something to it:</p>
+<pre>
+mySet.size = 5;
+mySet.size;  // <i>4</i>
+</pre>
+<p>In strict mode it even throws an error:</p>
+TypeError: Cannot <b>set</b> property size of #&lt;Set&bsol;which has only a
+getter
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-7">Section 43.7: Converting Sets to arrays</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Array  . <b>prototype</b>
+Sometimes you may need to convert a Set to an array, for example to be
+able to use methods like
+filter(). In order to do so,  Array   .   from   () or destructuring   &minus;   assignment
+use                                                                   
+.:
+<b>var</b>
+mySet
+=
+<b>new</b>
+Set
+(
+&lbrack;
+1
+,
+2
+,
+3
+,
+4
+&rbrack;
+)
+;
+// <i>use Array.from</i>
+<b>const</b>
+myArray
+=
+Array
+.
+from
+(
+mySet
+)
+;
+// <i>use destructuring-assignment</i>
+<b>const</b>
+myArray
+=
+&lbrack;
+&hellip;
+mySet
+&rbrack;
+;
+Now you can filter the array to contain only even numbers and convert
+it back to Set using Set constructor:
+mySet
+=
+<b>new</b>
+Set
+(
+myArray.
+filter
+(
+x
+=&gt;
+x
+&percnt;
+2
+===
+0
+)
+)
+;
+mySet now contains only even numbers:
+console.
+log
+(
+mySet
+)
+;
+// <i>Set {2, 4}</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-8">Section 43.8: Intersection and difference in Sets</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+There are no build-in methods for intersection and difference in Sets,
+but you can still achieve that but converting them to arrays,
+filtering, and converting back to Sets:
+
+<b>var</b> set1 = <b>new</b> Set(&lbrack;1, 2, 3, 4&rbrack;), set2 = <b>new</b> Set(&lbrack;3, 4,
+5, 6&rbrack;);
+<b>const</b> intersection = <b>new</b> Set(Array.from(set1).filter(x =&gt;
+set2.has(x)));// <i>Set {3, 4}</i> <b>const</b> difference = <b>new</b>
+Set(Array.from(set1).filter(x =&bsol;!set2.has(x))); // <i>Set {1, 2}</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch43-9">Section 43.9: Iterating Sets</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+You can use a simple for-of loop to iterate a Set:
+<b>const</b>
+mySet
+=
+<b>new</b>
+Set
+(
+&lbrack;
+1
+,
+2
+,
+3
+&rbrack;
+)
+;
+<b>for</b>
+(
+<b>const</b>
+value of mySet
+)
+{
+console.
+log
+(
+value
+)
+;
+// <i>logs 1, 2 and 3</i>
+}
+When iterating over a set, it will always return values in the order
+they were first added to the set. For example:
+<b>const</b>
+<b>set</b>
+=
+<b>new</b>
+Set
+(
+&lbrack;
+4
+,
+5
+,
+6
+&rbrack;
+)
+<b>set</b>
+.
+add
+(
+10
+)
+<b>set</b>
+.
+add
+(
+5
+)
+// <i>5 already exists in the set</i>
+Array
+.
+from
+(
+<b>set</b>
+)
+// <i>&lbrack;4, 5, 6, 10&rbrack;</i>
+forEach    () method, similar to       Array   .   <b>prototype</b>   .   forEach
+There&apos;s also a .(). It has two parameters, callback, which will be
+executed for each element, and optional thisArg, which will be used as
+<b>this</b> when executing callback.
+Array   .   <b>prototype</b>   .   forEach   () and   Map.<b>prototype</b>   .   forEach
+callback has three arguments. The first two arguments are both the
+current element of Set (for consistency with ()) and the third
+argument is the Set itself.
+mySet.forEach((value, value2, <b>set</b>) =&bsol;console.log(value)); // <i>
+logs 1, 2 and 3</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch44">Chapter 44: Modals - Prompts</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch44-1">Section 44.1: About User Prompts</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+[User
+Prompts](https://www.w3.org/TR/html5/webappapis.html#user-prompts) are
+methods part of the [Web Application
+API](https://www.w3.org/TR/html5/webappapis.html#webappapis) used to
+invoke Browser modals requesting a user action such as confirmation or
+input.
+<b>window.alert(message)</b>
+Show a modal <i>popup</i> with a message to the user. Requires the user to
+click &lbrack;OK&rbrack; to dismiss.
+alert
+(
+&quot;Hello World&quot;
+)
+;
+More information below in &quot;Using alert()&quot;.
+<b>boolean = window.confirm(message)</b>
+Show a modal <i>popup</i> with the provided message.
+
+Provides &lbrack;OK&rbrack; and &lbrack;Cancel&rbrack; buttons which will respond with a
+boolean value <b>true</b> / <b>false</b> respectively.
+confirm
+(
+&quot;Delete this comment?&quot;
+)
+;
+<b>result = window.prompt(message, defaultValue)</b>
+Show a modal <i>popup</i> with the provided message and an input field with
+an optional pre-filled value. Returns as result the user provided
+input value.
+prompt
+(
+&quot;Enter your website address&quot;
+,
+&quot;http://&quot;
+)
+;
+More information below in &quot;Usage of prompt()&quot;.
+<b>window.print()</b>
+Opens a modal with document print options.
+print
+(
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch44-2">Section 44.2: Persistent Prompt Modal</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+When using <b>prompt</b> a user can always click <i><b>Cancel</b></i> and no
+value will be returned. To prevent empty values and make it more
+<b>persistent</b>:
+<b>&lt;</b>
+<b>h</b>
+<b>2</b>
+<b>&gt;</b>
+Welcome
+<b>&lt;</b>
+<b>span</b>
+id
+=
+&quot;name&quot;
+<b>&gt;</b>
+<b>&lt;</b>
+<b>/span</b>
+<b>&gt;</b>
+!
+<b>&lt;</b>
+<b>/h</b>
+<b>2</b>
+<b>&gt;</b>
+&lt;
+script
+&gt;
+// <i>Persistent Prompt modal</i>
+<b>var</b>
+userName
+while
+(
+!
+userName
+)
+{
+userName
+=
+prompt
+(
+&quot;Enter your name&quot;
+,
+&quot;&quot;
+)
+;
+<b>if</b>
+(
+!
+userName
+)
+{
+alert
+(
+&quot;Please, we need your name!&quot;
+)
+;
+}
+<b>else</b>
+{
+document.
+getElementById
+(
+&quot;name&quot;
+)
+.
+innerHTML
+=
+userName
+;
+}
+}
+&lt;
+/
+script
+&gt;
+[jsFiddle demo](https://jsfiddle.net/RokoCB/2r3ekqzk/1/)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch44-3">Section 44.3: Confirm to Delete element</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+confirm
+A way to use () is when some UI action does some <i>destructive</i> changes
+to the page and is better accompanied by a <b>notification</b> and a
+<b>user confirmation</b> - like i.e. before deleting a post message:
+<b>&lt;</b>
+<b>div</b>
+id
+=
+&quot;post-102&quot;
+<b>&gt;</b>
+<b>&lt;</b>
+<b>p</b>
+<b>&gt;</b>
+I like Confirm modals.
+<b>&lt;</b>
+<b>/p</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>a</b>
+data-deletepost
+=
+&quot;post-102&quot;
+<b>&gt;</b>
+Delete post
+<b>&lt;</b>
+<b>/a</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>/div</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>div</b>
+id
+=
+&quot;post-103&quot;
+<b>&gt;</b>
+<b>&lt;</b>
+<b>p</b>
+<b>&gt;</b>
+That&apos;s way too cool!
+<b>&lt;</b>
+<b>/p</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>a</b>
+data-deletepost
+=
+&quot;post-103&quot;
+<b>&gt;</b>
+Delete post
+<b>&lt;</b>
+<b>/a</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>/div</b>
+<b>&gt;</b>
+// <i>Collect all buttons</i>
+<b>var</b>
+deleteBtn
+=
+document.
+querySelectorAll
+(
+&quot;&lbrack;data-deletepost&rbrack;&quot;
+)
+;
+<b>function</b>
+deleteParentPost
+(
+event
+)
+{
+event.
+preventDefault
+(
+)
+;
+// <i>Prevent page scroll jump on anchor click</i>
+<b>if</b>
+(
+confirm
+(
+&quot;Really Delete this post?&quot;
+)
+)
+{
+<b>var</b>
+post
+=
+document.
+getElementById
+(
+<b>this</b>
+.
+dataset
+.
+deletepost
+)
+;
+post.
+parentNode
+.
+removeChild
+(
+post
+)
+;
+// <i>TODO: remove that post from database</i>
+}
+// <i>else, do nothing</i>
+}
+// <i>Assign click event to buttons</i>
+&lbrack;
+&rbrack;
+.
+forEach
+.
+call
+(
+deleteBtn
+,
+<b>function</b>
+(
+btn
+)
+{
+btn.
+addEventListener
+(
+&quot;click&quot;
+,
+deleteParentPost
+,
+<b>false</b>
+)
+;
+}
+)
+;
+[jsFiddle demo](https://jsfiddle.net/RokoCB/6d652ycL/)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch44-4">Section 44.4: Usage of alert()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+alert
+The () method of the window object displays an <i>alert box</i> with a
+specified message and an OK or Cancel button. The text of that button
+depends on the browser and can&apos;t be modified.
+<b>Syntax</b>
+alert
+(
+&quot;Hello world!&quot;
+)
+;
+// <i>Or, alternatively&hellip;</i>
+window.
+alert
+(
+&quot;Hello world!&quot;
+)
+;
+<b>Produces</b>
+![](./images/image033.jpg){width="4.666666666666667in"
+height="1.5041666666666667in"}
+An <i>alert box</i> is often used if you want to make sure information
+comes through to the user.
+<b>Note:</b> The alert box takes the focus away from the current window,
+and forces the browser to read the message.
+Do not overuse this method, as it prevents the user from accessing
+other parts of the page until the box is closed. Also it stops the
+further code execution, until user clicks OK . (in particular, the
+timers which were set with
+setInterval                    () or         setTimeout
+() don&apos;t tick either). The alert box only works in browsers, and its
+design cannot be
+modified.
+<b>Parameter Description</b>
+Required. Specifies the text to display in the alert box, or an object
+converted into a string and message
+displayed.
+<b>Return value</b> alert function doesn&apos;t return any value
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch44-5">Section 44.5: Usage of prompt()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Prompt will display a dialog to the user requesting their input. You
+can provide a message that will be placed above the text field. The
+return value is a string representing the input provided by the user.
+<b>var</b>
+name
+=
+prompt
+(
+&quot;What&apos;s your name?&quot;
+)
+;
+console.
+log
+(
+&quot;Hello, &quot;
+&plus;
+name
+)
+;
+prompt
+You can also pass () a second parameter, which will be displayed as
+the default text in the prompt&apos;s text field.
+<b>var</b>
+name
+=
+prompt
+(
+&apos;What
+<b>&bsol;&amp;apos;</b>
+s your name?&apos;
+,
+&apos; Name&hellip;&apos;
+)
+;
+console.
+log
+(
+&apos;Hello, &apos;
+&plus;
+name
+)
+;
+<b>Parameter Description</b>
+message Required. Text to display above the text field of the prompt.
+default Optional. Default text to display in the text field when the
+prompt is displayed.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch45">Chapter 45: execCommand and contenteditable</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>commandId value</b>
+⋮ <b>Inline formatting commands</b>
+backColor                              Color value String
+bold                                   
+createLink                             URL String
+fontName                               Font family name
+fontSize                               &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;,
+&quot;5&quot;, &quot;6&quot;, &quot;7&quot;
+foreColor                              Color value String
+strikeThrough                          
+superscript                            
+unlink                                 
+⋮ <b>Block formatting commands</b> delete
+
+formatBlock &quot;address&quot;, &quot;dd&quot;, &quot;div&quot;, &quot;dt&quot;, &quot;h1&quot;, &quot;h2&quot;,
+&quot;h3&quot;, &quot;h4&quot;, &quot;h5&quot;, &quot;h6&quot;, &quot;p&quot;, &quot;pre&quot;
+
+forwardDelete insertHorizontalRule
+
+insertHTML HTML String insertImage URL String insertLineBreak
+insertOrderedList insertParagraph insertText Text string
+insertUnorderedList justifyCenter justifyFull justifyLeft justifyRight
+outdent
+
+⋮ <b>Clipboard commands</b> copy Currently Selected String cut Currently
+Selected String paste
+
+⋮ <b>Miscellaneous commands</b> defaultParagraphSeparator redo selectAll
+styleWithCSS undo useCSS
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch45-1">Section 45.1: Listening to Changes of contenteditable</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Events that work with most form elements (e.g., change, keydown,
+keyup, keypress) do not work with contenteditable.
+
+Instead, you can listen to changes of contenteditable contents with
+the input event. Assuming contenteditableHtmlElement is a JS DOM
+object that is contenteditable:
+contenteditableHtmlElement.
+addEventListener
+(
+&quot;input&quot;
+,
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+&quot;contenteditable element changed&quot;
+)
+;
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch45-2">Section 45.2: Getting started</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+
+The HTML attribute contenteditable provides a simple way to turn a
+HTML element into a user-editable area
+<b>&lt;</b>
+<b>div</b>
+contenteditable
+<b>&gt;</b>
+You can
+<b>&lt;</b>
+<b>b</b>
+<b>&gt;</b>
+edit
+<b>&lt;</b>
+<b>/b</b>
+<b>&gt;</b>
+me!
+<b>&lt;</b>
+<b>/div</b>
+<b>&gt;</b>
+<b>Native Rich-Text editing</b>
+Using <b>JavaScript</b> and
+[execCommandW3C](https://w3c.github.io/editing/execCommand.html) you
+can additionally pass more editing features to the currently focused
+contenteditable element (specifically at the caret position or
+selection).
+The execCommand function method accepts 3 arguments
+document.
+execCommand
+(
+commandId
+,
+showUI
+,
+value
+)
+commandId
+String. from the list of available &ast;&ast;
+<i>commandId</i>
+&ast;&ast;s
+(
+see:
+<i><b>Parameters</b></i>
+→
+<i>commandId</i>
+)
+showUI
+Boolean (not implemented. Use
+<b>false</b>
+)
+value
+String If a command expects a command-related String
+<i><b>value</b></i>
+, otherwise
+&quot;&quot;
+.
+(see: <i><b>Parameters</b></i>→<i>value</i>)
+Example using the &quot;bold&quot; <b>command</b> and &quot;formatBlock&quot; (where a
+<b>value</b> is expected):
+document.execCommand(&quot;bold&quot;, <b>false</b>, &quot;&quot;); // <i>Make selected
+text bold</i> document.execCommand(&quot;formatBlock&quot;, <b>false</b>, &quot;H2&quot;);
+// <i>Make selected text Block-level &lt;h2&gt;</i>
+
+<b>Quick Start Example:</b>
+<b>&lt;</b>
+<b>button</b>
+data-edit
+=
+&quot;bold&quot;
+<b>&gt;</b>
+<b>&lt;</b>
+<b>b</b>
+<b>&gt;</b>
+B
+<b>&lt;</b>
+<b>/b</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>/button</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>button</b>
+data-edit
+=
+&quot;italic&quot;
+<b>&gt;</b>
+<b>&lt;</b>
+<b>i</b>
+<b>&gt;</b>
+I
+<b>&lt;</b>
+<b>/i</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>/button</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>button</b>
+data-edit
+=
+&quot;formatBlock:p&quot;
+<b>&gt;</b>
+P
+<b>&lt;</b>
+<b>/button</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>button</b>
+data-edit
+=
+&quot;formatBlock:H1&quot;
+<b>&gt;</b>
+H1
+<b>&lt;</b>
+<b>/button</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>button</b>
+data-edit
+=
+&quot;insertUnorderedList&quot;
+<b>&gt;</b>
+UL
+<b>&lt;</b>
+<b>/button</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>button</b>
+data-edit
+=
+&quot;justifyLeft&quot;
+<b>&gt;</b>
+&#8676;
+<b>&lt;</b>
+<b>/button</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>button</b>
+data-edit
+=
+&quot;justifyRight&quot;
+<b>&gt;</b>
+&#8677;
+<b>&lt;</b>
+<b>/button</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>button</b>
+data-edit
+=
+&quot;removeFormat&quot;
+<b>&gt;</b>
+&times;
+<b>&lt;</b>
+<b>/button</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>div</b>
+contenteditable
+<b>&gt;</b>
+<b>&lt;</b>
+<b>p</b>
+<b>&gt;</b>
+Edit me!
+<b>&lt;</b>
+<b>/p</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>/div</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>script</b>
+
+<b>&gt;</b>
+&lbrack;&rbrack;
+.forEach.call(document.querySelectorAll(&quot;&lbrack;data-edit&rbrack;&quot;),
+function(btn)
+{
+btn.addEventListener(&quot;click&quot;, edit, false);
+})
+;
+function edit(event) {
+event.preventDefault();
+var cmd_val = this.dataset.edit.split(&quot;:&quot;);
+document.execCommand(cmd_val&lbrack;0&rbrack;, false, cmd_val&lbrack;1&rbrack;);
+}
+<b>&lt;</b>
+<b>script</b>
+<b>&gt;</b>
+[jsFiddle demo](https://jsfiddle.net/RokoCB/az7f38w7/)
+
+[Basic Rich-Text editor example (Modern
+browsers)](https://jsfiddle.net/RokoCB/yvshdr4q/)
+
+<b>Final thoughts</b>
+Even being present for a long time (IE6), implementations and
+behaviors of execCommand vary from browser to browser making
+&quot;building a Fully-featured and cross-browser compatible WYSIWYG
+editor&quot; a hard task to any experienced JavaScript developer.
+
+Even if not yet fully standardized you can expect pretty decent
+results on the newer browsers like <b>Chrome, Firefox, Edge</b>. If you
+need <i>better</i> support for other browsers and more features like
+HTMLTable editing etc. a rule of thumbs is to look for an <b>already
+existent</b> and robust <b>Rich-Text</b> editor.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch45-3">Section 45.3: Copy to clipboard from textarea using execCommand(&quot;copy&quot;)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Example:
+&lt;!
+DOCTYPE html
+&gt;
+&lt;
+html lang
+=
+&quot;en&quot;
+&gt;
+&lt;
+head
+&gt;
+&lt;
+meta charset
+=
+&quot;UTF-8&quot;
+&gt;
+&lt;
+title
+&gt;&lt;
+/
+title
+&gt;
+&lt;
+/
+head
+&gt;
+&lt;
+body
+&gt;
+&lt;
+textarea id
+=
+&quot;content&quot;
+&gt;&lt;
+/
+textarea
+&gt;
+&lt;
+input type
+=
+&quot;button&quot;
+id
+=
+&quot;copyID&quot;
+value
+=
+&quot;Copy&quot;
+/&gt;
+&lt;
+script type
+=
+&quot;text/javascript&quot;
+&gt;
+<b>var</b>
+button
+=
+document.
+getElementById
+(
+&quot;copyID&quot;
+)
+,
+input
+=
+document.
+getElementById
+(
+&quot;content&quot;
+)
+;
+button.
+addEventListener
+(
+&quot;click&quot;
+,
+<b>function</b>
+(
+event
+)
+{
+event.
+preventDefault
+(
+)
+;
+input.
+select
+(
+)
+;
+document.
+execCommand
+(
+&quot;copy&quot;
+)
+;
+}
+)
+;
+&lt;
+/
+script
+&gt;
+&lt;
+/
+body
+&gt;
+&lt;
+/
+html
+&gt;
+document.
+execCommand
+(
+&quot;copy&quot;
+)
+copies the current selection to the clipboard
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch45-4">Section 45.4: Formatting</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Users can add formatting to contenteditable documents or elements
+using their browser&apos;s features, such as common keyboard shortcuts for
+formatting ( Ctrl-B for <b>bold</b>, Ctrl-I for <i>italic</i>, etc.) or by
+dragging and dropping images, links, or markup from the clipboard.
+
+Additionally, developers can use JavaScript to apply formatting to the
+current selection (highlighted text).
+
+document.execCommand(&apos;bold&apos;, <b>false</b>, <b>null</b>); // <i>toggles bold
+formatting</i> document.execCommand(&apos;italic&apos;, <b>false</b>, <b>null</b>); // <i>
+toggles italic formatting</i> document.execCommand(&apos;underline&apos;,
+<b>false</b>, <b>null</b>); // <i>toggles underline</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch46">Chapter 46: History</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>Parameter Details</b>
+domain The domain you want to update to title The title to update to
+path The path to update to
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch46-1">Section 46.1: history.pushState()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Syntax :
+history.
+pushState
+(
+state object
+,
+title
+,
+url
+)
+This method allows to ADD histories entries. For more reference,
+Please have a look on this document : [pushState()
+method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method)
+
+<b>Example :</b> window.history.pushState(&quot;http://example.ca&quot;, &quot;Sample
+Title&quot;, &quot;/example/path.html&quot;);
+
+This example inserts a new record into the history, address bar, and
+page title.
+history.replaceState
+Note this is different from the (). Which updates the current history
+entry, rather than adding a new one.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch46-2">Section 46.2: history.replaceState()</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>Syntax :</b>
+history.
+replaceState
+(
+data
+,
+title
+&lbrack;
+,
+url
+&rbrack;
+)
+This method modifies the current history entry instead of creating a
+new one. Mainly used when we want to update URL of the current history
+entry. window.history.replaceState(&quot;http://example.ca&quot;, &quot;Sample
+Title&quot;, &quot;/example/path.html&quot;);
+
+This example replaces the current history, address bar, and page
+title.
+history.pushState
+Note this is different from the (). Which inserts a new history entry,
+rather than replacing the current one.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch46-3">Section 46.3: Load a specific URL from the history list</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>go() method</b>
+The go() method loads a specific URL from the history list. The
+parameter can either be a number which goes to the URL within the
+specific position (-1 goes back one page, 1 goes forward one page), or
+a string. The string must be a partial or full URL, and the function
+will go to the first URL that matches the string. Syntax
+history.
+go
+(
+number
+&vert;
+URL
+)
+Example
+Click on the button to go back two pages:
+<b>&lt;</b>
+<b>html</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>head</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>script</b>
+type
+=
+&quot;text/javascript&quot;
+<b>&gt;</b>
+function goBack()
+{
+window.history.go(-2)
+}
+<b>&lt;</b>
+<b>/script</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>/head</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>body</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>input</b>
+type
+=
+&quot;button&quot;
+value
+
+=
+&quot;Go back 2 pages&quot;
+onclick
+=
+&quot;goBack()&quot;
+<b>/&gt;</b>
+<b>&lt;</b>
+<b>/body</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>/html</b>
+<b>&gt;</b>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch47">Chapter 47: Navigator Object</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch47-1">Section 47.1: Get some basic browser data and return it as a JSON object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The following function can be used to get some basic information about
+the current browser and return it in JSON format.
+<b>function</b>
+getBrowserInfo
+(
+)
+{
+<b>var</b>
+json
+=
+&quot;&lbrack;{&quot;
+,
+<i>/&ast; The array containing the browser info &ast;/</i>
+info
+=
+&lbrack;
+navigator.
+userAgent
+,
+// <i>Get the User-agent</i>
+navigator.
+cookieEnabled
+,
+// <i>Checks whether cookies are enabled in browser</i>
+navigator.
+appName
+,
+// <i>Get the Name of Browser</i>
+navigator.
+language
+,
+// <i>Get the Language of Browser</i>
+navigator.
+appVersion
+,
+// <i>Get the Version of Browser</i>
+navigator.
+platform
+// <i>Get the platform for which browser is compiled</i>
+&rbrack;
+,
+<i>/&ast; The array containing the browser info names &ast;/</i>
+infoNames
+=
+&lbrack;
+&quot;userAgent&quot;
+,
+&quot;cookiesEnabled&quot;
+,
+&quot;browserName&quot;
+,
+&quot;browserLang&quot;
+,
+&quot;browserVersion&quot;
+,
+&quot;browserPlatform&quot;
+&rbrack;
+;
+<i>/&ast; Creating the JSON object &ast;/</i>
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+info.
+length
+;
+i
+++
+)
+{
+<b>if</b>
+(
+i
+===
+info.
+length
+&minus;
+1
+)
+{
+json
++=
+&apos;&quot;&apos;
+&plus;
+infoNames
+&lbrack;
+i
+&rbrack;
+&plus;
+&apos;&quot;: &quot;&apos;
+&plus;
+info
+&lbrack;
+i
+&rbrack;
+&plus;
+&apos;&quot;&apos;
+;
+}
+<b>else</b>
+{
+json
++=
+&apos;&quot;&apos;
+&plus;
+infoNames
+&lbrack;
+i
+&rbrack;
+&plus;
+&apos;&quot;: &quot;&apos;
+&plus;
+info
+&lbrack;
+i
+&rbrack;
+&plus;
+&apos;&quot;,&apos;
+;
+}
+}
+;
+<b>return</b>
+json
+&plus;
+&quot;}&rbrack;&quot;
+;
+}
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch48"># Chapter 48: BOM (Browser Object Model)</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch48-1">Section 48.1: Introduction</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The BOM (Browser Object Model) contains objects that represent the
+current browser window and components; objects that model things like
+<i>history, device&apos;s screen,</i> etc
+
+The topmost object in BOM is the window object, which represents the
+current browser window or tab.
+<b>Document:</b>
+represents current web page.
+<b>History:</b>
+
+represents pages in browser history.
+<b>Location:</b>
+represents URL of current page.
+<b>Navigator:</b>
+represents information about browser.
+<b>Screen:</b>
+represents device&apos;s display information.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch48-2">Section 48.2: Window Object Properties</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The Window Object contains the following properties.
+<b>Property Description</b>
+window.closed Whether the window has been closed
+<b>&lt;iframe</b>
+window.length Number of <b>&gt;</b> elements in window window.name Gets or
+sets the name of the window window.innerHeight Height of window
+window.innerWidth Width of window window.screenX X-coordinate of
+pointer, relative to top left corner of screen window.screenY
+Y-coordinate of pointer, relative to top left corner of screen
+window.location Current URL of window object (or local file path)
+window.history Reference to history object for browser window or tab.
+>
+window.screen Reference to screen object window.pageXOffset Distance
+document has been scrolled horizontally window.pageYOffset Distance
+document has been scrolled vertically
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch48-3">Section 48.3: Window Object Methods</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Browser Object Model
+
+The most important object in the is the window object. It helps in
+accessing information about the browser and its components. To access
+these features, it has various methods and properties.
+
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>window.alert()</td>
+      <td>Creates dialog box with message and an OK button</td>
+    </tr>
+    <tr>
+      <td>window.blur()</td>
+      <td>Remove focus from window</td>
+    </tr>
+    <tr>
+      <td>window.close()</td>
+      <td>Closes a browser window</td>
+    </tr>
+    <tr>
+      <td>window.confirm()</td>
+      <td>Creates dialog box with message, an OK button and a cancel button</td>
+    </tr>
+
+    <tr>
+      <td>window.getComputedStyle()</td>
+      <td>Get CSS styles applied to an element</td>
+    </tr>
+    <tr>
+      <td>window.moveto(x,y)</td>
+      <td>Move a window&apos;s left and top edget to supplied coordinates</td>
+    </tr>
+    <tr>
+      <td>window.open</td>
+      <td>Opens new browser window with URL specified as parameter</td>
+    </tr>
+    <tr>
+      <td>window.print()</td>
+      <td>Tells browser that user wants to print conents of current page</td>
+    </tr>
+    <tr>
+      <td>window.prompt()</td>
+      <td>Creates dialog box for retrieving user input</td>
+    </tr>
+    <tr>
+      <td>window.scrollBy()</td>
+      <td>Scrolls the document by the specified number of pixels</td>
+    </tr>
+    <tr>
+      <td>window.scrollTo()</td>
+      <td>Scrolls the document to the specified coordinates</td>
+    </tr>
+    <tr>
+      <td>window.setInterval()</td>
+      <td>Do something repeatedly at specified intervals</td>
+    </tr>
+    <tr>
+      <td>window.setTimeout()</td>
+      <td>Do something after a specified amount of time</td>
+    </tr>
+    <tr>
+      <td>window.stop()</td>
+      <td>Stop window from loading</td>
+    </tr>
+  </tbody>
+</table>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch49">Chapter 49: The Event Loop</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch49-1">Section 49.1: The event loop in a web browser</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The vast majority of modern JavaScript environments work according to
+an <i>event loop</i>. This is a common concept in computer programming
+which essentially means that your program continually waits for new
+things to happen, and when they do, reacts to them. The <i>host
+environment</i> calls into your program, spawning a &quot;turn&quot; or &quot;tick&quot;
+or &quot;task&quot; in the event loop, which then <i>runs to completion</i>. When
+that turn has finished, the host environment waits for something else
+to happen, before all this starts.
+
+A simple example of this is in the browser. Consider the following
+example:
+&lt;!
+DOCTYPE html
+&gt;
+<b>&lt;</b>
+<b>title</b>
+<b>&gt;</b>
+Event loop example
+<b>&lt;</b>
+<b>/title</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>script</b>
+<b>&gt;</b>
+console.log(&quot;this a script entry point&quot;);
+document.body.onclick = () =&bsol;{
+console.log(&quot;onclick&quot;);
+}
+;
+setTimeout(() =&bsol;{
+console.log(&quot;setTimeout callback log 1&quot;);
+console.log(&quot;setTimeout callback log 2&quot;);
+}
+, 100);
+<b>&lt;</b>
+<b>/script</b>
+<b>&gt;</b>
+In this example, the host environment is the web browser.
+<b>&lt;script</b>
+
+1.  The HTML parser will first execute the <b>&gt;</b>. It will run to
+    completion.
+
+2.  The call to
+    [setTimeout](https://html.spec.whatwg.org/multipage/webappapis.html#dom-settimeout)
+    tells the browser that, after 100 milliseconds, it should enqueue a
+    [task](https://html.spec.whatwg.org/multipage/webappapis.html#concept-task)
+    to perform the given action.
+
+3.  In the meantime, the event loop is then responsible for continually
+    checking if there&apos;s something else to do:
+
+for example, rendering the web page.
+
+4.  After 100 milliseconds, if the event loop is not busy for some other
+    reason, it will see the task that setTimeout enqueues, and run the
+    function, logging those two statements.
+
+5.  At any time, if someone clicks on the body, the browser will post a
+    task to the event loop to run the click handler function. The event
+    loop, as it goes around continually checking what to do, will see
+    this, and run that function.
+
+You can see how in this example there are several different types of
+entry points into JavaScript code, which the event loop invokes:
+<b>&lt;script</b>
+
+The <b>&gt;</b> element is invoked immediately
+The setTimeout task is posted to the event loop and run once
+
+The click handler task can be posted many times and run each time
+
+Each turn of the event loop is responsible for many things; only some
+of them will invoke these JavaScript tasks. For full details, [see the
+HTML
+specification](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model)
+setTimeout callback log
+
+One last thing: what do we mean by saying that each event loop task
+&quot;runs to completion&quot;? We mean that it is not generally possible to
+interrupt a block of code that is queued to run as a task, and it is
+never possible to run code interleaved with another block of code. For
+example, even if you clicked at the perfect time, you could never get
+the above code to log &quot;onclick&quot; in between the two 1/2&quot;s. This is
+due to the way the taskposting works; it is cooperative and
+queue-based, instead of preemptive.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch49-2">Section 49.2: Asynchronous operations and the event loop</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Many interesting operations in common JavaScript programming
+environments are asynchronous. For example, in the browser we see
+things like
+window.
+setTimeout
+(
+(
+)
+=&gt;
+{
+console.
+log
+(
+&quot;this happens later&quot;
+)
+;
+}
+,
+100
+)
+;
+and in Node.js we see things like
+fs.
+readFile
+(
+&quot;file.txt&quot;
+,
+(
+err
+,
+data
+)
+=&gt;
+{
+console.
+log
+(
+&quot;data&quot;
+)
+;
+}
+)
+;
+How does this fit with the event loop?
+file.txt
+How this works is that when these statements execute, they tell the
+<i>host environment</i> (i.e., the browser or Node.js runtime,
+respectively) to go off and do something, probably in another thread.
+When the host environment is done doing that thing (respectively,
+waiting 100 milliseconds or reading the file ) it will post a task to
+the event loop, saying &quot;call the callback I was given earlier with
+these arguments&quot;.
+
+The event loop is then busy doing its thing: rendering the webpage,
+listening for user input, and continually looking for posted tasks.
+When it sees these posted tasks to call the callbacks, it will call
+back into JavaScript. That&apos;s how you get asynchronous behavior!
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch50">Chapter 50: Strict mode</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch50-1">Section 50.1: For entire scripts</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+&quot;use strict&quot;
+Strict mode can be applied on entire scripts by placing the statement
+; before any other statements.
+&quot;use strict&quot;
+;
+// <i>strict mode now applies for the rest of the script</i>
+Strict mode is only enabled in scripts where you define &quot;use
+strict&quot;. You can combine scripts with and without strict mode,
+because the strict state is not shared among different scripts.
+<h5>Version ≥ 6</h5>
+<b>Note:</b> All code written inside ES2015+ modules and classes are
+strict by default.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch50-2">Section 50.2: For functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+&quot;use strict&quot;
+Strict mode can also be applied to single functions by prepending the
+; statement at the beginning of the function declaration.
+<b>function</b>
+strict
+(
+)
+{
+&quot;use strict&quot;
+;
+// <i>strict mode now applies to the rest of this function</i>
+<b>var</b>
+innerFunction
+=
+<b>function</b>
+(
+)
+{
+// <i>strict mode also applies here</i>
+}
+;
+}
+<b>function</b>
+notStrict
+(
+)
+{
+// <i>but not here</i>
+}
+Strict mode will also apply to any inner scoped functions.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch50-3">Section 50.3: Changes to properties</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Strict mode also prevents you from deleting undeletable properties.
+&quot;use strict&quot;
+;
+<b>delete</b>
+Object
+.
+<b>prototype</b>
+;
+// <i>throws a TypeError</i>
+The above statement would simply be ignored if you don&apos;t use strict
+mode, however now you know why it does not execute as expected.
+
+It also prevents you from extending a non-extensible property.
+<b>var</b>
+myObject
+=
+{
+name
+:
+&quot;My Name&quot;
+}
+Object
+.
+preventExtensions
+(
+myObject
+)
+;
+<b>function</b>
+setAge
+(
+)
+{
+myObject.
+age
+=
+25
+;
+// <i>No errors</i>
+}
+<b>function</b>
+setAge
+(
+)
+{
+&quot;use strict&quot;
+;
+myObject.
+age
+=
+25
+;
+// <i>TypeError: can&apos;t define property &quot;age&quot;: Object is not extensible</i>
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch50-4">Section 50.4: Changes to global properties</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+In a non-strict-mode scope, when a variable is assigned without being
+initialized with the <b>var</b>, <b>const</b> or the <b>let</b> keyword, it is
+automatically declared in the global scope:
+a
+=
+12
+;
+console.
+log
+(
+a
+)
+;
+// <i>12</i>
+In strict mode however, any access to an undeclared variable will
+throw a reference error:
+&quot;use strict&quot;
+;
+a
+=
+12
+;
+// <i>ReferenceError: a is not defined</i>
+console.
+log
+(
+a
+)
+
+;
+
+This is useful because JavaScript has a number of possible events that
+are sometimes unexpected. In non-strictmode, these events often lead
+developers to believe they are bugs or unexpected behavior, thus by
+enabling strictmode, any errors that are thrown enforces them to know
+exactly what is being done.
+&quot;use strict&quot;;
+// <i>Assuming a global variable mistypedVariable exists</i>
+mistypedVaraible = 17; // <i>this line throws a ReferenceError due to
+the</i>
+// <i>misspelling of variable</i>
+This code in strict mode displays one possible scenario: it throws a
+reference error which points to the assignment&apos;s line number,
+allowing the developer to immediately detect the mistype in the
+variable&apos;s name.
+
+In non-strict-mode, besides the fact that no error is thrown and the
+assignment is successfully made, the mistypedVaraible will be
+automatically declared in the global scope as a global variable. This
+implies that the developer needs to look up manually this specific
+assignment in the code.
+
+Furthermore, by forcing declaration of variables, the developer cannot
+accidentally declare global variables inside functions. In
+non-strict-mode:
+
+<b>function</b>
+foo
+(
+)
+{
+a
+=
+&quot;bar&quot;
+;
+// <i>variable is automatically declared in the global scope</i>
+}
+foo
+(
+)
+;
+console.
+log
+(
+a
+)
+;
+// <i>&gt;&bsol;bar</i>
+In strict mode, it is necessary to explicitly declare the variable:
+<b>function</b>
+strict_scope
+(
+)
+{
+&quot;use strict&quot;
+;
+<b>var</b>
+a
+=
+&quot;bar&quot;
+;
+// <i>variable is local</i>
+}
+strict_scope
+(
+)
+;
+console.
+log
+(
+a
+)
+;
+// <i>&gt;&amp;quot;ReferenceError: a is not defined&quot;</i>
+The variable can also be declared outside and after a function,
+allowing it to be used, for instance, in the global scope:
+<b>function</b>
+strict_scope
+(
+)
+{
+&quot;use strict&quot;
+;
+a
+=
+&quot;bar&quot;
+;
+// <i>variable is global</i>
+}
+<b>var</b>
+a
+;
+strict_scope
+(
+)
+;
+console.
+log
+(
+a
+)
+;
+// <i>&gt;&bsol;bar</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch50-5">Section 50.5: Duplicate Parameters</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Strict mode does not allow you to use duplicate function parameter
+names.
+<b>function</b>
+foo
+(
+bar
+,
+bar
+)
+{
+}
+// <i>No error. bar is set to the final argument when called</i>
+&quot;use strict&quot;
+;
+<b>function</b>
+foo
+(
+bar
+,
+bar
+)
+{
+}
+;
+// <i>SyntaxError: duplicate formal argument bar</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch50-5">Section 50.6: Function scoping in strict mode</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+In Strict Mode, functions declared in a local block are inaccessible
+outside the block.
+&quot;use strict&quot;
+;
+{
+f
+(
+)
+;
+// <i>&apos;hi&apos;</i>
+<b>function</b>
+f
+(
+)
+{
+console.
+log
+(
+&apos;hi&apos;
+)
+;
+}
+}
+f
+(
+)
+;
+// <i>ReferenceError: f is not defined</i>
+Scope-wise, function declarations in Strict Mode have the same kind of
+binding as <b>let</b> or <b>const</b>.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch50-7">Section 50.7: Behaviour of a function&apos;s arguments list</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+arguments object behave different in <i>strict</i> and <i>non strict</i> mode.
+In <i>non-strict</i> mode, the argument object will reflect the changes in
+the value of the parameters which are present, however in <i>strict</i>
+mode any changes to the value of the parameter will not be reflected
+in the argument object.
+<b>function</b>
+add
+(
+a
+,
+b
+)
+{
+console.
+log
+(
+arguments
+&lbrack;
+0
+&rbrack;
+,
+arguments
+&lbrack;
+1
+&rbrack;
+)
+;
+// <i>Prints : 1,2</i>
+a
+=
+5
+,
+b
+=
+10
+;
+console.
+log
+(
+arguments
+&lbrack;
+0
+&rbrack;
+,
+arguments
+&lbrack;
+1
+&rbrack;
+)
+;
+// <i>Prints : 5,10</i>
+}
+add
+(
+1
+,
+2
+)
+;
+For the above code, the arguments object is changed when we change the
+value of the parameters. However, for <i>strict</i> mode, the same will not
+be reflected.
+<b>function</b>
+add
+(
+a
+,
+b
+)
+{
+&apos;use strict&apos;
+;
+console.
+log
+(
+arguments
+&lbrack;
+0
+&rbrack;
+,
+arguments
+&lbrack;
+1
+&rbrack;
+)
+;
+// <i>Prints : 1,2</i>
+a
+=
+5
+,
+b
+=
+10
+;
+console.
+log
+(
+arguments
+&lbrack;
+0
+&rbrack;
+,
+arguments
+&lbrack;
+1
+&rbrack;
+)
+;
+// <i>Prints : 1,2</i>
+}
+It&apos;s worth noting that, if any one of the parameters is
+<b>undefined</b>, and we try to change the value of the parameter in both
+<i>strict-mode</i> or <i>non-strict</i> mode the arguments object remains
+unchanged.
+
+<b>Strict mode</b>
+<b>function</b>
+add
+(
+a
+,
+b
+)
+{
+&apos;use strict&apos;
+
+;
+console.
+log
+(
+arguments
+&lbrack;
+0
+&rbrack;
+,
+arguments
+&lbrack;
+1
+&rbrack;
+)
+;
+// <i>undefined,undefined</i>
+// <i>1,undefined</i>
+a
+=
+5
+,
+b
+=
+10
+;
+console.
+log
+(
+arguments
+&lbrack;
+0
+&rbrack;
+,
+arguments
+&lbrack;
+1
+&rbrack;
+)
+;
+// <i>undefined,undefined</i>
+// <i>1, undefined</i>
+}
+add
+(
+)
+;
+// <i>undefined,undefined</i>
+// <i>undefined,undefined</i>
+add
+(
+1
+)
+// <i>1, undefined</i>
+// <i>1, undefined</i>
+<b>Non-Strict Mode</b>
+<b>function</b>
+add
+(
+a
+,
+b
+)
+{
+console.
+log
+(
+arguments
+&lbrack;
+0
+&rbrack;
+,
+arguments
+&lbrack;
+1
+&rbrack;
+)
+;
+a
+=
+5
+,
+b
+=
+10
+;
+console.
+log
+(
+arguments
+&lbrack;
+0
+&rbrack;
+,
+arguments
+&lbrack;
+1
+&rbrack;
+)
+;
+}
+add
+(
+)
+;
+// <i>undefined,undefined</i>
+// <i>undefined,undefined</i>
+add
+(
+1
+)
+;
+// <i>1, undefined</i>
+// <i>5, undefined</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch50-8">Section 50.8: Non-Simple parameter lists</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>function</b>
+a
+(
+x
+=
+5
+)
+{
+&quot;use strict&quot;
+;
+}
+is invalid JavaScript and will throw a
+SyntaxError
+because you cannot use the directive
+&quot;use strict&quot;
+in a function
+with Non-Simple Parameter list like the one above - default assignment
+x
+=
+5
+Non-Simple parameters include -
+Default assignment
+<b>function</b>
+a
+(
+x
+=
+1
+)
+{
+&quot;use strict&quot;
+;
+}
+Destructuring
+<b>function</b>
+a
+(
+{
+x
+}
+)
+{
+&quot;use strict&quot;
+;
+}
+Rest params
+<b>function</b>
+a
+(
+&hellip;
+args
+)
+{
+&quot;use strict&quot;
+;
+}
+
+<!-- thru 50.8 -->
