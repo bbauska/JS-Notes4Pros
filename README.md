@@ -17411,6 +17411,7 @@ back into JavaScript. That&apos;s how you get asynchronous behavior!</p>
 <pre>
 &quot;use strict&quot;; 
 // <i>strict mode now applies for the rest of the script</i>
+</pre>
 <p>Strict mode is only enabled in scripts where you define &quot;use
 strict&quot;. You can combine scripts with and without strict mode,
 because the strict state is not shared among different scripts.</p>
