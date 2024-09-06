@@ -250,16 +250,20 @@ target="_blank" rel="noreferrer noopener">(See also this demo)</a></p>
 <p>You can also use JavaScript to create a new HTML element programmatically. For example, 
 consider an HTML document with the following body:</p>
 
-<pre><b>&lt;body&gt;</b>
+<pre>
+<b>&lt;body&gt;</b>
   <b>&lt;h1&gt;</b>Adding an element<b>&lt;/h1&gt;</b>
-<b>&lt;/body&gt;</b></pre>
+<b>&lt;/body&gt;</b>
+</pre>
 
 <p>In our JavaScript, we create a new <b>&lt;p&gt;</b>tag with a textContent property of 
 and add it at the end of the html body:</p>
 
-<pre><b>var</b> element = document.createElement('p');
+<pre>
+<b>var</b> element = document.createElement('p');
 element.textContent = "Hello, World";
-document.body.appendChild(element); //<i>add the newly created element to the DOM</i></pre>
+document.body.appendChild(element); //<i>add the newly created element to the DOM</i>
+</pre>
 
 <p>That will change your HTML body to the following:</p>
 
@@ -317,35 +321,30 @@ method parameter is displayed to the user in <b>plain</b> text:</p>
 <!--{width="5.225in" height="2.3152777777777778in"}-->
 
 <h4>Notes</h4>
-
 <blockquote>
   The alert method is technically a property of window object, but since
   all window properties are automatically global variables, we can use
   alert as a global variable instead of as a property of window meaning
   you can directly use alert() intead of window.alert().
 </blockquote>
-
 <p>Unlike using console.log, alert acts as a modal prompt meaning that the code
 calling alert will pause until the prompt is answered. Traditionally
 this means that <i>no other JavaScript code will execute</i> until the
 alert is dismissed:</p>
-
-<pre>alert('Pause!');
-console.log('Alert was dismissed');</pre>
-
+<pre>
+alert('Pause!');
+console.log('Alert was dismissed');
+</pre>
 <p>However the specification actually allows other event-triggered code
 to continue to execute even though a modal dialog is still being
 shown. In such implementations, it is possible for other code to run
 while the modal dialog is being shown.</p>
-
 <p>More information about usage of the alert method can be found in the
 modals prompts topic.</p>
-
 <p>The use of alerts is usually discouraged in favour of other methods
 that do not block users from interacting with the page - in order to
 create a better user experience. Nevertheless, it can be useful for
 debugging.</p>
-
 <p>Starting with Chrome 46.0, window.alert() is blocked inside an <b>&lt;iframe&gt;</b> 
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/alert" 
 target="_blank" rel="noreferrer noopener">unless its sandbox attribute has the value allow-modal</a>.
@@ -401,22 +400,18 @@ type, such as an integer.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The window.confirm() method displays a modal dialog with an optional message and two
 buttons, OK and Cancel.</p>
-
 <p>Now, let's take the following example:</p>
-
 <pre>result = window.confirm(message);</pre>
-
 <p>Here, <b>message</b> is the optional string to be displayed in the dialog
 and <b>result</b> is a boolean value indicating whether OK or Cancel was
 selected (true means OK).</p>
-
 <p>window.confirm() is typically used to ask for user confirmation before doing a
 dangerous operation like deleting something in a Control Panel:</p>
-
-<pre><b>if</b> (window.confirm("Are you sure you want to delete this?")) { 
+<pre>
+<b>if</b> (window.confirm("Are you sure you want to delete this?")) { 
   deleteItem (itemId);
-}</pre>
-
+}
+</pre>
 <p>The output of that code would look like this in the browser:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 10.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -461,75 +456,64 @@ user's interaction in a variable:</p>
 
 <p>First build a canvas for holding image pixel information.</p>
 
-<pre><b>var</b> canvas = document.createElement('canvas');
+<pre>
+<b>var</b> canvas = document.createElement('canvas');
 canvas.width = 500;
-canvas.height = 250;</pre>
-
+canvas.height = 250;
+</pre>
 <p>Then select a context for the canvas, in this case two-dimensional:</p>
-
 <pre><b>var</b> ctx=canvas.getContext ('2d');</pre>
-
 <p>Then set properties related to the text:</p>
-
-<pre>ctx.font = '30px Cursive';
-ctx.fillText ("Hello world!", 50, 50);</pre>
-
+<pre>
+ctx.font = '30px Cursive';
+ctx.fillText ("Hello world!", 50, 50);
+</pre>
 <p>Then insert the canvas element into the page to take effect:</p>
-
 <pre>document.body.appendChild(canvas);</pre>
-
 <h4>Using SVG</h4>
-
 <p>SVG is for building scalable vector-based graphics and can be used
 within HTML.</p>
-
 <p>First create an SVG element container with dimensions:</p>
-
-<pre><b>var</b> svg=document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+<pre>
+<b>var</b> svg=document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 svg.width = 500;
-svg.height = 50;</pre>
-
+svg.height = 50;
+</pre>
 <p>Then build a text element with the desired positioning and font
 characteristics:</p>
-
 <!-- page 9 -->
-
-<pre><b>var</b> text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+<pre>
+<b>var</b> text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
 text.setAttribute('x', '0');
 text.setAttribute('y', '50');
 text.style.fontFamily = 'Times New Roman';
-text.style.fontSize = '50';</pre>
-
+text.style.fontSize = '50';
+</pre>
 <p>Then add the actual text to display to the textelement:</p>
-
 <pre>text.textContent = 'Hello world!';</pre>
-
 <p>Finally add the text element to our svg container and add the svg
 container element to the HTML document:</p>
-
-<pre>svg.appendChild(text);
-document.body.appendChild(svg);</pre>
-
+<pre>
+svg.appendChild(text);
+document.body.appendChild(svg);
+</pre>
 <h4>Image file</h4>
-
 <p>If you already have an image file containing the desired text and have
 it placed on a server, you can add the URL of the image and then add
 the image to the document as follows:</p>
-
-<pre><b>var</b> img = <b>new</b> Image ( );
+<pre>
+<b>var</b> img = <b>new</b> Image ( );
 img.src = 'https://i.ytimg.com/vi/zecueq-mo4M/maxresdefault.jpg';
-document.body.appendChild(img);</pre>
+document.body.appendChild(img);
+</pre>
 <!-- page 10 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch2">Chapter 2: JavaScript Variables</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><b>variable_name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{Required} The name of the variable: used when calling it.</b></p>
-
 <p>= &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>&lbrack;Optional&rbrack;</b> Assignment (defining the variable)</p>
-
 <p>value &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<b>{Required when using Assignment}</b> The value of a variable
 <b>&lbrack;default: undefined&rbrack;</b></p>
-
 <p>Variables are what make up most of JavaScript. These variables make up
 things from numbers to objects, which are all over JavaScript to make
 one's life much easier.</p>
@@ -537,80 +521,71 @@ one's life much easier.</p>
 <h3 id="ch2-1">Section 2.1: Defining a Variable</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <pre><b>var</b> myVariable = "This is a variable!";</pre>
-
 <p>This is an example of defining variables. This variable is called a
 "string" because it has ASCII characters (A-Z, 0-9, !@#$, etc.)</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-2">Section 2.2: Using a Variable</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<pre><b>var</b> number1 = 5;
-number1 = 3;</pre>
-
+<pre>
+<b>var</b> number1 = 5;
+number1 = 3;
+</pre>
 <p>Here, we defined a number called "number1" which was equal to 5. 
 However, on the second line, we changed the value to 3. To show the 
 value of a variable, we log it to the console or use window.alert():</p>
-
-<pre>console.log(number1); // <i>3</i>
-window.alert(number1); // <i>3</i></pre>
-
+<pre>
+console.log(number1); // <i>3</i>
+window.alert(number1); // <i>3</i>
+</pre>
 <p>To add, subtract, multiply, divide, etc., we do like so:</p>
-
 <pre>number1 = number1 + 5; // <i>3 + 5 = 8</i>
 number1 = number1 - 6; // <i>8 - 6 = 2</i>
 <b>var</b> number2 = number1 &ast; 10; // <i>2 (times) 10 = 20</i>
 <b>var</b> number3 = number2 / number1; // <i>20 (divided by) 2 = 10;</i></pre>
-
 <p>We can also add strings which will concatenate them, or put them
 together. For example:</p>
-
 <pre><b>var</b> myString = "I am a " + "string!" ; // <i>"I am a string!"</i></pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-3">Section 2.3: Types of Variables</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<pre><b>var</b> myInteger = 12; // <i>32-bit number (from -2,147,483,648 to 2,147,483,647)</i>
+<pre>
+<b>var</b> myInteger = 12; // <i>32-bit number (from -2,147,483,648 to 2,147,483,647)</i>
 <b>var</b> myLong = 9310141419482 ; // <i>64-bit number (from -9,223,372,036,854,775,808 to
   9,223,372,036,854,775,807)</i>
 <b>var</b> myFloat = 5.5; // <i>32-bit floating-point number (decimal)</i>
 <b>var</b> myDouble = 9310141419482.22; // <i>64-bit floating-point number</i>
-
 <b>var</b> myBoolean = <b>true</b>; // <i>1-bit true/false (0 or 1)</i>
 <b>var</b> myBoolean2 = <b>false</b>;
-
 <b>var</b> myNotANumber = <b>NaN</b>;
 <b>var</b> NaN_Example = 0 / 0 ; // <i>NaN: Division by Zero is not possible</i>
-
 <b>var</b> notDefined; // <i>undefined: we didn&apos;t define it to anything yet</i>
 window.alert(aRandomVariable); // <i>undefined</i>
-
 <b>var</b> myNull=<b>null</b>; // <i>null</i>
-<i>// etc...</i></pre>
-
+<i>// etc...</i>
+</pre>
 <!-- page 11 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch2-4">Section 2.4: Arrays and Objects</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <pre><b>var</b> myArray=&lbrack;&rbrack;; // <i>empty array</i></pre>
-
 <p>An array is a set of variables. For example:</p>
-
-<pre><b>var</b> favoriteFruits = &lbrack;"apple", "orange", "strawberry"&rbrack;;
+<pre>
+<b>var</b> favoriteFruits = &lbrack;"apple", "orange", "strawberry"&rbrack;;
 <b>var</b> carsInParkingLot = &lbrack;"Toyota", "Ferrari", "Lexus"&rbrack;;
 <b>var</b> employees = &lbrack;"Billy", "Bob", "Joe"&rbrack;;
 <b>var</b> primeNumbers = &lbrack;2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31&rbrack;;
 <b>var</b> randomVariables = &lbrack;2, "any type works", <b>undefined</b>, <b>null</b>, <b>true</b>, 2.51&rbrack;;
-
 myArray = &lbrack;"zero" , "one" , "two" &rbrack;;
 window.alert ( myArray &lbrack;0&rbrack;); // <i>0 is the first element of an array</i>
                   // <i>in this case, the value would be "zero"</i>
 myArray = &lbrack;"John Doe", "Billy"&rbrack;;
 elementNumber = 1;
-
-window.alert(myArray&lbrack;elementNumber&rbrack;); // <i>Billy</i></pre>
-
+window.alert(myArray&lbrack;elementNumber&rbrack;); // <i>Billy</i>
+</pre>
 <p>An object is a group of values; unlike arrays, we can do something
 better than them:</p>
-
-<pre>myObject = {};
+<pre>
+myObject = {};
 john = {firstname: "John", lastname: "Doe", fullname: "John Doe"};
 billy = {
   firstname: "Billy",
@@ -618,11 +593,10 @@ billy = {
   fullname: "Billy"
 };
 window.alert(john.fullname); // <i>John Doe</i>
-window.alert(billy.firstname); // <i>Billy</i></pre>
-
+window.alert(billy.firstname); // <i>Billy</i>
+</pre>
 <p>Rather than making an array &lbrack;"John Doe", "Billy"&rbrack; and calling myArray&lbrack;0&rbrack;, we
 can just call john.fullname and billy.fullname.</p>
-
 <!-- page 12 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch3">Chapter 3: Built-in Constants</h2>
@@ -631,42 +605,36 @@ can just call john.fullname and billy.fullname.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><b>null</b> is used for representing the intentional absence of an object value and is a 
 primitive value. Unlike <b>undefined</b>, it is not a property of the global object.</p>
-
 <p>It is equal to <b>undefined</b> but not identical to it.</p>
-
-<pre><b>null</b> == <b>undefined</b>; // true
-<b>null</b> === <b>undefined</b>; // false</pre>
-
-<p><b>CAREFUL</b>: The <b>typeof null</b> is 'object'.</p>
-
-<pre><b>typeof null</b>; // 'object';
+<pre>
+<b>null</b> == <b>undefined</b>; // true
+<b>null</b> === <b>undefined</b>; // false
 </pre>
-
+<p><b>CAREFUL</b>: The <b>typeof null</b> is 'object'.</p>
+<pre>
+<b>typeof null</b>; // 'object';
+</pre>
 <p>To properly check if a value is <b>null</b>, compare it with the strict equality operator.</p>
-
 <pre>
 <b>var</b> a = <b>null</b>;
-
-a === <b>null</b>; // true</pre>
+a === <b>null</b>; // true
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-2">Section 3.2: Testing for NaN using isNaN()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <pre><b>window.isNaN</b></pre>  
-
 <p>The global function () can be used to check if a certain value or
 expression evaluates to <b>NaN</b>. This function (in short) first checks
 if the value is a number, if not tries to convert it (&ast;), and then
 checks if the resulting value is <b>NaN</b>. For this reason, <b>this
 testing method may cause confusion</b>.</p>
-
 <p>(&ast;) The "conversion" method is not that simple, see 
 <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-isnan-number" 
 target="_blank" rel="noreferrer noopener">ECMA-262 18.2.3</a> for a detailed explanation 
 of the algorithm.</p>
-
 <p>These examples will help you better understand the isNaN() behavior:</p>
-
-<pre>isNaN(<b>NaN</b>);            // <i>true</i>
+<pre>
+isNaN(<b>NaN</b>);            // <i>true</i>
 isNaN(1);             // <i>false: 1 is a number</i>
 isNaN(-2e-4);         // <i>false: -2e-4 is a number (-0.0002) in scientific notation</i>
 isNaN(<b>Infinity</b>);      // <i>false: Infinity is a number</i>
@@ -685,8 +653,8 @@ isNaN(<b>undefined</b>);     // <i>true : converted to NaN</i>
 isNaN();              // <i>true : converted to NaN (implicitly undefined)</i>
 isNaN(<b>function</b>(){}); // <i>true : conversion fails</i>
 isNaN({});           // <i>true : conversion fails</i>
-isNaN(&lbrack;1, 2&rbrack;);       // <i>true : converted to "1, 2", which can't be converted to a number</i></pre>
-
+isNaN(&lbrack;1, 2&rbrack;);       // <i>true : converted to "1, 2", which can't be converted to a number</i>
+</pre>
 <!-- page 13 -->
 <p>This last one is a bit tricky: checking if an Array is <b>NaN</b>. To do
 the Number() constructor first converts the array to a string, then to
@@ -694,20 +662,15 @@ a number; this is the reason why isNaN(&lbrack;&rbrack) and isNaN (&lbrack;34&rb
 "1,2", and <b>true</b> respectively. In general, <b>an array is
 considered NaN by () unless it only holds one element whose string
 representation can be converted to a valid number</b>.</p>
-
 <h5>Version ≥ 6</h5>
-
 <pre>Number.isNaN</pre>
-
 <p>In ECMAScript 6, the Number.isNaN() function has been implemented primarily to
 avoid the problem of window.isNaN() of forcefully converting the parameter to a 
 number.Number.isNaN(), indeed, <b>doesn't try to convert </b> the value to a number 
 before testing. This also means that <b>only values of the type number, that
 are also NaN, return true</b> (which basically means only )).</p>
-
 <p>From <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-number.isnan" 
 target="_blank" rel="noreferrer noopener">ECMA-262 20.1.2.4</a>:</p>
-
 <blockquote>
 <p>When the Number .isNaN is called with one argument number, the following steps are taken:</p>
 
@@ -715,7 +678,6 @@ target="_blank" rel="noreferrer noopener">ECMA-262 20.1.2.4</a>:</p>
 2.  If number is <b>NaN</b>, return <b>true</b>.
 3.  Otherwise, return <b>false</b>.
 </blockquote>
-
 <p>Some examples:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 11. examples: Number.isNaN (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -732,24 +694,23 @@ target="_blank" rel="noreferrer noopener">ECMA-262 20.1.2.4</a>:</p>
 target="_blank" rel="noreferrer noopener"><b>NaN</b></a> stands for "Not a Number." When a mathematical 
 function or operation in JavaScript cannot return a specific number, it returns the value <b>NaN</b> 
 instead.</p>
-
 <!-- page 14 -->
-
 <p>It is a property of the global object, and a reference to 
 <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN" 
 target="_blank" rel="noreferrer noopener">Number.NaN</a></p>
-
-<pre>window.hasOwnProperty('NaN'); // <i>true</i>
-<b>NaN</b>; // <i>NaN</i></pre>
-
+<pre>
+window.hasOwnProperty('NaN'); // <i>true</i>
+<b>NaN</b>; // <i>NaN</i>
+</pre>
 <p>Perhaps confusingly, <b>NaN</b> is still considered a number.</p>
-
-<pre><b>typeof</b> <b>NaN</b>; // <i>'number'</i></pre>
-
+<pre>
+<b>typeof</b> <b>NaN</b>; // <i>'number'</i>
+</pre>
 <p>Don&apos;t check for <b>NaN</b> using the equality operator. See isNaN instead.</p>
-
-<pre><b>NaN</b> == <b>NaN</b>  // <i>false</i>
-<b>NaN</b> === <b>NaN</b> // <i>false</i></pre>
+<pre>
+<b>NaN</b> == <b>NaN</b>  // <i>false</i>
+<b>NaN</b> === <b>NaN</b> // <i>false</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-4">Section 3.4: undefined and null</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -822,40 +783,35 @@ concept of an "empty" property.</p>
 </ul>
 <!-- page 15 -->
 <p><b>undefined</b> is also a property of the global window object.</p>
-
-<pre>// <i>Only in browsers</i>
+<pre>
+// <i>Only in browsers</i>
 console.log(window.<b>undefined</b>); // <i>undefined</i>
-window.hasOwnProperty('undefined'); // <i>true</i></pre>
-
+window.hasOwnProperty('undefined'); // <i>true</i>
+</pre>
 <h5>Version &lt; 5</h5>
-
 <p>Before ECMAScript 5 you could actually change the value of the
 window.<b>undefined</b> property to any other value potentially breaking everything.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-5">Section 3.5: Infinity and -Infinity</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<pre>1 / 0; // <i>Infinity</i>
-// <i>Wait! WHAAAT?</i></pre>
-
+<pre>
+1 / 0; // <i>Infinity</i>
+// <i>Wait! WHAAAT?</i>
+</pre>
 <p><b>Infinity</b> is a property of the global object (therefore a global
 variable) that represents mathematical infinity. It is a reference to Number.POSITIVE_INFINITY</p>
-
 <p>It is greater than any other value, and you can get it by dividing by
 0 or by evaluating the expression of a number that's so big that
 overflows. This actually means there is no division by 0 errors in
 JavaScript, there is Infinity!</p>
-
 <p>There is also <b>-Infinity</b> which is mathematical negative infinity, and it's lower 
 than any other value.</p>
-
 <p>To get <b>-Infinity</b> you negate <b>Infinity</b>, or get a reference to it in 
 <b>Number.NEGATIVE_INFINITY</b>.
-
 <pre>- <b>Infinity</b>; // <i>-Infinity</i></pre>
-
 <p>Now let's have some fun with examples:</p>
-
-<pre><b>Infinity</b> &gt; 123192310293;  // <i>true</i>
+<pre>
+<b>Infinity</b> &gt; 123192310293;  // <i>true</i>
 <b>-Infinity</b> &lt; -123192310293;  // <i>true</i>
 1 / 0;  // <i>Infinity</i>
 Math.pow(123123123, 9123192391023); // <i>Infinity</i>
@@ -868,20 +824,19 @@ Number.MAX_VALUE &ast; 2;  // <i>Infinity</i>
 1 / -0;  // <i>-Infinity</i>
 1 / 0 === 1 / -0;  // <i>false</i>
 <b>Infinity + Infinity</b>  // <i>Infinity</i>
-
 <b>var</b> a = 0, b = -0;
-
 a === b;  // <i>true</i>
 1 / a === 1 / b;  // <i>false</i>
-
-// <i>Try your own!</i></pre>
+// <i>Try your own!</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch3-6">Section 3.6: Number constants</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!-- page 16 -->
 <p>The Number constructor has some built in constants that can be useful</p>
 
-<pre>Number.MAX_VALUE;  // <i>1.7976931348623157e+308</i>
+<pre>
+Number.MAX_VALUE;  // <i>1.7976931348623157e+308</i>
 Number.MAX_SAFE_INTEGER;  // <i>9007199254740991</i>
 Number.MIN_VALUE;  // <i>5e-324</i>
 Number.MIN_SAFE_INTEGER;  // <i>-9007199254740991</i>
@@ -891,11 +846,10 @@ Number.EPSILON; // <i>0.0000000000000002220446049250313</i>
 Number.POSITIVE_INFINITY; // <i>Infinity</i>
 Number.NEGATIVE_INFINITY;  // <i>-Infinity</i>
 
-Number.<b>NaN</b>;  // <i>NaN</i></pre>
-
+Number.<b>NaN</b>;  // <i>NaN</i>
+</pre>
 <p>In many cases the various operators in JavaScript will break with
 values outside the range of (Number.MIN_SAFE_INTEGER,Number.MAX_SAFE_INTEGER)</p>
-
 <p>Note that represents the different between one and the smallest Number
 greater than one, and thus the smallest possible difference between
 two different Number values. One reason to use this is due to the
@@ -905,23 +859,17 @@ of two numbers.</p>
 <h3 id="ch3-7">Section 3.7: Operations that return NaN</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Mathematical operations on values other than numbers return NaN.</p>
-
-<pre>"b" &ast; 3
+<pre>
+"b" &ast; 3
 "cde" - "e"
-&lbrack;1, 2, 3&rbrack; &ast; 2</pre>
-
+&lbrack;1, 2, 3&rbrack; &ast; 2
+</pre>
 <p>An exception: Single-number arrays.</p>
-
 <pre>&lbrack;2&rbrack; &ast; &lbrack;3&rbrack;  // <i>Returns 6</i></pre>
-
 <p>Also, remember that the + operator concatenates strings.</p>
-
 <pre>"a" + "b"  // <i>Returns "ab"</i></pre>
-
 <p>Dividing zero by zero returns <b>NaN</b>.</p>
-
 <pre>0 / 0  // <i>NaN</i></pre>
-
 <p>Note: In mathematics generally (unlike in JavaScript programming),
 dividing by zero is not possible.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -929,15 +877,12 @@ dividing by zero is not possible.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Generally, Math functions that are given non-numeric arguments will
 return NaN.</p>
-
 <pre>Math.floor("a")</pre>
-
 <p>The square root of a negative number returns NaN, because does not
 support <a href="https://en.wikipedia.org/wiki/Imaginary_number" 
 target="_blank" rel="noreferrer noopener">imaginary</a> or
 <a href="https://en.wikipedia.org/wiki/Complex_number" 
 target="_blank" rel="noreferrer noopener">complex</a> numbers.</p>
-
 <pre>Math.sqrt(-1)</pre>
 <!-- page 17 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -947,24 +892,21 @@ target="_blank" rel="noreferrer noopener">complex</a> numbers.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>To add annotations, hints, or exclude some code from being executed
 JavaScript provides two ways of commenting code lines.</p>
-
 <h4>Single line Comment //</h4>
-
 <p>Everything after the // until the end of the line is excluded from execution.</p>
-
-<pre><b>function</b> elementAt( event ) {
+<pre>
+<b>function</b> elementAt( event ) {
 // <i>Gets the element from Event coordinates</i>
   <b>return</b> document.elementFromPoint(event.clientX, event.clientY);
 }
-&ast;// <i>TODO: write more cool stuff!</i></pre>
-
+&ast;// <i>TODO: write more cool stuff!</i>
+</pre>
 <h4>Multi-line Comment /&ast;&ast;/</h4>
-
 <p>Everything between the opening /&ast; and the closing &ast;/ is excluded
 from execution, even if the opening and closing are on different
 lines.</p>
-
-<pre>/&ast;
+<pre>
+/&ast;
    <i>Gets the element from Event coordinates.
    Use like:
      var clickedEl = someEl.addEventListener("click", elementAt, false);</i>
@@ -972,47 +914,44 @@ lines.</p>
 <b>function</b> elementAt( event ) {
   <b>return</b> document.elementFromPoint(event.clientX, event.clientY);
 }
-/&ast; <i>TODO: write more useful comments!</i> &ast;/</pre>
+/&ast; <i>TODO: write more useful comments!</i> &ast;/
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch4-2">Section 4.2: Using HTML comments in JavaScript (Bad practice)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>HTML comments (optionally preceded by whitespace) will cause code (on
 the same line) to be ignored by the browser also, though this is
 considered <b>bad practice</b>.</p>
-
 <p>One-line comments with the HTML comment opening sequence (&lt;!-&dash;):
-
 <blockquote>
 <b>Note:</b> the JavaScript interpreter ignores the closing characters of HTML comments (&dash;-&gt;) here.
 </blockquote>
-
-<pre>&lt;!-- A single-line comment.
+<pre>
+&lt;!-- A single-line comment.
 &lt;!-- --&gt; Identical to using `//` since
-&lt;!-- --&gt; the closing '--&gt;' is ignored.</pre>
-
+&lt;!-- --&gt; the closing '--&gt;' is ignored.
+</pre>
 <p>This technique can be observed in legacy code to hide JavaScript from
 browsers that didn't support it:</p>
-
-<pre><b>script</b> type="text/javascript" language="JavaScript"<b>&gt;</b>
+<pre>
+<b>script</b> type="text/javascript" language="JavaScript"<b>&gt;</b>
 &lt;!-&dash;
 /&ast; Arbitrary JavaScript code.
    Old browsers would treat
    it as HTML code. &ast;/
 // --&gt;
-&lt;/script&gt;</pre>
-
+&lt;/script&gt;
+</pre>
 <!-- page 18 -->
 <p>An HTML closing comment can also be used in JavaScript (independent of
 an opening comment) at the beginning of a line (optionally preceded by
 whitespace) in which case it too causes the rest of the line to be
 ignored:</p>
-
 <pre>&dash;-&gt; Unreachable JS code</pre>
-
 <p>These facts have also been exploited to allow a page to call itself
 first as HTML and secondly as JavaScript. For example:</p>
-
-<pre>&lt;!-&dash;
+<pre>
+&lt;!-&dash;
  self.postMessage('reached JS "file"');
 /&ast;
 &dash;-&gt;
@@ -1025,12 +964,11 @@ w1.onmessage = function (e) {
 <b>&lt;/script&gt;</b>
 &lt;!-&dash;
 &ast;/
-&dash;-&gt;</pre>
-
+&dash;-&gt;
+</pre>
 <p>When run a HTML, all the multiline text between the &lt;!-&dash; and &dash;-&gt;
 comments are ignored, so the JavaScript contained therein is ignored
 when run as HTML.</p>
-
 <p>As JavaScript, however, while the lines beginning with &lt;!-&dash; and &dash;-&gt;
 are ignored, their effect is not to escape over <i>multiple</i>
 lines, so the lines following them (e.g., self.postMessage(...) will not be ignored when
@@ -1150,46 +1088,37 @@ first enable the develop menu in Safari&apos;s Preferences</p>
   alt="."
   style="border: 2px solid #000000; width:773px;" />
 <!-- page 21 image012 -->
-
 <p>Then you can either pick &quot;Develop-&gt;Show Error Console&quot; from the menus or press ⌘
 &plus; Option &plus; C</p>
-
 <h4>Opera</h4>
-
 <p>Opening the "Console" in opera:</p>
-
 <ul>
   <li>Ctrl + Shift + I ,then click on the "Console" tab</li>
 </ul>
-
 <h4>Compatibility</h4>
-
 <p>When using or emulating Internet Explorer 8 or earlier versions (e.g.
 through Compatibility View / Enterprise Mode) the console will
 <b>only</b> be defined when the Developer Tools are active, so console.log ()
 statements can cause an exception and prevent code from executing. To
 mitigate this, you can check to see if the console is available before
 you log:</p>
-
-<pre><b>if</b> (<b>typeof</b> window.console !== &apos;undefined&apos)
+<pre>
+<b>if</b> (<b>typeof</b> window.console !== &apos;undefined&apos)
 {
   console.log(&quot;Hello World&quot;);
-}</pre>
-
+}
+</pre>
 <p>Or at the start of your script you can identify if the console is available and if not, define a null function to catch all of your
 references and prevent exceptions.</p>
-
 <!-- page 22 -->
-
-<pre><b>if</b> (!window.console)
+<pre>
+<b>if</b> (!window.console)
 {
   console = {log: <b>function</b>() {}};
-}</pre>
-
+}
+</pre>
 <p>Note this second example will stop <b>all</b> console logs even if the developer window has been opened.</p>
-
 <p>Using this second example will preclude use of other functions such as console.dir(obj) unless that is specifically added.</p>
-
 <p>A browser&apos;s debugging console or <a href="https://developer.mozilla.org/en-US/docs/Tools/Web_Console" 
 target="_blank" rel="noreferrer noopener">web console</a> is generally used by developers to identify errors, 
 understand flow of execution, log data and for many other purpose at runtime. This information is accessed 
@@ -1199,7 +1128,6 @@ target="_blank" rel="noreferrer noopener">console</a> object.</p>
 <h3 id="ch5-1">Section 5.1: Measuring time - console.time()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>console.time() can be used to measure how long a task in your code takes to run.</p>
-
 <p>Calling <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd" 
 target="_blank" rel="noreferrer noopener">console.time(&lbrack;label&rbrack;)</a> 
 starts a new timer. When 
@@ -1208,24 +1136,22 @@ target="_blank" rel="noreferrer noopener">console.timeEnd(&lbrack;label&rbrack;)
 called, the elapsed time, in milliseconds, Since the original .time() call is calculated 
 and logged. Because of this behavior, you can call .timeEnd() multiple times with the same 
 label to log the elapsed time since the original .time() call was made.</p>
-
 <p><b>Example 1:</b></p>
-
-<pre>console.time(&apos;response in&apos;);
+<pre>
+console.time(&apos;response in&apos;);
 
 alert(&apos;Click to continue&apos;);
 console.timeEnd(&apos;response in&apos;);
 
 alert(&apos;One more time&apos;);
-console.timeEnd(&apos;response in&apos;);</pre>
-
+console.timeEnd(&apos;response in&apos;);
+</pre>
 <p>will output:</p>
-
-<pre>response <b>in</b>: 774.967ms
-response <b>in</b>: 1402.199ms</pre>
-
+<pre>
+response <b>in</b>: 774.967ms
+response <b>in</b>: 1402.199ms
+</pre>
 <p><b>Example 2:</b></p>
-
 <pre><b>var</b> elms = document.getElementsByTagName(&apos;&ast;&apos;); // <i>select all elements on the page</i>
 console.time(&apos;Loop time&apos;);
 
@@ -1234,10 +1160,9 @@ console.time(&apos;Loop time&apos;);
     // <i>nothing to do ...</i>
   }
 } 
-console.timeEnd(&apos;Loop time&apos;);</pre>
-
+console.timeEnd(&apos;Loop time&apos;);
+</pre>
 <p>will output:</p>
-
 <pre>
 Loop time: 40.716ms
 </pre>
@@ -1247,15 +1172,11 @@ Loop time: 40.716ms
 <!-- page 23 -->
 <p>Many of the console&apos;s print methods can also handle C-like string
 formatting, using % tokens:</p>
-
 <pre>
 console.log(&apos;%s has %d points&apos;,&apos;Sam&apos;, 100);
 </pre>
-
 <p>Display Sam has 100 points.</p>
-
 <p>The full list of format specifiers in JavaScript is:</p>
-
 <table border="1" style="width:200px">
   <thead>
     <tr>
@@ -1290,15 +1211,11 @@ console.log(&apos;%s has %d points&apos;,&apos;Sam&apos;, 100);
     </tr>
   </tfoot>
 </table>
-
 <h4>Advanced styling</h4>
-
 <p>When the CSS format specifier (%c) is placed at the left side of the
 string, the print method will accept a second parameter with CSS rules
 which allow fine-grained control over the formatting of that string:</p>
-
 <pre>console.log(&apos;%cHello world!&apos;, &apos;color: blue; font-size: xx-large&apos;);</pre>
-
 <p>Displays:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 13.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -1310,7 +1227,6 @@ which allow fine-grained control over the formatting of that string:</p>
 <!-- (./images/image013.jpg){width="7.477777777777778in" height="0.6666666666666666in"} -->
 
 <p>It is possible to use multiple %c format specifiers:</p>
-
 <ul>
   <li>any substring to the right of a %c has a corresponding parameter in
     the print method;</li>
@@ -1322,7 +1238,6 @@ which allow fine-grained control over the formatting of that string:</p>
   <li>if three %c format specifiers are found, then the 1st, 2nd and 3rd substrings will 
     have their rules defined in the 2nd , 3rd and 4th parameter respectively, and so on&hellip;</li>
 </ul>
-
 <pre>
 console.log("%cHello %cWorld%c!!", // <i>string to be printed</i>
             "color: blue;", // <i>applies color formatting to the 1st substring</i>
@@ -1330,7 +1245,6 @@ console.log("%cHello %cWorld%c!!", // <i>string to be printed</i>
             &quot;/&ast; no CSS rule &ast;/&quot; // <i>does not apply any rule to the remaining substring</i>
 );
 </pre>
-
 <p>Displays:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 14.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -1342,10 +1256,8 @@ console.log("%cHello %cWorld%c!!", // <i>string to be printed</i>
 <!-- (./images/image014.jpg){width="7.477777777777778in" height="0.6395833333333333in"} -->
 <!-- page 24 -->
 <h4>Using groups to indent output</h4>
-
 <p>Output can be indented and enclosed in a collapsible group in the
 debugging console with the following methods:</p>
-
 <ul>
   <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupCollapsed" 
     target="_blank" rel="noreferrer noopener">console.groupCollapsed()</a>: creates a collapsed 
@@ -1355,15 +1267,12 @@ debugging console with the following methods:</p>
     target="_blank" rel="noreferrer noopener">console.group()</a>: creates an expanded group 
     of entries that can be collapsed in order to hide the entries after this method is invoked.</li>
 </ul>
-
 <p>The indentation can be removed for posterior entries by using the following method:</p>
-
 <ul>
   <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/groupEnd" 
     target="_blank" rel="noreferrer noopener">console.groupEnd()</a>: exits the current group, 
     allowing newer entries to be printed in the parent group after this method is invoked.</li>
 </ul>
-
 <p>Groups can be cascaded to allow multiple indented output or collapsible layers within each other:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 15/16.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -1388,53 +1297,42 @@ messages. This debugging or <a href="https://developer.mozilla.org/en-US/docs/To
 target="_blank" rel="noreferrer noopener">web console</a> can be directly opened in the 
 browser (F12 key in most browsers see <i>Remarks</i> below for further information) and 
 the log method of the console JavaScript object can be invoked by typing the following:</p>
-
 <pre>console.log('My message');</pre>
-
 <p>Then, by pressing Enter, this will display "My message" in the debugging console.
-
 <p>console.log() can be called with any number of arguments and variables available in
 the current scope. Multiple arguments will be printed in one line with a small space between them.</p>
-
-<pre><b>var</b> obj = {test: 1};
-console.log(&lbrack;'string'&rbrack;, 1, obj, window);</pre>
-
+<pre>
+<b>var</b> obj = {test: 1};
+console.log(&lbrack;'string'&rbrack;, 1, obj, window);
+</pre>
 <p>The log method will display the following in the debugging console:</p>
-
 <pre>&lbrack;'string'&rbrack; 1 Object { test: 1 } Window { /&ast; <i>truncated</i> &ast;/ }</pre>
-
 <p>Beside plain strings, console.log() can handle other types, like arrays, objects, dates, functions, etc.:</p>
-
-<pre>console.log(&lbrack;0, 3, 32, 'a string' &rbrack;);
-console.log({key1: 'value', key2: 'another value'});</pre>
-
+<pre>
+console.log(&lbrack;0, 3, 32, 'a string' &rbrack;);
+console.log({key1: 'value', key2: 'another value'});
+</pre>
 <p>Displays:</p>
-
-<pre>Array &lbrack;0, 3, 32, 'a string'&rbrack;
-Object { key1: 'value', key2: 'another value'}</pre>
-
+<pre>
+Array &lbrack;0, 3, 32, 'a string'&rbrack;
+Object { key1: 'value', key2: 'another value'}
+</pre>
 <p>Nested objects may be collapsed:</p>
-
 <pre>console.log({ key1: 'val', key2: &lbrack;'one', 'two'&rbrack;, key3: { a: 1, b: 2 } });</pre>
-
 <p>Displays:</p>
-
 <pre>Object { key1: 'val', key2: Array &lbrack;2&rbrack;, key3: Object }</pre>
-
 <p>Certain types such as Date objects and <b>function</b>s may be displayed differently:</p>
-
-<pre>console.log(<b>new</b> Date(0));
-console.log(<b>function</b> test(a, b) { <b>return</b> c; });</pre>
-
+<pre>
+console.log(<b>new</b> Date(0));
+console.log(<b>function</b> test(a, b) { <b>return</b> c; });
+</pre>
 <p>Displays:</p>
-
-<pre>Wed Dec 31 1969 19:00:00 GMT &minus; 0500 (Eastern Standard Time)
-<b>function</b> test (a , b) { <b>return</b> c; }</pre>
-
+<pre>
+Wed Dec 31 1969 19:00:00 GMT &minus; 0500 (Eastern Standard Time)
+<b>function</b> test (a , b) { <b>return</b> c; }
+</pre>
 <h4>Other print methods</h4>
-
 <p>In addition to the log method, modern browsers also support similar methods:</p>
-
 <ul>
   <li><a href="https://developer.mozilla.org/es/docs/Web/API/Console/info" 
     target="_blank" rel="noreferrer noopener">
@@ -1467,19 +1365,23 @@ console.log(<b>function</b> test(a, b) { <b>return</b> c; });</pre>
 </ul>
 <!-- page 26 -->
 
-<pre><b>function</b> sec () {
+<pre>
+<b>function</b> sec () {
   first();
 }
 <b>function</b> first () {
   console.trace();
 }
-sec ();</pre>
+sec ();
+</pre>
 
 <h4>Displays:</h4>
 
-<pre>first
+<pre>
+first
 sec
-(anonymous <b>function</b>)</pre>
+(anonymous <b>function</b>)
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 17.  (xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
@@ -1545,16 +1447,14 @@ console.log(e&period;stack);
 </pre>
 
 <pre>console.table({foo: &apos;bar&apos;, bar: &apos;baz&apos;});</pre>
-
 <p>displays like:</p>
-
 <pre>
 <b>(index) value</b>
 &quot;foo&quot;   &quot;bar&quot;
 &quot;bar&quot;   &quot;baz&quot;
 </pre>
-
-<pre><b>var</b> personArr = &lbrack;
+<pre>
+<b>var</b> personArr = &lbrack;
 { 
   &quot;personId&quot;: 123,
   &quot;name&quot;: &quot;Jhon&quot;, 
@@ -1579,8 +1479,8 @@ console.log(e&period;stack);
   &quot;phoneNo&quot;: &quot;1234567890&quot;
 }
 &rbrack;;
-  console.table(personArr, &lbrack;&apos;name&apos;, &apos;personId&apos;&rbrack;);</pre>
-
+  console.table(personArr, &lbrack;&apos;name&apos;, &apos;personId&apos;&rbrack;);
+</pre>
 <p>displays like:</p>
 <!-- page 28 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -1643,29 +1543,29 @@ console.count(&apos;42.3&apos;);
 
 <p>Displays:</p>
 
-<pre>42.3: 1
+<pre>
+42.3: 1
 42.3: 2
-42.3: 3</pre>
-
+42.3: 3
+</pre>
 <p>Functions point always to the global Function object:</p>
-
-<pre>console.count(console.constructor);
+<pre>
+console.count(console.constructor);
 console.count(<b>function</b>(){});
 console.count(Object);
 <b>var</b> fn1 = <b>function</b> myfn(){};
 console.count(fn1);
-console.count(Number);</pre>
-
+console.count(Number);
+</pre>
 <p>Displays:</p>
-
-<pre>&lbrack;object Function&rbrack;: 1
+<pre>
+&lbrack;object Function&rbrack;: 1
 &lbrack;object Function&rbrack;: 2
 &lbrack;object Function&rbrack;: 3
 &lbrack;object Function&rbrack;: 4
-&lbrack;object Function&rbrack;: 5</pre>
-
+&lbrack;object Function&rbrack;: 5
+</pre>
 <p>Certain objects get specific counters associated to the type of object they refer to:</p>
-
 <pre>
 console.count(<b>undefined</b>);
 console.count(document.Batman);
@@ -1686,10 +1586,9 @@ console.&lowbar;&lowbar;proto&lowbar;&lowbar;.constructor.<b>prototype</b>);
 console.count(Object.getPrototypeOf(console));
 console.count(<b>null</b>);
 </pre>
-
 <p>Displays:</p>
-
-<pre><b>undefined</b>: 1
+<pre>
+<b>undefined</b>: 1
 <b>undefined</b>: 2
 <b>undefined</b>: 3
 <b>NaN</b>: 1
@@ -1704,14 +1603,12 @@ console.count(<b>null</b>);
 &lbrack;object Object&rbrack;: 3
 &lbrack;object Object&rbrack;: 4
 &lbrack;object Object&rbrack;: 5
-<b>null</b>: 1</pre>
-
+<b>null</b>: 1
+</pre>
 <!-- page 30 -->
 <p><b>Empty string or absence of argument</b></p>
-
 <p>If no argument is provided while <b>sequentially inputting the count
 method in the debugging console</b>, an empty string is assumed as parameter, i.e.:
-
 <pre>
 &gt; console.count();
   : 1
@@ -17786,9 +17683,9 @@ get_extension(&apos;name.with.many.dots.myext&apos;) // <i>&quot;myext&quot;</i>
   <b>var</b> basename = path.split(/&lbrack;&bsol;&bsol;&bsol;&bsol;/&rbrack;/).pop(), // <i>extract file name from full path &hellip;</i>
                                               // <i>(supports &grave;&bsol;&bsol;&grave; and &grave;/&grave; separators)</i>
   pos = basename.lastIndexOf(&apos;.&apos;);            // <i>get last position of &grave;.&grave;</i>
-  <b>if</b> (basename === &apos;&apos; &vert;&vert; pos &lt; 1             // <i>if file name is empty or &hellip;</i>
-    <b>return</b> &quot;&quot;;                               // <i>&grave;.&grave; not found (-1) or comes first (0)</i>
-<b>return</b> basename.slice(pos &plus; 1);              // <i>extract extension ignoring &grave;.&grave;</i>
+  <b>if</b> (basename === &apos;&apos; &vert;&vert; pos &lt; 1              // <i>if file name is empty or &hellip;</i>
+    <b>return</b> &quot;&quot;;                                // <i>&grave;.&grave; not found (-1) or comes first (0)</i>
+<b>return</b> basename.slice(pos &plus; 1);               // <i>extract extension ignoring &grave;.&grave;</i>
 }
 get_extension(&apos;/path/to/file.ext&apos;); // <i>&quot;ext&quot;</i>
 </pre>
