@@ -17553,7 +17553,6 @@ default assignment x = 5</p>
 </pre>
 <!-- thru 50.8 -->
 <!-- page 299 -->
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch51">Chapter 51: Custom Elements</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -17682,10 +17681,10 @@ get_extension(&apos;name.with.many.dots.myext&apos;) // <i>&quot;myext&quot;</i>
 <b>function</b> get_extension(path) {
   <b>var</b> basename = path.split(/&lbrack;&bsol;&bsol;&bsol;&bsol;/&rbrack;/).pop(), // <i>extract file name from full path &hellip;</i>
                                               // <i>(supports &grave;&bsol;&bsol;&grave; and &grave;/&grave; separators)</i>
-  pos = basename.lastIndexOf(&apos;.&apos;);            // <i>get last position of &grave;.&grave;</i>
+    pos = basename.lastIndexOf(&apos;.&apos;);            // <i>get last position of &grave;.&grave;</i>
   <b>if</b> (basename === &apos;&apos; &vert;&vert; pos &lt; 1              // <i>if file name is empty or &hellip;</i>
     <b>return</b> &quot;&quot;;                                // <i>&grave;.&grave; not found (-1) or comes first (0)</i>
-<b>return</b> basename.slice(pos &plus; 1);               // <i>extract extension ignoring &grave;.&grave;</i>
+  <b>return</b> basename.slice(pos &plus; 1);               // <i>extract extension ignoring &grave;.&grave;</i>
 }
 get_extension(&apos;/path/to/file.ext&apos;); // <i>&quot;ext&quot;</i>
 </pre>
@@ -17839,368 +17838,125 @@ console.log(view.getUint16(0, <b>true</b>));  // <i>511</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch53-4">Section 53.4: Creating a TypedArray from a Base64 string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>var</b>
-data
-=
-&apos;iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACN&apos;
-&plus;
-&apos;byblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHx&apos;
-&plus;
-&apos;gljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==&apos;
-;
-<b>var</b>
-characters
-=
-atob
-(
-data
-)
-;
-<b>var</b>
-array
-=
-<b>new</b>
-Uint8Array
-(
-characters.
-length
-)
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-characters.
-length
-;
-i
-++
-)
-{
-array
-&lbrack;
-i
-&rbrack;
-=
-characters.
-charCodeAt
-(
-i
-)
-;
+<pre>
+<b>var</b> data =
+&apos;iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACN&apos; &plus;
+&apos;byblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHx&apos; &plus;
+&apos;gljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==&apos;;
+<b>var</b> characters = atob(data);
+<b>var</b> array = <b>new</b> Uint8Array(characters.length);
+<b>for</b> (<b>var</b> i = 0; i &lt; characters.length; i++) {
+  array&lbrack;i&rbrack; = characters.charCodeAt(i);
 }
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch53-5">Section 53.5: Using TypedArrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-TypedArrays are a set of types providing different views into
+<p>TypedArrays are a set of types providing different views into
 fixed-length mutable binary ArrayBuffers. For the most part, they act
 like Arrays that coerce all assigned values to a given numeric type.
 You can pass an ArrayBuffer instance to a TypedArray constructor to
-create a new view of its data.
-<b>var</b>
-buffer
-=
-<b>new</b>
-ArrayBuffer
-(
-8
-)
-;
-<b>var</b>
-byteView
-=
-<b>new</b>
-Uint8Array
-(
-buffer
-)
-;
-<b>var</b>
-floatView
-=
-<b>new</b>
-Float64Array
-(
-buffer
-)
-;
-console.
-log
-(
-byteView
-)
-;
-// <i>&lbrack;0, 0, 0, 0, 0, 0, 0, 0&rbrack;</i>
-console.
-log
-(
-floatView
-)
-;
-// <i>&lbrack;0&rbrack;</i>
-byteView
-&lbrack;
-0
-&rbrack;
-=
-0x01
-;
-byteView
-&lbrack;
-1
-&rbrack;
-=
-0x02
-;
-byteView
-&lbrack;
-2
-&rbrack;
-=
-0x04
-;
-byteView
-&lbrack;
-3
-&rbrack;
-=
-0x08
-;
-console.
-log
-(
-floatView
-)
-;
-// <i>&lbrack;6.64421383e-316&rbrack;</i>
-slice  ( &hellip;
-ArrayBuffers can be copied using the .) method, either directly or
-through a TypedArray view.
-<b>var</b>
-byteView2
-=
-byteView.
-slice
-(
-)
-;
-<b>var</b>
-floatView2
-=
-<b>new</b>
-Float64Array
-(
-byteView2.
-buffer
-)
-;
-byteView2
-&lbrack;
-6
-&rbrack;
-=
-0xFF
-;
-console.
-log
-(
-floatView
-)
-;
-// <i>&lbrack;6.64421383e-316&rbrack;</i>
-console.
-log
-(
-floatView2
-)
-;
-// <i>&lbrack;7.06327456e-304&rbrack;</i>
+create a new view of its data.</p>
+<pre>
+<b>var</b> buffer = <b>new</b> ArrayBuffer(8);
+<b>var</b> byteView = <b>new</b> int8Array(buffer);
+<b>var</b> floatView = <b>new</b> Float64Array(buffer);
+
+console.log(byteView);  // <i>&lbrack;0, 0, 0, 0, 0, 0, 0, 0&rbrack;</i>
+console.log(floatView); // <i>&lbrack;0&rbrack;</i>
+byteView&lbrack;0&rbrack; = 0x01;
+byteView&lbrack;1&rbrack; = 0x02;
+byteView&lbrack;2&rbrack; = 0x04;
+byteView&lbrack;3&rbrack; = 0x08;
+console.log(floatView);  // <i>&lbrack;6.64421383e-316&rbrack;</i>
+</pre>
+<p>ArrayBuffers can be copied using the .slice(...) method, either directly or through 
+a TypedArray view.</p>
+<pre>
+<b>var</b> byteView2 = byteView.slice();
+<b>var</b> floatView2 = <b>new</b> Float64Array(byteView2.buffer);
+byteView2&lbrack;6&rbrack; = 0xFF;
+console.log(floatView);  // <i>&lbrack;6.64421383e-316&rbrack;</i>
+console.log(floatView2); // <i>&lbrack;7.06327456e-304&rbrack;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch53-6">Section 53.6: Iterating through an arrayBuffer</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-For a convenient way to iterate through an arrayBuffer, you can create
-a simple iterator that implements the DataView methods under the hood:
-<b>var</b>
-ArrayBufferCursor
-=
-<b>function</b>
-(
-)
-{
-<b>var</b>
-ArrayBufferCursor
-=
-<b>function</b>
-(
-arrayBuffer
-)
-{
-<b>this</b>
-.
-dataview
-=
-<b>new</b>
-DataView
-(
-arrayBuffer
-,
-0
-)
-;
-<b>this</b>
-.
-size
-=
-arrayBuffer.
-byteLength
-;
-<b>this</b>
-.
-index
-=
-0
-;
+<p>For a convenient way to iterate through an arrayBuffer, you can create
+a simple iterator that implements the DataView methods under the hood:</p>
+<pre>
+<b>var</b> ArrayBufferCursor = <b>function</b>() {
+  <b>var</b> ArrayBufferCursor = <b>function</b>(arrayBuffer) {
+    <b>this</b>.dataview = <b>new</b> DataView(arrayBuffer, 0);
+    <b>this</b>.size = arrayBuffer.byteLength;
+    <b>this</b>.index = 0;
 }
-ArrayBufferCursor.
-<b>prototype</b>
-.
-next
-=
-<b>function</b>
-(
-type
-)
-{
-<b>switch</b>
-(
-type
-)
-{
-<b>case</b>
-&apos;Uint8&apos;
-:
-<b>var</b>
-result
-=
-<b>this</b>
-.
-dataview
-.
-getUint8
-(
-<b>this</b>
-.
-index
-)
-;
-<b>this</b>
-.
-index
-+=
-1
-;
-<b>return</b>
-result
-;
-<b>case</b>
-&apos;Int16&apos;
-:
-<b>var</b>
-result
-=
-<b>this</b>
-.
-dataview
-.
-getInt16
-(
-<b>this</b>
-.
-index
-,
-<b>true</b>
-)
-;
-<b>this</b>
-.
-index
-+=
-2
-;
-<b>return</b>
-result
-;
-<b>case</b>
-&apos;Uint16&apos;
-:
-<b>var</b>
-result
-=
-<b>this</b>
-.
-dataview
-.
-getUint16
-(
-<b>this</b>
-.
-index
-,
-<b>true</b>
-)
-;
-![](./images/image035.png){width="7.486805555555556in"
-height="5.360416666666667in"}
-You can then create an iterator like this:
-<b>var</b>
-cursor
-=
-<b>new</b>
-ArrayBufferCursor
-(
-arrayBuffer
-)
-;
-You can use the hasNext to check if there&apos;s still items
-<b>for</b>
-(
-;
-cursor.
-hasNext
-(
-)
-;
-)
-{
+
+ArrayBufferCursor.<b>prototype</b>.next = <b>function</b>(type) {
+  <b>switch</b>(type) {
+    <b>case</b> &apos;Uint8&apos; :
+      <b>var</b> result = <b>this</b>.dataview.getUint8(<b>this</b>.index);
+      <b>this</b>.index += 1;
+      <b>return</b> result;
+    <b>case</b> &apos;Int16&apos; :
+      <b>var</b> result = <b>this</b>.dataview.getInt16(<b>this</b>.index, <b>true</b>);
+      <b>this</b>.index += 2;
+      <b>return</b> result;
+    <b>case</b> &apos;Uint16&apos; :
+      <b>var</b> result = <b>this</b>.dataview.getUint16(<b>this</b>.index, <b>true</b>);
+      <b>this</b>.index += 2;
+      <b>return</b> result;
+    <b>case</b> &apos;Uint16&apos; :
+      <b>var</b> result = <b>this</b>.dataview.getInt32(<b>this</b>.index, <b>true</b>);
+      <b>this</b>.index += 4;
+      <b>return</b> result;
+    <b>case</b> &apos;Uint32&apos; :
+      <b>var</b> result = <b>this</b>.dataview.getUint32(<b>this</b>.index, <b>true</b>);
+      <b>this</b>.index += 4;
+      <b>return</b> result;
+    <b>case</b> &apos;Float&apos; :
+    <b>case</b> &apos;Float32&apos; :
+      <b>var</b> result = <b>this</b>.dataview.getFloat32(<b>this</b>.index, <b>true</b>);
+      <b>this</b>.index += 4;
+      <b>return</b> result;
+	<b>case</b> &apos;Double&apos :
+    <b>case</b> &apos;Float64&apos; :
+      <b>var</b> result = <b>this</b>.dataview.getFloat64(<b>this</b>.index, <b>true</b>);
+      <b>this</b>.index += 8;
+      <b>return</b> result;
+    <b>default</b>:
+      <b>throw new</b> Error("Unknown datatype");
+    }
+  };
+  ArrayBuffuerCursor.<b>prototype</b>.hasNext = <b>function</b>() {
+    <b>return this</b>.index &lt; <b>this</b>.size;
+  }	
+  <b>return</b> ArrayBufferCursor;
+});
+</pre>
+
+<p>You can then create an iterator like this:</p>
+<pre>
+<b>var</b> cursor = <b>new</b> ArrayBufferCursor(arrayBuffer);
+</pre>
+<p>You can use the hasNext to check if there&apos;s still items</p>
+<pre>
+<b>for</b>(;cursor.hasNext();) {
 // <i>There&apos;s still items to process</i>
 }
-You can use the next method to take the next value:
-<b>var</b>
-nextValue
-=
-cursor.
-next
-(
-&apos;Float&apos;
-)
-;
-With such an iterator, writing your own parser to process binary data
-becomes pretty easy.
+</pre>
+<p>You can use the next method to take the next value:</p>
+<pre>
+<b>var</b> nextValue = cursor.next(&apos;Float&apos;);
+</pre>
+<p>With such an iterator, writing your own parser to process binary data
+becomes pretty easy.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch54">Chapter 54: Template Literals</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Template literals are a type of string literal that allows values to
+<p>Template literals are a type of string literal that allows values to
 be interpolated, and optionally the interpolation and construction
-behaviour to be controlled using a &quot;tag&quot; function.
+behaviour to be controlled using a &quot;tag&quot; function.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch54-1">Section 54.1: Basic interpolation and multiline strings</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
