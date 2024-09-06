@@ -17952,212 +17952,60 @@ behaviour to be controlled using a &quot;tag&quot; function.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch54-1">Section 54.1: Basic interpolation and multiline strings</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Template literals are a special type of string literal that can be
+<p>Template literals are a special type of string literal that can be
 used instead of the standard &apos;&hellip;&apos; or &quot;&hellip;&quot;. They are declared
 by quoting the string with backticks instead of the standard single or
-double quotes: &grave;&hellip;&grave;.
-expression
-Template literals can contain line breaks and arbitrary expressions
-can be embedded using the &dollar;{} substitution syntax. By default, the
+double quotes: &grave;&hellip;&grave;.</p>
+<p>Template literals can contain line breaks and arbitrary expressions
+can be embedded using the &dollar;{ expression } substitution syntax. By default, the
 values of these substitution expressions are concatenated directly
-into the string where they appear.
-<b>const</b>
-name
-=
-&quot;John&quot;
-;
-<b>const</b>
-score
-=
-74
-;
-console.
-log
-(
-&grave;Game Over
-!
-&dollar;
-{
-name
-}
-&apos;s score was &dollar;{score &ast; 10}.&grave;);
-Game Over
-!
-John
-&apos;s score was 740.
+into the string where they appear.</p>
+<pre>
+<b>const</b> name = &quot;John&quot;;
+<b>const</b> score = 74;
+console.log(&grave;Game Over!
+&dollar;{name}&apos;s score was &dollar;{score &ast; 10}.&grave;);
+Game Over!
+John&apos;s score was 740.
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch54-2">Section 54.2: Tagged strings</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-A function identified immediately before a template literal is used to
+<p>A function identified immediately before a template literal is used to
 interpret it, in what is called a <b>tagged template literal</b>. The tag
 function can return a string, but it can also return any other type of
-value.
-&hellip;substitutions
-The first argument to the tag function, strings, is an Array of each
-constant piece of the literal. The remaining arguments, , contain the
-evaluated values of each &dollar;{} substitution expression.
-<b>function</b>
-settings
-(
-strings
-,
-&hellip;
-substitutions
-)
-{
-<b>const</b>
-result
-=
-<b>new</b>
-Map
-(
-)
-;
-<b>for</b>
-(
-<b>let</b>
-i
-=
-0
-;
-i
-&lt;
-substitutions.
-length
-;
-i
-++
-)
-{
-result.
-<b>set</b>
-(
-strings
-&lbrack;
-i
-&rbrack;
-.
-trim
-(
-)
-,
-substitutions
-&lbrack;
-i
-&rbrack;
+value.</p>
 
-)
-;
+<p>The first argument to the tag function, strings, is an Array of each
+constant piece of the literal. The remaining arguments, ...substitutions, contain the
+evaluated values of each &dollar;{} substitution expression.</p>
+<pre>
+<b>function</b> settings(strings, &hellip;substitutions) {
+  <b>const</b> result = <b>new</b> Map();
+  <b>for</b> (<b>let</b> i = 0; i &lt; substitutions.length; i++) {
+    result.<b>set</b>(strings&lbrack;i&rbrack;.trim(), substitutions&lbrack;i&rbrack;);
+  }
+  <b>return</b> result;
 }
-<b>return</b>
-result
-;
+<b>const</b> remoteConfiguration = settings&grave;
+  label &dollar;{&apos;Content&apos;}
+  servers &dollar;{2 &ast; 8 &plus; 1}
+  hostname &dollar;{location.hostname}
+&grave;;
+Map {&quot;label&quot; =&gt; &quot;Content&quot;, &quot;servers&quot; =&gt; 17, &quot;hostname&quot; =&gt; &quot;stackoverflow.com&quot;}
+</pre>
+<p>The strings Array has a special .raw property referencing a parallel Array of the 
+same constant pieces of the template literal but <i>exactly</i> as they appear in the 
+source code, without any backslash-escapes being replaced.</p>
+<pre>
+<b>function</b> example(strings, &hellip;substitutions) {
+  console.log(&apos;strings:&apos;, strings);
+  console.log(&apos;&hellip;substitutions:&apos;, substitutions);
 }
-<b>const</b>
-remoteConfiguration
-=
-settings&grave;
-label &dollar;
-{
-&apos;Content&apos;
-}
-servers &dollar;
-{
-2
-&ast;
-8
-&plus;
-1
-}
-hostname &dollar;
-{
-location.
-hostname
-}
-&grave;
-;
-Map
-{
-&quot;label&quot;
-=&gt;
-&quot;Content&quot;
-,
-&quot;servers&quot;
-=&gt;
-17
-,
-&quot;hostname&quot;
-=&gt;
-&quot;stackoverflow.com&quot;
-}
-raw
-The strings Array has a special . property referencing a parallel
-Array of the same constant pieces of the template literal but
-*exactly</i> as they appear in the source code, without any
-backslash-escapes being replaced.
-<b>function</b>
-example
-(
-strings
-,
-&hellip;
-substitutions
-)
-{
-console.
-log
-(
-&apos;strings:&apos;
-,
-strings
-)
-;
-console.
-log
-(
-&apos;&hellip;substitutions:&apos;
-,
-substitutions
-)
-;
-}
-example&grave;Hello &dollar;
-{
-&apos;world&apos;
-}
-.&bsol;&bsol;n&bsol;&bsol;nHow are you
-?
-&grave;
-;
-strings
-:
-&lbrack;
-&quot;Hello &quot;
-,
-&quot;.
-<b>&bsol;&bsol;n</b>
-<b>&bsol;&bsol;n</b>
-How are you?&quot;
-,
-raw
-:
-&lbrack;
-&quot;Hello &quot;
-,
-&quot;.
-<b>&bsol;&bsol;&amp;ast;</i>
-n
-**&bsol;&bsol;&amp;ast;</i>
-nHow are you?&quot;
-&rbrack;
-&rbrack;
-substitutions
-:
-&lbrack;
-&quot;world&quot;
-&rbrack;
+example&grave;Hello &dollar;{&apos;world&apos;}.&bsol;&bsol;n&absol;&absol;nHow are you?&grave;;
+strings: &lbrack;&quot;Hello &quot;, &quot;&period;&absol;n&absol;How are you?&quot;, raw: &lbrack;&quot;Hello &quot;, &quot;&period&absol;&absol;n&absol;&absol;nHow are you?&quot;&rbrack;&rbrack;
+substitutions: &lbrack;&quot;world&quot;&rbrack;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch54-3">Section 54.3: Raw strings</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
