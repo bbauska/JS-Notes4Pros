@@ -17331,11 +17331,10 @@ console.log(&quot;setTimeout callback log 1&quot;);
 console.log(&quot;setTimeout callback log 2&quot;);
 }
 , 100);
-<b>&lt;</b>
-<b>/script</b>
-<b>&gt;</b>
+<b>&lt;/script&gt;</b>
 In this example, the host environment is the web browser.
-<b>&lt;script</b>
+<b>&lt;script&gt;</b>
+</pre>
 
 <ol type="1">
   <li>The HTML parser will first execute the <b>&gt;</b>. It will run to completion.</li>
