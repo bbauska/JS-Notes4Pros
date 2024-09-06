@@ -17840,9 +17840,9 @@ console.log(view.getUint16(0, <b>true</b>));  // <i>511</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <pre>
 <b>var</b> data =
-&apos;iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACN&apos; &plus;
-&apos;byblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHx&apos; &plus;
-&apos;gljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==&apos;;
+  &apos;iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACN&apos; &plus;
+  &apos;byblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHx&apos; &plus;
+  &apos;gljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==&apos;;
 <b>var</b> characters = atob(data);
 <b>var</b> array = <b>new</b> Uint8Array(characters.length);
 <b>for</b> (<b>var</b> i = 0; i &lt; characters.length; i++) {
@@ -17891,7 +17891,6 @@ a simple iterator that implements the DataView methods under the hood:</p>
     <b>this</b>.size = arrayBuffer.byteLength;
     <b>this</b>.index = 0;
 }
-
 ArrayBufferCursor.<b>prototype</b>.next = <b>function</b>(type) {
   <b>switch</b>(type) {
     <b>case</b> &apos;Uint8&apos; :
@@ -17942,7 +17941,7 @@ ArrayBufferCursor.<b>prototype</b>.next = <b>function</b>(type) {
 <p>You can use the hasNext to check if there&apos;s still items</p>
 <pre>
 <b>for</b>(;cursor.hasNext();) {
-// <i>There&apos;s still items to process</i>
+  // <i>There&apos;s still items to process</i>
 }
 </pre>
 <p>You can use the next method to take the next value:</p>
