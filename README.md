@@ -17441,564 +17441,216 @@ strict by default.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch50-3">Section 50.3: Changes to properties</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Strict mode also prevents you from deleting undeletable properties.
-&quot;use strict&quot;
-;
-<b>delete</b>
-Object
-.
-<b>prototype</b>
-;
-// <i>throws a TypeError</i>
-The above statement would simply be ignored if you don&apos;t use strict
-mode, however now you know why it does not execute as expected.
-
-It also prevents you from extending a non-extensible property.
-<b>var</b>
-myObject
-=
-{
-name
-:
-&quot;My Name&quot;
+<p>Strict mode also prevents you from deleting undeletable properties.</p>
+<pre>
+&quot;use strict&quot;;
+<b>delete</b> Object.<b>prototype</b>;  // <i>throws a TypeError</i>
+</pre>
+<p>The above statement would simply be ignored if you don&apos;t use strict
+mode, however now you know why it does not execute as expected.</p>
+<p>It also prevents you from extending a non-extensible property.</p>
+<pre>
+<b>var</b> myObject = {name: &quot;My Name&quot;}
+Object.preventExtensions(myObject);
+<b>function</b> setAge() {
+  myObject.age = 25;  // <i>No errors</i>
 }
-Object
-.
-preventExtensions
-(
-myObject
-)
-;
-<b>function</b>
-setAge
-(
-)
-{
-myObject.
-age
-=
-25
-;
-// <i>No errors</i>
-}
-<b>function</b>
-setAge
-(
-)
-{
-&quot;use strict&quot;
-;
-myObject.
-age
-=
-25
-;
-// <i>TypeError: can&apos;t define property &quot;age&quot;: Object is not extensible</i>
-}
+<b>function</b> setAge() {
+  &quot;use strict&quot;;
+  myObject.age = 25;  // <i>TypeError: can&apos;t define property &quot;age&quot;: Object is not extensible</i>
+  }
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch50-4">Section 50.4: Changes to global properties</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-In a non-strict-mode scope, when a variable is assigned without being
+<p>In a non-strict-mode scope, when a variable is assigned without being
 initialized with the <b>var</b>, <b>const</b> or the <b>let</b> keyword, it is
-automatically declared in the global scope:
-a
-=
-12
-;
-console.
-log
-(
-a
-)
-;
-// <i>12</i>
-In strict mode however, any access to an undeclared variable will
-throw a reference error:
-&quot;use strict&quot;
-;
-a
-=
-12
-;
-// <i>ReferenceError: a is not defined</i>
-console.
-log
-(
-a
-)
-
-;
-
-This is useful because JavaScript has a number of possible events that
+automatically declared in the global scope:</p>
+<pre>
+a = 12;
+console.log(a);  // <i>12</i>
+</pre>
+<p>In strict mode however, any access to an undeclared variable will
+throw a reference error:</p>
+<pre>
+&quot;use strict&quot;;
+a = 12;  // <i>ReferenceError: a is not defined</i>
+console.log(a);
+</pre>
+<p>This is useful because JavaScript has a number of possible events that
 are sometimes unexpected. In non-strictmode, these events often lead
 developers to believe they are bugs or unexpected behavior, thus by
 enabling strictmode, any errors that are thrown enforces them to know
-exactly what is being done.
+exactly what is being done.</p>
+<pre>
 &quot;use strict&quot;;
-// <i>Assuming a global variable mistypedVariable exists</i>
-mistypedVaraible = 17; // <i>this line throws a ReferenceError due to
-the</i>
-// <i>misspelling of variable</i>
-This code in strict mode displays one possible scenario: it throws a
+                       // <i>Assuming a global variable mistypedVariable exists</i>
+mistypedVaraible = 17; // <i>this line throws a ReferenceError due to the</i>
+                       // <i>misspelling of variable</i>
+</pre>
+<p>This code in strict mode displays one possible scenario: it throws a
 reference error which points to the assignment&apos;s line number,
 allowing the developer to immediately detect the mistype in the
-variable&apos;s name.
-
-In non-strict-mode, besides the fact that no error is thrown and the
+variable&apos;s name.</p>
+<p>In non-strict-mode, besides the fact that no error is thrown and the
 assignment is successfully made, the mistypedVaraible will be
 automatically declared in the global scope as a global variable. This
 implies that the developer needs to look up manually this specific
-assignment in the code.
-
-Furthermore, by forcing declaration of variables, the developer cannot
+assignment in the code.</p>
+<p>Furthermore, by forcing declaration of variables, the developer cannot
 accidentally declare global variables inside functions. In
-non-strict-mode:
-
-<b>function</b>
-foo
-(
-)
-{
-a
-=
-&quot;bar&quot;
-;
-// <i>variable is automatically declared in the global scope</i>
+non-strict-mode:</p>
+<pre>
+<b>function</b> foo() {
+  a = &quot;bar&quot;;  // <i>variable is automatically declared in the global scope</i>
 }
-foo
-(
-)
-;
-console.
-log
-(
-a
-)
-;
-// <i>&gt;&bsol;bar</i>
-In strict mode, it is necessary to explicitly declare the variable:
-<b>function</b>
-strict_scope
-(
-)
-{
-&quot;use strict&quot;
-;
-<b>var</b>
-a
-=
-&quot;bar&quot;
-;
-// <i>variable is local</i>
+foo();
+console.log(a);  // <i>&gt;&bsol;bar</i>
+</pre>
+<p>In strict mode, it is necessary to explicitly declare the variable:</p>
+<pre>
+<b>function</b> strict_scope() {
+  &quot;use strict&quot;;
+  <b>var</b> a = &quot;bar&quot;;  // <i>variable is local</i>
 }
-strict_scope
-(
-)
-;
-console.
-log
-(
-a
-)
-;
-// <i>&gt;&amp;quot;ReferenceError: a is not defined&quot;</i>
-The variable can also be declared outside and after a function,
-allowing it to be used, for instance, in the global scope:
-<b>function</b>
-strict_scope
-(
-)
-{
-&quot;use strict&quot;
-;
-a
-=
-&quot;bar&quot;
-;
-// <i>variable is global</i>
+strict_scope();
+console.log(a);  // <i>&gt;&amp;quot;ReferenceError: a is not defined&quot;</i>
+</pre>
+<p>The variable can also be declared outside and after a function,
+allowing it to be used, for instance, in the global scope:</p>
+<!-- page 296 -->
+<pre>
+<b>function</b> strict_scope() {
+  &quot;use strict&quot;;
+  a = &quot;bar&quot;;  // <i>variable is global</i>
 }
-<b>var</b>
-a
-;
-strict_scope
-(
-)
-;
-console.
-log
-(
-a
-)
-;
-// <i>&gt;&bsol;bar</i>
+<b>var</b> a;
+strict_scope();
+console.log(a);  // <i>&gt;&bsol;bar</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch50-5">Section 50.5: Duplicate Parameters</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Strict mode does not allow you to use duplicate function parameter
-names.
-<b>function</b>
-foo
-(
-bar
-,
-bar
-)
-{
-}
-// <i>No error. bar is set to the final argument when called</i>
-&quot;use strict&quot;
-;
-<b>function</b>
-foo
-(
-bar
-,
-bar
-)
-{
-}
-;
-// <i>SyntaxError: duplicate formal argument bar</i>
+<p>Strict mode does not allow you to use duplicate function parameter names.</p>
+<pre>
+<b>function</b> foo(bar, bar) {}  // <i>No error. bar is set to the final argument when called</i>
+&quot;use strict&quot;;
+<b>function</b>foo(bar, bar) {};  // <i>SyntaxError: duplicate formal argument bar</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch50-5">Section 50.6: Function scoping in strict mode</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-In Strict Mode, functions declared in a local block are inaccessible
-outside the block.
-&quot;use strict&quot;
-;
+<p>In Strict Mode, functions declared in a local block are inaccessible outside the block.</p>
+<pre>
+&quot;use strict&quot;;
 {
-f
-(
-)
-;
-// <i>&apos;hi&apos;</i>
-<b>function</b>
-f
-(
-)
-{
-console.
-log
-(
-&apos;hi&apos;
-)
-;
+  f();  // <i>&apos;hi&apos;</i>
+  <b>function</b> f() {console.log(&apos;hi&apos;);}
 }
-}
-f
-(
-)
-;
-// <i>ReferenceError: f is not defined</i>
-Scope-wise, function declarations in Strict Mode have the same kind of
-binding as <b>let</b> or <b>const</b>.
+f();  // <i>ReferenceError: f is not defined</i>
+</pre>
+<p>Scope-wise, function declarations in Strict Mode have the same kind of
+binding as <b>let</b> or <b>const</b>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch50-7">Section 50.7: Behaviour of a function&apos;s arguments list</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-arguments object behave different in <i>strict</i> and <i>non strict</i> mode.
+<p>arguments object behave different in <i>strict</i> and <i>non strict</i> mode.
 In <i>non-strict</i> mode, the argument object will reflect the changes in
 the value of the parameters which are present, however in <i>strict</i>
 mode any changes to the value of the parameter will not be reflected
-in the argument object.
-<b>function</b>
-add
-(
-a
-,
-b
-)
-{
-console.
-log
-(
-arguments
-&lbrack;
-0
-&rbrack;
-,
-arguments
-&lbrack;
-1
-&rbrack;
-)
-;
-// <i>Prints : 1,2</i>
-a
-=
-5
-,
-b
-=
-10
-;
-console.
-log
-(
-arguments
-&lbrack;
-0
-&rbrack;
-,
-arguments
-&lbrack;
-1
-&rbrack;
-)
-;
-// <i>Prints : 5,10</i>
+in the argument object.</p>
+<pre>
+<b>function</b> add(a, b) {
+  console.log(arguments&lbrack;0&rbrack;, arguments&lbrack;1&rbrack;);  // <i>Prints : 1,2</i>
+  a = 5, b = 10;
+  console.log(arguments&lbrack;0&rbrack;, arguments&lbrack;1&rbrack;);  // <i>Prints : 5,10</i>
 }
-add
-(
-1
-,
-2
-)
-;
-For the above code, the arguments object is changed when we change the
+add(1, 2);
+</pre>
+<p>For the above code, the arguments object is changed when we change the
 value of the parameters. However, for <i>strict</i> mode, the same will not
-be reflected.
-<b>function</b>
-add
-(
-a
-,
-b
-)
-{
-&apos;use strict&apos;
-;
-console.
-log
-(
-arguments
-&lbrack;
-0
-&rbrack;
-,
-arguments
-&lbrack;
-1
-&rbrack;
-)
-;
-// <i>Prints : 1,2</i>
-a
-=
-5
-,
-b
-=
-10
-;
-console.
-log
-(
-arguments
-&lbrack;
-0
-&rbrack;
-,
-arguments
-&lbrack;
-1
-&rbrack;
-)
-;
-// <i>Prints : 1,2</i>
+be reflected.</p>
+<pre>
+<b>function</b> add(a, b) {
+  &apos;use strict&apos;;
+  console.log(arguments&lbrack;0&rbrack;, arguments&lbrack;1&rbrack;);  // <i>Prints : 1,2</i>
+  a = 5, b = 10;
+  console.log(arguments&lbrack;0&rbrack;, arguments&lbrack;1&rbrack;);  // <i>Prints : 1,2</i>
 }
-It&apos;s worth noting that, if any one of the parameters is
+</pre>
+<!-- page 297 -->
+<p>It&apos;s worth noting that, if any one of the parameters is
 <b>undefined</b>, and we try to change the value of the parameter in both
 <i>strict-mode</i> or <i>non-strict</i> mode the arguments object remains
-unchanged.
+unchanged.</p>
 
-<b>Strict mode</b>
-<b>function</b>
-add
-(
-a
-,
-b
-)
-{
-&apos;use strict&apos;
-
-;
-console.
-log
-(
-arguments
-&lbrack;
-0
-&rbrack;
-,
-arguments
-&lbrack;
-1
-&rbrack;
-)
-;
-// <i>undefined,undefined</i>
-// <i>1,undefined</i>
-a
-=
-5
-,
-b
-=
-10
-;
-console.
-log
-(
-arguments
-&lbrack;
-0
-&rbrack;
-,
-arguments
-&lbrack;
-1
-&rbrack;
-)
-;
-// <i>undefined,undefined</i>
-// <i>1, undefined</i>
+<p><b>Strict mode</b></p>
+<pre>
+<b>function</b> add(a, b) {
+  &apos;use strict&apos;;
+  console.log(arguments&lbrack;0&rbrack;, arguments&lbrack;1&rbrack;);  // <i>undefined,undefined</i>
+                                                                        // <i>1,undefined</i>
+  a = 5, b = 10;
+  console.log(arguments&lbrack;0&rbrack;, arguments&lbrack;1&rbrack;);  // <i>undefined,undefined</i>
+                                                                        // <i>1, undefined</i>
 }
-add
-(
-)
-;
+add();
 // <i>undefined,undefined</i>
 // <i>undefined,undefined</i>
-add
-(
-1
-)
+add(1)
 // <i>1, undefined</i>
 // <i>1, undefined</i>
-<b>Non-Strict Mode</b>
-<b>function</b>
-add
-(
-a
-,
-b
-)
-{
-console.
-log
-(
-arguments
-&lbrack;
-0
-&rbrack;
-,
-arguments
-&lbrack;
-1
-&rbrack;
-)
-;
-a
-=
-5
-,
-b
-=
-10
-;
-console.
-log
-(
-arguments
-&lbrack;
-0
-&rbrack;
-,
-arguments
-&lbrack;
-1
-&rbrack;
-)
-;
+</pre>
+<p><b>Non-Strict Mode</b></p>
+<pre>
+<b>function</b> add(a, b) {
+  console.log(arguments&lbrack;0&rbrack;, arguments&lbrack;1&rbrack;);
+  a = 5, b = 10;
+  console.log(arguments&lbrack;0&rbrack;, arguments&lbrack;1&rbrack;);
 }
-add
-(
-)
-;
+add();
 // <i>undefined,undefined</i>
 // <i>undefined,undefined</i>
-add
-(
-1
-)
-;
+add(1);
 // <i>1, undefined</i>
 // <i>5, undefined</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch50-8">Section 50.8: Non-Simple parameter lists</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>function</b>
-a
-(
-x
-=
-5
-)
-{
-&quot;use strict&quot;
-;
+<pre>
+<b>function</b> a(x = 5) {
+  &quot;use strict&quot;;
 }
-is invalid JavaScript and will throw a
-SyntaxError
-because you cannot use the directive
-&quot;use strict&quot;
-in a function
-with Non-Simple Parameter list like the one above - default assignment
-x
-=
-5
-Non-Simple parameters include -
-Default assignment
-<b>function</b>
-a
-(
-x
-=
-1
-)
-{
-&quot;use strict&quot;
-;
+</pre>
+<p>is invalid JavaScript and will throw a SyntaxError because you cannot use the directive
+&quot;use strict&quot; in a function with Non-Simple Parameter list like the one above - 
+default assignment x = 5</p>
+<p>Non-Simple parameters include -</p>
+<ul>
+  <li>Default assignment</li>
+</ul>
+<!-- page 298 -->
+<pre>
+<b>function</b> a(x = 1) {
+  &quot;use strict&quot;;
 }
-Destructuring
-<b>function</b>
-a
-(
-{
-x
+</pre>
+<ul>
+  <li>Destructuring</li>
+</ul>
+<pre>
+<b>function</b> a({ x }) {
+  &quot;use strict&quot;;
 }
-)
-{
-&quot;use strict&quot;
-;
+</pre>
+<ul>
+  <li>Rest params</li>
+</ul>
+<pre>
+<b>function</b> a(&hellip;args) {
+  &quot;use strict&quot;;
 }
-Rest params
-<b>function</b>
-a
-(
-&hellip;
-args
-)
-{
-&quot;use strict&quot;
-;
-}
-
+</pre>
 <!-- thru 50.8 -->
+<!-- page 299 -->
