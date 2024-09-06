@@ -17352,7 +17352,7 @@ In this example, the host environment is the web browser.
     loop, as it goes around continually checking what to do, will see
     this, and run that function.</li>
 </ol>
-<p.You can see how in this example there are several different types of
+<p>You can see how in this example there are several different types of
 entry points into JavaScript code, which the event loop invokes:</p>
 <ul>
   <li>The <b>&lt;script&gt;</b> element is invoked immediately</li>
