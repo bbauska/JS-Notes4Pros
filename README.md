@@ -17641,13 +17641,13 @@ formatted = num.toFixed(2).replace(/&bsol;d(?=(&bsol;d{3})+&bsol;&period;)/g</i>
 number groups &lbrack;0 .. x&rbrack; and different delimiter types:</p>
 <pre>
 <i>/&ast;&ast;</i>
-&ast; Number.prototype.format(n, x, s, c)</i>
-&ast;</i>
-&ast; &commat;param integer n: length of decimal</i>
-&ast; &commat;param integer x: length of whole part</i>
-&ast; &commat;param mixed   s: sections delimiter</i>
-&ast; &commat;param mixed   c: decimal delimiter</i>
-&ast;&ast;/</i>
+ &ast; Number.prototype.format(n, x, s, c)</i>
+ &ast;</i>
+ &ast; &commat;param integer n: length of decimal</i>
+ &ast; &commat;param integer x: length of whole part</i>
+ &ast; &commat;param mixed   s: sections delimiter</i>
+ &ast; &commat;param mixed   c: decimal delimiter</i>
+<i>&ast;&ast;/</i>
 Number.<b>prototype</b>.format = <b>function</b>(n, x, s, c) {
   <b>var</b> re = &apos;&bsol;&bsol;d(?=(&bsol;&bsol;d{&apos; &plus; (x &vert;&vert; 3) &plus; &apos;}) &plus; &apos; &plus; (n &gt; 0 ? &apos;&bsol;&bsol;D&apos; : &apos;&dollar;&apos;) &plus; &apos;)&apos;,
     num = <b>this</b>.toFixed(Math.max(0, ~~n));
@@ -17692,116 +17692,24 @@ get_extension(&apos;/path/to/file.ext&apos;); // <i>&quot;ext&quot;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch52-3">Section 52.3: Set object property given its string name</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>function</b>
-assign
-(
-obj
-,
-prop
-,
-value
-)
-{
-<b>if</b>
-(
-<b>typeof</b>
-prop
-===
-&apos;string&apos;
-)
-prop
-=
-prop.
-split
-(
-&apos;.&apos;
-)
-;
-<b>if</b>
-(
-prop.
-length
-&gt;
-1
-)
-{
-<b>var</b>
-e
-=
-prop.
-shift
-(
-)
-;
-assign
-(
-obj
-&lbrack;
-e
-&rbrack;
-=
-Object
-.
-<b>prototype</b>
-.
-toString
-.
-call
-(
-obj
-&lbrack;
-e
-&rbrack;
-)
-===
-&apos;&lbrack;object Object&rbrack;&apos;
-?
-obj
-&lbrack;
-e
-&rbrack;
-:
-{
+<pre>
+<b>function</b> assign(obj, prop, value) {
+  <b>if</b> (<b>typeof</b> prop === &apos;string&apos;)
+    prop = prop.split(&apos;.&apos;);
+  <b>if</b> (prop.length &gt; 1) {
+    <b>var</b> e = prop.shift();
+    assign(obj&lbrack;e&rbrack; =
+      Object.<b>prototype</b>.toString.call(obj&lbrack;e&rbrack;) === &apos;&lbrack;object Object&rbrack;&apos;
+	  ? obj&lbrack;e&rbrack;
+      : {},
+      prop,
+      value);
+  } <b>else</b>
+    obj&lbrack;prop&lbrack;0&rbrack;&rbrack; = value;
 }
-,
-prop
-,
-value
-)
-;
-}
-<b>else</b>
-obj
-&lbrack;
-prop
-&lbrack;
-0
-&rbrack;
-&rbrack;
-=
-value
-;
-}
-<b>var</b>
-obj
-=
-{
-}
-,
-propName
-=
-&apos;foo.bar.foobar&apos;
-;
-assign
-(
-obj
-,
-propName
-,
-&apos;Value&apos;
-)
-;
+<b>var</b> obj = {},
+  propName = &apos;foo.bar.foobar&apos;;
+assign(obj, propName, &apos;Value&apos;);
 // <i>obj == {</i>
 // <i>foo : {</i>
 // <i>bar : {</i>
@@ -17809,3 +17717,1831 @@ propName
 // <i>}</i>
 // <i>}</i>
 // <i>}</i>
+</pre>
+<!-- page 302 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch53">Chapter 53: Binary Data</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch53-1">Section 53.1: Getting binary representation of an image file</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>This example is inspired by 
+<a href="http://stackoverflow.com/q/38334315/2271269">
+this question</a>.</p>
+<p>We&apos;ll assume you know how to 
+<a href="http://www.html5rocks.com/en/tutorials/file/dndfiles/">
+load a file using the File API</a>.</p>
+
+<pre>
+// <i>preliminary code to handle getting local file and finally printing to console</i>
+// <i>the results of our function ArrayBufferToBinary().</i>
+<b>var</b> file =  // <i>get handle to local file.</i>
+<b>var</b> reader = <b>new</b> FileReader();
+reader.onload = <b>function</b>(event) {
+  <b>var</b> data = event.target.result;
+  console.log(ArrayBufferToBinary(data));
+};
+reader.readAsArrayBuffer(file);  // <i>gets an ArrayBuffer of the file</i>
+</pre>
+<p>Now we perform the actual conversion of the file data into 1&apos;s and
+0&apos;s using a DataView:</p>
+<pre>
+<b>function</b> ArrayBufferToBinary(buffer) {
+  // <i>Convert an array buffer to a string bit-representation: 0 1 1 0 0 0&hellip;</i>
+  <b>var</b> dataView = <b>new</b> DataView(buffer);
+  <b>var</b> response = &quot;&quot;, offset = (8/8);
+  <b>for</b>(<b>var</b> i = 0; i &lt; dataView.byteLength; i += offset) {
+    response += dataView.getInt8(i).toString(2);
+  }
+  <b>return</b> response;
+}
+</pre>
+<p>DataViews let you read/write numeric data; getInt8 converts the data
+from the byte position - here 0, the value passed in - in the
+ArrayBuffer to signed 8-bit integer representation, and toString(2) converts
+the 8-bit integer to binary representation format (i.e. a string of
+1&apos;s and 0&apos;s).</p>
+<p>Files are saved as bytes. The &apos;magic&apos; offset value is obtained by
+noting we are taking files stored as bytes i.e. as 8-bit integers and
+reading it in 8-bit integer representation. If we were trying to read
+our byte-saved (i.e. 8 bits) files to 32-bit integers, we would note
+that 32/8 = 4 is the number of byte spaces, which is our byte offset
+value.</p>
+<p>For this task, DataViews are overkill. They are typically used in
+cases where endianness or heterogeneity of data are encountered (e.g.
+in reading PDF files, which have headers encoded in different bases
+and we would like to meaningfully extract that value). Because we just
+want a textual representation, we do not care about heterogeneity as
+there is never a need to.</p>
+<p>A much better - and shorter - solution can be found using an
+UInt8Array typed array, which treats the entire ArrayBuffer as
+composed of unsigned 8-bit integers:</p>
+<pre>
+<b>function</b> ArrayBufferToBinary(buffer) {
+  <b>var</b> uint8 = <b>new</b> Uint8Array(buffer);
+  <b>return</b> uint8.reduce((binary, uint8) =&gt; binary &plus; uint8.toString(2), &quot;&quot;);
+}
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch53-2">Section 53.2: Converting between Blobs and ArrayBuers</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>JavaScript has two primary ways to represent binary data in the
+browser. ArrayBuffers/TypedArrays contain mutable (though still
+fixed-length) binary data which you can directly manipulate. Blobs
+contain immutable binary data which can only be accessed through the
+asynchronous File interface.</p>
+<!-- page 303 -->
+<p><b>Convert a Blob to an ArrayBuffer (asynchronous)</b></p>
+<pre>
+<b>var</b> blob = <b>new</b> Blob(&lbrack;&quot;<b>&bsol;x</b>01<b>&bsol;x</b>02<b>&bsol;x</b>03<b>&bsol;x</b>04&quot;&rbrack;),
+  fileReader = <b>new</b> FileReader(),
+  array;
+fileReader.onload = <b>function</b>() {
+  array = <b>this</b>.result;
+  console.log(&quot;Array contains&quot;, array.byteLength, &quot;bytes.&quot;);
+};
+fileReader.readAsArrayBuffer(blob);
+</pre>
+<h5>Version ≥ 6</h5>
+<p><b>Convert a Blob to an ArrayBuffer using a Promise (asynchronous)</b></p>
+<pre>
+<b>var</b> blob = <b>new</b> Blob(&lbrack;&quot;<b>&bsol;x</b>01<b>&bsol;x</b>02<b>&bsol;x</b>03<b>&bsol;x</b>&quot;04&rbrack;);
+<b>var</b> arrayPromise = <b>new</b> Promise(<b>function</b>(resolve) {
+  <b>var</b> reader = <b>new</b> FileReader();
+  reader.onloadend = <b>function</b>() {
+    resolve(reader.result);
+  };
+  reader.readAsArrayBuffer(blob);
+});
+arrayPromise.then(<b>function</b>(array) {
+  console.log(&quot;Array contains&quot;, array.byteLength, &quot;bytes.&quot;);
+});
+</pre>
+<p><b>Convert an ArrayBuffer or typed array to a Blob</b></p>
+<pre>
+<b>var</b> array = <b>new</b> Uint8Array(&lbrack;0x04, 0x06, 0x07, 0x08&rbrack;);
+<b>var</b> blob = <b>new</b> Blob(&lbrack;array&rbrack;);
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch53-3">Section 53.3: Manipulating ArrayBuffers with DataViews</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>DataViews provide methods to read and write individual values from an ArrayBuffer, 
+instead of viewing the entire thing as an array of a single type. Here we set two bytes 
+individually then interpret them together as a 16-bit unsigned integer, first big-endian 
+then little-endian.</p>
+<pre>
+<b>var</b> buffer = <b>new</b> ArrayBuffer(2);
+<b>var</b> view = <b>new</b> DataView(buffer);
+view.setUint8(0, 0xFF);
+view.setUint8(1, 0x01);
+console.log(view.getUint16(0, <b>false</b>)); // <i>65281</i>
+console.log(view.getUint16(0, <b>true</b>));  // <i>511</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch53-4">Section 53.4: Creating a TypedArray from a Base64 string</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>var</b>
+data
+=
+&apos;iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACN&apos;
+&plus;
+&apos;byblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHx&apos;
+&plus;
+&apos;gljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==&apos;
+;
+<b>var</b>
+characters
+=
+atob
+(
+data
+)
+;
+<b>var</b>
+array
+=
+<b>new</b>
+Uint8Array
+(
+characters.
+length
+)
+;
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+characters.
+length
+;
+i
+++
+)
+{
+array
+&lbrack;
+i
+&rbrack;
+=
+characters.
+charCodeAt
+(
+i
+)
+;
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch53-5">Section 53.5: Using TypedArrays</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+TypedArrays are a set of types providing different views into
+fixed-length mutable binary ArrayBuffers. For the most part, they act
+like Arrays that coerce all assigned values to a given numeric type.
+You can pass an ArrayBuffer instance to a TypedArray constructor to
+create a new view of its data.
+<b>var</b>
+buffer
+=
+<b>new</b>
+ArrayBuffer
+(
+8
+)
+;
+<b>var</b>
+byteView
+=
+<b>new</b>
+Uint8Array
+(
+buffer
+)
+;
+<b>var</b>
+floatView
+=
+<b>new</b>
+Float64Array
+(
+buffer
+)
+;
+console.
+log
+(
+byteView
+)
+;
+// <i>&lbrack;0, 0, 0, 0, 0, 0, 0, 0&rbrack;</i>
+console.
+log
+(
+floatView
+)
+;
+// <i>&lbrack;0&rbrack;</i>
+byteView
+&lbrack;
+0
+&rbrack;
+=
+0x01
+;
+byteView
+&lbrack;
+1
+&rbrack;
+=
+0x02
+;
+byteView
+&lbrack;
+2
+&rbrack;
+=
+0x04
+;
+byteView
+&lbrack;
+3
+&rbrack;
+=
+0x08
+;
+console.
+log
+(
+floatView
+)
+;
+// <i>&lbrack;6.64421383e-316&rbrack;</i>
+slice  ( &hellip;
+ArrayBuffers can be copied using the .) method, either directly or
+through a TypedArray view.
+<b>var</b>
+byteView2
+=
+byteView.
+slice
+(
+)
+;
+<b>var</b>
+floatView2
+=
+<b>new</b>
+Float64Array
+(
+byteView2.
+buffer
+)
+;
+byteView2
+&lbrack;
+6
+&rbrack;
+=
+0xFF
+;
+console.
+log
+(
+floatView
+)
+;
+// <i>&lbrack;6.64421383e-316&rbrack;</i>
+console.
+log
+(
+floatView2
+)
+;
+// <i>&lbrack;7.06327456e-304&rbrack;</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch53-6">Section 53.6: Iterating through an arrayBuffer</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+For a convenient way to iterate through an arrayBuffer, you can create
+a simple iterator that implements the DataView methods under the hood:
+<b>var</b>
+ArrayBufferCursor
+=
+<b>function</b>
+(
+)
+{
+<b>var</b>
+ArrayBufferCursor
+=
+<b>function</b>
+(
+arrayBuffer
+)
+{
+<b>this</b>
+.
+dataview
+=
+<b>new</b>
+DataView
+(
+arrayBuffer
+,
+0
+)
+;
+<b>this</b>
+.
+size
+=
+arrayBuffer.
+byteLength
+;
+<b>this</b>
+.
+index
+=
+0
+;
+}
+ArrayBufferCursor.
+<b>prototype</b>
+.
+next
+=
+<b>function</b>
+(
+type
+)
+{
+<b>switch</b>
+(
+type
+)
+{
+<b>case</b>
+&apos;Uint8&apos;
+:
+<b>var</b>
+result
+=
+<b>this</b>
+.
+dataview
+.
+getUint8
+(
+<b>this</b>
+.
+index
+)
+;
+<b>this</b>
+.
+index
++=
+1
+;
+<b>return</b>
+result
+;
+<b>case</b>
+&apos;Int16&apos;
+:
+<b>var</b>
+result
+=
+<b>this</b>
+.
+dataview
+.
+getInt16
+(
+<b>this</b>
+.
+index
+,
+<b>true</b>
+)
+;
+<b>this</b>
+.
+index
++=
+2
+;
+<b>return</b>
+result
+;
+<b>case</b>
+&apos;Uint16&apos;
+:
+<b>var</b>
+result
+=
+<b>this</b>
+.
+dataview
+.
+getUint16
+(
+<b>this</b>
+.
+index
+,
+<b>true</b>
+)
+;
+![](./images/image035.png){width="7.486805555555556in"
+height="5.360416666666667in"}
+You can then create an iterator like this:
+<b>var</b>
+cursor
+=
+<b>new</b>
+ArrayBufferCursor
+(
+arrayBuffer
+)
+;
+You can use the hasNext to check if there&apos;s still items
+<b>for</b>
+(
+;
+cursor.
+hasNext
+(
+)
+;
+)
+{
+// <i>There&apos;s still items to process</i>
+}
+You can use the next method to take the next value:
+<b>var</b>
+nextValue
+=
+cursor.
+next
+(
+&apos;Float&apos;
+)
+;
+With such an iterator, writing your own parser to process binary data
+becomes pretty easy.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch54">Chapter 54: Template Literals</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Template literals are a type of string literal that allows values to
+be interpolated, and optionally the interpolation and construction
+behaviour to be controlled using a &quot;tag&quot; function.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch54-1">Section 54.1: Basic interpolation and multiline strings</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Template literals are a special type of string literal that can be
+used instead of the standard &apos;&hellip;&apos; or &quot;&hellip;&quot;. They are declared
+by quoting the string with backticks instead of the standard single or
+double quotes: &grave;&hellip;&grave;.
+expression
+Template literals can contain line breaks and arbitrary expressions
+can be embedded using the &dollar;{} substitution syntax. By default, the
+values of these substitution expressions are concatenated directly
+into the string where they appear.
+<b>const</b>
+name
+=
+&quot;John&quot;
+;
+<b>const</b>
+score
+=
+74
+;
+console.
+log
+(
+&grave;Game Over
+!
+&dollar;
+{
+name
+}
+&apos;s score was &dollar;{score &ast; 10}.&grave;);
+Game Over
+!
+John
+&apos;s score was 740.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch54-2">Section 54.2: Tagged strings</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+A function identified immediately before a template literal is used to
+interpret it, in what is called a <b>tagged template literal</b>. The tag
+function can return a string, but it can also return any other type of
+value.
+&hellip;substitutions
+The first argument to the tag function, strings, is an Array of each
+constant piece of the literal. The remaining arguments, , contain the
+evaluated values of each &dollar;{} substitution expression.
+<b>function</b>
+settings
+(
+strings
+,
+&hellip;
+substitutions
+)
+{
+<b>const</b>
+result
+=
+<b>new</b>
+Map
+(
+)
+;
+<b>for</b>
+(
+<b>let</b>
+i
+=
+0
+;
+i
+&lt;
+substitutions.
+length
+;
+i
+++
+)
+{
+result.
+<b>set</b>
+(
+strings
+&lbrack;
+i
+&rbrack;
+.
+trim
+(
+)
+,
+substitutions
+&lbrack;
+i
+&rbrack;
+
+)
+;
+}
+<b>return</b>
+result
+;
+}
+<b>const</b>
+remoteConfiguration
+=
+settings&grave;
+label &dollar;
+{
+&apos;Content&apos;
+}
+servers &dollar;
+{
+2
+&ast;
+8
+&plus;
+1
+}
+hostname &dollar;
+{
+location.
+hostname
+}
+&grave;
+;
+Map
+{
+&quot;label&quot;
+=&gt;
+&quot;Content&quot;
+,
+&quot;servers&quot;
+=&gt;
+17
+,
+&quot;hostname&quot;
+=&gt;
+&quot;stackoverflow.com&quot;
+}
+raw
+The strings Array has a special . property referencing a parallel
+Array of the same constant pieces of the template literal but
+*exactly</i> as they appear in the source code, without any
+backslash-escapes being replaced.
+<b>function</b>
+example
+(
+strings
+,
+&hellip;
+substitutions
+)
+{
+console.
+log
+(
+&apos;strings:&apos;
+,
+strings
+)
+;
+console.
+log
+(
+&apos;&hellip;substitutions:&apos;
+,
+substitutions
+)
+;
+}
+example&grave;Hello &dollar;
+{
+&apos;world&apos;
+}
+.&bsol;&bsol;n&bsol;&bsol;nHow are you
+?
+&grave;
+;
+strings
+:
+&lbrack;
+&quot;Hello &quot;
+,
+&quot;.
+<b>&bsol;&bsol;n</b>
+<b>&bsol;&bsol;n</b>
+How are you?&quot;
+,
+raw
+:
+&lbrack;
+&quot;Hello &quot;
+,
+&quot;.
+<b>&bsol;&bsol;&amp;ast;</i>
+n
+**&bsol;&bsol;&amp;ast;</i>
+nHow are you?&quot;
+&rbrack;
+&rbrack;
+substitutions
+:
+&lbrack;
+&quot;world&quot;
+&rbrack;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch54-3">Section 54.3: Raw strings</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+String.raw
+The tag function can be used with template literals to access a
+version of their contents without interpreting any backslash escape
+sequences.
+String . raw&grave;&bsol;&bsol;n&grave;   will contain a backslash and the lowercase letter n,
+<b>&bsol;&bsol;n</b>
+ while &grave;&bsol;&bsol;n&grave; or &apos;
+&apos; would contain a single newline character instead.
+<b>const</b>
+patternString
+=
+String
+.
+raw
+&grave;Welcome
+,
+(
+&bsol;&bsol;w
+&plus;
+)
+!
+&grave;
+;
+<b>const</b>
+pattern
+=
+<b>new</b>
+RegExp
+(
+patternString
+)
+;
+<b>const</b>
+message
+=
+&quot;Welcome, John!&quot;
+;
+pattern.
+exec
+(
+message
+)
+;
+&lbrack;
+&quot;Welcome, John!&quot;
+,
+&quot;John&quot;
+&rbrack;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch54-4">Section 54.4: Templating HTML With Template Strings</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+You can create an HTML&grave;&hellip;&grave; template string tag function to
+automatically encodes interpolated values. (This requires that
+interpolated values are only used as text, and <b>may not be safe if
+interpolated values are used in code</b> such as scripts or styles.)
+
+![](./images/image036.png){width="7.486805555555556in"
+height="5.666666666666667in"}
+&lt;
+ul
+&gt;
+&dollar;
+{
+names.
+map
+(
+name
+=&gt;
+HTML&grave;
+&lt;
+li
+&gt;
+&dollar;
+{
+name
+}
+&lt;
+/
+li
+&gt;
+&grave;
+)
+}
+&lt;
+/
+ul
+&gt;
+&grave;
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch54-5">Section 54.5: Introduction</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Template Literals act like strings with special features. They are
+enclosed by by the back-tick &grave;&grave; and can be spanned across multiple
+lines.
+
+Template Literals can contain embedded expressions too. These
+expressions are indicated by a &dollar; sign and curly braces {}
+
+// <i>A single line Template Literal*
+<b>var</b>
+aLiteral
+=
+&grave;single line string data&grave;
+;
+// <i>Template Literal that spans across lines*
+<b>var</b>
+anotherLiteral
+=
+&grave;string data that spans
+across multiple lines of code&grave;
+;
+// <i>Template Literal with an embedded expression*
+<b>var</b>
+x
+=
+2
+;
+<b>var</b>
+y
+=
+3
+;
+<b>var</b>
+theTotal
+=
+&grave;The total is &dollar;
+{
+x
+&plus;
+y
+}
+&grave;
+;
+// <i>Contains &quot;The total is 5&quot;</i>
+// <i>Comparison of a string and a template literal*
+<b>var</b>
+aString
+=
+&quot;single line string data&quot;
+console.
+log
+(
+aString
+===
+aLiteral
+)
+// <i>Returns true*
+There are many other features of String Literals such as Tagged
+Template Literals and Raw property. These are demonstrated in other
+examples.
+<h2 id="ch55">Chapter 55: Fetch</h2>
+<table 
+|      | <b>Details</b>                                               |
+|  <b>Opt |                                                             |
+| ions</b> |                                                             |
+| method | The HTTP method to use for the request. ex: GET, POST, PUT, |
+|        | DELETE, HEAD. Defaults to GET.                              |
+| h      | A Headers object containing additional HTTP headers to      |
+| eaders | include in the request.                                     |
+| body   | The request payload, can be a string or a FormData object.  |
+|        | Defaults to <b>undefined</b>                                   |
+no-cache
+cache The caching mode. <b>default</b>, reload,
+referrer The referrer of the request.
+no-cors, same-origin. Defaults to no-cors
+same-origin
+mode cors, . credentialsomit, , include. Defaults to omit. redirect
+follow, error, manual. Defaults to follow. integrity Associated
+integrity metadata. Defaults to empty string.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch55-1">Section 55.1: Getting JSON data</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+// <i>get some data from stackoverflow*
+fetch
+(
+&quot;https://api.stackexchange.com/2.2/questions/featured?order=desc&sort=activity&site=stackover
+flow&quot;
+)
+.
+then
+(
+resp
+=&gt;
+resp.
+json
+(
+)
+)
+.
+then
+(
+json
+=&gt;
+console.
+log
+(
+json
+)
+)
+.
+<b>catch</b>
+(
+err
+=&gt;
+console.
+log
+(
+err
+)
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch55-2">Section 55.2: Set Request Headers</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+fetch
+(
+&apos;/example.json&apos;
+,
+{
+headers
+:
+<b>new</b>
+Headers
+(
+{
+&apos;Accept&apos;
+:
+&apos;text/plain&apos;
+,
+&apos;X-Your-Custom-Header&apos;
+:
+&apos;example value&apos;
+}
+)
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch55-3">Section 55.3: POST Data</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Posting form data
+fetch
+(
+&grave;
+/
+example
+/
+submit&grave;
+,
+{
+method
+:
+&apos;POST&apos;
+,
+body
+:
+<b>new</b>
+FormData
+(
+document.
+getElementById
+(
+&apos;example-form&apos;
+)
+)
+}
+)
+;
+Posting JSON data
+fetch
+(
+&grave;
+/
+example
+/
+submit.
+json
+&grave;
+,
+{
+method
+:
+&apos;POST&apos;
+,
+body
+:
+JSON.
+stringify
+(
+{
+email
+:
+document.
+getElementById
+(
+&apos;example-email&apos;
+)
+.
+
+value
+,
+comment
+:
+document.
+getElementById
+(
+&apos;example-comment&apos;
+)
+.
+value
+}
+)
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch55-4">Section 55.4: Send cookies</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The fetch function does not send cookies by default. There are two
+possible ways to send cookies:
+1.  Only send cookies if the URL is on the same origin as the calling
+    script.
+fetch
+(
+&apos;/login&apos;
+,
+{
+credentials
+:
+&apos;same-origin&apos;
+}
+)
+2.  Always send cookies, even for cross-origin calls.
+fetch
+(
+&apos;https://otherdomain.com/login&apos;
+,
+{
+credentials
+:
+&apos;include&apos;
+}
+)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch55-5">Section 55.5: GlobalFetch</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The [GlobalFetch](https://fetch.spec.whatwg.org/#globalfetch)
+interface exposes the fetch function, which can be used to request
+resources.
+fetch
+(
+&apos;/path/to/resource.json&apos;
+)
+.
+then
+(
+response
+=&gt;
+{
+<b>if</b>
+(
+!
+response.
+ok
+(
+)
+)
+{
+<b>throw</b>
+<b>new</b>
+Error
+(
+&quot;Request failed!&quot;
+)
+;
+}
+<b>return</b>
+response.
+json
+(
+)
+;
+}
+)
+.
+then
+(
+json
+=&gt;
+{
+console.
+log
+(
+json
+)
+;
+}
+)
+;
+The resolved value is a
+[Response](https://fetch.spec.whatwg.org/#response-class) Object. This
+Object contains the body of the response, as well as its status and
+headers.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch55-6">Section 55.6: Using Fetch to Display Questions from the Stack Overflow API</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>const</b>
+url
+=
+&apos;http://api.stackexchange.com/2.2/questions?site=stackoverflow&tagged=javascript&apos;
+;
+<b>const</b>
+questionList
+=
+document.
+createElement
+(
+&apos;ul&apos;
+)
+;
+document.
+body
+.
+appendChild
+(
+questionList
+)
+;
+<b>const</b>
+responseData
+=
+fetch
+(
+url
+)
+.
+then
+(
+response
+=&gt;
+response.
+json
+(
+)
+)
+;
+responseData.
+then
+(
+(
+{
+items
+,
+has_more
+,
+quota_max
+,
+quota_remaining
+}
+)
+=&gt;
+{
+<b>for</b>
+(
+<b>const</b>
+{
+title
+,
+score
+,
+owner
+,
+link
+,
+answer_count
+}
+of items
+)
+{
+<b>const</b>
+listItem
+=
+document.
+createElement
+(
+&apos;li&apos;
+)
+;
+questionList.
+appendChild
+(
+listItem
+)
+;
+<b>const</b>
+a
+=
+document.
+createElement
+(
+&apos;a&apos;
+)
+;
+listItem.
+appendChild
+(
+a
+)
+;
+a&period;
+href
+=
+link
+;
+a&period;
+textContent
+=
+&grave;
+&lbrack;
+&dollar;
+{
+score
+}
+&rbrack;
+&dollar;
+{
+title
+}
+(
+by &dollar;
+{
+owner.
+display_name
+&vert;&vert;
+&apos;somebody&apos;
+}
+)
+&grave;
+}
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch56">Chapter 56: Scope</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch56-1">Section 56.1: Closures</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+When a function is declared, variables in the context of its
+*declaration* are captured in its scope. For example, in the code
+below, the variable x is bound to a value in the outer scope, and then
+the reference to x is captured in the context of bar:
+<b>var</b>
+x
+=
+4
+;
+// <i>declaration in outer scope*
+<b>function</b>
+bar
+(
+)
+{
+console.
+log
+(
+x
+)
+;
+// <i>outer scope is captured on declaration*
+}
+bar
+(
+)
+;
+// <i>prints 4 to console*
+Sample output:
+4
+This concept of &quot;capturing&quot; scope is interesting because we can use
+and modify variables from an outer scope even after the outer scope
+exits. For example, consider the following:
+<b>function</b>
+foo
+(
+)
+{
+<b>var</b>
+x
+=
+4
+;
+// <i>declaration in outer scope*
+<b>function</b>
+bar
+(
+)
+{
+console.
+log
+(
+x
+)
+;
+// <i>outer scope is captured on declaration*
+}
+<b>return</b>
+bar
+;
+// <i>x goes out of scope after foo returns*
+}
+<b>var</b>
+barWithX
+=
+foo
+(
+)
+;
+barWithX
+(
+)
+;
+// <i>we can still access x</i>
+Sample output:
+4
+In the above example, when foo is called, its context is captured in
+the function bar. So even after it returns, bar can still access and
+modify the variable x. The function foo, whose context is captured in
+another function, is said to be a *closure*.
+<b>Private data</b>
+This lets us do some interesting things, such as defining &quot;private&quot;
+variables that are visible only to a specific function or set of
+functions. A contrived (but popular) example:
+<b>function</b>
+makeCounter
+(
+)
+{
+<b>var</b>
+counter
+=
+0
+;
+<b>return</b>
+{
+value
+:
+<b>function</b>
+(
+)
+{
+<b>return</b>
+counter
+;
+}
+,
+increment
+:
+<b>function</b>
+(
+)
+{
+counter
+++
+;
+}
+}
+;
+}
+<b>var</b>
+a
+=
+makeCounter
+(
+)
+;
+<b>var</b>
+b
+=
+makeCounter
+(
+)
+;
+a&period;
+increment
+(
+)
+;
+console.
+log
+(
+a&period;
+value
+(
+)
+)
+;
+console.
+log
+(
+b&period;
+value
+(
+)
+)
+;
+Sample output:
+1
+0
+makeCounter   () is called, a snapshot of the context of that       makeCounter
+function is saved. All code inside
+When ()
+makeCounter
+will use that snapshot in their execution. Two calls of () will thus
+create two different snapshots, with their own copy of counter.
+<b>Immediately-invoked function expressions (IIFE)</b>
+Closures are also used to prevent global namespace pollution, often
+through the use of immediately-invoked function expressions.
+*Immediately-invoked function expressions* (or, perhaps more
+intuitively, *self-executing anonymous functions*) are essentially
+closures that are called right after declaration. The general idea
+with IIFE&apos;s is to invoke the side-effect of creating a separate
+context that is accessible only to the code within the IIFE.
+
+Suppose we want to be able to reference jQuery with &dollar;. Consider the
+naive method, without using an IIFE:
+<b>var</b>
+&dollar;
+=
+jQuery
+;
+// <i>we&apos;ve just polluted the global namespace by assigning window.&dollar; to
+jQuery*
+In the following example, an IIFE is used to ensure that the &dollar; is
+bound to jQuery only in the context created by the closure:
+(
+<b>function</b>
+(
+&dollar;
+)
+{
+// <i>&dollar; is assigned to jQuery here*
+}
+)
+(
+jQuery
+)
+;
+// <i>but window.&dollar; binding doesn&apos;t exist, so no pollution*
+See [the canonical answer on
+Stackoverflow](http://stackoverflow.com/a/111111/2209007) for more
+information on closures.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch56-2">Section 56.2: Hoisting</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>What is hoisting?</b>
+<b>Hoisting</b> is a mechanism which moves all variable and function
+declarations to the top of their scope. However, variable assignments
+still happen where they originally were.
+For example, consider the following code:
+console.
+log
+(
+foo
+)
+;
+// <i>*
+→
+*undefined*
+<b>var</b>
+foo
+=
+42
+;
+console.
+log
+(
+foo
+)
+;
+// <i>*
+→
+*42*
+The above code is the same as:
+<b>var</b>
+foo
+;
+// <i>*
+→
+*Hoisted variable declaration*
+console.
+log
+(
+foo
+)
+;
+// <i>*
+→
+*undefined*
+foo
+=
+42
+;
+// <i>*
+→
+*variable assignment remains in the same place*
+console.
+log
+(
+foo
+)
+;
+// <i>*
+→
+*42*
+Note that due to hoisting the above <b>undefined</b> is not the same as
+the not defined resulting from running:
+console.
+log
+(
+foo
+)
+;
+// <i>*
+→
+*foo is not defined*
+A similar principle applies to functions. When functions are assigned
+to a variable (i.e. a [function
+expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function)),
+the variable declaration is hoisted while the assignment remains in
+the same place. The following two code snippets are equivalent.
+console.
+log
+(
+foo
+(
+2
+,
+3
+)
+)
+;
+// <i>*
+→
+*foo is not a function*
+<b>var</b>
+foo
+=
+<b>function</b>
+(
+a
+,
+b
+)
+{
+<b>return</b>
+a
+&ast;
+b
+;
+}
+<b>var</b>
+foo
+;
+console.
+log
+(
+foo
+(
+2
+,
+3
+)
+)
+;
+// <i>*
+→
+*foo is not a function*
+foo
+=
+<b>function</b>
+(
+a
+,
+b
+)
+{
+<b>return</b>
+a
+&ast;
+b
+;
+}
+When declaring [function
+statements](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function),
+a different scenario occurs. Unlike function statements, function
+declarations are hoisted to the top of their scope. Consider the
+following code:
+console.
+log
+(
+foo
+(
+2
+,
+3
+)
+)
+;
+// <i>*
+→
+*6*
+<b>function</b>
+foo
+(
+a
+,
+b
+)
+{
+<b>return</b>
+a
+&ast;
+b
+;
+}
+The above code is the same as the next code snippet due to hoisting:
+<b>function</b>
+foo
+(
+a
+,
+b
+)
+{
+<b>return</b>
+a
+&ast;
+b
+;
+}
+console.
+log
+(
+foo
+(
+2
+,
+3
+)
+)
+;
+// <i>*
+→
+*6*
+Here are some examples of what is and what isn&apos;t hoisting:
+// <i>Valid code:*
+foo
+(
+)
+;
+<b>function</b>
+foo
+(
+)
+{
+}
+// <i>Invalid code:*
+bar
+(
+)
+;
+// <i>*
+→
+*TypeError: bar is not a function*
+<b>var</b>
+bar
+=
+<b>function</b>
+(
+)
+{
+}
+;
+// <i>Valid code:*
+foo
+(
+)
+;
+<b>function</b>
+foo
+(
+)
+{
+bar
+(
+)
+;
+}
+<b>function</b>
+bar
+(
+)
+{
+}
+// <i>Invalid code:*
+foo
+(
+)
+;
+<b>function</b>
+foo
+(
+)
+{
+bar
+(
+)
+;
+// <i></i>
+→
+*TypeError: bar is not a function*
+}
+<b>var</b>
+bar
+=
+<b>function</b>
+(
+)
+{
+}
+;
+// <i>(E) valid:</i>
+<b>function</b>
+foo
+(
+)
+{
+bar
+(
+)
+;
+}
+<b>var</b>
+bar
+=
+<b>function</b>
+(
+)
+{
+}
+;
+foo
+(
+)
+;
+<b>Limitations of Hoisting</b>
+Initializing a variable can not be Hoisted or In simple JavaScript
+Hoists declarations not initialization.
+For example: The below scripts will give different outputs.
+<b>var</b>
+x
+=
+2
+;
+<b>var</b>
+y
+=
+4
+;
+alert
+(
+x
+&plus;
+y
+)
+;
+This will give you an output of 6. But this&hellip;
+<b>var</b>
+x
+=
+2
+;
+alert
+(
+x
+&plus;
+y
+)
+;
+<b>var</b>
+y
+=
+4
+;
+This will give you an output of NaN. Since we are initializing the
+value of y, the JavaScript Hoisting is not happening, so the y value
+will be undefined. The JavaScript will consider that y is not yet
+declared.
+So the second example is same as of below.
+<b>var</b>
+x
+=
+2
+;
+<b>var</b>
+y
+;
+alert
+(
+x
+&plus;
+y
+)
+;
+y
+=
+4
+;
+This will give you an output of NaN.
+![](./images/image037.jpg){width="4.090277777777778in"
+height="2.1534722222222222in"}
