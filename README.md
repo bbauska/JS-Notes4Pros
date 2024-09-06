@@ -16680,86 +16680,202 @@ browsers, and its design cannot be modified.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch44-5">Section 44.5: Usage of prompt()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Prompt will display a dialog to the user requesting their input. You
+<p>Prompt will display a dialog to the user requesting their input. You
 can provide a message that will be placed above the text field. The
-return value is a string representing the input provided by the user.
-<b>var</b>
-name
-=
-prompt
-(
-&quot;What&apos;s your name?&quot;
-)
-;
-console.
-log
-(
-&quot;Hello, &quot;
-&plus;
-name
-)
-;
-prompt
-You can also pass () a second parameter, which will be displayed as
-the default text in the prompt&apos;s text field.
-<b>var</b>
-name
-=
-prompt
-(
-&apos;What
-<b>&bsol;&amp;apos;</b>
-s your name?&apos;
-,
-&apos; Name&hellip;&apos;
-)
-;
-console.
-log
-(
-&apos;Hello, &apos;
-&plus;
-name
-)
-;
-<b>Parameter Description</b>
-message Required. Text to display above the text field of the prompt.
-default Optional. Default text to display in the text field when the
-prompt is displayed.
+return value is a string representing the input provided by the user.</p>
+<pre>
+<b>var</b> name = prompt(&quot;What&apos;s your name?&quot;);
+console.log(&quot;Hello, &quot; &plus; name);
+</pre>
+<p>You can also pass prompt() a second parameter, which will be displayed as
+the default text in the prompt&apos;s text field.</p>
+<pre>
+<b>var</b> name = prompt(&apos;What<b>&bsol;&amp;apos;</b>s your name?&apos;, &apos; Name&hellip;&apos;);
+console.log(&apos;Hello, &apos; &plus; name);
+</pre>
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>message</td>
+      <td>Required. Text to display above the text field of the prompt.</td>
+    </tr>
+    <tr>
+      <td>default</td>
+      <td>Optional. Default text to display in the text field when the prompt is diplayed.</td>
+    </tr>
+  </tbody>
+</table>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch45">Chapter 45: execCommand and contenteditable</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>commandId value</b>
-⋮ <b>Inline formatting commands</b>
-backColor                              Color value String
-bold                                   
-createLink                             URL String
-fontName                               Font family name
-fontSize                               &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;,
-&quot;5&quot;, &quot;6&quot;, &quot;7&quot;
-foreColor                              Color value String
-strikeThrough                          
-superscript                            
-unlink                                 
-⋮ <b>Block formatting commands</b> delete
-
-formatBlock &quot;address&quot;, &quot;dd&quot;, &quot;div&quot;, &quot;dt&quot;, &quot;h1&quot;, &quot;h2&quot;,
-&quot;h3&quot;, &quot;h4&quot;, &quot;h5&quot;, &quot;h6&quot;, &quot;p&quot;, &quot;pre&quot;
-
-forwardDelete insertHorizontalRule
-
-insertHTML HTML String insertImage URL String insertLineBreak
-insertOrderedList insertParagraph insertText Text string
-insertUnorderedList justifyCenter justifyFull justifyLeft justifyRight
-outdent
-
-⋮ <b>Clipboard commands</b> copy Currently Selected String cut Currently
-Selected String paste
-
-⋮ <b>Miscellaneous commands</b> defaultParagraphSeparator redo selectAll
-styleWithCSS undo useCSS
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>commandId</b></th>
+      <th><b>value</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>&vellip;inline formatting commands</b></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>backColor</td>
+      <td>Color value String</td>
+    </tr>
+    <tr>
+      <td>bold</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>createLink</td>
+      <td>URL String</td>
+    </tr>
+    <tr>
+      <td>fontName</td>
+      <td>Font family name</td>
+    </tr>
+    <tr>
+      <td>fontSize</td>
+      <td>&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;</td>
+    </tr>
+    <tr>
+      <td>foreColor</td>
+      <td>Color value String</td>
+    </tr>
+    <tr>
+      <td>strikeThrough</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>superscript</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>unlink</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><b>&vellip;Block formatting commands</b></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>delete</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>formatBlock</td>
+      <td>&quot;address&quot;,&quot;dd&quot;,&quot;div&quot;,&quot;dt&quot;,&quot;h1&quot;,&quot;h2&quot;,&quot;h3&quot;,&quot;h4&quot;,&quot;h5&quot;,&quot;h6&quot;,&quot;p&quot;,&quot;pre&quot;</td>
+    </tr>
+    <tr>
+      <td>forwardDelete</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>insertHorizontalRule</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>insertHTML</td>
+      <td>HTML String</td>
+    </tr>
+    <tr>
+      <td>insertImage</td>
+      <td>URL String</td>
+    </tr>
+    <tr>
+      <td>insertLineBreak</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>insertOrderedList</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>insertParagraph</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>insertText</td>
+      <td>Text string</td>
+    </tr>
+    <tr>
+      <td>insertUnorderedList</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>JustifyCenter</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>JustifyFull</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>JustifyLeft</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>JustifyRight</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>outdent</td>
+	  <td>
+	</tr>
+	<tr>
+      <td><b>&vellip;Clipboard commands</b></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>copy</td>
+      <td>Currently Selected String</td>
+    </tr>
+    <tr>
+      <td>cut</td>
+      <td>Currently Selected String</td>
+    </tr>
+    <tr>
+      <td>paste</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><b>&vellip;Miscellaneous commands</b></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>defaultParagraphSeparator</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>redo</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>selectAll</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>styleWithCSS</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>undo</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>useCSS</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch45-1">Section 45.1: Listening to Changes of contenteditable</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
