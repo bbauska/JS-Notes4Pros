@@ -17156,7 +17156,7 @@ current browser window or tab.</p>
   <img src="/images/image034.png"
   title="BOM (Browser Object Model)"
   alt="BOM (Browser Object Model)"
-  style="border: 2px solid #000000; width:7.5in;" />
+  style="border: 2px solid #000000; width:6in;" />
 
 <ul>
   <li><b>Document:</b> represents current web page.</li>
