@@ -16356,6 +16356,7 @@ request.onerror = <b>function</b>() {
     &apos;message&apos;: request.statusText
   });
 };
+</pre>
 <!-- page 277 -->
 <!-- thru chapter 42 section 14 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
