@@ -16645,6 +16645,7 @@ alert(&quot;Hello world!&quot;);
 window.alert(&quot;Hello world!&quot;);
 </pre>
 <p><b>Produces</b></p>
+<!-- page 282 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~ 33. stackoverflow.com says: Hello world! (282) ~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
@@ -16711,6 +16712,7 @@ console.log(&apos;Hello, &apos; &plus; name);
     </tr>
   </tbody>
 </table>
+<!-- page 283 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch45">Chapter 45: execCommand and contenteditable</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -16876,6 +16878,7 @@ console.log(&apos;Hello, &apos; &plus; name);
     </tr>
   </tbody>
 </table>
+<!-- page 284 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch45-1">Section 45.1: Listening to Changes of contenteditable</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -16942,6 +16945,7 @@ function edit(event) {
 }
 <b>&lt;</b><b>script</b><b>&gt;</b>
 </pre>
+<!-- page 285 -->
 <a href="https://jsfiddle.net/RokoCB/az7f38w7/">jsFiddle demo</a>
 <a href="https://jsfiddle.net/RokoCB/yvshdr4q/">Basic Rich-Text editor example (Modern browsers)</a>
 <p><b>Final thoughts</b></p>
@@ -16995,7 +16999,7 @@ document.execCommand(&apos;bold&apos;, <b>false</b>, <b>null</b>); // <i>toggles
 document.execCommand(&apos;italic&apos;, <b>false</b>, <b>null</b>); // <i>toggles italic formatting</i>
 document.execCommand(&apos;underline&apos;, <b>false</b>, <b>null</b>); // <i>toggles underline</i>
 </pre>
-<!-- page 286 -->
+<!-- page 287 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch46">Chapter 46: History</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -17098,197 +17102,139 @@ Example
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch47-1">Section 47.1: Get some basic browser data and return it as a JSON object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The following function can be used to get some basic information about
-the current browser and return it in JSON format.
-<b>function</b>
-getBrowserInfo
-(
-)
-{
-<b>var</b>
-json
-=
-&quot;&lbrack;{&quot;
-,
-<i>/&ast; The array containing the browser info &ast;/</i>
-info
-=
-&lbrack;
-navigator.
-userAgent
-,
-// <i>Get the User-agent</i>
-navigator.
-cookieEnabled
-,
-// <i>Checks whether cookies are enabled in browser</i>
-navigator.
-appName
-,
-// <i>Get the Name of Browser</i>
-navigator.
-language
-,
-// <i>Get the Language of Browser</i>
-navigator.
-appVersion
-,
-// <i>Get the Version of Browser</i>
-navigator.
-platform
-// <i>Get the platform for which browser is compiled</i>
-&rbrack;
-,
-<i>/&ast; The array containing the browser info names &ast;/</i>
-infoNames
-=
-&lbrack;
-&quot;userAgent&quot;
-,
-&quot;cookiesEnabled&quot;
-,
-&quot;browserName&quot;
-,
-&quot;browserLang&quot;
-,
-&quot;browserVersion&quot;
-,
-&quot;browserPlatform&quot;
-&rbrack;
-;
+<p>The following function can be used to get some basic information about
+the current browser and return it in JSON format.</p>
+<pre>
+<b>function</b> getBrowserInfo() {
+  <b>var</b>
+    json = &quot;&lbrack;{&quot;,
+    <i>/&ast; The array containing the browser info &ast;/</i>
+    info = &lbrack;
+      navigator.userAgent, // <i>Get the User-agent</i>
+      navigator.cookieEnabled, // <i>Checks whether cookies are enabled in browser</i>
+      navigator.appName, // <i>Get the Name of Browser</i>
+      navigator.language, // <i>Get the Language of Browser</i>
+      navigator.appVersion, // <i>Get the Version of Browser</i>
+      navigator.platform // <i>Get the platform for which browser is compiled</i>
+    &rbrack;,
+    <i>/&ast; The array containing the browser info names &ast;/</i>
+    infoNames = &lbrack;
+      &quot;userAgent&quot;,
+      &quot;cookiesEnabled&quot;,
+      &quot;browserName&quot;,
+      &quot;browserLang&quot;,
+      &quot;browserVersion&quot;,
+      &quot;browserPlatform&quot;
+	&rbrack;;
 <i>/&ast; Creating the JSON object &ast;/</i>
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-info.
-length
-;
-i
-++
-)
-{
-<b>if</b>
-(
-i
-===
-info.
-length
-&minus;
-1
-)
-{
-json
-+=
-&apos;&quot;&apos;
-&plus;
-infoNames
-&lbrack;
-i
-&rbrack;
-&plus;
-&apos;&quot;: &quot;&apos;
-&plus;
-info
-&lbrack;
-i
-&rbrack;
-&plus;
-&apos;&quot;&apos;
-;
-}
-<b>else</b>
-{
-json
-+=
-&apos;&quot;&apos;
-&plus;
-infoNames
-&lbrack;
-i
-&rbrack;
-&plus;
-&apos;&quot;: &quot;&apos;
-&plus;
-info
-&lbrack;
-i
-&rbrack;
-&plus;
-&apos;&quot;,&apos;
-;
-}
-}
-;
-<b>return</b>
-json
-&plus;
-&quot;}&rbrack;&quot;
-;
-}
-;
+<b>for</b> (<b>var</b> i = 0; i &lt; info.length; i++) {
+  <b>if</b> (i === info.length &minus; 1) {
+    json += &apos;&quot;&apos; &plus; infoNames&lbrack;i&rbrack; &plus; &apos;&quot;: &quot;&apos; &plus; info&lbrack;i&rbrack; &plus;&apos;&quot;&apos;;
+  }
+  <b>else</b> {
+    json += &apos;&quot;&apos; &plus; infoNames&lbrack;i&rbrack; &plus; &apos;&quot;: &quot;&apos; &plus; info&lbrack;i&rbrack; &plus; &apos;&quot;,&apos;;
+  }
+};
+<b>return</b> json &plus; &quot;}&rbrack;&quot;;
+};
+</pre>
+<!-- page 290 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch48">Chapter 48: BOM (Browser Object Model)</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch48-1">Section 48.1: Introduction</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The BOM (Browser Object Model) contains objects that represent the
+<p>The BOM (Browser Object Model) contains objects that represent the
 current browser window and components; objects that model things like
-<i>history, device&apos;s screen,</i> etc
+<i>history, device&apos;s screen,</i> etc</p>
 
-The topmost object in BOM is the window object, which represents the
-current browser window or tab.
-<b>Document:</b>
-represents current web page.
-<b>History:</b>
+<p>The topmost object in BOM is the window object, which represents the
+current browser window or tab.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~ 34. bom (browser object model) (290) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="/images/image034.jpg"
+  title="BOM (Browser Object Model)"
+  alt="BOM (Browser Object Model)"
+  style="border: 2px solid #000000; width:7.5in;" />
 
-represents pages in browser history.
-<b>Location:</b>
-represents URL of current page.
-<b>Navigator:</b>
-represents information about browser.
-<b>Screen:</b>
-represents device&apos;s display information.
+<ul>
+  <li><b>Document:</b> represents current web page.</li>
+  <li><b>History:</b> represents pages in browser history.</li>
+  <li><b>Location:</b> represents URL of current page.</li>
+  <li><b>Navigator:</b> represents information about browser.</li>
+  <li><b>Screen:</b> represents device&apos;s display information.</li>
+</ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch48-2">Section 48.2: Window Object Properties</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The Window Object contains the following properties.
-<b>Property Description</b>
-window.closed Whether the window has been closed
-<b>&lt;iframe</b>
-window.length Number of <b>&gt;</b> elements in window window.name Gets or
-sets the name of the window window.innerHeight Height of window
-window.innerWidth Width of window window.screenX X-coordinate of
-pointer, relative to top left corner of screen window.screenY
-Y-coordinate of pointer, relative to top left corner of screen
-window.location Current URL of window object (or local file path)
-window.history Reference to history object for browser window or tab.
->
-window.screen Reference to screen object window.pageXOffset Distance
-document has been scrolled horizontally window.pageYOffset Distance
-document has been scrolled vertically
-
+<p>The Window Object contains the following properties.</p>
+<!-- page 291 -->
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Property</b></th>
+      <th><b>Description</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>window.closed</td>
+      <td>Whether the window has been closed</td>
+    </tr>
+    <tr>
+      <td>window.length</td>
+      <td>Number of <b>&lt;iframe&gt;</b> elements in window</td>
+    </tr>
+    <tr>
+      <td>window.name</td>
+      <td>Gets or sets the name of the window</td>
+    </tr>
+    <tr>
+      <td>window.innerHeight</td>
+      <td>Height of window</td>
+    </tr>
+    <tr>
+      <td>window.innerWidth</td>
+      <td>Width of window</td>
+    </tr>
+    <tr>
+      <td>window.screenX</td>
+      <td>X-coordinate of pointer, relative to top left corner of screen</td>
+    </tr>
+    <tr>
+      <td>window.screenY</td>
+      <td>Y-coordinate of pointer, relative to top left corner of screen</td>
+    </tr>
+    <tr>
+      <td>window.location</td>
+      <td>Current URL of window object (or local file path)</td>
+    </tr>
+    <tr>
+      <td>window.history</td>
+      <td>Reference to history object for browser window or tab</td>
+    </tr>
+    <tr>
+      <td>window.screen</td>
+      <td>Reference to screen object</td>
+    </tr>
+    <tr>
+      <td>window.pageXOffset</td>
+      <td>Distance document has been scrolled horizontally</td>
+    </tr>
+    <tr>
+      <td>window.pageYOffset</td>
+      <td>Distance document has been scrolled vertically</td>
+    </tr>
+  </tbody>
+</table>
+<!-- page 291 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch48-3">Section 48.3: Window Object Methods</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Browser Object Model
-
-The most important object in the is the window object. It helps in
+<p>The most important object in the is the window object. It helps in
 accessing information about the browser and its components. To access
-these features, it has various methods and properties.
+these features, it has various methods and properties.</p>
 
 <table border="1" style="width:200px">
   <thead>
@@ -17357,42 +17303,30 @@ these features, it has various methods and properties.
     </tr>
   </tbody>
 </table>
+<!-- page 292 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch49">Chapter 49: The Event Loop</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch49-1">Section 49.1: The event loop in a web browser</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The vast majority of modern JavaScript environments work according to
-an <i>event loop</i>. This is a common concept in computer programming
-which essentially means that your program continually waits for new
-things to happen, and when they do, reacts to them. The <i>host
-environment</i> calls into your program, spawning a &quot;turn&quot; or &quot;tick&quot;
-or &quot;task&quot; in the event loop, which then <i>runs to completion</i>. When
-that turn has finished, the host environment waits for something else
-to happen, before all this starts.
-
-A simple example of this is in the browser. Consider the following
-example:
-&lt;!
-DOCTYPE html
-&gt;
-<b>&lt;</b>
-<b>title</b>
-<b>&gt;</b>
-Event loop example
-<b>&lt;</b>
-<b>/title</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>script</b>
-<b>&gt;</b>
+<p>The vast majority of modern JavaScript environments work according to an 
+<i>event loop</i>. This is a common concept in computer programming which 
+essentially means that your program continually waits for new things to happen, 
+and when they do, reacts to them. The <i>host environment</i> calls into your 
+program, spawning a &quot;turn&quot; or &quot;tick&quot; or &quot;task&quot; 
+in the event loop, which then <i>runs to completion</i>. When that turn has 
+finished, the host environment waits for something else to happen, before all 
+this starts.</p>
+<p>A simple example of this is in the browser. Consider the following example:</p>
+<pre>
+&lt;!DOCTYPE html&gt;
+<b>&lt;title&gt;</b>Event loop example<b>&lt;/title&gt;</b>
+<b>&lt;script&gt;</b>
 console.log(&quot;this a script entry point&quot;);
-document.body.onclick = () =&bsol;{
-console.log(&quot;onclick&quot;);
-}
-;
-setTimeout(() =&bsol;{
+document.body.onclick = () =&gt;{
+  console.log(&quot;onclick&quot;);
+};
+setTimeout(() =&gt; {
 console.log(&quot;setTimeout callback log 1&quot;);
 console.log(&quot;setTimeout callback log 2&quot;);
 }
@@ -17403,165 +17337,105 @@ console.log(&quot;setTimeout callback log 2&quot;);
 In this example, the host environment is the web browser.
 <b>&lt;script</b>
 
-1.  The HTML parser will first execute the <b>&gt;</b>. It will run to
-    completion.
-
-2.  The call to
-    [setTimeout](https://html.spec.whatwg.org/multipage/webappapis.html#dom-settimeout)
-    tells the browser that, after 100 milliseconds, it should enqueue a
-    [task](https://html.spec.whatwg.org/multipage/webappapis.html#concept-task)
-    to perform the given action.
-
-3.  In the meantime, the event loop is then responsible for continually
-    checking if there&apos;s something else to do:
-
-for example, rendering the web page.
-
-4.  After 100 milliseconds, if the event loop is not busy for some other
+<ol type="1">
+  <li>The HTML parser will first execute the <b>&gt;</b>. It will run to completion.</li>
+  <li>The call to <a href="https://html.spec.whatwg.org/multipage/webappapis.html#dom-settimeout">
+    setTimeout</a> tells the browser that, after 100 milliseconds, it should enqueue a
+    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-task">task</a> 
+    to perform the given action.</li>
+  <li>In the meantime, the event loop is then responsible for continually
+    checking if there&apos;s something else to do: for example, rendering the web page.</li>
+  <li>After 100 milliseconds, if the event loop is not busy for some other
     reason, it will see the task that setTimeout enqueues, and run the
-    function, logging those two statements.
-
-5.  At any time, if someone clicks on the body, the browser will post a
+    function, logging those two statements.</li>
+  <li>At any time, if someone clicks on the body, the browser will post a
     task to the event loop to run the click handler function. The event
     loop, as it goes around continually checking what to do, will see
-    this, and run that function.
-
-You can see how in this example there are several different types of
-entry points into JavaScript code, which the event loop invokes:
-<b>&lt;script</b>
-
-The <b>&gt;</b> element is invoked immediately
-The setTimeout task is posted to the event loop and run once
-
-The click handler task can be posted many times and run each time
-
-Each turn of the event loop is responsible for many things; only some
-of them will invoke these JavaScript tasks. For full details, [see the
-HTML
-specification](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model)
-setTimeout callback log
-
-One last thing: what do we mean by saying that each event loop task
+    this, and run that function.</li>
+</ol>
+<p.You can see how in this example there are several different types of
+entry points into JavaScript code, which the event loop invokes:</p>
+<ul>
+  <li>The <b>&lt;script&gt;</b> element is invoked immediately</li>
+  <li>The setTimeout task is posted to the event loop and run once</li>
+  <li>The click handler task can be posted many times and run each time</li>
+</ul>
+<p>Each turn of the event loop is responsible for many things; only some
+of them will invoke these JavaScript tasks. For full details, 
+<a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">
+see the HTML specification</a></p>
+<p>One last thing: what do we mean by saying that each event loop task
 &quot;runs to completion&quot;? We mean that it is not generally possible to
 interrupt a block of code that is queued to run as a task, and it is
 never possible to run code interleaved with another block of code. For
 example, even if you clicked at the perfect time, you could never get
 the above code to log &quot;onclick&quot; in between the two 1/2&quot;s. This is
 due to the way the taskposting works; it is cooperative and
-queue-based, instead of preemptive.
+queue-based, instead of preemptive.</p>
+<!-- page 293 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch49-2">Section 49.2: Asynchronous operations and the event loop</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Many interesting operations in common JavaScript programming
+<p>Many interesting operations in common JavaScript programming
 environments are asynchronous. For example, in the browser we see
-things like
-window.
-setTimeout
-(
-(
-)
-=&gt;
-{
-console.
-log
-(
-&quot;this happens later&quot;
-)
-;
-}
-,
-100
-)
-;
-and in Node.js we see things like
-fs.
-readFile
-(
-&quot;file.txt&quot;
-,
-(
-err
-,
-data
-)
-=&gt;
-{
-console.
-log
-(
-&quot;data&quot;
-)
-;
-}
-)
-;
-How does this fit with the event loop?
-file.txt
-How this works is that when these statements execute, they tell the
+things like</p>
+<pre>
+window.setTimeout(() =&gt; {
+  console.log(&quot;this happens later&quot;);
+}, 100);
+</pre>
+<p>and in Node.js we see things like</p>
+<pre>
+fs.readFile(&quot;file.txt&quot;, (err, data) =&gt; {
+  console.log(&quot;data&quot;);
+});
+</pre>
+<p>How does this fit with the event loop?</p>
+<p>How this works is that when these statements execute, they tell the
 <i>host environment</i> (i.e., the browser or Node.js runtime,
 respectively) to go off and do something, probably in another thread.
 When the host environment is done doing that thing (respectively,
-waiting 100 milliseconds or reading the file ) it will post a task to
+waiting 100 milliseconds or reading the file file.txt) it will post a task to
 the event loop, saying &quot;call the callback I was given earlier with
-these arguments&quot;.
-
-The event loop is then busy doing its thing: rendering the webpage,
+these arguments&quot;.</p>
+<p>The event loop is then busy doing its thing: rendering the webpage,
 listening for user input, and continually looking for posted tasks.
 When it sees these posted tasks to call the callbacks, it will call
-back into JavaScript. That&apos;s how you get asynchronous behavior!
+back into JavaScript. That&apos;s how you get asynchronous behavior!</p>
+<!-- page 294 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch50">Chapter 50: Strict mode</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch50-1">Section 50.1: For entire scripts</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-&quot;use strict&quot;
-Strict mode can be applied on entire scripts by placing the statement
-; before any other statements.
-&quot;use strict&quot;
-;
+<p>Strict mode can be applied on entire scripts by placing the statement</p>
+<pre>
+&quot;use strict&quot;; 
 // <i>strict mode now applies for the rest of the script</i>
-Strict mode is only enabled in scripts where you define &quot;use
+<p>Strict mode is only enabled in scripts where you define &quot;use
 strict&quot;. You can combine scripts with and without strict mode,
-because the strict state is not shared among different scripts.
+because the strict state is not shared among different scripts.</p>
 <h5>Version ≥ 6</h5>
-<b>Note:</b> All code written inside ES2015+ modules and classes are
-strict by default.
+<p><b>Note:</b> All code written inside ES2015+ modules and classes are
+strict by default.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch50-2">Section 50.2: For functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-&quot;use strict&quot;
-Strict mode can also be applied to single functions by prepending the
-; statement at the beginning of the function declaration.
-<b>function</b>
-strict
-(
-)
-{
-&quot;use strict&quot;
-;
-// <i>strict mode now applies to the rest of this function</i>
-<b>var</b>
-innerFunction
-=
-<b>function</b>
-(
-)
-{
-// <i>strict mode also applies here</i>
+<p>Strict mode can also be applied to single functions by prepending the
+&quot;use strict&quot;; statement at the beginning of the function declaration.</p>
+<pre>
+<b>function</b> strict() {
+  &quot;use strict&quot;;
+  // <i>strict mode now applies to the rest of this function</i>
+  <b>var</b> innerFunction = <b>function</b>() {
+    // <i>strict mode also applies here</i>
+    };
 }
-;
+<b>function</b> notStrict() {
+  // <i>but not here</i>
 }
-<b>function</b>
-notStrict
-(
-)
-{
-// <i>but not here</i>
-}
-Strict mode will also apply to any inner scoped functions.
+</pre>
+<p>Strict mode will also apply to any inner scoped functions.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch50-3">Section 50.3: Changes to properties</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
