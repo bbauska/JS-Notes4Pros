@@ -17153,7 +17153,7 @@ current browser window or tab.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~ 34. bom (browser object model) (290) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
-  <img src="/images/image034.jpg"
+  <img src="/images/image034.png"
   title="BOM (Browser Object Model)"
   alt="BOM (Browser Object Model)"
   style="border: 2px solid #000000; width:7.5in;" />
@@ -17352,6 +17352,7 @@ In this example, the host environment is the web browser.
     loop, as it goes around continually checking what to do, will see
     this, and run that function.</li>
 </ol>
+<br/>
 <p>You can see how in this example there are several different types of
 entry points into JavaScript code, which the event loop invokes:</p>
 <ul>
@@ -17359,6 +17360,7 @@ entry points into JavaScript code, which the event loop invokes:</p>
   <li>The setTimeout task is posted to the event loop and run once</li>
   <li>The click handler task can be posted many times and run each time</li>
 </ul>
+<br/>
 <p>Each turn of the event loop is responsible for many things; only some
 of them will invoke these JavaScript tasks. For full details, 
 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">
