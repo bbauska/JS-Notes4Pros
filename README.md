@@ -16212,500 +16212,150 @@ rejected.<b>catch</b>(reason =&gt; {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-11">Section 42.11: Using ES2017 async/await</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>try</b>                 /       <b>catch</b>
-The same example above, Image loading, can be written using async
-functions. This also allows using the common method for exception
-handling.
-Note: [as of April 2017, the current releases of all browsers but
-Internet Explorer supports async
-functions](http://caniuse.com/#feat=async-functions).
-<b>function</b>
-loadImage
-(
-url
-)
-{
-<b>return</b>
-<b>new</b>
-Promise
-(
-(
-resolve
-,
-reject
-)
-=&gt;
-{
-<b>const</b>
-img
-=
-<b>new</b>
-Image
-(
-)
-;
-img.
-addEventListener
-(
-&apos;load&apos;
-,
-(
-)
-=&gt;
-resolve
-(
-img
-)
-)
-;
-img.
-addEventListener
-(
-&apos;error&apos;
-,
-(
-)
-=&gt;
-{
-reject
-(
-<b>new</b>
-Error
-(
-&grave;Failed to load &dollar;
-{
-url
+<p>The same example above, Image loading, can be written using async
+functions. This also allows using the common try/catch method for exception handling.</p>
+
+<p>Note: <a href="http://caniuse.com/#feat=async-functions">
+as of April 2017, the current releases of all browsers but Internet 
+Explorer supports async functions</a>.</p>
+<pre>
+<b>function</b> loadImage(url) {
+  <b>return</b> <b>new</b> Promise((resolve, reject) =&gt; {
+    <b>const</b> img = <b>new</b> Image();
+    img.addEventListener(&apos;load&apos;, () =&gt; resolve(img));
+    img.addEventListener(&apos;error&apos;, () =&gt; {
+      reject(<b>new</b> Error(&grave;Failed to load &dollar;{url}&grave;));
+    });
+    img.src = url;
+  });
 }
-&grave;
-)
-)
-;
-}
-)
-;
-img.
-src
-=
-url
-;
-}
-)
-;
-}
-(
-async
-(
-)
-=&gt;
-{
-// <i>load /image.png and append to #image-holder, otherwise throw error</i>
-<b>try</b>
-{
-<b>let</b>
-img
-=
-await loadImage
-(
-&apos;http://example.com/image.png&apos;
-)
-;
-document.
-getElementById
-(
-&apos;image-holder&apos;
-)
-.
-appendChild
-(
-img
-)
-;
-}
-<b>catch</b>
-(
-error
-)
-{
-console.
-error
-(
-error
-)
-;
-}
-}
-)
-(
-)
-;
+(async () =&gt; {
+  // <i>load /image.png and append to #image-holder, otherwise throw error</i>
+  <b>try</b> {
+    <b>let</b> img = await loadImage(&apos;http://example.com/image.png&apos;);
+    document.getElementById(&apos;image-holder&apos;).appendChild(img);
+  }
+  <b>catch</b> (error) {
+    console.error(error);
+  }
+})();
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-12">Section 42.12: Performing cleanup with finally()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-There is currently a
-[proposal](https://github.com/tc39/proposal-promise-finally) (not yet
-part of the ECMAScript standard) to add a <b>finally</b> callback to
-promises that will be executed regardless of whether the promise is
-fulfilled or rejected. Semantically, this is similar to the
-[<b>finally</b> clause of the <b>try</b>
-block](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch#The_finally_clause).
-You would usually use this functionality for cleanup:
-<b>var</b>
-loadingData
-=
-<b>true</b>
-;
-fetch
-(
-&apos;/data&apos;
-)
-.
-then
-(
-result
-=&gt;
-processData
-(
-result.
-data
-)
-)
-.
-<b>catch</b>
-(
-error
-=&gt;
-console.
-error
-(
-error
-)
-)
-.
-<b>finally</b>
-(
-(
-)
-=&gt;
-{
-loadingData
-=
-<b>false</b>
-;
-}
-)
-;
-It is important to note that the <b>finally</b> callback doesn&apos;t affect
+<p>There is currently a 
+<a href="https://github.com/tc39/proposal-promise-finally">
+proposal</a> (not yet part of the ECMAScript standard) to add a 
+<b>finally</b> callback to promises that will be executed regardless 
+of whether the promise is fulfilled or rejected. Semantically, this 
+is similar to the 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch#The_finally_clause">
+<b>finally</b> clause of the <b>try</b> block</a>.</p>
+<p>You would usually use this functionality for cleanup:</p>
+<pre>
+<b>var</b> loadingData = <b>true</b>;
+fetch(&apos;/data&apos;)
+  .then(result =&gt; processData(result.data))
+  .<b>catch</b>(error =&gt; console.error(error))
+  .<b>finally</b>(() =&gt; {
+    loadingData = <b>false</b>;
+  });
+</pre>
+<!-- page 275 -->
+<p>It is important to note that the <b>finally</b> callback doesn&apos;t affect
 the state of the promise. It doesn&apos;t matter what value it returns,
-the promise stays in the fulfilled/rejected state that it had before.
-So in the example above the promise
-processData                       (   result.data
-will be resolved with the return value of ) even though the
-<b>finally</b> callback returned <b>undefined</b>.
-With the standardization process still being in progress, your
+the promise stays in the fulfilled/rejected state that it had before. 
+So in the example above the promise will be resolved with the return value 
+of processData(result.data) even though the <b>finally</b> callback returned 
+<b>undefined</b>.</p>
+
+<p>With the standardization process still being in progress, your
 promises implementation most likely won&apos;t support <b>finally</b>
 callbacks out of the box. For synchronous callbacks you can add this
-functionality with a polyfill however:
-<b>if</b>
-(
-!
-Promise.
-<b>prototype</b>
-.
-<b>finally</b>
-)
-{
-Promise.
-<b>prototype</b>
-.
-<b>finally</b>
-=
-<b>function</b>
-(
-callback
-)
-{
-<b>return</b>
-<b>this</b>
-.
-then
-(
-result
-=&gt;
-{
-callback
-(
-)
-;
-<b>return</b>
-result
-;
+functionality with a polyfill however:</p>
+<pre>
+<b>if</b> (!Promise.<b>prototype</b>.<b>finally</b>) {
+  Promise.<b>prototype</b>.<b>finally</b> = <b>function</b>(callback) {
+    <b>return</b> <b>this</b>.then(result =&gt; {
+      callback();
+      <b>return</b> result;
+    }, error =&gt; {
+      callback();
+      <b>throw</b> error;
+    });
+  };
 }
-,
-error
-=&gt;
-{
-callback
-(
-)
-;
-<b>throw</b>
-error
-;
-}
-)
-;
-}
-;
-}
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-13">Section 42.13: forEach with promises</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-It is possible to effectively apply a function (cb) which returns a
+<p>It is possible to effectively apply a function (cb) which returns a
 promise to each element of an array, with each element waiting to be
-processed until the previous element is processed.
-<b>function</b>
-promiseForEach
-(
-arr
-,
-cb
-)
-{
-<b>var</b>
-i
-=
-0
-;
-<b>var</b>
-nextPromise
-=
-<b>function</b>
-(
-)
-{
-<b>if</b>
-(
-i
-&gt;=
-arr.
-length
-)
-{
-// <i>Processing finished.</i>
-<b>return</b>
-;
-}
-// <i>Process next function. Wrap in &grave;Promise.resolve&grave; in case</i>
-// <i>the function does not return a promise</i>
-<b>var</b>
-newPromise
-=
-Promise.
-resolve
-(
-cb
-(
-arr
-&lbrack;
-i
-&rbrack;
-,
-i
-)
-)
-;
-i
-++
-;
-// <i>Chain to finish processing.</i>
-<b>return</b>
-newPromise.
-then
-(
-nextPromise
-)
-;
-}
-;
-// <i>Kick off the chain.</i>
-<b>return</b>
-Promise.
-resolve
-(
-)
-.
-then
-(
-nextPromise
-)
-;
-}
-;
-This can be helpful if you need to efficiently process thousands of
+processed until the previous element is processed.</p>
+<pre>
+<b>function</b> promiseForEach(arr, cb) {
+  <b>var</b> i = 0;
+  <b>var</b> nextPromise = <b>function</b>() {
+    <b>if</b> (i &gt;= arr.length) {
+      // <i>Processing finished.</i>
+      <b>return</b>;
+    }
+    // <i>Process next function. Wrap in &grave;Promise.resolve&grave; in case</i>
+    // <i>the function does not return a promise</i>
+    <b>var</b> newPromise = Promise.resolve(cb(arr&lbrack;i&rbrack;, i));
+    i++;
+    // <i>Chain to finish processing.</i>
+    <b>return</b> newPromise.then(nextPromise);
+  };
+  // <i>Kick off the chain.</i>
+  <b>return</b> Promise.resolve().then(nextPromise);
+};
+</pre>
+<p>This can be helpful if you need to efficiently process thousands of
 items, one at a time. Using a regular <b>for</b> loop to create the
 promises will create them all at once and take up a significant amount
-of RAM.
-
+of RAM.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-14">Section 42.14: Asynchronous API request</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-This is an example of a simple GET API call wrapped in a promise to
-take advantage of its asynchronous functionality.
-<b>var</b>
-<b>get</b>
-=
-<b>function</b>
-(
-path
-)
-{
-<b>return</b>
-<b>new</b>
-Promise
-(
-<b>function</b>
-(
-resolve
-,
-reject
-)
-{
-<b>let</b>
-request
-=
-<b>new</b>
-XMLHttpRequest
-(
-)
-;
-request.
-open
-(
-&apos;GET&apos;
-,
-path
-)
-;
-request.
-onload
-=
-resolve
-;
-request.
-onerror
-=
-reject
-;
-request.
-send
-(
-)
-;
-}
-)
-;
-}
-;
-More robust error handling can be done using the following
-[onload](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onload)
-and
-[onerror](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onerror)
-functions.
-request.
-onload
-=
-<b>function</b>
-(
-)
-{
-<b>if</b>
-(
-<b>this</b>
-.
-status
-&gt;=
-200
-&&
-<b>this</b>
-.
-status
-&lt;
-300
-)
-{
-<b>if</b>
-(
-request.
-response
-)
-{
-// <i>Assuming a successful call returns JSON</i>
-resolve
-(
-JSON.
-parse
-(
-request.
-response
-)
-)
-;
-}
-<b>else</b>
-{
-resolve
-(
-)
-;
-}
-<b>else</b>
-{
-reject
-(
-{
-&apos;status&apos;
-:
-<b>this</b>
-.
-status
-,
-&apos;message&apos;
-:
-request.
-statusText
-}
-)
-;
-}
-}
-;
-request.
-onerror
-=
-<b>function</b>
-(
-)
-{
-reject
-(
-{
-&apos;status&apos;
-:
-</b>this</b>
-.
-status
-,
-&apos;message&apos;
-:
-request.
-statusText
-}
-)
-;
-}
-;
+<p>This is an example of a simple GET API call wrapped in a promise to
+take advantage of its asynchronous functionality.</p>
+<pre>
+<b>var</b> <b>get</b> = <b>function</b>(path) {
+  <b>return</b> <b>new</b> Promise(<b>function</b>(resolve, reject) {
+    <b>let</b> request = <b>new</b> XMLHttpRequest();
+	request.open(&apos;GET&apos;, path);
+    request.onload = resolve;
+    request.onerror = reject;
+    request.send();
+  });
+};
+</pre>
+<p>More robust error handling can be done using the following
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onload">
+onload</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onerror">
+onerror</a> functions.</p>
+<pre>
+request.onload = <b>function</b>() {
+  <b>if</b> (<b>this</b>.status &gt;= 200 && <b>this</b>.status &lt; 300) {
+    <b>if</b> (request.response) {
+      // <i>Assuming a successful call returns JSON</i>
+      resolve(JSON.parse(request.response));
+    } <b>else</b> {
+      resolve();
+    } <b>else</b> {
+      reject({
+        &apos;status&apos;: <b>this</b>.status,
+        &apos;message&apos;: request.statusText
+      });
+    }
+};
+request.onerror = <b>function</b>() {
+  reject({
+    &apos;status&apos;: </b>this</b>.status,
+    &apos;message&apos;: request.statusText
+  });
+};
+<!-- page 277 -->
 <!-- thru chapter 42 section 14 -->
+
