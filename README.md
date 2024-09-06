@@ -16896,7 +16896,7 @@ contenteditableHtmlElement.addEventListener(&quot;input&quot;, <b>function</b>()
 HTML element into a user-editable area</p>
 <pre>
 <b>&lt;</b><b>div</b> contenteditable<b>&gt;</b>You can <b>&lt;</b><b>b</b><b>&gt;</b>edit<b>&lt;</b><b>/b</b><b>&gt;</b> me!<b>&lt;</b><b>/div</b><b>&gt;</b>
-
+</pre>
 <p><b>Native Rich-Text editing</b></p>
 
 <p>Using <b>JavaScript</b> and <a href="https://w3c.github.io/editing/execCommand.html">execCommandW3C</a> you
