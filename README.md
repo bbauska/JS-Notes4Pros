@@ -17758,87 +17758,40 @@ Number.<b>prototype</b>.format = <b>function</b>(n, x, s, c) {
 };
 12345678.9.format(2, 3, &apos;.&apos;, &apos;,&apos;);  // <i>&quot;12.345.678,90&quot;</i>
 123456.789.format(4, 4, &apos; &apos;, &apos;:&apos;);  // <i>&quot;12 3456:7890&quot;</i>
-12345678.9.format(0, 3, &apos;-&apos;);      // <i>&quot;12-345-679&quot;</i>
-123456789..format(2);              // <i>&quot;123,456,789.00&quot;</i>
+12345678.9.format(0, 3, &apos;-&apos;);       // <i>&quot;12-345-679&quot;</i>
+123456789..format(2);               // <i>&quot;123,456,789.00&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch52-2">Section 52.2: Extract extension from file name</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Fast and short way to extract extension from file name in JavaScript
-will be:
-<b>function</b>
-get_extension
-(
-filename
-)
-{
-<b>return</b>
-filename.
-slice
-(
-(
-filename.
-lastIndexOf
-(
-&apos;.&apos;
-)
-&minus;
-1
-&gt;&gt;&gt;
-0
-)
-&plus;
-2
-)
-;
+<p>Fast and short way to extract extension from file name in JavaScript
+will be:</p>
+<pre>
+<b>function</b> get_extension(filename) {
+  <b>return</b>filename.slice((filename.lastIndexOf(&apos;.&apos;) &minus; 1 &gt;&gt;&gt; 0) &plus; 2);
 }
-.htaccess
-It works correctly both with names having no extension (e.g. myfile)
-or starting with . dot (e.g. ):
-
-get_extension(&apos;&apos;) // <i>&quot;&quot;</i> get_extension(&apos;name&apos;) // <i>&quot;&quot;</i>
-get_extension(&apos;name.txt&apos;) // <i>&quot;txt&quot;</i> get_extension(&apos;.htpasswd&apos;)
-// <i>&quot;&quot;</i> get_extension(&apos;name.with.many.dots.myext&apos;) // <i>&quot;myext&quot;</i>
-
-The following solution may extract file extensions from full path:
-
-<b>function</b> get_extension(path) { <b>var</b> basename =
-path.split(/&lbrack;&bsol;&bsol;&bsol;&bsol;/&rbrack;/).pop(), // <i>extract file name from full path
-&hellip;</i> // <i>(supports &grave;&bsol;&bsol;&bsol;&bsol;&grave; and &grave;/&grave; separators)</i> pos =
-basename.lastIndexOf(&apos;.&apos;); // <i>get last position of &grave;.&grave;</i>
-<b>if</b>
-(
-basename
-===
-&apos;&apos;
-&vert;&vert;
-pos
-&lt;
-1
-
-// <i>if file name is empty or &hellip;</i>
-<b>return</b>
-&quot;&quot;
-;
-// <i>&grave;.&grave; not found (-1) or comes first (0)</i>
-<b>return</b>
-basename.
-slice
-(
-pos
-&plus;
-1
-)
-;
-// <i>extract extension ignoring &grave;.&grave;</i>
+</pre>
+<p>It works correctly both with names having no extension (e.g. myfile) or starting 
+with .dot(e.g. .htaccess):</p>
+<pre>
+get_extension(&apos;&apos;)                          // <i>&quot;&quot;</i>
+get_extension(&apos;name&apos;)                      // <i>&quot;&quot;</i>
+get_extension(&apos;name.txt&apos;)                  // <i>&quot;txt&quot;</i>
+get_extension(&apos;.htpasswd&apos;)                 // <i>&quot;&quot;</i>
+get_extension(&apos;name.with.many.dots.myext&apos;) // <i>&quot;myext&quot;</i>
+</pre>
+<p>The following solution may extract file extensions from full path:</p>
+<pre>
+<b>function</b> get_extension(path) {
+  <b>var</b> basename = path.split(/&lbrack;&bsol;&bsol;&bsol;&bsol;/&rbrack;/).pop(), // <i>extract file name from full path &hellip;</i>
+                                                   // <i>(supports &grave;&bsol;&bsol;&grave; and &grave;/&grave; separators)</i>
+  pos = basename.lastIndexOf(&apos;.&apos;);       // <i>get last position of &grave;.&grave;</i>
+  <b>if</b> (basename === &apos;&apos; &vert;&vert; pos &lt; 1  // <i>if file name is empty or &hellip;</i>
+    <b>return</b> &quot;&quot;;                    // <i>&grave;.&grave; not found (-1) or comes first (0)</i>
+<b>return</b> basename.slice(pos &plus; 1);        // <i>extract extension ignoring &grave;.&grave;</i>
 }
-get_extension
-(
-&apos;/path/to/file.ext&apos;
-)
-;
-// <i>&quot;ext&quot;</i>
+get_extension(&apos;/path/to/file.ext&apos;);      // <i>&quot;ext&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch52-3">Section 52.3: Set object property given its string name</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
