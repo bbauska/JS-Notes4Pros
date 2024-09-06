@@ -16690,7 +16690,7 @@ console.log(&quot;Hello, &quot; &plus; name);
 <p>You can also pass prompt() a second parameter, which will be displayed as
 the default text in the prompt&apos;s text field.</p>
 <pre>
-<b>var</b> name = prompt(&apos;What<b>&bsol;&amp;apos;</b>s your name?&apos;, &apos; Name&hellip;&apos;);
+<b>var</b> name = prompt(&apos;What<b>&bsol;</b>&apos;s your name?&apos;, &apos; Name&hellip;&apos;);
 console.log(&apos;Hello, &apos; &plus; name);
 </pre>
 <table border="0" style="width:200px">
@@ -16879,361 +16879,108 @@ console.log(&apos;Hello, &apos; &plus; name);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch45-1">Section 45.1: Listening to Changes of contenteditable</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Events that work with most form elements (e.g., change, keydown,
-keyup, keypress) do not work with contenteditable.
-
-Instead, you can listen to changes of contenteditable contents with
+<p>Events that work with most form elements (e.g., change, keydown,
+keyup, keypress) do not work with contenteditable.</p>
+<p>Instead, you can listen to changes of contenteditable contents with
 the input event. Assuming contenteditableHtmlElement is a JS DOM
-object that is contenteditable:
-contenteditableHtmlElement.
-addEventListener
-(
-&quot;input&quot;
-,
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-&quot;contenteditable element changed&quot;
-)
-;
-}
-)
-;
+object that is contenteditable:</p>
+<pre>
+contenteditableHtmlElement.addEventListener(&quot;input&quot;, <b>function</b>() {
+  console.log(&quot;contenteditable element changed&quot;);
+});
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch45-2">Section 45.2: Getting started</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<p>The HTML attribute contenteditable provides a simple way to turn a
+HTML element into a user-editable area</p>
+<pre>
+<b>&lt;</b><b>div</b> contenteditable<b>&gt;</b>You can <b>&lt;</b><b>b</b><b>&gt;</b>edit<b>&lt;</b><b>/b</b><b>&gt;</b> me!<b>&lt;</b><b>/div</b><b>&gt;</b>
 
-The HTML attribute contenteditable provides a simple way to turn a
-HTML element into a user-editable area
-<b>&lt;</b>
-<b>div</b>
-contenteditable
-<b>&gt;</b>
-You can
-<b>&lt;</b>
-<b>b</b>
-<b>&gt;</b>
-edit
-<b>&lt;</b>
-<b>/b</b>
-<b>&gt;</b>
-me!
-<b>&lt;</b>
-<b>/div</b>
-<b>&gt;</b>
-<b>Native Rich-Text editing</b>
-Using <b>JavaScript</b> and
-[execCommandW3C](https://w3c.github.io/editing/execCommand.html) you
-can additionally pass more editing features to the currently focused
-contenteditable element (specifically at the caret position or
-selection).
-The execCommand function method accepts 3 arguments
-document.
-execCommand
-(
-commandId
-,
-showUI
-,
-value
-)
-commandId
-String. from the list of available &ast;&ast;
-<i>commandId</i>
-&ast;&ast;s
-(
-see:
-<i><b>Parameters</b></i>
-→
-<i>commandId</i>
-)
-showUI
-Boolean (not implemented. Use
-<b>false</b>
-)
-value
-String If a command expects a command-related String
-<i><b>value</b></i>
-, otherwise
-&quot;&quot;
-.
-(see: <i><b>Parameters</b></i>→<i>value</i>)
-Example using the &quot;bold&quot; <b>command</b> and &quot;formatBlock&quot; (where a
-<b>value</b> is expected):
-document.execCommand(&quot;bold&quot;, <b>false</b>, &quot;&quot;); // <i>Make selected
-text bold</i> document.execCommand(&quot;formatBlock&quot;, <b>false</b>, &quot;H2&quot;);
-// <i>Make selected text Block-level &lt;h2&gt;</i>
+<p><b>Native Rich-Text editing</b></p>
 
-<b>Quick Start Example:</b>
-<b>&lt;</b>
-<b>button</b>
-data-edit
-=
-&quot;bold&quot;
-<b>&gt;</b>
-<b>&lt;</b>
-<b>b</b>
-<b>&gt;</b>
-B
-<b>&lt;</b>
-<b>/b</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>/button</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>button</b>
-data-edit
-=
-&quot;italic&quot;
-<b>&gt;</b>
-<b>&lt;</b>
-<b>i</b>
-<b>&gt;</b>
-I
-<b>&lt;</b>
-<b>/i</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>/button</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>button</b>
-data-edit
-=
-&quot;formatBlock:p&quot;
-<b>&gt;</b>
-P
-<b>&lt;</b>
-<b>/button</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>button</b>
-data-edit
-=
-&quot;formatBlock:H1&quot;
-<b>&gt;</b>
-H1
-<b>&lt;</b>
-<b>/button</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>button</b>
-data-edit
-=
-&quot;insertUnorderedList&quot;
-<b>&gt;</b>
-UL
-<b>&lt;</b>
-<b>/button</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>button</b>
-data-edit
-=
-&quot;justifyLeft&quot;
-<b>&gt;</b>
-&#8676;
-<b>&lt;</b>
-<b>/button</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>button</b>
-data-edit
-=
-&quot;justifyRight&quot;
-<b>&gt;</b>
-&#8677;
-<b>&lt;</b>
-<b>/button</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>button</b>
-data-edit
-=
-&quot;removeFormat&quot;
-<b>&gt;</b>
-&times;
-<b>&lt;</b>
-<b>/button</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>div</b>
-contenteditable
-<b>&gt;</b>
-<b>&lt;</b>
-<b>p</b>
-<b>&gt;</b>
-Edit me!
-<b>&lt;</b>
-<b>/p</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>/div</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>script</b>
+<p>Using <b>JavaScript</b> and <a href="https://w3c.github.io/editing/execCommand.html">execCommandW3C</a> you
+can additionally pass more editing features to the currently focused contenteditable element (specifically 
+at the caret position or selection).</p>
 
-<b>&gt;</b>
-&lbrack;&rbrack;
-.forEach.call(document.querySelectorAll(&quot;&lbrack;data-edit&rbrack;&quot;),
-function(btn)
-{
-btn.addEventListener(&quot;click&quot;, edit, false);
-})
-;
+<p>The execCommand function method accepts 3 arguments document.</p>
+<pre>
+document.execCommand(commandId, showUI, value)
+</pre>
+<ul>
+  <li>commandId String. from the list of available &ast;&ast;<i>commandId</i>&ast;&ast;s<br/>
+  (see: <i><b>Parameters</b></i>→<i>commandId</i>)</li>
+  <li>showUI Boolean (not implemented. Use <b>false</b>)</li>
+  <li>value String If a command expects a command-related String <i><b>value</b></i>, otherwise &quot;&quot;.<br/>
+  (see: <i><b>Parameters</b></i>→<i>value</i>)</li>
+</ul>
+<p>Example using the &quot;bold&quot; <b>command</b> and &quot;formatBlock&quot; (where a <b>value</b> is expected):</p>
+<pre>
+document.execCommand(&quot;bold&quot;, <b>false</b>, &quot;&quot;); // <i>Make selected text bold</i>
+document.execCommand(&quot;formatBlock&quot;, <b>false</b>, &quot;H2&quot;); // <i>Make selected text Block-level &lt;h2&gt;</i>
+</pre>
+<p><b>Quick Start Example:</b></p>
+<pre>
+<b>&lt;button</b>data-edit=&quot;bold&quot;<b>&gt;&lt;b&gt;</b>B<b>&lt;/b&gt;&lt;/button&gt;</b>
+<b>&lt;button</b>data-edit=&quot;italic&quot;<b>&gt;&lt;i&gt;</b>I<b>&lt;/i&gt;&lt;/button&gt;</b>
+<b>&lt;button</b>data-edit=&quot;formatBlock:p&quot;<b>&gt;&lt;/button&gt;</b>
+<b>&lt;button</b>data-edit=&quot;formatBlock:H1&quot;<b>&gt;</b>H1<b>&lt;/button&gt;</b>
+<b>&lt;button</b>data-edit=&quot;insertUnorderedList&quot;<b>&gt;</b>UL<b>&lt;/button&gt;</b>
+<b>&lt;button</b>data-edit=&quot;justifyLeft&quot;<b>&gt;</b>&#8676;<b>&lt;/button&gt;</b>
+<b>&lt;button</b>data-edit=&quot;justifyRight&quot;<b>&gt;</b>&#8677;<b>&lt;/button&gt;</b>
+<b>&lt;button</b>data-edit=&quot;removeFormat&quot;<b>&gt;</b>&times;<b>&lt;/button&gt;</b>
+<b>&lt;div</b>contenteditable<b>&gt;&lt;p&gt;</b>Edit me!<b>&lt;/p&gt;&lt;</b>
+<b>/div&gt;</b>
+<b>&lt;script&gt;</b>
+  &lbrack;&rbrack;.forEach.call(document.querySelectorAll(&quot;&lbrack;data-edit&rbrack;&quot;), function(btn) {
+  btn.addEventListener(&quot;click&quot;, edit, false);
+});
 function edit(event) {
-event.preventDefault();
-var cmd_val = this.dataset.edit.split(&quot;:&quot;);
-document.execCommand(cmd_val&lbrack;0&rbrack;, false, cmd_val&lbrack;1&rbrack;);
+  event.preventDefault();
+  var cmd_val = this.dataset.edit.split(&quot;:&quot;);
+  document.execCommand(cmd_val&lbrack;0&rbrack;, false, cmd_val&lbrack;1&rbrack;);
 }
-<b>&lt;</b>
-<b>script</b>
-<b>&gt;</b>
-[jsFiddle demo](https://jsfiddle.net/RokoCB/az7f38w7/)
-
-[Basic Rich-Text editor example (Modern
-browsers)](https://jsfiddle.net/RokoCB/yvshdr4q/)
-
-<b>Final thoughts</b>
-Even being present for a long time (IE6), implementations and
+<b>&lt;</b><b>script</b><b>&gt;</b>
+</pre>
+<a href="https://jsfiddle.net/RokoCB/az7f38w7/">jsFiddle demo</a>
+<a href="https://jsfiddle.net/RokoCB/yvshdr4q/">Basic Rich-Text editor example (Modern browsers)</a>
+<p><b>Final thoughts</b></p>
+<p>Even being present for a long time (IE6), implementations and
 behaviors of execCommand vary from browser to browser making
 &quot;building a Fully-featured and cross-browser compatible WYSIWYG
-editor&quot; a hard task to any experienced JavaScript developer.
-
-Even if not yet fully standardized you can expect pretty decent
+editor&quot; a hard task to any experienced JavaScript developer.</p>
+<p>Even if not yet fully standardized you can expect pretty decent
 results on the newer browsers like <b>Chrome, Firefox, Edge</b>. If you
 need <i>better</i> support for other browsers and more features like
 HTMLTable editing etc. a rule of thumbs is to look for an <b>already
-existent</b> and robust <b>Rich-Text</b> editor.
+existent</b> and robust <b>Rich-Text</b> editor.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch45-3">Section 45.3: Copy to clipboard from textarea using execCommand(&quot;copy&quot;)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Example:
-&lt;!
-DOCTYPE html
-&gt;
-&lt;
-html lang
-=
-&quot;en&quot;
-&gt;
-&lt;
-head
-&gt;
-&lt;
-meta charset
-=
-&quot;UTF-8&quot;
-&gt;
-&lt;
-title
-&gt;&lt;
-/
-title
-&gt;
-&lt;
-/
-head
-&gt;
-&lt;
-body
-&gt;
-&lt;
-textarea id
-=
-&quot;content&quot;
-&gt;&lt;
-/
-textarea
-&gt;
-&lt;
-input type
-=
-&quot;button&quot;
-id
-=
-&quot;copyID&quot;
-value
-=
-&quot;Copy&quot;
-/&gt;
-&lt;
-script type
-=
-&quot;text/javascript&quot;
-&gt;
-<b>var</b>
-button
-=
-document.
-getElementById
-(
-&quot;copyID&quot;
-)
-,
-input
-=
-document.
-getElementById
-(
-&quot;content&quot;
-)
-;
-button.
-addEventListener
-(
-&quot;click&quot;
-,
-<b>function</b>
-(
-event
-)
-{
-event.
-preventDefault
-(
-)
-;
-input.
-select
-(
-)
-;
-document.
-execCommand
-(
-&quot;copy&quot;
-)
-;
-}
-)
-;
-&lt;
-/
-script
-&gt;
-&lt;
-/
-body
-&gt;
-&lt;
-/
-html
-&gt;
-document.
-execCommand
-(
-&quot;copy&quot;
-)
-copies the current selection to the clipboard
+<p>Example:</p>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;textarea id = &quot;content&quot;&gt;&lt;/textarea&gt;
+  &lt;input type=&quot;button&quot; id=&quot;copyID&quot; value=&quot;Copy&quot; /&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    <b>var</b> button = document.getElementById(&quot;copyID&quot;),
+       input = document.getElementById(&quot;content&quot;);
+    button.addEventListener(&quot;click&quot;, <b>function</b>(event) {
+      event.preventDefault();
+      input.select();
+      document.execCommand(&quot;copy&quot;);
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>document.execCommand(&quot;copy&quot;) copies the current selection to the clipboard</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch45-4">Section 45.4: Formatting</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
