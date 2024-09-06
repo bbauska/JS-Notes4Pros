@@ -16714,7 +16714,7 @@ console.log(&apos;Hello, &apos; &plus; name);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch45">Chapter 45: execCommand and contenteditable</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<table border="0" style="width:200px">
+<table style="border: none; width:200px">
   <thead>
     <tr>
       <th><b>commandId</b></th>
