@@ -16693,7 +16693,7 @@ the default text in the prompt&apos;s text field.</p>
 <b>var</b> name = prompt(&apos;What<b>&bsol;&amp;apos;</b>s your name?&apos;, &apos; Name&hellip;&apos;);
 console.log(&apos;Hello, &apos; &plus; name);
 </pre>
-<table border="1" style="width:200px">
+<table border="0" style="width:200px">
   <thead>
     <tr>
       <th>Parameter</th>
@@ -16714,7 +16714,7 @@ console.log(&apos;Hello, &apos; &plus; name);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch45">Chapter 45: execCommand and contenteditable</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<table border="1" style="width:200px">
+<table border="0" style="width:200px">
   <thead>
     <tr>
       <th><b>commandId</b></th>
