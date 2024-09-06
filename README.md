@@ -17260,7 +17260,6 @@ these features, it has various methods and properties.</p>
       <td>window.confirm()</td>
       <td>Creates dialog box with message, an OK button and a cancel button</td>
     </tr>
-
     <tr>
       <td>window.getComputedStyle()</td>
       <td>Get CSS styles applied to an element</td>
@@ -17630,6 +17629,7 @@ default assignment x = 5</p>
 <ul>
   <li>Default assignment</li>
 </ul>
+<br/>
 <!-- page 298 -->
 <pre>
 <b>function</b> a(x = 1) {
@@ -17639,6 +17639,7 @@ default assignment x = 5</p>
 <ul>
   <li>Destructuring</li>
 </ul>
+<br/>
 <pre>
 <b>function</b> a({ x }) {
   &quot;use strict&quot;;
@@ -17647,6 +17648,7 @@ default assignment x = 5</p>
 <ul>
   <li>Rest params</li>
 </ul>
+<br/>
 <pre>
 <b>function</b> a(&hellip;args) {
   &quot;use strict&quot;;
@@ -17654,3 +17656,465 @@ default assignment x = 5</p>
 </pre>
 <!-- thru 50.8 -->
 <!-- page 299 -->
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch51">Chapter 51: Custom Elements</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Parameter</b></th>
+      <th><b>Details</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>name</td>
+      <td>The name of the new custom element.</td>
+    </tr>
+    <tr>
+      <td>options.extends</td>
+      <td>The name of the native element being extended, if any.</td>
+    </tr>
+    <tr>
+      <td>options.prototype</td>
+      <td>The custom prototype to use for the custom element, if any.</td>
+    </tr>
+  </tbody>
+</table>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch51-1">Section 51.1: Extending Native Elements</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>It&apos;s possible to extent native elements, but their descendants don&apos;t
+get to have their own tag names. Instead, the is attribute is used to
+specify which subclass an element is supposed to use. For example,
+here&apos;s an extension of the <b>&lt;img&gt;</b> element which logs a message to the
+console when it&apos;s loaded.</p>
+<pre>
+<b>const prototype</b> = Object.create(HTMLImageElement.<b>prototype</b>);
+<b>prototype</b>.createdCallback = <b>function</b>() {
+  <b>this</b>.addEventListener(&apos;load&apos;, event =&gt; {
+    console.log(&quot;Image loaded successfully.&quot;);
+  });
+};
+document.registerElement(&apos;ex-image&apos;, {extends: &apos;img&apos;, <b>prototype</b>: <b>prototype</b>});
+<b>&lt;img</b> is=&quot;ex-image&quot; src=&quot;http://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png&quot;<b>/&gt;</b>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch51-2">Section 51.2: Registering New Elements</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Defines <b>&lt;initially-hidden&gt;</b> custom element which hides its contents until 
+a specified number of seconds have elapsed.</p>
+<pre>
+<b>const</b> InitiallyHiddenElement = document.registerElement(&apos;initially-hidden&apos;, class extends
+HTMLElement {
+  createdCallback() {
+    <b>this</b>.revealTimeoutId = <b>null</b>;
+  }
+  attachedCallback() {
+    <b>const</b> seconds = Number(<b>this</b>.getAttribute(&apos;for&apos;));
+    <b>this</b>.style.display = &apos;none&apos;;
+    <b>this</b>.revealTimeoutId = setTimeout(() =&gt; {
+      <b>this</b>.style.display = &apos;block&apos;;
+    }, seconds &ast; 1000);
+  }
+  detachedCallback() {
+    <b>if</b> (<b>this</b>.revealTimeoutId) {
+      clearTimeout(<b>this</b>.revealTimeoutId);
+      <b>this</b>.revealTimeoutId = <b>null</b>;
+    }
+  }
+});
+<b>&lt;initially-hidden</b> for = &quot;2&quot;<b>&gt;</b>Hello<b>&lt;/initially-hidden&gt;</b>
+<b>&lt;initially-hidden</b> for = &quot;5&quot;<b>&gt;</b>World<b>&lt;/initially-hidden&gt;</b>
+</pre>
+<!-- page 300 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch52">Chapter 52: Data Manipulation</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch52-1">Section 52.1: Format numbers as money</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+1234567.89 =&amp;quot;1,234,567.89&quot;
+Fast and short way to format value of type Number as money, e.g. :
+<b>var</b>
+num
+=
+1234567.89
+,
+formatted
+;
+formatted
+=
+num.
+toFixed
+(
+2
+)
+.
+replace
+(
+*/&bsol;&bsol;d(?=(&bsol;&bsol;d{3})+&amp;period;)/g</i>
+,
+&apos;&dollar;&,&apos;
+)
+;
+// <i>&quot;1,234,567.89&quot;</i>
+| .. n&rbrack; | , variable size of number groups &lbrack;            | 0 .. x&rbrack; |
+More advanced variant with support of any number of decimals &lbrack;0 and
+different delimiter types:
+<i>/&ast;&ast;</i>
+*&ast; Number.prototype.format(n, x, s, c)</i>
+*&ast;</i>
+*&ast; &bsol;@param integer n: length of decimal</i>
+*&ast; &bsol;@param integer x: length of whole part</i>
+*&ast; &bsol;@param mixed s: sections delimiter</i>
+*&ast; &bsol;@param mixed c: decimal delimiter</i>
+*&ast;/</i>
+Number
+.
+<b>prototype</b>
+.
+format
+=
+<b>function</b>
+(
+n
+,
+x
+,
+s
+,
+c
+)
+{
+<b>var</b>
+re
+=
+&apos;
+**&bsol;&bsol;&amp;ast;</i>
+d(?=(
+**&bsol;&bsol;&amp;ast;</i>
+d{&apos;
+&plus;
+(
+x
+&vert;&vert;
+3
+)
+&plus;
+&apos;})+&apos;
+&plus;
+(
+n
+&gt;
+0
+?
+&apos;
+**&bsol;&bsol;&amp;ast;</i>
+D&apos;
+:
+
+&apos;&dollar;&apos;
+)
+&plus;
+&apos;)&apos;
+,
+num
+=
+<b>this</b>
+.
+toFixed
+(
+Math
+.
+max
+(
+0
+,
+&bsol;~&bsol;~n
+)
+)
+;
+<b>return</b>
+(
+c
+?
+num.
+replace
+(
+&apos;.&apos;
+,
+c
+)
+:
+num
+)
+.
+replace
+(
+<b>new</b>
+RegExp
+(
+re
+,
+&apos;g&apos;
+)
+,
+&apos;&dollar;&&apos;
+&plus;
+(
+s
+&vert;&vert;
+&apos;,&apos;
+)
+)
+;
+}
+;
+12345678.9
+.
+format
+(
+2
+,
+3
+,
+&apos;.&apos;
+,
+&apos;,&apos;
+)
+;
+// <i>&quot;12.345.678,90&quot;</i>
+123456.789
+.
+format
+(
+4
+,
+4
+,
+&apos; &apos;
+,
+&apos;:&apos;
+)
+;
+// <i>&quot;12 3456:7890&quot;</i>
+12345678.9
+.
+format
+(
+0
+,
+3
+,
+&apos;-&apos;
+)
+;
+// <i>&quot;12-345-679&quot;</i>
+123456789
+..
+format
+(
+2
+)
+;
+// <i>&quot;123,456,789.00&quot;</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch52-2">Section 52.2: Extract extension from file name</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Fast and short way to extract extension from file name in JavaScript
+will be:
+<b>function</b>
+get_extension
+(
+filename
+)
+{
+<b>return</b>
+filename.
+slice
+(
+(
+filename.
+lastIndexOf
+(
+&apos;.&apos;
+)
+&minus;
+1
+&gt;&gt;&gt;
+0
+)
+&plus;
+2
+)
+;
+}
+.htaccess
+It works correctly both with names having no extension (e.g. myfile)
+or starting with . dot (e.g. ):
+
+get_extension(&apos;&apos;) // <i>&quot;&quot;</i> get_extension(&apos;name&apos;) // <i>&quot;&quot;</i>
+get_extension(&apos;name.txt&apos;) // <i>&quot;txt&quot;</i> get_extension(&apos;.htpasswd&apos;)
+// <i>&quot;&quot;</i> get_extension(&apos;name.with.many.dots.myext&apos;) // <i>&quot;myext&quot;</i>
+
+The following solution may extract file extensions from full path:
+
+<b>function</b> get_extension(path) { <b>var</b> basename =
+path.split(/&lbrack;&bsol;&bsol;&bsol;&bsol;/&rbrack;/).pop(), // <i>extract file name from full path
+&hellip;</i> // <i>(supports &grave;&bsol;&bsol;&bsol;&bsol;&grave; and &grave;/&grave; separators)</i> pos =
+basename.lastIndexOf(&apos;.&apos;); // <i>get last position of &grave;.&grave;</i>
+<b>if</b>
+(
+basename
+===
+&apos;&apos;
+&vert;&vert;
+pos
+&lt;
+1
+
+// <i>if file name is empty or &hellip;</i>
+<b>return</b>
+&quot;&quot;
+;
+// <i>&grave;.&grave; not found (-1) or comes first (0)</i>
+<b>return</b>
+basename.
+slice
+(
+pos
+&plus;
+1
+)
+;
+// <i>extract extension ignoring &grave;.&grave;</i>
+}
+get_extension
+(
+&apos;/path/to/file.ext&apos;
+)
+;
+// <i>&quot;ext&quot;</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch52-3">Section 52.3: Set object property given its string name</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>function</b>
+assign
+(
+obj
+,
+prop
+,
+value
+)
+{
+<b>if</b>
+(
+<b>typeof</b>
+prop
+===
+&apos;string&apos;
+)
+prop
+=
+prop.
+split
+(
+&apos;.&apos;
+)
+;
+<b>if</b>
+(
+prop.
+length
+&gt;
+1
+)
+{
+<b>var</b>
+e
+=
+prop.
+shift
+(
+)
+;
+assign
+(
+obj
+&lbrack;
+e
+&rbrack;
+=
+Object
+.
+<b>prototype</b>
+.
+toString
+.
+call
+(
+obj
+&lbrack;
+e
+&rbrack;
+)
+===
+&apos;&lbrack;object Object&rbrack;&apos;
+?
+obj
+&lbrack;
+e
+&rbrack;
+:
+{
+}
+,
+prop
+,
+value
+)
+;
+}
+<b>else</b>
+obj
+&lbrack;
+prop
+&lbrack;
+0
+&rbrack;
+&rbrack;
+=
+value
+;
+}
+<b>var</b>
+obj
+=
+{
+}
+,
+propName
+=
+&apos;foo.bar.foobar&apos;
+;
+assign
+(
+obj
+,
+propName
+,
+&apos;Value&apos;
+)
+;
+// <i>obj == {</i>
+// <i>foo : {</i>
+// <i>bar : {</i>
+// <i>foobar : &apos;Value&apos;</i>
+// <i>}</i>
+// <i>}</i>
+// <i>}</i>
