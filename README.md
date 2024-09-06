@@ -17020,7 +17020,7 @@ document.execCommand(&apos;underline&apos;, <b>false</b>, <b>null</b>); // <i>to
       <td>path</td>
       <td>The path to update to</td>
     </tr>
-  </thead>
+  </tbody>
 </table>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch46-1">Section 46.1: history.pushState()
@@ -17044,7 +17044,6 @@ entry, rather than adding a new one.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch46-2">Section 46.2: history.replaceState()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p><b>Syntax:</b></p>
 <pre>
 history.replaceState(data, title &lbrack;, url &rbrack;)
@@ -17061,7 +17060,6 @@ entry, rather than replacing the current one.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch46-3">Section 46.3: Load a specific URL from the history list</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p><b>go() method</b></p>
 <p>The go() method loads a specific URL from the history list. The
 parameter can either be a number which goes to the URL within the
