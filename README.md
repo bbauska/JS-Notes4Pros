@@ -17758,8 +17758,8 @@ Number.<b>prototype</b>.format = <b>function</b>(n, x, s, c) {
 };
 12345678.9.format(2, 3, &apos;.&apos;, &apos;,&apos;);  // <i>&quot;12.345.678,90&quot;</i>
 123456.789.format(4, 4, &apos; &apos;, &apos;:&apos;);  // <i>&quot;12 3456:7890&quot;</i>
-12345678.9.format(0, 3, &apos;-&apos;);          // <i>&quot;12-345-679&quot;</i>
-123456789..format(2);                    // <i>&quot;123,456,789.00&quot;</i>
+12345678.9.format(0, 3, &apos;-&apos;);      // <i>&quot;12-345-679&quot;</i>
+123456789..format(2);              // <i>&quot;123,456,789.00&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch52-2">Section 52.2: Extract extension from file name</h3>
