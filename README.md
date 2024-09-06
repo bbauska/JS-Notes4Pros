@@ -16984,142 +16984,117 @@ existent</b> and robust <b>Rich-Text</b> editor.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch45-4">Section 45.4: Formatting</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Users can add formatting to contenteditable documents or elements
+<p>Users can add formatting to contenteditable documents or elements
 using their browser&apos;s features, such as common keyboard shortcuts for
 formatting ( Ctrl-B for <b>bold</b>, Ctrl-I for <i>italic</i>, etc.) or by
-dragging and dropping images, links, or markup from the clipboard.
-
-Additionally, developers can use JavaScript to apply formatting to the
-current selection (highlighted text).
-
-document.execCommand(&apos;bold&apos;, <b>false</b>, <b>null</b>); // <i>toggles bold
-formatting</i> document.execCommand(&apos;italic&apos;, <b>false</b>, <b>null</b>); // <i>
-toggles italic formatting</i> document.execCommand(&apos;underline&apos;,
-<b>false</b>, <b>null</b>); // <i>toggles underline</i>
+dragging and dropping images, links, or markup from the clipboard.</p>
+<p>Additionally, developers can use JavaScript to apply formatting to the
+current selection (highlighted text).</p>
+<pre>
+document.execCommand(&apos;bold&apos;, <b>false</b>, <b>null</b>); // <i>toggles bold formatting</i>
+document.execCommand(&apos;italic&apos;, <b>false</b>, <b>null</b>); // <i>toggles italic formatting</i>
+document.execCommand(&apos;underline&apos;, <b>false</b>, <b>null</b>); // <i>toggles underline</i>
+</pre>
+<!-- page 286 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch46">Chapter 46: History</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Parameter Details</b>
-domain The domain you want to update to title The title to update to
-path The path to update to
-
+<!-- page 287 -->
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Parameter</b></th>
+      <th><b>Details</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>domain</td>
+      <td>The domain you want to update to</td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>The title to update to</td>
+    </tr>
+    <tr>
+      <td>path</td>
+      <td>The path to update to</td>
+    </tr>
+  </thead>
+</table>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch46-1">Section 46.1: history.pushState()
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Syntax :
-history.
-pushState
-(
-state object
-,
-title
-,
-url
-)
-This method allows to ADD histories entries. For more reference,
-Please have a look on this document : [pushState()
-method](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method)
+<p>Syntax:</p>
+<pre>
+history.pushState(state object, title, url)
+</pre>
+<p>This method allows to ADD histories entries. For more reference,
+Please have a look on this document: 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method">
+pushState() method</a>
 
-<b>Example :</b> window.history.pushState(&quot;http://example.ca&quot;, &quot;Sample
-Title&quot;, &quot;/example/path.html&quot;);
-
-This example inserts a new record into the history, address bar, and
-page title.
-history.replaceState
-Note this is different from the (). Which updates the current history
-entry, rather than adding a new one.
+<p><b>Example:</b></p>
+<pre>
+window.history.pushState(&quot;http://example.ca&quot;, &quot;Sample Title&quot;, &quot;/example/path.html&quot;);
+</pre>
+<p>This example inserts a new record into the history, address bar, and page title.</p>
+<p>Note this is different from the (). Which updates the current history
+entry, rather than adding a new one.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch46-2">Section 46.2: history.replaceState()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-<b>Syntax :</b>
-history.
-replaceState
-(
-data
-,
-title
-&lbrack;
-,
-url
-&rbrack;
-)
-This method modifies the current history entry instead of creating a
+<p><b>Syntax:</b></p>
+<pre>
+history.replaceState(data, title &lbrack;, url &rbrack;)
+</pre>
+<p>This method modifies the current history entry instead of creating a
 new one. Mainly used when we want to update URL of the current history
-entry. window.history.replaceState(&quot;http://example.ca&quot;, &quot;Sample
-Title&quot;, &quot;/example/path.html&quot;);
-
-This example replaces the current history, address bar, and page
-title.
-history.pushState
-Note this is different from the (). Which inserts a new history entry,
-rather than replacing the current one.
+entry.</p>
+<pre>
+window.history.replaceState(&quot;http://example.ca&quot;, &quot;Sample Title&quot;, &quot;/example/path.html&quot;);
+</pre>
+<p>This example replaces the current history, address bar, and page title.</p>
+<p>Note this is different from the history.pushState(). Which inserts a new history 
+entry, rather than replacing the current one.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch46-3">Section 46.3: Load a specific URL from the history list</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-<b>go() method</b>
-The go() method loads a specific URL from the history list. The
+<p><b>go() method</b></p>
+<p>The go() method loads a specific URL from the history list. The
 parameter can either be a number which goes to the URL within the
 specific position (-1 goes back one page, 1 goes forward one page), or
 a string. The string must be a partial or full URL, and the function
-will go to the first URL that matches the string. Syntax
-history.
-go
-(
-number
-&vert;
-URL
-)
+will go to the first URL that matches the string.</p>
+<blockquote>
+Syntax
+</blockquote>
+<!-- page 288 -->
+<pre>
+history.go(number&vert;URL)
+</pre>
+<blockquote>
 Example
-Click on the button to go back two pages:
-<b>&lt;</b>
-<b>html</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>head</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>script</b>
-type
-=
-&quot;text/javascript&quot;
-<b>&gt;</b>
-function goBack()
-{
-window.history.go(-2)
-}
-<b>&lt;</b>
-<b>/script</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>/head</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>body</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>input</b>
-type
-=
-&quot;button&quot;
-value
-
-=
-&quot;Go back 2 pages&quot;
-onclick
-=
-&quot;goBack()&quot;
-<b>/&gt;</b>
-<b>&lt;</b>
-<b>/body</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>/html</b>
-<b>&gt;</b>
+</blockquote>
+<p>Click on the button to go back two pages:</p>
+<pre>
+<b>&lt;html&gt;</b>
+  <b>&lt;head&gt;</b>
+  <b>&lt;script</b> type=&quot;text/javascript&quot;<b>&gt;</b>
+    function goBack()
+    {
+      window.history.go(-2)
+    }
+  <b>&lt;/script&gt;</b>
+  <b>&lt;/head&gt;</b>
+  <b>&lt;body&gt;</b>
+    <b>&lt;input</b> type=&quot;button&quot; value=&quot;Go back 2 pages&quot; onclick=&quot;goBack()&quot;<b>/&gt;</b>
+  <b>&lt;/body&gt;</b>
+<b>&lt;/html&gt;</b>
+</pre>
+<!-- page 289 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch47">Chapter 47: Navigator Object</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
