@@ -17734,192 +17734,33 @@ HTMLElement {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch52-1">Section 52.1: Format numbers as money</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-1234567.89 =&amp;quot;1,234,567.89&quot;
-Fast and short way to format value of type Number as money, e.g. :
-<b>var</b>
-num
-=
-1234567.89
-,
-formatted
-;
-formatted
-=
-num.
-toFixed
-(
-2
-)
-.
-replace
-(
-*/&bsol;&bsol;d(?=(&bsol;&bsol;d{3})+&amp;period;)/g</i>
-,
-&apos;&dollar;&,&apos;
-)
-;
-// <i>&quot;1,234,567.89&quot;</i>
-| .. n&rbrack; | , variable size of number groups &lbrack;            | 0 .. x&rbrack; |
-More advanced variant with support of any number of decimals &lbrack;0 and
-different delimiter types:
+<p>Fast and short way to format value of type Number as money, e.g. 1234567.90 =&gt; &quot;1,234,567.89&quot;:</p>
+<pre>
+<b>var</b> num = 1234567.89,
+  formatted;
+formatted = num.toFixed(2).replace(/&bsol;d(?=(&bsol;d{3})+&bsol;&period;)/g</i>, &apos;&dollar;&,&apos;); // <i>&quot;1,234,567.89&quot;</i>
+</pre>
+<p>More advanced variant with support of any number of decimals &lbrack;0 .. n&rbrack;, variable size of
+number groups &lbrack;0 .. x&rbrack; and different delimiter types:</p>
+<pre>
 <i>/&ast;&ast;</i>
 *&ast; Number.prototype.format(n, x, s, c)</i>
 *&ast;</i>
-*&ast; &bsol;@param integer n: length of decimal</i>
-*&ast; &bsol;@param integer x: length of whole part</i>
-*&ast; &bsol;@param mixed s: sections delimiter</i>
-*&ast; &bsol;@param mixed c: decimal delimiter</i>
+*&ast; &commat;@param integer n: length of decimal</i>
+*&ast; &commat;@param integer x: length of whole part</i>
+*&ast; &commat;@param mixed s: sections delimiter</i>
+*&ast; &commat;@param mixed c: decimal delimiter</i>
 *&ast;/</i>
-Number
-.
-<b>prototype</b>
-.
-format
-=
-<b>function</b>
-(
-n
-,
-x
-,
-s
-,
-c
-)
-{
-<b>var</b>
-re
-=
-&apos;
-**&bsol;&bsol;&amp;ast;</i>
-d(?=(
-**&bsol;&bsol;&amp;ast;</i>
-d{&apos;
-&plus;
-(
-x
-&vert;&vert;
-3
-)
-&plus;
-&apos;})+&apos;
-&plus;
-(
-n
-&gt;
-0
-?
-&apos;
-**&bsol;&bsol;&amp;ast;</i>
-D&apos;
-:
-
-&apos;&dollar;&apos;
-)
-&plus;
-&apos;)&apos;
-,
-num
-=
-<b>this</b>
-.
-toFixed
-(
-Math
-.
-max
-(
-0
-,
-&bsol;~&bsol;~n
-)
-)
-;
-<b>return</b>
-(
-c
-?
-num.
-replace
-(
-&apos;.&apos;
-,
-c
-)
-:
-num
-)
-.
-replace
-(
-<b>new</b>
-RegExp
-(
-re
-,
-&apos;g&apos;
-)
-,
-&apos;&dollar;&&apos;
-&plus;
-(
-s
-&vert;&vert;
-&apos;,&apos;
-)
-)
-;
-}
-;
-12345678.9
-.
-format
-(
-2
-,
-3
-,
-&apos;.&apos;
-,
-&apos;,&apos;
-)
-;
-// <i>&quot;12.345.678,90&quot;</i>
-123456.789
-.
-format
-(
-4
-,
-4
-,
-&apos; &apos;
-,
-&apos;:&apos;
-)
-;
-// <i>&quot;12 3456:7890&quot;</i>
-12345678.9
-.
-format
-(
-0
-,
-3
-,
-&apos;-&apos;
-)
-;
-// <i>&quot;12-345-679&quot;</i>
-123456789
-..
-format
-(
-2
-)
-;
-// <i>&quot;123,456,789.00&quot;</i>
+Number.<b>prototype</b>.format = <b>function</b>(n, x, s, c) {
+  <b>var</b> re = &apos;&bsol;&bsol;d(?=(&bsol;&bsol;d{&apos; &plus; (x &vert;&vert; 3) &plus; &apos;}) &plus; &apos; &plus; (n &gt; 0 ? &apos;&bsol;&bsol;D&apos; : &apos;&dollar;&apos;) &plus; &apos;)&apos;,
+    num = <b>this</b>.toFixed(Math.max(0, ~~n));
+  <b>return</b> (c ? num.replace(&apos;.&apos;, c) : num).replace(<b>new</b> RegExp(re, &apos;g&apos;), &apos;&dollar;&&apos; &plus; (s &vert;&vert; &apos;,&apos;));
+};
+12345678.9.format(2, 3, &apos;.&apos;, &apos;,&apos;);  // <i>&quot;12.345.678,90&quot;</i>
+123456.789.format(4, 4, &apos; &apos;, &apos;:&apos;);  // <i>&quot;12 3456:7890&quot;</i>
+12345678.9.format(0, 3, &apos;-&apos;);                 // <i>&quot;12-345-679&quot;</i>
+123456789..format(2);                                   // <i>&quot;123,456,789.00&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch52-2">Section 52.2: Extract extension from file name</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
