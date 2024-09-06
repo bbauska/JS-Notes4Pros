@@ -13483,15 +13483,15 @@ Copyright <b>&lt;a</b> href=&quot;https://stackoverflow.com&quot;<b>&gt;</b>Stac
 </pre>
 <p>You want to extract and get all the links inside an a tag. At first, here the regex you write:</p>
 <pre>
-<b>var</b> re = <i>/&lt;a&lbrack;&Hat;&gt;&rbrack;&ast;href=&quot;https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;&quot;&lbrack;&Hat;&gt;&rbrack;&ast;&gt;&lbrack;&Hat;&lt;&rbrack;&ast;&lt;&bsol;&bsol;/a&gt;/g</i>;
+<b>var</b> re = <i>/&lt;a&lbrack;&Hat;&gt;&rbrack;&ast;href=&quot;https?:&bsol;/&bsol;/.&ast;&quot;&lbrack;&Hat;&gt;&rbrack;&ast;&gt;&lbrack;&Hat;&lt;&rbrack;&ast;&lt;&bsol;/a&gt;/g</i>;
 </pre>
 <p>But now, imagine you want the href and the anchor of each link. And
 you want it together. You can simply add a new regex in for each match <b>OR</b> you can use parentheses:</p>
 <pre>
 <b>var</b> re = <i>/&lt;a&lbrack;&Hat;&gt;&rbrack;&ast;href=&quot;(https?:&bsol;&bsol;/&bsol;&bsol;/.&ast;)&quot;&lbrack;&Hat;&gt;&rbrack;&ast;&gt;(&lbrack;&Hat;&lt;&rbrack;&ast;)&lt;&bsol;&bsol;/a&gt;/g</i>;
-<b>var</b> str = &apos;&lt;html&gt;<b>&bsol;n</b> &lt;head&gt;&lt;/head&gt;<b>&bsol;&bsol;n</b> &lt;body&gt;<b>&bsol;&bsol;n</b> &lt;h1&gt;Example&lt;/h1&gt;<b>&bsol;&bsol;n</b> &lt;p&gt;Look at this
-great link: &lt;a href=&quot;http://goalkicker.com&quot;&gt;goalkicker&lt;/a&gt; http://anotherlinkoutsideatag&lt;/p&gt;<b>&bsol;&bsol;n</b><b>&bsol;&bsol;n</b>
-  Copyright &lt;a href=&quot;https://stackoverflow.com&quot;&gt;Stackoverflow&lt;/a&gt;<b>&bsol;&bsol;n</b> &lt;/body&gt;<b>&bsol;&amp;apos;</b>;<b>&bsol;&bsol;n</b>&apos;;
+<b>var</b> str = &apos;&lt;html&gt;<b>&bsol;n</b> &lt;head&gt;&lt;/head&gt;<b>&bsol;n</b> &lt;body&gt;<b>&bsol;n</b> &lt;h1&gt;Example&lt;/h1&gt;<b>&bsol;n</b> &lt;p&gt;Look at this
+great link: &lt;a href=&quot;http://goalkicker.com&quot;&gt;goalkicker&lt;/a&gt; http://anotherlinkoutsideatag&lt;/p&gt;<b>&bsol;n&bsol;n</b>
+  Copyright &lt;a href=&quot;https://stackoverflow.com&quot;&gt;Stackoverflow&lt;/a&gt;<b>&bsol;n</b> &lt;/body&gt;<b>&bsol;&apos;</b>;<b>&bsol;n</b>&apos;;
 <b>var</b> m;
 <b>var</b> links = &lbrack;&rbrack;;
 while ((m = re.exec(str)) !== <b>null</b>) {
@@ -13826,8 +13826,8 @@ on any element.</p>
 <b>&lt;script&gt;</b>
 function showDetails(item) {
   var msg = item.innerHTML
-    &plus; &quot;&bsol;&bsol;r&bsol;&bsol;nISO ID: &quot; + item.dataset.id
-    &plus; &quot;&bsol;&bsol;r&bsol;&bsol;nDial Code: &quot; + item.dataset.dialCode;
+    &plus; &quot;&bsol;r&bsol;nISO ID: &quot; + item.dataset.id
+    &plus; &quot;&bsol;r&bsol;nDial Code: &quot; + item.dataset.dialCode;
   alert(msg);
 }
 function correctDetails(item) {
@@ -13850,8 +13850,8 @@ example above can be written this way:</p>
 <b>&lt;script&gt;</b>
 function showDetails(item) {
   var msg = item.innerHTML
-    &plus; &quot;&bsol;&bsol;r&bsol;&bsol;nISO ID: &quot; + item.getAttribute(&quot;data-id&quot;)
-    &plus; &quot;&bsol;&bsol;r&bsol;&bsol;nDial Code: &quot; + item.getAttribute(&quot;data-dial-code&quot;);
+    &plus; &quot;&bsol;r&bsol;nISO ID: &quot; + item.getAttribute(&quot;data-id&quot;)
+    &plus; &quot;&bsol;r&bsol;nDial Code: &quot; + item.getAttribute(&quot;data-dial-code&quot;);
   alert(msg);
 }
 function correctDetails(item) {
@@ -14114,7 +14114,7 @@ JSON.stringify({x: 1, y: 1}, <b>null</b>, 2)  // <i>2 space characters will be u
 <p>Alternatively, a string value can be provided to use for indentation. For example, 
 passing &apos;&apos; will cause the tab character to be used for indentation.</p>
 <pre>
-JSON.stringify({x: 1, y: 1}, <b>null</b>, &apos;<b>&bsol;&bsol;t</b>&apos;)
+JSON.stringify({x: 1, y: 1}, <b>null</b>, &apos;<b>&bsol;t</b>&apos;)
 <i>/&ast; output:</i>
   <i>{</i>
     <i>&apos;x&apos;: 1,</i>
@@ -15162,7 +15162,7 @@ string representations:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch40-7">Section 40.7: The bitwise NOT operator (~)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>The bitwise NOT (&bsol;~) performs a NOT operation on each bit in a value.</p>
+<p>The bitwise NOT (~) performs a NOT operation on each bit in a value.</p>
 <p><b>Syntax:</b></p>
 <pre>
 ~expression
@@ -17504,7 +17504,7 @@ non-strict-mode:</p>
   a = &quot;bar&quot;;  // <i>variable is automatically declared in the global scope</i>
 }
 foo();
-console.log(a);  // <i>&gt;&bsol;bar</i>
+console.log(a);  // <i>&gt;&gt;bar</i>
 </pre>
 <p>In strict mode, it is necessary to explicitly declare the variable:</p>
 <pre>
@@ -17525,7 +17525,7 @@ allowing it to be used, for instance, in the global scope:</p>
 }
 <b>var</b> a;
 strict_scope();
-console.log(a);  // <i>&gt;&bsol;bar</i>
+console.log(a);  // <i>&gt;&gt;bar</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch50-5">Section 50.5: Duplicate Parameters</h3>
@@ -17758,8 +17758,8 @@ Number.<b>prototype</b>.format = <b>function</b>(n, x, s, c) {
 };
 12345678.9.format(2, 3, &apos;.&apos;, &apos;,&apos;);  // <i>&quot;12.345.678,90&quot;</i>
 123456.789.format(4, 4, &apos; &apos;, &apos;:&apos;);  // <i>&quot;12 3456:7890&quot;</i>
-12345678.9.format(0, 3, &apos;-&apos;);                 // <i>&quot;12-345-679&quot;</i>
-123456789..format(2);                                   // <i>&quot;123,456,789.00&quot;</i>
+12345678.9.format(0, 3, &apos;-&apos;);          // <i>&quot;12-345-679&quot;</i>
+123456789..format(2);                    // <i>&quot;123,456,789.00&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch52-2">Section 52.2: Extract extension from file name</h3>
