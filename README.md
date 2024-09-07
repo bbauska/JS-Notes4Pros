@@ -18074,7 +18074,7 @@ expressions are indicated by a &dollar; sign and curly braces {}</p>
 <pre>
 // <i>A single line Template Literal</i>
 <b>var</b> aLiteral = &grave;single line string data&grave;;
-// <i>Template Literal that spans across lines*
+// <i>Template Literal that spans across lines</i>
 <b>var</b> anotherLiteral = &grave;string data that spans
   across multiple lines of code&grave;;
 // <i>Template Literal with an embedded expression</i>
@@ -18246,7 +18246,7 @@ responseData.then(({items, has_more, quota_max, quota_remaining}) =&gt; {
 <h3 id="ch56-1">Section 56.1: Closures</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>When a function is declared, variables in the context of its
-*declaration* are captured in its scope. For example, in the code
+<i>declaration</i> are captured in its scope. For example, in the code
 below, the variable x is bound to a value in the outer scope, and then
 the reference to x is captured in the context of bar:</p>
 <pre>
@@ -18351,9 +18351,9 @@ log
 foo
 )
 ;
-// <i>*
+// <i></i>
 →
-*undefined*
+<i>undefined</i>
 <b>var</b>
 foo
 =
@@ -18365,41 +18365,41 @@ log
 foo
 )
 ;
-// <i>*
+// <i></i>
 →
-*42*
+<i>42</i>
 The above code is the same as:
 <b>var</b>
 foo
 ;
-// <i>*
+// <i></i>
 →
-*Hoisted variable declaration*
+<i>Hoisted variable declaration</i>
 console.
 log
 (
 foo
 )
 ;
-// <i>*
+// <i></i>
 →
-*undefined*
+<i>undefined</i>
 foo
 =
 42
 ;
-// <i>*
+// <i></i>
 →
-*variable assignment remains in the same place*
+<i>variable assignment remains in the same place</i>
 console.
 log
 (
 foo
 )
 ;
-// <i>*
+// <i></i>
 →
-*42*
+<i>42</i>
 Note that due to hoisting the above <b>undefined</b> is not the same as
 the not defined resulting from running:
 console.
@@ -18408,9 +18408,9 @@ log
 foo
 )
 ;
-// <i>*
+// <i></i>
 →
-*foo is not defined*
+<i>foo is not defined</i>
 A similar principle applies to functions. When functions are assigned
 to a variable (i.e. a [function
 expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function)),
@@ -18427,9 +18427,9 @@ foo
 )
 )
 ;
-// <i>*
+// <i></i>
 →
-*foo is not a function*
+<i>foo is not a function</i>
 <b>var</b>
 foo
 =
@@ -18460,9 +18460,9 @@ foo
 )
 )
 ;
-// <i>*
+// <i></i>
 →
-*foo is not a function*
+<i>foo is not a function</i>
 foo
 =
 <b>function</b>
@@ -18494,9 +18494,9 @@ foo
 )
 )
 ;
-// <i>*
+// <i></i>
 →
-*6*
+<i>6</i>
 <b>function</b>
 foo
 (
@@ -18537,11 +18537,11 @@ foo
 )
 )
 ;
-// <i>*
+// <i></i>
 →
-*6*
+<i>6</i>
 Here are some examples of what is and what isn&apos;t hoisting:
-// <i>Valid code:*
+// <i>Valid code:</i>
 foo
 (
 )
@@ -18552,14 +18552,14 @@ foo
 )
 {
 }
-// <i>Invalid code:*
+// <i>Invalid code:</i>
 bar
 (
 )
 ;
-// <i>*
+// <i></i>
 →
-*TypeError: bar is not a function*
+<i>TypeError: bar is not a function</i>
 <b>var</b>
 bar
 =
@@ -18569,7 +18569,7 @@ bar
 {
 }
 ;
-// <i>Valid code:*
+// <i>Valid code:</i>
 foo
 (
 )
@@ -18590,7 +18590,7 @@ bar
 )
 {
 }
-// <i>Invalid code:*
+// <i>Invalid code:</i>
 foo
 (
 )
@@ -18606,7 +18606,7 @@ bar
 ;
 // <i></i>
 →
-*TypeError: bar is not a function*
+<i>TypeError: bar is not a function</i>
 }
 <b>var</b>
 bar
