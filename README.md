@@ -18036,34 +18036,33 @@ class HTMLString extends String {
 	return new HTMLString(
 	  String(text)
 	    .replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;')
+		.replace(/&lt;/g, '&lt;')
+		.replace(/&gt;/g, '&gt;')
 		.replace(/"/g, '&quot;)
-		.replace(/\\/g, '&#39;');
+		.replace(/&bsol;&bsol;/g, '&#39;');
   }
 }
 function HTML(strings, ...substitutions) {
   const escapedFlattenedSubstitutions =
-    substitutions.map(s =&gt; &lbrack;&rbrack;.concat(s).map(HTMLString.escape).join(''));
+    substitutions.map(s =&gt; &lbrack;&rbrack;.concat(s).map(HTMLString.escape).join(&apos;&apos;));
   const pieces = &lbrack;&rbrack;;
   for (const i of strings.key()) {
-    pieces.push(strings[i], escapedFlattenedSubstitutions [i] || '');
+    pieces.push(strings&lbrack;i&rbrack;, escapedFlattenedSubstitutions &lbrack;i&rbrack; &vert;&vert; &apos;&apos;);
   }
   return new HTMLString(pieces.join(''));
 }
 
 const title = "Hello World";
 const iconSrc = "/images/logo.png";
-const names = ["John", "Jane", "Joe", "Jill"];
+const names = &lbrack;&quot;John&quot;, &quot;Jane&quot;, &quot;Joe&quot;, &quot;Jill&quot;&rbrack;;
 document.body.innerHTML = HTML`
-  <h1><img src="${iconSrc}" /> ${title}</h1>
-  <ul> $(names.map(name => HTML `
-    <li?${name}</li>
+  <h1><img src="&dollar;{iconSrc}" /&gt; &dollar;{title}</h1>
+  <ul> &dollar;(names.map(name =&gt; HTML `
+    <li>?&dollar;{name}</li>
   `)} </ul>
 `;
 </pre>
-![](./images/image036.png){width="7.486805555555556in"
-height="5.666666666666667in"}
+<!-- ![](./images/image036.png){width="7.486805555555556in" height="5.666666666666667in"} -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch54-5">Section 54.5: Introduction</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -18081,7 +18080,7 @@ expressions are indicated by a &dollar; sign and curly braces {}</p>
 // <i>Template Literal with an embedded expression</i>
 <b>var</b> x = 2;
 <b>var</b> y = 3;
-<b>var</b> theTotal = &grave;The total is &dollar;{x &plus; y}&grave;;    // <i>Contains &quot;The total is 5&quot;</i>
+<b>var</b> theTotal = &grave;The total is &dollar;{x &plus; y}&grave;;  // <i>Contains &quot;The total is 5&quot;</i>
 // <i>Comparison of a string and a template literal</i>
 <b>var</b> aString = &quot;single line string data&quot;
 console.log(aString === aLiteral)  // <i>Returns true</i>
@@ -18092,23 +18091,52 @@ examples.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch55">Chapter 55: Fetch</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<table 
-<b>Details</b>
-<b>Options</b> 
-method | The HTTP method to use for the request. ex: GET, POST, PUT,
-DELETE, HEAD. Defaults to GET.
-h   A Headers object containing additional HTTP headers to
-eaders include in the request.
-body   The request payload, can be a string or a FormData object.
-       Defaults to <b>undefined</b>
-no-cache
-cache The caching mode. <b>default</b>, reload,
-referrer The referrer of the request.
-no-cors, same-origin. Defaults to no-cors
-same-origin
-mode cors, . credentialsomit, , include. Defaults to omit. redirect
-follow, error, manual. Defaults to follow. integrity Associated
-integrity metadata. Defaults to empty string.
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Options</b></th>
+      <th><b>Details</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>method</td>
+      <td>The HTTP method to use for the request. ex: GET,POST,PUT,DELETE,HEAD.Defaults to GET.</td>
+    </tr>
+    <tr>
+      <td>headers</td>
+      <td>A Headers object containg additional HTTP headers to include in the request.</td>
+    </tr>
+    <tr>
+      <td>body</td>
+      <td>The request payload, can be a string or a FormData object. Defaults to <b>undefined</b></td>
+    </tr>
+    <tr>
+      <td>cache</td>
+      <td>The caching mode. <b>default</b>, reload, no-cache.</td>
+    </tr>
+    <tr>
+      <td>referrer</td>
+      <td>The referrer of the request.</td>
+    </tr>
+    <tr>
+      <td>mode</td>
+      <td>cors, no-cors, same-origin. Defaults to no-cors.</td>
+    </tr>
+    <tr>
+      <td>credentials</td>
+      <td>omit, same-origin, include. Defaults to omit.</td>
+    </tr>
+    <tr>
+      <td>redirect</td>
+      <td>follow, error, manual. Default to follow.</td>
+    </tr>
+    <tr>
+      <td>integrity</td>
+      <td>Associated integrity metadata. Defaults to empty string.</td>
+    </tr>
+  </tbody>
+</table>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch55-1">Section 55.1: Getting JSON data</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -18134,521 +18162,180 @@ fetch(&apos;/example.json&apos;, {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch55-3">Section 55.3: POST Data</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Posting form data
-fetch
-(
-&grave;
-/
-example
-/
-submit&grave;
-,
-{
-method
-:
-&apos;POST&apos;
-,
-body
-:
-<b>new</b>
-FormData
-(
-document.
-getElementById
-(
-&apos;example-form&apos;
-)
-)
-}
-)
-;
+<p>Posting form data</p>
+<pre>
+fetch(&grave;/example/submit&grave;, {
+  method: &apos;POST&apos;,
+  body: <b>new</b> FormData(document.getElementById(&apos;example-form&apos;))
+});
 Posting JSON data
-fetch
-(
-&grave;
-/
-example
-/
-submit.
-json
-&grave;
-,
-{
-method
-:
-&apos;POST&apos;
-,
-body
-:
-JSON.
-stringify
-(
-{
-email
-:
-document.
-getElementById
-(
-&apos;example-email&apos;
-)
-.
-
-value
-,
-comment
-:
-document.
-getElementById
-(
-&apos;example-comment&apos;
-)
-.
-value
-}
-)
-}
-)
-;
+fetch(&grave;/example/submit.json&grave;, {
+  method: &apos;POST&apos;,
+  body: JSON.stringify({
+    email: document.getElementById(&apos;example-email&apos;).value,
+    comment: document.getElementById(&apos;example-comment&apos;).value
+  })
+});
+</pre>
+<!-- page 310 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch55-4">Section 55.4: Send cookies</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The fetch function does not send cookies by default. There are two
-possible ways to send cookies:
-1.  Only send cookies if the URL is on the same origin as the calling
-    script.
-fetch
-(
-&apos;/login&apos;
-,
-{
-credentials
-:
-&apos;same-origin&apos;
-}
-)
-2.  Always send cookies, even for cross-origin calls.
-fetch
-(
-&apos;https://otherdomain.com/login&apos;
-,
-{
-credentials
-:
-&apos;include&apos;
-}
-)
+<p>The fetch function does not send cookies by default. There are two
+possible ways to send cookies:</p>
+<ol type = "1">
+  <li>Only send cookies if the URL is on the same origin as the calling script.</li>
+<ol>
+<pre>
+fetch(&apos;/login&apos;, {
+  credentials: &apos;same-origin&apos;
+})
+</pre>
+<ol start = "2">
+  <li>Always send cookies, even for cross-origin calls.</li>
+</ol>
+<pre>
+fetch(&apos;https://otherdomain.com/login&apos;, {
+  credentials: &apos;include&apos;
+})
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch55-5">Section 55.5: GlobalFetch</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The [GlobalFetch](https://fetch.spec.whatwg.org/#globalfetch)
-interface exposes the fetch function, which can be used to request
-resources.
-fetch
-(
-&apos;/path/to/resource.json&apos;
-)
-.
-then
-(
-response
-=&gt;
-{
-<b>if</b>
-(
-!
-response.
-ok
-(
-)
-)
-{
-<b>throw</b>
-<b>new</b>
-Error
-(
-&quot;Request failed!&quot;
-)
-;
-}
-<b>return</b>
-response.
-json
-(
-)
-;
-}
-)
-.
-then
-(
-json
-=&gt;
-{
-console.
-log
-(
-json
-)
-;
-}
-)
-;
-The resolved value is a
-[Response](https://fetch.spec.whatwg.org/#response-class) Object. This
-Object contains the body of the response, as well as its status and
-headers.
+<p>The <a href="https://fetch.spec.whatwg.org/#globalfetch">GlobalFetch</a> 
+interface exposes the fetch function, which can be used to request resources.</p>
+<pre>
+fetch(&apos;/path/to/resource.json&apos;)
+  .then(response =&gt; {
+    <b>if</b>(!response.ok()) {
+      <b>throw</b> <b>new</b> Error(&quot;Request failed!&quot;);
+    }
+    <b>return</b> response.json();
+  })
+  .then(json =&gt; {
+    console.log(json);
+  });
+</pre>
+<p>The resolved value is a <a href="https://fetch.spec.whatwg.org/#response-class">
+Response</a> Object. This Object contains the body of the response, as well as its 
+status and headers.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch55-6">Section 55.6: Using Fetch to Display Questions from the Stack Overflow API</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>const</b>
-url
-=
-&apos;http://api.stackexchange.com/2.2/questions?site=stackoverflow&tagged=javascript&apos;
-;
-<b>const</b>
-questionList
-=
-document.
-createElement
-(
-&apos;ul&apos;
-)
-;
-document.
-body
-.
-appendChild
-(
-questionList
-)
-;
-<b>const</b>
-responseData
-=
-fetch
-(
-url
-)
-.
-then
-(
-response
-=&gt;
-response.
-json
-(
-)
-)
-;
-responseData.
-then
-(
-(
-{
-items
-,
-has_more
-,
-quota_max
-,
-quota_remaining
-}
-)
-=&gt;
-{
-<b>for</b>
-(
-<b>const</b>
-{
-title
-,
-score
-,
-owner
-,
-link
-,
-answer_count
-}
-of items
-)
-{
-<b>const</b>
-listItem
-=
-document.
-createElement
-(
-&apos;li&apos;
-)
-;
-questionList.
-appendChild
-(
-listItem
-)
-;
-<b>const</b>
-a
-=
-document.
-createElement
-(
-&apos;a&apos;
-)
-;
-listItem.
-appendChild
-(
-a
-)
-;
-a&period;
-href
-=
-link
-;
-a&period;
-textContent
-=
-&grave;
-&lbrack;
-&dollar;
-{
-score
-}
-&rbrack;
-&dollar;
-{
-title
-}
-(
-by &dollar;
-{
-owner.
-display_name
-&vert;&vert;
-&apos;somebody&apos;
-}
-)
-&grave;
-}
-}
-)
-;
+<pre>
+<b>const</b> url =
+  &apos;http://api.stackexchange.com/2.2/questions?site=stackoverflow&tagged=javascript&apos;;
+<b>const</b> questionList = document.createElement(&apos;ul&apos;);
+document.body.appendChild(questionList);
+<b>const</b> responseData = fetch(url).then(response =&gt; response.json());
+responseData.then(({items, has_more, quota_max, quota_remaining}) =&gt; {
+  <b>for</b> (<b>const</b> {title, score, owner, link, answer_count} of items) {
+    <b>const</b> listItem = document.createElement(&apos;li&apos;);
+    questionList.appendChild(listItem);
+    <b>const</b> a = document.createElement(&apos;a&apos;);
+    listItem.appendChild(a);
+    a&period;href = link;
+    a&period;textContent = &grave;&lbrack;&dollar;{score}&rbrack; &dollar;{title} (by &dollar;{owner.display_name &vert;&vert; &apos;somebody&apos;})&grave;
+  }
+});
+</pre>
+<!-- page 311 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch56">Chapter 56: Scope</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch56-1">Section 56.1: Closures</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-When a function is declared, variables in the context of its
+<p>When a function is declared, variables in the context of its
 *declaration* are captured in its scope. For example, in the code
 below, the variable x is bound to a value in the outer scope, and then
-the reference to x is captured in the context of bar:
-<b>var</b>
-x
-=
-4
-;
-// <i>declaration in outer scope*
-<b>function</b>
-bar
-(
-)
-{
-console.
-log
-(
-x
-)
-;
-// <i>outer scope is captured on declaration*
+the reference to x is captured in the context of bar:</p>
+<pre>
+<b>var</b> x = 4;  // <i>declaration in outer scope</i>
+<b>function</b> bar() {
+  console.log(x);  // <i>outer scope is captured on declaration</i>
 }
-bar
-(
-)
-;
-// <i>prints 4 to console*
-Sample output:
-4
-This concept of &quot;capturing&quot; scope is interesting because we can use
+bar();  // <i>prints 4 to console</i>
+</pre>
+<blockquote>
+Sample output: 4
+</blockquote>
+<p>This concept of &quot;capturing&quot; scope is interesting because we can use
 and modify variables from an outer scope even after the outer scope
-exits. For example, consider the following:
-<b>function</b>
-foo
-(
-)
-{
-<b>var</b>
-x
-=
-4
-;
-// <i>declaration in outer scope*
-<b>function</b>
-bar
-(
-)
-{
-console.
-log
-(
-x
-)
-;
-// <i>outer scope is captured on declaration*
+exits. For example, consider the following:</p>
+<pre>
+<b>function</b> foo() {
+  <b>var</b> x = 4;  // <i>declaration in outer scope</i>
+  <b>function</b> bar() {
+    console.log(x);  // <i>outer scope is captured on declaration</i>
+  }
+  <b>return</b> bar;
+// <i>x goes out of scope after foo returns</i>
 }
-<b>return</b>
-bar
-;
-// <i>x goes out of scope after foo returns*
-}
-<b>var</b>
-barWithX
-=
-foo
-(
-)
-;
-barWithX
-(
-)
-;
-// <i>we can still access x</i>
-Sample output:
-4
-In the above example, when foo is called, its context is captured in
+<b>var</b> barWithX = foo();
+barWithX();  // <i>we can still access x</i>
+</pre>
+<blockquote>
+Sample output: 4
+</blockquote>
+<p>In the above example, when foo is called, its context is captured in
 the function bar. So even after it returns, bar can still access and
 modify the variable x. The function foo, whose context is captured in
-another function, is said to be a *closure*.
-<b>Private data</b>
-This lets us do some interesting things, such as defining &quot;private&quot;
+another function, is said to be a <i>closure</i>.</p>
+
+<p><b>Private data</b></p>
+<p>This lets us do some interesting things, such as defining &quot;private&quot;
 variables that are visible only to a specific function or set of
-functions. A contrived (but popular) example:
-<b>function</b>
-makeCounter
-(
-)
-{
-<b>var</b>
-counter
-=
-0
-;
-<b>return</b>
-{
-value
-:
-<b>function</b>
-(
-)
-{
-<b>return</b>
-counter
-;
+functions. A contrived (but popular) example:</p>
+<pre>
+<b>function</b> makeCounter() {
+  <b>var</b> counter = 0;
+  <b>return</b> {
+    value: <b>function</b>() {
+      <b>return</b> counter;
+    },
+    increment: <b>function</b>() {
+      counter++;
+    }
+  };
 }
-,
-increment
-:
-<b>function</b>
-(
-)
-{
-counter
-++
-;
-}
-}
-;
-}
-<b>var</b>
-a
-=
-makeCounter
-(
-)
-;
-<b>var</b>
-b
-=
-makeCounter
-(
-)
-;
-a&period;
-increment
-(
-)
-;
-console.
-log
-(
-a&period;
-value
-(
-)
-)
-;
-console.
-log
-(
-b&period;
-value
-(
-)
-)
-;
-Sample output:
-1
-0
-makeCounter   () is called, a snapshot of the context of that       makeCounter
-function is saved. All code inside
-When ()
-makeCounter
-will use that snapshot in their execution. Two calls of () will thus
-create two different snapshots, with their own copy of counter.
-<b>Immediately-invoked function expressions (IIFE)</b>
-Closures are also used to prevent global namespace pollution, often
-through the use of immediately-invoked function expressions.
-*Immediately-invoked function expressions* (or, perhaps more
-intuitively, *self-executing anonymous functions*) are essentially
+<b>var</b> a = makeCounter();
+<b>var</b> b = makeCounter();
+a&period;increment();
+console.log(a&period;value());
+console.log(b&period;value());
+</pre>
+<blockquote>
+Sample output:<br/>
+<br/>
+10
+</blockquote>
+<p>When makeCounter() is called, a snapshot of the context of that function is saved.
+All code inside makeCountre() will use that snapshot in their execution. Two calls of 
+makeCounter() will thus create two different snapshots, with their own copy of counter.</p>
+<p><b>Immediately-invoked function expressions (IIFE)</b></p>
+<p>Closures are also used to prevent global namespace pollution, often
+through the use of immediately-invoked function expressions.</p>
+<p><i>Immediately-invoked function expressions</i> (or, perhaps more
+intuitively, <i>self-executing anonymous functions</i>) are essentially
 closures that are called right after declaration. The general idea
 with IIFE&apos;s is to invoke the side-effect of creating a separate
-context that is accessible only to the code within the IIFE.
-
-Suppose we want to be able to reference jQuery with &dollar;. Consider the
-naive method, without using an IIFE:
-<b>var</b>
-&dollar;
-=
-jQuery
-;
-// <i>we&apos;ve just polluted the global namespace by assigning window.&dollar; to
-jQuery*
-In the following example, an IIFE is used to ensure that the &dollar; is
-bound to jQuery only in the context created by the closure:
-(
-<b>function</b>
-(
-&dollar;
-)
-{
-// <i>&dollar; is assigned to jQuery here*
-}
-)
-(
-jQuery
-)
-;
-// <i>but window.&dollar; binding doesn&apos;t exist, so no pollution*
-See [the canonical answer on
-Stackoverflow](http://stackoverflow.com/a/111111/2209007) for more
-information on closures.
+context that is accessible only to the code within the IIFE.</p>
+<p>Suppose we want to be able to reference jQuery with &dollar;. Consider the
+naive method, without using an IIFE:</p>
+<pre>
+<b>var</b> &dollar; = jQuery;
+// <i>we&apos;ve just polluted the global namespace by assigning window.&dollar; to jQuery</i>
+</pre>
+<p>In the following example, an IIFE is used to ensure that the &dollar; is
+bound to jQuery only in the context created by the closure:</p>
+<pre>
+(<b>function</b> (&dollar;) {
+  // <i>&dollar; is assigned to jQuery here</i>
+  })(jQuery);
+// <i>but window.&dollar; binding doesn&apos;t exist, so no pollution</i>
+</pre>
+<p>See <a href="http://stackoverflow.com/a/111111/2209007">the canonical answer on Stackoverflow</a> for more
+information on closures.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch56-2">Section 56.2: Hoisting</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
