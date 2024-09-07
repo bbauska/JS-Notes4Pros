@@ -18435,7 +18435,7 @@ alert(x &plus; y);
 <b>var</b> x = 2;
 alert(x &plus; y);
 <b>var</b> y = 4;
-</pre.
+</pre>
 <p>This will give you an output of NaN. Since we are initializing the
 value of y, the JavaScript Hoisting is not happening, so the y value
 will be undefined. The JavaScript will consider that y is not yet
