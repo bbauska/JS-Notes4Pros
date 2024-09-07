@@ -18456,5 +18456,914 @@ y = 4;
   alt="The page at www.w3schools.com says: NaN"
   style="border: 2px solid #000000; width:4in;" />
 <!-- {width="4.090277777777778in" height="2.1534722222222222in"} -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch56-3">Section 56.3: Difference between var and let</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<i>(Note: All examples using <b>let</b> are also valid for <b>const</b>)</i>
+<b>var</b> is available in all versions of JavaScript, while <b>let</b> and
+<b>const</b> are part of ECMAScript 6 and [only available in some newer
+browsers](http://caniuse.com/#search=block%20level). <b>var</b> is scoped
+to the containing function or the global space, depending when it is
+declared:
+<b>var</b>
+x
+=
+4
+;
+// <i>global scope</i>
+<b>function</b>
+DoThings
+(
+)
+{
+<b>var</b>
+x
+=
+7
+;
+// <i>function scope</i>
+console.
+log
+(
+x
+)
+;
+}
+console.
+log
+(
+x
+)
+;
+// <i>&gt;&bsol;4</i>
+DoThings
+(
+)
+;
+// <i>&gt;&bsol;7</i>
+console.
+log
+(
+x
+)
+;
+// <i>&gt;&bsol;4</i>
+That means it &quot;escapes&quot; if statements and all similar block
+constructs:
+<b>var</b>
+x
+=
+4
+;
+<b>if</b>
+(
+<b>true</b>
+)
+{
+<b>var</b>
+x
+=
+7
+;
+}
+console.
+log
+(
+x
+)
+;
+// <i>&gt;&bsol;7</i>
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+4
+;
+i
+++
+)
+{
+<b>var</b>
+j
+=
+10
+;
+}
+console.
+log
+(
+i
+)
+;
+// <i>&gt;&bsol;4</i>
+console.
+log
+(
+j
+)
+;
+// <i>&gt;&bsol;10</i>
+By comparison,
+<b>let</b>
+is block scoped:
+<b>let</b>
+x
+=
+4
+;
+<b>if</b>
+(
+<b>true</b>
+)
+{
+<b>let</b>
+x
+=
+7
+;
+console.
+log
+(
+x
+)
+;
+// <i>&gt;&bsol;7</i>
+}
+console.
+log
+(
+x
+)
+;
+// <i>&gt;&bsol;4</i>
+<b>for</b>
+(
+<b>let</b>
+i
+=
+0
+;
+i
+&lt;
+4
+;
+i
+++
+)
+{
+<b>let</b>
+j
+=
+10
+;
+}
+console.
+log
+(
+i
+)
+;
+// <i>&gt;&amp;quot;ReferenceError: i is not defined&quot;</i>
+console.
+log
+(
+j
+)
+;
+// <i>&gt;&amp;quot;ReferenceError: j is not defined&quot;</i>
+Note that i and j are only declared in the <b>for</b> loop and are
+therefore undeclared outside of it.
+
+There are several other crucial differences:
+
+<b>Global variable declaration</b>
+
+In the top scope (outside any functions and blocks), <b>var</b>
+declarations put an element in the global object. <b>let</b> does not:
+<b>var</b>
+x
+=
+4
+;
+<b>let</b>
+y
+=
+7
+;
+console.
+log
+(
+<b>this</b>
+.
+x
+)
+;
+// <i>&gt;&bsol;4</i>
+console.
+log
+(
+<b>this</b>
+.
+y
+)
+;
+// <i>&gt;&bsol;undefined</i>
+<b>Re-declaration</b>
+Declaring a variable twice using <b>var</b> doesn&apos;t produce an error
+(even though it&apos;s equivalent to declaring it once):
+<b>var</b>
+x
+=
+4
+;
+<b>var</b>
+x
+=
+7
+;
+With <b>let</b>, this produces an error:
+<b>let</b>
+x
+=
+4
+;
+<b>let</b>
+x
+=
+7
+;
+TypeError: Identifier
+x
+has already been declared
+The same is true when
+y
+is declared with
+<b>var</b>
+:
+<b>var</b>
+y
+=
+4
+;
+<b>let</b>
+y
+=
+7
+;
+TypeError: Identifier
+y
+has already been declared
+However variables declared with let can be reused (not re-declared) in
+a nested block
+<b>let</b>
+i
+=
+5
+;
+{
+<b>let</b>
+i
+=
+6
+;
+console.
+log
+(
+i
+)
+;
+// <i>&gt;&bsol;6</i>
+}
+console.
+log
+(
+i
+)
+;
+// <i>&gt;&bsol;5</i>
+Within the block the outer i can be accessed, but if the within block
+has a <b>let</b> declaration for i, the outer i can not be accessed and
+will throw a ReferenceError if used before the second is declared.
+<b>let</b>
+i
+=
+5
+;
+{
+i
+=
+6
+;
+// <i>outer i is unavailable within the Temporal Dead Zone</i>
+<b>let</b>
+i
+;
+}
+ReferenceError: i is not defined
+<b>Hoisting</b>
+
+Variables declared both with <b>var</b> and <b>let</b> are hoisted. The
+difference is that a variable declared with <b>var</b> can be referenced
+before its own assignment, since it gets automatically assigned (with
+<b>undefined</b> as its value), but <b>let</b> cannotit specifically
+requires the variable to be declared before being invoked:
+console.
+log
+(
+x
+)
+;
+// <i>&gt;&bsol;undefined</i>
+console.
+log
+(
+y
+)
+;
+// <i>&gt;&amp;quot;ReferenceError: &grave;y&grave; is not defined&quot;</i>
+// <i>OR &gt;&amp;quot;ReferenceError: can&apos;t access lexical declaration &grave;y&grave;
+before initialization&quot;</i>
+<b>var</b>
+x
+=
+4
+;
+<b>let</b>
+y
+=
+7
+;
+The area between the start of a block and a <b>let</b> or <b>const</b>
+declaration is known as the [Temporal Dead
+Zone](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let),
+and any references to the variable in this area will cause a
+ReferenceError. This happens even if the [variable is assigned before
+being
+declared](http://stackoverflow.com/questions/41451181/does-let-override-a-global-declaration-and-throws-a-referenceerror):
+y
+=
+7
+;
+// <i>&gt;&amp;quot;ReferenceError: &grave;y&grave; is not defined&quot;</i>
+<b>let</b>
+y
+;
+In non-strict-mode, assigning a value to a variable without any
+declaration, automatically declares the variable in the global scope.
+In this case, instead of y being automatically declared in the global
+scope, <b>let</b> reserves the variable&apos;s name (y) and does not allow
+any access or assignment to it before the line where it is
+declared/initialized.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch56-4">Section 56.4: Apply and Call syntax and invocation</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The apply and call methods in every function allow it to provide a
+custom value for <b>this</b>.
+<b>function</b>
+print
+(
+)
+{
+console.
+log
+(
+<b>this</b>
+.
+toPrint
+)
+;
+}
+print.
+apply
+(
+{
+toPrint
+:
+&quot;Foo&quot;
+}
+)
+;
+// <i>&gt;&amp;quot;Foo&quot;</i>
+print.
+call
+(
+{
+toPrint
+:
+&quot;Foo&quot;
+}
+)
+;
+// <i>&gt;&amp;quot;Foo&quot;</i>
+You might notice that the syntax for both the invocations used above
+are the same. i.e. The signature looks similar.
+
+But there is a small difference in their usage, since we are dealing
+with functions and changing their scopes, we still need to maintain
+the original arguments passed to the function. Both apply and call
+support passing arguments to the target function as follows:
+<b>function</b>
+speak
+(
+)
+{
+<b>var</b>
+sentences
+=
+Array
+.
+<b>prototype</b>
+.
+slice
+.
+call
+(
+arguments
+)
+;
+console.
+log
+(
+<b>this</b>
+.
+name
+&plus;
+&quot;: &quot;
+&plus;
+sentences
+)
+;
+}
+<b>var</b>
+person
+=
+{
+name
+:
+&quot;Sunny&quot;
+}
+;
+speak.
+apply
+(
+person
+,
+&lbrack;
+&quot;I&quot;
+,
+&quot;Code&quot;
+,
+&quot;Startups&quot;
+&rbrack;
+)
+;
+// <i>&gt;&amp;quot;Sunny: I Code Startups&quot;</i>
+speak.
+call
+(
+person
+,
+&quot;I&quot;
+,
+&quot;&lt;3&quot;
+,
+&quot;Javascript&quot;
+)
+;
+// <i>&gt;&amp;quot;Sunny: I &lt;3 Javascript&quot;</i>
+Notice that apply allows you to pass an Array or the arguments object
+(array-like) as the list of arguments, whereas, call needs you to pass
+each argument separately.
+
+These two methods give you the freedom to get as fancy as you want,
+like implementing a poor version of the ECMAScript&apos;s native bind to
+create a function that will always be called as a method of an object
+from an original function.
+<b>function</b>
+bind
+(
+func
+,
+obj
+)
+{
+<b>return</b>
+<b>function</b>
+(
+)
+{
+<b>return</b>
+func.
+apply
+(
+obj
+,
+Array
+.
+<b>prototype</b>
+.
+slice
+.
+call
+(
+arguments
+,
+1
+)
+)
+;
+}
+}
+<b>var</b>
+obj
+=
+{
+name
+:
+&quot;Foo&quot;
+}
+;
+<b>function</b>
+print
+(
+)
+{
+console.
+log
+(
+<b>this</b>
+.
+name
+)
+;
+}
+printObj
+=
+bind
+(
+print
+,
+obj
+)
+;
+printObj
+(
+)
+;
+This will log
+&quot;Foo&quot;
+The bind function has a lot going on
+1.  obj will be used as the value of <b>this</b>
+2.  forward the arguments to the function
+3.  and then return the value
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch56-5">Section 56.5: Arrow function invocation</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<h5>Version ≥ 6</h5>
+When using arrow functions <b>this</b> takes the value from the enclosing
+execution context&apos;s <b>this</b> (that is, <b>this</b> in arrow functions
+has lexical scope rather than the usual dynamic scope). In global code
+(code that doesn&apos;t belong to any function) it would be the global
+object. And it keeps that way, even if you invoke the function
+declared with the arrow notation from any of the others methods here
+described.
+<b>var</b>
+globalThis
+=
+<b>this</b>
+;
+// <i>&quot;window&quot; in a browser, or &quot;global&quot; in Node.js</i>
+<b>var</b>
+foo
+=
+(
+(
+)
+=&gt;
+<b>this</b>
+)
+;
+console.
+log
+(
+foo
+(
+)
+===
+globalThis
+)
+;
+// <i>true</i>
+<b>var</b>
+obj
+=
+{
+name
+:
+&quot;Foo&quot;
+}
+;
+console.
+log
+(
+foo.
+call
+(
+obj
+)
+===
+globalThis
+)
+;
+// <i>true</i>
+See how <b>this</b> inherits the context rather than referring to the
+object the method was called on.
+<b>var</b>
+globalThis
+=
+<b>this</b>
+;
+<b>var</b>
+obj
+=
+{
+withoutArrow
+:
+<b>function</b>
+(
+)
+{
+<b>return</b>
+<b>this</b>
+;
+}
+,
+withArrow
+:
+(
+)
+=&gt;
+<b>this</b>
+}
+;
+console.
+log
+(
+obj.
+withoutArrow
+(
+)
+===
+obj
+)
+;
+// <i>true</i>
+console.
+log
+(
+obj.
+withArrow
+(
+)
+===
+globalThis
+)
+;
+// <i>true</i>
+<b>var</b>
+fn
+=
+obj.
+withoutArrow
+;
+// <i>no longer calling withoutArrow as a method</i>
+<b>var</b>
+fn2
+=
+obj.
+withArrow
+;
+console.
+log
+(
+fn
+(
+)
+===
+globalThis
+)
+;
+// <i>true</i>
+console.
+log
+(
+fn2
+(
+)
+===
+globalThis
+)
+;
+// <i>true</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch56-6">Section 56.6: Bound invocation</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The bind method of every function allows you to create new version of
+that function with the context strictly bound to a specific object. It
+is especially useful to force a function to be called as a method of
+an object.
+<b>var</b>
+obj
+=
+{
+foo
+:
+&apos;bar&apos;
+}
+;
+<b>function</b>
+foo
+(
+)
+{
+<b>return</b>
+<b>this</b>
+.
+foo
+;
+}
+fooObj
+=
+foo.
+bind
+(
+obj
+)
+;
+fooObj
+(
+)
+;
+This will log:
+bar
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch56-7">Section 56.7: Method invocation</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Invoking a function as a method of an object the value of <b>this</b>
+will be that object.
+<b>var</b>
+obj
+=
+{
+name
+:
+&quot;Foo&quot;
+,
+print
+:
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+<b>this</b>
+.
+name
+)
+}
+}
+We can now invoke print as a method of obj. <b>this</b> will be obj
+obj.
+print
+(
+)
+;
+This will thus log:
+Foo
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch56-8">Section 56.8: Anonymous invocation</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Invoking a function as an anonymous function, <b>this</b> will be the
+global object (self in the browser).
+<b>function</b>
+func
+(
+)
+{
+<b>return</b>
+<b>this</b>
+;
+}
+func
+(
+)
+===
+window
+;
+// <i>true</i>
+Version = 5
+In ECMAScript 5&apos;s strict mode, <b>this</b> will be <b>undefined</b> if the
+function is invoked anonymously.
+(
+<b>function</b>
+(
+)
+{
+&quot;use strict&quot;
+;
+func
+(
+)
+;
+}
+(
+)
+)
+This will output
+<b>undefined</b>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch56-9">Section 56.9: Constructor invocation</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+When a function is invoked as a constructor with the <b>new</b> keyword
+<b>this</b> takes the value of the object being constructed
+<b>function</b>
+Obj
+(
+name
+)
+{
+<b>this</b>
+.
+name
+=
+name
+;
+}
+<b>var</b>
+obj
+=
+<b>new</b>
+Obj
+(
+&quot;Foo&quot;
+)
+;
+console.
+log
+(
+obj
+)
+;
+This will log
+{ name: &quot;Foo&quot; }
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch56-10">Section 56.10: Using let in loops instead of var (click handlers example)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Let&apos;s say we need to add a button for each piece of loadedData array
+(for instance, each button should be a slider showing the data; for
+the sake of simplicity, we&apos;ll just alert a message). One may try
+something like this:
+
+<b>for</b>(<b>var</b> i = 0; i &lt; loadedData.length; i++)
+jQuery(&quot;#container&quot;).append(&quot;&lt;a
+class=&apos;button&apos;&gt;&quot;+loadedData&lbrack;i&rbrack;.label+&quot;&lt;/a&gt;&quot;)
+
+.children().last() // <i>now let&apos;s attach a handler to the button which
+is a child</i>
+.on(&quot;click&quot;,<b>function</b>() { alert(loadedData&lbrack;i&rbrack;.content); });
+But instead of alerting, each button will cause the
+TypeError: loadedData&lbrack;i&rbrack; is undefined
+i ==
+error. This is because the scope of i is the global scope (or a
+function scope) and after the loop, 3. What we need is not to
+&quot;remember the state of i&quot;. This can be done using <b>let</b>:
+<b>for</b>(<b>let</b> i = 0; i &lt; loadedData.length; i++)
+jQuery(&quot;#container&quot;).append(&quot;&lt;a
+class=&apos;button&apos;&gt;&quot;+loadedData&lbrack;i&rbrack;.label+&quot;&lt;/a&gt;&quot;)
+.children().last() // <i>now let&apos;s attach a handler to the button which
+is a child</i>
+.on(&quot;click&quot;,<b>function</b>() { alert(loadedData&lbrack;i&rbrack;.content); }); An
+example of loadedData to be tested with this code:
+<b>var</b> loadedData = &lbrack; { label:&quot;apple&quot;, content:&quot;green and round&quot;
+},
+{ label:&quot;blackberry&quot;, content:&quot;small black or blue&quot; },
+{ label:&quot;pineapple&quot;, content:&quot;weird stuff.. difficult to explain
+the shape&quot; } &rbrack;;
+[A fiddle to illustrate this](https://jsfiddle.net/fvgqu7a2/2/)
 
 
