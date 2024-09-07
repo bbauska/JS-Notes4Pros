@@ -18544,9 +18544,9 @@ TypeError: Identifier y has already been declared
 <b>let</b> i = 5;
 {
   <b>let</b> i = 6;
-  console.log(i); // <i>&gt;&bsol;6</i>
+  console.log(i); // <i>&gt;&gt; 6</i>
 }
-console.log(i);   // <i>&gt;&bsol;5</i>
+console.log(i);   // <i>&gt;&gt; 5</i>
 </pre>
 <p>Within the block the outer i can be accessed, but if the within block
 has a <b>let</b> declaration for i, the outer i can not be accessed and
@@ -18557,6 +18557,7 @@ will throw a ReferenceError if used before the second is declared.</p>
   i = 6;  // <i>outer i is unavailable within the Temporal Dead Zone</i>
   <b>let</b> i;
 }
+</pre>
 <blockquote>
 ReferenceError: i is not defined
 </blockquote>
@@ -18579,7 +18580,7 @@ Temporal Dead Zone</a>, and any references to the variable in this area will cau
 ReferenceError. This happens even if the <a href="http://stackoverflow.com/questions/41451181/does-let-override-a-global-declaration-and-throws-a-referenceerror">
 variable is assigned before being declared</a>:</p>
 <pre>
-y=7;  // <i>&gt;&amp;quot;ReferenceError: &grave;y&grave; is not defined&quot;</i>
+y=7;  // <i>&gt;&gt; &quot;ReferenceError: &grave;y&grave; is not defined&quot;</i>
 <b>let</b> y;
 </pre>
 <p>In non-strict-mode, assigning a value to a variable without any
@@ -18591,7 +18592,6 @@ declared/initialized.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch56-4">Section 56.4: Apply and Call syntax and invocation</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>The apply and call methods in every function allow it to provide a custom value for <b>this</b>.</p>
 <pre>
 <b>function</b> print() {
@@ -18651,344 +18651,231 @@ printObj();
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch56-5">Section 56.5: Arrow function invocation</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <h5>Version ≥ 6</h5>
-When using arrow functions <b>this</b> takes the value from the enclosing
+<p>When using arrow functions <b>this</b> takes the value from the enclosing
 execution context&apos;s <b>this</b> (that is, <b>this</b> in arrow functions
 has lexical scope rather than the usual dynamic scope). In global code
 (code that doesn&apos;t belong to any function) it would be the global
 object. And it keeps that way, even if you invoke the function
 declared with the arrow notation from any of the others methods here
-described.
-<b>var</b>
-globalThis
-=
-<b>this</b>
-;
-// <i>&quot;window&quot; in a browser, or &quot;global&quot; in Node.js</i>
-<b>var</b>
-foo
-=
-(
-(
-)
-=&gt;
-<b>this</b>
-)
-;
-console.
-log
-(
-foo
-(
-)
-===
-globalThis
-)
-;
-// <i>true</i>
-<b>var</b>
-obj
-=
-{
-name
-:
-&quot;Foo&quot;
-}
-;
-console.
-log
-(
-foo.
-call
-(
-obj
-)
-===
-globalThis
-)
-;
-// <i>true</i>
-See how <b>this</b> inherits the context rather than referring to the
-object the method was called on.
-<b>var</b>
-globalThis
-=
-<b>this</b>
-;
-<b>var</b>
-obj
-=
-{
-withoutArrow
-:
-<b>function</b>
-(
-)
-{
-<b>return</b>
-<b>this</b>
-;
-}
-,
-withArrow
-:
-(
-)
-=&gt;
-<b>this</b>
-}
-;
-console.
-log
-(
-obj.
-withoutArrow
-(
-)
-===
-obj
-)
-;
-// <i>true</i>
-console.
-log
-(
-obj.
-withArrow
-(
-)
-===
-globalThis
-)
-;
-// <i>true</i>
-<b>var</b>
-fn
-=
-obj.
-withoutArrow
-;
-// <i>no longer calling withoutArrow as a method</i>
-<b>var</b>
-fn2
-=
-obj.
-withArrow
-;
-console.
-log
-(
-fn
-(
-)
-===
-globalThis
-)
-;
-// <i>true</i>
-console.
-log
-(
-fn2
-(
-)
-===
-globalThis
-)
-;
-// <i>true</i>
+described.</p>
+<pre>
+<b>var</b> globalThis = <b>this</b>; // <i>&quot;window&quot; in a browser, or &quot;global&quot; in Node.js</i>
+<b>var</b> foo = (() =&gt; <b>this</b>);
+console.log(foo() === globalThis);  // <i>true</i>
+<b>var</b> obj = { name: &quot;Foo&quot; };
+console.log(foo.call(obj) === globalThis);  // <i>true</i>
+</pre>
+<p>See how <b>this</b> inherits the context rather than referring to the
+object the method was called on.</p>
+<!-- page 319 -->
+<pre>
+<b>var</b> globalThis = <b>this</b>;
+<b>var</b> obj = {
+  withoutArrow: <b>function</b>() {
+    <b>return</b> <b>this</b>;
+},
+  withArrow: () =&gt; <b>this</b>
+};
+console.log(obj.withoutArrow() === obj);  // <i>true</i>
+console.log(obj.withArrow() === globalThis); // <i>true</i>
+<b>var</b> fn = obj.withoutArrow;  // <i>no longer calling withoutArrow as a method</i>
+<b>var</b> fn2 = obj.withArrow;
+console.log(fn() === globalThis);  // <i>true</i>
+console.log(fn2() === globalThis); // <i>true</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch56-6">Section 56.6: Bound invocation</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The bind method of every function allows you to create new version of
+<p>The bind method of every function allows you to create new version of
 that function with the context strictly bound to a specific object. It
 is especially useful to force a function to be called as a method of
-an object.
-<b>var</b>
-obj
-=
-{
-foo
-:
-&apos;bar&apos;
+an object.</p>
+<pre>
+<b>var</b> obj = { foo: &apos;bar&apos; };
+<b>function</b> foo() {
+  <b>return</b> <b>this</b>.foo;
 }
-;
-<b>function</b>
-foo
-(
-)
-{
-<b>return</b>
-<b>this</b>
-.
-foo
-;
-}
-fooObj
-=
-foo.
-bind
-(
-obj
-)
-;
-fooObj
-(
-)
-;
-This will log:
+fooObj = foo.bind(obj);
+fooObj();
+</pre>
+<p>This will log:</p>
+<blockquote>
 bar
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch56-7">Section 56.7: Method invocation</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Invoking a function as a method of an object the value of <b>this</b>
-will be that object.
-<b>var</b>
-obj
-=
-{
-name
-:
-&quot;Foo&quot;
-,
-print
-:
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-<b>this</b>
-.
-name
-)
+<p>Invoking a function as a method of an object the value of <b>this</b>
+will be that object.</p>
+<pre>
+<b>var</b> obj = {
+  name: &quot;Foo&quot;,
+  print: <b>function</b> () {
+    console.log(<b>this</b>.name)
+  }
 }
-}
-We can now invoke print as a method of obj. <b>this</b> will be obj
-obj.
-print
-(
-)
-;
-This will thus log:
+</pre>
+<p>We can now invoke print as a method of obj. <b>this</b> will be obj</p>
+<pre>
+obj.print();
+</pre>
+<p>This will thus log:</p>
+<blockquote>
 Foo
+</blockquote>
+<!-- page 320 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch56-8">Section 56.8: Anonymous invocation</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Invoking a function as an anonymous function, <b>this</b> will be the
-global object (self in the browser).
-<b>function</b>
-func
-(
-)
-{
-<b>return</b>
-<b>this</b>
-;
+<p>Invoking a function as an anonymous function, <b>this</b> will be the
+global object (self in the browser).</p>
+<pre>
+<b>function</b> func() {
+  <b>return</b> <b>this</b>;
 }
-func
-(
-)
-===
-window
-;
-// <i>true</i>
-Version = 5
-In ECMAScript 5&apos;s strict mode, <b>this</b> will be <b>undefined</b> if the
-function is invoked anonymously.
-(
-<b>function</b>
-(
-)
-{
-&quot;use strict&quot;
-;
-func
-(
-)
-;
-}
-(
-)
-)
-This will output
+func() === window;  // <i>true</i>
+</pre>
+<h5>Version = 5</h5>
+<p>In ECMAScript 5&apos;s strict mode, <b>this</b> will be <b>undefined</b> if the
+function is invoked anonymously.</p>
+<pre>
+(<b>function</b> () {
+  &quot;use strict&quot;;
+  func();
+}())
+</pre>
+<p>This will output</p>
+<blockquote>
 <b>undefined</b>
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch56-9">Section 56.9: Constructor invocation</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<p>
 When a function is invoked as a constructor with the <b>new</b> keyword
-<b>this</b> takes the value of the object being constructed
-<b>function</b>
-Obj
-(
-name
-)
-{
-<b>this</b>
-.
-name
-=
-name
-;
+<b>this</b> takes the value of the object being constructed</p>
+<pre>
+<b>function</b> Obj(name) {
+  <b>this</b>.name = name;
 }
-<b>var</b>
-obj
-=
-<b>new</b>
-Obj
-(
-&quot;Foo&quot;
-)
-;
-console.
-log
-(
-obj
-)
-;
-This will log
-{ name: &quot;Foo&quot; }
+<b>var</b> obj = <b>new</b> Obj(&quot;Foo&quot;);
+console.log(obj);
+</pre>
+<p>This will log</p>
+<blockquote>
+{name: &quot;Foo&quot;}
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch56-10">Section 56.10: Using let in loops instead of var (click handlers example)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Let&apos;s say we need to add a button for each piece of loadedData array
+<p>Let&apos;s say we need to add a button for each piece of loadedData array
 (for instance, each button should be a slider showing the data; for
 the sake of simplicity, we&apos;ll just alert a message). One may try
-something like this:
-
+something like this:</p>
+<pre>
 <b>for</b>(<b>var</b> i = 0; i &lt; loadedData.length; i++)
-jQuery(&quot;#container&quot;).append(&quot;&lt;a
-class=&apos;button&apos;&gt;&quot;+loadedData&lbrack;i&rbrack;.label+&quot;&lt;/a&gt;&quot;)
-
-.children().last() // <i>now let&apos;s attach a handler to the button which
-is a child</i>
-.on(&quot;click&quot;,<b>function</b>() { alert(loadedData&lbrack;i&rbrack;.content); });
-But instead of alerting, each button will cause the
+  jQuery(&quot;#container&quot;).append(&quot;&lt;a class=&apos;button&apos;&gt;&quot;+loadedData&lbrack;i&rbrack;.label+&quot;&lt;/a&gt;&quot;)
+    .children().last() // <i>now let&apos;s attach a handler to the button which is a child</i>
+    .on(&quot;click&quot;,<b>function</b>() { alert(loadedData&lbrack;i&rbrack;.content); });
+</pre>
+<p>But instead of alerting, each button will cause the</p>
+<!-- page 321 -->
+<blockquote>
 TypeError: loadedData&lbrack;i&rbrack; is undefined
-i ==
-error. This is because the scope of i is the global scope (or a
-function scope) and after the loop, 3. What we need is not to
-&quot;remember the state of i&quot;. This can be done using <b>let</b>:
+</blockquote>
+<p>error. This is because the scope of i is the global scope (or a
+function scope) and after the loop, i == 3. What we need is not to
+&quot;remember the state of i&quot;. This can be done using <b>let</b>:</p>
+<pre>
 <b>for</b>(<b>let</b> i = 0; i &lt; loadedData.length; i++)
-jQuery(&quot;#container&quot;).append(&quot;&lt;a
-class=&apos;button&apos;&gt;&quot;+loadedData&lbrack;i&rbrack;.label+&quot;&lt;/a&gt;&quot;)
-.children().last() // <i>now let&apos;s attach a handler to the button which
-is a child</i>
-.on(&quot;click&quot;,<b>function</b>() { alert(loadedData&lbrack;i&rbrack;.content); }); An
-example of loadedData to be tested with this code:
-<b>var</b> loadedData = &lbrack; { label:&quot;apple&quot;, content:&quot;green and round&quot;
-},
-{ label:&quot;blackberry&quot;, content:&quot;small black or blue&quot; },
-{ label:&quot;pineapple&quot;, content:&quot;weird stuff.. difficult to explain
-the shape&quot; } &rbrack;;
-[A fiddle to illustrate this](https://jsfiddle.net/fvgqu7a2/2/)
-
+  jQuery(&quot;#container&quot;).append(&quot;&lt;a class=&apos;button&apos;&gt;&quot;+loadedData&lbrack;i&rbrack;.label+&quot;&lt;/a&gt;&quot;)
+    .children().last() // <i>now let&apos;s attach a handler to the button which is a child</i>
+    .on(&quot;click&quot;,<b>function</b>() { alert(loadedData&lbrack;i&rbrack;.content); });
+</pre>
+<p>An example of loadedData to be tested with this code:</p>
+<pre>
+  <b>var</b> loadedData = &lbrack;
+    { label:&quot;apple&quot;, content:&quot;green and round&quot; },
+    { label:&quot;blackberry&quot;, content:&quot;small black or blue&quot; },
+    { label:&quot;pineapple&quot;, content:&quot;weird stuff.. difficult to explain the shape&quot; }
+  &rbrack;;
+</pre>
+<p><a href="https://jsfiddle.net/fvgqu7a2/2/">A fiddle to illustrate this</a></p>
+<!-- page 322 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch57">Chapter 57: Modules</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch57-1">Section 57.1: Defining a module</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>In ECMAScript 6, when using the module syntax (import/export), each
+file becomes its own module with a private namespace. Top-level
+functions and variables do not pollute the global namespace. To expose
+functions, classes, and variables for other modules to import, you can
+use the export keyword.</p>
+<pre>
+// <i>not exported</i>
+<b>function</b> somethingPrivate() {
+  console.log(&apos;TOP SECRET&apos;)
+}
+export <b>const</b> PI = 3.14;
+export <b>function</b> doSomething() {
+  console.log(&apos;Hello from a module!&apos;)
+}
+<b>function</b> doSomethingElse() {
+  console.log(&quot;Something else&quot;)
+}
+export {doSomethingElse}
+export class MyClass {
+  test() {}
+}
+</pre>
+<p>Note: ES5 JavaScript files loaded via <b>&gt;</b> tags will remain the same
+when not using import/export.</p>
+<p>Only the values which are explicitly exported will be available
+outside of the module. Everything else can be considered private or
+inaccessible.</p>
+<p>Importing this module would yield (assuming the previous code block is in my-module.js):</p>
+<pre>
+import &ast; as myModule from &apos;./my-module.js&apos;;
+myModule.PI;                   // <i>3.14</i>
+myModule.doSomething();        // <i>&apos;Hello from a module!&apos;</i>
+myModule.doSomethingElse();    // <i>&apos;Something else&apos;</i>
+<b>new</b> myModule.MyClass(); // <i>an instance of MyClass</i>
+myModule.somethingPrivate();   // <i>This would fail since somethingPrivate was not exported</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch57-2">Section 57.2: Default exports</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<p>In addition to named imports, you can provide a default export.</p>
+<pre>
+// <i>circle.js</i>
+export <b>const</b> PI = 3.14;
+export <b>default</b> <b>function</b> area(radius) {
+  <b>return</b> PI &ast; radius &ast; radius;
+}
+</pre>
+<p>You can use a simplified syntax to import the default export.</p>
+<!-- page 323 -->
+<pre>
+import circleArea from &apos;./circle&apos;;
+console.log(circleArea(4));
+</pre>
+<p>Note that a <i>default export</i> is implicitly equivalent to a named
+export with the name <b>default</b>, and the imported binding (circleArea
+above) is simply an alias. The previous module can be written like</p>
+<pre>
+import { <b>default</b> as circleArea } from &apos;./circle&apos;;
+console.log(circleArea(4));
+</pre>
+<p>You can only have one default export per module. The name of the default export can be omitted.</p>
+<pre>
+// <i>named export: must have a name</i>
+export <b>const</b> PI = 3.14;
+// <i>default export: name is not required</i>
+export <b>default</b> <b>function</b> (radius) {
+  <b>return</b> PI &ast; radius &ast; radius;
+}
+</pre>
 
