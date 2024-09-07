@@ -18422,4 +18422,461 @@ document.documentElement.clientHeight ? document.documentElement.clientHeight : 
   colorDepth = window.screen.colorDepth;
 </pre>
 <!-- page 326 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch59">Chapter 59: Variable coercion/conversion</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch59-1">Section 59.1: Double Negation (!!x)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>The double-negation !! is not a distinct JavaScript operator nor a
+special syntax but rather just a sequence of two negations. It is used
+to convert the value of any type to its appropriate <b>true</b> or
+<b>false</b> Boolean value depending on whether it is <i>truthy</i> or
+<i>falsy</i>.</p>
+<pre>
+!!1       // <i>true</i>
+!!0       // <i>false</i>
+!!<b>undefined</b> // <i>false</i>
+!!{}      // <i>true</i>
+!!&lbrack;&rbrack;  // <i>true</i>
+</pre>
+<P>The first negation converts any value to <b>false</b> if it is <i>truthy</i>
+and to <b>true</b> if is <i>falsy</i>. The second negation then operates on a
+normal Boolean value. Together they convert any <i>truthy</i> value to
+<b>true</b> and any <i>falsy</i> value to <b>false</b>.</p>
+<p>However, many professionals consider the practice of using such syntax
+unacceptable and recommend simpler to read alternatives, even if
+they&apos;re longer to write:</p>
+<pre>
+x !== 0 // <i>instead of !!x in case x is a number</i>
+x != <b>null</b> // <i>instead of !!x in case x is an object, a string, or an undefined</i>
+</pre>
+<p>Usage of x is considered poor practice due to the following reasons:</p>
+<ol type="1">
+  <li>Stylistically it may look like a distinct special syntax whereas in
+    fact it is not doing anything other than two consecutive negations
+    with implicit type conversion.</li>
+  <li>It is better to provide information about types of values stored in
+    variables and properties through the code. For example, x !== 0 says that x 
+	is probably a number, whereas !!x does not convery any such advantage to
+	the readers of the code.</li>
+  <li>Usage of Boolean(x) allows for similar functionality, and is a more explicit 
+    conversion of type.</li>
+</ol>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch59-2">Section 59.2: Implicit conversion</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>JavaScript will try to automatically convert variables to more
+appropriate types upon use. It&apos;s usually advised to do conversions
+explicitly (see other examples), but it&apos;s still worth knowing what
+conversions take place implicitly.</p>
+<pre>
+&quot;1&quot; + 5 === &quot;15&quot; // <i>5 got converted to string.</i>
+1 + &quot;5&quot; === &quot;15&quot; // <i>1 got converted to string.</i>
+1 - &quot;5&quot; === -4 // <i>&quot;5&quot; got converted to a number.</i>
+alert({}) // <i>alerts &quot;&lbrack;object Object&rbrack;&quot;, {} got converted to string.</i>
+!0 === <b>true</b> // <i>0 got converted to boolean</i>
+<b>if</b> (&quot;hello&quot;) {} // <i>runs, &quot;hello&quot; got converted to boolean.</i>
+<b>new</b> Array(3) === &quot;,,&quot;; // <i>Return true. The array is converted to string - Array.toString();</i>
+</pre>
+<p>Some of the trickier parts:</p>
+<pre>
+!&quot;0&quot; === <b>false</b> // <i>&quot;0&quot; got converted to true, then reversed.</i>
+!&quot;false&quot; === <b>false</b> // <i>&quot;false&quot; converted to true, then reversed.</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch59-3">Section 59.3: Converting to boolean</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Boolean( ... ) will convert any data type into either <b>true</b> or <b>false</b>.</p>
+<!-- page 327 -->
+<pre>
+Boolean(&quot;true&quot;) === <b>true</b>
+Boolean(&quot;false&quot;) === <b>true</b>
+Boolean(&minus;1) === <b>true</b>
+Boolean(1) === <b>true</b>
+Boolean(0) === <b>false</b>
+Boolean(&quot;&quot;) === <b>false</b>
+Boolean(&quot;1&quot;) === <b>true</b>
+Boolean(&quot;0&quot;) === <b>true</b>
+Boolean({}) === <b>true</b>
+Boolean(&lbrack;&rbrack;) === <b>true</b>
+</pre>
+<p>Empty strings and the number 0 will be converted to false, and all
+others will be converted to true.</p>
+<p>A shorter, but less clear, form:</p>
+<pre>
+!!&quot;true&quot; === <b>true</b>
+!!&quot;false&quot; === <b>true</b>
+!!-1 === <b>true</b>
+!!1 === <b>true</b>
+!!0 === <b>false</b>
+!!&quot;&quot; === <b>false</b>
+!!&quot;1&quot; === <b>true</b>
+!!&quot;0&quot; === <b>true</b>
+!!{} === <b>true</b>
+!!&lbrack;&rbrack; === <b>true</b>
+</pre>
+<p>This shorter form takes advantage of implicit type conversion using
+the logical NOT operator twice, as described in
+http://stackoverflow.com/documentation/javascript/208/boolean-logic/3047/double-negation-x</p>
+<p>Here is the complete list of boolean conversions from the 
+<a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf">
+ECMAScript specification</a></p>
+<ul>
+  <li>if myArg of type <b>undefined</b> or <b>null</b> then Boolean(myArg) === false</li>
+  <li>if myArg of type boolean then Boolean(myArg) === myArg</li>
+  <li>if myArg of type number then Boolean(myArg) === false if myArg is +0, ‑0, or 
+    <b>NaN</b>; otherwise <b>true</b></li>
+  <li>if myArg of type string then Boolean(myArg) === false if myArg is the empty String
+    (its length is zero); otherwise <b>true</b></li>
+  <li>if myArg of type symbol or object then Boolean(myArg) === true</li>
+</ul>
+<p>Values that get converted to <b>false</b> as booleans are called <i>falsy</i>
+(and all others are called <i>truthy</i>). See Comparison Operations.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch59-4">Section 59.4: Converting a string to a number</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+Number(&apos;0&apos;) === 0
+</pre>
+<p>Number(&apos;0&apos;) will convert the string (&apos;0&apos;) into a number (0)</p>
+<p>A shorter, but less clear, form:</p>
+<pre>
+&plus;&apos;0&apos; === 0
+</pre>
+<p>The unary + operator does nothing to numbers, but converts anything
+else to a number. Interestingly, +(-12 ) === &minus;12.</p>
+<pre>
+parseInt(&apos;0&apos;, 10) === 0
+</pre>
+<p>parseInt(&apos;0&apos;, 10) will convert the string (&apos;0&apos;) into a 
+number (0), don&apos;t forget the second argument, which is radix. If not given, 
+parseInt could convert string to wrong number.</p>
+<!-- page 328 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch59-5">Section 59.5: Converting a number to a string</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+String
+(
+0
+)
+===
+&apos;0&apos;
+String
+&lpar;0&rpar; will convert the number (0) into a string (&apos;0&apos;).
+A shorter, but less clear, form:
+&apos;&apos;
+&plus;
+0
+===
+&apos;0&apos;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch59-6">Section 59.6: Primitive to Primitive conversion table</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>Value Converted                                        
+To String                                                
+Converted To                                             
+Number Converted                                         
+To Boolean</b>                                             
+undefinded                           NaN                 false
+&quot;undefined&quot;                                            
+  null &quot;null&quot;                        0                   false
+  true &quot;true&quot;                        1                   
+  false &quot;false&quot;                      0                   
+  NaN &quot;NaN&quot;                                              <b>false</b>
+  &quot;&quot; empty string                    0                   <b>false</b>
+  &quot; &quot;                                0                   <b>true</b>
+  &quot;2.4&quot; (numeric)                    2.4                 true
+  &quot;test&quot; (non                        NaN                 true
+  numeric                                                  
+  &quot;0&quot;                                0                   <b>true</b>
+  &quot;1&quot;                                1                   true
+-0   &quot;0&quot;  <b>false</b>
+0    &quot;0&quot;  false
+1    &quot;1&quot;  true
+Infinity  &quot;Infinity&quot;                           true
+Infinity  &quot;-Infinity&quot;                          true
+&lbrack;&rbrack;   &quot;&quot;   0  true
+&lbrack;3&rbrack;  &quot;3&quot;  3  true
+&lbrack;&apos;a&apos;&rbrack;         &quot;a&quot;              NaN                 true
+&lbrack;&apos;a&apos;,&apos;b&apos;&rbrack;   &quot;a,b&quot;            NaN                 true
+{ }               &quot;&lbrack;object         NaN                 true
+Object&rbrack;&quot;                             
+function(){}      &quot;function(){}&quot;   NaN                 true
+Bold values highlight conversion that programmers may find surprising
+To convert explicitly values you can use String() Number() Boolean()
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch59-7">Section 59.7: Convert an array to a string</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Array   .  join   (   separator
+) can be used to output an array as a string, with a configurable
+separator.
+Default (separator = &quot;,&quot;):
+&lbrack;
+&quot;a&quot;
+,
+&quot;b&quot;
+,
+&quot;c&quot;
+&rbrack;
+.
+join
+(
+)
+===
+&quot;a,b,c&quot;
+With a string separator:
+&lbrack;
+1
+,
+2
+,
+3
+,
+4
+&rbrack;
+.
+join
+(
+&quot; + &quot;
+)
+===
+&quot;1 + 2 + 3 + 4&quot;
+With a blank separator:
+&lbrack;
+&quot;B&quot;
+,
+&quot;o&quot;
+,
+&quot;b&quot;
+&rbrack;
+.
+oin
+(
+&quot;&quot;
+)
+===
+&quot;Bob&quot;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch59-8">Section 59.8: Array to String using array methods</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+This way may seem to be useless because you are using anonymous
+function to accomplish something that you can do it with join(); But
+if you need to make something to the strings while you are converting
+the Array to String, this can be useful.
+<b>var</b>
+arr
+=
+&lbrack;
+&apos;a&apos;
+,
+&apos;
+á
+&apos;
+,
+&apos;b&apos;
+,
+&apos;c&apos;
+&rbrack;
+<b>function</b>
+upper_lower
+(
+a
+,
+b
+,
+i
+)
+{
+// <i>&hellip;do something here</i>
+b
+=
+i
+&
+1
+?
+b&period;
+toUpperCase
+(
+)
+:
+b&period;
+toLowerCase
+(
+)
+;
+<b>return</b>
+a
+&plus;
+&apos;,&apos;
+&plus;
+b
+}
+arr
+=
+arr.
+reduce
+(
+upper_lower
+)
+;
+// <i>&quot;a,</i>
+Á
+<i>,b,C&quot;</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch59-9">Section 59.9: Converting a number to a boolean</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Boolean
+(
+0
+)
+===
+<b>false</b>
+Boolean(
+0&rpar; will convert the number 0 into a boolean <b>false</b>.
+
+A shorter, but less clear, form:
+!!
+0
+===
+<b>false</b>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch59-10">Section 59.10: Converting a string to a boolean</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+To convert a string to boolean use
+Boolean
+(
+myString
+)
+or the shorter but less clear form
+!!
+myString
+All strings except the empty string (of length zero) are evaluated to
+<b>true</b> as booleans.
+Boolean
+(
+&apos;&apos;
+)
+===
+<b>false</b>
+// <i>is true</i>
+Boolean
+(
+&quot;&quot;
+)
+===
+<b>false</b>
+// <i>is true</i>
+Boolean
+(
+&apos;0&apos;
+)
+===
+<b>false</b>
+// <i>is false</i>
+Boolean
+(
+&apos;any_nonempty_string&apos;
+)
+===
+<b>true</b>
+// <i>is true</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch59-11">Section 59.11: Integer to Float</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+In JavaScript, all numbers are internally represented as floats. This
+means that simply using your integer as a float is all that must be
+done to convert it.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch59-12">Section 59.12: Float to Integer</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+To convert a float to an integer, JavaScript provides multiple
+methods.
+
+The floor function returns the first integer less than or equal to the
+float.
+Math
+.
+floor
+(
+5.7
+)
+;
+// <i>5</i>
+The ceil function returns the first integer greater than or equal to
+the float.
+Math
+.
+ceil
+(
+5.3
+)
+;
+// <i>6</i>
+The round function rounds the float.
+Math
+.
+round
+(
+3.2
+)
+;
+// <i>3</i>
+Math
+.
+round
+(
+3.6
+)
+;
+// <i>4</i>
+Version
+≥
+6
+Truncation (trunc) removes the decimals from the float.
+Math
+.
+trunc
+(
+3.7
+)
+;
+// <i>3</i>
+Notice the difference between truncation (trunc) and floor:
+Math
+.
+floor
+(
+&minus;
+3.1
+)
+;
+// <i>-4</i>
+Math
+.
+trunc
+(
+&minus;
+3.1
+)
+;
+// <i>-3</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch59-13">Section 59.13: Convert string to float</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+parseFloat accepts a string as an argument which it converts to a
+float/
+parseFloat
+(
+&quot;10.01&quot;
+)
+// <i>= 10.01</i>
 
