@@ -18185,13 +18185,13 @@ fetch(&grave;/example/submit.json&grave;, {
 possible ways to send cookies:</p>
 <ol type = "1">
   <li>Only send cookies if the URL is on the same origin as the calling script.</li>
-<ol>
+</ol>
 <pre>
 fetch(&apos;/login&apos;, {
   credentials: &apos;same-origin&apos;
 })
 </pre>
-<ol start = "2">
+<ol type = "1" start = "2">
   <li>Always send cookies, even for cross-origin calls.</li>
 </ol>
 <pre>
