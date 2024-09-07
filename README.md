@@ -18847,7 +18847,6 @@ myModule.somethingPrivate();   // <i>This would fail since somethingPrivate was 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch57-2">Section 57.2: Default exports</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>In addition to named imports, you can provide a default export.</p>
 <pre>
 // <i>circle.js</i>
