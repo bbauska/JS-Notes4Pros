@@ -18339,371 +18339,122 @@ information on closures.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch56-2">Section 56.2: Hoisting</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>What is hoisting?</b>
-<b>Hoisting</b> is a mechanism which moves all variable and function
+<p><b>What is hoisting?</b></p>
+
+<p><b>Hoisting</b> is a mechanism which moves all variable and function
 declarations to the top of their scope. However, variable assignments
-still happen where they originally were.
-For example, consider the following code:
-console.
-log
-(
-foo
-)
-;
-// <i></i>
-→
-<i>undefined</i>
-<b>var</b>
-foo
-=
-42
-;
-console.
-log
-(
-foo
-)
-;
-// <i></i>
-→
-<i>42</i>
-The above code is the same as:
-<b>var</b>
-foo
-;
-// <i></i>
-→
-<i>Hoisted variable declaration</i>
-console.
-log
-(
-foo
-)
-;
-// <i></i>
-→
-<i>undefined</i>
-foo
-=
-42
-;
-// <i></i>
-→
-<i>variable assignment remains in the same place</i>
-console.
-log
-(
-foo
-)
-;
-// <i></i>
-→
-<i>42</i>
-Note that due to hoisting the above <b>undefined</b> is not the same as
-the not defined resulting from running:
-console.
-log
-(
-foo
-)
-;
-// <i></i>
-→
-<i>foo is not defined</i>
-A similar principle applies to functions. When functions are assigned
-to a variable (i.e. a [function
-expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function)),
-the variable declaration is hoisted while the assignment remains in
-the same place. The following two code snippets are equivalent.
-console.
-log
-(
-foo
-(
-2
-,
-3
-)
-)
-;
-// <i></i>
-→
-<i>foo is not a function</i>
-<b>var</b>
-foo
-=
-<b>function</b>
-(
-a
-,
-b
-)
-{
-<b>return</b>
-a
-&ast;
-b
-;
+still happen where they originally were.</p>
+<p>For example, consider the following code:</p>
+<!-- page 313 -->
+<pre>
+console.log(foo);  // <i>→ undefined</i>
+<b>var</b> foo = 42;
+console.log(foo);  // <i>→ 42</i>
+</pre>
+<p>The above code is the same as:</p>
+<pre>
+<b>var</b> foo;    // <i>→ Hoisted variable declaration</i>
+console.log(foo); // <i>→ undefined</i>
+foo = 42;          // <i>→ variable assignment remains in the same place</i>
+console.log(foo);  // <i>→ 42</i>
+</pre>
+<p>Note that due to hoisting the above <b>undefined</b> is not the same as
+the not defined resulting from running:</p>
+<pre>
+console.log(foo);  // <i>→ foo is not defined</i>
+</pre>
+<p>A similar principle applies to functions. When functions are assigned
+to a variable (i.e. a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function">
+function expression</a>), the variable declaration is hoisted while the assignment remains in
+the same place. The following two code snippets are equivalent.</p>
+<pre>
+console.log(foo(2, 3));  // <i>→ foo is not a function</i>
+<b>var</b> foo = <b>function</b>(a, b) {
+  <b>return</b> a &ast; b;
 }
-<b>var</b>
-foo
-;
-console.
-log
-(
-foo
-(
-2
-,
-3
-)
-)
-;
-// <i></i>
-→
-<i>foo is not a function</i>
-foo
-=
-<b>function</b>
-(
-a
-,
-b
-)
-{
-<b>return</b>
-a
-&ast;
-b
-;
+<b>var</b> foo;
+console.log(foo(2, 3));  // <i>→ foo is not a function</i>
+foo = <b>function</b>(a, b) {
+  <b>return</b> a &ast; b;
 }
-When declaring [function
-statements](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function),
-a different scenario occurs. Unlike function statements, function
-declarations are hoisted to the top of their scope. Consider the
-following code:
-console.
-log
-(
-foo
-(
-2
-,
-3
-)
-)
-;
-// <i></i>
-→
-<i>6</i>
-<b>function</b>
-foo
-(
-a
-,
-b
-)
-{
-<b>return</b>
-a
-&ast;
-b
-;
+</pre>
+<p>When declaring <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">
+function statements</a>, a different scenario occurs. Unlike function statements, function
+declarations are hoisted to the top of their scope. Consider the following code:</p>
+<pre>
+console.log(foo(2, 3));  // <i>→ 6</i>
+<b>function</b> foo(a, b) {
+  <b>return</b> a &ast; b;
 }
-The above code is the same as the next code snippet due to hoisting:
-<b>function</b>
-foo
-(
-a
-,
-b
-)
-{
-<b>return</b>
-a
-&ast;
-b
-;
+</pre>
+<p>The above code is the same as the next code snippet due to hoisting:</p>
+<pre>
+<b>function</b> foo(a, b) {
+  <b>return</b> a &ast; b;
 }
-console.
-log
-(
-foo
-(
-2
-,
-3
-)
-)
-;
-// <i></i>
-→
-<i>6</i>
-Here are some examples of what is and what isn&apos;t hoisting:
+console.log(foo(2, 3));  // <i>→ 6</i>
+</pre>
+<p>Here are some examples of what is and what isn&apos;t hoisting:</p>
+<pre>
 // <i>Valid code:</i>
-foo
-(
-)
-;
-<b>function</b>
-foo
-(
-)
-{
-}
+foo();
+<b>function</b> foo() {}
 // <i>Invalid code:</i>
-bar
-(
-)
-;
-// <i></i>
-→
-<i>TypeError: bar is not a function</i>
-<b>var</b>
-bar
-=
-<b>function</b>
-(
-)
-{
-}
-;
+bar();                         // <i>→ TypeError: bar is not a function</i>
+<b>var</b> bar = <b>function</b> () {};
 // <i>Valid code:</i>
-foo
-(
-)
-;
-<b>function</b>
-foo
-(
-)
-{
-bar
-(
-)
-;
+foo();
+<b>function</b> foo() {
+  bar();
 }
-<b>function</b>
-bar
-(
-)
-{
-}
+<b>function</b> bar() {}
 // <i>Invalid code:</i>
-foo
-(
-)
-;
-<b>function</b>
-foo
-(
-)
-{
-bar
-(
-)
-;
-// <i></i>
-→
-<i>TypeError: bar is not a function</i>
+foo();
+<b>function</b> foo() {
+  bar();               // <i>→ TypeError: bar is not a function</i>
 }
-<b>var</b>
-bar
-=
-<b>function</b>
-(
-)
-{
-}
-;
+<b>var</b> bar = <b>function</b> () {};
 // <i>(E) valid:</i>
-<b>function</b>
-foo
-(
-)
-{
-bar
-(
-)
-;
+<b>function</b> foo() {
+  bar();
 }
-<b>var</b>
-bar
-=
-<b>function</b>
-(
-)
-{
-}
-;
-foo
-(
-)
-;
-<b>Limitations of Hoisting</b>
-Initializing a variable can not be Hoisted or In simple JavaScript
-Hoists declarations not initialization.
-For example: The below scripts will give different outputs.
-<b>var</b>
-x
-=
-2
-;
-<b>var</b>
-y
-=
-4
-;
-alert
-(
-x
-&plus;
-y
-)
-;
-This will give you an output of 6. But this&hellip;
-<b>var</b>
-x
-=
-2
-;
-alert
-(
-x
-&plus;
-y
-)
-;
-<b>var</b>
-y
-=
-4
-;
-This will give you an output of NaN. Since we are initializing the
+<b>var</b> bar = <b>function</b>(){};
+foo();
+</pre>
+<p><b>Limitations of Hoisting</b></p>
+<p>Initializing a variable can not be Hoisted or In simple JavaScript
+Hoists declarations not initialization.</p>
+<p>For example: The below scripts will give different outputs.</p>
+<pre>
+<b>var</b> x = 2;
+<b>var</b> y = 4;
+alert(x &plus; y);
+</pre>
+<p>This will give you an output of 6. But this&hellip;</p>
+<pre>
+<b>var</b> x = 2;
+alert(x &plus; y);
+<b>var</b> y = 4;
+</pre.
+<p>This will give you an output of NaN. Since we are initializing the
 value of y, the JavaScript Hoisting is not happening, so the y value
 will be undefined. The JavaScript will consider that y is not yet
-declared.
-So the second example is same as of below.
-<b>var</b>
-x
-=
-2
-;
-<b>var</b>
-y
-;
-alert
-(
-x
-&plus;
-y
-)
-;
-y
-=
-4
-;
-This will give you an output of NaN.
-![](./images/image037.jpg){width="4.090277777777778in"
-height="2.1534722222222222in"}
+declared.</p>
+<p>So the second example is same as of below.</p>
+<pre>
+<b>var</b> x = 2;
+<b>var</b> y;
+alert(x &plus; y);
+y = 4;
+</pre>
+<p>This will give you an output of NaN.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~ 37. www.w3schools.com says NaN (315) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="/images/image037.jpg"
+  title="The page at www.w3schools.com says: NaN"
+  alt="The page at www.w3schools.com says: NaN"
+  style="border: 2px solid #000000; width:4in;" />
+<!-- {width="4.090277777777778in" height="2.1534722222222222in"} -->
+
+
