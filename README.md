@@ -18002,178 +18002,105 @@ source code, without any backslash-escapes being replaced.</p>
   console.log(&apos;strings:&apos;, strings);
   console.log(&apos;&hellip;substitutions:&apos;, substitutions);
 }
-example&grave;Hello &dollar;{&apos;world&apos;}.&bsol;&bsol;n&absol;&absol;nHow are you?&grave;;
-strings: &lbrack;&quot;Hello &quot;, &quot;&period;&absol;n&absol;How are you?&quot;, raw: &lbrack;&quot;Hello &quot;, &quot;&period&absol;&absol;n&absol;&absol;nHow are you?&quot;&rbrack;&rbrack;
+example&grave;Hello &dollar;{&apos;world&apos;}.&bsol;&bsol;n&bsol;&bsol;nHow are you?&grave;;
+strings: &lbrack;&quot;Hello &quot;, &quot;&period;&bsol;n&bsol;How are you?&quot;, raw: &lbrack;&quot;Hello &quot;, &quot;&period&bsol;&bsol;n&bsol;&bsol;nHow are you?&quot;&rbrack;&rbrack;
 substitutions: &lbrack;&quot;world&quot;&rbrack;
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch54-3">Section 54.3: Raw strings</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-String.raw
-The tag function can be used with template literals to access a
-version of their contents without interpreting any backslash escape
-sequences.
-String . raw&grave;&bsol;&bsol;n&grave;   will contain a backslash and the lowercase letter n,
-<b>&bsol;&bsol;n</b>
- while &grave;&bsol;&bsol;n&grave; or &apos;
-&apos; would contain a single newline character instead.
-<b>const</b>
-patternString
-=
-String
-.
-raw
-&grave;Welcome
-,
-(
-&bsol;&bsol;w
-&plus;
-)
-!
-&grave;
-;
-<b>const</b>
-pattern
-=
-<b>new</b>
-RegExp
-(
-patternString
-)
-;
-<b>const</b>
-message
-=
-&quot;Welcome, John!&quot;
-;
-pattern.
-exec
-(
-message
-)
-;
-&lbrack;
-&quot;Welcome, John!&quot;
-,
-&quot;John&quot;
-&rbrack;
+<p>The tag function can be used with template literals to access a version of their contents 
+without interpreting any backslash escape sequences.</p>
+<p>String .raw&grave;&bsol;n&grave; will contain a backslash and the lowercase letter n, while &grave;&bsol;n&grave;
+or &grave;&bsol;n&grave would contain a single newline character instead.</p>
+<pre>
+<b>const</b> patternString = String.raw&grave;Welcome, (&bsol;w)!&grave;;
+<b>const</b> pattern = <b>new</b> RegExp(patternString);
+<b>const</b> message = &quot;Welcome, John!&quot;;
+pattern.exec(message);
+&lbrack;&quot;Welcome, John!&quot;, &quot;John&quot;&rbrack;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch54-4">Section 54.4: Templating HTML With Template Strings</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-You can create an HTML&grave;&hellip;&grave; template string tag function to
+<p>You can create an HTML&grave;&hellip;&grave; template string tag function to
 automatically encodes interpolated values. (This requires that
 interpolated values are only used as text, and <b>may not be safe if
-interpolated values are used in code</b> such as scripts or styles.)
+interpolated values are used in code</b> such as scripts or styles.)</p>
+<pre>
+class HTMLString extends String {
+  static escape(text) {
+    if (text instanceof HTMLString) {
+	  return text;
+	}
+	return new HTMLString(
+	  String(text)
+	    .replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/"/g, '&quot;)
+		.replace(/\\/g, '&#39;');
+  }
+}
+function HTML(strings, ...substitutions) {
+  const escapedFlattenedSubstitutions =
+    substitutions.map(s =&gt; &lbrack;&rbrack;.concat(s).map(HTMLString.escape).join(''));
+  const pieces = &lbrack;&rbrack;;
+  for (const i of strings.key()) {
+    pieces.push(strings[i], escapedFlattenedSubstitutions [i] || '');
+  }
+  return new HTMLString(pieces.join(''));
+}
 
+const title = "Hello World";
+const iconSrc = "/images/logo.png";
+const names = ["John", "Jane", "Joe", "Jill"];
+document.body.innerHTML = HTML`
+  <h1><img src="${iconSrc}" /> ${title}</h1>
+  <ul> $(names.map(name => HTML `
+    <li?${name}</li>
+  `)} </ul>
+`;
+</pre>
 ![](./images/image036.png){width="7.486805555555556in"
 height="5.666666666666667in"}
-&lt;
-ul
-&gt;
-&dollar;
-{
-names.
-map
-(
-name
-=&gt;
-HTML&grave;
-&lt;
-li
-&gt;
-&dollar;
-{
-name
-}
-&lt;
-/
-li
-&gt;
-&grave;
-)
-}
-&lt;
-/
-ul
-&gt;
-&grave;
-;
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch54-5">Section 54.5: Introduction</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Template Literals act like strings with special features. They are
+<p>Template Literals act like strings with special features. They are
 enclosed by by the back-tick &grave;&grave; and can be spanned across multiple
-lines.
-
-Template Literals can contain embedded expressions too. These
-expressions are indicated by a &dollar; sign and curly braces {}
-
-// <i>A single line Template Literal*
-<b>var</b>
-aLiteral
-=
-&grave;single line string data&grave;
-;
+lines.</p>
+<p>Template Literals can contain embedded expressions too. These
+expressions are indicated by a &dollar; sign and curly braces {}</p>
+<pre>
+// <i>A single line Template Literal</i>
+<b>var</b> aLiteral = &grave;single line string data&grave;;
 // <i>Template Literal that spans across lines*
-<b>var</b>
-anotherLiteral
-=
-&grave;string data that spans
-across multiple lines of code&grave;
-;
-// <i>Template Literal with an embedded expression*
-<b>var</b>
-x
-=
-2
-;
-<b>var</b>
-y
-=
-3
-;
-<b>var</b>
-theTotal
-=
-&grave;The total is &dollar;
-{
-x
-&plus;
-y
-}
-&grave;
-;
-// <i>Contains &quot;The total is 5&quot;</i>
-// <i>Comparison of a string and a template literal*
-<b>var</b>
-aString
-=
-&quot;single line string data&quot;
-console.
-log
-(
-aString
-===
-aLiteral
-)
-// <i>Returns true*
-There are many other features of String Literals such as Tagged
+<b>var</b> anotherLiteral = &grave;string data that spans
+  across multiple lines of code&grave;;
+// <i>Template Literal with an embedded expression</i>
+<b>var</b> x = 2;
+<b>var</b> y = 3;
+<b>var</b> theTotal = &grave;The total is &dollar;{x &plus; y}&grave;;    // <i>Contains &quot;The total is 5&quot;</i>
+// <i>Comparison of a string and a template literal</i>
+<b>var</b> aString = &quot;single line string data&quot;
+console.log(aString === aLiteral)  // <i>Returns true</i>
+</pre>
+<p>There are many other features of String Literals such as Tagged
 Template Literals and Raw property. These are demonstrated in other
-examples.
+examples.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch55">Chapter 55: Fetch</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <table 
-|      | <b>Details</b>                                               |
-|  <b>Opt |                                                             |
-| ions</b> |                                                             |
-| method | The HTTP method to use for the request. ex: GET, POST, PUT, |
-|        | DELETE, HEAD. Defaults to GET.                              |
-| h      | A Headers object containing additional HTTP headers to      |
-| eaders | include in the request.                                     |
-| body   | The request payload, can be a string or a FormData object.  |
-|        | Defaults to <b>undefined</b>                                   |
+<b>Details</b>
+<b>Options</b> 
+method | The HTTP method to use for the request. ex: GET, POST, PUT,
+DELETE, HEAD. Defaults to GET.
+h   A Headers object containing additional HTTP headers to
+eaders include in the request.
+body   The request payload, can be a string or a FormData object.
+       Defaults to <b>undefined</b>
 no-cache
 cache The caching mode. <b>default</b>, reload,
 referrer The referrer of the request.
@@ -18185,73 +18112,25 @@ integrity metadata. Defaults to empty string.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch55-1">Section 55.1: Getting JSON data</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-// <i>get some data from stackoverflow*
-fetch
-(
-&quot;https://api.stackexchange.com/2.2/questions/featured?order=desc&sort=activity&site=stackover
-flow&quot;
-)
-.
-then
-(
-resp
-=&gt;
-resp.
-json
-(
-)
-)
-.
-then
-(
-json
-=&gt;
-console.
-log
-(
-json
-)
-)
-.
-<b>catch</b>
-(
-err
-=&gt;
-console.
-log
-(
-err
-)
-)
-;
+<pre>
+// <i>get some data from stackoverflow</i>
+fetch(&quot;https://api.stackexchange.com/2.2/questions/featured?order=desc&sort=activity&site=stackover
+flow&quot;)
+  .then(resp =&gt; resp.json())
+  .then(json =&gt; console.log(json))
+  .<b>catch</b>(err =&gt; console.log(err));
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch55-2">Section 55.2: Set Request Headers</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-fetch
-(
-&apos;/example.json&apos;
-,
-{
-headers
-:
-<b>new</b>
-Headers
-(
-{
-&apos;Accept&apos;
-:
-&apos;text/plain&apos;
-,
-&apos;X-Your-Custom-Header&apos;
-:
-&apos;example value&apos;
-}
-)
-}
-)
-;
+<pre>
+fetch(&apos;/example.json&apos;, {
+  headers: <b>new</b> Headers({
+    &apos;Accept&apos; : &apos;text/plain&apos;,
+    &apos;X-Your-Custom-Header&apos;: &apos;example value&apos;
+  })
+});
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch55-3">Section 55.3: POST Data</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
