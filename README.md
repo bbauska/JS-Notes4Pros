@@ -18841,7 +18841,7 @@ import &ast; as myModule from &apos;./my-module.js&apos;;
 myModule.PI;                   // <i>3.14</i>
 myModule.doSomething();        // <i>&apos;Hello from a module!&apos;</i>
 myModule.doSomethingElse();    // <i>&apos;Something else&apos;</i>
-<b>new</b> myModule.MyClass(); // <i>an instance of MyClass</i>
+<b>new</b> myModule.MyClass();       // <i>an instance of MyClass</i>
 myModule.somethingPrivate();   // <i>This would fail since somethingPrivate was not exported</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
