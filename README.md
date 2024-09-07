@@ -1775,13 +1775,11 @@ results &hellip;</p>
   <blockquote>
   &quot;object&quot;
   </blockquote></li>
-
   <li><b>Function</b><br/>
   <b>typeof</b> <b>function</b>(){}
   <blockquote>
   &quot;function&quot;
   </blockquote></li>
-
   <li><b>Undefined</b><br/>
   <b>var</b> var1; <b>typeof</b> var1
   <blockquote>
@@ -1793,7 +1791,6 @@ results &hellip;</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>To find whether an object was constructed by a certain constructor or
 one inheriting from it, you can use the <b>instanceof</b> command:</p>
-
 <pre>
 //<i>We want this function to take the sum of the numbers passed to it</i>
 //<i>It can be called as sum(1, 2, 3) or sum(&lbrack;1, 2, 3&rbrack;) and should give 6</i>
@@ -1810,7 +1807,6 @@ console.log(sum (1, 2, 3))   //<i>6</i>
 console.log(sum (&lbrack;1, 2, 3&rbrack;)) //<i>6</i>
 console.log(sum (4))         //<i>4</i>
 </pre>
-
 <p>Note that primitive values are not considered instances of any class:</p>
 <pre>
 console.log(2 <b>instanceof</b> Number)          //<i>false</i>
@@ -1818,17 +1814,14 @@ console.log(&apos;abc&apos; <b>instanceof</b> String)      //<i>false</i>
 console.log(<b>true</b> <b>instanceof</b> Boolean)     //<i>false</i>
 console.log(Symbol() <b>instanceof</b> Symbol)  //<i>false</i>
 </pre>
-
 <p>Every value in JavaScript besides <b>null</b> and <b>undefined</b> also has
 a constructor property storing the function that was used to construct
 it. This even works with primitives.</p>
-
 <pre>
 //<i>Whereas instanceof also catches instances of subclasses,</i>
 //<i>using obj.constructor does not</i>
 console.log(&lbrack;&rbrack; <b>instanceof</b> Object, &lbrack;&rbrack; <b>instanceof</b> Array)            // <i>true true</i>
 console.log(&lbrack;&rbrack;.constructor === Object, &lbrack;&rbrack;.constructor === Array) // <i>false true</i>
-
 <b>function</b> isNumber(value) {
   // <i>null.constructor and <b>undefined.constructor</b> throw an error when accessed</i>
   <b>if</b> (value === <b>null</b> &vert;&vert; value === <b>undefined</b>)
@@ -1843,11 +1836,9 @@ console.log(isNumber(0), isNumber(Number(&apos;10.1&apos;)), isNumber(<b>NaN</b>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>When one with <b>typeof</b> operator one gets type object it falls into
 somewhat wast category&hellip;</p>
-
 <p>In practice you might need to narrow it down to what sort of &apos;object&apos; it actually 
 is and one way to do it is to use object constructor name to get what flavor of object it 
 actually is: Object.<b>prototype</b>.toString.call(yourObject)</p>
-
 <ol type="1" start="1">
   <li><b>String</b><br/>
     Object.<b>prototype</b>.toString.call(&quot;String&quot;)<br/>
@@ -1916,91 +1907,66 @@ actually is: Object.<b>prototype</b>.toString.call(yourObject)</p>
 <p>Strings in JavaScript can be enclosed in Single quotes &apos;hello&apos;,
 Double quotes &quot;Hello&quot; and (from ES2015, ES6) in Template Literals
 (<i>backticks</i>) &grave;hello&grave;.</p>
-
 <pre>
 <b>var</b> hello = &quot;Hello&quot;;
 <b>var</b> world = &apos;world&apos;;
 <b>var</b> helloW = &grave;Hello World&grave;; // <i>ES2015 / ES6</i>
 </pre>
-
 <p>String can be created from other types using the String() function.</p>
-
 <pre>
 <b>var</b> intString = String(32); // <i>&quot;32&quot;</i>
 <b>var</b> booleanString = String(<b>true</b>); // <i>&quot;true&quot;</i>
 <b>var</b> nullString = String(<b>null</b>); // <i>&quot;null&quot;</i>
 </pre>
-
 <p>Or, toString() can be used to convert Numbers, Booleans or Objects to Strings.</p>
-
 <pre>
 <b>var</b> intString = (5232).toString(); // <i>&quot;5232&quot;</i>
 <b>var</b> booleanString = (<b>false</b>).toString(); // <i>&quot;false&quot;</i>
 <b>var</b> objString = ({}).toString(); // <i>&quot;&lbrack;object Object&rbrack;&quot;</i>
 </pre>
-
 <p>Strings also can be created by using String.fromCharCode method.</p>
-
 <pre>
 String.fromCharCode(104,101,108,108,111)  // <i>&quot;hello&quot;</i>
 </pre>
-
 <p>Creating a String object using <b>new</b> keyword is allowed, but is not recommended as 
 it behaves like Objects unlike primitive strings.</p>
-
 <pre>
 <b>var</b> objectString = <b>new</b> String(&quot;Yes, I am a String object&quot;);
 <b>typeof</b> objectString; // <i>&quot;object&quot;</i>
 <b>typeof</b> objectString.valueOf(); // <i>&quot;string&quot;</i>
 </pre>
-
 <p><b>Concatenating Strings</b></p>
-
 <p>String concatenation can be done with the + concatenation operator, or with the built-in concat() 
 method on the String object prototype.</p>
-
 <pre>
 <b>var</b> foo = &quot;Foo&quot;;
 <b>var</b> bar = &quot;Bar&quot;;
 console.log(foo &plus; bar);      // <i>=&gt;&quot;FooBar&quot;</i>
 console.log(foo &plus; &quot; &quot;&plus; bar);  // <i>=&gt;&quot;Foo Bar&quot;</i>
-
 foo.concat(bar)               // <i>=&gt;&quot;FooBar&quot;</i>
 &quot;a&quot;.concat(&quot;b&quot;, &quot; &quot;, &quot;d&quot;) // <i>=&gt;&quot;ab d&quot;</i>
 </pre>
-
 <p>Strings can be concatenated with non-string variables but will type-convert the non-string variables into strings.</p>
-
 <pre>
 <b>var</b> string = &quot;string&quot;;
 <b>var</b> number = 32;
 <b>var</b> boolean = <b>true</b>;
-
 console.log(string &plus; number &plus; boolean); // <i>&quot;string32true&quot;</i>
 </pre>
-
 <p><b>String Templates</b></p>
-
 <!-- page 38 -->
 <h5>Version ≥ 6</h5>
-
 <p>Strings can be created using template literals (<i>backticks</i>) &grave;hello&grave;.</p>
-
 <pre>
 <b>var</b> greeting = &grave;Hello&grave;;
 </pre>
-
 <p>With template literals, you can do string interpolation using &dollar;{variable} inside template literals:</p>
-
 <pre>
 <b>var</b> place = &grave;World&grave;; 
 <b>var</b> greet = &grave;Hello &dollar;{place}!&grave;
-
 console.log(greet); // <i>&quot;Hello World!&quot;</i>
 </pre>
-
 <p>You can use String.raw to get backslashes to be in the string without modification.</p>
-
 <pre>
 &grave;a&bsol;&bsol;b&grave; // <i>= a&bsol;b</i>
 String.raw&grave;a&bsol;&bsol;b&grave;  // <i>= a&bsol;&bsol;b</i>
@@ -2010,14 +1976,12 @@ String.raw&grave;a&bsol;&bsol;b&grave;  // <i>= a&bsol;&bsol;b</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The most &quot;popular&quot; way of reversing a string in JavaScript is the following code 
 fragment, which is quite common:</p>
-
 <pre>
 <b>function</b> reverseString (str) {
   <b>return</b> str.split(&apos;&apos;).reverse().join(&apos;&apos;);
 }
 reverseString(&apos;string&apos;);   // <i>&quot;gnirts&quot;</i>
 </pre>
-
 <p>However, this will work only so long as the string being reversed does
 not contain surrogate pairs. Astral symbols, i.e. characters outside
 of the basic multilingual plane, may be represented by two code units,
@@ -2025,19 +1989,15 @@ and will lead this naive technique to produce wrong results. Moreover,
 characters with combining marks (e.g. diaeresis) will appear on the
 logical &quot;next&quot; character instead of the original one it was combined
 with.</p>
-
 <pre>
 &apos;?????.&apos;.split(&apos;&apos;).reverse().join(&apos;&apos;);  // <i>fails</i>
 </pre>
-
 <p>While the method will work fine for most languages, a truly accurate, encoding respecting 
 algorithm for string reversal is slightly more involved. One such implementation is a tiny 
 library called <a href="https://github.com/mathiasbynens/esreverwhich" 
 target="_blank" rel="noreferrer noopener">Esrever</a> uses regular expressions for matching 
 combining marks and surrogate pairs in order to perform the reversing perfectly.</p>
-
 <p><b>Explanation</b></p>
-
 <table border="1" style="width:500px">
   <thead>
     <tr>
@@ -2072,11 +2032,8 @@ combining marks and surrogate pairs in order to perform the reversing perfectly.
     </tr>
   </tbody>
 </table>
-
 <p><b>Using spread operator</b></p>
-
 <h5>Version ≥ 6</h5>
-
 <!-- page 39 -->
 <pre>
 <b>function</b> reverseString(str) {
@@ -2086,9 +2043,7 @@ console.log(reverseString(&apos;stackoverflow&apos;));  // <i>&quot;wolfrevokcat
 console.log(reverseString(1337));             // <i>&quot;7331&quot;</i>
 console.log(reverseString(&lbrack;1, 2, 3&rbrack;));       // <i>&quot;3,2,1&quot;</i>
 </pre>
-
 <p><b>Custom reverse() function</b></p>
-
 <pre>
 <b>function</b> reverse(string) {
   <b>var</b> strRev = &quot;&quot;;
@@ -2097,7 +2052,6 @@ console.log(reverseString(&lbrack;1, 2, 3&rbrack;));       // <i>&quot;3,2,1&quo
   }
   <b>return</b> strRev;
 }
-
 reverse&quot;zebra&quot;);  // <i>&quot;arbez&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2108,18 +2062,14 @@ reverse&quot;zebra&quot;);  // <i>&quot;arbez&quot;</i>
 target="_blank" rel="noreferrer noopener">localCompare()</a>. This returns a negative value 
 if the reference string is lexicographically (alphabetically) before the compared string (the parameter), 
 a positive value if it comes afterwards, and a value of 0 if they are equal.</p>
-
 <pre>
 <b>var</b> a = &quot;hello&quot;;
 <b>var</b> b = &quot;world&quot;;
-
 console.log(a&period;localeCompare(b)); // <i>-1</i>
 </pre>
-  
 <p>The &gt; and &lt; operators can also be used to compare strings lexicographically, but 
 they cannot return a value of zero (this can be tested with the == equality operator). As 
 a result, a form of the localCompare() function can be written like so:</p>
-
 <pre>
 <b>function</b> strcmp(a,b){
   <b>if</b>(a === b) {
@@ -2134,10 +2084,8 @@ console.log (strcmp (&quot;hello&quot;, &quot;world&quot;)); // <i>-1</i>
 console.log (strcmp(&quot;hello&quot;, &quot;hello&quot;));  // <i>0</i>
 console.log (strcmp(&quot;world&quot;, &quot;hello&quot;));  // <i>1</i>
 </pre>
-
 <p>This is especially useful when using a sorting function that compares based on the sign 
 of the return value (such as sort).</p>
-
 <pre>
 <b>var</b> arr = &lbrack;&quot;bananas&quot;, &quot;cranberries&quot;, &quot;apples&quot;&rbrack;;
 arr.sort (<b>function</b>(a, b) {
@@ -2151,30 +2099,24 @@ console.log(arr);  // <i>&lbrack; &quot;apples&quot;, &quot;bananas&quot;, &quot
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt" 
 target="_blank" rel="noreferrer noopener">charAt()</a> to get a character at the specified index in the string.</p>
-
 <pre>
 <b>var</b> string = &quot;Hello, World!&quot;;
 console.log( string.charAt(4) ); // <i>&quot;o&quot;</i>
 </pre>
-
 <p>Alternatively, because strings can be treated like arrays, use the index via 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors" 
 target="_blank" rel="noreferrer noopener">bracket notation</a>.</p>
-
 <pre>
 <b>var</b> string = &quot;Hello, World!&quot;;
 console.log ( string &lbrack;4&rbrack; ); // <i>&quot;o&quot;</i>
 </pre>
-
 <p>To get the character code of the character at a specified index, use 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt" 
 target="_blank" rel="noreferrer noopener">charCodeAt()</a>.</p>
-
 <pre>
 <b>var</b> string = &quot;Hello, World!&quot;;
 console.log( string. charCodeAt(4) ); // <i>111</i>
 </pre>
-
 <p>Note that these methods are all getter methods (return a value).
 Strings in JavaScript are immutable. In other words, none of them can
 be used to set a character at a position in the string.</p>
@@ -2183,45 +2125,34 @@ be used to set a character at a position in the string.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>If your string is enclosed (i.e.) in single quotes you need to escape the inner literal 
 quote with <i>backslash</i> &bsol;.</p>
-
 <pre>
 <b>var</b> text = &apos;L&bsol;&apos;albero means tree in Italian&apos;;
 console.log( text ); \\ &quot;L&apos;albero means tree in Italian&quot;
 </pre>
-
 <p>Same goes for double quotes:</p>
-
 <pre>
 <b>var</b> text = "I feel &bsol;"high&bsol;";
 </pre>
-
 <p>Special attention must be given to escaping quotes if you&apos;re storing
 HTML representations within a String, since HTML strings make large
 use of quotations i.e. in attributes:</p>
-
 <pre>
 <b>var</b> content = &quot;&lt;p class=<b>&bsol;&quot;special&bsol;&quot;&gt;</b>Hello World!&lt;/p&gt;; // <i>valid String</i>
 <b>var</b> hello   = &apos;&lt;p class=&quot;special&quot;&gt;I<b>&bsol;&apos;</b>d like to say &quot;Hi&quot;&lt;/p&gt;&apos;; // <i>valid String</i>
 </pre>
-  
 <p>Quotes in HTML strings can also be represented using &apos;(or &#39;) as a single quote 
 and &quot; (or &#34;) as double quotes.</p>
-
 <pre>
 <b>var</b> hi = &quot;&lt;p class=&apos;special&apos;&gt;I&apos;d like to say &quot;Hi&quot;&lt;/p&gt;&quot;; // <i>valid String</i>
 <b>var</b> hello = &apos;&lt;p class=&quot;special&quot;&gt;I&apos;d like to say &quot;Hi&quot;&lt;/p&gt;&apos;; // <i>valid String</i>
 </pre>
-  
 <p><i>Note:</i> The use of &; will not overwrite double quotes that browsers can 
 automatically place on attribute quotes. For example <b>&lt;p</b> class=special<b>&gt;</b> being made to <b>&lt;p</b> class="special"&gt;,
 using &quot; can lead to <b>&lt;p</b> class=""special""&gt; where &bsol;" will be &lt;p class="special"&gt;.</p>
-
 <h5>Version ≥ 6</h5>
-
 <p>If a string has &apos; and &quot; you may want to consider using template literals (<i>also 
 known as template strings in previous ES6 editions</i>), which do not require you to escape &apos; 
 and &quot;. These use backticks (&grave;) instead of single or double quotes.</p>
-
 <pre>
 <b>var</b> x = &grave;&quot;Escaping &quot; and &apos; can become very annoying&grave;;
 </pre>
@@ -2230,14 +2161,12 @@ and &quot;. These use backticks (&grave;) instead of single or double quotes.</p
 <h3 id="ch7-6">Section 7.6: Word Counter</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Say you have a <b>&lt;textarea&gt;</b> and you want to retrieve info about the number of:</p>
-
 <ul>
   <li>Characters (total)</li>
   <li>Characters (no spaces)</li>
   <li>Words</li>
   <li>Lines</li>
 </ul>
-
 <pre>
 <b>function</b> wordCount( val ){
   <b>var</b> wom = val.match(<i>/&bsol;&bsol;S+/g</i>);
@@ -2251,18 +2180,15 @@ and &quot;. These use backticks (&grave;) instead of single or double quotes.</p
 // <i>Use like:</i>
 wordCount( someMultilineText ).words;  // <i>(Number of words)</i>
 </pre>
-
 <p><a href="http://jsfiddle.net/RokoCB/5nfay7d1/206/" target="_blank" rel="noreferrer noopener">
 jsFiddle example</a>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-7">Section 7.7: Trim whitespace</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>To trim whitespace from the edges of a string, use String.prototype.trim:</p>
-
 <pre>
 &quot;   some whitespaced string   &quot;.trim();  // <i>&quot;some whitespaced string&quot;</i>
 </pre>
-
 <p>Many JavaScript engines, but 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/TrimLeft#Browser_compatibility" 
 target="_blank" rel="noreferrer noopener">not Internet Explorer</a>, have implemented 
@@ -2270,12 +2196,10 @@ non-standard trimLeft and trimRight methods. There is a <a href="https://github.
 target="_blank" rel="noreferrer noopener">proposal</a>, currently at Stage 1 of the process, 
 for standardised trimStart and trimEnd methods, aliased to trimLeft and trimRight for 
 compatibility.</p>
-
 <pre>
 // <i>Stage 1 proposal</i>
 &quot;    this is me    &quot;.trimStart();  // <i>&quot;this is me    &quot;</i>
 &quot;    this is me    &quot;.trimEnd();  // <i>&quot;    this is me&quot;</i>
-
 // <i>Non-standard methods, but currently implemented by most engines</i>
 &quot;    this is me    &quot;.trimLeft();  // <i>&quot;this is me    &quot;</i>
 &quot;    this is me    &quot;.trimRight();  // <i>&quot;    this is me&quot;</i>
@@ -2284,14 +2208,11 @@ compatibility.</p>
 <h3 id="ch7-8">Section 7.8: Splitting a string into an array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Use .split to go from strings to an array of the split substrings:</p>
-
 <pre>
 <b>var</b> s = &quot;one, two, three, four, five&quot;
 s&period;split(&quot;, &quot;);  // <i>&lbrack;&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;, &quot;five&quot;&rbrack;</i>
 </pre>
-
 <p>Use the <b>array method</b>.join to go back to a string:</p>
-
 <pre>
 s&period;split(&quot;, &quot;).join(&quot;&minus;&minus;&quot;);  // <i>&quot;one&minus;&minus;two&minus;&minus;three&minus;&minus;four&minus;&minus;five&quot;</i>
 </pre>
@@ -2300,19 +2221,16 @@ s&period;split(&quot;, &quot;).join(&quot;&minus;&minus;&quot;);  // <i>&quot;on
 <h3 id="ch7-9">Section 7.9: Strings are unicode</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><b>All JavaScript strings are unicode!</b></p>
-
 <pre>
 <b>var</b> s = &quot;some ∆≈ƒ unicode ¡™£¢¢¢&quot;;
 s&period;charCodeAt(5);  // <i>8710</i>
 </pre>
-
 <p>There are no raw byte or binary strings in JavaScript. To effectively handle binary 
 data, use Typed Arrays.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch7-10">Section 7.10: Detecting a string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>To detect whether a parameter is a <i>primitive</i> string, use <b>typeof</b>:</p>
-
 <pre>
 <b>var</b> aString = &quot;my string&quot;;
 <b>var</b> anInt = 5;
@@ -2321,17 +2239,13 @@ data, use Typed Arrays.</p>
 <b>typeof</b> anInt === &quot;string&quot;;    // <i>false</i>
 <b>typeof</b> anObj === &quot;string&quot;;    // <i>false</i>
 </pre>
-
 <p>If you ever have a String object, via <b>new</b> String("somestr"), then the above will not 
 work. In this instance, we can use <b>instanceof</b>:</p>
-
 <pre>
 <b>var</b> aStringObj = <b>new</b> String(&quot;my string&quot;);
 aStringObj <b>instanceof</b> String;   // <i>true</i>
 </pre>
-
 <p>To cover both instances, we can write a simple helper function:</p>
-
 <pre>
 <b>var</b> isString = <b>function</b>(value) {
   <b>return</b> <b>typeof</b> value === &quot;string&quot; &vert;&vert; value <b>instanceof</b> String;
@@ -2343,26 +2257,21 @@ isString(aStringObj); // <i>true</i>
 isString({}); // <i>false</i>
 isString(5); // <i>false</i>
 </pre>
-
 <p>Or we can make use of toString function of Object. This can be useful
 if we have to check for other types as well say in a switch statement,
 as this method supports other datatypes as well just like <b>typeof</b>.</p>
-
 <pre>
 <b>var</b> pString = &quot;Primitive String&quot;;
 <b>var</b> oString = <b>new</b> String(&quot;Object Form of String&quot;);
 Object.<b>prototype</b>.toString.call(pString);  // <i>&quot;&lbrack;object String&rbrack;&quot;</i>
 Object.<b>prototype</b>.toString.call(oString);  // <i>&quot;&lbrack;object String&rbrack;&quot;</i>
 </pre>
-
 <p>A more robust solution is to not <i>detect</i> a string at all, rather only check for what 
 functionality is required. For example:</p>
-
 <pre>
 <b>var</b> aString = &quot;Primitive String&quot;;
 // <i>Generic check for a substring method</i>
 <b>if</b>(aString.substring) {
-
 }
 // <i>Explicit check for the String substring prototype method</i>
 <b>if</b>(aString.substring === String.<b>prototype</b>.substring) {
@@ -2374,15 +2283,12 @@ functionality is required. For example:</p>
 <h3 id="ch7-11">Section 7.11: Substrings with slice</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Use slice.() to extract substrings given two indices:</p>
-
 <pre>
 <b>var</b> s = &quot;0123456789abcdefg&quot;;
 s&period;slice (0, 5);  // <i>&quot;01234&quot;</i>
 s&period;slice (5, 6);  // <i>&quot;5&quot;</i>
 </pre>
-
 <p>Given one index, it will take from that index to the end of the string:</p>
-
 <pre>
 s&period;slice(10);  // <i>&quot;abcdefg&quot;</i>
 </pre>
@@ -2390,25 +2296,19 @@ s&period;slice(10);  // <i>&quot;abcdefg&quot;</i>
 <h3 id="ch7-12">Section 7.12: Character code</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The method charCodeAt retrieves the Unicode character code of a single character:</p>
-
 <pre>
 <b>var</b> charCode = &quot;µ&quot;.charCodeAt(); // <i>The character code of the letter µ is 181</i>
 </pre>
-
 <p>To get the character code of a character in a string, the 0-based
 position of the character is passed as a parameter to charCodeAt:</p>
-
 <pre>
 <b>var</b> charCode = &quot;ABCDE&quot;.charCodeAt(3); // <i>The character code of &quot;D&quot; is 68</i>
 </pre>
-
 <h5>Version ≥ 6</h5>
-
 <p>Some Unicode symbols don&apos;t fit in a single character, and instead
 require two UTF-16 surrogate pairs to encode. This is the case of
 character codes beyond 216 - 1 or 63553. These extended character
 codes or <i>code point</i> values can be retrieved with codePointAt:</p>
-
 <pre>
 // <i>The Grinning Face Emoji has code point 128512 or 0x1F600</i>
 <b>var</b> codePoint = &quot;????&quot;.codePointAt();
@@ -2417,31 +2317,24 @@ codes or <i>code point</i> values can be retrieved with codePointAt:</p>
 <h3 id="ch7-13">Section 7.13: String Representations of Numbers</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>JavaScript has native conversion from <i>Number</i> to its <i>String representation</i> for any base from <i>2 to 36</i>.</p>
-
 <p>The most common representation after <i>decimal (base 10)</i> is
 <i>hexadecimal (base 16)</i>, but the contents of this section work for all
 bases in the range.</p>
-
 <p>In order to convert a <i>Number</i> from decimal (base 10) to its
 hexadecimal (base 16) <i>String representation</i> the <i>toString</i> method
 can be used with <i>radix 16</i>.</p>
-
 <pre>
 // <i>base 10 Number</i>
 <b>var</b> b10 = 12;
-
 // <i>base 16 String representation</i>
 <b>var</b> b16 = b10.toString(16); // <i>&quot;c&quot;</i>
 </pre>
-
 <p>If the number represented is an integer, the inverse operation for
 this can be done with parseInt and the <i>radix 16</i> again.</p>
-
 <!-- page 44 -->
 <pre>
 // <i>base 16 String representation</i>
 <b>var</b> b16 = &apos;c&apos;;
-
 // <i>base 10 Number</i>
 <b>var</b> b10 = parseInt(b16, 16); // <i>12</i>
 </pre>
@@ -2451,22 +2344,17 @@ representation</i> into a <i>Number</i>, the operation must be split into two
 parts; the integer part and the fraction part.</p>
 
 <h5>Version ≥ 6</h5>
-
 <pre>
 <b>let</b> b16 = &apos;3.243f3e0370cdc&apos;;
 // <i>Split into integer and fraction parts</i>
 <b>let</b> &lbrack;i16, f16&rbrack; = b16.split(&apos;.&apos;);
-
 // <i>Calculate base 10 integer part</i>
 <b>let</b> i10 = parseInt(i16, 16);  // <i>3</i>
-
 // <i>Calculate the base 10 fraction part</i>
 <b>let</b> f10 = parseInt(f16, 16) / Math.pow(16, f16.length); // <i>0.14158999999999988</i>
-
 // <i>Put the base 10 parts together to find the Number</i>
 <b>let</b> b10 = i10 &plus; f10; // <i>3.14159</i>
 </pre>
-
 <p><b>Note 1:</b> Be careful as small errors may be in the result due to
 differences in what is possible to be represented in different bases.
 It may be desirable to perform some kind of rounding afterwards.<br/>
@@ -2477,68 +2365,52 @@ environment the conversions are happening in.</p>
 <h3 id="ch7-14">Section 7.14: String Find and Replace Functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>To search for a string inside a string, there are several functions:</p>
-
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf">
 indexOf( searchString ) <b>and</b> lastIndexOf( searchString )</a></p>
-
 <p>indexOf() will return the index of the first occurrence of searchString in
 the string. If searchString is not found, then -1 is returned.</p>
-
 <pre>
 <b>var</b> string = &quot;Hello, World!&quot;;
 console.log( string.indexOf(&quot;o&quot;));  // <i>4</i>
 console.log( string.indexOf(&quot;foo&quot;) ); // <i>-1</i>
 </pre>
-
 <p>Similarly, lastIndexOf() will return the index of the last occurrence of
 searchstring or -1 if not found.</p>
-
 <pre>
 <b>var</b> string = &quot;Hello, World!&quot;; 
 console.log( string.lastIndexOf(&quot;o&quot;));    // <i>8</i>
 console.log( string.lastIndexOf(&quot;foo&quot;));  // <i>-1</i>
 </pre>
-
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes">
 includes( searchString, start )</a></p>
-
 <p>includes() will return a boolean that tells whether searchString exists in the
 string, starting from index start (defaults to 0). This is better than
 () if you simply need to test for existence of a substring.</p>
-
 <pre>
 <b>var</b> string = &quot;Hello, World!&quot;;
 console.log( string.includes(&quot;Hello&quot;) ); // <i>true</i>
 console.log( string.includes(&quot;foo&quot;));   // <i>false</i>
 </pre>
 <!-- page 45 -->
-
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace">
 replace( regexp|substring, replacement|replaceFunction )</a></p>
-
 <p>replace() will return a string that has all occurrences of substrings matching the 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp" 
 target="_blank" rel="noreferrer noopener">RegExp</a> regexp or string substring with a string 
 replacement or the returned value of replaceFunction.</p>
-
 <p>Note that this does not modify the string in place, but returns the
 string with replacements.</p>
-
 <pre>
 <b>var</b> string = &quot;Hello, World!&quot;;
 string = string.replace( &quot;Hello&quot;, &quot;Bye&quot; );
 console.log( string ); // <i>&quot;Bye, World!&quot;</i>
-
 string = string.replace( <i>/W.{3}d/g</i>, &quot;Universe&quot; );
 console.log( string ); // <i>&quot;Bye, Universe!&quot;</i>
 </pre>
-
 <p>replaceFunction can be used for conditional replacements for regular
 expression objects (i.e., with use with regexp). The parameters are in
 the following order:</p>
-
 <p><b>Parameter Meaning</b></p>
-
 <table border="1" style="width:200px">
   <thead>
     <tr>
@@ -2565,15 +2437,12 @@ the following order:</p>
     </tr>
   </tbody>
 </table>
-
 <p>Note that all parameters are optional.</p>
-
 <pre>
 <b>var</b> string = &quot;heLlo, woRlD!&quot;;
 string = string.replace( <i>/(&lbrack;a-zA-Z&rbrack;)(&lbrack;a-zA-Z&rbrack;+)/g</i>, <b>function</b>(match, g1, g2) {
   <b>return</b> g1.toUpperCase() &plus; g2.toLowerCase();
 });
-
 console.log( string );  // <i>&quot;Hello, World!&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2581,20 +2450,15 @@ console.log( string );  // <i>&quot;Hello, World!&quot;</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The .indexOf method returns the index of a substring inside another string (if exists, 
 or -1 if otherwise)</p>
-
 <pre>
 &apos;Hellow World&apos;.indexOf(&apos;Wor&apos;);  // <i>7</i>
 </pre>
-
 <p>.indexOf also accepts an additional numeric argument that indicates on what index 
 should the function start looking</p>
-
 <pre>
 &quot;harr dee harr dee harr&quot; .indexOf(&quot;dee&quot;, 10); // <i>14</i>
 </pre>
-
 <p>You should note that .indexOf is case sensitive</p>
-
 <pre>
 &apos;Hellow World&apos; .indexOf(&apos;WOR&apos;);  // <i>-1</i>
 </pre>
@@ -2604,7 +2468,6 @@ should the function start looking</p>
 <blockquote>
 String.prototype.toUpperCase():
 </blockquote>
-
 <pre>
 console.log(&apos;qwerty&apos;.toUpperCase()); // <i>&apos;QWERTY&apos;</i>
 </pre>
@@ -2613,7 +2476,6 @@ console.log(&apos;qwerty&apos;.toUpperCase()); // <i>&apos;QWERTY&apos;</i>
 <h3 id="ch7-17">Section 7.17: String to Lower Case</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>String.prototype.toLowerCase()</p>
-
 <pre>
 console.log(&apos;QWERTY&apos;.toLowerCase());  // <i>&apos;qwerty&apos;</i>
 </pre>
@@ -2630,19 +2492,15 @@ target="_blank" rel="noreferrer noopener">.repeat()</a> method:</p>
 &quot;abc&quot;.repeat(0);   // <i>Returns &quot;&quot;</i>
 &quot;abc&quot;.repeat(&minus;1);  // <i>Throws a RangeError</i>
 </pre>
-
 <h5>Version &lt; 6</h5>
-
 <p>In the general case, this should be done using a correct polyfill for
 the ES6 <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-string.prototype.repeat" 
 target="_blank" rel="noreferrer noopener">
 String.prototype.repeat()</a> method. Otherwise, the idiom <b>new</b> Array(n &plus; 1).join(myString) 
 can repeat n times the string myString:</p>
-
 <pre>
 <b>var</b> myString = &quot;abc&quot;;
 <b>var</b> n = 3;
-
 <b>new</b> Array(n &plus; 1).join(myString);  // <i>Returns &quot;abcabcabc&quot;</i>
 </pre>
 <!-- page 47 -->
@@ -2699,7 +2557,6 @@ can repeat n times the string myString:</p>
 <h3 id="ch8-1">Section 8.1: Create a new Date object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>To create a new Date object use the () constructor:</p>
-
 <ul>
   <li><b>with no arguments</b><br/><br/>
     Date() creates a Date instance containing the current time (up to milliseconds) and date.<br/><br/></li>
@@ -2716,9 +2573,7 @@ can repeat n times the string myString:</p>
     in JavaScript, so 0 means January and 11 means December. Example: new Date(2017, 5, 1) gives 
     <i>June 1st, 2017</i>.<br/></li>
 </ul>
-
 <p><b>Exploring dates</b></p>
-
 <p>Note that these examples were generated on a browser in the Central
 Time Zone of the US, during Daylight Time, Date.<b>prototype</b>.toISOString
 as evidenced by the code. Where comparison with UTC was instructive, 
@@ -2732,46 +2587,38 @@ Date.prototype.toISOString() was used to show the date and time in UTC
 now.toString() === &apos;Mon Apr 11 2016 16:10:41 GMT-0500 (Central Daylight Time)&apos; 
 // <i>true</i>
 // <i>well, at the time of this writing, anyway</i>
-
 // <i>Creates a Date object at the Unix Epoch (i.e., &apos;1970-01-01T00:00:00.000Z&apos;)</i>
 <b>var</b> epoch = <b>new</b> Date(0);
 epoch.toISOString() === &apos;1970-01-01T00:00:00.000Z&apos; // <i>true</i>
-
 // <i>Creates a Date object with the date and time 2,012 milliseconds</i>
 // <i>after the Unix Epoch (i.e., &apos;1970-01-01T00:00:02.012Z&apos;).</i>
 <b>var</b> ms = <b>new</b> Date(2012);
 date2012.toISOString() === &apos;1970-01-01T00:00:02.012Z&apos; // <i>true</i>
-
 // <i>Creates a Date object with the first day of February of the year 2012</i>
 // <i>in the local timezone.</i>
 <b>var</b> one = <b>new</b> Date(2012, 1);
 one.toString() === &apos;Wed Feb 01 2012 00:00:00 GMT-0600 (Central Standard Time)&apos;
 // <i>true</i>
-
 // <i>Creates a Date object with the first day of the year 2012 in the local</i>
 // <i>timezone.</i>
 // <i>(Months are zero-based)</i>
 <b>var</b> zero = <b>new</b> Date(2012, 0);
 zero.toString() === &apos;Sun Jan 01 2012 00:00:00 GMT-0600 (Central Standard Time)&apos;
 // <i>true</i>
-
 // <i>Creates a Date object with the first day of the year 2012, in UTC.</i>
 <b>var</b> utc = <b>new</b> Date(Date.UTC(2012, 0));
 utc.toString() === &apos;Sat Dec 31 2011 18:00:00 GMT-0600 (Central Standard Time)&apos;
 // <i>true</i>
 utc.toISOString() === &apos;2012-01-01T00:00:00.000Z&apos;
 // <i>true</i>
-
 // <i>Parses a string into a Date object (ISO 8601 format added in ECMAScript 5.1)</i>
 // <i>Implementations should assumed UTC because of ISO 8601 format and Z designation</i>
 <b>var</b> iso = <b>new</b> Date(&apos;2012-01-01T00:00:00.000Z&apos;);
 iso.toISOString() === &apos;2012-01-01T00:00:00.000Z&apos; <i>// true</i>
-
 // <i>Parses a string into a Date object (RFC in JavaScript 1.0)</i>
 <b>var</b> local = <b>new</b> Date(&apos;Sun, 01 Jan 2012 00:00:00 -0600&apos;);
 local.toString() === &apos;Sun Jan 01 2012 00:00:00 GMT-0600 (Central Standard Time)&apos;
 // <i>true</i>
-
 // <i>Parses a string in no particular format, most of the time. Note that parsing</i>
 // <i>logic in these cases is very implementation-dependent, and therefore can vary</i>
 // <i>across browsers and versions.</i>
@@ -2779,7 +2626,6 @@ local.toString() === &apos;Sun Jan 01 2012 00:00:00 GMT-0600 (Central Standard T
 anything.toString() === &apos;Mon Nov 12 2012 00:00:00 GMT-0600 (Central Standard Time)&apos;
 // <i>true, in Chrome 49 64-bit on Windows 10 in the en-US locale. Other versions in
 // other locales may get a different result.</i>
-
 // <i>Rolls values outside of a specified range to the next value.</i>
 <b>var</b> rollover = <b>new</b> Date(2012, 12, 32, 25, 62, 62, 1023);
 rollover.toString() === &apos;Sat Feb 02 2013 02:03:03 GMT-0600 (Central Standard Time)&apos;
@@ -2790,7 +2636,6 @@ rollover.toString() === &apos;Sat Feb 02 2013 02:03:03 GMT-0600 (Central Standar
 <b>var</b> special1 = <b>new</b> Date(12, 0);
 special1.toString() === &apos;Mon Jan 01 1912 00:00:00 GMT-0600 (Central Standard Time)&grave;
 // true
-
 // If you actually wanted to set the year to the year 12 CE, you&apos;d need to use the
 // <i>setFullYear() method:</i>
 special1.setFullYear(12);
@@ -2802,29 +2647,22 @@ special1.toString() === &apos;Sun Jan 01    12 00:00:00 GMT-0600 (Central Standa
 <h3 id="ch8-2">Section 8.2: Convert to a string format</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><b>Convert to String</b></p>
-
 <pre>
 <b>var</b> date1 = <b>new</b> Date();
 date1.toString();
 </pre>
-
 <blockquote>
 Returns: &quot;Fri Apr 15 2016 07:48:48 GMT-0400 (Eastern Daylight Time)&quot;
 </blockquote>
-
 <p><b>Convert to Time String</b></p>
-
 <pre>
 <b>var</b> date1 = <b>new</b> Date();
 date1.toTimeString();
 </pre>
-
 <blockquote>
 Returns: &quot;07:48:48 GMT-0400 (Eastern Daylight Time)&quot;
 </blockquote>
-
 <p><b>Convert to Date String</b></p>
-
 <pre>
 <b>var</b> date1 = <b>new</b> Date();
 date1.toDateString();
@@ -2832,83 +2670,62 @@ date1.toDateString();
 <blockquote>
 Returns: &quot;Thu Apr 14 2016&quot;
 </blockquote>
-
 <p><b>Convert to UTC String</b></p>
-
 <pre>
 <b>var</b> date1 = <b>new</b> Date ();
 date1.toUTCString ();
 </pre>
-
 <blockquote>
 Returns: &quot;Fri, 15 Apr 2016 11:48:48 GMT&quot;
 </blockquote>
-
 <p><b>Convert to ISO String</b></p>
-
 <pre>
 <b>var</b> date1 = <b>new</b> Date ();
 date1.toISOString ();
 </pre>
-
 <blockquote>
 Returns: &quot;2016-04-14T23:49:08.596Z&quot;
 </blockquote>
-
 <p><b>Convert to GMT String</b></p>
 <pre>
 <b>var</b> date1 = <b>new</b> Date ( ) ;
 date1.toGMTString ( ) ;
 </pre>
-
 <blockquote>
 <p>Returns: &quot;Thu, 14 Apr 2016 23:49:08 GMT&quot;
 </blockquote>
-
 <p>This function has been marked as deprecated so some browsers may not
 support it in the future. It is suggested to use toUTCString()
 instead.</p>
-
 <p><b>Convert to Locale Date String</b></p>
-
 <pre>
 <b>var</b> date1 = <b>new</b> Date ( ) ;
 date1.toLocaleDateString ( ) ;
 </pre>
-
 <blockquote>
 <p>Returns: &quot;4/14/2016&quot;</p>
 </blockquote>
-
 <p>This function returns a locale sensitive date string based upon the
 user&apos;s location by default.</p>
-
 <pre>
 date1.toLocaleDateString(&lbrack;locales&lbrack;, options &rbrack;&rbrack;)
 </pre>
-
 <p>can be used to provide specific locales but is browser implementation
 specific. For example,</p>
-
 <pre>
 date1.toLocaleDateString(&lbrack; &quot;zh&quot; , &quot;en-US&quot; &rbrack; );
 </pre>
-
 <p>would attempt to print the string in the Chinese locale using United
 States English as a fallback. The options parameter can be used to
 provide specific formatting. For example:</p>
-
 <pre>
 <b>var</b> options = { weekday: &apos;long&apos;, year: &apos;numeric&apos;, month: &apos;long&apos;, day: &apos;numeric&apos; }; 
 date1.toLocaleDateString(&lbrack;&rbrack;, options);
 </pre>
-
 <p>would result in</p>
-
 <pre>
 &quot;Thursday, April 14, 2016&quot;.
 </pre>
-
 <p>See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#Example:_Checking_for_support_for_locales_and_options_arguments" 
 target="_blank" rel="noreferrer noopener">the MDN</a> for more details.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -2919,25 +2736,20 @@ desirable, for example when communicating a date between a server and
 a client that do not reside in the same timezone. In this scenario,
 one doesn&apos;t want to worry about timezones at all until the date needs
 to be displayed in local time, if that is even required at all.</p>
-
 <p><b>The problem</b></p>
-
 <p>In this problem we want to communicate a specific date (day, month,
 year) with someone in a different timezone. The first implementation
 naively uses local times, which results in wrong results. The second
 implementation uses UTC dates to avoid timezones where they are not
 needed.</p>
-
 <p><b>Naive approach with WRONG results</b></p>
 <!-- page 51 -->
-
 <pre>
 <b>function</b> formatDate(dayOfWeek, day, month, year) {
   <b>var</b> daysOfWeek = &lbrack;&quot;Sun&quot;,&quot;Mon&quot;,&quot;Tue&quot;,&quot;Wed&quot;,&quot;Thu&quot;,&quot;Fri&quot;,&quot;Sat&quot;&rbrack;;
   <b>var</b> months = &lbrack;&quot;Jan&quot;, &quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dec&quot;&rbrack;;
   <b>return</b> daysOfWeek &lbrack;dayOfWeek &rbrack; &plus; &quot; &quot; &plus; months&lbrack;month&rbrack; &plus; &quot; &quot; &plus; day &plus; &quot; &quot; &plus; year;
 }
-
 // <i>Foo lives in a country with timezone GMT + 1</i>
 <b>var</b> birthday = <b>new</b> Date(2000, 0, 1);
 console.log(&quot;Foo was born on: &quot; &plus; formatDate(birthday.getDay(), birthday.getDate(),
@@ -2950,129 +2762,98 @@ sendToBar(birthday.getTime());
 Sample output:<br/><br/>
 Foo was born on: Sat Jan 1 2000
 </blockquote>
-
 <pre>
 // <i>Meanwhile somewhere else&hellip;</i>
-
 // <i>Bar lives in a country with timezone GMT - 1</i>
 <b>var</b> birthday = <b>new</b> Date(receiveFromFoo());
 console.log(&quot;Foo was born on: &quot; &plus; formatDate(birthday.getDay(), birthday.getDate(),
   birthday.getMonth(), birthday.getFullYear()));
 </pre>
-
 <blockquote>
 Sample output:<br/><br/>
 Foo was born on: Fri Dec 31 1999
 </blockquote>
-
 <p>And thus, Bar would always believe Foo was born on the last day of 1999.</p>
-
 <p><b>Correct approach</b></p>
-
 <pre>
 <b>function</b> formatDate(dayOfWeek, day, month, year) {
   <b>var</b> daysOfWeek = &lbrack;&quot;Sun&quot;,&quot;Mon&quot;,&quot;Tue&quot;,&quot;Wed&quot;,&quot;Thu&quot;,&quot;Fri&quot;,&quot;Sat&quot;&rbrack;;
   <b>var</b> months = &lbrack;&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dec&quot;&rbrack;;
   <b>return</b> daysOfWeek&lbrack;dayOfWeek&rbrack; &plus; &quot; &quot; &plus; months&lbrack;month&rbrack; &plus; &quot; &quot; &plus; day &plus; &quot; &quot; &plus; year;
 }
-
 // <i>Foo lives in a country with timezone GMT + 1</i>
 <b>var</b> birthday = <b>new</b> Date(Date.UTC(2000,0,1));
 console.log(&quot;Foo was born on: &quot; &plus; formatDate(birthday.getUTCDay(), birthday.getUTCDate(),
   birthday.getUTCMonth(), birthday.getUTCFullYear()));
-
 sendToBar (birthday.getTime());
 </pre>
-
 <blockquote>
 Sample output:<br/><br/>
 Foo was born on: Sat Jan 1 2000
 </blockquote>
-
 <pre>
 // <i>Meanwhile somewhere else&hellip;</i>
-
 // <i>Bar lives in a country with timezone GMT - 1</i>
 <b>var</b> birthday = <b>new</b> Date(receiveFromFoo());
 console.log(&quot;Foo was born on: &quot;&plus;formatDate(birthday.getUTCDay(), birthday.getUTCDate(),
   birthday.getUTCMonth(), birthday.getUTCFullYear()));
 </pre>
-
 <!-- page 52 -->
-
 <blockquote>
 Sample output:<br/><br/>
 Foo was born on: Sat Jan 1 2000
 </blockquote>
-
 <p><b>Creating a Date from UTC</b></p>
-
 <p>If one wants to create a Date object based on UTC or GMT, the ) method
 can be used. It uses the same arguments as the longest Date
 constructor. This method will return a number representing the time
 that has passed since January 1, 1970, 00:00:00 UTC.</p>
-
 <pre>
 console.log(Date.UTC(2000,0,31,12));
 </pre>
-
 <blockquote>
 Sample output:<br/><br/>
 949320000000
 </blockquote>
-
 <pre>
 <b>var</b> utcDate = <b>new</b> Date(Date.UTC(2000,0,31,12));
 console.log(utcDate);
 </pre>
-
 <blockquote>
 Sample output:<br/><br/>
 Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
 </blockquote>
-
 <p>Unsurprisingly, the difference between UTC time and local time is, in
 fact, the timezone offset converted to milliseconds.</p>
-
 <pre>
 <b>var</b> utcDate = <b>new</b> Date ( Date.UTC(2000,0,31,12));
 <b>var</b> localDate = <b>new</b> Date(2000,0,31,12);
-
 console.log(localDate&minus; utcDate === utcDate.getTimezoneOffset()&ast;60&ast;1000);
 </pre>
-
 <blockquote>
 Sample output: <b>true</b>
 </blockquote>
-
 <p><b>Changing a Date object</b></p>
-
 <p>All Date object modifiers, such as ) have an equivalent takes an argument in UTC time 
 rather than in local time.</p>
-
 <pre>
 <b>var</b> date = <b>new</b> Date();
 date.setUTCFullYear (2000, 0, 31);
 date.setUTCHours ( 12 , 0 , 0 , 0);
 console.log ( date );
 </pre>
-
 <blockquote>
 Sample output:<br/><br/>
 Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
 </blockquote>
-
 <p>The other UTC-specific modifiers are .setUTCMonth(), .setUTCDate() (for the day of the month), 
 setUTCMinutes(), .setUTCSeconds() and .setUTCMilliseconds().</p>
-
 <p><b>Avoiding ambiguity with getTime() and setTime()</b></p>
-
 <p>Where the methods above are required to differentiate between
 ambiguity in dates, it is usually easier to communicate a date as the
 amount of time that has passed since January 1, 1970, 00:00:00 UTC.
 This single number represents a single point in time, and can be
 converted to local time whenever necessary.</p>
-
 <pre>
 <b>var</b> date = <b>new</b> Date (Date.UTC(2000,0,31,12));
 <b>var</b> timestamp = date.getTime();
@@ -3080,21 +2861,17 @@ converted to local time whenever necessary.</p>
 <b>var</b> timestamp2 = Date.UTC( 2000, 0, 31, 12);
 console.log ( timestamp === timestamp2 );
 </pre>
-
 <blockquote>
 Sample output: <b>true</b>
 </blockquote>
-
 <pre>
 // <i>And when constructing a date from it elsewhere&hellip;</i>
 <b>var</b> otherDate = <b>new</b> Date(timestamp);
-
 // <i>Represented as a universal date</i>
 console.log ( otherDate. toUTCString ( ) );
 // <i>Represented as a local date</i>
 console.log ( otherDate );
 </pre>
-
 <blockquote>
 Sample output:<br/>
 <pre>
@@ -3107,21 +2884,16 @@ Mon Jan 31 2000 13:00:00 GMT+0100 (West-Europa (standaardtijd))
 <h3 id="ch8-4">Section 8.4: Formatting a JavaScript date</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><b>Formatting a JavaScript date in modern browsers</b></p>
-
 <p>In modern browsers (&ast;), <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString" 
 target="_blank" rel="noreferrer noopener">Date.prototype.toLocalDateString()</a> 
 allows you to define the formatting of a Date in a convenient manner.</p>
-
 <p>It requires the following format:</p>
-
 <pre>
 dateObj.toLocaleDateString(&lbrack; locales &lbrack;, options &rbrack; &rbrack;)
 </pre>
-
 <p>The locales parameter should be a string with a BCP 47 language tag, or an array of such strings.</p>
 <!-- page 54 -->
 <p>The options parameter should be an object with some or all of the following properties:</p>
-
 <ul>
   <li><b>localeMatcher</b>:possible values are &quot;lookup&quot; and &quot;best fit&quot;;
     the default is &quot;best fit&quot;</li>
@@ -3141,9 +2913,7 @@ dateObj.toLocaleDateString(&lbrack; locales &lbrack;, options &rbrack; &rbrack;)
   <li><b>second</b>:possible values are &quot;numeric&quot; & &quot;2-digit&quot;</li>
   <li><b>timeZoneName</b>:possible values are &quot;short&quot; & &quot;long&quot;</li>
 </ul>
-
 <p><b>How to use</b></p>
-
 <pre>
 <b>var</b> today = <b>new</b> Date().toLocaleDateString(&apos;en-GB&apos;,{
   day   : &apos;numeric&apos;,
@@ -3151,17 +2921,12 @@ dateObj.toLocaleDateString(&lbrack; locales &lbrack;, options &rbrack; &rbrack;)
   year  : &apos;numeric&apos;
 });
 </pre>
-
 <p>Output if executed on January 24 ʰ, 2036 :</p>
-
 <pre>
 &apos;24 Jan 2036&apos;
 </pre>
-
 <p><b>Going custom</b></p>
-  
 Date.<b>prototype</b>.toLocaleDateString
-
 <p>If Date.prototype.toLocalDateString() isn&apos;t flexible enough to fulfill whatever need you may have,
 you might want to consider creating a custom Date object that looks like this:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -3179,7 +2944,6 @@ you might want to consider creating a custom Date object that looks like this:</
 <!-- page 55 -->
 <p>If you included that code and executed new DateObject() on January 20 ʰ, 2019, it
 would produce an object with the following properties:</p>
-
 <pre>
 day: 20
 dayPadded: &quot;20&quot;
@@ -3188,19 +2952,14 @@ monthPadded: &quot;01&quot;
 monthName: &quot;January&quot;
 year: 2019
 </pre>
-
 <p>To get a formatted string, you could do something like this:</p>
-
 <pre>
 <b>new</b> DateObject().<b>get</b>(&lbrack;&apos;dayPadded&apos;, &apos;monthPadded&apos;, &apos;year&apos;&rbrack;);
 </pre>
-
 <p>That would produce the following output:</p>
-
 <pre>
 20-01-2016
 </pre>
-
 <p>(&ast;) <a href="http://programmers.stackexchange.com/questions/56490/what-does-nightly-builds-mean" 
 target="_blank" rel="noreferrer noopener">
 <b>According to the MDN</b></a>, &quot;modern browsers&quot; means Chrome 24+, Firefox 29+, 
@@ -3214,24 +2973,18 @@ target="_blank" rel="noreferrer noopener"><b>nightly build</b></a>.</p>
 since 1 January 1970 00:00:00 UTC. To get the number of milliseconds
 that have elapsed since that time using an instance of a Date object,
 use its getTime method.</p>
-
 <pre>// <i>get milliseconds using static method now of Date</i>
 console.log(Date.now());
-
 // <i>get milliseconds using method getTime of Date instance</i>
 console.log((<b>new</b> Date ( ) ) .getTime ());</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch8-6">Section 8.6: Get the current time and date</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Use <b>new</b> Date() to generate a new Date object containing the current date and time.</p>
-
 <p><i>Note that</i> Date() <i>called without arguments</i> is equivalent to</i> <b>new</b> Date(Date.now()).</p>
-
 <p>Once you have a date object, you can apply any of the several available methods to extract 
 its properties (e.g. getFullYear() to get the 4-digits year).</p>
-
 <p>Below are some common date methods.</p>
-
 <p><b>Get the current year</b></p>
 <pre>
 <b>var</b> year = (<b>new</b> Date()).getFullYear();
@@ -3245,67 +2998,54 @@ console.log(year);
 console.log(month);
 // <i>Sample output: 0</i>
 </pre>
-
 <p>Please note that 0 = January. This is because months range from <i>0</i> to
 <i>11</i>, so it is often desirable to add +1 to the index.</p>
-
 <p><b>Get the current day</b></p>
 <pre>
 <b>var</b> day = (<b>new</b> Date()).getDate();
 console.log(day);
 // <i>Sample output: 31</i>
 </pre>
-
 <p><b>Get the current hour</b></p>
 <pre>
 <b>var</b> hours = (<b>new</b> Date()).getHours();
 console.log(hours);
 // <i>Sample output: 10</i>
 </pre>
-
 <p><b>Get the current minutes</b></p>
 <pre>
 <b>var</b> minutes = (<b>new</b> Date()).getMinutes();
 console.log(minutes);
 // <i>Sample output: 39</i>
 </pre>
-
 <p><b>Get the current seconds</b></p>
 <pre>
 <b>var</b> seconds = (<b>new</b> Date()).getSeconds();
 console.log(second);
 // <i>Sample output: 48</i>
 </pre>
-
 <p><b>Get the current milliseconds</b></p>
-
 <p>To get the milliseconds (ranging from 0 to 999) of an instance of a
 Date object, use its getMilliseconds method.</p>
-
 <pre>
 <b>var</b> milliseconds = (<b>new</b> Date()).getMilliseconds();
 console.log(milliseconds);
 // <i>Output: milliseconds right now</i>
 </pre>
-
 <p><b>Convert the current time and date to a human-readable string</b></p>
-
 <pre>
 <b>var</b> now = <b>new</b> Date();
 // <i>convert date to a string in UTC timezone format:</i>
 console.log(now.toUTCString());
 // <i>Output: Wed, 21 Jun 2017 09:13:01 GMT</i>
 </pre>
-  
 <p>The static method Date.now() returns the number of milliseconds that have
 elapsed since 1 January 1970 00:00:00 UTC. To get the number of
 milliseconds that have elapsed since that time using an instance of a
 Date object, use its getTime method.</p>
-
 <pre>
 // <i>get milliseconds using static method now of Date</i>
 console.log(Date.now());
-
 // <i>get milliseconds using method getTime of Date instance</i>
 console.log((<b>new</b> Date()).getTime());
 </pre>
@@ -3313,7 +3053,6 @@ console.log((<b>new</b> Date()).getTime());
 <h3 id="ch8-7">Section 8.7: Increment a Date Object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>To increment date objects in JavaScript, we can usually do this:</p>
-
 <pre>
 <b>var</b> checkoutDate = <b>new</b> Date(); // <i>Thu Jul 21 2016 10:05:13 GMT-0400 (EDT)</i>
 checkoutDate.setDate (checkoutDate.getDate() &plus; 1);
@@ -3329,16 +3068,12 @@ current month.</p>
 checkoutDate.setDate( checkoutDate.getDate() + 12 );
 console.log(checkoutDate); // <i>Tue Aug 02 2016 10:05:13 GMT-0400 (EDT)</i>
 </pre>
-
 <p>The same applies to other methods such as getHours(), getMonth(),etc.</p>
-
 <p><b>Adding Work Days</b></p>
-
 <p>If you wish to add work days (in this case I am assuming Monday -
 Friday) you can use the setDate function although you need a little
 extra logic to account for the weekends (obviously this will not take
 account of national holidays)</p>
-
 <pre>
 <b>function</b> addWorkDays(startDate, days) {
   // <i>Get the day of the week as a number (0 = Sunday, 1 = Monday, &hellip;. 6 = Saturday)</i>
@@ -3373,7 +3108,6 @@ account of national holidays)</p>
 <b>var</b> date1 = <b>new</b> Date();
 date1.toJSON();
 </pre>
-
 <blockquote>
 Returns: &quot;2016-04-14T23:49:08.596Z&quot;
 </blockquote>
@@ -3384,43 +3118,34 @@ Returns: &quot;2016-04-14T23:49:08.596Z&quot;
 <h3 id="ch9-1">Section 9.1: Comparing Date values</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>To check the equality of Date values:</p>
-
 <pre>
 <b>var</b> date1 = <b>new</b> Date();
 <b>var</b> date2 = <b>new</b> Date(date1.valueOf() &plus; 10);
 console.log(date1.valueOf() === date2.valueOf());
 </pre>
-
 <blockquote>
 Sample output: <b>false</b>
 </blockquote>
-
 <p>Note that you must use () to compare the values of Date objects
 because the equality operator will compare if two object references
 are the same. For example:</p>
-
 <pre>
 <b>var</b> date1 = <b>new</b> Date();
 <b>var</b> date2 = <b>new</b> Date();
 console.log(date1 === date2);
 </pre>
-
 <blockquote>
 Sample output: <b>false</b>
 </blockquote>
-
 <p>Whereas if the variables point to the same object:</p>
-
 <pre>
 <b>var</b> date1 = <b>new</b> Date();
 <b>var</b> date2 = date1;
 console.log(date1 === date2);
 </pre>
-
 <blockquote>
 Sample output: <b>true</b>
 </blockquote>
-
 <p>However, the other comparison operators will work as usual and you can
 use &lt; and &bsol;to compare that one date is earlier or later than the
 other. For example:</p>
@@ -4809,6 +4534,7 @@ executed (which would be skipped if the condition were <b>true</b>). An example:
     which could also be true is ignored.</li>
   <li>If you have only one statement, the braces around that statement are technically 
     optional, e.g this is fine:<br/><br/>
+</ul>
 <pre>
 <b>if</b> (i &lt; 1) console.log(&quot;i is smaller than 1&quot;);
 </pre>
@@ -4889,7 +4615,6 @@ makeAnimalSpeak(&apos;cat&apos;) // <i>=&gt;&apos;cat says meow&apos;</i>
 makeAnimalSpeak(&apos;lion&apos;) // <i>=&gt;&apos;lion says roar&apos;</i>
 makeAnimalSpeak(&apos;snake&apos;) // <i>=&gt;&apos;snake says moo&apos;</i>
 </pre>
-
 <p>In the last case, our default function handles any missing animals.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch11-5">Section 11.5: Using &vert;&vert; and && short circuiting</h3>
@@ -4897,10 +4622,8 @@ makeAnimalSpeak(&apos;snake&apos;) // <i>=&gt;&apos;snake says moo&apos;</i>
 <p>The Boolean operators &vert;&vert; and && will &quot;short circuit&quot; and not
 evaluate the second parameter if the first is true or false
 respectively. This can be used to write short conditionals like:</p>
-
 <pre>
 <b>var</b> x = 10
-
 x == 10 && alert(&quot;x is 10&quot;)
 x == 10 &vert;&vert; alert(&quot;x is not 10&quot;)
 </pre>
@@ -4910,10 +4633,8 @@ x == 10 &vert;&vert; alert(&quot;x is not 10&quot;)
 <h3 id="ch12-1">Section 12.1: Converting Array-like Objects to Arrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><b>What are Array-like Objects?</b></p>
-
 <p>JavaScript has &quot;Array-like Objects&quot;, which are Object
 representations of Arrays with a length property. For example:</p>
-
 <pre>
 <b>var</b> realArray = &lbrack;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&rbrack;;
 <b>var</b> arrayLike = {
@@ -4923,14 +4644,12 @@ representations of Arrays with a length property. For example:</p>
   length: 3
 };
 </pre>
-
 <p>Common examples of Array-like Objects are the <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/arguments">
 arguments</a> object in functions and
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection">HTMLCollection</a> or 
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeList"> NodeList</a> objects returned from methods like 
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName">document.getElementsByTagName</a>
  or <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll">document.querySelectorAll</a>.</p>
-
 <p>However, one key difference between Arrays and Array-like Objects is
 that Array-like objects inherit from 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype">
@@ -4944,30 +4663,24 @@ Array prototype methods</a> like
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map(), 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">filter()</a>, 
 and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice">slice()</a>:</p>
-
 <pre>
 <b>var</b> parent = document.getElementById(&apos;myDropdown&apos;);
 <b>var</b> desiredOption = parent.querySelector(&apos;option&lbrack;value=&quot;desired&quot;&rbrack;&apos;);
 <b>var</b> domList = parent.children;
-
 domList.indexOf(desiredOption);  // <i>Error! indexOf is not defined.</i>
 domList.forEach(<b>function</b>() {
   arguments.map(/&ast; <i>Stuff here &ast;/)</i>) // <i>Error! map is not defined.</i>
 }); // <i>Error! forEach is not defined.</i>
-
 <b>function</b> func() {
   console.log(arguments);
 }
 func (1, 2, 3); // <i>→ &lbrack;1, 2, 3&rbrack;</i>
 </pre>
-
 <p><b>Convert Array-like Objects to Arrays in ES6</b></p>
-
 <ol type="1" start="1">
   <li>Array.from:</li>
 </ol>
 <h5>Version ≥ 6</h5>
-
 <pre>
 <b>const</b> arrayLike = {
   0: &apos;Value 0&apos;,
@@ -4978,12 +4691,10 @@ arrayLike.forEach(value =&gt; {/&ast; Do something &ast;/}); // <i>Errors</i>
 <b>const</b> realArray = Array.from(arrayLike);
 realArray.forEach(value =&gt; {/&ast; Do something &ast;/}); // <i>Works</i>
 </pre>
-
 <ol start="2">
   <li><b>for</b>&hellip;of:</li>
 </ol>
 <h5>Version ≥ 6</h5>
-
 <pre>
 <b>var</b> realArray = &lbrack;&rbrack;;
 <b>for</b>(<b>const</b> element of arrayLike) {
@@ -4991,21 +4702,17 @@ realArray.forEach(value =&gt; {/&ast; Do something &ast;/}); // <i>Works</i>
 }
 </pre>
 <!-- page 81 -->
-
 <ol start="3">
   <li>Spread operator:</li>
 </ol>
 <h5>Version ≥ 6</h5>
-
 <pre>
 &lbrack;&hellip;arrayLike&rbrack;
 </pre>
-
 <ol start="4">
   <li>Object.values:</li>
 </ol>
 <h5>Version ≥ 7</h5>
-
 <pre>
 <b>var</b> realArray = Object.values(arrayLike);
 </pre>
@@ -5254,39 +4961,30 @@ an existing array.</p>
 });
 // <i>→ &lbrack;3, 3, 5, 4&rbrack;</i>
 </pre>
-
 <h5>Version ≥ 6</h5>
-
 <pre>
 &lbrack;&apos;one&apos;, &apos;two&apos;, &apos;three&apos;, &apos;four&apos;&rbrack;.map(value =&gt; value.length);
 // <i>→ &lbrack;3, 3, 5, 4&rbrack;</i>
 </pre>
-
 <p>In this example, an anonymous function is provided to the map() function, and the map 
 function will call it for every element in the array, providing the following parameters, 
 in this order:</p>
-
 <ul>
   <li>The element itself</li>
   <li>The index of the element (0, 1&hellip;)</li>
   <li>The entire array</li>
 </ul>
-
 <p>Additionally, map() provides an <i>optional</i> second parameter in order to
 set the value of <b>this</b> in the mapping function. Depending on the
 execution environment, the default value of <b>this</b> might vary:</p>
-
 <p>In a browser, the default value of <b>this</b> is always window:</p>
-
 <pre>
 &lbrack;&apos;one&apos;, &apos;two&apos;&rbrack;.map(<b>function</b>(value, index, arr) {
   console.log(<b>this</b>);  // <i>window (the default value in browsers)</i>
   <b>return</b> value.length;
 });
 </pre>
-
 <p>You can change it to any custom object like this:</p>
-
 <pre>
 &lbrack;&apos;one&apos;, &apos;two&apos;&rbrack;.map(<b>function</b>(value, index, arr) {
   console.log(<b>this</b>); // <i>Object { documentation: &quot;randomObject&quot; }</i>
@@ -5301,30 +4999,22 @@ execution environment, the default value of <b>this</b> might vary:</p>
 <p>The filter() method accepts a test function, and returns a new array containing only 
 the elements of the original array that pass the test provided.</p>
 <!-- page 85 -->
-
 <pre>
 // <i>Suppose we want to get all odd numbers in an array:</i>
 <b>var</b> numbers = &lbrack;5, 32, 43, 4&rbrack;;
 </pre>
-
 <h5>Version ≥ 5.1</h5>
-
 <pre>
 <b>var</b> odd = numbers.filter(<b>function</b>(n) {
   <b>return</b> n &percnt; 2 !== 0;
 });
 </pre>
-
 <h5>Version ≥ 6</h5>
-
 <pre>
 <b>let</b> odd = numbers.filter(n =&bsol;n % 2 !== 0); // <i>can be shortened to (n =&bsol;n % 2)</i>
 </pre>
-
 <p>odd would contain the following array: &lbrack;5, 43&rbrack;.</p>
-
 <p>It also works on an array of objects:</p>
-
 <pre>
 <b>var</b> people = &lbrack;{
   id: 1,
@@ -5340,23 +5030,17 @@ the elements of the original array that pass the test provided.</p>
   age: 55
 }&rbrack;;
 </pre>
-
 <h5>Version ≥ 5.1</h5>
-
 <pre>
 <b>var</b> young = people.filter(<b>function</b>(person) {
   <b>return</b> person.age &lt; 35;
 });
 </pre>
-
 <h5>Version ≥ 6</h5>
-
 <pre>
 <b>let</b> young = people.filter(person =&gt; person.age &lt; 35);
 </pre>
-
 <p>young would contain the following array:</p>
-
 <pre>
 &lbrack;{
   id: 1,
@@ -5368,9 +5052,7 @@ the elements of the original array that pass the test provided.</p>
   age: 31
 }&rbrack;
 </pre>
-
 <p>You can search in the whole array for a value like this:</p>
-
 <pre>
 <b>var</b> young = people.filter((obj) =&gt; {
   <b>var</b> flag = <b>false</b>;
@@ -5403,132 +5085,96 @@ the elements of the original array that pass the test provided.</p>
 <p>The sort.() method sorts the elements of an array. The default method will sort the 
 array according to string Unicode code points. To sort an array numerically the .sort() 
 method needs to have a compareFunction passed to it.</p>
-
 <p>sort () method is impure. .sort</p>
-
 <blockquote>
 <b>Note:</b> The .sort() method is impure. .sort will sort the array <b>in-place</b>, 
 i.e., instead of creating a sorted copy of the original array, it will re-order the
 original array and return it.
 </blockquote>
-
 <p><b>Default Sort</b></p>
-
 <p>Sorts the array in UNICODE order.</p>
-
 <pre>
 &lbrack;&apos;s&apos;, &apos;t&apos;, &apos;a&apos;, 34, &apos;K&apos;, &apos;o&apos;, &apos;v&apos;, &apos;E&apos;, &apos;r&apos;, &apos;2&apos;, &apos;4&apos;, &apos;o&apos;, &apos;W&apos;, -1, &apos;-4&apos;&rbrack;.sort();
 </pre>
-
 <p>Results in:</p>
-
 <pre>
 &lbrack;&minus;1, &apos;-4&apos;, &apos;2&apos;, 34, &apos;4&apos;, &apos;E&apos;, &apos;K&apos;, &apos;W&apos;, &apos;a&apos;, &apos;l&apos;, &apos;o&apos;, &apos;o&apos;, &apos;r&apos;, &apos;s&apos;, &apos;t&apos;, &apos;v&apos;&rbrack;
 </pre>
-
 <blockquote>
 <b>Note:</b> The uppercase characters have moved above lowercase. The array is not in
 alphabetical order, and numbers are not in numerical order.
 </blockquote>
-
 <p><b>Alphabetical Sort</b></p>
-
 <pre>
 &lbrack;&apos;s&apos;, &apos;t&apos;, &apos;a&apos;, &apos;c&apos;, &apos;K&apos;, &apos;o&apos;, &apos;v&apos;, &apos;E&apos;, &apos;r&apos;, &apos;f&apos;, &apos;l&apos;, &apos;W&apos;, &apos;2&apos;, &apos;1&apos;&rbrack;.sort((a, b) =&gt; {
   <b>return</b> a&period;localeCompare(b);
 });
 </pre>
-
 <p>Results in:</p>
-
 <pre>
 &lbrack;&apos;1&apos;, &apos;2&apos;, &apos;a&apos;, &apos;c&apos;, &apos;E&apos;, &apos;f&apos;, &apos;K&apos;, &apos;l&apos;, &apos;o&apos;, &apos;r&apos;, &apos;s&apos;, &apos;t&apos;, &apos;v&apos;, &apos;W&apos;&rbrack;
 </pre>
-
 <blockquote>
 <b>Note:</b> The above sort will throw an error if any array items are not a string.
 If you know that the array may contain items that are not strings use the safe version below.
 </blockquote>
-
 <pre>
 &lbrack;&apos;s&apos;, &apos;t&apos;, &apos;a&apos;, &apos;c&apos;, &apos;K&apos;, 1, &apos;v&apos;, &apos;E&apos;, &apos;r&apos;, &apos;f&apos;, &apos;l&apos;, &apos;o&apos;, &apos;W&apos;&rbrack;.sort((a, b) =&gt; {
   <b>return</b> a&period;toString().localeCompare(b);
 });
 </pre>
 <!-- page 87 -->
-
 <p><b>String sorting by length (longest first)</b></p>
-
 <pre>
 &lbrack;&quot;zebras&quot;, &quot;dogs&quot;, &quot;elephants&quot;, &quot;penguins&quot;&rbrack;.sort(<b>function</b>(a, b) {
   <b>return</b> b&period;length &minus; a&period;length;
 });
 </pre>
-
 <p>Results in</p>
-
 <pre>
 &lbrack;&quot;elephants&quot;, &quot;penguins&quot;, &quot;zebras&quot;, &quot;dogs&quot;&rbrack;;
 </pre>
-
 <p><b>String sorting by length (shortest first)</b></p>
-
 <pre>
 &lbrack;&quot;zebras&quot;, &quot;dogs&quot;, &quot;elephants&quot;, &quot;penguins&quot;&rbrack;.sort(<b>function</b>(a, b) {
   <b>return</b> a&period;length &minus; b&period;length;
 });
 </pre>
-
 <p>Results in</p>
-
 <pre>
 &lbrack;&quot;dogs&quot;, &quot;zebras&quot;, &quot;penguins&quot;, &quot;elephants&quot;&rbrack;;
 </pre>
-
 <p><b>Numerical Sort (ascending)</b></p>
-
 <pre>
 &lbrack;100, 1000, 10, 10000, 1&rbrack;.sort(<b>function</b>(a, b) {
   <b>return</b> a &minus; b;
 });
 </pre>
-
 <p>Results in:</p>
-
 <pre>
 &lbrack;1, 10, 100, 1000, 10000&rbrack;
 </pre>
-
 <p><b>Numerical Sort (descending)</b></p>
-
 <pre>&lbrack;100, 1000, 10, 10000, 1&rbrack;.sort(<b>function</b>(a, b) {
   <b>return</b> b &minus; a;
 });
 </pre>
-
 <p>Results in:</p>
-
 <pre>
 &lbrack;10000, 1000, 100, 10, 1&rbrack;
 </pre>
-
 <p><b>Sorting array by even and odd numbers</b></p>
-
 <pre>
 &lbrack;10, 21, 4, 15, 7, 99, 0, 12&rbrack;.sort(<b>function</b>(a, b) {
   <b>return</b> (a & 1) &minus; (b & 1) &vert;&vert; a &minus; b;
 });
 </pre>
-
 <p>Results in:</p>
-
 <pre>
 &lbrack;0, 4, 10, 12, 7, 15, 21, 99&rbrack;
 </pre>
-
 <p><b>Date Sort (descending)</b></p>
 <!-- page 88 -->
-
 <pre>
 <b>var</b> dates = &lbrack;
   <b>new</b> Date(2007, 11, 10),
@@ -5536,22 +5182,18 @@ If you know that the array may contain items that are not strings use the safe v
   <b>new</b> Date(2009, 6, 11),
   <b>new</b> Date(2016, 7, 23)
 &rbrack;;
-
 dates.sort(<b>function</b>(a, b) {
   <b>if</b> (a &gt; b) <b>return</b> &minus;1;
   <b>if</b> (a &lt; b) <b>return</b> 1;
   <b>return</b> 0;
 });
-
 // <i>the date objects can also sort by its difference</i>
 // <i>the same way that numbers array is sorting</i>
 dates.sort(<b>function</b>(a, b) {
   <b>return</b> b&minus;a;
 });
 </pre>
-
 <p>Results in:</p>
-
 <pre>
 &lbrack;
   &quot;Tue Aug 23 2016 00:00:00 GMT-0600 (MDT)&quot;,
@@ -5574,33 +5216,26 @@ dates.sort(<b>function</b>(a, b) {
   <li><b>The afterthought:</b> performed every time after the loop block is
     executed</li>
 </ol>
-
 <p>These three components are separated from each other by a ; symbol.
 Content for each of these three components is optional, which means
 that the following is the most minimal <b>for</b> loop possible:</p>
-
 <pre>
 <b>for</b>(;;) {
   // <i>Do stuff</i>
 }
 </pre>
-
 <p>Of course, you will need to include an <b>if</b>(condition === <b>true</b>) { <b>break</b>; }
 or an <b>if</b>(condition === <b>true</b>) { <b>return</b>; } somewhere inside that 
 <b>for</b>&minus;loop to get it to stop running.</p>
-
 <p>Usually, though, the initialization is used to declare an index, the condition 
 is used to compare that index with a minimum or maximum value, and the afterthought 
 is used to increment the index:</p>
-
 <pre>
 <b>for</b> (<b>var</b> i = 0, length = 10; i &lt; length; i++) {
   console.log(i);
 }
 </pre>
-
 <p><b>Using a traditional for loop to loop through an array</b></p>
-
 <p>The traditional way to loop through an array, is this:</p>
 <!-- page 89 -->
 <pre>
@@ -5608,26 +5243,20 @@ is used to increment the index:</p>
   console.log(myArray&lbrack;i&rbrack;);
 }
 </pre>
-
 <p>Or, if you prefer to loop backwards, you do this:</p>
-
 <pre>
 <b>for</b> (<b>var</b> i = myArray.length &minus; 1; i &gt; &minus;1; i&bsol;) {
   console.log(myArray&lbrack;i&rbrack;);
 }
 </pre>
-
 <p>There are, however, many variations possible, like for example this one:</p>
-
 <pre>
 <b>for</b> (<b>var</b> key = 0, value = myArray&lbrack;key&rbrack;, length = myArray.length; key &lt; length; value =
 myArray&lbrack;++key&rbrack;) {
   console.log(value);
 }
 </pre>
-
 <p>&hellip; or this one &hellip;</p>
-
 <pre>
 <b>var</b> i = 0, length = myArray.length;
 <b>for</b> (; i &lt; length;) {
@@ -5635,72 +5264,54 @@ myArray&lbrack;++key&rbrack;) {
   i++;
 }
 </pre>
-
 <p>&hellip; or this one:</p>
-
 <pre>
 <b>var</b> key = 0, value;
 <b>for</b> (; value = myArray&lbrack;key++&rbrack;;) {
   console.log(value);
 }
 </pre>
-
 <p>Whichever works best is largely a matter of both personal taste and
 the specific use case you&apos;re implementing.</p>
-
 <p>Note that each of these variations is supported by all browsers, including very very 
 old ones!</p>
-
 <p><b>A while loop</b></p>
-
 <p>One alternative to a <b>for</b> loop is a while loop. To loop through an
 array, you could do this:</p>
-
 <pre>
 <b>var</b> key = 0;
 while(value = myArray&lbrack;key++&rbrack;) {
   console.log(value);
 }
 </pre>
-
 <p>Like traditional <b>for</b> loops, while loops are supported by even the oldest of 
 browsers.</p>
-
 <p>Also, note that every while loop can be rewritten as a <b>for</b> loop.
 For example, the while loop hereabove behaves the exact same way as
 this <b>for</b>-loop:</p>
-
 <pre>
 <b>for</b> (<b>var</b> key = 0; value = myArray&lbrack;key++&rbrack;;) {
   console.log(value);
 }
 </pre>
-
 <p><b>for&hellip;in</b></p>
-
 <p>In JavaScript, you can also do this:</p>
 <!-- page 90 -->
-
 <pre>
 <b>for</b> (i <b>in</b> myArray) {
   console.log(myArray&lbrack;i&rbrack;);
 }
 </pre>
-
 <p>This should be used with care, however, as it doesn&apos;t behave the same
 as a traditional <b>for</b> loop in all cases, and there are potential
 side-effects that need to be considered. See 
 <a href="https://stackoverflow.com/questions/500504/why-is-using-for-in-with-array-iteration-such-a-bad-idea">
 <b>Why is using &quot;for&hellip;in&quot; with array iteration a bad</b> <b>idea?</b></a>
 for more details.</p>
-
 <p><b>for&hellip;of</b></p>
-
 <p>In ES 6, the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of">
 for-of</a> loop is the recommended way of iterating over a the values of an array:</p>
-
 <h5>Version ≥ 6</h5>
-
 <pre>
 <b>let</b> myArray = &lbrack;1, 2, 3, 4&rbrack;;
 <b>for</b> (<b>let</b> value of myArray) {
@@ -5708,31 +5319,22 @@ for-of</a> loop is the recommended way of iterating over a the values of an arra
   console.log(&quot;2 &ast; value is: %d&quot;, twoValue);
 }
 </pre>
-
 <p>The following example shows the difference between a for...of loop and a for...in loop:</p>
-
 <h5>Version ≥ 6</h5>
-
 <pre>
 <b>let</b> myArray = &lbrack;3, 5, 7&rbrack;;
 myArray.foo = &quot;hello&quot;;
-
 <b>for</b> (<b>var</b> i <b>in</b> myArray) {
   console.log(i);  // <i>logs 0, 1, 2, &quot;foo&quot;</i>
 }
-
 <b>for</b> (<b>var</b> i of myArray) {
   console.log(i);  // <i>logs 3, 5, 7</i>
 }
 </pre>
-
 <p><b>Array.prototype.keys</b></p>
-
 <p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys">
 Array.prototype.keys()</a> method can be used to iterate over indices like this:</p>
-
 <h5>Version ≥ 6</h5>
-
 <pre>
 <b>let</b> myArray = &lbrack;1, 2, 3, 4&rbrack;;
 <b>for</b> (<b>let</b> i of myArray.keys()) {
@@ -5740,32 +5342,24 @@ Array.prototype.keys()</a> method can be used to iterate over indices like this:
   console.log(&quot;2 &ast; value is: %d&quot;, twoValue);
 }
 </pre>
-
 <p><b>Array.prototype.forEach()</b></p>
-
 <p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">
 forEach(...)</a> method is an option in ES 5 and above. It is supported by all modern browsers, as well as 
 Internet Explorer 9 and later.</p>
-
 <p>method is an option in ES 5 and above.</p>
-
 <h5>Version ≥ 5</h5>
-
 <pre>
 &lbrack;1, 2, 3, 4&rbrack;.forEach(<b>function</b>(value, index, arr) {
   <b>var</b> twoValue = value &ast; 2;
   console.log(&quot;2 &ast; value is: %d&quot;, twoValue);
 });
 </pre>
-
 <p>Comparing with the traditional <b>for</b> loop, we can&apos;t jump out of the
 loop in .(). In this case, use the <b>for</b> loop, or use partial
 iteration presented below.</p>
-
 <!-- page 91 -->
 <p>In all versions of JavaScript, it is possible to iterate through the
 indices of an array using a traditional C-style <b>for</b> loop.</p>
-
 <pre>
 <b>var</b> myArray = &lbrack;1, 2, 3, 4&rbrack;;
 <b>for</b>(<b>var</b> i = 0; i &lt; myArray.length; ++i) {
@@ -5773,9 +5367,7 @@ indices of an array using a traditional C-style <b>for</b> loop.</p>
   console.log(&quot;2 &ast; value is: %d&quot;, twoValue);
 }
 </pre>
-
 <p>It&apos;s also possible to use while loop:</p>
-
 <pre>
 <b>var</b> myArray = &lbrack;1, 2, 3, 4&rbrack;, 
   i = 0, sum = 0;
@@ -5784,15 +5376,11 @@ while(i++ &lt; myArray.length) {
 }
 console.log(sum);
 </pre>
-
 <p><b>Array.prototype.every</b></p>
-
 <p>Since ES5, if you want to iterate over a portion of an array, you can
 use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every">
 Array.prototype.every</a>, which iterates until we return <b>false</b>:</p>
-
 <h5>Version ≥ 5</h5>
-
 <pre>
 // <i>&lbrack;&rbrack;.every() stops once it finds a false result</i>
 // <i>thus, this iteration will stop on value 7 (since 7 % 2 !== 0)</i>
@@ -5801,9 +5389,7 @@ Array.prototype.every</a>, which iterates until we return <b>false</b>:</p>
   <b>return</b> value &percnt; 2 === 0;  // <i>iterate until an odd number is found</i>
 });
 </pre>
-
 <p>Equivalent in any JavaScript version:</p>
-
 <pre>
 <b>var</b> arr = &lbrack;2, 4, 7, 9&rbrack;
 <b>for</b> (<b>var</b> i = 0; i &lt; arr.length && (arr&lbrack;i&rbrack; &percnt; 2 !== 0); i++) { // <i>iterate until an odd number is</i>
@@ -5811,12 +5397,9 @@ Array.prototype.every</a>, which iterates until we return <b>false</b>:</p>
 console.log(arr&lbrack;i&rbrack;);
 }
 </pre>
-
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some">
 <b>Array.prototype.some</b></a> iterates until we return <b>true</b>.</p>
-
 <h5>Version ≥ 5</h5>
-
 <pre>
 // <i>&lbrack;&rbrack;.some stops once it finds a false result</i>
 // <i>thus, this iteration will stop on value 7 (since 7 % 2 !== 0)</i>
@@ -5825,52 +5408,40 @@ console.log(arr&lbrack;i&rbrack;);
   <b>return</b> value === 7;  // <i>iterate until we find value 7</i>
 });
 </pre>
-
 <p>Equivalent in any JavaScript version:</p>
-
 <pre>
 <b>var</b> arr = &lbrack;2, 4, 7, 9&rbrack;;
 <b>for</b> (<b>var</b> i = 0; i &lt; arr.length && arr&lbrack;i&rbrack; !== 7; i++) {
   console.log(arr&lbrack;i&rbrack;);
 }
 </pre>
-
 <!-- page 92 -->
 <p><b>Libraries</b><p>
-
 <p>Finally, many utility libraries also have their own foreach variation.
 Three of the most popular ones are these:</p>
-
 <p><a href="http://api.jquery.com/jquery.each/"><b>jQuery.each</b>()</a>, in 
 <a href="https://jquery.com/"><b>jQuery:</b></a></p>
-
 <pre>
 &dollar;.each(myArray, <b>function</b>(key, value) {
   console.log(value);
 });
 </pre>
-
 <p><a href="http://underscorejs.org/#each"><b>_.each()</b>, in <a href="http://underscorejs.org/">
 <b>Underscore.js</b></a>:</p>
-
 <pre>
 &lowbar;.each(myArray, <b>function</b>(value, key, myArray) {
   console.log(value);
 });
 </pre>
-
 <p><a href="http://lodashjs.com/docs#forEach"><b>_.forEach()</b>, in <a href="https://lodash.com/">
 <b>Lodash.js</b></a>:</p>
-
 <pre>
 &lowbar;.forEach(myArray, <b>function</b>(value, key) {
   console.log(value);
 });
 </pre>
-
 <p>See also the following question on SO, where much of this information 
 was originally posted:</p>
-
 <ul>
   <li><a href="https://stackoverflow.com/questions/3010840/loop-through-an-array-in-javascript/35707349#35707349">
     Loop through an array in JavaScript</li>
@@ -5880,71 +5451,53 @@ was originally posted:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h5>Version ≥ 6</h5>
 <p>An array can be destructured when being assigned to a new variable.</p>
-
 <pre>
 <b>const</b> triangle = &lbrack;3, 4, 5&rbrack;;
 <b>const</b> &lbrack;length, height, hypotenuse&rbrack; = triangle;
-
 length === 3;     // <i>→ true</i>
 height === 4;     // <i>→ true</i>
 hypotneuse === 5; // <i>→ true</i>
 </pre>
-
 <p>Elements can be skipped</p>
-
 <pre>
 <b>const</b> &lbrack;,b,,c&rbrack; = &lbrack;1, 2, 3, 4&rbrack;;
-
 console.log(b, c);  // <i>→ 2, 4 </i>
 </pre>
-
 <p>Rest operator can be used too</p>
-
 <pre>
 <b>const</b> &lbrack;b, c, &hellip;xs&rbrack; = &lbrack;2, 3, 4, 5&rbrack;;
 console.log(b, c, xs);  // <i>→ 2, 3, &lbrack;4, 5&rbrack;</i>
 </pre>
-
 <p>An array can also be destructured if it&apos;s an argument to a function.</p>
-
 <pre>
 <b>function</b> area(&lbrack;length, height&rbrack;) {
   <b>return</b> (length &ast; height) / 2;
 }
-
 <b>const</b> triangle = &lbrack;3, 4, 5&rbrack;;
-
 area(triangle);  // <i>→ 6</i>
 </pre>
 <!-- page 93 -->
 <p><i>Notice the third argument is not named in the function because it&apos;s not needed.</i></p>
-
 <p>Learn more about destructuring syntax.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-8">Section 12.8: Removing duplicate elements</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>From ES5.1 onwards, you can use the native method <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"><b>Array.prototype.filter</b></a> to loop through an
 array and leave only entries that pass a given callback function.</p>
-
 <p>In the following example, our callback checks if the given value
 occurs in the array. If it does, it is a duplicate and will not be
 copied to the resulting array.</p>
-
 <h5>Version ≥ 5.1</h5>
-
 <pre>
 <b>var</b> uniqueArray = &lbrack;&apos;a&apos;, 1, &apos;a&apos;, 2, &apos;1&apos;, 1&rbrack;.filter(<b>function</b>(value, index, self) { 
   <b>return</b> self.indexOf(value) === index;
 }); // <i>returns &lbrack;&apos;a&apos;, 1, 2, &apos;1&apos;&rbrack;</i>
 </pre>
-
 <p>If your environment supports ES6, you can also use the
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">
 Set</a> object. This object lets you store unique values of any type, whether
 primitive values or object references:</p>
-
 <h5>Version ≥ 6</h5>
-
 <pre>
 <b>var</b> uniqueArray = &lbrack;&hellip; <b>new</b> Set(&lbrack;&apos;a&apos;, 1, &apos;a&apos;, 2, &apos;1&apos;, 1&rbrack;)&rbrack;;
 </pre>
@@ -5996,7 +5549,6 @@ a&lbrack;1&rbrack; = a;
 b = &lbrack;0, a&rbrack;;
 compareArrays(a, b);  // <i>throws RangeError: Maximum call stack size exceeded</i>
 </pre>
-
 <blockquote>
 <b>Note:</b> The function uses the strict equality operator === to compare non array items 
 {a: 0} === {a: 0} is <b>false</b>
@@ -6005,7 +5557,6 @@ compareArrays(a, b);  // <i>throws RangeError: Maximum call stack size exceeded<
 <h3 id="ch12-10">Section 12.10: Reversing arrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>.reverse . is used to reverse the order of items inside an array.</p>
-
 <p>Example for .reverse:</p>
 <pre>
 &lbrack;1, 2, 3, 4&rbrack;.reverse();
@@ -6053,21 +5604,17 @@ modify the original. Instead of a clone method, arrays have a slice
 method that lets you perform a shallow copy of any part of an array.
 Keep in mind that this only clones the first level. This works well
 with primitive types, like numbers and strings, but not objects.</p>
-
 <p>To shallow-clone an array (i.e. have a new array instance but with the
 same elements), you can use the following one-liner:</p>
 <pre>
 <b>var</b> clone = arrayToClone.slice();
 </pre>
-
 <p>This calls the built-in JavaScript Array.<b>prototype</b>.slice method. If you 
 pass arguments to slice, you can get more complicated behaviors that create shallow 
 clones of only part of an array, but for our purposes just calling slice() will create a 
 shallow copy of the entire array.</p>
-
 <p>All method used to convert array like objects to array are applicable
 to clone an array:</p>
-
 <h5>Version ≥ 6</h5>
 <pre>
 arrayToClone = &lbrack;1, 2, 3, 4, 5&rbrack;;
@@ -6085,12 +5632,10 @@ clone2 = &lbrack;&rbrack;.slice.call(arrayToClone);
 <h3 id="ch12-12">Section 12.12: Concatenating Arrays</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><b>Two Arrays</b></p>
-
 <pre>
 <b>var</b> array1 = &lbrack;1, 2&rbrack;;
 <b>var</b> array2 = &lbrack;3, 4, 5&rbrack;;
 </pre>
-
 <h5>Version ≥ 3</h5>
 <pre>
 <b>var</b> array3 = array1.concat(array2);  // <i>returns a new array</i>
@@ -6099,9 +5644,7 @@ clone2 = &lbrack;&rbrack;.slice.call(arrayToClone);
 <pre>
 <b>var</b> array3 = &lbrack;&hellip;array1, &hellip;array2&rbrack;
 </pre>
-
 <p>Results in a new Array:</p>
-
 <pre>
 &lbrack;1, 2, 3, 4, 5&rbrack;
 </pre>
@@ -6117,32 +5660,24 @@ clone2 = &lbrack;&rbrack;.slice.call(arrayToClone);
 <!-- page 96 -->
 <h5>Version ≥ 3</h5>
 <p>Provide more Array arguments to array.concat().</p>
-
 <pre>
 <b>var</b> arrConc = array1.concat(array2, array3, array4);
 </pre>
 <h5>Version ≥ 6</h5>
 <p>Provide more arguments to &lbrack;&rbrack;</p>
-
 <pre>
 <b>var</b> arrConc = &lbrack;&hellip;array1, &hellip;array2, &hellip;array3, &hellip;array4&rbrack;
 </pre>
-
 <p>Results in a new Array:</p>
-
 <pre>
 &lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;&rbrack;
 </pre>
-
 <p><b>Without Copying the First Array</b></p>
-
 <pre>
 <b>var</b> longArray = &lbrack;1, 2, 3, 4, 5, 6, 7, 8&rbrack;,
   shortArray = &lbrack;9, 10&rbrack;;
 </pre>
-
 <h5>Version ≥ 3</h5>
-
 <p>Provide the elements of shortArray as parameters to push using Function.<b>prototype</b>.apply</p>
 <pre>
 longArray.push.apply(longArray, shortArray);
@@ -6184,7 +5719,6 @@ shortArray.forEach(<b>function</b> (elem) {
 <pre>
 <b>var</b> arr1 = &lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;;
 <b>var</b> arr2 = &lbrack;&quot;e&quot;, &quot;f&quot;&rbrack;;
-
 <b>var</b> arrConc = arr1.concat(&quot;c&quot;, &quot;d&quot;, arr2);
 </pre>
 <p>Results in a new Array:</p>
@@ -6203,10 +5737,8 @@ from that two array, we can use array&apos;s reduce function like below:</p>
   result&lbrack;columns&lbrack;index&rbrack;&rbrack; = field;
   <b>return</b> result;
 }, {})
-
 console.log(result);
 </pre>
-
 <p>Output:</p>
 <pre>
 {
@@ -6222,7 +5754,6 @@ console.log(result);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><b>Spread operator</b></p>
 <h5>Version ≥ 6</h5>
-
 <p>With ES6, you can use spreads to separate individual elements into a comma-separated syntax:</p>
 <pre>
 <b>let</b> arr = &lbrack;1, 2, 3, &hellip;&lbrack;4, 5, 6&rbrack;&rbrack;; // <i>&lbrack;1, 2, 3, 4, 5, 6&rbrack;</i>
@@ -6240,44 +5771,32 @@ is equivalent to the one below:</p>
 <pre>
 <b>let</b> arr = &lbrack;1, 2, 3, &hellip;&lbrack;&hellip;&quot;456&quot;&rbrack;.map(x=&gt;parseInt(x))&rbrack;; // <i>&lbrack;1, 2, 3, 4, 5, 6&rbrack;</i>
 </pre>
-
 <p>Or, using a single string, this could be simplified to:</p>
 <pre>
 <b>let</b> arr = &lbrack;&hellip;&quot;123456&quot;&rbrack;.map(x=&gt;parseInt(x)); // <i>&lbrack;1, 2, 3, 4, 5, 6&rbrack;</i>
 </pre>
 <!-- page 98 -->
 <p>If the mapping is not performed then:</p>
-
 <pre>
 <b>let</b> arr = &lbrack;&hellip;&quot;123456&quot;&rbrack;;  // <i>&lbrack;&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;&rbrack;</i>
 </pre>
-
 <p>The spread operator can also be used to spread arguments into a function:</p>
-
 <pre>
 <b>function</b> myFunction(a, b, c) { }
 <b>let</b> args = &lbrack;0, 1, 2&rbrack;;
-
 myFunction(&hellip;args);
-
 // <i>in ES &lt; 6, this would be equivalent to:</i>
 myFunction.apply(<b>null</b>, args);
 </pre>
-
 <p><b>Rest operator</b></p>
-
 <p>The rest operator does the opposite of the spread operator by coalescing several elements 
 into a single one</p>
-
 <pre>
 &lbrack;a, b, &hellip;rest&rbrack; = &lbrack;1, 2, 3, 4, 5, 6&rbrack;; // <i>rest is assigned &lbrack;3, 4, 5, 6&rbrack;</i> Collect arguments of a function:
 </pre>
-
 <p>Collect arguments of a function:</p>
-
 <pre>
 <b>function</b> myFunction(a, b, &hellip;rest) { console.log(rest); }
-
 myFunction(0, 1, 2, 3, 4, 5, 6);  // <i>rest is &lbrack;2, 3, 4, 5, 6&rbrack;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -6285,7 +5804,6 @@ myFunction(0, 1, 2, 3, 4, 5, 6);  // <i>rest is &lbrack;2, 3, 4, 5, 6&rbrack;</i
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The filter() method creates an array filled with all array elements that pass a test provided 
 as a function.</p>
-
 <h5>Version ≥ 5.1</h5>
 <pre>
 &lbrack;1, 2, 3, 4, 5&rbrack;.filter(<b>function</b>(value, index, arr) {
@@ -6296,25 +5814,18 @@ as a function.</p>
 <pre>
 &lbrack;1, 2, 3, 4, 5&rbrack;.filter(value =&gt; value &gt; 2);
 </pre>
-
 <p>Results in a new array:</p>
-
 <pre>
 &lbrack;3, 4, 5&rbrack;
 </pre>
-
 <p><b>Filter falsy values</b></p>
-
 <h5>Version ≥ 5.1</h5>
-
 <pre>
 <b>var</b> filtered = &lbrack; 0, <b>undefined</b>, {}, <b>null</b>, &apos;&apos;, <b>true</b>, 5&rbrack;.filter(Boolean);
 </pre>
-
 <p>Since Boolean is a native JavaScript function/constructor that takes &lbrack;one optional 
 parameter&rbrack; and the filter method also takes a function and passes it the current array 
 item as parameter, you could read it like the following:</p>
-
 <ol type="1" start="1">
   <li>Boolean (0) returns false</li>
   <li>Boolean(<b>undefined</b>) returns false
@@ -6325,18 +5836,13 @@ item as parameter, you could read it like the following:</p>
   <li>Boolean (5) returns <b>true</b> which means push it to the returned array</li>
 </ol>
 <!-- page 99 -->
-
 <p>so the overall process will result</p>
-
 <pre>
 &lbrack; {}, <b>true</b>, 5 &rbrack;
 </pre>
-
 <p><b>Another simple example</b></p>
 <p>This example utilises the same concept of passing a function that takes one argument</p>
-
 <h5>Version ≥ 5.1</h5>
-
 <pre>
 <b>function</b> startsWithLetterA(str) {
   <b>if</b>(str && str&lbrack;0&rbrack;.toLowerCase() == &apos;a&apos;) {
@@ -6344,7 +5850,6 @@ item as parameter, you could read it like the following:</p>
   }
   <b>return</b> <b>false</b>;
 }
-
 <b>var</b> str = &apos;Since Boolean is a native javascript function/constructor that takes &lbrack;one
 optional parameter&rbrack; and the filter method also takes a function and passes it the current array
 item as a parameter, you could read it like the following&apos;;
@@ -6356,23 +5861,18 @@ item as a parameter, you could read it like the following&apos;;
 <h3 id="ch12-16">Section 12.16: Searching an Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The recommended way (Since ES5) is to use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">Array.prototype.find</a>:</p>
-
 <pre>
 <b>let</b> people = &lbrack;
   { name: &quot;bob&quot; },
   { name: &quot;john&quot;}
 &rbrack;;
-
 <b>let</b> bob = people.find(person =&gt; person.name === &quot;bob&quot;);
-
 // <i>Or, more verbose</i>
 <b>let</b> bob = people.find(<b>function</b>(person) {
   <b>return</b> person.name === &quot;bob&quot;;
 });
 </pre>
-
 <p>In any version of JavaScript, a standard <b>for</b> loop can be used as well:</p>
-
 <pre>
 <b>for</b> (<b>var</b> i = 0; i &lt; people.length; i++) {
   <b>if</b> (people&lbrack;i&rbrack;.name === &quot;bob&quot;) {
@@ -6380,9 +5880,7 @@ item as a parameter, you could read it like the following&apos;;
   }
 }
 </pre>
-
 <p><b>FindIndex</b></p>
-
 <p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex">
 findIndex()</a> method returns an index in the array, if an element in the array satisfies 
 the provided testing function. Otherwise -1 is returned.</p>
@@ -6403,25 +5901,19 @@ array = &lbrack;
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The .split() will break the string into substrings on spaces (&quot; &quot;), which
 is equivalent to calling .split(" "). </p>
-
 <p>The parameter passed to .split() specifies the character, or the regular
 expression, to use for splitting the string.</p>
-
 <p>To split a string into an array call .split with an empty string (&quot;&quot;).
 <b>Important Note:</b> This only works if all of your characters fit in
 the Unicode lower range characters, which covers most English and most
 European languages. For languages that require 3 and 4 byte Unicode
 characters, ) will separate them.</p>
-
 <pre>
 <b>var</b> strArray = &quot;StackOverflow&quot;.split(&quot;&quot;);
 // <i>strArray = &lbrack;&quot;S&quot;, &quot;t&quot;, &quot;a&quot;, &quot;c&quot;, &quot;k&quot;, &quot;O&quot;, &quot;v&quot;, &quot;e&quot;, &quot;r&quot;, &quot;f&quot;, &quot;l&quot;, &quot;o&quot;, &quot;w&quot;&rbrack;</i>
 </pre>
-
 <h5>Version ≥ 6</h5>
-
 <p>Using the spread operator (&hellip;), to convert a string into an array.</p>
-
 <pre>
 <b>var</b> strArray = &lbrack;&hellip;&quot;sky is blue&quot;&rbrack;;
 // <i>strArray = &lbrack;&quot;s&quot;, &quot;k&quot;, &quot;y&quot;, &quot; &quot;, &quot;i&quot;, &quot;s&quot;, &quot; &quot;, &quot;b&quot;, &quot;l&quot;, &quot;u&quot;, &quot;e&quot;&rbrack;</i>
@@ -6430,25 +5922,18 @@ characters, ) will separate them.</p>
 <h3 id="ch12-18">Section 12.18: Removing items from an array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><b>Shift</b></p>
-
 <p>Use .shift to remove the first item of an array.</p>
-
 <p>For example:</p>
-
 <pre>
 <b>var</b> array = &lbrack;1, 2, 3, 4&rbrack;;
 array.shift();
 </pre>
-
 <p>array results in:</p>
 <pre>
 &lbrack;2, 3, 4&rbrack;
 </pre>
-
 <p><b>Pop</b></p>
-
 <p>Further .pop is used to remove the last item from an array.</p>
-
 <p>For example:</p>
 <pre>
 <b>var</b> array = &lbrack;1, 2, 3&rbrack;;
@@ -6461,12 +5946,10 @@ array.pop();
 <p>Both methods return the removed item;</p>
 <p><b>Splice</b></p>
 <!-- page 101 -->
-
 <p>Use .splice() to remove a series of elements from an array..splice() accepts two 
 parameters, the starting splice index, and an optional number of elements to delete. If 
 the second parameter is left out .splice() will remove all elements from the starting
 index through the end of the array.</p>
-
 <p>For example:</p>
 <pre>
 <b>var</b> array = &lbrack;1, 2, 3, 4&rbrack;;
@@ -6476,7 +5959,6 @@ array.splice(1, 2);
 <pre>
 &lbrack;1, 4&rbrack;
 </pre>
-
 <p>The return of array.splice() is a new array containing the removed elements. For
 the example above, the return would be:</p>
 <pre>
@@ -6489,9 +5971,7 @@ two arrays, with the original ending before the index specified:</p>
 array.splice(2);
 </pre>
 <p>&hellip;leaves array containing &lbrack;1, 2&rbrack; and returns &lbrack;3, 4&rbrack;.</p>
-
 <p><b>Delete</b></p>
-
 <p>Use <b>delete</b> to remove item from array without changing the length of array:</p>
 <pre>
 <b>var</b> array = &lbrack;1, 2, 3, 4, 5&rbrack;;
@@ -6501,7 +5981,6 @@ console.log(array);  // <i>&lbrack;1, 2, undefined, 4, 5&rbrack;</i>
 console.log(array.length);  // <i>5</i>
 </pre>
 <p><b>Array.prototype.length</b></p>
-
 <p>Assigning value to length of array changes the length to given value.
 If new value is less than array length items will be removed from the
 end of value.</p>
@@ -6524,12 +6003,9 @@ arr = &lbrack;&rbrack;;
 array. The array may have been closed over when passed to a function.
 The array will remain in memory for the life of the function though
 you may not be aware of this. This is a common source of memory leaks.</p>
-
 <p>Example of a memory leak resulting from bad array clearing:</p>
-
 <pre>
 <b>var</b> count = 0;
-
 <b>function</b> addListener(arr) { // <i>arr is closed over</i>
   <b>var</b> b = document.body.querySelector(&quot;#foo&quot; &plus; (count++));
   b&period;addEventListener(&quot;click&quot;, <b>function</b>(e) { // <i>this functions reference keeps</i>
@@ -6538,7 +6014,6 @@ you may not be aware of this. This is a common source of memory leaks.</p>
     // <i>do something but does not need arr</i>
   });
 }
-
 arr = &lbrack;&quot;big data&quot;&rbrack;;
 <b>var</b> i = 100;
 while (i &gt; 0) {
@@ -6550,34 +6025,26 @@ while (i &gt; 0) {
 // <i>there are now 100 arrays closed over, each referencing a different array</i>
 // <i>no a single item has been deleted</i>
 </pre>
-
 <p>To prevent the risk of a memory leak use the one of the following 2
 methods to empty the array in the above example&apos;s while loop.</p>
-
 <p><b>Method 2</b></p>
-
 <p>Setting the length property deletes all array element from the new
 array length to the old array length. It is the most efficient way to
 remove and dereference all items in the array. Keeps the reference to
 the original array</p>
-
 <pre>
 arr.length = 0;
 </pre>
-
 <p><b>Method 3</b></p>
-
 <p>Similar to method 2 but returns a new array containing the removed
 items. If you do not need the items this method is inefficient as the
 new array is still created only to be immediately dereferenced.</p>
-
 <pre>
 arr.splice(0); // <i>should not use if you don&apos;t want the removed items</i>
 // <i>only use this method if you do the following</i>
 <b>var</b> keepArr = arr.splice(0); // <i>empties the array and creates a new array containing the</i> 
                                     // <i>removed items</i>
 </pre>
-
 <p><a href="http://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript">Related question</a>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-20">Section 12.20: Finding the minimum or maximum element</h3>
@@ -6613,17 +6080,14 @@ minimum or maximum element.</p>
 <p>The following example uses Array.<b>prototype</b>.reduce() to find the minimum or maximum:</p>
 <pre>
 <b>var</b> myArray = &lbrack;1, 2, 3, 4&rbrack;;
-
 myArray.reduce(<b>function</b>(a, b) {
   <b>return</b> Math.min(a, b);
 });  // <i>1</i>
-
 myArray.reduce(<b>function</b>(a, b) {
   <b>return</b> Math.max(a, b);
 });
 // <i>4</i>
 </pre>
-
 <h5>Version ≥ 6</h5>
 <p>or using arrow functions:</p>
 <pre>
@@ -6639,12 +6103,10 @@ myArray.reduce((a, b) =&gt; Math.max(a, b));  // <i>4</i>
     <b>return</b> Math.max(maxSoFar, element);
   }, &minus;<b>Infinity</b>);
 }
-
 myMax(&lbrack;3, 5&rbrack;);     // <i>5</i>
 myMax(&lbrack;&rbrack;);         // <i>-Infinity</i>
 Math.max.apply(<b>null</b>, &lbrack;&rbrack;);  // <i>-Infinity</i>
 </pre>
-
 <p>For the details on how to properly use reduce see Reducing values.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-21">Section 12.21: Standard array initialization</h3>
@@ -6695,12 +6157,10 @@ Array.of(21, &quot;Hello&quot;, &quot;World&quot;);
 <p>In contrast to the Array constructor, creating an array with a single
 number such as Array.of(21) will create a new array &lbrack;&rbrack;, rather than an Array
 with length 23.</p>
-
 <p>The other way to create and initialize an array would be Array.from</p>
 <pre>
 <b>var</b> newArray = Array.from({ length: 5 }, (&lowbar;, index) =&gt; Math.pow(index, 4));
 </pre>
-
 <p>will result:</p>
 <pre>
 &lbrack;0, 1, 16, 81, 256&rbrack;
@@ -6731,7 +6191,6 @@ remove the first 3 from the array.</p>
 }
 // <i>&lbrack;1, 2, 4, 5, 3&rbrack;</i>
 </pre>
-
 <p>The splice() method can also be used to add elements to an array. In this
 example, we will insert the numbers 6, 7, and 8 to the end of the array.</p>
 <pre>
@@ -6749,11 +6208,9 @@ into the array.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The entries() method returns a new Array Iterator object that contains the
 key/value pairs for each index in the array.</p>
-
 <h5>Version ≥ 6</h5>
 <pre>
 <b>var</b> letters = &lbrack;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&rbrack;;
-
 <b>for</b> (<b>const</b>&lbrack;index, element&rbrack; of letters.entries()) {
   console.log(index, element);
 }
@@ -6766,7 +6223,6 @@ key/value pairs for each index in the array.</p>
 </pre>
 <p><b>Note</b>: <a href="http://kangax.github.io/compat-table/es6/#test-Array.prototype_methods_Array.prototype.entries">
 This method is not supported in Internet Explorer</a>.</p>
-
 <p></i>Portions of this content from by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries$history">
 Mozilla Contributors</a> licensed by <a href="http://creativecommons.org/licenses/by-sa/2.5/">CC-by-SA 2.5</a></i></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -6801,14 +6257,12 @@ while(index = array.indexOf(3) !== -1) { array.splice(index, 1); }
 <b>function</b> flattenES6(arr) {
   <b>return</b> &lbrack;&rbrack;.concat(&hellip;arr);
 }
-
 <b>var</b> arrL1 = &lbrack;1, 2, &lbrack;3, 4&rbrack;&rbrack;;
 console.log(flattenES6(arrL1));  // <i>&lbrack;1, 2, 3, 4&rbrack;</i>
 </pre>
 <h5>Version ≥ 5</h5>
 <p>In ES5, we can achieve that by
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">.apply()</a>:</p>
-
 <pre>
 <b>function</b></p> flatten(arr) {
   <b>return</b> &lbrack;&rbrack;.concat.apply(&lbrack;&rbrack;, arr);
@@ -6826,15 +6280,12 @@ console.log(flatten(arrL1));  // <i>&lbrack;1, 2, 3, 4&rbrack;</i>
 console.log(String(deeplyNested).split(&apos;,&apos;).map(Number);
 &bsol;#=&gt; &lbrack;4, 5, 6, 7, 8, 9&rbrack;
 </pre>
-
 <p>Or</p>
-
 <pre>
 <b>const</b> flatten = deeplyNested.toString().split(&apos;,&apos;).map(Number)
 console.log(flatten);
 &bsol;#=&gt; &lbrack;4, 5, 6, 7, 8, 9&rbrack;
 </pre>
-
 <p>Both of the above methods only work when the array is made up
 exclusively of numbers. A multi-dimensional array of objects cannot be
 flattened by this method.</p>
@@ -6843,7 +6294,6 @@ flattened by this method.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!-- page 107 -->
 <p><b>Unshift</b></p>
-
 <p>Use .unshift to add one or more items in the beginning of an array.</p>
 <p>For example:</p>
 <pre>
@@ -6855,7 +6305,6 @@ array.unshift(1, 2);
 &lbrack;1, 2, 3, 4, 5, 6&rbrack;
 </pre>
 <p><b>Push</b></p>
-
 <p>Further is used to add items after the last currently existent item.</p>
 <p>For example:</p>
 <pre>
@@ -6896,16 +6345,13 @@ array.push(4, 5, 6);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h5>Version ≥ 5.1</h5>
 <p>some  and . every . allow a logical connective of Array values.</p>
-
 <p>While .some combines the return values with OR, .every combines them with AND.</p>
-
 <p>Examples for .some</p>
 <pre
 &lbrack;<b>false</b>, <b>false</b>&rbrack;.some(<b>function</b>(value) {
   <b>return</b> value;
 });
 // <i>Result: false</i>
-
 &lbrack;<b>false</b>, <b>true</b>&rbrack;.some(<b>function</b>(value) {
   <b>return</b> value;
 });
@@ -6915,9 +6361,7 @@ array.push(4, 5, 6);
 });
 // <i>Result: true</i>
 </pre>
-
 <p>And examples for .every</p>
-
 <pre>
 &lbrack;<b>false</b>, <b>false</b>&rbrack;.every(<b>function</b>(value) {
   <b>return</b> value;
@@ -6984,7 +6428,6 @@ Array.<b>prototype</b>.insert = <b>function</b>(index) {
 <pre>
 /<i>&ast; Syntax:</i>
   <i>array.insert(index, value1, value2, &hellip;, valueN) &ast;/</i>
-  
 Array.<b>prototype</b>.insert = <b>function</b>(index) {
   index = Math.min(index, <b>this</b>.length);
   arguments.length &gt; 1
@@ -6992,7 +6435,6 @@ Array.<b>prototype</b>.insert = <b>function</b>(index) {
   && <b>this</b>.insert.apply(<b>this</b>, arguments);
   <b>return</b> <b>this</b>;
 };
-
 &lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;&rbrack;.insert(2, &quot;V&quot;, &lbrack;&quot;W&quot;, &quot;X&quot;, &quot;Y&quot;rbrack;, &quot;Z&quot;).join(&quot;-&quot;); // <i>&quot;a-b-V-W-X-Y-Z-c-d&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -7037,7 +6479,6 @@ have side-effects.</p>
 <h3 id="ch12-33">Section 12.33: Test all array items for equality</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>The .every method tests if all array elements pass a provided predicate test.</p>
-
 <p>To test all objects for equality, you can use the following code snippets.</p>
 <pre>
 &lbrack;1, 2, 1&rbrack;.every(<b>function</b>(item, i, list) { <b>return</b> item === list&lbrack;0&rbrack;; }); // <i>false</i>
@@ -7053,7 +6494,6 @@ have side-effects.</p>
   { name: &quot;alice&quot;, id: 111 },
   { name: &quot;alice&quot;, id: 222 }
 &rbrack;;
-
 data.every(<b>function</b>(item, i, list) { <b>return</b> item === list&lbrack;0&rbrack;; }); // <i>false</i>
 data.every(<b>function</b>(item, i, list) { <b>return</b> item.name === list&lbrack;0&rbrack;.name; }); // <i>true</i>
 </pre>
@@ -7072,13 +6512,11 @@ It takes two parameters, arr.slice(&lbrack;begin&lbrack;, end&rbrack;&rbrack;):<
 <p>Zero-based index which is the end of extraction, slicing up to this index but 
 it&apos;s not included.</p>
 <p>If the end is a negative number, end = arr.length + end.</p>
-
 <p><b>Example 1</b></p>
 <!-- page 111 -->
 <pre>
 // <i>Let&apos;s say we have this Array of Alphabets</i>
 <b>var</b> arr = &lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;&hellip;&rbrack;;
-
 // <i>I want an Array of the first two Alphabets</i>
 <b>var</b> newArr = arr.slice(0, 2);  // <i>newArr === &lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;</i>
 </pre>
@@ -7139,11 +6577,9 @@ it&apos;s not included.</p>
 from an existing Object instance to a new one.</p>
 <pre>
 <b>const</b> existing = { a: 1, b: 2, c: 3 };
-
 <b>const</b> clone = Object.assign({}, existing);
 </pre>
 <p>This includes Symbol properties in addition to String ones.</p>
-
 <p><a href="https://github.com/tc39/proposal-object-rest-spread">
 Object rest/spread destructuring</a> which is currently a stage 3 proposal provides an 
 even simpler way to create shallow clones of Object instances:</p>
@@ -7156,7 +6592,6 @@ Object is by manually iterating over its properties and filtering out inherited 
 .hasOwnProperty().</p>
 <pre>
 <b>var</b> existing = { a: 1, b: 2, c: 3 };
-
 <b>var</b> clone = {};
 <b>for</b> (<b>var</b> prop <b>in</b> existing) {
   <b>if</b> (existing.hasOwnProperty(prop)) {
@@ -7184,21 +6619,16 @@ is running in strict mode. If the code is in strict mode, a TypeError will be th
     foo: &apos;nested-foo&apos;
   }
 };
-
 Object.freeze(obj);
-
 // <i>Cannot add new properties</i>
 obj.newProperty = <b>true</b>;
-
 // <i>Cannot modify existing values or their descriptors</i>
 obj.foo = &apos;not foo&apos;;
 Object.defineProperty(obj, &apos;foo&apos;, {
   writable: <b>true</b>
 });
-
 // <i>Cannot delete existing properties</i>
 <b>delete</b> obj.foo;
-
 // <i>Nested objects are not frozen</i>
 obj.bar.push(4);
 obj.baz.foo = &apos;new foo&apos;;
@@ -7209,7 +6639,6 @@ obj.baz.foo = &apos;new foo&apos;;
 <p>When you want a complete copy of an object (i.e. the object properties
 and the values inside those properties, etc&hellip;), that is called
 <b>deep cloning</b>.</p>
-
 <h5>Version ≥ 5.1</h5>
 <p>If an object can be serialized to JSON, then you can create a deep clone of it with a 
 combination of JSON.parse and JSON.stringify:</p>
@@ -7220,7 +6649,6 @@ existing.b.c = 3;  // <i>copy.b.c will not change</i>
 </pre>
 <p>Note that JSON.stringify will convert Date objects to ISO-format string JSON.parse
 will not convert the string back into a Date.</p>
-
 <p>There is no built-in function in JavaScript for creating deep clones,
 and it is not possible in general to create deep clones for every
 object for many reasons. For example,</p>
@@ -7265,7 +6693,6 @@ class. Not performing this check can raise errors.</p>
 and then you can loop through this array with function.</p>
 <pre>
 <b>var</b> obj = {0: &apos;a&apos;, 1: &apos;b&apos;, 2: &apos;c&apos; };
-
 Object.keys(obj).map(<b>function</b>(key) {
   console.log(key);
 });
@@ -7277,7 +6704,6 @@ Object.keys(obj).map(<b>function</b>(key) {
 <p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">
 Object.assign()</a> method is used to copy the values of all enumerable own properties from 
 one or more source objects to a target object. It will return the target object.</p>
-
 <p>Use it to assign values to an existing object:</p>
 <pre>
 <b>var</b> user = {
@@ -7402,12 +6828,9 @@ Object.defineProperty(person, &apos;fullName&apos;, {
     &lbrack;<b>this</b>.name, <b>this</b>.surname&rbrack; = value.split(&quot; &quot;);
   }
 });
-
 console.log(person.fullName);  // <i>-&amp;quot;John Doe&quot;</i>
-
 person.surname = &quot;Hill&quot;;
 console.log(person.fullName);  // <i>-&amp;quot;John Hill&quot;</i>
-
 person.fullName = &quot;Mary Jones&quot;;
 console.log(person.name)  // <i>-&amp;quot;Mary&quot;</i>
 </pre>
@@ -7433,12 +6856,10 @@ alert(word &plus; &apos; <b>&bsol;&bsol;n</b> <b>&bsol;&bsol;n</b>&apos; &plus; 
 <p>Note how we are using &lbrack;&rbrack; bracket notation to look at the variable
 named word; if we were to use the traditional . notation, then it
 would take the value literally, hence:</p>
-
 <pre>
 console.log(dictionary.word) // <i>doesn&apos;t work because word is taken literally and dictionary has no 
 field named &grave;word&grave;</i>
 console.log(dictionary.apple) // <i>it works! because apple is taken literally</i>
-
 console.log(dictionary&lbrack;word&rbrack;) // <i>it works! because word is a variable, and the user perfectly typed 
 in one of the words from our dictionary when prompted</i>
 console.log(dictionary&lbrack;apple&rbrack;) // <i>error! apple is not defined (as a variable)</i>
@@ -7488,9 +6909,7 @@ to see in an Array.</p>
 <pre>
 console.log(anArray&lbrack;0&rbrack;, anObject&lbrack;0&rbrack;); // <i>outputs: zero. zero!</i>
 console.log(anArray&lbrack;1&rbrack;, anObject&lbrack;1&rbrack;); // <i>outputs: one. one!</i>
-
 console.log(anArray.length, anObject.length); // <i>outputs: 2 interesting</i>
-
 console.log(anArray.foo, anObject.foo); // <i>outputs: undefined bar</i>
 </pre>
 <!-- page 119 -->
@@ -7512,12 +6931,10 @@ anObject.length = 2;
 </pre>
 <p>Then you can use the C-style <b>for</b> loop to iterate over anObject
 just as if it were an Array. See Array Iteration</p>
-
 <p>Note that anObject is only an <b>array-like</b> object. (also known as a List) It is 
 not a true Array. This is important, because functions like push and forEach (or any 
 convenience function found in Array.prototype) will not work by default on array-like 
 objects.</p>
-
 <p>Many of the DOM document functions will return a List (i.e. querySelectorAll,form.element) 
 which is similar to the array-like anObject we created above. See Converting Array-like 
 Objects to Arrays</p>
@@ -7531,16 +6948,13 @@ console.log(Array.isArray(anArray), Array.isArray(anObject)); // <i>outputs: tru
 <h3 id="ch13-11">Section 13.11: Object.seal</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h5>Version ≥ 5</h5>
-
 <p>Object.seal prevents the addition or removal of properties from an object. Once an 
 object has been sealed its Object.freeze property descriptors can&apos;t be converted 
 to another type. Unlike it does allow properties to be edited.</p>
 <p>Attempts to do this operations on a sealed object will fail silently</p>
 <pre>
 <b>var</b> obj = { foo: &apos;foo&apos;, bar: <b>function</b> () { <b>return</b> &apos;bar&apos;; } };
-
 Object.seal(obj)
-
 obj.newFoo = &apos;newFoo&apos;;
 obj.bar = <b>function</b> () { <b>return</b> &apos;foo&apos; };
 obj.newFoo; // <i>undefined</i>
@@ -7589,25 +7003,20 @@ console.log(array);  // <i>&lbrack;&quot;hello&quot;, &quot;this is&quot;, &quot
 <h3 id="ch13-13">Section 13.13: Retrieving properties from an object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><i><b>Characteristics of properties :</b></i></p>
-
 <p>Properties that can be retrieved from an <i>object</i> could have the following characteristics,</p>
 <ul>
   <li>Enumerable</li>
   <li>Non - Enumerable</li>
   <li>own</li>
 </ul>
-
 <p>While creating the properties using 
 <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"><i>Object.defineProperty(ies)</i></a>),
 we could set its characteristics except <i>&quot;own&quot;</i>. Properties which are available 
 in the direct level not in the <i>prototype</i> level (&lowbar;&lowbar;proto&lowbar;&lowbar;) 
 of an object are called as <i>own</i> properties.</p>
-
 <p>And the properties that are added into an object without using Object.defindProperty(ies) 
 will don&apos;t have its enumerable characteristic. That means it be considered as true.</p>
-
 <p><i><b>Purpose of enumerability:</b></i></p>
-
 <p>The main purpose of setting enumerable characteristics to a property
 is to make the particular property&apos;s availability when retrieving it
 from its object, by using different programmatical methods. Those
@@ -7615,7 +7024,6 @@ different methods will be discussed deeply below.</p>
 <!-- page 121 -->
 <p><i><b>Methods of retrieving properties:</b></i></p>
 <p>Properties from an object could be retrieved by the following methods,</p>
-
 <ol type="1" start="1">
   <li><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in"><b>for</b>..<b>in</b></a> loop<br/>
   <p>This loop is very useful in retrieving enumerable properties from an object. 
@@ -7653,12 +7061,10 @@ console.log(props);  // <i>&lbrack;&quot;a&quot;&rbrack;</i>
 <b>var</b> x = { a : 10 , b : 3} , props;
 props = Object.keys(x);
 console.log(props);  // <i>&lbrack;&quot;a&quot;,&quot;b&quot;&rbrack;</i>
-
 // <i>Ex 2 : Data with enumerable properties in prototype chain</i>
 <b>var</b> x = { a : 10 , &lowbar;&lowbar;proto&lowbar;&lowbar; : { b : 10}} , props;
 props = Object.keys(x);
 console.log(props);  // <i>&lbrack;&quot;a&quot;&rbrack;</i>
-
 // <i>Ex 3 : Data with non enumerable properties</i>
 <b>var</b> x = { a : 10 } , props;
 Object.defineProperty(x, &quot;b&quot;, {value : 5, enumerable : <b>false</b>});
@@ -7878,14 +7284,13 @@ property cannot be of both types.</p>
   <li><b>set</b> is a function which serves as a setter for the property, or <b>undefined</b> 
     if there is no setter. The function will receive as only argument the new value being 
     assigned to the property.</li>
-
+</ul>
 <p>value:</p>
 <ul>
   <li>This key defaults to <b>undefined</b>.</li>
   <li>The value associated with the property. Can be any valid JavaScript value (number, 
     object, function, etc).</li>
 </ul>
-
 <p>Example:</p>
 <!-- page 126 -->
 <pre>
@@ -7904,8 +7309,6 @@ console.log(&apos;and this will be logged &apos; +
 }});
 // <i>propertyName1 is the name of obj&apos;s data property</i>
 // <i>and propertyName2 is the name of its accessor property</i>
-
-
 obj.propertyName1 = 3;
 console.log(obj.propertyName1); // <i>3</i>
 
@@ -10698,7 +10101,7 @@ foo();
 performed through default values:</p>
 <ul>
   <li>A previously declared parameter can be reused as a default value for
-    the upcoming parameters&apos; values.</p>
+    the upcoming parameters&apos; values.</li>
   <li>Inline operations are allowed when assigning a default value to a parameter.</li>
   <li>Variables existing in the same scope of the function being declared can be 
     used in its default values.</li>
@@ -12048,7 +11451,7 @@ check8();  // <i>We also bound the argument to &grave;8&grave; here. It can&apos
 <p><b>Hard binding</b></p>
 <ul>
   <li>The object of <i>hard binding</i> is to &quot;hard&quot; link a reference to <b>this</b>.</li>
-  <li> Advantage: It&apos;s useful when you want to protect particular objects from being lost.</li>
+  <li>Advantage: It&apos;s useful when you want to protect particular objects from being lost.</li>
   <li>Example:</li>
 </ul>
 <pre>
@@ -12074,8 +11477,8 @@ Person.call(person3);
 </pre>
 <!-- page 202 -->
 <ul>
-  <li>So, as you can remark in the example above, whatever object you pass to <i>Person</i>, 
-  it&apos;ll always use <i>person() object</i> <b>it&apos;s hard binded.</b></li>
+  <li>So, as you can remark in the example above, whatever object you pass to <i>Person</i>,
+    it&apos;ll always use <i>person() object</i> <b>it&apos;s hard binded.</b></li>
 </ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch24-4">Section 24.4: this in constructor functions</h3>
@@ -12799,7 +12202,7 @@ called even after the original function has returned.</p>
 <ul>
   <li>Use bind<br/>
   <b>bind</b> effectively generates a new function that sets <b>this</b> to
-whatever was passed to <b>bind</b> then calls the original function.<br/>
+    whatever was passed to <b>bind</b> then calls the original function.<br/>
 <pre>
 <b>function</b> SomeClass(msg, elem) {
   <b>this</b>.msg = msg;
@@ -12819,10 +12222,10 @@ whatever was passed to <b>bind</b> then calls the original function.<br/>
   });
 }
 </pre>
-</li>
+  </li>
+</ul>
 <p>Often you&apos;d like to call a member function, ideally passing any
 arguments that were passed to the event on to the function.</p>
-</ul>
 <p><b>Solutions:</b></p>
 <ul>
   <li>Use bind<br/>
@@ -13031,9 +12434,8 @@ window.setTimeout(stopFunc, 3000);
 <p><b>setTimeout</b></p>
 <ul>
   <li>Executes a function, after waiting a specified number of milliseconds.</li>
-  <li>Used to delay the execution of a function.
+  <li>Used to delay the execution of a function.</li>
 </ul>
-
 <p><b>Syntax:</b> setTimeout ( <b>function</b>, milliseconds) or 
 window.setTimeout(<b>function</b>, milliseconds)</p>
 
@@ -13177,8 +12579,7 @@ be specified as the second argument to the RegExp constructor, as in
 <b>new</b> RegExp(&apos;test&apos;, &apos;gi&apos;).</p>
 <ul>
   <li>g - Global. Finds all matches instead of stopping after the first.</li>
-  <li>i - Ignore case. /&lbrack;a-z&rbrack;/i is equivalent to 
-  /&lbrack;a&bsol;Z&rbrack;/.</li>
+  <li>i - Ignore case. /&lbrack;a-z&rbrack;/i is equivalent to /&lbrack;a&bsol;Z&rbrack;/.</li>
   <li>m - Multiline. &Hat; and &dollar; match the beginning and end of each line
     respectively treating &bsol;&bsol;n and &bsol;&bsol;r as delimiters instead 
 	of simply the beginning and end of the entire string.</li>
@@ -13186,8 +12587,8 @@ be specified as the second argument to the RegExp constructor, as in
 <h5>Version ≥ 6</h5>
 <ul>
   <li>u - Unicode. If this flag is not supported you must match specific
-Unicode characters with &bsol;&bsol;uXXXX where XXXX is the character&apos;s value
-in hexadecimal.</li>
+    Unicode characters with &bsol;&bsol;uXXXX where XXXX is the character&apos;s 
+	value in hexadecimal.</li>
   <li>y - Finds all consecutive/adjacent matches.</li>
 </ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -13241,7 +12642,7 @@ expressions as arguments.</p>
   <li>&quot;string&quot;.replace(&hellip;</li>
   <li>&quot;string&quot;.split(&hellip;</li>
   <li>&quot;string&quot;.search(&hellip;</li>
-<ul>
+</ul>
 <p><b>Match with RegExp</b></p>
 console.log(&quot;string&quot;.match(<i>/&lbrack;i-n&rbrack;+/</i>));
 console.log(&quot;string&quot;.match(<i>/(r)&lbrack;i-n&rbrack;+/</i>));
@@ -13291,8 +12692,8 @@ so the solution is to write a capture group (pattern). The captured data can
 then be referenced as&hellip;</p>
 <!-- page 225 -->
 <ul>
-  <li>String replacement &quot;&dollar;n&quot; where n is the <i>n th</i> capture group
-(starting from 1)</li>
+  <li>String replacement &quot;&dollar;n&quot; where n is the <i>n th</i> capture 
+    group (starting from 1)</li>
   <li>The <i>n th</i> argument in a callback function</li>
   <li>If the <i>RegExp</i> is not flagged g, the <i>n+1 th</i> item in a returned
     <i>Array</i></li>
@@ -13818,7 +13219,6 @@ fetched from an external source. Functionally, JSON isn&apos;t very
 different from XML or YAML  some confusion can be avoided if JSON is
 just imagined as some serialization format that looks very much like
 JavaScript.</p>
-
 <p>Even though the name implies just objects, and even though the
 majority of use cases through some kind of API always happen to be
 objects and arrays, JSON is not for just objects or arrays. The
@@ -13829,14 +13229,11 @@ following primitive types are supported:</p>
   <li>Boolean (e.g. <b>true</b>)</li>
   <li>The value <b>null</b></li>
 </ul>
-
 <p><b>undefined</b> is not supported in the sense that an undefined property
 will be omitted from JSON upon serialization. Therefore, there is no
 way to deserialize JSON and end up with a property whose value is <b>undefined</b>.</p>
-
 <p>The string &quot;42&quot; is valid JSON. JSON doesn&apos;t always have to have an
 outer envelope of &quot;{&hellip;}&quot; or &quot;&lbrack;&hellip;&rbrack;&quot;.</p>
-
 <p>While some JSON is also valid JavaScript and some JavaScript is also
 valid JSON, there are some subtle differences between both languages
 and neither language is a subset of the other.</p>
@@ -13866,14 +13263,11 @@ quotes around the property name can be omitted:</p>
 </pre>
 <p>JSON strictly requires all property names to be double quoted and
 string values to be double quoted as well.</p>
-
 <p>It&apos;s common for JSON-newcomers to attempt to use code excerpts with
 JavaScript literals as JSON, and scratch their heads about the syntax
 errors they are getting from the JSON parser.</p>
-
 <p>More confusion starts arising when <i>incorrect terminology</i> is applied
 in code or in conversation.</p>
-
 <p>A common anti-pattern is to name variables that hold non-JSON values
 as &quot;json&quot;:</p>
 <pre>
@@ -14880,7 +14274,7 @@ Why is document.all defined but typeof document.all returns &quot;undefined&quot
 <p>If the property to be deleted is an own non-configurable property (can&apos;t be deleted):</p>
 <ul>
   <li><b>false</b> in non-strict mode.</li>
-  <li>Throws an error in strict mode</li>
+  <li>Throws an error in strict mode.</li>
 </ul>
 <br/>
 <p><b>Description</b></p>
@@ -14940,7 +14334,7 @@ converting something into a number.</p>
 <ul>
   <li>string representations of integers (decimal or hexadecimal) and floats.</li>
   <li>booleans: <b>true</b>, <b>false</b>.</li>
-  <li><b>null</b>
+  <li><b>null</b></li>
 </ul>
 <p>Values that can&apos;t be converted will evaluate to <b>NaN</b>.</p>
 <p><b>Examples:</b></p>
@@ -15442,13 +14836,13 @@ mitigating the problem of deeply nested callbacks (known as
 <p>A promise can be in one of three states:</p>
 <ul>
   <li><i>pending</i>  The underlying operation has not yet completed, and the
-promise is <i>pending</i> fulfillment.</li>
+    promise is <i>pending</i> fulfillment.</li>
   <li><i>fulfilled</i>  The operation has finished, and the promise is
-<i>fulfilled</i> with a <i>value</i>. This is analogous to returning a value
-from a synchronous function.</li>
+  <i>fulfilled</i> with a <i>value</i>. This is analogous to returning a value
+    from a synchronous function.</li>
   <li><i>rejected</i>  An error has occurred during the operation, and the
-promise is <i>rejected</i> with a <i>reason</i>. This is analogous to throwing
-an error in a synchronous function.</li>
+    promise is <i>rejected</i> with a <i>reason</i>. This is analogous to throwing
+	an error in a synchronous function.</li>
 </ul>
 <p>A promise is said to be <i>settled</i> (or <i>resolved</i>) when it is either
 fulfilled or rejected. Once a promise is settled, it becomes
@@ -18059,7 +17453,8 @@ document.body.innerHTML = HTML`
   <h1><img src="&dollar;{iconSrc}" /&gt; &dollar;{title}</h1>
   <ul> &dollar;(names.map(name =&gt; HTML `
     <li>?&dollar;{name}</li>
-  `)} </ul>
+  </ul>
+  `)} 
 `;
 </pre>
 <!-- ![](./images/image036.png){width="7.486805555555556in" height="5.666666666666667in"} -->
