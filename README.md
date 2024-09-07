@@ -18272,292 +18272,154 @@ export <b>default</b> <b>function</b> (radius) {
   <b>return</b> PI &ast; radius &ast; radius;
 }
 </pre>
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch57-3">Section 57.3: Importing named members from another module</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-test.js
-Given that the module from the Defining a Module section exists in the
-file , you can import from that module and use its exported members:
-import
-{
-doSomething
-,
-MyClass
-,
-PI
-}
-from
-&apos;./test&apos;
-doSomething
-(
-)
-<b>const</b>
-mine
-=
-<b>new</b>
-MyClass
-(
-)
-mine.
-test
-(
-)
-console.
-log
-(
-PI
-)
-somethingPrivate
-The () method was not exported from the test module, so attempting to
-import it will fail:
-import
-{
-somethingPrivate
-}
-from
-&apos;./test&apos;
-somethingPrivate
-(
-)
+<p>Given that the module from the Defining a Module section exists in the
+file test.js, you can import from that module and use its exported members:</p>
+<pre>
+import {doSomething, MyClass, PI} from &apos;./test&apos;
+doSomething()
+<b>const</b> mine = <b>new</b> MyClass()
+mine.test()
+console.log(PI)
+</pre>
+<p>The somethingPrivate() method was not exported from the test module, so attempting to
+import it will fail:</p>
+<pre>
+import {somethingPrivate} from &apos;./test&apos;
+somethingPrivate()
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch57-4">Section 57.4: Importing an entire module</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<p>
 In addition to importing named members from a module or a module&apos;s
-default export, you can also import all members into a namespace
-binding.
-import
-&ast;
-as test from
-&apos;./test&apos;
-test.
-doSomething
-(
-)
-All exported members are now available on the test variable.
+default export, you can also import all members into a namespace binding.</p>
+<pre>
+import &ast; as test from &apos;./test&apos;
+test.doSomething()
+</pre>
+<p>All exported members are now available on the test variable.
 Non-exported members are not available, just as they are not available
-with named member imports.
-<b>Note:</b> The path to the module &apos;./test&apos; is resolved by the
-[<i>loader</i>](https://whatwg.github.io/loader/) and is not covered by the
+with named member imports.</p>
+
+<p><b>Note:</b> The path to the module &apos;./test&apos; is resolved by the
+<a href="https://whatwg.github.io/loader/"><i>loader</i></a> and is not covered by the
 ECMAScript specification - this could be a string to any resource (a
 path - relative or absolute - on a filesystem, a URL to a network
-resource, or any other string identifier).
+resource, or any other string identifier).</p>
+<!-- page 324 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch57-5">Section 57.5: Importing named members with aliases</h3>
-<!--
-Sometimes you may encounter members that have really long member
-names, such as
-thisIsWayTooLongOfAName()
-. In this case, you can import the member and give it a shorter name to
-use in your
-current module:
-import
-{
-thisIsWayTooLongOfAName as shortName
-}
-from
-&apos;module&apos;
-shortName
-(
-)
-You can import multiple long member names like this:
-import
-{
-thisIsWayTooLongOfAName as shortName
-,
-thisIsAnotherLongNameThatShouldNotBeUsed as
-otherName
-}
-from
-&apos;module&apos;
-shortName
-(
-)
-console.
-log
-(
-otherName
-)
-And finally, you can mix import aliases with the normal member import:
-import
-{
-thisIsWayTooLongOfAName as shortName
-,
-PI
-}
-from
-&apos;module&apos;
-shortName
-(
-)
-console.
-log
-(
-PI
-)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Sometimes you may encounter members that have really long member names, such 
+as thisIsWayTooLongOfAName(). In this case, you can import the member and give 
+it a shorter name to use in your current module:</p>
+<pre>
+import {thisIsWayTooLongOfAName as shortName} from &apos;module&apos;
+shortName()
+</pre>
+<p>You can import multiple long member names like this:</p>
+<pre>
+import {thisIsWayTooLongOfAName as shortName, thisIsAnotherLongNameThatShouldNotBeUsed as
+otherName} from &apos;module&apos;
+shortName()
+console.log(otherName)
+</pre>
+<p>And finally, you can mix import aliases with the normal member import:</p>
+<pre>
+import {thisIsWayTooLongOfAName as shortName, PI} from &apos;module&apos;
+shortName()
+console.log(PI)
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch57-6">Section 57.6: Importing with side effects</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Sometimes you have a module that you only want to import so its
+<p>Sometimes you have a module that you only want to import so its
 top-level code gets run. This is useful for polyfills, other globals,
-or configuration that only runs once when your module is imported.
-test.js
-Given a file named :
-console.
-log
-(
-&apos;Initializing&hellip;&apos;
-)
-You can use it like this:
-import
-&apos;./test&apos;
-This example will print Initializing&hellip; to the console.
+or configuration that only runs once when your module is imported.</p>
+<p>Given a file named test.js:</p>
+<pre>
+console.log(&apos;Initializing&hellip;&apos;)
+</pre>
+<p>You can use it like this:</p>
+<pre>
+import &apos;./test&apos;
+</pre>
+<p>This example will print Initializing&hellip; to the console.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch57-7">Section 57.7: Exporting multiple named members</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>const</b>
-namedMember1
-=
-&hellip;
-<b>const</b>
-namedMember2
-=
-&hellip;
-<b>const</b>
-namedMember3
-=
-&hellip;
-export
-{
-namedMember1
-,
-namedMember2
-,
-namedMember3
-}
+<pre>
+<b>const</b> namedMember1 = &hellip;
+<b>const</b> namedMember2 = &hellip;
+<b>const</b> namedMember3 = &hellip;
+export { namedMember1, namedMember2, namedMember3 }
+</pre>
+<!-- page 325 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch58">Chapter 58: Screen</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch58-1">Section 58.1: Getting the screen resolution</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<p>
 To get the physical size of the screen (including window chrome and
-menubar/launcher):
-<b>var</b>
-width
-=
-window.
-screen
-.
-width
-,
-height
-=
-window.
-screen
-.
-height
-;
+menubar/launcher):</p>
+<pre>
+<b>var</b> width = window.screen.width,
+    height = window.screen.height;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch58-2">Section 58.2: Getting the "available" area of the screen</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-To get the "available" area of the screen (i.e. not including any bars
+<p>To get the "available" area of the screen (i.e. not including any bars
 on the edges of the screen, but including window chrome and other
-windows:
-<b>var</b>
-availableArea
-=
-{
-pos
-:
-{
-x
-:
-window.
-screen
-.
-availLeft
-,
-y
-:
-window.
-screen
-.
-availTop
-}
-,
-size
-:
-{
-width
-:
-window.
-screen
-.
-availWidth
-,
-height
-:
-window.
-screen
-.
-availHeight
-}
-}
-;
+windows:</p>
+<pre>
+<b>var</b> availableArea = {
+  pos: {
+    x: window.screen.availLeft,
+    y: window.screen.availTop
+  },
+  size: {
+    width: window.screen.availWidth,
+    height: window.screen.availHeight
+  }
+};
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch58-3">Section 58.3: Page width and height</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-To get current page width and height (for any browser), e.g. when
-programming responsiveness:
-<b>function</b> pageWidth() { <b>return</b> window.innerWidth != <b>null</b>?
-window.innerWidth : document.documentElement &&
-document.documentElement.clientWidth ?
-document.documentElement.clientWidth : document.body != <b>null</b> ?
-document.body.clientWidth : <b>null</b>; }
-<b>function</b> pageHeight() { <b>return</b> window.innerHeight != <b>null</b>?
-window.innerHeight : document.documentElement &&
-document.documentElement.clientHeight ?
-document.documentElement.clientHeight : document.body != <b>null</b>?
-document.body.clientHeight : <b>null</b>; }
+<p>To get current page width and height (for any browser), e.g. when
+programming responsiveness:</p>
+<pre>
+<b>function</b> pageWidth() {
+  <b>return</b> window.innerWidth != <b>null</b>? window.innerWidth : document.documentElement &&
+  document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body != <b>null</b> 
+  ? document.body.clientWidth : <b>null</b>; 
+  }
+<b>function</b> pageHeight() {
+  <b>return</b> window.innerHeight != <b>null</b>? window.innerHeight : document.documentElement &&
+document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body != 
+<b>null</b>? document.body.clientHeight : <b>null</b>; 
+}
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch58-4">Section 58.4: Window innerWidth and innerHeight Properties</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Get the window height and width
-<b>var</b>
-width
-=
-window.
-innerWidth
-<b>var</b>
-height
-=
-window.
-innerHeight
+<p>Get the window height and width</p>
+<pre>
+<b>var</b> width = window.innerWidth
+<b>var</b> height = window.innerHeight
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch58-5">Section 58.5: Getting color information about the screen</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-To determine the color and pixel depths of the screen:
-<b>var</b>
-pixelDepth
-=
-window.
-screen
-.
-pixelDepth
-,
-colorDepth
-=
-window.
-screen
-.
-colorDepth
-;
+<p>To determine the color and pixel depths of the screen:</p>
+<pre>
+<b>var</b> pixelDepth = window.screen.pixelDepth,
+  colorDepth = window.screen.colorDepth;
+</pre>
+<!-- page 326 -->
+
