@@ -18643,7 +18643,7 @@ printObj();
 &quot;Foo&quot;
 </blockquote>
 <p>The bind function has a lot going on</p>
-<ol start="1">
+<ol type="1">
   <li>obj will be used as the value of <b>this</b></li>
   <li>forward the arguments to the function</li>
   <li>and then return the value</li>
