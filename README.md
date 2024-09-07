@@ -18459,570 +18459,195 @@ y = 4;
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch56-3">Section 56.3: Difference between var and let</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<i>(Note: All examples using <b>let</b> are also valid for <b>const</b>)</i>
-<b>var</b> is available in all versions of JavaScript, while <b>let</b> and
-<b>const</b> are part of ECMAScript 6 and [only available in some newer
-browsers](http://caniuse.com/#search=block%20level). <b>var</b> is scoped
-to the containing function or the global space, depending when it is
-declared:
-<b>var</b>
-x
-=
-4
-;
-// <i>global scope</i>
-<b>function</b>
-DoThings
-(
-)
-{
-<b>var</b>
-x
-=
-7
-;
-// <i>function scope</i>
-console.
-log
-(
-x
-)
-;
+<p><i>(Note: All examples using <b>let</b> are also valid for <b>const</b>)</i></p>
+<p><b>var</b> is available in all versions of JavaScript, while <b>let</b> and
+<b>const</b> are part of ECMAScript 6 and <a href="http://caniuse.com/#search=block%20level">
+only available in some newer browsers</a>.</p>
+<p><b>var</b> is scoped to the containing function or the global space, depending when it is
+declared:</p>
+<pre>
+<b>var</b> x = 4;  // <i>global scope</i>
+<b>function</b> DoThings() {
+  <b>var</b> x = 7;  // <i>function scope</i>
+  console.log(x);
 }
-console.
-log
-(
-x
-)
-;
-// <i>&gt;&bsol;4</i>
-DoThings
-(
-)
-;
-// <i>&gt;&bsol;7</i>
-console.
-log
-(
-x
-)
-;
-// <i>&gt;&bsol;4</i>
-That means it &quot;escapes&quot; if statements and all similar block
-constructs:
-<b>var</b>
-x
-=
-4
-;
-<b>if</b>
-(
-<b>true</b>
-)
-{
-<b>var</b>
-x
-=
-7
-;
+console.log(x);  // <i>&gt;&bsol;4</i>
+DoThings();      // <i>&gt;&bsol;7</i>
+console.log(x);  // <i>&gt;&bsol;4</i>
+</pre>
+<p>That means it &quot;escapes&quot; if statements and all similar block constructs:</p>
+<pre>
+<b>var</b> x = 4;
+<b>if</b> (<b>true</b>) {
+  <b>var</b> x = 7;
 }
-console.
-log
-(
-x
-)
-;
-// <i>&gt;&bsol;7</i>
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-4
-;
-i
-++
-)
-{
-<b>var</b>
-j
-=
-10
-;
+console.log(x);  // <i>&gt;&bsol;7</i>
+<b>for</b> (<b>var</b> i = 0; i &lt; 4; i++) {
+  <b>var</b> j = 10;
 }
-console.
-log
-(
-i
-)
-;
-// <i>&gt;&bsol;4</i>
-console.
-log
-(
-j
-)
-;
-// <i>&gt;&bsol;10</i>
-By comparison,
-<b>let</b>
-is block scoped:
-<b>let</b>
-x
-=
-4
-;
-<b>if</b>
-(
-<b>true</b>
-)
-{
-<b>let</b>
-x
-=
-7
-;
-console.
-log
-(
-x
-)
-;
-// <i>&gt;&bsol;7</i>
+console.log(i);  // <i>&gt;&bsol;4</i>
+console.log(j);  // <i>&gt;&bsol;10</i>
+</pre>
+<p>By comparison, <b>let</b> is block scoped:</p>
+<pre>
+<b>let</b> x = 4;
+<b>if</b> (<b>true</b>) {
+  <b>let</b> x = 7;
+  console.log(x);  // <i>&gt;&bsol;7</i>
 }
-console.
-log
-(
-x
-)
-;
-// <i>&gt;&bsol;4</i>
-<b>for</b>
-(
-<b>let</b>
-i
-=
-0
-;
-i
-&lt;
-4
-;
-i
-++
-)
-{
-<b>let</b>
-j
-=
-10
-;
+console.log(x);    // <i>&gt;&bsol;4</i>
+<b>for</b> (<b>let</b> i = 0; i &lt; 4; i++) {
+  <b>let</b> j = 10;
 }
-console.
-log
-(
-i
-)
-;
-// <i>&gt;&amp;quot;ReferenceError: i is not defined&quot;</i>
-console.
-log
-(
-j
-)
-;
-// <i>&gt;&amp;quot;ReferenceError: j is not defined&quot;</i>
-Note that i and j are only declared in the <b>for</b> loop and are
-therefore undeclared outside of it.
+console.log(i);  // <i>&gt;&amp;quot;ReferenceError: i is not defined&quot;</i>
+console.log(j);  // <i>&gt;&amp;quot;ReferenceError: j is not defined&quot;</i>
+</pre>
+<p>Note that i and j are only declared in the <b>for</b> loop and are
+therefore undeclared outside of it.</p>
 
-There are several other crucial differences:
+<p>There are several other crucial differences:</p>
 
-<b>Global variable declaration</b>
-
-In the top scope (outside any functions and blocks), <b>var</b>
-declarations put an element in the global object. <b>let</b> does not:
-<b>var</b>
-x
-=
-4
-;
-<b>let</b>
-y
-=
-7
-;
-console.
-log
-(
-<b>this</b>
-.
-x
-)
-;
-// <i>&gt;&bsol;4</i>
-console.
-log
-(
-<b>this</b>
-.
-y
-)
-;
-// <i>&gt;&bsol;undefined</i>
-<b>Re-declaration</b>
-Declaring a variable twice using <b>var</b> doesn&apos;t produce an error
-(even though it&apos;s equivalent to declaring it once):
-<b>var</b>
-x
-=
-4
-;
-<b>var</b>
-x
-=
-7
-;
-With <b>let</b>, this produces an error:
-<b>let</b>
-x
-=
-4
-;
-<b>let</b>
-x
-=
-7
-;
-TypeError: Identifier
-x
-has already been declared
-The same is true when
-y
-is declared with
-<b>var</b>
-:
-<b>var</b>
-y
-=
-4
-;
-<b>let</b>
-y
-=
-7
-;
-TypeError: Identifier
-y
-has already been declared
-However variables declared with let can be reused (not re-declared) in
-a nested block
-<b>let</b>
-i
-=
-5
-;
+<p><b>Global variable declaration</b></p>
+<p>In the top scope (outside any functions and blocks), <b>var</b>
+declarations put an element in the global object. <b>let</b> does not:</p>
+<pre>
+<b>var</b> x = 4;
+<b>let</b> y = 7;
+console.log(<b>this</b>.x);  // <i>&gt;&bsol;4</i>
+console.log(<b>this</b>.y);  // <i>&gt;&bsol;undefined</i>
+</pre>
+<p><b>Re-declaration</b></p>
+<p>Declaring a variable twice using <b>var</b> doesn&apos;t produce an error
+(even though it&apos;s equivalent to declaring it once):</p>
+<pre>
+<b>var</b> x = 4;
+<b>var</b> x = 7;
+</pre>
+<p>With <b>let</b>, this produces an error:</p>
+<pre>
+<b>let</b> x = 4;
+<b>let</b> x = 7;
+</pre>
+<blockquote>
+TypeError: Identifier x has already been declared
+</blockquote>
+<p>The same is true when y is declared with <b>var</b>:</p>
+<pre>
+<b>var</b> y = 4;
+<b>let</b> y = 7;
+</pre>
+<blockquote>
+TypeError: Identifier y has already been declared
+</blockquote>
+<p>However variables declared with let can be reused (not re-declared) in a nested block</p>
+<pre>
+<b>let</b> i = 5;
 {
-<b>let</b>
-i
-=
-6
-;
-console.
-log
-(
-i
-)
-;
-// <i>&gt;&bsol;6</i>
+  <b>let</b> i = 6;
+  console.log(i); // <i>&gt;&bsol;6</i>
 }
-console.
-log
-(
-i
-)
-;
-// <i>&gt;&bsol;5</i>
-Within the block the outer i can be accessed, but if the within block
+console.log(i);   // <i>&gt;&bsol;5</i>
+</pre>
+<p>Within the block the outer i can be accessed, but if the within block
 has a <b>let</b> declaration for i, the outer i can not be accessed and
-will throw a ReferenceError if used before the second is declared.
-<b>let</b>
-i
-=
-5
-;
+will throw a ReferenceError if used before the second is declared.</p>
+<pre>
+<b>let</b> i = 5;
 {
-i
-=
-6
-;
-// <i>outer i is unavailable within the Temporal Dead Zone</i>
-<b>let</b>
-i
-;
+  i = 6;  // <i>outer i is unavailable within the Temporal Dead Zone</i>
+  <b>let</b> i;
 }
+<blockquote>
 ReferenceError: i is not defined
-<b>Hoisting</b>
-
-Variables declared both with <b>var</b> and <b>let</b> are hoisted. The
+</blockquote>
+<p><b>Hoisting</b></p>
+<p>Variables declared both with <b>var</b> and <b>let</b> are hoisted. The
 difference is that a variable declared with <b>var</b> can be referenced
 before its own assignment, since it gets automatically assigned (with
 <b>undefined</b> as its value), but <b>let</b> cannotit specifically
-requires the variable to be declared before being invoked:
-console.
-log
-(
-x
-)
-;
-// <i>&gt;&bsol;undefined</i>
-console.
-log
-(
-y
-)
-;
-// <i>&gt;&amp;quot;ReferenceError: &grave;y&grave; is not defined&quot;</i>
-// <i>OR &gt;&amp;quot;ReferenceError: can&apos;t access lexical declaration &grave;y&grave;
-before initialization&quot;</i>
-<b>var</b>
-x
-=
-4
-;
-<b>let</b>
-y
-=
-7
-;
-The area between the start of a block and a <b>let</b> or <b>const</b>
-declaration is known as the [Temporal Dead
-Zone](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let),
-and any references to the variable in this area will cause a
-ReferenceError. This happens even if the [variable is assigned before
-being
-declared](http://stackoverflow.com/questions/41451181/does-let-override-a-global-declaration-and-throws-a-referenceerror):
-y
-=
-7
-;
-// <i>&gt;&amp;quot;ReferenceError: &grave;y&grave; is not defined&quot;</i>
-<b>let</b>
-y
-;
-In non-strict-mode, assigning a value to a variable without any
+requires the variable to be declared before being invoked:</p>
+<pre>
+console.log(x);  // <i>&gt;&gt; undefined</i>
+console.log(y);  // <i>&gt;&gt; quot;ReferenceError: &grave;y&grave; is not defined&quot;</i>
+// <i>OR &gt;&amp;quot;ReferenceError: can&apos;t access lexical declaration &grave;y&grave; before initialization&quot;</i>
+<b>var</b> x = 4;
+<b>let</b> y = 7;
+</pre>
+<p>The area between the start of a block and a <b>let</b> or <b>const</b>
+declaration is known as the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let">
+Temporal Dead Zone</a>, and any references to the variable in this area will cause a
+ReferenceError. This happens even if the <a href="http://stackoverflow.com/questions/41451181/does-let-override-a-global-declaration-and-throws-a-referenceerror">
+variable is assigned before being declared</a>:</p>
+<pre>
+y=7;  // <i>&gt;&amp;quot;ReferenceError: &grave;y&grave; is not defined&quot;</i>
+<b>let</b> y;
+</pre>
+<p>In non-strict-mode, assigning a value to a variable without any
 declaration, automatically declares the variable in the global scope.
 In this case, instead of y being automatically declared in the global
 scope, <b>let</b> reserves the variable&apos;s name (y) and does not allow
 any access or assignment to it before the line where it is
-declared/initialized.
+declared/initialized.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch56-4">Section 56.4: Apply and Call syntax and invocation</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-The apply and call methods in every function allow it to provide a
-custom value for <b>this</b>.
-<b>function</b>
-print
-(
-)
-{
-console.
-log
-(
-<b>this</b>
-.
-toPrint
-)
-;
+<p>The apply and call methods in every function allow it to provide a custom value for <b>this</b>.</p>
+<pre>
+<b>function</b> print() {
+  console.log(<b>this</b>.toPrint);
 }
-print.
-apply
-(
-{
-toPrint
-:
-&quot;Foo&quot;
-}
-)
-;
-// <i>&gt;&amp;quot;Foo&quot;</i>
-print.
-call
-(
-{
-toPrint
-:
-&quot;Foo&quot;
-}
-)
-;
-// <i>&gt;&amp;quot;Foo&quot;</i>
-You might notice that the syntax for both the invocations used above
-are the same. i.e. The signature looks similar.
+print.apply({ toPrint: &quot;Foo&quot; });  // <i>&gt;&amp;quot;Foo&quot;</i>
+print.call({ toPrint: &quot;Foo&quot; });   // <i>&gt;&amp;quot;Foo&quot;</i>
+</pre>
+<p>You might notice that the syntax for both the invocations used above
+are the same. i.e. The signature looks similar.</p>
 
-But there is a small difference in their usage, since we are dealing
+<p>But there is a small difference in their usage, since we are dealing
 with functions and changing their scopes, we still need to maintain
 the original arguments passed to the function. Both apply and call
-support passing arguments to the target function as follows:
-<b>function</b>
-speak
-(
-)
-{
-<b>var</b>
-sentences
-=
-Array
-.
-<b>prototype</b>
-.
-slice
-.
-call
-(
-arguments
-)
-;
-console.
-log
-(
-<b>this</b>
-.
-name
-&plus;
-&quot;: &quot;
-&plus;
-sentences
-)
-;
+support passing arguments to the target function as follows:</p>
+<pre>
+<b>function</b> speak() {
+  <b>var</b> sentences = Array.<b>prototype</b>.slice.call(arguments);
+  console.log(<b>this</b>.name &plus; &quot;: &quot; &plus; sentences);
 }
-<b>var</b>
-person
-=
-{
-name
-:
-&quot;Sunny&quot;
-}
-;
-speak.
-apply
-(
-person
-,
-&lbrack;
-&quot;I&quot;
-,
-&quot;Code&quot;
-,
-&quot;Startups&quot;
-&rbrack;
-)
-;
-// <i>&gt;&amp;quot;Sunny: I Code Startups&quot;</i>
-speak.
-call
-(
-person
-,
-&quot;I&quot;
-,
-&quot;&lt;3&quot;
-,
-&quot;Javascript&quot;
-)
-;
-// <i>&gt;&amp;quot;Sunny: I &lt;3 Javascript&quot;</i>
-Notice that apply allows you to pass an Array or the arguments object
+<b>var</b> person = { name: &quot;Sunny&quot; };
+speak.apply(person, &lbrack;&quot;I&quot;, &quot;Code&quot;, &quot;Startups&quot;&rbrack;);  // <i>&gt;&amp;quot;Sunny: I Code Startups&quot;</i>
+speak.call(person, &quot;I&quot;, &quot;&lt;3&quot;, &quot;Javascript&quot;); // <i>&gt;&amp;quot;Sunny: I &lt;3 Javascript&quot;</i>
+</pre>
+<!-- page 318 -->
+<p>Notice that apply allows you to pass an Array or the arguments object
 (array-like) as the list of arguments, whereas, call needs you to pass
-each argument separately.
+each argument separately.</p>
 
-These two methods give you the freedom to get as fancy as you want,
+<p>These two methods give you the freedom to get as fancy as you want,
 like implementing a poor version of the ECMAScript&apos;s native bind to
 create a function that will always be called as a method of an object
-from an original function.
-<b>function</b>
-bind
-(
-func
-,
-obj
-)
-{
-<b>return</b>
-<b>function</b>
-(
-)
-{
-<b>return</b>
-func.
-apply
-(
-obj
-,
-Array
-.
-<b>prototype</b>
-.
-slice
-.
-call
-(
-arguments
-,
-1
-)
-)
-;
+from an original function.</p>
+<pre>
+<b>function</b> bind (func, obj) {
+  <b>return</b> <b>function</b> () {
+    <b>return</b> func.apply(obj, Array.<b>prototype</b>.slice.call(arguments, 1));
+  }
 }
+<b>var</b> obj = { name: &quot;Foo&quot; };
+<b>function</b> print() {
+  console.log(<b>this</b>.name);
 }
-<b>var</b>
-obj
-=
-{
-name
-:
+printObj = bind(print, obj);
+printObj();
+</pre>
+<p>This will log</p>
+<blockquote>
 &quot;Foo&quot;
-}
-;
-<b>function</b>
-print
-(
-)
-{
-console.
-log
-(
-<b>this</b>
-.
-name
-)
-;
-}
-printObj
-=
-bind
-(
-print
-,
-obj
-)
-;
-printObj
-(
-)
-;
-This will log
-&quot;Foo&quot;
-The bind function has a lot going on
-1.  obj will be used as the value of <b>this</b>
-2.  forward the arguments to the function
-3.  and then return the value
+</blockquote>
+<p>The bind function has a lot going on</p>
+<ol start="1">
+  <li>obj will be used as the value of <b>this</b></li>
+  <li>forward the arguments to the function</li>
+  <li>and then return the value</li>
+</ol>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch56-5">Section 56.5: Arrow function invocation</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
