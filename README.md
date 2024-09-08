@@ -18555,21 +18555,14 @@ parseInt could convert string to wrong number.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch59-5">Section 59.5: Converting a number to a string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-String
-(
-0
-)
-===
-&apos;0&apos;
-String
-&lpar;0&rpar; will convert the number (0) into a string (&apos;0&apos;).
-A shorter, but less clear, form:
-&apos;&apos;
-&plus;
-0
-===
-&apos;0&apos;
+<pre>
+String(0) === &apos;0&apos;
+</pre>
+<p>String&lpar;0&rpar; will convert the number(0) into a string (&apos;0&apos;).</p>
+<p>A shorter, but less clear, form:</p>
+<pre>
+&apos;&apos; &plus; 0 === &apos;0&apos;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch59-6">Section 59.6: Primitive to Primitive conversion table</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -18723,272 +18716,111 @@ A shorter, but less clear, form:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch59-7">Section 59.7: Convert an array to a string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Array   .  join   (   separator
-) can be used to output an array as a string, with a configurable
-separator.
-Default (separator = &quot;,&quot;):
-&lbrack;
-&quot;a&quot;
-,
-&quot;b&quot;
-,
-&quot;c&quot;
-&rbrack;
-.
-join
-(
-)
-===
-&quot;a,b,c&quot;
-With a string separator:
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-&rbrack;
-.
-join
-(
-&quot; + &quot;
-)
-===
-&quot;1 + 2 + 3 + 4&quot;
-With a blank separator:
-&lbrack;
-&quot;B&quot;
-,
-&quot;o&quot;
-,
-&quot;b&quot;
-&rbrack;
-.
-oin
-(
-&quot;&quot;
-)
-===
-&quot;Bob&quot;
+<p>Array.join(separator) can be used to output an array as a string, with a configurable
+separator.</p>
+<p>Default (separator = &quot;,&quot;):</p>
+<pre>
+&lbrack;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&rbrack;.join() === &quot;a,b,c&quot;
+</pre>
+<!-- page 329 -->
+<p>With a string separator:</p>
+<pre>
+&lbrack;1, 2, 3, 4&rbrack;.join(&quot; + &quot; ) === &quot;1 + 2 + 3 + 4&quot;
+</pre>
+<p>With a blank separator:</p>
+<pre>
+&lbrack;&quot;B&quot;, &quot;o&quot;, &quot;b&quot;&rbrack;.join(&quot;&quot;) === &quot;Bob&quot;
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch59-8">Section 59.8: Array to String using array methods</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-This way may seem to be useless because you are using anonymous
+<p>This way may seem to be useless because you are using anonymous
 function to accomplish something that you can do it with join(); But
 if you need to make something to the strings while you are converting
-the Array to String, this can be useful.
-<b>var</b>
-arr
-=
-&lbrack;
-&apos;a&apos;
-,
-&apos;
-á
-&apos;
-,
-&apos;b&apos;
-,
-&apos;c&apos;
-&rbrack;
-<b>function</b>
-upper_lower
-(
-a
-,
-b
-,
-i
-)
-{
-// <i>&hellip;do something here</i>
-b
-=
-i
-&
-1
-?
-b&period;
-toUpperCase
-(
-)
-:
-b&period;
-toLowerCase
-(
-)
-;
-<b>return</b>
-a
-&plus;
-&apos;,&apos;
-&plus;
-b
+the Array to String, this can be useful.</p>
+<pre>
+<b>var</b> arr = &lbrack;&apos;a&apos;, &apos;á&apos;, &apos;b&apos;, &apos;c&apos;&rbrack;
+<b>function</b> upper_lower (a, b, i) {
+  // <i>&hellip;do something here</i>
+  b = i & 1 ? b&period;toUpperCase() : b&period;toLowerCase();
+  <b>return</b> a &plus; &apos;,&apos; &plus; b
 }
-arr
-=
-arr.
-reduce
-(
-upper_lower
-)
-;
-// <i>&quot;a,</i>
-Á
-<i>,b,C&quot;</i>
+arr = arr.reduce(upper_lower);  // <i>&quot;a, Á,b,C&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch59-9">Section 59.9: Converting a number to a boolean</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Boolean
-(
-0
-)
-===
-<b>false</b>
-Boolean(
-0&rpar; will convert the number 0 into a boolean <b>false</b>.
-A shorter, but less clear, form:
-!!
-0
-===
-<b>false</b>
+<pre>
+Boolean(0) === <b>false</b>
+</pre>
+<p>Boolean&lpar;0&rpar; will convert the number 0 into a boolean <b>false</b>.</p>
+<p>A shorter, but less clear, form:</p>
+<pre>
+!!0 === <b>false</b>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch59-10">Section 59.10: Converting a string to a boolean</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-To convert a string to boolean use
-Boolean
-(
-myString
-)
-or the shorter but less clear form
-!!
-myString
-All strings except the empty string (of length zero) are evaluated to
-<b>true</b> as booleans.
-Boolean
-(
-&apos;&apos;
-)
-===
-<b>false</b>
-// <i>is true</i>
-Boolean
-(
-&quot;&quot;
-)
-===
-<b>false</b>
-// <i>is true</i>
-Boolean
-(
-&apos;0&apos;
-)
-===
-<b>false</b>
-// <i>is false</i>
-Boolean
-(
-&apos;any_nonempty_string&apos;
-)
-===
-<b>true</b>
-// <i>is true</i>
+<p>To convert a string to boolean use</p>
+<pre>
+Boolean(myString)
+</pre>
+<p>or the shorter but less clear form</p>
+<pre>
+!!myString
+</pre>
+<p>All strings except the empty string (of length zero) are evaluated to
+<b>true</b> as booleans.</p>
+<pre>
+Boolean(&apos;&apos;) === <b>false</b>  // <i>is true</i>
+Boolean(&quot;&quot;) === <b>false</b>  // <i>is true</i>
+Boolean(&apos;0&apos;) === <b>false</b> // <i>is false</i>
+Boolean(&apos;any_nonempty_string&apos;) === <b>true</b> // <i>is true</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch59-11">Section 59.11: Integer to Float</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-In JavaScript, all numbers are internally represented as floats. This
+<p>In JavaScript, all numbers are internally represented as floats. This
 means that simply using your integer as a float is all that must be
-done to convert it.
+done to convert it.</p>
+<!-- page 330 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch59-12">Section 59.12: Float to Integer</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-To convert a float to an integer, JavaScript provides multiple
-methods.
-The floor function returns the first integer less than or equal to the
-float.
-Math
-.
-floor
-(
-5.7
-)
-;
-// <i>5</i>
-The ceil function returns the first integer greater than or equal to
-the float.
-Math
-.
-ceil
-(
-5.3
-)
-;
-// <i>6</i>
-The round function rounds the float.
-Math
-.
-round
-(
-3.2
-)
-;
-// <i>3</i>
-Math
-.
-round
-(
-3.6
-)
-;
-// <i>4</i>
-Version
-≥
-6
-Truncation (trunc) removes the decimals from the float.
-Math
-.
-trunc
-(
-3.7
-)
-;
-// <i>3</i>
-Notice the difference between truncation (trunc) and floor:
-Math
-.
-floor
-(
-&minus;
-3.1
-)
-;
-// <i>-4</i>
-Math
-.
-trunc
-(
-&minus;
-3.1
-)
-;
-// <i>-3</i>
+<p>To convert a float to an integer, JavaScript provides multiple
+methods.</p>
+<p>The floor function returns the first integer less than or equal to the
+float.</p>
+<pre>
+Math.floor(5.7);  // <i>5</i>
+</pre>
+<p>The ceil function returns the first integer greater than or equal to
+the float.</p>
+<pre>
+Math.ceil(5.3);  // <i>6</i>
+</pre>
+<p>The round function rounds the float.</p>
+<pre>
+Math.round(3.2);  // <i>3</i>
+Math.round(3.6);  // <i>4</i>
+</pre>
+<h5>Version ≥ 6</h5>
+<p>Truncation (trunc) removes the decimals from the float.</p>
+<pre>
+Math.trunc(3.7);  // <i>3</i>
+</pre>
+<p>Notice the difference between truncation (trunc) and floor:</p>
+<pre>
+Math.floor(&minus;3.1); // <i>-4</i>
+Math.trunc(&minus;3.1); // <i>-3</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch59-13">Section 59.13: Convert string to float</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-parseFloat accepts a string as an argument which it converts to a
-float/
-parseFloat
-(
-&quot;10.01&quot;
-)
-// <i>= 10.01</i>
+<p>parseFloat accepts a string as an argument which it converts to a
+float/</p>
+<pre>
+parseFloat(&quot;10.01&quot;)  // <i>= 10.01</i>
+</pre>
+<!-- page 331 -->
 
