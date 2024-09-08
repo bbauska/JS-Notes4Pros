@@ -19334,520 +19334,169 @@ self.addEventListener(&apos;fetch&apos;, <b>function</b>(event) {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch63-3">Section 63.3: Register a service worker</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<pre>
 // <i>Check if service worker is available.</i>
-<b>if</b>
-(
-&apos;serviceWorker&apos;
-<b>in</b>
-navigator
-)
-{
-navigator.
-serviceWorker
-.
-register
-(
-&apos;/sw.js&apos;
-)
-.
-then
-(
-<b>function</b>
-(
-registration
-)
-{
-console.
-log
-(
-&apos;SW registration succeeded with scope:&apos;
-,
-registration.
-scope
-)
-;
+<b>if</b> (&apos;serviceWorker&apos;<b>in</b>navigator) {
+  navigator.serviceWorker.register(&apos;/sw.js&apos;).then(<b>function</b>(registration) {
+    console.log(&apos;SW registration succeeded with scope:&apos;, registration.scope);
+  }).<b>catch</b>(<b>function</b>(e) {
+    console.log(&apos;SW registration failed with error:&apos;, e);
+  });
 }
-)
-.
-<b>catch</b>
-(
-<b>function</b>
-(
-e
-)
-{
-console.
-log
-(
-&apos;SW registration failed with error:&apos;
-,
-e
-)
-;
-}
-)
-;
-}
-You can call
-register
-(
-)
-on every page load. If the SW is already registered, the browser
-provides you with
-instance that is already running
-The SW file can be any name.
-sw.
-js
-is common.
-The location of the SW file is important because it defines the SW&apos;s
-scope. For example, an SW file at
-  js   /   sw.js   can only intercept fetch requests for files that begin with js
-/
-//. For this reason you usually see the
-SW file at the top-level directory of the project.
+</pre>
+<ul>
+  <li>You can call register() on every page load. If the SW is already registered, 
+    the browser provides you with instance that is already running</li>
+  <li>The SW file can be any name. sw.js is common.</li>
+  <li>The location of the SW file is important because it defines the SW&apos;s scope. 
+    For example, an SW file at js/sw.js can only intercept fetch requests for files 
+	that begin with /js/. For this reason you usually see the SW file at the 
+	top-level directory of the project.</li>
+</ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch63-4">Section 63.4: Communicating with a Web Worker</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Since workers run in a separate thread from the one that created them,
-communication needs to happen via postMessage.
-
-<b>Note:</b> Because of the different export prefixes, some browsers have
+<p>Since workers run in a separate thread from the one that created them,
+communication needs to happen via postMessage.</p>
+<p><b>Note:</b> Because of the different export prefixes, some browsers have
 webkitPostMessage instead of postMessage. You should override
 postMessage to make sure workers &quot;work&quot; (no pun intended) in the
 most places possible: worker.postMessage = (worker.webkitPostMessage
-&vert;&vert; worker.postMessage);
-
-From the main thread (parent window):
+&vert;&vert; worker.postMessage);</p>
+<p>From the main thread (parent window):</p>
+<!-- page 342 -->
+<pre>
 // <i>Create a worker</i>
-<b>var</b>
-webworker
-=
-<b>new</b>
-Worker
-(
-&quot;./path/to/webworker.js&quot;
-)
-;
+<b>var</b> webworker = <b>new</b> Worker(&quot;./path/to/webworker.js&quot;);
 // <i>Send information to worker</i>
-webworker.
-postMessage
-(
-&quot;Sample message&quot;
-)
-;
+webworker.postMessage(&quot;Sample message&quot;);
 // <i>Listen for messages from the worker</i>
-webworker.
-addEventListener
-(
-&quot;message&quot;
-,
-<b>function</b>
-(
-event
-)
-{
-// <i>&grave;event.data&grave; contains the value or object sent from the worker</i>
-console.
-log
-(
-&quot;Message from worker:&quot;
-,
-event.
-data
-)
-;
-// <i>&lbrack;&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;&rbrack;</i>
-}
-)
-;
-webworker.js
-From the worker, in :
+webworker.addEventListener(&quot;message&quot;, <b>function</b>(event) {
+  // <i>&grave;event.data&grave; contains the value or object sent from the worker</i>
+    console.log(&quot;Message from worker:&quot;, event.data); // <i>&lbrack;&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;&rbrack;</i>
+  });
+</pre>
+<p>From the worker, in webworker.js:</p>
+<pre>
 // <i>Send information to the main thread (parent window)</i>
-self.
-postMessage
-(
-&lbrack;
-&quot;foo&quot;
-,
-&quot;bar&quot;
-,
-&quot;baz&quot;
-&rbrack;
-)
-;
+self.postMessage(&lbrack;&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;&rbrack;);
 // <i>Listen for messages from the main thread</i>
-self.
-addEventListener
-(
-&quot;message&quot;
-,
-<b>function</b>
-(
-event
-)
-{
-// <i>&grave;event.data&grave; contains the value or object sent from main</i>
-console.
-log
-(
-&quot;Message from parent:&quot;
-,
-event.
-data
-)
-;
-// <i>&quot;Sample message&quot;</i>
+self.addEventListener(&quot;message&quot;, <b>function</b>(event) {
+  // <i>&grave;event.data&grave; contains the value or object sent from main</i>
+  console.log(&quot;Message from parent:&quot;, event.data);  // <i>&quot;Sample message&quot;</i>
+});
+</pre>
+<p>Alternatively, you can also add event listeners using onmessage:</p>
+<p>From the main thread (parent window):</p>
+<pre>
+webworker.onmessage = <b>function</b>(event) {
+  console.log(&quot;Message from worker:&quot;, event.data); // <i>&lbrack;&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;&rbrack;</i>
 }
-)
-;
-Alternatively, you can also add event listeners using onmessage:
-
-From the main thread (parent window):
-webworker.
-onmessage
-=
-<b>function</b>
-(
-event
-)
-{
-console.
-log
-(
-&quot;Message from worker:&quot;
-,
-event.
-data
-)
-;
-// <i>&lbrack;&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;&rbrack;</i>
+</pre>
+<p>From the worker, in webworker.js:</p>
+<pre>
+self.onmessage = <b>function</b>(event) {
+  console.log(&quot;Message from parent:&quot;, event.data); // <i>&quot;Sample message&quot;</i>
 }
-webworker.js
-From the worker, in :
-self.
-onmessage
-=
-<b>function</b>
-(
-event
-)
-{
-console.
-log
-(
-&quot;Message from parent:&quot;
-,
-event.
-data
-)
-;
-// <i>&quot;Sample message&quot;</i>
-}
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch63-5">Section 63.5: Terminate a worker</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Once you are done with a worker you should terminate it. This helps to
-free up resources for other applications on the user's computer.
-<i>Main Thread:</i>
+<p>Once you are done with a worker you should terminate it. This helps to
+free up resources for other applications on the user's computer.</p>
+<p><i>Main Thread:</i></p>
+<pre>
 // <i>Terminate a worker from your application.</i>
-worker.
-terminate
-(
-)
-;
-<i>Note</i>: The terminate method is not available for service workers. It
-will be terminated when not in use, and restarted when it&apos;s next
-needed.
-<i>Worker Thread:</i>
+worker.terminate();
+</pre>
+<p><i>Note</i>: The terminate method is not available for service workers. It
+will be terminated when not in use, and restarted when it&apos;s next needed.</p>
+<p><i>Worker Thread:</i></p>
+<pre>
 // <i>Have a worker terminate itself.</i>
-self.
-close
-(
-)
-;
+self.close();
+</pre>
+<!-- page 343 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch63-6">Section 63.6: Populating your cache</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-After your service worker is registered, the browser will try to
-install & later activate the service worker.
-<b>Install event listener</b>
-<b>this</b>
-.
-addEventListener
-(
-&apos;install&apos;
-,
-<b>function</b>
-(
-event
-)
-{
-console.
-log
-(
-&apos;installed&apos;
-
-)
-;
-}
-)
-;
-<b>Caching</b>
-One can use this install event returned to cache the assets needed to
-run the app offline. Below example uses the cache api to do the same.
-<b>this</b>
-.
-addEventListener
-(
-&apos;install&apos;
-,
-<b>function</b>
-(
-event
-)
-{
-event.
-waitUntil
-(
-caches.
-open
-(
-&apos;v1&apos;
-)
-.
-then
-(
-<b>function</b>
-(
-cache
-)
-{
-<b>return</b>
-cache.
-addAll
-(
-&lbrack;
-<i>/&ast; Array of all the assets that needs to be cached &ast;/</i>
-&apos;/css/style.css&apos;
-,
-&apos;/js/app.js&apos;
-,
-&apos;/images/snowTroopers.jpg&apos;
-&rbrack;
-)
-;
-}
-)
-)
-;
-}
-)
-;
+<p>After your service worker is registered, the browser will try to
+install & later activate the service worker.</p>
+<p><b>Install event listener</b></p>
+<pre>
+<b>this</b>.addEventListener(&apos;install&apos;, <b>function</b>(event) {
+  console.log(&apos;installed&apos;);
+});
+</pre>
+<p><b>Caching</b></p>
+<p>One can use this install event returned to cache the assets needed to
+run the app offline. Below example uses the cache api to do the same.</p>
+<pre>
+<b>this</b>.addEventListener(&apos;install&apos;, <b>function</b>(event) {
+  event.waitUntil(
+    caches.open(&apos;v1&apos;).then(<b>function</b>(cache) {
+      <b>return</b> cache.addAll(&lbrack;
+        <i>/&ast; Array of all the assets that needs to be cached &ast;/</i>
+        &apos;/css/style.css&apos;,
+        &apos;/js/app.js&apos;,
+        &apos;/images/snowTroopers.jpg&apos;
+      &rbrack;);
+    })
+  );
+});
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch63-7">Section 63.7: Dedicated Workers and Shared Workers</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Dedicated Workers</b>
-A dedicated web worker is only accessible by the script that called
-it.
-Main application:
-<b>var</b>
-worker
-=
-<b>new</b>
-Worker
-(
-&apos;worker.js&apos;
-)
-;
-worker.
-addEventListener
-(
-&apos;message&apos;
-,
-<b>function</b>
-(
-msg
-)
-{
-console.
-log
-(
-&apos;Result from the worker:&apos;
-,
-msg.
-data
-)
-;
-}
-)
-;
-worker.
-postMessage
-
-(
-
-&lbrack;
-
-2
-
-,
-
-3
-
-&rbrack;
-
-)
-;
-worker.js:
-self.
-addEventListener
-(
-&apos;message&apos;
-,
-<b>function</b>
-(
-msg
-)
-{
-console.
-log
-(
-&apos;Worker received arguments:&apos;
-,
-msg.
-data
-)
-;
-self.
-postMessage
-(
-msg.
-data
-&lbrack;
-0
-&rbrack;
-&plus;
-msg.
-data
-&lbrack;
-1
-&rbrack;
-)
-;
-}
-)
-;
-<b>Shared Workers</b>
-A shared worker is accessible by multiple scripts  even if they are
-being accessed by different windows, iframes or even workers.
-Creating a shared worker is very similar to how to create a dedicated
+<p><b>Dedicated Workers</b></p>
+<p>A dedicated web worker is only accessible by the script that called it.</p>
+<p>Main application:</p>
+<pre>
+<b>var</b> worker = <b>new</b> Worker(&apos;worker.js&apos;);
+worker.addEventListener(&apos;message&apos;, <b>function</b>(msg) {
+  console.log(&apos;Result from the worker:&apos;, msg.data);
+});
+worker.postMessage(&lbrack;2,3&rbrack;);
+</pre>
+<p>worker.js:</p>
+<pre>
+self.addEventListener(&apos;message&apos;, <b>function</b>(msg) {
+  console.log(&apos;Worker received arguments:&apos;, msg.data);
+  self.postMessage(msg.data&lbrack;0&rbrack; &plus; msg.data&lbrack;1&rbrack;);
+});
+</pre>
+<p><b>Shared Workers</b></p>
+<p>A shared worker is accessible by multiple scripts  even if they are
+being accessed by different windows, iframes or even workers.</p>
+<p>Creating a shared worker is very similar to how to create a dedicated
 one, but instead of the straight-forward communication between the
 main thread and the worker thread, you&apos;ll have to communicate via a
 port object, i.e., an explicit port has to be opened so multiple
 scripts can use it to communicate with the shared worker. (Note that
-dedicated workers do this implicitly) Main application
-<b>var</b>
-myWorker
-=
-<b>new</b>
-SharedWorker
-(
-&apos;worker.js&apos;
-)
-;
-myWorker.
-port
-.
-start
-(
-)
-;
-// <i>open the port connection</i>
-myWorker.
-port
-.
-postMessage
-(
-&lbrack;
-2
-,
-3
-&rbrack;
-)
-;
-worker.js
-self.
-port
-.
-start
-(
-)
-;
-open the port connection to enable two
-&minus;
-way communication
-self.
-onconnect
-=
-<b>function</b>
-(
-e
-)
-{
-<b>var</b>
-port
-=
-e&period;
-ports
-&lbrack;
-0
-&rbrack;
-;
-// <i>get the port</i>
-port.
-onmessage
-=
-<b>function</b>
-(
-e
-)
-{
-console.
-log
-(
-&apos;Worker received arguments:&apos;
-,
-e&period;
-data
-)
-;
-port.
-postMessage
-(
-e&period;
-data
-&lbrack;
-0
-&rbrack;
-&plus;
-e&period;
-data
-&lbrack;
-1
-&rbrack;
-)
-;
+dedicated workers do this implicitly)</p>
+<!-- page 344 -->
+<p>Main application</p>
+<pre>
+<b>var</b> myWorker = <b>new</b> SharedWorker(&apos;worker.js&apos;);
+myWorker.port.start();  // <i>open the port connection</i>
+myWorker.port.postMessage(&lbrack;2,3&rbrack;);
+</pre>
+<p>worker.js</p>
+<pre>
+self.port.start();  // <i>open the port connection to enable two&minus;way communication</i>
+self.onconnect = <b>function</b>(e) {
+  <b>var</b> port = e&period;ports&lbrack;0&rbrack;;  // <i>get the port</i>
+  port.onmessage = <b>function</b>(e) {
+    console.log(&apos;Worker received arguments:&apos;, e&period;data);
+    port.postMessage(e&period;data&lbrack;0&rbrack; &plus; e&period;data&lbrack;1&rbrack;);
+  }
 }
-}
-port.start
-Note that setting up this message handler in the worker thread also
+</pre>
+<p>Note that setting up this message handler in the worker thread also
 implicitly opens the port connection back to the parent thread, so the
-call to () is not actually needed, as noted above.
+call to port.start() is not actually needed, as noted above.</p>
 <!-- end chapter 63 -->
+<!-- page 345 -->
+
 
 
