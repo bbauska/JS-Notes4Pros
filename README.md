@@ -20400,6 +20400,8 @@ console.log(&quot;Hello, World&quot;)&lbrack;(1, 2, 3)&rbrack;.join();
       <td>timeZoneName</td>
       <td>&quot;short&quot;, &quot;long&quot;</td>
     </tr>
+  </tbody>
+</table>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch70-1">Section 70.1: Number formatting</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -20627,8 +20629,6 @@ db.transaction(&quot;things&quot;).objectStore(&quot;things&quot;)
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch72-4">Section 72.4: Testing for IndexedDB availability</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-
 <p>You can test for IndexedDB support in the current environment by
 checking for the presence of the window.indexedDB property:</p>
 <pre>
