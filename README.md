@@ -19811,7 +19811,7 @@ javascript language like a objected oriented language:</p>
   <img src="/images/image038.png"
   title=""
   alt=""
-  style="border: 2px solid #000000; width:7.4in;" />
+  style="border: 2px solid #000000; width:5.5in;" />
 <!-- ![](./images/image038.png){width="7.486805555555556in" height="7.459722222222222in"} -->
 <p>This code above should be in a separated file .js to be referenced in
 any page that is needed. It can be used like this:</p>
@@ -19944,7 +19944,7 @@ specify the exact object that is being created.</p>
     having to specify the exact object being created."
   alt="Abstract Factory Pattern: used to define specific instances or classes without
     having to specify the exact object being created."
-  style="border: 2px solid #000000; width:6.5in;" />
+  style="border: 2px solid #000000; width:5.5in;" />
 <!-- {width="7.486805555555556in" height="4.045138888888889in"} -->
 <!-- page 355 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -20010,7 +20010,7 @@ of ignoring that part.</p>
   <img src="./images/image040.png"
   title="."
   alt="."
-  style="border: 2px solid #000000; width:6.5in;" />
+  style="border: 2px solid #000000; width:5.5in;" />
 <!-- ![](./images/image040.png){width="7.486805555555556in" height="2.6756944444444444in"} -->
 <p>Credit to <a href="http://stackoverflow.com/a/2401861/6194193">kennebec</a></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
