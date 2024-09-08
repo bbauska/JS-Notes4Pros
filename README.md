@@ -18522,13 +18522,13 @@ http://stackoverflow.com/documentation/javascript/208/boolean-logic/3047/double-
 <a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf">
 ECMAScript specification</a></p>
 <ul>
-  <li>if myArg of type <b>undefined</b> or <b>null</b> then Boolean(myArg) === false</li>
+  <li>if myArg of type <b>undefined</b> or <b>null</b> then Boolean(myArg) === <b>false</b></li>
   <li>if myArg of type boolean then Boolean(myArg) === myArg</li>
-  <li>if myArg of type number then Boolean(myArg) === false if myArg is +0, ‑0, or 
+  <li>if myArg of type number then Boolean(myArg) === <b>false</b> if myArg is +0, ‑0, or 
     <b>NaN</b>; otherwise <b>true</b></li>
-  <li>if myArg of type string then Boolean(myArg) === false if myArg is the empty String
+  <li>if myArg of type string then Boolean(myArg) === <b>false</b> if myArg is the empty String
     (its length is zero); otherwise <b>true</b></li>
-  <li>if myArg of type symbol or object then Boolean(myArg) === true</li>
+  <li>if myArg of type symbol or object then Boolean(myArg) === <b>true</b></li>
 </ul>
 <p>Values that get converted to <b>false</b> as booleans are called <i>falsy</i>
 (and all others are called <i>truthy</i>). See Comparison Operations.</p>
@@ -18573,39 +18573,153 @@ A shorter, but less clear, form:
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch59-6">Section 59.6: Primitive to Primitive conversion table</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Value Converted                                        
-To String                                                
-Converted To                                             
-Number Converted                                         
-To Boolean</b>                                             
-undefinded                           NaN                 false
-&quot;undefined&quot;                                            
-  null &quot;null&quot;                        0                   false
-  true &quot;true&quot;                        1                   
-  false &quot;false&quot;                      0                   
-  NaN &quot;NaN&quot;                                              <b>false</b>
-  &quot;&quot; empty string                    0                   <b>false</b>
-  &quot; &quot;                                0                   <b>true</b>
-  &quot;2.4&quot; (numeric)                    2.4                 true
-  &quot;test&quot; (non                        NaN                 true
-  numeric                                                  
-  &quot;0&quot;                                0                   <b>true</b>
-  &quot;1&quot;                                1                   true
--0   &quot;0&quot;  <b>false</b>
-0    &quot;0&quot;  false
-1    &quot;1&quot;  true
-Infinity  &quot;Infinity&quot;                           true
-Infinity  &quot;-Infinity&quot;                          true
-&lbrack;&rbrack;   &quot;&quot;   0  true
-&lbrack;3&rbrack;  &quot;3&quot;  3  true
-&lbrack;&apos;a&apos;&rbrack;         &quot;a&quot;              NaN                 true
-&lbrack;&apos;a&apos;,&apos;b&apos;&rbrack;   &quot;a,b&quot;            NaN                 true
-{ }               &quot;&lbrack;object         NaN                 true
-Object&rbrack;&quot;                             
-function(){}      &quot;function(){}&quot;   NaN                 true
-Bold values highlight conversion that programmers may find surprising
-To convert explicitly values you can use String() Number() Boolean()
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Value</b></th>
+      <th><b>Converted To String</b></th>
+      <th><b>Converted To Number</b></th>
+      <th><b>Converted To Boolean</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>undefined</td>
+      <td>&quot;undefined&quot;</td>
+      <td>NaN</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>null</td>
+      <td>&quot;null&quot;</td>
+      <td>0</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>true</td>
+      <td>&quot;true&quot;</td>
+      <td>1</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>false</td>
+      <td>&quot;false&quot;</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>NaN</td>
+      <td>&quot;NaN&quot;</td>
+      <td></td>
+      <td><b>false</b></td>
+    </tr>
+    <tr>
+      <td>&quot;&quot; empty string</td>
+      <td></td>
+      <td>0</td>
+      <td><b>false</b></td>
+    </tr>
+    <tr>
+      <td>&quot;&quot;</td>
+      <td></td>
+      <td>0</td>
+      <td><b>true</b></td>
+    </tr>
+    <tr>
+      <td>&quot;2.4&quot (numeric)</td>
+      <td></td>
+      <td>2.4</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>&quot;test&quot; (non-numeric)</td>
+      <td></td>
+      <td>NaN</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>&quot;0&quot;</td>
+      <td></td>
+      <td>0</td>
+      <td><b>true</b></td>
+    </tr>
+    <tr>
+      <td>&quot;1&quot;</td>
+      <td></td>
+      <td></td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>&minus;0</td>
+      <td>&quot;0&quot;</td>
+      <td></td>
+      <td><b>false</b></td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>&quot;0&quot;</td>
+      <td></td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>&quot;1&quot;</td>
+      <td></td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>Infinity</td>
+      <td>&quot;Infinity&quot;</td>
+      <td></td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>&minus;Infinity</td>
+      <td>&quot;&minus;Infinity&quot;</td>
+      <td></td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>&lbrack;&rbrack;</td>
+      <td>&quot;&quot;</td>
+      <td>0</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>&lbrack;3&rbrack;</td>
+      <td>&quot;3&quot;</td>
+      <td>3</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>&lbrack;&apos;a&apos;&rbrack;</td>
+      <td>&quot;a&quot;</td>
+      <td>NaN</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>&lbrack;&apos;a&apos;,&apos;b&apos;&rbrack;</td>
+      <td>&quot;a,b&quot;</td>
+      <td>NaN</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>{}</td>
+      <td>&quot;&lbrack;object Object&rbrack;&quot;</td>
+      <td>NaN</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>function(){}</td>
+      <td>&quot;function(){}&quot;</td>
+      <td>NaN</td>
+      <td>true</td>
+    </tr>
+  </tfoot>
+</table>
+
+<p>Bold values highlight conversion that programmers may find surprising</p>
+<p>To convert explicitly values you can use String() Number() Boolean()</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch59-7">Section 59.7: Convert an array to a string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -18738,7 +18852,6 @@ Boolean
 <b>false</b>
 Boolean(
 0&rpar; will convert the number 0 into a boolean <b>false</b>.
-
 A shorter, but less clear, form:
 !!
 0
@@ -18799,7 +18912,6 @@ done to convert it.
 <!--
 To convert a float to an integer, JavaScript provides multiple
 methods.
-
 The floor function returns the first integer less than or equal to the
 float.
 Math
