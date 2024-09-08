@@ -5558,6 +5558,7 @@ reversed.
 console.log(arr2);  // <i>&lbrack;33, 22, 11&rbrack;</i>
 console.log(arr1);  // <i>&lbrack;33, 22, 11&rbrack;</i>
 </pre>
+</blockquote>
 <p>You can also reverse an array &apos;deeply&apos; by:</p>
 <pre>
 <b>function</b> deepReverse(arr) {
@@ -5631,9 +5632,7 @@ clone2 = &lbrack;&rbrack;.slice.call(arrayToClone);
 <pre>
 &lbrack;1, 2, 3, 4, 5&rbrack;
 </pre>
-
 <p><b>Multiple Arrays</b></p>
-
 <pre>
 <b>var</b> array1 = &lbrack;&quot;a&quot;, &quot;b&quot;&rbrack;,
     array2 = &lbrack;&quot;c&quot;, &quot;d&quot;&rbrack;,
@@ -5740,7 +5739,6 @@ console.log(result);
 <p>With ES6, you can use spreads to separate individual elements into a comma-separated syntax:</p>
 <pre>
 <b>let</b> arr = &lbrack;1, 2, 3, &hellip;&lbrack;4, 5, 6&rbrack;&rbrack;; // <i>&lbrack;1, 2, 3, 4, 5, 6&rbrack;</i>
-
 // <i>in ES &lt; 6, the operations above are equivalent to</i>
 arr = &lbrack;1, 2, 3&rbrack;;
 arr.push(4, 5, 6);
