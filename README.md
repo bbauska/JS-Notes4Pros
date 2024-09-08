@@ -634,7 +634,7 @@ target="_blank" rel="noreferrer noopener">ECMA-262 18.2.3</a> for a detailed exp
 of the algorithm.</p>
 <p>These examples will help you better understand the isNaN() behavior:</p>
 <pre>
-isNaN(<b>NaN</b>);            // <i>true</i>
+isNaN(<b>NaN</b>);           // <i>true</i>
 isNaN(1);             // <i>false: 1 is a number</i>
 isNaN(-2e-4);         // <i>false: -2e-4 is a number (-0.0002) in scientific notation</i>
 isNaN(<b>Infinity</b>);      // <i>false: Infinity is a number</i>
@@ -651,14 +651,14 @@ isNaN("10$");         // <i>true : conversion fails, the dollar sign is not a di
 isNaN("hello");       // <i>true : conversion fails, no digits at all</i>
 isNaN(<b>undefined</b>);     // <i>true : converted to NaN</i>
 isNaN();              // <i>true : converted to NaN (implicitly undefined)</i>
-isNaN(<b>function</b>(){}); // <i>true : conversion fails</i>
-isNaN({});           // <i>true : conversion fails</i>
-isNaN(&lbrack;1, 2&rbrack;);       // <i>true : converted to "1, 2", which can't be converted to a number</i>
+isNaN(<b>function</b>(){});  // <i>true : conversion fails</i>
+isNaN({});            // <i>true : conversion fails</i>
+isNaN(&lbrack;1, 2&rbrack;);        // <i>true : converted to "1, 2", which can't be converted to a number</i>
 </pre>
 <!-- page 13 -->
 <p>This last one is a bit tricky: checking if an Array is <b>NaN</b>. To do
 the Number() constructor first converts the array to a string, then to
-a number; this is the reason why isNaN(&lbrack;&rbrack) and isNaN (&lbrack;34&rbrack;), 
+a number; this is the reason why isNaN(&lbrack;&rbrack;) and isNaN (&lbrack;34&rbrack;), 
 "1,2", and <b>true</b> respectively. In general, <b>an array is
 considered NaN by () unless it only holds one element whose string
 representation can be converted to a valid number</b>.</p>
@@ -717,11 +717,9 @@ window.hasOwnProperty('NaN'); // <i>true</i>
 <p>At first glance it may appear that <b>null</b> and <b>undefined</b> are
 basically the same, however there are subtle but important
 differences.</p>
-
 <p><b>undefined</b> is the absence of a value in the compiler, because where
 it should be a value, there hasn&apos;t been put one, like the case of an
 unassigned variable.</p>
-
 <ul>
   <li><b>undefined</b> is a global value that represents the absence of an
     assigned value.
@@ -1103,7 +1101,7 @@ statements can cause an exception and prevent code from executing. To
 mitigate this, you can check to see if the console is available before
 you log:</p>
 <pre>
-<b>if</b> (<b>typeof</b> window.console !== &apos;undefined&apos)
+<b>if</b> (<b>typeof</b> window.console !== &apos;undefined&apos;)
 {
   console.log(&quot;Hello World&quot;);
 }
@@ -4655,7 +4653,7 @@ that Array-like objects inherit from
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype">
 Object.prototype</a> instead of 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype">
-Array.prototype</a>. This means that Array-like Objects can&apost access common 
+Array.prototype</a>. This means that Array-like Objects can&apos;t access common 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype">
 Array prototype methods</a> like 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">foreEach(),
@@ -4740,18 +4738,13 @@ realArray.forEach(value =&gt; {/&ast; Do something &ast;/}); // <i>Works</i>
 };
 <b>var</b> realArray = Array.<b>prototype</b>.slice.call(arrayLike);
 realArray = &lbrack;&rbrack;.slice.call(arrayLike); // <i>Shorter version</i>
-
 realArray.indexOf(&apos;Value 1&apos;); // <i>Wow! this works</i>
 </pre>
-
 <p>You can also use Function.<b>prototype</b>.call to call Array.<b>prototype</b> methods
 on Array-like objects directly, without converting them:</p>
-
 <h5>Version ≥ 5.1</h5>
-
 <pre>
 <b>var</b> domList = document.querySelectorAll(&apos;#myDropdown option&apos;);
-
 domList.forEach (<b>function</b>() {
   // <i>Do stuff</i>
 }); // <i>Error! forEach is not defined.</i>
@@ -4760,41 +4753,31 @@ Array.<b>prototype</b>forEach.call(domList, <b>function</b>() {
   // <i>Do stuff</i>
 }); // <i>Wow! this works</i>
 </pre>
-
 <p>You can also use &lbrack;&rbrack;.method.bind( arrayLikeObject ) to borrow array 
 methods and glom them on to your object:</p>
-
 <h5>Version ≥ 5.1</h5>
-
 <pre>
 <b>var</b> arrayLike = {
   0: &apos;Value 0&apos;,
   1: &apos;Value 1&apos;,
   length: 2
 };
-
 arrayLike.forEach(<b>function</b>() {
   // <i>Do stuff</i>
 }); // <i>Error! forEach is not defined.</i>
-
 &lbrack;&rbrack;.forEach.bind(arrayLike)(<b>function</b>(val) {
 // <i>Do stuff with val</i>
 }); // <i>Wow! this works</i>
 </pre>
 <!-- page 82 -->
-
 <p><b>Modifying Items During Conversion</b></p>
-
 <p>In ES6, while using Array.from, we can specify a map function that returns a
 mapped value for the new array being created.</p>
-
 <h5>Version ≥ 6</h5>
 <pre>
 Array.from(domList, element =&bsol;element.tagName); // <i>Creates an array of tagName&apos;s</i>
 </pre>
-
 <p>See Arrays are Objects for a detailed analysis.</p>
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-2">Section 12.2: Reducing values</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -5594,7 +5577,7 @@ deepReverse(arr);
 <!-- page ~95 -->
 <p>Results in:</p>
 <pre>
-arr // <i>-&amp;lbrack;&lbrack;&lbrack;&apos;c&apos;,&apos;b&apos;,&apos;a&apos;&rbrack;, 3, 2, 1&rbrack;, 3, 2, 1&rbrack;</i>
+arr // <i>-&gt; lbrack;&lbrack;&lbrack;&apos;c&apos;,&apos;b&apos;,&apos;a&apos;&rbrack;, 3, 2, 1&rbrack;, 3, 2, 1&rbrack;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-11">Section 12.11: Shallow cloning an array</h3>
@@ -6750,10 +6733,10 @@ Note, only string wrappers can have own enumerable properties
 <b>return</b> users.reduce((result, user) =&bsol;Object.assign({}, {&lbrack;user.id&rbrack;: user})
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<h3 id="ch12-36">Section 13.6: Object rest/spread (&hellip;)</h3>
+<h3 id="ch13-6">Section 13.6: Object rest/spread (&hellip;)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h5>Version &gt; 7</h5>
-<p>Object spreading is just syntactic sugar for Object.assign({}, obj1, &hellip, objn);</p>
+<p>Object spreading is just syntactic sugar for Object.assign({}, obj1, &hellip;, objn);</p>
 <p>It is done with the &hellip; operator:</p>
 <pre>
 <b>let</b> obj = { a: 1 };
@@ -6828,11 +6811,11 @@ Object.defineProperty(person, &apos;fullName&apos;, {
     &lbrack;<b>this</b>.name, <b>this</b>.surname&rbrack; = value.split(&quot; &quot;);
   }
 });
-console.log(person.fullName);  // <i>-&amp;quot;John Doe&quot;</i>
+console.log(person.fullName);  // <i>-&gt; &quot;John Doe&quot;</i>
 person.surname = &quot;Hill&quot;;
-console.log(person.fullName);  // <i>-&amp;quot;John Hill&quot;</i>
+console.log(person.fullName);  // <i>-&gt; &quot;John Hill&quot;</i>
 person.fullName = &quot;Mary Jones&quot;;
-console.log(person.name)  // <i>-&amp;quot;Mary&quot;</i>
+console.log(person.name)  // <i>-&gt; &quot;Mary&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-9">Section 13.9: Dynamic / variable property names</h3>
@@ -13078,7 +13061,7 @@ forget to manage these cases.</p>
 <b>try</b> {
   video.volume = localStorage.getItem(&apos;volume&apos;)
 } <b>catch</b> (error) {
-  alert(&apos;If you <b>&bsol;&amp;apos;</b>d like your volume saved, turn on cookies&apos;)
+  alert(&apos;If you<b>&bsol;&apos;</b>d like your volume saved, turn on cookies&apos;)
 }
 video.play()
 </pre>
@@ -13386,7 +13369,7 @@ JSON.stringify(value&lbrack;, replacer&lbrack;, space&rbrack;&rbrack;)
 }
 <b>var</b> foo = { foundation: &quot;Mozilla&quot;, model: &quot;box&quot;, week: 45, transport: &quot;car&quot;, month: 7}
 JSON.stringify(foo, replacer)
-// <i>-&amp;apos;{&quot;week&quot;: 45, &quot;month&quot;: 7}&apos;</i>
+// <i>-&gt; &apos;{&quot;week&quot;: 45, &quot;month&quot;: 7}&apos;</i>
 // <i>replacer as an array</i>
 JSON.stringify(foo, &lbrack;&apos;foundation&apos;, &apos;week&apos;, &apos;month&apos;&rbrack;)
 // <i>-&gt; ;apos;{&quot;foundation&quot;: &quot;Mozilla&quot;, &quot;week&quot;: 45, &quot;month&quot;: 7}&apos;</i>
@@ -16804,7 +16787,7 @@ console.log(a);  // <i>&gt;&gt;bar</i>
   <b>var</b> a = &quot;bar&quot;;  // <i>variable is local</i>
 }
 strict_scope();
-console.log(a);  // <i>&gt;&amp;quot;ReferenceError: a is not defined&quot;</i>
+console.log(a);  // <i>&gt;&gt; &quot;ReferenceError: a is not defined&quot;</i>
 </pre>
 <p>The variable can also be declared outside and after a function,
 allowing it to be used, for instance, in the global scope:</p>
@@ -16816,7 +16799,7 @@ allowing it to be used, for instance, in the global scope:</p>
 }
 <b>var</b> a;
 strict_scope();
-console.log(a);  // <i>&gt;&gt;bar</i>
+console.log(a);  // <i>&gt;&gt; bar</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch50-5">Section 50.5: Duplicate Parameters</h3>
@@ -17397,7 +17380,7 @@ source code, without any backslash-escapes being replaced.</p>
   console.log(&apos;&hellip;substitutions:&apos;, substitutions);
 }
 example&grave;Hello &dollar;{&apos;world&apos;}.&bsol;&bsol;n&bsol;&bsol;nHow are you?&grave;;
-strings: &lbrack;&quot;Hello &quot;, &quot;&period;&bsol;n&bsol;How are you?&quot;, raw: &lbrack;&quot;Hello &quot;, &quot;&period&bsol;&bsol;n&bsol;&bsol;nHow are you?&quot;&rbrack;&rbrack;
+strings: &lbrack;&quot;Hello &quot;, &quot;&period;&bsol;n&bsol;How are you?&quot;, raw: &lbrack;&quot;Hello &quot;, &quot;&period;&bsol;&bsol;n&bsol;&bsol;nHow are you?&quot;&rbrack;&rbrack;
 substitutions: &lbrack;&quot;world&quot;&rbrack;
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -17406,7 +17389,7 @@ substitutions: &lbrack;&quot;world&quot;&rbrack;
 <p>The tag function can be used with template literals to access a version of their contents 
 without interpreting any backslash escape sequences.</p>
 <p>String .raw&grave;&bsol;n&grave; will contain a backslash and the lowercase letter n, while &grave;&bsol;n&grave;
-or &grave;&bsol;n&grave would contain a single newline character instead.</p>
+or &grave;&bsol;n&grave; would contain a single newline character instead.</p>
 <pre>
 <b>const</b> patternString = String.raw&grave;Welcome, (&bsol;w)!&grave;;
 <b>const</b> pattern = <b>new</b> RegExp(patternString);
@@ -17876,26 +17859,26 @@ console.log(x);  // <i>&gt;&bsol;4</i>
 <b>if</b> (<b>true</b>) {
   <b>var</b> x = 7;
 }
-console.log(x);  // <i>&gt;&bsol;7</i>
+console.log(x);  // <i>&gt;&gt; 7</i>
 <b>for</b> (<b>var</b> i = 0; i &lt; 4; i++) {
   <b>var</b> j = 10;
 }
-console.log(i);  // <i>&gt;&bsol;4</i>
-console.log(j);  // <i>&gt;&bsol;10</i>
+console.log(i);  // <i>&gt;&gt; 4</i>
+console.log(j);  // <i>&gt;&gt; 10</i>
 </pre>
 <p>By comparison, <b>let</b> is block scoped:</p>
 <pre>
 <b>let</b> x = 4;
 <b>if</b> (<b>true</b>) {
   <b>let</b> x = 7;
-  console.log(x);  // <i>&gt;&bsol;7</i>
+  console.log(x);  // <i>&gt;&gt; 7</i>
 }
-console.log(x);    // <i>&gt;&bsol;4</i>
+console.log(x);    // <i>&gt;&gt; 4</i>
 <b>for</b> (<b>let</b> i = 0; i &lt; 4; i++) {
   <b>let</b> j = 10;
 }
-console.log(i);  // <i>&gt;&amp;quot;ReferenceError: i is not defined&quot;</i>
-console.log(j);  // <i>&gt;&amp;quot;ReferenceError: j is not defined&quot;</i>
+console.log(i);  // <i>&gt;&gt; &quot;ReferenceError: i is not defined&quot;</i>
+console.log(j);  // <i>&gt;&gt; &quot;ReferenceError: j is not defined&quot;</i>
 </pre>
 <p>Note that i and j are only declared in the <b>for</b> loop and are
 therefore undeclared outside of it.</p>
@@ -17908,8 +17891,8 @@ declarations put an element in the global object. <b>let</b> does not:</p>
 <pre>
 <b>var</b> x = 4;
 <b>let</b> y = 7;
-console.log(<b>this</b>.x);  // <i>&gt;&bsol;4</i>
-console.log(<b>this</b>.y);  // <i>&gt;&bsol;undefined</i>
+console.log(<b>this</b>.x);  // <i>&gt;&gt;4</i>
+console.log(<b>this</b>.y);  // <i>&gt;&gt;undefined</i>
 </pre>
 <p><b>Re-declaration</b></p>
 <p>Declaring a variable twice using <b>var</b> doesn&apos;t produce an error
@@ -17964,8 +17947,8 @@ before its own assignment, since it gets automatically assigned (with
 requires the variable to be declared before being invoked:</p>
 <pre>
 console.log(x);  // <i>&gt;&gt; undefined</i>
-console.log(y);  // <i>&gt;&gt; quot;ReferenceError: &grave;y&grave; is not defined&quot;</i>
-// <i>OR &gt;&amp;quot;ReferenceError: can&apos;t access lexical declaration &grave;y&grave; before initialization&quot;</i>
+console.log(y);  // <i>&gt;&gt; &quot;ReferenceError: &grave;y&grave; is not defined&quot;</i>
+// <i>OR &gt;&gt; &quot;ReferenceError: can&apos;t access lexical declaration &grave;y&grave; before initialization&quot;</i>
 <b>var</b> x = 4;
 <b>let</b> y = 7;
 </pre>
@@ -17992,8 +17975,8 @@ declared/initialized.</p>
 <b>function</b> print() {
   console.log(<b>this</b>.toPrint);
 }
-print.apply({ toPrint: &quot;Foo&quot; });  // <i>&gt;&amp;quot;Foo&quot;</i>
-print.call({ toPrint: &quot;Foo&quot; });   // <i>&gt;&amp;quot;Foo&quot;</i>
+print.apply({ toPrint: &quot;Foo&quot; });  // <i>&gt;&gt; &quot;Foo&quot;</i>
+print.call({ toPrint: &quot;Foo&quot; });   // <i>&gt;&gt; &quot;Foo&quot;</i>
 </pre>
 <p>You might notice that the syntax for both the invocations used above
 are the same. i.e. The signature looks similar.</p>
@@ -18008,8 +17991,8 @@ support passing arguments to the target function as follows:</p>
   console.log(<b>this</b>.name &plus; &quot;: &quot; &plus; sentences);
 }
 <b>var</b> person = { name: &quot;Sunny&quot; };
-speak.apply(person, &lbrack;&quot;I&quot;, &quot;Code&quot;, &quot;Startups&quot;&rbrack;);  // <i>&gt;&amp;quot;Sunny: I Code Startups&quot;</i>
-speak.call(person, &quot;I&quot;, &quot;&lt;3&quot;, &quot;Javascript&quot;); // <i>&gt;&amp;quot;Sunny: I &lt;3 Javascript&quot;</i>
+speak.apply(person, &lbrack;&quot;I&quot;, &quot;Code&quot;, &quot;Startups&quot;&rbrack;);  // <i>&gt;&gt; &quot;Sunny: I Code Startups&quot;</i>
+speak.call(person, &quot;I&quot;, &quot;&lt;3&quot;, &quot;Javascript&quot;); // <i>&gt;&gt; &quot;Sunny: I &lt;3 Javascript&quot;</i>
 </pre>
 <!-- page 318 -->
 <p>Notice that apply allows you to pass an Array or the arguments object
