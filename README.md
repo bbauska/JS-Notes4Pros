@@ -19992,7 +19992,6 @@ OPR/&apos;) &gt;= 0;
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch66-2">Section 66.2: User Agent Detection</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>This method gets the user agent and parses it to find the browser. The
 browser name and version are extracted from the user agent through a
 regex. Based on these two, the <b>&lt;browser</b> name<b>&gt;</b> 
@@ -20011,7 +20010,7 @@ of ignoring that part.</p>
   <img src="./images/image040.png"
   title="."
   alt="."
-  style="border: 2px solid #000000; width:7.4in;" />
+  style="border: 2px solid #000000; width:6in;" />
 <!-- ![](./images/image040.png){width="7.486805555555556in" height="2.6756944444444444in"} -->
 <p>Credit to <a href="http://stackoverflow.com/a/2401861/6194193">kennebec</a></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
