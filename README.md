@@ -18823,4 +18823,206 @@ float/</p>
 parseFloat(&quot;10.01&quot;)  // <i>= 10.01</i>
 </pre>
 <!-- page 331 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch60">Chapter 60: Destructuring assignment</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Destructuring is a <b>pattern matching</b> technique that is added to
+JavaScript recently in ECMAScript 6.</p>
+<p>It allows you to bind a group of variables to a corresponding set of
+values when their pattern matches to the right hand-side and the left
+hand-side of the expression.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch60-1">Section 60.1: Destructuring Objects</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>
+Destructuring is a convenient way to extract properties from objects
+into variables.</p>
+<p>Basic syntax:</p>
+<pre>
+<b>let</b> person = {
+  name: &apos;Bob&apos;,
+  age: 25
+};
+<b>let</b> { name, age } = person;
+// <i>Is equivalent to</i>
+<b>let</b> name = person.name;  // <i>&apos;Bob&apos;</i>
+<b>let</b> age = person.age;    // <i>25</i>
+</pre>
+<p>Destructuring and renaming:</p>
+<pre>
+<b>let</b> person = {
+  name: &apos;Bob&apos;,
+  age: 25
+};
+<b>let</b> { name: firstName } = person;
+// <i>Is equivalent to</i>
+<b>let</b> firstName = person.name; // <i>&apos;Bob&apos;</i>
+</pre>
+<p>Destructuring with default values:</p>
+<pre>
+<b>let</b> person = {
+  name: &apos;Bob&apos;,
+  age: 25
+};
+<b>let</b> { phone = &apos;123-456-789&apos; } = person;
+// <i>Is equivalent to</i>
+<b>let</b> phone = person.hasOwnProperty(&apos;phone&apos;) ? person.phone : &apos;123-456-789&apos;; // <i>&apos;123-456-789&apos;</i>
+</pre>
+<p>Destructuring and renaming with default values</p>
+<pre>
+<b>let</b> person = {
+  name: &apos;Bob&apos;,
+  age: 25
+};
+<b>let</b> { phone: p = &apos;123-456-789&apos; } = person;
+// <i>Is equivalent to</i>
+<b>let</b> p = person.hasOwnProperty(&apos;phone&apos;) ? person.phone : &apos;123-456-789&apos;; // <i>&apos;123-456-789&apos;</i>
+</pre>
+<!-- page 332 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch60-2">Section 60.2: Destructuring function arguments</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Pull properties from an object passed into a function. This pattern
+simulates named parameters instead of relying on argument position.</p>
+<pre>
+<b>let</b> user = {
+  name: &apos;Jill&apos;,
+  age: 33,
+  profession: &apos;Pilot&apos;
+}
+<b>function</b> greeting ({name, profession}) {
+  console.log(&grave;Hello, &dollar;{name} the &dollar;{profession}&grave;)
+}
+greeting(user)
+</pre>
+<p>This also works for arrays:</p>
+<pre>
+<b>let</b> parts = &lbrack;&quot;Hello&quot;, &quot;World!&quot;&rbrack;;
+<b>function</b> greeting(&lbrack;first, second&rbrack;) {
+  console.log(&grave;&dollar;{first} &dollar;{second}&grave;);
+}
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch60-3">Section 60.3: Nested Destructuring</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>We are not limited to destructuring an object/array, we can
+destructure a nested object/array.</p>
+<p><b><i>Nested Object Destructuring</i></b></p>
+<pre>
+<b>var</b> obj = {
+  a: {
+    c: 1,
+    d: 3
+  },
+  b: 2
+};
+<b>var</b> {
+  a: {
+    c: x,
+    d: y
+  },
+  b: z
+} = obj;
+console.log(x, y, z);  // <i>1,3,2</i>
+</pre>
+<p><b><i>Nested Array Destructuring</i></b></p>
+<pre>
+<b>var</b> arr = &lbrack;1, 2, &lbrack;3, 4&rbrack;, 5&rbrack;;
+<b>var</b> &lbrack;a, , &lbrack;b, c&rbrack;, d&rbrack; = arr;
+console.log(a, b, c, d);  // <i>1 3 4 5</i>
+</pre>
+<!-- page 333 -->
+<p>Destructuring is not just limited to a single pattern, we can have
+arrays in it, with n-levels of nesting. Similarly we can destructure
+arrays with objects and vice-versa.</p>
+<p><b><i>Arrays Within Object</i></b></p>
+<pre>
+<b>var</b> obj = {
+  a: 1,
+  b: &lbrack;2, 3&rbrack;
+};
+<b>var</b> {
+  a: x1,
+  b: &lbrack;x2, x3&rbrack;
+} = obj;
+console.log(x1, x2, x3);  // <i>1 2 3</i>
+</pre>
+<b><i>Objects Within Arrays</i></b>
+<pre>
+<b>var</b> arr = &lbrack;1, 2, {a: 3}, 4&rbrack;;
+<b>var</b> &lbrack;x1, x2, {a: x3}, x4&rbrack; = arr;
+console.log(x1, x2, x3, x4);
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch60-4">Section 60.4: Destructuring Arrays</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+<b>const</b> myArr = &lbrack;&apos;one&apos;, &apos;two&apos;, &apos;three&apos;&rbrack;
+<b>const</b> &lbrack; a, b, c &rbrack; = myArr
+// <i>a = &apos;one&apos;, b = &apos;two, c = &apos;three&apos;</i>
+</pre>
+<p>We can set default value in destructuring array, see the example of
+Default Value While Destructuring.</p>
+<p>With destructuring array, we can swap the values of 2 variables easily:</p>
+<pre>
+<b>var</b> a = 1;
+<b>var</b> b = 3;
+&lbrack;a, b&rbrack; = &lbrack;b, a&rbrack;;
+// <i>a = 3, b = 1</i>
+</pre>
+<p>We can specify empty slots to skip unneeded values:</p>
+<pre>
+&lbrack;a, , b&rbrack; = &lbrack;1, 2, 3&rbrack;  // <i>a = 1, b = 3</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch60-5">Section 60.5: Destructuring inside variables</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Aside from destructuring objects into function arguments, you can use
+them inside variable declarations as follows:</p>
+<pre>
+<b>const</b> person = {
+  name: &apos;John Doe&apos;,
+  age: 45,
+  location: &apos;Paris, France&apos;,
+};
+<b>let</b> { name, age, location } = person;
+console.log(&apos;I am &apos; + name + &apos;, aged &apos; + age + &apos; and living in &apos; + location + &apos;.&apos;);
+// <i>-&amp;quot;I am John Doe aged 45 and living in Paris, France.&quot;</i>
+</pre>
+<p>As you can see, three new variables were created: name, age and
+location and their values were grabbed from the object person if they
+matched key names.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch60-6">Section 60.6: Default Value While Destructuring</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>We often encounter a situation where a property we&apos;re trying to
+extract doesn&apos;t exist in the object/array, resulting in a TypeError
+(while destructuring nested objects) or being set to <b>undefined</b>.
+While destructuring we can set a default value, which it will fallback
+to, in case of it not being found in the object.</p>
+<pre>
+<b>var</b> obj = {a : 1};
+<b>var</b> {a: x, b: x1 = 10} = obj;
+console.log(x, x1);  // <i>1, 10</i>
+<b>var</b> arr = &lbrack;&rbrack;;
+<b>var</b> &lbrack;a = 5, b = 10, c&rbrack; = arr;
+console.log(a, b, c);  // <i>5, 10, undefined</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch60-7">Section 60.7: Renaming Variables While Destructuring</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Destructuring allows us to refer to one key in an object, but declare
+it as a variable with a different name. The syntax looks like the
+key-value syntax for a normal JavaScript object.</p>
+<pre>
+<b>let</b> user = {
+  name: &apos;John Smith&apos;,
+  id: 10,
+  email: &apos;johns@workcorp.com&apos;,
+};
+<b>let</b> {user: userName, id: userId} = user;
+console.log(userName)  // <i>John Smith</i>
+console.log(userId)    // <i>10</i>
+</pre>
+<!-- page 335 -->
 
