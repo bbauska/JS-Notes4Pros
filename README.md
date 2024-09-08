@@ -19498,5 +19498,135 @@ call to port.start() is not actually needed, as noted above.</p>
 <!-- end chapter 63 -->
 <!-- page 345 -->
 
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch64">Chapter 64: requestAnimationFrame</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>callback</td>
+      <td>&quot;A parameter specifying a function to call when it&apos;s time to update
+      your animation for the next callback repaint.&quot; (<a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">requestAnimationFrame</a>)</td>
+    </tr>
+  </tbody>
+</table>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch64-1">Section 64.1: Use requestAnimationFrame to fade in element</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ul>
+  <li><b>View jsFiddle</b>: <a href="https://jsfiddle.net/HimmatChahal/jb5trg67/">jsFiddle here</a></li>
+  <li><b>Copy + Pasteable code below</b>:</li>
+</ul>
+<pre>
+<b>&lt;html&gt;</b>
+  <b>&lt;body&gt;</b>
+    <b>&lt;h1&gt;</b>This will fade in at 60 frames per second (or as close to possible as your hardware allows)<b>&lt;/h1&gt;</b>
+
+    <b>&lt;script&gt;</b>
+      // Fade in over 2000 ms = 2 seconds. 
+      var FADE_DURATION = 2.0 &ast; 1000;
+      // -1 is simply a flag to indicate if we are rendering the very 1st frame
+	  var startTime=-1.0;
+      // Function to render current frame (whatever frame that may be)
+      function render(currTime) {
+	    var head1 = document.getElementsByTagName(&apos;h1&apos;)&lbrack;0&rbrack;;
+        // How opaque should head1 be? Its fade started at currTime=0.
+        // Over FADE_DURATION ms, opacity goes from 0 to 1 
+		var opacity = (currTime/FADE_DURATION);
+		head1.style.opacity = opacity; 
+	  }
+      // Function to
+	  function eachFrame() {
+      // Time that animation has been running (in ms)
+	  // Uncomment the console.log function to view how quickly 
+	  // the timeRunning updates its value (may affect performance) 
+	  var timeRunning = (new Date()).getTime() - startTime; 
+	  //console.log(&apos;var timeRunning = &apos;+timeRunning+&apos;ms&apos;); 
+	  if (startTime &lt; 0) {
+        // This branch: executes for the first frame only.
+		// it sets the startTime, then renders at currTime = 0.0 
+		startTime = (new Date()).getTime(); 
+		render(0.0);
+      } else if (timeRunning &lt; FADE_DURATION) {
+        // This branch: renders every frame, other than the 1st frame,
+        // with the new timeRunning value. render(timeRunning); 
+	  } else {
+	    return; 
+	  }
+        // Now we are done rendering one frame.
+        // So we make a request to the browser to execute the next
+        // animation frame, and the browser optimizes the rest.
+        // This happens very rapidly, as you can see in the console.log();
+        window.requestAnimationFrame(eachFrame);
+      };
+      // start the animation
+      window.requestAnimationFrame(eachFrame);
+    <b>&lt;</b><b>/script</b><b>&gt;</b>
+  <b>&lt;</b><b>/body</b><b>&gt;</b>
+<b>&lt;</b><b>/html</b><b>&gt;</b>
+</pre>
+<!-- page 346 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch64-2">Section 64.2: Keeping Compatibility</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Of course, just like most things in browser JavaScript, you just can&apos;t 
+count on the fact that everything will be the same everywhere. In this case, 
+requestAnimationFrame might have a prefix on some platforms and are named 
+differently, such as webkitRequestAnimationFrame. Fortunately, there&apos;s a 
+really easy way to group all the known differences that could exist down to 1 
+function:</p>
+<pre>
+window.requestAnimationFrame = (<b>function</b>() {
+  <b>return</b> window.requestAnimationFrame &vert;&vert;
+    window.webkitRequestAnimationFrame &vert;&vert;
+    window.mozRequestAnimationFrame &vert;&vert;
+    <b>function</b>(callback) {
+      window.etTimeoutcallback, 1000 / 60);
+    };
+})();
+</pre>
+<p>Note that the last option (which fills in when no existing support was
+found) will not return an id to be used in cancelAnimationFrame. There
+is, however an <a href="https://gist.github.com/paulirish/1579671">
+efficient polyfill</a> that was written which fixes this.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch64-3">Section 64.3: Cancelling an Animation</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>To cancel a call to requestAnimationFrame, you need the id it returned
+from when it was last called. This is the parameter you use for
+cancelAnimationFrame. The following example starts some hypothetical
+animation then pauses it after one second.</p>
+<pre>
+// <i>stores the id returned from each call to requestAnimationFrame</i>
+<b>var</b> requestId;
+// <i>draw something</i>
+<b>function</b> draw(timestamp) {
+  // <i>do some animation</i>
+  // <i>request next frame</i>
+  start();
+}
+// <i>pauses the animation</i>
+<b>function</b> pause() {
+  // <i>pass in the id returned from the last call to requestAnimationFrame</i>
+  cancelAnimationFrame(requestId);
+}
+// <i>begin the animation</i>
+<b>function</b> start() {
+  // <i>store the id returned from requestAnimationFrame</i>
+  requestId = requestAnimationFrame(draw);
+}
+// <i>begin now</i>
+start();
+// <i>after a second, pause the animation</i>
+setTimeout(pause, 1000);
+</pre>
+<!-- end chapter 64 -->
+<!-- page 347 -->
 
 
