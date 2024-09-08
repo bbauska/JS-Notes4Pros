@@ -20178,14 +20178,14 @@ and <a href="https://babeljs.io/docs/usage/cli/">Babel CLI</a></p>
   <li>Go to a folder and create a project using your favourite command line tool</li>
 </ol>
 <pre>
-&bsol;~ npm init
+~ npm init
 </pre>
 <ol type="1" start="3">
   <li>Install Babel CLI</li>
 </ol>
 <pre>
-&bsol;~ npm <b>install</b> &bsol;save-dev babel-cli
-&bsol;~ npm <b>install</b> &bsol;save-dev babel-preset-es2015
+~ npm <b>install</b> &bsol;save-dev babel-cli
+~ npm <b>install</b> &bsol;save-dev babel-preset-es2015
 </pre>
 <ol type="1" start="4">
   <li>Create a scripts folder to store your .js files, and then a dist/scripts 
@@ -20211,12 +20211,13 @@ and <a href="https://babeljs.io/docs/usage/cli/">Babel CLI</a></p>
   },
   &hellip;
 }
+</pre>
 <ol type="1" start="7">
   <li>Enjoy <a href="https://babeljs.io/docs/learn-es2015/">programming in ES6/7</a></li>
   <li>Run the following to transpile all your files to ES5</li>
 </ol>
 <pre>
-&bsol;~ npm run build
+~ npm run build
 </pre
 <p>For more complex projects you might want to take a look at
 <a href="http://gulpjs.com/">Gulp</a> or <a href="https://webpack.github.io/">Webpack</a></p>
