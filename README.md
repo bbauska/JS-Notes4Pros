@@ -19248,5 +19248,605 @@ your function&apos;s body in curly braces, and return a value:</p>
 foo(1);  // <i>-&gt; 2</i>
 <!-- end chapter 62 -->
 <!-- page 340 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch63">Chapter 63: Workers</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch63-1">Section 63.1: Web Worker</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>A web worker is a simple way to run scripts in background threads as
+the worker thread can perform tasks (including I/O tasks using
+XMLHttpRequest) without interfering with the user interface. Once
+created, a worker can send messages which can be different data types
+(except functions) to the JavaScript code that created it by posting
+messages to an event handler specified by that code (and vice versa.)</p>
+<p>Workers can be created in a few ways.</p>
+<p>The most common is from a simple URL:</p>
+<pre>
+<b>var</b> webworker = <b>new</b> Worker(&quot;./path/to/webworker.js&quot;);
+</pre>
+<p>It&apos;s also possible to create a Worker dynamically from a string using URL.createObjectURL():</p>
+<pre>
+<b>var</b> workerData = &quot;function someFunction() {}; console.log(&apos;More code&apos;);&quot;;
+<b>var</b> blobURL = URL.createObjectURL(<b>new</b> Blob(&lbrack;&quot;(&quot; &plus; workerData &plus; &quot;)&quot;&rbrack;, { type: &quot;text/javascript&quot; }));
+<b>var</b>  webworker = <b>new</b> Worker(blobURL);
+</pre>
+<p>The same method can be combined with Function.toString() to create a worker from an
+existing function:</p>
+<pre>
+<b>var</b> workerFn = <b>function</b>() {
+  console.log(&quot;I was run&quot;);
+};
+<b>var</b> blobURL = URL.createObjectURL(<b>new</b> Blob(&lbrack;&quot;(&quot; &plus; workerFn.toString() &plus; &quot;)&quot;&rbrack;, { type:
+&quot;text/javascript&quot;}));
+<b>var</b> webworker = <b>new</b> Worker(blobURL);
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch63-2">Section 63.2: A simple service worker</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p><b>main.js</b></p>
+<blockquote>
+A service worker is an event-driven worker registered against an
+origin and a path. It takes the form of a JavaScript file that can
+control the web page/site it is associated with, intercepting and
+modifying navigation and resource requests, and caching resources in a
+very granular fashion to give you complete control over how your app
+behaves in certain situations (the most obvious one being when the
+network is not available.)
+</blockquote>
+<p>Source: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API">MDN</a></p>
+<p><b>Few Things:</b></p>
+<ol type="1" start="1">
+  <li>It&apos;s a JavaScript Worker, so it can&apos;t access the DOM directly</li>
+  <li>It&apos;s a programmable network proxy</li>
+  <li>It will be terminated when not in use and restarted when it&apos;s next needed</li>
+  <li>A service worker has a lifecycle which is completely separate from your web page</li>
+  <li>HTTPS is Needed</li>
+</ol>
+<!-- page 341 -->
+<p>This code that will be executed in the Document context, (or) this 
+JavaScript will be included in your page via a <b>&lt;script&gt;</b> tag.</p>
+<pre>
+// <i>we check if the browser supports ServiceWorkers</i>
+<b>if</b> (&apos;serviceWorker&apos; <b>in</b> navigator) {
+  navigator
+    .serviceWorker
+    .register (
+      // <i>path to the service worker file</i>
+      &apos;sw.js&apos;
+    )
+    // <i>the registration is async and it returns a promise</i>
+    .then(<b>function</b> (reg) {
+      console.log(&apos;Registration Successful&apos;);
+    });
+}
+</pre>
+<p><b>sw.js</b></p>
+<p>This is the service worker code and is executed in the 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope">
+ServiceWorker Global Scope</a>.</p>
+<pre>
+self.addEventListener(&apos;fetch&apos;, <b>function</b>(event) {
+  // <i>do nothing here, just log all the network requests</i>
+  console.log(event.request.url);
+});
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch63-3">Section 63.3: Register a service worker</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+// <i>Check if service worker is available.</i>
+<b>if</b>
+(
+&apos;serviceWorker&apos;
+<b>in</b>
+navigator
+)
+{
+navigator.
+serviceWorker
+.
+register
+(
+&apos;/sw.js&apos;
+)
+.
+then
+(
+<b>function</b>
+(
+registration
+)
+{
+console.
+log
+(
+&apos;SW registration succeeded with scope:&apos;
+,
+registration.
+scope
+)
+;
+}
+)
+.
+<b>catch</b>
+(
+<b>function</b>
+(
+e
+)
+{
+console.
+log
+(
+&apos;SW registration failed with error:&apos;
+,
+e
+)
+;
+}
+)
+;
+}
+You can call
+register
+(
+)
+on every page load. If the SW is already registered, the browser
+provides you with
+instance that is already running
+The SW file can be any name.
+sw.
+js
+is common.
+The location of the SW file is important because it defines the SW&apos;s
+scope. For example, an SW file at
+  js   /   sw.js   can only intercept fetch requests for files that begin with js
+/
+//. For this reason you usually see the
+SW file at the top-level directory of the project.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch63-4">Section 63.4: Communicating with a Web Worker</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Since workers run in a separate thread from the one that created them,
+communication needs to happen via postMessage.
+
+<b>Note:</b> Because of the different export prefixes, some browsers have
+webkitPostMessage instead of postMessage. You should override
+postMessage to make sure workers &quot;work&quot; (no pun intended) in the
+most places possible: worker.postMessage = (worker.webkitPostMessage
+&vert;&vert; worker.postMessage);
+
+From the main thread (parent window):
+// <i>Create a worker</i>
+<b>var</b>
+webworker
+=
+<b>new</b>
+Worker
+(
+&quot;./path/to/webworker.js&quot;
+)
+;
+// <i>Send information to worker</i>
+webworker.
+postMessage
+(
+&quot;Sample message&quot;
+)
+;
+// <i>Listen for messages from the worker</i>
+webworker.
+addEventListener
+(
+&quot;message&quot;
+,
+<b>function</b>
+(
+event
+)
+{
+// <i>&grave;event.data&grave; contains the value or object sent from the worker</i>
+console.
+log
+(
+&quot;Message from worker:&quot;
+,
+event.
+data
+)
+;
+// <i>&lbrack;&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;&rbrack;</i>
+}
+)
+;
+webworker.js
+From the worker, in :
+// <i>Send information to the main thread (parent window)</i>
+self.
+postMessage
+(
+&lbrack;
+&quot;foo&quot;
+,
+&quot;bar&quot;
+,
+&quot;baz&quot;
+&rbrack;
+)
+;
+// <i>Listen for messages from the main thread</i>
+self.
+addEventListener
+(
+&quot;message&quot;
+,
+<b>function</b>
+(
+event
+)
+{
+// <i>&grave;event.data&grave; contains the value or object sent from main</i>
+console.
+log
+(
+&quot;Message from parent:&quot;
+,
+event.
+data
+)
+;
+// <i>&quot;Sample message&quot;</i>
+}
+)
+;
+Alternatively, you can also add event listeners using onmessage:
+
+From the main thread (parent window):
+webworker.
+onmessage
+=
+<b>function</b>
+(
+event
+)
+{
+console.
+log
+(
+&quot;Message from worker:&quot;
+,
+event.
+data
+)
+;
+// <i>&lbrack;&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;&rbrack;</i>
+}
+webworker.js
+From the worker, in :
+self.
+onmessage
+=
+<b>function</b>
+(
+event
+)
+{
+console.
+log
+(
+&quot;Message from parent:&quot;
+,
+event.
+data
+)
+;
+// <i>&quot;Sample message&quot;</i>
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch63-5">Section 63.5: Terminate a worker</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Once you are done with a worker you should terminate it. This helps to
+free up resources for other applications on the user's computer.
+<i>Main Thread:</i>
+// <i>Terminate a worker from your application.</i>
+worker.
+terminate
+(
+)
+;
+<i>Note</i>: The terminate method is not available for service workers. It
+will be terminated when not in use, and restarted when it&apos;s next
+needed.
+<i>Worker Thread:</i>
+// <i>Have a worker terminate itself.</i>
+self.
+close
+(
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch63-6">Section 63.6: Populating your cache</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+After your service worker is registered, the browser will try to
+install & later activate the service worker.
+<b>Install event listener</b>
+<b>this</b>
+.
+addEventListener
+(
+&apos;install&apos;
+,
+<b>function</b>
+(
+event
+)
+{
+console.
+log
+(
+&apos;installed&apos;
+
+)
+;
+}
+)
+;
+<b>Caching</b>
+One can use this install event returned to cache the assets needed to
+run the app offline. Below example uses the cache api to do the same.
+<b>this</b>
+.
+addEventListener
+(
+&apos;install&apos;
+,
+<b>function</b>
+(
+event
+)
+{
+event.
+waitUntil
+(
+caches.
+open
+(
+&apos;v1&apos;
+)
+.
+then
+(
+<b>function</b>
+(
+cache
+)
+{
+<b>return</b>
+cache.
+addAll
+(
+&lbrack;
+<i>/&ast; Array of all the assets that needs to be cached &ast;/</i>
+&apos;/css/style.css&apos;
+,
+&apos;/js/app.js&apos;
+,
+&apos;/images/snowTroopers.jpg&apos;
+&rbrack;
+)
+;
+}
+)
+)
+;
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch63-7">Section 63.7: Dedicated Workers and Shared Workers</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>Dedicated Workers</b>
+A dedicated web worker is only accessible by the script that called
+it.
+Main application:
+<b>var</b>
+worker
+=
+<b>new</b>
+Worker
+(
+&apos;worker.js&apos;
+)
+;
+worker.
+addEventListener
+(
+&apos;message&apos;
+,
+<b>function</b>
+(
+msg
+)
+{
+console.
+log
+(
+&apos;Result from the worker:&apos;
+,
+msg.
+data
+)
+;
+}
+)
+;
+worker.
+postMessage
+
+(
+
+&lbrack;
+
+2
+
+,
+
+3
+
+&rbrack;
+
+)
+;
+worker.js:
+self.
+addEventListener
+(
+&apos;message&apos;
+,
+<b>function</b>
+(
+msg
+)
+{
+console.
+log
+(
+&apos;Worker received arguments:&apos;
+,
+msg.
+data
+)
+;
+self.
+postMessage
+(
+msg.
+data
+&lbrack;
+0
+&rbrack;
+&plus;
+msg.
+data
+&lbrack;
+1
+&rbrack;
+)
+;
+}
+)
+;
+<b>Shared Workers</b>
+A shared worker is accessible by multiple scripts  even if they are
+being accessed by different windows, iframes or even workers.
+Creating a shared worker is very similar to how to create a dedicated
+one, but instead of the straight-forward communication between the
+main thread and the worker thread, you&apos;ll have to communicate via a
+port object, i.e., an explicit port has to be opened so multiple
+scripts can use it to communicate with the shared worker. (Note that
+dedicated workers do this implicitly) Main application
+<b>var</b>
+myWorker
+=
+<b>new</b>
+SharedWorker
+(
+&apos;worker.js&apos;
+)
+;
+myWorker.
+port
+.
+start
+(
+)
+;
+// <i>open the port connection</i>
+myWorker.
+port
+.
+postMessage
+(
+&lbrack;
+2
+,
+3
+&rbrack;
+)
+;
+worker.js
+self.
+port
+.
+start
+(
+)
+;
+open the port connection to enable two
+&minus;
+way communication
+self.
+onconnect
+=
+<b>function</b>
+(
+e
+)
+{
+<b>var</b>
+port
+=
+e&period;
+ports
+&lbrack;
+0
+&rbrack;
+;
+// <i>get the port</i>
+port.
+onmessage
+=
+<b>function</b>
+(
+e
+)
+{
+console.
+log
+(
+&apos;Worker received arguments:&apos;
+,
+e&period;
+data
+)
+;
+port.
+postMessage
+(
+e&period;
+data
+&lbrack;
+0
+&rbrack;
+&plus;
+e&period;
+data
+&lbrack;
+1
+&rbrack;
+)
+;
+}
+}
+port.start
+Note that setting up this message handler in the worker thread also
+implicitly opens the port connection back to the parent thread, so the
+call to () is not actually needed, as noted above.
+<!-- end chapter 63 -->
 
 
