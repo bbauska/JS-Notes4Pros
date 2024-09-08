@@ -20272,7 +20272,6 @@ initial bracket in the next line can lead to silent errors.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <blockquote>
 There are three basic rules of semicolon insertion:
-</blockquote>
 <!-- page 362 -->
 <ol type="1" start="1">
 <li>When, as the program is parsed from left to right, a token (called
@@ -20357,17 +20356,48 @@ console.log(&quot;Hello, World&quot;)&lbrack;(1, 2, 3)&rbrack;.join();
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch70">Chapter 70: Localization</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Paramater</b> <b>Details</b>
-| weekday          | &quot;narrow&quot;, &quot;short&quot;, &quot;long&quot;                   |
-| era              | &quot;narrow&quot;, &quot;short&quot;, &quot;long&quot;                   |
-| year             | &quot;numeric&quot;, &quot;2-digit&quot;                          |
-| month            | &quot;numeric&quot;, &quot;2-digit&quot;, &quot;narrow&quot;, &quot;short&quot;,  |
-|                  | &quot;long&quot;                                          |
-| day              | &quot;numeric&quot;, &quot;2-digit&quot;                          |
-| hour             | &quot;numeric&quot;, &quot;2-digit&quot;                          |
-| minute           | &quot;numeric&quot;, &quot;2-digit&quot;                          |
-| second           | &quot;numeric&quot;, &quot;2-digit&quot;                          |
-timeZoneName &quot;short&quot;, &quot;long&quot;
-
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Parameter</b></th>
+      <th><b>Details</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>weekday</td>
+      <td>&quot;narrow&quot;, &quot;short&quot;, &quot;long&quot;</td>
+    </tr>
+    <tr>
+      <td>era</td>
+      <td>&quot;narrow&quot;, &quot;short&quot;, &quot;long&quot;</td>
+    </tr>
+    <tr>
+      <td>year</td>
+      <td>&quot;numeric&quot;, &quot;2-digit&quot;</td>
+    </tr>
+    <tr>
+      <td>month</td>
+      <td>&quot;numeric&quot;, &quot;2-digit&quot;, &quot;narrow&quot;, &quot;short&quot;, &quot;long&quot;</td>
+    </tr>
+    <tr>
+      <td>day</td>
+      <td>&quot;numeric&quot;, &quot;2-digit&quot;</td>
+    </tr>
+    <tr>
+      <td>hour</td>
+      <td>&quot;numeric&quot;, &quot;2-digit&quot;</td>
+    </tr>
+    <tr>
+      <td>minute</td>
+      <td>&quot;numeric&quot;, &quot;2-digit&quot;</td>
+    </tr>
+    <tr>
+      <td>second</td>
+      <td>&quot;numeric&quot;, &quot;2-digit&quot;</td>
+    </tr>
+    <tr>
+      <td>timeZoneName</td>
+      <td>&quot;short&quot;, &quot;long&quot;</td>
+    </tr>
 
