@@ -19750,485 +19750,189 @@ snowy.speak(); // <i>ERROR: snowy.speak is not a function</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch65-3">Section 65.3: Module and Revealing Module Patterns</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Module Pattern</b>
-The Module pattern is a [creational and structural design
-pattern](https://en.wikipedia.org/wiki/Module_pattern#Module_as_a_design_pattern)
-which provides a way of encapsulating private members while producing
-a public API. This is accomplished by creating an IIFE which allows us
-to define variables only available in its scope (through closure)
-while returning an object which contains the public API.
-This gives us a clean solution for hiding the main logic and only
-exposing an interface we wish other parts of our application to use.
-<b>var</b>
-Module
-=
-(
-<b>function</b>
-(
-<i>/&ast; pass initialization data if necessary &ast;/</i>
-)
-{
+<p><b>Module Pattern</b></p>
+<p>The Module pattern is a 
+<a href="https://en.wikipedia.org/wiki/Module_pattern#Module_as_a_design_pattern">
+creational and structural design pattern</a> which provides a way of encapsulating 
+private members while producing a public API. This is accomplished by creating an 
+IIFE which allows us to define variables only available in its scope (through closure)
+while returning an object which contains the public API.</p>
+<p>This gives us a clean solution for hiding the main logic and only
+exposing an interface we wish other parts of our application to use.</p>
+<pre>
+<b>var</b> Module = (<b>function</b>( <i>/&ast; pass initialization data if necessary &ast;/</i>) {
 // <i>Private data is stored within the closure</i>
-<b>var</b>
-privateData
-=
-1
-;
+<b>var</b> privateData = 1;
 // <i>Because the function is immediately invoked,</i>
 // <i>the return value becomes the public API</i>
-<b>var</b>
-api
-=
-{
-getPrivateData
-:
-<b>function</b>
-(
-)
-{
-<b>return</b>
-privateData
-;
-}
-,
-getDoublePrivateData
-:
-<b>function</b>
-(
-)
-{
-<b>return</b>
-api.
-getPrivateData
-(
-)
-&ast;
-2
-;
-}
-}
-;
-<b>return</b>
-api
-;
-}
-)
-(
-<i>/&ast; pass initialization data if necessary &ast;/</i>
-)
-;
-<b>Revealing Module Pattern</b>
-The Revealing Module pattern is a variant in the Module pattern. The
+<b>var</b> api = {
+  getPrivateData: <b>function</b>() {
+    <b>return</b> privateData;
+  },
+  getDoublePrivateData: <b>function</b>() {
+    <b>return</b> api.getPrivateData() &ast; 2;
+  }
+};
+<b>return</b> api;
+})( <i>/&ast; pass initialization data if necessary &ast;/</i>);
+</pre>
+<p><b>Revealing Module Pattern</b></p>
+<p>The Revealing Module pattern is a variant in the Module pattern. The
 key differences are that all members (private and public) are defined
 within the closure, the return value is an object literal containing
 no function definitions, and all references to member data are done
-through direct references rather than through the returned object.
-<b>var</b>
-Module
-=
-(
-<b>function</b>
-(
-<i>/&ast; pass initialization data if necessary &ast;/</i>
-)
-{
-// <i>Private data is stored just like before</i>
-<b>var</b>
-privateData
-=
-1
-;
+through direct references rather than through the returned object.</p>
+<pre>
+<b>var</b> Module = (<b>function</b>( <i>/&ast; pass initialization data if necessary &ast;/</i>) {
+  // <i>Private data is stored just like before</i>
+  <b>var</b> privateData = 1;
 // <i>All functions must be declared outside of the returned object</i>
-<b>var</b>
-getPrivateData
-=
-<b>function</b>
-(
-)
-{
-<b>return</b>
-privateData
-;
-}
-;
-<b>var</b>
-getDoublePrivateData
-=
-<b>function</b>
-(
-)
-{
-// <i>Refer directly to enclosed members rather than through the returned
-object</i>
-<b>return</b>
-getPrivateData
-(
-)
-&ast;
-2
-;
-}
-;
-// <i>Return an object literal with no function definitions</i>
-<b>return</b>
-{
-getPrivateData
-:
-getPrivateData
-,
-getDoublePrivateData
-:
-getDoublePrivateData
-}
-;
-}
-)
-(
-<i>/&ast; pass initialization data if necessary &ast;/</i>
-)
-;
-<b>Revealing Prototype Pattern</b>
-This variation of the revealing pattern is used to separate the
+<b>var</b> getPrivateData = <b>function</b>() {
+  <b>return</b> privateData;
+};
+<b>var</b> getDoublePrivateData = <b>function</b>() {
+  // <i>Refer directly to enclosed members rather than through the returned object</i>
+  <b>return</b> getPrivateData() &ast; 2;
+};
+  // <i>Return an object literal with no function definitions</i>
+  <b>return</b> {
+    getPrivateData: getPrivateData,
+    getDoublePrivateData: getDoublePrivateData
+	};
+})(  <i>/&ast; pass initialization data if necessary &ast;/</i>);
+</pre>
+<p><b>Revealing Prototype Pattern</b></p>
+<p>This variation of the revealing pattern is used to separate the
 constructor to the methods. This pattern allow us to use the
-javascript language like a objected oriented language:
-![](./images/image038.png){width="7.486805555555556in"
-height="7.459722222222222in"}
-This code above should be in a separated file .js to be referenced in
-any page that is needed. It can be used like this:
-<b>var</b>
-menuActive
-=
-<b>new</b>
-NavigationNs.
-active
-(
-&apos;ul.sidebar-menu li&apos;
-,
-5
-)
-;
-menuActive.
-setCurrent
-(
-)
-;
+javascript language like a objected oriented language:</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~ 38.  (315) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="/images/image038.png"
+  title=""
+  alt=""
+  style="border: 2px solid #000000; width:7.4in;" />
+<!-- ![](./images/image038.png){width="7.486805555555556in" height="7.459722222222222in"} -->
+<p>This code above should be in a separated file .js to be referenced in
+any page that is needed. It can be used like this:</p>
+<pre>
+<b>var</b> menuActive = <b>new</b> NavigationNs.active(&apos;ul.sidebar-menu li&apos;, 5);
+menuActive.setCurrent();
+</pre>
+<!-- page 352 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch65-4">Section 65.4: Prototype Pattern</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The prototype pattern focuses on creating an object that can be used
+<p>The prototype pattern focuses on creating an object that can be used
 as a blueprint for other objects through prototypal inheritance. This
 pattern is inherently easy to work with in JavaScript because of the
 native support for prototypal inheritance in JS which means we don&apos;t
-need to spend time or effort imitating this topology. <b>Creating
-methods on the prototype</b>
-<b>function</b>
-Welcome
-(
-name
-)
-{
-<b>this</b>
-.
-name
-=
-name
-;
+need to spend time or effort imitating this topology.</p>
+<p><b>Creating methods on the prototype</b></p>
+<pre>
+<b>function</b> Welcome(name) {
+  <b>this</b>.name = name;
 }
-Welcome.
-<b>prototype</b>
-.
-sayHello
-=
-<b>function</b>
-(
-)
-{
-<b>return</b>
-&apos;Hello, &apos;
-&plus;
-<b>this</b>
-.
-name
-&plus;
-&apos;!&apos;
-;
+Welcome.<b>prototype</b>.sayHello = <b>function</b>() {
+  <b>return</b> &apos;Hello, &apos; &plus; <b>this</b>.name &plus; &apos;!&apos;;
 }
-<b>var</b>
-welcome
-=
-<b>new</b>
-Welcome
-(
-&apos;John&apos;
-)
-;
-welcome.
-sayHello
-(
-)
-;
+<b>var</b> welcome = <b>new</b> Welcome(&apos;John&apos;);
+welcome.sayHello();
 // <i>=&bsol;Hello, John!</i>
-<b>Prototypal Inheritance</b>
-Inheriting from a &apos;parent object&apos; is relatively easy via the
-following pattern
+</pre>
+<p><b>Prototypal Inheritance</b></p>
+<p>Inheriting from a &apos;parent object&apos; is relatively easy via the
+following pattern</p>
+<pre>
 ChildObject.<b>prototype</b> = Object.create(ParentObject.<b>prototype</b>);
 ChildObject.<b>prototype</b>.constructor = ChildObject;
-Where ParentObject is the object you wish to inherit the prototyped
-functions from, and ChildObject is the new Object you wish to put them
-on.
-If the parent object has values it initializes in its constructor you
-need to call the parents constructor when initializing the child.
-You do that using the following pattern in the ChildObject
-constructor.
-<b>function</b>
-ChildObject
-(
-value
-)
-{
-ParentObject.
-call
-(
-<b>this</b>
-,
-value
-)
-;
+</pre>
+<p>Where ParentObject is the object you wish to inherit the prototyped
+functions from, and ChildObject is the new Object you wish to put them on.</p>
+<p>If the parent object has values it initializes in its constructor you
+need to call the parents constructor when initializing the child.</p>
+<p>You do that using the following pattern in the ChildObject constructor.</p>
+<pre>
+<b>function</b> ChildObject(value) {
+  ParentObject.call(<b>this</b>, value);
 }
-A complete example where the above is implemented
-<b>function</b>
-RoomService
-(
-name
-,
-order
-)
-{
-// <i>this.name will be set and made available on the scope of this
-function</i>
-Welcome.
-call
-(
-<b>this</b>
-,
-name
-)
-;
-<b>this</b>
-.
-order
-=
-order
-;
+</pre>
+<p>A complete example where the above is implemented</p>
+<pre>
+<b>function</b> RoomService(name, order) {
+  // <i>this.name will be set and made available on the scope of this function</i>
+  Welcome.call(<b>this</b>, name);
+  <b>this</b>.order = order;
 }
 // <i>Inherit &apos;sayHello()&apos; methods from &apos;Welcome&apos; prototype</i>
-RoomService.
-<b>prototype</b>
-=
-Object
-.
-create
-(
-Welcome.
-<b>prototype</b>
-)
-;
+RoomService.<b>prototype</b> = Object.create(Welcome.<b>prototype</b>);
 // <i>By default prototype object has &apos;constructor&apos; property.</i>
-// <i>But as we created new object without this property - we have to set
-it manually,</i>
+// <i>But as we created new object without this property - we have to set it manually,</i>
 // <i>otherwise &apos;constructor&apos; property will point to &apos;Welcome&apos; class</i>
-RoomService.
-<b>prototype</b>
-.
-constructor
-=
-RoomService
-;
-RoomService.
-<b>prototype</b>
-.
-announceDelivery
-=
-<b>function</b>
-(
-)
-{
-<b>return</b>
-&apos;Your &apos;
-&plus;
-<b>this</b>
-.
-order
-&plus;
-&apos; has arrived!&apos;
-;
+RoomService.<b>prototype</b>.constructor = RoomService;
+RoomService.<b>prototype</b>.announceDelivery = <b>function</b>() {
+  <b>return</b> &apos;Your &apos; &plus; <b>this</b>.order &plus; &apos; has arrived!&apos;;
 }
-RoomService.
-<b>prototype</b>
-.
-deliverOrder
-=
-<b>function</b>
-(
-)
-{
-<b>return</b>
-<b>this</b>
-.
-sayHello
-(
-)
-&plus;
-&apos; &apos;
-&plus;
-<b>this</b>
-.
-announceDelivery
-(
-)
-;
+RoomService.<b>prototype</b>.deliverOrder = <b>function</b>() {
+  <b>return</b> <b>this</b>.sayHello() &plus; &apos; &apos; &plus; <b>this</b>.announceDelivery();
 }
-<b>var</b>
-delivery
-=
-<b>new</b>
-RoomService
-(
-&apos;John&apos;
-,
-&apos;pizza&apos;
-)
-;
-delivery.
-sayHello
-(
-)
-;
-// <i>=&bsol;Hello, John!,</i>
-delivery.
-announceDelivery
-(
-)
-;
+<b>var</b> delivery = <b>new</b> RoomService(&apos;John&apos;, &apos;pizza&apos;);
+delivery.sayHello();
+// <i>=&gt; Hello, John!,</i>
+delivery.announceDelivery();
 // <i>Your pizza has arrived!</i>
-delivery.
-deliverOrder
-(
-)
-;
-// <i>=&bsol;Hello, John! Your pizza has arrived!</i>
+delivery.deliverOrder();
+// <i>=&gt; Hello, John! Your pizza has arrived!</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch65-5">Section 65.5: Singleton Pattern</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The Singleton pattern is a design pattern that restricts the
+<p>The Singleton pattern is a design pattern that restricts the
 instantiation of a class to one object. After the first object is
 created, it will return the reference to the same one whenever called
-for an object.
-<b>var</b>
-Singleton
-=
-(
-<b>function</b>
-(
-)
-{
-// <i>instance stores a reference to the Singleton</i>
-<b>var</b>
-instance
-;
-<b>function</b>
-createInstance
-(
-)
-{
-// <i>private variables and methods</i>
-<b>var</b>
-&lowbar;privateVariable
-=
-&apos;I am a private variable&apos;
-;
-<b>function</b>
-&lowbar;privateMethod
-(
-)
-{
-console.
-log
-(
-&apos;I am a private method&apos;
-)
-;
-}
-<b>return</b>
-{
-// <i>public methods and variables</i>
-publicMethod
-:
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-&apos;I am a public method&apos;
-)
-;
-}
-,
-publicVariable
-:
-&apos;I am a public variable&apos;
-}
-;
-}
-<b>return</b>
-{
-// <i>Get the Singleton instance if it exists</i>
-// <i>or create one if doesn&apos;t</i>
-getInstance
-:
-<b>function</b>
-(
-)
-{
-<b>if</b>
-(
-!
-instance
-)
-{
-instance
-=
-createInstance
-(
-)
-;
-}
-<b>return</b>
-instance
-;
-}
-}
-;
-}
-)
-(
-)
-;
-<b>Usage:</b>
+for an object.</p>
+<pre>
+<b>var</b> Singleton = (<b>function</b>() {
+  // <i>instance stores a reference to the Singleton</i>
+  <b>var</b> instance;
+  <b>function</b> createInstance() {
+    // <i>private variables and methods</i>
+    <b>var</b> &lowbar;privateVariable = &apos;I am a private variable&apos;;
+    <b>function</b> &lowbar;privateMethod() {
+      console.log(&apos;I am a private method&apos;);
+    }
+    <b>return</b> {
+      // <i>public methods and variables</i>
+      publicMethod: <b>function</b>() {
+        console.log(&apos;I am a public method&apos;);
+      },
+      publicVariable: &apos;I am a public variable&apos;
+	};
+  }
+  <b>return</b> {
+    // <i>Get the Singleton instance if it exists</i>
+    // <i>or create one if doesn&apos;t</i>
+    getInstance: <b>function</b>() {
+      <b>if</b> (!instance) {
+        instance = createInstance();
+      }
+      <b>return</b> instance;
+    }
+  };
+})();
+</pre>
+<p><b>Usage:</b></p>
+<pre>
 // <i>there is no existing instance of Singleton, so it will create one</i>
 <b>var</b> instance1 = Singleton.getInstance();
-// <i>there is an instance of Singleton, so it will return the reference
-to this one</i> <b>var</b> instance2 = Singleton.getInstance();
+// <i>there is an instance of Singleton, so it will return the reference to this one</i>
+<b>var</b> instance2 = Singleton.getInstance();
 console.log(instance1 === instance2); // <i>true</i>
+</pre>
+<!-- page 354 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch65-6">Section 65.6: Abstract Factory Pattern</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>The Abstract Factory Pattern is a creational design pattern that can
 be used to define specific instances or classes without having to
 specify the exact object that is being created.</p>
@@ -20242,5 +19946,143 @@ specify the exact object that is being created.</p>
     having to specify the exact object being created."
   style="border: 2px solid #000000; width:7.4in;" />
 <!-- {width="7.486805555555556in" height="4.045138888888889in"} -->
+<!-- page 355 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch66">Chapter 66: Detecting browser</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Browsers, as they have evolved, offered more features to JavaScript.
+But often these features are not available in all browsers. Sometimes
+they may be available in one browser, but yet to be released on other
+browsers. Other times, these features are implemented differently by
+different browsers. Browser detection becomes important to ensure that
+the application you develop runs smoothly across different browsers
+and devices.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch66-1">Section 66.1: Feature Detection Method</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>This method looks for the existence of browser specific things. This
+would be more difficult to spoof, but is not guaranteed to be future
+proof.</p>
+<pre>
+// <i>Opera 8.0+</i>
+<b>var</b> isOpera = (!!window.opr && !!opr.addons) &vert;&vert; !!window.opera &vert;&vert; navigator.userAgent.indexOf(&apos;
+OPR/&apos;) &gt;= 0;
+// <i>Firefox 1.0+</i>
+<b>var</b> isFirefox = <b>typeof</b> InstallTrigger !== &apos;undefined&apos;;
+// <i>At least Safari 3+: &quot;&lbrack;object HTMLElementConstructor&rbrack;&quot;</i>
+<b>var</b> isSafari = Object.<b>prototype</b>.toString.call(window.HTMLElement).indexOf(&apos;Constructor&apos;) &gt; 0;
+// <i>Internet Explorer 6-11</i>
+<b>var</b> isIE = <i>/&ast;@cc_on!@&ast;/</i><b>false</b> &vert;&vert; !!document.documentMode;
+// <i>Edge 20+</i>
+<b>var</b> isEdge = !isIE && !!window.StyleMedia;
+// <i>Chrome 1+</i>
+<b>var</b> isChrome = !!window.chrome && !!window.chrome.webstore;
+// <i>Blink engine detection</i>
+<b>var</b> isBlink = (isChrome &vert;&vert; isOpera) && !!window.CSS;
+</pre>
+<p>Successfully tested in:</p>
+<ul>
+  <li>Firefox 0.8 - 44</li>
+  <li>Chrome 1.0 - 48 Opera 8.0 - 34</li>
+  <li>Safari 3.0 - 9.0.3</li>
+  <li>IE 6 - 11</li>
+  <li>Edge - 20-25</li>
+</ul>
+<p>Credit to <a href="http://stackoverflow.com/a/9851769/6194193">Rob W</a></p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch66-2">Section 66.2: User Agent Detection</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<p>This method gets the user agent and parses it to find the browser. The
+browser name and version are extracted from the user agent through a
+regex. Based on these two, the <b>&lt;browser</b> name<b>&gt;</b> 
+<b>&lt;version&gt;</b> is returned.</p>
+<p>The four conditional blocks following the user agent matching code are
+meant to account for differences in the user agents of different
+browsers. For example, in case of opera, 
+<a href="https://stackoverflow.com/a/17436191/5894241">
+since it uses Chrome rendering engine</a>, there is an additional step 
+of ignoring that part.</p>
+<p>Note that this method can be easily spoofed by a user.</p>
+<!-- page 356 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 40.  (356) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="center">
+  <img src="./images/image040.png"
+  title="."
+  alt="."
+  style="border: 2px solid #000000; width:7.4in;" />
+<!-- ![](./images/image040.png){width="7.486805555555556in" height="2.6756944444444444in"} -->
+<p>Credit to <a href="http://stackoverflow.com/a/2401861/6194193">kennebec</a></p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch66-3">Section 66.3: Library Method</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<p>An easier approach for some would be to use an existing JavaScript
+library. This is because it can be tricky to guarantee browser
+detection is correct, so it can make sense to use a working solution
+if one is available.</p>
+
+<p>One popular browser-detection library is <a href="https://github.com/ded/bowser">Bowser</a>.</p>
+<p>Usage example:</p>
+<pre>
+<b>if</b> (bowser.msie && bowser.version &gt;= 6) {
+  alert(&apos;IE version 6 or newer&apos;);
+}
+<b>else</b>
+<b>if</b>
+(
+bowser.
+firefox
+)
+{
+alert
+(
+&apos;Firefox&apos;
+)
+;
+}
+<b>else</b>
+<b>if</b>
+(
+bowser.
+chrome
+)
+{
+alert
+(
+&apos;Chrome&apos;
+)
+;
+}
+<b>else</b>
+<b>if</b>
+(
+bowser.
+safari
+)
+{
+alert
+(
+&apos;Safari&apos;
+)
+;
+}
+<b>else</b>
+<b>if</b>
+(
+bowser.
+iphone
+&vert;&vert;
+bowser.
+android
+)
+{
+alert
+(
+&apos;iPhone or Android&apos;
+)
+;
+}
 
 
