@@ -19155,8 +19155,7 @@ function body.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch62-2">Section 62.2: Lexical Scoping & Binding (Value of &quot;this&quot;)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Arrow functions are <a href="http://stackoverflow.com/questions/1047454/what-is-lexical-scope">
+<p>Arrow functions are <a href="http://stackoverflow.com/questions/1047454/what-is-lexical-scope">
 lexically scoped</a>; this means that their <b>this</b> Binding is bound to the context 
 of the surrounding scope. That is to say, whatever <b>this</b> refers to can be preserved 
 by using an arrow function. Take a look at the following example. The class Cow has a method 
@@ -20353,6 +20352,7 @@ console.log(&quot;Hello, World&quot;)&lbrack;(1, 2, 3)&rbrack;.join();
   <b>return</b>;
     &quot;something&quot;;
 </pre>
+<!-- page 364 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch70">Chapter 70: Localization</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -20400,4 +20400,241 @@ console.log(&quot;Hello, World&quot;)&lbrack;(1, 2, 3)&rbrack;.join();
       <td>timeZoneName</td>
       <td>&quot;short&quot;, &quot;long&quot;</td>
     </tr>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch70-1">Section 70.1: Number formatting</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Number formatting, grouping digits according to the localization.</p>
+<pre>
+<b>const</b> usNumberFormat = <b>new</b> Intl.NumberFormat(&apos;en-US&apos;);
+<b>const</b> esNumberFormat = <b>new</b> Intl.NumberFormat(&apos;es-ES&apos;);
+<b>const</b> usNumber = usNumberFormat.format(99999999.99); // <i>&quot;99,999,999.99&quot;</i>
+<b>const</b> esNumber = esNumberFormat.format(99999999.99); // <i>&quot;99.999.999,99&quot;</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch70-2">Section 70.2: Currency formatting</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Currency formatting, grouping digits and placing the currency symbol
+according to the localization.</p>
+<pre>
+<b>const</b> usCurrencyFormat = <b>new</b> Intl.NumberFormat(&apos;en-US&apos;, {style: &apos;currency&apos;, currency: &apos;USD&apos;})
+<b>const</b> esCurrencyFormat = <b>new</b> Intl.NumberFormat(&apos;es-ES&apos;, {style: &apos;currency&apos;, currency: &apos;EUR&apos;})
+<b>const</b> usCurrency = usCurrencyFormat.format(100.10); // <i>&quot;&dollar;100.10&quot;</i>
+<b>const</b> esCurrency = esCurrencyFormat.format(100.10); // <i>&quot;100.10</i> €<i>&quot;</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch70-3">Section 70.3: Date and time formatting</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Date time formatting, according to the localization.</p>
+<pre>
+<b>const</b> usDateTimeFormatting = <b>new</b> Intl.DateTimeFormat(&apos;en-US&apos;);
+<b>const</b> esDateTimeFormatting = <b>new</b> Intl.DateTimeFormat(&apos;es-ES&apos;);
+<b>const</b> usDate = usDateTimeFormatting.format(<b>new</b> Date(&apos;2016-07-21&apos;)); // <i>&quot;7/21/2016&quot;</i>
+<b>const</b> esDate = esDateTimeFormatting.format(<b>new</b> Date(&apos;2016-07-21&apos;)); // <i>&quot;21/7/2016&quot;</i>
+</pre>
+<!-- page 365 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch71">Chapter 71: Geolocation</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch71-1">Section 71.1: Get updates when a user&apos;s location changes</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>You can also receive regular updates of the user&apos;s location; for
+example, as they move around while using a mobile device. Location
+tracking over time can be very sensitive, so be sure to explain to the
+user ahead of time why you&apos;re requesting this permission and how
+you&apos;ll use the data.</p>
+<pre>
+<b>if</b> (navigator.geolocation) {
+  // <i>after the user indicates that they want to turn on continuous location-tracking</i>
+  <b>var</b> watchId = navigator.geolocation.watchPosition(updateLocation, geolocationFailure);
+}
+<b>else</b> {
+  console.log(&quot;Geolocation is not supported by this browser.&quot;);
+}
+<b>var</b> updateLocation = <b>function</b>(position) {
+  console.log(&quot;New position at: &quot; &plus; position.coords.latitude &plus; &quot;, &quot; &plus; position.coords.longitude);
+};
+</pre>
+<p>To turn off continuous updates:</p>
+<pre>
+navigator.geolocation.clearWatch(watchId);
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch71-2">Section 71.2: Get a user&apos;s latitude and longitude</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+<b>if</b> (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationFailure);
+} <b>else</b> {
+  console.log(&quot;Geolocation is not supported by this browser.&quot;);
+}
+// <i>Function that will be called if the query succeeds</i>
+<b>var</b> geolocationSuccess = <b>function</b>(pos) {
+  console.log(&quot;Your location is &quot; &plus; pos.coords.latitude &plus; &quot;°, &quot; &plus; pos.coords.longitude &plus; &quot;°.&quot;);
+};
+// <i>Function that will be called if the query fails</i>
+<b>var</b> geolocationFailure = <b>function</b>(err) {
+  console.log(&quot;ERROR (&quot; &plus; err.code &plus; &quot;): &quot; &plus; err.message);
+};
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch71-3">Section 71.3: More descriptive error codes</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>In the event that geolocation fails, your callback function will
+receive a PositionError object. The object will include an attribute
+named code that will have a value of 1, 2, or 3. Each of these numbers
+signifies a different kind of error; the getErrorCode() function below 
+takes the PositionError.code as its only argument and returns a string 
+with the name of the error that occurred.</p>
+<pre>
+<b>var</b> getErrorCode = <b>function</b>(err) {
+  <b>switch</b> (err.code) {
+    <b>case</b> err.PERMISSION_DENIED:
+      <b>return</b> &quot;PERMISSION_DENIED&quot;;
+    <b>case</b> err.POSITION_UNAVAILABLE:
+      <b>return</b> &quot;POSITION_UNAVAILABLE&quot;;
+    <b>case</b> err.TIMEOUT:
+      <b>return</b> &quot;TIMEOUT&quot;;
+    <b>default</b>:
+      <b>return</b> &quot;UNKNOWN_ERROR&quot;;
+}
+};
+</pre>
+<p>It can be used in geolocationFailure() like so:</p>
+<pre>
+<b>var</b> geolocationFailure = <b>function</b>(err) {
+  console.log(&quot;ERROR (&quot; &plus; getErrorCode(err) &plus; &quot;): &quot; &plus; err.message);
+};
+</pre>
+<!-- page 367 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch72">Chapter 72: IndexedDB</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch72-1">Section 72.1: Opening a database</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Opening a database is an asynchronous operation. We need to send a
+request to open our database and then listen for events so we know
+when it&apos;s ready.</p>
+<p>We&apos;ll open a DemoDB database. If it doesn&apos;t exist yet, it will get
+created when we send the request.</p>
+<p>The 2 below says that we&apos;re asking for version 2 of our database.
+Only one version exists at any time, but we can use the version number
+to upgrade old data, as you&apos;ll see.</p>
+<pre>
+<b>var</b> db = <b>null</b>,  // <i>We&apos;ll use this once we have our database</i>
+request = window.indexedDB.open(&quot;DemoDB&quot;, 2);
+// <i>Listen for success. This will be called after onupgradeneeded runs, if it does at all</i>
+request.onsuccess = <b>function</b> () {
+  db = request.result;  // <i>We have a database!</i>
+  doThingsWithDB(db);
+};
+// <i>If our database didn&apos;t exist before, or it was an older version than what we requested,</i>
+// <i>the &grave;onupgradeneeded&grave; event will be fired.</i>
+// <i></i>
+// <i>We can use this to setup a new database and upgrade an old one with new data stores</i>
+request.onupgradeneeded = <b>function</b>(event) {
+  db = request.result;
+  // <i>If the oldVersion is less than 1, then the database didn&apos;t exist. Let&apos;s set it up</i>
+  <b>if</b> (event.oldVersion &lt; 1) {
+    // <i>We&apos;ll create a new &quot;things&quot; store with &grave;autoIncrement&grave;ing keys</i>
+    <b>var</b> store = db.createObjectStore(&quot;things&quot;, { autoIncrement: <b>true</b> });
+  }
+  // <i>In version 2 of our database, we added a new index by the name of each thing</i>
+  <b>if</b> (event.oldVersion &lt; 2) {
+    // <i>Let&apos;s load the things store and create an index</i>
+    <b>var</b> store = request.transaction.objectStore(&quot;things&quot;);
+    store.createIndex(&quot;by_name&quot;, &quot;name&quot;);
+  }
+};
+// <i>Handle any errors</i>
+request.onerror = <b>function</b>() {
+  console.error(&quot;Something went wrong when we tried to request the database!&quot;);
+};
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch72-2">Section 72.2: Adding objects</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>
+Anything that needs to happen with data in an IndexedDB database
+happens in a transaction. There are a few things to note about
+transactions that are mentioned in the Remarks section at the bottom
+of this page.</p>
+<p>We&apos;ll use the database we set up in <b>Opening a database.</b></p>
+<!-- page 368 -->
+<pre>
+// <i>Create a new readwrite (since we want to change things) transaction for the things store</i>
+<b>var</b> transaction = db.transaction(&lbrack;&quot;things&quot;&rbrack;, &quot;readwrite&quot;);
+// <i>Transactions use events, just like database open requests. Let&apos;s listen for success</i>
+transaction.oncomplete = <b>function</b>() {
+  console.log(&quot;All done!&quot;);
+};
+// <i>And make sure we handle errors</i>
+transaction.onerror = <b>function</b>() {
+  console.log(&quot;Something went wrong with our transaction: &quot;, transaction.error);
+};
+// <i>Now that our event handlers are set up, let&apos;s get our things store and add some objects!</i>
+<b>var</b> store = transaction.objectStore(&quot;things&quot;);
+// <i>Transactions can do a few things at a time. Let&apos;s start with a simple insertion</i>
+<b>var</b> request = store.add({
+  // <i>&quot;things&quot; uses auto-incrementing keys, so we don&apos;t need one, but we can set it anyway</i>
+  key: &quot;coffee_cup&quot;,
+  name: &quot;Coffee Cup&quot;,
+  contents: &lbrack;&quot;coffee&quot;, &quot;cream&quot;&rbrack;
+});
+// <i>Let&apos;s listen so we can see if everything went well</i>
+request.onsuccess = <b>function</b>(event) {
+// <i>Done! Here, &grave;request.result&grave; will be the object&apos;s key, &quot;coffee_cup&quot;</i>
+};
+// <i>We can also add a bunch of things from an array. We&apos;ll use auto-generated keys</i>
+<b>var</b> thingsToAdd = &lbrack;{ name: &quot;Example object&quot; }, { value: &quot;I don&apos;t have a name&quot; }&rbrack;;
+// <i>Let&apos;s use more compact code this time and ignore the results of our insertions</i>
+thingsToAdd.forEach(e =&gt; store.add(e));
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch72-3">Section 72.3: Retrieving data</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>
+Anything that needs to happen with data in an IndexedDB database
+happens in a transaction. There are a few things to note about
+transactions that are mentioned in the Remarks section at the bottom
+of this page.</p>
+<p>We&apos;ll use the database we set up in Opening a database.</p>
+<pre>
+// <i>Create a new transaction, we&apos;ll use the default &quot;readonly&quot; mode and the things store</i>
+<b>var</b> transaction = db.transaction(&lbrack;&quot;things&quot;&rbrack;);
+// <i>Transactions use events, just like database open requests. Let&apos;s listen for success</i>
+transaction.oncomplete = <b>function</b>() {
+  console.log(&quot;All done!&quot;);
+};
+// <i>And make sure we handle errors</i>
+transaction.onerror = <b>function</b>() {
+  console.log(&quot;Something went wrong with our transaction: &quot;, transaction.error);
+};
+// <i>Now that everything is set up, let&apos;s get our things store and load some objects!</i>
+<b>var</b> store = transaction.objectStore(&quot;things&quot;);
+// <i>We&apos;ll load the coffee_cup object we added in Adding objects</i>
+<b>var</b> request = store.<b>get</b>(&quot;coffee_cup&quot;);
+// <i>Let&apos;s listen so we can see if everything went well</i>
+request.onsuccess = <b>function</b>(event) {
+  // <i>All done, let&apos;s log our object to the console</i>
+  console.log(request.result);
+};
+// <i>That was pretty long for a basic retrieval. If we just want to get just</i>
+// <i>the one object and don&apos;t care about errors, we can shorten things a lot</i>
+db.transaction(&quot;things&quot;).objectStore(&quot;things&quot;)
+  .<b>get</b>(&quot;coffee_cup&quot;).onsuccess = e =&gt; console.log(e&period;target.result);
+</pre>
+<!-- page 369 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch72-4">Section 72.4: Testing for IndexedDB availability</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+
+<p>You can test for IndexedDB support in the current environment by
+checking for the presence of the window.indexedDB property:</p>
+<pre>
+<b>if</b> (window.indexedDB) {
+  // <i>IndexedDB is available</i>
+}
+</pre>
+<!-- page 370 -->
 
