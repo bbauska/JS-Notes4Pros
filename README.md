@@ -19983,7 +19983,8 @@ OPR/&apos;) &gt;= 0;
 <p>Successfully tested in:</p>
 <ul>
   <li>Firefox 0.8 - 44</li>
-  <li>Chrome 1.0 - 48 Opera 8.0 - 34</li>
+  <li>Chrome 1.0 - 48</li>
+  <li>Opera 8.0 - 34</li>
   <li>Safari 3.0 - 9.0.3</li>
   <li>IE 6 - 11</li>
   <li>Edge - 20-25</li>
@@ -20016,7 +20017,6 @@ of ignoring that part.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch66-3">Section 66.3: Library Method</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>An easier approach for some would be to use an existing JavaScript
 library. This is because it can be tricky to guarantee browser
 detection is correct, so it can make sense to use a working solution
@@ -20028,60 +20028,82 @@ if one is available.</p>
 <b>if</b> (bowser.msie && bowser.version &gt;= 6) {
   alert(&apos;IE version 6 or newer&apos;);
 }
-<b>else</b>
-<b>if</b>
-(
-bowser.
-firefox
-)
-{
-alert
-(
-&apos;Firefox&apos;
-)
-;
+<b>else</b> <b>if</b> (bowser.firefox) {
+  alert(&apos;Firefox&apos;);
 }
-<b>else</b>
-<b>if</b>
-(
-bowser.
-chrome
-)
-{
-alert
-(
-&apos;Chrome&apos;
-)
-;
+<b>else</b> <b>if</b> (bowser.chrome) {
+  alert(&apos;Chrome&apos;);
 }
-<b>else</b>
-<b>if</b>
-(
-bowser.
-safari
-)
-{
-alert
-(
-&apos;Safari&apos;
-)
-;
+<b>else</b> <b>if</b> (bowser.safari) {
+  alert(&apos;Safari&apos;);
 }
-<b>else</b>
-<b>if</b>
-(
-bowser.
-iphone
-&vert;&vert;
-bowser.
-android
-)
-{
-alert
-(
-&apos;iPhone or Android&apos;
-)
-;
+<b>else</b> <b>if</b> (bowser.iphone &vert;&vert; bowser.android) {
+  alert(&apos;iPhone or Android&apos;);
 }
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch67">Chapter 67: Symbols</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch67-1">Section 67.1: Basics of symbol primitive type</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Symbol is a new primitive type in ES6. Symbols are used mainly as
+<b>property keys</b>, and one of its main characteristics is that they
+are <i>unique</i>, even if they have the same description. This means they
+will never have a name clash with any other property key that is a
+symbol or string.</p>
+<pre>
+<b>const</b> MY_PROP_KEY = Symbol();
+<b>const</b> obj = {};
+obj&lbrack;MY_PROP_KEY&rbrack; = &quot;ABC&quot;;
+console.log(obj&lbrack;MY_PROP_KEY&rbrack;);
+</pre>
+<p>In this example, the result of console.log would be ABC.</p>
+<p>You can also have named Symbols like:</p>
+<pre>
+<b>const</b> APPLE  = Symbol(&apos;Apple&apos;);
+<b>const</b> BANANA = Symbol(&apos;Banana&apos;);
+<b>const</b> GRAPE  = Symbol(&apos;Grape&apos;);
+</pre>
+<p>Each of these values are unique and cannot be overridden.</p>
+<p>Providing an optional parameter () when creating primitive symbols can
+be used for debugging but not to access the symbol itself (but see the
+Symbol.for() example for a way to register/lookup global shared symbols).</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch67-2">Section 67.2: Using Symbol.for() to create global, shared symbols</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>The Symbol.for method allows you to register and look up global symbols by name.
+The first time it is called with a given key, it creates a new symbol
+and adds it to the registry.</p>
+<pre>
+<b>let</b> a = Symbol.<b>for</b>(&apos;A&apos;);
+</pre>
+<p>The next time you call Symbol.for('A'), the <i>same symbol</i> will be returned instead
+of a new one (in contrast to ) which would create a new, unique symbol
+that happens to have the same description).</p>
+<pre>
+a === Symbol.<b>for</b>(&apos;A&apos;)  // <i>true</i>
+</pre>
+<p>but</p>
+<pre>
+a === Symbol(&apos;A&apos;) // <i>false</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch67-3">Section 67.3: Converting a symbol into a string</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Unlike most other JavaScript objects, symbols are not automatically
+converted into a string when performing concatenation.</p>
+<pre>
+<b>let</b> apple = Symbol(&apos;Apple&apos;) &plus; &apos;&apos;; // <i>throws TypeError!</i>
+</pre>
+<!-- page 358 -->
+<p>Instead, they have to be explicitly converted into a string when
+necessary, (for example, to get a textual description of the symbol
+that can be used in a debug message) using the toString method or the
+String constructor.</p>
+<pre>
+<b>const</b> APPLE = Symbol(&apos;Apple&apos;);
+<b>let</b> str1 = APPLE.toString();  // <i>&quot;Symbol(Apple)&quot;</i>
+<b>let</b> str2 = String(APPLE);     // <i>&quot;Symbol(Apple)&quot;</i>
+</pre>
 
 
