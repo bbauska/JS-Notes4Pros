@@ -19938,13 +19938,13 @@ be used to define specific instances or classes without having to
 specify the exact object that is being created.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 39. abstract factory pattern (354) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p align="center">
+<p align="left">
   <img src="./images/image039.png"
   title="Abstract Factory Pattern: used to define specific instances or classes without
     having to specify the exact object being created."
   alt="Abstract Factory Pattern: used to define specific instances or classes without
     having to specify the exact object being created."
-  style="border: 2px solid #000000; width:7.4in;" />
+  style="border: 2px solid #000000; width:6.5in;" />
 <!-- {width="7.486805555555556in" height="4.045138888888889in"} -->
 <!-- page 355 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -20006,11 +20006,11 @@ of ignoring that part.</p>
 <!-- page 356 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 40.  (356) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p align="center">
+<p align="left">
   <img src="./images/image040.png"
   title="."
   alt="."
-  style="border: 2px solid #000000; width:6in;" />
+  style="border: 2px solid #000000; width:6.5in;" />
 <!-- ![](./images/image040.png){width="7.486805555555556in" height="2.6756944444444444in"} -->
 <p>Credit to <a href="http://stackoverflow.com/a/2401861/6194193">kennebec</a></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
