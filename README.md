@@ -12536,7 +12536,7 @@ dynamic variables.</p>
 <p>With a backslash: (this must be escaped because the regex is specified
 with a string)</p>
 <pre>
-<b>var</b> re = <b>new</b> RegExp(&quot;<b>&bsol;&bsol; &amp;ast;</b>w&ast;&quot;);
+<b>var</b> re = <b>new</b> RegExp(&quot;<b>&bsol;&bsol;</b>w&ast;&quot;);
 </pre>
 <p><b>Static initialization</b></p>
 <p>Use when you know the regular expression will not change, and you know
