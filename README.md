@@ -10384,8 +10384,8 @@ As of 2015 works in Node.js and all major browsers except IE.</p>
   // <i>- &Hat;           the beginning of the string</i>
   // <i>- function        the word &apos;function&apos;</i>
   // <i>- &bsol;s+        at least some white space</i>
-  // <i>- (&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+) capture one or more valid JavaScript identifier characters</i>
-  // <i>- &amp;lpar;      followed by an opening brace</i>
+  // <i>- (&lbrack;&bsol;w&bsol;&amp;dollar;&rbrack;+) capture one or more valid JavaScript identifier characters</i>
+  // <i>- &bsol;lpar;      followed by an opening brace</i>
   // 
 <b>var</b> result = / <i>&Hat;function&bsol;&bsol;s+(&lbrack;&bsol;&bsol;w&bsol;&amp;dollar;&rbrack;+)&amp;lpar;/</i>.exec( func.toString() )
   <b>return</b> result ? result &lbrack;1&rbrack; : &apos;&apos;
@@ -19064,7 +19064,7 @@ ws.onopen = <b>function</b>() {
   ws.send(value);
 };
 </pre>
-!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch61-2">Section 61.2: Establish a web socket connection</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <pre>
@@ -19101,5 +19101,372 @@ ws.onopen = <b>function</b>() {
 <p>This uses the wss instead of ws to make a secure web socket connection
 which make use of HTTPS instead of HTTP</p>
 <!-- end chapter 61 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch62">Chapter 62: Arrow Functions</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Arrow functions are a concise way of writing anonymous, lexically scoped functions in 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_2015_support_in_Mozilla">
+ECMAScript 2015 (ES6)</a>).</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch62-1">Section 62.1: Introduction</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+In JavaScript, functions may be anonymously defined using the
+&quot;arrow&quot; (=&gt;) syntax, which is sometimes referred to as a <i>lambda
+expression</i> due to Common Lisp similarities.
+The simplest form of an arrow function has its arguments on the left
+side of =&bsol;and the return value on the right side:
+item
+=&gt;
+item
+&plus;
+1
+// <i>-&bsol;function(item){return item + 1}</i>
+This function can be immediately invoked by providing an argument to
+the expression:
+(
+item
+=&gt;
+item
+&plus;
+1
+)
+(
+41
+)
+// <i>-&bsol;42</i>
+If an arrow function takes a single parameter, the parentheses around
+that parameter are optional. For example, the following expressions
+assign the same type of function into constant variables:
+<b>const</b>
+foo
+=
+bar
+=&gt;
+bar
+&plus;
+1
+;
+<b>const</b>
+bar
+=
+(
+baz
+)
+=&gt;
+baz
+&plus;
+1
+;
+However, if the arrow function takes no parameters, or more than one
+parameter, a new set of parentheses <i>must</i> encase all the arguments:
+(
+(
+)
+=&gt;
+&quot;foo&quot;
+)
+(
+)
+// <i>-&amp;quot;foo&quot;</i>
+(
+(
+bow
+,
+arrow
+)
+=&gt;
+bow
+&plus;
+arrow
+)
+(
+&apos;I took an arrow &apos;
+,
+&apos;to the knee&hellip;&apos;
+)
+// <i>-&amp;quot;I took an arrow to the knee&hellip;&quot;</i>
+If the function body doesn&apos;t consist of a single expression, it must
+be surrounded by brackets and use an explicit <b>return</b> statement for
+providing a result:
+(
+bar
+=&gt;
+{
+<b>const</b>
+baz
+=
+41
+;
+<b>return</b>
+bar
+&plus;
+baz
+;
+}
+)
+(
+1
+)
+;
+// <i>-&bsol;42</i>
+If the arrow function&apos;s body consists only of an object literal, this
+object literal has to be enclosed in parentheses:
+(
+bar
+=&gt;
+(
+{
+baz
+:
+1
+}
+)
+)
+(
+)
+;
+// <i>-&bsol;Object {baz: 1}</i>
+The extra parentheses indicate that the opening and closing brackets
+are part of the object literal, i.e. they are not delimiters of the
+function body.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch62-2">Section 62.2: Lexical Scoping & Binding (Value of &quot;this&quot;)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Arrow functions are [lexically
+scoped](http://stackoverflow.com/questions/1047454/what-is-lexical-scope);
+this means that their <b>this</b> Binding is bound to the context of the
+surrounding scope. That is to say, whatever <b>this</b> refers to can be
+preserved by using an arrow function.
+Take a look at the following example. The class Cow has a method that
+allows for it to print out the sound it makes after 1 second.
+class
+Cow
+{
+constructor
+(
+)
+{
+<b>this</b>
+.
+sound
+=
+&quot;moo&quot;
+;
+}
+makeSoundLater
+(
+)
+{
+setTimeout
+(
+(
+)
+=&gt;
+console.
+log
+(
+<b>this</b>
+.
+sound
+)
+,
+1000
+)
+;
+}
+}
+<b>const</b>
+betsy
+=
+<b>new</b>
+Cow
+(
+)
+;
+betsy.
+makeSoundLater
+(
+)
+;
+makeSoundLater
+betsy.makeSoundLater
+In the () method, the <b>this</b> context refers to the current instance
+of the Cow object, so in the case where I call (), the <b>this</b>
+context refers to betsy.
+<b>this</b>  . sound
+By using the arrow function, I <i>preserve</i> the <b>this</b> context so that
+I can make reference to when it comes time to print it out, which will
+properly print out &quot;moo&quot;.
+If you had used a regular function in place of the arrow function, you
+would lose the context of being within the class, and not be able to
+directly access the sound property.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch62-3">Section 62.3: Arguments Object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Arrow functions do not expose an arguments object; therefore,
+arguments would simply refer to a variable in the current scope.
+<b>const</b>
+arguments
+=
+&lbrack;
+<b>true</b>
+&rbrack;
+;
+<b>const</b>
+foo
+=
+x
+=&gt;
+console.
+log
+(
+arguments
+&lbrack;
+0
+&rbrack;
+)
+;
+foo
+(
+<b>false</b>
+)
+;
+// <i>-&bsol;true</i>
+Due to this, arrow functions are also <b>not</b> aware of their
+caller/callee.
+While the lack of an arguments object can be a limitation in some edge
+cases, rest parameters are generally a suitable alternative.
+<b>const</b>
+arguments
+=
+&lbrack;
+<b>true</b>
+&rbrack;
+;
+<b>const</b>
+foo
+=
+(
+&hellip;
+arguments
+)
+=&gt;
+console.
+log
+(
+arguments
+&lbrack;
+0
+&rbrack;
+)
+;
+foo
+(
+<b>false</b>
+)
+;
+// <i>-&bsol;false</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch62-4">Section 62.4: Implicit Return</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Arrow functions may implicitly return values by simply omitting the
+curly braces that traditionally wrap a function&apos;s body if their body
+only contains a single expression.
+<b>const</b>
+foo
+=
+x
+=&gt;
+x
+&plus;
+1
+;
+foo
+(
+1
+)
+;
+// <i>-&bsol;2</i>
+When using implicit returns, object literals must be wrapped in
+parenthesis so that the curly braces are not mistaken for the opening
+of the function&apos;s body.
+<b>const</b> foo = () =&bsol;{ bar: 1 } // <i>foo() returns undefined</i>
+<b>const</b> foo = () =&lpar;{ bar: 1 }) // <i>foo() returns {bar: 1}</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch62-5">Section 62.5: Arrow functions as a constructor</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Arrow functions will throw a TypeError when used with the <b>new</b>
+keyword.
+<b>const</b>
+foo
+=
+<b>function</b>
+(
+)
+{
+<b>return</b>
+&apos;foo&apos;
+;
+}
+<b>const</b>
+a
+=
+<b>new</b>
+foo
+(
+)
+;
+<b>const</b>
+bar
+=
+(
+)
+=&gt;
+{
+<b>return</b>
+&apos;bar&apos;
+;
+}
+<b>const</b>
+b
+=
+<b>new</b>
+bar
+(
+)
+;
+// <i>-&bsol;Uncaught TypeError: bar is not a constructor&hellip;</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch62-6">Section 62.6: Explicit Return</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Arrow functions can behave very similar to classic functions in that
+you may explicitly return a value from them using the <b>return</b>
+keyword; simply wrap your function&apos;s body in curly braces, and return
+a value:
+<b>const</b>
+foo
+=
+x
+=&gt;
+{
+<b>return</b>
+x
+&plus;
+1
+;
+}
+foo
+(
+1
+)
+;
+// <i>-&bsol;2</i>
+<!-- end chapter 62 -->
 
 
