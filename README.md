@@ -18987,7 +18987,7 @@ them inside variable declarations as follows:</p>
 };
 <b>let</b> { name, age, location } = person;
 console.log(&apos;I am &apos; + name + &apos;, aged &apos; + age + &apos; and living in &apos; + location + &apos;.&apos;);
-// <i>-&amp;quot;I am John Doe aged 45 and living in Paris, France.&quot;</i>
+// <i>-&gt; &quot;I am John Doe aged 45 and living in Paris, France.&quot;</i>
 </pre>
 <p>As you can see, three new variables were created: name, age and
 location and their values were grabbed from the object person if they
