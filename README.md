@@ -20105,5 +20105,270 @@ String constructor.</p>
 <b>let</b> str1 = APPLE.toString();  // <i>&quot;Symbol(Apple)&quot;</i>
 <b>let</b> str2 = String(APPLE);     // <i>&quot;Symbol(Apple)&quot;</i>
 </pre>
+<!-- page 359 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch68">Chapter 68: Transpiling</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Transpiling is the process of interpreting certain programming
+languages and translating it to a specific target language. In this
+context, transpiling will take 
+<a href="https://github.com/jashkenas/coffeescript/wiki/list-of-languages-that-compile-to-js"> 
+compile-to-JS languages</a> and translate them into the <b>target</b> language of JavaScript.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch68-1">Section 68.1: Introduction to Transpiling</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p><b>Examples</b></p>
+<p><b>ES6/ES2015 to ES5 (via <a href="https://babeljs.io/">Babel</a>)</b>:</p>
+<p>This ES2015 syntax</p>
+<pre>
+// <i>ES2015 arrow function syntax</i>
+&lbrack;1, 2, 3&rbrack;.map(n =&gt; n &plus; 1);
+</pre>
+<p>is interpreted and translated to this ES5 syntax:</p>
+<pre>
+// <i>Conventional ES5 anonymous function syntax</i>
+&lbrack;1, 2, 3&rbrack;.map(<b>function</b>(n) {
+  <b>return</b> n &plus; 1;
+});
+</pre>
+<p><b>CoffeeScript to JavaScript (via built-in CoffeeScript compiler)</b>:</p>
+<p>This CoffeeScript</p>
+<pre>
+&pound; Existence:
+alert &quot;I knew it!&quot; <b>if</b> elvis?
+</pre>
+<p>is interpreted and translated to JavaScript:</p>
+<pre>
+<b>if</b> (<b>typeof</b> elvis !== &quot;undefined&quot; && elvis !== <b>null</b>) {
+  alert(&quot;I knew it!&quot;);
+}
+</pre>
+<p><b>How do I transpile?</b></p>
+<p>Most compile-to-JavaScript languages have a transpiler <b>built-in</b>
+(like in CoffeeScript or TypeScript). In this case, you may just need
+to enable the language&apos;s transpiler via config settings or a
+checkbox. Advanced settings can also be set in relation to the
+transpiler.</p>
+<p>For <b>ES6/ES2016-to-ES5 transpiling</b>, the most prominent transpiler
+being used is <a href="https://babeljs.io/">Babel</a>.</p>
+<p><b>Why should I transpile?</b></p>
+<p>The most cited benefits include:</p>
+<ul>
+  <li>The ability to use newer syntax reliably</li>
+  <li>Compatibility among most, if not all browsers</li>
+  <li>Usage of missing/not yet native features to JavaScript via languages
+    like CoffeeScript or TypeScript</li>
+</ul>
+<!-- page 360 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch68-2">Section 68.2: Start using ES6/7 with Babel</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p><a href="https://kangax.github.io/compat-table/es6/">Browser support for ES6</a> 
+is growing, but to be sure your code will work on environments that
+don&apos;t fully support it, you can use <a href="https://babeljs.io/">
+Babel</a>, the ES6/7 to ES5 transpiler, <a href="https://babeljs.io/repl/">try it out!</a></p>
+
+<p>If you would like to use ES6/7 in your projects without having to
+worry about compatibility, you can use <a href="https://nodejs.org/en/">Node</a> 
+and <a href="https://babeljs.io/docs/usage/cli/">Babel CLI</a></p>
+
+<p><b>Quick setup of a project with Babel for ES6/7 support</b></p>
+<ol type="1" start="1">
+  <li><a href="https://nodejs.org/en/download/">Download</a> and install Node</li>
+  <li>Go to a folder and create a project using your favourite command line tool</li>
+</ol>
+<pre>
+&bsol;~ npm init
+</pre>
+<ol type="1" start="3">
+  <li>Install Babel CLI</li>
+</ol>
+<pre>
+&bsol;~ npm <b>install</b> &bsol;save-dev babel-cli
+&bsol;~ npm <b>install</b> &bsol;save-dev babel-preset-es2015
+</pre>
+<ol type="1" start="4">
+  <li>Create a scripts folder to store your .js files, and then a dist/scripts 
+    folder where the transpiled fully compatible files will be stored.</li>
+  <li>Create a .babelrc file in the root folder of your project, and write this
+    on it</li>
+</ol>
+<pre>
+{
+  &quot;presets&quot;: &lbrack;&quot;es2015&quot;&rbrack;
+}
+</pre>
+<ol type="1" start="6">
+  <li>Edit your package.json file (created when you ran npm init) and add the build
+    script to the scripts property:</li>
+</ol>
+<pre>
+{
+  &hellip;
+  &quot;scripts&quot;: {
+  &hellip;,
+  &quot;build&quot;: &quot;babel scripts &bsol;out-dir dist/scripts&quot;
+  },
+  &hellip;
+}
+<ol type="1" start="7">
+  <li>Enjoy <a href="https://babeljs.io/docs/learn-es2015/">programming in ES6/7</a></li>
+  <li>Run the following to transpile all your files to ES5</li>
+</ol>
+<pre>
+&bsol;~ npm run build
+</pre
+<p>For more complex projects you might want to take a look at
+<a href="http://gulpjs.com/">Gulp</a> or <a href="https://webpack.github.io/">Webpack</a></p>
+<!-- page 361 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch69">Chapter 69: Automatic Semicolon Insertion - ASI</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch68-1">Section 69.1: Avoid semicolon insertion on return statements</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>The JavaScript coding convention is to place the starting bracket of
+blocks on the same line of their declaration:</p>
+<pre>
+<b>if</b> (&hellip;) {
+}
+
+<b>function</b> (a, b, &hellip;) {
+
+}
+</pre>
+<p>Instead of in the next line:</p>
+<b>if</b> (&hellip;)
+{
+
+}
+<b>function</b> (a, b, &hellip;)
+{
+
+}
+</pre>
+<p>This has been adopted to avoid semicolon insertion in return
+statements that return objects:</p>
+<pre>
+<b>function</b> foo()
+{
+<b>return</b> // <i>A semicolon will be inserted here, making the function return nothing</i>
+{
+  foo: &apos;foo&apos;
+};
+}
+foo();  // <i>undefined</i>
+<b>function</b> properFoo() {
+  <b>return</b> {
+    foo: &apos;foo&apos;
+  };
+}
+properFoo();  // <i>{ foo: &apos;foo&apos; }</i>
+</pre>
+<p>In most languages the placement of the starting bracket is just a
+matter of personal preference, as it has no real impact on the
+execution of the code. In JavaScript, as you&apos;ve seen, placing the
+initial bracket in the next line can lead to silent errors.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch69-2">Section 69.2: Rules of Automatic Semicolon Insertion</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<blockquote>
+There are three basic rules of semicolon insertion:
+</blockquote>
+<!-- page 362 -->
+<ol type="1" start="1">
+<li>When, as the program is parsed from left to right, a token (called
+    the <i>offending token</i>) is encountered that is not allowed by any
+    production of the grammar, then a semicolon is automatically
+    inserted before the offending token if one or more of the following
+    conditions is true:
+  <ul>
+    <li>The offending token is separated from the previous token by at least one LineTerminator.</li>
+    <li>The offending token is }.</li>
+  </ul></li>
+  <li>When, as the program is parsed from left to right, the end of the
+    input stream of tokens is encountered and the parser is unable to
+    parse the input token stream as a single complete ECMAScript
+    Program, then a semicolon is automatically inserted at the end of
+    the input stream.</li>
+  <li>When, as the program is parsed from left to right, a token is
+    encountered that is allowed by some production of the grammar, but
+    the production is a <i>restricted production</i> and the token would be
+    the first token for a terminal or nonterminal immediately following
+    the annotation &quot;&lbrack;no LineTerminator here&rbrack;&quot; within the restricted
+    production (and therefore such a token is called a restricted
+    token), and the restricted token is separated from the previous
+    token by at least one LineTerminator, then a semicolon is
+    automatically inserted before the restricted token.</li>
+</ol>
+<p>However, there is an additional overriding condition on the preceding
+rules: a semicolon is never inserted automatically if the semicolon
+would then be parsed as an empty statement or if that semicolon would
+become one of the two semicolons in the header of a <b>for</b> statement
+(see 12.6.3).</p>
+</blockquote>
+<p><b>Source: <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMA-262, Fifth Edition ECMAScript
+Specification:</a></b></p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch69-3">Section 69.3: Statements aected by automatic semicolon insertion</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ul>
+  <li>empty statement</li>
+  <li><b>var</b> statement</li>
+  <li>expression statement</li>
+  <li>do-while statement</li>
+  <li><b>continue</b> statement</li>
+  <li><b>break</b> statement</li>
+  <li><b>return</b> statement</li>
+  <li><b>throw</b> statement</li>
+</ul>
+<p><b>Examples:</b></p>
+<p>When the end of the input stream of tokens is encountered and the
+parser is unable to parse the input token stream as a single complete
+Program, then a semicolon is automatically inserted at the end of the
+input stream.</p>
+<pre>
+a = b
+++c
+// <i>is transformed to:</i>
+a = b;
+++c;
+x
+++
+y
+// <i>is transformed to:</i>
+x;
+++y;
+</pre>
+<p><b>Array indexing/literals</b></p>
+<!-- page 363 -->
+<pre>
+console.log(&quot;Hello, World&quot;)
+&lbrack;1, 2, 3&rbrack;.join()
+// <i>is transformed to:</i>
+console.log(&quot;Hello, World&quot;)&lbrack;(1, 2, 3)&rbrack;.join();
+</pre>
+<p><b>Return statement:</b></p>
+<pre>
+<b>return</b>
+  &quot;something&quot;;
+// <i>is transformed to</i>
+  <b>return</b>;
+    &quot;something&quot;;
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch70">Chapter 70: Localization</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>Paramater</b> <b>Details</b>
+| weekday          | &quot;narrow&quot;, &quot;short&quot;, &quot;long&quot;                   |
+| era              | &quot;narrow&quot;, &quot;short&quot;, &quot;long&quot;                   |
+| year             | &quot;numeric&quot;, &quot;2-digit&quot;                          |
+| month            | &quot;numeric&quot;, &quot;2-digit&quot;, &quot;narrow&quot;, &quot;short&quot;,  |
+|                  | &quot;long&quot;                                          |
+| day              | &quot;numeric&quot;, &quot;2-digit&quot;                          |
+| hour             | &quot;numeric&quot;, &quot;2-digit&quot;                          |
+| minute           | &quot;numeric&quot;, &quot;2-digit&quot;                          |
+| second           | &quot;numeric&quot;, &quot;2-digit&quot;                          |
+timeZoneName &quot;short&quot;, &quot;long&quot;
 
 
