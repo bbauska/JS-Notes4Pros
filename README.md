@@ -19008,4 +19008,98 @@ console.log(userName)  // <i>John Smith</i>
 console.log(userId)    // <i>10</i>
 </pre>
 <!-- page 335 -->
+<!-- end of chapter 60 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch61">Chapter 61: WebSockets</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Parameter</b></th>
+      <th><b>Details</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>url</td>
+      <td>The server url supporint this web socket connection</td>
+    </tr>
+    <tr>
+      <td>data</td>
+      <td>The content to send to the host.</td>
+    </tr>
+    <tr>
+      <td>message</td>
+      <td>The message received from the host.</td>
+    </tr>
+  </tbody>
+</table>
+<p>WebSocket is protocol, which enables two-way communication between a
+client and server:</p>
+<p>The goal WebSocket is to provide a mechanism for browser-based
+applications that need two-way communication with servers that does
+not rely on opening multiple HTTP connections. (<a href="https://tools.ietf.org/html/rfc6455">
+RFC 6455)</p>
+<p>WebSocket works over HTTP protocol.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch61-1">Section 61.1: Working with string messages</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+<b>var</b> wsHost = &quot;ws://my-sites-url.com/path/to/echo-web-socket-handler&quot;;
+<b>var</b> ws = <b>new</b> WebSocket(wsHost);
+<b>var</b> value = &quot;an example message&quot;;
+// <i>onmessage : Event Listener - Triggered when we receive message form server</i>
+ws.onmessage = <b>function</b>(message) {
+  <b>if</b> (message === value) {
+    console.log(&quot;The echo host sent the correct message.&quot;);
+  } <b>else</b> {
+    console.log(&quot;Expected: &quot; &plus; value);
+    console.log(&quot;Received: &quot; &plus; message);
+  }
+};
+// <i>onopen : Event Listener - event is triggered when websockets readyState changes to open which means</i>
+<i>now we are ready to send and receives messages from server</i>
+ws.onopen = <b>function</b>() {
+  // <i>send is used to send the message to server</i>
+  ws.send(value);
+};
+</pre>
+!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch61-2">Section 61.2: Establish a web socket connection</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+<b>var</b> wsHost = &quot;ws://my-sites-url.com/path/to/web-socket-handler&quot;;
+<b>var</b> ws = <b>new</b> WebSocket(wsHost);
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch61-3">Section 61.3: Working with binary messages</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+<b>var</b> wsHost = &quot;http://my-sites-url.com/path/to/echo-web-socket-handler&quot;;
+<b>var</b> ws = <b>new</b> WebSocket(wsHost);
+<b>var</b> buffer = <b>new</b> ArrayBuffer(5); // <i>5 byte buffer</i>
+<b>var</b> bufferView = <b>new</b> DataView(buffer);
+bufferView.setFloat32(0, Math.PI);
+bufferView.setUint8(4, 127);
+ws.binaryType = &apos;arraybuffer&apos;;
+ws.onmessage = <b>function</b>(message) {
+  <b>var</b> view = <b>new</b> DataView(message.data);
+  console.log(&apos;Uint8:&apos;, view.getUint8(4), &apos;Float32:&apos;, view.getFloat32(0))
+};
+ws.onopen = <b>function</b>() {
+  ws.send(buffer);
+};
+</pre>
+<!-- page 336 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch61-4">Section 61.4: Making a secure web socket connection</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+<b>var</b> sck = &quot;wss://site.com/wss-handler&quot;;
+<b>var</b> wss = <b>new</b> WebSocket(sck);
+</pre>
+<p>This uses the wss instead of ws to make a secure web socket connection
+which make use of HTTPS instead of HTTP</p>
+<!-- end chapter 61 -->
+
 
