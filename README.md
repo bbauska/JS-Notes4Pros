@@ -19246,6 +19246,7 @@ your function&apos;s body in curly braces, and return a value:</p>
   <b>return</b> x &plus; 1;
 }
 foo(1);  // <i>-&gt; 2</i>
+</pre>
 <!-- end chapter 62 -->
 <!-- page 340 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
