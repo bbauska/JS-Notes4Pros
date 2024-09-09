@@ -21587,310 +21587,661 @@ with companion patterns to create messaging patterns.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch79-4">Section 79.4: Iterator</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-An iterator pattern provides a simple method for selecting,
-sequentially, the next item in a collection.
-<b>Fixed Collection</b>
-class
-BeverageForPizza
-{
-constructor
-(
-preferenceRank
-)
-{
-<b>this</b>
-.
-beverageList
-=
-beverageList
-;
-<b>this</b>
-.
-pointer
-=
-0
-;
-}
-next
-(
-)
-{
-<b>return</b>
-<b>this</b>
-.
-beverageList
-&lbrack;
-<b>this</b>
-.
-pointer
-++
-&rbrack;
-;
-}
-<b>var</b>
-withPepperoni
-=
-<b>new</b>
-BeverageForPizza
-(
-&lbrack;
-&quot;Cola&quot;
-,
-&quot;Water&quot;
-,
-&quot;Beer&quot;
-&rbrack;
-)
-;
-withPepperoni.
-next
-(
-)
-;
-// <i>Cola</i>
-withPepperoni.
-next
-(
-)
-;
-// <i>Water</i>
-withPepperoni.
-next
-(
-)
-;
-// <i>Beer</i>
-In ECMAScript 2015 iterators are a built-in as a method that returns
+<p>An iterator pattern provides a simple method for selecting,
+sequentially, the next item in a collection.</p>
+<p><b>Fixed Collection</b></p>
+<pre>
+class BeverageForPizza { 
+  constructor(preferenceRank) {
+    <b>this</b>.beverageList = beverageList;
+    <b>this</b>.pointer = 0;
+  }
+  next() {
+    <b>return</b> <b>this</b>.beverageList&lbrack;<b>this</b>.pointer++&rbrack;;
+  }
+  <b>var</b> withPepperoni = <b>new</b> BeverageForPizza(&lbrack;&quot;Cola&quot;, &quot;Water&quot;, &quot;Beer&quot;rbrack;);
+  withPepperoni.next();  // <i>Cola</i>
+  withPepperoni.next();  // <i>Water</i>
+  withPepperoni.next();  // <i>Beer</i>
+<p>In ECMAScript 2015 iterators are a built-in as a method that returns
 done and value. done is true when the iterator is at the end of the
-collection
-<b>function</b>
-preferredBeverage
-(
-beverage
+collection</p>
+<pre>
+<b>function</b> preferredBeverage(beverage) {
+  <b>if</b> ( beverage == &quot;Beer&quot; ) {
+    <b>return</b> <b>true</b>;
+  } <b>else</b> { 
+    <b>return</b> <b>false</b>;
+  }
+}
+<b>var</b> withPepperoni = <b>new</b> BeverageForPizza(&lbrack;&quot;Cola&quot;, &quot;Water&quot;, &quot;Beer&quot;, &quot;Orange Juice&quot;&rbrack;);
+<b>for</b> ( <b>var</b> bevToOrder of withPepperoni ) {
+  <b>if</b> ( preferredBeverage( bevToOrder ) {
+    bevToOrder.done;  // <i>false, because &quot;Beer&quot; isn&apos;t the final collection item</i>
+    <b>return</b> bevToOrder;  // <i>&quot;Beer&quot;</i>
+  }
+}
+</pre>
+<p><b>As a Generator</b></p>
+<pre>
+class FibonacciIterator {
+  constructor() {
+    <b>this</b>.previous = 1;
+    <b>this</b>.beforePrevious = 1;
+  }
+  next() {
+    <b>var</b> current = <b>this</b>.previous &plus; <b>this</b>.beforePrevious;
+    <b>this</b>.beforePrevious = <b>this</b>.previous;
+    <b>this</b>.previous = current;
+    <b>return</b> current;
+  }
+}
+<b>var</b> fib = <b>new</b> FibonacciIterator();
+fib.next(); // <i>2</i>
+fib.next(); // <i>3</i>
+fib.next(); // <i>5</i>
+</pre>
+<p>In ECMAScript 2015</p>
+<pre>
+<b>function</b>&ast; FibonacciGenerator() {  // <i>asterisk informs javascript of generator</i>
+  <b>var</b> previous = 1;
+  <b>var</b> beforePrevious = 1;
+  while(<b>true</b>) {
+    <b>var</b> current = previous &plus; beforePrevious;
+    beforePrevious = previous;
+    previous = current;
+    yield current; // <i>This is like return but</i>
+                   // <i>keeps the current state of the function</i>
+                   // <i>i.e it remembers its place between calls</i>
+  }
+}
+&nbsp;
+<b>var</b> fib = FibonacciGenerator();
+fib.next().value; // <i>2</i>
+fib.next().value; // <i>3</i>
+fib.next().value; // <i>5</i>
+fib.next().done;  // <i>false</i>
+</pre>
+<!-- page 391 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch80">Chapter 80: Server-sent events</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch80-1">Section 80.1: Setting up a basic event stream to the server</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>You can setup your client browser to listen in incoming server events
+using the EventSource object. You will need to supply the constructor
+a string of the path to the server&apos; API endpoint the will subscribe
+the client to the server events.</p>
+<p>Example:</p>
+<pre>
+<b>var</b> eventSource = <b>new</b> EventSource(&quot;api/my-events&quot;);
+</pre>
+<p>Events have names with which they are categorized and sent, and a listener must 
+be setup to listen to each such event by name. the default event name is message 
+and in order to listen to it you must use the appropriate event listener, .onmessage</p>
+<pre>
+evtSource.onmessage = <b>function</b>(event) {
+  <b>var</b> data = JSON.parse(event.data);
+  // <i>do something with data</i>
+}
+</pre>
+<p>The above function will run every time the server will push an event
+to the client. Data is sent as test/plain, if you send JSON data you may want to
+parse it.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch80-2">Section 80.2: Closing an event stream</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>An event stream to the server can be closed using the .close() method</p>
+<pre>
+<b>var</b> eventSource = <b>new</b> EventSource(&quot;api/my-events&quot;);
+// <i>do things &hellip;</i>
+eventSource.close();  // <i>you will not receive anymore events from this object</i>
+</pre>
+<p>The .close() method does nothing is the stream is already closed.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch80-3">Section 80.3: Binding event listeners to EventSource</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>You can bind event listeners to the EventSource object to listen to
+different events channels using the .addEventListener method.</p>
+<blockquote>
+EventSource.addEventListener(name: String, callback: Function,&lbrack;options&rbrack;)
+</blockquote>
+<p><b>name</b>: The name related to the name of the channel the server is emitting events to.</p>
+<p><b>callback</b>: The callback function runs every time an event bound to
+the channel is emitted, the function provides the event as an argument.</p>
+<p><b>options</b>: Options that characterize the behavior of the
+event listener.</p>
+<p>The following example shows a heartbeat event stream from the server,
+the server sends events on the heartbeat channel and this routine will
+always run when an event in accepted.</p>
+<pre>
+<b>var</b> eventSource = <b>new</b> EventSource(&quot;api/heartbeat&quot;);
+&hellip;
+eventSource.addEventListener(&quot;heartbeat&quot;, <b>function</b>(event) {
+  <b>var</b> status = event.data;
+  <b>if</b> (status == &apos;OK&apos;) {
+    // <i>do something</i>
+  }
+});
+</pre>
+<!-- page 393 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch81">Chapter 81: Async functions (async/await)</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>async and await build on top of promises and generators to express asynchronous 
+actions inline. This makes asynchronous or callback code much easier to maintain.</p>
+<p>Functions with the async keyword return a Promise, and can be called with that 
+syntax.</p>
+<p>Inside an async <b>function</b> the await keyword can be applied to any Promise, 
+and will cause all of the function body after the await to be executed after
+the promise resolves.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch81-1">Section 81.1: Introduction</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>
+A function defined as async is a function that can perform
+asynchronous actions but still look synchronous. The way it&apos;s done is
+using the await keyword to defer the function while it waits for a
+Promise to resolve or reject.</p>
+<p><b>Note:</b> Async functions are 
+<a href="https://github.com/tc39/proposals/blob/master/finished-proposals.md">
+a Stage 4 (&quot;Finished&quot;) proposal</a> on track to be included in the 
+ECMAScript 2017 standard.</p>
+<p>For instance, using the promise-based <a href="https://developer.mozilla.org/en/docs/Web/API/Fetch_API">
+Fetch API</a>:</p>
+<pre>
+async <b>function</b> getJSON(url) {
+  <b>try</b> {
+    <b>const</b> response = await fetch(url);
+    <b>return</b> await response.json();
+  }
+  <b>catch</b> (err) {
+    // <i>Rejections in the promise will get thrown here</i>
+    console.error(err.message);
+  }
+}
+</pre>
+<p>An async function always returns a Promise itself, so you can use it
+in other asynchronous functions.</p>
+<p><b>Arrow function style</b></p>
+<pre>
+<b>const</b> getJSON = async url =&gt; {
+  <b>const</b> response = await fetch (url);
+  <b>return</b> await response.json();
+}
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch81-2">Section 81.2: Await and operator precedence</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>You have to keep the operator precedence in mind when using await keyword.</p>
+<p>Imagine that we have an asynchronous function which calls another
+asynchronous function, getUnicorn() which returns a Promise that resolves to an
+instance of class Unicorn. Now we want to get the size of the unicorn
+using the getSize() method of that class.</p>
+<p>Look at the following code:</p>
+<pre>
+async <b>function</b> myAsyncFunction() {
+  await getUnicorn().getSize();
+}
+</pre>
+<p>At first sight, it seems valid, but it&apos;s not. Due to operator
+precedence, it&apos;s equivalent to the following:</p>
+<pre>
+async <b>function</b> myAsyncFunction() {
+  await (getUnicorn().getSize());
+}
+</pre>
+<p>Here we attempt to call getSize() method of the Promise object, which isn&apos;t
+what we want.</p>
+<p>Instead, we should use brackets to denote that we first want to wait
+for the unicorn, and then call getSize() method of the result:</p>
+<pre>
+async <b>function</b> asyncFunction() {
+  (await getUnicorn()).getSize();
+}
+</pre>
+<p>Of course. the previous version could be valid in some cases, for
+example, if the getUnicorn() function was synchronous, but the getSize() method was
+asynchronous.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch81-3">Section 81.3: Async functions compared to Promises</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>async functions do not replace the Promise type; they add language
+keywords that make promises easier to call. They are interchangeable:</p>
+<pre>
+async <b>function</b> doAsyncThing() {&hellip;}
+&nbsp;
+<b>function</b> doPromiseThing(input) { <b>return</b> <b>new</b> Promise((r, x) =&gt; &hellip;); }
+&nbsp;
+// <i>Call with promise syntax</i>
+doAsyncThing()
+  .then(a =&gt; doPromiseThing(a))
+  .then(b =&gt; &hellip;)
+  .<b>catch</b>(ex =&gt; &hellip;);
+&nbsp;
+// <i>Call with await syntax</i>
+<b>try</b> {
+  <b>const</b> a = await doAsyncThing();
+  <b>const</b> b = await doPromiseThing(a);
+  &hellip;
+}
+<b>catch</b>(ex) { &hellip; }
+</pre>
+<p>Any function that uses chains of promises can be rewritten using await:</p>
+<pre>
+<b>function</b> newUnicorn() { 
+  <b>return</b> fetch(&apos;unicorn.json&apos;) // <i>fetch unicorn.json from server</i>
+    .then(responseCurrent =&bsol;responseCurrent.json()) // <i>parse the response as JSON</i>
+    .then(unicorn =&bsol;fetch(&apos;new/unicorn&apos;, { // <i>send a request to &apos;new/unicorn&apos;</i> method: &apos;post&apos;, // <i>using the POST method</i>
+    body: JSON.stringify({unicorn}) // <i>pass the unicorn to the request body</i>
+  })
 )
-{
-<b>if</b>
+.then(responseNew =&bsol;responseNew.json())
+.then(json =&bsol;json.success) // <i>return success property of response</i>
+.<b>catch</b>(err =&bsol;console.log(&apos;Error creating unicorn:&apos;, err));
+}
+</pre>
+<p>The function can be rewritten using async/await as follows:</p>
+<pre>
+async <b>function</b> newUnicorn() {
+  <b>try</b> {
+    <b>const</b> responseCurrent = await fetch(&apos;unicorn.json&apos;); // <i>fetch unicorn.json from server</i>
+	<b>const</b> unicorn = await responseCurrent.json(); // <i>parse the response as JSON</i>
+	<b>const</b> responseNew = await fetch(&apos;new/unicorn&apos;, { // <i>send a request to &apos;new/unicorn&apos;</i>
+	  method: &apos;post&apos;, // <i>using the POST method</i>
+      body: JSON.stringify({unicorn}) // <i>pass the unicorn to the request body</i>
+    });
+    <b>const</b> json = await responseNew.json();
+	<b>return</b> json.success // <i>return success property of response</i>
+  } <b>catch</b> (err) {
+      console.log(&apos;Error creating unicorn:&apos;, err);
+  }
+}
+</pre>
+<p>This async variant of newUnicorn() appears to return a Promise, but really there
+were multiple await keywords. Each one returned a Promise, so really
+we had a collection of promises rather than a chain.</p>
+<p>In fact we can think of it as a <b>function</b>&ast; generator, with each await 
+being a yield <b>new</b> Promise. However, the results of each promise are needed 
+by the next to continue the function. This is why the additional keyword async is 
+needed on the function (as well as the await keyword when calling the promises) as
+it tells JavaScript to automatically creates an observer for this iteration. The Promise
+returned by async <b>function</b> newUnicorn() resolves when this iteration completes.</p>
+<p>Practically, you don&apos;t need to consider that; await hides the promise
+and async hides the generator iteration.</p>
+<p>You can call async functions as if they were promises, and await any
+promise or any async function. You don&apos;t need to await an async
+function, just as you can execute a promise without a .then().</p>
+<p>You can also use an async <a href="https://en.wikipedia.org/wiki/Immediately-invoked_function_expression">IIFE</a>
+if you want to execute that code immediately:</p>
+<pre>
+(async () =&gt; {
+  await makeCoffee()
+  console.log(&apos;coffee is ready!&apos;)
+})()
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch81-4">Section 81.4: Looping with async await</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>When using async await in loops, you might encounter some of these problems.</p>
+<p>If you just try to use await inside forEach, this will throw an Unexpected token error.</p>
+<pre>
+(async() =&gt; {
+  data = &lbrack;1, 2, 3, 4, 5&rbrack;;
+  data.forEach(e =&gt; {
+    <b>const</b> i = await somePromiseFn(e);
+    console.log(i);
+  });
+})();
+</pre>
+<p>This comes from the fact that you&apos;ve erroneously seen the arrow
+function as a block. The await will be in the context of the callback
+function, which is not async.</p>
+<p>The interpreter protects us from making the above error, but if you
+add async to the forEach callback no errors get thrown. You might
+think this solves the problem, but it won&apos;t work as expected.</p>
+<p>Example:</p>
+<pre>
+(async() =&bsol;{
+  data = &lbrack;1, 2, 3, 4, 5&rbrack;;
+  data.forEach(async(e) =&gt; {
+    <b>const</b> i = await somePromiseFn(e);
+	console.log(i);
+  });
+  console.log(&apos;this will print first&apos;);
+})();
+</pre>
+<p>This happens because the callback async function can only pause itself, not the parent async function.</p>
+<blockquote>
+You could write an asyncForEach function that returns a promise and then you could 
+something like asyncForEach(async (e) =&gt; await somePromiseFn(e), data ) Basically 
+you return a promise that resolves when all the callbacks are awaited and done. 
+But there are better ways of doing this, and that is to just use a loop.
+</blockquote>
+<p>You can use a loop, it doesn&apos;t really matter which one you pick.</p>
+<pre>
+(async() =&gt; {
+  data = &lbrack;1, 2, 3, 4, 5&rbrack;;
+  <b>for</b> (<b>let</b> e of data) {
+    <b>const</b> i = await somePromiseFn(e);
+    console.log(i);
+  }
+  console.log(&apos;this will print last&apos;);
+})();
+</pre>
+<p>But there&apos;s another catch. This solution will wait for each call to
+somePromiseFn to complete before iterating over the next one.</p>
+<p>This is great if you actually want your somePromiseFn invocations to
+be executed in order but if you want them to run concurrently, you
+will need to await on Promise.all.</p>
+
 (
-beverage
-==
-&quot;Beer&quot;
+async
+(
 )
+=&gt;
 {
-<b>return</b>
-<b>true</b>
-;
-}
-<b>else</b>
-{
-<b>return</b>
-<b>false</b>
-;
-}
-}
-<b>var</b>
-withPepperoni
+data
 =
-<b>new</b>
-BeverageForPizza
-(
 &lbrack;
-&quot;Cola&quot;
+1
 ,
-&quot;Water&quot;
+2
 ,
-&quot;Beer&quot;
+3
 ,
-&quot;Orange Juice&quot;
+4
+,
+5
 &rbrack;
+;
+<b>const</b>
+p
+=
+await Promise.
+all
+(
+data.
+map
+(
+async
+(
+e
 )
+=&gt;
+await somePromiseFn
+(
+e
+)
+)
+)
+;
+console.
+log
+(
+&hellip;
+p
+)
+;
+}
+)
+(
+)
+;
+Promise.all
+receives an array of promises as its only parameter and returns a
+promise. When all of the promises
+in the array are resolved, the returned promise is also resolved. We
+await on that promise and when it&apos;s resolved all our values are
+available.
+stage
+The above examples are fully runnable. The somePromiseFn function can
+be made as an async echo function with a timeout. You can try out the
+examples in the [babel-repl](https://babeljs.io/repl) with at least
+the -3 preset and look at the output.
+<b>function</b>
+somePromiseFn
+(
+n
+)
+{
+<b>return</b>
+<b>new</b>
+Promise
+(
+(
+res
+,
+rej
+)
+=&gt;
+{
+setTimeout
+(
+(
+)
+=&gt;
+res
+(
+n
+)
+,
+250
+)
+;
+}
+)
+;
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch81-5">Section 81.5: Less indentation</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+With promises:
+<b>function</b> doTheThing() { <b>return</b> doOneThing()
+.
+then
+(
+doAnother
+)
+.
+then
+(
+doSomeMore
+)
+.
+<b>catch</b>
+(
+handleErrors
+)
+}
+With async functions:
+async
+<b>function</b>
+doTheThing
+(
+)
+{
+<b>try</b>
+{
+<b>const</b>
+one
+=
+await doOneThing
+(
+)
+;
+<b>const</b>
+another
+=
+await doAnother
+(
+one
+)
+;
+<b>return</b>
+await doSomeMore
+(
+another
+)
+;
+}
+<b>catch</b>
+(
+err
+)
+{
+handleErrors
+(
+err
+)
+;
+}
+}
+<b>try</b>   / <b>catch</b>
+Note how the return is at the bottom, and not at the top, and you use
+the language&apos;s native error-handling mechanics ().
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch81-6">Section 81.6: Simultaneous async (parallel) operations</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Promise.all
+Often you will want to perform asynchronous operations in parallel.
+There is direct syntax that supports this in the async/await proposal,
+but since await will wait for a promise, you can wrap multiple
+promises together in to wait for them:
+// <i>Not in parallel</i>
+async
+<b>function</b>
+getFriendPosts
+(
+user
+)
+{
+friendIds
+=
+await db.
+<b>get</b>
+(
+&quot;friends&quot;
+,
+{
+user
+}
+,
+{
+id
+:
+1
+}
+)
+;
+friendPosts
+=
+&lbrack;
+&rbrack;
 ;
 <b>for</b>
 (
-<b>var</b>
-bevToOrder of withPepperoni
+<b>let</b>
+id
+<b>in</b>
+friendIds
 )
 {
-<b>if</b>
+friendPosts
+=
+friendPosts.
+concat
 (
-preferredBeverage
+await db.
+<b>get</b>
 (
-bevToOrder
-)
+&quot;posts&quot;
+,
 {
-bevToOrder.
-done
-;
-// <i>false, because &quot;Beer&quot; isn&apos;t the final collection item</i>
-<b>return</b>
-bevToOrder
-;
-// <i>&quot;Beer&quot;</i>
+user
+:
+id
 }
-}
-<b>As a Generator</b>
-class
-FibonacciIterator
-{
-constructor
-(
 )
-{
-<b>this</b>
-.
-previous
-=
-1
-;
-<b>this</b>
-.
-beforePrevious
-=
-1
+)
 ;
 }
-next
-(
-)
-{
-<b>var</b>
-current
-=
-<b>this</b>
-.
-previous
-&plus;
-<b>this</b>
-.
-beforePrevious
-;
-<b>this</b>
-.
-beforePrevious
-=
-<b>this</b>
-.
-previous
-;
-<b>this</b>
-.
-previous
-=
-current
-;
-<b>return</b>
-current
-;
+// <i>etc.</i>
 }
-}
-<b>var</b>
-fib
-=
-<b>new</b>
-FibonacciIterator
-(
-)
-;
-fib.
-next
-(
-)
-;
-// <i>2</i>
-fib.
-next
-(
-)
-;
-// <i>3</i>
-fib.
-next
-(
-)
-;
-// <i>5</i>
-In ECMAScript 2015
+This will do each query to get each friend&apos;s posts serially, but they
+can be done simultaneously:
+// <i>In parallel</i>
+async
 <b>function</b>
-&ast;
-FibonacciGenerator
+getFriendPosts
 (
+user
 )
 {
-// <i>asterisk informs javascript of generator</i>
-<b>var</b>
-previous
+friendIds
 =
-1
-;
-<b>var</b>
-beforePrevious
-=
-1
-;
-while
+await.
+db
+.
+<b>get</b>
 (
-<b>true</b>
-)
+&quot;friends&quot;
+,
 {
-<b>var</b>
-current
-=
-previous
-&plus;
-beforePrevious
-;
-beforePrevious
-=
-previous
-;
-previous
-=
-current
-;
-yield current
-;
-// <i>This is like return but</i>
-// <i>keeps the current state of the function</i>
-// <i>i.e it remembers its place between calls</i>
+user
 }
+,
+{
+id
+:
+1
 }
-<b>var</b>
-fib
+)
+;
+friendPosts
 =
-FibonacciGenerator
+await Promise.
+all
 (
+friendIds.
+map
+(
+id
+=&gt;
+db.
+<b>get</b>
+(
+&quot;posts&quot;
+,
+{
+user
+:
+id
+}
+)
 )
 ;
-fib.
-next
-(
-)
-.
-value
-;
-// <i>2</i>
-fib.
-next
-(
-)
-.
-value
-;
-// <i>3</i>
-fib.
-next
-(
-)
-.
-value
-;
-// <i>5</i>
-fib.
-next
-(
-)
-.
-done
-;
-// <i>false</i>
+// <i>etc.</i>
+}
+Promise.all
+This will loop over the list of IDs to create an array of promises.
+await will wait for <i>all</i> promises to be complete. combines them into
+a single promise, but they are done in parallel.
+
+<h3 id="ch82">Chapter 82: Async Iterators</h3>
+
+An async function is one that returns a promise. await yields to the
+caller until the promise resolves and then continues with the result.
+for &minus; of
+An iterator allows the collection to be looped through with a loop.
+for  &minus;    await    &minus;  of
+An async iterator is a collection where each iteration is a promise
+which can be awaited using a loop.
+&bsol;harmony    &minus;   async  &minus;   iteration
+Async iterators are a [stage 3
+proposal](https://github.com/tc39/proposal-async-iteration). They are
+in Chrome Canary 60 with
+
 
