@@ -19494,7 +19494,6 @@ implicitly opens the port connection back to the parent thread, so the
 call to port.start() is not actually needed, as noted above.</p>
 <!-- end chapter 63 -->
 <!-- page 345 -->
-
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch64">Chapter 64: requestAnimationFrame</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -20555,8 +20554,7 @@ request.onerror = <b>function</b>() {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch72-2">Section 72.2: Adding objects</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>
-Anything that needs to happen with data in an IndexedDB database
+<p>Anything that needs to happen with data in an IndexedDB database
 happens in a transaction. There are a few things to note about
 transactions that are mentioned in the Remarks section at the bottom
 of this page.</p>
@@ -20594,8 +20592,7 @@ thingsToAdd.forEach(e =&gt; store.add(e));
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch72-3">Section 72.3: Retrieving data</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>
-Anything that needs to happen with data in an IndexedDB database
+<p>Anything that needs to happen with data in an IndexedDB database
 happens in a transaction. There are a few things to note about
 transactions that are mentioned in the Remarks section at the bottom
 of this page.</p>
@@ -20637,4 +20634,182 @@ checking for the presence of the window.indexedDB property:</p>
 }
 </pre>
 <!-- page 370 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch73">Chapter 73: Modularization Techniques</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch73-1">Section 73.1: ES6 Modules</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h5>Version ≥ 6</h5>
+<p>In ECMAScript 6, when using the module syntax (import/export), each
+file becomes its own module with a private namespace. Top-level
+functions and variables do not pollute the global namespace. To expose
+functions, classes, and variables for other modules to import, you can
+use the export keyword.</p>
+<p><b>Note:</b> Although this is the official method for creating JavaScript
+modules, it is not supported by any major browsers right now. However,
+ES6 Modules are supported by many transpilers.</p>
+<pre>
+export <b>function</b> greet(name) {
+  console.log(&quot;Hello %s!&quot;, name);
+}
+<b>var</b> myMethod = <b>function</b>(param) {
+  <b>return</b> &quot;Here&apos;s what you said: &quot; &plus; param;
+};
+export{myMethod}
+export class MyClass {
+  test() {}
+}
+</pre>
+<p><b>Using Modules</b></p>
+<p>Importing modules is as simple as specifying their path:</p>
+<pre>
+import greet from &quot;mymodule.js&quot;;
+greet(&quot;Bob&quot;);
+</pre>
+<p>This imports only the myMethod method from our mymodule.js file.</p>
+<p>It&apos;s also possible to import all methods from a module:</p>
+<pre>
+import &ast; as myModule from &quot;mymodule.js&quot;;
+myModule.greet(&quot;Alice&quot;);
+</pre>
+<p>You can also import methods under a new name:</p>
+<pre>
+import { greet as A, myMethod as B } from &quot;mymodule.js&quot;;
+</pre>
+<p>More information on ES6 Modules can be found in the Modules topic.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch73-2">Section 73.2: Universal Module Definition (UMD)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>The UMD (Universal Module Definition) pattern is used when our module
+needs to be imported by a number of different module loaders (e.g.
+AMD, CommonJS).</p>
+<p>The pattern itself consists of two parts:</p>
+<!-- page 371 -->
+<ol type="1" start="1">
+  <li>An IIFE (Immediately-Invoked Function Expression) that checks for
+    the module loader that is being implemented by the user. This will
+    take two arguments; root (a <b>this</b> reference to the global scope)
+    and factory (the function where we declare our module).</li>
+  <li>An anonymous function that creates our module. This is passed as the
+    second argument to the IIFE portion of the pattern. This function is
+    passed any number of arguments to specify the dependencies of the
+    module.</li>
+<p>In the below example we check for AMD, then CommonJS. If neither of
+those loaders are in use we fall back to making the module and its
+dependencies available globally.</p>
+<pre>
+(<b>function</b> (root, factory) {
+  <b>if</b> (<b>typeof</b> define === &apos;function&apos; && define.amd) {
+  // <i>AMD. Register as an anonymous module.</i>
+  define(&lbrack;&apos;exports&apos;, &apos;b&apos;&rbrack;, factory);
+} <b>else</b> <b>if</b> (<b>typeof</b> exports === &apos;object&apos; && <b>typeof</b> exports.nodeName !== &apos;string&apos;) {
+    // <i>CommonJS</i>
+    factory(exports, require(&apos;b&apos;));
+} <b>else</b> {
+    // <i>Browser globals</i>
+    factory((root.commonJsStrict = {}), root.b);
+  }
+} (<b>this</b>, <b>function</b> (exports, b) {
+  // <i>use b in some fashion.</i>
+  // <i>attach properties to the exports object to define</i>
+  // <i>the exported module properties.</i>
+  exports.action = <b>function</b> () {};
+}));
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch73-3">Section 73.3: Immediately invoked function expressions (IIFE)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Immediately invoked function expressions can be used to create a
+private scope while producing a public API.</p>
+<pre>
+<b>var</b> Module = (<b>function</b>() {
+  <b>var</b> privateData = 1;
+  <b>return</b> {
+    getPrivateData: <b>function</b>() {
+      <b>return</b> privateData;
+    }
+  };
+})();
+Module.getPrivateData(); // <i>1</i>
+Module.privateData;      // <i>undefined</i>
+</pre>
+<p>See the Module Pattern for more details.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch73-4">Section 73.4: Asynchronous Module Definition (AMD)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>AMD is a module definition system that attempts to address some of the
+common issues with other systems like CommonJS and anonymous closures.</p>
+<p>AMD addresses these issues by:</p>
+<ul>
+  <li>Registering the factory function by calling define(), instead of
+    immediately executing it</li>
+  <li>Passing dependencies as an array of module names, which are then
+    loaded, instead of using globals</li>
+  <li>Only executing the factory function once all the dependencies have
+    been loaded and executed</li>
+  <li>Passing the dependent modules as arguments to the factory function</li>
+</ul>
+<p>The key thing here is that a module can have a dependency and not hold
+everything up while waiting for it to load, without the developer
+having to write complicated code.</p>
+<p>Here&apos;s an example of AMD:</p>
+<pre>
+// <i>Define a module &quot;myModule&quot; with two dependencies, jQuery and Lodash</i>
+define (&quot;myModule&quot;, &lbrack;&quot;jquery&quot;, &quot;lodash&quot;&rbrack;, <b>function</b>(&dollar;,&lowbar;) {
+  // <i>This publicly accessible object is our module</i>
+  // <i>Here we use an object, but it can be of any type</i>
+  <b>var</b> myModule = {};
+  <b>var</b> privateVar = &quot;Nothing outside of this module can see me&quot;;
+  <b>var</b> privateFn = <b>function</b>(param) {
+    <b>return</b> &quot;Here&apos;s what you said: &quot; &plus; param;
+  };
+  myModule.version = 1;
+  myModule.moduleMethod = <b>function</b>() {
+    // <i>We can still access global variables from here, but it&apos;s better</i>
+    // <i>if we use the passed ones</i>
+    <b>return</b> privateFn (windowTitle);
+};
+  <b>return</b> myModule;
+});
+</pre>
+<p>Modules can also skip the name and be anonymous. When that&apos;s done,
+they&apos;re usually loaded by file name.</p>
+<pre>
+define(&lbrack;&quot;jquery&quot;, &quot;lodash&quot;&rbrack;, <b>function</b>(&dollar;,&lowbar;) { <i>/&ast; factory &ast;/</i> });
+</pre>
+<p>They can also skip dependencies:</p>
+<pre>
+define (<b>function</b>() { <i>/&ast; factory &ast;/</i> });
+</pre>
+<p>Some AMD loaders support defining modules as plain objects:</p>
+<pre>
+define(&quot;myModule&quot;, {version: 1, value: &quot;sample string&quot; });
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch73-5">Section 73.5: CommonJS - Node.js</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>CommonJS is a popular modularization pattern that&apos;s used in Node.js.</p>
+<p>The CommonJS system is centered around a require() function that loads other
+modules and an exports property that lets modules export publicly accessible methods.</p>
+<p>Here&apos;s an example of CommonJS, we&apos;ll load Lodash and Node.js&apos; fs
+module:</p>
+<pre>
+// <i>Load fs and lodash, we can use them anywhere inside the module</i>
+<b>var</b> fs = require(&quot;fs&quot;),
+   &lowbar; = require(&quot;lodash&quot;);
+<b>var</b> myPrivateFn = <b>function</b>(param) {
+  <b>return</b> &quot;Here&apos;s what you said: &quot; &plus; param;
+};
+// <i>Here we export a public &grave;myMethod&grave; that other modules can use</i>
+exports.myMethod = <b>function</b>(param) {
+  <b>return</b> myPrivateFn(param);
+};
+</pre>
+<p>You can also export a function as the entire module using module.exports:</p>
+<pre>
+module.exports = <b>function</b>() {
+  <b>return</b> &quot;Hello!&quot;;
+};
+</pre>
+<!-- page 374 -->
 
