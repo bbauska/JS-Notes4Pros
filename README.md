@@ -20812,4 +20812,144 @@ module.exports = <b>function</b>() {
 };
 </pre>
 <!-- page 374 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch74">Chapter 74: Proxy</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Parameter</b></th>
+      <th><b>Details</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>target</td>
+      <td>The target object, actions on this object (getting, setting, etc&hellip;) will be routed through the handler.</td>
+    </tr>
+    <tr>
+      <td>handler</td>
+      <td>An object that can define "traps" for intercepting actoins on the target objet (getting, setting, etc&hellip;)</td>
+    </tr>
+  </tbody>
+</table>
+<p>A Proxy in JavaScript can be used to modify fundamental operations on
+objects. Proxies were introduced in ES6. A
+Proxy on an object is itself an object, that has <i>traps</i>. Traps may be
+triggered when operations are performed on the Proxy. This includes
+property lookup, function calling, modifying properties, adding
+properties, et cetera. When no applicable trap is defined, the
+operation is performed on the proxied object as if there was no Proxy.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch74-1">Section 74.1: Proxying property lookup</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>To influence property lookup, the <b>get</b> handler must be used.</p>
+<p>In this example, we modify property lookup so that not only the value,
+but also the type of that value is returned. We use 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect">
+Reflect</a> to ease this.</p>
+<pre>
+<b>let</b> handler = {
+  <b>get</b>(target, property) {
+    <b>if</b> (!Reflect.has(target, property)) {
+      <b>return</b> {
+        value: <b>undefined</b>,
+        type: &apos;undefined&apos;
+      };
+    }
+    <b>let</b> value = Reflect.<b>get</b>(target, property);
+    <b>return</b> {
+      value: value,
+      type: <b>typeof</b> value
+    };
+  }
+};
+<b>let</b> proxied = <b>new</b> Proxy({foo: &apos;bar&apos; }, handler);
+console.log(proxied.foo); // <i>logs &grave;Object {value: &quot;bar&quot;, type: &quot;string&quot;}&grave;</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch74-2">Section 74.2: Very simple proxy (using the set trap)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>This proxy simply appends the string &quot; went through proxy&quot; to every
+string property set on the target object.</p>
+<pre>
+<b>let</b> object = {};
+<b>let</b> handler = {
+  <b>set</b>(target, prop, value) { // <i>Note that ES6 object syntax is used</i>
+    <b>if</b>(&apos;string&apos; === <b>typeof</b> value) {
+      target&lbrack;prop&rbrack; = value &plus; &quot; went through proxy&quot;;
+    }
+  }
+};
+<b>let</b> proxied = <b>new</b> Proxy(object, handler);
+proxied.example = &quot;ExampleValue&quot;;
+console.log(object);
+// <i>logs: { example: &quot;ExampleValue went through proxy&quot; }</i>
+// <i>you could also access the object via proxied.target</i>
+</pre>
+<!-- page 375/376 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch75">Chapter 75: .postMessage() and MessageEvent</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p><b>Parameters</b><br/>
+<b>message</b><br/>
+<b>targetOrigin</b></p>
+<p>transfer &nbsp;&nbsp;&nbsp; optional</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch75-1">Section 75.1: Getting Started</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p><b>What is <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">.postMessage()</a>,
+when and why do we use it</b></p>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage"><b>postMessage</a> 
+method is a way to safely allow communication between cross-origin scripts.</b></p>
+
+<p>Normally, two different pages, can only directly communicate with each
+other using JavaScript when they are under the same origin, even if
+one of them is embedded into another (e.g. iframes) or one is opened
+from inside the other (e.g. window.open()). With .postMessage(), you can work around this
+restriction while still stayig safe.</p>
+<p><b>You can only use <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">
+postMessage()</a> when you have access to both pages&apos; JavaScript code.</b> Since the
+receiver needs to validate the sender and process the message accordingly, you can only use this 
+method to communicate between two scripts you have access to.</p>
+<p>We will build an example to send messages to a child window and have
+the messages be displayed on the child window. The parent/sender page
+will be assumed to be http://sender.com and child/receiver page will be 
+assumed to be http://receiver.com for the example.</p>
+<p><b>Sending messages</b></p>
+<p>In order to send messages to another window, you need to have a
+reference to its <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window">window</a>
+object. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/open">window.open</a> 
+returns the reference object of the newly opened window. For other
+methods to obtain a reference to a window object, see the explanation
+under otherWindow parameter 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax">here</a>.</p>
+<pre>
+<b>var</b> childWindow = window.open(&quot;http://receiver.com&quot;, &quot;&lowbar;blank&quot;);
+</pre>
+<p>Add a textarea and a send button that will be used to send messages to child window.</p>
+<pre>
+<b>&lt;textarea</b> id=&quot;text&quot;<b>&gt;&lt;/textarea&gt;</b>
+<b>&lt;button</b> id=&quot;btn&quot;<b>&gt;</b>Send Message<b>&lt;/button&gt;</b>
+</pre>
+<p>Send the text of textarea using 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">
+.postMessage(message, targetOrigin)</a> when the button is clicked.</p>
+<pre>
+<b>var</b> btn = document.getElementById(&quot;btn&quot;),
+  text = document.getElementById(&quot;text&quot;);
+btn.addEventListener(&quot;click&quot;, <b>function</b>() {
+  sendMessage(text.value);
+  text.value = &quot;&quot;;
+});
+<b>function</b> sendMessage(message) {
+  <b>if</b> (!message &vert;&vert; !message.length) <b>return</b>;
+    childWindow.postMessage(JSON.stringify({
+      message: message,
+      time: <b>new</b> Date()
+    }), &apos;http://receiver.com&apos;);
+}
+</pre>
+<!-- page 377 -->
 
