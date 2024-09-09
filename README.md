@@ -21101,13 +21101,13 @@ that weak reference does not contribute to reference count.</p>
   heapTotal: 7376896,
   heapUsed: 4153936,
   external: 9059 }
-<br/>
+nbsp;
 &gt; <b>let</b> wm = <b>new</b> WeakMap();
 <b>undefined</b>
-<br/>
+&nbsp;
 &gt; <b>const</b> b = <b>new</b> Object();
 <b>undefined</b>
-<br/>
+&nbsp;
 &gt; global.gc();
 <b>undefined</b>
 <br/>
