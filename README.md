@@ -21082,242 +21082,94 @@ console.log(weakmap.<b>delete</b>(obj2)); // <i>false</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch76-6">Section 76.6: Weak reference demo</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-JavaScript uses [reference
-counting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management)
-technique to detect unused objects. When reference count to an object
-is zero, that object will be released by the garbage collector.
-Weakmap uses weak reference that does not contribute to reference
-count of an object, therefore it is very useful to solve memory [leak
-problems](http://stackoverflow.com/questions/29413222/what-are-the-actual-uses-of-es6-weakmap).
-Here is a demo of weakmap. I use a very large object as value to show
-that weak reference does not contribute to reference count.
-// <i>manually trigger garbage collection to make sure that we are in good
-status.</i>
-&gt;
-global.
-gc
-(
-)
-;
+<p>JavaScript uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management">
+reference counting</a> technique to detect unused objects. When reference count to an object is zero, 
+that object will be released by the garbage collector. Weakmap uses weak reference that does not 
+contribute to reference count of an object, therefore it is very useful to solve memory 
+<a href="http://stackoverflow.com/questions/29413222/what-are-the-actual-uses-of-es6-weakmap">
+leak problems</a>.</p>
+<p>Here is a demo of weakmap. I use a very large object as value to show
+that weak reference does not contribute to reference count.</p>
+<pre>
+// <i>manually trigger garbage collection to make sure that we are in good status.</i>
+&gt; global.gc();
 <b>undefined</b>
-// <i>check initial memory use</i>
-，
-</i>heapUsed is 4M or so</i>
-&gt;
-process.
-memoryUsage
-(
-)
-;
-{
-rss
-:
-21106688
-,
-heapTotal
-:
-7376896
-,
-heapUsed
-:
-4153936
-,
-external
-:
-9059
-}
-&gt;
-<b>let</b>
-wm
-=
-<b>new</b>
-WeakMap
-(
-)
-;
+<br/>
+// <i>check initial memory use，heapUsed is 4M or so</i>
+&gt; process.memoryUsage();
+{ rss: 21106688,
+  heapTotal: 7376896,
+  heapUsed: 4153936,
+  external: 9059 }
+<br/>
+&gt; <b>let</b> wm = <b>new</b> WeakMap();
 <b>undefined</b>
-&gt;
-<b>const</b>
-b
-=
-<b>new</b>
-Object
-(
-)
-;
+<br/>
+&gt; <b>const</b> b = <b>new</b> Object();
 <b>undefined</b>
-&gt;
-global.
-gc
-(
-)
-;
+<br/>
+&gt; global.gc();
 <b>undefined</b>
+<br/>
 // <i>heapUsed is still 4M or so</i>
-&gt;
-process.
-memoryUsage
-(
-)
-;
-{
-rss
-:
-20537344
-,
-heapTotal
-:
-9474048
-,
-heapUsed
-:
-3967272
-,
-external
-:
-8993
-}
-// <i>add key-value tuple into WeakMap</i>
-，
-// <i>key is b</i>
-，
-<i>value is 5&ast;1024&ast;1024 array</i>
-&gt;
-wm.
-<b>set</b>
-(
-b
-,
-<b>new</b>
-Array
-(
-5
-&ast;
-1024
-&ast;
-1024
-)
-)
-;
-WeakMap
-{
-}
-// <i>manually garbage collection</i>
-&gt;
-global.
-gc
-(
-)
-;
+&gt; process.memoryUsage();
+{ rss: 20537344,
+  heapTotal: 9474048,
+  heapUsed: 3967272,
+  external: 8993 }
+<br/>
+// <i>add key-value tuple into WeakMap</i> ，
+// <i>key is b.value is 5&ast;1024&ast;1024 array</i>
+&gt; wm.<b>set</b>(b, <b>new</b> Array(5&ast;1024&ast;1024));
+WeakMap {}
+<br/>
+// <i>manual garbage collection</i>
+&gt; global.gc();
 <b>undefined</b>
+<br/>
 // <i>heapUsed is still 45M</i>
-&gt;
-process.
-memoryUsage
-(
-)
-;
-{
-rss
-:
-62652416
-,
-heapTotal
-:
-51437568
-,
-heapUsed
-:
-45911664
-,
-external
-:
-8951
-}
+&gt; process.memoryUsage();
+{ rss: 62652416,
+  heapTotal: 51437568,
+  heapUsed: 45911664,
+  external: 8951 }
+<br/>
 // <i>b reference to null</i>
-&gt;
-b
-=
+&gt; b = <b>null</b>;
 <b>null</b>
-;
-<b>null</b>
+<br/>
 // <i>garbage collection</i>
-&gt;
-global.
-gc
-(
-)
-;
+&gt; global.gc();
 <b>undefined</b>
-// <i>after remove b reference to object</i>
-，
-<i>heapUsed is 4M again</i>
+<br/>
+// <i>after remove b reference to object ，heapUsed is 4M again</i>
 // <i>it means the big array in WeakMap is released</i>
-// <i>it also means weekmap does not contribute to big array&apos;s reference
-count, only b does.</i>
-&gt;
-process.
-memoryUsage
-(
-)
-;
-{
-rss
-:
-20639744
-,
-heapTotal
-:
-8425472
-,
-heapUsed
-:
-3979792
-,
-external
-:
-8956
-}
+// <i>it also means weekmap does not contribute to big array&apos;s reference count, only b does.</i>
+&gt; process.memoryUsage();
+{ rss: 20639744,
+  heapTotal: 8425472,
+  heapUsed: 3979792,
+  external: 8956 }
+</pre>
+<!-- page 382 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch77">Chapter 77: WeakSet</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch77-1">Section 77.1: Creating a WeakSet object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The WeakSet object is used for storing weakly held objects in a
-collection. The difference from Set is that you can&apos;t store primitive
-values, like numbers or string. Also, references to the objects in the
-collection are held weakly, which means that if there is no other
-reference to an object stored in a WeakSet, it can be garbage
-collected.
-The WeakSet constructor has an optional parameter, which can be any
-iterable object (for example an array). All of its elements will be
-added to the created WeakSet.
-<b>const</b>
-obj1
-=
-{
-}
-,
-obj2
-=
-{
-}
-;
-<b>const</b>
-weakset
-=
-<b>new</b>
-WeakSet
-(
-&lbrack;
-obj1
-,
-obj2
-&rbrack;
-)
-;
+<p>The WeakSet object is used for storing weakly held objects in a collection. The 
+difference from Set is that you can&apos;t store primitive values, like numbers or 
+string. Also, references to the objects in the collection are held weakly, which 
+means that if there is no other reference to an object stored in a WeakSet, it can 
+be garbage collected.</p>
+<p>The WeakSet constructor has an optional parameter, which can be any iterable object 
+(for example an array). All of its elements will be added to the created WeakSet.</p>
+<pre>
+<b>const</b> obj1 = {},
+      obj2 = {};
+<br/>
+<b>const</b> weakset = <b>new</b> WeakSet(&lbrack;obj1, obj2&rbrack;);
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch77-2">Section 77.2: Adding a value</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
