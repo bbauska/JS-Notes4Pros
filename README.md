@@ -20900,10 +20900,8 @@ console.log(object);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><b>What is <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">.postMessage()</a>,
 when and why do we use it</b></p>
-
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage"><b>postMessage</a> 
 method is a way to safely allow communication between cross-origin scripts.</b></p>
-
 <p>Normally, two different pages, can only directly communicate with each
 other using JavaScript when they are under the same origin, even if
 one of them is embedded into another (e.g. iframes) or one is opened
@@ -20952,4 +20950,64 @@ btn.addEventListener(&quot;click&quot;, <b>function</b>() {
 }
 </pre>
 <!-- page 377 -->
+<p>In order send and receive JSON objects instead of a simple string, 
+<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">
+JSON.stringify()</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse">
+JSON.parse()</a> methods can be used. A 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Transferable">
+Transfarable Object</a> can be given as the third optional parameter of the 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">
+.postMessage(message,targetOrigin,transfer)</a> method, but browser support 
+is still lacking even in modern browsers.</p>
+<p>For this example, since our receiver is assumed to be http://receiver.com page, 
+we enter its url as the targetOrigin. The value of this parameter should match
+the origin of the childWindow object for the message to be send. It is
+possible to use &ast; as a wildcard but is <b>highly recommended</b> to
+avoid using the wildcard and always set this parameter to receiver&apos;s
+specific origin <b>for security reasons</b>.</p>
+<p><b>Receiving, Validating and Processing Messages</b></p>
+<p>The code under this part should be put in the receiver page, which is
+http://receiver.com for our example.</p>
+<p>In order to receive messages, the 
+<a href="https://developer.mozilla.org/en-US/docs/Web/Events/message_webmessaging">
+message event</a> of the window should be listened.</p>
+<pre>
+window.addEventListener(&quot;message&quot;, receiveMessage);
+</pre>
+<p>When a message is received there are a couple of <b>steps that should
+be followed to assure security as much as possible</b>.</p>
+<ul>
+  <li>Validate the sender</li>
+  <li>Validate the message</li>
+  <li>Process the message</li>
+</ul>
+<p>The sender should always be validated to make sure the message is
+received from a trusted sender. After that, the message itself should
+be validated to make sure nothing malicious is received. After these
+two validations, the message can be processed.</p>
+<pre>
+<b>function</b> receiveMessage(ev) {
+  // <i>Check event.origin to see if it is a trusted sender.</i>
+  // <i>If you have a reference to the sender, validate event.source</i>
+  // <i>We only want to receive messages from http://sender.com, our trusted sender page.</i>
+  <b>if</b> (ev.origin !== &quot;http://sender.com&quot; &vert;&vert; ev.source !== window.opener)
+    <b>return</b>;
+  // <i>Validate the message</i>
+  // <i>We want to make sure it&apos;s a valid json object and it does not contain anything malicious</i>
+  <b>var</b> data;
+  <b>try</b> {
+    data = JSON.parse(ev.data);
+    // <i>data.message = cleanseText(data.message)</i>
+  } <b>catch</b> (ex) {
+    <b>return</b>;
+  }
+  // <i>Do whatever you want with the received message</i>
+  // <i>We want to append the message into our #console div</i>
+  <b>var</b> p = document.createElement(&quot;p&quot;);
+  p&period;innerText = (<b>new</b> Date(data.time)).toLocaleTimeString() &plus; &quot; &vert; &quot; &plus; data.message;
+  document.getElementById(&quot;console&quot;).appendChild(p);
+}
+</pre>
+<p><a href="https://jsfiddle.net/ozzan/6gjstodk/">Click here for a JS Fiddle showcasing its usage.</p>
+<!-- page 378/379 -->
 
