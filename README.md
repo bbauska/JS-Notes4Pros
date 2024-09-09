@@ -21010,4 +21010,594 @@ two validations, the message can be processed.</p>
 </pre>
 <p><a href="https://jsfiddle.net/ozzan/6gjstodk/">Click here for a JS Fiddle showcasing its usage.</p>
 <!-- page 378/379 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch76">Chapter 76: WeakMap</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch76-1">Section 76.1: Creating a WeakMap object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>WeakMap object allows you to store key/value pairs. The difference
+from Map is that keys must be objects and are weakly referenced. This
+means that if there aren&apos;t any other strong references to the key,
+the element in WeakMap can be removed by garbage collector.</p>
+<p>WeakMap constructor has an optional parameter, which can be any
+iterable object (for example Array) containing key/value pairs as
+two-element arrays.</p>
+<pre>
+<b>const</b> o1 = {a: 1, b: 2},
+  o2 = {};
+<b>const</b> weakmap = <b>new</b>WeakMap(&lbrack;&lbrack;o1, <b>true</b>&rbrack;, &lbrack;o2, o1&rbrack;&rbrack;);
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch76-2">Section 76.2: Getting a value associated to the key</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>To get a value associated to the key, use the method. If there&apos;s no
+value associated to the key, it returns <b>undefined</b>.</p>
+<pre>
+<b>const</b> obj1 = {},
+  obj2 = {};
+<b>const</b> weakmap = <b>new</b> WeakMap(&lbrack;&lbrack;obj1, 7&rbrack;&rbrack;);
+console.log(weakmap.<b>get</b>(obj1));  // <i>7</i>
+console.log(weakmap.<b>get</b>(obj2));  // <i>undefined</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch76-3">Section 76.3: Assigning a value to the key</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+.<b>set</b>()   method. It returns the WeakMap object, so you can chain   .<b>set</b>()
+To assign a value to the key, use the calls.
+<b>const</b>
+obj1
+=
+{
+}
+,
+obj2
+=
+{
+}
+;
+<b>const</b>
+weakmap
+=
+<b>new</b>
+WeakMap
+(
+)
+;
+weakmap.
+<b>set</b>
+(
+obj1
+,
+1
+)
+.
+<b>set</b>
+(
+obj2
+,
+2
+)
+;
+console.
+log
+(
+weakmap.
+<b>get</b>
+(
+obj1
+)
+)
+;
+// <i>1</i>
+console.
+log
+(
+weakmap.
+<b>get</b>
+(
+obj2
+)
+)
+;
+// <i>2</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch76-4">Section 76.4: Checking if an element with the key exists</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+.has()
+To check if an element with a specified key exits in a WeakMap, use
+the method. It returns <b>true</b> if it exits, and otherwise <b>false</b>.
+<b>const</b>
+obj1
+=
+{
+}
+,
+obj2
+=
+{
+}
+;
+<b>const</b>
+weakmap
+=
+<b>new</b>
+WeakMap
+(
+&lbrack;
+&lbrack;
+obj1
+,
+7
+&rbrack;
+&rbrack;
+)
+;
+console.
+log
+(
+weakmap.
+has
+(
+obj1
+)
+)
+;
+// <i>true</i>
+console.
+log
+(
+weakmap.
+has
+(
+obj2
+)
+)
+;
+// <i>false</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch76-5">Section 76.5: Removing an element with the key</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>delete</b>
+To remove an element with a specified key, use the .() method. It
+returns <b>true</b> if the element existed and has been removed,
+otherwise <b>false</b>.
+<b>const</b>
+obj1
+=
+{
+}
+,
+obj2
+=
+{
+}
+;
+<b>const</b>
+weakmap
+=
+<b>new</b>
+WeakMap
+(
+&lbrack;
+&lbrack;
+obj1
+,
+7
+&rbrack;
+&rbrack;
+)
+;
+console.
+log
+(
+weakmap.
+<b>delete</b>
+(
+obj1
+)
+)
+;
+// <i>true</i>
+console.
+log
+(
+weakmap.
+has
+(
+obj1
+)
+)
+;
+// <i>false</i>
+console.
+log
+(
+weakmap.
+<b>delete</b>
+(
+obj2
+)
+)
+;
+// <i>false</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch76-6">Section 76.6: Weak reference demo</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+JavaScript uses [reference
+counting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management)
+technique to detect unused objects. When reference count to an object
+is zero, that object will be released by the garbage collector.
+Weakmap uses weak reference that does not contribute to reference
+count of an object, therefore it is very useful to solve memory [leak
+problems](http://stackoverflow.com/questions/29413222/what-are-the-actual-uses-of-es6-weakmap).
+Here is a demo of weakmap. I use a very large object as value to show
+that weak reference does not contribute to reference count.
+// <i>manually trigger garbage collection to make sure that we are in good
+status.</i>
+&gt;
+global.
+gc
+(
+)
+;
+<b>undefined</b>
+// <i>check initial memory use</i>
+，
+</i>heapUsed is 4M or so</i>
+&gt;
+process.
+memoryUsage
+(
+)
+;
+{
+rss
+:
+21106688
+,
+heapTotal
+:
+7376896
+,
+heapUsed
+:
+4153936
+,
+external
+:
+9059
+}
+&gt;
+<b>let</b>
+wm
+=
+<b>new</b>
+WeakMap
+(
+)
+;
+<b>undefined</b>
+&gt;
+<b>const</b>
+b
+=
+<b>new</b>
+Object
+(
+)
+;
+<b>undefined</b>
+&gt;
+global.
+gc
+(
+)
+;
+<b>undefined</b>
+// <i>heapUsed is still 4M or so</i>
+&gt;
+process.
+memoryUsage
+(
+)
+;
+{
+rss
+:
+20537344
+,
+heapTotal
+:
+9474048
+,
+heapUsed
+:
+3967272
+,
+external
+:
+8993
+}
+// <i>add key-value tuple into WeakMap</i>
+，
+// <i>key is b</i>
+，
+<i>value is 5&ast;1024&ast;1024 array</i>
+&gt;
+wm.
+<b>set</b>
+(
+b
+,
+<b>new</b>
+Array
+(
+5
+&ast;
+1024
+&ast;
+1024
+)
+)
+;
+WeakMap
+{
+}
+// <i>manually garbage collection</i>
+&gt;
+global.
+gc
+(
+)
+;
+<b>undefined</b>
+// <i>heapUsed is still 45M</i>
+&gt;
+process.
+memoryUsage
+(
+)
+;
+{
+rss
+:
+62652416
+,
+heapTotal
+:
+51437568
+,
+heapUsed
+:
+45911664
+,
+external
+:
+8951
+}
+// <i>b reference to null</i>
+&gt;
+b
+=
+<b>null</b>
+;
+<b>null</b>
+// <i>garbage collection</i>
+&gt;
+global.
+gc
+(
+)
+;
+<b>undefined</b>
+// <i>after remove b reference to object</i>
+，
+<i>heapUsed is 4M again</i>
+// <i>it means the big array in WeakMap is released</i>
+// <i>it also means weekmap does not contribute to big array&apos;s reference
+count, only b does.</i>
+&gt;
+process.
+memoryUsage
+(
+)
+;
+{
+rss
+:
+20639744
+,
+heapTotal
+:
+8425472
+,
+heapUsed
+:
+3979792
+,
+external
+:
+8956
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch77">Chapter 77: WeakSet</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch77-1">Section 77.1: Creating a WeakSet object</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The WeakSet object is used for storing weakly held objects in a
+collection. The difference from Set is that you can&apos;t store primitive
+values, like numbers or string. Also, references to the objects in the
+collection are held weakly, which means that if there is no other
+reference to an object stored in a WeakSet, it can be garbage
+collected.
+The WeakSet constructor has an optional parameter, which can be any
+iterable object (for example an array). All of its elements will be
+added to the created WeakSet.
+<b>const</b>
+obj1
+=
+{
+}
+,
+obj2
+=
+{
+}
+;
+<b>const</b>
+weakset
+=
+<b>new</b>
+WeakSet
+(
+&lbrack;
+obj1
+,
+obj2
+&rbrack;
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch77-2">Section 77.2: Adding a value</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+.add()
+To add a value to a WeakSet, use the method. This method is chainable.
+<b>const</b>
+obj1
+=
+{
+}
+,
+obj2
+=
+{
+}
+;
+<b>const</b>
+weakset
+=
+<b>new</b>
+WeakSet
+(
+)
+;
+weakset.
+add
+(
+obj1
+)
+.
+add
+(
+obj2
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch77-3">Section 77.3: Checking if a value exists</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+.has()
+To check if a value exits in a WeakSet, use the method.
+<b>const</b>
+obj1
+=
+{
+}
+,
+obj2
+=
+{
+}
+;
+<b>const</b>
+weakset
+=
+<b>new</b>
+WeakSet
+(
+&lbrack;
+obj1
+&rbrack;
+)
+;
+console.
+log
+(
+weakset.
+has
+(
+obj1
+)
+)
+;
+// <i>true</i>
+console.
+log
+(
+weakset.
+has
+(
+obj2
+)
+)
+;
+// <i>false</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch77-4">Section 77.4: Removing a value</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+.<b>delete</b>()
+To remove a value from a WeakSet, use the method. This method returns
+<b>true</b> if the value existed and has been removed, otherwise
+<b>false</b>.
+<b>const</b>
+obj1
+=
+{
+}
+,
+obj2
+=
+{
+}
+;
+<b>const</b>
+weakset
+=
+<b>new</b>
+WeakSet
+(
+&lbrack;
+obj1
+&rbrack;
+)
+;
+console.
+log
+(
+weakset.
+<b>delete</b>
+(
+obj1
+)
+)
+;
+// <i>true</i>
+console.
+log
+(
+weakset.
+<b>delete</b>
+(
+obj2
+)
+)
+;
+// <i>false</i>
 
