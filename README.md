@@ -21042,187 +21042,42 @@ console.log(weakmap.<b>get</b>(obj2));  // <i>undefined</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch76-3">Section 76.3: Assigning a value to the key</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-.<b>set</b>()   method. It returns the WeakMap object, so you can chain   .<b>set</b>()
-To assign a value to the key, use the calls.
-<b>const</b>
-obj1
-=
-{
-}
-,
-obj2
-=
-{
-}
-;
-<b>const</b>
-weakmap
-=
-<b>new</b>
-WeakMap
-(
-)
-;
-weakmap.
-<b>set</b>
-(
-obj1
-,
-1
-)
-.
-<b>set</b>
-(
-obj2
-,
-2
-)
-;
-console.
-log
-(
-weakmap.
-<b>get</b>
-(
-obj1
-)
-)
-;
-// <i>1</i>
-console.
-log
-(
-weakmap.
-<b>get</b>
-(
-obj2
-)
-)
-;
-// <i>2</i>
+<p>To assign a value to the key, use the .set() method. It returns the WeakMap object, 
+so you can chain .<b>set</b>() calls.</p>
+<pre>
+<b>const</b> obj1 = {},
+   obj2 = {};
+<b>const</b> weakmap = <b>new</b> WeakMap();
+weakmap.<b>set</b>(obj1, 1).<b>set</b>(obj2, 2);
+console.log(weakmap.<b>get</b>(obj1)); // <i>1</i>
+console.log(weakmap.<b>get</b>(obj2)); // <i>2</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch76-4">Section 76.4: Checking if an element with the key exists</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-.has()
-To check if an element with a specified key exits in a WeakMap, use
-the method. It returns <b>true</b> if it exits, and otherwise <b>false</b>.
-<b>const</b>
-obj1
-=
-{
-}
-,
-obj2
-=
-{
-}
-;
-<b>const</b>
-weakmap
-=
-<b>new</b>
-WeakMap
-(
-&lbrack;
-&lbrack;
-obj1
-,
-7
-&rbrack;
-&rbrack;
-)
-;
-console.
-log
-(
-weakmap.
-has
-(
-obj1
-)
-)
-;
-// <i>true</i>
-console.
-log
-(
-weakmap.
-has
-(
-obj2
-)
-)
-;
-// <i>false</i>
+<p>To check if an element with a specified key exits in a WeakMap, use the 
+.has() method. It returns <b>true</b> if it exits, and otherwise<b>false</b>.</p>
+<pre>
+<b>const</b> obj1 = {},
+   obj2 = {};
+<b>const</b> weakmap = <b>new</b> WeakMap(&lbrack;&lbrack;obj1, 7&rbrack;&rbrack;);
+console.log(weakmap.has(obj1));  // <i>true</i>
+console.log(weakmap.has(obj2));  // <i>false</i>
+</pre>
+<!-- page 380 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch76-5">Section 76.5: Removing an element with the key</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>delete</b>
-To remove an element with a specified key, use the .() method. It
-returns <b>true</b> if the element existed and has been removed,
-otherwise <b>false</b>.
-<b>const</b>
-obj1
-=
-{
-}
-,
-obj2
-=
-{
-}
-;
-<b>const</b>
-weakmap
-=
-<b>new</b>
-WeakMap
-(
-&lbrack;
-&lbrack;
-obj1
-,
-7
-&rbrack;
-&rbrack;
-)
-;
-console.
-log
-(
-weakmap.
-<b>delete</b>
-(
-obj1
-)
-)
-;
-// <i>true</i>
-console.
-log
-(
-weakmap.
-has
-(
-obj1
-)
-)
-;
-// <i>false</i>
-console.
-log
-(
-weakmap.
-<b>delete</b>
-(
-obj2
-)
-)
-;
-// <i>false</i>
+<p>To remove an element with a specified key, use the .delete() method. It
+returns <b>true</b> if the element existed and has been removed, otherwise <b>false</b>.</p>
+<pre>
+<b>const</b> obj1 = {},
+   obj2 = {};
+<b>const</b> weakmap = <b>new</b> WeakMap(&lbrack;&lbrack;obj1, 7&rbrack;&rbrack;);
+console.log(weakmap.<b>delete</b>(obj1)); // <i>true</i>
+console.log(weakmap.has(obj1));           // <i>false</i>
+console.log(weakmap.<b>delete</b>(obj2)); // <i>false</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch76-6">Section 76.6: Weak reference demo</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
