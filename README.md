@@ -21855,7 +21855,7 @@ async <b>function</b> newUnicorn() {
     <b>const</b> json = await responseNew.json();
 	<b>return</b> json.success // <i>return success property of response</i>
   } <b>catch</b> (err) {
-      console.log(&apos;Error creating unicorn:&apos;, err);
+    console.log(&apos;Error creating unicorn:&apos;, err);
   }
 }
 </pre>
@@ -21903,7 +21903,7 @@ add async to the forEach callback no errors get thrown. You might
 think this solves the problem, but it won&apos;t work as expected.</p>
 <p>Example:</p>
 <pre>
-(async() =&bsol;{
+(async() =&gt; {
   data = &lbrack;1, 2, 3, 4, 5&rbrack;;
   data.forEach(async(e) =&gt; {
     <b>const</b> i = await somePromiseFn(e);
@@ -21919,7 +21919,8 @@ something like asyncForEach(async (e) =&gt; await somePromiseFn(e), data ) Basic
 you return a promise that resolves when all the callbacks are awaited and done. 
 But there are better ways of doing this, and that is to just use a loop.
 </blockquote>
-<p>You can use a loop, it doesn&apos;t really matter which one you pick.</p>
+<p>You can use a for-of loop or a <b>for</b>/while loop, it doesn&apos;t really matter 
+which one you pick.</p>
 <pre>
 (async() =&gt; {
   data = &lbrack;1, 2, 3, 4, 5&rbrack;;
@@ -21931,109 +21932,32 @@ But there are better ways of doing this, and that is to just use a loop.
 })();
 </pre>
 <p>But there&apos;s another catch. This solution will wait for each call to
-somePromiseFn to complete before iterating over the next one.</p>
-<p>This is great if you actually want your somePromiseFn invocations to
+somePromiseFn to complete before iterating over the next one.<br/>
+This is great if you actually want your somePromiseFn invocations to
 be executed in order but if you want them to run concurrently, you
 will need to await on Promise.all.</p>
-
-(
-async
-(
-)
-=&gt;
-{
-data
-=
-&lbrack;
-1
-,
-2
-,
-3
-,
-4
-,
-5
-&rbrack;
-;
-<b>const</b>
-p
-=
-await Promise.
-all
-(
-data.
-map
-(
-async
-(
-e
-)
-=&gt;
-await somePromiseFn
-(
-e
-)
-)
-)
-;
-console.
-log
-(
-&hellip;
-p
-)
-;
-}
-)
-(
-)
-;
-Promise.all
-receives an array of promises as its only parameter and returns a
-promise. When all of the promises
-in the array are resolved, the returned promise is also resolved. We
-await on that promise and when it&apos;s resolved all our values are
-available.
-stage
-The above examples are fully runnable. The somePromiseFn function can
+<pre>
+(async() =&gt; {
+data = &lbrack;1, 2, 3, 4, 5&rbrack;;
+<b>const</b> p = await Promise.all(data.map(async(e) =&gt; await somePromiseFn(e)));
+console.log(&hellip;p);
+})();
+</pre>
+<p>Promise.all receives an array of promises as its only parameter and returns a
+promise. When all of the promises in the array are resolved, the returned 
+promise is also resolved. We await on that promise and when it&apos;s resolved 
+all our values are available.</p>
+<p>The above examples are fully runnable. The somePromiseFn function can
 be made as an async echo function with a timeout. You can try out the
 examples in the [babel-repl](https://babeljs.io/repl) with at least
-the -3 preset and look at the output.
-<b>function</b>
-somePromiseFn
-(
-n
-)
-{
-<b>return</b>
-<b>new</b>
-Promise
-(
-(
-res
-,
-rej
-)
-=&gt;
-{
-setTimeout
-(
-(
-)
-=&gt;
-res
-(
-n
-)
-,
-250
-)
-;
+the -3 preset and look at the output.</p>
+<pre>
+<b>function</b> somePromiseFn(n) {
+  <b>return</b> <b>new</b> Promise((res, rej) =&gt; {
+    setTimeout(() =&gt; res(n), 250);
+  });
 }
-)
-;
-}
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch81-5">Section 81.5: Less indentation</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
