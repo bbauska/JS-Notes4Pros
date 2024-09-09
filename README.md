@@ -14468,7 +14468,6 @@ string representations:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch40-8">Section 40.8: The logical NOT operator (!)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>The logical NOT (!) operator performs logical negation on an expression.</p>
 <p><b>Syntax:</b></p>
 <pre>
@@ -14551,7 +14550,7 @@ suspend and resume.</p>
   console.log(&apos;yielded 3&apos;); // <i>G</i>
 }
 <b>var</b> generator = nums();  // <i>Returns the iterator. No code in nums is executed</i>
-<br/>
+&nbsp;
 generator.next();  // <i>Executes lines A,B returning { value: 1, done: false }</i>
 // <i>console: &quot;starting&quot;</i>
 generator.next();  // <i>Executes lines C,D returning { value: 2, done: false }</i>
@@ -17681,8 +17680,8 @@ console.log(a&period;value());
 console.log(b&period;value());
 </pre>
 <blockquote>
-Sample output:<br/>
-<br/>
+Sample output:
+&nbsp;
 10
 </blockquote>
 <p>When makeCounter() is called, a snapshot of the context of that function is saved.
@@ -21025,7 +21024,8 @@ iterable object (for example Array) containing key/value pairs as
 two-element arrays.</p>
 <pre>
 <b>const</b> o1 = {a: 1, b: 2},
-  o2 = {};
+      o2 = {};
+&nbsp;
 <b>const</b> weakmap = <b>new</b>WeakMap(&lbrack;&lbrack;o1, <b>true</b>&rbrack;, &lbrack;o2, o1&rbrack;&rbrack;);
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -21035,7 +21035,8 @@ two-element arrays.</p>
 value associated to the key, it returns <b>undefined</b>.</p>
 <pre>
 <b>const</b> obj1 = {},
-  obj2 = {};
+     obj2 = {};
+&nbsp;
 <b>const</b> weakmap = <b>new</b> WeakMap(&lbrack;&lbrack;obj1, 7&rbrack;&rbrack;);
 console.log(weakmap.<b>get</b>(obj1));  // <i>7</i>
 console.log(weakmap.<b>get</b>(obj2));  // <i>undefined</i>
@@ -21047,7 +21048,8 @@ console.log(weakmap.<b>get</b>(obj2));  // <i>undefined</i>
 so you can chain .<b>set</b>() calls.</p>
 <pre>
 <b>const</b> obj1 = {},
-   obj2 = {};
+      obj2 = {};
+&nbsp;
 <b>const</b> weakmap = <b>new</b> WeakMap();
 weakmap.<b>set</b>(obj1, 1).<b>set</b>(obj2, 2);
 console.log(weakmap.<b>get</b>(obj1)); // <i>1</i>
@@ -21060,7 +21062,8 @@ console.log(weakmap.<b>get</b>(obj2)); // <i>2</i>
 .has() method. It returns <b>true</b> if it exits, and otherwise<b>false</b>.</p>
 <pre>
 <b>const</b> obj1 = {},
-   obj2 = {};
+      obj2 = {};
+&nbsp;
 <b>const</b> weakmap = <b>new</b> WeakMap(&lbrack;&lbrack;obj1, 7&rbrack;&rbrack;);
 console.log(weakmap.has(obj1));  // <i>true</i>
 console.log(weakmap.has(obj2));  // <i>false</i>
@@ -21073,7 +21076,8 @@ console.log(weakmap.has(obj2));  // <i>false</i>
 returns <b>true</b> if the element existed and has been removed, otherwise <b>false</b>.</p>
 <pre>
 <b>const</b> obj1 = {},
-   obj2 = {};
+      obj2 = {};
+&nbsp;
 <b>const</b> weakmap = <b>new</b> WeakMap(&lbrack;&lbrack;obj1, 7&rbrack;&rbrack;);
 console.log(weakmap.<b>delete</b>(obj1)); // <i>true</i>
 console.log(weakmap.has(obj1));           // <i>false</i>
@@ -21093,55 +21097,45 @@ that weak reference does not contribute to reference count.</p>
 <pre>
 // <i>manually trigger garbage collection to make sure that we are in good status.</i>
 &gt; global.gc();
-<b>undefined</b>
-<br/>
+<b>undefined</b>&nbsp;
 // <i>check initial memory use，heapUsed is 4M or so</i>
 &gt; process.memoryUsage();
 { rss: 21106688,
   heapTotal: 7376896,
   heapUsed: 4153936,
   external: 9059 }
-nbsp;
+&nbsp;
 &gt; <b>let</b> wm = <b>new</b> WeakMap();
-<b>undefined</b>
-&nbsp;
+<b>undefined</b>&nbsp;
 &gt; <b>const</b> b = <b>new</b> Object();
-<b>undefined</b>
-&nbsp;
+<b>undefined</b>&nbsp;
 &gt; global.gc();
-<b>undefined</b>
-<br/>
+<b>undefined</b>&nbsp;
 // <i>heapUsed is still 4M or so</i>
 &gt; process.memoryUsage();
 { rss: 20537344,
   heapTotal: 9474048,
   heapUsed: 3967272,
-  external: 8993 }
-<br/>
+  external: 8993 }&nbsp;
 // <i>add key-value tuple into WeakMap</i> ，
 // <i>key is b.value is 5&ast;1024&ast;1024 array</i>
 &gt; wm.<b>set</b>(b, <b>new</b> Array(5&ast;1024&ast;1024));
-WeakMap {}
-<br/>
+WeakMap {}&nbsp;
 // <i>manual garbage collection</i>
 &gt; global.gc();
-<b>undefined</b>
-<br/>
+<b>undefined</b>&nbsp;
 // <i>heapUsed is still 45M</i>
 &gt; process.memoryUsage();
 { rss: 62652416,
   heapTotal: 51437568,
   heapUsed: 45911664,
-  external: 8951 }
-<br/>
+  external: 8951 }&nbsp;
 // <i>b reference to null</i>
 &gt; b = <b>null</b>;
-<b>null</b>
-<br/>
+<b>null</b>&nbsp;
 // <i>garbage collection</i>
 &gt; global.gc();
-<b>undefined</b>
-<br/>
+<b>undefined</b>&nbsp;
 // <i>after remove b reference to object ，heapUsed is 4M again</i>
 // <i>it means the big array in WeakMap is released</i>
 // <i>it also means weekmap does not contribute to big array&apos;s reference count, only b does.</i>
@@ -21166,8 +21160,7 @@ be garbage collected.</p>
 (for example an array). All of its elements will be added to the created WeakSet.</p>
 <pre>
 <b>const</b> obj1 = {},
-      obj2 = {};
-<br/>
+      obj2 = {};&nbsp;
 <b>const</b> weakset = <b>new</b> WeakSet(&lbrack;obj1, obj2&rbrack;);
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
