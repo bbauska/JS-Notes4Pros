@@ -21835,11 +21835,11 @@ doAsyncThing()
     .then(responseCurrent =&bsol;responseCurrent.json()) // <i>parse the response as JSON</i>
     .then(unicorn =&bsol;fetch(&apos;new/unicorn&apos;, { // <i>send a request to &apos;new/unicorn&apos;</i> method: &apos;post&apos;, // <i>using the POST method</i>
     body: JSON.stringify({unicorn}) // <i>pass the unicorn to the request body</i>
-  })
-)
-.then(responseNew =&bsol;responseNew.json())
-.then(json =&bsol;json.success) // <i>return success property of response</i>
-.<b>catch</b>(err =&bsol;console.log(&apos;Error creating unicorn:&apos;, err));
+    })
+  )
+  .then(responseNew =&bsol;responseNew.json())
+  .then(json =&bsol;json.success) // <i>return success property of response</i>
+  .<b>catch</b>(err =&bsol;console.log(&apos;Error creating unicorn:&apos;, err));
 }
 </pre>
 <p>The function can be rewritten using async/await as follows:</p>
