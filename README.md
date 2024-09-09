@@ -21305,7 +21305,7 @@ character code. For example, the non-breaking space character has code
 without distinction.</p>
 <pre>
 <b>var</b> regExp1 = <i>/&lbrack;&bsol;x00-xff&rbrack;/</i>; // <i>matches any character between U+0000 and U+00FF</i>
-<b>var</b> regExp2 = <i>/&lbrack;&bsol;x00-xFF&rbrack;/<i>; // <i>same as above</i>
+<b>var</b> regExp2 = <i>/&lbrack;&bsol;x00-xFF&rbrack;/</i>; // <i>same as above</i>
 </pre>
 <p><b>4-digit Unicode escape sequences</b></p>
 <p>Characters with codes between 0 and 65535 (216 - 1) can be represented
