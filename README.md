@@ -20694,6 +20694,7 @@ AMD, CommonJS).</p>
     second argument to the IIFE portion of the pattern. This function is
     passed any number of arguments to specify the dependencies of the
     module.</li>
+</ol>
 <p>In the below example we check for AMD, then CommonJS. If neither of
 those loaders are in use we fall back to making the module and its
 dependencies available globally.</p>
