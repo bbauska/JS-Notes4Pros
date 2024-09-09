@@ -21603,6 +21603,7 @@ class BeverageForPizza {
   withPepperoni.next();  // <i>Cola</i>
   withPepperoni.next();  // <i>Water</i>
   withPepperoni.next();  // <i>Beer</i>
+</pre>
 <p>In ECMAScript 2015 iterators are a built-in as a method that returns
 done and value. done is true when the iterator is at the end of the
 collection</p>
