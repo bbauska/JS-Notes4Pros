@@ -21120,14 +21120,17 @@ that weak reference does not contribute to reference count.</p>
 { rss: 20537344,
   heapTotal: 9474048,
   heapUsed: 3967272,
-  external: 8993 }&nbsp;
+  external: 8993 }
+&nbsp;
 // <i>add key-value tuple into WeakMap</i> ，
 // <i>key is b.value is 5&ast;1024&ast;1024 array</i>
 &gt; wm.<b>set</b>(b, <b>new</b> Array(5&ast;1024&ast;1024));
-WeakMap {}&nbsp;
+WeakMap {}
+&nbsp;
 // <i>manual garbage collection</i>
 &gt; global.gc();
-<b>undefined</b>&nbsp;
+<b>undefined</b>
+&nbsp;
 // <i>heapUsed is still 45M</i>
 &gt; process.memoryUsage();
 { rss: 62652416,
@@ -21369,7 +21372,7 @@ position of the letter after &bsol;&bsol;c determines the character code.</p>
 <p>The letter &quot;G&quot; (the 7th letter in the alphabet) refers to the
 character U+0007, and thus</p>
 <pre>
-&grave;/&bsol;&bsol;cG&grave;/.test(String.fromCharCode(7)); // <i>true</i>
+&grave;/&bsol;cG&grave;/.test(String.fromCharCode(7)); // <i>true</i>
 </pre>
 <!-- page 386 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -21408,6 +21411,7 @@ addEventListener</a> then you&apos;ve utilized the Observer pattern.</p>
     });
   };
 }
+&nbsp;
 <b>function</b> Observer() {
   <b>this</b>.notify = <b>function</b>(message) {
     // <i>Every observer must implement this function</i>
@@ -21424,12 +21428,14 @@ addEventListener</a> then you&apos;ve utilized the Observer pattern.</p>
     console.log(<b>this</b>.name &plus; &apos;: There is a meeting at &apos; &plus; meetingTime);
   };
 }
+&nbsp;
 <b>var</b> bob = <b>new</b> Employee(&apos;Bob&apos;);
 <b>var</b> jane = <b>new</b> Employee(&apos;Jane&apos;);
 <b>var</b> meetingAlerts = <b>new</b> Subject();
 meetingAlerts.registerObserver(bob);
 meetingAlerts.registerObserver(jane);
 meetingAlerts.notifyObservers(&apos;4pm&apos;);
+&nbsp;
 // <i>Output:</i>
 // <i>Bob: There is a meeting at 4pm</i>
 // <i>Jane: There is a meeting at 4pm</i>
