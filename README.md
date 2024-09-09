@@ -21232,7 +21232,7 @@ character code U+000A.</p>
   <li>&bsol;&bsol;u</li>
   <li>&bsol;&bsol;x0a</li>
   <li>&bsol;&bsol;u000a
-  <li>&bsol;&bsol;{a} new in ES6, only in strings</li>
+  <li>&bsol;&bsol;u{a} new in ES6, only in strings</li>
   <li>&bsol;&bsol;012 forbidden in string literals in strict mode and in template strings</li>
   <li>&bsol;&bsol;cj only in regular expressions</li>
 </ul>
@@ -21304,8 +21304,8 @@ character code. For example, the non-breaking space character has code
 <p>For hex digits above 9, the letters a to f are used, in lowercase or uppercase 
 without distinction.</p>
 <pre>
-<b>var</b> regExp1 = <i>/&lbrack;&bsol;&bsol;x00-xff&rbrack;/</i>; // <i>matches any character between U+0000 and U+00FF</i>
-<b>var</b> regExp2 = </i>/&lbrack;&bsol;&bsol;x00-xFF&rbrack;/<i>; // <i>same as above</i>
+<b>var</b> regExp1 = <i>/&lbrack;&bsol;x00-xff&rbrack;/</i>; // <i>matches any character between U+0000 and U+00FF</i>
+<b>var</b> regExp2 = <i>/&lbrack;&bsol;x00-xFF&rbrack;/<i>; // <i>same as above</i>
 </pre>
 <p><b>4-digit Unicode escape sequences</b></p>
 <p>Characters with codes between 0 and 65535 (216 - 1) can be represented
