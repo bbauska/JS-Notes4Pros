@@ -21447,11 +21447,59 @@ different modules, this way you reduce module dependency on each
 other, increase loose coupling, and consequently portability.</p>
 <p>This <a href="http://www.dofactory.com/javascript/mediator-design-pattern">
 <b>Chatroom example</b></a> explains how mediator patterns works:</p>
-
-![](./images/image041.png){width="7.486805555555556in"
-height="8.206944444444444in"}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 41.  (3xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- <p align="left">
+  <img src="./images/image041.png"
+  title="."
+  alt="."
+  style="border: 2px solid #000000; width:5.5in;" />
+<!-- ![](./images/image041.png){width="7.486805555555556in" height="8.206944444444444in"} -->
+-->
 <pre>
+// <i>each participant is just a module that wants to talk to other modules(other participants)</i>
+<b>var</b> Participant = <b>function</b>(name) {
+  <b>this</b>.name = name;
+  <b>this</b>.chatroom = <b>null</b>;
+};
+// <i>each participant has method for talking, and also listening to other participants</i>
+Participant.<b>prototype</b> = {
+  send: <b>function</b>(message, to) {
+    <b>this</b>.chatroom.send(message, <b>this</b>, to);
+  },
+  receive: <b>function</b>(message, from) {
+    log.add(from.name + " to " + <b>this</b>.name + ": " + message);
+  }
+};
+&nbsp;
+// <i>chatroom is the Mediator: it is the hub where participants send message to and receive message from</i>
+<b>var</b> Chatroom = <b>function</b>() {
+  <b>var</b> participants = {};
+&nbsp;
+  <b>return</b> {
+    register: <b>function</b>(participants) {
+	  participants[participant.name] = participant;
+	  participant.chatroom = this;
+	},
+	send: <b>function</b>(message, from) {
+	  <b>for</b> (key <b>in</b> participants) {
+	    <b>if</b> (participants[key] !== from) { // <i>you can't messge yourself !</i>
+		    participants[key].receive(message, from);
+		}
+	  }
+	}
+  };
+};
+// <i>log helper</i>
+&nbsp;
+<b>var</b> log = (<b>function</b>() {
+  var log = "";
+  return {
+    add: <b>function</b>(msg) { log += msg + "\n"; },
+	show: <b>function</b>() { alert(log); log = ""; }
+  }
 })();
+&nbsp;
 <b>function</b> run() {
   <b>var</b> yoko = <b>new</b> Participant(&quot;Yoko&quot;);
   <b>var</b> john = <b>new</b> Participant(&quot;John&quot;);
