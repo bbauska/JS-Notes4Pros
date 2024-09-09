@@ -21539,9 +21539,9 @@ code to use to execute the command.</p>
 <b>var</b> aCommand = <b>new</b> Array();
 aCommand.push(<b>new</b> Instructions().DoThis); // <i>Method to execute</i>
 aCommand.push(&quot;String Argument&quot;); // <i>string argument</i>
-aCommand.push(777);                 // <i>integer argument</i>
-aCommand.push(<b>new</b> Object {} );      // <i>object argument</i>
-aCommand.push(<b>new</b> Array() );        // <i>array argument</i>
+aCommand.push(777);               // <i>integer argument</i>
+aCommand.push(<b>new</b> Object {} );    // <i>object argument</i>
+aCommand.push(<b>new</b> Array() );      // <i>array argument</i>
 </pre>
 <p>Constructor for command class</p>
 <pre>
