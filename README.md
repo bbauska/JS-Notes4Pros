@@ -21097,7 +21097,8 @@ that weak reference does not contribute to reference count.</p>
 <pre>
 // <i>manually trigger garbage collection to make sure that we are in good status.</i>
 &gt; global.gc();
-<b>undefined</b>&nbsp;
+<b>undefined</b>
+&nbsp;
 // <i>check initial memory use，heapUsed is 4M or so</i>
 &gt; process.memoryUsage();
 { rss: 21106688,
@@ -21106,11 +21107,14 @@ that weak reference does not contribute to reference count.</p>
   external: 9059 }
 &nbsp;
 &gt; <b>let</b> wm = <b>new</b> WeakMap();
-<b>undefined</b>&nbsp;
+<b>undefined</b>
+&nbsp;
 &gt; <b>const</b> b = <b>new</b> Object();
-<b>undefined</b>&nbsp;
+<b>undefined</b>
+&nbsp;
 &gt; global.gc();
-<b>undefined</b>&nbsp;
+<b>undefined</b>
+&nbsp;
 // <i>heapUsed is still 4M or so</i>
 &gt; process.memoryUsage();
 { rss: 20537344,
@@ -21129,13 +21133,16 @@ WeakMap {}&nbsp;
 { rss: 62652416,
   heapTotal: 51437568,
   heapUsed: 45911664,
-  external: 8951 }&nbsp;
+  external: 8951 }
+&nbsp;
 // <i>b reference to null</i>
 &gt; b = <b>null</b>;
-<b>null</b>&nbsp;
+<b>null</b>
+&nbsp;
 // <i>garbage collection</i>
 &gt; global.gc();
-<b>undefined</b>&nbsp;
+<b>undefined</b>
+&nbsp;
 // <i>after remove b reference to object ，heapUsed is 4M again</i>
 // <i>it means the big array in WeakMap is released</i>
 // <i>it also means weekmap does not contribute to big array&apos;s reference count, only b does.</i>
@@ -21160,145 +21167,684 @@ be garbage collected.</p>
 (for example an array). All of its elements will be added to the created WeakSet.</p>
 <pre>
 <b>const</b> obj1 = {},
-      obj2 = {};&nbsp;
+      obj2 = {};
+&nbsp;
 <b>const</b> weakset = <b>new</b> WeakSet(&lbrack;obj1, obj2&rbrack;);
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch77-2">Section 77.2: Adding a value</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-.add()
-To add a value to a WeakSet, use the method. This method is chainable.
-<b>const</b>
-obj1
-=
-{
-}
-,
-obj2
-=
-{
-}
-;
-<b>const</b>
-weakset
-=
-<b>new</b>
-WeakSet
-(
-)
-;
-weakset.
-add
-(
-obj1
-)
-.
-add
-(
-obj2
-)
-;
+<p>To add a value to a WeakSet, use the .add() method. This method is chainable.</p>
+<pre>
+<b>const</b> obj1 = {},
+       obj2 = {};
+&nbsp;
+<b>const</b> weakset = <b>new</b> WeakSet();
+weakset.add(obj1).add(obj2);
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch77-3">Section 77.3: Checking if a value exists</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-.has()
-To check if a value exits in a WeakSet, use the method.
-<b>const</b>
-obj1
-=
-{
-}
-,
-obj2
-=
-{
-}
-;
-<b>const</b>
-weakset
-=
-<b>new</b>
-WeakSet
-(
-&lbrack;
-obj1
-&rbrack;
-)
-;
-console.
-log
-(
-weakset.
-has
-(
-obj1
-)
-)
-;
-// <i>true</i>
-console.
-log
-(
-weakset.
-has
-(
-obj2
-)
-)
-;
-// <i>false</i>
+<p>To check if a value exits in a WeakSet, use the .has() method.</p>
+<pre>
+<b>const</b> obj1 = {},
+      obj2 = {};
+&nbsp;
+<b>const</b> weakset = <b>new</b> WeakSet(&lbrack;obj1&rbrack;);
+console.log(weakset.has(obj1)); // <i>true</i>
+console.log(weakset.has(obj2)); // <i>false</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch77-4">Section 77.4: Removing a value</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>To remove a value from a WeakSet, use the .delete() method. This method returns
+<b>true</b> if the value existed and has been removed, otherwise <b>false</b>.</p>
+<pre>
+<b>const</b> obj1 = {},
+       obj2 = {};
+&nbsp;
+<b>const</b> weakset = <b>new</b> WeakSet(&lbrack;obj1&rbrack;);
+console.log(weakset.<b>delete</b>(obj1)); // <i>true</i>
+console.log(weakset.<b>delete</b>(obj2)); // <i>false</i>
+</pre>
+<!-- page 383 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch78">Chapter 78: Escape Sequences</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch78-1">Section 78.1: Entering special characters in strings and regular expressions</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Most printable characters can be included in string or regular
+expression literals just as they are, e.g.</p>
+<pre>
+<b>var</b> str = &quot;ポケモン&quot;; // <i>a valid string</i>
+<b>var</b> regExp = <i>/&lbrack;</i>Α<i>-</i>Ωα<i>-</i>ω<i>&rbrack;/</i>; // <i>matches any Greek letter without diacritics</i>
+</pre>
+<p>In order to add arbitrary characters to a string or regular expression, including 
+non-printable ones, one has to use <i>escape sequences</i>. Escape sequences consist 
+of a backslash (&quot;&bsol;&bsol;quot;) followed by one or more other characters. 
+To write an escape sequence for a particular character, one typically (but not always) 
+needs to know its hexadecimal character code.</p>
+<p>JavaScript provides a number of different ways to specify escape sequences, as 
+documented in the examples in this topic. For instance, the following escape sequences 
+all denote the same character: the <i>line feed</i> (Unix newline character), with 
+character code U+000A.</p>
+<ul>
+  <li>&bsol;&bsol;u</li>
+  <li>&bsol;&bsol;x0a</li>
+  <li>&bsol;&bsol;u000a
+  <li>&bsol;&bsol;{a} new in ES6, only in strings</li>
+  <li>&bsol;&bsol;012 forbidden in string literals in strict mode and in template strings</li>
+  <li>&bsol;&bsol;cj only in regular expressions</li>
+</ul>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch78-2">Section 78.2: Escape sequence types</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p><b>Single character escape sequences</b></p>
+<p>Some escape sequences consist of a backslash followed by a single character.</p>
+<p>For example, in alert("Hello&absol;n&absol;World");, the escape sequence 
+&bsol;n is used to introduce a newline in the string parameter, so that the 
+words &quot;Hello&quot; and &quot;World&quot; are displayed in consecutive lines.</p>
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Escape sequence</b></th>
+      <th><b>Character</b></th>
+      <th><b>Unicode</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&bsol;b(only in strings, not in regual expressions)</td>
+      <td>backspace</td>
+      <td>U+0008</td>
+    </tr>
+    <tr>
+      <td>&bsol;t</td>
+      <td>horizontal tab</td>
+      <td>U+0009</td>
+    </tr>
+    <tr>
+      <td>&bsol;n</td>
+      <td>line feed</td>
+      <td>U+000A</td>
+    </tr>
+    <tr>
+      <td>&bsol;v</td>
+      <td>vertical tab</td>
+      <td>U+000B</td>
+    </tr>
+    <tr>
+      <td>&bsol;f</td>
+      <td>form feed</td>
+      <td>U+000C</td>
+    </tr>
+    <tr>
+      <td>&bsol;r</td>
+      <td>carrige return</td>
+      <td>U+000D</td>
+    </tr>
+  </tbody>
+</table>
+<p>Additionally, the sequence &bsol;&bsol;0, when not followed by a digit between 0
+and 7, can be used to escape the null character (U+0000).</p>
+<p>The sequences &bsol;&bsol;,&bsol;&apos; and &bsol;&quot; are used to escape the 
+character that follows the backslash. While similar to nonescape sequences,
+where the leading backslash is simply ignored (i.e. &bsol;&bsol;? for ?), they
+are explicitly treated as single character escape sequences inside
+strings as per the specification.</p>
+<p><b>Hexadecimal escape sequences</b></p>
+<!-- page 384 -->
+<p>Characters with codes between 0 and 255 can be represented with an
+escape sequence where &bsol;&bsol;x is followed by the 2-digit hexadecimal
+character code. For example, the non-breaking space character has code
+160 or A0 in base 16, and so it can be written as &bsol;&bsol;xa0.</p>
+<pre>
+<b>var</b> str = &quot;ONE<b>&bsol;x</b>a0LINE&quot;; // <i>ONE and LINE with a non-breaking space between them</i>
+</pre>
+<p>For hex digits above 9, the letters a to f are used, in lowercase or uppercase 
+without distinction.</p>
+<pre>
+<b>var</b> regExp1 = <i>/&lbrack;&bsol;&bsol;x00-xff&rbrack;/</i>; // <i>matches any character between U+0000 and U+00FF</i>
+<b>var</b> regExp2 = </i>/&lbrack;&bsol;&bsol;x00-xFF&rbrack;/<i>; // <i>same as above</i>
+</pre>
+<p><b>4-digit Unicode escape sequences</b></p>
+<p>Characters with codes between 0 and 65535 (216 - 1) can be represented
+with an escape sequence where &bsol;&bsol;u is followed by the 4-digit
+hexadecimal character code.</p>
+<p>For example, the Unicode standard defines the right arrow character
+(&quot;?&quot;) with the number 8594, or 2192 in hexadecimal format. So an
+escape sequence for it would be &bsol;u2192.</p>
+<p>This produces the string &quot;A ? B&quot;:</p>
+<pre>
+<b>var</b> str = &quot;A <b>&bsol;u</b>2192 B&quot;;
+</pre>
+<p>For hex digits above 9, the letters a to f are used, in lowercase or
+uppercase without distinction. Hexadecimal codes shorter than 4 digits
+must be left-padded with zeros: &bsol;&bsol;u007A for the small letter &quot;z&quot;.</p>
+<p><b>Curly bracket Unicode escape sequences</b></p>
+<h5>Version ≥ 6</h5>
+<p>ES6 extends Unicode support to the full code range from 0 to 0x10FFFF.
+In order to escape characters with code greater than 216 - 1, a new
+syntax for escape sequences was introduced:</p>
+<pre>
+&bsol;u{???}
+</pre>
+<p>Where the code in curly braces is hexadecimal representation of the code point value, e.g.</p>
+<pre>
+alert(&quot;Look! <b>&bsol;u</b>{1f440}&quot;); // <i>Look! ????</i>
+</pre>
+<p>In the example above, the code 1f440 is the hexadecimal representation of the 
+character code of the Unicode Character <i>Eyes</i>.</p>
+<p>Note that the code in curly braces may contain any number of hex
+digits, as long the value does not exceed 0x10FFFF. For hex digits
+above 9, the letters a to f are used, in lowercase or uppercase
+without distinction.</p>
+<p>Unicode escape sequences with curly braces only work inside strings,
+not inside regular expressions!</p>
+<p><b>Octal escape sequences</b></p>
+<p>Octal escape sequences are deprecated as of ES5, but they are still
+supported inside regular expressions and in non-strict mode also
+inside non-template strings. An octal escape sequence consists of one,
+two or three octal digits, with value between 0 and 3778 = 255.</p>
+<p>For example, the capital letter &quot;E&quot; has character code 69, or 105 in
+base 8. So it can be represented with the escape sequence &bsol;105:</p>
+<!-- page 385 -->
+<pre>
+/&bsol;105scape/.test(&quot;Fun with Escape Sequences&quot;); // <i>true</i>
+</pre>
+<p>In strict mode, octal escape sequences are not allowed inside strings
+and will produce a syntax error. It is worth to note that &bsol;0, unlike
+&bsol;00 or &bsol;000, is <i>not</i> considered an octal escape sequence, and is
+thus still allowed inside strings (even template strings) in strict mode.</p>
+<b>Control escape sequences</b>
+<p>Some escape sequences are only recognized inside regular expression
+literals (not in strings). These can be used to escape characters with
+codes between 1 and 26 (U+0001U+001A). They consist of a single
+letter AZ (case makes no difference) preceded by &bsol;&bsol;c. The alphabetic
+position of the letter after &bsol;&bsol;c determines the character code.</p>
+<p>For example, in the regular expression</p>
+<pre>
+&grave;/&bsol;cG/&grave;
+</pre>
+<p>The letter &quot;G&quot; (the 7th letter in the alphabet) refers to the
+character U+0007, and thus</p>
+<pre>
+&grave;/&bsol;&bsol;cG&grave;/.test(String.fromCharCode(7)); // <i>true</i>
+</pre>
+<!-- page 386 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch79">Chapter 79: Behavioral Design Patterns</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch79-1">Section 79.1: Observer pattern</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>The <a href="https://en.wikipedia.org/wiki/Observer_pattern">Observer</a> 
+pattern is used for event handling and delegation. A <i>subject</i> maintains a
+collection of <i>observers.</i> The subject then notifies these observers
+whenever an event occurs. If you&apos;ve ever used 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">
+addEventListener</a> then you&apos;ve utilized the Observer pattern.</p>
+<pre>
+<b>function</b> Subject() {
+  <b>this</b>.observers = &lbrack;&rbrack;; // <i>Observers listening to the subject</i>
+&nbsp;
+  <b>this</b>.registerObserver = <b>function</b>(observer) {
+    // <i>Add an observer if it isn&apos;t already being tracked</i>
+    <b>if</b> (<b>this</b>.observers.indexOf(observer) === &minus;1) {
+      <b>this</b>.observers.push(observer);
+    }
+  };
+&nbsp;
+  <b>this</b>.unregisterObserver = <b>function</b>(observer) {
+    // <i>Removes a previously registered observer</i>
+    <b>var</b> index = <b>this</b>.observers.indexOf(observer);
+    <b>if</b> (index &gt; &minus;1) {
+      <b>this</b>.observers.splice(index, 1);
+    }
+  };
+  <b>this</b>.notifyObservers = <b>function</b>(message) {
+    // <i>Send a message to all observers</i>
+    <b>this</b>.observers.forEach(<b>function</b>(observer) {
+      observer.notify(message);
+    });
+  };
+}
+<b>function</b> Observer() {
+  <b>this</b>.notify = <b>function</b>(message) {
+    // <i>Every observer must implement this function</i>
+  };
+}
+</pre>
+<p><b>Example usage:</b></p>
+<pre>
+<b>function</b> Employee(name) {
+  <b>this</b>.name = name;
+&nbsp;
+  // <i>Implement &grave;notify&grave; so the subject can pass us messages</i>
+  <b>this</b>.notify = <b>function</b>(meetingTime) {
+    console.log(<b>this</b>.name &plus; &apos;: There is a meeting at &apos; &plus; meetingTime);
+  };
+}
+<b>var</b> bob = <b>new</b> Employee(&apos;Bob&apos;);
+<b>var</b> jane = <b>new</b> Employee(&apos;Jane&apos;);
+<b>var</b> meetingAlerts = <b>new</b> Subject();
+meetingAlerts.registerObserver(bob);
+meetingAlerts.registerObserver(jane);
+meetingAlerts.notifyObservers(&apos;4pm&apos;);
+// <i>Output:</i>
+// <i>Bob: There is a meeting at 4pm</i>
+// <i>Jane: There is a meeting at 4pm</i>
+</pre>
+<!-- page 387 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch79-2">Section 79.2: Mediator Pattern</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Think of the mediator pattern as the flight control tower that
+controls planes in the air: it directs this plane to land now, the
+second to wait, and the third to take off, etc. However no plane is
+ever allowed to talk to its peers.</p>
+<p>This is how mediator works, it works as a communication hub among
+different modules, this way you reduce module dependency on each
+other, increase loose coupling, and consequently portability.</p>
+<p>This <a href="http://www.dofactory.com/javascript/mediator-design-pattern">
+<b>Chatroom example</b></a> explains how mediator patterns works:</p>
+
+![](./images/image041.png){width="7.486805555555556in"
+height="8.206944444444444in"}
+<pre>
+})();
+<b>function</b> run() {
+  <b>var</b> yoko = <b>new</b> Participant(&quot;Yoko&quot;);
+  <b>var</b> john = <b>new</b> Participant(&quot;John&quot;);
+  <b>var</b> paul = <b>new</b> Participant(&quot;Paul&quot;);
+  <b>var</b> ringo = <b>new</b> Participant(&quot;Ringo&quot;);
+&nbsp;
+  <b>var</b> chatroom = <b>new</b> Chatroom();
+  chatroom.register(yoko);
+  chatroom.register(john);
+  chatroom.register(paul);
+  chatroom.register(ringo);
+&nbsp;
+  yoko.send(&quot;All you need is love.&quot;);
+  yoko.send(&quot;I love you John.&quot;);
+  paul.send(&quot;Ha, I heard that!&quot;);
+&nbsp;
+  log.show();
+}
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch79-3">Section 79.3: Command</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>The command pattern encapsulates parameters to a method, current
+object state, and which method to call. It is useful to
+compartmentalize everything needed to call a method at a later time.
+It can be used to issue a &quot;command&quot; and decide later which piece of
+code to use to execute the command.</p>
+<p>There are three components in this pattern:</p>
+<ol type="1" start="1">
+  <li>Command Message - the command itself, including the method name,
+    parameters, and state</li>
+  <li>Invoker - the part which instructs the command to execute its
+    instructions. It can be a timed event, user interaction, a step in a
+    process, callback, or any way needed to execute the command.</li>
+  <li>Receiver - the target of the command execution.</li>
+</ol>
+<p><b>Command Message as an Array</b></p>
+<pre>
+<b>var</b> aCommand = <b>new</b> Array();
+aCommand.push(<b>new</b> Instructions().DoThis); // <i>Method to execute</i>
+aCommand.push(&quot;String Argument&quot;); // <i>string argument</i>
+aCommand.push(777); // <i>integer argument</i>
+aCommand.push(<b>new</b> Object {} ); // <i>object argument</i>
+aCommand.push(<b>new</b> Array() ); // <i>array argument</i>
+</pre>
+<p>Constructor for command class</p>
+<pre>
+class DoThis {
+  constructor( stringArg, numArg, objectArg, arrayArg ) {
+    <b>this</b>.&lowbar;stringArg = stringArg;
+    <b>this</b>.&lowbar;numArg = numArg;
+    <b>this</b>.&lowbar;objectArg = objectArg;
+    <b>this</b>.&lowbar;arrayArg = arrayArg;
+  }
+  Execute() {
+    <b>var</b> receiver = <b>new</b> Instructions();
+    receiver.DoThis(<b>this</b>.&lowbar;stringArg, <b>this</b>.&lowbar;numArg, <b>this</b>.&lowbar;objectArg, <b>this</b>.&lowbar;arrayArg);
+  }
+}
+</pre>
+<!-- page 389 -->
+<p><b>Invoker</b></p>
+<pre>
+aCommand.Execute();
+</pre>
+<p>Can invoke:</p>
+<ul>
+  <li>immediately</li>
+  <li>in response to an event</li>
+  <li>in a sequence of execution</li>
+  <li>as a callback response or in a promise</li>
+  <li>at the end of an event loop</li>
+  <li>in any other needed way to invoke a method</li>
+</ul>
+<p><b>Receiver</b></p>
+<pre>
+class Instructions {
+  DoThis( stringArg, numArg, objectArg, arrayArg ) {
+    console.log( &grave;&dollar;{stringArg}, &dollar;{numArg}, &dollar;{objectArg}, &dollar;{arrayArg}&grave;);
+  }
+}
+</pre>
+<p>A client generates a command, passes it to an invoker that either
+executes it immediately or delays the command, and then the command
+acts upon a receiver. The command pattern is very useful when used
+with companion patterns to create messaging patterns.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch79-4">Section 79.4: Iterator</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-.<b>delete</b>()
-To remove a value from a WeakSet, use the method. This method returns
-<b>true</b> if the value existed and has been removed, otherwise
-<b>false</b>.
-<b>const</b>
-obj1
-=
+An iterator pattern provides a simple method for selecting,
+sequentially, the next item in a collection.
+<b>Fixed Collection</b>
+class
+BeverageForPizza
 {
-}
-,
-obj2
-=
+constructor
+(
+preferenceRank
+)
 {
-}
+<b>this</b>
+.
+beverageList
+=
+beverageList
 ;
-<b>const</b>
-weakset
+<b>this</b>
+.
+pointer
+=
+0
+;
+}
+next
+(
+)
+{
+<b>return</b>
+<b>this</b>
+.
+beverageList
+&lbrack;
+<b>this</b>
+.
+pointer
+++
+&rbrack;
+;
+}
+<b>var</b>
+withPepperoni
 =
 <b>new</b>
-WeakSet
+BeverageForPizza
 (
 &lbrack;
-obj1
+&quot;Cola&quot;
+,
+&quot;Water&quot;
+,
+&quot;Beer&quot;
 &rbrack;
 )
 ;
-console.
-log
+withPepperoni.
+next
 (
-weakset.
-<b>delete</b>
-(
-obj1
-)
 )
 ;
-// <i>true</i>
-console.
-log
+// <i>Cola</i>
+withPepperoni.
+next
 (
-weakset.
-<b>delete</b>
+)
+;
+// <i>Water</i>
+withPepperoni.
+next
 (
-obj2
 )
+;
+// <i>Beer</i>
+In ECMAScript 2015 iterators are a built-in as a method that returns
+done and value. done is true when the iterator is at the end of the
+collection
+<b>function</b>
+preferredBeverage
+(
+beverage
 )
+{
+<b>if</b>
+(
+beverage
+==
+&quot;Beer&quot;
+)
+{
+<b>return</b>
+<b>true</b>
+;
+}
+<b>else</b>
+{
+<b>return</b>
+<b>false</b>
+;
+}
+}
+<b>var</b>
+withPepperoni
+=
+<b>new</b>
+BeverageForPizza
+(
+&lbrack;
+&quot;Cola&quot;
+,
+&quot;Water&quot;
+,
+&quot;Beer&quot;
+,
+&quot;Orange Juice&quot;
+&rbrack;
+)
+;
+<b>for</b>
+(
+<b>var</b>
+bevToOrder of withPepperoni
+)
+{
+<b>if</b>
+(
+preferredBeverage
+(
+bevToOrder
+)
+{
+bevToOrder.
+done
+;
+// <i>false, because &quot;Beer&quot; isn&apos;t the final collection item</i>
+<b>return</b>
+bevToOrder
+;
+// <i>&quot;Beer&quot;</i>
+}
+}
+<b>As a Generator</b>
+class
+FibonacciIterator
+{
+constructor
+(
+)
+{
+<b>this</b>
+.
+previous
+=
+1
+;
+<b>this</b>
+.
+beforePrevious
+=
+1
+;
+}
+next
+(
+)
+{
+<b>var</b>
+current
+=
+<b>this</b>
+.
+previous
+&plus;
+<b>this</b>
+.
+beforePrevious
+;
+<b>this</b>
+.
+beforePrevious
+=
+<b>this</b>
+.
+previous
+;
+<b>this</b>
+.
+previous
+=
+current
+;
+<b>return</b>
+current
+;
+}
+}
+<b>var</b>
+fib
+=
+<b>new</b>
+FibonacciIterator
+(
+)
+;
+fib.
+next
+(
+)
+;
+// <i>2</i>
+fib.
+next
+(
+)
+;
+// <i>3</i>
+fib.
+next
+(
+)
+;
+// <i>5</i>
+In ECMAScript 2015
+<b>function</b>
+&ast;
+FibonacciGenerator
+(
+)
+{
+// <i>asterisk informs javascript of generator</i>
+<b>var</b>
+previous
+=
+1
+;
+<b>var</b>
+beforePrevious
+=
+1
+;
+while
+(
+<b>true</b>
+)
+{
+<b>var</b>
+current
+=
+previous
+&plus;
+beforePrevious
+;
+beforePrevious
+=
+previous
+;
+previous
+=
+current
+;
+yield current
+;
+// <i>This is like return but</i>
+// <i>keeps the current state of the function</i>
+// <i>i.e it remembers its place between calls</i>
+}
+}
+<b>var</b>
+fib
+=
+FibonacciGenerator
+(
+)
+;
+fib.
+next
+(
+)
+.
+value
+;
+// <i>2</i>
+fib.
+next
+(
+)
+.
+value
+;
+// <i>3</i>
+fib.
+next
+(
+)
+.
+value
+;
+// <i>5</i>
+fib.
+next
+(
+)
+.
+done
 ;
 // <i>false</i>
 
