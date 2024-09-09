@@ -21180,7 +21180,7 @@ be garbage collected.</p>
 <p>To add a value to a WeakSet, use the .add() method. This method is chainable.</p>
 <pre>
 <b>const</b> obj1 = {},
-       obj2 = {};
+      obj2 = {};
 &nbsp;
 <b>const</b> weakset = <b>new</b> WeakSet();
 weakset.add(obj1).add(obj2);
@@ -21204,7 +21204,7 @@ console.log(weakset.has(obj2)); // <i>false</i>
 <b>true</b> if the value existed and has been removed, otherwise <b>false</b>.</p>
 <pre>
 <b>const</b> obj1 = {},
-       obj2 = {};
+      obj2 = {};
 &nbsp;
 <b>const</b> weakset = <b>new</b> WeakSet(&lbrack;obj1&rbrack;);
 console.log(weakset.<b>delete</b>(obj1)); // <i>true</i>
@@ -21404,6 +21404,7 @@ addEventListener</a> then you&apos;ve utilized the Observer pattern.</p>
       <b>this</b>.observers.splice(index, 1);
     }
   };
+&nbsp;
   <b>this</b>.notifyObservers = <b>function</b>(message) {
     // <i>Send a message to all observers</i>
     <b>this</b>.observers.forEach(<b>function</b>(observer) {
@@ -21538,9 +21539,9 @@ code to use to execute the command.</p>
 <b>var</b> aCommand = <b>new</b> Array();
 aCommand.push(<b>new</b> Instructions().DoThis); // <i>Method to execute</i>
 aCommand.push(&quot;String Argument&quot;); // <i>string argument</i>
-aCommand.push(777); // <i>integer argument</i>
-aCommand.push(<b>new</b> Object {} ); // <i>object argument</i>
-aCommand.push(<b>new</b> Array() ); // <i>array argument</i>
+aCommand.push(777);                 // <i>integer argument</i>
+aCommand.push(<b>new</b> Object {} );      // <i>object argument</i>
+aCommand.push(<b>new</b> Array() );        // <i>array argument</i>
 </pre>
 <p>Constructor for command class</p>
 <pre>
