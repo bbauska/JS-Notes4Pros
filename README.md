@@ -21453,15 +21453,6 @@ different modules, this way you reduce module dependency on each
 other, increase loose coupling, and consequently portability.</p>
 <p>This <a href="http://www.dofactory.com/javascript/mediator-design-pattern">
 <b>Chatroom example</b></a> explains how mediator patterns works:</p>
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 41.  (3xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!-- <p align="left">
-  <img src="./images/image041.png"
-  title="."
-  alt="."
-  style="border: 2px solid #000000; width:5.5in;" />
-<!-- ![](./images/image041.png){width="7.486805555555556in" height="8.206944444444444in"} -->
--->
 <pre>
 // <i>each participant is just a module that wants to talk to other modules(other participants)</i>
 <b>var</b> Participant = <b>function</b>(name) {
