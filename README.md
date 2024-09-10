@@ -22228,6 +22228,7 @@ Promise&lt;IteratorItem&gt;, a <i>promise</i> for the next value.</p>
 <i>&ast; Returns a promise which resolves after time had passed.</i>
 <i>&ast;/</i>
 <b>const</b> delay = time =&gt; <b>new</b> Promise(resolve =&gt; setTimeout(resolve, time));
+&nbsp;
 async <b>function</b>&ast; delayedRange(max) {
   <b>for</b> (<b>let</b> i = 0; i &lt; max; i++) {
     await delay(1000);
@@ -22289,6 +22290,7 @@ pointing to the element we are receiving the stats for.</p>
 <pre>
 <b>var</b> pipeline = {};
 // <i>(&hellip;) adding things in pipeline</i>
+&nbsp;
 <b>var</b> processOneFile = <b>function</b>(key) {
   fs.stat(pipeline&lbrack;key&rbrack;.path, <b>function</b>(err, stats) {
     <b>if</b> (err) {
@@ -22416,6 +22418,7 @@ thing!</p>
 <b>function</b> isEven(n) {
   <b>return</b> n &percnt; 2 == 0;
 }
+&nbsp;
 <b>function</b> isOdd(n) {
   <b>if</b> (isEven(n)) {
     <b>return false</b>;
@@ -22570,6 +22573,7 @@ presented as numeric value 1 and <b>false</b> as 0</p>
 <pre>
 <b>let</b> items = &lbrack;&apos;foo&apos;, &apos;bar&apos;, &apos;baz&apos;&rbrack;;
 <b>let</b> el = &apos;a&apos;;
+&nbsp;
 <b>if</b> (items.indexOf(&apos;a&apos;) !== &minus;1) {}
 </pre>
 <p>or</p>
@@ -22622,5 +22626,1436 @@ simple representation in binary format.</p>
 <b>let</b> e = ~2.5;         // <i>c is now -3</i>
 </pre>
 <!-- page 406 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch87">Chapter 87: Using JavaScript to get/set CSS custom variables</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+cSection 87.1: How to get and set CSS variable property values</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>To get a value use the .getPropertyValue() method</p>
+<pre>
+element.style.getPropertyValue(&quot;&dash;&dash;var&quot;)
+</pre>
+<p>To set a value use the .setProperty() method.</p>
+<pre>
+element.style.setProperty(&quot;&bsol;var&quot;, &quot;NEW_VALUE&quot;)
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch88">Chapter 88: Selection API</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Parameter</b></th>
+      <th><b>Details</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>startOffset</td>
+      <td>If the node is a Text node, it is the number of characters from the beginning of startNode to where the startOffset range begins. Otherwise, it is the number of child nodes between the beginning of startNode to where the range begins.</td>
+    </tr>
+    <tr>
+      <td>endOffset</td>
+      <td>If the node is a Text node, it is the number of characters from the beginning of startNode to where the endOffset range ends. Otherwise, it is the number of child nodes between the beginning of startNode to where the range ends.</td>
+    </tr>
+  </tbody>
+</table>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch88-1">Section 88.1: Get the text of the selection</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+<b>let</b> sel = document.getSelection();
+<b>let</b> text = sel.toString();
+onsole.log(text);  // <i>logs what the user selected</i>
+</pre>
+<p>Alternatively, since the toString member function is called
+automatically by some functions when converting the object to a
+string, you don&apos;t always have to call it yourself.</p>
+<pre>
+console.log(document.getSelection());
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch88-2">Section 88.2: Deselect everything that is selected</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+<b>let</b> sel = document.getSelection();
+sel.removeAllRanges();
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch88-3">Section 88.3: Select the contents of an element</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+<b>let</b> sel = document.getSelection();
+&nbsp;
+<b>let</b> myNode = document.getElementById(&apos;element-to-select&apos;);
+&nbsp;
+<b>let</b> range = document.createRange();
+range.selectNodeContents(myNode);
+&nbsp;
+sel.addRange(range);
+</pre>
+<p>It may be necessary to first remove all the ranges of the previous
+selection, as most browsers don&apos;t support multiple ranges.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch89">Chapter 89: File API, Blobs and FileReaders</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Property/Method</b></th>
+      <th><b>Description</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>error</td>
+      <td>A error that occurred while reading the file.</td>
+    </tr>
+    <tr>
+      <td>readyState</td>
+      <td>Contains the current state of the FileReader.</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>Contains the file contents.</td>
+    </tr>
+    <tr>
+      <td>onabort</td>
+      <td>Triggered when the operation is aborted.</td>
+    </tr>
+    <tr>
+      <td>onerror</td>
+      <td>Triggered when an error is encountered.</td>
+    </tr>
+    <tr>
+      <td>onload</td>
+      <td>Triggered when the file has loaded.</td>
+    </tr>
+    <tr>
+      <td>onloadstart</td>
+      <td>Triggered when the file loading operation has started.</td>
+    </tr>
+    <tr>
+      <td>onloadend</td>
+      <td>Triggered when the file loading operation has ended.</td>
+    </tr>
+    <tr>
+      <td>onprogress</td>
+      <td>Triggered whilst reading a Blob.</td>
+    </tr>
+    <tr>
+      <td>abort()</td>
+      <td>Aborts the current operation.</td>
+    </tr>
+    <tr>
+      <td>readAsArrayBuffer(blob)</td>
+      <td>Starts reading the file as an ArrayBuffer.</td>
+    </tr>
+    <tr>
+      <td>readAsDataURL(blob)</td>
+      <td>Starts reading the file as a data url/uri</td>
+    </tr>
+    <tr>
+      <td>readAsText(blob&lbrack;, encoding&rbrack;)</td>
+      <td>Starts reading the file as a text file. Not able to read binary files. Use readAsArrayBuffer instead.</td>
+    </tr>
+  </tbody>
+</table>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch89-1">Section 89.1: Read file as string</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<p>Make sure to have a file input on your page:</p>
+<pre>
+<b>&lt;</b><b>input</b> type=&quot;file&quot; id=&quot;upload&quot;<b>&gt;</b>
+</pre>
+<p>Then in JavaScript:</p>
+<pre>
+document.getElementById(&apos;upload&apos;).addEventListener(&apos;change&apos;, readFileAsString)
+<b>function</b> readFileAsString() {
+  <b>var</b> files = <b>this</b>.files;
+  <b>if</b> (files.length === 0) {
+    console.log(&apos;No file is selected&apos;);
+    <b>return</b>;
+  }
+  <b>var</b> reader = <b>new</b> FileReader();
+  reader.onload = <b>function</b>(event) {
+    console.log(&apos;File content:&apos;, event.target.result);
+  };
+  reader.readAsText(files&lbrack;0&rbrack;);
+}
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch89-2">Section 89.2: Read file as dataURL</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+type = &quot;file&quot;
+Reading the contents of a file within a web application can be
+accomplished by utilizing the HTML5 File API. First, add an input with
+in your HTML:
+<b>&lt;</b>
+<b>input</b>
+type
+=
+&quot;file&quot;
+id
+=
+&quot;upload&quot;
+<b>&gt;</b>
+Next, we&apos;re going to add a change listener on the file-input. This
+examples defines the listener via JavaScript, but it could also be
+added as attribute on the input element. This listener gets triggered
+every time a new file has been selected. Within this callback, we can
+read the file that was selected and perform further actions (like
+creating an image with the contents of the selected file):
+document.
+getElementById
+(
+&apos;upload&apos;
+)
+.
+addEventListener
+(
+apos;change&apos;
+showImage
+)
+;
+<b>function</b>
+showImage
+(
+evt
+)
+{
+<b>var</b>
+files
+=
+evt.
+target
+.
+files
+;
+<b>if</b>
+(
+files.
+length
+===
+0
+)
+{
+console.
+log
+(
+&apos;No files selected&apos;
+)
+;
+<b>return</b>
+;
+}
+<b>var</b>
+reader
+=
+<b>new</b>
+FileReader
+(
+)
+;
+reader.
+onload
+=
+<b>function</b>
+(
+event
+)
+{
+<b>var</b>
+img
+=
+<b>new</b>
+Image
+(
+)
+;
+img.
+onload
+=
+<b>function</b>
+(
+)
+{
+document.
+body
+.
+appendChild
+(
+img
+)
+;
+}
+;
+img.
+src
+=
+event.
+target
+.
+result
+;
+}
+;
+reader.
+readAsDataURL
+(
+files
+&lbrack;
+0
+&rbrack;
+)
+;
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch89-3">Section 89.3: Slice a file</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+blob.slice
+The () method is used to create a new Blob object containing the data
+in the specified range of bytes of the source Blob. This method is
+usable with File instances too, since File extends Blob.
+
+Here we slice a file in a specific amount of blobs. This is useful
+especially in cases where you need to process files that are too large
+to read in memory all in once. We can then read the chunks one by one
+using FileReader.
+<i>/&ast;&ast;</i>
+<i>&ast; &bsol;@param {File&vert;Blob} - file to slice</i>
+<i>&ast; &bsol;@param {Number} - chunksAmount</i>
+<i>&ast; &bsol;@return {Array} - an array of Blobs</i>
+<i>&ast;&ast;/</i>
+<b>function</b>
+sliceFile
+(
+file
+,
+chunksAmount
+)
+{
+<b>var</b>
+byteIndex
+=
+0
+;
+<b>var</b>
+chunks
+=
+&lbrack;
+&rbrack;
+;
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+chunksAmount
+;
+i
++=
+1
+)
+{
+<b>var</b>
+byteEnd
+=
+Math
+.
+ceil
+(
+(
+file.
+size
+/
+chunksAmount
+)
+&ast;
+(
+i
+&plus;
+1
+)
+)
+;
+chunks.
+push
+(
+file.
+slice
+(
+byteIndex
+,
+byteEnd
+)
+)
+;
+byteIndex
++=
+(
+byteEnd
+&minus;
+byteIndex
+)
+;
+}
+<b>return</b>
+chunks
+;
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch89-4">Section 89.4: Get the properties of the file</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+If you want to get the properties of the file (like the name or the
+size) you can do it before using the File Reader. If we have the
+following html piece of code:
+<b>&lt;</b>
+<b>input</b>
+type
+=
+&quot;file&quot;
+id
+=
+&quot;newFile&quot;
+<b>&gt;</b>
+You can access the properties directly like this:
+document.
+getElementById
+(
+&apos;newFile&apos;
+)
+.
+addEventListener
+(
+&apos;change&apos;
+,
+getFile
+)
+;
+<b>function</b>
+getFile
+(
+event
+)
+{
+<b>var</b>
+files
+=
+event.
+target
+.
+files
+,
+file
+=
+files
+&lbrack;
+0
+&rbrack;
+;
+console.
+log
+(
+&apos;Name of the file&apos;
+,
+file.
+name
+)
+;
+console.
+log
+(
+&apos;Size of the file&apos;
+,
+file.
+size
+)
+;
+}
+You can also get easily the following attributes: lastModified
+(Timestamp), lastModifiedDate (Date), and type (File
+Type)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch89-5">Section 89.5: Selecting multiple files and restricting file types</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The HTML5 file API allows you to restrict which kind of files are
+accepted by simply setting the accept attribute on a file input, e.g.:
+<b>&lt;</b>
+<b>input</b>
+type
+=
+&quot;file&quot;
+accept
+=
+&quot;image/jpeg&quot;
+<b>&gt;</b>
+image / jpeg  , image / png
+Specifying multiple MIME types separated by a comma (e.g. ) or using
+wildcards (e.g.
+image<i>/&ast;</i>
+for allowing all types of images) give you a quick and powerful way to
+restrict the type of files you want to select. Here&apos;s an example for
+allowing any image or video:
+<b>&lt;</b>
+<b>input</b>
+type
+=
+&quot;file&quot;
+accept
+=
+&quot;image/&ast;,video&ast;&quot;
+<b>&gt;</b>
+By default, the file input lets the user select a single file. If you
+want to enable multiple file selection, simply add the multiple
+attribute:
+<b>&lt;</b>
+<b>input</b>
+type
+=
+&quot;file&quot;
+multiple
+<b>&gt;</b>
+You can then read all the selected files via the file input&apos;s files
+array. See read file as dataUrl
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch89-6">Section 89.6: Client side csv download using Blob</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>function</b>
+downloadCsv
+(
+)
+{
+<b>var</b>
+blob
+=
+<b>new</b>
+Blob
+(
+&lbrack;
+csvString
+&rbrack;
+)
+;
+<b>if</b>
+(
+window.
+navigator
+.
+msSaveOrOpenBlob
+)
+{
+window.
+navigator
+.
+msSaveBlob
+(
+blob
+,
+&quot;filename.csv&quot;
+)
+;
+}
+<b>else</b>
+{
+<b>var</b>
+a
+=
+window.
+document
+.
+createElement
+(
+&quot;a&quot;
+)
+;
+a&period;
+href
+=
+window.
+URL
+.
+createObjectURL
+(
+blob
+,
+{
+type
+:
+&quot;text/plain&quot;
+}
+)
+;
+a&period;
+download
+=
+&quot;filename.csv&quot;
+;
+document.
+body
+.
+appendChild
+(
+a
+)
+;
+a&period;
+click
+(
+)
+;
+document.
+body
+.
+removeChild
+(
+a
+)
+;
+}
+}
+<b>var</b>
+string
+=
+&quot;a1,a2,a3&quot;
+;
+downloadCSV
+(
+string
+)
+;
+Source reference ; <https://github.com/mholt/PapaParse/issues/175>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch90">Chapter 90: Notifications API</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch90-1">Section 90.1: Requesting Permission to send notifications</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Notification.requestPermission
+We use to ask the user if he/she wants to receive notifications from
+our website.
+Notification.
+requestPermission
+(
+<b>function</b>
+(
+)
+{
+<b>if</b>
+(
+Notification.
+permission
+===
+&apos;granted&apos;
+)
+{
+// <i>user approved.</i>
+// <i>use of new Notification(&hellip;) syntax will now be successful</i>
+}
+<b>else</b>
+<b>if</b>
+(
+Notification.
+permission
+===
+&apos;denied&apos;
+)
+{
+// <i>user denied.</i>
+}
+<b>else</b>
+{
+// <i>Notification.permission === &apos;default&apos;</i>
+// <i>user didn</i>
+'
+<i>t make a decision.</i>
+// <i>You can</i>
+'
+<i>t send notifications until they grant permission.</i>
+}
+}
+)
+;
+.requestPermission
+Since Firefox 47 The method can also return a promise when handling
+the user&apos;s decision for granting permission
+Notification.
+requestPermission
+(
+)
+.
+then
+(
+<b>function</b>
+(
+permission
+)
+{
+<b>if</b>
+(
+!
+(
+&apos;permission&apos;
+<b>in</b>
+Notification
+)
+)
+{
+Notification.
+permission
+=
+permission
+;
+}
+// <i>you got permission !</i>
+}
+,
+<b>function</b>
+(
+rejection
+)
+{
+// <i>handle rejection here.</i>
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch90-2">Section 90.2: Sending Notifications</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+After the user has approved a request for permission to send
+notifications, we can send a simple notification that says Hello to
+the user: <b>new</b> Notification(&apos;Hello&apos;, { body: &apos;Hello, world!&apos;,
+icon: &apos;url to an .ico image&apos; });
+
+This will send a notification like this:
+
+<b>Hello</b>
+
+Hello, world!
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch90-3">Section 90.3: Closing a notification</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+.close()
+You can close a notification by using the method.
+<b>let</b>
+notification
+=
+<b>new</b>
+Notification
+(
+title
+,
+options
+)
+;
+// <i>do some work, then close the notification</i>
+notification.
+close
+(
+)
+You can utilize the setTimeout function to auto-close the notification
+sometime in the future.
+<b>let</b>
+notification
+=
+<b>new</b>
+Notification
+(
+title
+,
+options
+)
+;
+setTimeout
+(
+(
+)
+=&gt;
+{
+notification.
+close
+(
+)
+}
+,
+4000
+)
+;
+The above code will spawn a notification and close it after 4 seconds.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch90-4">Section 90.4: Notification events</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The Notification API specifications support 2 events that can be fired
+by a Notification.
+1.  The click event.
+This event will run when you click on the notification body (excluding
+the closing X and the Notifications configuration button).
+Example:
+notification.
+onclick
+=
+<b>function</b>
+(
+event
+)
+{
+console.
+debug
+(
+&quot;you click me and this is my event object: &quot;
+,
+event
+)
+;
+}
+2.  The error event
+The notification will fire this event whenever something wrong will
+happen, like being unable to display
+notification.
+onerror
+=
+<b>function</b>
+(
+event
+)
+{
+console.
+debug
+(
+&quot;There was an error: &quot;
+,
+event
+)
+;
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch91">Chapter 91: Vibration API</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Modern mobile devices include hardware for vibrations. The Vibration
+API offers Web apps the ability to access this hardware, if it exists,
+and does nothing if the device doesn&apos;t support it.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch91-1">Section 91.1: Single vibration</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Vibrate the device for 100ms:
+window.
+navigator
+.
+vibrate
+(
+100
+)
+;
+or
+window.
+navigator
+.
+vibrate
+(
+&lbrack;
+100
+&rbrack;
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch91-2">Section 91.2: Check for support</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Check if browser supports vibrations
+<b>if</b>
+(
+&apos;vibrate&apos;
+<b>in</b>
+window.
+navigator
+)
+// <i>browser has support for vibrations</i>
+<b>else</b>
+// <i>no support</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch91-3">Section 91.3: Vibration patterns</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+An array of values describes periods of time in which the device is
+vibrating and not vibrating.
+window.
+navigator
+.
+vibrate
+(
+&lbrack;
+200
+,
+100
+,
+200
+&rbrack;
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch92">Chapter 92: Battery Status API</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch92-1">Section 92.1: Battery Events</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+// <i>Get the battery API</i>
+navigator.
+getBattery
+(
+)
+.
+then
+(
+<b>function</b>
+(
+battery
+)
+
+{
+battery.
+addEventListener
+(
+&apos;chargingchange&apos;
+,
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+&apos;New charging state: &apos;
+,
+battery.
+charging
+)
+;
+}
+)
+;
+battery.
+addEventListener
+(
+&apos;levelchange&apos;
+,
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+&apos;New battery level: &apos;
+,
+battery.
+level
+&ast;
+100
+&plus;
+&quot;%&quot;
+)
+;
+}
+)
+;
+battery.
+addEventListener
+(
+&apos;chargingtimechange&apos;
+,
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+&apos;New time left until full: &apos;
+,
+battery.
+chargingTime
+,
+&quot; seconds&quot;
+)
+;
+}
+)
+;
+battery.
+addEventListener
+(
+&apos;dischargingtimechange&apos;
+,
+<b>function</b>
+(
+)
+{
+console.
+log
+(
+&apos;New time left until empty: &apos;
+,
+battery.
+dischargingTime
+,
+&quot; seconds&quot;
+)
+;
+}
+)
+;
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch92-2">Section 92.2: Getting current battery level</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+// <i>Get the battery API</i>
+navigator.
+getBattery
+(
+)
+.
+then
+(
+<b>function</b>
+(
+battery
+)
+{
+// <i>Battery level is between 0 and 1, so we multiply it by 100 to get in
+percents</i>
+console.
+log
+(
+&quot;Battery level: &quot;
+&plus;
+battery.
+level
+&ast;
+100
+&plus;
+&quot;%&quot;
+)
+;
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch92-3">Section 92.3: Is battery charging?</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+// <i>Get the battery API</i>
+navigator.
+getBattery
+(
+)
+.
+then
+(
+<b>function</b>
+(
+battery
+)
+{
+<b>if</b>
+
+battery.
+charging
+)
+{
+console.
+log
+(
+&quot;Battery is charging&quot;
+)
+;
+}
+<b>else</b>
+{
+console.
+log
+(
+&quot;Battery is discharging&quot;
+)
+;
+}
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch92-4">Section 92.4: Get time left until battery is empty</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+// <i>Get the battery API</i>
+navigator.
+getBattery
+(
+)
+.
+then
+(
+<b>function</b>
+(
+battery
+)
+{
+console.
+log
+(
+&quot;Battery will drain in &quot;
+,
+battery.
+dischargingTime
+,
+&quot; seconds&quot;
+)
+;
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch92-5">Section 92.5: Get time left until battery is fully charged</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+// <i>Get the battery API</i>
+navigator.
+getBattery
+(
+)
+.
+then
+(
+<b>function</b>
+(
+battery
+)
+{
+console.
+log
+(
+&quot;Battery will get fully charged in &quot;
+,
+battery.
+chargingTime
+,
+&quot; seconds&quot;
+)
+;
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch93">Chapter 93: Fluent API</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+JavaScript is great for designing fluent API - a consumer-oriented API
+with focus on developer experience. Combine with language dynamic
+features for optimal results.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch93-1">Section 93.1: Fluent API capturing construction of HTML articles with JS</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+![](./images/image042.png){width="7.486805555555556in"
+height="8.873611111111112in"}
+![](./images/image043.png){width="7.486805555555556in"
+height="5.711805555555555in"}
+This allows the consumer of the API to have a nice-looking article
+construction, almost a DSL for this purpose, using plain JS:
+<h5>Version ≥ 6</h5>
+<b>const</b> articles = &lbrack;
+Article.withTopic(&apos;Artificial Intelligence - Overview&apos;)
+.section(&apos;What is Artificial Intelligence?&apos;)
+.addParagraph(&apos;Something something&apos;)
+.addParagraph(&apos;Lorem ipsum&apos;)
+.withEmphasis()
+.section(&apos;Philosophy of AI&apos;)
+.addParagraph(&apos;Something about AI philosophy&apos;)
+.addParagraph(&apos;Conclusion&apos;),
+Article.withTopic(&apos;JavaScript&apos;)
+.list(&apos;JavaScript is one of the 3 languages all web developers must
+learn:&apos;)
+.addListItem(&apos;HTML to define the content of web pages&apos;)
+.addListItem(&apos;CSS to specify the layout of web pages&apos;)
+.addListItem(&apos; JavaScript to program the behavior of web pages&apos;)
+&rbrack;; document.getElementById(&apos;content&apos;).innerHTML = articles.map(a
+=&bsol;a.toHtml()).join(&apos;<b>&bsol;&bsol;n</b>&apos;);
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch94">Chapter 94: Web Cryptography API</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch94-1">Section 94.1: Creating digests (e.g. SHA-256)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+// <i>Convert string to ArrayBuffer. This step is only necessary if you
+wish to hash a string, not if</i>
+<i>you already got an ArrayBuffer such as an Uint8Array.</i>
+<b>var</b>
+input
+=
+<b>new</b>
+TextEncoder
+(
+&apos;utf-8&apos;
+)
+.
+encode
+(
+&apos;Hello world!&apos;
+)
+;
+// <i>Calculate the SHA-256 digest</i>
+crypto.
+subtle
+.
+digest
+(
+&apos;SHA-256&apos;
+,
+input
+)
+// <i>Wait for completion</i>
+.
+then
+(
+<b>function</b>
+(
+digest
+)
+{
+// <i>digest is an ArrayBuffer. There are multiple ways to proceed.</i>
+// <i>If you want to display the digest as a hexadecimal string, this will
+work:</i>
+<b>var</b>
+view
+=
+<b>new</b>
+DataView
+(
+digest
+)
+;
+<b>var</b>
+hexstr
+=
+&apos;&apos;
+;
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+view.
+byteLength
+;
+i
+++
+)
+{
+<b>var</b>
+b
+=
+view.
+getUint8
+(
+i
+)
+;
+hexstr
++=
+&apos;0123456789abcdef&apos;
+&lbrack;
+(
+b
+&
+0xf0
+)
+&gt;&gt;
+4
+&rbrack;
+;
+hexstr
++=
+&apos;0123456789abcdef&apos;
+&lbrack;
+(
+b
+&
+0x0f
+)
+&rbrack;
+;
+}
+console.
+log
+(
+hexstr
+)
+;
+// <i>Otherwise, you can simply create an Uint8Array from the buffer:</i>
+<b>var</b>
+digestAsArray
+=
+<b>new</b>
+Uint8Array
+(
+digest
+)
+;
+console.
+log
+(
+digestAsArray
+)
+;
+}
+)
+// <i>Catch errors</i>
+.
+<b>catch</b>
+(
+<b>function</b>
+(
+err
+)
+{
+console.
+error
+(
+err
+)
+;
+}
+)
+;
+SHA-1 , SHA-256     ,   SHA-384     and   SHA-512
+The current draft suggests to provide at least , but this is no strict
+requirement and subject to change. However, the SHA family can still
+be considered a good choice as it will likely be supported in all
+major browsers.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch94-2">Section 94.2: Cryptographically random data</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+// <i>Create an array with a fixed size and type.</i>
+<b>var</b>
+array
+=
+<b>new</b>
+Uint8Array
+(
+5
+)
+;
+// <i>Generate cryptographically random values</i>
+crypto.
+getRandomValues
+(
+array
+)
+;
+// <i>Print the array to the console</i>
+console.
+log
+(
+array
+)
+;
+[crypto.getRandomValues(array)](https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues)
+can be used with instances of the following classes (described further
+in Binary Data) and will generate values from the given ranges (both
+ends inclusive):
+Int8Array: -27 to 27-1
+Uint8Array: 0 to 28-1
+Int16Array: -215 to 215-1 Uint16Array: 0 to 216-1
+Int32Array: -231 to 231-1
+Uint32Array: 0 to 231-1
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch94-3">Section 94.3: Generating RSA key pair and converting to PEM format</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+In this example you will learn how to generate RSA-OAEP key pair and
+how to convert private key from this key pair to base64 so you can use
+it with OpenSSL etc. Please note that this process can also be used
+for public key you just have to use prefix and suffix below:
+&minus;&minus;&minus;&bsol;
+BEGIN PUBLIC KEY
+&minus;&minus;&minus;&bsol;
+&minus;&minus;&minus;&bsol;
+END PUBLIC KEY
+&minus;&minus;&minus;&bsol;
+NOTE: This example is fully tested in these browsers: Chrome, Firefox,
+Opera, Vivaldi
+![](./images/image044.png){width="7.486805555555556in"
+height="8.324305555555556in"}
+console.
+log
+(
+pem
+)
+;
+}
+)
+.
+<b>catch</b>
+(
+<b>function</b>
+(
+err
+)
+{
+console.
+log
+(
+err
+)
+;
+}
+)
+;
+}
+)
+;
+That&apos;s it! Now you have a fully working and compatible RSA-OAEP
+Private Key in PEM format which you can use wherever you want. Enjoy!
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch94-4">Section 94.4: Converting PEM key pair to CryptoKey</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+So, have you ever wondered how to use your PEM RSA key pair that was
+generated by OpenSSL in Web Cryptography API? If the answers is yes.
+Great! You are going to find out.
+NOTE: This process can also be used for public key, you only need to
+change prefix and suffix to:
+&minus;&minus;&minus;&bsol;
+BEGIN PUBLIC KEY
+&minus;&minus;&minus;&bsol;
+&minus;&minus;&minus;&bsol;
+END PUBLIC KEY
+&minus;&minus;&minus;&bsol;
+This example assumes that you have your RSA key pair generated in PEM.
+![](./images/image045.png){width="7.486805555555556in"
+height="6.270138888888889in"}
+And now you&apos;re done! You can use your imported key in WebCrypto API.
 
 
