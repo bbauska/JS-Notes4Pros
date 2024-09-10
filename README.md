@@ -22956,663 +22956,271 @@ Notification.requestPermission().then(<b>function</b>(permission) {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch90-2">Section 90.2: Sending Notifications</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-After the user has approved a request for permission to send
+<p>After the user has approved a request for permission to send
 notifications, we can send a simple notification that says Hello to
-the user: <b>new</b> Notification(&apos;Hello&apos;, { body: &apos;Hello, world!&apos;,
-icon: &apos;url to an .ico image&apos; });
-
-This will send a notification like this:
-
-<b>Hello</b>
+the user:</p>
+<pre>
+<b>new</b> Notification(&apos;Hello&apos;, { body: &apos;Hello, world!&apos;, icon: &apos;url to an .ico image&apos; });
+</pre>
+<p>This will send a notification like this:</p>
+<blockquote>
+<b>Hello</b><br/>
 
 Hello, world!
+</blockquote>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch90-3">Section 90.3: Closing a notification</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-.close()
-You can close a notification by using the method.
-<b>let</b>
-notification
-=
-<b>new</b>
-Notification
-(
-title
-,
-options
-)
-;
+<p>You can close a notification by using the .close() method.</p>
+<pre>
+<b>let</b> notification = <b>new</b> Notification(title, options);
 // <i>do some work, then close the notification</i>
-notification.
-close
-(
-)
-You can utilize the setTimeout function to auto-close the notification
-sometime in the future.
-<b>let</b>
-notification
-=
-<b>new</b>
-Notification
-(
-title
-,
-options
-)
-;
-setTimeout
-(
-(
-)
-=&gt;
-{
-notification.
-close
-(
-)
-}
-,
-4000
-)
-;
-The above code will spawn a notification and close it after 4 seconds.
+notification.close()
+</pre>
+<p>You can utilize the setTimeout function to auto-close the notification sometime in the future.</p>
+<!-- page 412 -->
+<pre>
+<b>let</b> notification = <b>new</b> Notification(title, options);
+setTimeout(() =&gt; {
+  notification.close()
+}, 4000);
+</pre>
+<p>The above code will spawn a notification and close it after 4 seconds.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch90-4">Section 90.4: Notification events</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The Notification API specifications support 2 events that can be fired
-by a Notification.
-1.  The click event.
-This event will run when you click on the notification body (excluding
-the closing X and the Notifications configuration button).
-Example:
-notification.
-onclick
-=
-<b>function</b>
-(
-event
-)
-{
-console.
-debug
-(
-&quot;you click me and this is my event object: &quot;
-,
-event
-)
-;
+<p>The Notification API specifications support 2 events that can be fired by a Notification.</p>
+<ol type="1" start="1">
+  <li>The click event.</li>
+</ol>
+<p>This event will run when you click on the notification body (excluding
+the closing X and the Notifications configuration button).</p>
+<p>Example:</p>
+<pre>
+notification.onclick = <b>function</b>(event) {
+  console.debug(&quot;you click me and this is my event object: &quot;, event);
 }
-2.  The error event
-The notification will fire this event whenever something wrong will
-happen, like being unable to display
-notification.
-onerror
-=
-<b>function</b>
-(
-event
-)
-{
-console.
-debug
-(
-&quot;There was an error: &quot;
-,
-event
-)
-;
+</pre>
+<ol type="1" start="2">
+  <li>The error event</li>
+</ol>
+<p>The notification will fire this event whenever something wrong will happen, like being unable to display</p>
+<pre>
+notification.onerror = <b>function</b>(event) {
+  console.debug(&quot;There was an error: &quot;, event);
 }
+</pre>
+<!-- page 413 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch91">Chapter 91: Vibration API</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Modern mobile devices include hardware for vibrations. The Vibration
+<p>Modern mobile devices include hardware for vibrations. The Vibration
 API offers Web apps the ability to access this hardware, if it exists,
-and does nothing if the device doesn&apos;t support it.
+and does nothing if the device doesn&apos;t support it.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch91-1">Section 91.1: Single vibration</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Vibrate the device for 100ms:
-window.
-navigator
-.
-vibrate
-(
-100
-)
-;
-or
-window.
-navigator
-.
-vibrate
-(
-&lbrack;
-100
-&rbrack;
-)
-;
+<p>Vibrate the device for 100ms:</p>
+<pre>
+window.navigator.vibrate(100);
+</pre>
+<p>or</p>
+<pre>
+window.navigator.vibrate(&lbrack;100&rbrack;);
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch91-2">Section 91.2: Check for support</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Check if browser supports vibrations
-<b>if</b>
-(
-&apos;vibrate&apos;
-<b>in</b>
-window.
-navigator
-)
-// <i>browser has support for vibrations</i>
-<b>else</b>
-// <i>no support</i>
+<p>Check if browser supports vibrations</p>
+<pre>
+<b>if</b> (&apos;vibrate&apos; <b>in</b> window.navigator)
+    // <i>browser has support for vibrations</i>
+  <b>else</b>
+    // <i>no support</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch91-3">Section 91.3: Vibration patterns</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-An array of values describes periods of time in which the device is
-vibrating and not vibrating.
-window.
-navigator
-.
-vibrate
-(
-&lbrack;
-200
-,
-100
-,
-200
-&rbrack;
-)
-;
+<p>An array of values describes periods of time in which the device is
+vibrating and not vibrating.</p>
+<pre>
+window.navigator.vibrate(&lbrack;200, 100, 200&rbrack;);
+</pre>
+<!-- page 414 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch92">Chapter 92: Battery Status API</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch92-1">Section 92.1: Battery Events</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<pre>
 // <i>Get the battery API</i>
-navigator.
-getBattery
-(
-)
-.
-then
-(
-<b>function</b>
-(
-battery
-)
-
-{
-battery.
-addEventListener
-(
-&apos;chargingchange&apos;
-,
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-&apos;New charging state: &apos;
-,
-battery.
-charging
-)
-;
-}
-)
-;
-battery.
-addEventListener
-(
-&apos;levelchange&apos;
-,
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-&apos;New battery level: &apos;
-,
-battery.
-level
-&ast;
-100
-&plus;
-&quot;%&quot;
-)
-;
-}
-)
-;
-battery.
-addEventListener
-(
-&apos;chargingtimechange&apos;
-,
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-&apos;New time left until full: &apos;
-,
-battery.
-chargingTime
-,
-&quot; seconds&quot;
-)
-;
-}
-)
-;
-battery.
-addEventListener
-(
-&apos;dischargingtimechange&apos;
-,
-<b>function</b>
-(
-)
-{
-console.
-log
-(
-&apos;New time left until empty: &apos;
-,
-battery.
-dischargingTime
-,
-&quot; seconds&quot;
-)
-;
-}
-)
-;
-}
-)
-;
+navigator.getBattery().then(<b>function</b>(battery) {
+  battery.addEventListener(&apos;chargingchange&apos;, <b>function</b>() {
+    console.log( &apos;New charging state: &apos;, battery.charging);
+  });
+  battery.addEventListener(&apos;levelchange&apos;, <b>function</b>() {
+    console.log( &apos;New battery level: &apos;, battery.level&ast;100 &plus; &quot;%&quot;);
+  });
+  battery.addEventListener(&apos;chargingtimechange&apos;, <b>function</b>() {
+    console.log( &apos;New time left until full: &apos;, battery.chargingTime, &quot; seconds&quot;);
+  });
+  battery.addEventListener(&apos;dischargingtimechange&apos;, <b>function</b>() {
+    console.log( &apos;New time left until empty: &apos;, battery.dischargingTime, &quot; seconds&quot;);
+  });
+});
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch92-2">Section 92.2: Getting current battery level</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<pre>
 // <i>Get the battery API</i>
-navigator.
-getBattery
-(
-)
-.
-then
-(
-<b>function</b>
-(
-battery
-)
-{
-// <i>Battery level is between 0 and 1, so we multiply it by 100 to get in
-percents</i>
-console.
-log
-(
-&quot;Battery level: &quot;
-&plus;
-battery.
-level
-&ast;
-100
-&plus;
-&quot;%&quot;
-)
-;
-}
-)
-;
+navigator.getBattery().then(<b>function</b>(battery) {
+  // <i>Battery level is between 0 and 1, so we multiply it by 100 to get in percents</i>
+    console.log(&quot;Battery level: &quot;&plus; battery.level &ast; 100 &plus; &quot;%&quot;);
+});
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch92-3">Section 92.3: Is battery charging?</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<pre>
 // <i>Get the battery API</i>
-navigator.
-getBattery
-(
-)
-.
-then
-(
-<b>function</b>
-(
-battery
-)
-{
-<b>if</b>
-
-battery.
-charging
-)
-{
-console.
-log
-(
-&quot;Battery is charging&quot;
-)
-;
-}
-<b>else</b>
-{
-console.
-log
-(
-&quot;Battery is discharging&quot;
-)
-;
-}
-}
-)
-;
+navigator.getBattery().then(<b>function</b>(battery) {
+  <b>if</b>(battery.charging) {
+    console.log(&quot;Battery is charging&quot;);
+  } <b>else</b> {
+    console.log(&quot;Battery is discharging&quot;);
+  }
+});
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch92-4">Section 92.4: Get time left until battery is empty</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<pre>
 // <i>Get the battery API</i>
-navigator.
-getBattery
-(
-)
-.
-then
-(
-<b>function</b>
-(
-battery
-)
-{
-console.
-log
-(
-&quot;Battery will drain in &quot;
-,
-battery.
-dischargingTime
-,
-&quot; seconds&quot;
-)
-;
-}
-)
-;
+navigator.getBattery().then(<b>function</b>(battery) {
+  console.log( &quot;Battery will drain in &quot;, battery.dischargingTime, &quot; seconds&quot;);
+});
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch92-5">Section 92.5: Get time left until battery is fully charged</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<pre>
 // <i>Get the battery API</i>
-navigator.
-getBattery
-(
-)
-.
-then
-(
-<b>function</b>
-(
-battery
-)
-{
-console.
-log
-(
-&quot;Battery will get fully charged in &quot;
-,
-battery.
-chargingTime
-,
-&quot; seconds&quot;
-)
-;
-}
-)
-;
+navigator.getBattery().then(<b>function</b>(battery) {
+  console.log( &quot;Battery will get fully charged in &quot;, battery.chargingTime, &quot; seconds&quot;);
+});
+</pre>
+<!-- page 415 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch93">Chapter 93: Fluent API</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-JavaScript is great for designing fluent API - a consumer-oriented API
+<p>JavaScript is great for designing fluent API - a consumer-oriented API
 with focus on developer experience. Combine with language dynamic
-features for optimal results.
+features for optimal results.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch93-1">Section 93.1: Fluent API capturing construction of HTML articles with JS</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 42/43.  (4xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image042.png"
+  title="."
+  alt="."
+  style="border: 2px solid #000000; width:7.48in;" />
+<img src="./images/image043.png"
+  title="."
+  alt="."
+  style="border: 2px solid #000000; width:7.48in;" />
 <!--
-![](./images/image042.png){width="7.486805555555556in"
+width="7.486805555555556in" 
 height="8.873611111111112in"}
-![](./images/image043.png){width="7.486805555555556in"
+width="7.486805555555556in"
 height="5.711805555555555in"}
-This allows the consumer of the API to have a nice-looking article
-construction, almost a DSL for this purpose, using plain JS:
+-->
+<p>This allows the consumer of the API to have a nice-looking article
+construction, almost a DSL for this purpose, using plain JS:</p>
 <h5>Version ≥ 6</h5>
+<pre>
 <b>const</b> articles = &lbrack;
-Article.withTopic(&apos;Artificial Intelligence - Overview&apos;)
-.section(&apos;What is Artificial Intelligence?&apos;)
-.addParagraph(&apos;Something something&apos;)
-.addParagraph(&apos;Lorem ipsum&apos;)
-.withEmphasis()
-.section(&apos;Philosophy of AI&apos;)
-.addParagraph(&apos;Something about AI philosophy&apos;)
-.addParagraph(&apos;Conclusion&apos;),
-Article.withTopic(&apos;JavaScript&apos;)
-.list(&apos;JavaScript is one of the 3 languages all web developers must
-learn:&apos;)
-.addListItem(&apos;HTML to define the content of web pages&apos;)
-.addListItem(&apos;CSS to specify the layout of web pages&apos;)
-.addListItem(&apos; JavaScript to program the behavior of web pages&apos;)
-&rbrack;; document.getElementById(&apos;content&apos;).innerHTML = articles.map(a
-=&bsol;a.toHtml()).join(&apos;<b>&bsol;&bsol;n</b>&apos;);
+  Article.withTopic(&apos;Artificial Intelligence - Overview&apos;)
+    .section(&apos;What is Artificial Intelligence?&apos;)
+    .addParagraph(&apos;Something something&apos;)
+    .addParagraph(&apos;Lorem ipsum&apos;)
+      .withEmphasis()
+    .section(&apos;Philosophy of AI&apos;)
+      .addParagraph(&apos;Something about AI philosophy&apos;)
+      .addParagraph(&apos;Conclusion&apos;),
+  Article.withTopic(&apos;JavaScript&apos;)
+    .list(&apos;JavaScript is one of the 3 languages all web developers must learn:&apos;)
+    .addListItem(&apos;HTML to define the content of web pages&apos;)
+    .addListItem(&apos;CSS to specify the layout of web pages&apos;)
+    .addListItem(&apos; JavaScript to program the behavior of web pages&apos;)
+&rbrack;;
+document.getElementById(&apos;content&apos;).innerHTML = articles.map(a =&bsol;a.toHtml()).join(&apos;<b>&bsol;&bsol;n</b>&apos;);
+</pre>
+<!-- page 417 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch94">Chapter 94: Web Cryptography API</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch94-1">Section 94.1: Creating digests (e.g. SHA-256)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-// <i>Convert string to ArrayBuffer. This step is only necessary if you
-wish to hash a string, not if</i>
+<pre>
+// <i>Convert string to ArrayBuffer. This step is only necessary if you wish to hash a string, not if</i>
 <i>you already got an ArrayBuffer such as an Uint8Array.</i>
-<b>var</b>
-input
-=
-<b>new</b>
-TextEncoder
-(
-&apos;utf-8&apos;
-)
-.
-encode
-(
-&apos;Hello world!&apos;
-)
-;
+<b>var</b> input = <b>new</b> TextEncoder(&apos;utf-8&apos;).encode(&apos;Hello world!&apos;);
+&nbsp;
 // <i>Calculate the SHA-256 digest</i>
-crypto.
-subtle
-.
-digest
-(
-&apos;SHA-256&apos;
-,
-input
-)
+crypto.subtle.digest(&apos;SHA-256&apos;, input)
 // <i>Wait for completion</i>
-.
-then
-(
-<b>function</b>
-(
-digest
-)
-{
-// <i>digest is an ArrayBuffer. There are multiple ways to proceed.</i>
-// <i>If you want to display the digest as a hexadecimal string, this will
-work:</i>
-<b>var</b>
-view
-=
-<b>new</b>
-DataView
-(
-digest
-)
-;
-<b>var</b>
-hexstr
-=
-&apos;&apos;
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-view.
-byteLength
-;
-i
-++
-)
-{
-<b>var</b>
-b
-=
-view.
-getUint8
-(
-i
-)
-;
-hexstr
-+=
-&apos;0123456789abcdef&apos;
-&lbrack;
-(
-b
-&
-0xf0
-)
-&gt;&gt;
-4
-&rbrack;
-;
-hexstr
-+=
-&apos;0123456789abcdef&apos;
-&lbrack;
-(
-b
-&
-0x0f
-)
-&rbrack;
-;
-}
-console.
-log
-(
-hexstr
-)
-;
-// <i>Otherwise, you can simply create an Uint8Array from the buffer:</i>
-<b>var</b>
-digestAsArray
-=
-<b>new</b>
-Uint8Array
-(
-digest
-)
-;
-console.
-log
-(
-digestAsArray
-)
-;
-}
-)
+.then(<b>function</b>(digest) {
+  // <i>digest is an ArrayBuffer. There are multiple ways to proceed.</i>
+  // <i>If you want to display the digest as a hexadecimal string, this will work:</i>
+  <b>var</b> view = <b>new</b> DataView(digest);
+  <b>var</b> hexstr = &apos;&apos;;
+  <b>for</b>(<b>var</b> i = 0; i &lt; view.byteLength; i++) {
+    <b>var</b> b = view.getUint8(i);
+    hexstr += &apos;0123456789abcdef&apos;&lbrack;(b & 0xf0) &gt;&gt; 4&rbrack;;
+    hexstr += &apos;0123456789abcdef&apos;&lbrack;(b&0x0f)&rbrack;;
+  }
+  console.log(hexstr);
+&nbsp;
+  // <i>Otherwise, you can simply create an Uint8Array from the buffer:</i>
+  <b>var</b> digestAsArray = <b>new</b> Uint8Array(digest);
+  console.log(digestAsArray);
+})
 // <i>Catch errors</i>
-.
-<b>catch</b>
-(
-<b>function</b>
-(
-err
-)
-{
-console.
-error
-(
-err
-)
-;
-}
-)
-;
-SHA-1 , SHA-256     ,   SHA-384     and   SHA-512
-The current draft suggests to provide at least , but this is no strict
-requirement and subject to change. However, the SHA family can still
-be considered a good choice as it will likely be supported in all
-major browsers.
+.<b>catch</b>(<b>function</b>(err) {
+console.error(err);
+});
+</pre>
+<p>The current draft suggests to provide at least SHA-1, SHA-256, SHA-384 and SHA-512 
+but this is no strict requirement and subject to change. However, the SHA family can still
+be considered a good choice as it will likely be supported in all major browsers.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch94-2">Section 94.2: Cryptographically random data</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
+<pre>
 // <i>Create an array with a fixed size and type.</i>
-<b>var</b>
-array
-=
-<b>new</b>
-Uint8Array
-(
-5
-)
-;
+<b>var</b> array = <b>new</b> Uint8Array(5);
+&nbsp;
 // <i>Generate cryptographically random values</i>
-crypto.
-getRandomValues
-(
-array
-)
-;
+crypto.getRandomValues(array);
+&nbsp;
 // <i>Print the array to the console</i>
-console.
-log
-(
-array
-)
-;
-[crypto.getRandomValues(array)](https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues)
-can be used with instances of the following classes (described further
-in Binary Data) and will generate values from the given ranges (both
-ends inclusive):
-Int8Array: -27 to 27-1
-Uint8Array: 0 to 28-1
-Int16Array: -215 to 215-1 Uint16Array: 0 to 216-1
-Int32Array: -231 to 231-1
-Uint32Array: 0 to 231-1
+console.log(array);
+</pre>
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues">
+crypto.getRandomValues(array)</a> can be used with instances of the following classes 
+(described further in Binary Data) and will generate values from the given ranges (both
+ends inclusive):</p>
+<ul>
+  <li>Int8Array: -27 to 27-1</li>
+  <li>Uint8Array: 0 to 28-1</li>
+  <li>Int16Array: -215 to 215-1</li>
+  <li>Uint16Array: 0 to 216-1</li>
+  <li>Int32Array: -231 to 231-1</li>
+  <li>Uint32Array: 0 to 231-1</li>
+</ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch94-3">Section 94.3: Generating RSA key pair and converting to PEM format</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
