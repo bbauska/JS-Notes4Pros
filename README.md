@@ -22833,9 +22833,9 @@ to read in memory all in once. We can then read the chunks one by one
 using FileReader.</p>
 <pre>
 <i>/&ast;&ast;</i>
-<i>&ast; &bsol;@param {File&vert;Blob} - file to slice</i>
-<i>&ast; &bsol;@param {Number} - chunksAmount</i>
-<i>&ast; &bsol;@return {Array} - an array of Blobs</i>
+<i>&ast;&ast; @param {File&vert;Blob} - file to slice</i>
+<i>&ast;&ast; @param {Number} - chunksAmount</i>
+<i>&ast;&ast; @return {Array} - an array of Blobs</i>
 <i>&ast;&ast;/</i>
 <b>function</b> sliceFile(file, chunksAmount) {
 <b>var</b> byteIndex = 0;
