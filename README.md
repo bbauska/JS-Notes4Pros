@@ -22699,7 +22699,6 @@ selection, as most browsers don&apos;t support multiple ranges.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch89">Chapter 89: File API, Blobs and FileReaders</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <table border="1" style="width:200px">
   <thead>
     <tr>
@@ -22765,7 +22764,6 @@ selection, as most browsers don&apos;t support multiple ranges.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch89-1">Section 89.1: Read file as string</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>Make sure to have a file input on your page:</p>
 <pre>
 <b>&lt;</b><b>input</b> type=&quot;file&quot; id=&quot;upload&quot;<b>&gt;</b>
@@ -22779,6 +22777,7 @@ document.getElementById(&apos;upload&apos;).addEventListener(&apos;change&apos;,
     console.log(&apos;No file is selected&apos;);
     <b>return</b>;
   }
+&nbsp;
   <b>var</b> reader = <b>new</b> FileReader();
   reader.onload = <b>function</b>(event) {
     console.log(&apos;File content:&apos;, event.target.result);
@@ -22789,547 +22788,171 @@ document.getElementById(&apos;upload&apos;).addEventListener(&apos;change&apos;,
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch89-2">Section 89.2: Read file as dataURL</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-type = &quot;file&quot;
-Reading the contents of a file within a web application can be
-accomplished by utilizing the HTML5 File API. First, add an input with
-in your HTML:
-<b>&lt;</b>
-<b>input</b>
-type
-=
-&quot;file&quot;
-id
-=
-&quot;upload&quot;
-<b>&gt;</b>
-Next, we&apos;re going to add a change listener on the file-input. This
+<p>Reading the contents of a file within a web application can be
+accomplished by utilizing the HTML5 File API. First, add an input with "file" 
+in your HTML:</p>
+<pre>
+<b>&lt;</b><b>input</b> type=&quot;file&quot; id=&quot;upload&quot;<b>&gt;</b>
+</pre>
+<p>Next, we&apos;re going to add a change listener on the file-input. This
 examples defines the listener via JavaScript, but it could also be
 added as attribute on the input element. This listener gets triggered
 every time a new file has been selected. Within this callback, we can
 read the file that was selected and perform further actions (like
-creating an image with the contents of the selected file):
-document.
-getElementById
-(
-&apos;upload&apos;
-)
-.
-addEventListener
-(
-apos;change&apos;
-showImage
-)
-;
-<b>function</b>
-showImage
-(
-evt
-)
-{
-<b>var</b>
-files
-=
-evt.
-target
-.
-files
-;
-<b>if</b>
-(
-files.
-length
-===
-0
-)
-{
-console.
-log
-(
-&apos;No files selected&apos;
-)
-;
-<b>return</b>
-;
+creating an image with the contents of the selected file):</p>
+<pre>
+document.getElementById(&apos;upload&apos;).addEventListener(apos;change&apos;, showImage);
+<b>function</b> showImage(evt) {
+  <b>var</b> files = evt.target.files;
+&nbsp;
+  <b>if</b> (files.length === 0) {
+    console.log(&apos;No files selected&apos;);
+    <b>return</b>;
+  }
+&nbsp;
+  <b>var</b> reader = <b>new</b> FileReader();
+  reader.onload = <b>function</b>(event) {
+    <b>var</b> img = <b>new</b> Image();
+    img.onload = <b>function</b>() {
+      document.body.appendChild(img);
+    };
+    img.src = event.target.result;
+  };
+  reader.readAsDataURL(files&lbrack;&rbrack;);
 }
-<b>var</b>
-reader
-=
-<b>new</b>
-FileReader
-(
-)
-;
-reader.
-onload
-=
-<b>function</b>
-(
-event
-)
-{
-<b>var</b>
-img
-=
-<b>new</b>
-Image
-(
-)
-;
-img.
-onload
-=
-<b>function</b>
-(
-)
-{
-document.
-body
-.
-appendChild
-(
-img
-)
-;
-}
-;
-img.
-src
-=
-event.
-target
-.
-result
-;
-}
-;
-reader.
-readAsDataURL
-(
-files
-&lbrack;
-0
-&rbrack;
-)
-;
-}
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch89-3">Section 89.3: Slice a file</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-blob.slice
-The () method is used to create a new Blob object containing the data
+<p>The blob.slice() method is used to create a new Blob object containing the data
 in the specified range of bytes of the source Blob. This method is
-usable with File instances too, since File extends Blob.
-
-Here we slice a file in a specific amount of blobs. This is useful
+usable with File instances too, since File extends Blob.</p>
+<p>Here we slice a file in a specific amount of blobs. This is useful
 especially in cases where you need to process files that are too large
 to read in memory all in once. We can then read the chunks one by one
-using FileReader.
+using FileReader.</p>
+<pre>
 <i>/&ast;&ast;</i>
 <i>&ast; &bsol;@param {File&vert;Blob} - file to slice</i>
 <i>&ast; &bsol;@param {Number} - chunksAmount</i>
 <i>&ast; &bsol;@return {Array} - an array of Blobs</i>
 <i>&ast;&ast;/</i>
-<b>function</b>
-sliceFile
-(
-file
-,
-chunksAmount
-)
-{
-<b>var</b>
-byteIndex
-=
-0
-;
-<b>var</b>
-chunks
-=
-&lbrack;
-&rbrack;
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-chunksAmount
-;
-i
-+=
-1
-)
-{
-<b>var</b>
-byteEnd
-=
-Math
-.
-ceil
-(
-(
-file.
-size
-/
-chunksAmount
-)
-&ast;
-(
-i
-&plus;
-1
-)
-)
-;
-chunks.
-push
-(
-file.
-slice
-(
-byteIndex
-,
-byteEnd
-)
-)
-;
-byteIndex
-+=
-(
-byteEnd
-&minus;
-byteIndex
-)
-;
+<b>function</b> sliceFile(file, chunksAmount) {
+<b>var</b> byteIndex = 0;
+<b>var</b> chunks = &lbrack;&rbrack;;
+&nbsp;
+<b>for</b> (<b>var</b> i = 0; i &lt; chunksAmount; i += 1) {
+  <b>var</b> byteEnd = Math.ceil((file.size / chunksAmount) &ast; (i &plus; 1));
+  chunks.push(file.slice(byteIndex, byteEnd));
+  byteIndex += (byteEnd &minus; byteIndex);
 }
-<b>return</b>
-chunks
-;
+&nbsp;
+<b>return</b> chunks;
 }
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch89-4">Section 89.4: Get the properties of the file</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-If you want to get the properties of the file (like the name or the
+<p>If you want to get the properties of the file (like the name or the
 size) you can do it before using the File Reader. If we have the
-following html piece of code:
-<b>&lt;</b>
-<b>input</b>
-type
-=
-&quot;file&quot;
-id
-=
-&quot;newFile&quot;
-<b>&gt;</b>
-You can access the properties directly like this:
-document.
-getElementById
-(
-&apos;newFile&apos;
-)
-.
-addEventListener
-(
-&apos;change&apos;
-,
-getFile
-)
-;
-<b>function</b>
-getFile
-(
-event
-)
-{
-<b>var</b>
-files
-=
-event.
-target
-.
-files
-,
-file
-=
-files
-&lbrack;
-0
-&rbrack;
-;
-console.
-log
-(
-&apos;Name of the file&apos;
-,
-file.
-name
-)
-;
-console.
-log
-(
-&apos;Size of the file&apos;
-,
-file.
-size
-)
-;
+following html piece of code:</p>
+<pre>
+<b>&lt;</b><b>input</b>type=&quot;file&quot; id=&quot;newFile&quot;<b>&gt;</b>
+</pre>
+<p>You can access the properties directly like this:</p>
+<pre>
+document.getElementById(&apos;newFile&apos;).addEventListener(&apos;change&apos;, getFile);
+<b>function</b> getFile(event) {
+  <b>var</b> files = event.target.files
+    , file = files&lbrack;0&rbrack;;
+    console.log(&apos;Name of the file&apos;, file.name);
+    console.log(&apos;Size of the file&apos;, file.size);
 }
-You can also get easily the following attributes: lastModified
-(Timestamp), lastModifiedDate (Date), and type (File
-Type)
+</pre>
+<p>You can also get easily the following attributes: lastModified
+(Timestamp), lastModifiedDate (Date), and type (File Type)</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch89-5">Section 89.5: Selecting multiple files and restricting file types</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The HTML5 file API allows you to restrict which kind of files are
-accepted by simply setting the accept attribute on a file input, e.g.:
-<b>&lt;</b>
-<b>input</b>
-type
-=
-&quot;file&quot;
-accept
-=
-&quot;image/jpeg&quot;
-<b>&gt;</b>
-image / jpeg  , image / png
-Specifying multiple MIME types separated by a comma (e.g. ) or using
-wildcards (e.g.
-image<i>/&ast;</i>
-for allowing all types of images) give you a quick and powerful way to
-restrict the type of files you want to select. Here&apos;s an example for
-allowing any image or video:
-<b>&lt;</b>
-<b>input</b>
-type
-=
-&quot;file&quot;
-accept
-=
-&quot;image/&ast;,video&ast;&quot;
-<b>&gt;</b>
-By default, the file input lets the user select a single file. If you
+<p>The HTML5 file API allows you to restrict which kind of files are
+accepted by simply setting the accept attribute on a file input, e.g.:</p>
+<pre>
+<b>&lt;</b> <b>input</b>type=&quot;file&quot; accept=&quot;image/jpeg&quot;<b>&gt;</b>
+</pre>
+<p>Specifying multiple MIME types separated by a comma (e.g. ) or using
+wildcards (e.g. image<i>/&ast;</i> for allowing all types of images) give 
+you a quick and powerful way to restrict the type of files you want to select. 
+Here&apos;s an example for allowing any image or video:</p>
+<pre>
+<b>&lt;</b><b>input</b> type=&quot;file&quot; accept=&quot;image/&ast;,video&ast;&quot;<b>&gt;</b>
+</pre>
+<p>By default, the file input lets the user select a single file. If you
 want to enable multiple file selection, simply add the multiple
-attribute:
-<b>&lt;</b>
-<b>input</b>
-type
-=
-&quot;file&quot;
-multiple
-<b>&gt;</b>
-You can then read all the selected files via the file input&apos;s files
-array. See read file as dataUrl
+attribute:</p>
+<pre>
+<b>&lt;</b><b>input</b> type=&quot;file&quot;multiple<b>&gt;</b>
+</pre>
+<p>You can then read all the selected files via the file input&apos;s files
+array. See read file as dataUrl</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch89-6">Section 89.6: Client side csv download using Blob</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>function</b>
-downloadCsv
-(
-)
-{
-<b>var</b>
-blob
-=
-<b>new</b>
-Blob
-(
-&lbrack;
-csvString
-&rbrack;
-)
-;
-<b>if</b>
-(
-window.
-navigator
-.
-msSaveOrOpenBlob
-)
-{
-window.
-navigator
-.
-msSaveBlob
-(
-blob
-,
-&quot;filename.csv&quot;
-)
-;
+<pre>
+<b>function</b> downloadCsv() {
+  <b>var</b> blob = <b>new</b>Blob(&lbrack;csvString&rbrack;);
+  <b>if</b> (window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveBlob(blob, &quot;filename.csv&quot;);
+  }
+  <b>else</b> {
+    <b>var</b> a = window.document.createElement(&quot;a&quot;);
+    a&period;href = window.URL.createObjectURL(blob, {
+      type: &quot;text/plain&quot;
+    });
+    a&period;download = &quot;filename.csv&quot;;
+    document.body.appendChild(a);
+    a&period;click();
+    document.body.removeChild(a);
+  }
 }
-<b>else</b>
-{
-<b>var</b>
-a
-=
-window.
-document
-.
-createElement
-(
-&quot;a&quot;
-)
-;
-a&period;
-href
-=
-window.
-URL
-.
-createObjectURL
-(
-blob
-,
-{
-type
-:
-&quot;text/plain&quot;
-}
-)
-;
-a&period;
-download
-=
-&quot;filename.csv&quot;
-;
-document.
-body
-.
-appendChild
-(
-a
-)
-;
-a&period;
-click
-(
-)
-;
-document.
-body
-.
-removeChild
-(
-a
-)
-;
-}
-}
-<b>var</b>
-string
-=
-&quot;a1,a2,a3&quot;
-;
-downloadCSV
-(
-string
-)
-;
-Source reference ; <https://github.com/mholt/PapaParse/issues/175>
+<b>var</b> string = &quot;a1,a2,a3&quot;;
+downloadCSV(string);
+</pre>
+<p>Source reference; <a href="https://github.com/mholt/PapaParse/issues/175">
+&lt;https://github.com/mholt/PapaParse/issues/175&gt;</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch90">Chapter 90: Notifications API</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch90-1">Section 90.1: Requesting Permission to send notifications</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Notification.requestPermission
-We use to ask the user if he/she wants to receive notifications from
-our website.
-Notification.
-requestPermission
-(
-<b>function</b>
-(
-)
-{
-<b>if</b>
-(
-Notification.
-permission
-===
-&apos;granted&apos;
-)
-{
-// <i>user approved.</i>
-// <i>use of new Notification(&hellip;) syntax will now be successful</i>
-}
-<b>else</b>
-<b>if</b>
-(
-Notification.
-permission
-===
-&apos;denied&apos;
-)
-{
-// <i>user denied.</i>
-}
-<b>else</b>
-{
-// <i>Notification.permission === &apos;default&apos;</i>
-// <i>user didn</i>
-'
-<i>t make a decision.</i>
-// <i>You can</i>
-'
-<i>t send notifications until they grant permission.</i>
-}
-}
-)
-;
-.requestPermission
-Since Firefox 47 The method can also return a promise when handling
-the user&apos;s decision for granting permission
-Notification.
-requestPermission
-(
-)
-.
-then
-(
-<b>function</b>
-(
-permission
-)
-{
-<b>if</b>
-(
-!
-(
-&apos;permission&apos;
-<b>in</b>
-Notification
-)
-)
-{
-Notification.
-permission
-=
-permission
-;
-}
-// <i>you got permission !</i>
-}
-,
-<b>function</b>
-(
-rejection
-)
-{
-// <i>handle rejection here.</i>
-}
-)
-;
+<p>We use to ask the user if he/she wants to receive notifications from
+our website.</p>
+&nbsp;
+<pre>
+Notification.requestPermission(<b>function</b>() {
+  <b>if</b> (Notification.permission === &apos;granted&apos;) {
+    // <i>user approved.</i>
+    // <i>use of new Notification(&hellip;) syntax will now be successful</i>
+  } <b>else</b> <b>if</b> (Notification.permission === &apos;denied&apos;) {
+    // <i>user denied.</i>
+  } <b>else</b> { // <i>Notification.permission === &apos;default&apos;</i>
+    // <i>user didn't make a decision.</i>
+    // <i>You can't send notifications until they grant permission.</i>
+  }
+});
+</pre>
+<p>Since Firefox 47 The method can also return a promise when handling
+the user&apos;s decision for granting permission</p>
+<pre>
+Notification.requestPermission().then(<b>function</b>(permission) {
+  <b>if</b> (!(&apos;permission&apos; <b>in</b> Notification)) {
+    Notification.permission = permission;
+  }
+  // <i>you got permission !</i>
+  }, <b>function</b>(rejection) {
+  // <i>handle rejection here.</i>
+  }
+);
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch90-2">Section 90.2: Sending Notifications</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
