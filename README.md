@@ -23257,9 +23257,8 @@ for public key you just have to use prefix and suffix below:</p>
 &nbsp;
 <b>function</b> toPem(privateKey) {
   <b>var</b> b64 = addNewLines(arrayBufferToBase64(privateKey));
-  <b>var</b> pem = &quot;&dash;&dash;&dash;&dash;&dash;BEGIN PRIVATE KEY&dash;&dash;&dash;&dash;&dash;&bsol;n&quot; &plus; b64 &plus; &quot;&dash;&dash;&dash;&dash;&dash;END PRIVATE KEY&dash;&dash;&dash;&dash;&dash;&quot;;
-&nbsp;
-  <br>return</b> pem;
+  <b>var</b> pem = &quot;&dash;&dash;&dash;&dash;&dash;BEGIN PRIVATE KEY&dash;&dash;&dash;&dash;&dash;<b>&bsol;n</b>&quot; &plus; b64 &plus; &quot;&dash;&dash;&dash;&dash;&dash;END PRIVATE KEY&dash;&dash;&dash;&dash;&dash;&quot;;
+  <b>return</b> pem;
 }
 &nbsp;
 // <i>Let&apos;s generate the key pair first</i>
@@ -23288,6 +23287,7 @@ window.crypto.subtle.generateKey)
     console.log(err);
   });
 });
+</pre>
 <!-- ![](./images/image044.png){width="7.486805555555556in" height="8.324305555555556in"} -->
 <p>That&apos;s it! Now you have a fully working and compatible RSA-OAEP
 Private Key in PEM format which you can use wherever you want. Enjoy!</p>
