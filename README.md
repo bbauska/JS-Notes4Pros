@@ -23267,15 +23267,15 @@ window.crypto.subtle.generateKey)
   {
     name: &quot;RSA&dash;OAEP&quot;,
     modulusLength: 2048, // <i>can be 1024, 2048 or 4096</i>
-    
+&nbsp;
     publicExponent: <b>new</b> Uint8Array(&lbrack;0x01, 0x00, 0x01&rbrack;),
     hash: {name: &quot:SHA&dash;256&quot;} // <i>or SHA&dash;512</i>
   },
   <b>true</b>,
   &lbrack;&quot;encrypt&quot;, &quot;decrypt&quot;&rbrack;
-),then(<b>function</b>(keyPair) {
+).then(<b>function</b>(keyPair) {
   /&ast; <i>new when the key pair is generated we are going</i>
-     <i>to export it from the keypair object in pkcs8
+     <i>to export it from the keypair object in pkcs8</i>
   &ast;/
   window.crypto.subtle.exportKey{
     &quot;pkcs8&quot;,
