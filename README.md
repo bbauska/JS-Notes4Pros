@@ -22371,395 +22371,179 @@ indexOf(&lbrack;1, 2, 3, 4, 5, 6, 7&rbrack;, x =&gt; x === 5); // <i>returns ind
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch85-1">Section 85.1: Swapping Two Integers with Bitwise XOR (without additional memory allocation)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>var</b>
-a
-=
-11
-,
-b
-=
-22
-;
-a
-=
-a
-&Hat;
-b
-;
-b
-=
-a
-&Hat;
-b
-;
-a
-=
-a
-&Hat;
-b
-;
-console.
-log
-(
-&quot;a = &quot;
-&plus;
-a
-&plus;
-&quot;; b = &quot;
-&plus;
-b
-)
-;
-// <i>a is now 22 and b is now 11</i>
+<pre>
+<b>var</b> a = 11, b = 22;
+a = a &Hat; b;
+b = a &Hat; b;
+a = a &Hat; b;
+console.log(&quot;a = &quot; &plus; a &plus; &quot;; b = &quot; &plus; b); // <i>a is now 22 and b is now 11</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch85-2">Section 85.2: Faster multiplication or division by powers of 2</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-13 &ast; (10 &ast;&ast; 2)
-Shifting bits left (right) is equivalent to multiplying (dividing) by
+<p>Shifting bits left (right) is equivalent to multiplying (dividing) by
 2. It&apos;s the same in base 10: if we &quot;left-shift&quot; 13 by 2 places, we
 get 1300, or . And if we take 12345 and &quot;right-shift&quot; by 3 places
 and then remove the
 Math.floor(12345 / (10 &ast;&ast;   . So if we want to multiply a  2 &ast;&ast;
 3)) variable by  n
-decimal part, we get 12, or , we can just left-shift by n bits.
-console.
-log
-(
-13
-&ast;
-(
-2
-&ast;&ast;
-6
-)
-)
-// <i>13 &ast; 64 = 832</i>
-console.
-log
-(
-13
-&lt;&lt;
-6
-)
-// <i>832</i>
-2 &ast;&ast; n
-Similarly, to do (floored) integer division by , we can right shift by
-n bits. Example:
-console.
-log
-(
-1000
-/
-(
-2
-&ast;&ast;
-4
-)
-)
-// <i>1000 / 16 = 62.5</i>
-console.
-log
-(
-1000
-&gt;&gt;
-4
-)
-// <i>62</i>
-It even works with negative numbers:
-console.
-log
-(
-&minus;
-80
-/
-(
-2
-&ast;&ast;
-3
-)
-)
-// <i>-80 / 8 = -10</i>
-console.
-log
-(
-&minus;
-80
-&gt;&gt;
-3
-)
-// <i>-10</i>
+decimal part, we get 12, or , we can just left-shift by n bits.</p>
+<pre>
+console.log(13 &ast; (2 &ast;&ast; 6)) // <i>13 &ast; 64 = 832</i>
+console.log(13        &lt;&lt;     6)  // <i>832</i>
+</pre>
+<p>Similarly, to do (floored) integer division by 2 &ast;&ast; n, we can right shift by
+n bits. Example:</p>
+pre>
+console.log(1000 / (2 &ast;&ast; 4)) // <i>1000 / 16 = 62.5</i>
+console.log(1000    &gt;&gt;     4)  // <i>62</i>
+</pre>
+<p>It even works with negative numbers:</p>
+<pre>
+console.log(&minus;80 / (2 &ast;&ast; 3)) // <i>-80 / 8 = -10</i>
+console.log(&minus;80       &gt;&gt;3)  // <i>-10</i>
+</pre>
+<p>
 In reality, speed of arithmetic is unlikely to significantly impact
 how long your code takes to run, unless you are doing on the order of
 100s of millions of computations. But C programmers love this sort of
-thing!
+thing!</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch85-3">Section 85.3: Number&apos;s Parity Detection with Bitwise AND</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Instead of this (unfortunately too often seen in the real code)
-&quot;masterpiece&quot;:
-<b>function</b>
-isEven
-(
-n
-)
-{
-<b>return</b>
-n
-&percnt;
-2
-==
-0
-;
+<p>Instead of this (unfortunately too often seen in the real code) &quot;masterpiece&quot;:</p>
+<pre>
+<b>function</b> isEven(n) {
+  <b>return</b> n &percnt; 2 == 0;
 }
-<b>function</b>
-isOdd
-(
-n
-)
-{
-<b>if</b>
-(
-isEven
-(
-n
-)
-)
-{
-<b>return</b>
-<b>false</b>
-;
+<b>function</b> isOdd(n) {
+  <b>if</b> (isEven(n)) {
+    <b>return false</b>;
+  } <b>else</b> {
+    <b>return</b> <b>true</b>;
+  }
 }
-<b>else</b>
-{
-<b>return</b>
-<b>true</b>
-;
+</pre>
+<p>You can do the parity check much more effective and simple:</p>
+<pre>
+<b>if</b> (n & 1) {
+  console.log(&quot;ODD!&quot;);
+} <b>else</b> {
+  console.log(&quot;EVEN!&quot;);
 }
-}
-You can do the parity check much more effective and simple:
-<b>if</b>
-(
-n
-&
-1
-)
-{
-console.
-log
-(
-&quot;ODD!&quot;
-)
-;
-}
-<b>else</b>
-{
-console.
-log
-(
-&quot;EVEN!&quot;
-)
-;
-}
-(this is actually valid not only for JavaScript)
+</pre>
+<p>(this is actually valid not only for JavaScript)</p>
+<!-- page 403 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch86">Chapter 86: Tilde ~<h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The &bsol;~ operator looks at the binary representation of the values of
-the expression and does a bitwise negation operation on it.
-Any digit that is a 1 in the expression becomes a 0 in the result. Any
-digit that is a 0 in the expression becomes a 1 in the result.
+<p>The ~ operator looks at the binary representation of the values of
+the expression and does a bitwise negation operation on it.</p>
+<p>Any digit that is a 1 in the expression becomes a 0 in the result. Any
+digit that is a 0 in the expression becomes a 1 in the result.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch86-1">Section 86.1: ~ Integer</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-The following example illustrates use of the bitwise NOT (&bsol;~) operator
-on integer numbers.
-<b>let</b>
-number
-=
-3
-;
-<b>let</b>
-complement
-=
-&bsol;~number
-;
-Result of the complement number equals to -4;
-<b>Expression Binary value Decimal value</b>
-3 00000000 00000000 00000000 00000011 3
-&bsol;~3
-11111111
-11111111
-11111111
-11111100
--4
-To simplify this, we can think of it as function
-f
-(
-n
-)
-=
-&minus;
-(
-n
-&plus;
-1
-)
-.
-<b>let</b>
-a
-=
-&bsol;~
-&minus;
-2
-;
-// <i>a is now 1</i>
-<b>let</b>
-b
-=
-&bsol;~
-&minus;
-1
-;
-// <i>b is now 0</i>
-<b>let</b>
-c
-=
-&bsol;~
-0
-;
-// <i>c is now -1</i>
-<b>let</b>
-d
-=
-&bsol;~
-1
-;
-// <i>d is now -2</i>
-<b>let</b>
-e
-=
-&bsol;~
-2
-;
-// <i>e is now -3</i>
+<p>The following example illustrates use of the bitwise NOT (&bsol;~) operator
+on integer numbers.</p>
+<pre>
+<b>let</b> number = 3;
+<b>let</b> complement = ~number;
+</pre>
+<p>Result of the complement number equals to -4;</p>
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Expression</b></th>
+      <th><b>Binary value</b></th>
+      <th><b>Decimal value</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3</td>
+      <td>00000000 00000000 00000000 00000011backspace</td>
+      <td>3</td>
+    </tr>
+    <tr>
+	  <td>&dash;3</td>
+      <td>11111111 11111111 11111111 11111100</td>
+      <td>&dash;4</td>
+    </tr>
+  </tbody>
+</table>
+<p>To simplify this, we can think of it as function f(n) = &minus;(n&plus;1).</p>
+<pre>
+<b>let</b> a = ~&minus;2; // <i>a is now 1</i>
+<b>let</b> b = ~&minus;&minus;1; // <i>b is now 0</i>
+<b>let</b> c = ~0;             // <i>c is now -1</i>
+<b>let</b> d = ~1;             // <i>d is now -2</i>
+<b>let</b> e = ~2;             // <i>e is now -3</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch86-2">Section 86.2: ~~ Operator</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Double Tilde &bsol;~&bsol;~ will perform bitwise NOT operation twice.
-The following example illustrates use of the bitwise NOT (&bsol;~&bsol;~)
-operator on decimal numbers.
-To keep the example simple, decimal number 3.5 will be used, cause of
-it&apos;s simple representation in binary format.
-<b>let</b>
-number
-=
-3.5
-;
-<b>let</b>
-complement
-=
-&bsol;~number
-;
-Result of the complement number equals to -4;
-<b>Expression Binary value Decimal value</b>
-3 00000000 00000000 00000000 00000011 3
-&bsol;~&bsol;~3 00000000 00000000 00000000 00000011 3
-00000000 00000011.1
-3.53.5
-&bsol;~&bsol;~3.5 00000000 00000011 3
-integer
-f2
-g2
-To simplify this, we can think of it as functions (n) = -(-(n+1) + 1)
-and (n) = -(-((n)+1) + 1).
-
-<b>f2(n)</b> will leave the integer number as it is.
-<b>let</b>
-a
-=
-&bsol;~&bsol;~
-&minus;
-2
-;
-// <i>a is now -2</i>
-<b>let</b>
-b
-=
-&bsol;~&bsol;~
-&minus;
-1
-;
-// <i>b is now -1</i>
-<b>let</b>
-c
-=
-&bsol;~&bsol;~
-0
-;
-// <i>c is now 0</i>
-<b>let</b>
-d
-=
-&bsol;~&bsol;~
-1
-;
-// <i>d is now 1</i>
-<b>let</b>
-e
-=
-&bsol;~&bsol;~
-2
-;
-// <i>e is now 2</i>
-<b>g2(n)</b> will essentially round positive numbers down and negative
-numbers up.
-<b>let</b>
-a
-=
-&bsol;~&bsol;~
-&minus;
-2.5
-;
-// <i>a is now -2</i>
-<b>let</b>
-b
-=
-&bsol;~&bsol;~
-&minus;
-1.5
-;
-// <i>b is now -1</i>
-<b>let</b>
-c
-=
-&bsol;~&bsol;~
-0.5
-;
-// <i>c is now 0</i>
-<b>let</b>
-d
-=
-&bsol;~&bsol;~
-1.5
-;
-// <i>d is now 1</i>
-<b>let</b>
-e
-=
-&bsol;~&bsol;~
-2.5
-;
-// <i>e is now 2</i>
+<p>Double Tilde ~~ will perform bitwise NOT operation twice.</p>
+<p>The following example illustrates use of the bitwise NOT (~~) operator on decimal 
+numbers.</p>
+<p>To keep the example simple, decimal number 3.5 will be used, cause of
+it&apos;s simple representation in binary format.</p>
+<pre>
+<b>let</b> number = 3.5;
+<b>let</b> complement = ~number;
+</pre>
+<p>Result of the complement number equals to -4;</p>
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Expression</b></th>
+      <th><b>Binary value</b></th>
+      <th><b>Decimal value</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3</td>
+      <td>00000000 00000000 00000000 00000011backspace</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>~~3</td>
+      <td>00000000 00000000 00000000 00000011backspace</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>00000000 00000011.1</td>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>00000000 00000011</td>
+      <td>3</td>
+    </tr>
+  <tbody>
+</table>
+<p>To simplify this, we can think of it as functions f2(n) = -(-(n+1) + 1)
+and g2(n) = -(-(integer(n)+1) + 1).</p>
+<p><b>f2(n)</b> will leave the integer number as it is.</p>
+<pre>
+<b>let</b> a = ~~&minus;2; // <i>a is now -2</i>
+<b>let</b> b = ~~&minus;1; // <i>b is now -1</i>
+<b>let</b> c = ~~0;        // <i>c is now 0</i>
+<b>let</b> d = ~~1;        // <i>d is now 1</i>
+<b>let</b> e = ~~2;        // <i>e is now 2</i>
+</pre>
+<p><b>g2(n)</b> will essentially round positive numbers down and negative numbers up.</p>
+<pre>
+<b>let</b> a = ~~&minus;2.5; // <i>a is now -2</i>
+<b>let</b> b = ~~&minus;1.5; // <i>b is now -1</i>
+<b>let</b> c = ~~0.5;        // <i>c is now 0</i>
+<b>let</b> d = ~~1.5;        // <i>d is now 1</i>
+<b>let</b> e = ~~2.5;        // <i>e is now 2</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch86-3">Section 86.3: Converting Non-numeric values to Numbers</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>~~ Could be used on non-numeric values. A numeric expression will be
 first converted to a number and then performed bitwise NOT operation
 on it.</p>
@@ -22779,7 +22563,6 @@ presented as numeric value 1 and <b>false</b> as 0</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch86-4">Section 86.4: Shorthands</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>We can use ~ as a shorthand in some everyday scenarios.</p>
 <p>We know that ~ converts -1 to 0, so we can use it with indexOf on array.</p>
 <p><b>indexOf</b></p>
@@ -22799,31 +22582,43 @@ presented as numeric value 1 and <b>false</b> as 0</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch86-5">Section 86.5: ~ Decimal</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>The following example illustrates use of the bitwise NOT (&bsol;~) operator on decimal numbers.</p>
 <p>To keep the example simple, decimal number 3.5 will be used, cause of it&apos;s 
 simple representation in binary format.</p>
 <pre>
 <b>let</b> number = 3.5;
-<b>let</b> complement = &bsol;~number;
+<b>let</b> complement = ~number;
 </pre>
 <!-- page 405 -->
-<!--
 <p>Result of the complement number equals to -4;</p>
-<b>Expression Binary value Decimal value</b>
-00000000 00000010.1
-3.53.5
-&bsol;~3.5
-11111111
-11111100
--4
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Expression</b></th>
+      <th><b>Binary value</b></th>
+      <th><b>Decimal value</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3.5</td>
+      <td>00000000 00000010.1</td>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <td>&dash;3.5</td>
+      <td>11111111 11111100</td>
+      <td>&dash;4</td>
+    </tr>
+  </tbody>
+</table>
 <p>To simplify this, we can think of it as function f(n) = &minus;(integer(n)&plus;1).</p>
 <pre>
-<b>let</b> a = &bsol;~&minus;2.5;  // <i>a is now 1</i>
-<b>let</b> b = &bsol;~&minus;1.5;  // <i>b is now 0</i>
-<b>let</b> c = &bsol;~0.5;         // <i>c is now -1</i>
-<b>let</b> d = &bsol;~1.5;         // <i>c is now -2</i>
-<b>let</b> e = &bsol;~2.5;         // <i>c is now -3</i>
+<b>let</b> a = ~&minus;2.5;  // <i>a is now 1</i>
+<b>let</b> b = ~&minus;1.5;  // <i>b is now 0</i>
+<b>let</b> c = ~0.5;         // <i>c is now -1</i>
+<b>let</b> d = ~1.5;         // <i>c is now -2</i>
+<b>let</b> e = ~2.5;         // <i>c is now -3</i>
 </pre>
 <!-- page 406 -->
 
