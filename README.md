@@ -3972,7 +3972,7 @@ target="_blank" rel="noopener noreferrer"><b>Abstract Equality Comparison</b></a
 <ul>
   <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation" 
     target="_blank" rel="noopener noreferrer">Symmetry</a>: x == y is <b>true</b> if, 
-	and only if, y == x is <b>true</b>, for any values x and y.</li>
+    and only if, y == x is <b>true</b>, for any values x and y.</li>
 </ul>
 
 <p>But is not an <a href="https://en.wikipedia.org/wiki/Equivalence_relation" 
@@ -3983,7 +3983,7 @@ target="_blank" rel="noopener noreferrer">equivalence relation</a>because</p>
     target="_blank" rel="noopener noreferrer">reflexive</a>: <b>NaN</b> != <b>NaN</b></li>
   <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation" 
     target="_blank" rel="noopener noreferrer">
-	Transitivity</a> does not hold, e.g. 0 == &apos;&apos; and 0 == &apos;0&apos;, but &apos;&apos; != &apos;0&apos;</li>
+    Transitivity</a> does not hold, e.g. 0 == &apos;&apos; and 0 == &apos;0&apos;, but &apos;&apos; != &apos;0&apos;</li>
 </ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-11">Section 10.11: Relational operators (&lt;, &lt;=, &gt;, &gt;=)</h3>
@@ -9524,7 +9524,7 @@ This can be useful:</p>
 <ul>
   <li>When the value of an argument almost never changes (e.g., a conversion factor), but 
     you need to maintain the flexibility of setting that value (rather than hard-coding it 
-	as a constant).</li>
+    as a constant).</li>
   <li>When the result of a curried function is useful before the other curried functions 
     have run.</li>
   <li>To validate the arrival of the functions in a specific sequence.</li>
@@ -12298,13 +12298,13 @@ arguments that were passed to the event on to the function.</p>
   <pre>
   function SomeClass(msg, elem} {
     this.msg = msg;
-	elem.addEventListener(&apos;click&apos;, this);
+    elem.addEventListener(&apos;click&apos;, this);
   }
   SomeClass.prototype.handleEvent = function(event) {
     var fn = this&lbrack;event.type&rbrack;;
-	if (fn) {
-	  fn.apply(this, arguments);
-	}
+    if (fn) {
+      fn.apply(this, arguments);
+    }
   };
   SomeClass.prototype.click = function(event) {
     console.log(this.msg);
@@ -12584,12 +12584,12 @@ clearTimeout(timeout);  // <i>The timeout will no longer be executed</i>
     <tr>
       <td>u</td>
       <td><b>u</b>nicode: Pattern strings are treated as <b>UTF-16</b>. Also causes escape sequences to match
-	  Unicode characters.</td>
+      Unicode characters.</td>
     </tr>
     <tr>
       <td>y</td>
       <td>stick<b>y</b>: matches only from the index indicated by the lastIndex property of this regular expression
-	  in the target string (and does not attempt to match from any later indexes).</td>
+      in the target string (and does not attempt to match from any later indexes).</td>
     </tr>
   </tbody>
 </table>
@@ -12639,13 +12639,13 @@ be specified as the second argument to the RegExp constructor, as in
   <li>i - Ignore case. /&lbrack;a-z&rbrack;/i is equivalent to /&lbrack;a&bsol;Z&rbrack;/.</li>
   <li>m - Multiline. &Hat; and &dollar; match the beginning and end of each line
     respectively treating &bsol;&bsol;n and &bsol;&bsol;r as delimiters instead 
-	of simply the beginning and end of the entire string.</li>
+    of simply the beginning and end of the entire string.</li>
 </ul>
 <h5>Version ≥ 6</h5>
 <ul>
   <li>u - Unicode. If this flag is not supported you must match specific
     Unicode characters with &bsol;&bsol;uXXXX where XXXX is the character&apos;s 
-	value in hexadecimal.</li>
+    value in hexadecimal.</li>
   <li>y - Finds all consecutive/adjacent matches.</li>
 </ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -13507,7 +13507,7 @@ class Car {
       &dollar;type: &apos;com.example.Car&apos;,
       color: <b>this</b>.color,
       speed: <b>this</b>.speed
-	};
+    };
 }
   <b>static</b> fromJSON(data) {
     <b>return</b> <b>new</b> Car(data.color, data.speed);
@@ -14257,7 +14257,7 @@ can not be overridden and therefore their functionality is guaranteed.</p>
     <tr>
       <td>Number</td>
       <td>&quot;number&quot;</td>
-	</tr>
+    </tr>
     <tr>
       <td>String</td>
       <td>&quot;string&quot;</td>
@@ -14911,7 +14911,7 @@ mitigating the problem of deeply nested callbacks (known as
     from a synchronous function.</li>
   <li><i>rejected</i>  An error has occurred during the operation, and the
     promise is <i>rejected</i> with a <i>reason</i>. This is analogous to throwing
-	an error in a synchronous function.</li>
+    an error in a synchronous function.</li>
 </ul>
 <p>A promise is said to be <i>settled</i> (or <i>resolved</i>) when it is either
 fulfilled or rejected. Once a promise is settled, it becomes
@@ -15053,7 +15053,7 @@ promise
         .then(handlerFn2);
     } <b>else</b> <b>if</b> (result.condition2) {
       <b>return</b> handlerFn3()
-	    .then(handlerFn4);
+        .then(handlerFn4);
     } <b>else</b> {
         <b>throw</b> <b>new</b> Error(&quot;Invalid result&quot;);
     }
@@ -15167,7 +15167,7 @@ target="_blank" rel="noopener noreferrer">.then()</a> chain
   <li>We manually append a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then" 
     target="_blank" rel="noopener noreferrer">
     .then(successHandler, errorHandler)</a> after the reduce, to execute successHandler once all the 
-	previous steps have resolved. If any step was to fail, then errorHandler would execute.</li>
+    previous steps have resolved. If any step was to fail, then errorHandler would execute.</li>
 </ol>
 <br/>
 <p>Note: The &quot;then&quot; reduction is a sequential counterpart of Promise.all().</p>
@@ -15253,7 +15253,7 @@ fooFn(options, <b>function</b> callback(err, result) {&hellip;});
 <b>function</b> promiseFooFn(options) {
   <b>return</b> <b>new</b> Promise((resolve, reject) =&gt;
     fooFn(options, (err, result) =&gt;
-	  // <i>If there&apos;s an error, reject; otherwise resolve</i>
+      // <i>If there&apos;s an error, reject; otherwise resolve</i>
       err ? reject(err) : resolve(result)
     )
   );
@@ -15326,7 +15326,7 @@ throwErrorAsync()
 throwErrorAsync()
   .<b>catch</b>(error =&gt; {
     <i>/&ast; handle error from throwErrorAsync() &ast;/</i>
-	<b>throw</b> error;
+    <b>throw</b> error;
   })
     .then(() =&gt; { <i>/&ast; will not be called if there&apos;s an error &ast;/</i> })
     .<b>catch</b>(error =&gt; { <i>/&ast; will get called with the same error &ast;/</i> });
@@ -15528,7 +15528,7 @@ are encountered.</p>
 <b>function</b> fetchResult() {
   <b>if</b> (!cachedPromise) {
     cachedPromise = fetch(planets)
-	  .<b>catch</b>(<b>function</b> (e) {
+      .<b>catch</b>(<b>function</b> (e) {
         // <i>Invalidate the current result to retry on the next fetch</i>
         cachedPromise = <b>null</b>;
         // <i>re-raise the error to propagate it to callers</i>
@@ -15727,7 +15727,7 @@ take advantage of its asynchronous functionality.</p>
 <b>var</b> <b>get</b> = <b>function</b>(path) {
   <b>return</b> <b>new</b> Promise(<b>function</b>(resolve, reject) {
     <b>let</b> request = <b>new</b> XMLHttpRequest();
-	request.open(&apos;GET&apos;, path);
+    request.open(&apos;GET&apos;, path);
     request.onload = resolve;
     request.onerror = reject;
     request.send();
@@ -16236,9 +16236,9 @@ console.log(&apos;Hello, &apos; &plus; name);
     </tr>
     <tr>
       <td>outdent</td>
-	  <td>
-	</tr>
-	<tr>
+      <td>
+    </tr>
+    <tr>
       <td><b>&vellip;Clipboard commands</b></td>
       <td></td>
     </tr>
@@ -16534,7 +16534,7 @@ the current browser and return it in JSON format.</p>
       &quot;browserLang&quot;,
       &quot;browserVersion&quot;,
       &quot;browserPlatform&quot;
-	&rbrack;;
+    &rbrack;;
 <i>/&ast; Creating the JSON object &ast;/</i>
 <b>for</b> (<b>var</b> i = 0; i &lt; info.length; i++) {
   <b>if</b> (i === info.length &minus; 1) {
@@ -16750,7 +16750,7 @@ In this example, the host environment is the web browser.
      target="_blank" rel="noopener noreferrer">
     setTimeout</a> tells the browser that, after 100 milliseconds, it should enqueue a
     <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-task" 
-	 target="_blank" rel="noopener noreferrer">task</a> 
+     target="_blank" rel="noopener noreferrer">task</a> 
     to perform the given action.</li>
   <li>In the meantime, the event loop is then responsible for continually
     checking if there&apos;s something else to do: for example, rendering the web page.</li>
@@ -17430,7 +17430,7 @@ ArrayBufferCursor.<b>prototype</b>.next = <b>function</b>(type) {
       <b>var</b> result = <b>this</b>.dataview.getFloat32(<b>this</b>.index, <b>true</b>);
       <b>this</b>.index += 4;
       <b>return</b> result;
-	<b>case</b> &apos;Double&apos; :
+    <b>case</b> &apos;Double&apos; :
     <b>case</b> &apos;Float64&apos; :
       <b>var</b> result = <b>this</b>.dataview.getFloat64(<b>this</b>.index, <b>true</b>);
       <b>this</b>.index += 8;
@@ -17441,7 +17441,7 @@ ArrayBufferCursor.<b>prototype</b>.next = <b>function</b>(type) {
   };
   ArrayBuffuerCursor.<b>prototype</b>.hasNext = <b>function</b>() {
     <b>return this</b>.index &lt; <b>this</b>.size;
-  }	
+  }    
   <b>return</b> ArrayBufferCursor;
 });
 </pre>
@@ -17545,15 +17545,15 @@ interpolated values are used in code</b> such as scripts or styles.)</p>
 class HTMLString extends String {
   static escape(text) {
     if (text instanceof HTMLString) {
-	  return text;
-	}
-	return new HTMLString(
-	  String(text)
-	    .replace(/&/g, '&amp;')
-		.replace(/&lt;/g, '&lt;')
-		.replace(/&gt;/g, '&gt;')
-		.replace(/"/g, '&quot;)
-		.replace(/&bsol;&bsol;/g, '&#39;');
+      return text;
+    }
+    return new HTMLString(
+      String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/&lt;/g, '&lt;')
+        .replace(/&gt;/g, '&gt;')
+        .replace(/"/g, '&quot;)
+        .replace(/&bsol;&bsol;/g, '&#39;');
   }
 }
 function HTML(strings, ...substitutions) {
@@ -18583,8 +18583,8 @@ x != <b>null</b> // <i>instead of !!x in case x is an object, a string, or an un
     with implicit type conversion.</li>
   <li>It is better to provide information about types of values stored in
     variables and properties through the code. For example, x !== 0 says that x 
-	is probably a number, whereas !!x does not convery any such advantage to
-	the readers of the code.</li>
+    is probably a number, whereas !!x does not convery any such advantage to
+    the readers of the code.</li>
   <li>Usage of Boolean(x) allows for similar functionality, and is a more explicit 
     conversion of type.</li>
 </ol>
@@ -19496,8 +19496,8 @@ self.addEventListener(&apos;fetch&apos;, <b>function</b>(event) {
   <li>The SW file can be any name. sw.js is common.</li>
   <li>The location of the SW file is important because it defines the SW&apos;s scope. 
     For example, an SW file at js/sw.js can only intercept fetch requests for files 
-	that begin with /js/. For this reason you usually see the SW file at the 
-	top-level directory of the project.</li>
+    that begin with /js/. For this reason you usually see the SW file at the 
+    top-level directory of the project.</li>
 </ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch63-4">Section 63.4: Communicating with a Web Worker</h3>
@@ -19679,33 +19679,33 @@ call to port.start() is not actually needed, as noted above.</p>
       // Fade in over 2000 ms = 2 seconds. 
       var FADE_DURATION = 2.0 &ast; 1000;
       // -1 is simply a flag to indicate if we are rendering the very 1st frame
-	  var startTime=-1.0;
+      var startTime=-1.0;
       // Function to render current frame (whatever frame that may be)
       function render(currTime) {
-	    var head1 = document.getElementsByTagName(&apos;h1&apos;)&lbrack;0&rbrack;;
+        var head1 = document.getElementsByTagName(&apos;h1&apos;)&lbrack;0&rbrack;;
         // How opaque should head1 be? Its fade started at currTime=0.
         // Over FADE_DURATION ms, opacity goes from 0 to 1 
-		var opacity = (currTime/FADE_DURATION);
-		head1.style.opacity = opacity; 
-	  }
+        var opacity = (currTime/FADE_DURATION);
+        head1.style.opacity = opacity; 
+      }
       // Function to
-	  function eachFrame() {
+      function eachFrame() {
       // Time that animation has been running (in ms)
-	  // Uncomment the console.log function to view how quickly 
-	  // the timeRunning updates its value (may affect performance) 
-	  var timeRunning = (new Date()).getTime() - startTime; 
-	  //console.log(&apos;var timeRunning = &apos;+timeRunning+&apos;ms&apos;); 
-	  if (startTime &lt; 0) {
+      // Uncomment the console.log function to view how quickly 
+      // the timeRunning updates its value (may affect performance) 
+      var timeRunning = (new Date()).getTime() - startTime; 
+      //console.log(&apos;var timeRunning = &apos;+timeRunning+&apos;ms&apos;); 
+      if (startTime &lt; 0) {
         // This branch: executes for the first frame only.
-		// it sets the startTime, then renders at currTime = 0.0 
-		startTime = (new Date()).getTime(); 
-		render(0.0);
+        // it sets the startTime, then renders at currTime = 0.0 
+        startTime = (new Date()).getTime(); 
+        render(0.0);
       } else if (timeRunning &lt; FADE_DURATION) {
         // This branch: renders every frame, other than the 1st frame,
         // with the new timeRunning value. render(timeRunning); 
-	  } else {
-	    return; 
-	  }
+      } else {
+        return; 
+      }
         // Now we are done rendering one frame.
         // So we make a request to the browser to execute the next
         // animation frame, and the browser optimizes the rest.
@@ -19949,7 +19949,7 @@ through direct references rather than through the returned object.</p>
   <b>return</b> {
     getPrivateData: getPrivateData,
     getDoublePrivateData: getDoublePrivateData
-	};
+    };
 })(  <i>/&ast; pass initialization data if necessary &ast;/</i>);
 </pre>
 <p><b>Revealing Prototype Pattern</b></p>
@@ -20058,7 +20058,7 @@ for an object.</p>
         console.log(&apos;I am a public method&apos;);
       },
       publicVariable: &apos;I am a public variable&apos;
-	};
+    };
   }
   <b>return</b> {
     // <i>Get the Singleton instance if it exists</i>
@@ -21659,16 +21659,16 @@ Participant.<b>prototype</b> = {
 &nbsp;
   <b>return</b> {
     register: <b>function</b>(participants) {
-	  participants[participant.name] = participant;
-	  participant.chatroom = this;
-	},
-	send: <b>function</b>(message, from) {
-	  <b>for</b> (key <b>in</b> participants) {
-	    <b>if</b> (participants[key] !== from) { // <i>you can't messge yourself !</i>
-		    participants[key].receive(message, from);
-		}
-	  }
-	}
+      participants[participant.name] = participant;
+      participant.chatroom = this;
+    },
+    send: <b>function</b>(message, from) {
+      <b>for</b> (key <b>in</b> participants) {
+        <b>if</b> (participants[key] !== from) { // <i>you can't messge yourself !</i>
+            participants[key].receive(message, from);
+        }
+      }
+    }
   };
 };
 // <i>log helper</i>
@@ -21677,7 +21677,7 @@ Participant.<b>prototype</b> = {
   var log = "";
   return {
     add: <b>function</b>(msg) { log += msg + "\n"; },
-	show: <b>function</b>() { alert(log); log = ""; }
+    show: <b>function</b>() { alert(log); log = ""; }
   }
 })();
 &nbsp;
@@ -22032,13 +22032,13 @@ doAsyncThing()
 async <b>function</b> newUnicorn() {
   <b>try</b> {
     <b>const</b> responseCurrent = await fetch(&apos;unicorn.json&apos;); // <i>fetch unicorn.json from server</i>
-	<b>const</b> unicorn = await responseCurrent.json(); // <i>parse the response as JSON</i>
-	<b>const</b> responseNew = await fetch(&apos;new/unicorn&apos;, { // <i>send a request to &apos;new/unicorn&apos;</i>
-	  method: &apos;post&apos;, // <i>using the POST method</i>
+    <b>const</b> unicorn = await responseCurrent.json(); // <i>parse the response as JSON</i>
+    <b>const</b> responseNew = await fetch(&apos;new/unicorn&apos;, { // <i>send a request to &apos;new/unicorn&apos;</i>
+      method: &apos;post&apos;, // <i>using the POST method</i>
       body: JSON.stringify({unicorn}) // <i>pass the unicorn to the request body</i>
     });
     <b>const</b> json = await responseNew.json();
-	<b>return</b> json.success // <i>return success property of response</i>
+    <b>return</b> json.success // <i>return success property of response</i>
   } <b>catch</b> (err) {
     console.log(&apos;Error creating unicorn:&apos;, err);
   }
@@ -22093,7 +22093,7 @@ think this solves the problem, but it won&apos;t work as expected.</p>
   data = &lbrack;1, 2, 3, 4, 5&rbrack;;
   data.forEach(async(e) =&gt; {
     <b>const</b> i = await somePromiseFn(e);
-	console.log(i);
+    console.log(i);
   });
   console.log(&apos;this will print first&apos;);
 })();
@@ -22469,7 +22469,7 @@ on integer numbers.</p>
       <td>3</td>
     </tr>
     <tr>
-	  <td>&dash;3</td>
+      <td>&dash;3</td>
       <td>11111111 11111111 11111111 11111100</td>
       <td>&dash;4</td>
     </tr>
@@ -23245,11 +23245,11 @@ for public key you just have to use prefix and suffix below:</p>
   <b>return</b> b64;
 }
 &nbsp;
-<b>function addNewLines(str) {
+<b>function</b> addNewLines(str) {
   <b>var</b> finalString = &apos;&apos;;
   while(str.length &gt; 0) {
     finalString += str.substring(0, 64) &plus; &apos;<b>&bsoln</b>&apos;;
-	str = str.substring(64);
+    str = str.substring(64);
   }
 &nbsp;
   <b>return</b> finalString;
@@ -23266,10 +23266,10 @@ for public key you just have to use prefix and suffix below:</p>
 window.crypto.subtle.generateKey)
   {
     name: &quot;RSA&dash;OAEP&quot;,
-	modulusLength: 2048, // <i>can be 1024, 2048 or 4096</i>
-	
-	publicExponent: <b>new</b> Uint8Array(&lbrack;0x01, 0x00, 0x01&rbrack;),
-	hash: {name: &quot:SHA&dash;256&quot;} // <i>or SHA&dash;512</i>
+    modulusLength: 2048, // <i>can be 1024, 2048 or 4096</i>
+    
+    publicExponent: <b>new</b> Uint8Array(&lbrack;0x01, 0x00, 0x01&rbrack;),
+    hash: {name: &quot:SHA&dash;256&quot;} // <i>or SHA&dash;512</i>
   },
   <b>true</b>,
   &lbrack;&quot;encrypt&quot;, &quot;decrypt&quot;&rbrack;
@@ -23279,17 +23279,16 @@ window.crypto.subtle.generateKey)
   &ast;/
   window.crypto.subtle.exportKey{
     &quot;pkcs8&quot;,
-	keyPair.privateKey
+    keyPair.privateKey
   ).then(<b>function</b>(exportedPrivateKey) {
     // <i>converting exported key to PEM format</i>
-	<b>var</b> pem = toPem(exportedPrivateKey);
+    <b>var</b> pem = toPem(exportedPrivateKey);
     console.log(pem);
   }).<b>catch</b>(<b>function</b>(err) {
     console.log(err);
   });
 });
-<!-- ![](./images/image044.png){width="7.486805555555556in"
-height="8.324305555555556in"} -->
+<!-- ![](./images/image044.png){width="7.486805555555556in" height="8.324305555555556in"} -->
 <p>That&apos;s it! Now you have a fully working and compatible RSA-OAEP
 Private Key in PEM format which you can use wherever you want. Enjoy!</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
