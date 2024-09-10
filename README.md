@@ -22147,212 +22147,174 @@ the -3 preset and look at the output.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch81-5">Section 81.5: Less indentation</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-With promises:
-<b>function</b> doTheThing() { <b>return</b> doOneThing()
-.
-then
-(
-doAnother
-)
-.
-then
-(
-doSomeMore
-)
-.
-<b>catch</b>
-(
-handleErrors
-)
+<p>With promises:</p>
+<pre>
+<b>function</b> doTheThing() { 
+<b>return</b> doOneThing()
+  .then(doAnother)
+  .then(doSomeMore)
+  .<b>catch</b>(handleErrors)
 }
-With async functions:
-async
-<b>function</b>
-doTheThing
-(
-)
-{
-<b>try</b>
-{
-<b>const</b>
-one
-=
-await doOneThing
-(
-)
-;
-<b>const</b>
-another
-=
-await doAnother
-(
-one
-)
-;
-<b>return</b>
-await doSomeMore
-(
-another
-)
-;
+</pre>
+<p>With async functions:</p>
+<pre>
+async <b>function</b> doTheThing() {
+  <b>try</b> {
+    <b>const</b> one = await doOneThing();
+    <b>const</b> another = await doAnother(one);
+    <b>return</b> await doSomeMore(another);
+  } <b>catch</b>(err) {
+    handleErrors(err);
+  }
 }
-<b>catch</b>
-(
-err
-)
-{
-handleErrors
-(
-err
-)
-;
-}
-}
-<b>try</b>   / <b>catch</b>
-Note how the return is at the bottom, and not at the top, and you use
-the language&apos;s native error-handling mechanics ().
+</pre>
+<p>Note how the return is at the bottom, and not at the top, and you use
+the language&apos;s native error-handling mechanics (try/catch).</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch81-6">Section 81.6: Simultaneous async (parallel) operations</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Promise.all
-Often you will want to perform asynchronous operations in parallel.
+<p>Often you will want to perform asynchronous operations in parallel.
 There is direct syntax that supports this in the async/await proposal,
 but since await will wait for a promise, you can wrap multiple
-promises together in to wait for them:
+promises together in Promise.all to wait for them:</p>
+<pre>
 // <i>Not in parallel</i>
+&nbsp;
+async <b>function</b> getFriendPosts(user) {
+  friendIds = await db.<b>get</b>(&quot;friends&quot;, {user}, {id: 1});
+    friendPosts = &lbrack;&rbrack;;
+    <b>for</b> (<b>let</b> id <b>in</b> friendIds) {
+      friendPosts = friendPosts.concat( await db.<b>get</b>(&quot;posts&quot;, {user: id}) );
+    }
+    // <i>etc.</i>
+}
+</pre>
+<p>This will do each query to get each friend&apos;s posts serially, but they
+can be done simultaneously:</p>
+<pre>
+// <i>In parallel</i>
+&nbsp;
+async <b>function</b> getFriendPosts(user) {
+  friendIds = await.db.<b>get</b>(&quot;friends&quot;, {user}, {id: 1});
+  friendPosts = await Promise.all( friendIds.map(id =&gt;
+    db.<b>get</b>(&quot;posts&quot;, {user: id})
+  );
+  // <i>etc.</i>
+}
+</pre>
+<p>This will loop over the list of IDs to create an array of promises.
+await will wait for <i>all</i> promises to be complete. Promise.all combines 
+them into a single promise, but they are done in parallel.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch82">Chapter 82: Async Iterators</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>An async function is one that returns a promise. await yields to the
+caller until the promise resolves and then continues with the result.</p>
+<p>An iterator allows the collection to be looped through with a for-of loop.</p>
+<p>An async iterator is a collection where each iteration is a promise
+which can be awaited using a for-await-of loop.</p>
+<p>Async iterators are a <a href="https://github.com/tc39/proposal-async-iteration">stage 3 proposal</a>. 
+They are in Chrome Canary 60 with &minus;&minus;harmony-async-iteration</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch82-1">Section 82.1: Basics</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+next
+A JavaScript Iterator is an object with a .() method, which returns an
+IteratorItem, which is an object with
+boolean
+value
+any  &bsol;and  done
+: &lt;: &lt;&gt;.
+  next   () method, which returns a Promise &lt; IteratorItem
+A JavaScript AsyncIterator is an object with a .&gt;, a <i>promise</i> for
+the next value.
+To create an AsyncIterator, we can use the <i>async generator</i> syntax:
+<i>/&ast;&ast;</i>
+<i>&ast; Returns a promise which resolves after time had passed.</i>
+<i>&ast;/</i>
+<b>const</b>
+delay
+=
+time
+=&gt;
+<b>new</b>
+Promise
+(
+resolve
+=&gt;
+setTimeout
+(
+resolve
+,
+time
+)
+)
+;
 async
 <b>function</b>
-getFriendPosts
+&ast;
+delayedRange
 (
-user
+max
 )
 {
-friendIds
-=
-await db.
-<b>get</b>
-(
-&quot;friends&quot;
-,
-{
-user
-}
-,
-{
-id
-:
-1
-}
-)
-;
-friendPosts
-=
-&lbrack;
-&rbrack;
-;
 <b>for</b>
 (
 <b>let</b>
-id
-<b>in</b>
-friendIds
-)
-{
-friendPosts
+i
 =
-friendPosts.
-concat
-(
-await db.
-<b>get</b>
-(
-&quot;posts&quot;
-,
-{
-user
-:
-id
-}
+0
+;
+i
+&lt;
+max
+;
+i
+++
 )
+{
+await delay
+(
+1000
+)
+;
+yield i
+;
+}
+}
+The delayedRange function will take a maximum number, and returns an
+AsyncIterator, which yields numbers from 0 to that number, in 1 second
+intervals.
+Usage:
+<b>for</b>
+await
+(
+<b>let</b>
+number of delayedRange
+(
+10
+)
+)
+{
+console.
+log
+(
+number
 )
 ;
 }
-// <i>etc.</i>
-}
-This will do each query to get each friend&apos;s posts serially, but they
-can be done simultaneously:
-// <i>In parallel</i>
-async
-<b>function</b>
-getFriendPosts
-(
-user
-)
-{
-friendIds
-=
-await.
-db
-.
-<b>get</b>
-(
-&quot;friends&quot;
-,
-{
-user
-}
-,
-{
-id
-:
-1
-}
-)
-;
-friendPosts
-=
-await Promise.
-all
-(
-friendIds.
-map
-(
-id
-=&gt;
-db.
-<b>get</b>
-(
-&quot;posts&quot;
-,
-{
-user
-:
-id
-}
-)
-)
-;
-// <i>etc.</i>
-}
-Promise.all
-This will loop over the list of IDs to create an array of promises.
-await will wait for <i>all</i> promises to be complete. combines them into
-a single promise, but they are done in parallel.
-
-<h3 id="ch82">Chapter 82: Async Iterators</h3>
-
-An async function is one that returns a promise. await yields to the
-caller until the promise resolves and then continues with the result.
-for &minus; of
-An iterator allows the collection to be looped through with a loop.
-for  &minus;    await    &minus;  of
-An async iterator is a collection where each iteration is a promise
-which can be awaited using a loop.
-&bsol;harmony    &minus;   async  &minus;   iteration
-Async iterators are a [stage 3
-proposal](https://github.com/tc39/proposal-async-iteration). They are
-in Chrome Canary 60 with
+<b>for</b> await of
+<b>for</b> await of
+The loop is another piece of new syntax, available only inside of
+async functions, as well as async generators. Inside the loop, the
+values yielded (which, remember, are Promises) are unwrapped, so the
+Promise is hidden away. Within the loop, you can deal with the direct
+values (the yielded numbers), the loop will wait for the Promises on
+your behalf.
+<b>for</b> await of
+The above example will wait 1 second, log 0, wait another second, log
+1, and so on, until it logs 9. At which point the AsyncIterator will
+be done, and the loop will exit.
 
 
