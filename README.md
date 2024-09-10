@@ -22257,8 +22257,7 @@ be done, and the <b>for</b> await of loop will exit.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch83">Chapter 83: How to make iterator usable inside async callback function</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>
-When using async callback we need to consider scope. <b>Especially</b> if
+<p>When using async callback we need to consider scope. <b>Especially</b> if
 inside a loop. This simple article shows what not to do and a simple
 working example.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -22566,7 +22565,7 @@ log
 }
 (this is actually valid not only for JavaScript)
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<h2 id="ch86">Chapter 86: Tilde &bsol;~<h2>
+<h2 id="ch86">Chapter 86: Tilde ~<h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 The &bsol;~ operator looks at the binary representation of the values of
@@ -22574,7 +22573,7 @@ the expression and does a bitwise negation operation on it.
 Any digit that is a 1 in the expression becomes a 0 in the result. Any
 digit that is a 0 in the expression becomes a 1 in the result.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<h3 id="ch86-1">Section 86.1: &bsol;~ Integer</h3>
+<h3 id="ch86-1">Section 86.1: ~ Integer</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 The following example illustrates use of the bitwise NOT (&bsol;~) operator
@@ -22649,7 +22648,7 @@ e
 ;
 // <i>e is now -3</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<h3 id="ch86-2">Section 86.2: &bsol;~&bsol;~ Operator</h3>
+<h3 id="ch86-2">Section 86.2: ~~ Operator</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 Double Tilde &bsol;~&bsol;~ will perform bitwise NOT operation twice.
@@ -22798,7 +22797,7 @@ presented as numeric value 1 and <b>false</b> as 0</p>
 <b>if</b> (&bsol;~items.indexOf(&apos;a&apos;)) {}
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<h3 id="ch86-5">Section 86.5: &bsol;~ Decimal</h3>
+<h3 id="ch86-5">Section 86.5: ~ Decimal</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
 <p>The following example illustrates use of the bitwise NOT (&bsol;~) operator on decimal numbers.</p>
@@ -22818,7 +22817,6 @@ simple representation in binary format.</p>
 11111111
 11111100
 -4
-
 <p>To simplify this, we can think of it as function f(n) = &minus;(integer(n)&plus;1).</p>
 <pre>
 <b>let</b> a = &bsol;~&minus;2.5;  // <i>a is now 1</i>
