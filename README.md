@@ -22218,103 +22218,615 @@ They are in Chrome Canary 60 with &minus;&minus;harmony-async-iteration</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch82-1">Section 82.1: Basics</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-next
-A JavaScript Iterator is an object with a .() method, which returns an
-IteratorItem, which is an object with
-boolean
-value
-any  &bsol;and  done
-: &lt;: &lt;&gt;.
-  next   () method, which returns a Promise &lt; IteratorItem
-A JavaScript AsyncIterator is an object with a .&gt;, a <i>promise</i> for
-the next value.
-To create an AsyncIterator, we can use the <i>async generator</i> syntax:
+<p>A JavaScript Iterator is an object with a .next() method, which returns an
+IteratorItem, which is an object with value : &lt;any&gt; and done : &lt;boolean&gt;.</p>
+<p>A JavaScript AsyncIterator is an object with a .next() method, which returns a 
+Promise&lt;IteratorItem&gt;, a <i>promise</i> for the next value.</p>
+<p>To create an AsyncIterator, we can use the <i>async generator</i> syntax:</p>
+<pre>
 <i>/&ast;&ast;</i>
 <i>&ast; Returns a promise which resolves after time had passed.</i>
 <i>&ast;/</i>
-<b>const</b>
-delay
+<b>const</b> delay = time =&gt; <b>new</b> Promise(resolve =&gt; setTimeout(resolve, time));
+async <b>function</b>&ast; delayedRange(max) {
+  <b>for</b> (<b>let</b> i = 0; i &lt; max; i++) {
+    await delay(1000);
+    yield i;
+  }
+}
+</pre>
+<p>The delayedRange function will take a maximum number, and returns an
+AsyncIterator, which yields numbers from 0 to that number, in 1 second
+intervals.</p>
+<p>Usage:</p>
+<pre.
+<b>for</b> await (<b>let</b> number of delayedRange(10)) {
+  console.log(number);
+}
+</pre>
+<p>The <b>for</b> loop is another piece of new syntax, available only inside of
+async functions, as well as async generators. Inside the loop, the
+values yielded (which, remember, are Promises) are unwrapped, so the
+Promise is hidden away. Within the loop, you can deal with the direct
+values (the yielded numbers), the <b>for</b> await loop will wait for the Promises on
+your behalf.</p>
+<p>The above example will wait 1 second, log 0, wait another second, log
+1, and so on, until it logs 9. At which point the AsyncIterator will
+be done, and the <b>for</b> await of loop will exit.</p>
+<!-- page 399 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch83">Chapter 83: How to make iterator usable inside async callback function</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>
+When using async callback we need to consider scope. <b>Especially</b> if
+inside a loop. This simple article shows what not to do and a simple
+working example.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch83-1">Section 83.1: Erroneous code, can you spot why this usage of key will lead to bugs?</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+<b>var</b> pipeline = {};
+// <i>(&hellip;) adding things in pipeline</i>
+&nbsp;
+<b>for</b>(<b>var</b> key <b>in</b> pipeline) {
+  fs.stat(pipeline&lbrack;key&rbrack;.path, <b>function</b>(err, stats) {
+    <b>if</b> (err) {
+      // <i>clear that one</i>
+      <b>delete</b> pipeline&lbrack;key&rbrack;;
+      <b>return</b>;
+    }
+    // <i>(&hellip;)</i>
+    pipeline&lbrack;key&rbrack;.count++;
+  });
+}
+</pre>
+<p>The problem is that there is only one instance of <b>var key</b>. All
+callbacks will share the same key instance. At the time the callback
+will fire, the key will most likely have been incremented and not
+pointing to the element we are receiving the stats for.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch83-2">Section 83.2: Correct Writing</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<pre>
+<b>var</b> pipeline = {};
+// <i>(&hellip;) adding things in pipeline</i>
+<b>var</b> processOneFile = <b>function</b>(key) {
+  fs.stat(pipeline&lbrack;key&rbrack;.path, <b>function</b>(err, stats) {
+    <b>if</b> (err) {
+      // <i>clear that one</i>
+      <b>delete</b> pipeline&lbrack;key&rbrack;;
+      <b>return</b>;
+    } // <i>(&hellip;)</i>
+    pipeline&lbrack;key&rbrack;.count++;
+  });
+};
+&nbsp;
+// <i>verify it is not growing</i>
+<b>for</b>(<b>var</b> key <b>in</b> pipeline) {
+  processOneFileInPipeline(key);
+}
+</pre>
+<p>By creating a new function, we are scoping <b>key</b> inside a function
+so all callback have their own key instance.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch84">Chapter 84: Tail Call Optimization</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch84-1">Section 84.1: What is Tail Call Optimization (TCO)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>TCO is only available in strict mode</p>
+<p>As always check browser and JavaScript implementations for support of
+any language features, and as with any JavaScript feature or syntax,
+it may change in the future.</p>
+<p>It provides a way to optimise recursive and deeply nested function
+calls by eliminating the need to push function state onto the global
+frame stack, and avoiding having to step down through each calling
+function by returning directly to the initial calling function.</p>
+<pre>
+<b>function</b> a() {
+  <b>return</b> b(); // <i>2</i>
+}
+<b>function</b> b() {
+  <b>return</b> 1;  // <i>3</i>
+}
+a(); // <i>1</i>
+</pre>
+<p>Without TCO the call to a() creates a new frame for that function.
+When that function calls b() the a()&apos;s frame is pushed onto the frame
+stack and a new frame is created for function b()</p>
+<p>When b() return to a() a()&apos;s frame is popped from the frame stack. It
+immediately return to the global frame and thus does not use any of
+the states save on the stack.</p>
+<p>TCO recognises that the call from a() to b() is at the tail of
+function a() and thus there is no need to push a()&apos;s state onto the
+frame stack. When b(0) returns rather than returning to a() it returns
+directly to the global frame. Further optimising by eliminating the
+intermediate steps.</p>
+<p>TCO allows for recursive functions to have indefinite recursion as the
+frame stack will not grow with each recursive call. Without TCO
+recursive function had a limited recursive depth.</p>
+<blockquote>
+<b>Note</b> TCO is a JavaScript engine implementation feature, it cannot
+be implemented via a transpiler if the browser does not support it.
+There is no additional syntax in the spec required to implement TCO
+and thus there is concern that TCO may break the web. Its release into
+the world is cautious and may require browser/engine specific flags to
+be set for the perceivable future.
+</blockquote>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch84-2">Section 84.2: Recursive loops</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Tail Call Optimisation makes it possible to safely implement recursive
+loops without concern for call stack overflow or the overhead of a
+growing frame stack.</p>
+<pre>
+<b>function</b> indexOf(array, predicate, i = 0) {
+  <b>if</b> (0 &lt;= i && i &lt; array.length) {
+    <b>if</b> (predicate(array&lbrack;i&rbrack;)) { <b>return</b> i; }
+      <b>return</b> indexOf(array, predicate, i&plus; 1); // <i>the tail call</i>
+  }
+}
+indexOf(&lbrack;1, 2, 3, 4, 5, 6, 7&rbrack;, x =&gt; x === 5); // <i>returns index of 5 which is 4</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch85">Chapter 85: Bitwise Operators - Real World Examples (snippets)</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch85-1">Section 85.1: Swapping Two Integers with Bitwise XOR (without additional memory allocation)</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>var</b>
+a
 =
-time
-=&gt;
-<b>new</b>
-Promise
-(
-resolve
-=&gt;
-setTimeout
-(
-resolve
+11
 ,
-time
-)
-)
-;
-async
-<b>function</b>
-&ast;
-delayedRange
-(
-max
-)
-{
-<b>for</b>
-(
-<b>let</b>
-i
+b
 =
-0
+22
 ;
-i
-&lt;
-max
+a
+=
+a
+&Hat;
+b
 ;
-i
-++
+b
+=
+a
+&Hat;
+b
+;
+a
+=
+a
+&Hat;
+b
+;
+console.
+log
+(
+&quot;a = &quot;
+&plus;
+a
+&plus;
+&quot;; b = &quot;
+&plus;
+b
 )
-{
-await delay
+;
+// <i>a is now 22 and b is now 11</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch85-2">Section 85.2: Faster multiplication or division by powers of 2</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+13 &ast; (10 &ast;&ast; 2)
+Shifting bits left (right) is equivalent to multiplying (dividing) by
+2. It&apos;s the same in base 10: if we &quot;left-shift&quot; 13 by 2 places, we
+get 1300, or . And if we take 12345 and &quot;right-shift&quot; by 3 places
+and then remove the
+Math.floor(12345 / (10 &ast;&ast;   . So if we want to multiply a  2 &ast;&ast;
+3)) variable by  n
+decimal part, we get 12, or , we can just left-shift by n bits.
+console.
+log
+(
+13
+&ast;
+(
+2
+&ast;&ast;
+6
+)
+)
+// <i>13 &ast; 64 = 832</i>
+console.
+log
+(
+13
+&lt;&lt;
+6
+)
+// <i>832</i>
+2 &ast;&ast; n
+Similarly, to do (floored) integer division by , we can right shift by
+n bits. Example:
+console.
+log
 (
 1000
+/
+(
+2
+&ast;&ast;
+4
 )
+)
+// <i>1000 / 16 = 62.5</i>
+console.
+log
+(
+1000
+&gt;&gt;
+4
+)
+// <i>62</i>
+It even works with negative numbers:
+console.
+log
+(
+&minus;
+80
+/
+(
+2
+&ast;&ast;
+3
+)
+)
+// <i>-80 / 8 = -10</i>
+console.
+log
+(
+&minus;
+80
+&gt;&gt;
+3
+)
+// <i>-10</i>
+In reality, speed of arithmetic is unlikely to significantly impact
+how long your code takes to run, unless you are doing on the order of
+100s of millions of computations. But C programmers love this sort of
+thing!
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch85-3">Section 85.3: Number&apos;s Parity Detection with Bitwise AND</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Instead of this (unfortunately too often seen in the real code)
+&quot;masterpiece&quot;:
+<b>function</b>
+isEven
+(
+n
+)
+{
+<b>return</b>
+n
+&percnt;
+2
+==
+0
 ;
-yield i
+}
+<b>function</b>
+isOdd
+(
+n
+)
+{
+<b>if</b>
+(
+isEven
+(
+n
+)
+)
+{
+<b>return</b>
+<b>false</b>
+;
+}
+<b>else</b>
+{
+<b>return</b>
+<b>true</b>
 ;
 }
 }
-The delayedRange function will take a maximum number, and returns an
-AsyncIterator, which yields numbers from 0 to that number, in 1 second
-intervals.
-Usage:
-<b>for</b>
-await
+You can do the parity check much more effective and simple:
+<b>if</b>
 (
-<b>let</b>
-number of delayedRange
-(
-10
-)
+n
+&
+1
 )
 {
 console.
 log
 (
-number
+&quot;ODD!&quot;
 )
 ;
 }
-<b>for</b> await of
-<b>for</b> await of
-The loop is another piece of new syntax, available only inside of
-async functions, as well as async generators. Inside the loop, the
-values yielded (which, remember, are Promises) are unwrapped, so the
-Promise is hidden away. Within the loop, you can deal with the direct
-values (the yielded numbers), the loop will wait for the Promises on
-your behalf.
-<b>for</b> await of
-The above example will wait 1 second, log 0, wait another second, log
-1, and so on, until it logs 9. At which point the AsyncIterator will
-be done, and the loop will exit.
+<b>else</b>
+{
+console.
+log
+(
+&quot;EVEN!&quot;
+)
+;
+}
+(this is actually valid not only for JavaScript)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch86">Chapter 86: Tilde &bsol;~<h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The &bsol;~ operator looks at the binary representation of the values of
+the expression and does a bitwise negation operation on it.
+Any digit that is a 1 in the expression becomes a 0 in the result. Any
+digit that is a 0 in the expression becomes a 1 in the result.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch86-1">Section 86.1: &bsol;~ Integer</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+The following example illustrates use of the bitwise NOT (&bsol;~) operator
+on integer numbers.
+<b>let</b>
+number
+=
+3
+;
+<b>let</b>
+complement
+=
+&bsol;~number
+;
+Result of the complement number equals to -4;
+<b>Expression Binary value Decimal value</b>
+3 00000000 00000000 00000000 00000011 3
+&bsol;~3
+11111111
+11111111
+11111111
+11111100
+-4
+To simplify this, we can think of it as function
+f
+(
+n
+)
+=
+&minus;
+(
+n
+&plus;
+1
+)
+.
+<b>let</b>
+a
+=
+&bsol;~
+&minus;
+2
+;
+// <i>a is now 1</i>
+<b>let</b>
+b
+=
+&bsol;~
+&minus;
+1
+;
+// <i>b is now 0</i>
+<b>let</b>
+c
+=
+&bsol;~
+0
+;
+// <i>c is now -1</i>
+<b>let</b>
+d
+=
+&bsol;~
+1
+;
+// <i>d is now -2</i>
+<b>let</b>
+e
+=
+&bsol;~
+2
+;
+// <i>e is now -3</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch86-2">Section 86.2: &bsol;~&bsol;~ Operator</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Double Tilde &bsol;~&bsol;~ will perform bitwise NOT operation twice.
+The following example illustrates use of the bitwise NOT (&bsol;~&bsol;~)
+operator on decimal numbers.
+To keep the example simple, decimal number 3.5 will be used, cause of
+it&apos;s simple representation in binary format.
+<b>let</b>
+number
+=
+3.5
+;
+<b>let</b>
+complement
+=
+&bsol;~number
+;
+Result of the complement number equals to -4;
+<b>Expression Binary value Decimal value</b>
+3 00000000 00000000 00000000 00000011 3
+&bsol;~&bsol;~3 00000000 00000000 00000000 00000011 3
+00000000 00000011.1
+3.53.5
+&bsol;~&bsol;~3.5 00000000 00000011 3
+integer
+f2
+g2
+To simplify this, we can think of it as functions (n) = -(-(n+1) + 1)
+and (n) = -(-((n)+1) + 1).
+
+<b>f2(n)</b> will leave the integer number as it is.
+<b>let</b>
+a
+=
+&bsol;~&bsol;~
+&minus;
+2
+;
+// <i>a is now -2</i>
+<b>let</b>
+b
+=
+&bsol;~&bsol;~
+&minus;
+1
+;
+// <i>b is now -1</i>
+<b>let</b>
+c
+=
+&bsol;~&bsol;~
+0
+;
+// <i>c is now 0</i>
+<b>let</b>
+d
+=
+&bsol;~&bsol;~
+1
+;
+// <i>d is now 1</i>
+<b>let</b>
+e
+=
+&bsol;~&bsol;~
+2
+;
+// <i>e is now 2</i>
+<b>g2(n)</b> will essentially round positive numbers down and negative
+numbers up.
+<b>let</b>
+a
+=
+&bsol;~&bsol;~
+&minus;
+2.5
+;
+// <i>a is now -2</i>
+<b>let</b>
+b
+=
+&bsol;~&bsol;~
+&minus;
+1.5
+;
+// <i>b is now -1</i>
+<b>let</b>
+c
+=
+&bsol;~&bsol;~
+0.5
+;
+// <i>c is now 0</i>
+<b>let</b>
+d
+=
+&bsol;~&bsol;~
+1.5
+;
+// <i>d is now 1</i>
+<b>let</b>
+e
+=
+&bsol;~&bsol;~
+2.5
+;
+// <i>e is now 2</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch86-3">Section 86.3: Converting Non-numeric values to Numbers</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<p>~~ Could be used on non-numeric values. A numeric expression will be
+first converted to a number and then performed bitwise NOT operation
+on it.</p>
+<p>If expression cannot be converted to numeric value, it will convert to 0.</p>
+<p><b>true</b> and <b>false</b> bool values are exceptions, where <b>true</b> is
+presented as numeric value 1 and <b>false</b> as 0</p>
+<pre>
+<b>let</b> a = ~~&quot;-2&quot;;    // <i>a is now -2</i>
+<b>let</b> b = ~~&quot;1&quot;;     // <i>b is now -1</i>
+<b>let</b> c = ~~&quot;0&quot;;     // <i>c is now 0</i>
+<b>let</b> d = ~~&quot;true&quot;;  // <i>d is now 0</i>
+<b>let</b> e = ~~&quot;false&quot;; // <i>e is now 0</i>
+<b>let</b> f = ~~<b>true</b>;       // <i>f is now 1</i>
+<b>let</b> g = ~~<b>false</b>;      // <i>g is now 0</i>
+<b>let</b> h = ~~&quot;&quot;;      // <i>h is now 0</i>
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch86-4">Section 86.4: Shorthands</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<p>We can use ~ as a shorthand in some everyday scenarios.</p>
+<p>We know that ~ converts -1 to 0, so we can use it with indexOf on array.</p>
+<p><b>indexOf</b></p>
+<pre>
+<b>let</b> items = &lbrack;&apos;foo&apos;, &apos;bar&apos;, &apos;baz&apos;&rbrack;;
+<b>let</b> el = &apos;a&apos;;
+<b>if</b> (items.indexOf(&apos;a&apos;) !== &minus;1) {}
+</pre>
+<p>or</p>
+<pre>
+<b>if</b> (items.indexOf(&apos;a&apos;) &gt;= 0) {}
+</pre>
+<p><b>can be re-written as</b></p>
+<pre>
+<b>if</b> (&bsol;~items.indexOf(&apos;a&apos;)) {}
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch86-5">Section 86.5: &bsol;~ Decimal</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<p>The following example illustrates use of the bitwise NOT (&bsol;~) operator on decimal numbers.</p>
+<p>To keep the example simple, decimal number 3.5 will be used, cause of it&apos;s 
+simple representation in binary format.</p>
+<pre>
+<b>let</b> number = 3.5;
+<b>let</b> complement = &bsol;~number;
+</pre>
+<!-- page 405 -->
+<!--
+<p>Result of the complement number equals to -4;</p>
+<b>Expression Binary value Decimal value</b>
+00000000 00000010.1
+3.53.5
+&bsol;~3.5
+11111111
+11111100
+-4
+
+<p>To simplify this, we can think of it as function f(n) = &minus;(integer(n)&plus;1).</p>
+<pre>
+<b>let</b> a = &bsol;~&minus;2.5;  // <i>a is now 1</i>
+<b>let</b> b = &bsol;~&minus;1.5;  // <i>b is now 0</i>
+<b>let</b> c = &bsol;~0.5;         // <i>c is now -1</i>
+<b>let</b> d = &bsol;~1.5;         // <i>c is now -2</i>
+<b>let</b> e = &bsol;~2.5;         // <i>c is now -3</i>
+</pre>
+<!-- page 406 -->
 
 
