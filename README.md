@@ -978,8 +978,10 @@ also ignored as JavaScript).</p>
 <h2 id="ch5">Chapter 5: Console</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!-- page 19 -->
-<p>The information displayed by a <a href="https://developer.mozilla.org/en-US/docs/Tools/Web_Console">
-debugging/web console</a> is made available through the multiple <a href="https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/console">
+<p>The information displayed by a <a href="https://developer.mozilla.org/en-US/docs/Tools/Web_Console" 
+ target="_blank" rel="noopener noreferrer">
+debugging/web console</a> is made available through the multiple <a href="https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/console" 
+ target="_blank" rel="noopener noreferrer">
 methods of the console Javascript object</a> that can be consulted through property, the methods 
 displayed are generally the following (taken from Chromium&apos;s output):
 
@@ -2363,7 +2365,8 @@ environment the conversions are happening in.</p>
 <h3 id="ch7-14">Section 7.14: String Find and Replace Functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>To search for a string inside a string, there are several functions:</p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf">
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf" 
+ target="_blank" rel="noopener noreferrer">
 indexOf( searchString ) <b>and</b> lastIndexOf( searchString )</a></p>
 <p>indexOf() will return the index of the first occurrence of searchString in
 the string. If searchString is not found, then -1 is returned.</p>
@@ -2379,8 +2382,8 @@ searchstring or -1 if not found.</p>
 console.log( string.lastIndexOf(&quot;o&quot;));    // <i>8</i>
 console.log( string.lastIndexOf(&quot;foo&quot;));  // <i>-1</i>
 </pre>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes">
-includes( searchString, start )</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes" 
+ target="_blank" rel="noopener noreferrer">includes( searchString, start )</a></p>
 <p>includes() will return a boolean that tells whether searchString exists in the
 string, starting from index start (defaults to 0). This is better than
 () if you simply need to test for existence of a substring.</p>
@@ -2390,7 +2393,8 @@ console.log( string.includes(&quot;Hello&quot;) ); // <i>true</i>
 console.log( string.includes(&quot;foo&quot;));   // <i>false</i>
 </pre>
 <!-- page 45 -->
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace">
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace" 
+ target="_blank" rel="noopener noreferrer">
 replace( regexp|substring, replacement|replaceFunction )</a></p>
 <p>replace() will return a string that has all occurrences of substrings matching the 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp" 
@@ -3264,7 +3268,8 @@ operators which will not perform any implicit type conversions.</p>
 
 <p>Further reference to this topic can be found here:</p>
 
-<p><a href="http://stackoverflow.com/questions/359494/does-it-matter-which-equals-operator-vs-i-use-in-javascript-comparisons">
+<p><a href="http://stackoverflow.com/questions/359494/does-it-matter-which-equals-operator-vs-i-use-in-javascript-comparisons" 
+target="_blank" rel="noopener noreferrer">
 Which equals operator (== vs ===) should be used in JavaScript comparisons?</a>.</p>
 
 <p>Abstract Equality (==)</p>
@@ -3272,7 +3277,8 @@ Which equals operator (== vs ===) should be used in JavaScript comparisons?</a>.
 <h3 id="ch10-2">Section 10.2: NaN Property of the Global Object</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><b>NaN</b> (&quot;<b>N</b>ot <b>a</b> <b>N</b>umber&quot;) is a special value defined by the 
-<a href=""><i>IEEE Standard for Floating-Point Arithmetic</i></a>, which is used when a non-numeric 
+<a href="https://ieeexplore.ieee.org/document/8766229" target="_blank" rel="noopener noreferrer">
+<i>IEEE Standard for Floating-Point Arithmetic</i></a>, which is used when a non-numeric 
 value is provided but a number is expected (1 &ast; "two"), or when a calculation doesn&apos;t have a 
 valid number result ((-1)).</p>
 
@@ -3370,8 +3376,8 @@ Object.is(+0, 0)         // <i>false</i>
 <h5>Version &lt; 6</h5>
 
 <p>You can use the following polyfill for Object.is() (from
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Polyfill_for_non-ES6_browsers">
-MDN</a>):</p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#Polyfill_for_non-ES6_browsers" 
+target="_blank" rel="noopener noreferrer">MDN</a>):</p>
 
 <pre>
 <b>if</b> (!Object.is) {
@@ -3582,7 +3588,8 @@ envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue // <i>select
 </pre>
 
 <p>Neither <b>null</b> or <b>undefined</b> equal <b>false</b> (see 
-<a href="http://stackoverflow.com/q/19277458/220060">this question</a>).</p>
+<a href="http://stackoverflow.com/q/19277458/220060" 
+target="_blank" rel="noopener noreferrer">this question</a>).</p>
 
 <pre>
 <b>false</b> == <b>undefined</b>  // <i>false</i>
@@ -3611,8 +3618,8 @@ envVariable &vert;&vert; configValue &vert;&vert; defaultConstValue // <i>select
 converted to a common type. How this conversion happens is based on
 the specification of the operator:</p>
 
-<p><a href="https://tc39.github.io/ecma262/#sec-abstract-equality-comparison">
-Specification for the == operator:</a></p>
+<p><a href="https://tc39.github.io/ecma262/#sec-abstract-equality-comparison" 
+target="_blank" rel="noopener noreferrer">Specification for the == operator:</a></p>
 
 <blockquote>
 <b>7.2.13 Abstract Equality Comparison</b>
@@ -3794,8 +3801,8 @@ they won't (because they are <i>falsy</i>).</p>
 <p>When &lbrack;&rbrack;.toString() is executed it calls &lbrack;&rbrack;.join() if it exists, or 
 Object.<b>prototype</b>.toString() otherwise.  This comparison is returning <b>true</b> because 
 &lbrack;&rbrack;.join() returns '' which, coerced into 0, is equal to false. 
-<a href="http://www.ecma-international.org/ecma-262/5.1/">ToNumber.</p>
-<!-- [ToNumber](http://www.ecma-international.org/ecma-262/5.1/#sec-9.3). -->
+<a href="http://www.ecma-international.org/ecma-262/5.1/" 
+target="_blank" rel="noopener noreferrer">ToNumber.</p>
 
 <p>Beware though, all objects are truthy and Array is an instance of Object:</p>
 
@@ -3808,7 +3815,8 @@ Object.<b>prototype</b>.toString() otherwise.  This comparison is returning <b>t
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>JavaScript has four different equality comparison operations.</p>
 
-<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-samevalue"><b>SameValue</b></a></p>
+<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-samevalue" 
+target="_blank" rel="noopener noreferrer"><b>SameValue</b></a></p>
 
 <p>It returns <b>true</b> if both operands belong to the same Type and are
 the same value.</p>
@@ -3830,19 +3838,23 @@ Object.is(1, &quot;1&quot;);          // <i>false</i>
 Object.is(&lbrack;&rbrack;, &lbrack;&rbrack;);      //<i>false</i>
 </pre>
 
-<p>This algorithm has the properties of an <a href="https://en.wikipedia.org/wiki/Equivalence_relation">
-equivalence relation</a>:</p>
+<p>This algorithm has the properties of an <a href="https://en.wikipedia.org/wiki/Equivalence_relation" 
+target="_blank" rel="noopener noreferrer">equivalence relation</a>:</p>
 
 <ul>
-  <li><a href="https://en.wikipedia.org/wiki/Reflexive_relation">Reflexivity</a>: Object.is(x, x) is <b>true</b>,
+  <li><a href="https://en.wikipedia.org/wiki/Reflexive_relation" 
+    target="_blank" rel="noopener noreferrer">Reflexivity</a>: Object.is(x, x) is <b>true</b>,
     for any value x</li>
-  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Symmetry</a>: Object.is(x, y) is <b>true</b> if,
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation" 
+    target="_blank" rel="noopener noreferrer">Symmetry</a>: Object.is(x, y) is <b>true</b> if,
     and only if, Object.is(y, x) is <b>true</b>, for any values x and y.</li>
-  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Transitivity</a>: If Object.is(x, y) and
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation" 
+    target="_blank" rel="noopener noreferrer">Transitivity</a>: If Object.is(x, y) and
     Object.is(y, z) are </b>true</b>, then Object.is(x, z) is also <b>true</b>, for any values x, y, and z.</li>
 </ul>
 
-<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-samevaluezero">SameValueZero</a></p>
+<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-samevaluezero" 
+target="_blank" rel="noopener noreferrer">SameValueZero</a></p>
 
 <p>It behaves like SameValue, but considers +0 and -0 to be equal.</p>
 
@@ -3861,18 +3873,22 @@ equivalence relation</a>:</p>
 &lbrack;&lbrack;&rbrack;&rbrack;.includes(&lbrack;&rbrack;);  // <i>false</i>
 </pre>
 
-<p>This algorithm still has the properties of an <a href="https://en.wikipedia.org/wiki/Equivalence_relation">equivalence
-relation</a>:</p>
+<p>This algorithm still has the properties of an <a href="https://en.wikipedia.org/wiki/Equivalence_relation" 
+target="_blank" rel="noopener noreferrer">equivalence relation</a>:</p>
 
 <ul>
-  <li><a href="https://en.wikipedia.org/wiki/Reflexive_relation">Reflexivity</a>:&lbrack;x&rbrack;.(x) is <b>true</b>, for any value x</li>
-  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Symmetry</a>:&lbrack;x&rbrack;.(x) is <b>true</b> if, and only if, &lbrack;y&rbrack;.includes(x) 
+  <li><a href="https://en.wikipedia.org/wiki/Reflexive_relation" 
+    target="_blank" rel="noopener noreferrer">Reflexivity</a>:&lbrack;x&rbrack;.(x) is <b>true</b>, for any value x</li>
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation" 
+    target="_blank" rel="noopener noreferrer">Symmetry</a>:&lbrack;x&rbrack;.(x) is <b>true</b> if, and only if, &lbrack;y&rbrack;.includes(x) 
     is <b>true</b>, for any values x and y.</li>
-  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Transitivity</a>: If &lbrack;x&rbrack;.includes(y) and &lbrack;y&rbrack;.includes(z) are <b>true</b>,
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation"
+    target="_blank" rel="noopener noreferrer">Transitivity</a>: If &lbrack;x&rbrack;.includes(y) and &lbrack;y&rbrack;.includes(z) are <b>true</b>,
     then &lbrack;x&rbrack;.includes(z) is also <b>true</b>, for any values x, y, and z.</li>
 </ul>
 
-<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-strict-equality-comparison"><b>Strict Equality Comparison</b></a></p>
+<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-strict-equality-comparison" 
+target="_blank" rel="noopener noreferrer"><b>Strict Equality Comparison</b></a></p>
 
 <p>It behaves like SameValue, but</p>
 
@@ -3902,20 +3918,24 @@ relation</a>:</p>
 <!-- page 70 -->
 
 <ul>
-  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Symmetry</a>: x === y is <b>true</b> 
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation" 
+    target="_blank" rel="noopener noreferrer">Symmetry</a>: x === y is <b>true</b> 
     if, and only if, y === <b>for</b> any values x and y&grave;</li>
-  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Transitivity</a>: If x === y and 
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation" 
+    target="_blank" rel="noopener noreferrer">Transitivity</a>: If x === y and 
     y === z are <b>true</b>, then x === z is also <b>true</b>, for any values x, y and z.</li>
 </ul>
  
-<p>But is not an <a href="https://en.wikipedia.org/wiki/Equivalence_relation">equivalence relation</a> because</p>
+<p>But is not an <a href="https://en.wikipedia.org/wiki/Equivalence_relation" 
+target="_blank" rel="noopener noreferrer">equivalence relation</a> because</p>
 
 <ul>
-  <li><b>NaN</b> is not <a href="https://en.wikipedia.org/wiki/Reflexive_relation">reflexive</a>: 
-    <b>NaN</b> !== <b>NaN</b></li>
+  <li><b>NaN</b> is not <a href="https://en.wikipedia.org/wiki/Reflexive_relation" 
+    target="_blank" rel="noopener noreferrer">reflexive</a>: <b>NaN</b> !== <b>NaN</b></li>
 </ul>
 
-<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-abstract-equality-comparison"><b>Abstract Equality Comparison</b></a></p>
+<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-abstract-equality-comparison" 
+target="_blank" rel="noopener noreferrer"><b>Abstract Equality Comparison</b></a></p>
 
 <p>If both operands belong to the same Type, it behaves like the Strict Equality Comparison.</p>
 
@@ -3950,14 +3970,20 @@ relation</a>:</p>
 <p>This algorithm has the following property:</p>
 
 <ul>
-  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Symmetry</a>: x == y is <b>true</b> if, and only if, y == x is <b>true</b>, for any values x and y.</li>
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation" 
+    target="_blank" rel="noopener noreferrer">Symmetry</a>: x == y is <b>true</b> if, 
+	and only if, y == x is <b>true</b>, for any values x and y.</li>
 </ul>
 
-<p>But is not an <a href="https://en.wikipedia.org/wiki/Equivalence_relation">equivalence relation</a>because</p>
+<p>But is not an <a href="https://en.wikipedia.org/wiki/Equivalence_relation" 
+target="_blank" rel="noopener noreferrer">equivalence relation</a>because</p>
 
 <ul>
-  <li><b>NaN</b> is not <a href="https://en.wikipedia.org/wiki/Reflexive_relation">reflexive</a>: <b>NaN</b> != <b>NaN</b></li>
-  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation">Transitivity</a> does not hold, e.g. 0 == &apos;&apos; and 0 == &apos;0&apos;, but &apos;&apos; != &apos;0&apos;</li>
+  <li><b>NaN</b> is not <a href="https://en.wikipedia.org/wiki/Reflexive_relation" 
+    target="_blank" rel="noopener noreferrer">reflexive</a>: <b>NaN</b> != <b>NaN</b></li>
+  <li><a href="https://en.wikipedia.org/wiki/Symmetric_relation" 
+    target="_blank" rel="noopener noreferrer">
+	Transitivity</a> does not hold, e.g. 0 == &apos;&apos; and 0 == &apos;0&apos;, but &apos;&apos; != &apos;0&apos;</li>
 </ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch10-11">Section 10.11: Relational operators (&lt;, &lt;=, &gt;, &gt;=)</h3>
@@ -4642,25 +4668,36 @@ representations of Arrays with a length property. For example:</p>
   length: 3
 };
 </pre>
-<p>Common examples of Array-like Objects are the <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/arguments">
-arguments</a> object in functions and
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection">HTMLCollection</a> or 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeList"> NodeList</a> objects returned from methods like 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName">document.getElementsByTagName</a>
- or <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll">document.querySelectorAll</a>.</p>
+<p>Common examples of Array-like Objects are the <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/arguments" 
+target="_blank" rel="noopener noreferrer">arguments</a> object in functions and
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection" 
+target="_blank" rel="noopener noreferrer">HTMLCollection</a> or 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeList" 
+target="_blank" rel="noopener noreferrer"> NodeList</a> objects returned from methods like 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName" 
+target="_blank" rel="noopener noreferrer">document.getElementsByTagName</a>
+ or <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll" 
+ target="_blank" rel="noopener noreferrer">document.querySelectorAll</a>.</p>
 <p>However, one key difference between Arrays and Array-like Objects is
 that Array-like objects inherit from 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype">
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype" 
+target="_blank" rel="noopener noreferrer">
 Object.prototype</a> instead of 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype">
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype" 
+target="_blank" rel="noopener noreferrer">
 Array.prototype</a>. This means that Array-like Objects can&apos;t access common 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype">
-Array prototype methods</a> like 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">foreEach(),
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push">push(), 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map(), 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">filter()</a>, 
-and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice">slice()</a>:</p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype" 
+target="_blank" rel="noopener noreferrer">Array prototype methods</a> like 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach" 
+target="_blank" rel="noopener noreferrer">foreEach(),
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push" 
+target="_blank" rel="noopener noreferrer">push(), 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" 
+target="_blank" rel="noopener noreferrer">map(), 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter" 
+target="_blank" rel="noopener noreferrer">filter()</a>, 
+and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice" 
+target="_blank" rel="noopener noreferrer">slice()</a>:</p>
 <pre>
 <b>var</b> parent = document.getElementById(&apos;myDropdown&apos;);
 <b>var</b> desiredOption = parent.querySelector(&apos;option&lbrack;value=&quot;desired&quot;&rbrack;&apos;);
@@ -4851,11 +4888,14 @@ array.reduce((obj, current) =&gt; Object.assign(obj, {
 array.reduce((obj, current) =&lpar;{&hellip;obj, &lbrack;current.key&rbrack;: current.value}), {});
 </pre>
 
-<p>Note that the <a href="https://github.com/sebmarkbage/ecmascript-rest-spread">
+<p>Note that the <a href="https://github.com/sebmarkbage/ecmascript-rest-spread" 
+target="_blank" rel="noopener noreferrer">
 Rest/Spread Properties</a> is not in the list of 
-<a href="https://github.com/tc39/proposals/blob/master/finished-proposals.md">
+<a href="https://github.com/tc39/proposals/blob/master/finished-proposals.md" 
+target="_blank" rel="noopener noreferrer">
 finished proposals of ES2016</a>. It isn&apos;t supported by ES2016. But we can 
-use babel plugin <a href="https://babeljs.io/docs/plugins/transform-object-rest-spread/">babel-plugin-transform-object-rest-spread</a>
+use babel plugin <a href="https://babeljs.io/docs/plugins/transform-object-rest-spread/" 
+target="_blank" rel="noopener noreferrer">babel-plugin-transform-object-rest-spread</a>
 to support it.</p>
 
 <p>All of the above examples for Flatten Array result in:</p>
@@ -5288,12 +5328,13 @@ this <b>for</b>-loop:</p>
 <p>This should be used with care, however, as it doesn&apos;t behave the same
 as a traditional <b>for</b> loop in all cases, and there are potential
 side-effects that need to be considered. See 
-<a href="https://stackoverflow.com/questions/500504/why-is-using-for-in-with-array-iteration-such-a-bad-idea">
+<a href="https://stackoverflow.com/questions/500504/why-is-using-for-in-with-array-iteration-such-a-bad-idea" 
+target="_blank" rel="noopener noreferrer">
 <b>Why is using &quot;for&hellip;in&quot; with array iteration a bad</b> <b>idea?</b></a>
 for more details.</p>
 <p><b>for&hellip;of</b></p>
-<p>In ES 6, the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of">
-for-of</a> loop is the recommended way of iterating over a the values of an array:</p>
+<p>In ES 6, the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of" 
+target="_blank" rel="noopener noreferrer">for-of</a> loop is the recommended way of iterating over a the values of an array:</p>
 <h5>Version ≥ 6</h5>
 <pre>
 <b>let</b> myArray = &lbrack;1, 2, 3, 4&rbrack;;
@@ -5315,8 +5356,8 @@ myArray.foo = &quot;hello&quot;;
 }
 </pre>
 <p><b>Array.prototype.keys</b></p>
-<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys">
-Array.prototype.keys()</a> method can be used to iterate over indices like this:</p>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/keys" 
+target="_blank" rel="noopener noreferrer">Array.prototype.keys()</a> method can be used to iterate over indices like this:</p>
 <h5>Version ≥ 6</h5>
 <pre>
 <b>let</b> myArray = &lbrack;1, 2, 3, 4&rbrack;;
@@ -5326,9 +5367,9 @@ Array.prototype.keys()</a> method can be used to iterate over indices like this:
 }
 </pre>
 <p><b>Array.prototype.forEach()</b></p>
-<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">
-forEach(...)</a> method is an option in ES 5 and above. It is supported by all modern browsers, as well as 
-Internet Explorer 9 and later.</p>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach" 
+target="_blank" rel="noopener noreferrer">forEach(...)</a> method is an option in ES 5 and above. It is supported 
+by all modern browsers, as well as Internet Explorer 9 and later.</p>
 <p>method is an option in ES 5 and above.</p>
 <h5>Version ≥ 5</h5>
 <pre>
@@ -5361,7 +5402,8 @@ console.log(sum);
 </pre>
 <p><b>Array.prototype.every</b></p>
 <p>Since ES5, if you want to iterate over a portion of an array, you can
-use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every">
+use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every" 
+target="_blank" rel="noopener noreferrer">
 Array.prototype.every</a>, which iterates until we return <b>false</b>:</p>
 <h5>Version ≥ 5</h5>
 <pre>
@@ -5380,8 +5422,8 @@ Array.prototype.every</a>, which iterates until we return <b>false</b>:</p>
 console.log(arr&lbrack;i&rbrack;);
 }
 </pre>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some">
-<b>Array.prototype.some</b></a> iterates until we return <b>true</b>.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some" 
+target="_blank" rel="noopener noreferrer"><b>Array.prototype.some</b></a> iterates until we return <b>true</b>.</p>
 <h5>Version ≥ 5</h5>
 <pre>
 // <i>&lbrack;&rbrack;.some stops once it finds a false result</i>
@@ -5402,22 +5444,25 @@ console.log(arr&lbrack;i&rbrack;);
 <p><b>Libraries</b><p>
 <p>Finally, many utility libraries also have their own foreach variation.
 Three of the most popular ones are these:</p>
-<p><a href="http://api.jquery.com/jquery.each/"><b>jQuery.each</b>()</a>, in 
-<a href="https://jquery.com/"><b>jQuery:</b></a></p>
+<p><a href="http://api.jquery.com/jquery.each/" target="_blank" rel="noopener noreferrer">
+<b>jQuery.each</b>()</a>, in <a href="https://jquery.com/" target="_blank" rel="noopener noreferrer">
+<b>jQuery:</b></a></p>
 <pre>
 &dollar;.each(myArray, <b>function</b>(key, value) {
   console.log(value);
 });
 </pre>
-<p><a href="http://underscorejs.org/#each"><b>_.each()</b>, in <a href="http://underscorejs.org/">
-<b>Underscore.js</b></a>:</p>
+<p><a href="http://underscorejs.org/#each" target="_blank" rel="noopener noreferrer">
+<b>_.each()</b>, in <a href="http://underscorejs.org/" 
+target="_blank" rel="noopener noreferrer"><b>Underscore.js</b></a>:</p>
 <pre>
 &lowbar;.each(myArray, <b>function</b>(value, key, myArray) {
   console.log(value);
 });
 </pre>
-<p><a href="http://lodashjs.com/docs#forEach"><b>_.forEach()</b>, in <a href="https://lodash.com/">
-<b>Lodash.js</b></a>:</p>
+<p><a href="http://lodashjs.com/docs#forEach" target="_blank" rel="noopener noreferrer">
+<b>_.forEach()</b>, in <a href="https://lodash.com/" 
+target="_blank" rel="noopener noreferrer"><b>Lodash.js</b></a>:</p>
 <pre>
 &lowbar;.forEach(myArray, <b>function</b>(value, key) {
   console.log(value);
@@ -5426,8 +5471,8 @@ Three of the most popular ones are these:</p>
 <p>See also the following question on SO, where much of this information 
 was originally posted:</p>
 <ul>
-  <li><a href="https://stackoverflow.com/questions/3010840/loop-through-an-array-in-javascript/35707349#35707349">
-    Loop through an array in JavaScript</li>
+  <li><a href="https://stackoverflow.com/questions/3010840/loop-through-an-array-in-javascript/35707349#35707349" 
+    target="_blank" rel="noopener noreferrer">Loop through an array in JavaScript</li>
 </ul>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-7">Section 12.7: Destructuring an array</h3>
@@ -5465,7 +5510,8 @@ area(triangle);  // <i>→ 6</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-8">Section 12.8: Removing duplicate elements</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>From ES5.1 onwards, you can use the native method <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"><b>Array.prototype.filter</b></a> to loop through an
+<p>From ES5.1 onwards, you can use the native method <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter" 
+target="_blank" rel="noopener noreferrer"><b>Array.prototype.filter</b></a> to loop through an
 array and leave only entries that pass a given callback function.</p>
 <p>In the following example, our callback checks if the given value
 occurs in the array. If it does, it is a duplicate and will not be
@@ -5477,9 +5523,9 @@ copied to the resulting array.</p>
 }); // <i>returns &lbrack;&apos;a&apos;, 1, 2, &apos;1&apos;&rbrack;</i>
 </pre>
 <p>If your environment supports ES6, you can also use the
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">
-Set</a> object. This object lets you store unique values of any type, whether
-primitive values or object references:</p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set" 
+target="_blank" rel="noopener noreferrer">Set</a> object. This object lets you store unique 
+values of any type, whether primitive values or object references:</p>
 <h5>Version ≥ 6</h5>
 <pre>
 <b>var</b> uniqueArray = &lbrack;&hellip; <b>new</b> Set(&lbrack;&apos;a&apos;, 1, &apos;a&apos;, 2, &apos;1&apos;, 1&rbrack;)&rbrack;;
@@ -5841,7 +5887,8 @@ item as a parameter, you could read it like the following&apos;;
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-16">Section 12.16: Searching an Array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>The recommended way (Since ES5) is to use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">Array.prototype.find</a>:</p>
+<p>The recommended way (Since ES5) is to use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find" 
+target="_blank" rel="noopener noreferrer">Array.prototype.find</a>:</p>
 <pre>
 <b>let</b> people = &lbrack;
   { name: &quot;bob&quot; },
@@ -5862,9 +5909,9 @@ item as a parameter, you could read it like the following&apos;;
 }
 </pre>
 <p><b>FindIndex</b></p>
-<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex">
-findIndex()</a> method returns an index in the array, if an element in the array satisfies 
-the provided testing function. Otherwise -1 is returned.</p>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex" 
+target="_blank" rel="noopener noreferrer">findIndex()</a> method returns an index in the array, if an element in 
+the array satisfies the provided testing function. Otherwise -1 is returned.</p>
 <pre>
 array = &lbrack;
   { value: 1 },
@@ -6026,7 +6073,8 @@ arr.splice(0); // <i>should not use if you don&apos;t want the removed items</i>
 <b>var</b> keepArr = arr.splice(0); // <i>empties the array and creates a new array containing the</i> 
                                     // <i>removed items</i>
 </pre>
-<p><a href="http://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript">Related question</a>.</p>
+<p><a href="http://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript" 
+target="_blank" rel="noopener noreferrer">Related question</a>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-20">Section 12.20: Finding the minimum or maximum element</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -6202,10 +6250,11 @@ key/value pairs for each index in the array.</p>
 1 &quot;b&quot;
 2 &quot;c&quot;
 </pre>
-<p><b>Note</b>: <a href="http://kangax.github.io/compat-table/es6/#test-Array.prototype_methods_Array.prototype.entries">
-This method is not supported in Internet Explorer</a>.</p>
+<p><b>Note</b>: <a href="http://kangax.github.io/compat-table/es6/#test-Array.prototype_methods_Array.prototype.entries" 
+target="_blank" rel="noopener noreferrer">This method is not supported in Internet Explorer</a>.</p>
 <p></i>Portions of this content from by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries$history">
-Mozilla Contributors</a> licensed by <a href="http://creativecommons.org/licenses/by-sa/2.5/">CC-by-SA 2.5</a></i></p>
+Mozilla Contributors</a> licensed by <a href="http://creativecommons.org/licenses/by-sa/2.5/" 
+target="_blank" rel="noopener noreferrer">CC-by-SA 2.5</a></i></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-25">Section 12.25: Remove value from array</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -6233,7 +6282,8 @@ while(index = array.indexOf(3) !== -1) { array.splice(index, 1); }
 <p><b>2 Dimensional arrays</b></p>
 <h5>Version ≥ 6</h5>
 <p>In ES6, we can flatten the array by the spread operator
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">&hellip;</a>:</p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator" 
+target="_blank" rel="noopener noreferrer">&hellip;</a>:</p>
 <pre>
 <b>function</b> flattenES6(arr) {
   <b>return</b> &lbrack;&rbrack;.concat(&hellip;arr);
@@ -6243,7 +6293,8 @@ console.log(flattenES6(arrL1));  // <i>&lbrack;1, 2, 3, 4&rbrack;</i>
 </pre>
 <h5>Version ≥ 5</h5>
 <p>In ES5, we can achieve that by
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">.apply()</a>:</p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply" 
+target="_blank" rel="noopener noreferrer">.apply()</a>:</p>
 <pre>
 <b>function</b></p> flatten(arr) {
   <b>return</b> &lbrack;&rbrack;.concat.apply(&lbrack;&rbrack;, arr);
@@ -6387,7 +6438,8 @@ arr <b>instanceof</b> Array;  // <i>false</i>
 <h3 id="ch12-31">Section 12.31: Insert an item into an array at a specific index</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Simple item insertion can be done with 
-<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice">
+<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/splice" 
+target="_blank" rel="noopener noreferrer">
 Array.<b>prototype</b>.splice</a> method:</p>
 <pre>
 arr.splice(index, 0, item);
@@ -6561,9 +6613,10 @@ from an existing Object instance to a new one.</p>
 <b>const</b> clone = Object.assign({}, existing);
 </pre>
 <p>This includes Symbol properties in addition to String ones.</p>
-<p><a href="https://github.com/tc39/proposal-object-rest-spread">
-Object rest/spread destructuring</a> which is currently a stage 3 proposal provides an 
-even simpler way to create shallow clones of Object instances:</p>
+<p><a href="https://github.com/tc39/proposal-object-rest-spread" 
+target="_blank" rel="noopener noreferrer">Object rest/spread destructuring</a> which 
+is currently a stage 3 proposal provides an even simpler way to create shallow clones 
+of Object instances:</p>
 <pre>
 <b>const</b> existing = { a: 1, b: 2, c: 3 };
 <b>const</b> { &hellip;clone } = existing;
@@ -6682,9 +6735,9 @@ Object.keys(obj).map(<b>function</b>(key) {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch12-35">Section 13.5: Object.assign</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">
-Object.assign()</a> method is used to copy the values of all enumerable own properties from 
-one or more source objects to a target object. It will return the target object.</p>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign" 
+target="_blank" rel="noopener noreferrer">Object.assign()</a> method is used to copy the values of all enumerable 
+own properties from one or more source objects to a target object. It will return the target object.</p>
 <p>Use it to assign values to an existing object:</p>
 <pre>
 <b>var</b> user = {
@@ -6746,8 +6799,10 @@ console.log(obj2);  // <i>{ a: 1, b: 2, c: 3 };</i>
 <b>let</b> obj3 = { &hellip;obj, b: { c: 2 } };
 console.log(obj3);  // <i>{ a: 1, b: { c: 2 } };</i>
 </pre>
-<p><b>NOTE</b>: <a href="https://github.com/sebmarkbage/ecmascript-rest-spread">
-This specification</a> is currently in <a href="http://www.2ality.com/2015/11/tc39-process.html">stage 3</a></p>
+<p><b>NOTE</b>: <a href="https://github.com/sebmarkbage/ecmascript-rest-spread" 
+target="_blank" rel="noopener noreferrer">
+This specification</a> is currently in <a href="http://www.2ality.com/2015/11/tc39-process.html" 
+target="_blank" rel="noopener noreferrer">stage 3</a></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch13-7">Section 13.7: Object.defineProperty</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -6991,7 +7046,8 @@ console.log(array);  // <i>&lbrack;&quot;hello&quot;, &quot;this is&quot;, &quot
   <li>own</li>
 </ul>
 <p>While creating the properties using 
-<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"><i>Object.defineProperty(ies)</i></a>),
+<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" 
+target="_blank" rel="noopener noreferrer"><i>Object.defineProperty(ies)</i></a>),
 we could set its characteristics except <i>&quot;own&quot;</i>. Properties which are available 
 in the direct level not in the <i>prototype</i> level (&lowbar;&lowbar;proto&lowbar;&lowbar;) 
 of an object are called as <i>own</i> properties.</p>
@@ -7006,7 +7062,8 @@ different methods will be discussed deeply below.</p>
 <p><i><b>Methods of retrieving properties:</b></i></p>
 <p>Properties from an object could be retrieved by the following methods,</p>
 <ol type="1" start="1">
-  <li><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in"><b>for</b>..<b>in</b></a> loop<br/>
+  <li><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in" 
+    target="_blank" rel="noopener noreferrer"><b>for</b>..<b>in</b></a> loop<br/>
   <p>This loop is very useful in retrieving enumerable properties from an object. 
   Additionally this loop will retrieve enumerable own properties as well as it will do the 
   same retrieval by traversing through the prototype chain until it sees the prototype as null.</p>
@@ -7031,11 +7088,14 @@ Object.defineProperty(x, &quot;b&quot;, {value : 5, enumerable: <b>false</b>});
 }
 console.log(props);  // <i>&lbrack;&quot;a&quot;&rbrack;</i>
 </pre></li>
-  <li><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys">Object.keys()</a> function<br/>
+  <li><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/keys" 
+    target="_blank" rel="noopener noreferrer">Object.keys()</a> function<br/>
   <p>This function was unveiled as a part of ECMAScript 5. It is used to retrieve enumerable own properties from an object. 
   Prior to its release people used to retrieve own properties from an object by combining 
-  <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in">for..in</a> loop and 
-  <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty">
+  <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/for...in" 
+    target="_blank" rel="noopener noreferrer">for..in</a> loop and 
+  <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty" 
+    target="_blank" rel="noopener noreferrer">
   Object.prototype.hasOwnProperty()</a> function.</p>
 <pre>
 // <i>Ex 1 : Simple data</i>
@@ -9116,7 +9176,8 @@ a b c
 <p><b>Note</b>:</p>
 <ul>
   <li>A Set object will eliminate duplicates.</li>
-  <li>Please <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Set#Browser_compatibility">check this reference</a>
+  <li>Please <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Set#Browser_compatibility" 
+    target="_blank" rel="noopener noreferrer">check this reference</a>
     for () browser support.</li>
 </ul>
 <!-- page 158 -->
@@ -9179,7 +9240,8 @@ name: Mike
 <blockquote>
 <b>Warning</b>
 for&hellip;in is intended for iterating over object keys, not array indexes.
-<a href="http://stackoverflow.com/questions/500504/why-is-using-for-in-with-array-iteration-such-a-bad-idea">
+<a href="http://stackoverflow.com/questions/500504/why-is-using-for-in-with-array-iteration-such-a-bad-idea" 
+target="_blank" rel="noopener noreferrer">
 Using it to loop through an array is generally discouraged</a>. It also includes properties 
 from the prototype, so it may be necessary to check if the key is within the object using
 hasOwnProperty/defineProperties method and set the param enumerable: false, those attributes
@@ -9451,7 +9513,8 @@ detailed description.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-2">Section 19.2: Currying</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<a href="https://en.wikipedia.org/wiki/Currying">Currying</a> is the
+<a href="https://en.wikipedia.org/wiki/Currying" 
+target="_blank" rel="noopener noreferrer">Currying</a> is the
 transformation of a function of n arity or arguments into a sequence
 of n functions taking only one argument.</p>
 <p>Use cases: When the values of some arguments are available before
@@ -9493,7 +9556,8 @@ evaluate to 30.</p>
 <p>Without some extra machinery (like with libraries), currying is of
 limited syntactical flexibility in JavaScript (ES 5/6) due to the lack
 of placeholder values; thus, while you can use (2)(3) to create a
-<a href="https://en.wikipedia.org/wiki/Partial_application">partially applied function</a>
+<a href="https://en.wikipedia.org/wiki/Partial_application" 
+target="_blank" rel="noopener noreferrer">partially applied function</a>
 , you cannot use ()(3)(5).</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch19-3">Section 19.3: Immediately Invoked Function Expressions</h3>
@@ -9804,7 +9868,8 @@ one 2 3 &lbrack;4&rbrack; Object {5: 5}
 arguments, there are two methods depending on your environment.</p>
 <h5>Version ≤ 5</h5>
 <p>Whenever a function is called, it has an Array-like
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments">
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments" 
+target="_blank" rel="noopener noreferrer">
 arguments</a> object in its scope, containing all the arguments passed to the function. 
 Indexing into or iterating over this will give access to the arguments, for example</p>
 <pre>
@@ -9820,7 +9885,8 @@ logSomeThings(&apos;hello&apos;, &apos;world&apos;);
 <p>Note that you can convert arguments to an actual Array if need-be; see: Converting Array-like Objects to Arrays</p>
 <h5>Version ≥ 6</h5>
 <p>From ES6, the function can be declared with its last parameter using the 
-<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/rest_parameters">
+<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/rest_parameters" 
+target="_blank" rel="noopener noreferrer">
 rest operator</a> (&hellip;). This creates an Array which holds the arguments from that point onwards</p>
 <pre>
 <b>function</b> personLogsSomeThings(person, &hellip;msg) {
@@ -9833,8 +9899,8 @@ personLogsSomeThings(&apos;John&apos;, &apos;hello&apos;, &apos;world&apos;);
 // <i>logs &quot;John says world&quot;</i>
 </pre>
 <p>Functions can also be called with similar way, the 
-<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_operator">
-spread syntax</a></p>
+<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_operator" 
+target="_blank" rel="noopener noreferrer">spread syntax</a></p>
 <pre>
 <b>const</b> logArguments = (&hellip;args) =&gt; console.log(args)
 <b>const</b> list = &lbrack;1, 2, 3&rbrack;
@@ -10352,9 +10418,9 @@ formatText(&apos;this is an example&apos;)
 as in our example.</p>
 
 <p>Implementation of compose are present in many JavaScript utility libraries 
-(<a href="https://lodash.com/docs#flow">lodash</a>, <a href="http://ramdajs.com/">
-rambda</a>http://ramdajs.com/ etc.) but you can also start out with a
-simple implementation such as:</p>
+(<a href="https://lodash.com/docs#flow" target="_blank" rel="noopener noreferrer">
+lodash</a>, <a href="http://ramdajs.com/" target="_blank" rel="noopener noreferrer">
+rambda</a>/ etc.) but you can also start out with a simple implementation such as:</p>
 <h5>Version ≥ 6</h5>
 <pre>
 <b>const</b> compose = (&hellip;funs) =&gt;
@@ -10369,7 +10435,8 @@ simple implementation such as:</p>
 <pre>
 myFunction.name
 </pre>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name">Explanation on MDN</a>.
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name" 
+target="_blank" rel="noopener noreferrer">Explanation on MDN</a>.
 As of 2015 works in Node.js and all major browsers except IE.</p>
 <h5>Version ≥ 5</h5>
 <p><b>ES5</b>:</p>
@@ -10660,7 +10727,8 @@ iAmJustFunction()();
 <p>This is an example of an implementation of the identity monad in
 JavaScript, and could serve as a starting point to create other
 monads.</p>
-<p>Based on the <a href="https://www.youtube.com/watch?v=b0EF0VTs9Dc">
+<p>Based on the <a href="https://www.youtube.com/watch?v=b0EF0VTs9Dc" 
+target="_blank" rel="noopener noreferrer">
 conference by Douglas Crockford on monads and gonads</a></p>
 <p>Using this approach reusing your functions will be easier because of
 the flexibility this monad provides, and composition nightmares:</p>
@@ -11050,7 +11118,8 @@ console.log(classInstance.prop);  // <i>logs: 5</i>
 <h3 id="ch22-5">Section 22.5: Private Members</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>JavaScript does not technically support private members as a language
-feature. Privacy - <a href="http://javascript.crockford.com/private.html">described by Douglas
+feature. Privacy - <a href="http://javascript.crockford.com/private.html" 
+target="_blank" rel="noopener noreferrer">described by Douglas
 Crockford</a> - gets emulated instead via closures (preserved function scope) that will be
 generated each with every instantiation call of a constructor function.</p>
 
@@ -11158,7 +11227,8 @@ handling private states:</p>
 <p><b>Using Symbols</b></p>
 
 <p>Symbols are new primitive type introduced on in ES2015, as defined at
-<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol">MDN</a></p>
+<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol" 
+target="_blank" rel="noopener noreferrer">MDN</a></p>
 <blockquote>
 A symbol is a unique and immutable data type that may be used as an
 identifier for object properties.
@@ -11200,14 +11270,16 @@ agent&lbrack;secretKeys&lbrack;0&rbrack;&rbrack; // <i>&apos;steal all the ice c
 
 <p>WeakMap is a new type of object that have been added for es6.</p>
 
-<p>As defined on <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbolhttps:/developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">MDN</a></p>
+<p>As defined on <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbolhttps:/developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap" 
+target="_blank" rel="noopener noreferrer">MDN</a></p>
 <blockquote>
 The WeakMap object is a collection of key/value pairs in which the
 keys are weakly referenced. The keys must be objects and the values
 can be arbitrary values.
 </blockquote>
 
-<p>Another important feature of WeakMap is, as defined on <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">MDN</a>.</p>
+<p>Another important feature of WeakMap is, as defined on <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap" 
+target="_blank" rel="noopener noreferrer">MDN</a>.</p>
 <blockquote>
 The key in a WeakMap is held weakly. What this means is that, if there
 are no other strong references to the key, the entire entry will be
@@ -12123,9 +12195,10 @@ console.log(&apos;Doing something else&apos;);
 </pre>
 <p>The <b>then</b> callbacks are considered continuations of the <b>doSomething</b>() 
 methods. Providing a callback as the last instruction in a function is called a
-<a href="https://en.wikipedia.org/wiki/Tail_call">tail-call</a>, which is 
-<a href="http://www.2ality.com/2015/06/tail-call-optimization.html">
-optimized by ES2015 interpreters</a>.</p>
+<a href="https://en.wikipedia.org/wiki/Tail_call" 
+target="_blank" rel="noopener noreferrer">tail-call</a>, which is 
+<a href="http://www.2ality.com/2015/06/tail-call-optimization.html" 
+target="_blank" rel="noopener noreferrer">optimized by ES2015 interpreters</a>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch29-3">Section 29.3: What is a callback?</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -12220,7 +12293,8 @@ arguments that were passed to the event on to the function.</p>
   };
   </pre>
   </li>
-  <li>For DOM event listeners in particular you can implement the <a href="">EventListener interface</a>
+  <li>For DOM event listeners in particular you can implement the <a href="https://www.w3schools.com/jsref/met_document_addeventlistener.asp" 
+    target="_blank" rel="noopener noreferrer">EventListener interface</a>
   <pre>
   function SomeClass(msg, elem} {
     this.msg = msg;
@@ -12316,8 +12390,10 @@ console.log(&apos;Doing something else&apos;);
 <p>It should be noted, multiple callbacks do not have to be mutually
 exclusive - both methods could be called. Similarly, the <b>compare</b>() 
 could be written with callbacks that are optional (by using a 
-<a href="https://en.wikipedia.org/wiki/NOP">noop</a> as the default value - see 
-<a href="https://en.wikipedia.org/wiki/Null_Object_pattern">
+<a href="https://en.wikipedia.org/wiki/NOP" 
+target="_blank" rel="noopener noreferrer">noop</a> as the default value - see 
+<a href="https://en.wikipedia.org/wiki/Null_Object_pattern" 
+target="_blank" rel="noopener noreferrer">
 Null Object pattern</a>).</p>
 <!-- page 219 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -13186,7 +13262,8 @@ item.setAttribute(&quot;data-dial-code&quot;, &quot;33&quot;);
 and easy for machines to parse and generate. It is important to realize that, in JavaScrtip, JSON is a string and not 
 an object.</p>
 
-<p>A basic overview can be found on the <a href="http://json.org/">json.org</a> 
+<p>A basic overview can be found on the <a href="http://json.org/" 
+target="_blank" rel="noopener noreferrer">json.org</a> 
 website which also contains links to implementations of the standard
 in many different programming languages.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -13608,13 +13685,15 @@ xmlhttp.send();
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch36-3">Section 36.3: Displaying the top JavaScript questions of the month from Stack Overflow&apos;s API</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>We can make an AJAX request to <a href="http://api.stackexchange.com/docs">Stack 
+<p>We can make an AJAX request to <a href="http://api.stackexchange.com/docs" 
+target="_blank" rel="noopener noreferrer">Stack 
 Exchange&apos;s API</a> to retrieve a list of the top JavaScript questions for the month, 
 then present them as a list of links. If the request fails or the returns an API error, 
 our promise error handling displays the error instead.</p>
 
 <h5>Version ≥ 6</h5>
-<a href="http://plume-pine.hyperweb.space/hot-javascript.html">View live results on HyperWeb</a>.
+<a href="http://plume-pine.hyperweb.space/hot-javascript.html" 
+target="_blank" rel="noopener noreferrer">View live results on HyperWeb</a>.
 <pre>
 <b>const</b> url =
   &apos;http://api.stackexchange.com/2.2/questions?site=stackoverflow&apos; &plus;
@@ -13816,7 +13895,8 @@ Object.freeze(ColorsEnum);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch37-4">Section 37.4: Implementing Enums Using Symbols</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>As ES6 introduced <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol"><b>Symbols</b></a>,
+<p>As ES6 introduced <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol" 
+target="_blank" rel="noopener noreferrer"><b>Symbols</b></a>,
 which are both <b>unique and immutable primitive values</b> that may be used as the 
 key of an Object property, instead of using strings as possible values for an enum, 
 it&apos;s possible to use symbols.</p>
@@ -13845,7 +13925,8 @@ yetAnotherSymbol === anotherSymbol; // <i> false</i>
 describe(Regnum_Vegetabile);
 // <i> Vegetable kingdom</i>
 </pre>
-<p>The <a href="http://www.2ality.com/2014/12/es6-symbols.html">Symbols in ECMAScript
+<p>The <a href="http://www.2ality.com/2014/12/es6-symbols.html" 
+target="_blank" rel="noopener noreferrer">Symbols in ECMAScript
 6</a> article covers this new primitive type more in detail.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch37-5">Section 37.5: Automatic Enumeration Value</h3>
@@ -13854,7 +13935,8 @@ describe(Regnum_Vegetabile);
 <p>This Example demonstrates how to automatically assign a value to each
 entry in an enum list. This will prevent two enums from having the
 same value by mistake. NOTE: 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze">
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze" 
+target="_blank" rel="noopener noreferrer">
 Object.freeze browser support</a></p>
 <pre>
 <b>var</b> testEnum = <b>function</b>() {
@@ -14044,11 +14126,13 @@ console.log(map.size);  // <i>2</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch39-1">Section 39.1: High-resolution timestamps</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now">
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now" 
+target="_blank" rel="noopener noreferrer">
 performance.now()</a> returns a precise timestamp: The number of milliseconds, 
 including microseconds, since the current web page started to load.</p>
 <p>More generally, it returns the time elapsed since the 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/navigationStart">performanceTiming.navigationStart</a></p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/navigationStart" 
+target="_blank" rel="noopener noreferrer">performanceTiming.navigationStart</a></p>
 
 <pre>
 t = performance.now();
@@ -14065,7 +14149,8 @@ Math.floor((<b>new</b> Date().getTime()) / 1000)
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch39-3">Section 39.3: Low-resolution timestamps</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now">Date.now()]()
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now" 
+target="_blank" rel="noopener noreferrer">Date.now()]()
 returns the number of whole milliseconds that have elapsed since 1 January 1970 00:00:00 UTC.</p>
 <pre>
 t = Date.now();
@@ -14077,13 +14162,15 @@ t = Date.now();
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 <p>In older browsers where Data.now() is unavailable, use 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime">
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime" 
+target="_blank" rel="noopener noreferrer">
 (new Date()).getTime()</a> instead:</p>
 <pre>
 t = (<b>new</b> Date()).getTime();
 </pre>
 <p>Or, to provide a Date.now() function for use in older browsers, 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now#Polyfill">
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now#Polyfill"
+target="_blank" rel="noopener noreferrer">
 use this polyfill</a></p>
 <pre>
 <b>if</b> (!Date.now) {
@@ -14197,7 +14284,8 @@ can not be overridden and therefore their functionality is guaranteed.</p>
 
 <p>The unusual behavior of document.all with the typeof operator with the <b>typeof</b> operator is from its
 former usage to detect legacy browsers.<br/>
-For more information, see <a href="http://stackoverflow.com/q/40643613/6388243">
+For more information, see <a href="http://stackoverflow.com/q/40643613/6388243" 
+target="_blank" rel="noopener noreferrer">
 Why is document.all defined but typeof document.all returns &quot;undefined&quot;?</a></p>
 
 <!-- page 252 -->
@@ -14806,11 +14894,12 @@ libraries - taskjs, co, or bluebird</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-1">Section 42.1: Introduction</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>A <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>
+<p>A <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" 
+target="_blank" rel="noopener noreferrer">Promise</a>
 object represents an operation which <i>has produced or will eventually produce</i> a value. 
 Promises provide a robust way to wrap the (possibly pending) result of asynchronous work, 
 mitigating the problem of deeply nested callbacks (known as 
-&quot;<a href="http://callbackhell.com/">callback hell</a>&quot;).</p>
+&quot;<a href="http://callbackhell.com/" target="_blank" rel="noopener noreferrer">callback hell</a>&quot;).</p>
 
 <p><b>States and control flow</b></p>
 <p>A promise can be in one of three states:</p>
@@ -14827,9 +14916,11 @@ mitigating the problem of deeply nested callbacks (known as
 <p>A promise is said to be <i>settled</i> (or <i>resolved</i>) when it is either
 fulfilled or rejected. Once a promise is settled, it becomes
 immutable, and its state cannot change. The
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then" 
+target="_blank" rel="noopener noreferrer">
 then</a> and
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch">
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch" 
+target="_blank" rel="noopener noreferrer">
 <b>catch</b></a> methods of a promise can be used to attach callbacks that execute when
 it is settled. These callbacks are invoked with the fulfillment value
 and rejection reason, respectively.</p>
@@ -14859,8 +14950,10 @@ and rejection reason, respectively.</p>
   }
 });
 </pre>
-<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">
-then</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch">
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then" 
+target="_blank" rel="noopener noreferrer">
+then</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch" 
+target="_blank" rel="noopener noreferrer">
 <b>catch</b></a> methods can be used to attach fulfillment and rejection callbacks:</p>
 <!-- page 264 -->
 <pre>
@@ -14878,22 +14971,26 @@ the promise or inside one of the callbacks, so the preferred way would be to att
 listener on the promise returned by the previous then / <b>catch</b>.</p>
 
 <p>Alternatively, both callbacks can be attached in a single call to
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then" 
+target="_blank" rel="noopener noreferrer">
 then</a>:</p>
 <pre>
 promise.then(onFulfilled, onRejected);
 </pre>
 <p>Attaching callbacks to a promise that has already been settled will immediately place 
-them in the <a href="http://stackoverflow.com/a/25933985/5931915">
+them in the <a href="http://stackoverflow.com/a/25933985/5931915" 
+target="_blank" rel="noopener noreferrer">
 microtask queue</a>, and they will be invoked &quot;as soon as possible&quot; (i.e. 
 immediately after the currently executing script). It is not necessary to check the 
 state of the promise before attaching callbacks, unlike with many other event-emitting 
 implementations.</p>
-<p><a href="https://jsfiddle.net/SO_AMK/sy8s7a3a/">Live demo</a></p>
+<p><a href="https://jsfiddle.net/SO_AMK/sy8s7a3a/" 
+target="_blank" rel="noopener noreferrer">Live demo</a></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch43-2">Section 42.2: Promise chaining</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then" 
+target="_blank" rel="noopener noreferrer">
 then</a> method of a promise returns a new promise.</p>
 <pre>
 <b>const</b> promise = <b>new</b> Promise(resolve =&gt; setTimeout(resolve, 5000));
@@ -14904,8 +15001,10 @@ promise
   // <i>the new promise to resolve with this value</i>
   .then(value =&gt; { <i>/&ast; value === 2 &ast;/</i> });
 </pre>
-<p>Returning a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">
-Promise</a> from a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">
+<p>Returning a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" 
+target="_blank" rel="noopener noreferrer">
+Promise</a> from a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then" 
+target="_blank" rel="noopener noreferrer">
 then</a> callback will append it to the promise chain.</p>
 <pre>
 <b>function</b> wait(millis) {
@@ -14915,19 +15014,25 @@ then</a> callback will append it to the promise chain.</p>
 p&period;then(() =&gt; { <i>/&ast; 10 seconds have passed &ast;/</i> });
 </pre>
 
-<p>A <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch">
+<p>A <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch" 
+target="_blank" rel="noopener noreferrer">
 <b>catch</b></a> allows a rejected promise to recover, similar to how <b>catch</b> in a
-<b>try</b>/<b>catch</b> statement works. Any chained <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">
-then</a> after a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch">
+<b>try</b>/<b>catch</b> statement works. Any chained <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then" 
+target="_blank" rel="noopener noreferrer">
+then</a> after a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch" 
+target="_blank" rel="noopener noreferrer">
 <b>catch</b></a> will execute its resolve handler using the value resolved from the
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch"><b>catch</b></a>.</p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch" 
+target="_blank" rel="noopener noreferrer"><b>catch</b></a>.</p>
 <pre>
 <b>const</b> p = <b>new</b> Promise(resolve =&gt; {<b>throw</b> &apos;oh no&apos;});
 p.<b>catch</b>(() =&apos;oh yes&apos;).then(console.log.bind(console)); // <i>outputs &quot;oh yes&quot;</i>
 </pre>
-<p>If there are no <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch">
+<p>If there are no <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch" 
+target="_blank" rel="noopener noreferrer">
 <b>catch</b></a> or reject handlers in the middle of the chain, a
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch"><b>catch</b></a> 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch" 
+target="_blank" rel="noopener noreferrer"><b>catch</b></a> 
 at the end will capture any rejection in the chain:</p>
 <pre>
 p&period;<b>catch</b>(() =&gt; Promise.reject(&apos;oh yes&apos;))
@@ -14969,7 +15074,8 @@ promise &dash;&dash;&gt; handlerFn1 &dash;&gt; handlerFn2 &dash;&dash;&gt; handl
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-3">Section 42.3: Waiting for multiple concurrent promises</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all">
+The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all" 
+target="_blank" rel="noopener noreferrer">
 Promise.all()</a> static method accepts an iterable (e.g. an Array) of promises and
 returns a new promise, which resolves when <b>all</b> promises in the
 iterable have resolved, or rejects if <b>at least one</b> of the promises
@@ -15032,7 +15138,8 @@ asynchronous actions from a list of elements.</p>
 </ul>
 <p><b>The &quot;then&quot; reduction</b></p>
 
-<p>This variant of the pattern builds a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">.then()</a> chain
+<p>This variant of the pattern builds a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then" 
+target="_blank" rel="noopener noreferrer">.then()</a> chain
 , and might be used for chaining animations, or making a sequence of dependent HTTP requests.</p>
 <pre>&lbrack;1, 3, 5, 7, 9&rbrack;.reduce((seq, n) =&gt; {
   <b>return</b> seq.then(() =&gt; {
@@ -15047,13 +15154,18 @@ asynchronous actions from a list of elements.</p>
 </pre>
 <p>Explanation:</p>
 <ol type="1">
-  <li>We call <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce">
-    .reduce()</a> On a source array, and provie <a href="">Promise.resolve()</a> as an initial value.</li>
-  <li>Every element reduced will add a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">
+  <li>We call <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce" 
+    target="_blank" rel="noopener noreferrer">
+    .reduce()</a> On a source array, and provie <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve" 
+    target="_blank" rel="noopener noreferrer">Promise.resolve()</a> as an initial value.</li>
+  <li>Every element reduced will add a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then" 
+    target="_blank" rel="noopener noreferrer">
     .then()</a> to the inital value.</li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce">
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce" 
+    target="_blank" rel="noopener noreferrer">
     reduce()&apos;s product will be Promise.resolve().then(...).then(...).</li>
-  <li>We manually append a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">
+  <li>We manually append a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then" 
+    target="_blank" rel="noopener noreferrer">
     .then(successHandler, errorHandler)</a> after the reduce, to execute successHandler once all the 
 	previous steps have resolved. If any step was to fail, then errorHandler would execute.</li>
 </ol>
@@ -15062,7 +15174,8 @@ asynchronous actions from a list of elements.</p>
 
 <p><b>The &quot;catch&quot; reduction</b></p>
 
-<p>This variant of the pattern builds a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch">
+<p>This variant of the pattern builds a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch" 
+target="_blank" rel="noopener noreferrer">
 .catch()</a> chain and might be used for sequentially probing a set of web servers for some mirrored 
 resource until a working server is found.</p>
 <pre>
@@ -15084,11 +15197,15 @@ resource until a working server is found.</p>
 </pre>
 <p>Explanation:</p>
 <ol type = "1">
-  <li>We call <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject">
-  .reduce</a>()  on a source array, and provide <a href="">Promise.reject()</a> as an initial value.</li>
-  <li>Every element reduced will add a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch">.catch()</a> to the initial value.</li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce">reduce()</a>&apos;s product will be Promise.reject().catch(...).catch(...).</li>
-  <li>We manually append <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">.then(successHandler, errorHandler)</a> after the reduce, to execute
+  <li>We call <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)[()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject" 
+   target="_blank" rel="noopener noreferrer">
+   .reduce</a>()  on a source array, and provide <a href="">Promise.reject()</a> as an initial value.</li>
+  <li>Every element reduced will add a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch" 
+    target="_blank" rel="noopener noreferrer">.catch()</a> to the initial value.</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce" target="_blank" rel="noopener noreferrer">
+    reduce()</a>&apos;s product will be Promise.reject().catch(...).catch(...).</li>
+  <li>We manually append <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then"
+    target="_blank" rel="noopener noreferrer">.then(successHandler, errorHandler)</a> after the reduce, to execute
     successHandler once any of the previous steps has resolved. If all steps were to fail, then errorHandler would execute.</li>
 </ol>
 <br/>
@@ -15097,7 +15214,8 @@ currently in native ECMAScript).</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-5">Section 42.5: Waiting for the first of multiple concurrent promises</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race">
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race" 
+target="_blank" rel="noopener noreferrer">
 Promise.race()</a> static method accepts an iterable of Promises and returns a new Promise 
 which resolves or rejects as soon as the <b>first</b> of the promises in the iterable has 
 resolved or rejected.</p>
@@ -15239,13 +15357,15 @@ throwErrorAsync()
 throwErrorAsync()
   .then(() =&gt; { <i>/&ast; will not be called &ast;/</i> }, error =&gt; { <i>/&ast; handle error&ast;/</i> });
 </pre>
-<p>Alternatively, subscribe to the <a href="https://developer.mozilla.org/en-US/docs/Web/Events/unhandledrejection">
+<p>Alternatively, subscribe to the <a href="https://developer.mozilla.org/en-US/docs/Web/Events/unhandledrejection" 
+target="_blank" rel="noopener noreferrer">
 unhandledrejection</a> event to catch any unhandled rejected promises:</p>
 <pre>
 window.addEventListener(&apos;unhandledrejection&apos;, event =&gt; {});
 </pre>
 <p>Some promises can handle their rejection later than their creation time. The
-<a href="https://developer.mozilla.org/en-US/docs/Web/Events/rejectionhandled">rejectionhandled</a> 
+<a href="https://developer.mozilla.org/en-US/docs/Web/Events/rejectionhandled" 
+target="_blank" rel="noopener noreferrer">rejectionhandled</a> 
 event gets fired whenever such a promise is handled:</p>
 <pre>
 window.addEventListener(&apos;unhandledrejection&apos;, event =&gt; console.log(&apos;unhandled&apos;));
@@ -15260,8 +15380,10 @@ setTimeout() =&gt; p&period;<b>catch</b>(console.log), 1000);
 and event.promise is the promise object that caused the event.</p>
 
 <p>In Nodejs the rejectionhandled and unhandledrejection events are called 
-<a href="https://nodejs.org/api/process.html#process_event_rejectionhandled">rejectionHandled</a> and
-<a href="https://nodejs.org/api/process.html#process_event_unhandledrejection">unhandledRejection</a>
+<a href="https://nodejs.org/api/process.html#process_event_rejectionhandled" 
+target="_blank" rel="noopener noreferrer">rejectionHandled</a> and
+<a href="https://nodejs.org/api/process.html#process_event_unhandledrejection" 
+target="_blank" rel="noopener noreferrer">unhandledRejection</a>
 on process, respectively, and have a different signature:</p>
 <pre>
 process.on(&apos;rejectionHandled&apos;, (reason, promise) =&gt;{});
@@ -15419,7 +15541,8 @@ are encountered.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-9">Section 42.9: Delay function call</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout">
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout" 
+target="_blank" rel="noopener noreferrer">
 setTimout()</a> method calls a function or evaluates an expression after a specified
 number of milliseconds. It is also a trivial way to achieve an
 asynchronous operation.</p>
@@ -15437,7 +15560,8 @@ wait(5000).then(() =&gt; {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch42-10">Section 42.10: &quot;Promisifying&quot; values</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve">
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve" 
+target="_blank" rel="noopener noreferrer">
 Promise.resolve</a> The static method can be used to wrap values into promises.</p>
 <pre>
 <b>let</b> resolved = Promise.resolve(2);
@@ -15446,8 +15570,8 @@ resolved.then(value =&gt; {
   // <i>value === 2</i>
 });
 </pre>
-<p>If value is already a promise, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve">
-Promise.resolve</a> simply recasts it.</p>
+<p>If value is already a promise, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve" 
+target="_blank" rel="noopener noreferrer">Promise.resolve</a> simply recasts it.</p>
 <pre> 
 <b>let</b> one = <b>new</b> Promise(resolve =&gt; setTimeout(() =&gt; resolve(2), 1000));
 <b>let</b> two = Promise.resolve(one);
@@ -15459,7 +15583,8 @@ two.then(value =&gt; {
 
 <p>In fact, value can be any &quot;thenable&quot; (object defining a then method that works 
 sufficiently like a spec-compliant promise). This allows 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve">
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve" 
+target="_blank" rel="noopener noreferrer">
 Promise.resolve</a> to convert untrusted 3rd-party objects into trusted 1st-party Promises.</p>
 <pre>
 <b>let</b> resolved = Promise.resolve({
@@ -15474,7 +15599,8 @@ resolved.then(value =&gt; {
 </pre>
 <!-- page 274 -->
 
-The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject">
+The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/reject" 
+target="_blank" rel="noopener noreferrer">
 Promise.reject</a> static method returns a promise which immediately rejects with the
 given reason.</p>
 <pre>
@@ -15490,7 +15616,8 @@ rejected.<b>catch</b>(reason =&gt; {
 <p>The same example above, Image loading, can be written using async
 functions. This also allows using the common try/catch method for exception handling.</p>
 
-<p>Note: <a href="http://caniuse.com/#feat=async-functions">
+<p>Note: <a href="http://caniuse.com/#feat=async-functions" 
+target="_blank" rel="noopener noreferrer">
 as of April 2017, the current releases of all browsers but Internet 
 Explorer supports async functions</a>.</p>
 <pre>
@@ -15519,12 +15646,13 @@ Explorer supports async functions</a>.</p>
 <h3 id="ch42-12">Section 42.12: Performing cleanup with finally()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>There is currently a 
-<a href="https://github.com/tc39/proposal-promise-finally">
+<a href="https://github.com/tc39/proposal-promise-finally" target="_blank" rel="noopener noreferrer">
 proposal</a> (not yet part of the ECMAScript standard) to add a 
 <b>finally</b> callback to promises that will be executed regardless 
 of whether the promise is fulfilled or rejected. Semantically, this 
 is similar to the 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch#The_finally_clause">
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch#The_finally_clause" 
+target="_blank" rel="noopener noreferrer">
 <b>finally</b> clause of the <b>try</b> block</a>.</p>
 <p>You would usually use this functionality for cleanup:</p>
 <pre>
@@ -15607,8 +15735,10 @@ take advantage of its asynchronous functionality.</p>
 };
 </pre>
 <p>More robust error handling can be done using the following
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onload">
-onload</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onerror">
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onload" 
+target="_blank" rel="noopener noreferrer">onload</a> and 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onerror" 
+target="_blank" rel="noopener noreferrer">
 onerror</a> functions.</p>
 <pre>
 request.onload = <b>function</b>() {
@@ -15670,8 +15800,8 @@ primitive values or object references.</p>
 elements of a set in insertion order. A value in the Set may only
 occur <b>ONCE</b>; it is unique in the Set&apos;s collection. Distinct values
 are discriminated using the <i>SameValueZero</i> comparison algorithm.</p>
-<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-set-objects">
-Standard Specification About Set</a></p>
+<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-set-objects" 
+target="_blank" rel="noopener noreferrer">Standard Specification About Set</a></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch43-1">Section 43.1: Creating a Set</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -15818,7 +15948,10 @@ mySet.forEach((value, value2, <b>set</b>) =&gt; console.log(value)); // <i>logs 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch44-1">Section 44.1: About User Prompts</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p><a href="">User Prompts</a> are methods part of the <a href="">Web Application API</a> used to invoke Browser
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt" 
+target="_blank" rel="noopener noreferrer">User Prompts</a> are methods part of the 
+<a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Introduction" 
+target="_blank" rel="noopener noreferrer">Web Application API</a> used to invoke Browser
 modals requesting a user action such as confirmation or input.</p>
 <p><b>window.alert(message)</b></p>
 <p>Show a modal <i>popup</i> with a message to the user.</p>
@@ -15871,7 +16004,8 @@ while(!userName) {
 &lt;/script&gt;
 </pre>
 <!-- page 281 -->
-<a href="https://jsfiddle.net/RokoCB/2r3ekqzk/1/">jsFiddle demo</a>
+<a href="https://jsfiddle.net/RokoCB/2r3ekqzk/1/" 
+target="_blank" rel="noopener noreferrer">jsFiddle demo</a>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch44-3">Section 44.3: Confirm to Delete element</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -15902,7 +16036,8 @@ to the page and is better accompanied by a <b>notification</b> and a <b>user con
   btn.addEventListener(&quot;click&quot;, deleteParentPost, <b>false</b>);
 });
 </pre>
-<p><a href="https://jsfiddle.net/RokoCB/6d652ycL/">jsFiddle demo</a></p>
+<p><a href="https://jsfiddle.net/RokoCB/6d652ycL/" target="_blank" 
+rel="noopener noreferrer">jsFiddle demo</a></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch44-4">Section 44.4: Usage of alert()</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -16173,7 +16308,8 @@ HTML element into a user-editable area</p>
 </pre>
 <p><b>Native Rich-Text editing</b></p>
 
-<p>Using <b>JavaScript</b> and <a href="https://w3c.github.io/editing/execCommand.html">execCommandW3C</a> you
+<p>Using <b>JavaScript</b> and <a href="https://w3c.github.io/editing/execCommand.html" 
+target="_blank" rel="noopener noreferrer">execCommandW3C</a> you
 can additionally pass more editing features to the currently focused contenteditable element (specifically 
 at the caret position or selection).</p>
 
@@ -16217,8 +16353,10 @@ function edit(event) {
 <b>&lt;</b><b>script</b><b>&gt;</b>
 </pre>
 <!-- page 285 -->
-<a href="https://jsfiddle.net/RokoCB/az7f38w7/">jsFiddle demo</a>
-<a href="https://jsfiddle.net/RokoCB/yvshdr4q/">Basic Rich-Text editor example (Modern browsers)</a>
+<a href="https://jsfiddle.net/RokoCB/az7f38w7/" 
+target="_blank" rel="noopener noreferrer">jsFiddle demo</a>
+<a href="https://jsfiddle.net/RokoCB/yvshdr4q/" 
+target="_blank" rel="noopener noreferrer">Basic Rich-Text editor example (Modern browsers)</a>
 <p><b>Final thoughts</b></p>
 <p>Even being present for a long time (IE6), implementations and
 behaviors of execCommand vary from browser to browser making
@@ -16306,8 +16444,8 @@ history.pushState(state object, title, url)
 </pre>
 <p>This method allows to ADD histories entries. For more reference,
 Please have a look on this document: 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method">
-pushState() method</a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method" 
+target="_blank" rel="noopener noreferrer">pushState() method</a>
 
 <p><b>Example:</b></p>
 <pre>
@@ -16608,9 +16746,11 @@ In this example, the host environment is the web browser.
 
 <ol type="1">
   <li>The HTML parser will first execute the <b>&gt;</b>. It will run to completion.</li>
-  <li>The call to <a href="https://html.spec.whatwg.org/multipage/webappapis.html#dom-settimeout">
+  <li>The call to <a href="https://html.spec.whatwg.org/multipage/webappapis.html#dom-settimeout" 
+     target="_blank" rel="noopener noreferrer">
     setTimeout</a> tells the browser that, after 100 milliseconds, it should enqueue a
-    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-task">task</a> 
+    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-task" 
+	 target="_blank" rel="noopener noreferrer">task</a> 
     to perform the given action.</li>
   <li>In the meantime, the event loop is then responsible for continually
     checking if there&apos;s something else to do: for example, rendering the web page.</li>
@@ -16633,8 +16773,8 @@ entry points into JavaScript code, which the event loop invokes:</p>
 <br/>
 <p>Each turn of the event loop is responsible for many things; only some
 of them will invoke these JavaScript tasks. For full details, 
-<a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">
-see the HTML specification</a></p>
+<a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model"
+ target="_blank" rel="noopener noreferrer">see the HTML specification</a></p>
 <p>One last thing: what do we mean by saying that each event loop task
 &quot;runs to completion&quot;? We mean that it is not generally possible to
 interrupt a block of code that is queued to run as a task, and it is
@@ -17098,11 +17238,11 @@ assign(obj, propName, &apos;Value&apos;);
 <h3 id="ch53-1">Section 53.1: Getting binary representation of an image file</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>This example is inspired by 
-<a href="http://stackoverflow.com/q/38334315/2271269">
-this question</a>.</p>
+<a href="http://stackoverflow.com/q/38334315/2271269" 
+ target="_blank" rel="noopener noreferrer">this question</a>.</p>
 <p>We&apos;ll assume you know how to 
-<a href="http://www.html5rocks.com/en/tutorials/file/dndfiles/">
-load a file using the File API</a>.</p>
+<a href="http://www.html5rocks.com/en/tutorials/file/dndfiles/" 
+target="_blank" rel="noopener noreferrer">load a file using the File API</a>.</p>
 <pre>
 // <i>preliminary code to handle getting local file and finally printing to console</i>
 // <i>the results of our function ArrayBufferToBinary().</i>
@@ -17577,7 +17717,8 @@ fetch(&apos;https://otherdomain.com/login&apos;, {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch55-5">Section 55.5: GlobalFetch</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>The <a href="https://fetch.spec.whatwg.org/#globalfetch">GlobalFetch</a> 
+<p>The <a href="https://fetch.spec.whatwg.org/#globalfetch" 
+target="_blank" rel="noopener noreferrer">GlobalFetch</a> 
 interface exposes the fetch function, which can be used to request resources.</p>
 <pre>
 fetch(&apos;/path/to/resource.json&apos;)
@@ -17591,9 +17732,9 @@ fetch(&apos;/path/to/resource.json&apos;)
     console.log(json);
   });
 </pre>
-<p>The resolved value is a <a href="https://fetch.spec.whatwg.org/#response-class">
-Response</a> Object. This Object contains the body of the response, as well as its 
-status and headers.</p>
+<p>The resolved value is a <a href="https://fetch.spec.whatwg.org/#response-class" 
+target="_blank" rel="noopener noreferrer">Response</a> Object. This Object contains 
+the body of the response, as well as its status and headers.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch55-6">Section 55.6: Using Fetch to Display Questions from the Stack Overflow API</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -17709,8 +17850,9 @@ bound to jQuery only in the context created by the closure:</p>
   })(jQuery);
 // <i>but window.&dollar; binding doesn&apos;t exist, so no pollution</i>
 </pre>
-<p>See <a href="http://stackoverflow.com/a/111111/2209007">the canonical answer on Stackoverflow</a> for more
-information on closures.</p>
+<p>See <a href="http://stackoverflow.com/a/111111/2209007" 
+target="_blank" rel="noopener noreferrer">the canonical answer on Stackoverflow</a> 
+for more information on closures.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch56-2">Section 56.2: Hoisting</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -17739,9 +17881,10 @@ the not defined resulting from running:</p>
 console.log(foo);  // <i>→ foo is not defined</i>
 </pre>
 <p>A similar principle applies to functions. When functions are assigned
-to a variable (i.e. a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function">
-function expression</a>), the variable declaration is hoisted while the assignment remains in
-the same place. The following two code snippets are equivalent.</p>
+to a variable (i.e. a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function" 
+target="_blank" rel="noopener noreferrer">function expression</a>), the variable declaration 
+is hoisted while the assignment remains in the same place. The following two code snippets 
+are equivalent.</p>
 <pre>
 console.log(foo(2, 3));  // <i>→ foo is not a function</i>
 <b>var</b> foo = <b>function</b>(a, b) {
@@ -17753,7 +17896,8 @@ foo = <b>function</b>(a, b) {
   <b>return</b> a &ast; b;
 }
 </pre>
-<p>When declaring <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">
+<p>When declaring <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function" 
+target="_blank" rel="noopener noreferrer">
 function statements</a>, a different scenario occurs. Unlike function statements, function
 declarations are hoisted to the top of their scope. Consider the following code:</p>
 <pre>
@@ -17836,8 +17980,8 @@ y = 4;
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><i>(Note: All examples using <b>let</b> are also valid for <b>const</b>)</i></p>
 <p><b>var</b> is available in all versions of JavaScript, while <b>let</b> and
-<b>const</b> are part of ECMAScript 6 and <a href="http://caniuse.com/#search=block%20level">
-only available in some newer browsers</a>.</p>
+<b>const</b> are part of ECMAScript 6 and <a href="http://caniuse.com/#search=block%20level" 
+target="_blank" rel="noopener noreferrer">only available in some newer browsers</a>.</p>
 <p><b>var</b> is scoped to the containing function or the global space, depending when it is
 declared:</p>
 <pre>
@@ -17950,10 +18094,11 @@ console.log(y);  // <i>&gt;&gt; &quot;ReferenceError: &grave;y&grave; is not def
 <b>let</b> y = 7;
 </pre>
 <p>The area between the start of a block and a <b>let</b> or <b>const</b>
-declaration is known as the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let">
-Temporal Dead Zone</a>, and any references to the variable in this area will cause a
-ReferenceError. This happens even if the <a href="http://stackoverflow.com/questions/41451181/does-let-override-a-global-declaration-and-throws-a-referenceerror">
-variable is assigned before being declared</a>:</p>
+declaration is known as the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let" 
+target="_blank" rel="noopener noreferrer">Temporal Dead Zone</a>, and any references 
+to the variable in this area will cause a ReferenceError. This happens even if the 
+<a href="http://stackoverflow.com/questions/41451181/does-let-override-a-global-declaration-and-throws-a-referenceerror" 
+target="_blank" rel="noopener noreferrer">variable is assigned before being declared</a>:</p>
 <pre>
 y=7;  // <i>&gt;&gt; &quot;ReferenceError: &grave;y&grave; is not defined&quot;</i>
 <b>let</b> y;
@@ -18176,7 +18321,8 @@ function scope) and after the loop, i == 3. What we need is not to
     { label:&quot;pineapple&quot;, content:&quot;weird stuff.. difficult to explain the shape&quot; }
   &rbrack;;
 </pre>
-<p><a href="https://jsfiddle.net/fvgqu7a2/2/">A fiddle to illustrate this</a></p>
+<p><a href="https://jsfiddle.net/fvgqu7a2/2/" target="_blank" rel="noopener noreferrer">
+A fiddle to illustrate this</a></p>
 <!-- page 322 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch57">Chapter 57: Modules</h2>
@@ -18285,10 +18431,10 @@ Non-exported members are not available, just as they are not available
 with named member imports.</p>
 
 <p><b>Note:</b> The path to the module &apos;./test&apos; is resolved by the
-<a href="https://whatwg.github.io/loader/"><i>loader</i></a> and is not covered by the
-ECMAScript specification - this could be a string to any resource (a
-path - relative or absolute - on a filesystem, a URL to a network
-resource, or any other string identifier).</p>
+<a href="https://whatwg.github.io/loader/" target="_blank" rel="noopener noreferrer">
+<i>loader</i></a> and is not covered by the ECMAScript specification - this could be 
+a string to any resource (a path - relative or absolute - on a filesystem, a URL to 
+a network resource, or any other string identifier).</p>
 <!-- page 324 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch57-5">Section 57.5: Importing named members with aliases</h3>
@@ -18499,7 +18645,7 @@ others will be converted to true.</p>
 the logical NOT operator twice, as described in
 http://stackoverflow.com/documentation/javascript/208/boolean-logic/3047/double-negation-x</p>
 <p>Here is the complete list of boolean conversions from the 
-<a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf">
+<a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf" target="_blank" rel="noopener noreferrer">
 ECMAScript specification</a></p>
 <ul>
   <li>if myArg of type <b>undefined</b> or <b>null</b> then Boolean(myArg) === <b>false</b></li>
@@ -19035,7 +19181,8 @@ console.log(userId)    // <i>10</i>
 client and server:</p>
 <p>The goal WebSocket is to provide a mechanism for browser-based
 applications that need two-way communication with servers that does
-not rely on opening multiple HTTP connections. (<a href="https://tools.ietf.org/html/rfc6455">
+not rely on opening multiple HTTP connections. (<a href="https://tools.ietf.org/html/rfc6455" 
+target="_blank" rel="noopener noreferrer">
 RFC 6455)</p>
 <p>WebSocket works over HTTP protocol.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -19103,8 +19250,8 @@ which make use of HTTPS instead of HTTP</p>
 <h2 id="ch62">Chapter 62: Arrow Functions</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p>Arrow functions are a concise way of writing anonymous, lexically scoped functions in 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_2015_support_in_Mozilla">
-ECMAScript 2015 (ES6)</a>).</p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_2015_support_in_Mozilla" 
+target="_blank" rel="noopener noreferrer">ECMAScript 2015 (ES6)</a>).</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch62-1">Section 62.1: Introduction</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -19154,7 +19301,8 @@ function body.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch62-2">Section 62.2: Lexical Scoping & Binding (Value of &quot;this&quot;)</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>Arrow functions are <a href="http://stackoverflow.com/questions/1047454/what-is-lexical-scope">
+<p>Arrow functions are <a href="http://stackoverflow.com/questions/1047454/what-is-lexical-scope" 
+ target="_blank" rel="noopener noreferrer">
 lexically scoped</a>; this means that their <b>this</b> Binding is bound to the context 
 of the surrounding scope. That is to say, whatever <b>this</b> refers to can be preserved 
 by using an arrow function. Take a look at the following example. The class Cow has a method 
@@ -19290,7 +19438,8 @@ very granular fashion to give you complete control over how your app
 behaves in certain situations (the most obvious one being when the
 network is not available.)
 </blockquote>
-<p>Source: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API">MDN</a></p>
+<p>Source: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API" 
+target="_blank" rel="noopener noreferrer">MDN</a></p>
 <p><b>Few Things:</b></p>
 <ol type="1" start="1">
   <li>It&apos;s a JavaScript Worker, so it can&apos;t access the DOM directly</li>
@@ -19319,7 +19468,8 @@ JavaScript will be included in your page via a <b>&lt;script&gt;</b> tag.</p>
 </pre>
 <p><b>sw.js</b></p>
 <p>This is the service worker code and is executed in the 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope">
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope" 
+target="_blank" rel="noopener noreferrer">
 ServiceWorker Global Scope</a>.</p>
 <pre>
 self.addEventListener(&apos;fetch&apos;, <b>function</b>(event) {
@@ -19507,7 +19657,8 @@ call to port.start() is not actually needed, as noted above.</p>
     <tr>
       <td>callback</td>
       <td>&quot;A parameter specifying a function to call when it&apos;s time to update
-      your animation for the next callback repaint.&quot; (<a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">requestAnimationFrame</a>)</td>
+      your animation for the next callback repaint.&quot; (<a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame" 
+      target="_blank" rel="noopener noreferrer">requestAnimationFrame</a>)</td>
     </tr>
   </tbody>
 </table>
@@ -19515,7 +19666,8 @@ call to port.start() is not actually needed, as noted above.</p>
 <h3 id="ch64-1">Section 64.1: Use requestAnimationFrame to fade in element</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <ul>
-  <li><b>View jsFiddle</b>: <a href="https://jsfiddle.net/HimmatChahal/jb5trg67/">jsFiddle here</a></li>
+  <li><b>View jsFiddle</b>: <a href="https://jsfiddle.net/HimmatChahal/jb5trg67/" 
+    target="_blank" rel="noopener noreferrer">jsFiddle here</a></li>
   <li><b>Copy + Pasteable code below</b>:</li>
 </ul>
 <pre>
@@ -19588,7 +19740,8 @@ window.requestAnimationFrame = (<b>function</b>() {
 </pre>
 <p>Note that the last option (which fills in when no existing support was
 found) will not return an id to be used in cancelAnimationFrame. There
-is, however an <a href="https://gist.github.com/paulirish/1579671">
+is, however an <a href="https://gist.github.com/paulirish/1579671" 
+target="_blank" rel="noopener noreferrer">
 efficient polyfill</a> that was written which fixes this.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch64-3">Section 64.3: Cancelling an Animation</h3>
@@ -19636,8 +19789,9 @@ examples about the most important design patterns.</p>
 <p>Factory functions do not require the use of the <b>new</b> keyword, but
 can still be used to initialize an object, like a constructor.</p>
 <p>Often, factory functions are used as API wrappers, like in the cases
-of <a href="https://jquery.com/">jQuery</a> and <a href="http://momentjs.com/">moment.js</a>
-, so users do not need to use <b>new</b>.</p>
+of <a href="https://jquery.com/" target="_blank" rel="noopener noreferrer">
+jQuery</a> and <a href="http://momentjs.com/" target="_blank" rel="noopener noreferrer">
+moment.js</a>, so users do not need to use <b>new</b>.</p>
 <p>The following is the simplest form of factory function; taking
 arguments and using them to craft a new object with the object
 literal:</p>
@@ -19680,7 +19834,8 @@ practices in JavaScript, because they are functions.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch65-2">Section 65.2: Factory with Composition</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<a href="http://programmers.stackexchange.com/questions/134097/why-should-i-prefer-composition-over-inheritance">
+<a href="http://programmers.stackexchange.com/questions/134097/why-should-i-prefer-composition-over-inheritance" 
+target="_blank" rel="noopener noreferrer">
 <i>&apos;Prefer composition over inheritance&apos;</i></a> is an important and popular 
 programming principle, used to assign behaviors to objects, as opposed to inheriting 
 many often unneeded behaviors.</p>
@@ -19747,7 +19902,8 @@ snowy.speak(); // <i>ERROR: snowy.speak is not a function</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><b>Module Pattern</b></p>
 <p>The Module pattern is a 
-<a href="https://en.wikipedia.org/wiki/Module_pattern#Module_as_a_design_pattern">
+<a href="https://en.wikipedia.org/wiki/Module_pattern#Module_as_a_design_pattern" 
+target="_blank" rel="noopener noreferrer">
 creational and structural design pattern</a> which provides a way of encapsulating 
 private members while producing a public API. This is accomplished by creating an 
 IIFE which allows us to define variables only available in its scope (through closure)
@@ -19984,18 +20140,17 @@ OPR/&apos;) &gt;= 0;
   <li>IE 6 - 11</li>
   <li>Edge - 20-25</li>
 </ul>
-<p>Credit to <a href="http://stackoverflow.com/a/9851769/6194193">Rob W</a></p>
+<p>Credit to <a href="http://stackoverflow.com/a/9851769/6194193" target="_blank" rel="noopener noreferrer">Rob W</a></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch66-2">Section 66.2: User Agent Detection</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>This method gets the user agent and parses it to find the browser. The
-browser name and version are extracted from the user agent through a
-regex. Based on these two, the <b>&lt;browser</b> name<b>&gt;</b> 
-<b>&lt;version&gt;</b> is returned.</p>
+<p>This method gets the user agent and parses it to find the browser. The browser name 
+and version are extracted from the user agent through a regex. Based on these two, the 
+<b>&lt;browser</b> name<b>&gt;&lt;version&gt;</b> is returned.</p>
 <p>The four conditional blocks following the user agent matching code are
 meant to account for differences in the user agents of different
 browsers. For example, in case of opera, 
-<a href="https://stackoverflow.com/a/17436191/5894241">
+<a href="https://stackoverflow.com/a/17436191/5894241" target="_blank" rel="noopener noreferrer">
 since it uses Chrome rendering engine</a>, there is an additional step 
 of ignoring that part.</p>
 <p>Note that this method can be easily spoofed by a user.</p>
@@ -20007,17 +20162,17 @@ of ignoring that part.</p>
   title="."
   alt="."
   style="border: 2px solid #000000; width:5.5in;" />
-<!-- ![](./images/image040.png){width="7.486805555555556in" height="2.6756944444444444in"} -->
-<p>Credit to <a href="http://stackoverflow.com/a/2401861/6194193">kennebec</a></p>
+<p>Credit to <a href="http://stackoverflow.com/a/2401861/6194193" 
+target="_blank" rel="noopener noreferrer">kennebec</a></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch66-3">Section 66.3: Library Method</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>An easier approach for some would be to use an existing JavaScript
-library. This is because it can be tricky to guarantee browser
-detection is correct, so it can make sense to use a working solution
-if one is available.</p>
+<p>An easier approach for some would be to use an existing JavaScript library. This is 
+because it can be tricky to guarantee browser detection is correct, so it can make sense 
+to use a working solution if one is available.</p>
 
-<p>One popular browser-detection library is <a href="https://github.com/ded/bowser">Bowser</a>.</p>
+<p>One popular browser-detection library is <a href="https://github.com/ded/bowser" 
+target="_blank" rel="noopener noreferrer">Bowser</a>.</p>
 <p>Usage example:</p>
 <pre>
 <b>if</b> (bowser.msie && bowser.version &gt;= 6) {
@@ -20104,16 +20259,17 @@ String constructor.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch68">Chapter 68: Transpiling</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>Transpiling is the process of interpreting certain programming
-languages and translating it to a specific target language. In this
-context, transpiling will take 
-<a href="https://github.com/jashkenas/coffeescript/wiki/list-of-languages-that-compile-to-js"> 
-compile-to-JS languages</a> and translate them into the <b>target</b> language of JavaScript.
+<p>Transpiling is the process of interpreting certain programming languages and 
+translating it to a specific target language. In this context, transpiling will take 
+<a href="https://github.com/jashkenas/coffeescript/wiki/list-of-languages-that-compile-to-js" 
+target="_blank" rel="noopener noreferrer">compile-to-JS languages</a> and translate 
+them into the <b>target</b> language of JavaScript.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch68-1">Section 68.1: Introduction to Transpiling</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p><b>Examples</b></p>
-<p><b>ES6/ES2015 to ES5 (via <a href="https://babeljs.io/">Babel</a>)</b>:</p>
+<p><b>ES6/ES2015 to ES5 (via <a href="https://babeljs.io/" target="_blank" rel="noopener noreferrer">
+Babel</a>)</b>:</p>
 <p>This ES2015 syntax</p>
 <pre>
 // <i>ES2015 arrow function syntax</i>
@@ -20145,7 +20301,8 @@ to enable the language&apos;s transpiler via config settings or a
 checkbox. Advanced settings can also be set in relation to the
 transpiler.</p>
 <p>For <b>ES6/ES2016-to-ES5 transpiling</b>, the most prominent transpiler
-being used is <a href="https://babeljs.io/">Babel</a>.</p>
+being used is <a href="https://babeljs.io/" target="_blank" rel="noopener noreferrer">
+Babel</a>.</p>
 <p><b>Why should I transpile?</b></p>
 <p>The most cited benefits include:</p>
 <ul>
@@ -20158,18 +20315,22 @@ being used is <a href="https://babeljs.io/">Babel</a>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch68-2">Section 68.2: Start using ES6/7 with Babel</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p><a href="https://kangax.github.io/compat-table/es6/">Browser support for ES6</a> 
+<p><a href="https://kangax.github.io/compat-table/es6/" 
+target="_blank" rel="noopener noreferrer">Browser support for ES6</a> 
 is growing, but to be sure your code will work on environments that
-don&apos;t fully support it, you can use <a href="https://babeljs.io/">
-Babel</a>, the ES6/7 to ES5 transpiler, <a href="https://babeljs.io/repl/">try it out!</a></p>
+don&apos;t fully support it, you can use <a href="https://babeljs.io/" 
+target="_blank" rel="noopener noreferrer">
+Babel</a>, the ES6/7 to ES5 transpiler, <a href="https://babeljs.io/repl/" 
+target="_blank" rel="noopener noreferrer">try it out!</a></p>
 
 <p>If you would like to use ES6/7 in your projects without having to
 worry about compatibility, you can use <a href="https://nodejs.org/en/">Node</a> 
-and <a href="https://babeljs.io/docs/usage/cli/">Babel CLI</a></p>
+and <a href="https://babeljs.io/docs/usage/cli/" target="_blank" rel="noopener noreferrer">Babel CLI</a></p>
 
 <p><b>Quick setup of a project with Babel for ES6/7 support</b></p>
 <ol type="1" start="1">
-  <li><a href="https://nodejs.org/en/download/">Download</a> and install Node</li>
+  <li><a href="https://nodejs.org/en/download/" 
+    target="_blank" rel="noopener noreferrer">Download</a> and install Node</li>
   <li>Go to a folder and create a project using your favourite command line tool</li>
 </ol>
 <pre>
@@ -20208,14 +20369,17 @@ and <a href="https://babeljs.io/docs/usage/cli/">Babel CLI</a></p>
 }
 </pre>
 <ol type="1" start="7">
-  <li>Enjoy <a href="https://babeljs.io/docs/learn-es2015/">programming in ES6/7</a></li>
+  <li>Enjoy <a href="https://babeljs.io/docs/learn-es2015/" 
+    target="_blank" rel="noopener noreferrer">programming in ES6/7</a></li>
   <li>Run the following to transpile all your files to ES5</li>
 </ol>
 <pre>
 ~ npm run build
 </pre
 <p>For more complex projects you might want to take a look at
-<a href="http://gulpjs.com/">Gulp</a> or <a href="https://webpack.github.io/">Webpack</a></p>
+<a href="http://gulpjs.com/" target="_blank" rel="noopener noreferrer">
+Gulp</a> or <a href="https://webpack.github.io/" 
+target="_blank" rel="noopener noreferrer">Webpack</a></p>
 <!-- page 361 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch69">Chapter 69: Automatic Semicolon Insertion - ASI</h2>
@@ -20301,7 +20465,8 @@ would then be parsed as an empty statement or if that semicolon would
 become one of the two semicolons in the header of a <b>for</b> statement
 (see 12.6.3).</p>
 </blockquote>
-<p><b>Source: <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMA-262, Fifth Edition ECMAScript
+<p><b>Source: <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm" 
+target="_blank" rel="noopener noreferrer">ECMA-262, Fifth Edition ECMAScript
 Specification:</a></b></p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch69-3">Section 69.3: Statements aected by automatic semicolon insertion</h3>
@@ -20846,7 +21011,8 @@ operation is performed on the proxied object as if there was no Proxy.</p>
 <p>To influence property lookup, the <b>get</b> handler must be used.</p>
 <p>In this example, we modify property lookup so that not only the value,
 but also the type of that value is returned. We use 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect">
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect" 
+target="_blank" rel="noopener noreferrer">
 Reflect</a> to ease this.</p>
 <pre>
 <b>let</b> handler = {
@@ -20898,16 +21064,19 @@ console.log(object);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch75-1">Section 75.1: Getting Started</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p><b>What is <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">.postMessage()</a>,
+<p><b>What is <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage" 
+target="_blank" rel="noopener noreferrer">.postMessage()</a>,
 when and why do we use it</b></p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage"><b>postMessage</a> 
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage" 
+target="_blank" rel="noopener noreferrer"><b>postMessage</a> 
 method is a way to safely allow communication between cross-origin scripts.</b></p>
 <p>Normally, two different pages, can only directly communicate with each
 other using JavaScript when they are under the same origin, even if
 one of them is embedded into another (e.g. iframes) or one is opened
 from inside the other (e.g. window.open()). With .postMessage(), you can work around this
 restriction while still stayig safe.</p>
-<p><b>You can only use <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">
+<p><b>You can only use <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage" 
+target="_blank" rel="noopener noreferrer">
 postMessage()</a> when you have access to both pages&apos; JavaScript code.</b> Since the
 receiver needs to validate the sender and process the message accordingly, you can only use this 
 method to communicate between two scripts you have access to.</p>
@@ -20917,12 +21086,15 @@ will be assumed to be http://sender.com and child/receiver page will be
 assumed to be http://receiver.com for the example.</p>
 <p><b>Sending messages</b></p>
 <p>In order to send messages to another window, you need to have a
-reference to its <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window">window</a>
-object. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/open">window.open</a> 
+reference to its <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window" 
+target="_blank" rel="noopener noreferrer">window</a>
+object. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/open" 
+target="_blank" rel="noopener noreferrer">window.open</a> 
 returns the reference object of the newly opened window. For other
 methods to obtain a reference to a window object, see the explanation
 under otherWindow parameter 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax">here</a>.</p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Syntax" 
+target="_blank" rel="noopener noreferrer">here</a>.</p>
 <pre>
 <b>var</b> childWindow = window.open(&quot;http://receiver.com&quot;, &quot;&lowbar;blank&quot;);
 </pre>
@@ -20932,7 +21104,8 @@ under otherWindow parameter
 <b>&lt;button</b> id=&quot;btn&quot;<b>&gt;</b>Send Message<b>&lt;/button&gt;</b>
 </pre>
 <p>Send the text of textarea using 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage" 
+target="_blank" rel="noopener noreferrer">
 .postMessage(message, targetOrigin)</a> when the button is clicked.</p>
 <pre>
 <b>var</b> btn = document.getElementById(&quot;btn&quot;),
@@ -20951,12 +21124,16 @@ btn.addEventListener(&quot;click&quot;, <b>function</b>() {
 </pre>
 <!-- page 377 -->
 <p>In order send and receive JSON objects instead of a simple string, 
-<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">
-JSON.stringify()</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse">
+<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify" 
+target="_blank" rel="noopener noreferrer">
+JSON.stringify()</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse" 
+target="_blank" rel="noopener noreferrer">
 JSON.parse()</a> methods can be used. A 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/Transferable">
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Transferable" 
+target="_blank" rel="noopener noreferrer">
 Transfarable Object</a> can be given as the third optional parameter of the 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage" 
+target="_blank" rel="noopener noreferrer">
 .postMessage(message,targetOrigin,transfer)</a> method, but browser support 
 is still lacking even in modern browsers.</p>
 <p>For this example, since our receiver is assumed to be http://receiver.com page, 
@@ -20969,7 +21146,8 @@ specific origin <b>for security reasons</b>.</p>
 <p>The code under this part should be put in the receiver page, which is
 http://receiver.com for our example.</p>
 <p>In order to receive messages, the 
-<a href="https://developer.mozilla.org/en-US/docs/Web/Events/message_webmessaging">
+<a href="https://developer.mozilla.org/en-US/docs/Web/Events/message_webmessaging" 
+target="_blank" rel="noopener noreferrer">
 message event</a> of the window should be listened.</p>
 <pre>
 window.addEventListener(&quot;message&quot;, receiveMessage);
@@ -21008,7 +21186,8 @@ two validations, the message can be processed.</p>
   document.getElementById(&quot;console&quot;).appendChild(p);
 }
 </pre>
-<p><a href="https://jsfiddle.net/ozzan/6gjstodk/">Click here for a JS Fiddle showcasing its usage.</p>
+<p><a href="https://jsfiddle.net/ozzan/6gjstodk/" 
+target="_blank" rel="noopener noreferrer">Click here for a JS Fiddle showcasing its usage.</p>
 <!-- page 378/379 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch76">Chapter 76: WeakMap</h2>
@@ -21086,12 +21265,13 @@ console.log(weakmap.<b>delete</b>(obj2)); // <i>false</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch76-6">Section 76.6: Weak reference demo</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>JavaScript uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management">
+<p>JavaScript uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management" 
+target="_blank" rel="noopener noreferrer">
 reference counting</a> technique to detect unused objects. When reference count to an object is zero, 
 that object will be released by the garbage collector. Weakmap uses weak reference that does not 
 contribute to reference count of an object, therefore it is very useful to solve memory 
-<a href="http://stackoverflow.com/questions/29413222/what-are-the-actual-uses-of-es6-weakmap">
-leak problems</a>.</p>
+<a href="http://stackoverflow.com/questions/29413222/what-are-the-actual-uses-of-es6-weakmap" 
+target="_blank" rel="noopener noreferrer">leak problems</a>.</p>
 <p>Here is a demo of weakmap. I use a very large object as value to show
 that weak reference does not contribute to reference count.</p>
 <pre>
@@ -21380,11 +21560,13 @@ character U+0007, and thus</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch79-1">Section 79.1: Observer pattern</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p>The <a href="https://en.wikipedia.org/wiki/Observer_pattern">Observer</a> 
+<p>The <a href="https://en.wikipedia.org/wiki/Observer_pattern" 
+target="_blank" rel="noopener noreferrer">Observer</a> 
 pattern is used for event handling and delegation. A <i>subject</i> maintains a
 collection of <i>observers.</i> The subject then notifies these observers
 whenever an event occurs. If you&apos;ve ever used 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener" 
+target="_blank" rel="noopener noreferrer">
 addEventListener</a> then you&apos;ve utilized the Observer pattern.</p>
 <pre>
 <b>function</b> Subject() {
@@ -21452,7 +21634,8 @@ ever allowed to talk to its peers.</p>
 <p>This is how mediator works, it works as a communication hub among
 different modules, this way you reduce module dependency on each
 other, increase loose coupling, and consequently portability.</p>
-<p>This <a href="http://www.dofactory.com/javascript/mediator-design-pattern">
+<p>This <a href="http://www.dofactory.com/javascript/mediator-design-pattern" 
+target="_blank" rel="noopener noreferrer">
 <b>Chatroom example</b></a> explains how mediator patterns works:</p>
 <pre>
 // <i>each participant is just a module that wants to talk to other modules(other participants)</i>
@@ -21745,10 +21928,12 @@ asynchronous actions but still look synchronous. The way it&apos;s done is
 using the await keyword to defer the function while it waits for a
 Promise to resolve or reject.</p>
 <p><b>Note:</b> Async functions are 
-<a href="https://github.com/tc39/proposals/blob/master/finished-proposals.md">
+<a href="https://github.com/tc39/proposals/blob/master/finished-proposals.md" 
+ target="_blank" rel="noopener noreferrer">
 a Stage 4 (&quot;Finished&quot;) proposal</a> on track to be included in the 
 ECMAScript 2017 standard.</p>
-<p>For instance, using the promise-based <a href="https://developer.mozilla.org/en/docs/Web/API/Fetch_API">
+<p>For instance, using the promise-based <a href="https://developer.mozilla.org/en/docs/Web/API/Fetch_API"
+ target="_blank" rel="noopener noreferrer">
 Fetch API</a>:</p>
 <pre>
 async <b>function</b> getJSON(url) {
@@ -21873,7 +22058,8 @@ and async hides the generator iteration.</p>
 <p>You can call async functions as if they were promises, and await any
 promise or any async function. You don&apos;t need to await an async
 function, just as you can execute a promise without a .then().</p>
-<p>You can also use an async <a href="https://en.wikipedia.org/wiki/Immediately-invoked_function_expression">IIFE</a>
+<p>You can also use an async <a href="https://en.wikipedia.org/wiki/Immediately-invoked_function_expression"
+ target="_blank" rel="noopener noreferrer">IIFE</a>
 if you want to execute that code immediately:</p>
 <pre>
 (async () =&gt; {
@@ -21949,7 +22135,7 @@ promise is also resolved. We await on that promise and when it&apos;s resolved
 all our values are available.</p>
 <p>The above examples are fully runnable. The somePromiseFn function can
 be made as an async echo function with a timeout. You can try out the
-examples in the [babel-repl](https://babeljs.io/repl) with at least
+examples in the <a href="https://babeljs.io/repl" target="_blank" rel="noopener noreferrer">babel-repl</a> with at least
 the -3 preset and look at the output.</p>
 <pre>
 <b>function</b> somePromiseFn(n) {
