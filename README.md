@@ -23744,16 +23744,15 @@ Caught error: Invalid something
     occurs when an internal error in the JavaScript engine is thrown. E.g. 
     &quot;too much recursion&quot;. (Supported only by <b>Mozilla Firefox</b>).</li>
   <li><b>RangeError</b> - creates an instance representing an error that occurs
-when a numeric variable or parameter is outside of its valid range.</li>
+    when a numeric variable or parameter is outside of its valid range.</li>
   <li><b>ReferenceError</b> - creates an instance representing an error that
-occurs when dereferencing an invalid reference.</li>
+    occurs when dereferencing an invalid reference.</li>
   <li><b>SyntaxError</b> - creates an instance representing a syntax error that
-occurs while parsing code in eval().</li>
-  <li><b>TypeError</b> - creates an instance representing an error that occurs
-when a variable or parameter is not of a valid type.</li>
-
+    occurs while parsing code in eval().</li>
+  <li><b>TypeError</b> - creates an instance representing an error that occurs 
+    when a variable or parameter is not of a valid type.</li>
   <li><b>URIError</b> - creates an instance representing an error that occurs
-when encodeURI() or decodeURI() are passed invalid parameters.</li>
+    when encodeURI() or decodeURI() are passed invalid parameters.</li>
 </ul>
 <p>If you are implementing error handling mechanism you can check which
 kind of error you are catching from code.</p>
@@ -23980,6 +23979,7 @@ window.onerror = <b>function</b> (eventOrMessage, url, lineNumber, colNumber, er
 // <i>calling the server-side handler which should probably register the
 error in a database or a log file</i>
 <b>new</b> Image().src = &apos;/exampleErrorReporting?stack=&apos; &plus; encodeURIComponent(stack);
+&nbsp;
 // <i>window.DEBUG_ENVIRONMENT a configurable property that may be set to true somewhere else for</i>
 <i>debugging and testing purposes.</i>
   <b>if</b> (window.DEBUG_ENVIRONMENT) {
@@ -23993,40 +23993,98 @@ error in a database or a log file</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch99-1">Section 99.1: Interactive interpreter variables</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Note that these only work in the developer tools of certain browsers.
-&dollar;&lowbar; gives you the value of whatever expression was evaluated last.
-&quot;foo&quot;
-// <i>&quot;foo&quot;</i>
-&dollar;&lowbar;
-// <i>&quot;foo&quot;</i>
-<b>&lt;div</b> id       = &quot;foo&quot;
-&dollar;0 refers to the DOM element currently selected in the Inspector. So
-if <b>&gt;</b> is highlighted:
-&dollar;0
-// <i>&lt;div id=&quot;foo&quot;&gt;</i>
-&dollar;0.
-getAttribute
-(
-&apos;id&apos;
-)
-// <i>&quot;foo&quot;</i>
-&dollar;1 refers to the element previously selected, &dollar;2 to the one selected
-before that, and so forth for &dollar;3 and &dollar;4.
-&dollar;&dollar;     (  selector
-To get a collection of elements matching a CSS selector, use ). This
-is essentially a shortcut for
-document.querySelectorAll.
-<b>var</b> images = &dollar;&dollar;(&apos;img&apos;); // <i>Returns an array or a nodelist of
-all matching elements</i>
-<b>&dollar;&lowbar; &dollar;()</b>¹ <b>&dollar;&dollar;() &dollar;0 &dollar;1 &dollar;2 &dollar;3 &dollar;4</b>
-Opera 15+ 11+ 11+ 11+ 11+ 15+ 15+ 15+
-Chrome 22+ ✔ ✔ ✔ ✔ ✔ ✔ ✔
-Firefox 39+ ✔ ✔ ✔ × × × ×
-IE 11 11 11 11 11 11 11 11
-Safari 6.1+ 4+ 4+ 4+ 4+ 4+ 4+ 4+
-document.getElementById    or   document.querySelector
-¹ alias to either
+<p>Note that these only work in the developer tools of certain browsers.</p>
+<p>&dollar;&lowbar; gives you the value of whatever expression was evaluated last.</p>
+<pre>
+&quot;foo&quot;  // <i>&quot;foo&quot;</i>
+&dollar;&lowbar; // <i>&quot;foo&quot;</i>
+</pre>
+<p>&dollar;0 refers to the DOM element currently selected in the Inspector. So
+if <p><b>&lt;div id = &quot;foo&quot;<b>&gt;</b> is highlighted:</p>
+<pre>
+&dollar;0 // <i>&lt;div id=&quot;foo&quot;&gt;</i>
+&dollar;0.getAttribute(&apos;id&apos;)  // <i>&quot;foo&quot;</i>
+</pre>
+<p>&dollar;1 refers to the element previously selected, &dollar;2 to the one selected
+before that, and so forth for &dollar;3 and &dollar;4.</p>
+<p>To get a collection of elements matching a CSS selector, use &dollar;&dollar;(selector). This
+is essentially a shortcut for document.querySelectorAll.</p>
+<pre>
+<b>var</b> images = &dollar;&dollar;(&apos;img&apos;); // <i>Returns an array or a nodelist of all matching elements</i>
+</pre>
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+	  <th></th>
+      <th><b>&dollar;&lowbar;</b></th>
+      <th><b>&dollar;()¹</b></th>
+      <th><b>&dollar;&dollar;()</b></th>
+      <th><b>&dollar;0</b></th>
+      <th><b>&dollar;1</b></th>
+      <th><b>&dollar;2</b></th>
+      <th><b>&dollar;3</b></th>
+      <th><b>&dollar;4</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Opera</td>
+      <td>15&plus;</td>
+	  <td>11&plus;
+	  <td>11&plus;
+	  <td>11&plus;
+	  <td>11&plus;
+	  <td>15&plus;
+	  <td>15&plus;
+	  <td>15&plus;
+    </tr>
+    <tr>
+      <td>Chrome</td>
+      <td>22&plus;</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+    </tr>
+    <tr>
+      <td>Firefox</td>
+      <td>39&plus;</td>
+      <td>✔</td>
+      <td>✔</td>
+      <td>✔</td>
+	  <td>×</td>
+	  <td>×</td>
+	  <td>×</td>
+	  <td>×</td>
+    </tr>
+    <tr>
+      <td>IE</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>Safari</td>
+      <td>6.1&plus;</td>
+	  <td>4&plus;</td>
+	  <td>4&plus;</td>
+	  <td>4&plus;</td>
+	  <td>4&plus;</td>
+	  <td>4&plus;</td>
+	  <td>4&plus;</td>
+	  <td>4&plus;</td>
+    </tr>
+  </tbody>
+</table>
+<p>¹ alias to either document.getElementById or document.querySelector</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch99-2">Section 99.2: Breakpoints</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
