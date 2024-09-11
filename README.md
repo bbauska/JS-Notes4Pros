@@ -24000,7 +24000,7 @@ error in a database or a log file</i>
 &dollar;&lowbar; // <i>&quot;foo&quot;</i>
 </pre>
 <p>&dollar;0 refers to the DOM element currently selected in the Inspector. So
-if <p><b>&lt;div id = &quot;foo&quot;<b>&gt;</b> is highlighted:</p>
+if <b>&lt;div</b> id = &quot;foo&quot;<b>&gt;</b> is highlighted:</p>
 <pre>
 &dollar;0 // <i>&lt;div id=&quot;foo&quot;&gt;</i>
 &dollar;0.getAttribute(&apos;id&apos;)  // <i>&quot;foo&quot;</i>
