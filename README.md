@@ -23968,7 +23968,7 @@ window.onerror = <b>function</b> (eventOrMessage, url, lineNumber, colNumber, er
   } 
   <b>if</b> (error && error.stack) {
     eventOrMessage = &lbrack;eventOrMessage, &apos;; Stack: &apos;, error.stack, &apos;.&apos;&rbrack;.join(&apos;&apos;); }
-    <b>var</b> jsFile = (/&lbrack;&Hat;<i>/&rbrack;+&amp;period;js/i<i>.exec(url &vert;&vert; &apos;&apos;) &vert;&vert; &lbrack;&rbrack;)&lbrack;0&rbrack; &vert;&vert; &apos;inlineScriptOrDynamicEvalCode&apos;, 
+    <b>var</b> jsFile = (/&lbrack;&Hat;/&rbrack;+&amp;period;js/i.exec(url &vert;&vert; &apos;&apos;) &vert;&vert; &lbrack;&rbrack;)&lbrack;0&rbrack; &vert;&vert; &apos;inlineScriptOrDynamicEvalCode&apos;, 
 	stack = &lbrack;eventOrMessage, &apos; Occurred in &apos;, jsFile, &apos;:&apos;, lineNumber &vert;&vert; &apos;?&apos;, &apos;:&apos;, colNumber &vert;&vert; &apos;?&apos;&rbrack;.join(&apos;&apos;);
 &nbsp;
   // <i>shortening the message a bit so that it is more likely to fit into browser&apos;s URL length limit</i>
@@ -24085,185 +24085,125 @@ is essentially a shortcut for document.querySelectorAll.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch99-2">Section 99.2: Breakpoints</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Breakpoints pause your program once execution reaches a certain point.
+<p>Breakpoints pause your program once execution reaches a certain point.
 You can then step through the program line by line, observing its
-execution and inspecting the contents of your variables.
-There are three ways of creating breakpoints.
-debugger
-1.  From code, using the ; statement.
-2.  From the browser, using the Developer Tools.
-3.  From an Integrated Development Environment (IDE).
-<b>Debugger Statement</b>
-debugger
-You can place a ; statement anywhere in your JavaScript code. Once the
+execution and inspecting the contents of your variables.</p>
+<p>There are three ways of creating breakpoints.</p>
+<ol type="1" start="1">
+  <li>From code, using the debugger; statement.</li>
+  <li>From the browser, using the Developer Tools.</li>
+  <li>From an Integrated Development Environment (IDE).</li>
+</ol>
+<p><b>Debugger Statement</b></p>
+<p>You can place a debugger; statement anywhere in your JavaScript code. Once the
 JS interpreter reaches that line, it will stop the script execution,
-allowing you to inspect variables and step through your code.
-<b>Developer Tools</b>
-The second option is to add a breakpoint directly into the code from
-the browser&apos;s Developer Tools.
-<b>Opening the Developer Tools</b>
+allowing you to inspect variables and step through your code.</p>
+<p><b>Developer Tools</b></p>
+<p>The second option is to add a breakpoint directly into the code from
+the browser&apos;s Developer Tools.</p>
+<p><b>Opening the Developer Tools</b></p>
 <b>Chrome or Firefox</b>
-1.  Press F12 to open Developer Tools
-2.  Switch to the Sources tab (Chrome) or Debugger tab (Firefox)
-3.  Press Ctrl + P and type the name of your JavaScript file
-Enter
-4.  Press to open it.
-<b>Internet Explorer or Edge</b>
-1.  Press F12 to open Developer Tools
-2.  Switch to the Debugger tab.
-3.  Use the folder icon near the upper-left corner of the window to open
-    a file-selection pane; you can find your JavaScript file there.
-<b>Safari</b>
-1.  Press Command + Option + C to open Developer Tools
-2.  Switch to the Resources tab
-3.  Open the &quot;Scripts&quot; folder in the left-side panel
-4.  Select your JavaScript file.
-<b>Adding a breakpoint from the Developer Tools</b>
-Once you have your JavaScript file open in Developer Tools, you can
+<ol type="1" start="1">
+  <li>Press F12 to open Developer Tools</li>
+  <li>Switch to the Sources tab (Chrome) or Debugger tab (Firefox)</li>
+  <li>Press Ctrl + P and type the name of your JavaScript file</li>
+  <li>Press Enter to open it.</li>
+</ol>
+<p><b>Internet Explorer or Edge</b></p>
+<ol type="1" start="1">
+  <li>Press F12 to open Developer Tools</li>
+  <li>Switch to the Debugger tab.</li>
+  <li>Use the folder icon near the upper-left corner of the window to open
+    a file-selection pane; you can find your JavaScript file there.</li>
+</ol>
+<p><b>Safari</b></p>
+<ol type="1" start="1">
+  <li>Press Command + Option + C to open Developer Tools</li>
+  <li>Switch to the Resources tab</li>
+  <li>Open the &quot;Scripts&quot; folder in the left-side panel</li>
+  <li>Select your JavaScript file.</li>
+</ol>
+<p><b>Adding a breakpoint from the Developer Tools</b></p>
+<p>Once you have your JavaScript file open in Developer Tools, you can
 click a line number to place a breakpoint. The next time your program
-runs, it will pause there.
-<b>Note about Minified Sources:</b> If your source is minified, you can
+runs, it will pause there.</p>
+<p><b>Note about Minified Sources:</b> If your source is minified, you can
 Pretty Print it (convert to readable format). In Chrome, this is done
 by clicking on the {} button in the bottom right corner of the source
-code viewer.
-<b>IDEs</b>
-<b>Visual Studio Code (VSC)</b>
-VSC has [built-in
-support](https://code.visualstudio.com/docs/editor/debugging) for
-debugging JavaScript.
-1.  Click the Debug button on the left or Ctrl + Shift + D
-launch.json
-2.  If not already done, create a launch configuration file () by
-    pressing the gear icon.
-3.  Run the code from VSC by pressing the green play button or hit F5 .
-<b>Adding a breakpoint in VSC</b>
-Click next to the line number in your JavaScript source file to add a
+code viewer.</p>
+<p><b>IDEs</b></p>
+<p><b>Visual Studio Code (VSC)</b></p>
+<p>VSC has <a href="https://code.visualstudio.com/docs/editor/debugging">
+built-in support</a> for debugging JavaScript.</p>
+<ol type="1" start="1">
+  <li>Click the Debug button on the left or Ctrl + Shift + D</li>
+  <li>If not already done, create a launch configuration file (launch.json) 
+    by pressing the gear icon.</li>
+  <li>Run the code from VSC by pressing the green play button or hit F5.</li>
+</ol>
+<p><b>Adding a breakpoint in VSC</b></p>
+<p>Click next to the line number in your JavaScript source file to add a
 breakpoint (it will be marked red). To delete the breakpoint, click
-the red circle again.
-<b>Tip:</b> You can also utilise the conditional breakpoints in
+the red circle again.</p>
+<p><b>Tip:</b> You can also utilise the conditional breakpoints in
 browser&apos;s dev tools. These help in skipping unnecessary breaks in
 execution. Example scenario: you want to examine a variable in a loop
-exactly at 5th iteration.
-![](./images/image047.jpg){width="4.288194444444445in"
-height="0.8736111111111111in"}
+exactly at 5th iteration.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 47.  (419) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image047.jpg"
+  title="."
+  alt="."
+  style="border: 2px solid #000000; width:4.2in;" />
+<!-- ![](./images/image047.jpg){width="4.288194444444445in" height="0.8736111111111111in"} -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch99-3">Section 99.3: Using setters and getters to find what changed a property</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Let&apos;s say you have an object like this:
-<b>var</b>
-myObject
-=
-{
-name
-:
-&apos;Peter&apos;
+<p>Let&apos;s say you have an object like this:</p>
+<pre>
+<b>var</b> myObject = {
+  name: &apos;Peter&apos;
 }
-myObject.name
-Later in your code, you try to access and you get <b>George</b> instead
+</pre>
+<!-- page 437 -->
+<p>Later in your code, you try to access myObject.name and you get <b>George</b> instead
 of <b>Peter</b>. You start wondering who changed it and where exactly it
 was changed. There is a way to place a debugger (or something else) on
-every set
-myObject.name        =   &apos;something&apos;
-(every time someone does ):
-<b>var</b>
-myObject
-=
-{
-&lowbar;name
-:
-&apos;Peter&apos;
-,
-<b>set</b>
-name
-(
-name
-)
-{
-debugger
-;
-<b>this</b>
-.&lowbar;name
-=
-name
+every set (every time someone does myObject.name = &apos;something&apos;):</p>
+<pre>
+<b>var</b> myObject = {
+  &lowbar;name: &apos;Peter&apos;,
+  <b>set</b> name(name){debugger;<b>this</b>.&lowbar;name=name},
+  <b>get</b> name(){<b>return</b> <b>this</b>.&lowbar;name}
 }
-,
-<b>get</b>
-name
-(
-)
-{
-<b>return</b>
-<b>this</b>
-.&lowbar;name
-}
-}
-Note that we renamed name to &lowbar;name and we are going to define a
-setter and a getter for name.
-<b>set</b>   is the setter. That is a sweet spot where you can   console.trace
-name  place debugger,         
-<b>get</b> name
-(), or anything else you need for debugging. The setter will set the
-value for name in &lowbar;name. The getter (the part) will read the value
-from there. Now we have a fully functional object with debugging
-functionality.
-Most of the time, though, the object that gets changed is not under
+</pre>
+<p>Note that we renamed name to &lowbar;name and we are going to define a
+setter and a getter for name.</p>
+<b>set</b> is the setter. That is a sweet spot where you can place debugger, console.trace(), 
+or anything else you need for debugging. The setter will set the value for name in &lowbar;name. 
+The getter (the <b>get</b> name part) will read the value from there. Now we have a fully 
+functional object with debugging functionality.</p>
+<p>Most of the time, though, the object that gets changed is not under
 our control. Fortunately, we can define setters and getters on
-<b>existing</b> objects to debug them.
-// <i>First, save the name to &lowbar;name, because we are going to use name for
-setter/getter</i>
-otherObject.&lowbar;name
-=
-otherObject.
-name
-;
+<b>existing</b> objects to debug them.</p>
+<pre>
+// <i>First, save the name to &lowbar;name, because we are going to use name for setter/getter</i>
+otherObject.&lowbar;name = otherObject.name;
+&nbsp;
 // <i>Create setter and getter</i>
-Object
-.
-defineProperty
-(
-otherObject
-,
-&quot;name&quot;
-,
-{
-<b>set</b>
-:
-<b>function</b>
-(
-name
-)
-{
-debugger
-;
-<b>this</b>
-.&lowbar;name
-=
-name
-}
-,
-<b>get</b>
-:
-<b>function</b>
-(
-)
-{
-<b>return</b>
-<b>this</b>
-.&lowbar;name
-}
-}
-)
-;
-Check out
-[setters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set)
-and
-[getters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)
-at MDN for more information.
-Browser support for setters/getters:
-<b>Chrome Firefox IE Opera Safari Mobile</b>
-Version 1 2.0 9 9.5 3 all
+Object.defineProperty(otherObject, &quot;name&quot;, {
+  <b>set</b>: <b>function</b>(name) {debugger;<b>this</b>.&lowbar;name=name},
+  <b>get</b>: <b>function</b>() {<b>return</b> <b>this</b>.&lowbar;name}
+});
+</pre>
+<p>Check out <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set">setters</a>
+and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get">getters</a> 
+at MDN for more information.</p>
+<p>Browser support for setters/getters:</p>
+
+<p><b>Chrome Firefox IE Opera Safari Mobile</b></p>
+<p>Version 1 2.0 9 9.5 3 all</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch99-4">Section 99.4: Using the console</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -24277,54 +24217,17 @@ devices. Most commonly, this will be the browser&apos;s JavaScript console
 [Safari](https://developer.apple.com/safari/tools/), and
 [Edge](https://developer.microsoft.com/en-us/microsoft-edge/platform/documentation/f12-devtools-guide/console/)
 for more information).
+<pre>
 // <i>At its simplest, you can &apos;log&apos; a string</i>
-console.
-log
-(
-&quot;Hello, World!&quot;
-)
-;
+console.log(&quot;Hello, World!&quot;);
 // <i>You can also log any number of comma-separated values</i>
-console.
-log
-(
-&quot;Hello&quot;
-,
-&quot;World!&quot;
-)
-;
+console.log(&quot;Hello&quot;, &quot;World!&quot;);
 // <i>You can also use string substitution</i>
-console.
-log
-(
-&quot;%s %s&quot;
-,
-&quot;Hello&quot;
-,
-&quot;World!&quot;
-)
-;
+console.log(&quot;%s %s&quot;, &quot;Hello&quot;, &quot;World!&quot;);
 // <i>You can also log any variable that exist in the same scope</i>
-<b>var</b>
-arr
-=
-&lbrack;
-1
-,
-2
-,
-3
-&rbrack;
-;
-console.
-log
-(
-arr.
-length
-,
-<b>this</b>
-)
-;
+<b>var</b> arr = &lbrack;1, 2, 3&rbrack;;
+console.log(arr.length, <b>this</b>);
+</pre>
 You can use different console methods to highlight your output in
 different ways. Other methods are also useful for more advanced
 debugging.
