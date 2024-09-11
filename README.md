@@ -23440,7 +23440,7 @@ addMessage(&quot;Message 6&quot;);
 an effort to avoid XSS, <b>any HTML in messages posted is escaped.</b></p>
 <p>The script is generated <b>on the server</b> like this:</p>
 <pre>
-<b>for</b>(<b>var</b>i = 0; i &lt; messages.length; i++) {
+<b>for</b>(<b>var</b> i = 0; i &lt; messages.length; i++) {
   script += &quot;addMessage(<b>&bsol;&quot;</b>&quot; &plus; messages&lbrack;i&rbrack; &plus; &quot;<b>&bsol;&quot;</b>);&quot;;
 }
 </pre>
@@ -23627,71 +23627,760 @@ window.addEventListener(&apos;message&apos;, <b>function</b>(evt) {
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch96-2">Section 96.2: Ways to circumvent Same-Origin Policy</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-As far as client-side JavaScript engines are concerned (those running
+<p>As far as client-side JavaScript engines are concerned (those running
 inside a browser), there is no straightforward solution available for
 requesting content from sources other than the current domain. (By the
 way, this limitation does not exist in JavaScript-server tools such as
-Node JS.)
-However, it is (in some situations) indeed possible to retrieve data
+Node JS.)</p>
+<p>However, it is (in some situations) indeed possible to retrieve data
 from other sources using the following methods. Please do note that
 some of them may present hacks or workarounds instead of solutions
-production system should rely on.
-<b>Method 1: CORS</b>
-Access
-Most public APIs today allow developers to send data bidirectionally
-between client and server by enabling a feature called CORS
-(Cross-Origin Resource Sharing). The browser will check if a certain
-HTTP header (-
-Control      &minus;   Allow     &minus;   Origin
-) is set and that the requesting site&apos;s domain is listed in the
-header&apos;s value. If it is, then the
-browser will allow establishing AJAX connections.
-However, because developers cannot change other servers&apos; response
-headers, this method can&apos;t always be relied on.
-<b>Method 2: JSONP</b>
-<b>JSON</b> with <b>P</b>adding is commonly blamed to be a workaround. It is
+production system should rely on.</p>
+<p><b>Method 1: CORS</b></p>
+<p>Most public APIs today allow developers to send data bidirectionally between client 
+and server by enabling a feature called CORS (Cross-Origin Resource Sharing). The browser 
+will check if a certain HTTP header (Acess-Control-Allow-Origin) is set and that the 
+requesting site&apos;s domain is listed in the header&apos;s value. If it is, then 
+the browser will allow establishing AJAX connections.</p>
+<p>However, because developers cannot change other servers&apos; response
+headers, this method can&apos;t always be relied on.</p>
+<p><b>Method 2: JSONP</b></p>
+<p><b>JSON</b> with <b>P</b>adding is commonly blamed to be a workaround. It is
 not the most straightforward method, but it still gets the job done.
 This method takes advantage of the fact that script files can be
 loaded from any domain. Still, it is crucial to mention that
 requesting JavaScript code from external sources is <b>always</b> a
 potential security risk and this should generally be avoided if
-there&apos;s a better solution available.
-The data requested using JSONP is typically JSON, which happens to fit
+there&apos;s a better solution available.</p>
+<p>The data requested using JSONP is typically JSON, which happens to fit
 the syntax used for object definition in JavaScript, making this
 method of transport very simple. A common way to let websites use the
 external data obtained via JSONP is to wrap it inside a callback
 function, which is set via a GET parameter in the URL. Once the
 external script file loads, the function will be called with the data
-as its first parameter.
-<b>&lt;</b>
-<b>script</b>
-<b>&gt;</b>
+as its first parameter.</p>
+<pre>
+<b>&lt;</b><b>script</b><b>&gt;</b>
 function myfunc(obj){
 console.log(obj.example_field);
 }
-<b>&lt;</b>
-<b>/script</b>
-<b>&gt;</b>
-<b>&lt;</b>
-<b>script</b>
-src
-=
-&quot;http://example.com/api/endpoint.js?callback=myfunc&quot;
-<b>&gt;</b>
-<b>&lt;</b>
-<b>/script</b>
-<b>&gt;</b>
-http   :   // <i>example.com/api/endpoint.js?callback=myfunc</i>
-The contents of might look like this:
-myfunc
+<b>&lt;</b><b>/script</b><b>&gt;</b>
+<b>&lt;</b><b>script</b> src=&quot;http://example.com/api/endpoint.js?callback=myfunc&quot;<b>&gt;</b><b>&lt;</b><b>/script</b><b>&gt;</b>
+The contents of http://<i>example.com/api/endpoint.js?callback=myfunc</i> might look like this:</p>
+<!-- page 428 -->
+<pre>
+myfunc({&quot;example_field&quot;:<b>true</b>})
+</pre>
+<p>The function always has to be defined first, otherwise it won&apos;t be
+defined when the external script loads.</p>
+<!-- page 429 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch97">Chapter 97: Error Handling</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch97-1">Section 97.1: Error objects</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Runtime errors in JavaScript are instances of the Error object. The
+Error object can also be used as-is, or as the base for user-defined
+exceptions. It&apos;s possible to throw any type of value - for example,
+strings - but you&apos;re strongly encouraged to use Error or one of its
+derivatives to ensure that debugging information &bsol; such as stack
+traces &bsol; is correctly preserved.</p>
+<p>The first parameter to the Error constructor is the human-readable
+error message. You should try to always specify a useful error message
+of what went wrong, even if additional information can be found
+elsewhere.</p>
+<pre>
+<b>try</b> {
+  <b>throw</b> <b>new</b> Error(&apos;Useful message&apos;);
+} <b>catch</b> (error) {
+  console.log(&apos;Something went wrong! &apos; &plus; error.message);
+}
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch97-2">Section 97.2: Interaction with Promises</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h5>Version ≥ 6</h5>
+<p>Exceptions are to synchronous code what rejections are to
+promise-based asynchronous code. If an exception is thrown in a
+promise handler, its error will be automatically caught and used to
+reject the promise instead.</p>
+<pre>
+Promise.resolve(5)
+  .then(result =&gt; {
+    <b>throw new</b> Error(&quot;I don&apos;t like five&quot;);
+  })
+  .then(result =&gt; {
+    console.info(&quot;Promise resolved: &quot; &plus; result);
+  })
+  .<b>catch</b>(error =&gt; {
+    console.error(&quot;Promise rejected: &quot; &plus; error);
+  });
+Promise rejected: Error: I don&apos;t like five
+</pre>
+<h5>Version &gt;7</h5>
+<p>The <a href="http://tc39.github.io/ecmascript-asyncawait/">async functions proposal</a> expected to
+be part of ECMAScript 2017 extends this in the opposite direction.
+If you await a rejected promise, its error is raised as an exception:</p>
+<pre>
+async <b>function</b> main() {
+  <b>try</b> {
+    await Promise.reject(<b>new</b>Error(&quot;Invalid something&quot;));
+  } <b>catch</b> (error) {
+    console.log(&quot;Caught error: &quot; &plus; error);
+  }
+}
+main();
+Caught error: Invalid something
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch97-3">Section 97.3: Error types</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>There are six specific core error constructors in JavaScript:</p>
+<ul>
+  <li><b>EvalError</b> - creates an instance representing an error that occurs
+    regarding the global function eval().</li>
+  <li><b>InternalError</b> - creates an instance representing an error that
+    occurs when an internal error in the JavaScript engine is thrown. E.g. 
+    &quot;too much recursion&quot;. (Supported only by <b>Mozilla Firefox</b>).</li>
+  <li><b>RangeError</b> - creates an instance representing an error that occurs
+when a numeric variable or parameter is outside of its valid range.</li>
+  <li><b>ReferenceError</b> - creates an instance representing an error that
+occurs when dereferencing an invalid reference.</li>
+  <li><b>SyntaxError</b> - creates an instance representing a syntax error that
+occurs while parsing code in eval().</li>
+  <li><b>TypeError</b> - creates an instance representing an error that occurs
+when a variable or parameter is not of a valid type.</li>
+
+  <li><b>URIError</b> - creates an instance representing an error that occurs
+when encodeURI() or decodeURI() are passed invalid parameters.</li>
+</ul>
+<p>If you are implementing error handling mechanism you can check which
+kind of error you are catching from code.</p>
+<pre>
+<b>try</b> {
+  <b>throw</b> <b>new</b> TypeError();
+}
+<b>catch</b> (e) {
+  <b>if</b>(e <b>instanceof</b> Error) {
+    console.log(&apos;instance of general Error constructor&apos;);
+  }
+  <b>if</b> (e <b>instanceof</b> TypeError) {
+    console.log(&apos;type error&apos;);
+  }
+}
+</pre>
+<p>In such case e will be an instance of TypeError. All error types
+extend the base constructor Error, therefore it&apos;s also an instance of
+Error.</p>
+<p>Keeping that in mind shows us that checking e to be an instance of
+Error is useless in most cases.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch97-4">Section 97.4: Order of operations plus advanced thoughts</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Without a try catch block, undefined functions will throw errors and
+stop execution:</p>
+<pre>
+undefinedFunction(&quot;This will not get executed&quot;);
+console.log(&quot;I will never run because of the uncaught error!&quot;); 
+</pre>
+<p>Will throw an error and not run the second line:</p>
+<pre>
+// <i>Uncaught ReferenceError: undefinedFunction is not defined</i>
+</pre>
+<p>You need a try catch block, similar to other languages, to ensure you
+catch that error so code can continue to execute:</p>
+<!-- page 431 -->
+<pre>
+<b>try</b> {
+  undefinedFunction(&quot;This will not get executed&quot;);
+} <b>catch</b>(error) {
+  console.log(&quot;An error occurred!&quot;, error);
+} <b>finally</b> {
+  console.log(&quot;The code-block has finished&quot;);
+}
+console.log(&quot;I will run because we caught the error!&quot;);
+</pre>
+<p>Now, we&apos;ve caught the error and can be sure that our code is going to
+execute</p>
+<pre>
+// <i>An error occurred! ReferenceError: undefinedFunction is not defined(&bsol;)</i>
+// <i>The code-block has finished</i>
+// <i>I will run because we caught the error!</i>
+</pre>
+<p>What if an error occurs in our catch block!?</p>
+<pre>
+<b>try</b> {
+  undefinedFunction(&quot;This will not get executed&quot;);
+} <b>catch</b>(error) {
+  otherUndefinedFunction(&quot;Uh oh&hellip; &quot;);
+  console.log(&quot;An error occurred!&quot;, error);
+} <b>finally</b> {
+  console.log(&quot;The code-block has finished&quot;);
+}
+console.log(&quot;I won&apos;t run because of the uncaught error in the catch block!&quot;);
+</pre>
+<p>We won&apos;t process the rest of our catch block, and execution will halt
+except for the finally block.</p>
+<pre>
+// <i>The code-block has finished</i>
+// <i>Uncaught ReferenceError: otherUndefinedFunction is not defined(...)</i>
+</pre>
+<p>You could always nest your try catch blocks.. but you shouldn&apos;t
+because that will get extremely messy..</p>
+<pre>
+<b>try</b> {
+  undefinedFunction(&quot;This will not get executed&quot;);
+} <b>catch</b>(error) {
+  <b>try</b> {
+    otherUndefinedFunction(&quot;Uh oh&hellip; &quot;);
+  } <b>catch</b>(error2) {
+    console.log(&quot;Too much nesting is bad for my heart and soul&hellip;&quot;);
+  }
+  console.log(&quot;An error occurred!&quot;, error);
+} <b>finally</b> {
+  console.log(&quot;The code-block has finished&quot;);
+}
+console.log(&quot;I will run because we caught the error!&quot;);
+</pre>
+<p>Will catch all errors from the previous example and log the following:</p>
+<pre>
+// <i>Too much nesting is bad for my heart and soul&hellip;</i>
+// <i>An error occurred! ReferenceError: undefinedFunction is not defined(...)</i>
+// <i>The code-block has finished</i>
+// <i>I will run because we caught the error!</i>
+</pre>
+<p>So, how can we catch all errors!? For undefined variables and
+functions: you can&apos;t.</p>
+<!-- page 432 -->
+<p>Also, you shouldn&apos;t wrap every variable and function in a try/catch
+block, because these are simple examples that will only ever occur
+once until you fix them. However, for objects, functions and other
+variables that you know exist, but you don&apos;t know whether their
+properties or sub-processes or side-effects will exist, or you expect
+some error states in some circumstances, you should abstract your
+error handling in some sort of manner. Here is a very basic example
+and implementation.</p>
+<p>Without a protected way to call untrusted or exception throwing
+methods:</p>
+<pre>
+<b>function</b> foo(a, b, c) {
+  console.log(a, b, c);
+  <b>throw</b> <b>new</b> Error(&quot;custom error!&quot;);
+}
+<b>try</b> {
+  foo(1, 2, 3);
+} <b>catch</b>(e) {
+  <b>try</b> {
+    foo(4, 5, 6);
+  } <b>catch</b>(e2) {
+      console.log(&quot;We had to nest because there&apos;s currently no other way&hellip;&quot;);
+  }
+  console.log(e);
+}
+// <i>1 2 3</i>
+// <i>4 5 6</i>
+// <i>We had to nest because there&apos;s currently no other way&hellip;</i>
+// <i>Error: custom error!(...)</i>
+</pre>
+<p>And with protection:</p>
+<pre>
+<b>function</b> foo(a, b, c) {
+  console.log(a, b, c);
+  <b>throw</b> <b>new</b> Error(&quot;custom error!&quot;);
+}
+<b>function</b> protectedFunction(fn, &hellip;args) {
+  <b>try</b> {
+    fn.apply(<b>this</b>, args);
+  } <b>catch</b> (e) {
+    console.log(&quot;caught error: &quot; &plus; e&period;name &plus; &quot; -&amp;quot; &plus; e&period;message);
+  }
+}
+protectedFunction(foo, 1, 2, 3);
+protectedFunction(foo, 4, 5, 6);
+// <i>1 2 3</i>
+// <i>caught error: Error -&bsol;custom error!</i>
+// <i>4 5 6</i>
+// <i>caught error: Error -&bsol;custom error!</i>
+</pre>
+<p>We catch errors and still process all the expected code, though with a
+somewhat different syntax. Either way will work, but as you build more
+advanced applications you will want to start thinking about ways to
+abstract your error handling.</p>
+<!-- page 433 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch98">Chapter 98: Global error handling in browsers</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>Parameter</b></th>
+      <th><b>Details</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>eventOrMessage</td>
+      <td>Some browsers will call the event handler with just one argument, an Event object. However, eventOrMessage other browsers, especially the older ones and older mobile ones will supply a String message as a first argument.</td>
+    </tr>
+    <tr>
+      <td>url</td>
+      <td>If a handler is called with more than 1 argument, the second argument usually is an URL of a url JavaScript file that is the source of the problem.</td>
+    </tr>
+    <tr>
+      <td>lineNumber</td>
+      <td>If a handler is called with more than 1 argument, the third argument is a line number inside the lineNumber JavaScript source file.</td>
+    </tr>
+    <tr>
+      <td>colNumber</td>
+      <td>If a handler is called with more than 1 argument, the fourth argument is the column number colNumber inside the JavaScript source file.</td>
+    </tr>
+    <tr>
+      <td>error</td>
+      <td>If a handler is called with more than 1 argument, the fifth argument is sometimes an Error object error describing the problem.</td>
+    </tr>
+  </tbody>
+</table>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch98-1">Section 98.1: Handling window.onerror to report all errors back to the server-side</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>The following example listens to window.onerror event and uses an image beacon
+technique to send the information through the GET parameters of an
+URL.</p>
+<pre>
+<b>var</b> hasLoggedOnce = <b>false</b>;
+// <i>Some browsers (at least Firefox) don&apos;t report line and column
+numbers</i>
+// <i>when event is handled through window.addEventListener(&apos;error&apos;,
+fn). That&apos;s why 
+// a more reliable approach is to set an event listener via direct assignment.</i>
+window.onerror = <b>function</b> (eventOrMessage, url, lineNumber, colNumber, error) {
+  <b>if</b> (hasLoggedOnce &vert;&vert; !eventOrMessage) {
+    // <i>It does not make sense to report an error if:</i>
+    // <i>1. another one has already been reported &bsol; the page has an invalid state and may produce way too many errors.</i>
+    // <i>2. the provided information does not make sense (!eventOrMessage &bsol; the browser didn&apos;t supply information for some reason.)</i>
+    <b>return</b>;
+  }
+  hasLoggedOnce = <b>true</b>;
+  <b>if</b> (<b>typeof</b> eventOrMessage !== &apos;string&apos;) {
+    error = eventOrMessage.error;
+	url = eventOrMessage.filename &vert;&vert; eventOrMessage.fileName;
+	lineNumber = eventOrMessage.lineno &vert;&vert; eventOrMessage.lineNumber;
+	colNumber = eventOrMessage.colno &vert;&vert; eventOrMessage.columnNumber;
+	eventOrMessage = eventOrMessage.message &vert;&vert; eventOrMessage.name &vert;&vert; error.message &vert;&vert; error.name; 
+  } 
+  <b>if</b> (error && error.stack) {
+    eventOrMessage = &lbrack;eventOrMessage, &apos;; Stack: &apos;, error.stack, &apos;.&apos;&rbrack;.join(&apos;&apos;); }
+    <b>var</b> jsFile = (/&lbrack;&Hat;<i>/&rbrack;+&amp;period;js/i<i>.exec(url &vert;&vert; &apos;&apos;) &vert;&vert; &lbrack;&rbrack;)&lbrack;0&rbrack; &vert;&vert; &apos;inlineScriptOrDynamicEvalCode&apos;, 
+	stack = &lbrack;eventOrMessage, &apos; Occurred in &apos;, jsFile, &apos;:&apos;, lineNumber &vert;&vert; &apos;?&apos;, &apos;:&apos;, colNumber &vert;&vert; &apos;?&apos;&rbrack;.join(&apos;&apos;);
+&nbsp;
+  // <i>shortening the message a bit so that it is more likely to fit into browser&apos;s URL length limit</i>
+<i>(which is 2,083 in some browsers)</i>
+  stack = stack.replace(/https?&bsol;&bsol;:&bsol;&bsol;/&bsol;&bsol;/&lbrack;&Hat;<i>/&rbrack;+/gi</i>,  &apos;&apos;);
+// <i>calling the server-side handler which should probably register the
+error in a database or a log file</i>
+<b>new</b> Image().src = &apos;/exampleErrorReporting?stack=&apos; &plus; encodeURIComponent(stack);
+// <i>window.DEBUG_ENVIRONMENT a configurable property that may be set to true somewhere else for</i>
+<i>debugging and testing purposes.</i>
+  <b>if</b> (window.DEBUG_ENVIRONMENT) {
+    alert(&apos;Client-side script failed: &apos; &plus; stack);
+  }
+}
+</pre>
+<!-- page 435 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch99">Chapter 99: Debugging</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch99-1">Section 99.1: Interactive interpreter variables</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Note that these only work in the developer tools of certain browsers.
+&dollar;&lowbar; gives you the value of whatever expression was evaluated last.
+&quot;foo&quot;
+// <i>&quot;foo&quot;</i>
+&dollar;&lowbar;
+// <i>&quot;foo&quot;</i>
+<b>&lt;div</b> id       = &quot;foo&quot;
+&dollar;0 refers to the DOM element currently selected in the Inspector. So
+if <b>&gt;</b> is highlighted:
+&dollar;0
+// <i>&lt;div id=&quot;foo&quot;&gt;</i>
+&dollar;0.
+getAttribute
 (
+&apos;id&apos;
+)
+// <i>&quot;foo&quot;</i>
+&dollar;1 refers to the element previously selected, &dollar;2 to the one selected
+before that, and so forth for &dollar;3 and &dollar;4.
+&dollar;&dollar;     (  selector
+To get a collection of elements matching a CSS selector, use ). This
+is essentially a shortcut for
+document.querySelectorAll.
+<b>var</b> images = &dollar;&dollar;(&apos;img&apos;); // <i>Returns an array or a nodelist of
+all matching elements</i>
+<b>&dollar;&lowbar; &dollar;()</b>¹ <b>&dollar;&dollar;() &dollar;0 &dollar;1 &dollar;2 &dollar;3 &dollar;4</b>
+Opera 15+ 11+ 11+ 11+ 11+ 15+ 15+ 15+
+Chrome 22+ ✔ ✔ ✔ ✔ ✔ ✔ ✔
+Firefox 39+ ✔ ✔ ✔ × × × ×
+IE 11 11 11 11 11 11 11 11
+Safari 6.1+ 4+ 4+ 4+ 4+ 4+ 4+ 4+
+document.getElementById    or   document.querySelector
+¹ alias to either
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch99-2">Section 99.2: Breakpoints</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Breakpoints pause your program once execution reaches a certain point.
+You can then step through the program line by line, observing its
+execution and inspecting the contents of your variables.
+There are three ways of creating breakpoints.
+debugger
+1.  From code, using the ; statement.
+2.  From the browser, using the Developer Tools.
+3.  From an Integrated Development Environment (IDE).
+<b>Debugger Statement</b>
+debugger
+You can place a ; statement anywhere in your JavaScript code. Once the
+JS interpreter reaches that line, it will stop the script execution,
+allowing you to inspect variables and step through your code.
+<b>Developer Tools</b>
+The second option is to add a breakpoint directly into the code from
+the browser&apos;s Developer Tools.
+<b>Opening the Developer Tools</b>
+<b>Chrome or Firefox</b>
+1.  Press F12 to open Developer Tools
+2.  Switch to the Sources tab (Chrome) or Debugger tab (Firefox)
+3.  Press Ctrl + P and type the name of your JavaScript file
+Enter
+4.  Press to open it.
+<b>Internet Explorer or Edge</b>
+1.  Press F12 to open Developer Tools
+2.  Switch to the Debugger tab.
+3.  Use the folder icon near the upper-left corner of the window to open
+    a file-selection pane; you can find your JavaScript file there.
+<b>Safari</b>
+1.  Press Command + Option + C to open Developer Tools
+2.  Switch to the Resources tab
+3.  Open the &quot;Scripts&quot; folder in the left-side panel
+4.  Select your JavaScript file.
+<b>Adding a breakpoint from the Developer Tools</b>
+Once you have your JavaScript file open in Developer Tools, you can
+click a line number to place a breakpoint. The next time your program
+runs, it will pause there.
+<b>Note about Minified Sources:</b> If your source is minified, you can
+Pretty Print it (convert to readable format). In Chrome, this is done
+by clicking on the {} button in the bottom right corner of the source
+code viewer.
+<b>IDEs</b>
+<b>Visual Studio Code (VSC)</b>
+VSC has [built-in
+support](https://code.visualstudio.com/docs/editor/debugging) for
+debugging JavaScript.
+1.  Click the Debug button on the left or Ctrl + Shift + D
+launch.json
+2.  If not already done, create a launch configuration file () by
+    pressing the gear icon.
+3.  Run the code from VSC by pressing the green play button or hit F5 .
+<b>Adding a breakpoint in VSC</b>
+Click next to the line number in your JavaScript source file to add a
+breakpoint (it will be marked red). To delete the breakpoint, click
+the red circle again.
+<b>Tip:</b> You can also utilise the conditional breakpoints in
+browser&apos;s dev tools. These help in skipping unnecessary breaks in
+execution. Example scenario: you want to examine a variable in a loop
+exactly at 5th iteration.
+![](./images/image047.jpg){width="4.288194444444445in"
+height="0.8736111111111111in"}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch99-3">Section 99.3: Using setters and getters to find what changed a property</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Let&apos;s say you have an object like this:
+<b>var</b>
+myObject
+=
 {
-&quot;example_field&quot;
+name
 :
-<b>true</b>
+&apos;Peter&apos;
+}
+myObject.name
+Later in your code, you try to access and you get <b>George</b> instead
+of <b>Peter</b>. You start wondering who changed it and where exactly it
+was changed. There is a way to place a debugger (or something else) on
+every set
+myObject.name        =   &apos;something&apos;
+(every time someone does ):
+<b>var</b>
+myObject
+=
+{
+&lowbar;name
+:
+&apos;Peter&apos;
+,
+<b>set</b>
+name
+(
+name
+)
+{
+debugger
+;
+<b>this</b>
+.&lowbar;name
+=
+name
+}
+,
+<b>get</b>
+name
+(
+)
+{
+<b>return</b>
+<b>this</b>
+.&lowbar;name
+}
+}
+Note that we renamed name to &lowbar;name and we are going to define a
+setter and a getter for name.
+<b>set</b>   is the setter. That is a sweet spot where you can   console.trace
+name  place debugger,         
+<b>get</b> name
+(), or anything else you need for debugging. The setter will set the
+value for name in &lowbar;name. The getter (the part) will read the value
+from there. Now we have a fully functional object with debugging
+functionality.
+Most of the time, though, the object that gets changed is not under
+our control. Fortunately, we can define setters and getters on
+<b>existing</b> objects to debug them.
+// <i>First, save the name to &lowbar;name, because we are going to use name for
+setter/getter</i>
+otherObject.&lowbar;name
+=
+otherObject.
+name
+;
+// <i>Create setter and getter</i>
+Object
+.
+defineProperty
+(
+otherObject
+,
+&quot;name&quot;
+,
+{
+<b>set</b>
+:
+<b>function</b>
+(
+name
+)
+{
+debugger
+;
+<b>this</b>
+.&lowbar;name
+=
+name
+}
+,
+<b>get</b>
+:
+<b>function</b>
+(
+)
+{
+<b>return</b>
+<b>this</b>
+.&lowbar;name
+}
 }
 )
-The function always has to be defined first, otherwise it won&apos;t be
-defined when the external script loads.
+;
+Check out
+[setters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set)
+and
+[getters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)
+at MDN for more information.
+Browser support for setters/getters:
+<b>Chrome Firefox IE Opera Safari Mobile</b>
+Version 1 2.0 9 9.5 3 all
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch99-4">Section 99.4: Using the console</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+In many environments, you have access to a global console object that
+contains some basic methods for communicating with standard output
+devices. Most commonly, this will be the browser&apos;s JavaScript console
+(see
+[Chrome](https://developers.google.com/web/tools/chrome-devtools/debug/console/?utm_source=dcc),
+[Firefox](https://developer.mozilla.org/en-US/docs/Tools/Browser_Console),
+[Safari](https://developer.apple.com/safari/tools/), and
+[Edge](https://developer.microsoft.com/en-us/microsoft-edge/platform/documentation/f12-devtools-guide/console/)
+for more information).
+// <i>At its simplest, you can &apos;log&apos; a string</i>
+console.
+log
+(
+&quot;Hello, World!&quot;
+)
+;
+// <i>You can also log any number of comma-separated values</i>
+console.
+log
+(
+&quot;Hello&quot;
+,
+&quot;World!&quot;
+)
+;
+// <i>You can also use string substitution</i>
+console.
+log
+(
+&quot;%s %s&quot;
+,
+&quot;Hello&quot;
+,
+&quot;World!&quot;
+)
+;
+// <i>You can also log any variable that exist in the same scope</i>
+<b>var</b>
+arr
+=
+&lbrack;
+1
+,
+2
+,
+3
+&rbrack;
+;
+console.
+log
+(
+arr.
+length
+,
+<b>this</b>
+)
+;
+You can use different console methods to highlight your output in
+different ways. Other methods are also useful for more advanced
+debugging.
+For more documentation, information on compatibility, and instructions
+on how to open your browser&apos;s console, see the Console topic.
+console.log
+Note: if you need to support IE9, either remove or wrap its calls as
+follows, because console is undefined until the Developer Tools are
+opened:
+<b>if</b>
+(
+console
+)
+{
+// <i>IE9 workaround</i>
+console.
+log
+(
+&quot;test&quot;
+)
+;
+}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch99-5">Section 99.5: Automatically pausing execution</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+In Google Chrome, you can pause execution without needing to place
+breakpoints.
+![](./images/image048.jpg){width="0.225in" height="0.225in"}
+<b>Pause on Exception:</b> While this button is toggled on, if your
+program hits an unhandled exception, the program will pause as if it
+had hit a breakpoint. The button can be found near Execution Controls
+and is useful for locating errors.
+You can also pause execution when an HTML tag (DOM node) is modified,
+or when its attributes are changed. To do that, right click the DOM
+node on the Elements tab and select &quot;Break on&hellip;&quot;.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch99-6">Section 99.6: Elements inspector</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Clicking the
+![](./images/image049.jpg){width="0.21597222222222223in"
+height="0.21597222222222223in"} <i>Select an element in the page to
+inspect it</i> button in the upper left corner of the Elements tab in
+Chrome or Inspector tab in Firefox, available from Developer Tools,
+and then clicking on an element of the page highlights the element and
+assigns it to the &dollar;0 variable.
+Elements inspector can be used in variety of ways, for example:
+1.  You can check if your JS is manipulating DOM the way you expect it
+    to,
+2.  You can more easily debug your CSS, when seeing which rules affect
+    the element (<i>Styles</i> tab in Chrome)
+3.  You can play around with CSS and HTML without reloading the page.
+Also, Chrome remembers last 5 selections in the Elements tab. &dollar;0 is
+the current selection, while &dollar;1 is the previous selection. You can go
+up to &dollar;4. That way you can easily debug multiple nodes without
+constantly switching selection to them.
+You can read more at [Google
+Developers](https://developers.google.com/web/tools/chrome-devtools/debug/command-line/command-line-reference#section-1).
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch99-7">Section 99.7: Break when a function is called</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+For named (non-anonymous) functions, you can break when the function
+is executed.
+debug
+(
+functionName
+)
+;
+The next time functionName function runs, the debugger will stop on
+its first line.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch99-8">Section 99.8: Stepping through code</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Once you&apos;ve paused execution on a breakpoint, you may want to follow
+execution line-by-line to observe what happens. Open your browser&apos;s
+Developer Tools and look for the Execution Control icons. (This
+example uses the icons in Google Chrome, but they&apos;ll be similar in
+other browsers.)
+![](./images/image050.jpg){width="0.21597222222222223in"
+height="0.19791666666666666in"} <b>Resume:</b> Unpause execution.
+Shorcut: F8 (Chrome, Firefox)
+F6
+![](./images/image051.jpg){width="0.2611111111111111in"
+height="0.18888888888888888in"} <b>Step Over:</b> Run the next line of
+code. If that line contains a function call, run the whole function
+and move to the next line, rather than jumping to wherever the
+function is defined. Shortcut : F10 (Chrome, Firefox, IE/Edge),
+(Safari)
+![](./images/image052.jpg){width="0.19791666666666666in"
+height="0.20694444444444443in"} <b>Step Into:</b> Run the next line of
+code. If that line contains a function call, jump into the function
+and pause there. Shortcut : F11 (Chrome, Firefox, IE/Edge), F7
+(Safari)
+![](./images/image053.jpg){width="0.19791666666666666in"
+height="0.20694444444444443in"} <b>Step Out:</b> Run the rest of the
+current function, jump back to where the function was called from, and
+pause at the next statement there. Shortcut : Shift + F11 (Chrome,
+Firefox, IE/Edge), F8 (Safari)
+Use these in conjunction with the <b>Call Stack</b>, which will tell you
+which function you&apos;re currently inside of, which function called that
+function, and so forth.
+See Google&apos;s guide on [&quot;How to Step Through the
+Code&quot;](https://developers.google.com/web/tools/chrome-devtools/debug/breakpoints/step-code?hl=en)
+for more details and advice.
+Links to browser shortcut key documentation:
+[Chrome](https://developers.google.com/web/tools/chrome-devtools/iterate/inspect-styles/shortcuts?hl=en#keyboard-shortcuts-by-panel)
+[Firefox](https://developer.mozilla.org/en-US/docs/Tools/Debugger/Keyboard_shortcuts)
+[IE](https://msdn.microsoft.com/en-us/library/dd565630(v=vs.85).aspx#debugMode)
+[Edge](https://developer.microsoft.com/en-us/microsoft-edge/platform/documentation/f12-devtools-guide/developer-tools-keyboard-shortcuts/)
+[Safari](https://developer.apple.com/library/mac/documentation/AppleApplications/Conceptual/Safari_Developer_Guide/KeyboardShortcuts/KeyboardShortcuts.html)
+
 
