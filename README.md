@@ -23666,7 +23666,8 @@ console.log(obj.example_field);
 }
 <b>&lt;</b><b>/script</b><b>&gt;</b>
 <b>&lt;</b><b>script</b> src=&quot;http://example.com/api/endpoint.js?callback=myfunc&quot;<b>&gt;</b><b>&lt;</b><b>/script</b><b>&gt;</b>
-The contents of http://<i>example.com/api/endpoint.js?callback=myfunc</i> might look like this:</p>
+</pre>
+<p>The contents of http://<i>example.com/api/endpoint.js?callback=myfunc</i> might look like this:</p>
 <!-- page 428 -->
 <pre>
 myfunc({&quot;example_field&quot;:<b>true</b>})
