@@ -24584,121 +24584,56 @@ integers</b>. We can roll these up into something like this:</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch101">Chapter 101: Evaluating JavaScript</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<p><b>Parameter        Details</b><br/>
-string    The JavaScript to be evaluated.</p>
-
+<p><b>Parameter Details</b><br/>
+string The JavaScript to be evaluated.</p>
 <p>In JavaScript, the eval function evaluates a string as if it were
 JavaScript code. The return value is the result of the evaluated
 string, e.g. eval(&apos;2 &plus; 2&apos;) returns 4.</p>
-
 <p>eval is available in the global scope. The lexical scope of the evaluation is the 
 local scope unless invoked indirectly (e.g. <b>var</b> geval = eval; geval(s);).</p>
 <p><b>The use of eval is strongly discouraged.</b> See the Remarks section for details.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch101-1">Section 101.1: Evaluate a string of JavaScript statements</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>var</b>
-x
-=
-5
-;
-<b>var</b>
-str
-=
-&quot;if (x == 5) {console.log(&apos;z is 42&apos;); z = 42;} else z = 0; &quot;
-;
-console.
-log
-(
-&quot;z is &quot;
-,
-eval
-(
-str
-)
-)
-;
-<b>The use of eval is strongly discouraged.</b> See the Remarks section
-for details.
+<pre>
+<b>var</b> x = 5;
+<b>var</b> str = &quot;if (x == 5) {console.log(&apos;z is 42&apos;); z = 42;} else z = 0; &quot;;
+console.log(&quot;z is &quot;, eval(str));
+</pre>
+<p><b>The use of eval is strongly discouraged.</b> See the Remarks section
+for details.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch101-2">Section 101.2: Introduction</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-You can always run JavaScript from inside itself, although this is
+<p>You can always run JavaScript from inside itself, although this is
 <b>strongly discouraged</b> due to the security vulnerabilities it
-presents (see Remarks for details).
-To run JavaScript from inside JavaScript, simply use the below
-function:
-eval
-(
-&quot;var a = &apos;Hello, World!&apos;&quot;
-)
-;
+presents (see Remarks for details).</p>
+<p>To run JavaScript from inside JavaScript, simply use the below function:</p>
+<pre>
+eval(&quot;var a = &apos;Hello, World!&apos;&quot;);
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch101-3">Section 101.3: Evaluation and Math</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-eval
-You can set a variable to something with the () function by using
-something similar to the below code:
-<b>var</b>
-x
-=
-10
-;
-<b>var</b>
-y
-=
-20
-;
-<b>var</b>
-a
-=
-eval
-(
-&quot;x &ast; y&quot;
-)
-&plus;
-&quot;&lt;br&gt;&quot;
-;
-<b>var</b>
-b
-=
-eval
-(
-&quot;2 + 2&quot;
-)
-&plus;
-&quot;&lt;br&gt;&quot;
-;
-<b>var</b>
-c
-=
-eval
-(
-&quot;x + 17&quot;
-)
-&plus;
-&quot;&lt;br&gt;&quot;
-;
-<b>var</b>
-res
-=
-a
-&plus;
-b
-&plus;
-c
-;
-The result, stored in the variable
-res
-, will be:
-200
-4
+<p>You can set a variable to something with the eval() function by using
+something similar to the below code:</p>
+<pre>
+<b>var</b> x = 10;
+<b>var</b> y = 20;
+<b>var</b> a = eval(&quot;x &ast; y&quot;) &plus; &quot;&lt;br&gt;&quot;;
+<b>var</b> b = eval(&quot;2 + 2&quot;) &plus; &quot;&lt;br&gt;&quot;;
+<b>var</b> c = eval(&quot;x + 17&quot;) &plus; &quot;&lt;br&gt;&quot;;
+<b>var</b> res = a &plus; b &plus; c;
+</pre>
+<p>The result, stored in the variable res, will be:</p>
+<blockquote>
+200<br/>
+4<br/>
 27
-<b>The use of eval is strongly discouraged.</b> See the Remarks section
-for details.
+</blockquote>
+<p><b>The use of eval is strongly discouraged.</b> See the Remarks section
+for details.</p>
+<!-- page 445 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch102">Chapter 102: Linters - Ensuring code quality</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
