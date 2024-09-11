@@ -24598,6 +24598,7 @@ local scope unless invoked indirectly (e.g. <b>var</b> geval = eval; geval(s);).
 <pre>
 <b>var</b> x = 5;
 <b>var</b> str = &quot;if (x == 5) {console.log(&apos;z is 42&apos;); z = 42;} else z = 0; &quot;;
+&nbsp;
 console.log(&quot;z is &quot;, eval(str));
 </pre>
 <p><b>The use of eval is strongly discouraged.</b> See the Remarks section
@@ -24623,6 +24624,7 @@ something similar to the below code:</p>
 <b>var</b> a = eval(&quot;x &ast; y&quot;) &plus; &quot;&lt;br&gt;&quot;;
 <b>var</b> b = eval(&quot;2 + 2&quot;) &plus; &quot;&lt;br&gt;&quot;;
 <b>var</b> c = eval(&quot;x + 17&quot;) &plus; &quot;&lt;br&gt;&quot;;
+&nbsp;
 <b>var</b> res = a &plus; b &plus; c;
 </pre>
 <p>The result, stored in the variable res, will be:</p>
@@ -24639,141 +24641,77 @@ for details.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch102-1">Section 102.1: JSHint</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-[JSHint](http://jshint.com/) is an open source tool which detects
-errors and potential problems in JavaScript code.
-To lint your JavaScript you have two options.
-1.  Go to [JSHint.com](http://jshint.com/) and paste your code in there
-    on line text editor.
-2.  Install [JSHint in your IDE](http://jshint.com/install/).
-Atom: [linter-jshint](https://github.com/AtomLinter/linter-jshint)
-(must have [Linter](https://github.com/steelbrain/linter) plugin
-installed)
-Sublime Text: [JSHint
-Gutter](https://github.com/victorporof/Sublime-JSHint) and/or [Sublime
-Linter](https://github.com/SublimeLinter/SublimeLinter-for-ST2)
-Vim: [jshint.vim](https://github.com/walm/jshint.vim) or
-[jshint2.vim](https://github.com/Shutnik/jshint2.vim)
-Visual Studio: [VSCode
-JSHint](https://github.com/Microsoft/vscode-jshint)
-jshintrc
-A benefit of adding it to your IDE is that you can create a JSON
-configuration file named . that will be used when linting your
+<p><a href="http://jshint.com/">JSHint</a> is an open source tool which detects
+errors and potential problems in JavaScript code.</p>
+<p>To lint your JavaScript you have two options.</p>
+<ol type="1" start="1">
+  <li>Go to <a href="http://jshint.com/">JSHint.com</a> and paste your code in there
+    on line text editor</li>
+  <li>Install <a href="http://jshint.com/install/">JSHint in your IDE</a>.
+    <ul>
+	  <li>Atom: <a href="https://github.com/AtomLinter/linter-jshint">linter-jshint</a>
+	    (must have <a href="https://github.com/steelbrain/linter">Linter</a> plugin installed)</li>
+	  <li>Sublime Text: <a href="https://github.com/victorporof/Sublime-JSHint">
+	    JSHint Gutter</a> and/or <a href="https://github.com/SublimeLinter/SublimeLinter-for-ST2">Sublime Linter</a></li>
+	  <li>Vim: <a href="https://github.com/walm/jshint.vim">jshint.vim</a> or
+	    <a href="https://github.com/Shutnik/jshint2.vim">jshint2.vim</a></li>
+	</ul>
+	</li>
+</ol>
+<p>A benefit of adding it to your IDE is that you can create a JSON
+configuration file named .jshintrc that will be used when linting your
 program. This is convent if you want to share configurations between
-projects.
-jshintrc
-Example . file
+projects.</p>
+<p>Example .jshintrc file</p>
+<pre>
 {
-&quot;-W097&quot;
-:
-<b>false</b>
-,
-// <i>Allow &quot;use strict&quot; at document level</i>
-&quot;browser&quot;
-:
-<b>true</b>
-,
-// <i>defines globals exposed by modern browsers</i>
-<i>http://jshint.com/docs/options/#browser</i>
-&quot;curly&quot;
-:
-<b>true</b>
-,
-// <i>requires you to always put curly braces around blocks in loops and</i>
-<i>conditionals http://jshint.com/docs/options/#curly</i>
-&quot;devel&quot;
-:
-<b>true</b>
-,
-// <i>defines globals that are usually used for logging poor-man&apos;s
-debugging:</i>
-<i>console, alert, etc. http://jshint.com/docs/options/#devel</i>
-// <i>List global variables (false means read only)</i>
-&quot;globals&quot;
-:
+  &quot;-W097&quot;: <b>false</b>, // <i>Allow &quot;use strict&quot; at document level</i>
+  &quot;browser&quot;: <b>true</b>, // <i>defines globals exposed by modern browsers</i>
+    <i>http://jshint.com/docs/options/#browser</i>
+  &quot;curly&quot;: <b>true</b>,  // <i>requires you to always put curly braces around blocks in loops and</i>
+    <i>conditionals http://jshint.com/docs/options/#curly</i>
+  &quot;devel&quot;: <b>true</b>,  // <i>defines globals that are usually used for logging poor-man&apos;s debugging:</i>
+    <i>console, alert, etc. http://jshint.com/docs/options/#devel</i>
+  // <i>List global variables (false means read only)</i>
+  &quot;globals&quot;: {
+    &quot;globalVar&quot;: <b>true</b>
+  },
+  &quot;jquery&quot;: <b>true</b>,  // <i>This option defines globals exposed by the jQuery JavaScript library.</i>
+  &quot;newcap&quot;: <b>false</b>, // <i>List any global functions or const vars</i>
+  &quot;predef&quot;: &lbrack;
+    &quot;GlobalFunction&quot;,
+    &quot;GlobalFunction2&quot;
+  &rbrack;,
+  &quot;undef&quot;: <b>true</b>,  // <i>warn about undefined vars</i>
+  &quot;unused&quot;: <b>true</b>  // <i>warn about unused vars</i>
+}
+</pre>
+<p>JSHint also allows configurations for specific lines/blocks of code</p>
+<pre>
+<b>switch</b>(operation)
 {
-&quot;globalVar&quot;
-:
-<b>true</b>
+  <b>case</b> &apos;+&apos;
+  {
+    result = a &plus; b;
+    <b>break</b>;
+  }
+  // <i>JSHint W086 Expected a &apos;break&apos; statement</i>
+  // <i>JSHint flag to allow cases to not need a break</i>
+  <i>/&ast; falls through &ast;/</i>
+  <b>case</b> &apos;&ast;&apos;:
+  <b>case</b> &apos;x&apos;:
+  {
+  result = a &ast; b;
+  <b>break</b>;
+  }
 }
-,
-&quot;jquery&quot;
-:
-<b>true</b>
-,
-// <i>This option defines globals exposed by the jQuery JavaScript
-library.</i>
-&quot;newcap&quot;
-:
-<b>false</b>
-,
-// <i>List any global functions or const vars</i>
-&quot;predef&quot;
-:
-&lbrack;
-&quot;GlobalFunction&quot;
-,
-&quot;GlobalFunction2&quot;
-&rbrack;
-,
-&quot;undef&quot;
-:
-<b>true</b>
-,
-// <i>warn about undefined vars</i>
-&quot;unused&quot;
-:
-<b>true</b>
-// <i>warn about unused vars</i>
-}
-JSHint also allows configurations for specific lines/blocks of code
-<b>switch</b>
-(
-operation
-)
-{
-<b>case</b>
-&apos;+&apos;
-{
-result
-=
-a
-&plus;
-b
-;
-<b>break</b>
-;
-}
-// <i>JSHint W086 Expected a &apos;break&apos; statement</i>
-// <i>JSHint flag to allow cases to not need a break</i>
-<i>/&ast; falls through &ast;/</i>
-<b>case</b>
-&apos;&ast;&apos;
-:
-<b>case</b>
-&apos;x&apos;
-:
-{
-result
-=
-a
-&ast;
-b
-;
-<b>break</b>
-;
-}
-}
-// <i>JSHint disable error for variable not defined, because it is defined
-in another file</i>
+// <i>JSHint disable error for variable not defined, because it is defined in another file</i>
 <i>/&ast; jshint -W117 &ast;/</i>
-globalVariable
-=
-&apos;in-another-file.js&apos;
-;
+globalVariable = &apos;in-another-file.js&apos;;
 <i>/&ast; jshint +W117 &ast;/</i>
-More configuration options are documented at
-<http://jshint.com/docs/options/>
+</pre>
+<p><a href="http://jshint.com/docs/options/">More configuration options are documented at</a>
+&lt;http://jshint.com/docs/options/&gt;</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch102-2">Section 102.2: ESLint / JSCS</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
