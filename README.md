@@ -24207,16 +24207,14 @@ at MDN for more information.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch99-4">Section 99.4: Using the console</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-In many environments, you have access to a global console object that
+<p>In many environments, you have access to a global console object that
 contains some basic methods for communicating with standard output
 devices. Most commonly, this will be the browser&apos;s JavaScript console
-(see
-[Chrome](https://developers.google.com/web/tools/chrome-devtools/debug/console/?utm_source=dcc),
-[Firefox](https://developer.mozilla.org/en-US/docs/Tools/Browser_Console),
-[Safari](https://developer.apple.com/safari/tools/), and
-[Edge](https://developer.microsoft.com/en-us/microsoft-edge/platform/documentation/f12-devtools-guide/console/)
-for more information).
+(see <a href="https://developers.google.com/web/tools/chrome-devtools/debug/console/?utm_source=dcc">Chrome</a>,
+<a href="https://developer.mozilla.org/en-US/docs/Tools/Browser_Console">Firefox</a>,
+<a href="https://developer.apple.com/safari/tools/">Safari</a>, and
+<a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/documentation/f12-devtools-guide/console/">Edge</a>
+for more information).</p>
 <pre>
 // <i>At its simplest, you can &apos;log&apos; a string</i>
 console.log(&quot;Hello, World!&quot;);
@@ -24228,87 +24226,89 @@ console.log(&quot;%s %s&quot;, &quot;Hello&quot;, &quot;World!&quot;);
 <b>var</b> arr = &lbrack;1, 2, 3&rbrack;;
 console.log(arr.length, <b>this</b>);
 </pre>
-You can use different console methods to highlight your output in
+<!-- page 438 -->
+<P>You can use different console methods to highlight your output in
 different ways. Other methods are also useful for more advanced
-debugging.
-For more documentation, information on compatibility, and instructions
-on how to open your browser&apos;s console, see the Console topic.
-console.log
-Note: if you need to support IE9, either remove or wrap its calls as
+debugging.</p>
+<p>For more documentation, information on compatibility, and instructions
+on how to open your browser&apos;s console, see the Console topic.</p>
+<p>Note: if you need to support IE9, either remove or wrap its calls as
 follows, because console is undefined until the Developer Tools are
-opened:
-<b>if</b>
-(
-console
-)
-{
-// <i>IE9 workaround</i>
-console.
-log
-(
-&quot;test&quot;
-)
-;
+opened:</p>
+<pre>
+<b>if</b> (console) { // <i>IE9 workaround</i>
+  console.log(&quot;test&quot;);
 }
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch99-5">Section 99.5: Automatically pausing execution</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-In Google Chrome, you can pause execution without needing to place
-breakpoints.
-![](./images/image048.jpg){width="0.225in" height="0.225in"}
-<b>Pause on Exception:</b> While this button is toggled on, if your
+<p>In Google Chrome, you can pause execution without needing to place
+breakpoints.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 48.  (438) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image048.jpg"
+  title="."
+  alt="."
+  style="border: 2px solid #000000; width:.2in;" />
+<!-- ![](./images/image048.jpg){width="0.225in" height="0.225in"} -->
+
+<p><b>Pause on Exception:</b> While this button is toggled on, if your
 program hits an unhandled exception, the program will pause as if it
 had hit a breakpoint. The button can be found near Execution Controls
-and is useful for locating errors.
-You can also pause execution when an HTML tag (DOM node) is modified,
+and is useful for locating errors.</p>
+<p>You can also pause execution when an HTML tag (DOM node) is modified,
 or when its attributes are changed. To do that, right click the DOM
-node on the Elements tab and select &quot;Break on&hellip;&quot;.
+node on the Elements tab and select &quot;Break on&hellip;&quot;.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch99-6">Section 99.6: Elements inspector</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Clicking the
-![](./images/image049.jpg){width="0.21597222222222223in"
-height="0.21597222222222223in"} <i>Select an element in the page to
+<p>Clicking the</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 49.  (419) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image049.jpg"
+  title="."
+  alt="."
+  style="border: 2px solid #000000; width:.2in;" />
+<!-- ![](./images/image049.jpg){width="0.21597222222222223in" height="0.21597222222222223in"} -->
+<i>Select an element in the page to
 inspect it</i> button in the upper left corner of the Elements tab in
 Chrome or Inspector tab in Firefox, available from Developer Tools,
 and then clicking on an element of the page highlights the element and
 assigns it to the &dollar;0 variable.
-Elements inspector can be used in variety of ways, for example:
-1.  You can check if your JS is manipulating DOM the way you expect it
-    to,
-2.  You can more easily debug your CSS, when seeing which rules affect
-    the element (<i>Styles</i> tab in Chrome)
-3.  You can play around with CSS and HTML without reloading the page.
-Also, Chrome remembers last 5 selections in the Elements tab. &dollar;0 is
+<p>Elements inspector can be used in variety of ways, for example:</p>
+<ol type="1" start="1">
+  <li>You can check if your JS is manipulating DOM the way you expect it to,</li>
+  <li>You can more easily debug your CSS, when seeing which rules affect
+    the element (<i>Styles</i> tab in Chrome)</li>
+  <li>You can play around with CSS and HTML without reloading the page.</li>
+</ol>
+<p>Also, Chrome remembers last 5 selections in the Elements tab. &dollar;0 is
 the current selection, while &dollar;1 is the previous selection. You can go
 up to &dollar;4. That way you can easily debug multiple nodes without
-constantly switching selection to them.
-You can read more at [Google
-Developers](https://developers.google.com/web/tools/chrome-devtools/debug/command-line/command-line-reference#section-1).
+constantly switching selection to them.</p>
+<p>You can read more at <a href="https://developers.google.com/web/tools/chrome-devtools/debug/command-line/command-line-reference#section-1">
+Google Developers</a>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch99-7">Section 99.7: Break when a function is called</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-For named (non-anonymous) functions, you can break when the function
-is executed.
-debug
-(
-functionName
-)
-;
-The next time functionName function runs, the debugger will stop on
-its first line.
+<p>For named (non-anonymous) functions, you can break when the function is executed.</p>
+<pre>
+debug(functionName);
+</pre>
+<p>The next time functionName function runs, the debugger will stop on its first line.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch99-8">Section 99.8: Stepping through code</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-Once you&apos;ve paused execution on a breakpoint, you may want to follow
+<p>Once you&apos;ve paused execution on a breakpoint, you may want to follow
 execution line-by-line to observe what happens. Open your browser&apos;s
 Developer Tools and look for the Execution Control icons. (This
 example uses the icons in Google Chrome, but they&apos;ll be similar in
-other browsers.)
+other browsers.)</p>
+
 ![](./images/image050.jpg){width="0.21597222222222223in"
 height="0.19791666666666666in"} <b>Resume:</b> Unpause execution.
 Shorcut: F8 (Chrome, Firefox)
@@ -24329,17 +24329,20 @@ height="0.20694444444444443in"} <b>Step Out:</b> Run the rest of the
 current function, jump back to where the function was called from, and
 pause at the next statement there. Shortcut : Shift + F11 (Chrome,
 Firefox, IE/Edge), F8 (Safari)
-Use these in conjunction with the <b>Call Stack</b>, which will tell you
+<p>Use these in conjunction with the <b>Call Stack</b>, which will tell you
 which function you&apos;re currently inside of, which function called that
-function, and so forth.
-See Google&apos;s guide on [&quot;How to Step Through the
-Code&quot;](https://developers.google.com/web/tools/chrome-devtools/debug/breakpoints/step-code?hl=en)
-for more details and advice.
-Links to browser shortcut key documentation:
-[Chrome](https://developers.google.com/web/tools/chrome-devtools/iterate/inspect-styles/shortcuts?hl=en#keyboard-shortcuts-by-panel)
-[Firefox](https://developer.mozilla.org/en-US/docs/Tools/Debugger/Keyboard_shortcuts)
-[IE](https://msdn.microsoft.com/en-us/library/dd565630(v=vs.85).aspx#debugMode)
-[Edge](https://developer.microsoft.com/en-us/microsoft-edge/platform/documentation/f12-devtools-guide/developer-tools-keyboard-shortcuts/)
-[Safari](https://developer.apple.com/library/mac/documentation/AppleApplications/Conceptual/Safari_Developer_Guide/KeyboardShortcuts/KeyboardShortcuts.html)
+function, and so forth.</p>
+<p>See Google&apos;s guide on <a href="https://developers.google.com/web/tools/chrome-devtools/debug/breakpoints/step-code?hl=en">
+&quot;How to Step Through the Code&quot;</a> for more details and advice.</p>
+<p>Links to browser shortcut key documentation:</p>
+<ul>
+  <li><a href="https://developers.google.com/web/tools/chrome-devtools/iterate/inspect-styles/shortcuts?hl=en#keyboard-shortcuts-by-panel">Chrome</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Tools/Debugger/Keyboard_shortcuts">Firefox</a></li>
+  <li><a href="https://msdn.microsoft.com/en-us/library/dd565630(v=vs.85).aspx#debugMode">IE</a></li>
+  <li><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/documentation/f12-devtools-guide/developer-tools-keyboard-shortcuts/">Edge</a></li>
+  <li><a href="https://developer.apple.com/library/mac/documentation/AppleApplications/Conceptual/Safari_Developer_Guide/KeyboardShortcuts/KeyboardShortcuts.html">Safari</a></li>
+</ul>
+
+
 
 
