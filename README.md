@@ -23544,7 +23544,7 @@ Hello! &bsol;&bsol;&quot;});alert(1);({
 </pre>
 <p>Will be converted to:</p>
 <pre>
-&quot;Hello! <b>&bsol;&bsol;&quot;</i>});alert(1);({&quot;
+&quot;Hello! <b>&bsol;&bsol;&quot;</b>});alert(1);({&quot;
 </pre>
 <p>Oops. Remember to escape both the &bsol; and &quot;, or just use JSON.parse.</p>
 </li>
@@ -23589,15 +23589,19 @@ to the sender window using postMessage() again.</p>
 <pre>
 // <i>Get the &lt;iframe&gt;&apos;s window</i>
 <b>var</b> frameWindow = document.getElementById(&apos;frame-id&apos;).contentWindow;
+&nbsp;
 // <i>Add a listener for a response</i>
 window.addEventListener(&apos;message&apos;, <b>function</b>(evt) {
+&nbsp;
   // <i>IMPORTANT: Check the origin of the data!</i>
   <b>if</b> (event.origin.indexOf(&apos;http://other-site.com&apos;) == 0) {
+&nbsp;
     // <i>Check the response</i>
     console.log(evt.data);
     <i>/&ast; &hellip; &ast;/</i>
   }
 });
+&nbsp;
 // <i>Send a message to the frame&apos;s window</i>
 frameWindow.postMessage(<i>/&ast; any obj or var &ast;/</i>, &apos;&ast;&apos;);
 </pre>
@@ -23605,11 +23609,14 @@ frameWindow.postMessage(<i>/&ast; any obj or var &ast;/</i>, &apos;&ast;&apos;);
   <li>Content of other_site_script.js:
 <pre>
 window.addEventListener(&apos;message&apos;, <b>function</b>(evt) {
+&nbsp;
   // <i>IMPORTANT: Check the origin of the data!</i>
   <b>if</b> (event.origin.indexOf(&apos;http://main-site.com&apos;) == 0) {
+&nbsp;
     // <i>Read and elaborate the received data</i>
     console.log(evt.data);
     <i>/&ast; &hellip; &ast;/</i>
+&nbsp;
     // <i>Send a response back to the main window</i>
     window.parent.postMessage(<i>/&ast; any obj or var &ast;/</i>, &apos;&ast;&apos;);
   }
