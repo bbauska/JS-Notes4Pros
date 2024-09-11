@@ -24882,9 +24882,9 @@ changes in one single DOM update.</p>
 }
 list.innerHTML = html;  // <i>update once</i>
 </pre>
-<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment">function document.createDocumentFragment() 
-can be used as a lightweight container for the HTML created by the loop. This method 
-is slightly faster than modifying the container element&apos;s innerHTML property 
+<p>The function <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment">
+document.createDocumentFragment()</a> can be used as a lightweight container for the HTML created by the 
+loop. This method is slightly faster than modifying the container element&apos;s innerHTML property 
 (as shown below).</p>
 <pre>
 <b>var</b> list = document.getElementById(&quot;list&quot;);
@@ -24900,229 +24900,111 @@ list.appendChild(fragment);
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-3">Section 104.3: Benchmarking your code - measuring execution time</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Most performance tips are very dependent of the current state of JS
+<p>Most performance tips are very dependent of the current state of JS
 engines and are expected to be only relevant at a given time. The
 fundamental law of performance optimization is that you must first
 measure before trying to optimize, and measure again after a presumed
-optimization.
-To measure code execution time, you can use different time measurement
-tools like:
-[Performance](https://developer.mozilla.org/en-US/docs/Web/API/Performance)
+optimization.</p>
+<p>To measure code execution time, you can use different time measurement
+tools like:</p>
+<!-- page 450 -->
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance">Performance</a>
 interface that represents timing-related performance information for
-the given page (only available in browsers).
-[process.hrtime](https://nodejs.org/api/process.html#process_process_hrtime_time)
+the given page (only available in browsers).</p>
+<p><a href="https://nodejs.org/api/process.html#process_process_hrtime_time">process.hrtime</a> 
 on Node.js gives you timing information as &lbrack;seconds, nanoseconds&rbrack;
 tuples. Called without argument it returns an arbitrary time but
 called with a previously returned value as argument it returns the
-difference between the two executions.
-console.time        (   &quot;labelName&quot;
-[Console
-timers](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)
-) starts a timer you can use to track how long an operation takes. You
+difference between the two executions.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/time">Console timers</a>(&quot;labelName&quot;)
+starts a timer you can use to track how long an operation takes. You 
 give each timer a unique label name, and may have up to 10,000 timers
-running on a given page. When you call
-console.timeEnd     (   &quot;labelName&quot;
-) with the same name, the browser will finish the timer for given name
-and output
+running on a given page. When you call console.timeEnd(&quot;labelName&quot;) 
+with the same name, the browser will finish the timer for given name and output
 the time in milliseconds, that elapsed since the timer was started.
 The strings passed to time() and timeEnd() must match otherwise the
-timer will not finish.
-Date  . now
-[Date.now](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now)
-function () returns current [Timestamp](http://www.unixtimestamp.com/)
-in milliseconds, which is a
-[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
-representation of time since 1 January 1970 00:00:00 UTC until now.
-The method now() is a static method of Date, therefore you always use
-it as Date.now().
-performance.now
-<b>Example 1</b> using: ()
-In this example we are going to calculate the elapsed time for the
-execution of our function, and we are going to use the
-[Performance.now()](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)
-method that returns a
-[DOMHighResTimeStamp](https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp),
-measured in milliseconds, accurate to one thousandth of a millisecond.
-<b>let</b>
-startTime
-,
-endTime
-;
-<b>function</b>
-myFunction
-(
-)
-{
-// <i>Slow code you want to measure</i>
+timer will not finish.</p>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now">
+Date.now</a> function Date.now() returns current <a href="http://www.unixtimestamp.com/">Timestamp</a> 
+in milliseconds, which is a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a> 
+representation of time since 1 January 1970 00:00:00 UTC until now. The method now() is a static 
+method of Date, therefore you always use it as Date.now().</p>
+
+<b>Example 1</b> using: performance.now()</p>
+
+<p>In this example we are going to calculate the elapsed time for the
+execution of our function, and we are going to use the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now">
+Performance.now()</a> method that returns a <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp">
+DOMHighResTimeStamp</a>, measured in milliseconds, accurate to one thousandth of a millisecond.</p>
+<pre>
+<b>let</b> startTime, endTime;
+&nbsp;
+<b>function</b> myFunction() {
+  // <i>Slow code you want to measure</i>
 }
+&nbsp;
 // <i>Get the start time</i>
-startTime
-=
-performance.
-now
-(
-)
-;
+startTime = performance.now();
+&nbsp;
 // <i>Call the time-consuming function</i>
-myFunction
-(
-)
-;
+myFunction();
+&nbsp;
 // <i>Get the end time</i>
-endTime
-=
-performance.
-now
-(
-)
-;
+endTime = performance.now();
+&nbsp;
 // <i>The difference is how many milliseconds it took to call myFunction()</i>
-console.
-debug
-(
-&apos;Elapsed time:&apos;
-,
-(
-endTime
-&minus;
-startTime
-)
-)
-;
-The result in console will look something like this:
-Elapsed time
-:
-0.10000000009313226
-[performance.now](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)
-Usage of
-[()](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)
+console.debug(&apos;Elapsed time:&apos;, (endTime &minus; startTime));
+</pre>
+<p>The result in console will look something like this:</p>
+<pre>
+Elapsed time: 0.10000000009313226
+</pre>
+<p>Usage of <a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now">performance.now()</a> 
 has the highest precision in browsers with accuracy to one thousandth
-of a millisecond, but the lowest
-[compatibility](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now#Browser_compatibility).
-Date   . now
-<b>Example 2</b> using: ()
-In this example we are going to calculate the elapsed time for the
-initialization of a big array (1 million values), and
-Date        .    now
-we are going to use the () method
-<b>let</b> t0 = Date.now(); // <i>stores current Timestamp in milliseconds
-since 1 January 1970 00:00:00 UTC</i> <b>let</b> arr = &lbrack;&rbrack;; // <i>store empty
-array</i> <b>for</b> (<b>let</b> i = 0; i &lt; 1000000; i++) { // <i>1 million
-iterations</i> arr.push(i); // <i>push current i value</i>
+of a millisecond, but the lowest <a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now#Browser_compatibility">
+compatibility</a>.</p>
+
+<p><b>Example 2</b> using: Date.now()</p>
+
+<p>In this example we are going to calculate the elapsed time for the initialization of a big array 
+(1 million values), and Date.now() method</p>
+<pre>
+<b>let</b> t0 = Date.now(); // <i>stores current Timestamp in milliseconds since 1 January 1970 00:00:00 UTC</i>
+<b>let</b> arr = &lbrack;&rbrack;; // <i>store empty array</i>
+<b>for</b> (<b>let</b> i = 0; i &lt; 1000000; i++) { // <i>1 million iterations</i> 
+  arr.push(i); // <i>push current i value</i>
 }
-console.
-log
-(
-Date
-.
-now
-(
-)
-&minus;
-t0
-)
-;
-// <i>print elapsed time between stored t0 and now</i>
-console.time   (   &quot;label&quot;   ) &   console.timeEnd    (   &quot;label&quot;
-<b>Example 3</b> using: )
-console.time       (   &quot;label&quot;
-console.timeEnd       (    &quot;label&quot;
-In this example we are doing the same task as in Example 2, but we are
-going to use the ) & ) methods
-console.time
-(
-&quot;t&quot;
-)
-;
-// <i>start new timer for label name: &quot;t&quot;</i>
-<b>let</b>
-arr
-=
-&lbrack;
-&rbrack;
-;
-// <i>store empty array</i>
-<b>for</b>
-(
-<b>let</b>
-i
-=
-0
-;
-i
-&lt;
-1000000
-;
-i
-++
-)
-{
-// <i>1 million iterations</i>
-arr.
-push
-(
-i
-)
-;
-// <i>push current i value</i>
+console.log(Date.now() &minus; t0); // <i>print elapsed time between stored t0 and now</i>
+</pre>
+<!-- page 451 -->
+<p><b>Example 3</b> using: console.time(&quot;label&quot;) & console.timeEnd(&quot;label&quot;)</p>
+<p>In this example we are doing the same task as in Example 2, but we are going to use the 
+console.time(&quot;label&quot;) & console.timeEnd(&quot;label&quot;) methods</p>
+<pre>
+console.time(&quot;t&quot;);  // <i>start new timer for label name: &quot;t&quot;</i>
+<b>let</b> arr = &lbrack;&rbrack;; // <i>store empty array</i>
+<b>for</b>(<b>let</b> i = 0; i &lt; 1000000; i++) { // <i>1 million iterations</i>
+  arr.push(i);  // <i>push current i value</i>
 }
-console.
-timeEnd
-(
-&quot;t&quot;
-)
-;
-// <i>stop the timer for label name: &quot;t&quot; and print elapsed time</i>
-process.hrtime
-<b>Exemple 4</b> using ()
-In Node.js programs this is the most precise way to measure spent
-time.
-<b>let</b>
-start
-=
-process.
-hrtime
-(
-)
-;
+console.timeEnd(&quot;t&quot;);  // <i>stop the timer for label name: &quot;t&quot; and print elapsed time</i>
+</pre>
+<p><b>Exemple 4</b> using process.hrtime()</p>
+<p>In Node.js programs this is the most precise way to measure spent time.</p>
+<pre>
+<b>let</b> start = process.hrtime();
+&nbsp;
 // <i>long execution here, maybe asynchronous</i>
-<b>let</b>
-diff
-=
-process.
-hrtime
-(
-start
-)
-;
+&nbsp;
+<b>let</b> diff = process.hrtime(start);
 // <i>returns for example &lbrack; 1, 2325 &rbrack;</i>
-console.
-log
-(
-&grave;Operation took &dollar;
-{
-diff
-&lbrack;
-0
-&rbrack;
-&ast;
-1e9
-&plus;
-diff
-&lbrack;
-1
-&rbrack;
-}
-nanoseconds&grave;
-)
-;
+console.log(&grave;Operation took &dollar;{diff&lbrack;0&rbrack; &ast; 1e9 &plus; diff&lbrack;1&rbrack;} nanoseconds&grave;);
 // <i>logs: Operation took 1000002325 nanoseconds</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-4">Section 104.4: Use a memoizer for heavy-computing functions</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-If you are building a function that may be heavy on the processor
+<p>If you are building a function that may be heavy on the processor
 (either clientside or serverside) you may want to consider a
 <b>memoizer</b> which is a <i>cache of previous function executions and
 their returned values</i>. This allows you to check if the parameters of
@@ -25130,297 +25012,111 @@ a function were passed before. Remember, pure functions are those that
 given an input, return a corresponding unique output and don&apos;t cause
 side-effects outside their scope so, you should not add memoizers to
 functions that are unpredictable or depend on external resources (like
-AJAX calls or randomly returned values).
-Let&apos;s say I have a recursive factorial function:
-<b>function</b>
-fact
-(
-num
-)
-{
-<b>return</b>
-(
-num
-===
-0
-)
-?
-1
-:
-num
-&ast;
-fact
-(
-num
-&minus;
-1
-)
-;
+AJAX calls or randomly returned values).</p>
+<p>Let&apos;s say I have a recursive factorial function:</p>
+<pre>
+<b>function</b> fact(num) {
+  <b>return</b> (num === 0) ? 1 : num &ast; fact(num &minus; 1);
 }
-If I pass small values from 1 to 100 for example, there would be no
+</pre>
+<p>If I pass small values from 1 to 100 for example, there would be no
 problem, but once we start going deeper, we might blow up the call
 stack or make the process a bit painful for the JavaScript engine
 we&apos;re doing this in, especially if the engine doesn&apos;t count with
 tail-call optimization (although Douglas Crockford says that native
-ES6 has tail-call optimization included).
-We could hard code our own dictionary from 1 to god-knows-what number
+ES6 has tail-call optimization included).</p>
+<p>We could hard code our own dictionary from 1 to god-knows-what number
 with their corresponding factorials but, I&apos;m not sure if I advise
-that! Let&apos;s create a memoizer, shall we?
-<b>var</b>
-fact
-=
-(
-<b>function</b>
-(
-)
-{
-<b>var</b>
-cache
-=
-{
-}
-;
-// <i>Initialise a memory cache object</i>
+that! Let&apos;s create a memoizer, shall we?</p>
+<!-- page 452 -->
+<pre>
+<b>var</b> fact = (<b>function</b>() {
+  <b>var</b> cache = {};  // <i>Initialise a memory cache object</i>
+&nbsp;
 // <i>Use and return this function to check if val is cached</i>
-<b>function</b>
-checkCache
-(
-val
-)
-{
-<b>if</b>
-(
-val
-<b>in</b>
-cache
-)
-{
-console.
-log
-(
-&apos;It was in the cache :D&apos;
-)
-;
-<b>return</b>
-cache
-&lbrack;
-val
-&rbrack;
-;
-// <i>return cached</i>
+<b>function</b> checkCache(val) {
+  <b>if</b> (val <b>in</b> cache) {
+    console.log(&apos;It was in the cache :D&apos;);
+    <b>return</b> cache&lbrack;val&rbrack;; // <i>return cached</i>
+  } <b>else</b> {
+  cache&lbrack;val&rbrack; = factorial(val);  // <i>we cache it</i>
+  <b>return</b> cache&lbrack;val&rbrack;; // <i>and then return it</i>
+  }
+&nbsp;
+  <i>/&ast; Other alternatives for checking are:</i>
+  <i>&vert;&vert; cache.hasOwnProperty(val) or !!cache&lbrack;val&rbrack;</i>
+  <i>&vert;&vert; but wouldn&apos;t work if the results of those</i>
+  <i>&vert;&vert; executions were falsy values.</i>
+  <i>&ast;/</i>
 }
-<b>else</b>
-{
-cache
-&lbrack;
-val
-&rbrack;
-=
-factorial
-(
-val
-)
-;
-// <i>we cache it</i>
-<b>return</b>
-cache
-&lbrack;
-val
-&rbrack;
-;
-// <i>and then return it</i>
-}
-<i>/&ast; Other alternatives for checking are:</i>
-<i>&vert;&vert; cache.hasOwnProperty(val) or !!cache&lbrack;val&rbrack;</i>
-<i>&vert;&vert; but wouldn&apos;t work if the results of those</i>
-<i>&vert;&vert; executions were falsy values.</i>
-<i>&ast;/</i>
-}
+&nbsp;
 // <i>We create and name the actual function to be used</i>
-<b>function</b>
-factorial
-(
-num
-)
-{
-<b>return</b>
-(
-num
-===
-0
-)
-?
-1
-:
-num
-&ast;
-factorial
-(
-num
-&minus;
-1
-)
-;
-}
-// <i>End of factorial function</i>
+<b>function</b> factorial(num) {
+  <b>return</b>(num === 0) ? 1 : num &ast; factorial(num &minus; 1);
+} // <i>End of factorial function</i>
+&nbsp;
 <i>/&ast; We return the function that checks, not the one</i>
 <i>&vert;&vert; that computes because it happens to be recursive,</i>
 <i>&vert;&vert; if it weren&apos;t you could avoid creating an extra</i>
 <i>&vert;&vert; function in this self-invoking closure function.</i>
 <i>&ast;/</i>
-<b>return</b>
-checkCache
-;
-}
-(
-)
-)
-;
-Now we can start using it:
+  <b>return</b> checkCache;
+}());
+</pre>
+<p>Now we can start using it:</p>
 ![](./images/image054.jpg){width="4.252083333333333in"
 height="0.9909722222222223in"}
-
-Now that I start to reflect on what I did, if I were to increment from
+<p>Now that I start to reflect on what I did, if I were to increment from
 1 instead of decrement from <i>num</i>, I could have cached all of the
 factorials from 1 to <i>num</i> in the cache recursively, but I will leave
-that for you.
-
-This is great but what if we have <b>multiple parameters</b>? This is a
+that for you.<p>
+<p>This is great but what if we have <b>multiple parameters</b>? This is a
 problem? Not quite, we can do some nice tricks like using
 JSON.stringify() on the arguments array or even a list of values that
 the function will depend on (for object-oriented approaches). This is
 done to generate a unique key with all the arguments and dependencies
-included.
-
-We can also create a function that &quot;memoizes&quot; other functions, using
+included.</p>
+<p>We can also create a function that &quot;memoizes&quot; other functions, using
 the same scope concept as before (returning a new function that uses
-the original and has access to the cache object):
-<b>var</b> args
-WARNING: ES6 syntax, if you don&apos;t like it, replace &hellip; with nothing
-and use the =
-Array . <b>prototype</b> . slice .  call   (   <b>null</b>   ,   arguments
-); trick; replace const and let with var, and the other things you
-already know.
-<b>function</b>
-memoize
-(
-func
-)
-{
-<b>let</b>
-cache
-=
-{
+the original and has access to the cache object):</p>
+<p>WARNING: ES6 syntax, if you don&apos;t like it, replace &hellip; with nothing
+and use the var args = Array.prototype.slice.call(null, arguments); trick; 
+replace const and let with var, and the other things you already know.</p>
+<pre>
+<b>function</b> memoize(func) {
+  <b>let</b> cache = {};
+  // <i>You can opt for not naming the function</i>
+  <b>function</b> memoized(&hellip;args) {
+    <b>const</b> argsKey = JSON.stringify(args);
+    // <i>The same alternatives apply for this example</i>
+    <b>if</b> (argsKey <b>in</b> cache) {
+      console.log(argsKey &plus; &apos; was/were in cache :D&apos;);
+    <b>return</b> cache&lbrack;argsKey&rbrack;;
+    } <b>else</b> {
+      cache&lbrack;argsKey&rbrack; = func.apply(<b>null</b>, args);  // <i>Cache it</i>
+      <b>return</b> cache&lbrack;argsKey&rbrack;;  // <i>And then return it</i>
+    }
+  }
+  <b>return</b> memoized; // <i>Return the memoized function</i>
 }
-;
-// <i>You can opt for not naming the function</i>
-<b>function</b>
-memoized
-(
-&hellip;
-args
-)
-{
-<b>const</b>
-argsKey
-=
-JSON.
-stringify
-(
-args
-)
-;
-// <i>The same alternatives apply for this example</i>
-<b>if</b>
-(
-argsKey
-<b>in</b>
-cache
-)
-{
-console.
-log
-(
-argsKey
-&plus;
-&apos; was/were in cache :D&apos;
-)
-;
-<b>return</b>
-cache
-&lbrack;
-argsKey
-&rbrack;
-;
-}
-<b>else</b>
-{
-cache
-&lbrack;
-argsKey
-&rbrack;
-=
-func.
-apply
-(
-<b>null</b>
-,
-args
-)
-;
-// <i>Cache it</i>
-<b>return</b>
-cache
-&lbrack;
-argsKey
-&rbrack;
-;
-// <i>And then return it</i>
-}
-}
-<b>return</b>
-memoized
-;
-// <i>Return the memoized function</i>
-}
-func.apply        (   <b>null</b>  ,   args
-Now notice that this will work for multiple arguments but won&apos;t be of
-much use in object-oriented methods I think, you may need an extra
-object for dependencies. Also, ) can be replaced with
-func    ( &hellip;args
-) since array destructuring will send them separately instead of as an
-array form. Also, just for
-Function    .   <b>prototype</b>      .   apply
-reference, passing an array as an argument to func won&apos;t work unless
-you use as I did.
-To use the above method you just:
-<b>const</b>
-newFunction
-=
-memoize
-(
-oldFunction
-)
-;
+</pre>
+<p>Now notice that this will work for multiple arguments but won&apos;t be of
+much use in object-oriented methods I think, you may need an extra object for 
+dependencies. Also, func.apply(null, args) can be replaced with func(&hellip;.args) 
+since array destructuring will send them separately instead of as an
+array form. Also, just for reference, passing an array as an argument to 
+func won&apos;t work unlessFunction.<b>prototype</b>.apply as I did.</p>
+<p>To use the above method you just:</p>
+<pre>
+<b>const</b> newFunction = memoize(oldFunction);
+&nbsp;
 // <i>Assuming new oldFunction just sums/concatenates:</i>
-newFunction
-(
-&apos;meaning of life&apos;
-,
-42
-)
-;
-// <i>-&amp;quot;meaning of life42&quot;</i>
-newFunction
-(
-&apos;meaning of life&apos;
-,
-42
-)
-;
-// <i>again</i>
-// <i>=&amp;lbrack;&quot;meaning of life&quot;,42&rbrack; was/were in cache :D</i>
-// <i>-&amp;quot;meaning of life42&quot;</i>
+newFunction(&apos;meaning of life&apos;, 42);
+// <i>-&gt;quot;meaning of life42&quot;</i>
+newFunction(&apos;meaning of life&apos;, 42);  // <i>again</i>
+// <i>=&gt;lbrack;&quot;meaning of life&quot;,42&rbrack; was/were in cache :D</i>
+// <i>-&gt;quot;meaning of life42&quot;</i>
+</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-5">Section 104.5: Initializing object properties with null</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
