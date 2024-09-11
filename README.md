@@ -23994,12 +23994,12 @@ window.onerror = <b>function</b> (eventOrMessage, url, lineNumber, colNumber, er
 <p>&dollar;&lowbar; gives you the value of whatever expression was evaluated last.</p>
 <pre>
 &quot;foo&quot;  // <i>&quot;foo&quot;</i>
-&dollar;&lowbar; // <i>&quot;foo&quot;</i>
+&dollar;&lowbar;     // <i>&quot;foo&quot;</i>
 </pre>
 <p>&dollar;0 refers to the DOM element currently selected in the Inspector. So
 if <b>&lt;div</b> id = &quot;foo&quot;<b>&gt;</b> is highlighted:</p>
 <pre>
-&dollar;0 // <i>&lt;div id=&quot;foo&quot;&gt;</i>
+&dollar;0               // <i>&lt;div id=&quot;foo&quot;&gt;</i>
 &dollar;0.getAttribute(&apos;id&apos;)  // <i>&quot;foo&quot;</i>
 </pre>
 <p>&dollar;1 refers to the element previously selected, &dollar;2 to the one selected
@@ -24273,11 +24273,11 @@ node on the Elements tab and select &quot;Break on&hellip;&quot;.</p>
   alt="."
   style="border: 2px solid #000000; width:.2in;" />
 <!-- ![](./images/image049.jpg){width="0.21597222222222223in" height="0.21597222222222223in"} -->
-<i>Select an element in the page to
+<p><i>Select an element in the page to
 inspect it</i> button in the upper left corner of the Elements tab in
 Chrome or Inspector tab in Firefox, available from Developer Tools,
 and then clicking on an element of the page highlights the element and
-assigns it to the &dollar;0 variable.
+assigns it to the &dollar;0 variable.</p>
 <p>Elements inspector can be used in variety of ways, for example:</p>
 <ol type="1" start="1">
   <li>You can check if your JS is manipulating DOM the way you expect it to,</li>
@@ -24299,36 +24299,58 @@ Google Developers</a>.</p>
 debug(functionName);
 </pre>
 <p>The next time functionName function runs, the debugger will stop on its first line.</p>
+<!-- page 439 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch99-8">Section 99.8: Stepping through code</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<p>Once you&apos;ve paused execution on a breakpoint, you may want to follow
+<p><p>Once you&apos;ve paused execution on a breakpoint, you may want to follow
 execution line-by-line to observe what happens. Open your browser&apos;s
 Developer Tools and look for the Execution Control icons. (This
 example uses the icons in Google Chrome, but they&apos;ll be similar in
 other browsers.)</p>
-
-![](./images/image050.jpg){width="0.21597222222222223in"
-height="0.19791666666666666in"} <b>Resume:</b> Unpause execution.
-Shorcut: F8 (Chrome, Firefox)
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 50.  (439) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image050.jpg"
+  title="."
+  alt="."
+  style="border: 2px solid #000000; width:.2in;" />
+<!-- ![](./images/image050.jpg){width="0.21597222222222223in" height="0.19791666666666666in"} -->
+<p><b>Resume:</b> Unpause execution. Shorcut: F8 (Chrome, Firefox)</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 51.  (439) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image051.jpg"
+  title="."
+  alt="."
+  style="border: 2px solid #000000; width:.2in;" />
 F6
-![](./images/image051.jpg){width="0.2611111111111111in"
-height="0.18888888888888888in"} <b>Step Over:</b> Run the next line of
+<!-- ![](./images/image051.jpg){width="0.2611111111111111in" height="0.18888888888888888in"} -->
+<p><b>Step Over:</b> Run the next line of
 code. If that line contains a function call, run the whole function
 and move to the next line, rather than jumping to wherever the
-function is defined. Shortcut : F10 (Chrome, Firefox, IE/Edge),
-(Safari)
-![](./images/image052.jpg){width="0.19791666666666666in"
-height="0.20694444444444443in"} <b>Step Into:</b> Run the next line of
-code. If that line contains a function call, jump into the function
-and pause there. Shortcut : F11 (Chrome, Firefox, IE/Edge), F7
-(Safari)
-![](./images/image053.jpg){width="0.19791666666666666in"
-height="0.20694444444444443in"} <b>Step Out:</b> Run the rest of the
-current function, jump back to where the function was called from, and
-pause at the next statement there. Shortcut : Shift + F11 (Chrome,
-Firefox, IE/Edge), F8 (Safari)
+function is defined. Shortcut : F10 (Chrome, Firefox, IE/Edge), (Safari)</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 52.  (439) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image052.jpg"
+  title="."
+  alt="."
+  style="border: 2px solid #000000; width:.19in;" />
+<!-- ![](./images/image052.jpg){width="0.19791666666666666in" height="0.20694444444444443in"} -->
+<p><b>Step Into:</b> Run the next line of code. If that line contains a function call, 
+jump into the function and pause there. Shortcut : F11 (Chrome, Firefox, IE/Edge), F7 (Safari)</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 52.  (439) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image052.jpg"
+  title="."
+  alt="."
+  style="border: 2px solid #000000; width:.20in;" />
+<!-- ![](./images/image053.jpg){width="0.19791666666666666in" height="0.20694444444444443in"} -->
+<p><b>Step Out:</b> Run the rest of the current function, jump back to where the function 
+was called from, and pause at the next statement there. Shortcut : Shift + F11 (Chrome, 
+Firefox, IE/Edge), F8 (Safari)</p>
 <p>Use these in conjunction with the <b>Call Stack</b>, which will tell you
 which function you&apos;re currently inside of, which function called that
 function, and so forth.</p>
@@ -24342,7 +24364,620 @@ function, and so forth.</p>
   <li><a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/documentation/f12-devtools-guide/developer-tools-keyboard-shortcuts/">Edge</a></li>
   <li><a href="https://developer.apple.com/library/mac/documentation/AppleApplications/Conceptual/Safari_Developer_Guide/KeyboardShortcuts/KeyboardShortcuts.html">Safari</a></li>
 </ul>
+<!-- page 440 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch100">Chapter 100: Unit Testing JavaScript</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch100-1">Section 100.1: Unit Testing Promises with Mocha, Sinon, Chai and Proxyquire</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Here we have a simple class to be tested that returns a Promise based
+on the results of an external ResponseProcessor that takes time to
+execute.</p>
+<p>For simplicity we&apos;ll assume that the processResponse method won&apos;t
+ever fail.</p>
+<pre>
+import {processResponse} from &apos;../utils/response_processor&apos;;
+&nbsp;
+<b>const</b> ping = () =&gt; {
+  <b>return</b> <b>new</b> Promise((resolve, &lowbar;reject) =&gt; {
+    <b>const</b> response = processResponse(data);
+    resolve(response);
+  });
+}
+&nbsp;
+module.exports = ping;
+</pre>
+<p>To test this we can leverage the following tools.</p>
+<ol type="1" start="1">
+  <li><a href="https://mochajs.org/">mocha</a></li>
+  <li><a href="http://chaijs.com/">chai</a></li>
+  <li><a href="http://sinonjs.org/">sinon</a></li>
+  <li><a href="https://github.com/thlorenz/proxyquire">proxyquire</a></li>
+  <li><a href="https://github.com/domenic/chai-as-promised">chai-as-promised</a></li>
+</ol>
+<p>I use the following test script in my package.json file.</p>
+<pre>
+&quot;test&quot;: &quot;NODE_ENV=test mocha &dash;&dash;compilers js:babel-core/register &dash;&dash;;require
+./test/unit/test_helper.js &bsol;recursive test/&ast;&ast;/&ast;&lowbar;spec.js&quot;
+</pre>
+<p>This allows me to use es6 syntax. It references a test_helper that will look like</p>
+<pre>
+import chai from &apos;chai&apos;;
+import sinon from &apos;sinon&apos;;
+import sinonChai from &apos;sinon-chai&apos;;
+import chaiAsPromised from &apos;chai-as-promised&apos;;
+import sinonStubPromise from &apos;sinon-stub-promise&apos;;
+&nbsp;
+chai.use(sinonChai);
+chai.use(chaiAsPromised);
+sinonStubPromise(sinon);
+</pre>
+<p>Proxyquire allows us to inject our own stub in the place of the
+external ResponseProcessor. We can then use sinon to spy on that
+stub&apos;s methods. We use the extensions to chai that chai-as-promised injects to check
+that the ping() method&apos;s promise is fullfilled, and that it eventually returns the 
+required response.</p>
+<pre>
+import {expect}    from &apos;chai&apos;;
+import sinon       from &apos;sinon&apos;;
+import proxyquire  from &apos;proxyquire&apos;;
+&nbsp;
+<b>let</b> formattingStub = {
+  wrapResponse: () =&gt; {}
+}
+<b>let</b> ping = proxyquire(&apos;../../../src/api/ping&apos;, {
+  &apos;../utils/formatting&apos;: formattingStub
+});
+&nbsp;
+describe(&apos;ping&apos;, () =&gt; {
+  <b>let</b> wrapResponseSpy, pingResult;
+  <b>const</b> response = &apos;some response&apos;;
+&nbsp;
+  beforeEach(() =&gt; {
+    wrapResponseSpy = sinon.stub(formattingStub, &apos;wrapResponse&apos;).returns(response);
+    pingResult = ping();
+  })
+&nbsp;
+  afterEach(() =&gt; {
+    formattingStub.wrapResponse.restore();
+  })
+&nbsp;
+  it(&apos;returns a fullfilled promise&apos;, () =&gt; {
+    expect(pingResult).to.be.fulfilled;
+  })
+&nbsp;
+  it(&apos;eventually returns the correct response&apos;, () =&gt; {
+    expect(pingResult).to.eventually.equal(response);
+  })
+});
+</pre>
+<p>Now instead let&apos;s assume you wish to test something that uses the
+response from ping.</p>
+<pre>
+import {ping} from &apos;./ping&apos;;
+&nbsp;
+<b>const</b> pingWrapper = () =&gt; {
+  ping.then((response) =&gt; {
+  // <i>do something with the response</i>
+  });
+}
+module.exports = pingWrapper;
+</pre>
+<p>To test the pingWrapper we leverage</p>
+<ol type="1" start="1">
+  <li><a href="http://sinonjs.org/">sinon</a></li>
+  <li><a href="https://github.com/thlorenz/proxyquire">proxyquire</a></li>
+  <li><a href="https://github.com/substantial/sinon-stub-promise">sinon-stub-promise</a></li>
+</ol>
+<p>As before, Proxyquire allows us to inject our own stub in the place of
+the external dependency, in this case the ping method we tested
+previously. We can then use sinon to spy on that stub&apos;s methods and
+leverage promise to allow us to returnsPromise. This promise can then
+be resolved or rejected as we wish in the test, in order to test the
+wrapper&apos;s response to that.</p>
+<pre>
+import {expect}   from &apos;chai&apos;;
+import sinon      from &apos;sinon&apos;;
+import proxyquire from &apos;proxyquire&apos;;
+&nbsp;
+<b>let</b> pingStub = {
+  ping: () =&gt; {}
+};
+<b>let</b> pingWrapper = proxyquire(&apos;../src/pingWrapper&apos;, {
+  &apos;./ping&apos;: pingStub
+});
+describe(&apos;pingWrapper&apos;, () =&gt; {
+  <b>let</b> pingSpy;
+  <b>const</b> response = &apos;some response&apos;;
+&nbsp;
+  beforeEach(() =&gt; {
+    pingSpy = sinon.stub(pingStub, &apos;ping&apos;).returnsPromise();
+    pingSpy.resolves(response);
+    pingWrapper();
+});
+&nbsp;
+  afterEach(() =&gt; {
+    pingStub.wrapResponse.restore();
+  });
+  it(&apos;wraps the ping&apos;, () =&gt; {
+    expect(pingSpy).to.have.been.calledWith(response);
+  });
+});
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch100-2">Section 100.2: Basic Assertion</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>At its most basic level, Unit Testing in any language provides
+assertions against some known or expected output.</p>
+<pre>
+<b>function</b> assert( outcome, description ) {
+  <b>var</b> passFail = outcome ? &apos;pass&apos; : &apos;fail&apos;;
+  console.log(passFail, &apos;: &apos;, description);
+  <b>return</b> outcome;
+};
+</pre>
+<p>The popular assertion method above shows us one quick and easy way to
+assert a value in most web browsers and interpreters like Node.js with
+virtually any version of ECMAScript.</p>
+<p>A good unit test is designed to test a discreet unit of code; usually a function.</p>
+<pre>
+<b>function</b> add(num1, num2) {
+  <b>return</b> num1 &plus; num2;
+}
+<b>var</b> result = add(5, 20);
+assert( result == 24, &apos;add(5, 20) should return 25&hellip;&apos;);
+</pre>
+<p>In the example above, the return value from the function add(x, y) or 5 &plus; 20 is clearly
+25 , so our assertion of 24 should fail, and the assert method will log a &quot;fail&quot; line.</p>
+<p>If we simply modify our expected assertion outcome, the test will
+succeed and the resulting output would look something like this.</p>
+<pre>
+assert( result == 25, &apos;add(5, 20) should return 25&hellip;&apos;);
+console output:
+&gt; pass: should <b>return</b> 25&hellip;
+</pre>
+<p>This simple assertion can assure that in many different cases, your
+&quot;add&quot; function will always return the expected result and requires
+no additional frameworks or libraries to work.</p>
+<p>A more rigorous set of assertions would look like this (using var result(x,y) 
+for each assertion):</p>
+<pre>
+assert( result == 0, &apos;add(0, 0) should return 0&hellip;&apos;);
+assert( result == -1, &apos;add(0, -1) should return -1&hellip;&apos;);
+assert( result == 1, &apos;add(0, 1) should return 1&hellip;&apos;);
+</pre>
+<p>And console output would be this:</p>
+<pre>
+&gt; pass: should <b>return</b> 0&hellip;
+&gt; pass: should <b>return</b> &minus;1&hellip;
+&gt; pass: should <b>return</b> 1&hellip;
+</pre>
+<p>We can now safely say that <b>add(x,y)</b>... <b>should return the sum of two
+integers</b>. We can roll these up into something like this:</p>
+<pre>
+<b>function</b> test&lowbar;&lowbar;addsIntegers() {
+  // <i>expect a number of passed assertions</i>
+  <b>var</b> passed = 3;
+  // <i>number of assertions to be reduced and added as Booleans</i>
+  <b>var</b> assertions = &lbrack;
+&nbsp;
+    assert( add(0, 0) == 0, &apos;add(0, 0) should return 0&hellip;&apos;),
+    assert( add(0, &minus;1) == &minus;1, &apos;add(0, -1) should return -1&hellip;&apos;),
+    assert( add(0, 1) == 1, &apos;add(0, 1) should return 1&hellip;&apos;)
+&nbsp;
+  &rbrack;.reduce(<b>function</b>(previousValue, currentValue) {
+    <b>return</b> previousValue &plus; current;
+&nbsp;
+  });
+&nbsp;
+  <b>if</b> (assertions === passed) {
+&nbsp;
+    console.log(&quot;add(x,y)&hellip; did return the sum of two integers&quot;);
+    <b>return</b> <b>true</b>;
+  } <b>else</b> {
+    console.log(&quot;add(x,y)&hellip; does not reliably return the sum of two integers&quot;);
+    <b>return</b> <b>false</b>;
+  }
+}
+</pre>
+<!-- page 444 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch101">Chapter 101: Evaluating JavaScript</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p><b>Parameter        Details</b><br/>
+string    The JavaScript to be evaluated.</p>
 
+<p>In JavaScript, the eval function evaluates a string as if it were
+JavaScript code. The return value is the result of the evaluated
+string, e.g. eval(&apos;2 &plus; 2&apos;) returns 4.</p>
+
+<p>eval is available in the global scope. The lexical scope of the evaluation is the 
+local scope unless invoked indirectly (e.g. <b>var</b> geval = eval; geval(s);).</p>
+<p><b>The use of eval is strongly discouraged.</b> See the Remarks section for details.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch101-1">Section 101.1: Evaluate a string of JavaScript statements</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>var</b>
+x
+=
+5
+;
+<b>var</b>
+str
+=
+&quot;if (x == 5) {console.log(&apos;z is 42&apos;); z = 42;} else z = 0; &quot;
+;
+console.
+log
+(
+&quot;z is &quot;
+,
+eval
+(
+str
+)
+)
+;
+<b>The use of eval is strongly discouraged.</b> See the Remarks section
+for details.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch101-2">Section 101.2: Introduction</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+You can always run JavaScript from inside itself, although this is
+<b>strongly discouraged</b> due to the security vulnerabilities it
+presents (see Remarks for details).
+To run JavaScript from inside JavaScript, simply use the below
+function:
+eval
+(
+&quot;var a = &apos;Hello, World!&apos;&quot;
+)
+;
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch101-3">Section 101.3: Evaluation and Math</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+eval
+You can set a variable to something with the () function by using
+something similar to the below code:
+<b>var</b>
+x
+=
+10
+;
+<b>var</b>
+y
+=
+20
+;
+<b>var</b>
+a
+=
+eval
+(
+&quot;x &ast; y&quot;
+)
+&plus;
+&quot;&lt;br&gt;&quot;
+;
+<b>var</b>
+b
+=
+eval
+(
+&quot;2 + 2&quot;
+)
+&plus;
+&quot;&lt;br&gt;&quot;
+;
+<b>var</b>
+c
+=
+eval
+(
+&quot;x + 17&quot;
+)
+&plus;
+&quot;&lt;br&gt;&quot;
+;
+<b>var</b>
+res
+=
+a
+&plus;
+b
+&plus;
+c
+;
+The result, stored in the variable
+res
+, will be:
+200
+4
+27
+<b>The use of eval is strongly discouraged.</b> See the Remarks section
+for details.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch102">Chapter 102: Linters - Ensuring code quality</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch102-1">Section 102.1: JSHint</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+[JSHint](http://jshint.com/) is an open source tool which detects
+errors and potential problems in JavaScript code.
+To lint your JavaScript you have two options.
+1.  Go to [JSHint.com](http://jshint.com/) and paste your code in there
+    on line text editor.
+2.  Install [JSHint in your IDE](http://jshint.com/install/).
+Atom: [linter-jshint](https://github.com/AtomLinter/linter-jshint)
+(must have [Linter](https://github.com/steelbrain/linter) plugin
+installed)
+Sublime Text: [JSHint
+Gutter](https://github.com/victorporof/Sublime-JSHint) and/or [Sublime
+Linter](https://github.com/SublimeLinter/SublimeLinter-for-ST2)
+Vim: [jshint.vim](https://github.com/walm/jshint.vim) or
+[jshint2.vim](https://github.com/Shutnik/jshint2.vim)
+Visual Studio: [VSCode
+JSHint](https://github.com/Microsoft/vscode-jshint)
+jshintrc
+A benefit of adding it to your IDE is that you can create a JSON
+configuration file named . that will be used when linting your
+program. This is convent if you want to share configurations between
+projects.
+jshintrc
+Example . file
+{
+&quot;-W097&quot;
+:
+<b>false</b>
+,
+// <i>Allow &quot;use strict&quot; at document level</i>
+&quot;browser&quot;
+:
+<b>true</b>
+,
+// <i>defines globals exposed by modern browsers</i>
+<i>http://jshint.com/docs/options/#browser</i>
+&quot;curly&quot;
+:
+<b>true</b>
+,
+// <i>requires you to always put curly braces around blocks in loops and</i>
+<i>conditionals http://jshint.com/docs/options/#curly</i>
+&quot;devel&quot;
+:
+<b>true</b>
+,
+// <i>defines globals that are usually used for logging poor-man&apos;s
+debugging:</i>
+<i>console, alert, etc. http://jshint.com/docs/options/#devel</i>
+// <i>List global variables (false means read only)</i>
+&quot;globals&quot;
+:
+{
+&quot;globalVar&quot;
+:
+<b>true</b>
+}
+,
+&quot;jquery&quot;
+:
+<b>true</b>
+,
+// <i>This option defines globals exposed by the jQuery JavaScript
+library.</i>
+&quot;newcap&quot;
+:
+<b>false</b>
+,
+// <i>List any global functions or const vars</i>
+&quot;predef&quot;
+:
+&lbrack;
+&quot;GlobalFunction&quot;
+,
+&quot;GlobalFunction2&quot;
+&rbrack;
+,
+&quot;undef&quot;
+:
+<b>true</b>
+,
+// <i>warn about undefined vars</i>
+&quot;unused&quot;
+:
+<b>true</b>
+// <i>warn about unused vars</i>
+}
+JSHint also allows configurations for specific lines/blocks of code
+<b>switch</b>
+(
+operation
+)
+{
+<b>case</b>
+&apos;+&apos;
+{
+result
+=
+a
+&plus;
+b
+;
+<b>break</b>
+;
+}
+// <i>JSHint W086 Expected a &apos;break&apos; statement</i>
+// <i>JSHint flag to allow cases to not need a break</i>
+<i>/&ast; falls through &ast;/</i>
+<b>case</b>
+&apos;&ast;&apos;
+:
+<b>case</b>
+&apos;x&apos;
+:
+{
+result
+=
+a
+&ast;
+b
+;
+<b>break</b>
+;
+}
+}
+// <i>JSHint disable error for variable not defined, because it is defined
+in another file</i>
+<i>/&ast; jshint -W117 &ast;/</i>
+globalVariable
+=
+&apos;in-another-file.js&apos;
+;
+<i>/&ast; jshint +W117 &ast;/</i>
+More configuration options are documented at
+<http://jshint.com/docs/options/>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch102-2">Section 102.2: ESLint / JSCS</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+[ESLint](http://eslint.org/) is a code style linter and formatter for
+your style guide [much like
+JSHint](http://www.slant.co/versus/8627/8628/%7Ejshint_vs_eslint).
+ESLint merged with
+[JSCS](https://medium.com/@markelog/jscs-end-of-the-line-bc9bf0b3fdb2#.h2cktyall)
+in April of 2016. ESLint does take more effort to set up than JSHint,
+but there are clear instructions on their
+[website](http://eslint.org/docs/user-guide/getting-started) for
+getting started.
+A sample configuration for ESLint is as follows:
+{
+&quot;rules&quot;
+:
+{
+&quot;semi&quot;
+:
+&lbrack;
+&quot;error&quot;
+,
+&quot;always&quot;
+&rbrack;
+,
+// <i>throw an error when semicolons are detected</i>
+&quot;quotes&quot;
+:
+&lbrack;
+&quot;error&quot;
+,
+&quot;double&quot;
+&rbrack;
+// <i>throw an error when double quotes are detected</i>
+}
+}
+A sample configuration file where ALL rules are set to off, with
+descriptions for what they do can be found
+[here](https://gist.github.com/cletusw/e01a85e399ab563b1236).
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch102-3">Section 102.3: JSLint</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+[JSLint](http://www.jslint.com/) is the trunk from which JSHint
+branched. JSLint takes a much more opinionated stance on how to write
+JavaScript code, pushing you towards only using the parts [Douglas
+Crockford](http://crockford.com/) deems to be its &quot;good parts&quot;, and
+away from any code that Crockford believes to have a better solution.
+The following StackOverflow thread may help you decide [which linter
+is right for you](http://stackoverflow.com/a/6803574/6194193). While
+there are differences (here are some brief comparisons between it and
+[JSHint](http://www.slant.co/versus/8627/8626/%7Ejshint_vs_jslint) /
+[ESLint](http://www.slant.co/versus/8628/8626/%7Eeslint_vs_jslint)),
+each option is extremely customizable.
+For a more information about configuring JSLint check out
+[NPM](https://www.npmjs.com/package/jslint) or
+[github](https://gist.github.com/bretdavidson/3189814#file-jslint-options-descriptions).
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch103">Chapter 103: Anti-patterns</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch103-1">Section 103.1: Chaining assignments in var declarations</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Chaining assignments as part of a <b>var</b> declaration will create
+global variables unintentionally.
+For example:
+(
+<b>function</b>
+foo
+(
+)
+{
+<b>var</b>
+a
+=
+b
+=
+0
+;
+}
+)
+(
+)
+console.
+log
+(
+&apos;a: &apos;
+&plus;
+a
+)
+;
+console.log
+(
+&apos;b: &apos;
+&plus;
+b
+)
+;
+Will result in:
+Uncaught ReferenceError
+:
+a is not defined
+&apos;b: 0&apos;
+In the above example, a is local but b becomes global. This is because
+of the right to left evaluation of the = operator. So the above code
+actually evaluated as
+<b>var</b>
+a
+=
+(
+b
+=
+0
+)
+;
+The correct way to chain var assignments is:
+<b>var</b>
+a
+,
+b
+;
+a
+=
+b
+=
+0
+;
+Or:
+<b>var</b>
+a
+=
+0
+,
+b
+=
+a
+;
+This will make sure that both a and b will be local variables.
 
 
 
