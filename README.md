@@ -25112,10 +25112,11 @@ func won&apos;t work unlessFunction.<b>prototype</b>.apply as I did.</p>
 &nbsp;
 // <i>Assuming new oldFunction just sums/concatenates:</i>
 newFunction(&apos;meaning of life&apos;, 42);
-// <i>-&gt;quot;meaning of life42&quot;</i>
+// <i>-&gt; &quot;meaning of life42&quot;</i>
+&nbsp;
 newFunction(&apos;meaning of life&apos;, 42);  // <i>again</i>
-// <i>=&gt;lbrack;&quot;meaning of life&quot;,42&rbrack; was/were in cache :D</i>
-// <i>-&gt;quot;meaning of life42&quot;</i>
+// <i>=&gt; &lbrack;&quot;meaning of life&quot;,42&rbrack; was/were in cache :D</i>
+// <i>-&gt; &quot;meaning of life42&quot;</i>
 </pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-5">Section 104.5: Initializing object properties with null</h3>
