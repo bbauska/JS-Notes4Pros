@@ -24710,147 +24710,1337 @@ projects.</p>
 globalVariable = &apos;in-another-file.js&apos;;
 <i>/&ast; jshint +W117 &ast;/</i>
 </pre>
-<p><a href="http://jshint.com/docs/options/">More configuration options are documented at</a>
-&lt;http://jshint.com/docs/options/&gt;</p>
+<p><a href="http://jshint.com/docs/options/">More configuration options</a>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch102-2">Section 102.2: ESLint / JSCS</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-[ESLint](http://eslint.org/) is a code style linter and formatter for
-your style guide [much like
-JSHint](http://www.slant.co/versus/8627/8628/%7Ejshint_vs_eslint).
-ESLint merged with
-[JSCS](https://medium.com/@markelog/jscs-end-of-the-line-bc9bf0b3fdb2#.h2cktyall)
-in April of 2016. ESLint does take more effort to set up than JSHint,
-but there are clear instructions on their
-[website](http://eslint.org/docs/user-guide/getting-started) for
-getting started.
-A sample configuration for ESLint is as follows:
+<a href="http://eslint.org/">ESLint</a> is a code style linter and formatter for
+your style guide <a href="http://www.slant.co/versus/8627/8628/%7Ejshint_vs_eslint">much like JSHint</a>.
+ESLint merged with <a href="https://medium.com/@markelog/jscs-end-of-the-line-bc9bf0b3fdb2#.h2cktyall">
+JSCS</a> in April of 2016. ESLint does take more effort to set up than JSHint, but there 
+are clear instructions on their <a href="http://eslint.org/docs/user-guide/getting-started">
+website</a> for getting started.</p>
+<p>A sample configuration for ESLint is as follows:</p>
+<pre>
 {
-&quot;rules&quot;
-:
-{
-&quot;semi&quot;
-:
-&lbrack;
-&quot;error&quot;
-,
-&quot;always&quot;
-&rbrack;
-,
-// <i>throw an error when semicolons are detected</i>
-&quot;quotes&quot;
-:
-&lbrack;
-&quot;error&quot;
-,
-&quot;double&quot;
-&rbrack;
-// <i>throw an error when double quotes are detected</i>
+  &quot;rules&quot;: {
+    &quot;semi&quot;: &lbrack;&quot;error&quot;, &quot;always&quot;&rbrack;, // <i>throw an error when semicolons are detected</i>
+    &quot;quotes&quot;: &lbrack;&quot;error&quot;, &quot;double&quot;&rbrack; // <i>throw an error when double quotes are detected</i>
+  }
 }
-}
-A sample configuration file where ALL rules are set to off, with
-descriptions for what they do can be found
-[here](https://gist.github.com/cletusw/e01a85e399ab563b1236).
+</pre>
+<p>A sample configuration file where ALL rules are set to off, with descriptions 
+for what they do can be found <a href="https://gist.github.com/cletusw/e01a85e399ab563b1236">here</a>.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch102-3">Section 102.3: JSLint</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-[JSLint](http://www.jslint.com/) is the trunk from which JSHint
+<p><a href="http://www.jslint.com/">JSLint</a> is the trunk from which JSHint
 branched. JSLint takes a much more opinionated stance on how to write
-JavaScript code, pushing you towards only using the parts [Douglas
-Crockford](http://crockford.com/) deems to be its &quot;good parts&quot;, and
-away from any code that Crockford believes to have a better solution.
-The following StackOverflow thread may help you decide [which linter
-is right for you](http://stackoverflow.com/a/6803574/6194193). While
-there are differences (here are some brief comparisons between it and
-[JSHint](http://www.slant.co/versus/8627/8626/%7Ejshint_vs_jslint) /
-[ESLint](http://www.slant.co/versus/8628/8626/%7Eeslint_vs_jslint)),
-each option is extremely customizable.
-For a more information about configuring JSLint check out
-[NPM](https://www.npmjs.com/package/jslint) or
-[github](https://gist.github.com/bretdavidson/3189814#file-jslint-options-descriptions).
+JavaScript code, pushing you towards only using the parts 
+<a href="http://crockford.com/">Douglas Crockford</a> deems to be its &quot;good 
+parts&quot;, and away from any code that Crockford believes to have a better solution.
+The following StackOverflow thread may help you decide 
+<a href="http://stackoverflow.com/a/6803574/6194193">which linter is right for you</a>. 
+While there are differences (here are some brief comparisons between it and 
+<a href="http://www.slant.co/versus/8627/8626/%7Ejshint_vs_jslint">JSHint</a> / 
+<a href="http://www.slant.co/versus/8628/8626/%7Eeslint_vs_jslint">ESLint</a>) 
+each option is extremely customizable.</p>
+
+<p>For a more information about configuring JSLint check out <a href="https://www.npmjs.com/package/jslint">
+NPM</a> or <a href="https://gist.github.com/bretdavidson/3189814#file-jslint-options-descriptions">github</a>.</p>
+<!-- page 447 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h2 id="ch103">Chapter 103: Anti-patterns</h2>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch103-1">Section 103.1: Chaining assignments in var declarations</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-Chaining assignments as part of a <b>var</b> declaration will create
-global variables unintentionally.
+<p>Chaining assignments as part of a <b>var</b> declaration will create global 
+variables unintentionally.</p>
+<pre>
 For example:
+&nbsp;
+(<b>function</b> foo() {
+  <b>var</b> a = b = 0;
+})()
+console.log(&apos;a: &apos; &plus; a);
+console.log(&apos;b: &apos; &plus; b);
+</pre>
+<p>Will result in:</p>
+<pre>
+Uncaught ReferenceError: a is not defined
+&apos;b: 0&apos;
+</pre>
+<p>In the above example, a is local but b becomes global. This is because
+of the right to left evaluation of the = operator. So the above code
+actually evaluated as</p>
+<pre>
+<b>var</b> a = (b = 0);
+</pre>
+<p>The correct way to chain var assignments is:</p>
+<pre>
+<b>var</b> a, b;
+a = b = 0;
+</pre>
+<p>Or:</p>
+<pre>
+<b>var</b> a = 0, b = a;
+</pre>
+<p>This will make sure that both a and b will be local variables.</p>
+<!-- page 448 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch104">Chapter 104: Performance Tips</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>JavaScript, like any language, requires us to be judicious in the use
+of certain language features. Overuse of some features can decrease
+performance, while some techniques can be used to increase performance.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch104-1">Section 104.1: Avoid try/catch in performance-critical functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Some JavaScript engines (for example, the current version of Node.js
+and older versions of Chrome before Ignition+turbofan) don&apos;t run the
+optimizer on functions that contain a try/catch block.</p>
+<p>If you need to handle exceptions in performance-critical code, it can
+be faster in some cases to keep the try/catch in a separate function.
+For example, this function will not be optimized by some implementations:</p>
+<pre>
+<b>function</b> myPerformanceCriticalFunction() {
+  <b>try</b> {
+    // <i>do complex calculations here</i>
+  } <b>catch</b> (e) {
+    console.log(e);
+  }
+}
+</pre>
+<p>However, you can refactor to move the slow code into a separate
+function (that <i>can</i> be optimized) and call it from inside the <b>try</b>
+block.</p>
+<pre>
+// <i>This function can be optimized</i>
+<b>function</b> doCalculations() {
+  // <i>do complex calculations here</i>
+}
+  // <i>Still not always optimized, but it&apos;s not doing much so the performance doesn&apos;t matter</i>
+<b>function</b> myPerformanceCriticalFunction() {
+  <b>try</b> {
+    doCalculations();
+  } <b>catch</b> (e) {
+    console.log(e);
+  }
+}
+</pre>
+<p>Here&apos;s a jsPerf benchmark showing the difference:
+<a href="https://jsperf.com/try-catch-deoptimization">try-catch-deoptimization</a>. 
+In the current version of most browsers, there shouldn&apos;t be much difference if any, but in
+less recent versions of Chrome and Firefox, or IE, the version that
+calls a helper function inside the try/catch is likely to be faster.</p>
+<p>Note that optimizations like this should be made carefully and with
+actual evidence based on profiling your code. As
+JavaScript engines get better, it could end up hurting performance
+instead of helping, or making no difference at all (but complicating
+the code for no reason). Whether it helps, hurts, or makes no
+difference can depend on a lot of factors, so always measure the
+effects on your code. That&apos;s true of all optimizations, but
+especially microoptimizations like this that depend on low-level
+details of the compiler/runtime.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch104-2">Section 104.2: Limit DOM Updates</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>A common mistake seen in JavaScript when run in a browser environment
+is updating the DOM more often than necessary.</p>
+<p>The issue here is that every update in the DOM interface causes the
+browser to re-render the screen. If an update changes the layout of an
+element in the page, the entire page layout needs to be re-computed,
+and this is very performance-heavy even in the simplest of cases. The
+process of re-drawing a page is known as <i>reflow</i> and can cause a
+browser to run slowly or even become unresponsive.</p>
+<p>The consequence of updating the document too frequently is illustrated
+with the following example of adding items to a list.</p>
+<p>Consider the following document containing a <b>&lt;ul&gt;</b> element:</p>
+<pre>
+&lt;!DOCTYPE html<b>&gt;</b>
+<b>&lt;</b><b>html</b><b>&gt;</b>
+  <b>&lt;</b><b>body</b><b>&gt;</b>
+    <b>&lt;</b><b>ul</b> id=&quot;list&quot;<b>&gt;&lt;/ul&gt;</b>
+  <b>&lt;</b><b>/body</b><b>&gt;</b>
+<b>&lt;</b><b>/html</b><b>&gt;</b>
+</pre>
+<p>We add 5000 items to the list looping 5000 times (you can try this
+with a larger number on a powerful computer to increase the effect).</p>
+<pre>
+<b>var</b> list = document.getElementById(&quot;list&quot;);
+<b>for</b>(<b>var</b> i = 1; i &lt;= 5000; i++) {
+  list.innerHTML += &grave;&lt;li&gt;item &dollar;{i}&lt;/li&gt;&grave;; // <i>update 5000 times</i>
+}
+</pre>
+<p>In this case, the performance can be improved by batching all 5000
+changes in one single DOM update.</p>
+<pre>
+<b>var</b> list = document.getElementById(&quot;list&quot;);
+<b>var</b> html = &quot;&quot;;
+<b>for</b>(<b>var</b> i = 1; i &lt;= 5000; i++) {
+  html += &grave;&lt;li&gt;item &dollar;{i}&lt;/li&gt;&grave;;
+}
+list.innerHTML = html;  // <i>update once</i>
+</pre>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment">function document.createDocumentFragment() 
+can be used as a lightweight container for the HTML created by the loop. This method 
+is slightly faster than modifying the container element&apos;s innerHTML property 
+(as shown below).</p>
+<pre>
+<b>var</b> list = document.getElementById(&quot;list&quot;);
+<b>var</b> fragment = document.createDocumentFragment();
+<b>for</b>(<b>var</b> i = 1; i &lt;= 5000; i++) {
+  li = document.createElement(&quot;li&quot;);
+  li&period;innerHTML = &quot;item &quot; &plus; i;
+  fragment.appendChild(li);
+  i++;
+}
+list.appendChild(fragment);
+</pre>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch104-3">Section 104.3: Benchmarking your code - measuring execution time</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+Most performance tips are very dependent of the current state of JS
+engines and are expected to be only relevant at a given time. The
+fundamental law of performance optimization is that you must first
+measure before trying to optimize, and measure again after a presumed
+optimization.
+To measure code execution time, you can use different time measurement
+tools like:
+[Performance](https://developer.mozilla.org/en-US/docs/Web/API/Performance)
+interface that represents timing-related performance information for
+the given page (only available in browsers).
+[process.hrtime](https://nodejs.org/api/process.html#process_process_hrtime_time)
+on Node.js gives you timing information as &lbrack;seconds, nanoseconds&rbrack;
+tuples. Called without argument it returns an arbitrary time but
+called with a previously returned value as argument it returns the
+difference between the two executions.
+console.time        (   &quot;labelName&quot;
+[Console
+timers](https://developer.mozilla.org/en-US/docs/Web/API/Console/time)
+) starts a timer you can use to track how long an operation takes. You
+give each timer a unique label name, and may have up to 10,000 timers
+running on a given page. When you call
+console.timeEnd     (   &quot;labelName&quot;
+) with the same name, the browser will finish the timer for given name
+and output
+the time in milliseconds, that elapsed since the timer was started.
+The strings passed to time() and timeEnd() must match otherwise the
+timer will not finish.
+Date  . now
+[Date.now](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now)
+function () returns current [Timestamp](http://www.unixtimestamp.com/)
+in milliseconds, which is a
+[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
+representation of time since 1 January 1970 00:00:00 UTC until now.
+The method now() is a static method of Date, therefore you always use
+it as Date.now().
+performance.now
+<b>Example 1</b> using: ()
+In this example we are going to calculate the elapsed time for the
+execution of our function, and we are going to use the
+[Performance.now()](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)
+method that returns a
+[DOMHighResTimeStamp](https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp),
+measured in milliseconds, accurate to one thousandth of a millisecond.
+<b>let</b>
+startTime
+,
+endTime
+;
+<b>function</b>
+myFunction
 (
+)
+{
+// <i>Slow code you want to measure</i>
+}
+// <i>Get the start time</i>
+startTime
+=
+performance.
+now
+(
+)
+;
+// <i>Call the time-consuming function</i>
+myFunction
+(
+)
+;
+// <i>Get the end time</i>
+endTime
+=
+performance.
+now
+(
+)
+;
+// <i>The difference is how many milliseconds it took to call myFunction()</i>
+console.
+debug
+(
+&apos;Elapsed time:&apos;
+,
+(
+endTime
+&minus;
+startTime
+)
+)
+;
+The result in console will look something like this:
+Elapsed time
+:
+0.10000000009313226
+[performance.now](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)
+Usage of
+[()](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)
+has the highest precision in browsers with accuracy to one thousandth
+of a millisecond, but the lowest
+[compatibility](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now#Browser_compatibility).
+Date   . now
+<b>Example 2</b> using: ()
+In this example we are going to calculate the elapsed time for the
+initialization of a big array (1 million values), and
+Date        .    now
+we are going to use the () method
+<b>let</b> t0 = Date.now(); // <i>stores current Timestamp in milliseconds
+since 1 January 1970 00:00:00 UTC</i> <b>let</b> arr = &lbrack;&rbrack;; // <i>store empty
+array</i> <b>for</b> (<b>let</b> i = 0; i &lt; 1000000; i++) { // <i>1 million
+iterations</i> arr.push(i); // <i>push current i value</i>
+}
+console.
+log
+(
+Date
+.
+now
+(
+)
+&minus;
+t0
+)
+;
+// <i>print elapsed time between stored t0 and now</i>
+console.time   (   &quot;label&quot;   ) &   console.timeEnd    (   &quot;label&quot;
+<b>Example 3</b> using: )
+console.time       (   &quot;label&quot;
+console.timeEnd       (    &quot;label&quot;
+In this example we are doing the same task as in Example 2, but we are
+going to use the ) & ) methods
+console.time
+(
+&quot;t&quot;
+)
+;
+// <i>start new timer for label name: &quot;t&quot;</i>
+<b>let</b>
+arr
+=
+&lbrack;
+&rbrack;
+;
+// <i>store empty array</i>
+<b>for</b>
+(
+<b>let</b>
+i
+=
+0
+;
+i
+&lt;
+1000000
+;
+i
+++
+)
+{
+// <i>1 million iterations</i>
+arr.
+push
+(
+i
+)
+;
+// <i>push current i value</i>
+}
+console.
+timeEnd
+(
+&quot;t&quot;
+)
+;
+// <i>stop the timer for label name: &quot;t&quot; and print elapsed time</i>
+process.hrtime
+<b>Exemple 4</b> using ()
+In Node.js programs this is the most precise way to measure spent
+time.
+<b>let</b>
+start
+=
+process.
+hrtime
+(
+)
+;
+// <i>long execution here, maybe asynchronous</i>
+<b>let</b>
+diff
+=
+process.
+hrtime
+(
+start
+)
+;
+// <i>returns for example &lbrack; 1, 2325 &rbrack;</i>
+console.
+log
+(
+&grave;Operation took &dollar;
+{
+diff
+&lbrack;
+0
+&rbrack;
+&ast;
+1e9
+&plus;
+diff
+&lbrack;
+1
+&rbrack;
+}
+nanoseconds&grave;
+)
+;
+// <i>logs: Operation took 1000002325 nanoseconds</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch104-4">Section 104.4: Use a memoizer for heavy-computing functions</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+If you are building a function that may be heavy on the processor
+(either clientside or serverside) you may want to consider a
+<b>memoizer</b> which is a <i>cache of previous function executions and
+their returned values</i>. This allows you to check if the parameters of
+a function were passed before. Remember, pure functions are those that
+given an input, return a corresponding unique output and don&apos;t cause
+side-effects outside their scope so, you should not add memoizers to
+functions that are unpredictable or depend on external resources (like
+AJAX calls or randomly returned values).
+Let&apos;s say I have a recursive factorial function:
+<b>function</b>
+fact
+(
+num
+)
+{
+<b>return</b>
+(
+num
+===
+0
+)
+?
+1
+:
+num
+&ast;
+fact
+(
+num
+&minus;
+1
+)
+;
+}
+If I pass small values from 1 to 100 for example, there would be no
+problem, but once we start going deeper, we might blow up the call
+stack or make the process a bit painful for the JavaScript engine
+we&apos;re doing this in, especially if the engine doesn&apos;t count with
+tail-call optimization (although Douglas Crockford says that native
+ES6 has tail-call optimization included).
+We could hard code our own dictionary from 1 to god-knows-what number
+with their corresponding factorials but, I&apos;m not sure if I advise
+that! Let&apos;s create a memoizer, shall we?
+<b>var</b>
+fact
+=
+(
+<b>function</b>
+(
+)
+{
+<b>var</b>
+cache
+=
+{
+}
+;
+// <i>Initialise a memory cache object</i>
+// <i>Use and return this function to check if val is cached</i>
+<b>function</b>
+checkCache
+(
+val
+)
+{
+<b>if</b>
+(
+val
+<b>in</b>
+cache
+)
+{
+console.
+log
+(
+&apos;It was in the cache :D&apos;
+)
+;
+<b>return</b>
+cache
+&lbrack;
+val
+&rbrack;
+;
+// <i>return cached</i>
+}
+<b>else</b>
+{
+cache
+&lbrack;
+val
+&rbrack;
+=
+factorial
+(
+val
+)
+;
+// <i>we cache it</i>
+<b>return</b>
+cache
+&lbrack;
+val
+&rbrack;
+;
+// <i>and then return it</i>
+}
+<i>/&ast; Other alternatives for checking are:</i>
+<i>&vert;&vert; cache.hasOwnProperty(val) or !!cache&lbrack;val&rbrack;</i>
+<i>&vert;&vert; but wouldn&apos;t work if the results of those</i>
+<i>&vert;&vert; executions were falsy values.</i>
+<i>&ast;/</i>
+}
+// <i>We create and name the actual function to be used</i>
+<b>function</b>
+factorial
+(
+num
+)
+{
+<b>return</b>
+(
+num
+===
+0
+)
+?
+1
+:
+num
+&ast;
+factorial
+(
+num
+&minus;
+1
+)
+;
+}
+// <i>End of factorial function</i>
+<i>/&ast; We return the function that checks, not the one</i>
+<i>&vert;&vert; that computes because it happens to be recursive,</i>
+<i>&vert;&vert; if it weren&apos;t you could avoid creating an extra</i>
+<i>&vert;&vert; function in this self-invoking closure function.</i>
+<i>&ast;/</i>
+<b>return</b>
+checkCache
+;
+}
+(
+)
+)
+;
+Now we can start using it:
+![](./images/image054.jpg){width="4.252083333333333in"
+height="0.9909722222222223in"}
+
+Now that I start to reflect on what I did, if I were to increment from
+1 instead of decrement from <i>num</i>, I could have cached all of the
+factorials from 1 to <i>num</i> in the cache recursively, but I will leave
+that for you.
+
+This is great but what if we have <b>multiple parameters</b>? This is a
+problem? Not quite, we can do some nice tricks like using
+JSON.stringify() on the arguments array or even a list of values that
+the function will depend on (for object-oriented approaches). This is
+done to generate a unique key with all the arguments and dependencies
+included.
+
+We can also create a function that &quot;memoizes&quot; other functions, using
+the same scope concept as before (returning a new function that uses
+the original and has access to the cache object):
+<b>var</b> args
+WARNING: ES6 syntax, if you don&apos;t like it, replace &hellip; with nothing
+and use the =
+Array . <b>prototype</b> . slice .  call   (   <b>null</b>   ,   arguments
+); trick; replace const and let with var, and the other things you
+already know.
+<b>function</b>
+memoize
+(
+func
+)
+{
+<b>let</b>
+cache
+=
+{
+}
+;
+// <i>You can opt for not naming the function</i>
+<b>function</b>
+memoized
+(
+&hellip;
+args
+)
+{
+<b>const</b>
+argsKey
+=
+JSON.
+stringify
+(
+args
+)
+;
+// <i>The same alternatives apply for this example</i>
+<b>if</b>
+(
+argsKey
+<b>in</b>
+cache
+)
+{
+console.
+log
+(
+argsKey
+&plus;
+&apos; was/were in cache :D&apos;
+)
+;
+<b>return</b>
+cache
+&lbrack;
+argsKey
+&rbrack;
+;
+}
+<b>else</b>
+{
+cache
+&lbrack;
+argsKey
+&rbrack;
+=
+func.
+apply
+(
+<b>null</b>
+,
+args
+)
+;
+// <i>Cache it</i>
+<b>return</b>
+cache
+&lbrack;
+argsKey
+&rbrack;
+;
+// <i>And then return it</i>
+}
+}
+<b>return</b>
+memoized
+;
+// <i>Return the memoized function</i>
+}
+func.apply        (   <b>null</b>  ,   args
+Now notice that this will work for multiple arguments but won&apos;t be of
+much use in object-oriented methods I think, you may need an extra
+object for dependencies. Also, ) can be replaced with
+func    ( &hellip;args
+) since array destructuring will send them separately instead of as an
+array form. Also, just for
+Function    .   <b>prototype</b>      .   apply
+reference, passing an array as an argument to func won&apos;t work unless
+you use as I did.
+To use the above method you just:
+<b>const</b>
+newFunction
+=
+memoize
+(
+oldFunction
+)
+;
+// <i>Assuming new oldFunction just sums/concatenates:</i>
+newFunction
+(
+&apos;meaning of life&apos;
+,
+42
+)
+;
+// <i>-&amp;quot;meaning of life42&quot;</i>
+newFunction
+(
+&apos;meaning of life&apos;
+,
+42
+)
+;
+// <i>again</i>
+// <i>=&amp;lbrack;&quot;meaning of life&quot;,42&rbrack; was/were in cache :D</i>
+// <i>-&amp;quot;meaning of life42&quot;</i>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch104-5">Section 104.5: Initializing object properties with null</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+All modern JavaScript JIT compilers trying to optimize code based on
+expected object structures. Some tip from
+[mdn](https://developer.mozilla.org/en-US/docs/Web/JavaScript/The_performance_hazards_of__%5B%5BPrototype%5D%5D_mutation#How_JavaScript_engines_optimize_property_accesses).
+Fortunately, the objects and properties are often &quot;predictable&quot;, and
+in such cases their underlying structure can also be predictable. JITs
+can rely on this to make predictable accesses faster.
+The best way to make object predictable is to define a whole structure
+in a constructor. So if you&apos;re going to add some extra properties
+after object creation, define them in a constructor with <b>null</b>.
+This will help the optimizer to predict object behavior for its whole
+life cycle. However all compilers have different optimizers, and the
+performance increase can be different, but overall it&apos;s good practice
+to define all properties in a constructor, even when their value is
+not yet known.
+Time for some testing. In my test, I&apos;m creating a big array of some
+class instances with a for loop. Within the loop, I&apos;m assigning the
+same string to all object&apos;s &quot;x&quot; property before array
+initialization. If constructor initializes &quot;x&quot; property with null,
+array always processes better even if it&apos;s doing extra statement.
+This is code:
+<b>function</b>
+f1
+(
+)
+{
+<b>var</b>
+P
+=
+<b>function</b>
+(
+)
+{
+<b>this</b>
+.
+value
+=
+1
+}
+;
+<b>var</b>
+big_array
+=
+<b>new</b>
+Array
+(
+10000000
+)
+.
+fill
+(
+1
+)
+.
+map
+(
+(
+x
+,
+index
+)
+=&gt;
+{
+![](./images/image055.png){width="7.486805555555556in"
+height="7.072222222222222in"}
+This is the result for Chrome and Firefox.
+FireFox Chrome
+&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&bsol;
+f1 6,400 11,400
+f2 1,700 9,600
+As we can see, the performance improvements are very different between
+the two.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch104-6">Section 104.6: Reuse objects rather than recreate</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+<b>Example A</b>
+<b>var</b>
+i
+,
+a
+,
+b
+,
+len
+;
+a
+=
+{
+x
+:
+0
+,
+y
+:
+0
+}
+<b>function</b>
+test
+(
+)
+{
+// <i>return object created each call</i>
+<b>return</b>
+{
+x
+:
+0
+,
+y
+:
+0
+}
+;
+}
+<b>function</b>
+test1
+(
+a
+)
+{
+// <i>return object supplied</i>
+a&period;
+x
+=
+0
+;
+a&period;
+y
+=
+0
+;
+<b>return</b>
+a
+;
+}
+<b>for</b>
+(
+i
+=
+0
+;
+i
+&lt;
+100
+;
+i
+++
+)
+{
+// <i>Loop A</i>
+b
+=
+test
+(
+)
+;
+}
+<b>for</b>
+(
+i
+=
+0
+;
+i
+&lt;
+100
+;
+i
+++
+)
+{
+// <i>Loop B</i>
+b
+=
+test1
+(
+a
+)
+;
+}
+Loop B is 4 (400%) times faster than Loop A
+test
+test1
+It is very inefficient to create a new object in performance code.
+Loop A calls function () which returns a new object every call. The
+created object is discarded every iteration, Loop B calls () that
+requires the object returns to be supplied. It thus uses the same
+object and avoids allocation of a new object, and excessive GC hits.
+(GC were not included in the performance test)
+<b>Example B</b>
+<b>var</b>
+i
+,
+a
+,
+b
+,
+len
+;
+a
+=
+{
+x
+:
+0
+,
+y
+:
+0
+}
+<b>function</b>
+test2
+(
+a
+)
+{
+<b>return</b>
+{
+x
+:
+a&period;
+x
+&ast;
+10
+,
+y
+:
+a&period;
+x
+&ast;
+10
+}
+;
+}
+<b>function</b>
+test3
+(
+a
+)
+{
+a&period;
+x
+=
+a&period;
+x
+&ast;
+10
+;
+a&period;
+y
+=
+a&period;
+y
+&ast;
+10
+;
+<b>return</b>
+a
+;
+}
+<b>for</b>
+(
+i
+=
+0
+;
+i
+&lt;
+100
+;
+i
+++
+)
+{
+// <i>Loop A</i>
+b
+=
+test2
+(
+{
+x
+:
+10
+,
+y
+:
+10
+}
+)
+;
+}
+<b>for</b>
+(
+i
+=
+0
+;
+i
+&lt;
+100
+;
+i
+++
+)
+{
+// <i>Loop B</i>
+a&period;
+x
+=
+10
+;
+a&period;
+y
+=
+10
+;
+b
+=
+test3
+(
+a
+)
+;
+}
+Loop B is 5 (500%) times faster than loop A
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch104-7">Section 104.7: Prefer local variables to globals, attributes, and indexed values</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+JavaScript engines first look for variables within the local scope
+before extending their search to larger scopes. If the variable is an
+indexed value in an array, or an attribute in an associative array, it
+will first look for the parent array before it finds the contents.
+
+This has implications when working with performance-critical code.
+Take for instance a common <b>for</b> loop:
+
+<b>var</b>
+global_variable
+=
+0
+;
+<b>function</b>
+foo
+(
+)
+{
+global_variable
+=
+0
+;
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+items.
+length
+;
+i
+++
+)
+{
+global_variable
++=
+items
+&lbrack;
+i
+&rbrack;
+;
+}
+}
+For every iteration in <b>for</b> loop, the engine will lookup items,
+lookup the length attribute within items, lookup items again, lookup
+the value at index i of items, and then finally lookup
+global_variable, first trying the local scope before checking the
+global scope.
+A performant rewrite of the above function is:
 <b>function</b>
 foo
 (
 )
 {
 <b>var</b>
-a
-=
-b
+local_variable
 =
 0
+;
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+,
+li
+=
+items.
+length
+;
+i
+&lt;
+li
+;
+i
+++
+)
+{
+local_variable
++=
+items
+&lbrack;
+i
+&rbrack;
+;
+}
+<b>return</b>
+local_variable
+;
+}
+
+For every iteration in the rewritten <b>for</b> loop, the engine will
+lookup li, lookup items, lookup the value at index i, and lookup
+local_variable, this time only needing to check the local scope.
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch104-8">Section 104.8: Be consistent in use of Numbers</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--
+If the engine is able to correctly predict you&apos;re using a specific
+small type for your values, it will be able to optimize the executed
+code.
+In this example, we&apos;ll use this trivial function summing the elements
+of an array and outputting the time it took:
+// <i>summing properties</i>
+<b>var</b>
+sum
+=
+(
+<b>function</b>
+(
+arr
+)
+{
+<b>var</b>
+start
+=
+process.
+hrtime
+(
+)
+;
+<b>var</b>
+sum
+=
+0
+;
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+arr.
+length
+;
+i
+++
+)
+{
+sum
++=
+arr
+&lbrack;
+i
+&rbrack;
+;
+}
+<b>var</b>
+diffSum
+=
+process.
+hrtime
+(
+start
+)
+;
+console.
+log
+(
+&grave;Summing took &dollar;
+{
+diffSum
+&lbrack;
+0
+&rbrack;
+&ast;
+1e9
+&plus;
+diffSum
+&lbrack;
+1
+&rbrack;
+}
+nanoseconds&grave;
+)
+;
+<b>return</b>
+sum
 ;
 }
 )
 (
-)
-console.
-log
-(
-&apos;a: &apos;
-&plus;
-a
+arr
 )
 ;
-console.log
-(
-&apos;b: &apos;
-&plus;
-b
-)
-;
-Will result in:
-Uncaught ReferenceError
-:
-a is not defined
-&apos;b: 0&apos;
-In the above example, a is local but b becomes global. This is because
-of the right to left evaluation of the = operator. So the above code
-actually evaluated as
+Let&apos;s make an array and sum the elements:
 <b>var</b>
-a
+N
 =
-(
-b
-=
-0
-)
-;
-The correct way to chain var assignments is:
-<b>var</b>
-a
+12345
 ,
-b
-;
-a
+arr
 =
-b
-=
-0
+&lbrack;
+&rbrack;
 ;
-Or:
+<b>for</b>
+(
 <b>var</b>
-a
+i
 =
 0
-,
-b
-=
-a
 ;
-This will make sure that both a and b will be local variables.
+i
+&lt;
+N
+;
+i
+++
+)
+arr
+&lbrack;
+i
+&rbrack;
+=
+Math
+.
+random
+(
+)
+;
+Result:
+Summing took 384416 nanoseconds
+Now, let&apos;s do the same but with only integers:
+<b>var</b>
+N
+=
+12345
+,
+arr
+=
+&lbrack;
+&rbrack;
+;
+<b>for</b>
+(
+<b>var</b>
+i
+=
+0
+;
+i
+&lt;
+N
+;
+i
+++
+)
+arr
+&lbrack;
+i
+&rbrack;
+=
+Math
+.
+round
+(
+1000
+&ast;
+Math
+.
+random
+(
+)
+)
+;
+Result:
+Summing took 180520 nanoseconds
+<b>Summing integers took half the time here.</b>
+Engines don&apos;t use the same types you have in JavaScript. As you
+probably know, all numbers in JavaScript are IEEE754 double precision
+floating point numbers, there&apos;s no specific available representation
+for integers. But engines, when they can predict you only use
+integers, can use a more compact and faster to use representation, for
+example, short integers.
+This kind of optimization is especially important for computation or
+data intensive applications.
+
 
 
 
