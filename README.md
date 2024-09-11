@@ -23948,11 +23948,9 @@ technique to send the information through the GET parameters of an
 URL.</p>
 <pre>
 <b>var</b> hasLoggedOnce = <b>false</b>;
-// <i>Some browsers (at least Firefox) don&apos;t report line and column
-numbers</i>
-// <i>when event is handled through window.addEventListener(&apos;error&apos;,
-fn). That&apos;s why 
-// a more reliable approach is to set an event listener via direct assignment.</i>
+// <i>Some browsers (at least Firefox) don&apos;t report line and column numbers</i>
+// <i>when event is handled through window.addEventListener(&apos;error&apos;, fn). That&apos;s why</i>
+// <i>a more reliable approach is to set an event listener via direct assignment.</i>
 window.onerror = <b>function</b> (eventOrMessage, url, lineNumber, colNumber, error) {
   <b>if</b> (hasLoggedOnce &vert;&vert; !eventOrMessage) {
     // <i>It does not make sense to report an error if:</i>
@@ -23974,14 +23972,13 @@ window.onerror = <b>function</b> (eventOrMessage, url, lineNumber, colNumber, er
 	stack = &lbrack;eventOrMessage, &apos; Occurred in &apos;, jsFile, &apos;:&apos;, lineNumber &vert;&vert; &apos;?&apos;, &apos;:&apos;, colNumber &vert;&vert; &apos;?&apos;&rbrack;.join(&apos;&apos;);
 &nbsp;
   // <i>shortening the message a bit so that it is more likely to fit into browser&apos;s URL length limit</i>
-<i>(which is 2,083 in some browsers)</i>
-  stack = stack.replace(/https?&bsol;&bsol;:&bsol;&bsol;/&bsol;&bsol;/&lbrack;&Hat;<i>/&rbrack;+/gi</i>,  &apos;&apos;);
-// <i>calling the server-side handler which should probably register the
-error in a database or a log file</i>
-<b>new</b> Image().src = &apos;/exampleErrorReporting?stack=&apos; &plus; encodeURIComponent(stack);
+    <i>(which is 2,083 in some browsers)</i>
+  stack = stack.replace(/https?&bsol;&bsol;:&bsol;&bsol;/&bsol;&bsol;/&lbrack;&Hat;<i>/&rbrack;+/gi</i>, &apos;&apos;);
+  // <i>calling the server-side handler which should probably register the error in a database or a log file</i>
+  <b>new</b> Image().src = &apos;/exampleErrorReporting?stack=&apos; &plus; encodeURIComponent(stack);
 &nbsp;
-// <i>window.DEBUG_ENVIRONMENT a configurable property that may be set to true somewhere else for</i>
-<i>debugging and testing purposes.</i>
+  // <i>window.DEBUG_ENVIRONMENT a configurable property that may be set to true somewhere else for</i>
+    <i>debugging and testing purposes.</i>
   <b>if</b> (window.DEBUG_ENVIRONMENT) {
     alert(&apos;Client-side script failed: &apos; &plus; stack);
   }
