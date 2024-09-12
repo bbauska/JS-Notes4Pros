@@ -24609,9 +24609,7 @@ for details.</p>
 <b>strongly discouraged</b> due to the security vulnerabilities it
 presents (see Remarks for details).</p>
 <p>To run JavaScript from inside JavaScript, simply use the below function:</p>
-<pre>
-eval(&quot;var a = &apos;Hello, World!&apos;&quot;);
-</pre>
+<pre>eval(&quot;var a = &apos;Hello, World!&apos;&quot;);</pre>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch101-3">Section 101.3: Evaluation and Math</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -24700,8 +24698,8 @@ projects.</p>
   <b>case</b> &apos;&ast;&apos;:
   <b>case</b> &apos;x&apos;:
   {
-  result = a &ast; b;
-  <b>break</b>;
+    result = a &ast; b;
+    <b>break</b>;
   }
 }
 // <i>JSHint disable error for variable not defined, because it is defined in another file</i>
@@ -24818,7 +24816,7 @@ block.</p>
 <b>function</b> doCalculations() {
   // <i>do complex calculations here</i>
 }
-  // <i>Still not always optimized, but it&apos;s not doing much so the performance doesn&apos;t matter</i>
+// <i>Still not always optimized, but it&apos;s not doing much so the performance doesn&apos;t matter</i>
 <b>function</b> myPerformanceCriticalFunction() {
   <b>try</b> {
     doCalculations();
@@ -25096,7 +25094,7 @@ replace const and let with var, and the other things you already know.</p>
     // <i>The same alternatives apply for this example</i>
     <b>if</b> (argsKey <b>in</b> cache) {
       console.log(argsKey &plus; &apos; was/were in cache :D&apos;);
-    <b>return</b> cache&lbrack;argsKey&rbrack;;
+      <b>return</b> cache&lbrack;argsKey&rbrack;;
     } <b>else</b> {
       cache&lbrack;argsKey&rbrack; = func.apply(<b>null</b>, args);  // <i>Cache it</i>
       <b>return</b> cache&lbrack;argsKey&rbrack;;  // <i>And then return it</i>
