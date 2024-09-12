@@ -1209,7 +1209,7 @@ console.log(&apos;%s has %d points&apos;,&apos;Sam&apos;, 100);
       <td>%c</td>
       <td>Applies CSS style rules to the output string as specified by the second parameter</td>
     </tr>
-  </tfoot>
+  </tbody>
 </table>
 <h4>Advanced styling</h4>
 <p>When the CSS format specifier (%c) is placed at the left side of the
@@ -25278,10 +25278,8 @@ local_variable, this time only needing to check the local scope.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-8">Section 104.8: Be consistent in use of Numbers</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
 <p>If the engine is able to correctly predict you&apos;re using a specific
-small type for your values, it will be able to optimize the executed
-code.</p>
+small type for your values, it will be able to optimize the executed code.</p>
 <p>In this example, we&apos;ll use this trivial function summing the elements
 of an array and outputting the time it took:</p>
 <pre>
@@ -25297,48 +25295,241 @@ of an array and outputting the time it took:</p>
   console.log(&grave;Summing took &dollar; {
     diffSum&lbrack;0&rbrack; &ast; 1e9 &plus; diffSum&lbrack;1&rbrack;} nanoseconds&grave;);
     <b>return</b> sum;
-  }
-)
-(
-arr
-)
-;
+})(arr);
 </pre>
-Let&apos;s make an array and sum the elements:
-<b>var</b>
-N
-=
-12345
-,
-arr
-=
-&lbrack;
-&rbrack;
-;
+<p>Let&apos;s make an array and sum the elements:</p>
+<pre.
+<b>var</b>    N = 12345,
+              arr = &lbrack;&rbrack;;
 <b>for</b> (<b>var</b> i = 0; i &lt; N; i++)
   arr&lbrack;i&rbrack; = Math.random();
 </pre>
 <p>Result:</p>
+<pre>
 <p>Summing took 384416 nanoseconds</p>
+</pre>
 <p>Now, let&apos;s do the same but with only integers:</p>
 <pre>
-<b>var</b> N = 12345, arr = &lbrack;&rbrack;;
+<b>var</b> N = 12345, 
+    arr = &lbrack;&rbrack;;
 <b>for</b> (<b>var</b> i = 0; i &lt; N; i++)
-arr&lbrack;i&rbrack; = Math.round(1000 &ast; Math.random()
-);
-
+arr&lbrack;i&rbrack; = Math.round(1000 &ast; Math.random());
+</pre>
 <p>Result:</p>
-<p>Summing took 180520 nanoseconds</p>
-<b>Summing integers took half the time here.</b>
+<!-- page 457 -->
+<pre>
+Summing took 180520 nanoseconds
+<pre>
+<p><b>Summing integers took half the time here.</b></p>
 <p>Engines don&apos;t use the same types you have in JavaScript. As you
 probably know, all numbers in JavaScript are IEEE754 double precision
 floating point numbers, there&apos;s no specific available representation
 for integers. But engines, when they can predict you only use
 integers, can use a more compact and faster to use representation, for
 example, short integers.</p>
-<P>This kind of optimization is especially important for computation or
+<p>This kind of optimization is especially important for computation or
 data intensive applications.</p>
+<!-- page 458 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="ch105">Chapter 105: Memory efficiency</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="ch105-1">Section 105.1: Drawback of creating true private method</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>One drawback of creating private method in JavaScript is
+memory-inefficient because a copy of the private method will be
+created every time a new instance is created. See this simple example.</p>
+<pre>
+<b>function</b> contact(first, last) {
+  <b>this</b>.firstName = first;
+  <b>this</b>.lastName = last;
+  <b>this</b>.mobile;
+&nbsp;
+  // <i>private method</i>
+  <b>var</b> formatPhoneNumber = <b>function</b>(number) {
+    // <i>format phone number based on input</i>
+  };
+  // <i>public method</i>
+  <b>this</b>.setMobileNumber = <b>function</b>(number) {
+    <b>this</b>.mobile = formatPhoneNumber(number);
+  };
+}
+</pre>
+<p>When you create few instances, they all have a copy of
+formatPhoneNumber method</p>
+<pre>
+<b>var</b> rob = <b>new</b> contact(&apos;Rob&apos;, &apos;Sanderson&apos;);
+<b>var</b> don = <b>new</b> contact(&apos;Donald&apos;, &apos;Trump&apos;);
+<b>var</b> andy = <b>new</b> contact(&apos;Andy&apos;, &apos;Whitehall&apos;);
+</pre>
+<p>Thus, would be great to avoid using private method only if it&apos;s
+necessary.</p>
+<!-- page 459 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h2 id="chA">Appendix A: Reserved Keywords</h2>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p>Certain words - so-called <i>keywords</i> - are treated specially in
+JavaScript. There&apos;s a plethora of different kinds of keywords, and
+they have changed in different versions of the language.</p>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<h3 id="chA-1">Section A.1: Reserved Keywords</h3>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p><b>JavaScript has a predefined collection of <i>reserved keywords</i> which
+you cannot use as variables, labels, or function names.</b></p>
+<p><b>ECMAScript 1</b>
+<p>Version = 1</p>
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th><b>A-E</b></th>
+      <th><b>E-R</b>Output</th>
+      <th><b>S-Z</b>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>break</b></td>
+      <td>export</td>
+      <td>super</td>
+    </tr>
+    <tr>
+      <td><b>case</b></td>
+      <td>extends</td>
+      <td><b>switch</b></td>
+    </tr>
+    <tr>
+      <td><b>catch</b></td>
+      <td><b>false</b></td>
+      <td><b>this</b></td>
+    </tr>
+    <tr>
+      <td>class</td>
+      <td><b>finally</b></td>
+      <td><b>throw</b></td>
+    </tr>
+    <tr>
+      <td><b>const</b></td>
+      <td><b>for</b></td>
+      <td><b>true</b></td>
+    </tr>
+    <tr>
+      <td><b>continue</b></td>
+      <td><b>function</b></td>
+      <td><b>try</b></td>
+    </tr>
+    <tr>
+      <td>debugger</td>
+      <td>if</td>
+      <td><b>typeof</b></td>
+    </tr>
+    <tr>
+      <td><b>default</b></td>
+      <td>in</td>
+      <td><b>var</b></td>
+    </tr>
+    <tr>
+      <td><b>delete</b></td>
+      <td>in</td>
+      <td><b>void</b></td>
+    </tr>
+    <tr>
+      <td>do</td>
+      <td><b>new</b></td>
+      <td>while</td>
+    </tr>
+    <tr>
+      <td><b>else</b></td>
+      <td><b>null</b></td>
+      <td>with</td>
+    </tr>
+    <tr>
+      <td>enum</td>
+      <td><b>return</b></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<p><b>ECMAScript 2</b></p>
+<p>Added <b>24</b> additional reserved keywords. (New additions in bold).</p>
 
+<h5>Version = 3 Version = E4X</h5>
+
+| <b><i>A</i></b>  <b><i>F F</i></b>  <b><i>P</i></b>     | <b><i>P</i></b>  <b><i>Z</i></b>    |
+| <b>abstractfinal</b>     | <b>public</b>   |
+| <b>boolean finally</b>       | <b>return</b>   |
+| <b>break float</b>       | <b>short</b>    |
+| <b>byte for</b>      | <b>static</b>   |
+| <b>case function</b>     | super    |
+| <b>catch goto</b>        | <b>switch</b>   |
+| <b>char</b> if       | <b>synchronized</b>     |
+class <b>implementsthis const</b> import <b>throw continue</b>in <b>throws</b>
+debugger<b>instanceoftransient</b>
+  <b>default</b>    <b>int</b>     <b>true</b>
+  <b>delete</b>     <b>interface</b>   <b>try</b>
+  do     <b>long</b>    <b>typeof</b>
+  <b>double</b>     <b>native</b>      <b>var</b>
+  <b>else</b>   <b>new</b>     <b>void</b>
+  enum       <b>null</b>    <b>volatile</b>
+  export     <b>package</b>     while
+  extends    <b>private</b>     with
+<b>false</b> protected
+<b>ECMAScript 5 / 5.1</b>
+There was no change since <i>ECMAScript 3</i>.
+
+<i>ECMAScript 5</i> removed int, byte, char, <b>goto</b>, long, final, float,
+short, double, native, throws, boolean, abstract, volatile, transient,
+and synchronized; it added <b>let</b> and yield.
+
+| <b><i>A</i></b>  <b><i>F</i></b> | <b><i>F</i></b>  <b><i>P</i></b>     | <b><i>P</i></b>   |
+       |         | <b><i>Z</i></b>  |
+| <b>break</b>     | <b>finally</b>     | public     |
+| <b>case</b>      | <b>for</b>     | <b>return</b> |
+| <b>catch</b>     | <b>function</b>    | <b>static</b> |
+| class     | if      | super  |
+<b>const</b> implements<b>switch continue</b>import <b>this</b> debuggerin
+<b>throw</b>
+<b>default</b>      <b>instanceoftrue</b>    
+  <b>delete</b>   interface <b>try</b>
+  do   <b>let</b>       <b>typeof</b>
+  <b>else</b>     <b>new</b>       <b>var</b>
+  enum     <b>null</b>      <b>void</b>
+  export       package       while
+  extends      private       with
+  <b>false</b>    protected     <b>yield</b>
+implements, <b>let</b>, private, public, interface, package, protected,
+<b>static</b>, and yield are <b>disallowed in strict mode only</b>.
+eval and arguments are not reserved words but they act like it in
+<b>strict mode</b>. <b>ECMAScript 6 / ECMAScript 2015</b>
+| <b><i>A</i></b>  <b><i>E E</i></b>  <b><i>R</i></b>       | <b><i>S</i></b>   |
+|                                     | <b><i>Z</i></b>      |
+| <b>break</b> export                                    | super          |
+| <b>case</b> extends                                    | <b>switch</b>     |
+| <b>catch finally</b>                                   | <b>this</b>       |
+| class <b>for</b>                                       | <b>throw</b>      |
+| <b>const function</b>                                  | <b>try</b>        |
+| <b>continue</b>if                                      | <b>typeof</b>     |
+| debuggerimport                                      | <b>var</b>        |
+| <b>default</b> in                                      | <b>void</b>       |
+<b>delete instanceof</b>while
+do <b>new</b> with
+<b>else return</b> yield
+Future reserved keywords
+The following are reserved as future keywords by the ECMAScript
+specification. They have no special functionality at present, but they
+might at some future time, so they cannot be used as identifiers. enum
+The following are only reserved when they are found in strict mode
+code:
+implementspackage public interface private &grave;static&apos; <b>let</b>
+protected
+Future reserved keywords in older standards
+The following are reserved as future keywords by older ECMAScript
+specifications (ECMAScript 1 till 3).
+abstractfloat short boolean <b>goto</b> synchronized byte
+<b>instanceof</b>throws
+char int transient double long volatile final native
+Additionally, the literals null, true, and false cannot be used as
+identifiers in ECMAScript.
+From the [Mozilla Developer
+Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar).
 
 
 
