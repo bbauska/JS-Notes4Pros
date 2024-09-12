@@ -25279,96 +25279,31 @@ local_variable, this time only needing to check the local scope.</p>
 <h3 id="ch104-8">Section 104.8: Be consistent in use of Numbers</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--
-If the engine is able to correctly predict you&apos;re using a specific
+<p>If the engine is able to correctly predict you&apos;re using a specific
 small type for your values, it will be able to optimize the executed
-code.
-In this example, we&apos;ll use this trivial function summing the elements
-of an array and outputting the time it took:
+code.</p>
+<p>In this example, we&apos;ll use this trivial function summing the elements
+of an array and outputting the time it took:</p>
+<pre>
 // <i>summing properties</i>
-<b>var</b>
-sum
-=
-(
-<b>function</b>
-(
-arr
-)
-{
-<b>var</b>
-start
-=
-process.
-hrtime
-(
-)
-;
-<b>var</b>
-sum
-=
-0
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-arr.
-length
-;
-i
-++
-)
-{
-sum
-+=
-arr
-&lbrack;
-i
-&rbrack;
-;
-}
-<b>var</b>
-diffSum
-=
-process.
-hrtime
-(
-start
-)
-;
-console.
-log
-(
-&grave;Summing took &dollar;
-{
-diffSum
-&lbrack;
-0
-&rbrack;
-&ast;
-1e9
-&plus;
-diffSum
-&lbrack;
-1
-&rbrack;
-}
-nanoseconds&grave;
-)
-;
-<b>return</b>
-sum
-;
-}
+<b>var</b> sum = (
+<b>function</b> (arr) {
+  <b>var</b> start = process.hrtime();
+  <b>var</b> sum = 0;
+  <b>for</b> (<b>var</b> i = 0; i &lt; arr.length; i++) {
+    sum += arr&lbrack;i&rbrack;;
+  }
+  <b>var</b> diffSum = process.hrtime(start);
+  console.log(&grave;Summing took &dollar; {
+    diffSum&lbrack;0&rbrack; &ast; 1e9 &plus; diffSum&lbrack;1&rbrack;} nanoseconds&grave;);
+    <b>return</b> sum;
+  }
 )
 (
 arr
 )
 ;
+</pre>
 Let&apos;s make an array and sum the elements:
 <b>var</b>
 N
@@ -25380,87 +25315,29 @@ arr
 &lbrack;
 &rbrack;
 ;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-N
-;
-i
-++
-)
-arr
-&lbrack;
-i
-&rbrack;
-=
-Math
-.
-random
-(
-)
-;
-Result:
-Summing took 384416 nanoseconds
-Now, let&apos;s do the same but with only integers:
-<b>var</b>
-N
-=
-12345
-,
-arr
-=
-&lbrack;
-&rbrack;
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-N
-;
-i
-++
-)
-arr
-&lbrack;
-i
-&rbrack;
-=
-Math
-.
-round
-(
-1000
-&ast;
-Math
-.
-random
-(
-)
-)
-;
-Result:
-Summing took 180520 nanoseconds
+<b>for</b> (<b>var</b> i = 0; i &lt; N; i++)
+  arr&lbrack;i&rbrack; = Math.random();
+</pre>
+<p>Result:</p>
+<p>Summing took 384416 nanoseconds</p>
+<p>Now, let&apos;s do the same but with only integers:</p>
+<pre>
+<b>var</b> N = 12345, arr = &lbrack;&rbrack;;
+<b>for</b> (<b>var</b> i = 0; i &lt; N; i++)
+arr&lbrack;i&rbrack; = Math.round(1000 &ast; Math.random()
+);
+
+<p>Result:</p>
+<p>Summing took 180520 nanoseconds</p>
 <b>Summing integers took half the time here.</b>
-Engines don&apos;t use the same types you have in JavaScript. As you
+<p>Engines don&apos;t use the same types you have in JavaScript. As you
 probably know, all numbers in JavaScript are IEEE754 double precision
 floating point numbers, there&apos;s no specific available representation
 for integers. But engines, when they can predict you only use
 integers, can use a more compact and faster to use representation, for
-example, short integers.
-This kind of optimization is especially important for computation or
-data intensive applications.
+example, short integers.</p>
+<P>This kind of optimization is especially important for computation or
+data intensive applications.</p>
 
 
 
