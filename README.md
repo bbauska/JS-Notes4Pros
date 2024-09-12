@@ -25292,8 +25292,7 @@ of an array and outputting the time it took:</p>
     sum += arr&lbrack;i&rbrack;;
   }
   <b>var</b> diffSum = process.hrtime(start);
-  console.log(&grave;Summing took &dollar; {
-    diffSum&lbrack;0&rbrack; &ast; 1e9 &plus; diffSum&lbrack;1&rbrack;} nanoseconds&grave;);
+  console.log(&grave;Summing took &dollar;{diffSum&lbrack;0&rbrack; &ast; 1e9 &plus; diffSum&lbrack;1&rbrack;} nanoseconds&grave;);
     <b>return</b> sum;
 })(arr);
 </pre>
@@ -25301,25 +25300,23 @@ of an array and outputting the time it took:</p>
 <pre.
 <b>var</b>    N = 12345,
               arr = &lbrack;&rbrack;;
-<b>for</b> (<b>var</b> i = 0; i &lt; N; i++)
-  arr&lbrack;i&rbrack; = Math.random();
+<b>for</b> (<b>var</b> i = 0; i &lt; N; i++) arr&lbrack;i&rbrack; = Math.random();
 </pre>
 <p>Result:</p>
 <pre>
-<p>Summing took 384416 nanoseconds</p>
+Summing took 384416 nanoseconds
 </pre>
 <p>Now, let&apos;s do the same but with only integers:</p>
 <pre>
 <b>var</b> N = 12345, 
     arr = &lbrack;&rbrack;;
-<b>for</b> (<b>var</b> i = 0; i &lt; N; i++)
-arr&lbrack;i&rbrack; = Math.round(1000 &ast; Math.random());
+<b>for</b> (<b>var</b> i = 0; i &lt; N; i++) arr&lbrack;i&rbrack; = Math.round(1000 &ast; Math.random());
 </pre>
 <p>Result:</p>
 <!-- page 457 -->
 <pre>
 Summing took 180520 nanoseconds
-<pre>
+</pre>
 <p><b>Summing integers took half the time here.</b></p>
 <p>Engines don&apos;t use the same types you have in JavaScript. As you
 probably know, all numbers in JavaScript are IEEE754 double precision
@@ -25381,8 +25378,8 @@ you cannot use as variables, labels, or function names.</b></p>
   <thead>
     <tr>
       <th><b>A-E</b></th>
-      <th><b>E-R</b>Output</th>
-      <th><b>S-Z</b>Output</th>
+      <th><b>E-R</b></th>
+      <th><b>S-Z</b></th>
     </tr>
   </thead>
   <tbody>
@@ -25452,7 +25449,7 @@ you cannot use as variables, labels, or function names.</b></p>
 <p>Added <b>24</b> additional reserved keywords. (New additions in bold).</p>
 
 <h5>Version = 3 Version = E4X</h5>
-
+<!--
 | <b><i>A</i></b>  <b><i>F F</i></b>  <b><i>P</i></b>     | <b><i>P</i></b>  <b><i>Z</i></b>    |
 | <b>abstractfinal</b>     | <b>public</b>   |
 | <b>boolean finally</b>       | <b>return</b>   |
