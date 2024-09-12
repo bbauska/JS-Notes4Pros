@@ -25154,6 +25154,7 @@ array always processes better even if it&apos;s doing extra statement.</p>
     <b>this</b>.value = 1
 };
 <b>var</b> big_array = <b>new</b> Array(10000000).fill(1).map((x, index) =&gt; {
+</pre>
 <!-- page 454 -->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 55.  (454) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
