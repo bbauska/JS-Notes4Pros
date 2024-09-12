@@ -24324,7 +24324,6 @@ other browsers.)</p>
   title="."
   alt="."
   style="border: 2px solid #000000; width:.2in;" />
-F6
 <!-- ![](./images/image051.jpg){width="0.2611111111111111in" height="0.18888888888888888in"} -->
 <p><b>Step Over:</b> Run the next line of
 code. If that line contains a function call, run the whole function
@@ -24343,10 +24342,10 @@ jump into the function and pause there. Shortcut : F11 (Chrome, Firefox, IE/Edge
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 52.  (439) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <p align="left">
-  <img src="./images/image052.jpg"
+  <img src="./images/image053.jpg"
   title="."
   alt="."
-  style="border: 2px solid #000000; width:.20in;" />
+  style="border: 2px solid #000000; width:.19in;" />
 <!-- ![](./images/image053.jpg){width="0.19791666666666666in" height="0.20694444444444443in"} -->
 <p><b>Step Out:</b> Run the rest of the current function, jump back to where the function 
 was called from, and pause at the next statement there. Shortcut : Shift + F11 (Chrome, 
@@ -25064,8 +25063,14 @@ that! Let&apos;s create a memoizer, shall we?</p>
 }());
 </pre>
 <p>Now we can start using it:</p>
-![](./images/image054.jpg){width="4.252083333333333in"
-height="0.9909722222222223in"}
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 54.  (4xx) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image054.jpg"
+  title="."
+  alt="."
+  style="border: 2px solid #000000; width:4.25in;" />
+<!-- {width="4.252083333333333in" height="0.9909722222222223in"} -->
 <p>Now that I start to reflect on what I did, if I were to increment from
 1 instead of decrement from <i>num</i>, I could have cached all of the
 factorials from 1 to <i>num</i> in the cache recursively, but I will leave
@@ -25121,436 +25126,154 @@ newFunction(&apos;meaning of life&apos;, 42);  // <i>again</i>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-5">Section 104.5: Initializing object properties with null</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-All modern JavaScript JIT compilers trying to optimize code based on
-expected object structures. Some tip from
-[mdn](https://developer.mozilla.org/en-US/docs/Web/JavaScript/The_performance_hazards_of__%5B%5BPrototype%5D%5D_mutation#How_JavaScript_engines_optimize_property_accesses).
+<p>All modern JavaScript JIT compilers trying to optimize code based on
+expected object structures. Some tip from 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/The_performance_hazards_of__%5B%5BPrototype%5D%5D_mutation#How_JavaScript_engines_optimize_property_accesses">mdn</a>.</p>
+<blockquote>
 Fortunately, the objects and properties are often &quot;predictable&quot;, and
 in such cases their underlying structure can also be predictable. JITs
 can rely on this to make predictable accesses faster.
-The best way to make object predictable is to define a whole structure
+</blockquote>
+<p>The best way to make object predictable is to define a whole structure
 in a constructor. So if you&apos;re going to add some extra properties
 after object creation, define them in a constructor with <b>null</b>.
 This will help the optimizer to predict object behavior for its whole
 life cycle. However all compilers have different optimizers, and the
 performance increase can be different, but overall it&apos;s good practice
 to define all properties in a constructor, even when their value is
-not yet known.
-Time for some testing. In my test, I&apos;m creating a big array of some
+not yet known.</p>
+<p>Time for some testing. In my test, I&apos;m creating a big array of some
 class instances with a for loop. Within the loop, I&apos;m assigning the
 same string to all object&apos;s &quot;x&quot; property before array
 initialization. If constructor initializes &quot;x&quot; property with null,
-array always processes better even if it&apos;s doing extra statement.
-This is code:
-<b>function</b>
-f1
-(
-)
-{
-<b>var</b>
-P
-=
-<b>function</b>
-(
-)
-{
-<b>this</b>
-.
-value
-=
-1
-}
-;
-<b>var</b>
-big_array
-=
-<b>new</b>
-Array
-(
-10000000
-)
-.
-fill
-(
-1
-)
-.
-map
-(
-(
-x
-,
-index
-)
-=&gt;
-{
-![](./images/image055.png){width="7.486805555555556in"
-height="7.072222222222222in"}
-This is the result for Chrome and Firefox.
-FireFox Chrome
-&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&minus;&bsol;
-f1 6,400 11,400
-f2 1,700 9,600
-As we can see, the performance improvements are very different between
-the two.
+array always processes better even if it&apos;s doing extra statement.</p>
+<p>This is code:</p>
+<pre>
+<b>function</b> f1() {
+  <b>var</b> P = <b>function</b>() {
+    <b>this</b>.value = 1
+};
+<b>var</b> big_array = <b>new</b> Array(10000000).fill(1).map((x, index) =&gt; {
+<!-- page 454 -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~ 55.  (454) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<p align="left">
+  <img src="./images/image055.png"
+  title="."
+  alt="."
+  style="border: 2px solid #000000; width:7in;" />
+<!-- {width="7.486805555555556in" height="7.072222222222222in"} -->
+<p>This is the result for Chrome and Firefox.</p>
+<table border="1" style="width:200px">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Firefox</th>
+      <th>Chrome</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+	  <td>f1</td>
+      <td>6,400</td>
+      <td>11,400</td>
+    </tr>
+    <tr>
+      <td>f2</td>
+      <td>1,700</td>
+      <td>9,600</td>
+	</tr>
+  </tbody>
+</table>
+<p>As we can see, the performance improvements are very different between the two.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-6">Section 104.6: Reuse objects rather than recreate</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-<b>Example A</b>
-<b>var</b>
-i
-,
-a
-,
-b
-,
-len
-;
-a
-=
-{
-x
-:
-0
-,
-y
-:
-0
+<p><b>Example A</b></p>
+<pre>
+<b>var</b> i, a, b, len;
+a = {x: 0, y: 0}
+<b>function</b> test() { // <i>return object created each call</i>
+  <b>return</b> {x: 0, y: 0};
 }
-<b>function</b>
-test
-(
-)
-{
-// <i>return object created each call</i>
-<b>return</b>
-{
-x
-:
-0
-,
-y
-:
-0
+<b>function</b> test1(a) { // <i>return object supplied</i>
+  a&period;x = 0;
+  a&period;y = 0;
+  <b>return</b> a;
 }
-;
+<b>for</b>(i = 0; i &lt; 100; i++) { // <i>Loop A</i>
+  b = test();
 }
-<b>function</b>
-test1
-(
-a
-)
-{
-// <i>return object supplied</i>
-a&period;
-x
-=
-0
-;
-a&period;
-y
-=
-0
-;
-<b>return</b>
-a
-;
+<b>for</b>(i = 0; i &lt; 100; i++) { // <i>Loop B</i>
+  b = test1(a);
 }
-<b>for</b>
-(
-i
-=
-0
-;
-i
-&lt;
-100
-;
-i
-++
-)
-{
-// <i>Loop A</i>
-b
-=
-test
-(
-)
-;
-}
-<b>for</b>
-(
-i
-=
-0
-;
-i
-&lt;
-100
-;
-i
-++
-)
-{
-// <i>Loop B</i>
-b
-=
-test1
-(
-a
-)
-;
-}
-Loop B is 4 (400%) times faster than Loop A
-test
-test1
-It is very inefficient to create a new object in performance code.
-Loop A calls function () which returns a new object every call. The
-created object is discarded every iteration, Loop B calls () that
+</pre>
+<p>Loop B is 4 (400%) times faster than Loop A</p>
+<P>It is very inefficient to create a new object in performance code.
+Loop A calls function test() which returns a new object every call. The
+created object is discarded every iteration, Loop B calls test1() that
 requires the object returns to be supplied. It thus uses the same
 object and avoids allocation of a new object, and excessive GC hits.
-(GC were not included in the performance test)
-<b>Example B</b>
-<b>var</b>
-i
-,
-a
-,
-b
-,
-len
-;
-a
-=
-{
-x
-:
-0
-,
-y
-:
-0
+(GC were not included in the performance test)</p>
+<p><b>Example B</b></p>
+<pre>
+<b>var</b> i, a, b, len;
+a = {x: 0, y: 0}
+<b>function</b> test2(a) {
+  <b>return</b> {x: a&period;x &ast; 10, y : a&period;x &ast; 10};
 }
-<b>function</b>
-test2
-(
-a
-)
-{
-<b>return</b>
-{
-x
-:
-a&period;
-x
-&ast;
-10
-,
-y
-:
-a&period;
-x
-&ast;
-10
+<b>function</b> test3(a) {
+  a&period;x = a&period;x &ast; 10;
+  a&period;y = a&period;y &ast; 10;
+  <b>return</b> a;
 }
-;
+<b>for</b>(i = 0; i &lt; 100; i++) { // <i>Loop A</i>
+  b = test2({x : 10, y : 10});
 }
-<b>function</b>
-test3
-(
-a
-)
-{
-a&period;
-x
-=
-a&period;
-x
-&ast;
-10
-;
-a&period;
-y
-=
-a&period;
-y
-&ast;
-10
-;
-<b>return</b>
-a
-;
+<b>for</b>(i = 0; i &lt; 100; i++) { // <i>Loop B</i>
+  a&period;x = 10;
+  a&period;y = 10;
+  b = test3(a);
 }
-<b>for</b>
-(
-i
-=
-0
-;
-i
-&lt;
-100
-;
-i
-++
-)
-{
-// <i>Loop A</i>
-b
-=
-test2
-(
-{
-x
-:
-10
-,
-y
-:
-10
-}
-)
-;
-}
-<b>for</b>
-(
-i
-=
-0
-;
-i
-&lt;
-100
-;
-i
-++
-)
-{
-// <i>Loop B</i>
-a&period;
-x
-=
-10
-;
-a&period;
-y
-=
-10
-;
-b
-=
-test3
-(
-a
-)
-;
-}
-Loop B is 5 (500%) times faster than loop A
+</pre>
+<p>Loop B is 5 (500%) times faster than loop A</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-7">Section 104.7: Prefer local variables to globals, attributes, and indexed values</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-<!--
-JavaScript engines first look for variables within the local scope
+<p>JavaScript engines first look for variables within the local scope
 before extending their search to larger scopes. If the variable is an
 indexed value in an array, or an attribute in an associative array, it
-will first look for the parent array before it finds the contents.
-
-This has implications when working with performance-critical code.
-Take for instance a common <b>for</b> loop:
-
-<b>var</b>
-global_variable
-=
-0
-;
-<b>function</b>
-foo
-(
-)
-{
-global_variable
-=
-0
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-;
-i
-&lt;
-items.
-length
-;
-i
-++
-)
-{
-global_variable
-+=
-items
-&lbrack;
-i
-&rbrack;
-;
+will first look for the parent array before it finds the contents.</p>
+<p>This has implications when working with performance-critical code.
+Take for instance a common <b>for</b> loop:</p>
+<pre>
+<b>var</b> global_variable = 0;
+<b>function</b> foo() {
+  global_variable = 0;
+  <b>for</b> (<b>var</b> i = 0; i &lt; items.length; i++) {
+    global_variable += items&lbrack;i&rbrack;;
+  }
 }
-}
-For every iteration in <b>for</b> loop, the engine will lookup items,
+</pre>
+<!-- page 456 -->
+<p>For every iteration in <b>for</b> loop, the engine will lookup items,
 lookup the length attribute within items, lookup items again, lookup
 the value at index i of items, and then finally lookup
 global_variable, first trying the local scope before checking the
-global scope.
-A performant rewrite of the above function is:
-<b>function</b>
-foo
-(
-)
-{
-<b>var</b>
-local_variable
-=
-0
-;
-<b>for</b>
-(
-<b>var</b>
-i
-=
-0
-,
-li
-=
-items.
-length
-;
-i
-&lt;
-li
-;
-i
-++
-)
-{
-local_variable
-+=
-items
-&lbrack;
-i
-&rbrack;
-;
+global scope.</p>
+<p>A performant rewrite of the above function is:</p>
+<pre>
+<b>function</b> foo() {
+  <b>var</b> local_variable = 0;
+  <b>for</b> (<b>var</b> i = 0, li = items.length; i &lt; li; i++) {
+    local_variable += items&lbrack;i&rbrack;;
+  }
+  <b>return</b> local_variable;
 }
-<b>return</b>
-local_variable
-;
-}
-
-For every iteration in the rewritten <b>for</b> loop, the engine will
+</pre>
+<p>For every iteration in the rewritten <b>for</b> loop, the engine will
 lookup li, lookup items, lookup the value at index i, and lookup
-local_variable, this time only needing to check the local scope.
-
+local_variable, this time only needing to check the local scope.</p>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 <h3 id="ch104-8">Section 104.8: Be consistent in use of Numbers</h3>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
