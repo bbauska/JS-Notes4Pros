@@ -25373,7 +25373,7 @@ they have changed in different versions of the language.</p>
 <p><b>JavaScript has a predefined collection of <i>reserved keywords</i> which
 you cannot use as variables, labels, or function names.</b></p>
 <p><b>ECMAScript 1</b>
-<p>Version = 1</p>
+<h5>Version = 1</h5>
 <table border="1" style="width:200px">
   <thead>
     <tr>
