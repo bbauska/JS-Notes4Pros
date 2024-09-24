@@ -25295,7 +25295,7 @@ of an array and outputting the time it took:</p>
 })(arr);
 </pre>
 <p>Let&apos;s make an array and sum the elements:</p>
-<pre.
+<pre>
 <b>var</b>    N = 12345,
               arr = &lbrack;&rbrack;;
 <b>for</b> (<b>var</b> i = 0; i &lt; N; i++) arr&lbrack;i&rbrack; = Math.random();
